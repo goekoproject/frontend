@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v2
       #Init Node
       - name: Install Dependencies
+        working-directory: ./goeko
         run: npm install
       - name: Build
         run: npm run build --prod
