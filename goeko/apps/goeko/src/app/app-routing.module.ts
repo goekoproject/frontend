@@ -4,7 +4,7 @@ import { loadRemoteModule } from '@nrwl/angular/mf';
 
 const ROUTES: Routes = [
     {
-        path: '',
+        path: 'home',
         loadChildren: () =>
           loadRemoteModule('home', './Module').then((m) => m.RemoteEntryModule),
       },
