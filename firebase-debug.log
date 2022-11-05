@@ -1,0 +1,21 @@
+[debug] [2022-11-05T18:02:55.179Z] ----------------------------------------------------------------------
+[debug] [2022-11-05T18:02:55.184Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\oswalda.megret\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-11-05T18:02:55.186Z] CLI Version:   11.16.0
+[debug] [2022-11-05T18:02:55.186Z] Platform:      win32
+[debug] [2022-11-05T18:02:55.187Z] Node Version:  v16.14.0
+[debug] [2022-11-05T18:02:55.189Z] Time:          Sat Nov 05 2022 19:02:55 GMT+0100 (hora estándar de Europa central)
+[debug] [2022-11-05T18:02:55.189Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-05T18:02:55.211Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-05T18:02:55.212Z] > authorizing via signed-in user (cuman74@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\oswalda.megret\Desktop\PE\PROYECTOS\goEko\frontend
+
