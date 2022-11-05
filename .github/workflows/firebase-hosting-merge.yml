@@ -40,4 +40,4 @@ jobs:
         with:
           args: deploy --only hosting --project goeko-c8a23
         env:
-          FIREBASE_TOKEN:  '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          FIREBASE_TOKEN:  '${{ secrets.FIREBASE_TOKEN }}'
