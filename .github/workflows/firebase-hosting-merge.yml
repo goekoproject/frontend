@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: goeko/dist/apps/home
+          path: goeko/dist/apps/goeko
   deploy:
     name: Deploy
     needs: build
