@@ -18,6 +18,7 @@ jobs:
         working-directory: ./goeko
         run: npm install
       - name: Build
+        working-directory: ./goeko
         run: npm run build --prod
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
@@ -30,13 +31,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
+        working-directory: ./goeko
         uses: actions/checkout@master
       - name: Download Artifact
+        working-directory: ./goeko
         uses: actions/download-artifact@master
         with:
           name: dist
           path: dist
       - name: Deploy to Firebase
+        working-directory: ./goeko
         uses: w9jds/firebase-action@master 
         with:
           args: deploy --only hosting --project goeko-c8a23
