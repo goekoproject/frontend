@@ -30,6 +30,9 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./goeko
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -39,8 +42,8 @@ jobs:
           name: dist
           path: dist
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master 
+        uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting --project goeko-c8a23
         env:
-          FIREBASE_TOKEN:  '${{ secrets.FIREBASE_TOKEN }}'
+          FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
