@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: ./goeko/dist
+          path: goeko/dist/apps/goeko
   deploy:
     name: Deploy
     needs: build
@@ -39,7 +39,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-          path: dist
+          path: goeko/dist/apps/goeko
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
