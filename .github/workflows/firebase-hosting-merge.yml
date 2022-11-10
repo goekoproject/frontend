@@ -38,7 +38,6 @@ jobs:
           name: dist
           path: dist
       - name: Deploy to Firebase
-        working-directory: ./goeko
         uses: w9jds/firebase-action@master 
         with:
           args: deploy --only hosting --project goeko-c8a23
