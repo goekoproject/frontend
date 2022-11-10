@@ -27,14 +27,11 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: goeko/dist/apps/goeko
+          path: goeko/dist/apps/home
   deploy:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./goeko
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
