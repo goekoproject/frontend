@@ -10,15 +10,16 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./goeko
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       #Init Node
       - name: Install Dependencies
-        working-directory: ./goeko
         run: npm install
       - name: Build
-        working-directory: ./goeko
         run: npm run build --prod
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
