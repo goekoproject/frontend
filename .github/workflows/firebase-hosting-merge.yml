@@ -43,6 +43,6 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting --project goeko-c8a23
+          args: deploy
         env:
           FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
