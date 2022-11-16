@@ -1,0 +1,19 @@
+:root {
+  --color-primary: #048abf;
+  --color-primary-support: #049dbf;
+  --color-primary-light: #f7f5f6;
+  --color-secondary: #21a650;
+  --color-secondary-light: #49a669;
+}
+
+@mixin gradient-linear {
+    background: rgb(156,212,183);
+    background: linear-gradient(70deg, rgba(156,212,183,1) 35%, rgba(4,138,191,1) 70%);
+}
+
+
+@mixin gradient-radial {
+    background: rgb(156,212,183);
+    background: linear-gradient(344deg, rgba(156,212,183,1) 38%, rgba(4,138,191,1) 70%);
+    
+}
