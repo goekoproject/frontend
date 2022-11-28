@@ -40,6 +40,10 @@
             {
               "replace": "apps/goeko/src/environments/environment.ts",
               "with": "apps/goeko/src/environments/environment.prod.ts"
+            },
+            {
+              "replace": "apps/goeko/src/app/assets/module-federation.manifest.json",
+              "with": "apps/goeko/src/app/assets/module-federation.manifest.pro.json"
             }
           ],
           "outputHashing": "all",
