@@ -3,14 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 import { loadRemoteModule } from '@nrwl/angular/mf';
 
 const ROUTES: Routes = [
-    {
-        path: 'home',
-        loadChildren: () =>
-          loadRemoteModule('home', './Module').then((m) => m.RemoteEntryModule),
-      },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home'
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      loadRemoteModule('home', './Module').then((m) => m.HomeModule),
+  },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(ROUTES)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

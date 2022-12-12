@@ -1,9 +1,15 @@
 :root {
-  --color-primary: #049DD9;
+  --color-primary: #048ABF;
   --color-primary-support: #049DBF;
-  --color-primary-light: #12A646;
-  --color-secondary: #378C55;
-  --color-secondary-light: #F2F2F2;
+  --color-primary-light: #A7E4F2;
+  --color-secondary: #21A650;
+  --color-secondary-light: #49A669;
+  --color-background: #06BBE3;
+  --color-background-white: #ffffff;
+  --color-background-light: #E5F7FC;
+  --color-text-dark: #001724;
+  --color-text-light:#47525E;
+  --color-swiss:#cc0000;
 }
 
 @mixin gradient-linear {

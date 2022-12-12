@@ -1,0 +1,48 @@
+$font-roboto-regular: 'Roboto-Regular';
+$font-barlow-extra-light:'Barlow-SemiBold';
+$font-barlow-la-belle-aurore:'LaBelleAurore-Regular';
+
+
+:root {
+    --font-default: 14px Roboto-Regular, sans-serif;
+    --font-title: 18px Roboto-Regular, sans-serif;
+    --font-subtitle: 15px Barlow-SemiBold, sans-serif;
+}
+
+
+$font-path: '_fonts';
+$font-path-barlow: '_fonts/barlow';
+
+$font-path-supports: '_fonts/supports';
+
+
+/** Roboto REGULAR **/
+
+
+@font-face {
+	font-family: '#{$font-roboto-regular}';
+	src: url('#{$font-path}/#{$font-roboto-regular}.ttf?sirsoa') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+/** Barlow ExtraLight **/
+
+@font-face {
+	font-family: '#{$font-barlow-extra-light}';
+	src: url('#{$font-path-barlow}/#{$font-barlow-extra-light}.ttf?sirsoa') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+/** Barlow ExtraLight **/
+
+@font-face {
+	font-family: '#{$font-barlow-la-belle-aurore}';
+	src: url('#{$font-path-supports}/#{$font-barlow-la-belle-aurore}.ttf?sirsoa') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}

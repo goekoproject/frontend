@@ -3,7 +3,12 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: ''
+  },
+  {
+    path: '',
     loadChildren: () =>
-      import('./remote-entry/entry.module').then((m) => m.RemoteEntryModule),
+      import('./home/home.module').then((m) => m.HomeModule),
   },
 ];

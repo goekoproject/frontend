@@ -9,4 +9,15 @@ html {
 }
 
 @import './color-palette';
+@import './fonts';
+
+
+body {
+	background-color: var(--color-background-white);
+	margin: 0;
+	font: var(--font-default);
+}
+
+
+
 
