@@ -1,0 +1,72 @@
+@mixin urlImg($img) {
+  background-image: $img;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: var(--color-background-light);
+  background-position: center -51rem;
+  display: block;
+  width: 100%;
+  background-attachment: fixed;
+  transition: all 0.4s ease;
+}
+
+.banner {
+  height: 680px;
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+
+  flex-direction: column;
+
+  padding-bottom: 14rem;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+  }
+  //@include urlImg(url(/assets/bkg-2.png));
+  &-slogan {
+    color: var(--color-background-white);
+    font-family: 'Roboto-Regular', serif;
+    font-size: 3.75rem;
+    max-width: 635px;
+    margin-top: 1.3rem;
+    text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+
+  }
+  &-info {
+    color: var(--color-swiss);
+    background-color: var(--color-background-white);
+    font-family: 'Barlow-SemiBold', serif;
+    width: fit-content;
+    padding: 0 3.1px;
+  }
+  &-shadow {
+    background: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    width: 100%;
+    height: 95%;
+    object-fit: contain;
+    z-index: -1;
+    left: 0;
+    right: 0;
+  }
+  img {
+    position: absolute;
+    width: 100%;
+    height: 95%;
+    object-fit: cover;
+    z-index: -2;
+    left: 0;
+    right: 0;
+  }
+  &-actions {
+    display: flex;
+    gap: 2rem;
+  }
+}
+
+.banner-slogan--green {
+    box-shadow: inset 0vw 0px 7px 6vw rgb(33 166 80 / 70%);
+    color: var(--color-text-dark);
+}

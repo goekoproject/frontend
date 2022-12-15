@@ -11,11 +11,13 @@ html {
 @import './color-palette';
 @import './fonts';
 
-
+@import './buttons.scss';
 body {
 	background-color: var(--color-background-white);
 	margin: 0;
 	font: var(--font-default);
+	position: relative;
+	padding-bottom: 5em;
 }
 
 

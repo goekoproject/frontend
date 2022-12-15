@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { HomeRouteModule } from './home.routes';
+import { BannerComponent } from './banner/banner.component';
+import { ButtonModule } from '@goeko/ui';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [CommonModule,HomeRouteModule],
+  declarations: [HomeComponent, BannerComponent, ContentComponent],
+  imports: [CommonModule, HomeRouteModule, ButtonModule],
 })
 export class HomeModule {}

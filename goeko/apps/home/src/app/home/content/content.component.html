@@ -1,0 +1,14 @@
+<article class="content" *ngFor="let article of content">
+  <h1>{{ article.title }}</h1>
+  <div>
+    <p>
+      {{ article.info }}
+    </p>
+    <p>{{ article.optionsInfo }}</p>
+  </div>
+  <div class="content-cards">
+    <div class="content-card" *ngFor="let item of article.options">
+      {{ item.text }}
+    </div>
+  </div>
+</article>

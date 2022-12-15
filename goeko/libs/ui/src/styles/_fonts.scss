@@ -1,5 +1,7 @@
 $font-roboto-regular: 'Roboto-Regular';
-$font-barlow-extra-light:'Barlow-SemiBold';
+$font-roboto-thin: 'Roboto-Thin';
+$font-barlow-semi-bold:'Barlow-SemiBold';
+
 $font-barlow-la-belle-aurore:'LaBelleAurore-Regular';
 
 
@@ -27,17 +29,29 @@ $font-path-supports: '_fonts/supports';
 	font-display: block;
 }
 
-/** Barlow ExtraLight **/
+/** Roboto LIGHT **/
+
 
 @font-face {
-	font-family: '#{$font-barlow-extra-light}';
-	src: url('#{$font-path-barlow}/#{$font-barlow-extra-light}.ttf?sirsoa') format('truetype');
+	font-family: '#{$font-roboto-thin}';
+	src: url('#{$font-path}/#{$font-roboto-thin}.ttf?sirsoa') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
 }
 
-/** Barlow ExtraLight **/
+/** Barlow SEMIBOLD **/
+
+@font-face {
+	font-family: '#{$font-barlow-semi-bold}';
+	src: url('#{$font-path-barlow}/#{$font-barlow-semi-bold}.ttf?sirsoa') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+
+/** La belle aurore **/
 
 @font-face {
 	font-family: '#{$font-barlow-la-belle-aurore}';
