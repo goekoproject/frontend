@@ -7,15 +7,15 @@ export const CONTENT = [
         options: [
             {
                 text: 'You can reduce your environmental impact',
-                icon: ''
+                image: 'environmental-impact.jpg'
             },
             {
-                text: 'You can increase your profitability ',
-                icon: ''
+                text: 'You can increase your profitability',
+                image: 'increase your profitability.jpg'
             },
             {
                 text: 'You can beat your competitors',
-                icon: ''
+                image: 'beat-your-competitors.jpg'
             }
         ]
     }
