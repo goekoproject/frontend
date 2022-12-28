@@ -1,16 +1,16 @@
-<article class="content" *ngFor="let article of content">
-  <h1>{{ article.title }}</h1>
+<article class="content">
+  <h1>{{ article?.name }}</h1>
   <div class="content-description">
     <div class="esfera"></div>
     <p>
-      {{ article.info }}
+      {{ article?.descriptions }}
     </p>
-    <p>{{ article.optionsInfo }}</p>
+    <p>{{ article.descriptions2 }}</p>
   </div>
   <div class="content-description content-cards">
-    <div class="content-card" *ngFor="let item of article.options">
-      <img src="/assets/{{item.image}}" />
-      <p>{{ item.text }}</p>
+    <div class="content-card" *ngFor="let item of article?.benefits">
+      <img src="{{ item?.media.url }}" />
+      <p>{{ item?.text }}</p>
     </div>
   </div>
 </article>

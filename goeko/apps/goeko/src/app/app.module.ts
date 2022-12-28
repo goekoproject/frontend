@@ -6,12 +6,15 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from './shell/header/header.module';
 
+import { ContentFulModule } from '@goeko/store';
+import { ContentConfig } from './content-ful.config';
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HeaderModule
+    HeaderModule,
+    ContentFulModule.forRoot(ContentConfig)
   ],
   providers: [],
   bootstrap: [AppComponent],
