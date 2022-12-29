@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import {
   distinctUntilChanged,
   filter,
@@ -14,6 +14,11 @@ import { HomeService } from '../home.service';
   selector: 'go-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: {
+    class: 'home'
+  }
 })
 export class HomeComponent implements OnInit {
 

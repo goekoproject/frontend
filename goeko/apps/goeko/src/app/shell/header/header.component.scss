@@ -1,6 +1,8 @@
 .header {
   background-color: #ffffff;
-
+ 
+  position: sticky;
+  top: 0;
   &-wrapper {
     width: 80%;
     margin: 0 auto;
@@ -8,6 +10,9 @@
     align-items: center;
     height: 5rem;
     gap: 1rem;
+
+    align-items: flex-end;
+    height: 8rem;
   }
   &-slogan {
     color: var(--color-primary);

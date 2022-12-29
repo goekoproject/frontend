@@ -1,21 +1,32 @@
 .content {
-  height: 5rem;
+  height: 100vh;
   color: var(--color-text-light);
   display: flex;
   flex-direction: column;
+  text-align: center;
+  
+  align-items: center;
+
+  background: radial-gradient(circle, #a8e4bd 35%, rgba(255,255,255,1) 55%);
   h1 {
-    font-size: 40px;
+    font-size: 108px;
   }
   &-description {
     border-left: 1px solid;
-    padding-left: 6rem;
-    margin-left: 2.6rem;
-    height: 5rem;
+    
+   // padding-left: 6rem;
+   // margin-left: 2.6rem;
     padding-top: 6rem;
-    font-size: 1rem;
+    
+    font: var(--font-subtitle);
+    font-size: 1.5rem;
+
     &:first-of-type {
       padding-top: 6rem;
     }
+  }
+  &-description-without-border {
+    border:none;
   }
   &-cards {
     display: flex;
@@ -24,9 +35,9 @@
   }
   &-card {
     min-width: 150px;
-    max-width: 467px;
+    max-width: 255px;
 
-    height: 13rem;
+    height: 21rem;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
     background-color: var(--color-background-white);
     border-radius: 15px;
@@ -36,8 +47,7 @@
     position: relative;
     overflow: hidden;
     padding: 0 2rem;
-    flex-grow: 2;
-    flex-shrink: 2;
+    width: 100%;
     img {
       position: absolute;
       width: 100%;
@@ -73,6 +83,6 @@ div.esfera {
   border-radius: 150px;
   margin: 0px auto;
   position: absolute;
-  bottom: -24%;
-  left: 10.7%;
+  bottom: -46%;
+  left: 10.4%;
 }

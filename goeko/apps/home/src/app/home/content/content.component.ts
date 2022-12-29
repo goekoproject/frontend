@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { filter, map, of, switchMap } from 'rxjs';
 import { HomeService } from '../home.service';
 import { CONTENT } from './content.contants';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'go-content',
   templateUrl: './content.component.html',
@@ -11,6 +11,7 @@ import { CONTENT } from './content.contants';
 export class ContentComponent implements OnInit {
   article: any;
 
+  otherContent = false;
   @Input()
   public get body(): any {
     return this._body;
@@ -48,5 +49,8 @@ export class ContentComponent implements OnInit {
   };
   constructor(private _homeService: HomeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    AOS.init();
+    window.addEventListener('load', AOS.refresh);
+  }
 }

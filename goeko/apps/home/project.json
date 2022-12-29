@@ -16,8 +16,11 @@
         "tsConfig": "apps/home/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/home/src/favicon.ico", "apps/home/src/assets"],
-        "styles": ["apps/home/src/styles.scss"],
-        "scripts": [],
+        "styles": [
+          "apps/home/src/styles.scss",
+          "node_modules/aos/dist/aos.css"
+        ],
+        "scripts": ["node_modules/aos/dist/aos.js"],
         "customWebpackConfig": {
           "path": "apps/home/webpack.config.js"
         }
