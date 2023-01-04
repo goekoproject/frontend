@@ -56,8 +56,7 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true,
-          "baseHref": "./"
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"

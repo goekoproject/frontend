@@ -8,11 +8,17 @@ const ROUTES: Routes = [
     pathMatch: 'full',
     redirectTo: 'home'
   },
-  {
+/*    {
     path: 'home',
     loadChildren: () =>
       loadRemoteModule('home', './Module').then((m) => m.HomeModule),
-  },
+  }, 
+ */
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+     
+  }, 
 
 ];
 @NgModule({
