@@ -23,7 +23,8 @@
   &-content {
     display: flex;
     flex-direction: column;
-    padding-top: 13rem;
+    padding-top: 2rem;
+    align-items: center;
   }
   //@include urlImg(url(/assets/bkg-2.png));
   &-slogan {
@@ -33,7 +34,13 @@
     max-width: 640px;
     margin-top: 1.3rem;
     text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-bottom: 0;
     text-transform: uppercase;
+  }
+  &-support-text {
+    margin-top: 0;
+    font-size: 2.6rem;
   }
   &-info {
     color: var(--color-swiss);
@@ -46,17 +53,16 @@
    // background: rgba(0, 0, 0, 0.45);
     position: absolute;
     width: 100%;
-    height: 95%;
-    object-fit: contain;
+    height: 100vh;
     z-index: -1;
     left: 0;
     right: 0;
 
-    background-image: url(/assets/bkg-10.png);
+    background-image: url(/assets/fondo-header.png);
     background-repeat: no-repeat;
-    background-position: bottom center;
+    background-position: top center;
     background-attachment: fixed;
-    background-size: 86% auto;
+    background-size: 100%;
   }
   img {
     position: absolute;
@@ -72,19 +78,23 @@
   &-actions {
     display: flex;
     gap: 2rem;
+    width: 100%;
+    justify-content: center;
   }
+}
+.banner-actions > button {
+  max-width: 16.25rem;
+  width: 100%;
 }
 
 .banner-slogan--green {
-    box-shadow: inset 0vw 0px 7px 6vw rgb(33 166 80 / 70%);
-    color: var(--color-text-dark);
+   // box-shadow: inset 0vw 0px 7px 6vw rgb(33 166 80 / 70%);
+    color:  rgb(33 166 80 / 70%);
 }
 
 @media screen 
   and (min-device-width: 2500px)  { 
 
-    .banner-shadow {
-      background-size: 80%;
-    }
+
     
 }

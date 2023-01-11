@@ -24,5 +24,10 @@ body {
   margin: 0;
   font: var(--font-default);
   position: relative;
-  height: 100vh
+}
+:root {
+  --center-container: 90%
+}
+a {
+  text-decoration: none;
 }

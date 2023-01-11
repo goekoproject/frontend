@@ -1,4 +1,5 @@
-<article class="content">
+
+<article class="content" *ngFor="let article of articles">
   <h1 data-aos="fade-down"  data-aos-duration="3000">{{ article?.name }}</h1>
   <div class="content-description" data-aos="fade-down" [ngClass]="{'content-description-without-border': !otherContent}">
     <div class="esfera" *ngIf="otherContent"></div>
@@ -9,7 +10,7 @@
   </div>
   <div class="content-description content-cards" [ngClass]="{'content-description-without-border': !otherContent}">
     <div class="content-card" *ngFor="let item of article?.benefits">
-      <img src="{{ item?.media.url }}" />
+      <img src="{{ item?.media?.fields?.file?.url }}" />
       <p>{{ item?.text }}</p>
     </div>
   </div>

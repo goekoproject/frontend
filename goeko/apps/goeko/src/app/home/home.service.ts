@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ContentFulService } from '@goeko/store';
+import { map } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class HomeService {
@@ -11,6 +12,10 @@ export class HomeService {
 
     getEntry(entryId: string) {
         return this._contentFul.getEntryId(entryId);
+    }
+
+    getContentType(contentType: string) {
+        return this._contentFul.getContentType(contentType).pipe(map(res => res.items.map(item => item.fields)));
     }
     
 }

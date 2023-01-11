@@ -20,4 +20,8 @@ export class ContentFulService {
   getEntryId(entryId: string) {
     return from(this._client.getEntry(entryId));
   }
+
+  getContentType(contentType: string) {
+    return from(this._client.getEntries({content_type: 'actores'}));
+  }
 }

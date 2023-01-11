@@ -1,35 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { filter, map, of, switchMap } from 'rxjs';
-import { HomeService } from '../home.service';
-import { CONTENT } from './content.contants';
-import * as AOS from 'aos';
+import { Component, Input, OnInit } from "@angular/core";
+import { filter, map, of, switchMap } from "rxjs";
+import { HomeService } from "../home.service";
+import { CONTENT } from "./content.contants";
+import * as AOS from "aos";
 @Component({
-  selector: 'go-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss'],
+  selector: "go-content",
+  templateUrl: "./content.component.html",
+  styleUrls: ["./content.component.scss"],
 })
 export class ContentComponent implements OnInit {
-  article: any;
-
+  /* article: any; */
+  articles!: Array<any>;
   otherContent = false;
-  @Input()
-  public get body(): any {
-    return this._body;
-  }
-  public set body(value) {
-    const benefit = new Array<any>();
 
-    value?.benefits
-      ?.filter((entry: string) => entry)
-      .map((entryId: any) =>
-        this._searchEntry$(entryId).subscribe((res) => {
-          benefit.push(res);
-          this.article = { ...value, benefits: benefit };
-        })
-      );
-
-    this._body = value;
-  }
   private _body: any;
 
   public content = CONTENT;
@@ -47,10 +30,26 @@ export class ContentComponent implements OnInit {
       media: benefit.fields.media.fields.file,
     };
   };
+
+  private _buildDataLandingPage = (data?: any): Array<any> => {
+    return data.content
+      .filter((b: any) => b.data.target?.fields)
+      .map((benefits: any) => benefits.data.target.fields);
+  };
   constructor(private _homeService: HomeService) {}
 
   ngOnInit(): void {
     AOS.init();
-    window.addEventListener('load', AOS.refresh);
+    window.addEventListener("load", AOS.refresh);
+    this._getActors();
+  }
+
+  private _getActors() {
+    this._homeService.getContentType("actor").subscribe((res) => {
+      this.articles = res.map((actor: any) => ({
+        ...actor,
+        benefits: this._buildDataLandingPage(actor.benefits),
+      }));
+    });
   }
 }

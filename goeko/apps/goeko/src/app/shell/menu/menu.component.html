@@ -1,0 +1,12 @@
+<div class="menu-item" *ngFor="let item of menu">
+  <ng-container [ngSwitch]="item.type">
+    <ng-container *ngSwitchCase="'button'">
+      <button go-button appearance="transparent">
+        {{item.title}}
+      </button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <a [routerLink]="item.url">{{item.title}}</a>
+    </ng-container>
+  </ng-container>
+</div>
