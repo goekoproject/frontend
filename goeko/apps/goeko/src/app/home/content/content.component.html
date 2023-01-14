@@ -1,14 +1,38 @@
-
 <article class="content" *ngFor="let article of articles">
-  <h1 data-aos="fade-down"  data-aos-duration="3000">{{ article?.name }}</h1>
-  <div class="content-description" data-aos="fade-down" [ngClass]="{'content-description-without-border': !otherContent}">
-    <div class="esfera" *ngIf="otherContent"></div>
-    <p>
-      {{ article?.descriptions }}
-    </p>
-    <p>{{ article?.descriptions2 }}</p>
+  <div class="content-shadow"></div>
+  <h1 data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
+  <div
+    class="content-description"
+    data-aos="fade-down"
+    [ngClass]="{'content-description-without-border': !otherContent}"
+  >
+    <div class="content_header-bad-stuff">
+      <h3>
+        {{ article?.descriptions }}
+      </h3>
+    </div>
+
+    <div class="content_wrapper-bad-stuff">
+      <div
+        class="content_bad-stuff"
+        *ngFor="let item of article?.badStuff; let i = index"
+      >
+        <span class="material-symbols-rounded" *ngIf="article?.badStuffIcons">
+          {{article?.badStuffIcons[i]}}
+        </span>
+        <p>{{item}}</p>
+      </div>
+    </div>
+
+  
   </div>
-  <div class="content-description content-cards" [ngClass]="{'content-description-without-border': !otherContent}">
+
+  <div class="content_header-bad-stuff content_header-bad-stuff--medium">
+    <h3>
+      {{ article?.descriptions3 }}
+    </h3>
+  </div>
+  <div class="content-description content-cards">
     <div class="content-card" *ngFor="let item of article?.benefits">
       <img src="{{ item?.media?.fields?.file?.url }}" />
       <p>{{ item?.text }}</p>

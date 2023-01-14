@@ -1,8 +1,15 @@
-.header {
+.goeko-header {
   background-color: #ffffff;
-
   position: sticky;
   top: 0;
+  display: block;
+  z-index: 10;
+
+}
+
+.header {
+
+  
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -46,4 +53,13 @@
   cursor: pointer;
 
   color: var(--color-text-light);
+}
+@media (max-width: 768px) {
+  .header-slogan {
+      display: none;
+  }
+  .logo {
+    margin: 0 auto;
+  }
+  
 }

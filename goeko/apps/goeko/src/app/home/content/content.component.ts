@@ -12,6 +12,10 @@ export class ContentComponent implements OnInit {
   /* article: any; */
   articles!: Array<any>;
   otherContent = false;
+  badStuffIcons = [
+    'battery_charging_80','compost','unknown_document'
+  ];
+
 
   private _body: any;
 

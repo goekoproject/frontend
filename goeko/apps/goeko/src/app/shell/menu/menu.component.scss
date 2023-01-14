@@ -45,3 +45,10 @@ $lineColor: #29EECC;
     width: calc(100% + $lineHeight);
 
 }
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+    
+}
