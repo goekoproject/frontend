@@ -41,6 +41,7 @@
   &-support-text {
     margin-top: 0;
     font-size: 2.6rem;
+    font-family: 'Roboto-Thin',sans-serif;
   }
   &-info {
     color: var(--color-swiss);
@@ -58,22 +59,17 @@
     left: 0;
     right: 0;
 
-    background-image: url(/assets/fondo-header.png);
+    background-image: url(/assets/fondo-hex.png);
     background-repeat: no-repeat;
     background-position: top center;
-    background-attachment: fixed;
+    //background-attachment: fixed;
     background-size: 100%;
   }
   img {
-    position: absolute;
     width: 100%;
     height: 95%;
     object-fit: contain;
-    z-index: -2;
-    left: 0;
-    right: 0;
-    background: linear-gradient(282deg, rgba(255,255,255,1) 25%, rgba(250,249,250,1) 48%, rgb(0 144 214 / 51%) 100%);
-    display: none;
+
   }
   &-actions {
     display: flex;
