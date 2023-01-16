@@ -12,11 +12,12 @@
   }
   &_header-bad-stuff {
     h3 {
-      background: linear-gradient(90deg, #c58e6f 21.15%, #2683b8 57.27%);
+     /*  background: linear-gradient(90deg, #c58e6f 21.15%, #2683b8 57.27%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background-clip: text; */
       margin: 0;
+      color: #47525e;
     }
     background: #ffffff;
     border-radius: 25px;
