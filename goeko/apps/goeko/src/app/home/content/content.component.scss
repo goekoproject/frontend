@@ -5,10 +5,9 @@
   text-align: center;
   align-items: center;
   gap: 3rem;
-  background: radial-gradient(circle, #a8e4bd 35%, rgba(255, 255, 255, 1) 55%);
+
   h1 {
     font-size: 108px;
-    text-shadow: 8px 4px 4px #21a650;
   }
   &_header-bad-stuff {
     h3 {
@@ -127,11 +126,7 @@
   left: 0;
   right: 0;
 
-  background-image: url(/assets/wave-green.png);
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-attachment: fixed;
-  background-size: 86% auto;
+
 }
 
 @media (max-width: 768px) {
