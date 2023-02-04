@@ -56,23 +56,22 @@ export class SphereService extends SceneService {
 		this.wobbleAnim.setKeys(this.wobbleKeys);
 	}
 
-	override createScene(canvas: ElementRef<HTMLCanvasElement>): Scene {
+	createSceneSME(canvas: ElementRef<HTMLCanvasElement>): Scene {
 		if (this.scene) {
 			this.scene.dispose();
 		}
 		super.createScene(canvas);
 		this.light = new PointLight('sun', new Vector3(1, 20, -40), this.scene);
 
-		this._sme = MeshBuilder.CreateSphere('s1', { segments: 32, diameter: 10 });
+		this._sme = MeshBuilder.CreateSphere('s1', { segments: 32, diameter: 14 });
 		const sphereMaterial = new StandardMaterial('sun_surface', this.scene);
 		sphereMaterial.emissiveColor = new Color3(-1, 20, 10);
 
-		const text = this._configText();
-		sphereMaterial.diffuseTexture = text;
 		this._sme.material = sphereMaterial;
 		this._sme.parent = this.rootMesh;
 		this._sme.position = new Vector3(1, 2, 0);
 		this._configGround();
+
 		const light1 = new DirectionalLight('dir01', new Vector3(-1, -2, -1), this.scene);
 
 		const shadow = (scene: Scene, light: DirectionalLight) => {
@@ -158,10 +157,7 @@ export class SphereService extends SceneService {
 
 	private _configText() {
 		const dynamicTexture = new DynamicTexture('dynamicTexture', 512, this.scene, true);
-		const context = dynamicTexture.getContext();
-		context.font = '30px Arial';
-		context.fillText('Hello World!', 100, 200);
-		dynamicTexture.update();
+
 		return dynamicTexture;
 	}
 }

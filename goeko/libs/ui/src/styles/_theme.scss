@@ -31,3 +31,6 @@ body {
 a {
   text-decoration: none;
 }
+canvas:focus {
+  outline: none;
+}

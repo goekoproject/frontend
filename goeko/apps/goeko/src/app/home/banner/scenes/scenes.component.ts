@@ -14,7 +14,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	constructor(private _sphere: SphereService) {}
 
 	ngOnInit(): void {
-		const scene = this._sphere.createScene(this.canvasRef);
+		const scene = this._sphere.createSceneSME(this.canvasRef);
 		this._addActorsSecondary(scene);
 	}
 
@@ -24,7 +24,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	private _addActorsSecondary(scene: Scene) {
 		scene.beginAnimation(
-			this._sphere.createActorsSecondary('CleanTeach', 4, 8, '5B9CB3', {
+			this._sphere.createActorsSecondary('CleanTeach', 6, 15, '5B9CB3', {
 				x: 30,
 				y: 20,
 				z: 20,
@@ -32,11 +32,11 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			0,
 			FPS,
 			true,
-			0.05
+			0.055
 		);
 
 		scene.beginAnimation(
-			this._sphere.createActorsSecondary('Bank', 4, 8, '3b6ebc', {
+			this._sphere.createActorsSecondary('Bank', 6, 15, '3b6ebc', {
 				x: 10,
 				y: 10,
 				z: 10,
@@ -44,7 +44,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			0,
 			FPS,
 			true,
-			0.05
+			0.055
 		);
 	}
 }
