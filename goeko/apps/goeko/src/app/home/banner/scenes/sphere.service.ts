@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { ElementRef, Inject, Injectable, NgZone } from '@angular/core';
 import {
 	Animation,
-	BaseTexture,
 	Color3,
 	DirectionalLight,
 	DynamicTexture,
@@ -10,6 +9,7 @@ import {
 	Matrix,
 	Mesh,
 	MeshBuilder,
+	PBRMaterial,
 	PointLight,
 	Scene,
 	ShadowGenerator,
@@ -56,36 +56,30 @@ export class SphereService extends SceneService {
 		this.wobbleAnim.setKeys(this.wobbleKeys);
 	}
 
-	createSceneSME(canvas: ElementRef<HTMLCanvasElement>): Scene {
+	/**
+	 *
+	 * @param canvas Element of  scene
+	 * @param size Size of sphere
+	 * @returns
+	 */
+	createSceneSME(canvas: ElementRef<HTMLCanvasElement>, size: number = 20): Scene {
 		if (this.scene) {
 			this.scene.dispose();
 		}
 		super.createScene(canvas);
-		this.light = new PointLight('sun', new Vector3(1, 20, -40), this.scene);
+		this.light = new PointLight('sun', new Vector3(1, -10, -40), this.scene);
 
-		this._sme = MeshBuilder.CreateSphere('s1', { segments: 32, diameter: 14 });
+		this._sme = MeshBuilder.CreateSphere('sme', { segments: 32, diameter: size });
 		const sphereMaterial = new StandardMaterial('sun_surface', this.scene);
 		sphereMaterial.emissiveColor = new Color3(-1, 20, 10);
 
 		this._sme.material = sphereMaterial;
 		this._sme.parent = this.rootMesh;
-		this._sme.position = new Vector3(1, 2, 0);
-		this._configGround();
+		this._sme.position = new Vector3(0, 8, -2);
+		this._addGround();
 
-		const light1 = new DirectionalLight('dir01', new Vector3(-1, -2, -1), this.scene);
-
-		const shadow = (scene: Scene, light: DirectionalLight) => {
-			const s1 = this.scene.getMeshByName('s1') as any;
-
-			const shadowGenerator = new ShadowGenerator(1024, light);
-			shadowGenerator.useExponentialShadowMap = true;
-			shadowGenerator.usePoissonSampling = true;
-
-			shadowGenerator?.getShadowMap()?.renderList?.push(s1);
-			this._ground.receiveShadows = true;
-		};
-
-		shadow(this.scene, light1);
+		this._addShadow();
+		//shadow(this.scene, light1);
 		return this.scene;
 	}
 
@@ -117,18 +111,20 @@ export class SphereService extends SceneService {
 			sphereMaterial.diffuseColor = new Color3(_color.red, _color.green, _color.blue);
 			mesh.material = sphereMaterial;
 		}
+		this._addShadow(name);
 		return mesh;
 	}
-	private _configGround() {
+	private _addGround() {
 		// Ground
-		this._ground = MeshBuilder.CreateGround('ground', { width: 50, height: 50 }, this.scene);
+		this._ground = MeshBuilder.CreateGround('ground', { width: 50, height: 30 }, this.scene);
 
 		const groundMaterial = new StandardMaterial('groundMaterial', this.scene);
-		//groundMaterial.diffuseColor = Color3.Yellow();
+		//groundMaterial.diffuseColor = new Color3(0, 0.17, 0.17);
 
-		//groundMaterial.specularColor = new Color3(0, 0, 0);
-		groundMaterial.diffuseTexture = new BaseTexture();
-		groundMaterial.diffuseTexture.hasAlpha = true;
+		this._ground.position.y = -1;
+		groundMaterial.specularColor = new Color3(0, 0, 0);
+		/* 	groundMaterial.diffuseTexture = new BaseTexture();
+		groundMaterial.diffuseTexture.hasAlpha = true; */
 
 		this._ground.material = groundMaterial;
 		if (!this._ground.material) {
@@ -138,26 +134,32 @@ export class SphereService extends SceneService {
 		//this._ground.position.y = -10.05;
 	}
 
-	private _shadow() {
-		const s1 = this.scene.getMeshByName('s1');
+	private _addShadow(meshName: string = 'sme') {
+		// Main elements
+		const sme = this.scene.getMeshByName(meshName) as any;
 
 		// Light Shadow
-		const light1 = new DirectionalLight('dir01', new Vector3(-1, -2, -1), this.scene);
-		const light2 = new PointLight('light2', new Vector3(0, 1, -1), this.scene);
+		const light1 = new DirectionalLight('dir01', new Vector3(1.2, -14, 1.26), this.scene);
 
-		light1.position = new Vector3(20, 40, 20);
-		light1.intensity = 0.5;
+		light1.intensity = 1;
 
 		//Shadows
-		/* const shadowGenerator = new ShadowGenerator(1024, light1);
-		shadowGenerator?.getShadowMap()?.renderList?.push(s1);
+		const shadowGenerator = new ShadowGenerator(1024, light1);
+		shadowGenerator?.getShadowMap()?.renderList?.push(sme);
 		shadowGenerator.useBlurExponentialShadowMap = true;
-		shadowGenerator.usePoissonSampling = true; */
+		shadowGenerator.usePoissonSampling = true;
+
+		this._ground.receiveShadows = true;
 	}
 
 	private _configText() {
 		const dynamicTexture = new DynamicTexture('dynamicTexture', 512, this.scene, true);
 
 		return dynamicTexture;
+	}
+
+	private _createAsphalt() {
+		const pbr = new PBRMaterial('pbr', this.scene);
+		return pbr;
 	}
 }
