@@ -14,8 +14,11 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	constructor(private _sphere: SphereService) {}
 
 	ngOnInit(): void {
-		const scene = this._sphere.createSceneSME(this.canvasRef);
+		const scene = this._sphere.createSceneSME(this.canvasRef, 19);
+		scene.blockfreeActiveMeshesAndRenderingGroups = true;
+
 		this._addActorsSecondary(scene);
+		scene.blockfreeActiveMeshesAndRenderingGroups = false;
 	}
 
 	ngAfterViewInit(): void {
@@ -23,10 +26,11 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	}
 
 	private _addActorsSecondary(scene: Scene) {
+		const distancies = 15;
 		scene.beginAnimation(
-			this._sphere.createActorsSecondary('CleanTeach', 6, 15, '5B9CB3', {
+			this._sphere.createActorsSecondary('CleanTeach', 6, distancies, '5B9CB3', {
 				x: 30,
-				y: 20,
+				y: -10,
 				z: 20,
 			}),
 			0,
@@ -36,7 +40,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		);
 
 		scene.beginAnimation(
-			this._sphere.createActorsSecondary('Bank', 6, 15, '3b6ebc', {
+			this._sphere.createActorsSecondary('Bank', 6, distancies, '3b6ebc', {
 				x: 10,
 				y: 10,
 				z: 10,

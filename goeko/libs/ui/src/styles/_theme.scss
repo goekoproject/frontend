@@ -24,6 +24,7 @@ body {
   margin: 0;
   font: var(--font-default);
   position: relative;
+  overflow-x: hidden;
 }
 :root {
   --center-container: 90%
