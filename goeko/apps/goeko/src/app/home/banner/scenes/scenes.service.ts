@@ -6,7 +6,6 @@ import {
 	DynamicTexture,
 	Engine,
 	FreeCamera,
-	HemisphericLight,
 	Light,
 	Mesh,
 	MeshBuilder,
@@ -19,7 +18,7 @@ import {
 @Injectable({ providedIn: 'root' })
 export class SceneService {
 	public scene!: Scene;
-	protected light!: Light;
+	light!: Light;
 	protected rootMesh!: Mesh;
 
 	private _engine!: Engine;
@@ -55,7 +54,7 @@ export class SceneService {
 		this._configLight();
 		this._configCamera();
 		// generates the world x-y-z axis for better understanding
-		//this._showWorldAxis(18);
+		//this._showWorldAxis(28);
 		//this.createElements();
 	}
 
@@ -66,11 +65,11 @@ export class SceneService {
 	}
 
 	private _configLight() {
-		this.light = new HemisphericLight('light', new Vector3(1, 1, 0), this.scene);
+		//this.light = new HemisphericLight('light', new Vector3(1, 1, 0), this.scene);
 	}
 
 	private _configCamera() {
-		this._camera = new ArcRotateCamera('Camera', -7.95, 0.6, 60, new Vector3(3, -10, 0), this.scene);
+		this._camera = new ArcRotateCamera('Camera', 0, 1, 70, new Vector3(3, -8, 0), this.scene);
 		this._camera.setTarget(this.rootMesh);
 
 		// Control mouse/ scroller etcc

@@ -2,28 +2,53 @@ import { DOCUMENT } from '@angular/common';
 import { ElementRef, Inject, Injectable, NgZone } from '@angular/core';
 import {
 	Animation,
+	BaseTexture,
 	Color3,
 	DirectionalLight,
 	DynamicTexture,
 	GroundMesh,
+	HighlightLayer,
 	Matrix,
 	Mesh,
 	MeshBuilder,
+	MultiMaterial,
 	PBRMaterial,
 	PointLight,
 	Scene,
 	ShadowGenerator,
 	StandardMaterial,
+	Texture,
 	Vector3,
 } from '@babylonjs/core';
+import { Curve3, Path2 } from '@babylonjs/core/Maths/math.path';
+import { Vector2 } from '@babylonjs/core/Maths/math.vector';
+import { PolygonMeshBuilder } from '@babylonjs/core/Meshes/polygonMesh';
+import { SolidParticleSystem } from '@babylonjs/core/Particles/solidParticleSystem';
+
 import { colorToColorBY } from '@goeko/ui';
+declare const MeshWriter: any;
+
 import { SceneService } from './scenes.service';
 export const FPS = 60;
+const methodsObj = {
+	Vector2,
+	Vector3,
+	Path2,
+	Curve3,
+	Color3,
+	SolidParticleSystem,
+	PolygonMeshBuilder,
+	StandardMaterial,
+	Mesh,
+};
 
 @Injectable({ providedIn: 'root' })
 export class SphereService extends SceneService {
-	private _sme!: Mesh;
+	_sme!: Mesh;
+	light1!: DirectionalLight;
 	private _ground!: GroundMesh;
+
+	testRotationX = 0;
 
 	readonly rotationAnim = new Animation(
 		'rotate',
@@ -68,18 +93,53 @@ export class SphereService extends SceneService {
 		}
 		super.createScene(canvas);
 		this.light = new PointLight('sun', new Vector3(1, -10, -40), this.scene);
-
+		this.light.intensity = 0.5;
 		this._sme = MeshBuilder.CreateSphere('sme', { segments: 32, diameter: size });
+
+		const multimat = new MultiMaterial('multi', this.scene);
+
 		const sphereMaterial = new StandardMaterial('sun_surface', this.scene);
-		sphereMaterial.emissiveColor = new Color3(-1, 20, 10);
 
-		this._sme.material = sphereMaterial;
+		const sphereMaterial2 = new StandardMaterial('text', this.scene);
+
+		//Material 1
+		sphereMaterial.diffuseTexture = new Texture('./assets/bkgcontent.jpg', this.scene, false);
+		sphereMaterial.alpha = 0.8;
+
+		sphereMaterial.diffuseTexture.hasAlpha = true;
+
+		//Material 2
+		const myDynamicTexture = new DynamicTexture('dynamic texture', { width: 800, height: 800 }, this.scene);
+		const font = 'bold 100px Mukta Mahee';
+		sphereMaterial2.emissiveColor = new Color3(-1, 20, 10);
+		sphereMaterial2.diffuseTexture = myDynamicTexture;
+		myDynamicTexture.drawText('SME', 20, 500, font, '#FFFFFF', '#048ABF', true, true);
+		sphereMaterial2.alpha = 0.8;
+
+		myDynamicTexture.update();
+
+		multimat.subMaterials.push(sphereMaterial);
+		//multimat.subMaterials.push(sphereMaterial2);
+
+		/* 		sphereMaterial.diffuseTexture = myDynamicTexture; */
+
+		this._sme.material = sphereMaterial2;
+
+		//	this._sme.subMeshes = [];
+		var verticesCount = this._sme.getTotalVertices();
+		console.log(verticesCount);
+		/* new SubMesh(0, 0, verticesCount, 0, 2415, this._sme);
+		new SubMesh(1, 0, verticesCount, 900, 900, this._sme);
+		new SubMesh(0, 0, verticesCount, 1800, 2088, this._sme); */
+
 		this._sme.parent = this.rootMesh;
-		this._sme.position = new Vector3(0, 8, -2);
+		this._sme.position = new Vector3(0, 10, 0);
+		this._sme.rotation = new Vector3(8.85, 7.15, 5.83);
 		this._addGround();
-
+		const hl1 = new HighlightLayer('hl1', this.scene);
+		const color = colorToColorBY('3b6ebc');
+		hl1.addMesh(this._sme, new Color3(color.red, color.green, color.blue));
 		this._addShadow();
-		//shadow(this.scene, light1);
 		return this.scene;
 	}
 
@@ -109,22 +169,26 @@ export class SphereService extends SceneService {
 			const _color = colorToColorBY(color);
 			const sphereMaterial = new StandardMaterial(name, this.scene);
 			sphereMaterial.diffuseColor = new Color3(_color.red, _color.green, _color.blue);
+			sphereMaterial.wireframe = true;
+
 			mesh.material = sphereMaterial;
 		}
+
 		this._addShadow(name);
 		return mesh;
 	}
+
 	private _addGround() {
 		// Ground
-		this._ground = MeshBuilder.CreateGround('ground', { width: 50, height: 30 }, this.scene);
+		this._ground = MeshBuilder.CreateGround('ground', { width: 50, height: 50 }, this.scene);
 
 		const groundMaterial = new StandardMaterial('groundMaterial', this.scene);
-		//groundMaterial.diffuseColor = new Color3(0, 0.17, 0.17);
+		groundMaterial.diffuseColor = new Color3(0, 0.17, 0.17);
 
 		this._ground.position.y = -1;
 		groundMaterial.specularColor = new Color3(0, 0, 0);
-		/* 	groundMaterial.diffuseTexture = new BaseTexture();
-		groundMaterial.diffuseTexture.hasAlpha = true; */
+		groundMaterial.diffuseTexture = new BaseTexture();
+		groundMaterial.diffuseTexture.hasAlpha = true;
 
 		this._ground.material = groundMaterial;
 		if (!this._ground.material) {
@@ -139,23 +203,31 @@ export class SphereService extends SceneService {
 		const sme = this.scene.getMeshByName(meshName) as any;
 
 		// Light Shadow
-		const light1 = new DirectionalLight('dir01', new Vector3(1.2, -14, 1.26), this.scene);
+		this.light1 = new DirectionalLight('dir01', new Vector3(10, -10, 10), this.scene);
 
-		light1.intensity = 1;
+		this.light1.intensity = 0.8;
 
 		//Shadows
-		const shadowGenerator = new ShadowGenerator(1024, light1);
+		const shadowGenerator = new ShadowGenerator(1024, this.light1);
 		shadowGenerator?.getShadowMap()?.renderList?.push(sme);
 		shadowGenerator.useBlurExponentialShadowMap = true;
 		shadowGenerator.usePoissonSampling = true;
+		shadowGenerator.useOpacityTextureForTransparentShadow = true;
 
 		this._ground.receiveShadows = true;
 	}
 
-	private _configText() {
-		const dynamicTexture = new DynamicTexture('dynamicTexture', 512, this.scene, true);
+	_addText() {
+		const Writer = MeshWriter(this.scene, { scale: 0.1, methods: methodsObj });
+		const text1 = new Writer('holaa', { color: '1C3870' });
+		const meshText = text1.getMesh();
+		meshText.rotation.x = -1.4;
+		meshText.rotation.y = 8;
+		meshText.rotation.z = 2;
 
-		return dynamicTexture;
+		meshText.position = new Vector3(2, 16, -1);
+
+		return meshText;
 	}
 
 	private _createAsphalt() {

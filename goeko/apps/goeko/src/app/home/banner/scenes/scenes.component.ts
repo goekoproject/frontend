@@ -11,6 +11,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	@ViewChild('canvas', { static: true })
 	canvasRef!: ElementRef<HTMLCanvasElement>;
 
+	meshText!: any;
 	constructor(private _sphere: SphereService) {}
 
 	ngOnInit(): void {
@@ -23,26 +24,15 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this._sphere.start();
+		//	this.meshText = this._sphere._addText();
 	}
 
 	private _addActorsSecondary(scene: Scene) {
-		const distancies = 15;
+		const distancies = 18;
 		scene.beginAnimation(
-			this._sphere.createActorsSecondary('CleanTeach', 6, distancies, '5B9CB3', {
+			this._sphere.createActorsSecondary('CleanTeach', 9, distancies, '5B9CB3', {
 				x: 30,
-				y: -10,
-				z: 20,
-			}),
-			0,
-			FPS,
-			true,
-			0.055
-		);
-
-		scene.beginAnimation(
-			this._sphere.createActorsSecondary('Bank', 6, distancies, '3b6ebc', {
-				x: 10,
-				y: 10,
+				y: -20,
 				z: 10,
 			}),
 			0,
@@ -50,5 +40,37 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			true,
 			0.055
 		);
+
+		scene.beginAnimation(
+			this._sphere.createActorsSecondary('Bank', 9, distancies, '3b6ebc', {
+				x: -20,
+				y: -30,
+				z: -18,
+			}),
+			0,
+			FPS,
+			true,
+			0.055
+		);
+	}
+	/* 
+	changeRotationX(event: any) {
+		this.meshText.rotation.x = event.target.value;
+	}
+	changeRotationY(event: any) {
+		this.meshText.rotation.y = event.target.value;
+	}
+	changeRotationZ(event: any) {
+		this.meshText.rotation.y = event.target.value;
+	} */
+	changePosotionX(target: any) {
+		this._sphere.light.getAbsolutePosition().x = target.value;
+	}
+	changePosotionY(target: any) {
+		this._sphere.light.getAbsolutePosition().y = target.value;
+	}
+
+	changePosotionZ(target: any) {
+		this._sphere.light.getAbsolutePosition().z = target.value;
 	}
 }

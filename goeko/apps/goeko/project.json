@@ -20,7 +20,7 @@
         "node_modules/aos/dist/aos.css",
         
         "./libs/ui/src/styles/_theme.scss"],
-        "scripts": ["node_modules/aos/dist/aos.js"],
+        "scripts": ["node_modules/aos/dist/aos.js","node_modules/meshwriter/dist/meshwriter.js"],
         "customWebpackConfig": {
           "path": "apps/goeko/webpack.config.js"
         }
