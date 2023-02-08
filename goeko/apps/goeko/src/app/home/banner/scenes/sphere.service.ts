@@ -11,7 +11,6 @@ import {
 	Matrix,
 	Mesh,
 	MeshBuilder,
-	MultiMaterial,
 	PBRMaterial,
 	PointLight,
 	Scene,
@@ -87,53 +86,37 @@ export class SphereService extends SceneService {
 	 * @param size Size of sphere
 	 * @returns
 	 */
-	createSceneSME(canvas: ElementRef<HTMLCanvasElement>, size: number = 20): Scene {
+	createSceneSME(canvas: ElementRef<HTMLCanvasElement>, size: number = 30): Scene {
 		if (this.scene) {
 			this.scene.dispose();
 		}
 		super.createScene(canvas);
 		this.light = new PointLight('sun', new Vector3(1, -10, -40), this.scene);
 		this.light.intensity = 0.5;
-		this._sme = MeshBuilder.CreateSphere('sme', { segments: 32, diameter: size });
-
-		const multimat = new MultiMaterial('multi', this.scene);
+		this._sme = MeshBuilder.CreateSphere('sme', { segments: 100, diameter: size });
 
 		const sphereMaterial = new StandardMaterial('sun_surface', this.scene);
 
-		const sphereMaterial2 = new StandardMaterial('text', this.scene);
+		const sphereMaterialText = new StandardMaterial('text', this.scene);
 
 		//Material 1
-		sphereMaterial.diffuseTexture = new Texture('./assets/bkgcontent.jpg', this.scene, false);
-		sphereMaterial.alpha = 0.8;
-
+		sphereMaterial.diffuseTexture = new Texture('./assets/fondo-header.png', this.scene, false);
+		sphereMaterial.alpha = 0.4;
 		sphereMaterial.diffuseTexture.hasAlpha = true;
 
-		//Material 2
+		//Material Text
 		const myDynamicTexture = new DynamicTexture('dynamic texture', { width: 800, height: 800 }, this.scene);
-		const font = 'bold 100px Mukta Mahee';
-		sphereMaterial2.emissiveColor = new Color3(-1, 20, 10);
-		sphereMaterial2.diffuseTexture = myDynamicTexture;
+		const font = 'bold 100px Tahoma';
+		sphereMaterialText.emissiveColor = new Color3(-1, 20, 10);
+		sphereMaterialText.diffuseTexture = myDynamicTexture;
 		myDynamicTexture.drawText('SME', 20, 500, font, '#FFFFFF', '#048ABF', true, true);
-		sphereMaterial2.alpha = 0.8;
 
 		myDynamicTexture.update();
 
-		multimat.subMaterials.push(sphereMaterial);
-		//multimat.subMaterials.push(sphereMaterial2);
-
-		/* 		sphereMaterial.diffuseTexture = myDynamicTexture; */
-
-		this._sme.material = sphereMaterial2;
-
-		//	this._sme.subMeshes = [];
-		var verticesCount = this._sme.getTotalVertices();
-		console.log(verticesCount);
-		/* new SubMesh(0, 0, verticesCount, 0, 2415, this._sme);
-		new SubMesh(1, 0, verticesCount, 900, 900, this._sme);
-		new SubMesh(0, 0, verticesCount, 1800, 2088, this._sme); */
+		this._sme.material = sphereMaterialText;
 
 		this._sme.parent = this.rootMesh;
-		this._sme.position = new Vector3(0, 10, 0);
+		this._sme.position = new Vector3(0, 0, 0);
 		this._sme.rotation = new Vector3(8.85, 7.15, 5.83);
 		this._addGround();
 		const hl1 = new HighlightLayer('hl1', this.scene);
@@ -158,8 +141,31 @@ export class SphereService extends SceneService {
 		color: string,
 		position?: { x: number; y: number; z: number }
 	) {
+		return this._createMesh(name, diameter, distance, color, position);
+	}
+
+	createInsideActorSecondary(
+		name: string,
+		diameter: number,
+		distance: number,
+		color: string,
+		position?: { x: number; y: number; z: number }
+	) {
+		const mesh = this._createMesh(name, diameter, distance, color, position) as any;
+		mesh.material.alpha = 1;
+		return mesh;
+	}
+
+	private _createMesh(
+		name: string,
+		diameter: number,
+		distance: number,
+		color: string,
+		position?: { x: number; y: number; z: number }
+	) {
 		const offY = -1 + Math.random();
 		const mesh = MeshBuilder.CreateSphere(name, { diameter, segments: 16 }, this.scene);
+
 		mesh.parent = this._sme;
 		mesh.setPivotMatrix(Matrix.Translation(distance, -2, 0), false);
 		mesh.rotation = new Vector3(position?.x, position?.y, position?.z) || new Vector3();
@@ -168,9 +174,11 @@ export class SphereService extends SceneService {
 		if (color) {
 			const _color = colorToColorBY(color);
 			const sphereMaterial = new StandardMaterial(name, this.scene);
-			sphereMaterial.diffuseColor = new Color3(_color.red, _color.green, _color.blue);
-			sphereMaterial.wireframe = true;
 
+			sphereMaterial.emissiveColor = new Color3(_color.red, _color.green, _color.blue);
+			//sphereMaterial.diffuseTexture = new BaseTexture();
+			sphereMaterial.alpha = 0.2;
+			//(sphereMaterial.diffuseTexture.hasAlpha = true;
 			mesh.material = sphereMaterial;
 		}
 
@@ -185,10 +193,11 @@ export class SphereService extends SceneService {
 		const groundMaterial = new StandardMaterial('groundMaterial', this.scene);
 		groundMaterial.diffuseColor = new Color3(0, 0.17, 0.17);
 
-		this._ground.position.y = -1;
-		groundMaterial.specularColor = new Color3(0, 0, 0);
+		this._ground.position.y = -10;
+		//groundMaterial.specularColor = new Color3(0, 0, 0);
 		groundMaterial.diffuseTexture = new BaseTexture();
 		groundMaterial.diffuseTexture.hasAlpha = true;
+		//groundMaterial.diffuseTexture = new Texture('./assets/bkg-1.png', this.scene, false);
 
 		this._ground.material = groundMaterial;
 		if (!this._ground.material) {

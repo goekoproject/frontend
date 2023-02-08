@@ -23,7 +23,6 @@
     "@babylonjs/materials": "^5.45.0",
     "@types/three": "^0.148.0",
     "aos": "^2.3.4",
-    "babylonjs": "^5.45.0",
     "contentful": "^9.2.14",
     "meshwriter": "^1.3.2",
     "pako": "^2.1.0",
