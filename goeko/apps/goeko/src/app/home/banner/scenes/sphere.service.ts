@@ -188,7 +188,7 @@ export class SphereService extends SceneService {
 
 	private _addGround() {
 		// Ground
-		this._ground = MeshBuilder.CreateGround('ground', { width: 50, height: 50 }, this.scene);
+		this._ground = MeshBuilder.CreateGround('ground', { width: 100, height: 100 }, this.scene);
 
 		const groundMaterial = new StandardMaterial('groundMaterial', this.scene);
 		groundMaterial.diffuseColor = new Color3(0, 0.17, 0.17);
