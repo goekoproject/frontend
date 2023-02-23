@@ -1,22 +1,22 @@
-<article class="content" *ngFor="let article of articles">
-  <div class="content-shadow"></div>
-  <h1 data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
-  <div
-    class="content-description"
-    data-aos="fade-down"
-    [ngClass]="{'content-description-without-border': !otherContent}"
-  >
-    <div class="content_header-bad-stuff">
-      <h3>
-        {{ article?.descriptions }}
-      </h3>
-    </div>
+<article class="content" *ngFor="let article of articles; let i = index">
+  <!--   <div class="content-shadow"></div>
+ -->
+  <section class="content_title" [ngStyle]="{'background-image': 'url(assets/'+actorsImg[i]+')'}">
+    <div class="content-shadow"></div>
+    <h1 data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
+    <h3>
+      {{ article?.descriptions3 }}
+    </h3>
+  </section>
 
+
+  <section>
+    <h3 class="section-title">
+      {{ article?.descriptions }}
+    </h3>
     <div class="content_wrapper-bad-stuff">
-      <div
-        class="content_bad-stuff"
-        *ngFor="let item of article?.badStuff; let i = index"
-      >
+      <div class="content_bad-stuff" *ngFor="let item of article?.badStuff; let i = index">
+        <img src="assets/platform.png" />
         <span class="material-symbols-rounded" *ngIf="article?.badStuffIcons">
           {{article?.badStuffIcons[i]}}
         </span>
@@ -24,18 +24,26 @@
       </div>
     </div>
 
-  
-  </div>
+    <img src="assets/button-goeko.png" />
 
-  <div class="content_header-bad-stuff content_header-bad-stuff--medium">
-    <h3>
-      {{ article?.descriptions3 }}
-    </h3>
-  </div>
-  <div class="content-description content-cards">
-    <div class="content-card" *ngFor="let item of article?.benefits">
-      <img src="{{ item?.media?.fields?.file?.url }}" />
-      <p>{{ item?.text }}</p>
+ 
+    <div class="content_wrapper-benefit">
+      <div class="benefit"  *ngFor="let item of article?.benefits">
+        <img src="assets/platform-benefits.png" />
+        <p class="benefit-text">{{ item?.text }}</p>
+      </div>
     </div>
-  </div>
+  
+
+
+    <!-- <div class="content-description content-cards">
+      <div class="content-card">
+        <p>{{ item?.text }}</p>
+      </div>
+    </div> -->
+  </section>
+
+  
+
+  
 </article>
