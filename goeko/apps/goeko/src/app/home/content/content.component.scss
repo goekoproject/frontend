@@ -1,5 +1,14 @@
 $color-platform: #3065b0;
 
+.go-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 8rem;
+}
+
+
 .content {
   color: var(--color-text-light);
   display: flex;
@@ -7,17 +16,14 @@ $color-platform: #3065b0;
   align-items: center;
   gap: 3rem;
   min-height: 700px;
-  height: 100vh;
 
   &_title {
     position: relative;
-    width: 35%;
+    width: 33rem;
     height: 100vh;
     color: #FFFFFF;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: contain;
-    background-position: -151%;
+    background-size: cover;
 
     display: flex;
     align-items: center;
@@ -59,22 +65,7 @@ $color-platform: #3065b0;
       max-width: 578px;
     }
   }
-  &_wrapper-bad-stuff {
-    max-width: 1190px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
 
-    p {
-      margin: 0;
-      position: absolute;
-      top: 40px;
-      width: 44%;
-      font-size: 21px;
-      left: 4.8rem;
-    }
-  }
   &-description {
     font: var(--font-subtitle);
     font-size: 1.5rem;
@@ -128,18 +119,62 @@ $color-platform: #3065b0;
       text-shadow: 0 0 16px black;
       align-self: flex-end;
       display: flex;
+      padding: 3rem 2rem;
     }
   }
 }
+
+
+.content_wrapper{
+  
+  &-bad-stuff {
+    max-width: 1190px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    p {
+      margin: 0;
+      position: absolute;
+      top: 16%;
+      width: 44%;
+      font-size: 15px;
+      left: 4.2rem;
+    }
+  }
+
+  &-benefit {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+     >.benefit {
+      position: relative;
+    }
+    & >.benefit .benefit-text {
+      position: absolute;
+      top: -15%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 63%;
+    } 
+  }
+}
 .content_bad-stuff {
-  font-family: "Roboto-Thin";
   font-size: 1.3rem;
-  width: 16rem;
+  width: 14rem;
   position: relative;
   align-items: center;
   justify-content: center;
   display: flex;
   flex-shrink: 2;
+  padding-top: 2rem;
   span {
     font-size: 1.8rem;
     color: #3065b0;

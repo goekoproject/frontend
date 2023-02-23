@@ -91,7 +91,7 @@ export class SceneService {
 
 		// Watch for browser/canvas resize events
 		window.addEventListener('resize', () => {
-			this._engine.resize();
+			//	this._engine.resize();
 		});
 	}
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as AOS from 'aos';
 import { map } from 'rxjs';
 import { HomeService } from '../home.service';
@@ -7,13 +7,17 @@ import { CONTENT } from './content.contants';
 	selector: 'go-content',
 	templateUrl: './content.component.html',
 	styleUrls: ['./content.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'go-content',
+	},
 })
 export class ContentComponent implements OnInit {
 	/* article: any; */
 	articles!: Array<any>;
 	otherContent = false;
 	badStuffIcons = ['bolt', 'compost', 'unknown_document'];
-	actorsImg = ['sme.jpg', 'sme.jpg', 'sme.jpg'];
+	actorsImg = ['sme.jpg', 'cleantech.jpg', 'sme.jpg'];
 
 	private _body: any;
 

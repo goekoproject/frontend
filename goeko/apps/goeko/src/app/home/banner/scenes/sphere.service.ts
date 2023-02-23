@@ -198,7 +198,7 @@ export class SphereService extends SceneService {
 		groundMaterial.diffuseTexture = new BaseTexture();
 		groundMaterial.diffuseTexture.hasAlpha = true;
 		//groundMaterial.diffuseTexture = new Texture('./assets/bkg-1.png', this.scene, false);
-
+		//groundMaterial.diffuseTexture = new Texture('assets/background-world.svg', this.scene, false);
 		this._ground.material = groundMaterial;
 		if (!this._ground.material) {
 			return;
@@ -206,6 +206,8 @@ export class SphereService extends SceneService {
 
 		//this._ground.position.y = -10.05;
 	}
+
+	rotateGroud(x: number, y: number, z: number) {}
 
 	private _addShadow(meshName: string = 'sme') {
 		// Main elements

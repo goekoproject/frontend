@@ -11,6 +11,9 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	@ViewChild('canvas', { static: true })
 	canvasRef!: ElementRef<HTMLCanvasElement>;
 
+	x!: number;
+	y!: number;
+	z!: number;
 	meshText!: any;
 	constructor(private _sphere: SphereService) {}
 
@@ -88,13 +91,21 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this.meshText.rotation.y = event.target.value;
 	} */
 	changePosotionX(target: any) {
-		this._sphere.light.getAbsolutePosition().x = target.value;
+		this.x = target.value;
+		this._sphere.rotateGroud(this.x, this.z, this.y);
+		//		this._sphere.light.getAbsolutePosition().x = target.value;
 	}
 	changePosotionY(target: any) {
-		this._sphere.light.getAbsolutePosition().y = target.value;
+		this.y = target.value;
+		this._sphere.rotateGroud(this.x, this.z, this.y);
+
+		//this._sphere.light.getAbsolutePosition().y = target.value;
 	}
 
 	changePosotionZ(target: any) {
-		this._sphere.light.getAbsolutePosition().z = target.value;
+		this.z = target.value;
+		this._sphere.rotateGroud(this.x, this.z, this.y);
+
+		//	this._sphere.light.getAbsolutePosition().z = target.value;
 	}
 }

@@ -16,7 +16,6 @@
     </h3>
     <div class="content_wrapper-bad-stuff">
       <div class="content_bad-stuff" *ngFor="let item of article?.badStuff; let i = index">
-        
         <img src="assets/platform.png" />
         <span class="material-symbols-rounded" *ngIf="article?.badStuffIcons">
           {{article?.badStuffIcons[i]}}
@@ -25,12 +24,23 @@
       </div>
     </div>
 
-    <div class="content-description content-cards">
-      <div class="content-card" *ngFor="let item of article?.benefits">
-        <img src="{{ item?.media?.fields?.file?.url }}" />
-        <p>{{ item?.text }}</p>
+    <img src="assets/button-goeko.png" />
+
+ 
+    <div class="content_wrapper-benefit">
+      <div class="benefit"  *ngFor="let item of article?.benefits">
+        <img src="assets/platform-benefits.png" />
+        <p class="benefit-text">{{ item?.text }}</p>
       </div>
     </div>
+  
+
+
+    <!-- <div class="content-description content-cards">
+      <div class="content-card">
+        <p>{{ item?.text }}</p>
+      </div>
+    </div> -->
   </section>
 
   
