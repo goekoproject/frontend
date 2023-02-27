@@ -41,7 +41,7 @@ export class SceneService {
 
 	createScene(canvas: ElementRef<HTMLCanvasElement>) {
 		this._canvas = canvas.nativeElement;
-		this._canvas.style.height = '100%';
+		//this._canvas.style.height = '100%';
 		this._canvas.style.width = '100%';
 		this._engine = new Engine(this._canvas, true);
 

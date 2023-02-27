@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Scene } from '@babylonjs/core';
 import { FPS, SphereService } from './sphere.service';
 
@@ -6,6 +6,10 @@ import { FPS, SphereService } from './sphere.service';
 	selector: 'goeko-scenes',
 	templateUrl: './scenes.component.html',
 	styleUrls: ['./scenes.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'scene-container',
+	},
 })
 export class ScenesComponent implements OnInit, AfterViewInit {
 	@ViewChild('canvas', { static: true })

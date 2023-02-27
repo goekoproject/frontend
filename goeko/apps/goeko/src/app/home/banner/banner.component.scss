@@ -11,18 +11,18 @@
 }
 
 .banner {
-  height: 100vh;
   display: flex;
   gap: 3rem;
   justify-content: start;
   flex-direction: column;
   padding-bottom: 14rem;
+  height: 39%;
 
   &-content {
     display: flex;
     flex-direction: column;
     padding-top: 2rem;
-    align-items: center;
+    align-items: flex-start;
   }
   //@include urlImg(url(/assets/bkg-2.png));
   &-slogan {
@@ -69,16 +69,12 @@
  */  }
   img {
     width: 100%;
-    height: 95%;
-    object-fit: contain;
-    bottom: 14%;
-    position: relative;
+    position: absolute;
   }
   &-actions {
     display: flex;
     gap: 2rem;
     width: 100%;
-    justify-content: center;
   }
 }
 .banner-actions > button {
@@ -89,6 +85,12 @@
 .banner-slogan--green {
    // box-shadow: inset 0vw 0px 7px 6vw rgb(33 166 80 / 70%);
     color:  rgb(33 166 80 / 70%);
+}
+
+.world-europe {
+  top: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 @media screen 

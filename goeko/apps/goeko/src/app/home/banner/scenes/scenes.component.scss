@@ -1,0 +1,16 @@
+.scene-container {
+    position: relative;
+}
+
+.canvas {
+    width: 100%;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    position: absolute;
+    height: 50rem;
+    object-fit: contain;
+    top: -22rem;
+    z-index: 1;
+    left: 25%;
+    bottom: 0;
+}
