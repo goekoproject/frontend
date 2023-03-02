@@ -37,8 +37,10 @@
 /* .logo {
   max-width: 89px;
   max-height: 89px; */
-  img {
-    padding: 1rem;
+  .header-wrapper > img {
+    
+    width: 7%;
+
    /*  height: 100%;
     object-fit: cover; */
   }

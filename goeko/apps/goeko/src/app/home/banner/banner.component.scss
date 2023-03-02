@@ -14,15 +14,14 @@
   display: flex;
   gap: 3rem;
   justify-content: start;
-  flex-direction: column;
-  padding-bottom: 14rem;
-  height: 39%;
+  height: 100vh;
 
   &-content {
     display: flex;
     flex-direction: column;
     padding-top: 2rem;
     align-items: flex-start;
+    //align-self: center;
   }
   //@include urlImg(url(/assets/bkg-2.png));
   &-slogan {

@@ -1,5 +1,5 @@
 .scene-container {
-    position: relative;
+    flex-grow: 2;
 }
 
 .canvas {
@@ -9,8 +9,6 @@
     position: absolute;
     height: 50rem;
     object-fit: contain;
-    top: -22rem;
     z-index: 1;
     left: 25%;
-    bottom: 0;
 }
