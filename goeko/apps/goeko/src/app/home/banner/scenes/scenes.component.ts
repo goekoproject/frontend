@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Scene } from '@babylonjs/core';
+import { ActionManager, ExecuteCodeAction, Scene } from '@babylonjs/core';
+import { InteractionService } from './interaction.service';
 import { FPS, SphereService } from './sphere.service';
 
 @Component({
@@ -19,20 +20,41 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	y!: number;
 	z!: number;
 	meshText!: any;
-	constructor(private _sphere: SphereService) {}
+
+	get sphereSME() {
+		return this._sphere._sme;
+	}
+	constructor(private _sphere: SphereService, private _interactionService: InteractionService) {}
 
 	ngOnInit(): void {
 		const scene = this._sphere.createSceneSME(this.canvasRef, 22);
 		scene.blockfreeActiveMeshesAndRenderingGroups = true;
 
-		this._addActorsSecondary(scene);
 		scene.blockfreeActiveMeshesAndRenderingGroups = false;
+		this._addActorsSecondary(scene);
+		this._createEventClickSME(scene);
+		this._onClickSME();
 	}
 
 	ngAfterViewInit(): void {
 		this._sphere.start();
 		//	this.meshText = this._sphere._addText();
 	}
+
+	private _createEventClickSME(scene: Scene) {
+		this.sphereSME.actionManager = new ActionManager(scene);
+		this.sphereSME.actionManager.registerAction(
+			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => this._interactionService.onSMEClick.next(true))
+		);
+	}
+
+	private _onClickSME() {
+		this._interactionService.onSMEClick.subscribe((res) => {
+			console.log(res);
+		});
+	}
+
+	private _changeColorEuropeSVG() {}
 
 	private _addActorsSecondary(scene: Scene) {
 		const distancies = 22;

@@ -22,6 +22,7 @@
     "@babylonjs/gui": "^5.45.0",
     "@babylonjs/materials": "^5.45.0",
     "@types/three": "^0.148.0",
+    "angular-svg-icon": "^15.0.0",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "contentful": "^9.2.14",

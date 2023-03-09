@@ -94,6 +94,12 @@
   left: 0;
     right: 0;
 }
+.fill-green {
+  transition: .5s ease;
+  fill:rgba(33, 166, 80, 0.7);
+  transform: scale(1.2) translate(-12.4rem, 1rem);
+
+}
 
 @media screen 
   and (min-device-width: 2500px)  { 
