@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
 import { map } from 'rxjs';
 import { HomeService } from '../home.service';
@@ -7,10 +7,6 @@ import { CONTENT } from './content.contants';
 	selector: 'go-content',
 	templateUrl: './content.component.html',
 	styleUrls: ['./content.component.scss'],
-	encapsulation: ViewEncapsulation.None,
-	host: {
-		class: 'go-content',
-	},
 })
 export class ContentComponent implements OnInit {
 	/* article: any; */

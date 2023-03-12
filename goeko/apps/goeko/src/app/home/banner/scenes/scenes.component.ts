@@ -33,7 +33,6 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		scene.blockfreeActiveMeshesAndRenderingGroups = false;
 		this._addActorsSecondary(scene);
 		this._createEventClickSME(scene);
-		this._onClickSME();
 	}
 
 	ngAfterViewInit(): void {
@@ -48,16 +47,13 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		);
 	}
 
-	private _onClickSME() {
-		this._interactionService.onSMEClick.subscribe((res) => {
-			console.log(res);
-		});
-	}
-
-	private _changeColorEuropeSVG() {}
-
 	private _addActorsSecondary(scene: Scene) {
 		const distancies = 22;
+		this._animationCleanTech(scene, distancies);
+		this._animationBank(scene, distancies);
+	}
+
+	private _animationCleanTech(scene: Scene, distancies: number) {
 		scene.beginAnimation(
 			this._sphere.createActorsSecondary('CleanTeach', 10, distancies, '5B9CB3', {
 				x: 40,
@@ -81,7 +77,9 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			true,
 			0.065
 		);
+	}
 
+	private _animationBank(scene: Scene, distancies: number) {
 		scene.beginAnimation(
 			this._sphere.createActorsSecondary('Bank', 10, distancies, '3b6ebc', {
 				x: 40,
@@ -106,6 +104,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			0.065
 		);
 	}
+
 	/* 
 	changeRotationX(event: any) {
 		this.meshText.rotation.x = event.target.value;
