@@ -23,7 +23,7 @@ export class SceneService {
 
 	private _engine!: Engine;
 	private _canvas!: HTMLCanvasElement;
-	private _camera!: FreeCamera | ArcRotateCamera;
+	_camera!: FreeCamera | ArcRotateCamera;
 
 	constructor(private readonly _ngZone: NgZone, private document: Document) {}
 
@@ -65,7 +65,7 @@ export class SceneService {
 	}
 
 	private _configLight() {
-		//this.light = new HemisphericLight('light', new Vector3(1, 1, 0), this.scene);
+		//this.light = new HemisphericLight('light', new Vector3(0, 1, 0), this.scene);
 	}
 
 	private _configCamera() {
@@ -73,7 +73,7 @@ export class SceneService {
 		this._camera.setTarget(this.rootMesh);
 
 		// Control mouse/ scroller etcc
-		//this._camera.attachControl(this._canvas, true);
+		this._camera.attachControl(this._canvas, false);
 
 		this._engine.runRenderLoop(() => this.scene.render());
 	}

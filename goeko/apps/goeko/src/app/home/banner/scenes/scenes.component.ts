@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActionManager, ExecuteCodeAction, Scene } from '@babylonjs/core';
 import { InteractionService } from './interaction.service';
-import { FPS, SphereService } from './sphere.service';
+import { FPS, SPEED, SphereService } from './sphere.service';
 
 @Component({
 	selector: 'goeko-scenes',
@@ -27,7 +27,9 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	constructor(private _sphere: SphereService, private _interactionService: InteractionService) {}
 
 	ngOnInit(): void {
-		const scene = this._sphere.createSceneSME(this.canvasRef, 22);
+		this._sphere.configScene(this.canvasRef);
+		const scene = this._sphere.createSME(22);
+		this._sphere.makeRotate();
 		scene.blockfreeActiveMeshesAndRenderingGroups = true;
 
 		scene.blockfreeActiveMeshesAndRenderingGroups = false;
@@ -37,13 +39,16 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this._sphere.start();
-		//	this.meshText = this._sphere._addText();
 	}
 
 	private _createEventClickSME(scene: Scene) {
 		this.sphereSME.actionManager = new ActionManager(scene);
 		this.sphereSME.actionManager.registerAction(
-			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => this._interactionService.onSMEClick.next(true))
+			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
+				this._sphere.stopRotate();
+				this._sphere.startAnimationMaterialMain();
+				this._interactionService.onSMEClick.next(true);
+			})
 		);
 	}
 
@@ -63,7 +68,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			0,
 			FPS,
 			true,
-			0.065
+			SPEED
 		);
 
 		scene.beginAnimation(
@@ -75,7 +80,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			0,
 			FPS,
 			true,
-			0.065
+			SPEED
 		);
 	}
 
@@ -89,7 +94,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			0,
 			FPS,
 			true,
-			0.065
+			SPEED
 		);
 
 		scene.beginAnimation(
@@ -101,7 +106,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			0,
 			FPS,
 			true,
-			0.065
+			SPEED
 		);
 	}
 
