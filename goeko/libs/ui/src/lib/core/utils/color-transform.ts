@@ -1,3 +1,5 @@
+import { VectorColor } from '../models/vector-color.model';
+
 export const REGEX_COLOR = new RegExp('^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$');
 
 export const colorHexToRgb = (hex: string) => {
@@ -19,4 +21,9 @@ export const colorToColorBY = (hex: string) => {
 	const blue = parseFloat((color.b / 255).toFixed(2));
 	console.log(red);
 	return { red, green, blue };
+};
+
+export const getVectorColor = <T>(hex: string): VectorColor<T> => {
+	const color = colorToColorBY(hex);
+	return new VectorColor<T>(color.red, color.green, color.blue);
 };

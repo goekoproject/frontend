@@ -24,17 +24,29 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	get sphereSME() {
 		return this._sphere._sme;
 	}
+
+	public get cleanTeach(): any {
+		return this._cleanTeach;
+	}
+	public set cleanTeach(value: any) {
+		this._cleanTeach = value;
+	}
+	private _cleanTeach!: any;
+
+	scene!: Scene;
 	constructor(private _sphere: SphereService, private _interactionService: InteractionService) {}
 
 	ngOnInit(): void {
 		this._sphere.configScene(this.canvasRef);
-		const scene = this._sphere.createSME(22);
+		this.scene = this._sphere.createSME(22);
+		this._sphere.createMaterialText();
 		this._sphere.makeRotate();
-		scene.blockfreeActiveMeshesAndRenderingGroups = true;
+		this._createEventClickSME(this.scene);
 
-		scene.blockfreeActiveMeshesAndRenderingGroups = false;
-		this._addActorsSecondary(scene);
-		this._createEventClickSME(scene);
+		this.scene.blockfreeActiveMeshesAndRenderingGroups = true;
+
+		this.scene.blockfreeActiveMeshesAndRenderingGroups = false;
+		this._addActorsSecondary(this.scene);
 	}
 
 	ngAfterViewInit(): void {
@@ -53,23 +65,19 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	}
 
 	private _addActorsSecondary(scene: Scene) {
-		const distancies = 22;
+		const distancies = 20;
 		this._animationCleanTech(scene, distancies);
 		this._animationBank(scene, distancies);
 	}
 
 	private _animationCleanTech(scene: Scene, distancies: number) {
-		scene.beginAnimation(
-			this._sphere.createActorsSecondary('CleanTeach', 10, distancies, '5B9CB3', {
-				x: 40,
-				y: -20,
-				z: 10,
-			}),
-			0,
-			FPS,
-			true,
-			SPEED
-		);
+		this._cleanTeach = this._sphere.createActorsSecondary('CleanTeach', 10, distancies, '5B9CB3', {
+			x: 40,
+			y: -20,
+			z: 10,
+		});
+
+		scene.beginAnimation(this._cleanTeach, 0, FPS, true, SPEED);
 
 		scene.beginAnimation(
 			this._sphere.createInsideActorSecondary('CleanTeachSmall', 6, distancies, '5B9CB3', {

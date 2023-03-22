@@ -69,11 +69,11 @@ export class SceneService {
 	}
 
 	private _configCamera() {
-		this._camera = new ArcRotateCamera('Camera', 0, 1, 70, new Vector3(3, -8, 0), this.scene);
+		this._camera = new ArcRotateCamera('Camera', 0, 1, 70, new Vector3(3, -8, 4), this.scene);
 		this._camera.setTarget(this.rootMesh);
 
 		// Control mouse/ scroller etcc
-		this._camera.attachControl(this._canvas, false);
+		//this._camera.attachControl(this._canvas, false);
 
 		this._engine.runRenderLoop(() => this.scene.render());
 	}
