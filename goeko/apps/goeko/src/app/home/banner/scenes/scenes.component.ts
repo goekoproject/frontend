@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActionManager, ExecuteCodeAction, Scene } from '@babylonjs/core';
+import { BANK, BANK_INNER } from '../sphere/contstants/bank.constants';
+import { CLEANTECH, CLEANTECH_INNER } from '../sphere/contstants/cleantech.constants';
+import { MeshActors } from '../sphere/models/sphere.model';
 import { InteractionService } from './interaction.service';
 import { FPS, SPEED, SphereService } from './sphere.service';
 
@@ -33,15 +36,19 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	}
 	private _cleanTeach!: any;
 
+	private _bank!: any;
+	private planeText!: any;
+
 	scene!: Scene;
 	constructor(private _sphere: SphereService, private _interactionService: InteractionService) {}
 
 	ngOnInit(): void {
 		this._sphere.configScene(this.canvasRef);
-		this.scene = this._sphere.createSME(22);
-		this._sphere.createMaterialText();
+		this.scene = this._sphere.createSME(18);
+		this.planeText = this._sphere.createMaterialText();
 		this._sphere.makeRotate();
 		this._createEventClickSME(this.scene);
+		this._createEventClickSMEPlane(this.scene);
 
 		this.scene.blockfreeActiveMeshesAndRenderingGroups = true;
 
@@ -64,58 +71,42 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		);
 	}
 
-	private _addActorsSecondary(scene: Scene) {
-		const distancies = 20;
-		this._animationCleanTech(scene, distancies);
-		this._animationBank(scene, distancies);
+	private _createEventClickSMEPlane(scene: Scene) {
+		this.planeText.actionManager = new ActionManager(scene);
+
+		this.planeText.actionManager.registerAction(
+			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
+				this._sphere.stopRotate();
+				this._sphere.startAnimationMaterialMain();
+				this._interactionService.onSMEClick.next(true);
+			})
+		);
 	}
 
-	private _animationCleanTech(scene: Scene, distancies: number) {
-		this._cleanTeach = this._sphere.createActorsSecondary('CleanTeach', 10, distancies, '5B9CB3', {
-			x: 40,
-			y: -20,
-			z: 10,
-		});
+	private _addActorsSecondary(scene: Scene) {
+		this._animationCleanTech(scene);
+		this._animationBank(scene);
+	}
+
+	private _animationCleanTech(scene: Scene) {
+		const cleanTechMesh = new MeshActors(CLEANTECH);
+		const cleanTechMeshInner = new MeshActors(CLEANTECH_INNER);
+
+		this._cleanTeach = this._sphere.createActorsSecondary(cleanTechMesh);
 
 		scene.beginAnimation(this._cleanTeach, 0, FPS, true, SPEED);
 
-		scene.beginAnimation(
-			this._sphere.createInsideActorSecondary('CleanTeachSmall', 6, distancies, '5B9CB3', {
-				x: 40,
-				y: -20,
-				z: 10,
-			}),
-			0,
-			FPS,
-			true,
-			SPEED
-		);
+		scene.beginAnimation(this._sphere.createInsideActorSecondary(cleanTechMeshInner), 0, FPS, true, SPEED);
 	}
 
-	private _animationBank(scene: Scene, distancies: number) {
-		scene.beginAnimation(
-			this._sphere.createActorsSecondary('Bank', 10, distancies, '3b6ebc', {
-				x: 40,
-				y: -20,
-				z: -18,
-			}),
-			0,
-			FPS,
-			true,
-			SPEED
-		);
+	private _animationBank(scene: Scene) {
+		const bankMesh = new MeshActors(BANK);
+		const bankMeshInner = new MeshActors(BANK_INNER);
+		this._bank = this._sphere.createActorsSecondary(bankMesh);
 
-		scene.beginAnimation(
-			this._sphere.createInsideActorSecondary('BankSmall', 6, distancies, '3b6ebc', {
-				x: 40,
-				y: -30,
-				z: -18,
-			}),
-			0,
-			FPS,
-			true,
-			SPEED
-		);
+		scene.beginAnimation(this._bank, 0, FPS, true, SPEED);
+
+		scene.beginAnimation(this._sphere.createInsideActorSecondary(bankMeshInner), 0, FPS, true, SPEED);
 	}
 
 	/* 

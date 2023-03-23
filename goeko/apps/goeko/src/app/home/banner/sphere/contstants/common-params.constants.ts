@@ -1,0 +1,5 @@
+export const COMMON_PARAMS = {
+	DIAMETER_WRAPPER: 8,
+	DIAMETER_INNER: 4,
+	DISTANCE: 16,
+};
