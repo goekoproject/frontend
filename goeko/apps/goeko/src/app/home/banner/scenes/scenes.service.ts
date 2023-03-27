@@ -21,7 +21,7 @@ export class SceneService {
 	light!: Light;
 	protected rootMesh!: Mesh;
 
-	private _engine!: Engine;
+	_engine!: Engine;
 	private _canvas!: HTMLCanvasElement;
 	_camera!: FreeCamera | ArcRotateCamera;
 

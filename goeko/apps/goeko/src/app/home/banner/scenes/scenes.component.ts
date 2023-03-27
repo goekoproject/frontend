@@ -64,8 +64,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this.sphereSME.actionManager = new ActionManager(scene);
 		this.sphereSME.actionManager.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				this._sphere.stopRotate();
-				this._sphere.startAnimationMaterialMain();
+				/* 	this._sphere.stopRotate();
+				this._sphere.startAnimationMaterialMain(); */
 				this._interactionService.onSMEClick.next(true);
 			})
 		);
@@ -76,7 +76,6 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 		this.planeText.actionManager.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				this._sphere.stopRotate();
 				this._sphere.startAnimationMaterialMain();
 				this._interactionService.onSMEClick.next(true);
 			})

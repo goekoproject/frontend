@@ -19,6 +19,7 @@ import {
 	Texture,
 	Vector3,
 } from '@babylonjs/core';
+import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
 import { Curve3, Path2 } from '@babylonjs/core/Maths/math.path';
 import { Vector2 } from '@babylonjs/core/Maths/math.vector';
 import { PolygonMeshBuilder } from '@babylonjs/core/Meshes/polygonMesh';
@@ -31,6 +32,7 @@ declare const MeshWriter: any;
 import { SceneService } from './scenes.service';
 export const FPS = 10;
 export const SPEED = 0.025;
+const CONTROL_CAM = false;
 
 const methodsObj = {
 	Vector2,
@@ -107,7 +109,7 @@ export class SphereService extends SceneService {
 
 		const materialMain = this._createMaterialMain();
 		this._createBorder();
-
+		//this._createRings();
 		this._sme.material = materialMain;
 		//this._sme.subMeshes = subMeshes;
 
@@ -221,10 +223,15 @@ export class SphereService extends SceneService {
 		this.scene.stopAnimation(this._sme);
 	}
 	private _createMaterialMain(img: string = 'fondo-hex2.png') {
+		var light = new HemisphericLight('light_sp', new Vector3(0, 1, 0), this.scene);
+
 		const url = `assets/${img}`;
+		const imgTexture = new Texture(url, this.scene, false, CONTROL_CAM);
 		const materialMain = new StandardMaterial('water1', this.scene);
 		//	materialMain.alpha = 0.4;
-		materialMain.opacityTexture = new Texture(url, this.scene);
+		materialMain.diffuseTexture = imgTexture;
+
+		materialMain.opacityTexture = imgTexture;
 		materialMain.opacityTexture.hasAlpha = true;
 
 		// Establecer opciones de textura
@@ -237,6 +244,34 @@ export class SphereService extends SceneService {
 		materialMain.specularColor = Color3.White();
 		materialMain.emissiveColor = Color3.Teal();
 		return materialMain;
+	}
+
+	private _createRings() {
+		// Creamos dos anillos luminosos azules
+		var blueMaterial = new StandardMaterial('blueMaterial', this.scene);
+		blueMaterial.emissiveColor = Color3.Blue();
+		var ring1 = MeshBuilder.CreateTorus('ring1', { diameter: 25, thickness: 0.5, tessellation: 32 }, this.scene);
+		ring1.material = blueMaterial;
+		ring1.position.x = 2.5;
+		var ring2 = MeshBuilder.CreateTorus('ring2', { diameter: 25, thickness: 0.5, tessellation: 32 }, this.scene);
+		ring2.material = blueMaterial;
+		ring2.position.x = 2.5;
+
+		// Creamos una animación para rotar los anillos alrededor del eje Y
+		var animation = new Animation(
+			'ringAnimation',
+			'rotation.z',
+			30,
+			Animation.ANIMATIONTYPE_FLOAT,
+			Animation.ANIMATIONLOOPMODE_CYCLE
+		);
+		var keys = [
+			{ frame: 0, value: 0 },
+			{ frame: 100, value: Math.PI * 2 },
+		];
+		animation.setKeys(keys);
+		ring1.animations.push(animation);
+		ring2.animations.push(animation);
 	}
 
 	private _createBorder(mesh: Mesh = this._sme) {
