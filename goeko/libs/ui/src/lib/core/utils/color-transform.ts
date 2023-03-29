@@ -1,3 +1,4 @@
+import { Color3 } from '@babylonjs/core/Maths/math.color';
 import { VectorColor } from '../models/vector-color.model';
 
 export const REGEX_COLOR = new RegExp('^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$');
@@ -27,3 +28,9 @@ export const getVectorColor = <T>(hex: string): VectorColor<T> => {
 	const color = colorToColorBY(hex);
 	return new VectorColor<T>(color.red, color.green, color.blue);
 };
+
+export abstract class CustomColor {
+	static hex(hex: string) {
+		return colorHexToRgb(hex) as Color3;
+	}
+}

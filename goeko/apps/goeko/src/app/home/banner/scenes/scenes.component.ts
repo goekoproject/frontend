@@ -44,7 +44,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		this._sphere.configScene(this.canvasRef);
-		this.scene = this._sphere.createSME(18);
+		this.scene = this._sphere.createSME(14);
 		this.planeText = this._sphere.createMaterialText();
 		this._sphere.makeRotate();
 		this._createEventClickSME(this.scene);
@@ -76,7 +76,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 		this.planeText.actionManager.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				this._sphere.startAnimationMaterialMain();
+				//	this._sphere.startAnimationMaterialMain();
 				this._interactionService.onSMEClick.next(true);
 			})
 		);
@@ -92,10 +92,10 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		const cleanTechMeshInner = new MeshActors(CLEANTECH_INNER);
 
 		this._cleanTeach = this._sphere.createActorsSecondary(cleanTechMesh);
+		const cleanTeachInner = this._sphere.createInsideActorSecondary(cleanTechMeshInner);
 
 		scene.beginAnimation(this._cleanTeach, 0, FPS, true, SPEED);
-
-		scene.beginAnimation(this._sphere.createInsideActorSecondary(cleanTechMeshInner), 0, FPS, true, SPEED);
+		scene.beginAnimation(cleanTeachInner, 0, FPS, true, SPEED);
 	}
 
 	private _animationBank(scene: Scene) {

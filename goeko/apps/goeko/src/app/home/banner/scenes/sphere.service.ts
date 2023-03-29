@@ -25,14 +25,14 @@ import { Vector2 } from '@babylonjs/core/Maths/math.vector';
 import { PolygonMeshBuilder } from '@babylonjs/core/Meshes/polygonMesh';
 import { SolidParticleSystem } from '@babylonjs/core/Particles/solidParticleSystem';
 
-import { colorToColorBY } from '@goeko/ui';
+import { colorToColorBY, CustomColor } from '@goeko/ui';
 import { MeshActors } from '../sphere/models/sphere.model';
 declare const MeshWriter: any;
 
 import { SceneService } from './scenes.service';
 export const FPS = 10;
 export const SPEED = 0.025;
-const CONTROL_CAM = false;
+const CONTROL_CAM = true;
 
 const methodsObj = {
 	Vector2,
@@ -64,7 +64,7 @@ export class SphereService extends SceneService {
 
 	readonly wobbleAnim = new Animation(
 		'wobble',
-		'position.x',
+		'position.y',
 		FPS,
 		Animation.ANIMATIONTYPE_FLOAT,
 		Animation.ANIMATIONLOOPMODE_RELATIVE
@@ -104,7 +104,6 @@ export class SphereService extends SceneService {
 
 		this.sphereMaterialSME = new StandardMaterial('text', this.scene);
 
-		this._addMaterialText();
 		this._addColor();
 
 		const materialMain = this._createMaterialMain();
@@ -131,12 +130,11 @@ export class SphereService extends SceneService {
 		const sphereMaterial = new StandardMaterial('material_inner', this.scene);
 
 		sphereMaterial.diffuseTexture = new BaseTexture();
-		sphereMaterial.diffuseColor = Color3.Green();
-		sphereMaterial.specularColor = Color3.Green();
-		sphereMaterial.emissiveColor = Color3.Green();
+		sphereMaterial.diffuseColor = Color3.Teal();
+		sphereMaterial.specularColor = Color3.Teal();
+		sphereMaterial.emissiveColor = CustomColor.hex('24A650');
 		sphereInner.material = sphereMaterial;
-		sphereInner.material.alpha = 1;
-
+		sphereInner.material.alpha = 0.3;
 		// Establecer opciones de textura
 		/* 	(materialMain.opacityTexture as any).uScale = 8;
 		(materialMain.opacityTexture as any).vScale = 8; */
@@ -226,22 +224,19 @@ export class SphereService extends SceneService {
 		var light = new HemisphericLight('light_sp', new Vector3(0, 1, 0), this.scene);
 
 		const url = `assets/${img}`;
-		const imgTexture = new Texture(url, this.scene, false, CONTROL_CAM);
+		const imgTexture = new Texture(url, this.scene);
 		const materialMain = new StandardMaterial('water1', this.scene);
-		//	materialMain.alpha = 0.4;
-		materialMain.diffuseTexture = imgTexture;
+		//materialMain.diffuseTexture = imgTexture;
 
 		materialMain.opacityTexture = imgTexture;
-		materialMain.opacityTexture.hasAlpha = true;
 
 		// Establecer opciones de textura
 		(materialMain.opacityTexture as any).uScale = 2;
 		(materialMain.opacityTexture as any).vScale = 2;
 		(materialMain.opacityTexture as any).uOffset = 1.5;
 		(materialMain.opacityTexture as any).vOffset = 1.5;
-
 		materialMain.diffuseColor = Color3.Teal();
-		materialMain.specularColor = Color3.White();
+		//	materialMain.specularColor = Color3.White();
 		materialMain.emissiveColor = Color3.Teal();
 		return materialMain;
 	}
@@ -249,13 +244,16 @@ export class SphereService extends SceneService {
 	private _createRings() {
 		// Creamos dos anillos luminosos azules
 		var blueMaterial = new StandardMaterial('blueMaterial', this.scene);
-		blueMaterial.emissiveColor = Color3.Blue();
+		//blueMaterial.diffuseColor = Color3.Blue();
+		blueMaterial.emissiveColor = new Color3(0, 0, 1); // Establecer el color azul brillante
+
 		var ring1 = MeshBuilder.CreateTorus('ring1', { diameter: 25, thickness: 0.5, tessellation: 32 }, this.scene);
+		blueMaterial.alpha = 0.4;
+		ring1.rotation.x = -60;
 		ring1.material = blueMaterial;
-		ring1.position.x = 2.5;
-		var ring2 = MeshBuilder.CreateTorus('ring2', { diameter: 25, thickness: 0.5, tessellation: 32 }, this.scene);
+		/* 	var ring2 = MeshBuilder.CreateTorus('ring2', { diameter: 25, thickness: 0.5, tessellation: 32 }, this.scene);
 		ring2.material = blueMaterial;
-		ring2.position.x = 2.5;
+		ring2.position.x = 2.5; */
 
 		// Creamos una animación para rotar los anillos alrededor del eje Y
 		var animation = new Animation(
@@ -271,15 +269,16 @@ export class SphereService extends SceneService {
 		];
 		animation.setKeys(keys);
 		ring1.animations.push(animation);
-		ring2.animations.push(animation);
+		/* 		ring2.animations.push(animation);
+		 */
 	}
 
 	private _createBorder(mesh: Mesh = this._sme) {
-		this.scene.createDefaultCameraOrLight(true, true, false);
+		this.scene.createDefaultCameraOrLight(true, true, CONTROL_CAM);
 
 		// Crear efecto de brillo en el borde de la esfera
 		var glowLayer = new GlowLayer('glow', this.scene);
-		glowLayer.intensity = 1; // Establecer intensidad
+		glowLayer.intensity = 2; // Establecer intensidad
 		glowLayer.addIncludedOnlyMesh(mesh);
 
 		var light = new PointLight('light', Vector3.Zero(), this.scene);
@@ -344,11 +343,11 @@ export class SphereService extends SceneService {
 		// Crea un material y aplica la textura dinámica
 		planeMaterial.diffuseTexture = dynamicTexture;
 		planeMaterial.opacityTexture = dynamicTexture;
-		planeMaterial.diffuseTexture.hasAlpha = false;
+		/* planeMaterial.diffuseTexture.hasAlpha = false; */
 
 		plane.position.x = this._sme.position.x;
 		plane.position.y = this._sme.position.y;
-		plane.position.z = -20;
+		plane.position.z = -10;
 		plane.material = planeMaterial;
 		return plane;
 	}
@@ -375,17 +374,42 @@ export class SphereService extends SceneService {
 		const segments = meshActors.segments;
 		const mesh = MeshBuilder.CreateSphere(meshActors.name, { diameter, segments }, this.scene);
 		mesh.parent = this._sme;
-		mesh.rotation = new Vector3(0, 0, 0);
+		mesh.rotation = new Vector3(-10, -10, 0);
 		if (meshActors.color) {
 			const _color = colorToColorBY(meshActors.color);
-			const sphereMaterial = new StandardMaterial(meshActors.name, this.scene);
+			const sphereMaterial = this._createMaterialMain();
 
-			sphereMaterial.diffuseTexture = new BaseTexture();
-			sphereMaterial.diffuseTexture.hasAlpha = true;
+			const textureWidth = 512;
+			const textureHeight = 256;
+			const dynamicTexture = new DynamicTexture(
+				'dynamicTexture',
+				{ width: textureWidth, height: textureHeight },
+				this.scene,
+				true
+			);
+			// Dibuja el texto creativo en la textura
+			const textureContext = dynamicTexture.getContext();
+			textureContext.font = 'bold 100px monospace';
+			dynamicTexture.drawText(
+				meshActors.title,
+				null,
+				null,
+				'80px Trebuchet MS',
+				'#31363F',
+				'transparent',
+				true,
+				true
+			);
+
+			dynamicTexture.update();
+
+			// Crea un material y aplica la textura dinámica
+			//	sphereMaterial.diffuseTexture = dynamicTexture;
+			sphereMaterial.opacityTexture = dynamicTexture;
+
 			mesh.material = sphereMaterial;
-			mesh.material.alpha = 1;
 		}
-		const plane = this._createPlaneOnMesh(mesh, meshActors);
+		//const plane = this._createPlaneOnMesh(mesh, meshActors);
 
 		this._rotationMesh(mesh, meshActors);
 
@@ -404,7 +428,6 @@ export class SphereService extends SceneService {
 	}
 
 	private _createMesh(meshActors: MeshActors) {
-		const offY = -1 + Math.random();
 		const diameter = meshActors.diameter;
 		const segments = meshActors.segments;
 		const mesh = MeshBuilder.CreateSphere(meshActors.name, { diameter, segments }, this.scene);
@@ -422,10 +445,11 @@ export class SphereService extends SceneService {
 			const sphereMaterial = new StandardMaterial(meshActors.name, this.scene);
 
 			sphereMaterial.emissiveColor = new Color3(_color.red, _color.green, _color.blue);
-			//sphereMaterial.diffuseTexture = new BaseTexture();
-			sphereMaterial.alpha = 0.2;
+			sphereMaterial.diffuseTexture = new BaseTexture();
+			sphereMaterial.alpha = 1;
 			//(sphereMaterial.diffuseTexture.hasAlpha = true;
-			mesh.material = sphereMaterial;
+			mesh.material = this._createMaterialMain();
+			mesh.material.alpha = 0.4;
 		}
 
 		//this._addShadow(name);
@@ -433,7 +457,7 @@ export class SphereService extends SceneService {
 	}
 
 	private _rotationMesh(meshWrapper: Mesh, meshActors: MeshActors) {
-		meshWrapper.setPivotMatrix(Matrix.Translation(meshActors.distance, -2, 0), false);
+		meshWrapper.setPivotMatrix(Matrix.Translation(meshActors.distance, 0, 0), false);
 
 		meshWrapper.rotation =
 			new Vector3(meshActors.position?.x, meshActors.position?.y, meshActors.position?.z) || new Vector3();
@@ -448,9 +472,9 @@ export class SphereService extends SceneService {
 		);
 
 		const planeMaterial = new StandardMaterial('material_ plane', this.scene);
-		/* 	planeMaterial.opacityTexture = new Texture(`assets/${meshActors.imgTexture}`, this.scene);
-		planeMaterial.opacityTexture.hasAlpha = true;
-		plane.parent = meshReferencePosition; */
+		planeMaterial.opacityTexture = new Texture(`assets/${meshActors.imgTexture}`, this.scene);
+		//planeMaterial.opacityTexture.hasAlpha = true;
+		plane.parent = meshReferencePosition;
 
 		// Dibuja el texto creativo en la textura
 		const textureWidth = 512;
@@ -482,6 +506,7 @@ export class SphereService extends SceneService {
 		plane.position.x = meshReferencePosition.position.x;
 		plane.position.y = meshReferencePosition.position.y;
 		plane.position.z = meshReferencePosition.position.z;
+
 		/* plane.position.y = -1; */
 		plane.material = planeMaterial;
 
@@ -498,7 +523,7 @@ export class SphereService extends SceneService {
 		this._ground.position.y = -10;
 		//groundMaterial.specularColor = new Color3(0, 0, 0);
 		groundMaterial.diffuseTexture = new BaseTexture();
-		groundMaterial.diffuseTexture.hasAlpha = true;
+		//groundMaterial.diffuseTexture.hasAlpha = true;
 		//groundMaterial.diffuseTexture = new Texture('./assets/bkg-1.png', this.scene, false);
 		//groundMaterial.diffuseTexture = new Texture('assets/background-world.svg', this.scene, false);
 		this._ground.material = groundMaterial;
