@@ -32,7 +32,7 @@ declare const MeshWriter: any;
 import { SceneService } from './scenes.service';
 export const FPS = 10;
 export const SPEED = 0.025;
-const CONTROL_CAM = true;
+const CONTROL_CAM = false;
 
 const methodsObj = {
 	Vector2,

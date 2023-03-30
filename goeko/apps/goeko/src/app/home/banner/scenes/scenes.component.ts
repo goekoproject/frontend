@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActionManager, ExecuteCodeAction, Scene } from '@babylonjs/core';
 import { BANK, BANK_INNER } from '../sphere/contstants/bank.constants';
 import { CLEANTECH, CLEANTECH_INNER } from '../sphere/contstants/cleantech.constants';
@@ -40,7 +41,11 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	private planeText!: any;
 
 	scene!: Scene;
-	constructor(private _sphere: SphereService, private _interactionService: InteractionService) {}
+	constructor(
+		private _sphere: SphereService,
+		private _router: Router,
+		private _interactionService: InteractionService
+	) {}
 
 	ngOnInit(): void {
 		this._sphere.configScene(this.canvasRef);
@@ -67,6 +72,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 				/* 	this._sphere.stopRotate();
 				this._sphere.startAnimationMaterialMain(); */
 				this._interactionService.onSMEClick.next(true);
+				this._router.navigate([], { fragment: 'sme' });
 			})
 		);
 	}
@@ -78,6 +84,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
 				//	this._sphere.startAnimationMaterialMain();
 				this._interactionService.onSMEClick.next(true);
+				this._router.navigate([], { fragment: 'sme' });
 			})
 		);
 	}
@@ -92,6 +99,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		const cleanTechMeshInner = new MeshActors(CLEANTECH_INNER);
 
 		this._cleanTeach = this._sphere.createActorsSecondary(cleanTechMesh);
+		this._clickCleanTeach();
 		const cleanTeachInner = this._sphere.createInsideActorSecondary(cleanTechMeshInner);
 
 		scene.beginAnimation(this._cleanTeach, 0, FPS, true, SPEED);
@@ -102,10 +110,21 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		const bankMesh = new MeshActors(BANK);
 		const bankMeshInner = new MeshActors(BANK_INNER);
 		this._bank = this._sphere.createActorsSecondary(bankMesh);
-
+		const bankinner = this._sphere.createInsideActorSecondary(bankMeshInner);
 		scene.beginAnimation(this._bank, 0, FPS, true, SPEED);
+		scene.beginAnimation(bankinner, 0, FPS, true, SPEED);
+	}
 
-		scene.beginAnimation(this._sphere.createInsideActorSecondary(bankMeshInner), 0, FPS, true, SPEED);
+	private _clickCleanTeach() {
+		this._cleanTeach.actionManager = new ActionManager(this.scene);
+		this._cleanTeach.actionManager.registerAction(
+			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
+				/* 	this._sphere.stopRotate();
+				this._sphere.startAnimationMaterialMain(); */
+				this._interactionService.onCleanTeachClick.next(true);
+				this._router.navigate([], { fragment: 'cleanteach' });
+			})
+		);
 	}
 
 	/* 

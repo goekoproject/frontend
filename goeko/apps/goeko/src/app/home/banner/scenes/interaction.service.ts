@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class InteractionService {
 	onSMEClick = new Subject<boolean>();
+	onCleanTeachClick = new Subject<boolean>();
 
 	constructor() {}
 }
