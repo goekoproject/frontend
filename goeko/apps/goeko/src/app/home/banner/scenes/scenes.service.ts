@@ -73,7 +73,7 @@ export class SceneService {
 		this._camera.setTarget(this.rootMesh);
 
 		// Control mouse/ scroller etcc
-		this._camera.attachControl(this._canvas, false);
+		this._camera.attachControl(this._canvas, true);
 
 		this._engine.runRenderLoop(() => this.scene.render());
 	}

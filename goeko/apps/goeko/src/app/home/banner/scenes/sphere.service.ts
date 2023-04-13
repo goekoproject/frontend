@@ -25,10 +25,11 @@ import { Vector2 } from '@babylonjs/core/Maths/math.vector';
 import { PolygonMeshBuilder } from '@babylonjs/core/Meshes/polygonMesh';
 import { SolidParticleSystem } from '@babylonjs/core/Particles/solidParticleSystem';
 
-import { colorToColorBY, CustomColor } from '@goeko/ui';
-import { MeshActors } from '../sphere/models/sphere.model';
+import { colorToColorBY } from '@goeko/ui';
+import { MeshActors, TYPE_MESH } from '../sphere/models/sphere.model';
 declare const MeshWriter: any;
 
+import { AdvancedDynamicTexture, Rectangle, TextBlock } from '@babylonjs/gui';
 import { SceneService } from './scenes.service';
 export const FPS = 10;
 export const SPEED = 0.025;
@@ -81,15 +82,16 @@ export class SphereService extends SceneService {
 	];
 	constructor(readonly zone: NgZone, @Inject(DOCUMENT) readonly doc: Document) {
 		super(zone, document);
-		this.rotationAnim.setKeys(this.rotationKeys);
-		this.wobbleAnim.setKeys(this.wobbleKeys);
+		/* this.rotationAnim.setKeys(this.rotationKeys);
+		this.wobbleAnim.setKeys(this.wobbleKeys); */
 	}
 
-	configScene(canvas: ElementRef<HTMLCanvasElement>) {
+	getScene(canvas: ElementRef<HTMLCanvasElement>) {
 		if (this.scene) {
 			this.scene.dispose();
 		}
 		super.createScene(canvas);
+		return this.scene;
 	}
 
 	/**
@@ -99,10 +101,11 @@ export class SphereService extends SceneService {
 	 * @returns
 	 */
 	createSME(size: number = 30): Scene {
-		this._createPointLight();
+		//	this._createPointLight();
 		this._sme = MeshBuilder.CreateSphere('sme', { segments: 100, diameter: size });
 
 		this.sphereMaterialSME = new StandardMaterial('text', this.scene);
+		const light = new HemisphericLight('light1', new Vector3(2, 0, -10), this.scene);
 
 		this._addColor();
 
@@ -115,33 +118,75 @@ export class SphereService extends SceneService {
 		this._sme.parent = this.rootMesh;
 		this._sme.position = new Vector3(0, 0, 0);
 		//this._sme.rotation = new Vector3(8.85, 7.15, 5.83);
-		this._addGround();
+		//this._addGround();
 
-		this._createSMEinner();
+		//this._createSMEinner();
 
 		//this._addShadow('sme');
 
 		return this.scene;
 	}
 
+	public builderSphere(mesh: MeshActors): Mesh {
+		const sphere = MeshBuilder.CreateSphere(mesh.name, { segments: mesh.segments, diameter: mesh.diameter });
+		sphere.position = new Vector3(mesh.position.x, mesh.position.x, mesh.position.x);
+		if (mesh.type === TYPE_MESH.ROOT_MESH) {
+			this._setRootMesh(sphere);
+		}
+		return sphere;
+	}
+
+	public builderSphereWithLabel(mesh: MeshActors, text: string): Mesh {
+		const sphere = MeshBuilder.CreateSphere(mesh.name, { segments: mesh.segments, diameter: mesh.diameter });
+		sphere.position = new Vector3(mesh.position.x, mesh.position.x, mesh.position.x);
+		if (mesh.type === TYPE_MESH.ROOT_MESH) {
+			this._setRootMesh(sphere);
+		}
+
+		this._builderLabel(text);
+		return sphere;
+	}
+
+	private _builderLabel(name: string) {
+		const label = new Rectangle('label');
+		label.background = 'transparent';
+		label.height = '150px';
+		label.width = '200px';
+		label.cornerRadius = 5;
+		label.thickness = 1;
+
+		const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI('UI');
+		advancedTexture.addControl(label);
+
+		const text = new TextBlock();
+		text.text = name;
+		text.color = 'white';
+		text.fontSize = '50px';
+		label.addControl(text);
+	}
+
+	private _setRootMesh(mesh: Mesh, meshParent = this.rootMesh) {
+		mesh.parent = meshParent;
+	}
+
 	private _createSMEinner() {
-		const sphereInner = MeshBuilder.CreateSphere('sme_inner', { segments: 100, diameter: 10 });
+		const sphereInner = MeshBuilder.CreateSphere('sme_inner', { segments: 100, diameter: 8 });
 
 		const sphereMaterial = new StandardMaterial('material_inner', this.scene);
 
 		sphereMaterial.diffuseTexture = new BaseTexture();
 		sphereMaterial.diffuseColor = Color3.Teal();
 		sphereMaterial.specularColor = Color3.Teal();
-		sphereMaterial.emissiveColor = CustomColor.hex('24A650');
+		//sphereMaterial.emissiveColor = CustomColor.hex('24A650');
 		sphereInner.material = sphereMaterial;
-		sphereInner.material.alpha = 0.3;
+		//sphereInner.material.alpha = 0.3;
 		// Establecer opciones de textura
 		/* 	(materialMain.opacityTexture as any).uScale = 8;
 		(materialMain.opacityTexture as any).vScale = 8; */
 		/* 		(materialMain.opacityTexture as any).uOffset = 0.5;
 		(materialMain.opacityTexture as any).vOffset = 0.5; */
 
-		this._createGlow(sphereInner);
+		//this._createGlow(sphereInner);
 	}
 
 	startAnimationMaterialMain() {
@@ -195,9 +240,9 @@ export class SphereService extends SceneService {
 		this.scene.beginAnimation(this._sme, 0, 60, true);
 	}
 
-	makeRotate() {
-		var animation = new Animation(
-			'rotationAnimation',
+	makeRotate(mesh = this._sme) {
+		const animation = new Animation(
+			'rotationSphere',
 			'rotation.y',
 			30,
 			Animation.ANIMATIONTYPE_FLOAT,
@@ -205,38 +250,45 @@ export class SphereService extends SceneService {
 		);
 
 		// Definir los frames de la animación
-		var keys = [
+		const keyFrames = [
 			{ frame: 0, value: 0 },
-			{ frame: 1800, value: Math.PI * 2 },
+			{ frame: 120, value: 2 * Math.PI },
 		];
-		animation.setKeys(keys);
+		animation.setKeys(keyFrames);
 
 		// Añadir la animación a la esfera
-		this._sme.animations.push(animation);
+		mesh.animations = [];
+		mesh.animations.push(animation);
 
 		// Empezar la animación
-		this.scene.beginAnimation(this._sme, 0, 1800, true);
+		this.scene.beginAnimation(mesh, 0, 120, true);
 	}
 	stopRotate() {
 		this.scene.stopAnimation(this._sme);
 	}
 	private _createMaterialMain(img: string = 'fondo-hex2.png') {
-		var light = new HemisphericLight('light_sp', new Vector3(0, 1, 0), this.scene);
-
+		//	var light = new HemisphericLight('light_sp', new Vector3(0, 1, 0), this.scene);
+		let dynamicTexture = new DynamicTexture('dynamicTexture', 512, this.scene, true);
+		let textBlock = new TextBlock();
+		textBlock.text = '¡Hola, mundo!';
+		textBlock.color = 'white';
+		textBlock.fontSize = 56;
+		dynamicTexture.drawText('SME', null, null, 'bold 36px Arial', 'white', 'transparent', true);
 		const url = `assets/${img}`;
 		const imgTexture = new Texture(url, this.scene);
 		const materialMain = new StandardMaterial('water1', this.scene);
+		materialMain.diffuseTexture = dynamicTexture;
 		//materialMain.diffuseTexture = imgTexture;
 
-		materialMain.opacityTexture = imgTexture;
+		/* 	materialMain.opacityTexture = imgTexture;
 
 		// Establecer opciones de textura
 		(materialMain.opacityTexture as any).uScale = 2;
 		(materialMain.opacityTexture as any).vScale = 2;
 		(materialMain.opacityTexture as any).uOffset = 1.5;
-		(materialMain.opacityTexture as any).vOffset = 1.5;
+		(materialMain.opacityTexture as any).vOffset = 1.5; */
 		materialMain.diffuseColor = Color3.Teal();
-		//	materialMain.specularColor = Color3.White();
+		materialMain.specularColor = Color3.Teal();
 		materialMain.emissiveColor = Color3.Teal();
 		return materialMain;
 	}
@@ -349,6 +401,7 @@ export class SphereService extends SceneService {
 		plane.position.y = this._sme.position.y;
 		plane.position.z = -10;
 		plane.material = planeMaterial;
+		this.makeRotate(plane);
 		return plane;
 	}
 
@@ -437,6 +490,9 @@ export class SphereService extends SceneService {
 		}
 
 		mesh.parent = this._sme;
+		if (!meshActors.distance) {
+			return;
+		}
 		mesh.setPivotMatrix(Matrix.Translation(meshActors.distance, -2, 0), false);
 		this._rotationMesh(mesh, meshActors);
 
@@ -457,6 +513,9 @@ export class SphereService extends SceneService {
 	}
 
 	private _rotationMesh(meshWrapper: Mesh, meshActors: MeshActors) {
+		if (!meshActors.distance) {
+			return;
+		}
 		meshWrapper.setPivotMatrix(Matrix.Translation(meshActors.distance, 0, 0), false);
 
 		meshWrapper.rotation =
@@ -513,6 +572,11 @@ export class SphereService extends SceneService {
 		return plane;
 	}
 
+	addMaterialHover(mesh: Mesh) {
+		var hoverMaterial = new StandardMaterial('hoverMaterial', this.scene);
+		hoverMaterial.emissiveColor = new Color3(1, 1, 0);
+		mesh.material = hoverMaterial;
+	}
 	private _addGround() {
 		// Ground
 		this._ground = MeshBuilder.CreateGround('ground', { width: 100, height: 100 }, this.scene);

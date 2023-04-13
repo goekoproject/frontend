@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionManager, ExecuteCodeAction, Scene } from '@babylonjs/core';
-import { BANK, BANK_INNER } from '../sphere/contstants/bank.constants';
-import { CLEANTECH, CLEANTECH_INNER } from '../sphere/contstants/cleantech.constants';
+import { SME } from '../sphere/contstants/sme-constants';
 import { MeshActors } from '../sphere/models/sphere.model';
 import { InteractionService } from './interaction.service';
-import { FPS, SPEED, SphereService } from './sphere.service';
+import { SphereService } from './sphere.service';
 
 @Component({
 	selector: 'goeko-scenes',
@@ -25,9 +24,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	z!: number;
 	meshText!: any;
 
-	get sphereSME() {
-		return this._sphere._sme;
-	}
+	private _sphereSme!: any;
 
 	public get cleanTeach(): any {
 		return this._cleanTeach;
@@ -42,39 +39,38 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	scene!: Scene;
 	constructor(
-		private _sphere: SphereService,
+		private _sphereService: SphereService,
 		private _router: Router,
 		private _interactionService: InteractionService
 	) {}
 
 	ngOnInit(): void {
-		this._sphere.configScene(this.canvasRef);
-		this.scene = this._sphere.createSME(14);
-		this.planeText = this._sphere.createMaterialText();
-		this._sphere.makeRotate();
-		this._createEventClickSME(this.scene);
-		this._createEventClickSMEPlane(this.scene);
+		this.scene = this._sphereService.getScene(this.canvasRef);
+		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build('SME');
+		this._sphereSme.addHemisphericLight();
+		this._sphereSme.addDiffuseTexture();
+		this._sphereService.makeRotate(this._sphereSme.rawMesh);
+
+		//	this.planeText = this._sphereService.createMaterialText();
+		/* 		this._sphereService.makeRotate();
+		 */
+		// this._createEventClickSME(this.scene);
+		//this._createEventClickSMEPlane(this.scene);
 
 		this.scene.blockfreeActiveMeshesAndRenderingGroups = true;
-
 		this.scene.blockfreeActiveMeshesAndRenderingGroups = false;
-		this._addActorsSecondary(this.scene);
+		/* 		this._addActorsSecondary(this.scene);
+		 */
 	}
 
 	ngAfterViewInit(): void {
-		this._sphere.start();
+		this._sphereService.start();
 	}
 
 	private _createEventClickSME(scene: Scene) {
-		this.sphereSME.actionManager = new ActionManager(scene);
-		this.sphereSME.actionManager.registerAction(
-			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				/* 	this._sphere.stopRotate();
-				this._sphere.startAnimationMaterialMain(); */
-				this._interactionService.onSMEClick.next(true);
-				this._router.navigate([], { fragment: 'sme' });
-			})
-		);
+		this._sphereSme.onClick(() => {
+			this._interactionService.onSMEClick.next(true);
+		});
 	}
 
 	private _createEventClickSMEPlane(scene: Scene) {
@@ -82,7 +78,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 		this.planeText.actionManager.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				//	this._sphere.startAnimationMaterialMain();
+				//	this._sphereService.startAnimationMaterialMain();
 				this._interactionService.onSMEClick.next(true);
 				this._router.navigate([], { fragment: 'sme' });
 			})
@@ -91,38 +87,48 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	private _addActorsSecondary(scene: Scene) {
 		this._animationCleanTech(scene);
-		this._animationBank(scene);
+		//this._animationBank(scene);
 	}
 
 	private _animationCleanTech(scene: Scene) {
-		const cleanTechMesh = new MeshActors(CLEANTECH);
+		/* 	const cleanTechMesh = new MeshActors(CLEANTECH);
 		const cleanTechMeshInner = new MeshActors(CLEANTECH_INNER);
 
-		this._cleanTeach = this._sphere.createActorsSecondary(cleanTechMesh);
+		this._cleanTeach = this._sphereService.createActorsSecondary(cleanTechMesh);
 		this._clickCleanTeach();
-		const cleanTeachInner = this._sphere.createInsideActorSecondary(cleanTechMeshInner);
+		//this._hoverCleanTeach();
+		const cleanTeachInner = this._sphereService.createInsideActorSecondary(cleanTechMeshInner);
 
 		scene.beginAnimation(this._cleanTeach, 0, FPS, true, SPEED);
-		scene.beginAnimation(cleanTeachInner, 0, FPS, true, SPEED);
+		scene.beginAnimation(cleanTeachInner, 0, FPS, true, SPEED); */
 	}
 
 	private _animationBank(scene: Scene) {
-		const bankMesh = new MeshActors(BANK);
+		/* 		const bankMesh = new MeshActors(BANK);
 		const bankMeshInner = new MeshActors(BANK_INNER);
-		this._bank = this._sphere.createActorsSecondary(bankMesh);
-		const bankinner = this._sphere.createInsideActorSecondary(bankMeshInner);
+		this._bank = this._sphereService.createActorsSecondary(bankMesh);
+		const bankinner = this._sphereService.createInsideActorSecondary(bankMeshInner);
 		scene.beginAnimation(this._bank, 0, FPS, true, SPEED);
-		scene.beginAnimation(bankinner, 0, FPS, true, SPEED);
+		scene.beginAnimation(bankinner, 0, FPS, true, SPEED); */
 	}
 
 	private _clickCleanTeach() {
 		this._cleanTeach.actionManager = new ActionManager(this.scene);
 		this._cleanTeach.actionManager.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				/* 	this._sphere.stopRotate();
-				this._sphere.startAnimationMaterialMain(); */
+				/* 	this._sphereService.stopRotate();
+				this._sphereService.startAnimationMaterialMain(); */
 				this._interactionService.onCleanTeachClick.next(true);
 				this._router.navigate([], { fragment: 'cleanteach' });
+			})
+		);
+	}
+
+	private _hoverCleanTeach() {
+		this._cleanTeach.actionManager = new ActionManager(this.scene);
+		this._cleanTeach.actionManager.registerAction(
+			new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => {
+				this._sphereService.addMaterialHover(this._cleanTeach);
 			})
 		);
 	}
@@ -139,20 +145,20 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	} */
 	changePosotionX(target: any) {
 		this.x = target.value;
-		this._sphere.rotateGroud(this.x, this.z, this.y);
-		//		this._sphere.light.getAbsolutePosition().x = target.value;
+		this._sphereService.rotateGroud(this.x, this.z, this.y);
+		//		this._sphereService.light.getAbsolutePosition().x = target.value;
 	}
 	changePosotionY(target: any) {
 		this.y = target.value;
-		this._sphere.rotateGroud(this.x, this.z, this.y);
+		this._sphereService.rotateGroud(this.x, this.z, this.y);
 
-		//this._sphere.light.getAbsolutePosition().y = target.value;
+		//this._sphereService.light.getAbsolutePosition().y = target.value;
 	}
 
 	changePosotionZ(target: any) {
 		this.z = target.value;
-		this._sphere.rotateGroud(this.x, this.z, this.y);
+		this._sphereService.rotateGroud(this.x, this.z, this.y);
 
-		//	this._sphere.light.getAbsolutePosition().z = target.value;
+		//	this._sphereService.light.getAbsolutePosition().z = target.value;
 	}
 }

@@ -57,7 +57,9 @@ export class ContentComponent implements OnInit {
 
 	private _onClickSme() {
 		this._interactionService.onSMEClick.subscribe((res) => {
-			this._viewportScroller.scrollToAnchor('sme');
+			setTimeout(() => {
+				this._viewportScroller.scrollToAnchor('sme');
+			}, 2000);
 		});
 	}
 
