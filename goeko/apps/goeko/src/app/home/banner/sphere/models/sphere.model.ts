@@ -1,5 +1,6 @@
 import {
 	ActionManager,
+	Color3,
 	ExecuteCodeAction,
 	HemisphericLight,
 	Mesh,
@@ -8,6 +9,7 @@ import {
 	Texture,
 	Vector3,
 } from '@babylonjs/core';
+import { CustomColor } from '@goeko/ui';
 import { SphereService } from '../../scenes/sphere.service';
 
 export class MeshActorsPosition {
@@ -38,6 +40,13 @@ export interface MeshActor {
 	distance?: number;
 	color?: string;
 	imgTexture?: string;
+	font: MeshFont;
+}
+
+export interface MeshFont {
+	color: string;
+	fontSize: number;
+	text: string;
 }
 export class MeshActors implements MeshActor {
 	name!: string;
@@ -52,7 +61,7 @@ export class MeshActors implements MeshActor {
 	distance?: number;
 	color?: string;
 	imgTexture?: string;
-
+	font!: MeshFont;
 	private _rawMesh!: Mesh;
 	public get rawMesh(): Mesh {
 		return this._rawMesh;
@@ -75,6 +84,7 @@ export class MeshActors implements MeshActor {
 			this.type = data.type || TYPE_MESH.NONE;
 			this.imgTexture = data.imgTexture;
 			this.scene = scene;
+			this.font = data.font || { color: 'white', fontSize: '12', text: 'text' };
 		}
 	}
 
@@ -93,13 +103,22 @@ export class MeshActors implements MeshActor {
 		this._rawMesh.material = material;
 	}
 
-	addDiffuseTexture(texture?: string) {
-		(this._rawMesh.material as StandardMaterial).diffuseTexture = new Texture(
-			'assets/texture-gray-1.png',
-			this.scene
-		);
+	setDiffuseTexture(texture?: string) {
+		(this._rawMesh.material as StandardMaterial).diffuseTexture = new Texture(`${texture}`, this.scene);
 	}
-	addHemisphericLight() {
+
+	setEmissiveColor(colorHex: string) {
+		const color = CustomColor.hex(colorHex);
+		(this._rawMesh.material as StandardMaterial).emissiveColor = new Color3(color.r, color.g, color.b);
+	}
+	setSpecularColor(colorHex: string) {
+		(this._rawMesh.material as StandardMaterial).specularColor = Color3.Teal();
+	}
+
+	setDiffuseColor(colorHex: string) {
+		(this._rawMesh.material as StandardMaterial).diffuseColor = Color3.Gray();
+	}
+	setHemisphericLight() {
 		new HemisphericLight(
 			'light1',
 			new Vector3(this.positonHemisphericLight.x, this.positonHemisphericLight.y, this.positonHemisphericLight.z),

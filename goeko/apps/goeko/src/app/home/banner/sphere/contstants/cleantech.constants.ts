@@ -1,23 +1,30 @@
+import { Color3 } from '@babylonjs/core';
+import { MeshActor, MeshActorsPosition, MeshFont } from '../models/sphere.model';
 import { COMMON_PARAMS } from './common-params.constants';
 
-const POSITION = { x: 0, y: 0, z: 0 };
-
-export const CLEANTECH = {
-	name: 'CleanTeach',
-	diameter: COMMON_PARAMS.DIAMETER_WRAPPER,
-	distance: -COMMON_PARAMS.DISTANCE,
-	color: '5B9CB3',
-	segments: 16,
-	position: POSITION,
+const POSITION = { x: 8, y: 5, z: 0 };
+const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
+const material = {
+	name: 'material_sme',
+	diffuseColor: Color3.Teal(),
+	specularColor: Color3.Teal(),
+	emissiveColor: Color3.Teal(),
 };
 
-export const CLEANTECH_INNER = {
-	name: 'CleanTeach',
-	diameter: COMMON_PARAMS.DIAMETER_INNER,
+const font: MeshFont = {
+	fontSize: 20,
+	color: '#8594E8',
+	text: 'CleanTech',
+};
+
+export const CLEANTECH: MeshActor = {
+	name: 'cleantech',
+	segments: 100,
+	diameter: 5,
 	title: 'CleanTech',
-	distance: -COMMON_PARAMS.DISTANCE,
-	color: '5B9CB3',
-	segments: 16,
 	position: POSITION,
-	imgTexture: 'solar-panel.png',
+	positonHemisphericLight: POSITION_LIGHT,
+	material: material,
+	distance: COMMON_PARAMS.DISTANCE,
+	font: font,
 };

@@ -1,10 +1,17 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActionManager, ExecuteCodeAction, Scene } from '@babylonjs/core';
+import { Scene } from '@babylonjs/core';
+import { BANK } from '../sphere/contstants/bank.constants';
+import { CLEANTECH } from '../sphere/contstants/cleantech.constants';
 import { SME } from '../sphere/contstants/sme-constants';
 import { MeshActors } from '../sphere/models/sphere.model';
 import { InteractionService } from './interaction.service';
 import { SphereService } from './sphere.service';
+
+const TEXTURE_SME = 'assets/texture-gray-1.png';
+const EMISSIVE_COLOR_SME = '#c0c0c0';
+const LIGHT_BORDER_SME = 0.2;
+const LIGHT_BORDER_SME_COLOR = '#FFFF00';
 
 @Component({
 	selector: 'goeko-scenes',
@@ -26,15 +33,9 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	private _sphereSme!: any;
 
-	public get cleanTeach(): any {
-		return this._cleanTeach;
-	}
-	public set cleanTeach(value: any) {
-		this._cleanTeach = value;
-	}
-	private _cleanTeach!: any;
+	private _sphereCleanTech!: any;
 
-	private _bank!: any;
+	private _sphereBank!: any;
 	private planeText!: any;
 
 	scene!: Scene;
@@ -46,92 +47,75 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		this.scene = this._sphereService.getScene(this.canvasRef);
-		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build('SME');
-		this._sphereSme.addHemisphericLight();
-		this._sphereSme.addDiffuseTexture();
-		this._sphereService.makeRotate(this._sphereSme.rawMesh);
-
-		//	this.planeText = this._sphereService.createMaterialText();
-		/* 		this._sphereService.makeRotate();
-		 */
-		// this._createEventClickSME(this.scene);
-		//this._createEventClickSMEPlane(this.scene);
-
 		this.scene.blockfreeActiveMeshesAndRenderingGroups = true;
 		this.scene.blockfreeActiveMeshesAndRenderingGroups = false;
-		/* 		this._addActorsSecondary(this.scene);
-		 */
+		this._createSME();
+		this._createCleanTech();
+		this._createBank();
 	}
 
 	ngAfterViewInit(): void {
 		this._sphereService.start();
 	}
 
-	private _createEventClickSME(scene: Scene) {
+	private _createSME() {
+		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build(SME.title);
+		//	this._sphereSme.setHemisphericLight();
+		this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
+		this._sphereSme.setDiffuseTexture(TEXTURE_SME);
+		this._sphereService.makeRotate(this._sphereSme.rawMesh);
+		//	this._sphereService.createBorder(this._sphereSme.rawMesh, LIGHT_BORDER_SME);
+		//this._createEventClickSME();
+	}
+
+	changeColor(color: string) {
+		this._sphereSme.setEmissiveColor(color);
+	}
+
+	private _createEventClickSME() {
 		this._sphereSme.onClick(() => {
 			this._interactionService.onSMEClick.next(true);
 		});
 	}
 
-	private _createEventClickSMEPlane(scene: Scene) {
-		this.planeText.actionManager = new ActionManager(scene);
+	private _createCleanTech() {
+		this._sphereCleanTech = new MeshActors(this._sphereService, this.scene, CLEANTECH).build(CLEANTECH.title);
+		this._sphereCleanTech.setHemisphericLight();
+		this._sphereCleanTech.setEmissiveColor(EMISSIVE_COLOR_SME);
+		this._sphereCleanTech.setDiffuseTexture(TEXTURE_SME);
+		this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
 
-		this.planeText.actionManager.registerAction(
-			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				//	this._sphereService.startAnimationMaterialMain();
-				this._interactionService.onSMEClick.next(true);
-				this._router.navigate([], { fragment: 'sme' });
-			})
+		this.scene.registerBeforeRender(() =>
+			this._sphereService.updateOrbitingSpherePosition(this._sphereCleanTech.rawMesh)
 		);
 	}
 
-	private _addActorsSecondary(scene: Scene) {
-		this._animationCleanTech(scene);
-		//this._animationBank(scene);
-	}
+	private _createBank() {
+		this._sphereBank = new MeshActors(this._sphereService, this.scene, BANK).build(BANK.title);
+		this._sphereBank.setHemisphericLight();
+		this._sphereBank.setEmissiveColor(EMISSIVE_COLOR_SME);
+		this._sphereBank.setDiffuseTexture(TEXTURE_SME);
+		this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
 
-	private _animationCleanTech(scene: Scene) {
-		/* 	const cleanTechMesh = new MeshActors(CLEANTECH);
-		const cleanTechMeshInner = new MeshActors(CLEANTECH_INNER);
-
-		this._cleanTeach = this._sphereService.createActorsSecondary(cleanTechMesh);
-		this._clickCleanTeach();
-		//this._hoverCleanTeach();
-		const cleanTeachInner = this._sphereService.createInsideActorSecondary(cleanTechMeshInner);
-
-		scene.beginAnimation(this._cleanTeach, 0, FPS, true, SPEED);
-		scene.beginAnimation(cleanTeachInner, 0, FPS, true, SPEED); */
-	}
-
-	private _animationBank(scene: Scene) {
-		/* 		const bankMesh = new MeshActors(BANK);
-		const bankMeshInner = new MeshActors(BANK_INNER);
-		this._bank = this._sphereService.createActorsSecondary(bankMesh);
-		const bankinner = this._sphereService.createInsideActorSecondary(bankMeshInner);
-		scene.beginAnimation(this._bank, 0, FPS, true, SPEED);
-		scene.beginAnimation(bankinner, 0, FPS, true, SPEED); */
-	}
-
-	private _clickCleanTeach() {
-		this._cleanTeach.actionManager = new ActionManager(this.scene);
-		this._cleanTeach.actionManager.registerAction(
-			new ExecuteCodeAction(ActionManager.OnPickUpTrigger, () => {
-				/* 	this._sphereService.stopRotate();
-				this._sphereService.startAnimationMaterialMain(); */
-				this._interactionService.onCleanTeachClick.next(true);
-				this._router.navigate([], { fragment: 'cleanteach' });
-			})
+		this.scene.registerBeforeRender(() =>
+			this._sphereService.updateOrbitingSpherePosition(this._sphereBank.rawMesh)
 		);
 	}
 
-	private _hoverCleanTeach() {
+	private _createEventCleanTeach() {
+		this._sphereSme.onClick(() => {
+			this._interactionService.onCleanTeachClick.next(true);
+		});
+	}
+
+	/* 	private _hoverCleanTeach() {
 		this._cleanTeach.actionManager = new ActionManager(this.scene);
 		this._cleanTeach.actionManager.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => {
 				this._sphereService.addMaterialHover(this._cleanTeach);
 			})
 		);
-	}
+	} */
 
 	/* 
 	changeRotationX(event: any) {
@@ -143,22 +127,4 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	changeRotationZ(event: any) {
 		this.meshText.rotation.y = event.target.value;
 	} */
-	changePosotionX(target: any) {
-		this.x = target.value;
-		this._sphereService.rotateGroud(this.x, this.z, this.y);
-		//		this._sphereService.light.getAbsolutePosition().x = target.value;
-	}
-	changePosotionY(target: any) {
-		this.y = target.value;
-		this._sphereService.rotateGroud(this.x, this.z, this.y);
-
-		//this._sphereService.light.getAbsolutePosition().y = target.value;
-	}
-
-	changePosotionZ(target: any) {
-		this.z = target.value;
-		this._sphereService.rotateGroud(this.x, this.z, this.y);
-
-		//	this._sphereService.light.getAbsolutePosition().z = target.value;
-	}
 }

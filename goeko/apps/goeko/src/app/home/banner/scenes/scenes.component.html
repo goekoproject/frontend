@@ -9,4 +9,6 @@ y{{y.value}}
 z{{z.value}}
 <input type="range" #z (input)="changePosotionZ($event.target)" step="0.0001" max="1">  -->
 
+<input type="color"  style="z-index: 10; position: relative;" (change)="changeColor($any($event.target).value)">
+
 <canvas #canvas id="canvas" class="canvas"></canvas>

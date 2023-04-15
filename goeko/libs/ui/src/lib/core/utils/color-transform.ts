@@ -1,17 +1,19 @@
 import { Color3 } from '@babylonjs/core/Maths/math.color';
 import { VectorColor } from '../models/vector-color.model';
 
-export const REGEX_COLOR = new RegExp('^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$');
+export const REGEX_COLOR = new RegExp(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
 
 export const colorHexToRgb = (hex: string) => {
 	if (!REGEX_COLOR.test(hex)) {
 		throw new TypeError(`${hex} is not a valid, it must be hexadecimal (#5B9CB3)`);
 	}
-	var r = parseInt(hex.substring(0, 2), 16);
-	var g = parseInt(hex.substring(2, 4), 16);
-	var b = parseInt(hex.substring(4, 6), 16);
+	hex = hex.replace(/^#/, '');
 
-	console.log(`Trasnform to RGB(${r},${g},${b})`);
+	var r = parseInt(hex.substring(0, 2), 16) / 255;
+	var g = parseInt(hex.substring(2, 4), 16) / 255;
+	var b = parseInt(hex.substring(4, 6), 16) / 255;
+
+	console.log(`Transform to RGB(${r},${g},${b})`);
 	return { r, g, b };
 };
 

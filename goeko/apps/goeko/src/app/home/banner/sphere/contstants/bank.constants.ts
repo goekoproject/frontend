@@ -1,22 +1,30 @@
+import { Color3 } from '@babylonjs/core';
+import { MeshActor, MeshActorsPosition, MeshFont } from '../models/sphere.model';
 import { COMMON_PARAMS } from './common-params.constants';
 
-export const BANK = {
-	name: 'Bank',
-	diameter: COMMON_PARAMS.DIAMETER_WRAPPER,
-	distance: COMMON_PARAMS.DISTANCE,
-	color: '3b6ebc',
-	segments: 16,
-	position: { x: 0, y: 0, z: 0 },
+const POSITION = { x: -8, y: 5, z: 0 };
+const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
+const material = {
+	name: 'material_sme',
+	diffuseColor: Color3.Teal(),
+	specularColor: Color3.Teal(),
+	emissiveColor: Color3.Teal(),
 };
 
-export const BANK_INNER = {
-	name: 'Bank',
-	diameter: COMMON_PARAMS.DIAMETER_INNER,
-	distance: COMMON_PARAMS.DISTANCE,
-	color: '3b6ebc',
-	segments: 16,
-	position: { x: 0, y: 0, z: 0 },
-	type: 'plane',
-	imgTexture: 'solar-panel.png',
+const font: MeshFont = {
+	fontSize: 20,
+	color: '#8594E8',
+	text: 'Bank',
+};
+
+export const BANK: MeshActor = {
+	name: 'cleantech',
+	segments: 100,
+	diameter: 5,
 	title: 'Bank',
+	position: POSITION,
+	positonHemisphericLight: POSITION_LIGHT,
+	material: material,
+	distance: COMMON_PARAMS.DISTANCE,
+	font: font,
 };
