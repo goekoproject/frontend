@@ -1,7 +1,7 @@
 import { Color3 } from '@babylonjs/core';
 import { MeshActor, MeshActorsPosition, MeshFont } from '../models/sphere.model';
 const POSITION = new MeshActorsPosition(0, 0, 0);
-const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
+const POSITION_LIGHT = new MeshActorsPosition(-10, -10, -10);
 const material = {
 	name: 'material_sme',
 	diffuseColor: Color3.Teal(),

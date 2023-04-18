@@ -1,10 +1,13 @@
 import {
 	ActionManager,
 	Color3,
+	DirectionalLight,
 	ExecuteCodeAction,
 	HemisphericLight,
 	Mesh,
+	MeshBuilder,
 	Scene,
+	ShadowGenerator,
 	StandardMaterial,
 	Texture,
 	Vector3,
@@ -124,6 +127,36 @@ export class MeshActors implements MeshActor {
 			new Vector3(this.positonHemisphericLight.x, this.positonHemisphericLight.y, this.positonHemisphericLight.z),
 			this.scene
 		);
+	}
+
+	setShadows(colorHex: string) {
+		const color = CustomColor.hex(colorHex);
+
+		// Agregue una luz direccional
+		const light = new DirectionalLight('light', new Vector3(-1, -2, -1), this.scene);
+		light.position = new Vector3(1, 6, 9);
+		light.intensity = 0.5;
+
+		// Cree un plano
+		const ground = MeshBuilder.CreateDisc('ground', { radius: 4, tessellation: 64 }, this.scene);
+		ground.rotation.x = Math.PI / 2;
+
+		// Aplique un material transparente al plano
+		const groundMaterial = new StandardMaterial('groundMaterial', this.scene);
+		groundMaterial.alpha = 0.2;
+		groundMaterial.diffuseColor = new Color3(0.4, 0.4, 0.4);
+		groundMaterial.emissiveColor = new Color3(color.r, color.g, color.b);
+		ground.material = groundMaterial;
+		ground.position.y = -6;
+
+		// Configure la sombra
+		const shadowGenerator = new ShadowGenerator(200, light);
+		shadowGenerator.addShadowCaster(this._rawMesh);
+		shadowGenerator.useBlurExponentialShadowMap = true;
+		shadowGenerator.blurBoxOffset = 15;
+		shadowGenerator.transparencyShadow = true;
+
+		ground.receiveShadows = true;
 	}
 
 	rotate() {

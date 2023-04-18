@@ -2,6 +2,9 @@ import { Color3 } from '@babylonjs/core';
 import { MeshActor, MeshActorsPosition, MeshFont } from '../models/sphere.model';
 import { COMMON_PARAMS } from './common-params.constants';
 
+export const BANK_PROP = {
+	emissiveColor: '#c8e37d',
+};
 const POSITION = { x: -8, y: 5, z: 0 };
 const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
 const material = {
