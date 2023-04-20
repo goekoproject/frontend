@@ -6,7 +6,7 @@ export const CLEANTECH_PROP = {
 	emissiveColor: '#b55dc0',
 };
 
-const POSITION = { x: 8, y: 5, z: 0 };
+const POSITION = { x: COMMON_PARAMS.DISTANCE, y: 2, z: 0 };
 const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
 const material = {
 	name: 'material_sme',
@@ -24,7 +24,7 @@ const font: MeshFont = {
 export const CLEANTECH: MeshActor = {
 	name: 'cleantech',
 	segments: 100,
-	diameter: 5,
+	diameter: 2,
 	title: 'CleanTech',
 	position: POSITION,
 	positonHemisphericLight: POSITION_LIGHT,

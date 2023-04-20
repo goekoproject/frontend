@@ -5,7 +5,7 @@ import { COMMON_PARAMS } from './common-params.constants';
 export const BANK_PROP = {
 	emissiveColor: '#c8e37d',
 };
-const POSITION = { x: -8, y: 5, z: 0 };
+const POSITION = { x: -COMMON_PARAMS.DISTANCE, y: 2, z: 0 };
 const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
 const material = {
 	name: 'material_sme',
@@ -23,7 +23,7 @@ const font: MeshFont = {
 export const BANK: MeshActor = {
 	name: 'cleantech',
 	segments: 100,
-	diameter: 5,
+	diameter: 2,
 	title: 'Bank',
 	position: POSITION,
 	positonHemisphericLight: POSITION_LIGHT,

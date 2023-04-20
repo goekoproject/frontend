@@ -54,7 +54,7 @@ export class SceneService {
 		this._configLight();
 		this._configCamera();
 		// generates the world x-y-z axis for better understanding
-		//this._showWorldAxis(28);
+		//this._showWorldAxis(5);
 		//this.createElements();
 	}
 
@@ -69,11 +69,11 @@ export class SceneService {
 	}
 
 	private _configCamera() {
-		this._camera = new ArcRotateCamera('Camera', 0, 2, 7, new Vector3(3, -7, 4), this.scene);
+		this._camera = new ArcRotateCamera('Camera', 0, 1.6, 5, new Vector3(0, 0, 18), this.scene);
 		this._camera.setTarget(this.rootMesh);
 
 		// Control mouse/ scroller etcc
-		this._camera.attachControl(this._canvas, true);
+		//	this._camera.attachControl(this._canvas, true);
 
 		this._engine.runRenderLoop(() => this.scene.render());
 	}

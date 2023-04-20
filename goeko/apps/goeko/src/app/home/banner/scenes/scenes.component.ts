@@ -31,7 +31,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	z!: number;
 	meshText!: any;
 
-	private _sphereSme!: any;
+	public _sphereSme!: any;
 
 	private _sphereCleanTech!: any;
 
@@ -62,12 +62,12 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build(SME.title);
 		this._sphereSme.setShadows('#847575');
 		this._sphereSme.setDiffuseTexture(TEXTURE_SME);
-		this._sphereSme.setHemisphericLight();
+		//	this._sphereSme.setHemisphericLight();
 		//	this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
 		/* 		this._sphereService.makeRotate(this._sphereSme.rawMesh);
 		 */
 		//	this._sphereService.createBorder(this._sphereSme.rawMesh, LIGHT_BORDER_SME);
-		//this._createEventClickSME();
+		this._createEventClickSME();
 	}
 
 	changeColor(color: string) {
@@ -121,14 +121,15 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		);
 	} */
 
-	/* 
 	changeRotationX(event: any) {
-		this.meshText.rotation.x = event.target.value;
+		this._sphereSme.rawMesh.rotation.x = event.target.value;
 	}
 	changeRotationY(event: any) {
-		this.meshText.rotation.y = event.target.value;
+		this._sphereSme.rawMesh.rotation.y = event.target.value;
 	}
 	changeRotationZ(event: any) {
-		this.meshText.rotation.y = event.target.value;
-	} */
+		this._sphereSme.rawMesh.rotation.z = event.target.value;
+	}
+
+	getFocusElements() {}
 }

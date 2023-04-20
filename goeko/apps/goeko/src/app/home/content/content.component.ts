@@ -58,16 +58,16 @@ export class ContentComponent implements OnInit {
 	private _onClickSme() {
 		this._interactionService.onSMEClick.subscribe((res) => {
 			if (res) {
-				setTimeout(() => {
-					this._viewportScroller.scrollToAnchor('sme');
-				}, 2000);
+				this._viewportScroller.scrollToAnchor('sme');
+
+				setTimeout(() => {}, 2000);
 			}
 		});
 	}
 
 	private _onClickCleanTeach() {
 		this._interactionService.onCleanTeachClick.subscribe((res) => {
-			this._viewportScroller.scrollToAnchor('cleantech');
+			//	this._viewportScroller.scrollToAnchor('cleantech');
 		});
 	}
 

@@ -3,7 +3,6 @@ import { ElementRef, Inject, Injectable, NgZone } from '@angular/core';
 import {
 	Animation,
 	Axis,
-	BaseTexture,
 	Color3,
 	DirectionalLight,
 	DynamicTexture,
@@ -12,10 +11,7 @@ import {
 	Matrix,
 	Mesh,
 	MeshBuilder,
-	Scene,
-	ShadowGenerator,
 	StandardMaterial,
-	Texture,
 	Vector3,
 } from '@babylonjs/core';
 import { Curve3, Path2 } from '@babylonjs/core/Maths/math.path';
@@ -104,6 +100,7 @@ export class SphereService extends SceneService {
 	public builderSphereWithLabel(mesh: MeshActors, text: string): Mesh {
 		const sphere = MeshBuilder.CreateSphere(mesh.name, { segments: mesh.segments, diameter: mesh.diameter });
 		sphere.position = new Vector3(mesh.position.x, mesh.position.y, mesh.position.z);
+		sphere.rotation = new Vector3(0.1, 1.2, 8.3);
 		if (mesh.type === TYPE_MESH.ROOT_MESH) {
 			this._setRootMesh(sphere);
 		}
@@ -125,26 +122,6 @@ export class SphereService extends SceneService {
 
 	private _setRootMesh(mesh: Mesh, meshParent = this.rootMesh) {
 		mesh.parent = meshParent;
-	}
-
-	private _createSMEinner() {
-		const sphereInner = MeshBuilder.CreateSphere('sme_inner', { segments: 100, diameter: 8 });
-
-		const sphereMaterial = new StandardMaterial('material_inner', this.scene);
-
-		sphereMaterial.diffuseTexture = new BaseTexture();
-		sphereMaterial.diffuseColor = Color3.Teal();
-		sphereMaterial.specularColor = Color3.Teal();
-		//sphereMaterial.emissiveColor = CustomColor.hex('24A650');
-		sphereInner.material = sphereMaterial;
-		//sphereInner.material.alpha = 0.3;
-		// Establecer opciones de textura
-		/* 	(materialMain.opacityTexture as any).uScale = 8;
-		(materialMain.opacityTexture as any).vScale = 8; */
-		/* 		(materialMain.opacityTexture as any).uOffset = 0.5;
-		(materialMain.opacityTexture as any).vOffset = 0.5; */
-
-		//this._createGlow(sphereInner);
 	}
 
 	startAnimationMaterialMain() {
@@ -222,7 +199,7 @@ export class SphereService extends SceneService {
 	}
 
 	createBorder(mesh: Mesh = this._sme, intensity: number, color?: string) {
-		this.scene.createDefaultCameraOrLight(true, true, CONTROL_CAM);
+		this.scene.createDefaultCameraOrLight(true, false, CONTROL_CAM);
 
 		// Crear efecto de brillo en el borde de la esfera
 		var glowLayer = new GlowLayer('glow', this.scene);
@@ -254,7 +231,7 @@ export class SphereService extends SceneService {
 	}
 
 	updateOrbitingSpherePosition = (meshActors: Mesh) => {
-		const orbitSpeed = 0.0003; // Controla la velocidad de la órbita
+		const orbitSpeed = 0.0001; // Controla la velocidad de la órbita
 
 		// Calcula el ángulo de rotación en base al tiempo transcurrido
 		const angle = (this._engine.getDeltaTime() * orbitSpeed) % (2 * Math.PI);
@@ -265,33 +242,6 @@ export class SphereService extends SceneService {
 		meshActors.position = Vector3.TransformCoordinates(meshActors.position, rotationMatrix);
 		meshActors.animations = [this.rotationAnim, this.wobbleAnim];
 	};
-
-	private _createMaterialMain(img: string = 'fondo-hex2.png') {
-		//	var light = new HemisphericLight('light_sp', new Vector3(0, 1, 0), this.scene);
-		let dynamicTexture = new DynamicTexture('dynamicTexture', 512, this.scene, true);
-		let textBlock = new TextBlock();
-		textBlock.text = '¡Hola, mundo!';
-		textBlock.color = 'white';
-		textBlock.fontSize = 56;
-		dynamicTexture.drawText('SME', null, null, 'bold 36px Arial', 'white', 'transparent', true);
-		const url = `assets/${img}`;
-		const imgTexture = new Texture(url, this.scene);
-		const materialMain = new StandardMaterial('water1', this.scene);
-		materialMain.diffuseTexture = dynamicTexture;
-		//materialMain.diffuseTexture = imgTexture;
-
-		/* 	materialMain.opacityTexture = imgTexture;
-
-		// Establecer opciones de textura
-		(materialMain.opacityTexture as any).uScale = 2;
-		(materialMain.opacityTexture as any).vScale = 2;
-		(materialMain.opacityTexture as any).uOffset = 1.5;
-		(materialMain.opacityTexture as any).vOffset = 1.5; */
-		materialMain.diffuseColor = Color3.Teal();
-		materialMain.specularColor = Color3.Teal();
-		materialMain.emissiveColor = Color3.Teal();
-		return materialMain;
-	}
 
 	private _createRings() {
 		// Creamos dos anillos luminosos azules
@@ -325,40 +275,9 @@ export class SphereService extends SceneService {
 		 */
 	}
 
-	public createArrow(el: any, scene: Scene) {
-		const points = [this._sme.position, el.position];
-		const line = MeshBuilder.CreateLines('line', { points: points }, scene);
-
-		const lineMaterial = new StandardMaterial('lineMaterial', scene);
-		lineMaterial.emissiveColor = new Color3(0, 0, 1);
-		line.material = lineMaterial;
-		return line;
-	}
-
 	addMaterialHover(mesh: Mesh) {
 		var hoverMaterial = new StandardMaterial('hoverMaterial', this.scene);
 		hoverMaterial.emissiveColor = new Color3(1, 1, 0);
 		mesh.material = hoverMaterial;
-	}
-
-	private _addShadow(meshName: string = 'sme', haslight = true) {
-		// Main elements
-		const sme = this.scene.getMeshByName(meshName) as any;
-
-		if (haslight) {
-			// Light Shadow
-			this.light1 = new DirectionalLight('dir01', new Vector3(10, -10, 10), this.scene);
-
-			this.light1.intensity = 0.8;
-		}
-
-		//Shadows
-		const shadowGenerator = new ShadowGenerator(1024, this.light1);
-		shadowGenerator?.getShadowMap()?.renderList?.push(sme);
-		shadowGenerator.useBlurExponentialShadowMap = true;
-		shadowGenerator.usePoissonSampling = true;
-		shadowGenerator.useOpacityTextureForTransparentShadow = true;
-
-		this._ground.receiveShadows = true;
 	}
 }

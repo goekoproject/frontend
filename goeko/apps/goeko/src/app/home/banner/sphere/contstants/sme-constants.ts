@@ -17,7 +17,7 @@ const font: MeshFont = {
 export const SME: MeshActor = {
 	name: 'sme',
 	segments: 100,
-	diameter: 10,
+	diameter: 4,
 	title: 'SME',
 	position: POSITION,
 	positonHemisphericLight: POSITION_LIGHT,
