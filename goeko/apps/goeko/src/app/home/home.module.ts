@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentFulModule } from '@goeko/store';
-import { ButtonModule } from '@goeko/ui';
+import { ButtonModule, TooltipModule } from '@goeko/ui';
 import { BannerComponent } from './banner/banner.component';
 import { HomeRouteModule } from './home.routes';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +14,13 @@ import { ContentComponent } from './content/content.component';
 
 @NgModule({
 	declarations: [HomeComponent, BannerComponent, ContentComponent, ModelComponent, SphereComponent, ScenesComponent],
-	imports: [CommonModule, HomeRouteModule, ButtonModule, ContentFulModule, AngularSvgIconModule.forRoot()],
+	imports: [
+		CommonModule,
+		HomeRouteModule,
+		ButtonModule,
+		ContentFulModule,
+		AngularSvgIconModule.forRoot(),
+		TooltipModule,
+	],
 })
 export class HomeModule {}

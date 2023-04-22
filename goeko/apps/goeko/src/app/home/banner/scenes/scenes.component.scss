@@ -4,11 +4,12 @@
 
 .canvas {
     width: 100%;
+    max-width: 51%;
     touch-action: none;
     -webkit-tap-highlight-color: transparent;
     position: absolute;
     height: 50rem;
     object-fit: contain;
     z-index: 1;
-    left: 25%;
+    left: 50%;
 }

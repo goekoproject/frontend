@@ -1,0 +1,10 @@
+<div
+	class="tooltip"
+	(mouseenter)="onMouseEnter()"
+	(mouseleave)="onMouseLeave()"
+	[@bounce]="bounceState"
+	(@bounce.done)="bounceState = !bounceState"
+>
+	<ng-content></ng-content>
+	<div class="tooltip-arrow"></div>
+</div>

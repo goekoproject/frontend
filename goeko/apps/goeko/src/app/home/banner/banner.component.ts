@@ -8,11 +8,13 @@ import { InteractionService } from './scenes/interaction.service';
 })
 export class BannerComponent implements OnInit {
 	@ViewChild('worldmap') worldmap!: ElementRef<SVGAElement>;
-
+	isShowing = false;
 	europeMap!: ElementRef<SVGAElement>;
 	constructor(private _interactionService: InteractionService, private _renderer: Renderer2) {}
 
 	ngOnInit(): void {
+		this.isShowing = true;
+
 		this.onSMEClick();
 	}
 
@@ -27,4 +29,6 @@ export class BannerComponent implements OnInit {
 	private _modifyColorEurope() {
 		this._renderer.addClass(this.europeMap, 'fill-green');
 	}
+
+	onClickText() {}
 }

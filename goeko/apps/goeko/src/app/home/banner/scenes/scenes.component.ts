@@ -31,12 +31,9 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	z!: number;
 	meshText!: any;
 
-	public _sphereSme!: any;
-
-	private _sphereCleanTech!: any;
-
-	private _sphereBank!: any;
-	private planeText!: any;
+	public _sphereSme!: MeshActors;
+	private _sphereCleanTech!: MeshActors;
+	private _sphereBank!: MeshActors;
 
 	scene!: Scene;
 	constructor(
@@ -88,6 +85,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._sphereCleanTech.setEmissiveColor(CLEANTECH_PROP.emissiveColor);
 		this._sphereCleanTech.setDiffuseTexture(TEXTURE_SME);
 		this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
+		this._createEventCleanTeach();
 
 		this.scene.registerBeforeRender(() =>
 			this._sphereService.updateOrbitingSpherePosition(this._sphereCleanTech.rawMesh)
@@ -100,14 +98,13 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._sphereBank.setEmissiveColor(BANK_PROP.emissiveColor);
 		this._sphereBank.setDiffuseTexture(TEXTURE_SME);
 		this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
-
 		this.scene.registerBeforeRender(() =>
 			this._sphereService.updateOrbitingSpherePosition(this._sphereBank.rawMesh)
 		);
 	}
 
 	private _createEventCleanTeach() {
-		this._sphereSme.onClick(() => {
+		this._sphereCleanTech.onClick(() => {
 			this._interactionService.onCleanTeachClick.next(true);
 		});
 	}

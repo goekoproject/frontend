@@ -149,7 +149,7 @@ export class MeshActors implements MeshActor {
 	onClick(callback: any): any {
 		this._rawMesh.actionManager = new ActionManager(this.scene);
 		return this._rawMesh.actionManager.registerAction(
-			new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => callback())
+			new ExecuteCodeAction(ActionManager.OnPickTrigger, () => callback())
 		);
 	}
 }

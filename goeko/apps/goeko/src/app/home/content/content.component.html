@@ -1,41 +1,44 @@
 <article class="content" *ngFor="let article of articles; let i = index" [id]="article.id">
-  <!--   <div class="content-shadow"></div>
+	<!--   <div class="content-shadow"></div>
  -->
-  <section class="content_title" [ngStyle]="{'background-image': 'url(assets/'+actorsImg[i]+')'}">
-    <div class="content-shadow"></div>
-    <h1 data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
-    <h3>
-      {{ article?.descriptions3 }}
-    </h3>
-  </section>
+	<section class="content_title" [ngStyle]="{ 'background-image': 'url(assets/' + actorsImg[i] + ')' }">
+		<div class="content-shadow"></div>
+		<h1 data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
+		<h3>
+			{{ article?.descriptions3 }}
+		</h3>
+	</section>
 
-  <section class="content-data">
-    <h3 class="section-title">
-      {{ article?.descriptions }}
-    </h3>
-    <div class="content_wrapper-bad-stuff">
-      <div class="content_bad-stuff" *ngFor="let item of article?.badStuff; let i = index">
-        <span class="material-symbols-rounded bad-stuff-icon" *ngIf="article?.badStuffIcons">
-          {{article?.badStuffIcons[i]}}
-        </span>
-        <p class="bad-stuff-text">{{item}}</p>
-      </div>
-    </div>
+	<section class="content-data">
+		<h3 class="section-title">
+			{{ article?.descriptions }}
+		</h3>
+		<div class="content_wrapper-bad-stuff">
+			<div class="content_bad-stuff" *ngFor="let item of article?.badStuff; let i = index">
+				<span class="material-symbols-rounded bad-stuff-icon" *ngIf="article?.badStuffIcons">
+					{{ article?.badStuffIcons[i] }}
+				</span>
+				<p class="bad-stuff-text">{{ item }}</p>
+			</div>
+		</div>
 
-    <section>
-      <p class="data-description">
-        {{ article?.descriptions2}}
-      </p>
-    </section>
+		<section>
+			<p class="data-description">
+				{{ article?.descriptions2 }}
+			</p>
+		</section>
 
-    <h2 class="data-solutions">SOLUTIONS</h2>
+		<h2 class="data-solutions">SOLUTIONS</h2>
 
-    <div class="content_wrapper-benefit">
-      <div class="benefit" *ngFor="let item of article?.benefits">
-        <p class="benefit-text">{{ item?.text }}</p>
-      </div>
-    </div>
+		<div class="content_wrapper-benefit">
+			<div class="benefit" *ngFor="let item of article?.benefits">
+				<p class="benefit-text">{{ item?.text }}</p>
+			</div>
+		</div>
+		<div class="goeko_in">
+			<img src="assets/button-goeko.png" class="button-goeko" />
 
-    <img src="assets/button-goeko.png" class="button-goeko" />
-  </section>
+			<go-tooltip class="tooltip">Click me </go-tooltip>
+		</div>
+	</section>
 </article>
