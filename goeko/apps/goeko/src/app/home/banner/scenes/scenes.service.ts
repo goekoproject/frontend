@@ -54,8 +54,8 @@ export class SceneService {
 		this._configLight();
 		this._configCamera();
 		// generates the world x-y-z axis for better understanding
-		//this._showWorldAxis(5);
-		//this.createElements();
+		/* 		this._showWorldAxis(5);
+		 */ //this.createElements();
 	}
 
 	createElements(path?: string) {
@@ -73,8 +73,8 @@ export class SceneService {
 		this._camera.setTarget(this.rootMesh);
 
 		// Control mouse/ scroller etcc
-		//	this._camera.attachControl(this._canvas, true);
-
+		/* 		this._camera.attachControl(this._canvas, true);
+		 */
 		this._engine.runRenderLoop(() => this.scene.render());
 	}
 

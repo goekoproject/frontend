@@ -53,23 +53,26 @@ export class ContentComponent implements OnInit {
 		this._getActors();
 		this._onClickSme();
 		this._onClickCleanTeach();
+		this._oBank();
 	}
 
 	private _onClickSme() {
 		this._interactionService.onSMEClick.subscribe((res) => {
 			if (res) {
-				setTimeout(() => {
-					this._viewportScroller.scrollToAnchor('sme');
-				}, 2000);
+				this._viewportScroller.scrollToAnchor('sme');
 			}
 		});
 	}
 
 	private _onClickCleanTeach() {
 		this._interactionService.onCleanTeachClick.subscribe((res) => {
-			setTimeout(() => {
-				this._viewportScroller.scrollToAnchor('cleantech');
-			}, 2000);
+			this._viewportScroller.scrollToAnchor('cleantech');
+		});
+	}
+
+	private _oBank() {
+		this._interactionService.onBankClick.subscribe((res) => {
+			this._viewportScroller.scrollToAnchor('bank');
 		});
 	}
 

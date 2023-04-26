@@ -15,12 +15,13 @@
   gap: 3rem;
   justify-content: start;
   height: 100vh;
-
+  position: relative;
   &-content {
     display: flex;
     flex-direction: column;
     padding-top: 2rem;
     align-items: flex-start;
+    position: relative;
     //align-self: center;
   }
   //@include urlImg(url(/assets/bkg-2.png));
@@ -61,11 +62,11 @@
   }
    
   &-info {
-    color: var(--color-swiss);
-    background-color: var(--color-background-white);
+    color: var(--color-background-white);
+    background-color: var(--color-swiss);
     font-family: 'Barlow-SemiBold', serif;
     width: fit-content;
-    padding: 0 3.1px;
+    padding: 4px;
   }
   &-shadow {
    // background: rgba(0, 0, 0, 0.45);
@@ -104,19 +105,34 @@
 }
 
 .world-europe {
-  top: 8%;
   position: absolute;
   z-index: -1;
   width: 100%;
-  left: -32%;
+  left: -38%;
   right: 0;
-  top: 22rem;
+  top: 13rem;
 }
 .fill-green {
   transition: .5s ease;
   fill:rgba(33, 166, 80, 0.7);
+  fill: limegreen;
+  animation: fillAnimation 3s ease-in-out;
+
+
   //transform: scale(1.2) translate(-12.4rem, 1rem);
 
+}
+
+@keyframes fillAnimation {
+  0% {
+    fill: gray;
+  }
+  50% {
+    fill: rgb(101, 80, 80);
+  }
+  100% {
+    fill: limegreen;
+  }
 }
 
 @media screen 

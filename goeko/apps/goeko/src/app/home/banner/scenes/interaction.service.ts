@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 export class InteractionService {
 	onSMEClick = new Subject<boolean>();
 	onCleanTeachClick = new Subject<boolean>();
+	onBankClick = new Subject<boolean>();
 
 	constructor() {}
 }

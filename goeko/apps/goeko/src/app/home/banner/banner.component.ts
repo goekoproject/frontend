@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { InteractionService } from './scenes/interaction.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { InteractionService } from './scenes/interaction.service';
 	templateUrl: './banner.component.html',
 	styleUrls: ['./banner.component.scss'],
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, AfterViewInit {
 	@ViewChild('worldmap') worldmap!: ElementRef<SVGAElement>;
 	isShowing = false;
 	europeMap!: ElementRef<SVGAElement>;
@@ -14,20 +14,21 @@ export class BannerComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.isShowing = true;
-
 		this.onSMEClick();
 	}
-
+	ngAfterViewInit(): void {
+		this._modifyColorEurope();
+	}
 	public onSMEClick() {
-		this._interactionService.onSMEClick.subscribe((res) => {
-			const paths = (this.worldmap as any).element.nativeElement.querySelectorAll('path');
-			this.europeMap = paths[3];
-			this._modifyColorEurope();
-		});
+		this._interactionService.onSMEClick.subscribe((res) => {});
 	}
 
 	private _modifyColorEurope() {
-		this._renderer.addClass(this.europeMap, 'fill-green');
+		setTimeout(() => {
+			const paths = (this.worldmap as any).element.nativeElement.querySelectorAll('path');
+			this.europeMap = paths[3];
+			this._renderer.addClass(this.europeMap, 'fill-green');
+		}, 1000);
 	}
 
 	onClickText() {}

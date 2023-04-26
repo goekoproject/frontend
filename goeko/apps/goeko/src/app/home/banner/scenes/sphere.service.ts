@@ -4,10 +4,7 @@ import {
 	Animation,
 	Axis,
 	Color3,
-	DirectionalLight,
-	DynamicTexture,
 	GlowLayer,
-	GroundMesh,
 	Matrix,
 	Mesh,
 	MeshBuilder,
@@ -41,14 +38,13 @@ const methodsObj = {
 	Mesh,
 };
 
+export enum DIRECTION_ANGLE {
+	RIGHT = +1,
+	LEFT = -1,
+}
+
 @Injectable({ providedIn: 'root' })
 export class SphereService extends SceneService {
-	_sme!: Mesh;
-	light1!: DirectionalLight;
-	sphereMaterialSME!: StandardMaterial;
-	dynamicTexture!: DynamicTexture;
-	private _ground!: GroundMesh;
-
 	readonly rotationAnim = new Animation(
 		'rotate',
 		'rotation.y',
@@ -124,58 +120,7 @@ export class SphereService extends SceneService {
 		mesh.parent = meshParent;
 	}
 
-	startAnimationMaterialMain() {
-		var animationScale = new Animation(
-			'animationScale',
-			'scaling',
-			30,
-			Animation.ANIMATIONTYPE_VECTOR3,
-			Animation.ANIMATIONLOOPMODE_CONSTANT
-		);
-		var keysScale = [];
-		keysScale.push({
-			frame: 0,
-			value: new Vector3(1, 1, 1),
-		});
-		keysScale.push({
-			frame: 30,
-			value: new Vector3(1.5, 1.5, 1.5),
-		});
-		keysScale.push({
-			frame: 60,
-			value: new Vector3(1, 1, 1),
-		});
-		animationScale.setKeys(keysScale);
-		this._sme.animations.push(animationScale);
-
-		var animationOpacity = new Animation(
-			'animationOpacity',
-			'material.alpha',
-			30,
-			Animation.ANIMATIONTYPE_FLOAT,
-			Animation.ANIMATIONLOOPMODE_CYCLE
-		);
-		var keysOpacity = [];
-		keysOpacity.push({
-			frame: 0,
-			value: 0.5,
-		});
-		keysOpacity.push({
-			frame: 30,
-			value: 1,
-		});
-		keysOpacity.push({
-			frame: 60,
-			value: 0.5,
-		});
-		animationOpacity.setKeys(keysOpacity);
-		this._sme?.material?.animations?.push(animationOpacity);
-
-		// Iniciar animaciones
-		this.scene.beginAnimation(this._sme, 0, 60, true);
-	}
-
-	makeRotate(mesh = this._sme) {
+	makeRotate(mesh: Mesh) {
 		const animation = new Animation(
 			'rotationSphere',
 			'rotation.y',
@@ -198,8 +143,8 @@ export class SphereService extends SceneService {
 		this.scene.beginAnimation(mesh, 0, 120, true);
 	}
 
-	createBorder(mesh: Mesh = this._sme, intensity: number, color?: string) {
-		this.scene.createDefaultCameraOrLight(true, false, CONTROL_CAM);
+	createBorder(mesh: Mesh, intensity: number, color?: string) {
+		this.scene.createDefaultCamera(true, false, CONTROL_CAM);
 
 		// Crear efecto de brillo en el borde de la esfera
 		var glowLayer = new GlowLayer('glow', this.scene);
@@ -230,14 +175,14 @@ export class SphereService extends SceneService {
 		meshWrapper.animations = [this.rotationAnim, this.wobbleAnim];
 	}
 
-	updateOrbitingSpherePosition = (meshActors: Mesh) => {
+	updateOrbitingSpherePosition = (meshActors: Mesh, drl = DIRECTION_ANGLE.RIGHT) => {
 		const orbitSpeed = 0.0001; // Controla la velocidad de la órbita
 
 		// Calcula el ángulo de rotación en base al tiempo transcurrido
-		const angle = (this._engine.getDeltaTime() * orbitSpeed) % (2 * Math.PI);
-
+		const rawAngle = (this._engine.getDeltaTime() * orbitSpeed) % (2 * Math.PI);
+		const directionAngle = drl * rawAngle;
 		// Rota la posición de la esfera en órbita alrededor de la central
-		const rotationMatrix = Matrix.RotationAxis(Axis.Y, angle);
+		const rotationMatrix = Matrix.RotationAxis(Axis.Y, directionAngle);
 
 		meshActors.position = Vector3.TransformCoordinates(meshActors.position, rotationMatrix);
 		meshActors.animations = [this.rotationAnim, this.wobbleAnim];

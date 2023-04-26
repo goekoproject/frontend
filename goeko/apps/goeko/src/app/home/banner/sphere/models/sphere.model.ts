@@ -5,6 +5,7 @@ import {
 	HemisphericLight,
 	Mesh,
 	MeshBuilder,
+	PointLight,
 	Scene,
 	StandardMaterial,
 	Texture,
@@ -35,7 +36,8 @@ export interface MeshActor {
 	segments: number;
 	title: string;
 	position: MeshActorsPosition;
-	positonHemisphericLight: MeshActorsPosition;
+	positonHemisphericLight?: MeshActorsPosition;
+	positionPointLight?: MeshActorsPosition;
 	material: any;
 	type?: TYPE_MESH;
 	distance?: number;
@@ -55,7 +57,9 @@ export class MeshActors implements MeshActor {
 	segments!: number;
 	title!: string;
 	position!: MeshActorsPosition;
-	positonHemisphericLight!: MeshActorsPosition;
+	positonHemisphericLight?: MeshActorsPosition;
+	positionPointLight?: MeshActorsPosition;
+
 	scene!: Scene;
 	type!: TYPE_MESH;
 	material!: any;
@@ -80,7 +84,8 @@ export class MeshActors implements MeshActor {
 			this.segments = data.segments;
 			this.position = data.position || { x: 0, y: 0, z: 0 };
 			this.title = data.title;
-			this.positonHemisphericLight = data.positonHemisphericLight || { x: 0, y: 0, z: 0 };
+			this.positonHemisphericLight = data.positonHemisphericLight;
+			this.positionPointLight = data.positionPointLight;
 			this.material = data.material;
 			this.type = data.type || TYPE_MESH.NONE;
 			this.imgTexture = data.imgTexture;
@@ -122,9 +127,29 @@ export class MeshActors implements MeshActor {
 	setHemisphericLight() {
 		new HemisphericLight(
 			'light1',
-			new Vector3(this.positonHemisphericLight.x, this.positonHemisphericLight.y, this.positonHemisphericLight.z),
+			new Vector3(
+				this.positonHemisphericLight?.x,
+				this.positonHemisphericLight?.y,
+				this.positonHemisphericLight?.z
+			),
 			this.scene
 		);
+	}
+	setPointLight(colorHexDiffuse?: string, colorHexSpecular?: string) {
+		const name = `point-light${this.name}`;
+		const lightPoint = new PointLight(
+			name,
+			new Vector3(this.positionPointLight?.x, this.positionPointLight?.y, this.positionPointLight?.z),
+			this.scene
+		);
+		if (colorHexDiffuse) {
+			const _colorHexDiffuse = CustomColor.hex(colorHexDiffuse);
+			lightPoint.diffuse = new Color3(_colorHexDiffuse.r, _colorHexDiffuse.g, _colorHexDiffuse.b);
+		}
+		if (colorHexSpecular) {
+			const _colorHexSpecular = CustomColor.hex(colorHexSpecular);
+			lightPoint.specular = new Color3(_colorHexSpecular.r, _colorHexSpecular.g, _colorHexSpecular.b);
+		}
 	}
 
 	setShadows(colorHex: string) {

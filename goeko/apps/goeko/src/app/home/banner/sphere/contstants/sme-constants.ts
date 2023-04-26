@@ -1,7 +1,10 @@
 import { Color3 } from '@babylonjs/core';
 import { MeshActor, MeshActorsPosition, MeshFont } from '../models/sphere.model';
 const POSITION = new MeshActorsPosition(0, 0, 0);
-const POSITION_LIGHT = new MeshActorsPosition(-10, -10, -10);
+const POSITION_LIGHT_HEMISPHERE = new MeshActorsPosition(-10, -10, -10);
+
+const POSITION_LIGHT_POINT = new MeshActorsPosition(-5, 10, 0);
+
 const material = {
 	name: 'material_sme',
 	diffuseColor: Color3.Teal(),
@@ -10,17 +13,18 @@ const material = {
 };
 const font: MeshFont = {
 	fontSize: 80,
-	color: '#8594E8',
+	color: '#31363f',
 	text: 'SME',
 };
 
 export const SME: MeshActor = {
 	name: 'sme',
 	segments: 100,
-	diameter: 4,
+	diameter: 5,
 	title: 'SME',
 	position: POSITION,
-	positonHemisphericLight: POSITION_LIGHT,
+	/* 	positonHemisphericLight: POSITION_LIGHT_HEMISPHERE,
+	 */ positionPointLight: POSITION_LIGHT_POINT,
 	material: material,
 	font: font,
 };
