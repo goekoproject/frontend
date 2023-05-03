@@ -26,6 +26,7 @@ export class BannerComponent implements OnInit, AfterViewInit {
 	private _modifyColorEurope() {
 		setTimeout(() => {
 			const paths = (this.worldmap as any).element.nativeElement.querySelectorAll('path');
+			console.log(paths);
 			this.europeMap = paths[3];
 			this._renderer.addClass(this.europeMap, 'fill-green');
 		}, 1000);

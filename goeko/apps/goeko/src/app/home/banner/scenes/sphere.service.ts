@@ -176,7 +176,7 @@ export class SphereService extends SceneService {
 	}
 
 	updateOrbitingSpherePosition = (meshActors: Mesh, drl = DIRECTION_ANGLE.RIGHT) => {
-		const orbitSpeed = 0.0001; // Controla la velocidad de la órbita
+		const orbitSpeed = 0.00006; // Controla la velocidad de la órbita
 
 		// Calcula el ángulo de rotación en base al tiempo transcurrido
 		const rawAngle = (this._engine.getDeltaTime() * orbitSpeed) % (2 * Math.PI);

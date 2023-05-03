@@ -41,7 +41,7 @@
     font-size: 2.6rem;
     font-family: 'Roboto-Thin',sans-serif;
     text-align: center;
-    letter-spacing: 0.3rem;
+    letter-spacing: 0.47rem;
     word-spacing: 15px;
     display: flex;
     gap: 1rem;
@@ -108,7 +108,7 @@
   position: absolute;
   z-index: -1;
   width: 100%;
-  left: -32rem;
+  left: -41rem;
   right: 0;
   top: 13rem;
 }
@@ -116,7 +116,7 @@
   transition: .5s ease;
   fill:rgba(33, 166, 80, 0.7);
   fill: limegreen;
-  animation: fillAnimation 3s ease-in-out;
+  animation: fillAnimation 2s ease-in-out;
 
 
   //transform: scale(1.2) translate(-12.4rem, 1rem);
@@ -125,15 +125,17 @@
 
 @keyframes fillAnimation {
   0% {
-    fill: gray;
+    fill: #ECE2E2;
   }
   50% {
-    fill: rgb(101, 80, 80);
+    fill: #ECE2E2;
   }
   100% {
     fill: limegreen;
   }
 }
+
+
 
 @media screen 
   and (min-device-width: 2500px)  { 

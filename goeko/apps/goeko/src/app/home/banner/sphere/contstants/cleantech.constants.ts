@@ -3,7 +3,7 @@ import { MeshActor, MeshActorsPosition, MeshFont } from '../models/sphere.model'
 import { COMMON_PARAMS } from './common-params.constants';
 
 export const CLEANTECH_PROP = {
-	emissiveColor: '#b55dc0',
+	emissiveColor: '#096bfd',
 };
 
 const POSITION = { x: COMMON_PARAMS.DISTANCE, y: 2, z: 0 };
@@ -17,7 +17,7 @@ const material = {
 
 const font: MeshFont = {
 	fontSize: 20,
-	color: '#8594E8',
+	color: '#ffffff',
 	text: 'CleanTech',
 };
 

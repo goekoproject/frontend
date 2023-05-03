@@ -60,19 +60,19 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build(SME.title);
 		this._sphereSme.setShadows('#847575');
 		this._sphereSme.setPointLight('#847575', '#847575');
-		this._sphereSme.setDiffuseTexture(TEXTURE_SME);
-		this._sphereService.makeRotate(this._sphereSme.rawMesh);
-		this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
+		/* 		this._sphereSme.setDiffuseTexture(TEXTURE_SME);
+		 */ /* 		this._sphereService.makeRotate(this._sphereSme.rawMesh);
+		 */ this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
 		this._createEventClickSME();
 	}
 
 	changeColor(color: string) {
 		console.log(color);
-		this._sphereSme.setPointLight(color, '#847575');
+		this._sphereBank.setEmissiveColor(color);
 	}
 	changeColor2(color: string) {
 		console.log(color);
-		this._sphereSme.setPointLight('#847575', color);
+		this._sphereCleanTech.setEmissiveColor(color);
 	}
 	private _createEventClickSME() {
 		this._sphereSme.onClick(() => {
@@ -84,8 +84,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._sphereCleanTech = new MeshActors(this._sphereService, this.scene, CLEANTECH).build(CLEANTECH.title);
 		/* 		this._sphereCleanTech.setHemisphericLight();
 		 */ this._sphereCleanTech.setEmissiveColor(CLEANTECH_PROP.emissiveColor);
-		this._sphereCleanTech.setDiffuseTexture(TEXTURE_SME);
-		this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
+		/* 		this._sphereCleanTech.setDiffuseTexture(TEXTURE_SME);
+		 */ this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
 		this._createEventCleanTeach();
 
 		this.scene.registerBeforeRender(() =>
@@ -103,8 +103,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._sphereBank = new MeshActors(this._sphereService, this.scene, BANK).build(BANK.title);
 		/* 		this._sphereBank.setHemisphericLight();
 		 */ this._sphereBank.setEmissiveColor(BANK_PROP.emissiveColor);
-		this._sphereBank.setDiffuseTexture(TEXTURE_SME);
-		this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
+		/* 		this._sphereBank.setDiffuseTexture(TEXTURE_SME);
+		 */ this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
 		this._createEventBank();
 		this.scene.registerBeforeRender(() =>
 			this._sphereService.updateOrbitingSpherePosition(this._sphereBank.rawMesh, DIRECTION_ANGLE.LEFT)

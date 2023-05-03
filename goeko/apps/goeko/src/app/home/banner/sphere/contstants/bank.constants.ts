@@ -3,7 +3,7 @@ import { MeshActor, MeshActorsPosition, MeshFont } from '../models/sphere.model'
 import { COMMON_PARAMS } from './common-params.constants';
 
 export const BANK_PROP = {
-	emissiveColor: '#c8e37d',
+	emissiveColor: '#096bfd',
 };
 const POSITION = { x: -COMMON_PARAMS.DISTANCE, y: 2, z: 0 };
 const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
@@ -16,7 +16,7 @@ const material = {
 
 const font: MeshFont = {
 	fontSize: 20,
-	color: '#8594E8',
+	color: '#ffffff',
 	text: 'Bank',
 };
 
