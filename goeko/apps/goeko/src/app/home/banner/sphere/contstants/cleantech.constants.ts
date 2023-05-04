@@ -6,7 +6,7 @@ export const CLEANTECH_PROP = {
 	emissiveColor: '#096bfd',
 };
 
-const POSITION = { x: COMMON_PARAMS.DISTANCE, y: 2, z: 0 };
+const POSITION = { x: COMMON_PARAMS.DISTANCE, y: 4, z: 0 };
 const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
 const material = {
 	name: 'material_sme',

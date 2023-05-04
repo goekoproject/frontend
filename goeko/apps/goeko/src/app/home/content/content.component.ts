@@ -17,7 +17,7 @@ export class ContentComponent implements OnInit {
 	articles!: Array<any>;
 	otherContent = false;
 	badStuffIcons = ['bolt', 'compost', 'unknown_document'];
-	actorsImg = ['bank2.jpeg', 'sme.jpg', 'cleantech.jpg'];
+	actorsImg = ['bank.jpg', 'sme.jpg', 'cleantech.jpg'];
 
 	private _body: any;
 
