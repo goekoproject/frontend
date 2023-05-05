@@ -78,8 +78,8 @@ $color-platform: #3065b0;
 
 .content_wrapper {
 	&-bad-stuff {
-		max-width: 1190px;
-		width: 100%;
+/* 		max-width: 1190px;
+ */		width: 100%;
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
@@ -92,7 +92,7 @@ $color-platform: #3065b0;
 		justify-content: center;
 		gap: 2rem;
 		> .benefit {
-			@include card(173px, 151px);
+			@include card(173px, 110px);
 			display: flex;
 			justify-content: center;
 		}
@@ -154,6 +154,7 @@ $color-platform: #3065b0;
 .button-goeko {
 	width: 60%;
 	margin: 0 auto;
+	max-width: 466px;
 }
 
 @media (max-width: 768px) {
