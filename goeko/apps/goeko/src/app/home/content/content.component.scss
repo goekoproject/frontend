@@ -2,7 +2,7 @@ $color-platform: #3065b0;
 
 .go-content {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
 }
 .content {
@@ -10,34 +10,121 @@ $color-platform: #3065b0;
   display: flex;
   gap: 3rem;
   position: relative;
+  flex-wrap: wrap;
+  padding: 10rem 0;
+  height: 100vh;
+/*   margin-bottom: 4%;
+ */
   .title {
-    font-size: 108px;
+    font-size: 200px;
     margin:0;
     color: #47525E;
     text-shadow: 3px -1px 14px rgb(243 243 243 / 59%);
     position: absolute;
+    right: 70%;
+    top: -14%;
+    background-color: #FFFFFF;
+    height: 12rem;
+    line-height: 1;
+    padding: 0 2rem;
+    width: fit-content;
   }
 
   &__actor-photo {
     width: 340px;
     height: 380px;
     border-radius: 50px;
+    object-fit: cover;
   }
   
 }
-
+.content-header {
+  position: relative;
+  .title-reverse-content {
+    left: 80%;
+  }
+}
+.info-actors {
+  display: flex;
+  width: 55%;
+  align-items: flex-end;
+  height: 21rem;
+}
 .section-column {
   display: flex;
   flex-direction: column;
+  flex-basis: 29%;
+  flex-grow: 2;
+
+  
 }
 .element-column {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color:#47525E;
+  span {
+    color: #0090D6;
+
+  }
+}
+.title-content-column {
+  font-family: 'Inter-Thin', sans-serif;
+  font-size: 24px;
+  color: #47525E;
+  font-weight: 100;
 }
 
+.banner-actors {
+  width: 100%;
+  background: #47525E;
+  height: 209px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+  
+}
 
+.goeko_in {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+  width: 19rem;
+  bottom: -7px;
+  img {width: inherit}
+}
+.tooltip {
+	transform: scale(1);
+	opacity: 1;
+	position: absolute;
+	top: 1%;
+  display:flex;
+  justify-content: center;
+  text-align: center;
+}
+.content-slogan {
+  font-size: 30px;
+  color: #FFFFFF;
+  font-family: 'Roboto-Thin';
+  margin: 0;
+}
+
+.point-style {
+  position: absolute;
+/*   top: -11rem;
+  right: -18rem; */
+  transform: rotate(45deg);
+  &--reverse {
+    right: 93%;
+  }
+}
+
+.row-reverse-content {
+  flex-direction: row-reverse;
+}
 
 
 @media (max-width: 768px) {
@@ -45,18 +132,4 @@ $color-platform: #3065b0;
 		max-width: 100%;
 	}
 }
-.goeko_in {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	position: relative;
-  margin-top: 3rem;
-}
-.tooltip {
-	transform: scale(1);
-	opacity: 1;
-	position: absolute;
-	top: 2rem;
-  display:flex;
-  justify-content: center;
-}
+

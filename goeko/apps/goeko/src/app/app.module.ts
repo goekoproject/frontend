@@ -9,10 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentFulModule } from '@goeko/store';
 import { ButtonModule } from '@goeko/ui';
 import { ContentConfig } from './content-ful.config';
+import { FooterComponent } from './shell/footer/footer.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { MenuComponent } from './shell/menu/menu.component';
 import { TeamComponent } from './team/team.component';
-import { FooterComponent } from './shell/footer/footer.component';
 
 @NgModule({
 	declarations: [AppComponent, NxWelcomeComponent, MenuComponent, HeaderComponent, TeamComponent, FooterComponent],

@@ -11,9 +11,18 @@ import { ModelComponent } from './banner/model/model.component';
 import { ScenesComponent } from './banner/scenes/scenes.component';
 import { SphereComponent } from './banner/sphere/sphere.component';
 import { ContentComponent } from './content/content.component';
+import { OrderByPipe } from './content/order-by.pipe';
 
 @NgModule({
-	declarations: [HomeComponent, BannerComponent, ContentComponent, ModelComponent, SphereComponent, ScenesComponent],
+	declarations: [
+		HomeComponent,
+		BannerComponent,
+		ContentComponent,
+		ModelComponent,
+		SphereComponent,
+		ScenesComponent,
+		OrderByPipe,
+	],
 	imports: [
 		CommonModule,
 		HomeRouteModule,

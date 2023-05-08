@@ -32,12 +32,12 @@
     color: #FFFFFF;
 
 }
-.title-column {
+.title-footer-column {
     @extend %title;
     color: rgba(255, 255, 255, 0.5);    
 
 }
-.subtitle-column { 
+.subtitle-footer-column { 
     @extend %title;
     color: #FFFFFF;
 }

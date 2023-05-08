@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import * as AOS from 'aos';
 import { map } from 'rxjs';
@@ -10,6 +10,7 @@ import { CONTENT } from './content.contants';
 	selector: 'go-content',
 	templateUrl: './content.component.html',
 	styleUrls: ['./content.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class ContentComponent implements OnInit {
 	@ViewChildren('content') articlesRef!: QueryList<ElementRef>;
@@ -58,21 +59,25 @@ export class ContentComponent implements OnInit {
 
 	private _onClickSme() {
 		this._interactionService.onSMEClick.subscribe((res) => {
-			if (res) {
-				this._viewportScroller.scrollToAnchor('sme');
-			}
+			this._router.navigate(['/home'], { fragment: 'sme' });
+			/* 			window.scroll(0, window.scrollY + 1000);
+			 */
 		});
 	}
 
 	private _onClickCleanTeach() {
 		this._interactionService.onCleanTeachClick.subscribe((res) => {
-			this._viewportScroller.scrollToAnchor('cleantech');
+			this._router.navigate(['/home'], { fragment: 'cleantech' });
+			/* 			window.scroll(0, window.scrollY + 1000);
+			 */
 		});
 	}
 
 	private _oBank() {
 		this._interactionService.onBankClick.subscribe((res) => {
-			this._viewportScroller.scrollToAnchor('bank');
+			this._router.navigate(['/home'], { fragment: 'bank' });
+			/* 			window.scroll(0, window.scrollY + 1000);
+			 */
 		});
 	}
 
