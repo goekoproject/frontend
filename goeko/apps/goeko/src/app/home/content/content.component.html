@@ -1,49 +1,51 @@
-<article class="content" *ngFor="let article of articles; let i = index">
-  <!--   <div class="content-shadow"></div>
- -->
-  <section class="content_title" [ngStyle]="{'background-image': 'url(assets/'+actorsImg[i]+')'}">
-    <div class="content-shadow"></div>
-    <h1 data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
-    <h3>
-      {{ article?.descriptions3 }}
-    </h3>
-  </section>
+<article
+	[id]="article.id"
+	class="content"
+	[ngClass]="{ 'row-reverse-content': odd }"
+	*ngFor="let article of articles | orderBy : 'order'; let i = index; let odd = odd"
+>
+	<img
+		class="point-style"
+		src="assets/point-style.png"
+		[ngClass]="{ 'point-style--reverse': odd }"
+		alt="point-style"
+	/>
+	<div class="content-header">
+		<h1 class="title" [ngClass]="{ 'title-reverse-content': !odd }">
+			{{ article?.name }}
+		</h1>
 
+		<img class="content__actor-photo" [src]="'assets/' + actorsImg[i]" [alt]="article.name" />
+	</div>
 
-  <section>
-    <h3 class="section-title">
-      {{ article?.descriptions }}
-    </h3>
-    <div class="content_wrapper-bad-stuff">
-      <div class="content_bad-stuff" *ngFor="let item of article?.badStuff; let i = index">
-        <img src="assets/platform.png" />
-        <span class="material-symbols-rounded" *ngIf="article?.badStuffIcons">
-          {{article?.badStuffIcons[i]}}
-        </span>
-        <p>{{item}}</p>
-      </div>
-    </div>
+	<section class="info-actors">
+		<div class="section-column">
+			<h3 class="title-content-column">
+				{{ article?.descriptions }}
+			</h3>
+			<div class="element-column" *ngFor="let item of article?.badStuff; let i = index">
+				<span class="material-symbols-rounded" *ngIf="article?.badStuffIcons">
+					{{ article?.badStuffIcons[i] }}
+				</span>
+				<p>{{ item }}</p>
+			</div>
+		</div>
 
-    <img src="assets/button-goeko.png" />
-
- 
-    <div class="content_wrapper-benefit">
-      <div class="benefit"  *ngFor="let item of article?.benefits">
-        <img src="assets/platform-benefits.png" />
-        <p class="benefit-text">{{ item?.text }}</p>
-      </div>
-    </div>
-  
-
-
-    <!-- <div class="content-description content-cards">
-      <div class="content-card">
-        <p>{{ item?.text }}</p>
-      </div>
-    </div> -->
-  </section>
-
-  
-
-  
+		<div class="section-column">
+			<h3 class="title-content-column">
+				{{ article?.descriptions3 }}
+			</h3>
+			<div class="element-column" *ngFor="let item of article?.benefits; let i = index">
+				<span class="material-symbols-rounded positive" *ngIf="article?.badStuffIcons"> check_circle </span>
+				<p>{{ item?.text }}</p>
+			</div>
+		</div>
+	</section>
+	<section class="banner-actors">
+		<h4 class="content-slogan">Interested work with us?</h4>
+		<div class="goeko_in">
+			<go-tooltip class="tooltip">Click me</go-tooltip>
+			<img src="assets/button-goeko.png" class="button-goeko" alt="goeko_in" />
+		</div>
+	</section>
 </article>

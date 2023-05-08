@@ -1,28 +1,30 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { loadRemoteModule } from '@nrwl/angular/mf';
+import { RouterModule, Routes } from '@angular/router';
 
 const ROUTES: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home'
-  },
-/*    {
-    path: 'home',
-    loadChildren: () =>
-      loadRemoteModule('home', './Module').then((m) => m.HomeModule),
-  }, 
- */
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-     
-  }, 
+	{
+		path: '',
+		pathMatch: 'full',
+		redirectTo: 'home',
+	},
+	{
+		path: '',
+		loadChildren: () => import('./langing-page/landing-page.module').then((m) => m.LandingModule),
+	},
 
+	{
+		path: 'home',
+		loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+	},
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(ROUTES)],
-  exports: [RouterModule],
+	imports: [
+		RouterModule.forRoot(ROUTES, {
+			scrollPositionRestoration: 'enabled',
+			anchorScrolling: 'enabled',
+			scrollOffset: [0, 100], // [x, y]
+		}),
+	],
+	exports: [RouterModule],
 })
 export class AppRoutingModule {}

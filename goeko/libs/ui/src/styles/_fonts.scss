@@ -3,6 +3,8 @@ $font-roboto-thin: 'Roboto-Thin';
 $font-barlow-semi-bold:'Barlow-SemiBold';
 
 $font-barlow-la-belle-aurore:'LaBelleAurore-Regular';
+$font-inter-thin:'Inter-Thin';
+
 
 
 :root {
@@ -16,6 +18,9 @@ $font-path: '_fonts';
 $font-path-barlow: '_fonts/barlow';
 
 $font-path-supports: '_fonts/supports';
+
+$font-path-inter: '_fonts/inter';
+
 
 
 /** Roboto REGULAR **/
@@ -59,4 +64,13 @@ $font-path-supports: '_fonts/supports';
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
+}
+
+/**Inter */
+
+@font-face {
+	font-family: '#{$font-inter-thin}';
+	src: url('#{$font-path-inter}/#{$font-inter-thin}.ttf?sirsoa') format('truetype');
+	font-weight: 100;
+
 }

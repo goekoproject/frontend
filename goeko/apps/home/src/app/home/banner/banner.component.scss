@@ -15,11 +15,8 @@
   display: flex;
   gap: 3rem;
   justify-content: start;
-
   flex-direction: column;
-
   padding-bottom: 14rem;
-
   &-content {
     display: flex;
     flex-direction: column;
@@ -36,8 +33,8 @@
     text-transform: uppercase;
   }
   &-info {
-    color: var(--color-swiss);
-    background-color: var(--color-background-white);
+    color: var(--color-background-white);
+    background-color:var(--color-swiss); 
     font-family: 'Barlow-SemiBold', serif;
     width: fit-content;
     padding: 0 3.1px;

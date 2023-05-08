@@ -16,11 +16,8 @@
         "tsConfig": "apps/goeko/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/goeko/src/favicon.ico", "apps/goeko/src/assets"],
-        "styles": ["apps/goeko/src/styles.scss",
-        "node_modules/aos/dist/aos.css",
-        
-        "./libs/ui/src/styles/_theme.scss"],
-        "scripts": ["node_modules/aos/dist/aos.js","node_modules/meshwriter/dist/meshwriter.js"],
+        "styles": ["apps/goeko/src/styles.scss", "node_modules/animate.css/animate.min.css", "node_modules/aos/dist/aos.css", "./libs/ui/src/styles/_theme.scss"],
+        "scripts": ["node_modules/aos/dist/aos.js",  "node_modules/meshwriter/dist/meshwriter.js"],
         "customWebpackConfig": {
           "path": "apps/goeko/webpack.config.js"
         }

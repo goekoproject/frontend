@@ -11,23 +11,23 @@
 }
 
 .banner {
-  height: 100vh;
   display: flex;
   gap: 3rem;
   justify-content: start;
-  flex-direction: column;
-  padding-bottom: 14rem;
-
+  height: 100vh;
+  position: relative;
   &-content {
     display: flex;
     flex-direction: column;
     padding-top: 2rem;
-    align-items: center;
+    align-items: flex-start;
+    position: relative;
+    //align-self: center;
   }
   //@include urlImg(url(/assets/bkg-2.png));
   &-slogan {
-    color: #011c37;
-    font-family: 'Roboto-Regular', serif;
+    color: #31363f;
+    font-family: 'Barlow-SemiBold', serif;
     font-size: 3.35rem;
     max-width: 640px;
     margin-top: 1.3rem;
@@ -41,15 +41,32 @@
     font-size: 2.6rem;
     font-family: 'Roboto-Thin',sans-serif;
     text-align: center;
-    letter-spacing: 0.3rem;
+    letter-spacing: 0.47rem;
     word-spacing: 15px;
+    display: flex;
+    gap: 1rem;
+  
   }
+
+  .word:nth-child(1) {
+    animation-delay: 0s;
+  
+  }
+  .word:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  .word:nth-child(3) { 
+    animation-delay: 1s;
+
+  }
+   
   &-info {
-    color: var(--color-swiss);
-    background-color: var(--color-background-white);
+    color: var(--color-background-white);
+    background-color: var(--color-swiss);
     font-family: 'Barlow-SemiBold', serif;
     width: fit-content;
-    padding: 0 3.1px;
+    padding: 4px;
   }
   &-shadow {
    // background: rgba(0, 0, 0, 0.45);
@@ -69,16 +86,12 @@
  */  }
   img {
     width: 100%;
-    height: 95%;
-    object-fit: contain;
-    bottom: 14%;
-    position: relative;
+    position: absolute;
   }
   &-actions {
     display: flex;
     gap: 2rem;
     width: 100%;
-    justify-content: center;
   }
 }
 .banner-actions > button {
@@ -90,6 +103,39 @@
    // box-shadow: inset 0vw 0px 7px 6vw rgb(33 166 80 / 70%);
     color:  rgb(33 166 80 / 70%);
 }
+
+.world-europe {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  left: -41rem;
+  right: 0;
+  top: 13rem;
+}
+.fill-green {
+  transition: .5s ease;
+  fill:rgba(33, 166, 80, 0.7);
+  fill: limegreen;
+  animation: fillAnimation 2s ease-in-out;
+
+
+  //transform: scale(1.2) translate(-12.4rem, 1rem);
+
+}
+
+@keyframes fillAnimation {
+  0% {
+    fill: #ECE2E2;
+  }
+  50% {
+    fill: #ECE2E2;
+  }
+  100% {
+    fill: limegreen;
+  }
+}
+
+
 
 @media screen 
   and (min-device-width: 2500px)  { 

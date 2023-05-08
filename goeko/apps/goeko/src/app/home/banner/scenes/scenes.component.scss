@@ -1,0 +1,13 @@
+.scene-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas {
+    width: 50rem;
+    height: 49rem;
+    position: relative;
+    top: 4rem;
+    
+}

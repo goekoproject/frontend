@@ -1,12 +1,18 @@
-<!-- <input type="number" (change)="changeRotationX($event)">
-<input type="number" (change)="changeRotationY($event)">
-<input type="number" (change)="changeRotationZ($event)">
+<!-- <input type="number" step="0.1" (focusout)="getFocusElements()" (change)="changeRotationX($event)" [value]="this._sphereSme?.rawMesh?.rotation.x">
+<input type="number"  step="0.1"  (change)="changeRotationZ($event)" [value]="this._sphereSme?.rawMesh?.rotation.z">
  -->
 <!--  x{{x.value}}
+
+
 <input type="range" #x (input)="changePosotionX($event.target)" step="0.0001" max="1" >
 y{{y.value}}
 <input type="range"  #y (input)="changePosotionY($event.target)" step="0.0001" max="1">
 z{{z.value}}
 <input type="range" #z (input)="changePosotionZ($event.target)" step="0.0001" max="1">  -->
 
-<canvas #canvas id="canvas"></canvas>
+<!-- <input type="number" step="1" (change)="changeRotationY($event)" style="z-index: 10; position: relative" />
+ -->
+<!-- <input type="color" style="z-index: 10; position: relative" (change)="changeColor($any($event.target).value)" />
+<input type="color" style="z-index: 10; position: relative" (change)="changeColor2($any($event.target).value)" /> -->
+<h1>GoEko System</h1>
+<canvas #canvas id="canvas" class="canvas"></canvas>
