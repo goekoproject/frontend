@@ -2,21 +2,13 @@ import { DOCUMENT } from '@angular/common';
 import { ElementRef, Inject, Injectable, NgZone } from '@angular/core';
 import {
 	Animation,
-	BaseTexture,
+	Axis,
 	Color3,
-	DirectionalLight,
-	DynamicTexture,
-	GroundMesh,
-	HighlightLayer,
+	GlowLayer,
 	Matrix,
 	Mesh,
 	MeshBuilder,
-	PBRMaterial,
-	PointLight,
-	Scene,
-	ShadowGenerator,
 	StandardMaterial,
-	Texture,
 	Vector3,
 } from '@babylonjs/core';
 import { Curve3, Path2 } from '@babylonjs/core/Maths/math.path';
@@ -24,11 +16,16 @@ import { Vector2 } from '@babylonjs/core/Maths/math.vector';
 import { PolygonMeshBuilder } from '@babylonjs/core/Meshes/polygonMesh';
 import { SolidParticleSystem } from '@babylonjs/core/Particles/solidParticleSystem';
 
-import { colorToColorBY } from '@goeko/ui';
+import { colorHexToRgb } from '@goeko/ui';
+import { MeshActors, TYPE_MESH } from '../sphere/models/sphere.model';
 declare const MeshWriter: any;
 
+import { AdvancedDynamicTexture, TextBlock } from '@babylonjs/gui';
 import { SceneService } from './scenes.service';
-export const FPS = 60;
+export const FPS = 10;
+export const SPEED = 0.025;
+const CONTROL_CAM = false;
+
 const methodsObj = {
 	Vector2,
 	Vector3,
@@ -41,14 +38,13 @@ const methodsObj = {
 	Mesh,
 };
 
+export enum DIRECTION_ANGLE {
+	RIGHT = +1,
+	LEFT = -1,
+}
+
 @Injectable({ providedIn: 'root' })
 export class SphereService extends SceneService {
-	_sme!: Mesh;
-	light1!: DirectionalLight;
-	private _ground!: GroundMesh;
-
-	testRotationX = 0;
-
 	readonly rotationAnim = new Animation(
 		'rotate',
 		'rotation.y',
@@ -80,169 +76,153 @@ export class SphereService extends SceneService {
 		this.wobbleAnim.setKeys(this.wobbleKeys);
 	}
 
-	/**
-	 *
-	 * @param canvas Element of  scene
-	 * @param size Size of sphere
-	 * @returns
-	 */
-	createSceneSME(canvas: ElementRef<HTMLCanvasElement>, size: number = 30): Scene {
+	getScene(canvas: ElementRef<HTMLCanvasElement>) {
 		if (this.scene) {
 			this.scene.dispose();
 		}
 		super.createScene(canvas);
-		this.light = new PointLight('sun', new Vector3(1, -10, -40), this.scene);
-		this.light.intensity = 0.5;
-		this._sme = MeshBuilder.CreateSphere('sme', { segments: 100, diameter: size });
-
-		const sphereMaterial = new StandardMaterial('sun_surface', this.scene);
-
-		const sphereMaterialText = new StandardMaterial('text', this.scene);
-
-		//Material 1
-		sphereMaterial.diffuseTexture = new Texture('./assets/fondo-header.png', this.scene, false);
-		sphereMaterial.alpha = 0.4;
-		sphereMaterial.diffuseTexture.hasAlpha = true;
-
-		//Material Text
-		const myDynamicTexture = new DynamicTexture('dynamic texture', { width: 800, height: 800 }, this.scene);
-		const font = 'bold 100px Tahoma';
-		sphereMaterialText.emissiveColor = new Color3(-1, 20, 10);
-		sphereMaterialText.diffuseTexture = myDynamicTexture;
-		myDynamicTexture.drawText('SME', 20, 500, font, '#FFFFFF', '#048ABF', true, true);
-
-		myDynamicTexture.update();
-
-		this._sme.material = sphereMaterialText;
-
-		this._sme.parent = this.rootMesh;
-		this._sme.position = new Vector3(0, 0, 0);
-		this._sme.rotation = new Vector3(8.85, 7.15, 5.83);
-		this._addGround();
-		const hl1 = new HighlightLayer('hl1', this.scene);
-		const color = colorToColorBY('3b6ebc');
-		hl1.addMesh(this._sme, new Color3(color.red, color.green, color.blue));
-		this._addShadow();
 		return this.scene;
 	}
 
-	/**
-	 *
-	 * @param name name of the actors
-	 * @param diameter Size of the sphere
-	 * @param distance Distance between main sphere
-	 * @param color
-	 * @returns
-	 */
-	createActorsSecondary(
-		name: string,
-		diameter: number,
-		distance: number,
-		color: string,
-		position?: { x: number; y: number; z: number }
-	) {
-		return this._createMesh(name, diameter, distance, color, position);
+	public builderSphere(mesh: MeshActors): Mesh {
+		const sphere = MeshBuilder.CreateSphere(mesh.name, { segments: mesh.segments, diameter: mesh.diameter });
+		sphere.position = new Vector3(mesh.position.x, mesh.position.x, mesh.position.x);
+		if (mesh.type === TYPE_MESH.ROOT_MESH) {
+			this._setRootMesh(sphere);
+		}
+		return sphere;
 	}
 
-	createInsideActorSecondary(
-		name: string,
-		diameter: number,
-		distance: number,
-		color: string,
-		position?: { x: number; y: number; z: number }
-	) {
-		const mesh = this._createMesh(name, diameter, distance, color, position) as any;
-		mesh.material.alpha = 1;
-		return mesh;
-	}
-
-	private _createMesh(
-		name: string,
-		diameter: number,
-		distance: number,
-		color: string,
-		position?: { x: number; y: number; z: number }
-	) {
-		const offY = -1 + Math.random();
-		const mesh = MeshBuilder.CreateSphere(name, { diameter, segments: 16 }, this.scene);
-
-		mesh.parent = this._sme;
-		mesh.setPivotMatrix(Matrix.Translation(distance, -2, 0), false);
-		mesh.rotation = new Vector3(position?.x, position?.y, position?.z) || new Vector3();
-		mesh.animations = [this.rotationAnim, this.wobbleAnim];
-
-		if (color) {
-			const _color = colorToColorBY(color);
-			const sphereMaterial = new StandardMaterial(name, this.scene);
-
-			sphereMaterial.emissiveColor = new Color3(_color.red, _color.green, _color.blue);
-			//sphereMaterial.diffuseTexture = new BaseTexture();
-			sphereMaterial.alpha = 0.2;
-			//(sphereMaterial.diffuseTexture.hasAlpha = true;
-			mesh.material = sphereMaterial;
+	public builderSphereWithLabel(mesh: MeshActors, text: string): Mesh {
+		const sphere = MeshBuilder.CreateSphere(mesh.name, { segments: mesh.segments, diameter: mesh.diameter });
+		sphere.position = new Vector3(mesh.position.x, mesh.position.y, mesh.position.z);
+		sphere.rotation = new Vector3(0.1, 1.2, 8.3);
+		if (mesh.type === TYPE_MESH.ROOT_MESH) {
+			this._setRootMesh(sphere);
 		}
 
-		this._addShadow(name);
-		return mesh;
+		this._builderLabel(text, sphere, mesh);
+		return sphere;
 	}
 
-	private _addGround() {
-		// Ground
-		this._ground = MeshBuilder.CreateGround('ground', { width: 100, height: 100 }, this.scene);
+	private _builderLabel(name: string, mesh: Mesh, meshActor: MeshActors) {
+		const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI('UI');
 
-		const groundMaterial = new StandardMaterial('groundMaterial', this.scene);
-		groundMaterial.diffuseColor = new Color3(0, 0.17, 0.17);
+		const text = new TextBlock();
+		text.text = meshActor.font.text;
+		text.color = meshActor.font.color;
+		text.fontSize = `${meshActor.font.fontSize}px`;
+		advancedTexture.addControl(text);
+		text.linkWithMesh(mesh);
+	}
 
-		this._ground.position.y = -10;
-		//groundMaterial.specularColor = new Color3(0, 0, 0);
-		groundMaterial.diffuseTexture = new BaseTexture();
-		groundMaterial.diffuseTexture.hasAlpha = true;
-		//groundMaterial.diffuseTexture = new Texture('./assets/bkg-1.png', this.scene, false);
-		//groundMaterial.diffuseTexture = new Texture('assets/background-world.svg', this.scene, false);
-		this._ground.material = groundMaterial;
-		if (!this._ground.material) {
+	private _setRootMesh(mesh: Mesh, meshParent = this.rootMesh) {
+		mesh.parent = meshParent;
+	}
+
+	makeRotate(mesh: Mesh) {
+		const animation = new Animation(
+			'rotationSphere',
+			'rotation.y',
+			30,
+			Animation.ANIMATIONTYPE_FLOAT,
+			Animation.ANIMATIONLOOPMODE_CYCLE
+		);
+
+		// Definir los frames de la animación
+		const keyFrames = [
+			{ frame: 0, value: 0 },
+			{ frame: 120, value: 2 * Math.PI },
+		];
+		animation.setKeys(keyFrames);
+
+		// Añadir la animación a la esfera
+		mesh.animations = [animation];
+
+		// Empezar la animación
+		this.scene.beginAnimation(mesh, 0, 120, true);
+	}
+
+	createBorder(mesh: Mesh, intensity: number, color?: string) {
+		this.scene.createDefaultCamera(true, false, CONTROL_CAM);
+
+		// Crear efecto de brillo en el borde de la esfera
+		var glowLayer = new GlowLayer('glow', this.scene);
+		glowLayer.intensity = intensity; // Establecer intensidad
+		/* 		glowLayer.neutralColor = new Color4(1, 30, 0, 0);
+		 */
+		if (color) {
+			this._setGlowColor(glowLayer, color);
+		}
+		//glowLayer.addIncludedOnlyMesh(mesh);
+	}
+
+	private _setGlowColor(glowLayer: GlowLayer, color: string) {
+		const colorRGB = colorHexToRgb(color);
+		glowLayer.customEmissiveColorSelector = (mesh, subMesh, material, result) => {
+			result.set(colorRGB.r, colorRGB.g, colorRGB.b, 1); // Color verde suave
+		};
+	}
+
+	rotationMesh(meshWrapper: Mesh, meshActors: MeshActors) {
+		if (!meshActors.distance) {
 			return;
 		}
+		meshWrapper.setPivotMatrix(Matrix.Translation(meshActors.distance, 0, 0), false);
 
-		//this._ground.position.y = -10.05;
+		meshWrapper.rotation =
+			new Vector3(meshActors.position?.x, meshActors.position?.y, meshActors.position?.z) || new Vector3();
+		meshWrapper.animations = [this.rotationAnim, this.wobbleAnim];
 	}
 
-	rotateGroud(x: number, y: number, z: number) {}
+	updateOrbitingSpherePosition = (meshActors: Mesh, drl = DIRECTION_ANGLE.RIGHT) => {
+		const orbitSpeed = 0.00006; // Controla la velocidad de la órbita
 
-	private _addShadow(meshName: string = 'sme') {
-		// Main elements
-		const sme = this.scene.getMeshByName(meshName) as any;
+		// Calcula el ángulo de rotación en base al tiempo transcurrido
+		const rawAngle = (this._engine.getDeltaTime() * orbitSpeed) % (2 * Math.PI);
+		const directionAngle = drl * rawAngle;
+		// Rota la posición de la esfera en órbita alrededor de la central
+		const rotationMatrix = Matrix.RotationAxis(Axis.Y, directionAngle);
 
-		// Light Shadow
-		this.light1 = new DirectionalLight('dir01', new Vector3(10, -10, 10), this.scene);
+		meshActors.position = Vector3.TransformCoordinates(meshActors.position, rotationMatrix);
+		meshActors.animations = [this.rotationAnim, this.wobbleAnim];
+	};
 
-		this.light1.intensity = 0.8;
+	private _createRings() {
+		// Creamos dos anillos luminosos azules
+		var blueMaterial = new StandardMaterial('blueMaterial', this.scene);
+		//blueMaterial.diffuseColor = Color3.Blue();
+		blueMaterial.emissiveColor = new Color3(0, 0, 1); // Establecer el color azul brillante
 
-		//Shadows
-		const shadowGenerator = new ShadowGenerator(1024, this.light1);
-		shadowGenerator?.getShadowMap()?.renderList?.push(sme);
-		shadowGenerator.useBlurExponentialShadowMap = true;
-		shadowGenerator.usePoissonSampling = true;
-		shadowGenerator.useOpacityTextureForTransparentShadow = true;
+		var ring1 = MeshBuilder.CreateTorus('ring1', { diameter: 25, thickness: 0.5, tessellation: 32 }, this.scene);
+		blueMaterial.alpha = 0.4;
+		ring1.rotation.x = -60;
+		ring1.material = blueMaterial;
+		/* 	var ring2 = MeshBuilder.CreateTorus('ring2', { diameter: 25, thickness: 0.5, tessellation: 32 }, this.scene);
+		ring2.material = blueMaterial;
+		ring2.position.x = 2.5; */
 
-		this._ground.receiveShadows = true;
+		// Creamos una animación para rotar los anillos alrededor del eje Y
+		var animation = new Animation(
+			'ringAnimation',
+			'rotation.z',
+			30,
+			Animation.ANIMATIONTYPE_FLOAT,
+			Animation.ANIMATIONLOOPMODE_CYCLE
+		);
+		var keys = [
+			{ frame: 0, value: 0 },
+			{ frame: 100, value: Math.PI * 2 },
+		];
+		animation.setKeys(keys);
+		ring1.animations.push(animation);
+		/* 		ring2.animations.push(animation);
+		 */
 	}
 
-	_addText() {
-		const Writer = MeshWriter(this.scene, { scale: 0.1, methods: methodsObj });
-		const text1 = new Writer('holaa', { color: '1C3870' });
-		const meshText = text1.getMesh();
-		meshText.rotation.x = -1.4;
-		meshText.rotation.y = 8;
-		meshText.rotation.z = 2;
-
-		meshText.position = new Vector3(2, 16, -1);
-
-		return meshText;
-	}
-
-	private _createAsphalt() {
-		const pbr = new PBRMaterial('pbr', this.scene);
-		return pbr;
+	addMaterialHover(mesh: Mesh) {
+		var hoverMaterial = new StandardMaterial('hoverMaterial', this.scene);
+		hoverMaterial.emissiveColor = new Color3(1, 1, 0);
+		mesh.material = hoverMaterial;
 	}
 }

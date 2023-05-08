@@ -9,10 +9,12 @@
 
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 0 auto;
   align-items: center;
   width: var(--center-container);
+  height: 10rem;
+  transition: .2s all ease-in-out;
   &-wrapper {
     width: 82.5rem;
     display: flex;
@@ -37,8 +39,11 @@
 /* .logo {
   max-width: 89px;
   max-height: 89px; */
-  img {
-    padding: 1rem;
+  .header-wrapper > img {
+    
+    width: 10%;
+    transition: .4s ease-in-out;
+
    /*  height: 100%;
     object-fit: cover; */
   }

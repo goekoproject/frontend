@@ -1,27 +1,30 @@
 <div class="banner">
-  <div class="banner-content">
-    <span class="banner-info">A Swiss Company</span>
+	<div class="banner-content">
+		<span class="banner-info" *ngIf="false">A Swiss Company</span>
 
-    <h2 class="banner-slogan">The <span class="banner-slogan--green">Green</span> Transition</h2>
-    <h3 class="banner-support-text">Easy Fast Affordable</h3>
-    <!--    <h2>
+		<h2 class="banner-slogan">The <span class="banner-slogan--green">Green</span> Transition</h2>
+		<div class="banner-support-text">
+			<span class="word animate__animated" [class.animate__backInLeft]="isShowing">Easy</span>
+			|
+			<span class="word animate__animated" [class.animate__backInLeft]="isShowing">Fast</span>
+			|
+			<span class="word animate__animated" [class.animate__backInLeft]="isShowing">Affordable</span>
+		</div>
+		<!--    <h2>
       The Solution for SMEs.
     </h2> -->
-    <div class="banner-actions">
-      <button go-button appearance="white">
-        Oportunity for Clean Teach
-      </button>
-      <button go-button>
-        Solution for SME
-        <span class="material-symbols-rounded"> file_open </span>
-      </button>
-    </div>
-  </div>
+		<div class="banner-actions" *ngIf="false">
+			<button go-button appearance="white">Oportunity for Clean Teach</button>
+			<button go-button>
+				Solution for SME
+				<span class="material-symbols-rounded"> file_open </span>
+			</button>
+		</div>
+	</div>
 
-  <div class="banner-shadow"></div>
-  <!--     <app-model></app-model>
- -->
-  <goeko-scenes></goeko-scenes>
-  <!--  <img src="/assets/esferas-actors2.png" />
- -->
+	<div class="banner-shadow"></div>
+
+	<goeko-scenes></goeko-scenes>
+
+	<svg-icon #worldmap src="assets/world_map.svg" [class]="'world-europe'"></svg-icon>
 </div>

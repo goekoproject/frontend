@@ -1,0 +1,77 @@
+
+.title {
+    width: 100%;
+    text-align: center;
+}
+
+.carrousel {
+    perspective: 650px;
+    height: 40rem;
+    top: 50px;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.member__card {
+    width: 265px;
+    height: 294.44px;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    top: 35px;
+    left: 125px;
+    font-size: 9px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);
+    text-align: center;
+    background: linear-gradient(145.36deg, rgba(80, 78, 190, 0.77) 13.72%, rgba(51, 228, 197, 0.71) 64.03%);
+    border-radius: 8px;
+    animation-duration: 8s;
+    flex-direction: column;
+    &:hover {
+        cursor: pointer;
+         box-shadow: 0px 0px 20px rgba(34, 106, 201, 0.5);
+    }
+/*     animation-iteration-count: infinite;
+ */    
+ 
+/*  animation-timing-function: linear;
+ */}
+
+
+.member__photo {
+    width: 160px;
+    height: 142px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.member__card--active {
+/*     transform: scale(1);
+ */    
+ 
+/*  animation-name: efeitoCarrosel;
+ */
+
+}
+
+@keyframes efeitoCarrosel {
+    from {
+        transform: rotateY(360deg) translateZ(130px) rotateY(-360deg);
+        z-index: 10;
+        opacity: 1
+    }
+
+    50% {
+        z-index: -10;
+    }
+
+    to {
+        transform: rotateY(0deg) translateZ(130px) rotateY(0deg);
+        z-index: 10;
+        opacity: 1
+    }
+}
+

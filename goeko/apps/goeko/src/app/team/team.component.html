@@ -1,0 +1,14 @@
+<h1 class="title">Teams GoEko</h1>
+
+<div class="carrousel">
+	<div
+		class="member__card"
+		[ngClass]="{ 'member__card--active': member.active }"
+		*ngFor="let member of teams"
+		(click)="toogle(member)"
+	>
+		<img class="member__photo" [src]="'assets/' + member.photo" [alt]="member.name" />
+		<h2>{{ member.name }}</h2>
+		<h3>{{ member.rating }}</h3>
+	</div>
+</div>
