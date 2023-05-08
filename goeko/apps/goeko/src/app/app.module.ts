@@ -11,9 +11,11 @@ import { ButtonModule } from '@goeko/ui';
 import { ContentConfig } from './content-ful.config';
 import { HeaderComponent } from './shell/header/header.component';
 import { MenuComponent } from './shell/menu/menu.component';
+import { TeamComponent } from './team/team.component';
+import { FooterComponent } from './shell/footer/footer.component';
 
 @NgModule({
-	declarations: [AppComponent, NxWelcomeComponent, MenuComponent, HeaderComponent],
+	declarations: [AppComponent, NxWelcomeComponent, MenuComponent, HeaderComponent, TeamComponent, FooterComponent],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
