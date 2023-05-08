@@ -12,7 +12,7 @@ $color-platform: #3065b0;
   position: relative;
   flex-wrap: wrap;
   padding: 10rem 0;
-  height: 100vh;
+  min-height: 100vh;
 /*   margin-bottom: 4%;
  */
   .title {
@@ -48,7 +48,8 @@ $color-platform: #3065b0;
   display: flex;
   width: 55%;
   align-items: flex-end;
-  height: 21rem;
+  min-height: 21rem;
+  flex-wrap: wrap;
 }
 .section-column {
   display: flex;
@@ -128,8 +129,22 @@ $color-platform: #3065b0;
 
 
 @media (max-width: 768px) {
-	.content-card {
-		max-width: 100%;
+	.content {
+    height: auto;
+    justify-content: center;
+    text-align: center;
 	}
+  .content .title {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-size: 63px;
+    height: auto;
+    top: -76px;
+
+  }
 }
 
