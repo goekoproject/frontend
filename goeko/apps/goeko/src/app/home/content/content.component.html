@@ -1,49 +1,50 @@
 <article class="content" *ngFor="let article of articles; let i = index">
-  <!--   <div class="content-shadow"></div>
- -->
-  <section class="content_title" [ngStyle]="{'background-image': 'url(assets/'+actorsImg[i]+')'}">
-    <div class="content-shadow"></div>
-    <h1 data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
-    <h3>
+  <h1  class="title" data-aos="fade-down" data-aos-duration="3000">{{ article?.name }}</h1>
+
+
+    <img class="content__actor-photo" [src]="'assets/'+actorsImg[i]"  [alt]="article.name" />
+   <!--  <h3>
       {{ article?.descriptions3 }}
-    </h3>
-  </section>
+    </h3> -->
 
 
   <section>
-    <h3 class="section-title">
-      {{ article?.descriptions }}
-    </h3>
-    <div class="content_wrapper-bad-stuff">
-      <div class="content_bad-stuff" *ngFor="let item of article?.badStuff; let i = index">
-        <img src="assets/platform.png" />
+    
+    <div class="section-column">
+      <h3 class="title-column">
+        {{ article?.descriptions }}
+      </h3>
+      <div class="element-column" *ngFor="let item of article?.badStuff; let i = index">
         <span class="material-symbols-rounded" *ngIf="article?.badStuffIcons">
           {{article?.badStuffIcons[i]}}
         </span>
         <p>{{item}}</p>
       </div>
+    
     </div>
 
-    <img src="assets/button-goeko.png" />
 
- 
-    <div class="content_wrapper-benefit">
-      <div class="benefit"  *ngFor="let item of article?.benefits">
-        <img src="assets/platform-benefits.png" />
-        <p class="benefit-text">{{ item?.text }}</p>
+    <div class="section-column">
+      <h3 class="title-column">
+        {{ article?.descriptions3 }}
+      </h3>
+      <div class="element-column" *ngFor="let item of article?.benefits; let i = index">
+        <span class="material-symbols-rounded" *ngIf="article?.badStuffIcons">
+          check_circle
+        </span>
+        <p >{{ item?.text }}</p>
       </div>
+    
     </div>
   
 
 
-    <!-- <div class="content-description content-cards">
-      <div class="content-card">
-        <p>{{ item?.text }}</p>
-      </div>
-    </div> -->
+
+ 
   </section>
 
   
 
-  
+  <img src="assets/button-goeko.png" />
+
 </article>
