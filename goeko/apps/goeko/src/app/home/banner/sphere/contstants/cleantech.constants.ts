@@ -16,7 +16,7 @@ const material = {
 };
 
 const font: MeshFont = {
-	fontSize: 20,
+	fontSize: 16,
 	color: '#ffffff',
 	text: 'CleanTech',
 };

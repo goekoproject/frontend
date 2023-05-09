@@ -18,7 +18,7 @@ export class ContentComponent implements OnInit {
 	articles!: Array<any>;
 	otherContent = false;
 	badStuffIcons = ['bolt', 'compost', 'unknown_document'];
-	actorsImg = ['sme.jpg', 'cleantech.jpg', 'bank.jpg'];
+	actorsImg = ['bank.jpg', 'sme.jpg', 'cleantech.jpg'];
 
 	private _body: any;
 
@@ -59,25 +59,21 @@ export class ContentComponent implements OnInit {
 
 	private _onClickSme() {
 		this._interactionService.onSMEClick.subscribe((res) => {
-			this._router.navigate(['/home'], { fragment: 'sme' });
-			/* 			window.scroll(0, window.scrollY + 1000);
-			 */
+			if (res) {
+				this._viewportScroller.scrollToAnchor('sme');
+			}
 		});
 	}
 
 	private _onClickCleanTeach() {
 		this._interactionService.onCleanTeachClick.subscribe((res) => {
-			this._router.navigate(['/home'], { fragment: 'cleantech' });
-			/* 			window.scroll(0, window.scrollY + 1000);
-			 */
+			this._viewportScroller.scrollToAnchor('cleantech');
 		});
 	}
 
 	private _oBank() {
 		this._interactionService.onBankClick.subscribe((res) => {
-			this._router.navigate(['/home'], { fragment: 'bank' });
-			/* 			window.scroll(0, window.scrollY + 1000);
-			 */
+			this._viewportScroller.scrollToAnchor('bank');
 		});
 	}
 

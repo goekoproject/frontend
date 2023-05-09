@@ -15,7 +15,7 @@ const material = {
 };
 
 const font: MeshFont = {
-	fontSize: 20,
+	fontSize: 18,
 	color: '#ffffff',
 	text: 'Bank',
 };
