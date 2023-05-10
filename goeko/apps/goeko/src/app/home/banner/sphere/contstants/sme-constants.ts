@@ -12,7 +12,7 @@ const material = {
 	emissiveColor: Color3.Teal(),
 };
 const font: MeshFont = {
-	fontSize: 80,
+	fontSize: 60,
 	color: '#31363f',
 	text: 'SME',
 };
