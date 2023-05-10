@@ -7,7 +7,7 @@ export const CLEANTECH_PROP = {
 };
 
 const POSITION = { x: COMMON_PARAMS.DISTANCE, y: 4, z: 0 };
-const POSITION_LIGHT = new MeshActorsPosition(2, 0, -10);
+const POSITION_LIGHT = new MeshActorsPosition(2, 0, -1);
 const material = {
 	name: 'material_sme',
 	diffuseColor: Color3.Teal(),
