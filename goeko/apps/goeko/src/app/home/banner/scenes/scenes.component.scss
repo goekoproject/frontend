@@ -3,10 +3,12 @@
     flex-direction: column;
     align-items: center;
 
-   /*  border: 7px solid rgba(0, 0, 0, 0.02);
+    border: 7px solid rgba(0, 0, 0, 0.02);
     box-shadow: 4px 7px 15px rgba(0, 0, 0, 0.08), inset -1px 0px 2px rgba(0, 0, 0, 0.1), inset 5px -5px 12px rgba(0, 0, 0, 0.05), inset -5px 5px 12px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(75px); */
-    border-radius: 22px;
+    backdrop-filter: blur(5px); 
+    border-radius: 50%;
+
+    border-radius: 50%;
     width: 100%;
     height: 40rem;
     width: 38rem;
