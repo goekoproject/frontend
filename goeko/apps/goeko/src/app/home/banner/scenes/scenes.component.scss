@@ -3,13 +3,20 @@
     flex-direction: column;
     align-items: center;
 
-    border: 7px solid rgba(0, 0, 0, 0.02);
+   /*  border: 7px solid rgba(0, 0, 0, 0.02);
     box-shadow: 4px 7px 15px rgba(0, 0, 0, 0.08), inset -1px 0px 2px rgba(0, 0, 0, 0.1), inset 5px -5px 12px rgba(0, 0, 0, 0.05), inset -5px 5px 12px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(75px);
+    backdrop-filter: blur(75px); */
     border-radius: 22px;
     width: 100%;
     height: 40rem;
     width: 38rem;
+    left: -11rem;
+    position: relative;
+    top: 2rem;
+    opacity: 0;
+    animation: 6s forwards opacity-actors linear;
+    animation-delay: 3s;
+
 }
 
 .canvas {
@@ -20,9 +27,11 @@
     
 }
 .goeko_system {
-    font-family: 'Material Symbols Rounded';
-    font-size: 1rem;
-    line-height: 3;
+    font-size: 1.9rem;
+    line-height: 2;
+    top: 3rem;
+    text-transform: capitalize;
+    position: relative;
 }
 .who_are_you {
     
@@ -32,11 +41,15 @@
     margin: 0;
     position: relative;
     top: 3rem;
+    opacity: 0;
+    animation: 2s forwards opacity-actors linear;
+    animation-delay: 7s;
+
 }
 
 h3:before {
     content: "";
-    background: #7FDBFF;
+/*     background: #7FDBFF; */
     position: absolute;
     width: 100%;
     height: 5px;
@@ -44,15 +57,15 @@ h3:before {
     left: 0;
     border-radius: 5px;
     transform: scaleX(0);
-    animation: 1.4s forwards no-hover-v linear;
-    animation-fill-mode: forwards;
+   /*  animation: 1.4s forwards no-hover-v linear;
+    animation-fill-mode: forwards; */
     z-index: -1;
   }
-  h3:hover:before,
-  h3:focus:before {
+ 
+/*   h3:focus:before {
     animation: .5s forwards hover-v linear;
     animation-fill-mode: forwards;
-  }
+  } */
   @keyframes hover-v {
     0% {
         transform: scaleX(0);
@@ -84,5 +97,18 @@ h3:before {
         transform: scaleX(0);
         height: 5px;
         opacity: .02;
+       }
+  }
+
+  @keyframes opacity-actors {
+    0% {
+        opacity: 0;
+       }
+    50% {   
+        opacity: 0.5;
+
+       }
+    100% {
+        opacity: 1;
        }
   }

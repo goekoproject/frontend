@@ -7,5 +7,9 @@ export class InteractionService {
 	onCleanTeachClick = new Subject<boolean>();
 	onBankClick = new Subject<boolean>();
 
+	onSMEHover = new Subject<boolean>();
+	onCleanTeachHover = new Subject<boolean>();
+	onBankHover = new Subject<boolean>();
+
 	constructor() {}
 }

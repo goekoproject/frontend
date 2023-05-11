@@ -9,7 +9,7 @@ import { InteractionService } from './interaction.service';
 import { DIRECTION_ANGLE, SphereService } from './sphere.service';
 
 const TEXTURE_SME = 'assets/texture-gray-1.png';
-const EMISSIVE_COLOR_SME = '#73687d';
+const EMISSIVE_COLOR_SME = '#47525E';
 const LIGHT_BORDER_SME = 0.2;
 const LIGHT_BORDER_SME_COLOR = '#FFFF00';
 
@@ -64,6 +64,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		 */ /* 		this._sphereService.makeRotate(this._sphereSme.rawMesh);
 		 */ this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
 		this._createEventClickSME();
+		this._createEventHoverSME();
 	}
 
 	changeColor(color: string) {
@@ -77,6 +78,12 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	private _createEventClickSME() {
 		this._sphereSme.onClick(() => {
 			this._interactionService.onSMEClick.next(true);
+		});
+	}
+
+	private _createEventHoverSME() {
+		this._sphereSme.onHover(() => {
+			this._interactionService.onSMEHover.next(true);
 		});
 	}
 
@@ -116,15 +123,6 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			this._interactionService.onBankClick.next(true);
 		});
 	}
-
-	/* 	private _hoverCleanTeach() {
-		this._cleanTeach.actionManager = new ActionManager(this.scene);
-		this._cleanTeach.actionManager.registerAction(
-			new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => {
-				this._sphereService.addMaterialHover(this._cleanTeach);
-			})
-		);
-	} */
 
 	changeRotationX(event: any) {
 		this._sphereSme.rawMesh.rotation.x = event.target.value;

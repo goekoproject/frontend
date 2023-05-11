@@ -156,7 +156,7 @@ export class MeshActors implements MeshActor {
 		const color = CustomColor.hex(colorHex);
 
 		// Cree un plano
-		const ground = MeshBuilder.CreateDisc('ground', { radius: 1, tessellation: 64 }, this.scene);
+		const ground = MeshBuilder.CreateDisc('ground', { radius: 2.6, tessellation: 50 }, this.scene);
 		ground.rotation.x = Math.PI / 2;
 
 		// Aplique un material transparente al plano
@@ -165,7 +165,9 @@ export class MeshActors implements MeshActor {
 		groundMaterial.diffuseColor = new Color3(0.4, 0.4, 0.4);
 		groundMaterial.emissiveColor = new Color3(color.r, color.g, color.b);
 		ground.material = groundMaterial;
-		ground.position.y = -3;
+		ground.position.y = -5.4;
+		ground.position.x = 0.5;
+		ground.position.z = -10;
 	}
 
 	rotate() {
@@ -175,6 +177,13 @@ export class MeshActors implements MeshActor {
 		this._rawMesh.actionManager = new ActionManager(this.scene);
 		return this._rawMesh.actionManager.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPickTrigger, () => callback())
+		);
+	}
+
+	onHover(callback: any): any {
+		this._rawMesh.actionManager = new ActionManager(this.scene);
+		return this._rawMesh.actionManager.registerAction(
+			new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => callback())
 		);
 	}
 }
