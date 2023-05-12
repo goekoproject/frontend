@@ -64,7 +64,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		 */ /* 		this._sphereService.makeRotate(this._sphereSme.rawMesh);
 		 */ this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
 		this._createEventClickSME();
-		this._createEventHoverSME();
+		/* 		this._createEventHoverSME();
+		 */
 	}
 
 	changeColor(color: string) {
