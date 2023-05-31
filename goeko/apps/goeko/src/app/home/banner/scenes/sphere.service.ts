@@ -5,6 +5,7 @@ import {
 	Axis,
 	Color3,
 	GlowLayer,
+	HighlightLayer,
 	Matrix,
 	Mesh,
 	MeshBuilder,
@@ -220,9 +221,13 @@ export class SphereService extends SceneService {
 		 */
 	}
 
-	addMaterialHover(mesh: Mesh) {
-		var hoverMaterial = new StandardMaterial('hoverMaterial', this.scene);
-		hoverMaterial.emissiveColor = new Color3(1, 1, 0);
-		mesh.material = hoverMaterial;
+	addHightLightHover(mesh: Mesh) {
+		var highlightLayer = new HighlightLayer('highlightLayer', this.scene);
+		highlightLayer.addMesh(mesh, Color3.White());
+		return highlightLayer;
+	}
+
+	removeHightLightBlur(mesh: Mesh, highlightLayer: HighlightLayer) {
+		highlightLayer?.removeMesh(mesh); // Quita el borde iluminado al dejar de estar el ratón encima
 	}
 }

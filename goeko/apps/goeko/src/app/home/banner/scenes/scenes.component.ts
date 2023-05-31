@@ -54,18 +54,18 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._createCleanTech();
 		this._createBank();
 		this._sphereSme.material.metallic = 1;
+		this._sphereSme.setDirectionalLight('#847575', '#847575');
+		this._sphereSme.onHoverActors();
+		this._sphereCleanTech.onHoverActors();
+		this._sphereBank.onHoverActors();
 	}
 
 	private _createSME() {
 		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build(SME.title);
 		this._sphereSme.setShadows('#847575');
-		this._sphereSme.setPointLight('#847575', '#847575');
-		/* 		this._sphereSme.setDiffuseTexture(TEXTURE_SME);
-		 */ /* 		this._sphereService.makeRotate(this._sphereSme.rawMesh);
-		 */ this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
+
+		this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
 		this._createEventClickSME();
-		/* 		this._createEventHoverSME();
-		 */
 	}
 
 	changeColor(color: string) {
@@ -82,18 +82,10 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	private _createEventHoverSME() {
-		this._sphereSme.onHover(() => {
-			this._interactionService.onSMEHover.next(true);
-		});
-	}
-
 	private _createCleanTech() {
 		this._sphereCleanTech = new MeshActors(this._sphereService, this.scene, CLEANTECH).build(CLEANTECH.title);
-		/* 		this._sphereCleanTech.setHemisphericLight();
-		 */ this._sphereCleanTech.setEmissiveColor(CLEANTECH_PROP.emissiveColor);
-		/* 		this._sphereCleanTech.setDiffuseTexture(TEXTURE_SME);
-		 */ this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
+		this._sphereCleanTech.setEmissiveColor(CLEANTECH_PROP.emissiveColor);
+		this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
 		this._createEventCleanTeach();
 
 		this.scene.registerBeforeRender(() =>
@@ -109,10 +101,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	private _createBank() {
 		this._sphereBank = new MeshActors(this._sphereService, this.scene, BANK).build(BANK.title);
-		/* 		this._sphereBank.setHemisphericLight();
-		 */ this._sphereBank.setEmissiveColor(BANK_PROP.emissiveColor);
-		/* 		this._sphereBank.setDiffuseTexture(TEXTURE_SME);
-		 */ this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
+		this._sphereBank.setEmissiveColor(BANK_PROP.emissiveColor);
+		this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
 		this._createEventBank();
 		this.scene.registerBeforeRender(() =>
 			this._sphereService.updateOrbitingSpherePosition(this._sphereBank.rawMesh, DIRECTION_ANGLE.LEFT)

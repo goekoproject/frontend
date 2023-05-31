@@ -8,13 +8,13 @@ export interface Team {
 export const TEAMS: Team[] = [
 	{
 		name: 'Raphael Herrera',
-		photo: 'funder-mock.webp',
+		photo: 'mock-team.jpg',
 		rating: 'Founder',
 		active: true,
 	},
 	{
 		name: 'Daniel Eskenazi',
-		photo: 'mandela-mock.jpg',
+		photo: 'mock-team.jpg',
 		rating: 'Founder',
 		active: false,
 	},

@@ -1,8 +1,10 @@
 import {
 	ActionManager,
 	Color3,
+	DirectionalLight,
 	ExecuteCodeAction,
 	HemisphericLight,
+	HighlightLayer,
 	Mesh,
 	MeshBuilder,
 	PointLight,
@@ -38,6 +40,8 @@ export interface MeshActor {
 	position: MeshActorsPosition;
 	positonHemisphericLight?: MeshActorsPosition;
 	positionPointLight?: MeshActorsPosition;
+	positionDirectionalLight?: MeshActorsPosition;
+
 	material: any;
 	type?: TYPE_MESH;
 	distance?: number;
@@ -59,7 +63,7 @@ export class MeshActors implements MeshActor {
 	position!: MeshActorsPosition;
 	positonHemisphericLight?: MeshActorsPosition;
 	positionPointLight?: MeshActorsPosition;
-
+	positionDirectionalLight?: MeshActorsPosition;
 	scene!: Scene;
 	type!: TYPE_MESH;
 	material!: any;
@@ -73,6 +77,7 @@ export class MeshActors implements MeshActor {
 	}
 	public set rawMesh(value: Mesh) {
 		this._rawMesh = value;
+		this._rawMesh.actionManager = new ActionManager(this.scene);
 	}
 
 	constructor(private sphereService: SphereService, scene: Scene, data: any) {
@@ -91,6 +96,7 @@ export class MeshActors implements MeshActor {
 			this.imgTexture = data.imgTexture;
 			this.scene = scene;
 			this.font = data.font || { color: 'white', fontSize: '12', text: 'text' };
+			this.positionDirectionalLight = data.positionDirectionalLight;
 		}
 	}
 
@@ -135,6 +141,20 @@ export class MeshActors implements MeshActor {
 			this.scene
 		);
 	}
+
+	setDirectionalLight(colorHexDiffuse?: string, colorHexSpecular?: string) {
+		const name = `directional-light${this.name}`;
+		const directionalLight = new DirectionalLight(
+			name,
+			new Vector3(
+				this.positionDirectionalLight?.x,
+				this.positionDirectionalLight?.y,
+				this.positionDirectionalLight?.z
+			),
+			this.scene
+		);
+		this.setColorLight(directionalLight, colorHexDiffuse, colorHexSpecular);
+	}
 	setPointLight(colorHexDiffuse?: string, colorHexSpecular?: string) {
 		const name = `point-light${this.name}`;
 		const lightPoint = new PointLight(
@@ -142,13 +162,17 @@ export class MeshActors implements MeshActor {
 			new Vector3(this.positionPointLight?.x, this.positionPointLight?.y, this.positionPointLight?.z),
 			this.scene
 		);
+		this.setColorLight(lightPoint, colorHexDiffuse, colorHexSpecular);
+	}
+
+	setColorLight(light: any, colorHexDiffuse?: string, colorHexSpecular?: string) {
 		if (colorHexDiffuse) {
 			const _colorHexDiffuse = CustomColor.hex(colorHexDiffuse);
-			lightPoint.diffuse = new Color3(_colorHexDiffuse.r, _colorHexDiffuse.g, _colorHexDiffuse.b);
+			light.diffuse = new Color3(_colorHexDiffuse.r, _colorHexDiffuse.g, _colorHexDiffuse.b);
 		}
 		if (colorHexSpecular) {
 			const _colorHexSpecular = CustomColor.hex(colorHexSpecular);
-			lightPoint.specular = new Color3(_colorHexSpecular.r, _colorHexSpecular.g, _colorHexSpecular.b);
+			light.specular = new Color3(_colorHexSpecular.r, _colorHexSpecular.g, _colorHexSpecular.b);
 		}
 	}
 
@@ -173,6 +197,18 @@ export class MeshActors implements MeshActor {
 	rotate() {
 		this.sphereService.makeRotate(this._rawMesh);
 	}
+
+	onHoverActors() {
+		let highlightLayer: HighlightLayer;
+		this.onHover(() => {
+			highlightLayer = this.sphereService.addHightLightHover(this.rawMesh);
+		});
+
+		this.onBlur(() => {
+			this.sphereService.removeHightLightBlur(this.rawMesh, highlightLayer);
+		});
+	}
+
 	onClick(callback: any): any {
 		this._rawMesh.actionManager = new ActionManager(this.scene);
 		return this._rawMesh.actionManager.registerAction(
@@ -181,9 +217,14 @@ export class MeshActors implements MeshActor {
 	}
 
 	onHover(callback: any): any {
-		this._rawMesh.actionManager = new ActionManager(this.scene);
-		return this._rawMesh.actionManager.registerAction(
+		return this._rawMesh.actionManager?.registerAction(
 			new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => callback())
+		);
+	}
+
+	onBlur(callback: any): any {
+		return this._rawMesh.actionManager?.registerAction(
+			new ExecuteCodeAction(ActionManager.OnPointerOutTrigger, () => callback())
 		);
 	}
 }

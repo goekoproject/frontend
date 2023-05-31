@@ -4,12 +4,12 @@
 	[ngClass]="{ 'row-reverse-content': odd }"
 	*ngFor="let article of articles | orderBy : 'order'; let i = index; let odd = odd"
 >
-	<img
+	<!-- <img
 		class="point-style"
 		src="assets/point-style.png"
 		[ngClass]="{ 'point-style--reverse': odd }"
 		alt="point-style"
-	/>
+	/> -->
 	<div class="content-header">
 		<h1 class="title" [ngClass]="{ 'title-reverse-content': !odd }">
 			{{ article?.name }}
@@ -19,7 +19,7 @@
 	</div>
 
 	<section class="info-actors">
-		<div class="section-column">
+		<div class="section-column" *ngIf="article?.descriptions">
 			<h3 class="title-content-column">
 				{{ article?.descriptions }}
 			</h3>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 
-		<div class="section-column">
+		<div class="section-column" *ngIf="article?.descriptions3">
 			<h3 class="title-content-column">
 				{{ article?.descriptions3 }}
 			</h3>
@@ -42,10 +42,19 @@
 		</div>
 	</section>
 	<section class="banner-actors">
-		<h4 class="content-slogan">Interested work with us?</h4>
+		<ng-container *ngIf="article.id === 'sme'; otherActor"></ng-container>
+		<h4 class="content-slogan">Start your green transition here</h4>
 		<div class="goeko_in">
 			<go-tooltip class="tooltip">Click me</go-tooltip>
 			<img src="assets/button-goeko.png" class="button-goeko" alt="goeko_in" />
 		</div>
 	</section>
 </article>
+
+<ng-template #otherActor>
+	<h4 class="content-slogan">Free trial to connect with qualified leads</h4>
+	<div class="goeko_in">
+		<go-tooltip class="tooltip">Click me</go-tooltip>
+		<img src="assets/button-goeko.png" class="button-goeko" alt="goeko_in" />
+	</div>
+</ng-template>
