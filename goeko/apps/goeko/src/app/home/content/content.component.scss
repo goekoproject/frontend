@@ -16,7 +16,7 @@ $color-platform: #3065b0;
 /*   margin-bottom: 4%;
  */
   .title {
-    font-size: 200px;
+    font-size: 150px;
     margin:0;
     color: #47525E;
     text-shadow: 3px -1px 14px rgb(243 243 243 / 59%);
@@ -24,7 +24,7 @@ $color-platform: #3065b0;
     right: 70%;
     top: -14%;
     background-color: #FFFFFF;
-    height: 12rem;
+    height: 9rem;
     line-height: 1;
     padding: 0 2rem;
     width: fit-content;
@@ -47,16 +47,18 @@ $color-platform: #3065b0;
 .info-actors {
   display: flex;
   width: 55%;
-  align-items: flex-end;
   min-height: 21rem;
   flex-wrap: wrap;
 }
 .section-column {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-basis: 29%;
   flex-grow: 2;
-
+  column-gap: 2rem;
+  flex-wrap: wrap;
+  font-size: 18px;
+  align-self: center;
   
 }
 .element-column {
@@ -64,6 +66,7 @@ $color-platform: #3065b0;
   align-items: center;
   gap: 0.5rem;
   color:#47525E;
+  min-width: 16rem;
   span {
     color: #0090D6;
 
@@ -74,6 +77,7 @@ $color-platform: #3065b0;
   font-size: 24px;
   color: #47525E;
   font-weight: 100;
+  width: 100%;
 }
 
 .banner-actors {
