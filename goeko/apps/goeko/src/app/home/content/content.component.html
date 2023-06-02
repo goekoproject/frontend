@@ -36,16 +36,20 @@
 				{{ article?.descriptions3 }}
 			</h3>
 			<div class="element-column" *ngFor="let item of article?.benefits; let i = index">
-				<span class="material-symbols-rounded positive" *ngIf="article?.badStuffIcons"> check_circle </span>
+				<span class="material-symbols-rounded positive">
+					{{ item?.icon || 'check_circle' }}
+				</span>
 				<p>{{ item?.text }}</p>
 			</div>
+			<p style="width: 100%">{{ article?.descriptions2 }}</p>
 		</div>
 	</section>
 	<section class="banner-actors">
 		<ng-container *ngIf="article.id === 'sme'; otherActor"></ng-container>
 		<h4 class="content-slogan">Start your green transition here</h4>
 		<div class="goeko_in">
-			<go-tooltip class="tooltip">Click me</go-tooltip>
+			<!-- 			<go-tooltip class="tooltip">Click me</go-tooltip>
+ -->
 			<img src="assets/button-goeko.png" class="button-goeko" alt="goeko_in" />
 		</div>
 	</section>

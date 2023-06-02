@@ -55,9 +55,9 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._createBank();
 		this._sphereSme.material.metallic = 1;
 		this._sphereSme.setDirectionalLight('#847575', '#847575');
-		this._sphereSme.onHoverActors();
 		this._sphereCleanTech.onHoverActors();
 		this._sphereBank.onHoverActors();
+		this._sphereSme.onHoverActors();
 	}
 
 	private _createSME() {
@@ -69,8 +69,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	}
 
 	changeColor(color: string) {
-		console.log(color);
-		this._sphereBank.setEmissiveColor(color);
+		this._sphereSme.onHoverActors(color);
 	}
 	changeColor2(color: string) {
 		console.log(color);

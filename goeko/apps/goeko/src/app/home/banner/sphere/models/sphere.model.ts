@@ -198,10 +198,18 @@ export class MeshActors implements MeshActor {
 		this.sphereService.makeRotate(this._rawMesh);
 	}
 
-	onHoverActors() {
+	onHoverActors(colorHex?: string) {
+		let color: Color3;
+		if (colorHex) {
+			const _colorHexDiffuse = CustomColor.hex(colorHex);
+			color = new Color3(_colorHexDiffuse.r, _colorHexDiffuse.g, _colorHexDiffuse.b);
+		} else {
+			color = Color3.White();
+		}
+
 		let highlightLayer: HighlightLayer;
 		this.onHover(() => {
-			highlightLayer = this.sphereService.addHightLightHover(this.rawMesh);
+			highlightLayer = this.sphereService.addHightLightHover(this.rawMesh, color);
 		});
 
 		this.onBlur(() => {

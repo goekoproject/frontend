@@ -10,14 +10,14 @@
 
     border-radius: 50%;
     width: 100%;
-    height: 40rem;
-    width: 38rem;
+    height: 42rem;
+    width: 42rem;
     left: -11rem;
     position: relative;
     top: 2rem;
-    opacity: 1;
-/*     animation: 6s forwards opacity-actors linear;
-    animation-delay: 3s; */
+    opacity: 0;
+    animation: 6s forwards opacity-actors linear;
+    animation-delay: 3s; 
 
 }
 
@@ -29,23 +29,25 @@
     
 }
 .goeko_system {
-    font-size: 1.9rem;
+    font-size: 1;
     line-height: 2;
     top: 3rem;
     text-transform: capitalize;
     position: relative;
+    font-family: 'Inter-Thin';
+
 }
 .who_are_you {
     
-    font-size: 1.3rem;
-    font-weight: 100;
-    font-family: 'Inter-Thin';
+    font-size: 1.5rem;
     margin: 0;
     position: relative;
     top: 3rem;
     opacity: 0;
     animation: 2s forwards opacity-actors linear;
-    animation-delay: 7s;
+    animation-delay: 4s; 
+    letter-spacing: 2px;
+    word-spacing: 3px;
 
 }
 

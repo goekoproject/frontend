@@ -221,7 +221,7 @@ export class SphereService extends SceneService {
 		 */
 	}
 
-	addHightLightHover(mesh: Mesh) {
+	addHightLightHover(mesh: Mesh, color?: Color3) {
 		var highlightLayer = new HighlightLayer('highlightLayer', this.scene);
 		highlightLayer.addMesh(mesh, Color3.White());
 		return highlightLayer;

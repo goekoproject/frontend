@@ -59,6 +59,7 @@ $color-platform: #3065b0;
   flex-wrap: wrap;
   font-size: 18px;
   align-self: center;
+  margin-top: 2rem;
   
 }
 .element-column {
@@ -66,7 +67,7 @@ $color-platform: #3065b0;
   align-items: center;
   gap: 0.5rem;
   color:#47525E;
-  min-width: 16rem;
+  min-width: 9rem;
   span {
     color: #0090D6;
 
@@ -76,7 +77,7 @@ $color-platform: #3065b0;
   font-family: 'Inter-Thin', sans-serif;
   font-size: 24px;
   color: #47525E;
-  font-weight: 100;
+/*   font-weight: 100; */
   width: 100%;
 }
 

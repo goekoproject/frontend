@@ -19,7 +19,7 @@ const material = {
 const font: MeshFont = {
 	fontSize: 14,
 	color: '#ffffff',
-	text: 'CleanTech',
+	text: 'Cleantech',
 };
 
 export const CLEANTECH: MeshActor = {
