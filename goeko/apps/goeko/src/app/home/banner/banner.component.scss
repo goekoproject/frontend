@@ -83,10 +83,10 @@
     background-size: 100%;
 /*     background: #011c37;
  */  }
-  img {
+/*   img {
     width: 100%;
     position: absolute;
-  }
+  } */
   &-actions {
     display: flex;
     gap: 2rem;
@@ -118,6 +118,19 @@
 
 
   //transform: scale(1.2) translate(-12.4rem, 1rem);
+
+}
+.ods {
+  position: absolute;
+    bottom: 0;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.ods-icon {
+  width: 70px;
 
 }
 

@@ -29,7 +29,12 @@
 
 	<goeko-scenes></goeko-scenes>
 
-	<!-- <div *ngFor="let icon of odsIcon">
-		<img class="member__photo" [src]="'assets/icon-ods/S-WEB-Goal-0' + icon + '.png'" [alt]="icon" />
-	</div> -->
+	<div class="ods">
+		<img
+			*ngFor="let icon of odsIcon"
+			class="ods-icon"
+			[src]="'assets/icon-ods/S-WEB-Goal-' + icon + '.png'"
+			[alt]="icon"
+		/>
+	</div>
 </div>
