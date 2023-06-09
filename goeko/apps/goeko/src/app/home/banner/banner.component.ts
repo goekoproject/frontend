@@ -10,7 +10,7 @@ export class BannerComponent implements OnInit, AfterViewInit {
 	@ViewChild('worldmap') worldmap!: ElementRef<SVGAElement>;
 	isShowing = false;
 	europeMap!: ElementRef<SVGAElement>;
-	public odsIcon = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+	public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15];
 
 	constructor(private _interactionService: InteractionService, private _renderer: Renderer2) {}
 
