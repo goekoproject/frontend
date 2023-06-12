@@ -48,8 +48,7 @@
 		<ng-container *ngIf="article.id === 'sme'; else otherActor">
 			<h4 class="content-slogan">Start your green transition here</h4>
 			<div class="goeko_in">
-				<!-- 			<go-tooltip class="tooltip">Click me</go-tooltip>-->
-				<img src="assets/button-goeko.png" class="button-goeko" alt="goeko_in" />
+				<button id="goeko-go" class="goeko-go"></button>
 			</div>
 		</ng-container>
 	</section>
@@ -58,8 +57,6 @@
 <ng-template #otherActor>
 	<h4 class="content-slogan">Free trial to connect with qualified leads</h4>
 	<div class="goeko_in">
-		<!-- 		<go-tooltip class="tooltip">Click me</go-tooltip>
- -->
-		<img src="assets/button-goeko.png" class="button-goeko" alt="goeko_in" />
+		<button id="goeko-go" class="goeko-go"></button>
 	</div>
 </ng-template>
