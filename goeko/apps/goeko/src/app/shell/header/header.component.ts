@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 			this._renderer.setStyle(this.logo.nativeElement, 'width', '5%');
 		} else {
 			this._renderer.setStyle(this.header.nativeElement, 'maxHeight', '10rem');
-			this._renderer.setStyle(this.logo.nativeElement, 'width', '10%');
+			this._renderer.setStyle(this.logo.nativeElement, 'width', '7%');
 		}
 	}
 
