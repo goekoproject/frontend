@@ -2,6 +2,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    border: 7px solid rgba(0, 0, 0, 0.02);
+    box-shadow: 4px 7px 15px rgba(0, 0, 0, 0.08), inset -1px 0px 2px rgba(0, 0, 0, 0.1), inset 5px -5px 12px rgba(0, 0, 0, 0.05), inset -5px 5px 12px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px); 
+    border-radius: 50%;
+
+    border-radius: 50%;
+    width: 100%;
+    height: 42rem;
+    width: 42rem;
+    left: -11rem;
+    position: relative;
+    top: 2rem;
+    opacity: 0;
+    animation: 6s forwards opacity-actors linear;
+    animation-delay: 3s; 
+
 }
 
 .canvas {
@@ -11,3 +28,91 @@
     top: 4rem;
     
 }
+.goeko_system {
+    font-size: 1;
+    line-height: 2;
+    top: 3rem;
+    text-transform: capitalize;
+    position: relative;
+    font-family: 'Inter-Thin';
+
+}
+.who_are_you {
+    
+    font-size: 1.5rem;
+    margin: 0;
+    position: relative;
+    top: 3rem;
+    opacity: 0;
+    animation: 2s forwards opacity-actors linear;
+    animation-delay: 4s; 
+    letter-spacing: 2px;
+    word-spacing: 3px;
+
+}
+
+h3:before {
+    content: "";
+/*     background: #7FDBFF; */
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px;
+    transform: scaleX(0);
+   /*  animation: 1.4s forwards no-hover-v linear;
+    animation-fill-mode: forwards; */
+    z-index: -1;
+  }
+ 
+/*   h3:focus:before {
+    animation: .5s forwards hover-v linear;
+    animation-fill-mode: forwards;
+  } */
+  @keyframes hover-v {
+    0% {
+        transform: scaleX(0);
+        height: 5px;
+       }
+    45% {   
+        transform: scaleX(1.05);
+        height: 5px;
+       }
+    55% {height: 5px;}
+    100% {
+        transform: scaleX(1.05);
+        height: 3.8rem;
+       }
+  }
+  @keyframes no-hover-v {
+    0% {
+        transform: scaleX(1.05);
+        height: 3.8rem;
+       }
+    45% {height: 5px;}
+    55% {   
+        transform: scaleX(1.05);
+        height: 5px;
+        opacity: 1;
+       }
+    
+    100% {
+        transform: scaleX(0);
+        height: 5px;
+        opacity: .02;
+       }
+  }
+
+  @keyframes opacity-actors {
+    0% {
+        opacity: 0;
+       }
+    50% {   
+        opacity: 0.5;
+
+       }
+    100% {
+        opacity: 1;
+       }
+  }

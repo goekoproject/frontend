@@ -5,6 +5,7 @@ import {
 	Axis,
 	Color3,
 	GlowLayer,
+	HighlightLayer,
 	Matrix,
 	Mesh,
 	MeshBuilder,
@@ -176,7 +177,7 @@ export class SphereService extends SceneService {
 	}
 
 	updateOrbitingSpherePosition = (meshActors: Mesh, drl = DIRECTION_ANGLE.RIGHT) => {
-		const orbitSpeed = 0.00006; // Controla la velocidad de la órbita
+		const orbitSpeed = 0.0001; // Controla la velocidad de la órbita
 
 		// Calcula el ángulo de rotación en base al tiempo transcurrido
 		const rawAngle = (this._engine.getDeltaTime() * orbitSpeed) % (2 * Math.PI);
@@ -220,9 +221,13 @@ export class SphereService extends SceneService {
 		 */
 	}
 
-	addMaterialHover(mesh: Mesh) {
-		var hoverMaterial = new StandardMaterial('hoverMaterial', this.scene);
-		hoverMaterial.emissiveColor = new Color3(1, 1, 0);
-		mesh.material = hoverMaterial;
+	addHightLightHover(mesh: Mesh, color?: Color3) {
+		var highlightLayer = new HighlightLayer('highlightLayer', this.scene);
+		highlightLayer.addMesh(mesh, Color3.White());
+		return highlightLayer;
+	}
+
+	removeHightLightBlur(mesh: Mesh, highlightLayer: HighlightLayer) {
+		highlightLayer?.removeMesh(mesh); // Quita el borde iluminado al dejar de estar el ratón encima
 	}
 }

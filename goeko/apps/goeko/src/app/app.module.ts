@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfigModule } from '@goeko/core';
 import { ContentFulModule } from '@goeko/store';
 import { ButtonModule } from '@goeko/ui';
+import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
 import { FooterComponent } from './shell/footer/footer.component';
 import { HeaderComponent } from './shell/header/header.component';
@@ -22,6 +24,10 @@ import { TeamComponent } from './team/team.component';
 		AppRoutingModule,
 		ButtonModule,
 		ContentFulModule.forRoot(ContentConfig),
+		ConfigModule.forRoot({
+			endopoint: environment.baseUrl,
+			tokenAccess: environment.baseUrl,
+		}),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

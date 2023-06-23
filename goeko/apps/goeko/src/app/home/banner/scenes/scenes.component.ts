@@ -9,7 +9,7 @@ import { InteractionService } from './interaction.service';
 import { DIRECTION_ANGLE, SphereService } from './sphere.service';
 
 const TEXTURE_SME = 'assets/texture-gray-1.png';
-const EMISSIVE_COLOR_SME = '#73687d';
+const EMISSIVE_COLOR_SME = '#47525E';
 const LIGHT_BORDER_SME = 0.2;
 const LIGHT_BORDER_SME_COLOR = '#FFFF00';
 
@@ -54,21 +54,22 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 		this._createCleanTech();
 		this._createBank();
 		this._sphereSme.material.metallic = 1;
+		this._sphereSme.setDirectionalLight('#847575', '#847575');
+		this._sphereCleanTech.onHoverActors();
+		this._sphereBank.onHoverActors();
+		this._sphereSme.onHoverActors();
 	}
 
 	private _createSME() {
 		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build(SME.title);
 		this._sphereSme.setShadows('#847575');
-		this._sphereSme.setPointLight('#847575', '#847575');
-		/* 		this._sphereSme.setDiffuseTexture(TEXTURE_SME);
-		 */ /* 		this._sphereService.makeRotate(this._sphereSme.rawMesh);
-		 */ this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
+
+		this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
 		this._createEventClickSME();
 	}
 
 	changeColor(color: string) {
-		console.log(color);
-		this._sphereBank.setEmissiveColor(color);
+		this._sphereSme.onHoverActors(color);
 	}
 	changeColor2(color: string) {
 		console.log(color);
@@ -82,10 +83,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	private _createCleanTech() {
 		this._sphereCleanTech = new MeshActors(this._sphereService, this.scene, CLEANTECH).build(CLEANTECH.title);
-		/* 		this._sphereCleanTech.setHemisphericLight();
-		 */ this._sphereCleanTech.setEmissiveColor(CLEANTECH_PROP.emissiveColor);
-		/* 		this._sphereCleanTech.setDiffuseTexture(TEXTURE_SME);
-		 */ this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
+		this._sphereCleanTech.setEmissiveColor(CLEANTECH_PROP.emissiveColor);
+		this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
 		this._createEventCleanTeach();
 
 		this.scene.registerBeforeRender(() =>
@@ -101,10 +100,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	private _createBank() {
 		this._sphereBank = new MeshActors(this._sphereService, this.scene, BANK).build(BANK.title);
-		/* 		this._sphereBank.setHemisphericLight();
-		 */ this._sphereBank.setEmissiveColor(BANK_PROP.emissiveColor);
-		/* 		this._sphereBank.setDiffuseTexture(TEXTURE_SME);
-		 */ this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
+		this._sphereBank.setEmissiveColor(BANK_PROP.emissiveColor);
+		this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
 		this._createEventBank();
 		this.scene.registerBeforeRender(() =>
 			this._sphereService.updateOrbitingSpherePosition(this._sphereBank.rawMesh, DIRECTION_ANGLE.LEFT)
@@ -116,15 +113,6 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 			this._interactionService.onBankClick.next(true);
 		});
 	}
-
-	/* 	private _hoverCleanTeach() {
-		this._cleanTeach.actionManager = new ActionManager(this.scene);
-		this._cleanTeach.actionManager.registerAction(
-			new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => {
-				this._sphereService.addMaterialHover(this._cleanTeach);
-			})
-		);
-	} */
 
 	changeRotationX(event: any) {
 		this._sphereSme.rawMesh.rotation.x = event.target.value;

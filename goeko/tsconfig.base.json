@@ -15,6 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@goeko/core": ["libs/core/src/index.ts"],
 			"@goeko/store": ["libs/store/src/index.ts"],
 			"@goeko/ui": ["libs/ui/src/index.ts"]
 		}

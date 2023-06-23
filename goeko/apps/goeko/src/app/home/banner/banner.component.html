@@ -22,9 +22,19 @@
 		</div>
 	</div>
 
-	<div class="banner-shadow"></div>
+	<!-- 	<div class="banner-shadow"></div>
+ -->
+
+	<svg-icon #worldmap src="assets/world_map.svg" [class]="'world-europe'"></svg-icon>
 
 	<goeko-scenes></goeko-scenes>
 
-	<svg-icon #worldmap src="assets/world_map.svg" [class]="'world-europe'"></svg-icon>
+	<div class="ods">
+		<img
+			*ngFor="let icon of odsIcon"
+			class="ods-icon"
+			[src]="'assets/icon-ods/S-WEB-Goal-' + icon + '.png'"
+			[alt]="icon"
+		/>
+	</div>
 </div>
