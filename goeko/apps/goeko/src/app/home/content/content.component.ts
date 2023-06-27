@@ -41,6 +41,7 @@ export class ContentComponent implements OnInit {
 			.filter((b: any) => b.data.target?.fields)
 			.map((benefits: any) => benefits.data.target.fields);
 	};
+	link: any;
 	constructor(
 		private _homeService: HomeService,
 		private _router: Router,

@@ -1,5 +1,5 @@
-<goeko-header> </goeko-header>
-<div class="container">
+<goeko-header *ngIf="!path.includes('demo')"> </goeko-header>
+<div [ngClass]="{ container: !path.includes('demo') }">
 	<router-outlet></router-outlet>
 </div>
 <goeko-team></goeko-team>

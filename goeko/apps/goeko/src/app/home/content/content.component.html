@@ -45,18 +45,24 @@
 		</div>
 	</section>
 	<section class="banner-actors">
-		<ng-container *ngIf="article.id === 'sme'; else otherActor">
-			<h4 class="content-slogan">Start your green transition here</h4>
-			<div class="goeko_in">
-				<button id="goeko-go" class="goeko-go"></button>
-			</div>
+		<ng-container
+			[ngTemplateOutlet]="article.id === 'sme' ? sme : otherActor"
+			[ngTemplateOutletContext]="{ id: article.id }"
+		>
 		</ng-container>
 	</section>
 </article>
 
-<ng-template #otherActor>
+<ng-template #sme let-id="id">
+	<h4 class="content-slogan">Start your green transition here</h4>
+	<div class="goeko_in">
+		<button id="goeko-go" class="goeko-go" [routerLink]="'../demo/' + id"></button>
+	</div>
+</ng-template>
+
+<ng-template #otherActor let-id="id">
 	<h4 class="content-slogan">Free trial to connect with qualified leads</h4>
 	<div class="goeko_in">
-		<button id="goeko-go" class="goeko-go"></button>
+		<button id="goeko-go" class="goeko-go" [routerLink]="'demo/' + id"></button>
 	</div>
 </ng-template>
