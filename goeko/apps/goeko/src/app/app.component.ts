@@ -9,6 +9,10 @@ import { distinctUntilChanged, filter } from 'rxjs';
 })
 export class AppComponent {
 	public path!: string;
+
+	isDemo = () => {
+		return this.path?.includes('demo');
+	};
 	constructor(private router: Router, private route: ActivatedRoute) {
 		this._routeChange();
 	}

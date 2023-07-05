@@ -20,8 +20,8 @@
     align-items: center;
     margin: 0 auto;
     width: 50%;
-    height: 60%;
-    span {
+    height: 94%;
+    .demo-header-icon {
         border: 2px solid #0190d6;
         border-radius: 14px;
         width: 4rem;
@@ -55,11 +55,19 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    height: 2.7rem;
+    transition: all .8s ease-in-out;
+    &--active {
+        color: #47525E;
+        
+    font-size: 20px;
+    font-weight: bold;
+
+    }
 }
 .form-wrapper { 
     display: flex;
     flex-wrap: wrap;
-    gap: 5rem 0;
 }
 .form-header {
     width: 100%;
@@ -72,4 +80,24 @@
    &--center{
     margin: 0 auto;
    }
+}
+
+.demo-summary {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    .elements {
+        height: auto;
+        flex-direction: column;
+    }
+}
+.summary-section-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.summary-section-body {
+    width: 100%;
 }

@@ -8,7 +8,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigModule } from '@goeko/core';
 import { ContentFulModule } from '@goeko/store';
-import { ButtonModule } from '@goeko/ui';
+import { ButtonModule, CarouselModule } from '@goeko/ui';
 import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
 import { FooterComponent } from './shell/footer/footer.component';

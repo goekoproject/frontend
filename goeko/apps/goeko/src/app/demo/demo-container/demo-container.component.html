@@ -1,27 +1,73 @@
-<div class="demo-wrapper">
+<div class="demo-wrapper" [formGroup]="form">
 	<section class="section-form">
 		<img class="demo-logo" src="assets/logo_footer.png" alt="logo_footer" />
 
 		<ul class="section-elements">
-			<li class="elements">
+			<li
+				class="elements"
+				[class.elements--active]="index === slideSelected"
+				*ngFor="let element of formField; let index = index"
+			>
 				<span class="material-symbols-rounded"> done </span>
-				<p>Company details</p>
+				<p>{{ element.nameSection }}</p>
 			</li>
 		</ul>
 	</section>
+	<go-carousel (valueChangeButton)="addFormGroup($event)" [hiddenButton]="isSlideSummary">
+		<ng-container *ngFor="let element of formField; last as isLast">
+			<section *goSlide [class.content-form]="!isSlideSummary">
+				<ng-container *ngIf="!(isLast && isSlideSummary); else summary">
+					<!--FORM ACTORS-->
+					<div class="form-wrapper">
+						<div class="form-header">
+							<span class="material-symbols-rounded demo-header-icon"> {{ element.icon }} </span>
+							<h3>{{ element.nameSection }}</h3>
+						</div>
 
-	<section class="content-form">
-		<div class="form-wrapper">
-			<div class="form-header">
-				<span class="material-symbols-rounded"> account_balance </span>
-				<h3>Company details</h3>
-			</div>
+						<div class="form-field form-field--center" *ngFor="let field of element.fields">
+							<!-- FIELD FORM -->
+							<ng-container
+								[ngTemplateOutlet]="typeField"
+								[ngTemplateOutletContext]="{ $implicit: field }"
+							></ng-container>
+						</div>
+					</div>
+				</ng-container>
 
-			<div class="form-field form-field--center">
-				<go-input [textHelp]="'¿How many employees does your company have?'">
-					<p slot="label">Number of employee</p>
-				</go-input>
-			</div>
-		</div>
-	</section>
+				<!--SUMMARY-->
+				<ng-template #summary>
+					<div class="demo-summary">
+						<h1>{{ element.nameSection }}</h1>
+						<ul class="section-elements">
+							<li class="elements" *ngFor="let element of formField; last as isLast">
+								<div *ngIf="!isLast" class="summary-section-header">
+									<span class="material-symbols-rounded"> {{ element.icon }} </span>
+									<h2>{{ element.nameSection }}</h2>
+								</div>
+								<div class="summary-section-body">
+									<div class="form-field form-field--center" *ngFor="let field of element.fields">
+										<h4>{{ field.label }}</h4>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</ng-template>
+			</section>
+		</ng-container>
+	</go-carousel>
 </div>
+
+<ng-template #typeField let-field>
+	<ng-container [ngSwitch]="field.type">
+		<!-- INPUT TEXT -->
+		<ng-container *ngSwitchCase="'readonly'">
+			<p>{{ field.label }}</p>
+		</ng-container>
+		<ng-container *ngSwitchDefault>
+			<go-input [textHelp]="field.textHelp">
+				<p slot="label">{{ field.label }}</p>
+			</go-input>
+		</ng-container>
+	</ng-container>
+</ng-template>
