@@ -18,7 +18,7 @@
 			<section *goSlide [class.content-form]="!isSlideSummary">
 				<ng-container *ngIf="!(isLast && isSlideSummary); else summary">
 					<!--FORM ACTORS-->
-					<div class="form-wrapper">
+					<div class="form-wrapper" [formGroupName]="element.controlName">
 						<div class="form-header">
 							<span class="material-symbols-rounded demo-header-icon"> {{ element.icon }} </span>
 							<h3>{{ element.nameSection }}</h3>
@@ -26,10 +26,16 @@
 
 						<div class="form-field form-field--center" *ngFor="let field of element.fields">
 							<!-- FIELD FORM -->
-							<ng-container
-								[ngTemplateOutlet]="typeField"
-								[ngTemplateOutletContext]="{ $implicit: field }"
-							></ng-container>
+
+							<ng-container [ngSwitch]="field.type">
+								<!-- INPUT TEXT -->
+
+								<ng-container *ngSwitchDefault>
+									<go-input [textHelp]="field.textHelp" [formControlName]="field.controlName">
+										<p slot="label">{{ field.label }}</p>
+									</go-input>
+								</ng-container>
+							</ng-container>
 						</div>
 					</div>
 				</ng-container>
@@ -45,8 +51,9 @@
 									<h2>{{ element.nameSection }}</h2>
 								</div>
 								<div class="summary-section-body">
-									<div class="form-field form-field--center" *ngFor="let field of element.fields">
+									<div class="form-field" *ngFor="let field of element.fields">
 										<h4>{{ field.label }}</h4>
+										<p>{{ this.form.value[element.controlName][field.controlName] || '-' }}</p>
 									</div>
 								</div>
 							</li>
@@ -57,17 +64,3 @@
 		</ng-container>
 	</go-carousel>
 </div>
-
-<ng-template #typeField let-field>
-	<ng-container [ngSwitch]="field.type">
-		<!-- INPUT TEXT -->
-		<ng-container *ngSwitchCase="'readonly'">
-			<p>{{ field.label }}</p>
-		</ng-container>
-		<ng-container *ngSwitchDefault>
-			<go-input [textHelp]="field.textHelp">
-				<p slot="label">{{ field.label }}</p>
-			</go-input>
-		</ng-container>
-	</ng-container>
-</ng-template>

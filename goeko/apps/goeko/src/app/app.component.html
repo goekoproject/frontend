@@ -1,5 +1,5 @@
 <goeko-header *ngIf="!isDemo"> </goeko-header>
-<div [ngClass]="{ container: !isDemo || false }">
+<div [ngClass]="{ container: !isDemo || false, 'container-demo': isDemo }">
 	<router-outlet></router-outlet>
 </div>
 <goeko-team *ngIf="!isDemo"></goeko-team>

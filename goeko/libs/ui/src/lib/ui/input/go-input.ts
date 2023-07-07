@@ -1,5 +1,5 @@
-import { LitElement, css, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { LitElement, PropertyValues, css, html, nothing } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 
 @customElement('go-input')
 export class GoInput extends LitElement {
@@ -50,10 +50,31 @@ export class GoInput extends LitElement {
 	@property({ type: Boolean }) pattern = Infinity;
 	@property({ type: String }) idInput;
 	@property({ type: String }) textHelp = '';
+	@query('input') input!: HTMLInputElement;
 
 	constructor() {
 		super();
 		this.idInput = `go-input-${++GoInput.lastId}`;
+	}
+	protected override firstUpdated(changedProperties: PropertyValues) {
+		super.firstUpdated(changedProperties);
+		this.input.value = this.value;
+	}
+
+	handleInput() {
+		this.value = this.input.value;
+		this._dispatchValueChange();
+		/* 		this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
+		 */
+	}
+
+	private _dispatchValueChange() {
+		const options = {
+			detail: this.value,
+			bubbles: true,
+			composed: true,
+		};
+		this.dispatchEvent(new CustomEvent('change', options));
 	}
 	override render() {
 		return html`
@@ -70,7 +91,7 @@ export class GoInput extends LitElement {
 				name="${this.name}"
 				placeholder="${this.placeholder}"
 				?required="${this.required}"
-				@input="${(e: Event) => this.handleInput(e)}"
+				@input="${this.handleInput}"
 			/>
 			${this.textHelp
 				? html`<section class="input-help">
@@ -80,11 +101,5 @@ export class GoInput extends LitElement {
 				  </section>`
 				: nothing}
 		`;
-	}
-
-	handleInput(e: Event) {
-		const target = e.target as HTMLInputElement;
-		this.value = target.value;
-		this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
 	}
 }

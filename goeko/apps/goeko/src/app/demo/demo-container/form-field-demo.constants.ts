@@ -1,33 +1,36 @@
+import { Section } from './form-field.model';
+
 export enum STATUS_SECTION {
 	COMPLETED = 'COMPLETED',
 	INCOMPLETED = 'INCOMPLETED',
 }
-export const FORM_FIELD_DEMO = [
+export const FORM_FIELD_DEMO: Section[] = [
 	{
 		nameSection: 'Company details',
-		status: STATUS_SECTION,
+		controlName: 'companyDetails',
+		status: STATUS_SECTION.COMPLETED,
 		icon: 'apartment',
 		fields: [
 			{
-				control: 'nameCompany',
+				controlName: 'nameCompany',
 				type: 'text',
 				textHelp: '',
 				label: 'Name Company',
 			},
 			{
-				control: 'numberEmployees',
+				controlName: 'numberEmployees',
 				type: 'text',
 				textHelp: '¿How many employees does your company have?',
 				label: 'Number of employee',
 			},
 			{
-				control: 'country',
+				controlName: 'country',
 				type: 'text',
 				textHelp: '',
 				label: 'Country',
 			},
 			{
-				control: 'Contact link',
+				controlName: 'contact',
 				type: 'text',
 				textHelp: '',
 				label: 'Contact link',
@@ -36,29 +39,30 @@ export const FORM_FIELD_DEMO = [
 	},
 	{
 		nameSection: 'CO2 emissions',
-		status: STATUS_SECTION,
+		controlName: 'emissions',
+		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',
 		fields: [
 			{
-				control: '  ',
+				controlName: 'internalCombustion',
 				type: 'text',
 				textHelp: '',
 				label: 'Main internal combustion engine',
 			},
 			{
-				control: 'numberEmployees',
+				controlName: 'fuelInvoice',
 				type: 'text',
 				textHelp: 'Fuel invoice the main combustion engine (2022)',
 				label: 'Fuel invoice ',
 			},
 			{
-				control: 'country',
+				controlName: 'ammountMineral',
 				type: 'text',
 				textHelp: 'cement, concrete, etc.',
 				label: 'Total amount of mineral product purchased (2022)',
 			},
 			{
-				control: 'Contact link',
+				controlName: 'mineralProduct',
 				type: 'text',
 				textHelp: '',
 				label: 'Main mineral product purchased (2022)',
@@ -67,11 +71,12 @@ export const FORM_FIELD_DEMO = [
 	},
 	{
 		nameSection: 'Waste',
-		status: STATUS_SECTION,
+		controlName: 'waste',
+		status: STATUS_SECTION.COMPLETED,
 		icon: 'water_pump',
 		fields: [
 			{
-				control: '  ',
+				controlName: 'mainCategory',
 				type: 'text',
 				textHelp: '',
 				label: 'Main category of non-inert waste (2022)',
@@ -80,23 +85,24 @@ export const FORM_FIELD_DEMO = [
 	},
 	{
 		nameSection: 'Water',
-		status: STATUS_SECTION,
+		controlName: 'water',
+		status: STATUS_SECTION.COMPLETED,
 		icon: 'water_drop',
 		fields: [
 			{
-				control: '  ',
+				controlName: 'waterConsumption',
 				type: 'text',
 				textHelp: '',
 				label: 'Water consumption (2022)',
 			},
 			{
-				control: '  ',
+				controlName: 'waterInvoice',
 				type: 'text',
 				textHelp: '',
 				label: 'Water invoice (2022)',
 			},
 			{
-				control: '  ',
+				controlName: 'mostActivity',
 				type: 'text',
 				textHelp: '',
 				label: 'Activity more that consume',
@@ -105,11 +111,12 @@ export const FORM_FIELD_DEMO = [
 	},
 	{
 		nameSection: 'Toxic product',
-		status: STATUS_SECTION,
+		controlName: 'toxicProduct',
+		status: STATUS_SECTION.COMPLETED,
 		icon: 'science',
 		fields: [
 			{
-				control: '  ',
+				controlName: 'hazardousProduct',
 				type: 'text',
 				textHelp: '',
 				label: 'Types of hazardous product',
@@ -118,13 +125,7 @@ export const FORM_FIELD_DEMO = [
 	},
 	{
 		nameSection: 'Summary',
-		status: STATUS_SECTION,
-		fields: [
-			{
-				type: 'readonly',
-				textHelp: '',
-				label: 'Types of hazardous product',
-			},
-		],
+		status: STATUS_SECTION.COMPLETED,
+		controlName: '',
 	},
 ];
