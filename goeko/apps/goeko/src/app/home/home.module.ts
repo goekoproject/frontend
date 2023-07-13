@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentFulModule } from '@goeko/store';
-import { ButtonModule, TooltipModule } from '@goeko/ui';
+import { ButtonModule, GoekoButtonModule, TooltipModule } from '@goeko/ui';
 import { BannerComponent } from './banner/banner.component';
 import { HomeRouteModule } from './home.routes';
 import { HomeComponent } from './home/home.component';
@@ -30,6 +30,7 @@ import { OrderByPipe } from './content/order-by.pipe';
 		ContentFulModule,
 		AngularSvgIconModule.forRoot(),
 		TooltipModule,
+		GoekoButtonModule,
 	],
 })
 export class HomeModule {}

@@ -1,4 +1,9 @@
-<button *ngIf="!hiddenButton" class="button-slide button-slide--prev" (click)="prev()" [disabled]="disabledButtonPrev">
+<button
+	*ngIf="!hiddenButton || !hiddenButtonPrev"
+	class="button-slide button-slide--prev"
+	(click)="prev()"
+	[disabled]="disabledButtonPrev"
+>
 	<span class="material-symbols-rounded"> chevron_left </span>
 </button>
 
@@ -10,6 +15,11 @@
 	<ng-container [ngTemplateOutlet]="selectedSlideTemplateRef"></ng-container>
 </div>
 
-<button *ngIf="!hiddenButton" class="button-slide button-slide--next" (click)="next()" [disabled]="disabledButtonNext">
+<button
+	*ngIf="!hiddenButton || !hiddenButtonNext"
+	class="button-slide button-slide--next"
+	(click)="next()"
+	[disabled]="disabledButtonNext"
+>
 	<span class="material-symbols-rounded"> chevron_right </span>
 </button>

@@ -1,8 +1,9 @@
 .demo-wrapper {
 	display: flex;
 	height: 100%;
+	min-height: 100vh;
 }
-.section-form {
+.section-step {
 	display: flex;
 	background: #f9fbfc;
 	height: 100%;
@@ -11,6 +12,12 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 3rem;
+}
+.section-form {
+    display: flex;
+    width: 65%;
+    align-items: center;
+    margin: 0 auto;
 }
 .content-form {
 	display: flex;
@@ -90,6 +97,10 @@
 	.elements {
 		height: auto;
 		flex-direction: column;
+		border: 2px solid #EBEFFF;
+		border-radius: 8px;
+		margin: 0.7rem;
+		width: 100%;
 	}
 }
 .summary-section-header {
@@ -97,14 +108,23 @@
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	color: #080b17;
+	color: #537CD0;
+	h2 {
+		padding: 0;
+		margin: 0;
+	}
+	h1 {
+		font-size: 1.3rem;
+		color: #080b17;
+	}
 }
 .summary-section-body {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+	gap: 1rem 5rem;
 	.form-field {
-		width: 40%;
+		width: fit-content;
 		h4 {
 			margin-bottom: 0;
 		}
@@ -113,4 +133,26 @@
 			margin: 0;
 		}
 	}
+}
+
+.goeko-go {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	display: block;
+	background-image: url('/assets/logo.png');
+	background-size: 38px;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+
+}
+.button-submit {
+	width: 122px;
+    display: block;
+}
+.form-actions {
+	display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
 }

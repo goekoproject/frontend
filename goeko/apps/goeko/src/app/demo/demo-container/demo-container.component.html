@@ -1,6 +1,6 @@
 <div class="demo-wrapper" [formGroup]="form">
-	<section class="section-form">
-		<img class="demo-logo" src="assets/logo_footer.png" alt="logo_footer" />
+	<section class="section-step">
+		<img class="demo-logo go-link" src="assets/logo_footer.png" alt="logo_footer" [routerLink]="'/'" />
 
 		<ul class="section-elements">
 			<li
@@ -13,54 +13,67 @@
 			</li>
 		</ul>
 	</section>
-	<go-carousel (valueChangeButton)="addFormGroup($event)" [hiddenButton]="isSlideSummary">
-		<ng-container *ngFor="let element of formField; last as isLast">
-			<section *goSlide [class.content-form]="!isSlideSummary">
-				<ng-container *ngIf="!(isLast && isSlideSummary); else summary">
-					<!--FORM ACTORS-->
-					<div class="form-wrapper" [formGroupName]="element.controlName">
-						<div class="form-header">
-							<span class="material-symbols-rounded demo-header-icon"> {{ element.icon }} </span>
-							<h3>{{ element.nameSection }}</h3>
-						</div>
+	<section class="section-form">
+		<go-carousel (valueChangeButton)="addFormGroup($event)" [hiddenButtonNext]="isSlideSummary">
+			<ng-container *ngFor="let element of formField; last as isLast">
+				<section *goSlide [class.content-form]="!isSlideSummary">
+					<ng-container *ngIf="!(isLast && isSlideSummary); else summary">
+						<!--FORM ACTORS-->
+						<div class="form-wrapper" [formGroupName]="element.controlName">
+							<div class="form-header">
+								<span class="material-symbols-rounded demo-header-icon"> {{ element.icon }} </span>
+								<h3>{{ element.nameSection }}</h3>
+							</div>
 
-						<div class="form-field form-field--center" *ngFor="let field of element.fields">
-							<!-- FIELD FORM -->
+							<div class="form-field form-field--center" *ngFor="let field of element.fields">
+								<!-- FIELD FORM -->
 
-							<ng-container [ngSwitch]="field.type">
-								<!-- INPUT TEXT -->
+								<ng-container [ngSwitch]="field.type">
+									<!-- INPUT TEXT -->
 
-								<ng-container *ngSwitchDefault>
-									<go-input [textHelp]="field.textHelp" [formControlName]="field.controlName">
-										<p slot="label">{{ field.label }}</p>
-									</go-input>
+									<ng-container *ngSwitchDefault>
+										<go-input [textHelp]="field.textHelp" [formControlName]="field.controlName">
+											<p slot="label">{{ field.label }}</p>
+										</go-input>
+									</ng-container>
 								</ng-container>
-							</ng-container>
+							</div>
 						</div>
-					</div>
-				</ng-container>
+					</ng-container>
 
-				<!--SUMMARY-->
-				<ng-template #summary>
-					<div class="demo-summary">
-						<h1>{{ element.nameSection }}</h1>
-						<ul class="section-elements">
-							<li class="elements" *ngFor="let element of formField; last as isLast">
-								<div *ngIf="!isLast" class="summary-section-header">
-									<span class="material-symbols-rounded"> {{ element.icon }} </span>
-									<h2>{{ element.nameSection }}</h2>
+					<!--SUMMARY-->
+					<ng-template #summary>
+						<div class="demo-summary">
+							<h1>{{ element.nameSection }}</h1>
+							<ul class="section-elements">
+								<ng-container *ngFor="let element of formField; last as isLast">
+									<li class="elements" *ngIf="!isLast">
+										<div class="summary-section-header">
+											<span class="material-symbols-rounded"> {{ element.icon }} </span>
+											<h2>{{ element.nameSection }}</h2>
+										</div>
+										<div class="summary-section-body">
+											<div class="form-field" *ngFor="let field of element.fields">
+												<h4>{{ field.label }}</h4>
+												<p>
+													{{ this.form.value[element.controlName][field.controlName] || '-' }}
+												</p>
+											</div>
+										</div>
+									</li>
+								</ng-container>
+								<div class="form-actions">
+									<button type="button" go-button appearance="white">Cancel</button>
+									<go-goeko-button class="button-submit" [routerLink]="'../sme/result'">
+										<span class="goeko-go" btn-logo></span>
+										Demo</go-goeko-button
+									>
 								</div>
-								<div class="summary-section-body">
-									<div class="form-field" *ngFor="let field of element.fields">
-										<h4>{{ field.label }}</h4>
-										<p>{{ this.form.value[element.controlName][field.controlName] || '-' }}</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</ng-template>
-			</section>
-		</ng-container>
-	</go-carousel>
+							</ul>
+						</div>
+					</ng-template>
+				</section>
+			</ng-container>
+		</go-carousel>
+	</section>
 </div>

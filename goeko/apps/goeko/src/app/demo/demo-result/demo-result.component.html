@@ -1,0 +1,27 @@
+<div class="result-wrapper">
+	<section class="filter-by">
+		<img class="filter-logo go-link" src="assets/logo_footer.png" alt="logo_footer" [routerLink]="'/'" />
+
+		<ul class="filter-type">
+			<li class="elements" *ngFor="let element of formField; let index = index">
+				<input type="checkbox" />
+				<p>{{ element.nameSection }}</p>
+			</li>
+		</ul>
+	</section>
+	<section class="result">
+		<h1>Result Company Name</h1>
+		<div class="eco-solutions">
+			<div class="eco-solutions-header"></div>
+			<div class="eco-solutions-body">
+				<h3>Vertua Ultra Zero</h3>
+				<p>CEMEX</p>
+				<div class="eco-solutions-benefis">
+					<span>CO2</span>
+					<p>70%</p>
+				</div>
+				<div class="eco-solutions-actions"></div>
+			</div>
+		</div>
+	</section>
+</div>

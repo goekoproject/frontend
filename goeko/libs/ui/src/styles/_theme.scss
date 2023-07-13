@@ -26,7 +26,7 @@ body {
   font: var(--font-default);
   position: relative;
   overflow-x: hidden;
-  height: 100%;
+  min-height: 100%;
 }
 
 :root {
@@ -37,4 +37,11 @@ a {
 }
 canvas:focus {
   outline: none;
+}
+.go-link {
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+
 }

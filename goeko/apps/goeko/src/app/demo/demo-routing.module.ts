@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DemoContainerComponent } from './demo-container/demo-container.component';
+import { DemoResultComponent } from './demo-result/demo-result.component';
 
 const routes: Routes = [
 	{
@@ -10,6 +11,10 @@ const routes: Routes = [
 	{
 		path: ':actor',
 		component: DemoContainerComponent,
+	},
+	{
+		path: ':actor/result',
+		component: DemoResultComponent,
 	},
 	{
 		path: '',

@@ -40,6 +40,9 @@ export class CarouselComponent implements AfterContentInit {
 
 	@Output() valueChangeButton = new EventEmitter();
 	@Input() hiddenButton = false;
+	@Input() hiddenButtonPrev = false;
+	@Input() hiddenButtonNext = false;
+
 	public selectedSlideIndex: number = 0;
 	public selectedSlideTemplateRef!: TemplateRef<any> | null;
 	public animateStateSlide = '';

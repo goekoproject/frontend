@@ -1,0 +1,45 @@
+$color-platform: #3065b0;
+$color-deep-button: #f3f6f7;
+$color-deep-button-active: #e9e9e9f5;
+
+.goeko-button {
+    display: flex;
+    width: 100%;
+    height: 46px;
+    padding: 3px 58px 3px 2px;
+    align-items: center;
+    gap: 13px;
+    border-radius: 25px;
+    background: #0090D6;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+    justify-content: center;
+    box-sizing: content-box;
+    cursor: pointer;
+    box-shadow:  0px 0px 0px 0px $color-deep-button;
+
+    &:hover {
+		box-shadow:  0px 0px 6px $color-deep-button-active;
+	}
+	&:active {
+		box-shadow: 0px 0px 6px 2px $color-deep-button-active;
+        transform: translateY(4px);
+
+        /* .button-logo {
+            transform: translateX(126px);
+        } */
+	}
+}
+.button-logo {
+    width: 40%;
+    background-color: #FFFFFF;
+    height: 100%;
+    border-radius: 50%;
+    left:  -0.2rem;
+    position: relative;
+    transition: all  1s;
+}
+.button-text {
+    color: #FEFEFB;
+    font-size: 18px;
+}

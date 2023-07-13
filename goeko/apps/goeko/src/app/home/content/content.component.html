@@ -56,13 +56,21 @@
 <ng-template #sme let-id="id">
 	<h4 class="content-slogan">Start your green transition here</h4>
 	<div class="goeko_in">
-		<button id="goeko-go" class="goeko-go" [routerLink]="'../demo/' + id"></button>
+		<go-goeko-button [routerLink]="'../demo/' + id">
+			<span class="goeko-go" btn-logo></span>
+			Demo</go-goeko-button
+		>
+
+		<!-- 		<button id="goeko-go" class="goeko-go" [routerLink]="'../demo/' + id"></button>
+ -->
 	</div>
 </ng-template>
 
 <ng-template #otherActor let-id="id">
 	<h4 class="content-slogan">Free trial to connect with qualified leads</h4>
 	<div class="goeko_in">
-		<button id="goeko-go" class="goeko-go" [routerLink]="'demo/' + id"></button>
+		<go-goeko-button> Demo</go-goeko-button>
+		<!-- 		<button id="goeko-go" class="goeko-go" ></button>
+ -->
 	</div>
 </ng-template>
