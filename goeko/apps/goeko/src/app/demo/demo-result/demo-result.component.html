@@ -10,18 +10,36 @@
 		</ul>
 	</section>
 	<section class="result">
-		<h1>Result Company Name</h1>
-		<div class="eco-solutions">
-			<div class="eco-solutions-header"></div>
-			<div class="eco-solutions-body">
-				<h3>Vertua Ultra Zero</h3>
-				<p>CEMEX</p>
-				<div class="eco-solutions-benefis">
-					<span>CO2</span>
-					<p>70%</p>
+		<h1>Result <span class="result-name-company">Company Name</span></h1>
+		<div class="eco-solutions-result">
+			<div class="eco-solutions" (click)="handlerOpenDetail()">
+				<div class="eco-solutions-header">
+					<div class="eco-solutions-logo">
+						<img src="/assets/eco_solutions_default.jpg" alt="eco solutions logo" />
+					</div>
 				</div>
-				<div class="eco-solutions-actions"></div>
+				<div class="eco-solutions-body">
+					<h3 class="eco-solutions-name">Vertua Ultra Zero</h3>
+					<p class="eco-solutions-company">CEMEX</p>
+					<div class="eco-solutions-benefis">
+						<span class="eco-solutions-type">CO2</span>
+						<p class="eco-solutions-benefis-default">70%</p>
+					</div>
+					<div class="eco-solutions-actions">
+						<abbr title="Save"><span class="material-symbols-rounded"> bookmark </span></abbr>
+						<abbr title="https://www.cemex.fr/fiches-techniques/vertua"
+							><a href="https://www.cemex.fr/fiches-techniques/vertua" target="_blank">
+								<span class="material-symbols-rounded"> captive_portal </span>
+							</a></abbr
+						>
+					</div>
+				</div>
 			</div>
+		</div>
+		<div class="eco-solutions-detail" *ngIf="toogleOpenDetails">
+			<span class="material-symbols-rounded eco-solutions-detail-close" (click)="handlerOpenDetail()">
+				close
+			</span>
 		</div>
 	</section>
 </div>

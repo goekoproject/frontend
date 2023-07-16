@@ -8,4 +8,8 @@ import { FORM_FIELD_DEMO } from '../demo-container/form-field-demo.constants';
 })
 export class DemoResultComponent {
 	formField = FORM_FIELD_DEMO;
+	toogleOpenDetails = false;
+	handlerOpenDetail() {
+		this.toogleOpenDetails = !this.toogleOpenDetails;
+	}
 }
