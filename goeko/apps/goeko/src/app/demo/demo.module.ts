@@ -7,10 +7,22 @@ import '@goeko/ui';
 import { ButtonModule, CarouselComponent, CarouselModule, GoInputDirective, GoekoButtonModule } from '@goeko/ui';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { DemoResultComponent } from './demo-result/demo-result.component';
+import { SmeModule } from '@goeko/store';
+import { environment } from '../../environments/environment';
 
 @NgModule({
 	declarations: [DemoContainerComponent, GoInputDirective, DemoResultComponent],
-	imports: [CommonModule, DemoRoutingModule, CarouselModule, ReactiveFormsModule, GoekoButtonModule, ButtonModule],
+	imports: [
+		CommonModule,
+		DemoRoutingModule,
+		CarouselModule,
+		ReactiveFormsModule,
+		GoekoButtonModule,
+		SmeModule.forRoot({
+			endpoint: environment.baseUrl,
+		}),
+		ButtonModule,
+	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DemoModule {}

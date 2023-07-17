@@ -12,18 +12,26 @@
 	<section class="result">
 		<h1>Result <span class="result-name-company">Company Name</span></h1>
 		<div class="eco-solutions-result">
-			<div class="eco-solutions" (click)="handlerOpenDetail()">
+			<div
+				class="eco-solutions"
+				(click)="handlerOpenDetail(ecoSolutions, index)"
+				*ngFor="let ecoSolutions of smeRecomendation; let index = index"
+				[ngClass]="{ 'eco-solutions-selected': selectedRecomendationIndex === index }"
+			>
 				<div class="eco-solutions-header">
 					<div class="eco-solutions-logo">
 						<img src="/assets/eco_solutions_default.jpg" alt="eco solutions logo" />
 					</div>
 				</div>
 				<div class="eco-solutions-body">
-					<h3 class="eco-solutions-name">Vertua Ultra Zero</h3>
-					<p class="eco-solutions-company">CEMEX</p>
+					<h3 class="eco-solutions-name">{{ ecoSolutions?.solutionName }}</h3>
+					<p class="eco-solutions-company">{{ ecoSolutions?.companyDetail?.name }}</p>
 					<div class="eco-solutions-benefis">
 						<span class="eco-solutions-type">CO2</span>
-						<p class="eco-solutions-benefis-default">70%</p>
+						<div class="eco-solutions-benefis-default">
+							<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
+							<p>{{ ecoSolutions?.improvement?.reductionPercentage }}%</p>
+						</div>
 					</div>
 					<div class="eco-solutions-actions">
 						<abbr title="Save"><span class="material-symbols-rounded"> bookmark </span></abbr>
@@ -37,9 +45,15 @@
 			</div>
 		</div>
 		<div class="eco-solutions-detail" *ngIf="toogleOpenDetails">
-			<span class="material-symbols-rounded eco-solutions-detail-close" (click)="handlerOpenDetail()">
-				close
-			</span>
+			<span class="material-symbols-rounded eco-solutions-detail-close" (click)="closeDetails()"> close </span>
+			<div class="details-solutions-logo">
+				<img src="/assets/eco_solutions_default.jpg" alt="eco solutions logo" />
+			</div>
+			<div class="detail-header">
+				<h3 class="eco-solutions-name">{{ selectedRecomendation?.solutionName }}</h3>
+				<p class="eco-solutions-company">{{ selectedRecomendation?.companyDetail?.name }}</p>
+				<span class="eco-solutions-type">CO2</span>
+			</div>
 		</div>
 	</section>
 </div>
