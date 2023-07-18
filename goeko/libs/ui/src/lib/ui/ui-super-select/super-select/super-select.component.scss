@@ -1,0 +1,134 @@
+$border-color: var(--state-border-default);
+$border-color-disabled: transparent;
+$border-color-error: var(--border-error);
+$background-disbaled: var(--bg-field);
+$background-error: var(--bg-select-error);
+$background-overlay: #FFFF;
+$color-label: var(--color-label-default);
+$color-label-pressed: #0090d6;
+
+@mixin status($status, $color, $background: none) {
+	&#{$status} {
+		border: 1px solid $color;
+		border-radius: 8px;
+		background: $background;
+		background-color: $background-overlay;
+	}
+}
+
+//default size medium
+@mixin size($size, $width: 325, $height: 56) {
+	&#{$size} {
+		width: inherit;
+		height: #{$height}px;
+	}
+	@if $size ==--xsmall {
+		.select_value {
+			padding: 0;
+		}
+		&#{$size} > .select_label:has(+ div) {
+			display: none;
+		}
+	}
+}
+
+@mixin label-floting {
+	&_label:has(+ div:not(:empty)) {
+		position: absolute;
+		font-size: 13px;
+		transform: translateY(-15px);
+	}
+}
+
+.super-select {
+	display: block;
+	width: fit-content;
+}
+.super-select[disabled] {
+	.select {
+		border: 1px solid $border-color-disabled;
+		background-color: $background-disbaled;
+		cursor: not-allowed;
+		i {
+			color: $background-disbaled;
+		}
+	}
+}
+.select-dropdown {
+	position: fixed;
+}
+
+.select {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1.3rem;
+
+	height: inherit;
+	cursor: pointer;
+	position: relative;
+
+	// SIZE
+	@include size(--large, 325, 64);
+	@include size(--medium, 325, 56);
+	@include size(--small, 325, 48);
+	@include size(--xsmall, 200, 32);
+
+	// STATUS
+	@include status(--default, $border-color);
+	@include status(--error, $border-color-error, $background-error);
+	@include status(--success, $border-color);
+
+	&_options {
+		background-color: $background-overlay;
+		width: 100%;
+		box-shadow: 0px 4px 8px 0px #a0a3bd99;
+		border-radius: 12px;
+		overflow-y: scroll;
+		max-height: 20rem;
+	}
+	&_label {
+		font-size: 15px;
+		color: $color-label;
+		transition: all 0.5s;
+		&:hover {
+			color: $color-label-pressed;
+		}
+	}
+	&_value {
+		padding-top: 1rem;
+		width: inherit;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	@include label-floting();
+	&_arrow {
+		margin-left: auto;
+	}
+}
+
+.cdk-overlay-backdrop {
+	transition: visibility 1ms linear, opacity 1ms linear;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	pointer-events: auto;
+}
+
+.before-icon-select {
+	width: 13%;
+	position: absolute;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	color: var(--grayscale-label);
+	left: 11px;
+}
+
+.before-icon-select:not(:empty) ~ div {
+	padding-left: 2.5rem;
+}

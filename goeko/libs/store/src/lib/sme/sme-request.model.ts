@@ -1,13 +1,6 @@
-// Creating an interface for the 'lastYearInvoice' object
-export interface LastYearInvoice {
-	amount: string;
-	currency: string;
-}
-
-// Creating an interface for 'mainInternalCombustionEngine' and 'mainMineralProduct' objects
 export interface MainProduct {
 	name: string;
-	lastYearInvoice: LastYearInvoice;
+	lastYearInvoice: string;
 }
 
 export interface MainRigidMaterial {
@@ -31,19 +24,19 @@ export interface Waste {
 	mainCategoryNonInert: string;
 }
 
-export interface ToxicProduct {
+export interface HazardousProduct {
 	products: string[];
 }
 
 export interface WaterConsumption {
 	mainActivity: string[];
 	amount: string;
-	lastYearInvoice: LastYearInvoice;
+	lastYearInvoice: string;
 }
 export interface SmeRecomendationRequest {
 	companyDetail: CompanyDetail;
 	co2Emission: Co2Emission;
 	waste: Waste;
-	toxicProduct: ToxicProduct;
+	hazardousProduct: HazardousProduct;
 	waterConsumption: WaterConsumption;
 }

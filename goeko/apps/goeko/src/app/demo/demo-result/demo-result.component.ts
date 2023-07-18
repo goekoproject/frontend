@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FORM_FIELD_DEMO } from '../demo-container/form-field-demo.constants';
 import { SmeRecomendation, SmeService } from '@goeko/store';
+import { DemoService } from '../demo.services';
+import { SmeRecomendationParams } from '../demo-result.request';
 
 @Component({
 	selector: 'goeko-demo-result',
@@ -14,6 +16,11 @@ export class DemoResultComponent implements OnInit {
 	selectedRecomendation: any;
 	selectedRecomendationIndex: any;
 
+	getCountriesAvailability(countries: any) {
+		const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+
+		return regionNames.of(countries);
+	}
 	bodyMock = {
 		companyDetail: {
 			name: 'SME A',
@@ -25,17 +32,11 @@ export class DemoResultComponent implements OnInit {
 		co2Emission: {
 			mainInternalCombustionEngine: {
 				name: 'loader',
-				lastYearInvoice: {
-					amount: '81273618273',
-					currency: 'EUR',
-				},
+				lastYearInvoice: '81273618273',
 			},
 			mainMineralProduct: {
 				name: 'concrete',
-				lastYearInvoice: {
-					amount: '81273618273',
-					currency: 'EUR',
-				},
+				lastYearInvoice: '81273618273',
 			},
 			mainRigidMaterial: {
 				name: 'insolationPanel',
@@ -44,23 +45,22 @@ export class DemoResultComponent implements OnInit {
 		waste: {
 			mainCategoryNonInert: 'metalsAndAlloys',
 		},
-		toxicProduct: {
+		hazardousProduct: {
 			products: ['aerosol', 'batteries'],
 		},
 		waterConsumption: {
 			mainActivity: ['siteCleaning'],
 			amount: '1298379123',
-			lastYearInvoice: {
-				amount: '81273618273',
-				currency: 'EUR',
-			},
+			lastYearInvoice: '81273618273',
 		},
 	};
-	constructor(private _smeService: SmeService) {}
+	smeRecomendationBody!: any;
+	constructor(private _smeService: SmeService, private _demoService: DemoService) {}
 
 	ngOnInit(): void {
-		this.smeRecomendation = new Array();
-		this._smeService.getRecommendations(this.bodyMock).subscribe((recomendation) => {
+		this.smeRecomendationBody = new SmeRecomendationParams(this._demoService.getDataForm());
+
+		this._smeService.getRecommendations(this.smeRecomendationBody).subscribe((recomendation) => {
 			this.transformRecommendations(recomendation);
 			console.log(this.smeRecomendation);
 		});
@@ -69,11 +69,27 @@ export class DemoResultComponent implements OnInit {
 	}
 
 	private transformRecommendations(recomendation: any): void {
+		this.smeRecomendation = new Array();
 		Object.keys(recomendation).forEach((element: any) => {
 			const solutions = recomendation[element];
+			this._buildCountriesAvailability(solutions);
 			solutions.forEach((s: any) => this.smeRecomendation.push(s));
 		});
 	}
+	private _buildCountriesAvailability(solutions: any) {
+		if (!solutions) {
+			return;
+		}
+		solutions.map((res: any) => {
+			res.companyDetail = {
+				...res?.companyDetail,
+				countriesAvailability: res?.companyDetail.countries
+					.map((countries: string) => this.getCountriesAvailability(countries))
+					.toString(),
+			};
+		});
+	}
+
 	handlerOpenDetail(selectedRecomendation: any, selectedRecomendationIndex: number) {
 		this.selectedRecomendation = selectedRecomendation;
 		if (!this.toogleOpenDetails) {

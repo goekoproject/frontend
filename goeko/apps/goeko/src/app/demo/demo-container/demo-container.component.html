@@ -29,6 +29,56 @@
 								<!-- FIELD FORM -->
 
 								<ng-container [ngSwitch]="field.type">
+									<!-- INPUT NUMBER -->
+									<ng-container *ngSwitchCase="'number'">
+										<go-input
+											[textHelp]="field.textHelp"
+											[formControlName]="field.controlName"
+											type="number"
+										>
+											<p slot="label">{{ field.label }}</p>
+										</go-input>
+									</ng-container>
+									<!-- INPUT SELECT -->
+
+									<ng-container *ngSwitchCase="'select'">
+										<label for="{{ field.controlName }}">{{ field.label }}</label>
+
+										<select
+											[formControlName]="field.controlName"
+											[id]="field.controlName"
+											[name]="field.controlName"
+										>
+											<option value="">--Please choose an option--</option>
+											<option
+												*ngFor="let option of dataSelect[field.controlName]"
+												[value]="option.title"
+											>
+												{{ option.title }}
+											</option>
+										</select>
+									</ng-container>
+
+									<!-- INPUT SELECT-MULTIPLE-->
+
+									<ng-container *ngSwitchCase="'select-multiple'">
+										<label for="{{ field.controlName }}">{{ field.label }}</label>
+
+										<select
+											multiple
+											[formControlName]="field.controlName"
+											[id]="field.controlName"
+											[name]="field.controlName"
+										>
+											<option value="">--Please choose an option--</option>
+											<option
+												*ngFor="let option of dataSelect[field.controlName]"
+												[value]="option.title"
+											>
+												{{ option.title }}
+											</option>
+										</select>
+									</ng-container>
 									<!-- INPUT TEXT -->
 
 									<ng-container *ngSwitchDefault>
@@ -56,7 +106,11 @@
 											<div class="form-field" *ngFor="let field of element.fields">
 												<h4>{{ field.label }}</h4>
 												<p>
-													{{ this.form.value[element.controlName][field.controlName] || '-' }}
+													{{
+														this.form.value[element.controlName][
+															field.controlName
+														].toString() || '-'
+													}}
 												</p>
 											</div>
 										</div>
@@ -64,7 +118,7 @@
 								</ng-container>
 								<div class="form-actions">
 									<button type="button" go-button appearance="white">Cancel</button>
-									<go-goeko-button class="button-submit" [routerLink]="'../sme/result'">
+									<go-goeko-button class="button-submit" (click)="getResults()">
 										<span class="goeko-go" btn-logo></span>
 										Demo</go-goeko-button
 									>

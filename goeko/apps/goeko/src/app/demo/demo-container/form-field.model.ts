@@ -13,4 +13,5 @@ export interface Section {
 	icon?: string;
 	fields?: Field[];
 	controlName: string;
+	showResult: boolean;
 }
