@@ -21,44 +21,13 @@ export class DemoResultComponent implements OnInit {
 
 		return regionNames.of(countries);
 	}
-	bodyMock = {
-		companyDetail: {
-			name: 'SME A',
-			numberEmployees: '4',
-			countries: ['SPAIN', 'FRANCE'],
-			email: 'sme@gmail.com',
-			link: 'www.sme.com/contact',
-		},
-		co2Emission: {
-			mainInternalCombustionEngine: {
-				name: 'loader',
-				lastYearInvoice: '81273618273',
-			},
-			mainMineralProduct: {
-				name: 'concrete',
-				lastYearInvoice: '81273618273',
-			},
-			mainRigidMaterial: {
-				name: 'insolationPanel',
-			},
-		},
-		waste: {
-			mainCategoryNonInert: 'metalsAndAlloys',
-		},
-		hazardousProduct: {
-			products: ['aerosol', 'batteries'],
-		},
-		waterConsumption: {
-			mainActivity: ['siteCleaning'],
-			amount: '1298379123',
-			lastYearInvoice: '81273618273',
-		},
-	};
+
 	smeRecomendationBody!: any;
 	constructor(private _smeService: SmeService, private _demoService: DemoService) {}
 
 	ngOnInit(): void {
 		this.smeRecomendationBody = new SmeRecomendationParams(this._demoService.getDataForm());
+		console.log(this.smeRecomendationBody);
 
 		this._smeService.getRecommendations(this.smeRecomendationBody).subscribe((recomendation) => {
 			this.transformRecommendations(recomendation);

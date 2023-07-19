@@ -48,6 +48,10 @@ export class CarouselComponent implements AfterContentInit {
 	public animateStateSlide = '';
 	public disabledButtonNext = false;
 	public disabledButtonPrev = true;
+
+	get isLastSlide() {
+		return this.selectedSlideIndex + 1 === this.slide.length;
+	}
 	constructor() {}
 	ngAfterContentInit(): void {
 		this.selectedSlideTemplateRef = this.slide.first?.template;

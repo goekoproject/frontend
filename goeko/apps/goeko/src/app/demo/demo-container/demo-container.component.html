@@ -28,63 +28,65 @@
 							<div class="form-field form-field--center" *ngFor="let field of element.fields">
 								<!-- FIELD FORM -->
 
-								<ng-container [ngSwitch]="field.type">
-									<!-- INPUT NUMBER -->
-									<ng-container *ngSwitchCase="'number'">
-										<go-input
-											[textHelp]="field.textHelp"
-											[formControlName]="field.controlName"
-											type="number"
-										>
-											<p slot="label">{{ field.label }}</p>
-										</go-input>
-									</ng-container>
-									<!-- INPUT SELECT -->
-
-									<ng-container *ngSwitchCase="'select'">
-										<label for="{{ field.controlName }}">{{ field.label }}</label>
-
-										<select
-											[formControlName]="field.controlName"
-											[id]="field.controlName"
-											[name]="field.controlName"
-										>
-											<option value="">--Please choose an option--</option>
-											<option
-												*ngFor="let option of dataSelect[field.controlName]"
-												[value]="option.title"
+								<ng-container *ngIf="!field.hidden">
+									<ng-container [ngSwitch]="field.type">
+										<!-- INPUT NUMBER -->
+										<ng-container *ngSwitchCase="'number'">
+											<go-input
+												[textHelp]="field.textHelp"
+												[formControlName]="field.controlName"
+												type="number"
 											>
-												{{ option.title }}
-											</option>
-										</select>
-									</ng-container>
+												<p slot="label">{{ field.label }}</p>
+											</go-input>
+										</ng-container>
+										<!-- INPUT SELECT -->
 
-									<!-- INPUT SELECT-MULTIPLE-->
+										<ng-container *ngSwitchCase="'select'">
+											<label for="{{ field.controlName }}">{{ field.label }}</label>
 
-									<ng-container *ngSwitchCase="'select-multiple'">
-										<label for="{{ field.controlName }}">{{ field.label }}</label>
-
-										<select
-											multiple
-											[formControlName]="field.controlName"
-											[id]="field.controlName"
-											[name]="field.controlName"
-										>
-											<option value="">--Please choose an option--</option>
-											<option
-												*ngFor="let option of dataSelect[field.controlName]"
-												[value]="option.title"
+											<select
+												[formControlName]="field.controlName"
+												[id]="field.controlName"
+												[name]="field.controlName"
 											>
-												{{ option.title }}
-											</option>
-										</select>
-									</ng-container>
-									<!-- INPUT TEXT -->
+												<option value="">--Please choose an option--</option>
+												<option
+													*ngFor="let option of dataSelect[field.controlName]"
+													[value]="option.title"
+												>
+													{{ option.title }}
+												</option>
+											</select>
+										</ng-container>
 
-									<ng-container *ngSwitchDefault>
-										<go-input [textHelp]="field.textHelp" [formControlName]="field.controlName">
-											<p slot="label">{{ field.label }}</p>
-										</go-input>
+										<!-- INPUT SELECT-MULTIPLE-->
+
+										<ng-container *ngSwitchCase="'select-multiple'">
+											<label for="{{ field.controlName }}">{{ field.label }}</label>
+
+											<select
+												multiple
+												[formControlName]="field.controlName"
+												[id]="field.controlName"
+												[name]="field.controlName"
+											>
+												<option value="">--Please choose an option--</option>
+												<option
+													*ngFor="let option of dataSelect[field.controlName]"
+													[value]="option.title"
+												>
+													{{ option.title }}
+												</option>
+											</select>
+										</ng-container>
+										<!-- INPUT TEXT -->
+
+										<ng-container *ngSwitchDefault>
+											<go-input [textHelp]="field.textHelp" [formControlName]="field.controlName">
+												<p slot="label">{{ field.label }}</p>
+											</go-input>
+										</ng-container>
 									</ng-container>
 								</ng-container>
 							</div>

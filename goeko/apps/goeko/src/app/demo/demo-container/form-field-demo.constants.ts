@@ -34,7 +34,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 				controlName: 'email',
 				type: 'text',
 				textHelp: '',
-				label: 'email',
+				label: 'Email',
 			},
 			{
 				controlName: 'link',
@@ -62,12 +62,14 @@ export const FORM_FIELD_DEMO: Section[] = [
 				type: 'number',
 				textHelp: 'Fuel invoice the main combustion engine (2022)',
 				label: 'Fuel invoice ',
+				hidden: true,
 			},
 			{
 				controlName: 'mainMineralProduct',
 				type: 'select',
 				textHelp: 'cement, concrete, etc.',
 				label: 'Total amount of mineral product purchased (2022)',
+				hidden: true,
 			},
 			{
 				controlName: 'mainRigidMaterial',
@@ -104,12 +106,14 @@ export const FORM_FIELD_DEMO: Section[] = [
 				type: 'number',
 				textHelp: '',
 				label: 'Water consumption (2022)',
+				hidden: true,
 			},
 			{
 				controlName: 'lastYearInvoice',
 				type: 'number',
 				textHelp: '',
 				label: 'Water invoice (2022)',
+				hidden: true,
 			},
 			{
 				controlName: 'mainActivity',
@@ -120,7 +124,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		nameSection: 'Toxic product',
+		nameSection: 'Hazardous product',
 		controlName: 'hazardousProduct',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'science',

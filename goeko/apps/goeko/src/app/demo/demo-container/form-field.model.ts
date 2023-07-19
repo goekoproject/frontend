@@ -5,6 +5,7 @@ export interface Field {
 	type: string;
 	textHelp: string;
 	label: string;
+	hidden?: boolean;
 }
 
 export interface Section {

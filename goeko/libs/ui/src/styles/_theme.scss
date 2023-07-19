@@ -28,7 +28,10 @@ body {
   font: var(--font-default);
   position: relative;
   overflow-x: hidden;
-  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 :root {
@@ -64,4 +67,28 @@ select {
     height: 10rem;
   }
 
+}
+/* Note: The -webkit-scrollbar is not supported by Firefox or IE and Edge. */
+
+.go-scroll::-webkit-scrollbar {
+  /* width */
+  width: 8px;
+  height: 8px
+}
+
+
+.go-scroll::-webkit-scrollbar-thumb {
+  /* Handle */
+  background: rgb(173 219 242);
+  border-radius: 20px;
+}
+
+.go-scroll::-webkit-scrollbar-thumb:hover {
+  /* Handle on hover */
+  background: rgb(0 144 214);
+}
+
+.go-scroll::-webkit-scrollbar-track-piece {
+  /* not handle on */
+  background: transparent;
 }

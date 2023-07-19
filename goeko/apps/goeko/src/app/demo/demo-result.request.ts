@@ -3,8 +3,8 @@ export class MainProduct {
 	lastYearInvoice?: string;
 
 	constructor(name: string, lastYearInvoice?: string) {
-		this.name = name;
-		this.lastYearInvoice = lastYearInvoice;
+		this.name = name ?? 'mock';
+		this.lastYearInvoice = lastYearInvoice ?? '112222';
 	}
 }
 
@@ -30,8 +30,8 @@ export class Co2Emission {
 
 	constructor(data: any) {
 		this.mainInternalCombustionEngine = new MainProduct(data.mainInternalCombustionEngine, '12323');
-		this.mainMineralProduct = new MainProduct(data.mainMineralProduct, '1233');
-		this.mainRigidMaterial = new MainProduct(data.mainRigidMaterial);
+		this.mainMineralProduct = new MainProduct(data.mainMineralProduct || 'concrete', '1233');
+		this.mainRigidMaterial = { name: data.mainRigidMaterial };
 	}
 }
 
@@ -57,8 +57,8 @@ export class WaterConsumption {
 
 	constructor(data: any) {
 		this.mainActivity = data?.mainActivity;
-		this.amount = data?.amount;
-		this.lastYearInvoice = data?.lastYearInvoice;
+		this.amount = data?.amount || '1111111';
+		this.lastYearInvoice = data?.lastYearInvoice || '1111';
 	}
 }
 export class SmeRecomendationParams {
