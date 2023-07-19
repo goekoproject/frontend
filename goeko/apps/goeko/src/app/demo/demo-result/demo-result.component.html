@@ -72,7 +72,7 @@
 					}}</span>
 				</div>
 				<span class="details-country">
-					Countries availability :
+					Availability :
 					<p>{{ selectedRecomendation.companyDetail.countriesAvailability }}</p>
 				</span>
 			</div>
@@ -81,7 +81,7 @@
 					<h4>Environmental impact reduction in comparison with a traditional solution</h4>
 					<div class="percentage-benefis">
 						<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
-						<p>{{ selectedRecomendation.improvement?.reductionPercentage }}</p>
+						<p>{{ selectedRecomendation.improvement?.reductionPercentage }} %</p>
 					</div>
 				</section>
 				<section *ngIf="selectedRecomendation?.improvement?.operationalCostReductionPercentage">
@@ -91,13 +91,13 @@
 						<p>{{ selectedRecomendation.improvement?.operationalCostReductionPercentage }}</p>
 					</div>
 				</section>
-				<section *ngIf="selectedRecomendation?.improvement?.smeOperationalCostReduction?.amount">
+				<!-- 				<section *ngIf="selectedRecomendation?.improvement?.smeOperationalCostReduction?.amount">
 					<h4>Cost reduction</h4>
 					<div class="percentage-benefis">
 						<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
 						<p>{{ selectedRecomendation?.improvement?.smeOperationalCostReduction?.amount }} €</p>
 					</div>
-				</section>
+				</section> -->
 			</div>
 			<div class="details-footer">
 				<div class="details-ods">

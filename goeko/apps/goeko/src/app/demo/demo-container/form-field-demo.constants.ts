@@ -16,7 +16,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 				controlName: 'name',
 				type: 'text',
 				textHelp: '',
-				label: 'Company Name',
+				label: 'Company name',
 			},
 			{
 				controlName: 'numberEmployees',
@@ -69,7 +69,6 @@ export const FORM_FIELD_DEMO: Section[] = [
 				type: 'select',
 				textHelp: 'cement, concrete, etc.',
 				label: 'Total amount of mineral product purchased (2022)',
-				hidden: true,
 			},
 			{
 				controlName: 'mainRigidMaterial',
@@ -117,9 +116,9 @@ export const FORM_FIELD_DEMO: Section[] = [
 			},
 			{
 				controlName: 'mainActivity',
-				type: 'select-multiple',
+				type: 'select',
 				textHelp: '',
-				label: 'Activity more that consume',
+				label: 'Activity that consume the most',
 			},
 		],
 	},
@@ -132,9 +131,9 @@ export const FORM_FIELD_DEMO: Section[] = [
 		fields: [
 			{
 				controlName: 'products',
-				type: 'select-multiple',
+				type: 'select',
 				textHelp: '',
-				label: 'Types of hazardous product',
+				label: 'Type of hazardous product',
 			},
 		],
 	},

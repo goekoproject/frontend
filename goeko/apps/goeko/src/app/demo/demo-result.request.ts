@@ -56,7 +56,7 @@ export class WaterConsumption {
 	lastYearInvoice: string;
 
 	constructor(data: any) {
-		this.mainActivity = data?.mainActivity;
+		this.mainActivity = [data?.mainActivity];
 		this.amount = data?.amount || '1111111';
 		this.lastYearInvoice = data?.lastYearInvoice || '1111';
 	}
@@ -72,7 +72,7 @@ export class SmeRecomendationParams {
 		this.co2Emission = new Co2Emission(dataForm.co2Emission);
 		this.companyDetail = new CompanyDetail(dataForm.companyDetail);
 		this.waste = new Waste(dataForm?.waste?.mainCategoryNonInert);
-		this.hazardousProduct = new HazardousProduct(dataForm.hazardousProduct.products);
+		this.hazardousProduct = new HazardousProduct([dataForm?.hazardousProduct?.products]);
 		this.waterConsumption = new WaterConsumption(dataForm.waterConsumption);
 	}
 }
