@@ -11,6 +11,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'apartment',
 		showResult: false,
+		checked: false,
 		fields: [
 			{
 				controlName: 'name',
@@ -21,7 +22,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 			{
 				controlName: 'numberEmployees',
 				type: 'number',
-				textHelp: '¿How many employees does your company have?',
+				textHelp: 'How many employees does your company have?',
 				label: 'Number of employees',
 			},
 			{
@@ -50,6 +51,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',
 		showResult: true,
+		checked: false,
 		fields: [
 			{
 				controlName: 'mainInternalCombustionEngine',
@@ -74,7 +76,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 				controlName: 'mainRigidMaterial',
 				type: 'boolen',
 				textHelp: '',
-				label: '¿Does your company use insolation panels?',
+				label: 'Does your company use insolation panels?',
 			},
 		],
 	},
@@ -84,6 +86,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'water_pump',
 		showResult: true,
+		checked: false,
 		fields: [
 			{
 				controlName: 'mainCategoryNonInert',
@@ -99,6 +102,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'water_drop',
 		showResult: true,
+		checked: false,
 		fields: [
 			{
 				controlName: 'amount',
@@ -118,7 +122,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 				controlName: 'mainActivity',
 				type: 'select',
 				textHelp: '',
-				label: 'Activity that consume the most',
+				label: 'Activity that consumes the most',
 			},
 		],
 	},
@@ -128,6 +132,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'science',
 		showResult: true,
+		checked: false,
 		fields: [
 			{
 				controlName: 'products',
@@ -142,5 +147,6 @@ export const FORM_FIELD_DEMO: Section[] = [
 		status: STATUS_SECTION.COMPLETED,
 		controlName: '',
 		showResult: false,
+		checked: false,
 	},
 ];

@@ -3,13 +3,13 @@
 		<img class="filter-logo go-link" src="assets/logo_footer.png" alt="logo_footer" [routerLink]="'/'" />
 
 		<ul class="filter-type">
-			<li class="elements">
-				<input type="checkbox" checked />
+			<li class="elements" (click)="getAll(all.checked)">
+				<input type="checkbox" [checked]="allChecked" #all />
 				<p>All</p>
 			</li>
 			<ng-container *ngFor="let element of formField; let index = index">
-				<li class="elements" *ngIf="element.showResult">
-					<input type="checkbox" />
+				<li class="elements" *ngIf="element.showResult" (click)="onCheckboxStateChange(section.checked, index)">
+					<input type="checkbox" #section [checked]="element.checked" id="{{ element.controlName }}" />
 					<p>{{ element.nameSection }}</p>
 				</li>
 			</ng-container>
@@ -88,7 +88,7 @@
 					<h4>Operational cost reduction in comparison with a traditional solution</h4>
 					<div class="percentage-benefis">
 						<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
-						<p>{{ selectedRecomendation.improvement?.operationalCostReductionPercentage }}</p>
+						<p>{{ selectedRecomendation.improvement?.operationalCostReductionPercentage }} %</p>
 					</div>
 				</section>
 				<!-- 				<section *ngIf="selectedRecomendation?.improvement?.smeOperationalCostReduction?.amount">

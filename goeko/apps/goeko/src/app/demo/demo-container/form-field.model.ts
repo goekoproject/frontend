@@ -15,4 +15,5 @@ export interface Section {
 	fields?: Field[];
 	controlName: string;
 	showResult: boolean;
+	checked?: boolean;
 }
