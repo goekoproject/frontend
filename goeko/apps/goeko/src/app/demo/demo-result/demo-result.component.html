@@ -9,7 +9,12 @@
 			</li>
 			<ng-container *ngFor="let element of formField; let index = index">
 				<li class="elements" *ngIf="element.showResult" (click)="onCheckboxStateChange(section.checked, index)">
-					<input type="checkbox" #section [checked]="element.checked" id="{{ element.controlName }}" />
+					<input
+						type="checkbox"
+						#section
+						[checked]="element.checked && !all.checked"
+						id="{{ element.controlName }}"
+					/>
 					<p>{{ element.nameSection }}</p>
 				</li>
 			</ng-container>
