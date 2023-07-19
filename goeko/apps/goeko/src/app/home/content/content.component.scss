@@ -24,13 +24,13 @@ $color-deep-button-active: #e9e9e9f5;
 		position: absolute;
 		right: 70%;
 
-		top: -6%;
+		top: -13%;
 		background-color: #ffffff;
 		height: 9rem;
 		line-height: 1;
 		padding: 0 2rem;
 		width: fit-content;
-		border-radius: 55%;
+		border-radius: 7%;
 	}
 
 	&__actor-photo {
@@ -43,7 +43,7 @@ $color-deep-button-active: #e9e9e9f5;
 .content-header {
 	position: relative;
 	.title-reverse-content {
-		left: 80%;
+		left: 84%;
 	}
 }
 .info-actors {
@@ -87,7 +87,7 @@ $color-deep-button-active: #e9e9e9f5;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 2px solid #0090D6;
+	border: 2px solid #0090d626;
     border-radius: 23px;
     margin: 0 auto;
 }
@@ -98,7 +98,6 @@ $color-deep-button-active: #e9e9e9f5;
 	flex-direction: column;
 	position: relative;
 	width: 19rem;
-	bottom: -7px;
 	img {
 		width: inherit;
 	}
