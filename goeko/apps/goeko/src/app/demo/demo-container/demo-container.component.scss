@@ -18,6 +18,8 @@
     width: 65%;
     align-items: center;
     margin: 0 auto;
+	position: relative;
+    top: -11%;
 }
 .content-form {
 	display: flex;
@@ -149,11 +151,17 @@
 
 }
 .button-submit {
-	width: 122px;
+	width: 184px;
     display: block;
 }
 .form-actions {
 	display: flex;
     justify-content: space-around;
     margin: 2rem 0;
+}
+
+.field-form-checked {
+	display: flex;
+    align-items: center;
+    gap: 1rem;
 }

@@ -73,9 +73,9 @@ export const FORM_FIELD_DEMO: Section[] = [
 			},
 			{
 				controlName: 'mainRigidMaterial',
-				type: 'select',
+				type: 'boolen',
 				textHelp: '',
-				label: 'Main mineral product purchased (2022)',
+				label: '¿Does your company use insolation panels?',
 			},
 		],
 	},

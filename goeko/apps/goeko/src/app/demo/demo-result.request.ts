@@ -31,7 +31,7 @@ export class Co2Emission {
 	constructor(data: any) {
 		this.mainInternalCombustionEngine = new MainProduct(data.mainInternalCombustionEngine, '12323');
 		this.mainMineralProduct = new MainProduct(data.mainMineralProduct || 'concrete', '1233');
-		this.mainRigidMaterial = { name: data.mainRigidMaterial };
+		this.mainRigidMaterial = data.mainRigidMaterial;
 	}
 }
 

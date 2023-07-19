@@ -30,6 +30,16 @@
 
 								<ng-container *ngIf="!field.hidden">
 									<ng-container [ngSwitch]="field.type">
+										<!-- INPUT Boolen -->
+										<ng-container *ngSwitchCase="'boolen'">
+											<div class="field-form-checked">
+												<label>{{ field.label }}</label>
+												<label class="switch">
+													<input type="checkbox" [formControlName]="field.controlName" />
+													<span class="slider round"></span>
+												</label>
+											</div>
+										</ng-container>
 										<!-- INPUT NUMBER -->
 										<ng-container *ngSwitchCase="'number'">
 											<go-input
@@ -122,7 +132,7 @@
 									<button type="button" go-button appearance="white">Cancel</button>
 									<go-goeko-button class="button-submit" (click)="getResults()">
 										<span class="goeko-go" btn-logo></span>
-										Demo</go-goeko-button
+										Eco-solutions</go-goeko-button
 									>
 								</div>
 							</ul>

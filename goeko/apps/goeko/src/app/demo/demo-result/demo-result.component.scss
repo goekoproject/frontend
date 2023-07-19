@@ -30,8 +30,8 @@
 
 .eco-solutions {
   display: flex;
-  width: 233px;
-  height: 272px;
+  width: 298px;
+  height: 294px;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
@@ -112,6 +112,11 @@
 }
 .details-solutions-logo {
   @include solutions-logo(28%,65%);
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 }
 .eco-solutions-header {
   display: flex;
@@ -123,15 +128,15 @@
   @include solutions-logo;
 
   img {
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
     height: 100%;
-    object-position: bottom;
+    object-position: center;
   }
 }
 .eco-solutions-body {
   width: 100%;
-  padding: 0.8rem;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -241,6 +246,22 @@
     font-size: 60px;
     align-items: center;
     color: #00D649;
+}
+.details-ods {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+   img {
+    width: 13%;
+   }
+}
+.result-arrow-back {
+  display: flex;
+    gap: 0.5rem;
+    position: relative;
+    top: -3rem;
+    font-weight: 200;
+    cursor: pointer;
 }
 
 @keyframes slideIn {

@@ -10,7 +10,6 @@ export const SelectMainInternalCombustionEngine = [
 	{ id: 9, title: 'Steam roller' },
 	{ id: 10, title: 'Dumper' },
 	{ id: 11, title: 'Grader' },
-	{ id: 12, title: 'Other' },
 ];
 
 export const SelectMainMineralProduct = [

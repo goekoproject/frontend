@@ -15,9 +15,15 @@
 			</ng-container>
 		</ul>
 	</section>
+
 	<section class="result">
+		<div class="result-arrow-back" [routerLink]="['/demo/sme']">
+			<span class="material-symbols-rounded"> arrow_back_ios_new </span>
+			<p>Back</p>
+		</div>
 		<h1>
-			Result <span class="result-name-company">{{ smeRecomendationBody.companyDetail.name }}</span>
+			Most adapted eco-solutions for
+			<span class="result-name-company">{{ smeRecomendationBody.companyDetail.name }}</span>
 		</h1>
 		<div class="eco-solutions-result go-scroll">
 			<div
@@ -28,7 +34,7 @@
 			>
 				<div class="eco-solutions-header">
 					<div class="eco-solutions-logo">
-						<img src="/assets/eco_solutions_default.jpg" alt="eco solutions logo" />
+						<img src="{{ ecoSolutions?.companyDetail?.logo }}" alt="eco solutions logo" />
 					</div>
 				</div>
 				<div class="eco-solutions-body">
@@ -43,8 +49,8 @@
 					</div>
 					<div class="eco-solutions-actions">
 						<abbr title="Save"><span class="material-symbols-rounded"> bookmark </span></abbr>
-						<abbr title="https://www.cemex.fr/fiches-techniques/vertua"
-							><a href="https://www.cemex.fr/fiches-techniques/vertua" target="_blank">
+						<abbr title="{{ ecoSolutions?.companyDetail?.link }}"
+							><a href="{{ ecoSolutions?.companyDetail?.link }}" target="_blank">
 								<span class="material-symbols-rounded"> captive_portal </span>
 							</a></abbr
 						>
@@ -56,7 +62,7 @@
 			<span class="material-symbols-rounded eco-solutions-detail-close" (click)="closeDetails()"> close </span>
 			<div class="detail-header">
 				<div class="details-solutions-logo">
-					<img src="/assets/eco_solutions_default.jpg" alt="eco solutions logo" />
+					<img src="{{ selectedRecomendation?.companyDetail?.logo }}" alt="eco solutions logo" />
 				</div>
 				<div class="detail-header-info">
 					<h3 class="eco-solutions-name">{{ selectedRecomendation?.solutionName }}</h3>
@@ -92,6 +98,16 @@
 						<p>{{ selectedRecomendation?.improvement?.smeOperationalCostReduction?.amount }} €</p>
 					</div>
 				</section>
+			</div>
+			<div class="details-footer">
+				<div class="details-ods">
+					<img
+						*ngFor="let icon of selectedRecomendation.sustainableDevelopmentGoals"
+						class="ods-icon"
+						[src]="'assets/icon-ods/S-WEB-Goal-' + icon + '.png'"
+						[alt]="icon"
+					/>
+				</div>
 			</div>
 		</div>
 	</section>
