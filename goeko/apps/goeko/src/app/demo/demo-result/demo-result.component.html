@@ -4,7 +4,7 @@
 
 		<ul class="filter-type">
 			<li class="elements" (click)="getAll(all.checked)">
-				<input type="checkbox" [checked]="allChecked" #all />
+				<input type="checkbox" class="checkbox" [checked]="allChecked" #all />
 				<p>All</p>
 			</li>
 			<ng-container *ngFor="let element of formField; let index = index">
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="eco-solutions-detail" *ngIf="toogleOpenDetails">
+		<div class="eco-solutions-detail go-scroll" *ngIf="toogleOpenDetails">
 			<span class="material-symbols-rounded eco-solutions-detail-close" (click)="closeDetails()"> close </span>
 			<div class="detail-header">
 				<div class="details-solutions-logo">

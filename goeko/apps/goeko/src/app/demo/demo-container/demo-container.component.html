@@ -30,12 +30,20 @@
 
 								<ng-container *ngIf="!field.hidden">
 									<ng-container [ngSwitch]="field.type">
-										<!-- INPUT Boolen -->
-										<ng-container *ngSwitchCase="'boolen'">
+										<!-- INPUT boolean -->
+										<ng-container *ngSwitchCase="'boolean'">
 											<div class="field-form-checked">
 												<label>{{ field.label }}</label>
 												<label class="switch">
-													<input type="checkbox" [formControlName]="field.controlName" />
+													<input
+														type="checkbox"
+														[formControlName]="field.controlName"
+														[value]="
+															this.form.value[element.controlName][field.controlName]
+																? 'YES'
+																: 'NO'
+														"
+													/>
 													<span class="slider round"></span>
 												</label>
 											</div>
@@ -115,16 +123,40 @@
 											<h2>{{ element.nameSection }}</h2>
 										</div>
 										<div class="summary-section-body">
-											<div class="form-field" *ngFor="let field of element.fields">
-												<h4>{{ field.label }}</h4>
-												<p>
-													{{
-														this.form.value[element.controlName][
-															field.controlName
-														].toString() || '-'
-													}}
-												</p>
-											</div>
+											<ng-container *ngFor="let field of element.fields">
+												<div
+													class="form-field"
+													*ngIf="this.form.value[element.controlName][field.controlName]"
+												>
+													<h4>{{ field.label }}</h4>
+													<p
+														*ngIf="
+															isBoolean(
+																form.value[element.controlName][field.controlName]
+															)
+														"
+													>
+														{{
+															form.value[element.controlName][field.controlName]
+																? 'YES'
+																: 'NO'
+														}}
+													</p>
+													<p
+														*ngIf="
+															!isBoolean(
+																form.value[element.controlName][field.controlName]
+															)
+														"
+													>
+														{{
+															this.form.value[element.controlName][
+																field.controlName
+															].toString() || '-'
+														}}
+													</p>
+												</div>
+											</ng-container>
 										</div>
 									</li>
 								</ng-container>

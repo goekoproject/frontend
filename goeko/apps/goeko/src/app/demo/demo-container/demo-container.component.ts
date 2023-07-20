@@ -24,6 +24,9 @@ export class DemoContainerComponent implements OnInit {
 	get isSlideSummary() {
 		return this.slideSelected + 1 === this.formField.length;
 	}
+	isBoolean(value: any) {
+		return typeof value === 'boolean';
+	}
 	constructor(private _fb: FormBuilder, private _router: Router, private _demoServices: DemoService) {}
 
 	ngOnInit(): void {
@@ -44,7 +47,6 @@ export class DemoContainerComponent implements OnInit {
 	}
 	addFormGroup(value: any) {
 		this.slideSelected = value.index;
-		console.log(value);
 	}
 
 	getResults() {

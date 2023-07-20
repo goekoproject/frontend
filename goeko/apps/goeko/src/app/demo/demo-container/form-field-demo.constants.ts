@@ -70,11 +70,11 @@ export const FORM_FIELD_DEMO: Section[] = [
 				controlName: 'mainMineralProduct',
 				type: 'select',
 				textHelp: 'cement, concrete, etc.',
-				label: 'Total amount of mineral product purchased (2022)',
+				label: ' Main mineral product purchased (2022)',
 			},
 			{
 				controlName: 'mainRigidMaterial',
-				type: 'boolen',
+				type: 'boolean',
 				textHelp: '',
 				label: 'Does your company use insolation panels?',
 			},

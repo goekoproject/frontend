@@ -17,12 +17,8 @@ export class DemoResultComponent implements OnInit {
 	selectedRecomendationIndex: any;
 	@ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
 	get allChecked() {
-		return !this.formField.some((field) => field.checked);
-	}
-	getCountriesAvailability(countries: any) {
-		const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
-
-		return regionNames.of(countries);
+		const allChecked = !this.formField.some((field) => field.checked);
+		return allChecked;
 	}
 
 	smeRecomendationBody!: any;
@@ -35,31 +31,28 @@ export class DemoResultComponent implements OnInit {
 
 	private _getSmeRecomendations() {
 		this._smeService.getRecommendations(this.smeRecomendationBody).subscribe((sme) => {
-			const smeRecomendation = this._filterSmeRecomendations(sme.recommendations);
-			this.smeRecomendation = smeRecomendation;
+			if (sme && Array.isArray(sme.recommendations)) {
+				const smeRecomendation = this._filterSmeRecomendations(sme.recommendations);
+				this.smeRecomendation = this._buildCountriesAvailability(smeRecomendation);
+			}
 		});
 	}
 
-	private _transformRecommendations(recomendation: any): void {
-		this.smeRecomendation = new Array();
-		Object.keys(recomendation).forEach((element: any) => {
-			const solutions = recomendation[element];
-			this._buildCountriesAvailability(solutions);
-			solutions.forEach((s: any) => this.smeRecomendation.push(s));
-		});
-	}
 	private _buildCountriesAvailability(solutions: any) {
-		if (!solutions) {
-			return;
-		}
-		solutions.map((res: any) => {
-			res.companyDetail = {
+		return solutions.map((res: any) => ({
+			...res,
+			companyDetail: {
 				...res?.companyDetail,
 				countriesAvailability: res?.companyDetail.countries
 					.map((countries: string) => this.getCountriesAvailability(countries))
 					.toString(),
-			};
-		});
+			},
+		}));
+	}
+
+	getCountriesAvailability(countries: any) {
+		const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+		return ` ${regionNames.of(countries)}`;
 	}
 
 	handlerOpenDetail(selectedRecomendation: any, selectedRecomendationIndex: number) {
@@ -100,8 +93,7 @@ export class DemoResultComponent implements OnInit {
 	}
 
 	getAll(checked: boolean) {
-		if (checked) {
-			this._getSmeRecomendations();
-		}
+		this.formField = this.formField.map((field) => ({ ...field, checked: checked }));
+		this._getSmeRecomendations();
 	}
 }
