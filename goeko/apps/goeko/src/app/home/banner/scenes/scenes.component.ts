@@ -7,6 +7,7 @@ import { SME } from '../sphere/contstants/sme-constants';
 import { MeshActors } from '../sphere/models/sphere.model';
 import { InteractionService } from './interaction.service';
 import { DIRECTION_ANGLE, SphereService } from './sphere.service';
+import { TranslateService } from '@ngx-translate/core';
 
 const TEXTURE_SME = 'assets/texture-gray-1.png';
 const EMISSIVE_COLOR_SME = '#47525E';
@@ -39,17 +40,30 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	constructor(
 		private _sphereService: SphereService,
 		private _router: Router,
-		private _interactionService: InteractionService
+		private _interactionService: InteractionService,
+		private _translate: TranslateService
 	) {}
 
 	ngOnInit(): void {
 		this.scene = this._sphereService.getScene(this.canvasRef);
 		this.scene.blockfreeActiveMeshesAndRenderingGroups = true;
 		this.scene.blockfreeActiveMeshesAndRenderingGroups = false;
+		this._onChangeLangs();
 	}
 
 	ngAfterViewInit(): void {
 		this._sphereService.start();
+		this._configMeshes();
+	}
+
+	private _onChangeLangs() {
+		this._translate.onLangChange.subscribe(() => {
+			this.scene = this._sphereService.getScene(this.canvasRef);
+			this._configMeshes();
+		});
+	}
+
+	private _configMeshes(): void {
 		this._createSME();
 		this._createCleanTech();
 		this._createBank();
@@ -61,7 +75,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	}
 
 	private _createSME() {
-		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME).build(SME.title);
+		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME, this._translate).build(SME.title);
 		this._sphereSme.setShadows('#847575');
 
 		this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
@@ -82,7 +96,9 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	}
 
 	private _createCleanTech() {
-		this._sphereCleanTech = new MeshActors(this._sphereService, this.scene, CLEANTECH).build(CLEANTECH.title);
+		this._sphereCleanTech = new MeshActors(this._sphereService, this.scene, CLEANTECH, this._translate).build(
+			CLEANTECH.title
+		);
 		this._sphereCleanTech.setEmissiveColor(CLEANTECH_PROP.emissiveColor);
 		this._sphereService.createBorder(this._sphereCleanTech.rawMesh, LIGHT_BORDER_SME);
 		this._createEventCleanTeach();
@@ -99,7 +115,7 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 	}
 
 	private _createBank() {
-		this._sphereBank = new MeshActors(this._sphereService, this.scene, BANK).build(BANK.title);
+		this._sphereBank = new MeshActors(this._sphereService, this.scene, BANK, this._translate).build(BANK.title);
 		this._sphereBank.setEmissiveColor(BANK_PROP.emissiveColor);
 		this._sphereService.createBorder(this._sphereBank.rawMesh, LIGHT_BORDER_SME);
 		this._createEventBank();

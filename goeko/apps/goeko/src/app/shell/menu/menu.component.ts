@@ -13,9 +13,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MenuComponent implements OnInit {
 	langs = [
-		{
+		/* 		{
 			code: 'es',
-		},
+			locale: 'es ',
+		}, */
 		{
 			code: 'fr',
 		},

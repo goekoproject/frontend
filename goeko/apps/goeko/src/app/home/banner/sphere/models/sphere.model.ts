@@ -15,6 +15,7 @@ import {
 } from '@babylonjs/core';
 import { CustomColor } from '@goeko/ui';
 import { SphereService } from '../../scenes/sphere.service';
+import { TranslateService } from '@ngx-translate/core';
 
 export class MeshActorsPosition {
 	x: number;
@@ -80,7 +81,7 @@ export class MeshActors implements MeshActor {
 		this._rawMesh.actionManager = new ActionManager(this.scene);
 	}
 
-	constructor(private sphereService: SphereService, scene: Scene, data: any) {
+	constructor(private sphereService: SphereService, scene: Scene, data: any, private translate: TranslateService) {
 		if (data) {
 			this.name = data.name;
 			this.diameter = data.diameter;
@@ -88,21 +89,29 @@ export class MeshActors implements MeshActor {
 			this.color = data.color;
 			this.segments = data.segments;
 			this.position = data.position || { x: 0, y: 0, z: 0 };
-			this.title = data.title;
+			this.title = translate.instant(data.title);
 			this.positonHemisphericLight = data.positonHemisphericLight;
 			this.positionPointLight = data.positionPointLight;
 			this.material = data.material;
 			this.type = data.type || TYPE_MESH.NONE;
 			this.imgTexture = data.imgTexture;
 			this.scene = scene;
-			this.font = data.font || { color: 'white', fontSize: '12', text: 'text' };
+			this._getFontText(data.font);
 			this.positionDirectionalLight = data.positionDirectionalLight;
 		}
 	}
 
+	private _getFontText(font: MeshFont) {
+		this.font = { ...font, text: this.translate.instant(font.text)?.toUpperCase() } || {
+			color: 'white',
+			fontSize: '12',
+			text: 'text',
+		};
+	}
+
 	build(text?: string) {
 		if (text) {
-			this._rawMesh = this.sphereService.builderSphereWithLabel(this, text);
+			this._rawMesh = this.sphereService.builderSphereWithLabel(this, this.title);
 		} else {
 			this._rawMesh = this.sphereService.builderSphere(this);
 		}

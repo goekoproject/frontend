@@ -1,4 +1,9 @@
 {
+    "sme": "Sme",
+    "cleantech": "Cleantech",
+    "bank": "Bank",
+    "start":"Start",
+    "sloganGoeko": "The Connection to Efficiency",
     "MENU":  {
         "aboutGoEKo": "About GoEko",
         "blog": "Blog",
@@ -8,5 +13,17 @@
     "SCENES" : {
         "slogan_text1": "GoEko System",
         "slogan_text2": "Who are you?"
+    },
+    "BANNER": {
+        "swissCompany" : "A Swiss Company",
+        "the": "The",
+        "green": "Green",
+        "transition": "Transition",
+        "easy": "Easy",
+        "fast": "Fast",
+        "affordable": "Affortable"
+    },
+    "HOME" : {
+        "sloganCallActionsBtn": "Free trial to connect with qualified leads"
     }
 }

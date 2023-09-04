@@ -1,4 +1,9 @@
 {
+    "sme": "pme",
+    "cleantech": "Cleantech",
+    "bank":"Banque",
+    "start":"Commencer",
+    "sloganGoeko": "Le lien avec l’efficacité",
     "MENU":  {
         "aboutGoEKo": "À propos GoIKo",
         "blog": "Blog",
@@ -8,5 +13,18 @@
     "SCENES" : {
         "slogan_text1": "Système Goeko",
         "slogan_text2": "Est-ce que tu veux?"
+    },
+    "BANNER": {
+        "swissCompany" : "Une entreprise suisse",
+        "the": "LA",
+        "green": "Transition",
+        "transition": "verte",
+        "easy": "Facile",
+        "fast": "Rapide",
+        "affordable": "Abordable"
+    },
+    "HOME" : {
+        "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des prospects qualifiés"
     }
+   
 }

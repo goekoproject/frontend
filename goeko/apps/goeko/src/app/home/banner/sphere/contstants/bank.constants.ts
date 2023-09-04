@@ -16,9 +16,9 @@ const material = {
 };
 
 const font: MeshFont = {
-	fontSize: 18,
+	fontSize: 16,
 	color: '#ffffff',
-	text: 'Bank',
+	text: 'bank',
 };
 
 export const BANK: MeshActor = {

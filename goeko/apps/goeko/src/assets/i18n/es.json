@@ -1,5 +1,8 @@
 {
-
+    "sme": "Pymes",
+    "cleantech": "Cleantech",
+    "start":"Empezar",
+    "sloganGoeko": "La conexión con la eficiencia",
     "MENU":  {
         "aboutGoEKo": "Sobre GoEKo",
         "blog": "Blog",
@@ -9,5 +12,17 @@
     "SCENES" : {
         "slogan_text1": "Sistema GoEko",
         "slogan_text2": "¿Quiere eres?"
+    },
+    "BANNER": {
+        "swissCompany" : "Compañia Suiza",
+        "the": "La",
+        "green": "transición",
+        "transition": "verde",
+        "easy": "Fácil",
+        "fast": "Rápido",
+        "affordable": "Asequible"
+    },
+    "HOME" : {
+        "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
     }
 }

@@ -4,25 +4,21 @@
 
 import { Directive, Input } from '@angular/core';
 
-type appearance = 'transparent' | 'primary' | 'white' | 'any' | null;
+type appearance = 'transparent' | 'primary' | 'white' | 'any' | 'link' | null;
 @Directive({
-  selector: '[go-button]',
-  host: {
-    class: 'go-button',
-    '[attr.appearance]':'appearance'
-  }
+	selector: '[go-button]',
+	host: {
+		class: 'go-button',
+		'[attr.appearance]': 'appearance',
+	},
 })
 export class ButtonDirective {
-
-  @Input('appearance')
-  public get appearance():appearance  {
-    return this._appearance;
-  }
-  public set appearance(value: appearance) {
-    this._appearance = value;
-  }
-  private _appearance!: appearance
-
- 
-
+	@Input('appearance')
+	public get appearance(): appearance {
+		return this._appearance;
+	}
+	public set appearance(value: appearance) {
+		this._appearance = value;
+	}
+	private _appearance!: appearance;
 }

@@ -58,7 +58,7 @@
 	<div class="goeko_in">
 		<go-goeko-button [routerLink]="'../demo/' + id" style="width: 100px">
 			<span class="goeko-go" btn-logo></span>
-			Start
+			{{ 'start' | translate }}
 		</go-goeko-button>
 
 		<!-- 		<button id="goeko-go" class="goeko-go" [routerLink]="'../demo/' + id"></button>
@@ -67,9 +67,9 @@
 </ng-template>
 
 <ng-template #otherActor let-id="id">
-	<h4 class="content-slogan">Free trial to connect with qualified leads</h4>
+	<h4 class="content-slogan">{{ 'HOME.sloganCallActionsBtn' | translate }}</h4>
 	<div class="goeko_in">
-		<go-goeko-button> Start</go-goeko-button>
+		<go-goeko-button> {{ 'start' | translate }}</go-goeko-button>
 		<!-- 		<button id="goeko-go" class="goeko-go" ></button>
  -->
 	</div>

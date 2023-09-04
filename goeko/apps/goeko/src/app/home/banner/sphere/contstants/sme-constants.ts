@@ -15,14 +15,14 @@ const material = {
 const font: MeshFont = {
 	fontSize: 60,
 	color: '#FFFFFF',
-	text: 'SME',
+	text: 'sme',
 };
 
 export const SME: MeshActor = {
 	name: 'sme',
 	segments: 100,
 	diameter: 5.5,
-	title: 'SME',
+	title: 'sme',
 	position: POSITION,
 
 	positionDirectionalLight: POSITION_DIRECTIONAL_LIGHT,

@@ -38,6 +38,15 @@ export class SceneService {
 			this._startTheEngine();
 		}
 	}
+	clear() {
+		if (!this.scene.isDisposed) {
+			this.scene.dispose();
+		}
+	}
+
+	resetScene(canvas: ElementRef<HTMLCanvasElement>) {
+		this.scene.dispose();
+	}
 
 	createScene(canvas: ElementRef<HTMLCanvasElement>) {
 		this._canvas = canvas.nativeElement;
