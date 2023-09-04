@@ -28,6 +28,7 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 	},
 })
 export class SuperSelectComponent extends BaseSelectComponent implements OnInit {
+	@Input() noFloatinglabel: boolean = false;
 	override ngOnInit(): void {
 		super.ngOnInit();
 

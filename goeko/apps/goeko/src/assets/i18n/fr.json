@@ -1,0 +1,12 @@
+{
+    "MENU":  {
+        "aboutGoEKo": "À propos GoIKo",
+        "blog": "Blog",
+        "contanctUs": "Contactez-nous",
+        "login": "Se connecter"
+    },
+    "SCENES" : {
+        "slogan_text1": "Système Goeko",
+        "slogan_text2": "Est-ce que tu veux?"
+    }
+}

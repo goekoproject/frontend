@@ -16,7 +16,9 @@
 	#origin="cdkOverlayOrigin"
 	#trigger
 >
-	<label id="floting-label" class="select_label" #labelElement>{{ placeholder }}</label>
+	<label id="floting-label" class="select_label" [ngClass]="{ 'not-floating': noFloatinglabel }" #labelElement>{{
+		placeholder
+	}}</label>
 
 	<div *ngIf="!empty" class="select_value">
 		{{ label }}
@@ -44,7 +46,7 @@
 			role="listbox"
 			tabindex="-1"
 			(keydown)="_handleKeydown($event)"
-			class="select_options scrollbar"
+			class="select_options go-scroll"
 			cdkTrapFocus
 		>
 			<ng-content></ng-content>

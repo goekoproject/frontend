@@ -1,12 +1,10 @@
-<div class="menu-item" *ngFor="let item of menu">
-  <ng-container [ngSwitch]="item.type">
-    <ng-container *ngSwitchCase="'button'">
-      <button go-button appearance="transparent">
-        {{item.title}}
-      </button>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-      <a [routerLink]="item.url">{{item.title}}</a>
-    </ng-container>
-  </ng-container>
+<div class="menu-wrapper">
+	<div class="menu-item" *ngFor="let item of menu">
+		<a [routerLink]="item.url">{{ item.keyLang | translate }}</a>
+	</div>
+</div>
+<div class="menu-actions">
+	<button go-button appearance="transparent">{{ 'MENU.login' | translate }}</button>
+	<goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang">
+	</goeko-select-i18n>
 </div>

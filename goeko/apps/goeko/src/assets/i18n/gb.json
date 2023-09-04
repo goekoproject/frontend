@@ -1,0 +1,12 @@
+{
+    "MENU":  {
+        "aboutGoEKo": "About GoEko",
+        "blog": "Blog",
+        "contanctUs": "Contact us",
+        "login": "Login"
+    },
+    "SCENES" : {
+        "slogan_text1": "GoEko System",
+        "slogan_text2": "Who are you?"
+    }
+}

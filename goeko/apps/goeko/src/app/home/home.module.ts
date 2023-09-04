@@ -12,6 +12,7 @@ import { ScenesComponent } from './banner/scenes/scenes.component';
 import { SphereComponent } from './banner/sphere/sphere.component';
 import { ContentComponent } from './content/content.component';
 import { OrderByPipe } from './content/order-by.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
 	declarations: [
@@ -31,6 +32,7 @@ import { OrderByPipe } from './content/order-by.pipe';
 		AngularSvgIconModule.forRoot(),
 		TooltipModule,
 		GoekoButtonModule,
+		TranslateModule,
 	],
 })
 export class HomeModule {}

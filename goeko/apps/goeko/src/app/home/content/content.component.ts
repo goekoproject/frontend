@@ -6,6 +6,7 @@ import { map } from 'rxjs';
 import { InteractionService } from '../banner/scenes/interaction.service';
 import { HomeService } from '../home.service';
 import { CONTENT } from './content.contants';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
 	selector: 'go-content',
 	templateUrl: './content.component.html',
@@ -24,6 +25,7 @@ export class ContentComponent implements OnInit {
 
 	public content = CONTENT;
 
+	private currentLang!: string;
 	private _searchEntry$ = (entryId: any) => {
 		console.log(entryId);
 		return this._homeService.getEntry(entryId).pipe(map((benefits: any) => this._buildBenefis(benefits)));
@@ -45,12 +47,14 @@ export class ContentComponent implements OnInit {
 	constructor(
 		private _homeService: HomeService,
 		private _router: Router,
+		private _translate: TranslateService,
 		private _interactionService: InteractionService,
 		private _viewportScroller: ViewportScroller
 	) {}
 
 	ngOnInit(): void {
 		AOS.init();
+		this.currentLang = this._translate.defaultLang;
 		window.addEventListener('load', AOS.refresh);
 		this._getActors();
 		this._onClickSme();
@@ -79,7 +83,7 @@ export class ContentComponent implements OnInit {
 	}
 
 	private _getActors() {
-		this._homeService.getContentType('actor').subscribe((res) => {
+		this._homeService.getContentType('actor', this.currentLang).subscribe((res) => {
 			this.articles = res.map((actor: any) => ({
 				...actor,
 				id: actor.name.trim().toLowerCase(),

@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { ContentFulService } from '@goeko/store';
 import { map } from 'rxjs';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class HomeService {
-    constructor(private _contentFul: ContentFulService) { }
+	constructor(private _contentFul: ContentFulService) {}
 
-    getContent() {
-        return this._contentFul.getContentEntry();
-    }
+	getContent() {
+		return this._contentFul.getContentEntry();
+	}
 
-    getEntry(entryId: string) {
-        return this._contentFul.getEntryId(entryId);
-    }
+	getEntry(entryId: string) {
+		return this._contentFul.getEntryId(entryId);
+	}
 
-    getContentType(contentType: string) {
-        return this._contentFul.getContentType(contentType).pipe(map(res => res.items.map(item => item.fields)));
-    }
-    
+	getContentType(contentType: string, currentLang: string) {
+		return this._contentFul
+			.getContentType(contentType, currentLang)
+			.pipe(map((res) => res.items.map((item) => item.fields)));
+	}
 }

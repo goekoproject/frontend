@@ -15,7 +15,13 @@ import { FooterComponent } from './shell/footer/footer.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { MenuComponent } from './shell/menu/menu.component';
 import { TeamComponent } from './team/team.component';
-
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { SelectI18nModule } from '@goeko/business-ui';
+const httpLoaderFactory = (http: HttpClient) => {
+	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+};
 @NgModule({
 	declarations: [AppComponent, NxWelcomeComponent, MenuComponent, HeaderComponent, TeamComponent, FooterComponent],
 	imports: [
@@ -24,9 +30,18 @@ import { TeamComponent } from './team/team.component';
 		AppRoutingModule,
 		ButtonModule,
 		ContentFulModule.forRoot(ContentConfig),
+		SelectI18nModule,
 		ConfigModule.forRoot({
 			endopoint: environment.baseUrl,
 			tokenAccess: environment.baseUrl,
+		}),
+		TranslateModule.forRoot({
+			defaultLanguage: 'fr',
+			loader: {
+				provide: TranslateLoader,
+				useFactory: httpLoaderFactory,
+				deps: [HttpClient],
+			},
 		}),
 	],
 	providers: [],

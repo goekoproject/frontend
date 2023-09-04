@@ -11,6 +11,6 @@ import { SuperSelectComponent } from './super-select/super-select.component';
 @NgModule({
 	declarations: [SuperSelectComponent, SuperOptionComponent, PlaygroundSuperSelectComponent, SelectCheckboxComponent],
 	imports: [CommonModule, OverlayModule, A11yModule, ReactiveFormsModule, FormsModule],
-	exports: [SuperOptionComponent, SuperSelectComponent],
+	exports: [SuperOptionComponent, SuperSelectComponent, PlaygroundSuperSelectComponent],
 })
 export class UiSuperSelectModule {}

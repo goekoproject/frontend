@@ -1,0 +1,24 @@
+.langs {
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0, rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+  top: 8px;
+  position: relative;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+
+  li {
+    width: 50px;
+    text-align: center;
+    padding: 0.4rem;
+    cursor: pointer;
+    &:hover {
+    background: rgb(0 144 214 / 24%);
+      border-radius: 6px;
+    }
+  }
+}
+
+.select-langs {
+    width: 3.4rem;
+    padding: 6px;
+}

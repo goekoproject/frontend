@@ -4,26 +4,20 @@ let _id = Math.random();
 export const MENU: IMenu[] = [
 	{
 		id: ++_id,
-		title: 'About GoEko',
+		keyLang: 'MENU.aboutGoEKo',
 		url: '',
 		type: 'text',
 	},
 	{
 		id: ++_id,
-		title: 'Blog',
+		keyLang: 'MENU.blog',
 		url: '',
 		type: 'text',
 	},
 	{
 		id: ++_id,
-		title: 'Contact us',
+		keyLang: 'MENU.contanctUs',
 		url: '',
 		type: 'text',
-	},
-	{
-		id: ++_id,
-		title: 'Login',
-		url: '',
-		type: 'button',
 	},
 ];

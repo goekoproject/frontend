@@ -16,11 +16,12 @@
   height: 10rem;
   transition: .2s all ease-in-out;
   &-wrapper {
-    width: 82.5rem;
+    width: 60%;
     display: flex;
     align-items: center;
     height: 6rem;
     gap: 1rem;
+    
   }
   &-slogan {
     color: var(--color-primary);

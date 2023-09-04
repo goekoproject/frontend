@@ -1,0 +1,13 @@
+{
+
+    "MENU":  {
+        "aboutGoEKo": "Sobre GoEKo",
+        "blog": "Blog",
+        "contanctUs": "Contáctenos",
+        "login": "Accesso"
+    },
+    "SCENES" : {
+        "slogan_text1": "Sistema GoEko",
+        "slogan_text2": "¿Quiere eres?"
+    }
+}

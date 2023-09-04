@@ -33,7 +33,7 @@ $color-label-pressed: #0090d6;
 }
 
 @mixin label-floting {
-	&_label:has(+ div:not(:empty)) {
+	&_label:has(+ div:not(:empty)):not(+ .not-floating) {
 		position: absolute;
 		font-size: 13px;
 		transform: translateY(-15px);
@@ -56,6 +56,7 @@ $color-label-pressed: #0090d6;
 }
 .select-dropdown {
 	position: fixed;
+	z-index: 10000;
 }
 
 .select {
@@ -86,6 +87,7 @@ $color-label-pressed: #0090d6;
 		border-radius: 12px;
 		overflow-y: scroll;
 		max-height: 20rem;
+		min-width: fit-content;
 	}
 	&_label {
 		font-size: 15px;
@@ -131,4 +133,24 @@ $color-label-pressed: #0090d6;
 
 .before-icon-select:not(:empty) ~ div {
 	padding-left: 2.5rem;
+}
+.super-select {
+	label {
+		background-color: transparent;
+		color: #174ea6;
+		border: 1px solid #fff;
+		box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0, rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+		padding: 2px 24px;
+		border-radius: 24px;
+		touch-action: manipulation;
+		width: auto;
+		will-change: transform, opacity;
+		height: 48px;
+		justify-content: center;
+		letter-spacing: 0.25px;
+		display: inline-flex;
+		align-items: center;
+		font-weight: 600; 
+		position: absolute;
+	}
 }

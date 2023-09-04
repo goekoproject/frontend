@@ -24,14 +24,15 @@ html {
 
 body {
   background-color: var(--color-background-white);
-  margin: 0;
+  margin: 0 auto;
   font: var(--font-default);
   position: relative;
   overflow-x: hidden;
-  min-height: 100dvh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-width: 1920px;
 }
 
 :root {
