@@ -4,6 +4,7 @@
     "bank": "Bank",
     "start":"Start",
     "sloganGoeko": "The Connection to Efficiency",
+    "companyDetails" : "Company Details",
     "MENU":  {
         "aboutGoEKo": "About GoEko",
         "blog": "Blog",
@@ -25,5 +26,11 @@
     },
     "HOME" : {
         "sloganCallActionsBtn": "Free trial to connect with qualified leads"
+    },
+    "CATEGORIES" : {
+        "co2Emissions":"CO2 emissions",
+        "waste":"Waste",
+        "water":"Water",
+        "hazardousProduct":"Hazardous Product"
     }
 }

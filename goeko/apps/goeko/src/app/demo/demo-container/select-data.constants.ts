@@ -50,6 +50,12 @@ export const SelectProducts = [
 	{ id: 9, title: 'Electrical and electronic waste containing hazardous substances' },
 	{ id: 10, title: 'Paint/varnish' },
 ];
+
+export const SelectEnergySource = [
+	{ id: 1, title: 'A smart management system optimising energy consumption' },
+	{ id: 2, title: 'Green solution producing the energy for your building or activity needs' },
+];
+
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -57,4 +63,5 @@ export const DataSelect = {
 	mainCategoryNonInert: SelectMainCategoryNonInert,
 	mainActivity: SelectMainActivity,
 	products: SelectProducts,
+	energySource: SelectEnergySource,
 };

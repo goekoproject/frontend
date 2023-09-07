@@ -4,6 +4,7 @@
     "bank":"Banque",
     "start":"Commencer",
     "sloganGoeko": "Le lien avec l’efficacité",
+    "companyDetails" : "Détails de l'entreprise",
     "MENU":  {
         "aboutGoEKo": "À propos GoIKo",
         "blog": "Blog",
@@ -25,6 +26,12 @@
     },
     "HOME" : {
         "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des prospects qualifiés"
+    },
+    "CATEGORIES" : {
+        "co2Emissions":"Emissions de CO2",
+        "waste":"Déchets",
+        "water":"Eau",
+        "hazardousProduct":"Produit dangereux"
     }
    
 }

@@ -5,7 +5,6 @@
 }
 .section-step {
 	display: flex;
-	background: #f9fbfc;
 	height: 100%;
 	width: 19%;
 	padding: 2rem 2rem;
@@ -14,12 +13,15 @@
 	gap: 3rem;
 }
 .section-form {
+	background: #EDF1F2;
     display: flex;
-    width: 65%;
+	width: 60%;
     align-items: center;
     margin: 0 auto;
 	position: relative;
-    top: -11%;
+	border-radius: 28px;
+	max-height: 46rem;
+    align-items: center;
 }
 .content-form {
 	display: flex;
@@ -60,18 +62,47 @@
 }
 .elements {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	gap: 0.8rem;
-	height: 2.7rem;
+	height: 6.3rem;
+	width: 100%;
 	transition: all 0.8s ease-in-out;
-	border-radius: 3rem;
-	width: fit-content;
+	border-radius: 14px;
+    border: 2px solid #0090D6;
 	padding: 1rem;
+	margin: 1rem 0;
+	justify-content: center;
+	cursor: pointer;
 	&--active {
 		color: #537cd0;
 		background: #ebefff;
 		font-size: 18px;
 		font-weight: bold;
+	}
+	&-icon {
+		color: #0090D6;
+		font-size: 2.2rem;
+	}
+	&-title {
+		font-size: 1.2rem;
+	}
+	&:hover {
+		filter: drop-shadow(1px 1px 9px #0090D6);
+		color: #080b17e0;
+	}
+}
+.elements:first-child {
+	height: 2.9rem;
+	flex-direction: row;
+	filter: none;
+	margin-bottom: 5rem;
+	position: relative;
+	.elements-icon {
+		font-size: 1.5rem;
+	}
+	.elements-title {
+		font-size: 1rem;
+
 	}
 }
 .form-wrapper {
@@ -155,13 +186,31 @@
     display: block;
 }
 .form-actions {
-	display: flex;
-    justify-content: space-around;
+    display: flex;
+    justify-content: center;
     margin: 2rem 0;
+    position: absolute;
+    margin: 0 auto;
+	gap: 2rem;
+    left: 0;
+    right: 0;
+	bottom: -3%;
 }
 
 .field-form-checked {
 	display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.line-connected {
+	position: absolute;
+    width: 20%;
+    transform: rotate(90deg);
+    top: 5rem;
+    border-style: dotted;
+    border-top-width: 7px;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
 }

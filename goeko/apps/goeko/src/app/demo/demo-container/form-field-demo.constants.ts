@@ -6,7 +6,7 @@ export enum STATUS_SECTION {
 }
 export const FORM_FIELD_DEMO: Section[] = [
 	{
-		nameSection: 'Company details',
+		keyLang: 'companyDetails',
 		controlName: 'companyDetail',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'apartment',
@@ -19,12 +19,12 @@ export const FORM_FIELD_DEMO: Section[] = [
 				textHelp: '',
 				label: 'Company name',
 			},
-			{
+			/* 			{
 				controlName: 'numberEmployees',
 				type: 'number',
 				textHelp: 'How many employees does your company have?',
 				label: 'Number of employees',
-			},
+			}, */
 			{
 				controlName: 'countries',
 				type: 'text',
@@ -46,7 +46,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		nameSection: 'CO2 emissions',
+		keyLang: 'CATEGORIES.co2Emissions',
 		controlName: 'co2Emission',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',
@@ -78,10 +78,16 @@ export const FORM_FIELD_DEMO: Section[] = [
 				textHelp: '',
 				label: 'Does your company use insolation panels?',
 			},
+			{
+				controlName: 'energySource',
+				type: 'question',
+				textHelp: '',
+				label: 'Would your company like to use less carbon intensive-energy thanks to:',
+			},
 		],
 	},
 	{
-		nameSection: 'Waste',
+		keyLang: 'CATEGORIES.waste',
 		controlName: 'waste',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'water_pump',
@@ -97,7 +103,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		nameSection: 'Water',
+		keyLang: 'CATEGORIES.water',
 		controlName: 'waterConsumption',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'water_drop',
@@ -127,7 +133,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		nameSection: 'Hazardous product',
+		keyLang: 'CATEGORIES.hazardousProduct',
 		controlName: 'hazardousProduct',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'science',
@@ -143,7 +149,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		nameSection: 'Summary',
+		keyLang: 'Summary',
 		status: STATUS_SECTION.COMPLETED,
 		controlName: '',
 		showResult: false,

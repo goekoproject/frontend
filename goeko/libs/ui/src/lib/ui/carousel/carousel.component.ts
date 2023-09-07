@@ -29,6 +29,7 @@ export class GoSlideDirective {
 		trigger('fadeIn', [
 			transition('* => next', [style({ opacity: 0 }), animate('500ms', style({ opacity: 1 }))]),
 			transition('* => prev', [animate('500ms', style({ opacity: 0 }))]),
+			transition(':enter', [animate('500ms', style({ opacity: 0 }))]),
 		]),
 	],
 	host: {
@@ -43,10 +44,26 @@ export class CarouselComponent implements AfterContentInit {
 	@Input() hiddenButtonPrev = false;
 	@Input() hiddenButtonNext = false;
 
-	public selectedSlideIndex: number = 0;
+	@Input() disabledButtonNext = false;
+
+	@Input()
+	get selectedSlideIndex(): number {
+		return this._selectedSlideIndex;
+	}
+
+	set selectedSlideIndex(index: number) {
+		if (index) {
+			this._selectedSlideIndex = index;
+			this.selectedSlideTemplateRef = null;
+			this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
+			this.animateStateSlide = '';
+		}
+	}
+
 	public selectedSlideTemplateRef!: TemplateRef<any> | null;
+
+	private _selectedSlideIndex: number = 0;
 	public animateStateSlide = '';
-	public disabledButtonNext = false;
 	public disabledButtonPrev = true;
 
 	get isLastSlide() {
@@ -55,16 +72,14 @@ export class CarouselComponent implements AfterContentInit {
 	constructor() {}
 	ngAfterContentInit(): void {
 		this.selectedSlideTemplateRef = this.slide.first?.template;
-		console.log(this.slide);
 	}
 	next() {
 		if (this.disabledButtonNext) {
 			return;
 		}
-		this.selectedSlideTemplateRef = null;
 		this.selectedSlideIndex += 1;
-		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
-		this.animateStateSlide = 'next';
+		/* 		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
+		 */ this.animateStateSlide = 'next';
 		this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.NEXT);
 	}
 
@@ -72,10 +87,9 @@ export class CarouselComponent implements AfterContentInit {
 		if (this.disabledButtonPrev) {
 			return;
 		}
-		this.selectedSlideTemplateRef = null;
 		this.selectedSlideIndex -= 1;
-		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
-		this.animateStateSlide = 'prev';
+		/* 		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
+		 */ this.animateStateSlide = 'prev';
 		this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.PREV);
 	}
 

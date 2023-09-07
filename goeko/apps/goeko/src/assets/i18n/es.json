@@ -24,5 +24,11 @@
     },
     "HOME" : {
         "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
+    },
+    "CATEGORIES" : {
+        "co2Emissions" : "Emisiones CO2",
+        "waste": "Residuos",
+        "water": "Agua",
+        "hazardousProduct" :"Producto peligroso"
     }
 }

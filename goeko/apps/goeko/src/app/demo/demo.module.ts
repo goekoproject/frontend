@@ -17,6 +17,7 @@ import { DemoResultComponent } from './demo-result/demo-result.component';
 import { SmeModule } from '@goeko/store';
 import { environment } from '../../environments/environment';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
 	declarations: [DemoContainerComponent, GoInputDirective, DemoResultComponent],
@@ -28,6 +29,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 		GoekoButtonModule,
 		UiSuperSelectModule,
 		OverlayModule,
+		TranslateModule,
 		SmeModule.forRoot({
 			endpoint: environment.baseUrl,
 		}),

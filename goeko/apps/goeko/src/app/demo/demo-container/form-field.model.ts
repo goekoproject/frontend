@@ -9,7 +9,7 @@ export interface Field {
 }
 
 export interface Section {
-	nameSection: string;
+	keyLang: string;
 	status: STATUS_SECTION;
 	icon?: string;
 	fields?: Field[];

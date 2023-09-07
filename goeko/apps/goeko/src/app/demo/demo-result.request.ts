@@ -10,14 +10,14 @@ export class MainProduct {
 
 export class CompanyDetail {
 	name: string;
-	numberEmployees: string;
+	numberEmployees: number;
 	countries: string[];
 	email: string;
 	link: string;
 
 	constructor(data: any) {
 		this.name = data.name;
-		this.numberEmployees = data.numberEmployees;
+		this.numberEmployees = 4;
 		this.countries = [data.countries];
 		this.email = data.email;
 		this.link = data.link;
@@ -27,11 +27,13 @@ export class Co2Emission {
 	mainInternalCombustionEngine: MainProduct;
 	mainMineralProduct: MainProduct;
 	mainRigidMaterial: MainProduct;
+	energySource: EnergySource;
 
 	constructor(data: any) {
 		this.mainInternalCombustionEngine = new MainProduct(data.mainInternalCombustionEngine, '12323');
 		this.mainMineralProduct = new MainProduct(data.mainMineralProduct || 'concrete', '1233');
 		this.mainRigidMaterial = data.mainRigidMaterial;
+		this.energySource = new EnergySource(data.energySource);
 	}
 }
 
@@ -61,13 +63,18 @@ export class WaterConsumption {
 		this.lastYearInvoice = data?.lastYearInvoice || '1111';
 	}
 }
+export class EnergySource {
+	sources!: string[];
+	constructor(data: any) {
+		this.sources = data;
+	}
+}
 export class SmeRecomendationParams {
 	companyDetail: CompanyDetail;
 	co2Emission: Co2Emission;
 	waste: Waste;
 	hazardousProduct: HazardousProduct;
 	waterConsumption: WaterConsumption;
-
 	constructor(dataForm: any) {
 		this.co2Emission = new Co2Emission(dataForm.co2Emission);
 		this.companyDetail = new CompanyDetail(dataForm.companyDetail);

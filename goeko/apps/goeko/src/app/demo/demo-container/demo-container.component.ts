@@ -45,8 +45,8 @@ export class DemoContainerComponent implements OnInit {
 			}
 		});
 	}
-	addFormGroup(value: any) {
-		this.slideSelected = value.index;
+	addFormGroup(index: any) {
+		this.slideSelected = index;
 	}
 
 	getResults() {
