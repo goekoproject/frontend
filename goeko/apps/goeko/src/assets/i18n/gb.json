@@ -52,7 +52,7 @@
         "slogan_text2": "Who are you?"
     },
     "SELECT_DATA_LABEL": {
-        "defaultLabel": "Please choose an option",
+        "defaultLabel": "-- Please choose an option --",
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"

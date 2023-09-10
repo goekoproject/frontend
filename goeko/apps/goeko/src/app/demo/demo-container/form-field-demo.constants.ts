@@ -68,7 +68,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 			},
 			{
 				controlName: 'mainMineralProduct',
-				type: 'select',
+				type: 'select-multiple',
 				textHelp: 'cement, concrete, etc.',
 				label: 'CATEGORIES_FIELD.mainMineralProduct',
 			},
@@ -80,7 +80,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 			},
 			{
 				controlName: 'energySource',
-				type: 'question',
+				type: 'select-multiple',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.energySource',
 			},
@@ -126,7 +126,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 			},
 			{
 				controlName: 'mainActivity',
-				type: 'select',
+				type: 'select-multiple',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainActivity',
 			},
@@ -142,11 +142,17 @@ export const FORM_FIELD_DEMO: Section[] = [
 		fields: [
 			{
 				controlName: 'products',
-				type: 'select',
+				type: 'select-multiple',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.products',
 			},
 		],
 	},
-	/* line */
+	{
+		keyLang: 'Summary',
+		status: STATUS_SECTION.COMPLETED,
+		controlName: '',
+		showResult: false,
+		checked: false,
+	},
 ];

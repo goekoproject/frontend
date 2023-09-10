@@ -52,12 +52,13 @@ export class CarouselComponent implements AfterContentInit {
 	}
 
 	set selectedSlideIndex(index: number) {
-		if (index) {
-			this._selectedSlideIndex = index;
-			this.selectedSlideTemplateRef = null;
-			this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
-			this.animateStateSlide = '';
+		if (index === undefined || !this.slide) {
+			return;
 		}
+		this._selectedSlideIndex = index;
+		this.selectedSlideTemplateRef = null;
+		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
+		this.animateStateSlide = '';
 	}
 
 	public selectedSlideTemplateRef!: TemplateRef<any> | null;
@@ -72,6 +73,8 @@ export class CarouselComponent implements AfterContentInit {
 	constructor() {}
 	ngAfterContentInit(): void {
 		this.selectedSlideTemplateRef = this.slide.first?.template;
+
+		this.selectedSlideTemplateRef = this.slide.toArray().at(1)?.template;
 	}
 	next() {
 		if (this.disabledButtonNext) {

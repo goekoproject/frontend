@@ -16,9 +16,14 @@
 	#origin="cdkOverlayOrigin"
 	#trigger
 >
-	<label id="floting-label" class="select_label" [ngClass]="{ 'not-floating': noFloatinglabel }" #labelElement>{{
-		placeholder
-	}}</label>
+	<label
+		*ngIf="empty"
+		id="floting-label"
+		class="select_label"
+		[ngClass]="{ 'not-floating': noFloatinglabel }"
+		#labelElement
+		>{{ placeholder }}</label
+	>
 
 	<div *ngIf="!empty" class="select_value">
 		{{ label }}
@@ -26,6 +31,7 @@
 
 	<i id="{{ arrowId }}" class="icon-Arrow-Chevron-Down select_arrow" [ngClass]="{ 'select-arrow--rotate': isOpen }">
 	</i>
+	<span class="material-symbols-rounded"> keyboard_arrow_down </span>
 
 	<div class="ui-select_message-error" *ngIf="hasError">
 		<ng-content select="[isError]"></ng-content>

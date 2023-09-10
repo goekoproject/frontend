@@ -1,3 +1,4 @@
+
 $border-color: var(--state-border-default);
 $border-color-disabled: transparent;
 $border-color-error: var(--border-error);
@@ -42,7 +43,6 @@ $color-label-pressed: #0090d6;
 
 .super-select {
 	display: block;
-	width: fit-content;
 }
 .super-select[disabled] {
 	.select {
@@ -138,9 +138,7 @@ $color-label-pressed: #0090d6;
 	label {
 		background-color: transparent;
 		color: #174ea6;
-		border: 1px solid #fff;
-		box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0, rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
-		padding: 2px 24px;
+	padding: 2px 24px;
 		border-radius: 24px;
 		touch-action: manipulation;
 		width: auto;
@@ -153,4 +151,8 @@ $color-label-pressed: #0090d6;
 		font-weight: 600; 
 		position: absolute;
 	}
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+	opacity: 0;
 }

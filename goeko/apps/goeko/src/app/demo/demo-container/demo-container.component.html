@@ -3,27 +3,29 @@
 		<!-- 		<img class="demo-logo go-link" src="assets/logo_footer.png" alt="logo_footer" [routerLink]="'/'" />
  -->
 		<ul class="section-elements">
-			<li
-				(click)="addFormGroup(index)"
-				class="elements"
-				[class.elements--active]="index === slideSelected"
-				*ngFor="let element of formField; let index = index; let first = first"
-			>
-				<span class="line-connected" *ngIf="first"></span>
-				<span class="material-symbols-rounded elements-icon"> {{ element.icon }} </span>
-				<p class="elements-title">{{ element.keyLang | translate }}</p>
-			</li>
+			<ng-container *ngFor="let element of formField; let index = index; let first = first; last as isLast">
+				<li
+					*ngIf="!isLast"
+					(click)="addFormGroup(index)"
+					class="elements"
+					[class.elements--active]="index === slideSelected"
+				>
+					<span class="line-connected" *ngIf="first"></span>
+					<span class="material-symbols-rounded elements-icon"> {{ element.icon }} </span>
+					<p class="elements-title">{{ element.keyLang | translate }}</p>
+				</li>
+			</ng-container>
 		</ul>
 	</section>
 	<section class="section-form">
 		<go-carousel
 			(valueChangeButton)="addFormGroup($event.value)"
-			[hiddenButtonNext]="isSlideSummary"
+			[hiddenButtonNext]="showSummary"
 			[selectedSlideIndex]="slideSelected"
 		>
 			<ng-container *ngFor="let element of formField; last as isLast">
-				<section *goSlide [class.content-form]="!isSlideSummary">
-					<ng-container *ngIf="!(isLast && isSlideSummary); else summary">
+				<section *goSlide class="content-form go-scroll" [class.content-form-demo]="isLast">
+					<ng-container *ngIf="!isLast; else summary">
 						<!--FORM ACTORS-->
 						<div class="form-wrapper" [formGroupName]="element.controlName">
 							<div class="form-header">
@@ -69,21 +71,19 @@
 										<ng-container *ngSwitchCase="'select'">
 											<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
 
-											<select
+											<ui-super-select
+												[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
 												[formControlName]="field.controlName"
 												[id]="field.controlName"
 												[name]="field.controlName"
 											>
-												<option value="">
-													--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--
-												</option>
-												<option
+												<super-option
 													*ngFor="let option of dataSelect[field.controlName]"
 													[value]="option.keyLang | translate"
 												>
 													{{ option.keyLang | translate }}
-												</option>
-											</select>
+												</super-option>
+											</ui-super-select>
 										</ng-container>
 
 										<!-- INPUT SELECT-MULTIPLE-->
@@ -91,20 +91,20 @@
 										<ng-container *ngSwitchCase="'select-multiple'">
 											<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
 
-											<select
-												multiple
+											<ui-super-select
+												[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+												[multiple]="true"
 												[formControlName]="field.controlName"
 												[id]="field.controlName"
 												[name]="field.controlName"
 											>
-												<option value="">{{ '--Please choose an hola--' }}</option>
-												<option
+												<super-option
 													*ngFor="let option of dataSelect[field.controlName]"
 													[value]="option.keyLang | translate"
 												>
 													{{ option.keyLang | translate }}
-												</option>
-											</select>
+												</super-option>
+											</ui-super-select>
 										</ng-container>
 
 										<!-- Question card-->
@@ -121,7 +121,7 @@
 												</option>
 												<option
 													*ngFor="let option of dataSelect[field.controlName]"
-													[value]="option.keyLang"
+													[value]="option.keyLang | translate"
 												>
 													{{ option.keyLang | translate }}
 												</option>
@@ -145,11 +145,13 @@
 						<div class="demo-summary">
 							<h1>{{ element.keyLang | translate }}</h1>
 							<ul class="section-elements">
-								<ng-container *ngFor="let element of formField; last as isLast">
-									<li class="elements" *ngIf="!isLast">
+								<ng-container *ngFor="let element of formField; last as isLast; index as index">
+									<li class="elements-field" *ngIf="!isLast">
 										<div class="summary-section-header">
-											<span class="material-symbols-rounded"> {{ element.icon }} </span>
 											<h2>{{ element.keyLang | translate }}</h2>
+											<span class="material-symbols-rounded" (click)="addFormGroup(index)">
+												edit</span
+											>
 										</div>
 										<div class="summary-section-body">
 											<ng-container *ngFor="let field of element.fields">
@@ -189,13 +191,6 @@
 										</div>
 									</li>
 								</ng-container>
-								<div class="form-actions">
-									<button type="button" go-button appearance="white">Cancel</button>
-									<go-goeko-button class="button-submit" (click)="getResults()">
-										<span class="goeko-go" btn-logo></span>
-										Eco-solutions</go-goeko-button
-									>
-								</div>
 							</ul>
 						</div>
 					</ng-template>
@@ -204,6 +199,7 @@
 		</go-carousel>
 		<div class="form-actions">
 			<button type="button" go-button appearance="white">Cancel</button>
+			<button type="button" go-button appearance="white" (click)="gotToSummary()">Summary</button>
 			<go-goeko-button class="button-submit" (click)="getResults()">
 				<span class="goeko-go" btn-logo></span>
 				Eco-solutions</go-goeko-button

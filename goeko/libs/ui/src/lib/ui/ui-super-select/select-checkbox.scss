@@ -7,9 +7,9 @@
 	display: block;
 	min-width: 24px;
 	min-height: 24px;
-	border: 2px solid var(--primary-lightBlue-default);
+	border: 2px solid #3b6ab4;
 	border-radius: 4px;
-	background-color: var(--grayscale-off-white);
+	background-color: #fff;
 	position: relative;
 	margin: 5px;
 	&:after {
@@ -17,7 +17,7 @@
 		top: 2px;
 		width: 7px;
 		height: 13px;
-		border: solid var(--primary-lightBlue-default);
+		border: solid #3b6ab4;
 		border-width: 0 2px 2px 0;
 		transform: rotate(45deg);
 	}

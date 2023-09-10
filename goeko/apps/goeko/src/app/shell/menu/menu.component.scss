@@ -5,6 +5,7 @@ $lineColor: #29EECC;
 .menu-wrapper {
     display: flex;
     gap: 3rem;
+    text-transform: uppercase;
 }
 .menu-actions {
     display: flex;
@@ -19,8 +20,8 @@ $lineColor: #29EECC;
     align-items: center;
     text-align: center;
     width: 100%;
-    justify-content: space-around;
-    &-item {
+    justify-content: space-between;
+     &-item {
         min-width: 3rem;
     }
 

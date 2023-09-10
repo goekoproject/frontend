@@ -22,7 +22,7 @@
   padding: 0;
   min-width: 245px;
   width: 100%;
-  
+
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -36,13 +36,12 @@
     height: 2rem;
     align-items: center;
     padding-left: 1.5rem;
-    transition: all .5s ease-in;
+    transition: all 0.5s ease-in;
     cursor: pointer;
   }
-  li:has(input[type=checkbox]:checked) {
+  li:has(input[type="checkbox"]:checked) {
     background: #0090d6;
     color: #ffff;
-   
   }
   li:hover {
     background: #008fd67e;
@@ -53,7 +52,7 @@
 .eco-solutions {
   display: flex;
   width: 298px;
-  height: 294px;
+  height: 190px;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
@@ -62,6 +61,7 @@
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   transition: all 0.5s ease;
   cursor: pointer;
+  position: relative;
   &:hover {
     box-shadow: 0px 0px 11px 1px #0090d6;
   }
@@ -120,7 +120,14 @@
     cursor: pointer;
     position: absolute;
     right: 8px;
-    padding: 1rem;
+    padding: .3rem;
+    color: #0090d6;
+  }
+  &-zoom {
+    cursor: pointer;
+    position: absolute;
+    right: 44px;
+    padding: .3rem;
     color: #0090d6;
   }
 }
@@ -134,7 +141,7 @@
   height: $height;
 }
 .details-solutions-logo {
-  @include solutions-logo(28%,65%);
+  @include solutions-logo(28%, 65%);
   img {
     object-fit: contain;
     width: 100%;
@@ -145,7 +152,7 @@
   display: flex;
   width: 100%;
   max-height: 114px;
-  height: 100%;
+  height: 46%;
 }
 .eco-solutions-logo {
   @include solutions-logo;
@@ -163,6 +170,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  height: 40%;
   .eco-solutions-name {
     font-family: "Barlow-SemiBold";
   }
@@ -188,19 +196,34 @@
   background: #f5f5f5;
   color: #b4b6c2;
   font-family: "Barlow-SemiBold";
-  line-height: 1.5;
+  line-height: 1.8;
+  border-radius: 0px 14px 0px 16px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1.8rem;
+  color:#FFF;
+
+  &-co2emission{
+    background: var(--color-co2Emission);
+  }
+  &-water{
+    background: var(--color-water);
+  }
+  &-waste{
+    background: var(--color-waste);
+  }
+  &-hazardousProduct{
+    background: var(--color-hazardousProduct);
+  }
 }
 
 .eco-solutions-actions {
   display: flex;
   justify-content: end;
   position: relative;
-  bottom: -14%;
   color: #0090d6;
   gap: 0.3rem;
-  height: 30px;
-  padding: 1.9px;
-
   span:hover,
   a:hover {
     border-radius: 50%;
@@ -235,56 +258,56 @@
   }
 }
 .details-country {
-    width: 100%;
-    padding: 1rem;
-    display: flex;
-    gap: 1rem;
-    border-bottom: 5px solid #F5F5F5;
-    margin: 1rem;
-    border-radius: 3%;
-    font-size: 20px;
-    
-    p {
-        font-weight: bold;
-    }
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  border-bottom: 5px solid #f5f5f5;
+  margin: 1rem;
+  border-radius: 3%;
+  font-size: 20px;
+
+  p {
+    font-weight: bold;
+  }
 }
 
 .details-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 2rem;
-    h4 {
-        font-size: 1rem;
-        width: 73%;
-        margin: 0 auto;
-        font-weight: 300;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  h4 {
+    font-size: 1rem;
+    width: 73%;
+    margin: 0 auto;
+    font-weight: 300;
+  }
 }
 
 .percentage-benefis {
-    display: flex;
-    justify-content: center;
-    font-size: 60px;
-    align-items: center;
-    color: #00D649;
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  align-items: center;
+  color: #00d649;
 }
 .details-ods {
   display: flex;
   gap: 1rem;
   justify-content: center;
-   img {
+  img {
     width: 13%;
-   }
+  }
 }
 .result-arrow-back {
   display: flex;
-    gap: 0.5rem;
-    position: relative;
-    top: -3rem;
-    font-weight: 200;
-    cursor: pointer;
+  gap: 0.5rem;
+  position: relative;
+  top: -3rem;
+  font-weight: 200;
+  cursor: pointer;
 }
 
 @keyframes slideIn {
@@ -294,4 +317,14 @@
   to {
     transform: translateX(0);
   }
+}
+
+.zoom {
+  position: absolute;
+  z-index: 100000000000;
+  width: 100%;
+  background: #fff;
+  left: 0;
+  right: 0;
+  top: 12%;
 }

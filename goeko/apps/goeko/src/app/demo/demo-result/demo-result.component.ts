@@ -15,6 +15,7 @@ export class DemoResultComponent implements OnInit {
 	smeRecomendation!: any;
 	selectedRecomendation: any;
 	selectedRecomendationIndex: any;
+	zoomOutIn = false;
 	@ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
 	get allChecked() {
 		const allChecked = !this.formField.some((field) => field.checked);
@@ -90,6 +91,7 @@ export class DemoResultComponent implements OnInit {
 	}
 	closeDetails() {
 		this.toogleOpenDetails = false;
+		this.zoomOutIn = false;
 	}
 
 	getAll(checked: boolean) {

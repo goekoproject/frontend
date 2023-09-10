@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit {
 
 	public content = CONTENT;
 
-	private currentLang!: string;
+	currentLang!: string;
 	private _searchEntry$ = (entryId: any) => {
 		console.log(entryId);
 		return this._homeService.getEntry(entryId).pipe(map((benefits: any) => this._buildBenefis(benefits)));
@@ -54,6 +54,7 @@ export class ContentComponent implements OnInit {
 
 	ngOnInit(): void {
 		AOS.init();
+		this.currentLang = this._translate.defaultLang;
 		this._getContentActors(this._translate.defaultLang);
 		window.addEventListener('load', AOS.refresh);
 		this._getActors();
@@ -85,6 +86,7 @@ export class ContentComponent implements OnInit {
 	private _getActors() {
 		this._translate.onLangChange.subscribe((res) => {
 			this._getContentActors(res.lang);
+			this.currentLang = res.lang;
 		});
 	}
 

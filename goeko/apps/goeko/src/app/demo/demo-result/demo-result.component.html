@@ -22,7 +22,6 @@
 	<section class="result">
 		<div class="result-arrow-back" [routerLink]="['/demo/sme']">
 			<span class="material-symbols-rounded"> arrow_back_ios_new </span>
-			<p>Back</p>
 		</div>
 		<h1>
 			{{ 'titleResult' | translate }}
@@ -43,26 +42,29 @@
 				<div class="eco-solutions-body">
 					<h3 class="eco-solutions-name">{{ ecoSolutions?.solutionName }}</h3>
 					<p class="eco-solutions-company">{{ ecoSolutions?.companyDetail?.name }}</p>
-					<div class="eco-solutions-benefis">
-						<span class="eco-solutions-type">{{ ecoSolutions?.classification.mainCategory.tittle }}</span>
-						<div class="eco-solutions-benefis-default">
-							<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
-							<p>{{ ecoSolutions?.improvement?.reductionPercentage }}%</p>
-						</div>
-					</div>
+					<span
+						class="eco-solutions-type   eco-solutions-type-{{
+							ecoSolutions?.classification.mainCategory.name
+						}}"
+						>{{ ecoSolutions?.classification.mainCategory.tittle }}</span
+					>
+
 					<div class="eco-solutions-actions">
 						<abbr title="Save"><span class="material-symbols-rounded"> bookmark </span></abbr>
 						<abbr title="{{ ecoSolutions?.companyDetail?.link }}"
 							><a href="{{ ecoSolutions?.companyDetail?.link }}" target="_blank">
-								<span class="material-symbols-rounded"> captive_portal </span>
+								<span class="material-symbols-rounded"> link </span>
 							</a></abbr
 						>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="eco-solutions-detail go-scroll" *ngIf="toogleOpenDetails">
+		<div class="eco-solutions-detail go-scroll" *ngIf="toogleOpenDetails" [class.zoom]="zoomOutIn">
 			<span class="material-symbols-rounded eco-solutions-detail-close" (click)="closeDetails()"> close </span>
+			<span class="material-symbols-rounded eco-solutions-detail-zoom" (click)="zoomOutIn = !zoomOutIn">
+				{{ zoomOutIn ? 'zoom_in_map' : 'zoom_out_map' }}
+			</span>
 			<div class="detail-header">
 				<div class="details-solutions-logo">
 					<img src="{{ selectedRecomendation?.companyDetail?.logo }}" alt="eco solutions logo" />

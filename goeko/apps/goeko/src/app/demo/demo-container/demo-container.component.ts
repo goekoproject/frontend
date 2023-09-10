@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FORM_FIELD_DEMO } from './form-field-demo.constants';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Field } from './form-field.model';
@@ -15,15 +15,18 @@ import {
 	selector: 'goeko-demo-container',
 	templateUrl: './demo-container.component.html',
 	styleUrls: ['./demo-container.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'demo-container',
+	},
 })
 export class DemoContainerComponent implements OnInit {
 	formField = FORM_FIELD_DEMO;
 	form!: FormGroup;
 	slideSelected = 0;
 	public dataSelect = DataSelect as any;
-	get isSlideSummary() {
-		return this.slideSelected + 1 === this.formField.length;
-	}
+	public showSummary: boolean = false;
+
 	isBoolean(value: any) {
 		return typeof value === 'boolean';
 	}
@@ -49,6 +52,9 @@ export class DemoContainerComponent implements OnInit {
 		this.slideSelected = index;
 	}
 
+	gotToSummary() {
+		this.slideSelected = this.formField.length - 1;
+	}
 	getResults() {
 		this._demoServices.setDataForm(this.form.value);
 		this._router.navigate(['demo/sme/result']);

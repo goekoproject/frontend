@@ -1,3 +1,7 @@
+.demo-container {
+  width: 100%;
+}
+
 .demo-wrapper {
   display: flex;
   height: 100%;
@@ -11,6 +15,7 @@
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+  margin-right: 7%;
 }
 .section-form {
   background: #edf1f2;
@@ -21,7 +26,8 @@
   position: relative;
   border-radius: 28px;
   max-height: 46rem;
-  align-items: center;
+  flex-grow: 2;
+  flex-shrink: 2;
 }
 .content-form {
   display: flex;
@@ -40,6 +46,10 @@
     align-items: center;
     font-size: 35px;
     color: #0190d6;
+  }
+  &-demo {
+    width: 100%;
+    max-width: 554px;
   }
   h3 {
     font-size: 1.3rem;
@@ -64,9 +74,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 6.3rem;
+  height: 5.3rem;
   width: 100%;
-  transition: all 0.8s ease-in-out;
+  transition: all .2s ease-in-out;
   border-radius: 14px;
   border: 2px solid #0090d6;
   padding: 1rem;
@@ -127,13 +137,17 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
-  .elements {
+  .elements-field {
     height: auto;
     flex-direction: column;
     border: 2px solid #ebefff;
     border-radius: 8px;
     margin: 0.7rem;
-    width: 100%;
+    width: 95%;
+    padding: 0.3rem;
+  }
+  h1 {
+    font-size: 1.4rem;
   }
 }
 .summary-section-header {
@@ -149,6 +163,9 @@
   h1 {
     font-size: 1.3rem;
     color: #080b17;
+  }
+  span {
+    cursor: pointer;
   }
 }
 .summary-section-body {

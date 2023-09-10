@@ -52,7 +52,7 @@
         "slogan_text2": "Est-ce que tu veux?"
     },
     "SELECT_DATA_LABEL": {
-        "defaultLabel": "Veuillez choisir une option",
+        "defaultLabel": "-- Veuillez choisir une option --",
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Système de gestion intelligent optimisant la consommation d'énergie",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solution verte produisant l'énergie pour les besoins de votre bâtiment ou de votre activité"
@@ -113,7 +113,7 @@
     "bank": "Banque",
     "cleantech": "Cleantech",
     "companyDetails": "Détails de l'entreprise",
-    "sloganGoeko": "Le lien avec l’efficacité",
+    "sloganGoeko": "The Connection to Efficiency",
     "sme": "pme",
     "start": "Commencer",
     "titleResult": "Les éco-solutions les plus adaptées pour"

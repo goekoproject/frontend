@@ -52,7 +52,7 @@
         "slogan_text2": "¿Quiere eres?"
     },
     "SELECT_DATA_LABEL": {
-        "defaultLabel": "Por favor, elija una opción",
+        "defaultLabel": "-- Por favor, elija una opción --",
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Sistema de gestión inteligente que optimiza el consumo de energía",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solución ecológica que produce la energía para las necesidades de tu edificio o actividad"
@@ -111,7 +111,7 @@
     },
     "back": "Volver",
     "cleantech": "Cleantech",
-    "sloganGoeko": "La conexión con la eficiencia",
+    "sloganGoeko": "The Connection to Efficiency",
     "sme": "Pymes",
     "start": "Empezar",
     "titleResult": "Las soluciones ecológicas más adaptadas para"
