@@ -1,37 +1,120 @@
 {
-    "sme": "pme",
-    "cleantech": "Cleantech",
-    "bank":"Banque",
-    "start":"Commencer",
-    "sloganGoeko": "Le lien avec l’efficacité",
-    "companyDetails" : "Détails de l'entreprise",
-    "MENU":  {
+    "BANNER": {
+        "affordable": "Abordable",
+        "easy": "Facile",
+        "fast": "Rapide",
+        "green": "Transition",
+        "swissCompany": "Une entreprise suisse",
+        "the": "LA",
+        "transition": "verte"
+    },
+    "CATEGORIES": {
+        "co2Emissions": "Emissions de CO2",
+        "hazardousProduct": "Produit dangereux",
+        "waste": "Déchets",
+        "water": "Eau"
+    },
+    "CATEGORIES_FIELD": {
+        "amount": "Consommation d'eau (2022)",
+        "energySource": "Votre entreprise souhaite-t-elle utiliser une énergie moins carbonée grâce à :",
+        "fuelInvoice": "Facture de carburant",
+        "lastYearInvoice": "Facture d'eau (2022)",
+        "mainActivity": "Activité qui consomme le plus",
+        "mainCategoryNonInert": "Principale catégorie de déchets non inertes (2022)",
+        "mainInternalCombustionEngine": "Moteur principal à combustion interne",
+        "mainMineralProduct": "Principal produit minéral acheté (2022)",
+        "mainRigidMaterial": "Votre entreprise utilise-t-elle des panneaux isolants ?",
+        "products": "Type de produit dangereux"
+    },
+    "FORM_LABEL": {
+        "companyName": "Nom de l'entreprise",
+        "country": "Pays",
+        "email": "E-mail",
+        "website": "Site web"
+    },
+    "HOME": {
+        "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des prospects qualifiés"
+    },
+    "LANGS": {
+        "en": "Anglais",
+        "es": "Espagnol",
+        "fr": "Français",
+        "gb": "Anglais (Royaume-Uni)"
+    },
+    "MENU": {
         "aboutGoEKo": "À propos GoIKo",
         "blog": "Blog",
         "contanctUs": "Contactez-nous",
         "login": "Se connecter"
     },
-    "SCENES" : {
+    "SCENES": {
         "slogan_text1": "Système Goeko",
         "slogan_text2": "Est-ce que tu veux?"
     },
-    "BANNER": {
-        "swissCompany" : "Une entreprise suisse",
-        "the": "LA",
-        "green": "Transition",
-        "transition": "verte",
-        "easy": "Facile",
-        "fast": "Rapide",
-        "affordable": "Abordable"
+    "SELECT_DATA_LABEL": {
+        "defaultLabel": "Veuillez choisir une option",
+        "selectEnergySource": {
+            "aSmartManagementSystemOptimisingEnergyConsumption": "Système de gestion intelligent optimisant la consommation d'énergie",
+            "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solution verte produisant l'énergie pour les besoins de votre bâtiment ou de votre activité"
+        },
+        "selectMainActivity": {
+            "cleaningSiteVehicles": "Nettoyage des véhicules sur le site",
+            "paint": "Peinture",
+            "pouringConcrete": "Couler du béton",
+            "siteCleaning": "Nettoyage du site",
+            "siteHut": "Cabane de chantier",
+            "toolCleaning": "Nettoyage des outils"
+        },
+        "selectMainCategoryNonInert": {
+            "cartridgesWithoutToxicProducts": "Cartouches sans produits toxiques",
+            "electricalAndElectronicEquipment": "Équipement électrique et électronique",
+            "metalsAndAlloys": "Métaux et alliages",
+            "mineralWools": "Laines minérales",
+            "paintVarnishGlue": "Peinture, vernis, colle",
+            "paperAndCardboard": "Papier et carton",
+            "plaster": "Plâtre",
+            "plastic": "Plastique",
+            "untreatedWood": "Bois non traité"
+        },
+        "selectMainInternalCombustionEngine": {
+            "aerialBucketTruck": "Camion à nacelle aérienne",
+            "backhoe": "Pelle rétro",
+            "backhoeLoader": "Chargeuse-pelleteuse",
+            "bulldozer": "Bulldozer",
+            "dumper": "Camion-benne",
+            "equipmentCarrierTruck": "Camion porteur d'équipement",
+            "grader": "Niveleuse",
+            "loader": "Chargeuse",
+            "materialsCarrierTruck": "Camion porteur de matériaux",
+            "scraper": "Racleur",
+            "steamRoller": "Rouleau compresseur"
+        },
+        "selectMainMineralProduct": {
+            "cement": "Ciment",
+            "concrete": "Béton"
+        },
+        "selectMainRigidMaterial": {
+            "insolationPanels": "Panneaux d'isolation"
+        },
+        "selectProducts": {
+            "aerosol": "Aérosol",
+            "batteries": "Batteries et accumulateurs contenant des substances dangereuses",
+            "cartridgesContainingDangerousSubstances": "Cartouches contenant des substances dangereuses",
+            "electricalAndElectronicWasteContainingHazardousSubstances": "Déchets électriques et électroniques contenant des substances dangereuses",
+            "energySavingLamps": "Ampoules à économie d'énergie",
+            "oilSeparatorSludge": "Boues de séparateur d'huile",
+            "packagingSoiledWithDangerousSubstances": "Emballages souillés par des substances dangereuses",
+            "paintVarnish": "Peinture/vernis",
+            "productsContainingTar": "Produits contenant du goudron",
+            "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses"
+        }
     },
-    "HOME" : {
-        "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des prospects qualifiés"
-    },
-    "CATEGORIES" : {
-        "co2Emissions":"Emissions de CO2",
-        "waste":"Déchets",
-        "water":"Eau",
-        "hazardousProduct":"Produit dangereux"
-    }
-   
+    "back": "Dos",
+    "bank": "Banque",
+    "cleantech": "Cleantech",
+    "companyDetails": "Détails de l'entreprise",
+    "sloganGoeko": "Le lien avec l’efficacité",
+    "sme": "pme",
+    "start": "Commencer",
+    "titleResult": "Les éco-solutions les plus adaptées pour"
 }

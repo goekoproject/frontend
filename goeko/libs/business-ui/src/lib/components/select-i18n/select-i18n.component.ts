@@ -4,6 +4,7 @@ import {
 	ElementRef,
 	EventEmitter,
 	Input,
+	OnInit,
 	Output,
 	QueryList,
 	TemplateRef,
@@ -16,14 +17,19 @@ import {
 	templateUrl: './select-i18n.component.html',
 	styleUrls: ['./select-i18n.component.scss'],
 })
-export class SelectI18nComponent {
+export class SelectI18nComponent implements OnInit {
 	@Input() langs: any;
-	@Input() defaultLang!: string;
+	@Input() defaultLang!: any;
 
 	@Output() onSelect: EventEmitter<any> = new EventEmitter();
 
 	public isOpen = false;
 	public selectedLand: any;
+
+	ngOnInit(): void {
+		this.selectedLand = this.defaultLang;
+	}
+
 	toggle() {
 		this.isOpen = !this.isOpen;
 	}

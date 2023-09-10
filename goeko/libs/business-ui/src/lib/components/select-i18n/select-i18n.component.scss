@@ -7,18 +7,33 @@
   flex-direction: column;
 
   li {
-    width: 50px;
     text-align: center;
     padding: 0.4rem;
     cursor: pointer;
+    display: flex;
+    gap: 0.8rem;
+
     &:hover {
-    background: rgb(0 144 214 / 24%);
-      border-radius: 6px;
+      background: rgb(0 144 214 / 24%);
+      color: #ffff;
+    }
+    &:first-child {
+      border-top-left-radius: 0.7rem;
+      border-top-right-radius: 0.7rem;
+    }
+    &:last-child {
+      border-bottom-left-radius: 0.7rem;
+      border-bottom-right-radius: 0.7rem;
     }
   }
 }
 
+.langs-selected {
+  background: rgb(22 133 187 / 78%);
+  color: #ffff;
+}
+
 .select-langs {
-    width: 3.4rem;
-    padding: 6px;
+  width: 3.4rem;
+  padding: 6px;
 }

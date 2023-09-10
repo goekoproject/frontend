@@ -1,36 +1,120 @@
 {
-    "sme": "Sme",
-    "cleantech": "Cleantech",
-    "bank": "Bank",
-    "start":"Start",
-    "sloganGoeko": "The Connection to Efficiency",
-    "companyDetails" : "Company Details",
-    "MENU":  {
+    "BANNER": {
+        "affordable": "Affortable",
+        "easy": "Easy",
+        "fast": "Fast",
+        "green": "Green",
+        "swissCompany": "A Swiss Company",
+        "the": "The",
+        "transition": "Transition"
+    },
+    "CATEGORIES": {
+        "co2Emissions": "CO2 emissions",
+        "hazardousProduct": "Hazardous Product",
+        "waste": "Waste",
+        "water": "Water"
+    },
+    "CATEGORIES_FIELD": {
+        "amount": "Water consumption (2022)",
+        "energySource": "Would your company like to use less carbon intensive-energy thanks to:",
+        "fuelInvoice": "Fuel invoice",
+        "lastYearInvoice": "Water invoice (2022)",
+        "mainActivity": "Activity that consumes the most",
+        "mainCategoryNonInert": "Main category of non-inert waste (2022)",
+        "mainInternalCombustionEngine": "Main internal combustion engine",
+        "mainMineralProduct": "Main mineral product purchased (2022)",
+        "mainRigidMaterial": "Does your company use insolation panels?",
+        "products": "Type of hazardous product"
+    },
+    "FORM_LABEL": {
+        "companyName": "Company name",
+        "country": "Country",
+        "email": "Email",
+        "website": "Website"
+    },
+    "HOME": {
+        "sloganCallActionsBtn": "Free trial to connect with qualified leads"
+    },
+    "LANGS": {
+        "en": "English",
+        "es": "Spanish",
+        "fr": "French",
+        "gb": "English (UK)"
+    },
+    "MENU": {
         "aboutGoEKo": "About GoEko",
         "blog": "Blog",
         "contanctUs": "Contact us",
         "login": "Login"
     },
-    "SCENES" : {
+    "SCENES": {
         "slogan_text1": "GoEko System",
         "slogan_text2": "Who are you?"
     },
-    "BANNER": {
-        "swissCompany" : "A Swiss Company",
-        "the": "The",
-        "green": "Green",
-        "transition": "Transition",
-        "easy": "Easy",
-        "fast": "Fast",
-        "affordable": "Affortable"
+    "SELECT_DATA_LABEL": {
+        "defaultLabel": "Please choose an option",
+        "selectEnergySource": {
+            "aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
+            "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
+        },
+        "selectMainActivity": {
+            "cleaningSiteVehicles": "Cleaning site vehicles",
+            "paint": "Paint",
+            "pouringConcrete": "Pouring concrete",
+            "siteCleaning": "Site cleaning",
+            "siteHut": "Site hut",
+            "toolCleaning": "Tool cleaning"
+        },
+        "selectMainCategoryNonInert": {
+            "cartridgesWithoutToxicProducts": "Cartridges without toxic products",
+            "electricalAndElectronicEquipment": "Electrical and electronic equipment",
+            "metalsAndAlloys": "Metals and alloys",
+            "mineralWools": "Mineral wools",
+            "paintVarnishGlue": "Paint, varnish, glue",
+            "paperAndCardboard": "Paper and cardboard",
+            "plaster": "Plaster",
+            "plastic": "Plastic",
+            "untreatedWood": "Untreated wood"
+        },
+        "selectMainInternalCombustionEngine": {
+            "aerialBucketTruck": "Aerial bucket truck",
+            "backhoe": "Backhoe",
+            "backhoeLoader": "Backhoe loader",
+            "bulldozer": "Bulldozer",
+            "dumper": "Dumper",
+            "equipmentCarrierTruck": "Equipment carrier truck",
+            "grader": "Grader",
+            "loader": "Loader",
+            "materialsCarrierTruck": "Materials carrier truck",
+            "scraper": "Scraper",
+            "steamRoller": "Steam roller"
+        },
+        "selectMainMineralProduct": {
+            "cement": "Cement",
+            "concrete": "Concrete"
+        },
+        "selectMainRigidMaterial": {
+            "insolationPanels": "Insolation panels"
+        },
+        "selectProducts": {
+            "aerosol": "Aerosol",
+            "batteries": "Batteries and accumulators containing hazardous substances",
+            "cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
+            "electricalAndElectronicWasteContainingHazardousSubstances": "Electrical and electronic waste containing hazardous substances",
+            "energySavingLamps": "Energy-saving lamps",
+            "oilSeparatorSludge": "Oil separator sludge",
+            "packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
+            "paintVarnish": "Paint/varnish",
+            "productsContainingTar": "Products containing tar",
+            "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
+        }
     },
-    "HOME" : {
-        "sloganCallActionsBtn": "Free trial to connect with qualified leads"
-    },
-    "CATEGORIES" : {
-        "co2Emissions":"CO2 emissions",
-        "waste":"Waste",
-        "water":"Water",
-        "hazardousProduct":"Hazardous Product"
-    }
+    "back": "Back",
+    "bank": "Bank",
+    "cleantech": "Cleantech",
+    "companyDetails": "Company Details",
+    "sloganGoeko": "The Connection to Efficiency",
+    "sme": "Sme",
+    "start": "Start",
+    "titleResult": "Most adapted eco-solutions for"
 }

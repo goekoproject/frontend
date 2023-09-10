@@ -19,16 +19,18 @@ export class MenuComponent implements OnInit {
 		}, */
 		{
 			code: 'fr',
+			title: 'LANGS.fr',
 		},
 		{
 			code: 'gb',
+			title: 'LANGS.gb',
 		},
 	];
 	menu = MENU;
-	defaultLang!: string;
+	defaultLang!: any;
 	constructor(private translate: TranslateService) {}
 	ngOnInit(): void {
-		this.defaultLang = this.translate.getDefaultLang();
+		this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang());
 	}
 	onChangeLangs(selectedLand: any) {
 		this.translate.use(selectedLand.code);

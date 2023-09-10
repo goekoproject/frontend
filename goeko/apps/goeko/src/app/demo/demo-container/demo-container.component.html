@@ -39,7 +39,7 @@
 										<!-- INPUT boolean -->
 										<ng-container *ngSwitchCase="'boolean'">
 											<div class="field-form-checked">
-												<label>{{ field.label }}</label>
+												<label>{{ field.label | translate }}</label>
 												<label class="switch">
 													<input
 														type="checkbox"
@@ -61,25 +61,27 @@
 												[formControlName]="field.controlName"
 												type="number"
 											>
-												<p slot="label">{{ field.label }}</p>
+												<p slot="label">{{ field.label | translate }}</p>
 											</go-input>
 										</ng-container>
 										<!-- INPUT SELECT -->
 
 										<ng-container *ngSwitchCase="'select'">
-											<label for="{{ field.controlName }}">{{ field.label }}</label>
+											<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
 
 											<select
 												[formControlName]="field.controlName"
 												[id]="field.controlName"
 												[name]="field.controlName"
 											>
-												<option value="">--Please choose an option--</option>
+												<option value="">
+													--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--
+												</option>
 												<option
 													*ngFor="let option of dataSelect[field.controlName]"
-													[value]="option.title"
+													[value]="option.keyLang | translate"
 												>
-													{{ option.title }}
+													{{ option.keyLang | translate }}
 												</option>
 											</select>
 										</ng-container>
@@ -87,7 +89,7 @@
 										<!-- INPUT SELECT-MULTIPLE-->
 
 										<ng-container *ngSwitchCase="'select-multiple'">
-											<label for="{{ field.controlName }}">{{ field.label }}</label>
+											<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
 
 											<select
 												multiple
@@ -95,31 +97,33 @@
 												[id]="field.controlName"
 												[name]="field.controlName"
 											>
-												<option value="">--Please choose an option--</option>
+												<option value="">{{ '--Please choose an hola--' }}</option>
 												<option
 													*ngFor="let option of dataSelect[field.controlName]"
-													[value]="option.title"
+													[value]="option.keyLang | translate"
 												>
-													{{ option.title }}
+													{{ option.keyLang | translate }}
 												</option>
 											</select>
 										</ng-container>
 
 										<!-- Question card-->
 										<ng-container *ngSwitchCase="'question'">
-											<label for="{{ field.controlName }}">{{ field.label }}</label>
+											<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
 											<select
 												multiple
 												[formControlName]="field.controlName"
 												[id]="field.controlName"
 												[name]="field.controlName"
 											>
-												<option value="">--Please choose an option--</option>
+												<option value="">
+													--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--
+												</option>
 												<option
 													*ngFor="let option of dataSelect[field.controlName]"
-													[value]="option.title"
+													[value]="option.keyLang"
 												>
-													{{ option.title }}
+													{{ option.keyLang | translate }}
 												</option>
 											</select>
 										</ng-container>
@@ -127,7 +131,7 @@
 
 										<ng-container *ngSwitchDefault>
 											<go-input [textHelp]="field.textHelp" [formControlName]="field.controlName">
-												<p slot="label">{{ field.label }}</p>
+												<p slot="label">{{ field.label | translate }}</p>
 											</go-input>
 										</ng-container>
 									</ng-container>
@@ -153,7 +157,7 @@
 													class="form-field"
 													*ngIf="this.form.value[element.controlName][field.controlName]"
 												>
-													<h4>{{ field.label }}</h4>
+													<h4>{{ field.label | translate }}</h4>
 													<p
 														*ngIf="
 															isBoolean(
@@ -208,9 +212,9 @@
 	</section>
 </div>
 <ng-template #question let-field="field">
-	<label for="{{ field.controlName }}">{{ field.label }}</label>
+	<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
 	<select multiple [formControlName]="field.controlName" [id]="field.controlName" [name]="field.controlName">
-		<option value="">--Please choose an option--</option>
+		<option value="">--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--</option>
 		<option *ngFor="let option of dataSelect[field.controlName]" [value]="option.title">
 			{{ option.title }}
 		</option>
