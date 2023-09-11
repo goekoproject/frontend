@@ -73,8 +73,6 @@ export class CarouselComponent implements AfterContentInit {
 	constructor() {}
 	ngAfterContentInit(): void {
 		this.selectedSlideTemplateRef = this.slide.first?.template;
-
-		this.selectedSlideTemplateRef = this.slide.toArray().at(1)?.template;
 	}
 	next() {
 		if (this.disabledButtonNext) {

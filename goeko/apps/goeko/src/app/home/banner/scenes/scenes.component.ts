@@ -76,8 +76,8 @@ export class ScenesComponent implements OnInit, AfterViewInit {
 
 	private _createSME() {
 		this._sphereSme = new MeshActors(this._sphereService, this.scene, SME, this._translate).build(SME.title);
-		this._sphereSme.setShadows('#847575');
-
+		/* 		this._sphereSme.setShadows('#847575');
+		 */
 		this._sphereSme.setEmissiveColor(EMISSIVE_COLOR_SME);
 		this._createEventClickSME();
 	}

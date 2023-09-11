@@ -17,10 +17,10 @@
 			</ng-container>
 		</ul>
 	</section>
-	<section class="section-form">
+	<section class="section-form" [class.section-form-demo]="isSummarySlide">
 		<go-carousel
 			(valueChangeButton)="addFormGroup($event.value)"
-			[hiddenButtonNext]="showSummary"
+			[hiddenButtonNext]="isSummarySlide"
 			[selectedSlideIndex]="slideSelected"
 		>
 			<ng-container *ngFor="let element of formField; last as isLast">
@@ -199,7 +199,9 @@
 		</go-carousel>
 		<div class="form-actions">
 			<button type="button" go-button appearance="white">Cancel</button>
-			<button type="button" go-button appearance="white" (click)="gotToSummary()">Summary</button>
+			<button type="button" go-button appearance="white" (click)="gotToSummary()" *ngIf="!isSummarySlide">
+				Summary
+			</button>
 			<go-goeko-button class="button-submit" (click)="getResults()">
 				<span class="goeko-go" btn-logo></span>
 				Eco-solutions</go-goeko-button

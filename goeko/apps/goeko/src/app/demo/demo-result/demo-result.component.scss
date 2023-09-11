@@ -189,6 +189,8 @@
     display: flex;
   }
 }
+
+
 .eco-solutions-type {
   padding: 0 0.7rem;
   border-radius: 6px;
@@ -215,6 +217,11 @@
   }
   &-hazardousProduct{
     background: var(--color-hazardousProduct);
+  }
+}
+.detail-header {
+  .eco-solutions-type {
+    position: relative;
   }
 }
 

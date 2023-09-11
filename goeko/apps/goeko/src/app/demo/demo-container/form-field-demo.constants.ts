@@ -55,7 +55,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		fields: [
 			{
 				controlName: 'mainInternalCombustionEngine',
-				type: 'select',
+				type: 'select-multiple',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainInternalCombustionEngine',
 			},
@@ -96,7 +96,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		fields: [
 			{
 				controlName: 'mainCategoryNonInert',
-				type: 'select',
+				type: 'select-multiple',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainCategoryNonInert',
 			},

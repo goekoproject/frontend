@@ -17,10 +17,10 @@ export class HeaderComponent implements OnInit {
 	onScroll($event: any) {
 		if (window.scrollY > 0) {
 			this._renderer.setStyle(this.header.nativeElement, 'maxHeight', '6rem');
-			this._renderer.setStyle(this.logo.nativeElement, 'width', '5%');
+			this._renderer.setStyle(this.logo.nativeElement, 'width', '7%');
 		} else {
 			this._renderer.setStyle(this.header.nativeElement, 'maxHeight', '10rem');
-			this._renderer.setStyle(this.logo.nativeElement, 'width', '7%');
+			this._renderer.setStyle(this.logo.nativeElement, 'width', '12%');
 		}
 	}
 

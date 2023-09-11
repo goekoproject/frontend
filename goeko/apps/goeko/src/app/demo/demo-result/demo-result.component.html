@@ -1,12 +1,12 @@
 <div class="result-wrapper">
 	<section class="filter-by">
 		<ul class="filter-type">
-			<li class="elements" (click)="getAll(all.checked)">
+			<li (click)="getAll(all.checked)">
 				<input type="checkbox" class="checkbox" [checked]="allChecked" #all />
 				<p>All</p>
 			</li>
 			<ng-container *ngFor="let element of formField; let index = index">
-				<li class="elements" *ngIf="element.showResult" (click)="onCheckboxStateChange(section.checked, index)">
+				<li *ngIf="element.showResult" (click)="onCheckboxStateChange(section.checked, index)">
 					<input
 						type="checkbox"
 						#section
@@ -72,9 +72,12 @@
 				<div class="detail-header-info">
 					<h3 class="eco-solutions-name">{{ selectedRecomendation?.solutionName }}</h3>
 					<p class="eco-solutions-company">{{ selectedRecomendation?.companyDetail?.name }}</p>
-					<span class="eco-solutions-type">{{
-						selectedRecomendation?.classification.mainCategory.tittle
-					}}</span>
+					<span
+						class="eco-solutions-type eco-solutions-type-{{
+							selectedRecomendation?.classification.mainCategory.name
+						}}"
+						>{{ selectedRecomendation?.classification.mainCategory.tittle }}</span
+					>
 				</div>
 				<span class="details-country">
 					Availability :

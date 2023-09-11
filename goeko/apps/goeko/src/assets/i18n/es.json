@@ -1,4 +1,5 @@
 {
+    "back": "Volver",
     "BANNER": {
         "affordable": "Asequible",
         "easy": "Fácil",
@@ -20,12 +21,13 @@
         "fuelInvoice": "Factura de combustible",
         "lastYearInvoice": "Factura de agua (2022)",
         "mainActivity": "Actividad que más consume",
-        "mainCategoryNonInert": "Categoría principal de residuos no inertes (2022)",
+        "mainCategoryNonInert": "Categoría principal de residuos no inertes",
         "mainInternalCombustionEngine": "Motor de combustión interna principal",
-        "mainMineralProduct": "Principal producto mineral adquirido (2022)",
+        "mainMineralProduct": "Principal producto mineral",
         "mainRigidMaterial": "¿Su empresa utiliza paneles aislantes?",
         "products": "Tipo de producto peligroso"
     },
+    "cleantech": "Cleantech",
     "FORM_LABEL": {
         "companyName": "Nombre de la Compañia",
         "country": "Pais",
@@ -48,11 +50,11 @@
         "login": "Accesso"
     },
     "SCENES": {
-        "slogan_text1": "Sistema GoEko",
+        "slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
         "slogan_text2": "¿Quiere eres?"
     },
     "SELECT_DATA_LABEL": {
-        "defaultLabel": "-- Por favor, elija una opción --",
+        "defaultLabel": "-- Por favor seleccione entre las siguientes opciones --",
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Sistema de gestión inteligente que optimiza el consumo de energía",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solución ecológica que produce la energía para las necesidades de tu edificio o actividad"
@@ -109,8 +111,6 @@
             "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
         }
     },
-    "back": "Volver",
-    "cleantech": "Cleantech",
     "sloganGoeko": "The Connection to Efficiency",
     "sme": "Pymes",
     "start": "Empezar",

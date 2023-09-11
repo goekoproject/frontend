@@ -1,6 +1,8 @@
 {
+    "back": "Back",
+    "bank": "Bank",
     "BANNER": {
-        "affordable": "Affortable",
+        "affordable": "Affordable",
         "easy": "Easy",
         "fast": "Fast",
         "green": "Green",
@@ -20,12 +22,14 @@
         "fuelInvoice": "Fuel invoice",
         "lastYearInvoice": "Water invoice (2022)",
         "mainActivity": "Activity that consumes the most",
-        "mainCategoryNonInert": "Main category of non-inert waste (2022)",
-        "mainInternalCombustionEngine": "Main internal combustion engine",
-        "mainMineralProduct": "Main mineral product purchased (2022)",
-        "mainRigidMaterial": "Does your company use insolation panels?",
+        "mainCategoryNonInert": "Main category of non-inert waste",
+        "mainInternalCombustionEngine": "Main internal combustion engines",
+        "mainMineralProduct": "Main mineral product",
+        "mainRigidMaterial": "Does your company use insulation panels?",
         "products": "Type of hazardous product"
     },
+    "cleantech": "Cleantech",
+    "companyDetails": "Company Details",
     "FORM_LABEL": {
         "companyName": "Company name",
         "country": "Country",
@@ -48,11 +52,11 @@
         "login": "Login"
     },
     "SCENES": {
-        "slogan_text1": "GoEko System",
+        "slogan_text1": "Connecting SMEs to Clean Technologies and Financing",
         "slogan_text2": "Who are you?"
     },
     "SELECT_DATA_LABEL": {
-        "defaultLabel": "-- Please choose an option --",
+        "defaultLabel": "-- Please select from the following options --",
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
@@ -109,10 +113,6 @@
             "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
         }
     },
-    "back": "Back",
-    "bank": "Bank",
-    "cleantech": "Cleantech",
-    "companyDetails": "Company Details",
     "sloganGoeko": "The Connection to Efficiency",
     "sme": "Sme",
     "start": "Start",

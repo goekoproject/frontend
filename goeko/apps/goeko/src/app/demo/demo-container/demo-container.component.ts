@@ -25,8 +25,10 @@ export class DemoContainerComponent implements OnInit {
 	form!: FormGroup;
 	slideSelected = 0;
 	public dataSelect = DataSelect as any;
-	public showSummary: boolean = false;
 
+	get isSummarySlide() {
+		return this.slideSelected === this.formField.length - 1;
+	}
 	isBoolean(value: any) {
 		return typeof value === 'boolean';
 	}
