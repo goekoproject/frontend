@@ -19,7 +19,7 @@
 	</section>
 	<section class="section-form" [class.section-form-demo]="isSummarySlide">
 		<go-carousel
-			(valueChangeButton)="addFormGroup($event.value)"
+			(valueChangeButton)="addFormGroup($event.index)"
 			[hiddenButtonNext]="isSummarySlide"
 			[selectedSlideIndex]="slideSelected"
 		>
