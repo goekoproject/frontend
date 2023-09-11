@@ -20,13 +20,14 @@
 	</section>
 
 	<section class="result">
-		<div class="result-arrow-back" [routerLink]="['/demo/sme']">
-			<span class="material-symbols-rounded"> arrow_back_ios_new </span>
+		<div class="result-header">
+			<span class="material-symbols-rounded" [routerLink]="['/demo/sme']"> arrow_back_ios_new </span>
+			<h1>
+				{{ 'titleResult' | translate }}
+				<span class="result-name-company">{{ smeRecomendationBody.companyDetail.name }}</span>
+			</h1>
 		</div>
-		<h1>
-			{{ 'titleResult' | translate }}
-			<span class="result-name-company">{{ smeRecomendationBody.companyDetail.name }}</span>
-		</h1>
+
 		<div class="eco-solutions-result go-scroll">
 			<div
 				class="eco-solutions"
@@ -61,10 +62,15 @@
 			</div>
 		</div>
 		<div class="eco-solutions-detail go-scroll" *ngIf="toogleOpenDetails" [class.zoom]="zoomOutIn">
-			<span class="material-symbols-rounded eco-solutions-detail-close" (click)="closeDetails()"> close </span>
-			<span class="material-symbols-rounded eco-solutions-detail-zoom" (click)="zoomOutIn = !zoomOutIn">
-				{{ zoomOutIn ? 'zoom_in_map' : 'zoom_out_map' }}
-			</span>
+			<div class="window-actions">
+				<span class="material-symbols-rounded eco-solutions-detail-close" (click)="closeDetails()">
+					close
+				</span>
+				<span class="material-symbols-rounded eco-solutions-detail-zoom" (click)="zoomOutIn = !zoomOutIn">
+					{{ zoomOutIn ? 'zoom_in_map' : 'zoom_out_map' }}
+				</span>
+			</div>
+
 			<div class="detail-header">
 				<div class="details-solutions-logo">
 					<img src="{{ selectedRecomendation?.companyDetail?.logo }}" alt="eco solutions logo" />
@@ -85,14 +91,28 @@
 				</span>
 			</div>
 			<div class="details-body">
-				<section *ngIf="selectedRecomendation?.improvement?.reductionPercentage">
+				<section class="details-body-actions">
+					<div class="action-ecosolution">
+						<span class="material-symbols-rounded"> download </span>
+						<p>Certified</p>
+					</div>
+					<a
+						class="action-ecosolution"
+						href="{{ selectedRecomendation?.companyDetail?.link }}"
+						target="_blank"
+					>
+						<span class="material-symbols-rounded"> link </span>
+						<p>Website</p>
+					</a>
+				</section>
+				<section *ngIf="false">
 					<h4>Environmental impact reduction in comparison with a traditional solution</h4>
 					<div class="percentage-benefis">
 						<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
 						<p>{{ selectedRecomendation.improvement?.reductionPercentage }} %</p>
 					</div>
 				</section>
-				<section *ngIf="selectedRecomendation?.improvement?.operationalCostReductionPercentage">
+				<section *ngIf="false">
 					<h4>Operational cost reduction in comparison with a traditional solution</h4>
 					<div class="percentage-benefis">
 						<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
@@ -108,6 +128,7 @@
 				</section> -->
 			</div>
 			<div class="details-footer">
+				<p>Positive impact on ODS</p>
 				<div class="details-ods">
 					<img
 						*ngFor="let icon of selectedRecomendation.sustainableDevelopmentGoals"
