@@ -14,6 +14,7 @@ export const SelectMainInternalCombustionEngine = [
 export const SelectMainMineralProduct = [
 	{ id: 1, keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.cement' },
 	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.concrete' },
+	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.isolation' },
 ];
 
 export const SelectMainRigidMaterial = [{ id: 1, title: 'SELECT_DATA_LABEL.Insolation panels' }];

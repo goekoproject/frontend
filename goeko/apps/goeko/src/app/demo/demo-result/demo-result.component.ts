@@ -17,12 +17,23 @@ export class DemoResultComponent implements OnInit {
 	selectedRecomendation: any;
 	selectedRecomendationIndex: any;
 	zoomOutIn = false;
-	currentLangCode!: string;
 	@ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
 	get allChecked() {
 		const allChecked = !this.formField.some((field) => field.checked);
 		return allChecked;
 	}
+
+	get currentLangCode(): string {
+		return this._currentLangCode;
+	}
+
+	set currentLangCode(currentLang: string) {
+		this._currentLangCode = currentLang;
+		this._getSmeRecomendations();
+		this.closeDetails();
+	}
+
+	private _currentLangCode!: string;
 
 	smeRecomendationBody!: any;
 	constructor(
@@ -63,7 +74,8 @@ export class DemoResultComponent implements OnInit {
 	}
 
 	getCountriesAvailability(countries: any) {
-		const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+		const lang = this.currentLangCode === 'gb' ? 'en' : this.currentLangCode;
+		const regionNames = new Intl.DisplayNames([lang], { type: 'region' });
 		return ` ${regionNames.of(countries)}`;
 	}
 

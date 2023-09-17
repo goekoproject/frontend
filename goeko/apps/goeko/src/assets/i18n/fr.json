@@ -1,4 +1,6 @@
 {
+    "all": "Tout",
+    "availability": "Disponibilité:",
     "back": "Dos",
     "bank": "Banque",
     "BANNER": {
@@ -10,36 +12,38 @@
         "the": "LA",
         "transition": "verte"
     },
+    "cancel": "Annuler",
     "CATEGORIES": {
-        "co2Emissions": "Emissions de CO2",
-        "hazardousProduct": "Produit dangereux",
+        "co2emission": "Emissions de CO2",
+        "hazardousProduct": "Produits toxiques",
         "waste": "Déchets",
         "water": "Eau"
     },
     "CATEGORIES_FIELD": {
-        "amount": "Consommation d'eau (2022)",
-        "energySource": "Votre entreprise souhaite-t-elle utiliser une énergie moins carbonée grâce à :",
+        "amount": "Activités qui consomment le plus d’eau",
+        "energySource": "Votre entreprise souhaite-t-elle diminuer sa consommation d’énergie grâce à:",
         "fuelInvoice": "Facture de carburant",
         "lastYearInvoice": "Facture d'eau (2022)",
         "mainActivity": "Activité qui consomme le plus",
-        "mainCategoryNonInert": "Principale catégorie de déchets non inertes",
-        "mainInternalCombustionEngine": "Moteur principal à combustion interne",
-        "mainMineralProduct": "Principal produit minéral",
+        "mainCategoryNonInert": "Principales catégories de déchets non inertes",
+        "mainInternalCombustionEngine": "Principaux engins à moteur",
+        "mainMineralProduct": "Principaux produits minéraux",
         "mainRigidMaterial": "Votre entreprise utilise-t-elle des panneaux isolants ?",
-        "products": "Type de produit dangereux"
+        "products": "Types de produits toxiques"
     },
     "certified": "Certifié",
     "cleantech": "Cleantech",
     "companyDetails": "Détails de l'entreprise",
-    "contact": "Contacter",
+    "contact": "Contact",
     "FORM_LABEL": {
         "companyName": "Nom de l'entreprise",
         "country": "Pays",
-        "email": "E-mail",
+        "email": "Email",
         "website": "Site web"
     },
     "HOME": {
-        "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des prospects qualifiés"
+        "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des prospects qualifiés",
+        "sloganCallActionsBtnSME": "Votre transition écologique commence ici"
     },
     "LANGS": {
         "en": "Anglais",
@@ -48,14 +52,15 @@
         "gb": "Anglais (Royaume-Uni)"
     },
     "MENU": {
-        "aboutGoEKo": "À propos GoIKo",
+        "aboutGoEKo": "À propos de GoIKo",
         "blog": "Blog",
-        "contanctUs": "Contactez-nous",
-        "login": "Se connecter"
+        "contanctUs": "Contact",
+        "login": "Login "
     },
+    "ods_msg_card_result": "Impact positif sur ODD",
     "ods_title": "Objectifs de développement durable",
     "SCENES": {
-        "slogan_text1": "Connecter les PME aux technologies propres et au financement",
+        "slogan_text1": "Connexion des PME aux technologies propres et au financement",
         "slogan_text2": "Est-ce que tu veux?"
     },
     "SELECT_DATA_LABEL": {
@@ -72,16 +77,16 @@
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solution verte produisant l'énergie pour les besoins de votre bâtiment ou de votre activité"
         },
         "selectMainActivity": {
-            "cleaningSiteVehicles": "Nettoyage des véhicules sur le site",
+            "cleaningSiteVehicles": "Nettoyage des véhicules de chantier",
             "paint": "Peinture",
-            "pouringConcrete": "Couler du béton",
-            "siteCleaning": "Nettoyage du site",
+            "pouringConcrete": "Coulage du béton",
+            "siteCleaning": "Nettoyage du chantier",
             "siteHut": "Cabane de chantier",
             "toolCleaning": "Nettoyage des outils"
         },
         "selectMainCategoryNonInert": {
             "cartridgesWithoutToxicProducts": "Cartouches sans produits toxiques",
-            "electricalAndElectronicEquipment": "Équipement électrique et électronique",
+            "electricalAndElectronicEquipment": "Equipements électriques et électroniques",
             "metalsAndAlloys": "Métaux et alliages",
             "mineralWools": "Laines minérales",
             "paintVarnishGlue": "Peinture, vernis, colle",
@@ -91,21 +96,22 @@
             "untreatedWood": "Bois non traité"
         },
         "selectMainInternalCombustionEngine": {
-            "aerialBucketTruck": "Camion à nacelle aérienne",
-            "backhoe": "Pelle rétro",
+            "aerialBucketTruck": "Camion nacelle",
+            "backhoe": "Rétrocaveuse",
             "backhoeLoader": "Chargeuse-pelleteuse",
             "bulldozer": "Bulldozer",
-            "dumper": "Camion-benne",
-            "equipmentCarrierTruck": "Camion porteur d'équipement",
+            "dumper": "Tombereau",
+            "equipmentCarrierTruck": "Camion de transport d’équipement",
             "grader": "Niveleuse",
-            "loader": "Chargeuse",
-            "materialsCarrierTruck": "Camion porteur de matériaux",
-            "scraper": "Racleur",
+            "loader": "Chargeur",
+            "materialsCarrierTruck": "Camion de transport de matériaux",
+            "scraper": "Décapeuse",
             "steamRoller": "Rouleau compresseur"
         },
         "selectMainMineralProduct": {
             "cement": "Ciment",
-            "concrete": "Béton"
+            "concrete": "Béton",
+            "isolation": "Panneaux d’isolation thermique"
         },
         "selectMainRigidMaterial": {
             "insolationPanels": "Panneaux d'isolation"
@@ -126,5 +132,6 @@
     "sloganGoeko": "The connection to efficiency",
     "sme": "pme",
     "start": "Commencer",
+    "summary": "Résumé",
     "titleResult": "Les éco-solutions les plus adaptées pour"
 }

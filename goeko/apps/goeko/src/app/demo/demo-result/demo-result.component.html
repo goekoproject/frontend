@@ -3,7 +3,7 @@
 		<ul class="filter-type">
 			<li (click)="getAll(all.checked)">
 				<input type="checkbox" class="checkbox" [checked]="allChecked" #all />
-				<p>All</p>
+				<p>{{ 'all' | translate }}</p>
 			</li>
 			<ng-container *ngFor="let element of formField; let index = index">
 				<li *ngIf="element.showResult" (click)="onCheckboxStateChange(section.checked, index)">
@@ -47,7 +47,7 @@
 						class="eco-solutions-type   eco-solutions-type-{{
 							ecoSolutions?.classification.mainCategory.name
 						}}"
-						>{{ ecoSolutions?.classification.mainCategory.tittle }}</span
+						>{{ 'CATEGORIES.' + ecoSolutions?.classification.mainCategory.name | translate }}</span
 					>
 
 					<div class="eco-solutions-actions">
@@ -86,7 +86,7 @@
 					>
 				</div>
 				<span class="details-country">
-					Availability :
+					{{ 'availability' | translate }} :
 					<p>{{ selectedRecomendation.companyDetail.countriesAvailability }}</p>
 				</span>
 			</div>
@@ -128,7 +128,7 @@
 				</section> -->
 			</div>
 			<div class="details-footer">
-				<p>Positive impact on SDG</p>
+				<p>{{ 'ods_msg_card_result' | translate }}</p>
 				<div class="details-ods">
 					<img
 						*ngFor="let icon of selectedRecomendation.sustainableDevelopmentGoals"

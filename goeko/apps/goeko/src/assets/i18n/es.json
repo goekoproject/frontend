@@ -1,5 +1,8 @@
 {
+    "all": "Todo",
+    "availability": "Disponible",
     "back": "Volver",
+    "bank": "Banco",
     "BANNER": {
         "affordable": "Asequible",
         "easy": "Fácil",
@@ -9,8 +12,9 @@
         "the": "La",
         "transition": "verde"
     },
+    "cancel": "Cancelar",
     "CATEGORIES": {
-        "co2Emissions": "Emisiones CO2",
+        "co2emission": "Emisiones CO2",
         "hazardousProduct": "Producto peligroso",
         "waste": "Residuos",
         "water": "Agua"
@@ -37,7 +41,8 @@
         "website": "Sito web"
     },
     "HOME": {
-        "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados"
+        "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
+        "sloganCallActionsBtnSME": "Comience su transición verde aquí"
     },
     "LANGS": {
         "en": "Ingles",
@@ -51,6 +56,7 @@
         "contanctUs": "Contáctenos",
         "login": "Accesso"
     },
+    "ods_msg_card_result": "Impacto positivo en los ODS",
     "ods_title": "Objetivos de Desarrollo Sostenible",
     "SCENES": {
         "slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
@@ -103,7 +109,8 @@
         },
         "selectMainMineralProduct": {
             "cement": "Cemento",
-            "concrete": "Concreto"
+            "concrete": "Concreto",
+            "isolation": "Paneles de aislamiento"
         },
         "selectMainRigidMaterial": {
             "insolationPanels": "Paneles de aislamiento"
@@ -124,5 +131,6 @@
     "sloganGoeko": "The connection to efficiency",
     "sme": "Pymes",
     "start": "Empezar",
+    "summary": "Resumen",
     "titleResult": "Las soluciones ecológicas más adaptadas para"
 }

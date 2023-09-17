@@ -1,4 +1,6 @@
 {
+    "all": "All",
+    "availability": "Availability",
     "back": "Back",
     "bank": "Bank",
     "BANNER": {
@@ -10,8 +12,9 @@
         "the": "The",
         "transition": "Transition"
     },
+    "cancel": "Cancel",
     "CATEGORIES": {
-        "co2Emissions": "CO2 emissions",
+        "co2emission": "CO2 emissions",
         "hazardousProduct": "Hazardous Product",
         "waste": "Waste",
         "water": "Water"
@@ -39,7 +42,8 @@
         "website": "Website"
     },
     "HOME": {
-        "sloganCallActionsBtn": "Free trial to connect with qualified leads"
+        "sloganCallActionsBtn": "Free trial to connect with qualified leads",
+        "sloganCallActionsBtnSME": "Start your green transition here"
     },
     "LANGS": {
         "en": "English",
@@ -53,6 +57,7 @@
         "contanctUs": "Contact us",
         "login": "Login"
     },
+    "ods_msg_card_result": "Positive impact on SDG",
     "ods_title": "Sustainable Development Goals",
     "SCENES": {
         "slogan_text1": "Connecting SMEs to Clean Technologies and Financing",
@@ -105,7 +110,8 @@
         },
         "selectMainMineralProduct": {
             "cement": "Cement",
-            "concrete": "Concrete"
+            "concrete": "Concrete",
+            "isolation": "Insultation panels"
         },
         "selectMainRigidMaterial": {
             "insolationPanels": "Insultation panels"
@@ -126,5 +132,6 @@
     "sloganGoeko": "The connection to efficiency",
     "sme": "Sme",
     "start": "Start",
+    "summary": "Summary",
     "titleResult": "Most adapted eco-solutions for"
 }

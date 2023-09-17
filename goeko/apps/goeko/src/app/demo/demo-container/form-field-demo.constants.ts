@@ -46,7 +46,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		keyLang: 'CATEGORIES.co2Emissions',
+		keyLang: 'CATEGORIES.co2emission',
 		controlName: 'co2Emission',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',
@@ -72,12 +72,12 @@ export const FORM_FIELD_DEMO: Section[] = [
 				textHelp: 'cement, concrete, etc.',
 				label: 'CATEGORIES_FIELD.mainMineralProduct',
 			},
-			{
+			/* 	{
 				controlName: 'mainRigidMaterial',
 				type: 'boolean',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainRigidMaterial',
-			},
+			}, */
 			{
 				controlName: 'energySource',
 				type: 'select-multiple',

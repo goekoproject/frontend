@@ -198,9 +198,9 @@
 			</ng-container>
 		</go-carousel>
 		<div class="form-actions">
-			<button type="button" go-button appearance="white">Cancel</button>
+			<button type="button" go-button appearance="white">{{ 'cancel' | translate }}</button>
 			<button type="button" go-button appearance="white" (click)="gotToSummary()" *ngIf="!isSummarySlide">
-				Summary
+				{{ 'summary' | translate }}
 			</button>
 			<go-goeko-button class="button-submit" (click)="getResults()">
 				<span class="goeko-go" btn-logo></span>
