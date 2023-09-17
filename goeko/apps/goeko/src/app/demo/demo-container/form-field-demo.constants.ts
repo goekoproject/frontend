@@ -27,7 +27,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 			}, */
 			{
 				controlName: 'countries',
-				type: 'text',
+				type: 'select',
 				textHelp: '',
 				label: 'FORM_LABEL.country',
 			},

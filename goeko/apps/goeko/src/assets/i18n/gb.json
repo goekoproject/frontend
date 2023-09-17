@@ -24,12 +24,14 @@
         "mainActivity": "Activity that consumes the most",
         "mainCategoryNonInert": "Main category of non-inert waste",
         "mainInternalCombustionEngine": "Main internal combustion engines",
-        "mainMineralProduct": "Main mineral product",
+        "mainMineralProduct": "Main mineral products",
         "mainRigidMaterial": "Does your company use insulation panels?",
         "products": "Type of hazardous product"
     },
+    "certified": "Certified",
     "cleantech": "Cleantech",
-    "companyDetails": "Company Details",
+    "companyDetails": "Company details",
+    "contact": "Contact",
     "FORM_LABEL": {
         "companyName": "Company name",
         "country": "Country",
@@ -51,12 +53,20 @@
         "contanctUs": "Contact us",
         "login": "Login"
     },
+    "ods_title": "Sustainable Development Goals",
     "SCENES": {
         "slogan_text1": "Connecting SMEs to Clean Technologies and Financing",
         "slogan_text2": "Who are you?"
     },
     "SELECT_DATA_LABEL": {
         "defaultLabel": "-- Please select from the following options --",
+        "selectCountry": {
+            "france": "France",
+            "germany": "Germany",
+            "italy": "Italy",
+            "spain": "Spain",
+            "switzerland": "Switzerland"
+        },
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
@@ -98,7 +108,7 @@
             "concrete": "Concrete"
         },
         "selectMainRigidMaterial": {
-            "insolationPanels": "Insolation panels"
+            "insolationPanels": "Insultation panels"
         },
         "selectProducts": {
             "aerosol": "Aerosol",
@@ -113,7 +123,7 @@
             "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
         }
     },
-    "sloganGoeko": "The Connection to Efficiency",
+    "sloganGoeko": "The connection to efficiency",
     "sme": "Sme",
     "start": "Start",
     "titleResult": "Most adapted eco-solutions for"

@@ -28,8 +28,10 @@
         "mainRigidMaterial": "Votre entreprise utilise-t-elle des panneaux isolants ?",
         "products": "Type de produit dangereux"
     },
+    "certified": "Certifié",
     "cleantech": "Cleantech",
     "companyDetails": "Détails de l'entreprise",
+    "contact": "Contacter",
     "FORM_LABEL": {
         "companyName": "Nom de l'entreprise",
         "country": "Pays",
@@ -51,12 +53,20 @@
         "contanctUs": "Contactez-nous",
         "login": "Se connecter"
     },
+    "ods_title": "Objectifs de développement durable",
     "SCENES": {
         "slogan_text1": "Connecter les PME aux technologies propres et au financement",
         "slogan_text2": "Est-ce que tu veux?"
     },
     "SELECT_DATA_LABEL": {
         "defaultLabel": "-- Veuillez sélectionner parmi les options suivantes --",
+        "selectCountry": {
+            "france": "France",
+            "germany": "Allemagne",
+            "italy": "Italie",
+            "spain": "Espagne",
+            "switzerland": "Suisse"
+        },
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Système de gestion intelligent optimisant la consommation d'énergie",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solution verte produisant l'énergie pour les besoins de votre bâtiment ou de votre activité"
@@ -113,7 +123,7 @@
             "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses"
         }
     },
-    "sloganGoeko": "The Connection to Efficiency",
+    "sloganGoeko": "The connection to efficiency",
     "sme": "pme",
     "start": "Commencer",
     "titleResult": "Les éco-solutions les plus adaptées pour"

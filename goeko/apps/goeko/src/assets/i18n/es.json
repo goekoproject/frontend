@@ -23,11 +23,13 @@
         "mainActivity": "Actividad que más consume",
         "mainCategoryNonInert": "Categoría principal de residuos no inertes",
         "mainInternalCombustionEngine": "Motor de combustión interna principal",
-        "mainMineralProduct": "Principal producto mineral",
+        "mainMineralProduct": "Principal productos minerales",
         "mainRigidMaterial": "¿Su empresa utiliza paneles aislantes?",
         "products": "Tipo de producto peligroso"
     },
+    "certified": "Certificado",
     "cleantech": "Cleantech",
+    "contact": "Contacto",
     "FORM_LABEL": {
         "companyName": "Nombre de la Compañia",
         "country": "Pais",
@@ -49,12 +51,20 @@
         "contanctUs": "Contáctenos",
         "login": "Accesso"
     },
+    "ods_title": "Objetivos de Desarrollo Sostenible",
     "SCENES": {
         "slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
         "slogan_text2": "¿Quiere eres?"
     },
     "SELECT_DATA_LABEL": {
         "defaultLabel": "-- Por favor seleccione entre las siguientes opciones --",
+        "selectCountry": {
+            "france": "France",
+            "germany": "Germany",
+            "italy": "Italy",
+            "spanin": "Spain",
+            "switzerland": "Suiza"
+        },
         "selectEnergySource": {
             "aSmartManagementSystemOptimisingEnergyConsumption": "Sistema de gestión inteligente que optimiza el consumo de energía",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solución ecológica que produce la energía para las necesidades de tu edificio o actividad"
@@ -111,7 +121,7 @@
             "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
         }
     },
-    "sloganGoeko": "The Connection to Efficiency",
+    "sloganGoeko": "The connection to efficiency",
     "sme": "Pymes",
     "start": "Empezar",
     "titleResult": "Las soluciones ecológicas más adaptadas para"

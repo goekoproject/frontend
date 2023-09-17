@@ -51,7 +51,7 @@
 					>
 
 					<div class="eco-solutions-actions">
-						<abbr title="Save"><span class="material-symbols-rounded"> bookmark </span></abbr>
+						<abbr title="Save"><span class="material-symbols-rounded"> favorite </span></abbr>
 						<abbr title="{{ ecoSolutions?.companyDetail?.link }}"
 							><a href="{{ ecoSolutions?.companyDetail?.link }}" target="_blank">
 								<span class="material-symbols-rounded"> link </span>
@@ -94,15 +94,15 @@
 				<section class="details-body-actions">
 					<div class="action-ecosolution">
 						<span class="material-symbols-rounded"> download </span>
-						<p>Certified</p>
+						<p>{{ 'certified' | translate }}</p>
 					</div>
 					<a
 						class="action-ecosolution"
 						href="{{ selectedRecomendation?.companyDetail?.link }}"
 						target="_blank"
 					>
-						<span class="material-symbols-rounded"> link </span>
-						<p>Website</p>
+						<span class="material-symbols-rounded"> connect_without_contact </span>
+						<p>{{ 'contact' | translate }}</p>
 					</a>
 				</section>
 				<section *ngIf="false">
@@ -133,7 +133,7 @@
 					<img
 						*ngFor="let icon of selectedRecomendation.sustainableDevelopmentGoals"
 						class="ods-icon"
-						[src]="'assets/icon-ods/S-WEB-Goal-' + icon + '.png'"
+						[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + icon + '.png'"
 						[alt]="icon"
 					/>
 				</div>

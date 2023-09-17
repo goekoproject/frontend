@@ -56,6 +56,29 @@ export const SelectEnergySource = [
 		keyLang: 'SELECT_DATA_LABEL.selectEnergySource.greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds',
 	},
 ];
+
+export const SelectCountry = [
+	{
+		id: 1,
+		keyLang: 'SELECT_DATA_LABEL.selectCountry.france',
+	},
+	{
+		id: 2,
+		keyLang: 'SELECT_DATA_LABEL.selectCountry.germany',
+	},
+	{
+		id: 3,
+		keyLang: 'SELECT_DATA_LABEL.selectCountry.italy',
+	},
+	{
+		id: 4,
+		keyLang: 'SELECT_DATA_LABEL.selectCountry.spain',
+	},
+	{
+		id: 5,
+		keyLang: 'SELECT_DATA_LABEL.selectCountry.switzerland',
+	},
+];
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -64,4 +87,5 @@ export const DataSelect = {
 	mainActivity: SelectMainActivity,
 	products: SelectProducts,
 	energySource: SelectEnergySource,
+	countries: SelectCountry,
 };

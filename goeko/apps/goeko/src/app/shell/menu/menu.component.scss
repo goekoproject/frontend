@@ -5,7 +5,7 @@ $lineColor: #29EECC;
 .menu-wrapper {
     display: flex;
     gap: 3rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 .menu-actions {
     display: flex;

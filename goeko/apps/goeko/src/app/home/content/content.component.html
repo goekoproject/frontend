@@ -44,9 +44,10 @@
 			<h3 class="title-content-column">{{ article?.descriptions2 }}</h3>
 		</div>
 	</section>
-	<!-- <section class="ods-info">
-		<img width="100%" [src]="'assets/icon-ods/ods-logo-' + currentLang + '.png'" [alt]="currentLang" />
-	</section> -->
+	<div class="ods-info">
+		<img width="100%" [src]="'assets/icon-ods/ods-logo-wheel.png'" [alt]="currentLang" />
+		<h1>{{ 'ods_title' | translate }}</h1>
+	</div>
 	<section class="banner-actors">
 		<ng-container
 			[ngTemplateOutlet]="article.id === 'sme' ? sme : otherActor"

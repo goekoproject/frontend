@@ -3,6 +3,7 @@ import { FORM_FIELD_DEMO } from '../demo-container/form-field-demo.constants';
 import { SmeRecomendation, SmeService } from '@goeko/store';
 import { DemoService } from '../demo.services';
 import { SmeRecomendationParams } from '../demo-result.request';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'goeko-demo-result',
@@ -16,6 +17,7 @@ export class DemoResultComponent implements OnInit {
 	selectedRecomendation: any;
 	selectedRecomendationIndex: any;
 	zoomOutIn = false;
+	currentLangCode!: string;
 	@ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
 	get allChecked() {
 		const allChecked = !this.formField.some((field) => field.checked);
@@ -23,13 +25,22 @@ export class DemoResultComponent implements OnInit {
 	}
 
 	smeRecomendationBody!: any;
-	constructor(private _smeService: SmeService, private _demoService: DemoService) {}
+	constructor(
+		private _smeService: SmeService,
+		private _demoService: DemoService,
+		private _translateServices: TranslateService
+	) {}
 
 	ngOnInit(): void {
 		this.smeRecomendationBody = new SmeRecomendationParams(this._demoService.getDataForm());
+		this.currentLangCode = this._translateServices.defaultLang;
+		this._changeLangCode();
 		this._getSmeRecomendations();
 	}
 
+	private _changeLangCode() {
+		this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang));
+	}
 	private _getSmeRecomendations() {
 		this._smeService.getRecommendations(this.smeRecomendationBody).subscribe((sme) => {
 			if (sme && Array.isArray(sme.recommendations)) {
