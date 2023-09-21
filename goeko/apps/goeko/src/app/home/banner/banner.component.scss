@@ -145,11 +145,19 @@
     fill: limegreen;
   }
 }
-
+@media (max-width: 1024px) { 
+  .banner  {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
 @media (max-width: 768px) { 
   .banner  {
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
   }
   .banner-slogan {
     font-size: 1rem;

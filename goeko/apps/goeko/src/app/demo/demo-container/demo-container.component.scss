@@ -86,6 +86,7 @@
   margin: 1rem 0;
   justify-content: center;
   cursor: pointer;
+  width: 14rem;
   &--active {
     color: #537cd0;
     background: #ebefff;
@@ -184,6 +185,8 @@
     p {
       color: #080b17;
       margin: 0;
+    
+    white-space: pre-wrap;
     }
   }
 }

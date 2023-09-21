@@ -1,5 +1,5 @@
 <button
-	*ngIf="!hiddenButton || !hiddenButtonPrev"
+	*ngIf="!hiddenButton && !hiddenButtonPrev"
 	class="button-slide button-slide--prev"
 	(click)="prev()"
 	[disabled]="disabledButtonPrev"
@@ -16,7 +16,7 @@
 </div>
 
 <button
-	*ngIf="!hiddenButton || !hiddenButtonNext"
+	*ngIf="!hiddenButton && !hiddenButtonNext"
 	class="button-slide button-slide--next"
 	(click)="next()"
 	[disabled]="disabledButtonNext"

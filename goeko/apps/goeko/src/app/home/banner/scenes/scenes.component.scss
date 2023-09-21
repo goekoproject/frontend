@@ -32,7 +32,6 @@
     font-size: 1;
     line-height: 2;
     top: 7rem;
-    text-transform: capitalize;
     position: relative;
     font-family: 'Inter-Thin';
 
@@ -116,3 +115,19 @@ h3:before {
         opacity: 1;
        }
   }
+
+  @media (max-width: 1024px) { 
+    .scene-container  {
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: 26%;
+    
+    }
+  }
+  @media (max-width: 1500px) { 
+    .scene-container {
+        left: 0;
+    }
+  }
+  

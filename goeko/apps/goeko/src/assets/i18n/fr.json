@@ -8,7 +8,7 @@
         "easy": "Facile",
         "fast": "Rapide",
         "green": "Transition",
-        "swissCompany": "Une entreprise suisse",
+        "swissCompany": "A Swiss Company",
         "the": "LA",
         "transition": "verte"
     },
@@ -24,14 +24,14 @@
         "energySource": "Votre entreprise souhaite-t-elle diminuer sa consommation d’énergie grâce à:",
         "fuelInvoice": "Facture de carburant",
         "lastYearInvoice": "Facture d'eau (2022)",
-        "mainActivity": "Activité qui consomme le plus",
+        "mainActivity": "Activité qui consomme le plus d’eau",
         "mainCategoryNonInert": "Principales catégories de déchets non inertes",
         "mainInternalCombustionEngine": "Principaux engins à moteur",
         "mainMineralProduct": "Principaux produits minéraux",
         "mainRigidMaterial": "Votre entreprise utilise-t-elle des panneaux isolants ?",
         "products": "Types de produits toxiques"
     },
-    "certified": "Certifié",
+    "certified": "Certification",
     "cleantech": "Cleantech",
     "companyDetails": "Détails de l'entreprise",
     "contact": "Contact",
@@ -42,7 +42,7 @@
         "website": "Site web"
     },
     "HOME": {
-        "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des prospects qualifiés",
+        "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",
         "sloganCallActionsBtnSME": "Votre transition écologique commence ici"
     },
     "LANGS": {
@@ -52,7 +52,7 @@
         "gb": "Anglais (Royaume-Uni)"
     },
     "MENU": {
-        "aboutGoEKo": "À propos de GoIKo",
+        "aboutGoEKo": "A propos de GoEKo",
         "blog": "Blog",
         "contanctUs": "Contact",
         "login": "Login "
@@ -101,7 +101,7 @@
             "backhoeLoader": "Chargeuse-pelleteuse",
             "bulldozer": "Bulldozer",
             "dumper": "Tombereau",
-            "equipmentCarrierTruck": "Camion de transport d’équipement",
+            "equipmentCarrierTruck": "Camion de transport d’équipements",
             "grader": "Niveleuse",
             "loader": "Chargeur",
             "materialsCarrierTruck": "Camion de transport de matériaux",

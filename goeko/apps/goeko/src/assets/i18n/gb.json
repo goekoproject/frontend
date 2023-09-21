@@ -15,23 +15,23 @@
     "cancel": "Cancel",
     "CATEGORIES": {
         "co2emission": "CO2 emissions",
-        "hazardousProduct": "Hazardous Product",
+        "hazardousProduct": "Hazardous Products",
         "waste": "Waste",
         "water": "Water"
     },
     "CATEGORIES_FIELD": {
         "amount": "Water consumption (2022)",
-        "energySource": "Would your company like to use less carbon intensive-energy thanks to:",
+        "energySource": "Would your company like to use less carbon intensive energy thanks to:",
         "fuelInvoice": "Fuel invoice",
         "lastYearInvoice": "Water invoice (2022)",
-        "mainActivity": "Activity that consumes the most",
-        "mainCategoryNonInert": "Main category of non-inert waste",
+        "mainActivity": "Activities that consume the most water",
+        "mainCategoryNonInert": "Main categories of non-inert waste",
         "mainInternalCombustionEngine": "Main internal combustion engines",
         "mainMineralProduct": "Main mineral products",
         "mainRigidMaterial": "Does your company use insulation panels?",
-        "products": "Type of hazardous product"
+        "products": "Type of hazardous products"
     },
-    "certified": "Certified",
+    "certified": "Certification",
     "cleantech": "Cleantech",
     "companyDetails": "Company details",
     "contact": "Contact",
@@ -54,13 +54,13 @@
     "MENU": {
         "aboutGoEKo": "About GoEko",
         "blog": "Blog",
-        "contanctUs": "Contact us",
+        "contanctUs": "Contact",
         "login": "Login"
     },
     "ods_msg_card_result": "Positive impact on SDG",
     "ods_title": "Sustainable Development Goals",
     "SCENES": {
-        "slogan_text1": "Connecting SMEs to Clean Technologies and Financing",
+        "slogan_text1": "Connecting SMEs to clean technologies and financing",
         "slogan_text2": "Who are you?"
     },
     "SELECT_DATA_LABEL": {
@@ -111,10 +111,10 @@
         "selectMainMineralProduct": {
             "cement": "Cement",
             "concrete": "Concrete",
-            "isolation": "Insultation panels"
+            "isolation": "Insulation panels"
         },
         "selectMainRigidMaterial": {
-            "insolationPanels": "Insultation panels"
+            "insolationPanels": "Insulation panels"
         },
         "selectProducts": {
             "aerosol": "Aerosol",

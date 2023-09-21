@@ -26,11 +26,18 @@ export class DemoContainerComponent implements OnInit {
 	slideSelected = 0;
 	public dataSelect = DataSelect as any;
 
-	get isSummarySlide() {
+	isSummarySlide() {
 		return this.slideSelected === this.formField.length - 1;
 	}
 	isBoolean(value: any) {
 		return typeof value === 'boolean';
+	}
+	isArray(value: any) {
+		return Array.isArray(value);
+	}
+
+	tranformValueArray(value: Array<any>) {
+		return value.join(',  ');
 	}
 	constructor(private _fb: FormBuilder, private _router: Router, private _demoServices: DemoService) {}
 

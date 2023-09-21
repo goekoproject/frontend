@@ -36,7 +36,7 @@ const httpLoaderFactory = (http: HttpClient) => {
 			tokenAccess: environment.baseUrl,
 		}),
 		TranslateModule.forRoot({
-			defaultLanguage: 'gb',
+			defaultLanguage: 'fr',
 			loader: {
 				provide: TranslateLoader,
 				useFactory: httpLoaderFactory,

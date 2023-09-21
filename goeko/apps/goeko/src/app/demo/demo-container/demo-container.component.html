@@ -17,10 +17,10 @@
 			</ng-container>
 		</ul>
 	</section>
-	<section class="section-form" [class.section-form-demo]="isSummarySlide">
+	<section class="section-form" [class.section-form-demo]="isSummarySlide()">
 		<go-carousel
 			(valueChangeButton)="addFormGroup($event.index)"
-			[hiddenButtonNext]="isSummarySlide"
+			[hiddenButtonNext]="isSummarySlide()"
 			[selectedSlideIndex]="slideSelected"
 		>
 			<ng-container *ngFor="let element of formField; last as isLast">
@@ -160,32 +160,51 @@
 													*ngIf="this.form.value[element.controlName][field.controlName]"
 												>
 													<h4>{{ field.label | translate }}</h4>
-													<p
-														*ngIf="
-															isBoolean(
+													<ng-container [ngSwitch]="true">
+														<p
+															*ngSwitchCase="
+																isBoolean(
+																	form.value[element.controlName][field.controlName]
+																)
+															"
+														>
+															{{
 																form.value[element.controlName][field.controlName]
-															)
-														"
-													>
-														{{
-															form.value[element.controlName][field.controlName]
-																? 'YES'
-																: 'NO'
-														}}
-													</p>
-													<p
-														*ngIf="
-															!isBoolean(
-																form.value[element.controlName][field.controlName]
-															)
-														"
-													>
-														{{
-															this.form.value[element.controlName][
-																field.controlName
-															].toString() || '-'
-														}}
-													</p>
+																	? 'YES'
+																	: 'NO'
+															}}
+														</p>
+														<p
+															*ngSwitchCase="
+																isArray(
+																	form.value[element.controlName][field.controlName]
+																)
+															"
+														>
+															{{
+																tranformValueArray(
+																	form.value[element.controlName][field.controlName]
+																)
+															}}
+														</p>
+														<p
+															*ngSwitchCase="
+																!isBoolean(
+																	form.value[element.controlName][field.controlName]
+																) &&
+																!isArray(
+																	form.value[element.controlName][field.controlName]
+																)
+															"
+														>
+															{{
+																this.form.value[element.controlName][
+																	field.controlName
+																].toString() || '-'
+															}}
+														</p>
+														<p *ngSwitchDefault></p>
+													</ng-container>
 												</div>
 											</ng-container>
 										</div>
@@ -199,7 +218,7 @@
 		</go-carousel>
 		<div class="form-actions">
 			<button type="button" go-button appearance="white">{{ 'cancel' | translate }}</button>
-			<button type="button" go-button appearance="white" (click)="gotToSummary()" *ngIf="!isSummarySlide">
+			<button type="button" go-button appearance="white" (click)="gotToSummary()" *ngIf="!isSummarySlide()">
 				{{ 'summary' | translate }}
 			</button>
 			<go-goeko-button class="button-submit" (click)="getResults()">

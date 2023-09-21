@@ -11,6 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 	styleUrls: ['./demo-result.component.scss'],
 })
 export class DemoResultComponent implements OnInit {
+	odsIcons!: Array<{ code: number; active: boolean }>;
+
 	formField = FORM_FIELD_DEMO;
 	toogleOpenDetails = false;
 	smeRecomendation!: any;
@@ -47,8 +49,17 @@ export class DemoResultComponent implements OnInit {
 		this.currentLangCode = this._translateServices.defaultLang;
 		this._changeLangCode();
 		this._getSmeRecomendations();
+		this._getOdsIcons();
 	}
 
+	private _getOdsIcons() {
+		const odsIconsCode = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+
+		this.odsIcons = odsIconsCode.map((code: number) => ({
+			code: code,
+			active: false,
+		}));
+	}
 	private _changeLangCode() {
 		this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang));
 	}
@@ -57,6 +68,7 @@ export class DemoResultComponent implements OnInit {
 			if (sme && Array.isArray(sme.recommendations)) {
 				const smeRecomendation = this._filterSmeRecomendations(sme.recommendations);
 				this.smeRecomendation = this._buildCountriesAvailability(smeRecomendation);
+				this._makeFilterBySDG();
 			}
 		});
 	}
@@ -111,6 +123,44 @@ export class DemoResultComponent implements OnInit {
 			newSmeRecomendation = [...newSmeRecomendation, ...newArray];
 		});
 		return newSmeRecomendation;
+	}
+
+	filterBySDG(index: number, checked: boolean) {
+		this.odsIcons[index].active = !checked;
+		this._getSmeRecomendations();
+		this._makeFilterBySDG();
+	}
+
+	private _makeFilterBySDG() {
+		const codeActive = this.odsIcons.filter((sdg) => sdg.active).map((sdgActive) => sdgActive.code);
+		if (!this.odsIcons.every((codeActive) => !codeActive.active)) {
+			this.smeRecomendation = this.smeRecomendation.filter((recomendation: any) =>
+				codeActive.some((elemento) => recomendation.sustainableDevelopmentGoals.includes(elemento))
+			);
+		}
+	}
+
+	contieneArray(arrPrincipal: any, arrBuscado: any) {
+		// Iterar a través de los elementos del array principal
+		for (let i = 0; i <= arrPrincipal.length - arrBuscado.length; i++) {
+			let coincide = true;
+
+			// Comprobar si el subarray coincide en esta posición
+			for (let j = 0; j < arrBuscado.length; j++) {
+				if (arrPrincipal[i + j] !== arrBuscado[j]) {
+					coincide = false;
+					return;
+				}
+			}
+
+			// Si el subarray coincide, retornar true
+			if (coincide) {
+				return true;
+			}
+		}
+
+		// Si no se encuentra el subarray, retornar false
+		return false;
 	}
 	closeDetails() {
 		this.toogleOpenDetails = false;

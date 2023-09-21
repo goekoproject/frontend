@@ -17,6 +17,20 @@
 				</li>
 			</ng-container>
 		</ul>
+
+		<ul class="filter-ods">
+			<li
+				[class.active]="icon.active"
+				*ngFor="let icon of odsIcons; index as index"
+				(click)="filterBySDG(index, icon.active)"
+			>
+				<img
+					class="ods-icon"
+					[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + icon.code + '.png'"
+					[alt]="icon"
+				/>
+			</li>
+		</ul>
 	</section>
 
 	<section class="result">
@@ -82,9 +96,12 @@
 						class="eco-solutions-type eco-solutions-type-{{
 							selectedRecomendation?.classification.mainCategory.name
 						}}"
-						>{{ selectedRecomendation?.classification.mainCategory.tittle }}</span
+						>{{ 'CATEGORIES.' + selectedRecomendation?.classification.mainCategory.name | translate }}</span
 					>
 				</div>
+				<p class="details-country">
+					{{ selectedRecomendation.description }}
+				</p>
 				<span class="details-country">
 					{{ 'availability' | translate }} :
 					<p>{{ selectedRecomendation.companyDetail.countriesAvailability }}</p>
