@@ -23,18 +23,23 @@
         "amount": "Water consumption (2022)",
         "energySource": "Would your company like to use less carbon intensive energy thanks to:",
         "fuelInvoice": "Fuel invoice",
+        "greenWaste": "Green Waste",
+        "hazardousWaste": "Hazardous Waste",
+        "inertOrMineralWaste": "Mineral or Inert Waste",
         "lastYearInvoice": "Water invoice (2022)",
         "mainActivity": "Activities that consume the most water",
-        "mainCategoryNonInert": "Main categories of non-inert waste",
+        "mainCategoryNonInert": "Non inert déchets",
         "mainInternalCombustionEngine": "Main internal combustion engines",
         "mainMineralProduct": "Main mineral products",
         "mainRigidMaterial": "Does your company use insulation panels?",
-        "products": "Type of hazardous products"
+        "products": "Type of hazardous products",
+        "specialWaste": "Special Waste"
     },
     "certified": "Certification",
     "cleantech": "Cleantech",
     "companyDetails": "Company details",
     "contact": "Contact",
+    "costReduction": "Costos operativos",
     "FORM_LABEL": {
         "companyName": "Company name",
         "country": "Country",
@@ -65,6 +70,10 @@
     },
     "SELECT_DATA_LABEL": {
         "defaultLabel": "-- Please select from the following options --",
+        "greenWaste": {
+            "greenWoodUntreated": "Green Wood (Untreated)",
+            "topsoil": "Topsoil"
+        },
         "selectCountry": {
             "france": "France",
             "germany": "Germany",
@@ -76,6 +85,18 @@
             "aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
         },
+        "selectHazardousWaste": {
+            "oilSeparatorSludge": "Oil Separator Sludge",
+            "productsContainingHeavyMetals": "Products Containing Heavy Metals",
+            "productsContainingTar": "Products Containing Tar"
+        },
+        "selectInertOrMineralWaste": {
+            "brick": "Brick",
+            "ceramic": "Ceramic",
+            "concrete": "Concrete",
+            "soil": "Soil",
+            "stone": "Stone"
+        },
         "selectMainActivity": {
             "cleaningSiteVehicles": "Cleaning site vehicles",
             "paint": "Paint",
@@ -85,14 +106,15 @@
             "toolCleaning": "Tool cleaning"
         },
         "selectMainCategoryNonInert": {
+            "cardboardAndPaper": "Carton and papier",
             "cartridgesWithoutToxicProducts": "Cartridges without toxic products",
             "electricalAndElectronicEquipment": "Electrical and electronic equipment",
+            "insulationMaterials": "Insulation materials",
             "metalsAndAlloys": "Metals and alloys",
             "mineralWools": "Mineral wools",
             "paintVarnishGlue": "Paint, varnish, glue",
-            "paperAndCardboard": "Paper and cardboard",
             "plaster": "Plaster",
-            "plastic": "Plastic",
+            "plastic": "Plastic (packaging, tarps, etc.)",
             "untreatedWood": "Untreated wood"
         },
         "selectMainInternalCombustionEngine": {
@@ -127,6 +149,17 @@
             "paintVarnish": "Paint/varnish",
             "productsContainingTar": "Products containing tar",
             "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
+        },
+        "selectSpecialWaste": {
+            "aerosols": "Aerosols",
+            "agglomeratedProducts": "Agglomerated Products",
+            "batteriesAndAccumulators": "Batteries and Accumulators",
+            "cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
+            "electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment (PCB)",
+            "fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
+            "paintsAndSolvents": "Paints and Solvents",
+            "treatedWood": "Treated Wood",
+            "usedOils": "Used Oils"
         }
     },
     "sloganGoeko": "The connection to efficiency",

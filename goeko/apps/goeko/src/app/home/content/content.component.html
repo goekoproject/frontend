@@ -73,8 +73,9 @@
 <ng-template #otherActor let-id="id">
 	<h4 class="content-slogan">{{ 'HOME.sloganCallActionsBtn' | translate }}</h4>
 	<div class="goeko_in">
-		<go-goeko-button> {{ 'start' | translate }}</go-goeko-button>
-		<!-- 		<button id="goeko-go" class="goeko-go" ></button>
- -->
+		<go-goeko-button [routerLink]="'../demo/' + id" style="width: 100px">
+			<span class="goeko-go" btn-logo></span>
+			{{ 'start' | translate }}
+		</go-goeko-button>
 	</div>
 </ng-template>

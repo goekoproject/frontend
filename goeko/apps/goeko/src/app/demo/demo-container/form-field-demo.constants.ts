@@ -100,6 +100,30 @@ export const FORM_FIELD_DEMO: Section[] = [
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainCategoryNonInert',
 			},
+			{
+				controlName: 'inertOrMineralWaste',
+				type: 'select-multiple',
+				textHelp: '',
+				label: 'CATEGORIES_FIELD.inertOrMineralWaste',
+			},
+			{
+				controlName: 'greenWaste',
+				type: 'select-multiple',
+				textHelp: '',
+				label: 'CATEGORIES_FIELD.greenWaste',
+			},
+			{
+				controlName: 'specialWaste',
+				type: 'select-multiple',
+				textHelp: '',
+				label: 'CATEGORIES_FIELD.specialWaste',
+			},
+			{
+				controlName: 'hazardousWaste',
+				type: 'select-multiple',
+				textHelp: '',
+				label: 'CATEGORIES_FIELD.hazardousWaste',
+			},
 		],
 	},
 	{

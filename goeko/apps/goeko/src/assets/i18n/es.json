@@ -23,17 +23,22 @@
         "amount": "Consumo de agua (2022)",
         "energySource": "¿Le gustaría a su empresa utilizar menos energía intensiva en carbono gracias a:",
         "fuelInvoice": "Factura de combustible",
+        "greenWaste": "Residuos Verdes",
+        "hazardousWaste": "Residuos Peligrosos",
+        "inertOrMineralWaste": "Residuos Minerales o Inertes",
         "lastYearInvoice": "Factura de agua (2022)",
         "mainActivity": "Actividad que más consume",
         "mainCategoryNonInert": "Categoría principal de residuos no inertes",
         "mainInternalCombustionEngine": "Motor de combustión interna principal",
         "mainMineralProduct": "Principal productos minerales",
         "mainRigidMaterial": "¿Su empresa utiliza paneles aislantes?",
-        "products": "Tipo de producto peligroso"
+        "products": "Tipo de producto peligroso",
+        "specialWaste": "Residuos Especiales"
     },
     "certified": "Certificado",
     "cleantech": "Cleantech",
     "contact": "Contacto",
+    "costReduction": "Costos operativos",
     "FORM_LABEL": {
         "companyName": "Nombre de la Compañia",
         "country": "Pais",
@@ -51,7 +56,7 @@
         "gb": "Ingles(UK)"
     },
     "MENU": {
-        "aboutGoEKo": "Sobre GoEKo",
+        "aboutGoEKo": "Sobre GoEko",
         "blog": "Blog",
         "contanctUs": "Contáctenos",
         "login": "Accesso"
@@ -64,6 +69,10 @@
     },
     "SELECT_DATA_LABEL": {
         "defaultLabel": "-- Por favor seleccione entre las siguientes opciones --",
+        "greenWaste": {
+            "greenWoodUntreated": "Madera verde (no tratada)",
+            "topsoil": "Tierra vegetal"
+        },
         "selectCountry": {
             "france": "France",
             "germany": "Germany",
@@ -75,6 +84,18 @@
             "aSmartManagementSystemOptimisingEnergyConsumption": "Sistema de gestión inteligente que optimiza el consumo de energía",
             "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solución ecológica que produce la energía para las necesidades de tu edificio o actividad"
         },
+        "selectHazardousWaste": {
+            "oilSeparatorSludge": "Lodo del separador de aceite",
+            "productsContainingHeavyMetals": "Productos que contienen metales pesados",
+            "productsContainingTar": "Productos que contienen alquitrán"
+        },
+        "selectInertOrMineralWaste": {
+            "brick": "Ladrillo",
+            "ceramic": "Cerámica",
+            "concrete": "Hormigón",
+            "soil": "Tierra",
+            "stone": "Piedra"
+        },
         "selectMainActivity": {
             "cleaningSiteVehicles": "Limpieza de vehículos en el sitio",
             "paint": "Pintura",
@@ -84,12 +105,13 @@
             "toolCleaning": "Limpieza de herramientas"
         },
         "selectMainCategoryNonInert": {
+            "cardboardAndPaper": "Cartón y papel",
             "cartridgesWithoutToxicProducts": "Cartuchos sin productos tóxicos",
             "electricalAndElectronicEquipment": "Equipos eléctricos y electrónicos",
+            "insulationMaterials": "Materiales de aislamiento",
             "metalsAndAlloys": "Metales y aleaciones",
             "mineralWools": "Lanas minerales",
             "paintVarnishGlue": "Pintura, barniz, pegamento",
-            "paperAndCardboard": "Papel y cartón",
             "plaster": "Yeso",
             "plastic": "Plástico",
             "untreatedWood": "Madera sin tratar"
@@ -126,6 +148,17 @@
             "paintVarnish": "Pintura/barniz",
             "productsContainingTar": "Productos que contienen alquitrán",
             "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
+        },
+        "selectSpecialWaste": {
+            "aerosols": "Aerosoles",
+            "agglomeratedProducts": "Productos aglomerados",
+            "batteriesAndAccumulators": "Baterías y acumuladores",
+            "cartridgesSealantChemicalCaulking": "Cartuchos (selladores, productos químicos, calafateo...)",
+            "electricalAndElectronicEquipmentPCB": "Equipos eléctricos y electrónicos (PCB)",
+            "fluorescentTubesEnergySavingBulbsNeonTubes": "Tubos fluorescentes, bombillas de bajo consumo, tubos de neón",
+            "paintsAndSolvents": "Pinturas y solventes",
+            "treatedWood": "Madera tratada",
+            "usedOils": "Aceites usados"
         }
     },
     "sloganGoeko": "The connection to efficiency",

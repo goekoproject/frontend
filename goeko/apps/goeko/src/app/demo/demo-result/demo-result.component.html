@@ -136,13 +136,18 @@
 						<p>{{ selectedRecomendation.improvement?.operationalCostReductionPercentage }} %</p>
 					</div>
 				</section>
-				<!-- 				<section *ngIf="selectedRecomendation?.improvement?.smeOperationalCostReduction?.amount">
-					<h4>Cost reduction</h4>
+				<section
+					*ngIf="
+						selectedRecomendation?.companyDetail.name === 'Volvo' ||
+						selectedRecomendation?.companyDetail.name === 'Caterpillar' ||
+						selectedRecomendation?.companyDetail.name === 'Hesus'
+					"
+				>
 					<div class="percentage-benefis">
 						<span class="material-symbols-rounded"> keyboard_double_arrow_down </span>
-						<p>{{ selectedRecomendation?.improvement?.smeOperationalCostReduction?.amount }} €</p>
+						<p>{{ 'costReduction' | translate }}</p>
 					</div>
-				</section> -->
+				</section>
 			</div>
 			<div class="details-footer">
 				<p>{{ 'ods_msg_card_result' | translate }}</p>

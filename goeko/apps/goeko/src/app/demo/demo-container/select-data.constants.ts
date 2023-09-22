@@ -22,13 +22,13 @@ export const SelectMainRigidMaterial = [{ id: 1, title: 'SELECT_DATA_LABEL.Insol
 export const SelectMainCategoryNonInert = [
 	{ id: 1, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.metalsAndAlloys' },
 	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.untreatedWood' },
-	{ id: 3, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.paperAndCardboard' },
 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.plastic' },
-	{ id: 5, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.mineralWools' },
-	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.paintVarnishGlue' },
-	{ id: 7, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.cartridgesWithoutToxicProducts' },
-	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.electricalAndElectronicEquipment' },
-	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.plaster' },
+	/* 	{ id: 5, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.mineralWools' },
+	 */ { id: 6, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.insulationMaterials' },
+	{ id: 7, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.cardboardAndPaper' },
+	/* 	{ id: 7, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.cartridgesWithoutToxicProducts' },
+	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.electricalAndElectronicEquipment' }, */
+	/* 	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.plaster' }, */
 ];
 export const SelectMainActivity = [
 	{ id: 1, keyLang: 'SELECT_DATA_LABEL.selectMainActivity.siteCleaning' },
@@ -80,6 +80,53 @@ export const SelectCountry = [
 		keyLang: 'SELECT_DATA_LABEL.selectCountry.switzerland',
 	},
 ];
+
+// Resultado de la constante SelectInertOrMineralWaste
+export const SelectInertOrMineralWaste = [
+	{ id: 'concrete', keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.concrete' },
+	{ id: 'brick', keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.brick' },
+	{ id: 'stone', keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.stone' },
+	{ id: 'soil', keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.soil' },
+	{ id: 'ceramic', keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.ceramic' },
+];
+
+// Resultado de la constante GreenWaste
+export const SelectGreenWaste = [
+	{ id: 'greenWoodUntreated', keyLang: 'SELECT_DATA_LABEL.greenWaste.greenWoodUntreated' },
+	{ id: 'topsoil', keyLang: 'SELECT_DATA_LABEL.greenWaste.topsoil' },
+];
+
+// Resultado de la constante SelectSpecialWaste
+export const SelectSpecialWaste = [
+	{ id: 'paintsAndSolvents', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.paintsAndSolvents' },
+	{ id: 'usedOils', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.usedOils' },
+	{ id: 'batteriesAndAccumulators', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.batteriesAndAccumulators' },
+	{
+		id: 'fluorescentTubesEnergySavingBulbsNeonTubes',
+		keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.fluorescentTubesEnergySavingBulbsNeonTubes',
+	},
+	{ id: 'aerosols', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.aerosols' },
+	{
+		id: 'electricalAndElectronicEquipmentPCB',
+		keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.electricalAndElectronicEquipmentPCB',
+	},
+	{
+		id: 'cartridgesSealantChemicalCaulking',
+		keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.cartridgesSealantChemicalCaulking',
+	},
+	{ id: 'agglomeratedProducts', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.agglomeratedProducts' },
+	{ id: 'treatedWood', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.treatedWood' },
+];
+
+// Resultado de la constante SelectHazardousWaste
+export const SelectHazardousWaste = [
+	{
+		id: 'productsContainingHeavyMetals',
+		keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.productsContainingHeavyMetals',
+	},
+	{ id: 'productsContainingTar', keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.productsContainingTar' },
+	{ id: 'oilSeparatorSludge', keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.oilSeparatorSludge' },
+];
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -89,4 +136,8 @@ export const DataSelect = {
 	products: SelectProducts,
 	energySource: SelectEnergySource,
 	countries: SelectCountry,
+	inertOrMineralWaste: SelectInertOrMineralWaste,
+	greenWaste: SelectGreenWaste,
+	specialWaste: SelectSpecialWaste,
+	hazardousWaste: SelectHazardousWaste,
 };
