@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectI18nComponent } from './select-i18n.component';
-import { ButtonModule, UiSuperSelectModule } from '@goeko/ui';
+import { ButtonModule } from '@goeko/ui';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TranslateModule } from '@ngx-translate/core';
 

@@ -1,4 +1,5 @@
 {
+    "accept": "Accept",
     "all": "All",
     "availability": "Availability",
     "back": "Back",
@@ -40,6 +41,7 @@
     "companyDetails": "Company details",
     "contact": "Contact",
     "costReduction": "Costos operativos",
+    "decline": "Decline",
     "FORM_LABEL": {
         "companyName": "Company name",
         "country": "Country",
@@ -55,6 +57,10 @@
         "es": "Spanish",
         "fr": "French",
         "gb": "English (UK)"
+    },
+    "LEGAL": {
+        "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
+        "cookiesPolicy": "Cookies policy"
     },
     "MENU": {
         "aboutGoEKo": "About GoEko",

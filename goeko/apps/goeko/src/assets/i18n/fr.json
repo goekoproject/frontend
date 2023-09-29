@@ -1,4 +1,5 @@
 {
+    "accept": "Accepter",
     "all": "Tout",
     "availability": "Disponibilité:",
     "back": "Dos",
@@ -40,6 +41,7 @@
     "companyDetails": "Détails de l'entreprise",
     "contact": "Contact",
     "costReduction": "Coûts opérationnels",
+    "decline": "Déclin",
     "FORM_LABEL": {
         "companyName": "Nom de l'entreprise",
         "country": "Pays",
@@ -55,6 +57,10 @@
         "es": "Espagnol",
         "fr": "Français",
         "gb": "Anglais (Royaume-Uni)"
+    },
+    "LEGAL": {
+        "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
+        "cookiesPolicy": "Politique de cookies"
     },
     "MENU": {
         "aboutGoEKo": "A propos de GoEko",

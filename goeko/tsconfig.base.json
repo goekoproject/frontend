@@ -1,25 +1,39 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"rootDir": ".",
-		"sourceMap": true,
+		"baseUrl": ".",
 		"declaration": false,
-		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"importHelpers": true,
-		"target": "es2015",
+		"lib": [
+			"es2017",
+			"dom"
+		],
 		"module": "esnext",
-		"lib": ["es2017", "dom"],
-		"skipLibCheck": true,
-		"skipDefaultLibCheck": true,
-		"baseUrl": ".",
+		"moduleResolution": "node",
 		"paths": {
-			"@goeko/business-ui": ["libs/business-ui/src/index.ts"],
-			"@goeko/core": ["libs/core/src/index.ts"],
-			"@goeko/store": ["libs/store/src/index.ts"],
-			"@goeko/ui": ["libs/ui/src/index.ts"]
-		}
+			"@goeko/business-ui": [
+				"libs/business-ui/src/index.ts"
+			],
+			"@goeko/core": [
+				"libs/core/src/index.ts"
+			],
+			"@goeko/store": [
+				"libs/store/src/index.ts"
+			],
+			"@goeko/ui": [
+				"libs/ui/src/index.ts"
+			]
+		},
+		"rootDir": ".",
+		"skipDefaultLibCheck": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"target": "es2015"
 	},
-	"exclude": ["node_modules", "tmp"]
+	"exclude": [
+		"node_modules",
+		"tmp"
+	]
 }

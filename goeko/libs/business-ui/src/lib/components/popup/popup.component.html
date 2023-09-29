@@ -1,0 +1,14 @@
+<div class="popup" [class.popup--noshow]="toggle">
+	<ng-content select="[icon]"></ng-content>
+
+	<h1>{{ title }}</h1>
+	<ng-content select="[description]"></ng-content>
+	<div class="popup_actions">
+		<button *ngIf="textMainButton" type="button" go-button appearance="primary" (click)="confirm()">
+			{{ textMainButton }}
+		</button>
+		<button *ngIf="textSecondaryButton" type="button" go-button appearance="white">
+			{{ textSecondaryButton }}
+		</button>
+	</div>
+</div>

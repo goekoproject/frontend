@@ -18,7 +18,7 @@ import { TeamComponent } from './team/team.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { SelectI18nModule } from '@goeko/business-ui';
+import { PopupModule, SelectI18nModule } from '@goeko/business-ui';
 const httpLoaderFactory = (http: HttpClient) => {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
@@ -31,6 +31,7 @@ const httpLoaderFactory = (http: HttpClient) => {
 		ButtonModule,
 		ContentFulModule.forRoot(ContentConfig),
 		SelectI18nModule,
+		PopupModule,
 		ConfigModule.forRoot({
 			endopoint: environment.baseUrl,
 			tokenAccess: environment.baseUrl,

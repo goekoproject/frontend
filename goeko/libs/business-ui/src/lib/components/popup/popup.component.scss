@@ -1,0 +1,33 @@
+.go-popup {
+    position: fixed;
+    bottom: 4%;
+}
+.popup {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background: #FFFFFF;
+    width: 34%;
+    height: 8.6%;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 16px;
+    //layout
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    i[icon] {
+        font-size: 90px;
+        color: #63c184;
+    }
+    &_actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 0.8rem;
+    }
+}
+.popup--noshow {
+    display: none;
+}

@@ -6,3 +6,13 @@
 <footer>
 	<goeko-footer></goeko-footer>
 </footer>
+<go-popup
+	[title]="'LEGAL.cookiesPolicy' | translate"
+	[text-main-button]="'accept' | translate"
+	[text-secondary-button]="'decline' | translate"
+>
+	<i class="ti ti-cookie" icon></i>
+	<p description>
+		{{ 'LEGAL.cookiesNotice' | translate }}
+	</p>
+</go-popup>
