@@ -1,13 +1,36 @@
 .document-legal {
     display: flex;
     flex-direction: column;
-    align-items: center;
     text-align: justify;
-    width: 50%;
+    width: 48%;
     margin: 0 auto;
     line-height: 2.2;
     color: #24253B;
-     h1 {
+     &-title {
         font-size: 44px;
      }
 }
+
+
+@media screen and (width < 1280px) {
+   .document-legal {
+      width: 80%;
+   }
+ }
+
+//Mobile
+@media screen and (width < 800px) {
+   .document-legal {
+      width: 90%;
+      h1 {
+         font-size: 2rem;
+       }
+      h2 {
+         font-size:1.8rem;
+      }
+      h2 {
+         font-size:1.6rem;
+      }
+   }
+
+ }
