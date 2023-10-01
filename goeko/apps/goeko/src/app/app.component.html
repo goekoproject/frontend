@@ -2,7 +2,6 @@
 <div class="container">
 	<router-outlet></router-outlet>
 </div>
-<goeko-team *ngIf="!isDemo"></goeko-team>
 <footer>
 	<goeko-footer></goeko-footer>
 </footer>
@@ -13,6 +12,7 @@
 >
 	<i class="ti ti-cookie" icon></i>
 	<p description>
-		{{ 'LEGAL.cookiesNotice' | translate }}
+		{{ 'LEGAL.cookiesNotice' | translate }}.
+		<a [routerLink]="'/home/cookies-policy'"> {{ 'LEGAL.cookiesPolicy' | translate }}</a>
 	</p>
 </go-popup>

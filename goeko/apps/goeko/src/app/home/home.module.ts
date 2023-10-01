@@ -13,6 +13,8 @@ import { SphereComponent } from './banner/sphere/sphere.component';
 import { ContentComponent } from './content/content.component';
 import { OrderByPipe } from './content/order-by.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { DocumentLegalComponent } from './document-legal/document-legal.component';
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
 	declarations: [
@@ -23,6 +25,8 @@ import { TranslateModule } from '@ngx-translate/core';
 		SphereComponent,
 		ScenesComponent,
 		OrderByPipe,
+		TeamComponent,
+		DocumentLegalComponent,
 	],
 	imports: [
 		CommonModule,

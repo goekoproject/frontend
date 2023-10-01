@@ -15,9 +15,11 @@
 
 <!-- template elements-->
 <ng-template #text let-element="element">
-	<h2 class="subtitle-footer-column">{{ element.title }}</h2>
+	<h2 class="subtitle-footer-column">
+		<a [routerLink]="element.url">{{ element.title | translate }}</a>
+	</h2>
 </ng-template>
 <ng-template #withLogo let-element="element">
 	<span class="material-symbols-rounded"> {{ element?.logo }} </span>
-	<h2 class="subtitle-footer-column">{{ element.title }}</h2>
+	<h2 class="subtitle-footer-column">{{ element.title | translate }}</h2>
 </ng-template>

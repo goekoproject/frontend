@@ -59,7 +59,8 @@
     },
     "LEGAL": {
         "cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
-        "cookiesPolicy": "Politica de cookies"
+        "cookiesPolicy": "Politica de cookies",
+        "privacyPolicy": "Politica de privacidad"
     },
     "MENU": {
         "aboutGoEKo": "Sobre GoEko",

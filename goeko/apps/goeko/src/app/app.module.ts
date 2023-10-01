@@ -14,7 +14,7 @@ import { ContentConfig } from './content-ful.config';
 import { FooterComponent } from './shell/footer/footer.component';
 import { HeaderComponent } from './shell/header/header.component';
 import { MenuComponent } from './shell/menu/menu.component';
-import { TeamComponent } from './team/team.component';
+import { TeamComponent } from './home/team/team.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
@@ -23,7 +23,7 @@ const httpLoaderFactory = (http: HttpClient) => {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 @NgModule({
-	declarations: [AppComponent, NxWelcomeComponent, MenuComponent, HeaderComponent, TeamComponent, FooterComponent],
+	declarations: [AppComponent, NxWelcomeComponent, MenuComponent, HeaderComponent, FooterComponent],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,

@@ -1,13 +1,19 @@
 .container {
-    display: flex;
-    width: var(--center-container);
-    margin: 0 auto;
-    min-height: 100rem;
+  display: flex;
+  width: var(--center-container);
+  margin: 0 auto;
+  min-height: 100rem;
 }
 .container-demo {
-    display: block;
-    height: 100%;
+  display: block;
+  height: 100%;
 }
 footer {
-    width: 100%;
+  width: 100%;
+}
+go-popup {
+  a {
+    text-decoration: underline;
+    color: #00527d;
+  }
 }

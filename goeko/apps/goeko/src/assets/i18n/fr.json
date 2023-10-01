@@ -60,7 +60,8 @@
     },
     "LEGAL": {
         "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
-        "cookiesPolicy": "Politique de cookies"
+        "cookiesPolicy": "Politique de cookies",
+        "privacyPolicy": "Politique de confidentialité"
     },
     "MENU": {
         "aboutGoEKo": "A propos de GoEko",

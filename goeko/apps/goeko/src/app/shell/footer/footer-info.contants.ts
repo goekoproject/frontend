@@ -26,6 +26,14 @@ export const FOOTER_INFO = [
 				title: 'WhitePapers',
 				url: '',
 			},
+			{
+				title: 'LEGAL.privacyPolicy',
+				url: 'home/privacy-policy',
+			},
+			{
+				title: 'LEGAL.cookiesPolicy',
+				url: 'home/cookies-policy',
+			},
 		],
 	},
 

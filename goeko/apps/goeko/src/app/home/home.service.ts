@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ContentFulService } from '@goeko/store';
+import { ContentFulService, LangOfLocalecontentFul } from '@goeko/store';
 import { map } from 'rxjs';
 
-enum LangOfLocalecontentFul {
-	gb = 'en-US',
-	fr = 'fr',
-}
 @Injectable({ providedIn: 'root' })
 export class HomeService {
 	constructor(private _contentFul: ContentFulService) {}
