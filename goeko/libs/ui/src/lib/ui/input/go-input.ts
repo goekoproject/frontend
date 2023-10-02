@@ -89,6 +89,7 @@ export class GoInput extends LitElement {
 				.value="${this.value}"
 				.id="${this.idInput}"
 				name="${this.name}"
+				?maxlength="${this.maxLength}"
 				placeholder="${this.placeholder}"
 				?required="${this.required}"
 				@input="${this.handleInput}"

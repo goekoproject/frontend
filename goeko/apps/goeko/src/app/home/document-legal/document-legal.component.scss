@@ -7,7 +7,7 @@
     line-height: 2.2;
     color: #24253B;
      &-title {
-        font-size: 44px;
+        font-size: calc(33px + 0.5vw);
      }
 }
 
@@ -22,15 +22,6 @@
 @media screen and (width < 800px) {
    .document-legal {
       width: 90%;
-      h1 {
-         font-size: 2rem;
-       }
-      h2 {
-         font-size:1.8rem;
-      }
-      h2 {
-         font-size:1.6rem;
-      }
    }
 
  }

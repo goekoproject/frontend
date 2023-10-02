@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { distinctUntilChanged, filter } from 'rxjs';
 
+const KEY_COOKIES = 'cookie-policy';
 @Component({
 	selector: 'goeko-root',
 	templateUrl: './app.component.html',
@@ -10,11 +11,20 @@ import { distinctUntilChanged, filter } from 'rxjs';
 export class AppComponent {
 	public path!: string;
 
+	get showPopupCookies() {
+		return !sessionStorage.getItem(KEY_COOKIES);
+	}
+
 	get isDemo() {
 		return this.path?.includes('demo');
 	}
 	constructor(private router: Router, private route: ActivatedRoute) {
 		this._routeChange();
+		console.log(this.showPopupCookies);
+	}
+
+	acceptCookie() {
+		sessionStorage.setItem(KEY_COOKIES, 'true');
 	}
 
 	private _routeChange() {

@@ -1,7 +1,7 @@
 <div class="footer">
 	<img class="footer__logo" src="assets/logo_footer.png" alt="logo_footer" />
 	<div *ngFor="let item of footerInfo">
-		<h1 class="title-footer-column">{{ item.title }}</h1>
+		<h1 class="title-footer-column">{{ item.title | translate }}</h1>
 		<div *ngFor="let element of item.elements" class="footer__element">
 			<ng-container *ngTemplateOutlet="element.logo ? withLogo : text; context: { element: element }">
 			</ng-container>

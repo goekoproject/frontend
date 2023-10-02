@@ -9,6 +9,7 @@ import {
 	CarouselComponent,
 	CarouselModule,
 	GoInputDirective,
+	GoInputModule,
 	GoekoButtonModule,
 	UiSuperSelectModule,
 } from '@goeko/ui';
@@ -20,7 +21,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-	declarations: [DemoContainerComponent, GoInputDirective, DemoResultComponent],
+	declarations: [DemoContainerComponent, DemoResultComponent],
 	imports: [
 		CommonModule,
 		DemoRoutingModule,
@@ -30,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
 		UiSuperSelectModule,
 		OverlayModule,
 		TranslateModule,
+		GoInputModule,
 		SmeModule.forRoot({
 			endpoint: environment.baseUrl,
 		}),

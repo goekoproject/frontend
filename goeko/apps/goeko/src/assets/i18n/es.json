@@ -39,12 +39,19 @@
     "certified": "Certificado",
     "cleantech": "Cleantech",
     "contact": "Contacto",
+    "continue": "Continuar",
     "costReduction": "Costos operativos",
     "decline": "Rechazar",
+    "FOOTER": {
+        "contact": "Contactar",
+        "resources": "Recursos",
+        "service": "Servicios"
+    },
     "FORM_LABEL": {
         "companyName": "Nombre de la Compañia",
         "country": "Pais",
         "email": "Email",
+        "password": "Contraseña",
         "website": "Sito web"
     },
     "HOME": {

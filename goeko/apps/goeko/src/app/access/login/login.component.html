@@ -1,0 +1,24 @@
+<div class="access">
+	<img alt="logo-access" src="assets/logo.png" #logo [routerLink]="['/']" class="logo-access" />
+
+	<div class="login-singup">
+		<ng-container *ngTemplateOutlet="login"></ng-container>
+	</div>
+	<div class="access-img">
+		<img alt="logo" src="assets/environmental-impact.jpg" />
+	</div>
+</div>
+
+<ng-template #login>
+	<div class="login" [formGroup]="formLogin">
+		<go-input [formControlName]="'email'">
+			<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+		</go-input>
+		<go-input [formControlName]="'password'" type="password" maxlength="8">
+			<p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
+		</go-input>
+		<button type="button" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
+			{{ 'continue' | translate }}
+		</button>
+	</div>
+</ng-template>

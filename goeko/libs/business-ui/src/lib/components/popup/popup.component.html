@@ -4,10 +4,10 @@
 	<h1>{{ title }}</h1>
 	<ng-content select="[description]"></ng-content>
 	<div class="popup_actions">
-		<button *ngIf="textMainButton" type="button" go-button appearance="primary" (click)="confirm()">
+		<button *ngIf="textMainButton" type="button" go-button appearance="primary" (click)="onOk()">
 			{{ textMainButton }}
 		</button>
-		<button *ngIf="textSecondaryButton" type="button" go-button appearance="white">
+		<button *ngIf="textSecondaryButton" type="button" go-button appearance="white" (click)="onKo()">
 			{{ textSecondaryButton }}
 		</button>
 	</div>

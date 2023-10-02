@@ -10,7 +10,7 @@ export interface Elements {
 
 export const FOOTER_INFO = [
 	{
-		title: 'Service',
+		title: 'FOOTER.service',
 		elements: [
 			{
 				title: 'Transition ecology',
@@ -20,7 +20,7 @@ export const FOOTER_INFO = [
 	},
 
 	{
-		title: 'Resources',
+		title: 'FOOTER.resources',
 		elements: [
 			{
 				title: 'WhitePapers',
@@ -38,7 +38,7 @@ export const FOOTER_INFO = [
 	},
 
 	{
-		title: 'Contact',
+		title: 'FOOTER.contact',
 		elements: [
 			{
 				title: 'info@goeko.com',

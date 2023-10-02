@@ -40,12 +40,19 @@
     "cleantech": "Cleantech",
     "companyDetails": "Company details",
     "contact": "Contact",
+    "continue": "Continue",
     "costReduction": "Costos operativos",
     "decline": "Decline",
+    "FOOTER": {
+        "contact": "Contact",
+        "resources": "Resources",
+        "service": "Service"
+    },
     "FORM_LABEL": {
         "companyName": "Company name",
         "country": "Country",
         "email": "Email",
+        "password": "password",
         "website": "Website"
     },
     "HOME": {

@@ -20,6 +20,14 @@ const ROUTES: Routes = [
 		path: 'demo',
 		loadChildren: () => import('./demo/demo.module').then((m) => m.DemoModule),
 	},
+	{
+		path: 'login',
+		loadChildren: () => import('./access/access.module').then((m) => m.AccessModule),
+	},
+	{
+		path: 'dashboard',
+		loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+	},
 ];
 @NgModule({
 	imports: [

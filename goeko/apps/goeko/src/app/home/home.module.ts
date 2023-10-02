@@ -15,6 +15,10 @@ import { OrderByPipe } from './content/order-by.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { DocumentLegalComponent } from './document-legal/document-legal.component';
 import { TeamComponent } from './team/team.component';
+import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './header/menu/menu.component';
+import { SelectI18nModule } from '@goeko/business-ui';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
 	declarations: [
@@ -27,8 +31,12 @@ import { TeamComponent } from './team/team.component';
 		OrderByPipe,
 		TeamComponent,
 		DocumentLegalComponent,
+		HeaderComponent,
+		MenuComponent,
+		LandingComponent,
 	],
 	imports: [
+		SelectI18nModule,
 		CommonModule,
 		HomeRouteModule,
 		ButtonModule,

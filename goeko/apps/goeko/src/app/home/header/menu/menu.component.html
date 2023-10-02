@@ -6,5 +6,5 @@
 <div class="menu-actions">
 	<goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang">
 	</goeko-select-i18n>
-	<button go-button appearance="transparent">{{ 'MENU.login' | translate }}</button>
+	<button go-button appearance="transparent" [routerLink]="'../login'">{{ 'MENU.login' | translate }}</button>
 </div>

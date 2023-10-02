@@ -26,8 +26,7 @@ export class ContentFulService {
 	}
 	getEntryIdByHTML(entryId: string, codeLang: string) {
 		const currentLang = LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
-
-		return from(this._getBodyLikeHtml(entryId, codeLang));
+		return from(this._getBodyLikeHtml(entryId, currentLang));
 	}
 	private async _getBodyLikeHtml(entryId: string, codeLang: string) {
 		return this._client.getEntry(entryId, { locale: codeLang }).then((entry: any) => {
