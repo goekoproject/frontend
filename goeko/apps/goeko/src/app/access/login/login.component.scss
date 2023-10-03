@@ -5,6 +5,7 @@
   position: relative;
   gap: 5rem;
   height: 100vh;
+  width: 100vw;
 }
 .logo-access {
   position: absolute;
@@ -39,5 +40,9 @@
 @media screen and  (width <= 800px) {
     .access-img {
         display: none;
+    }
+    .login-singup {
+      width: 76%;
+      justify-content: flex-start;
     }
 }
