@@ -23,7 +23,7 @@ const httpLoaderFactory = (http: HttpClient) => {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 @NgModule({
-	declarations: [AppComponent, NxWelcomeComponent, FooterComponent],
+	declarations: [AppComponent, NxWelcomeComponent, FooterComponent, HeaderComponent, MenuComponent],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
@@ -31,6 +31,7 @@ const httpLoaderFactory = (http: HttpClient) => {
 		ButtonModule,
 		ContentFulModule.forRoot(ContentConfig),
 		PopupModule,
+		SelectI18nModule,
 		ConfigModule.forRoot({
 			endopoint: environment.baseUrl,
 			tokenAccess: environment.baseUrl,

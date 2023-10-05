@@ -173,7 +173,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		keyLang: 'Summary',
+		keyLang: 'summary',
 		status: STATUS_SECTION.COMPLETED,
 		controlName: '',
 		showResult: false,
