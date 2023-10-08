@@ -99,7 +99,7 @@ export class AuthService extends Auth0Connected {
 				realm: 'goeko-users',
 				username: body.username,
 				password: body.password,
-				redirectUri: 'http://localhost:3000/autenticate',
+				redirectUri: `${window.location.origin}/autenticate`,
 			},
 			(error: any, result: any) => {
 				console.log(result);
