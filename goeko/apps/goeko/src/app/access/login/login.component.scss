@@ -1,48 +1,74 @@
 .access {
-  display: flex;
-  justify-content: center;
-  padding: 3.4rem 0;
-  position: relative;
-  gap: 5rem;
-  height: 100vh;
-  width: 100vw;
+	display: flex;
+	justify-content: center;
+	padding: 3.4rem 0;
+	position: relative;
+	gap: 5rem;
+	height: 100vh;
+	width: 100vw;
 }
 .logo-access {
-  position: absolute;
-  top: 2rem;
-  left: 0;
+	position: absolute;
+	top: 2rem;
+	left: 0;
 }
 .login-singup {
-  width: 36%;
-  align-self: center;
-  display: flex;
-  justify-content: center;
+	width: 36%;
+	align-self: center;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	gap: 2.5rem;
+	min-height: 500px;
+}
+.go-switch {
+	width: 63%;
 }
 .access-img {
-  overflow: hidden;
-  width: 52%;
-  height: auto;
-  border-radius: 24px;
-  flex-grow: 2;
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
+	overflow: hidden;
+	width: 52%;
+	height: auto;
+	border-radius: 24px;
+	flex-grow: 2;
+	img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
 }
 .login {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 62%;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	width: 62%;
+}
+.arrow-back {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	left: 0;
+	bottom: 7%;
+	border-radius: 50%;
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+		rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	span {
+		position: relative;
+		left: 0.3rem;
+		color: #24253b;
+	}
 }
 
-@media screen and  (width <= 800px) {
-    .access-img {
-        display: none;
-    }
-    .login-singup {
-      width: 76%;
-      justify-content: flex-start;
-    }
+@media screen and (width <= 800px) {
+	.access-img {
+		display: none;
+	}
+	.login-singup {
+		width: 76%;
+		justify-content: flex-start;
+	}
 }

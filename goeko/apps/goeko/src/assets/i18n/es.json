@@ -1,5 +1,12 @@
 {
     "accept": "Aceptar",
+    "ACCESS_ERROR": {
+        "passwordPolicy1": "Letras minúsculas (a-z)",
+        "passwordPolicy2": "Letras mayúsculas (A-Z)",
+        "passwordPolicy3": "Números (0-9)",
+        "passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
+        "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
+    },
     "all": "Todo",
     "availability": "Disponible",
     "back": "Volver",
@@ -179,5 +186,11 @@
     "sme": "Pymes",
     "start": "Empezar",
     "summary": "Resumen",
-    "titleResult": "Las soluciones ecológicas más adaptadas para"
+    "titleResult": "Las soluciones ecológicas más adaptadas para",
+    "USER_TYPE": {
+        "bank": "Banco",
+        "cleanTech": "Cleantech",
+        "sme": "PYME"
+    },
+    "userType": "Tipo de usuario"
 }

@@ -34,7 +34,10 @@ const httpLoaderFactory = (http: HttpClient) => {
 		SelectI18nModule,
 		ConfigModule.forRoot({
 			endopoint: environment.baseUrl,
-			tokenAccess: environment.baseUrl,
+			tokenAccess: environment.accessToken,
+			clientSecret: environment.clientSecret,
+			clientId: environment.clientId,
+			domainAuth0: environment.domainAuth0,
 		}),
 		TranslateModule.forRoot({
 			defaultLanguage: 'fr',

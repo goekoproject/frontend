@@ -1,0 +1,23 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 62%;
+}
+
+.signup-row {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+
+  go-input {
+    width: 50%;
+  }
+}
+
+.policy-password {
+  ul {
+    padding: 0 1.6rem;
+    list-style-type: circle;
+  }
+}

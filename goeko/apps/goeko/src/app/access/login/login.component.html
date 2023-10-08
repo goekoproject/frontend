@@ -2,23 +2,48 @@
 	<img alt="logo-access" src="assets/logo.png" #logo [routerLink]="['/']" class="logo-access" />
 
 	<div class="login-singup">
-		<ng-container *ngTemplateOutlet="login"></ng-container>
+		<go-switch
+			class="go-switch"
+			[onLabel]="'Log in'"
+			[offLabel]="'Sign up'"
+			(valueChanged)="valueChanbgeTypeForm($event)"
+		></go-switch>
+
+		<ng-container *ngTemplateOutlet="typeForm ? login : signup"></ng-container>
 	</div>
 	<div class="access-img">
 		<img alt="logo" src="assets/environmental-impact.jpg" />
 	</div>
+
+	<button class="arrow-back" [routerLink]="['/']">
+		<span class="material-symbols-rounded"> arrow_back_ios </span>
+	</button>
 </div>
 
 <ng-template #login>
-	<div class="login" [formGroup]="formLogin">
-		<go-input [formControlName]="'email'">
+	<form class="login" [formGroup]="formLogin">
+		<go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
 			<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
 		</go-input>
-		<go-input [formControlName]="'password'" type="password" maxlength="8">
+		<go-input
+			[formControlName]="'password'"
+			type="password"
+			minlength="8"
+			id="current-password"
+			name="current-password"
+		>
 			<p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
 		</go-input>
-		<button type="button" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
+		<button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
 			{{ 'continue' | translate }}
 		</button>
-	</div>
+	</form>
+</ng-template>
+
+<ng-template #signup>
+	<goeko-signup [formSignup]="formSignup" [isErrorPolicyPassword]="isErrorPolicyPassword">
+		<button type="button" go-button appearance="primary" (click)="submitSignUp()" [disabled]="formSignup.invalid">
+			{{ 'continue' | translate }}
+		</button>
+	</goeko-signup>
 </ng-template>

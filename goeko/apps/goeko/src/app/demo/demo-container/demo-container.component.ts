@@ -4,12 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Field } from './form-field.model';
 import { DemoService } from '../demo.services';
 import { Router } from '@angular/router';
-import {
-	DataSelect,
-	SelectMainCategoryNonInert,
-	SelectMainInternalCombustionEngine,
-	SelectMainRigidMaterial,
-} from './select-data.constants';
+import { DataSelect } from './select-data.constants';
 
 @Component({
 	selector: 'goeko-demo-container',

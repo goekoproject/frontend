@@ -8,18 +8,18 @@ import { Options } from '../../models/options.interface';
 import { SessionStorageService } from './../../services/session-storage.service';
 import { AuthRequest } from './auth-request.interface';
 import { AuthResponse } from './auth-response.interface';
+import { Auth0Connected } from './auth0.abtract';
 
-export const SESSIONID = 'SESSIONID';
+export const SESSIONID = 'accessToken';
 export const TOKEN_USER = 'TOKEN_USER';
-
 export const ACCESS_TOKEN = 'ACCESS_TOKEN';
 
 @Injectable({ providedIn: 'platform' })
-export class AuthService {
+export class AuthService extends Auth0Connected {
 	private _url!: string;
 	private _urlTokenAccess!: string;
-	private _clientId!: string | undefined;
-	private _clientSecret!: string | undefined;
+	private _clientId: string;
+	private _clientSecret: string;
 	private _authData$ = new BehaviorSubject<AuthResponse | null>(null);
 	private _expirationCurrent!: number;
 	/********
@@ -41,10 +41,11 @@ export class AuthService {
 		private readonly _http: HttpClient,
 		private _router: Router
 	) {
+		super(_config.domainAuth0, _config.clientId);
 		this._url = this._config.endopoint;
 		this._urlTokenAccess = this._config.tokenAccess;
-		this._clientId = this._config.consumerKey;
-		this._clientSecret = this._config.consumerSecret;
+		this._clientId = this._config.clientId;
+		this._clientSecret = this._config.clientSecret;
 	}
 
 	/**
@@ -54,7 +55,7 @@ export class AuthService {
 	 */
 	isLoggedIn(body: AuthRequest) {
 		//	this.killSessions();
-		return this._auth(body);
+		return this._auth0(body);
 	}
 
 	/**
@@ -62,8 +63,8 @@ export class AuthService {
 	 * @returns If is login in
 	 */
 	isAuthenticated(): boolean {
-		const accessToken = this.sessionStorageService.getItem(SESSIONID) as AuthResponse;
-		return !!accessToken && !this.isExpiredTOKEN(accessToken.exp);
+		const accessToken = this.sessionStorageService.getItem(SESSIONID);
+		return !!accessToken && !this.isExpiredTOKEN(this.expiresIn);
 	}
 
 	killSessions(): void {
@@ -81,20 +82,44 @@ export class AuthService {
 	 * @returns
 	 */
 	private _auth(body: AuthRequest) {
-		return this._getTokenBasic().pipe(concatMap((res: any) => this._login(body, res.access_token)));
+		return this._getTokenBasic().pipe(concatMap((res: any) => this._login(body, res.accessToken)));
+	}
+
+	public proccesAccessToken(accessToken: string) {
+		this.proccesHash(accessToken);
+	}
+
+	private _auth0(body: AuthRequest) {
+		return this._loginAuth0(body);
+	}
+
+	private _loginAuth0(body: AuthRequest) {
+		this.webAuth.login(
+			{
+				realm: 'goeko-users',
+				username: body.username,
+				password: body.password,
+				redirectUri: 'http://localhost:3000/autenticate',
+			},
+			(error: any, result: any) => {
+				console.log(result);
+				console.log(error);
+			}
+		);
 	}
 
 	private _getTokenBasic(): Observable<unknown> {
-		const token = `${this._clientId}:${this._clientSecret}`;
-		const hash = btoa(token);
-		let headers = new HttpHeaders();
-		const credentials = 'grant_type=client_credentials';
-		headers = headers
-			.set('Authorization', `Basic ${hash}`)
-			.set('Content-Type', 'application/x-www-form-urlencoded');
-		return this._http.post(this._urlTokenAccess, credentials, {
-			headers: headers,
-		});
+		const body = this._getBodyAccessToken(this._clientId, this._clientSecret);
+		return this._http.post(this._urlTokenAccess, body);
+	}
+
+	private _getBodyAccessToken(clientId: string, clientSecret: string) {
+		return {
+			grant_type: 'client_credentials',
+			audience: 'goeko-backend',
+			client_id: clientId,
+			client_secret: clientSecret,
+		};
 	}
 
 	/**
@@ -104,6 +129,7 @@ export class AuthService {
 	 */
 	private _login(body: AuthRequest, accessToken: string): Observable<unknown> {
 		let headers = new HttpHeaders();
+		console.log(accessToken);
 
 		headers = headers.set('Authorization', `Bearer ${accessToken}`).set('Content-Type', 'application/json');
 

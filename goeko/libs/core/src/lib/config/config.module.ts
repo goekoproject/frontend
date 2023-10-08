@@ -26,6 +26,7 @@ export class ConfigModule {
 	static forRoot(config?: Options): ModuleWithProviders<ConfigModule> {
 		return {
 			ngModule: ConfigModule,
+
 			providers: [
 				AuthService,
 				{

@@ -3,8 +3,6 @@ import { customElement, property, query } from 'lit/decorators.js';
 
 @customElement('go-input')
 export class GoInput extends LitElement {
-	static lastId = 0;
-
 	static override get styles() {
 		return css`
 			.go-input {
@@ -14,7 +12,6 @@ export class GoInput extends LitElement {
 				height: 2rem;
 				padding: 0 1rem;
 				transition: all 0.4 s;
-				width: inherit;
 			}
 			.go-input:focus-visible {
 				outline-color: #6f57cd;
@@ -45,16 +42,16 @@ export class GoInput extends LitElement {
 	@property({ type: String }) placeholder = '';
 	@property({ type: Boolean }) required = false;
 	@property({ type: Boolean }) disabled = false;
-	@property({ type: Boolean }) minLength = 0;
-	@property({ type: Boolean }) maxLength = Infinity;
+	@property({ type: String }) minLength = 0;
+	@property({ type: String }) maxLength = Infinity;
 	@property({ type: Boolean }) pattern = Infinity;
-	@property({ type: String }) idInput;
+	@property({ type: String }) autocomplete = '';
+
 	@property({ type: String }) textHelp = '';
 	@query('input') input!: HTMLInputElement;
 
 	constructor() {
 		super();
-		this.idInput = `go-input-${++GoInput.lastId}`;
 	}
 	protected override firstUpdated(changedProperties: PropertyValues) {
 		super.firstUpdated(changedProperties);
@@ -82,16 +79,17 @@ export class GoInput extends LitElement {
 				rel="stylesheet"
 				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
 			/>
-			<label for="${this.idInput}"> <slot name="label"></slot> </label>
+			<label for="${this.id}"> <slot name="label"></slot> </label>
 			<input
 				class="go-input"
 				type="${this.type}"
 				.value="${this.value}"
-				.id="${this.idInput}"
-				name="${this.name}"
+				.id="${this.id}"
+				.name="${this.name}"
 				?maxlength="${this.maxLength}"
 				placeholder="${this.placeholder}"
 				?required="${this.required}"
+				autocomplete="${this.autocomplete ? this.autocomplete : this.id}"
 				@input="${this.handleInput}"
 			/>
 			${this.textHelp

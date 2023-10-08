@@ -15,6 +15,10 @@ export class AppComponent {
 		return !sessionStorage.getItem(KEY_COOKIES);
 	}
 
+	get isHome() {
+		return this.router.url.includes('home');
+	}
+
 	get isDemo() {
 		return this.path?.includes('demo');
 	}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AutenticateComponent } from '@goeko/core';
 
 const ROUTES: Routes = [
 	{
@@ -23,6 +24,10 @@ const ROUTES: Routes = [
 	{
 		path: 'login',
 		loadChildren: () => import('./access/access.module').then((m) => m.AccessModule),
+	},
+	{
+		path: 'autenticate',
+		component: AutenticateComponent,
 	},
 	{
 		path: 'dashboard',
