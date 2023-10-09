@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AutenticateComponent } from '@goeko/core';
+import { AutenticateComponent, AuthGuard } from '@goeko/core';
 
 const ROUTES: Routes = [
 	{
@@ -31,6 +31,7 @@ const ROUTES: Routes = [
 	},
 	{
 		path: 'dashboard',
+		canActivate: [AuthGuard],
 		loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
 	},
 ];

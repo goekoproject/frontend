@@ -39,9 +39,9 @@ export class AuthService extends Auth0Connected {
 		@Inject(CONFIGURATION) private _config: Options,
 		private readonly sessionStorageService: SessionStorageService,
 		private readonly _http: HttpClient,
-		private _router: Router
+		private router: Router
 	) {
-		super(_config.domainAuth0, _config.clientId);
+		super(_config.domainAuth0, _config.clientId, router);
 		this._url = this._config.endopoint;
 		this._urlTokenAccess = this._config.tokenAccess;
 		this._clientId = this._config.clientId;
@@ -58,12 +58,18 @@ export class AuthService extends Auth0Connected {
 		return this._auth0(body);
 	}
 
+	logout() {
+		this.disconnectAuth0();
+		sessionStorage.removeItem(SESSIONID);
+		sessionStorage.removeItem('idTokenData');
+	}
+
 	/**
 	 *  When the user try navigate what check in the credentials
 	 * @returns If is login in
 	 */
 	isAuthenticated(): boolean {
-		const accessToken = this.sessionStorageService.getItem(SESSIONID);
+		const accessToken = sessionStorage.getItem(SESSIONID);
 		return !!accessToken && !this.isExpiredTOKEN(this.expiresIn);
 	}
 
@@ -108,6 +114,10 @@ export class AuthService extends Auth0Connected {
 		);
 	}
 
+	public getUserInfoToken() {
+		return this.getUserJWTData();
+	}
+
 	private _getTokenBasic(): Observable<unknown> {
 		const body = this._getBodyAccessToken(this._clientId, this._clientSecret);
 		return this._http.post(this._urlTokenAccess, body);
@@ -150,14 +160,6 @@ export class AuthService extends Auth0Connected {
 					});
 			})
 		);
-	}
-	manageTokenExternal(token: string, parkId: string) {
-		this._getTokenBasic().subscribe((res: any) => {
-			this._saveAccesToken(res.access_token);
-			this.manageToken(token);
-			const pathParkSelection = `park-selection/${parkId}`;
-			this._router.navigate([pathParkSelection]);
-		});
 	}
 
 	manageToken(token: string) {

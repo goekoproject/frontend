@@ -83,6 +83,10 @@
         "contanctUs": "Contact",
         "login": "Login"
     },
+    "MENU_USER": {
+        "dashboard": "Dashboard",
+        "favorites": "Favorites"
+    },
     "ods_msg_card_result": "Positive impact on SDG",
     "ods_title": "Sustainable Development Goals",
     "SCENES": {

@@ -1,0 +1,16 @@
+<nav class="menu-user">
+	<img alt="user-logo" src="assets/logo.png" #logo class="user-logo" />
+
+	<ul class="menu-user-options">
+		<li *ngFor="let item of menuOptions">
+			<i class="ti ti-{{ item.icon }}"></i>
+			<p class="menu-user-title">{{ item.title | translate }}</p>
+		</li>
+	</ul>
+
+	<div class="user-actions">
+		<goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang">
+		</goeko-select-i18n>
+		<i class="ti ti-logout-2" (click)="logout()"></i>
+	</div>
+</nav>

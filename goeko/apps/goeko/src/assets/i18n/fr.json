@@ -83,6 +83,10 @@
         "contanctUs": "Contact",
         "login": "Login "
     },
+    "MENU_USER": {
+        "dashboard": "Tableau de bord",
+        "favorites": "Favoris"
+    },
     "ods_msg_card_result": "Impact positif sur ODD",
     "ods_title": "Objectifs de développement durable",
     "SCENES": {

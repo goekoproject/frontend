@@ -1,6 +1,6 @@
 <goeko-header *ngIf="isHome"> </goeko-header>
-
-<div class="container">
+<goeko-menu-user *ngIf="getIsAuthenticated()"></goeko-menu-user>
+<div class="container" [class.is-platform]="getIsAuthenticated()">
 	<router-outlet></router-outlet>
 </div>
 <footer>

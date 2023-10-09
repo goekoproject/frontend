@@ -82,6 +82,10 @@
         "contanctUs": "Contáctenos",
         "login": "Accesso"
     },
+    "MENU_USER": {
+        "dashboard": "Dashboard",
+        "favorites": "Favoritos"
+    },
     "ods_msg_card_result": "Impacto positivo en los ODS",
     "ods_title": "Objetivos de Desarrollo Sostenible",
     "SCENES": {

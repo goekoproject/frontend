@@ -1,31 +1,20 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MENU } from './menu.contants';
 import { TranslateService } from '@ngx-translate/core';
+import { LANGS } from '@goeko/core';
 
 @Component({
 	selector: 'goeko-menu',
 	templateUrl: './menu.component.html',
 	styleUrls: ['./menu.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: {
 		class: 'menu',
 	},
 })
 export class MenuComponent implements OnInit {
-	langs = [
-		/* 		{
-			code: 'es',
-			locale: 'es ',
-		}, */
-		{
-			code: 'fr',
-			title: 'LANGS.fr',
-		},
-		{
-			code: 'gb',
-			title: 'LANGS.gb',
-		},
-	];
+	langs = LANGS;
 	menu = MENU;
 	defaultLang!: any;
 	constructor(private translate: TranslateService) {}

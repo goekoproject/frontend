@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '@goeko/core';
 import { distinctUntilChanged, filter } from 'rxjs';
 
 const KEY_COOKIES = 'cookie-policy';
@@ -22,7 +23,11 @@ export class AppComponent {
 	get isDemo() {
 		return this.path?.includes('demo');
 	}
-	constructor(private router: Router, private route: ActivatedRoute) {
+
+	getIsAuthenticated() {
+		return this._authService.isAuthenticated();
+	}
+	constructor(private router: Router, private route: ActivatedRoute, private _authService: AuthService) {
 		this._routeChange();
 		console.log(this.showPopupCookies);
 	}

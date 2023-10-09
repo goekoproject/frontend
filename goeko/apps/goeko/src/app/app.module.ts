@@ -19,11 +19,19 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { PopupModule, SelectI18nModule } from '@goeko/business-ui';
+import { MenuUserComponent } from './shell/menu-user/menu-user.component';
 const httpLoaderFactory = (http: HttpClient) => {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 @NgModule({
-	declarations: [AppComponent, NxWelcomeComponent, FooterComponent, HeaderComponent, MenuComponent],
+	declarations: [
+		AppComponent,
+		NxWelcomeComponent,
+		FooterComponent,
+		HeaderComponent,
+		MenuComponent,
+		MenuUserComponent,
+	],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
