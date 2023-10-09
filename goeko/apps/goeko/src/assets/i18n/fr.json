@@ -125,10 +125,10 @@
         "selectMainActivity": {
             "cleaningSiteVehicles": "Nettoyage des véhicules de chantier",
             "paint": "Peinture",
-            "pouringConcrete": "Coulage du béton",
-            "siteCleaning": "Nettoyage du chantier",
+            "pouringConcrete": "Production du béton",
+            "siteCleaning": "Arrosage du chantier",
             "siteHut": "Cabane de chantier",
-            "toolCleaning": "Nettoyage des outils"
+            "toolCleaning": "Nettoyage du matériel"
         },
         "selectMainCategoryNonInert": {
             "cardboardAndPaper": "Carton et papier",

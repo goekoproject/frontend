@@ -17,7 +17,7 @@ export class AppComponent {
 	}
 
 	get isHome() {
-		return this.router.url.includes('home');
+		return this.router.url.includes('home') || this.router.url.includes('demo');
 	}
 
 	get isDemo() {
