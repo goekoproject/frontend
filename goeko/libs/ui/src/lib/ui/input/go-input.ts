@@ -31,7 +31,7 @@ export class GoInput extends LitElement {
 				color: #6a6d8c;
 			}
 			label {
-				color: #6a6d8c;
+				color: #2b2b2b;
 				font-weight: 500;
 			}
 		`;

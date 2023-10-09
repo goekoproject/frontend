@@ -23,6 +23,7 @@ export const SelectMainCategoryNonInert = [
 	{ id: 1, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.metalsAndAlloys' },
 	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.untreatedWood' },
 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.plastic' },
+	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.plaster' },
 	/* 	{ id: 5, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.mineralWools' },
 	 */ { id: 6, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.insulationMaterials' },
 	{ id: 7, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.cardboardAndPaper' },
@@ -37,24 +38,37 @@ export const SelectMainActivity = [
 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectMainActivity.pouringConcrete' },
 	{ id: 5, keyLang: 'SELECT_DATA_LABEL.selectMainActivity.siteHut' },
 	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectMainActivity.paint' },
+	{ id: 7, keyLang: 'SELECT_DATA_LABEL.selectMainActivity.wateringForCure' },
+	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectMainActivity.cleaningOfSiteAndPeripheryAccesses' },
+	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectMainActivity.wateringPlants' },
 ];
 export const SelectProducts = [
 	{ id: 1, keyLang: 'SELECT_DATA_LABEL.selectProducts.aerosol' },
-	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectProducts.batteries' },
-	{ id: 3, keyLang: 'SELECT_DATA_LABEL.selectProducts.woodTreatedWithHazardousSubstances' },
-	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectProducts.packagingSoiledWithDangerousSubstances' },
-	{ id: 5, keyLang: 'SELECT_DATA_LABEL.selectProducts.oilSeparatorSludge' },
-	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectProducts.cartridgesContainingDangerousSubstances' },
 	{ id: 7, keyLang: 'SELECT_DATA_LABEL.selectProducts.productsContainingTar' },
+
+	/* 	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectProducts.batteries' },
+	 */ { id: 3, keyLang: 'SELECT_DATA_LABEL.selectProducts.woodTreatedWithHazardousSubstances' },
+	/* 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectProducts.packagingSoiledWithDangerousSubstances' },
+ { id: 5, keyLang: 'SELECT_DATA_LABEL.selectProducts.oilSeparatorSludge' },	
+	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectProducts.cartridgesContainingDangerousSubstances' },
 	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectProducts.energySavingLamps' },
-	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectProducts.electricalAndElectronicWasteContainingHazardousSubstances' },
+	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectProducts.electricalAndElectronicWasteContainingHazardousSubstances' }*/
 	{ id: 10, keyLang: 'SELECT_DATA_LABEL.selectProducts.paintVarnish' },
+	{ id: 11, keyLang: 'SELECT_DATA_LABEL.selectProducts.fuel' },
+	{ id: 12, keyLang: 'SELECT_DATA_LABEL.selectProducts.oils' },
+	{ id: 13, keyLang: 'SELECT_DATA_LABEL.selectProducts.curingProducts' },
+	{ id: 14, keyLang: 'SELECT_DATA_LABEL.selectProducts.admixtures' },
+	{ id: 15, keyLang: 'SELECT_DATA_LABEL.selectProducts.bituminousProductsContainingHAPs' },
 ];
 export const SelectEnergySource = [
 	{ id: 1, keyLang: 'SELECT_DATA_LABEL.selectEnergySource.aSmartManagementSystemOptimisingEnergyConsumption' },
 	{
 		id: 2,
 		keyLang: 'SELECT_DATA_LABEL.selectEnergySource.greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds',
+	},
+	{
+		id: 'energySource-none',
+		keyLang: 'none',
 	},
 ];
 
@@ -105,8 +119,8 @@ export const SelectSpecialWaste = [
 		id: 'fluorescentTubesEnergySavingBulbsNeonTubes',
 		keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.fluorescentTubesEnergySavingBulbsNeonTubes',
 	},
-	{ id: 'aerosols', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.aerosols' },
-	{
+	/* 	{ id: 'aerosols', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.aerosols' },
+	 */ {
 		id: 'electricalAndElectronicEquipmentPCB',
 		keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.electricalAndElectronicEquipmentPCB',
 	},
@@ -116,6 +130,15 @@ export const SelectSpecialWaste = [
 	},
 	{ id: 'agglomeratedProducts', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.agglomeratedProducts' },
 	{ id: 'treatedWood', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.treatedWood' },
+
+	{ id: 'solventsForInsulation', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.solventsForInsulation' },
+	{ id: 'polyurethaneFoams', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.polyurethaneFoams' },
+	{ id: 'lead', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.lead' },
+	{ id: 'asbestos', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.asbestos' },
+	{ id: 'particleboardPanels', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.particleboardPanels' },
+	{ id: 'agglomeratedConcrete', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.agglomeratedConcrete' },
+	{ id: 'agglomeratedCementPanels', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.agglomeratedCementPanels' },
+	{ id: 'rubberProducts', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.rubberProducts' },
 ];
 
 // Resultado de la constante SelectHazardousWaste

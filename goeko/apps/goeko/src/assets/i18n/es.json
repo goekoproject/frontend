@@ -98,6 +98,7 @@
             "greenWoodUntreated": "Madera verde (no tratada)",
             "topsoil": "Tierra vegetal"
         },
+        "none": "Ningúno",
         "selectCountry": {
             "france": "France",
             "germany": "Germany",
@@ -122,12 +123,15 @@
             "stone": "Piedra"
         },
         "selectMainActivity": {
+            "cleaningOfSiteAndPeripheryAccesses": "Limpieza de accesos de obra y periféricos",
             "cleaningSiteVehicles": "Limpieza de vehículos en el sitio",
             "paint": "Pintura",
             "pouringConcrete": "Vertido de concreto",
             "siteCleaning": "Limpieza de sitio",
             "siteHut": "Cabaña de sitio",
-            "toolCleaning": "Limpieza de herramientas"
+            "toolCleaning": "Limpieza de herramientas",
+            "wateringForCure": "Riego para la cura",
+            "wateringPlants": "Regando plantas"
         },
         "selectMainCategoryNonInert": {
             "cardboardAndPaper": "Cartón y papel",
@@ -163,11 +167,16 @@
             "insolationPanels": "Paneles de aislamiento"
         },
         "selectProducts": {
+            "admixtures": "Aditivos",
             "aerosol": "Aerosol",
             "batteries": "Acumuladores y baterías que contienen sustancias peligrosas",
+            "bituminousProductsContainingHAPs": "Productos bituminosos que contienen HAP",
             "cartridgesContainingDangerousSubstances": "Cartuchos que contienen sustancias peligrosas",
+            "curingProducts": "Productos de curado",
             "electricalAndElectronicWasteContainingHazardousSubstances": "Residuos eléctricos y electrónicos que contienen sustancias peligrosas",
             "energySavingLamps": "Lámparas de bajo consumo",
+            "fuel": "Combustible",
+            "oils": "Aceites",
             "oilSeparatorSludge": "Lodos de separadores de aceite",
             "packagingSoiledWithDangerousSubstances": "Envases ensuciados con sustancias peligrosas",
             "paintVarnish": "Pintura/barniz",
@@ -176,12 +185,20 @@
         },
         "selectSpecialWaste": {
             "aerosols": "Aerosoles",
+            "agglomeratedCementPanels": "Paneles de cemento aglomerado",
+            "agglomeratedConcrete": "Hormigón aglomerado",
             "agglomeratedProducts": "Productos aglomerados",
+            "asbestos": "Amianto",
             "batteriesAndAccumulators": "Baterías y acumuladores",
             "cartridgesSealantChemicalCaulking": "Cartuchos (selladores, productos químicos, calafateo...)",
             "electricalAndElectronicEquipmentPCB": "Equipos eléctricos y electrónicos (PCB)",
             "fluorescentTubesEnergySavingBulbsNeonTubes": "Tubos fluorescentes, bombillas de bajo consumo, tubos de neón",
+            "lead": "Plomo",
             "paintsAndSolvents": "Pinturas y solventes",
+            "particleboardPanels": "Paneles de aglomerado de partículas",
+            "polyurethaneFoams": "Espumas de poliuretano",
+            "rubberProducts": "Productos de caucho",
+            "solventsForInsulation": "Solventes para aislamiento",
             "treatedWood": "Madera tratada",
             "usedOils": "Aceites usados"
         }

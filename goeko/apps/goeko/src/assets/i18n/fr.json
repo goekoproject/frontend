@@ -29,19 +29,19 @@
     },
     "CATEGORIES_FIELD": {
         "amount": "Activités qui consomment le plus d’eau",
-        "energySource": "Votre entreprise souhaite-t-elle diminuer sa consommation d’énergie grâce à:",
+        "energySource": "Votre entreprise est-elle déjà équipée de: ",
         "fuelInvoice": "Facture de carburant",
-        "greenWaste": "Déchets verts",
-        "hazardousWaste": "Déchets dangereux",
-        "inertOrMineralWaste": "Déchets minéraux ou inertes",
+        "greenWaste": "Avec quels types de déchets verts votre entreprise est-elle principalement confrontée?",
+        "hazardousWaste": "Avec quels types de déchets dangereux votre entreprise est-elle principalement confrontée?",
+        "inertOrMineralWaste": "Avec quels types de déchets minéraux ou inertes votre entreprise est-elle principalement confrontée?",
         "lastYearInvoice": "Facture d'eau (2022)",
-        "mainActivity": "Activité qui consomme le plus d’eau",
-        "mainCategoryNonInert": "Déchets non inertes",
+        "mainActivity": "Activités de votre entreprise qui consomment le plus d’eau",
+        "mainCategoryNonInert": "Avec quels types de déchets non inertes votre entreprise est-elle principalement confrontée?",
         "mainInternalCombustionEngine": "Principaux engins à moteur",
         "mainMineralProduct": "Principaux produits minéraux",
         "mainRigidMaterial": "Votre entreprise utilise-t-elle des panneaux isolants ?",
         "products": "Types de produits toxiques",
-        "specialWaste": "Déchets spéciaux"
+        "specialWaste": "Avec quels types de déchets spéciaux votre entreprise est-elle principalement confrontée?"
     },
     "certified": "Certification",
     "cleantech": "Cleantech",
@@ -87,6 +87,7 @@
         "dashboard": "Tableau de bord",
         "favorites": "Favoris"
     },
+    "none": "Aucun",
     "ods_msg_card_result": "Impact positif sur ODD",
     "ods_title": "Objectifs de développement durable",
     "SCENES": {
@@ -123,12 +124,15 @@
             "stone": "Pierre"
         },
         "selectMainActivity": {
+            "cleaningOfSiteAndPeripheryAccesses": "Nettoyage des accès chantier et périphérie",
             "cleaningSiteVehicles": "Nettoyage des véhicules de chantier",
             "paint": "Peinture",
             "pouringConcrete": "Production du béton",
             "siteCleaning": "Arrosage du chantier",
             "siteHut": "Cabane de chantier",
-            "toolCleaning": "Nettoyage du matériel"
+            "toolCleaning": "Nettoyage du matériel",
+            "wateringForCure": "Arrosage pour la cure",
+            "wateringPlants": "Arrosage des plantes"
         },
         "selectMainCategoryNonInert": {
             "cardboardAndPaper": "Carton et papier",
@@ -164,25 +168,38 @@
             "insolationPanels": "Panneaux d'isolation"
         },
         "selectProducts": {
+            "admixtures": "Adjuvants",
             "aerosol": "Aérosol",
             "batteries": "Batteries et accumulateurs contenant des substances dangereuses",
+            "bituminousProductsContainingHAPs": "Produits bitumineux contenant des HAP",
             "cartridgesContainingDangerousSubstances": "Cartouches contenant des substances dangereuses",
+            "curingProducts": "Produits de cure",
             "electricalAndElectronicWasteContainingHazardousSubstances": "Déchets électriques et électroniques contenant des substances dangereuses",
             "energySavingLamps": "Ampoules à économie d'énergie",
+            "fuel": "Carburant",
+            "oils": "Huiles",
             "oilSeparatorSludge": "Boues de séparateur d'huile",
             "packagingSoiledWithDangerousSubstances": "Emballages souillés par des substances dangereuses",
-            "paintVarnish": "Peinture/vernis",
+            "paintVarnish": "Solvants à peintures/ vernis",
             "productsContainingTar": "Produits contenant du goudron",
             "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses"
         },
         "selectSpecialWaste": {
             "aerosols": "Aérosols",
+            "agglomeratedCementPanels": "Panneaux de ciment aggloméré",
+            "agglomeratedConcrete": "Béton Aggloméré",
             "agglomeratedProducts": "Produits agglomérés",
+            "asbestos": "Amiante",
             "batteriesAndAccumulators": "Batteries et accumulateurs",
             "cartridgesSealantChemicalCaulking": "Cartouches (mastic, produit chimique, calfeutrage…)",
             "electricalAndElectronicEquipmentPCB": "Équipements électriques et électroniques (PCB)",
             "fluorescentTubesEnergySavingBulbsNeonTubes": "Tubes fluorescents, ampoules à économie d'énergie, rampes de néon",
+            "lead": "Plomb",
             "paintsAndSolvents": "Peintures et solvants",
+            "particleboardPanels": "Panneaux de bois aggloméré",
+            "polyurethaneFoams": "Mousses polyuréthanes",
+            "rubberProducts": "Produits en caoutchouc",
+            "solventsForInsulation": "Solvants pour isolants",
             "treatedWood": "Bois traités",
             "usedOils": "Huiles usagées"
         }

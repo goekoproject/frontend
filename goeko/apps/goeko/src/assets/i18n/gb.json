@@ -87,6 +87,7 @@
         "dashboard": "Dashboard",
         "favorites": "Favorites"
     },
+    "none": "None",
     "ods_msg_card_result": "Positive impact on SDG",
     "ods_title": "Sustainable Development Goals",
     "SCENES": {
@@ -123,12 +124,15 @@
             "stone": "Stone"
         },
         "selectMainActivity": {
+            "cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
             "cleaningSiteVehicles": "Cleaning site vehicles",
             "paint": "Paint",
             "pouringConcrete": "Pouring concrete",
             "siteCleaning": "Site cleaning",
             "siteHut": "Site hut",
-            "toolCleaning": "Tool cleaning"
+            "toolCleaning": "Tool cleaning",
+            "wateringForCure": "Watering for Cure",
+            "wateringPlants": "Watering Plants"
         },
         "selectMainCategoryNonInert": {
             "cardboardAndPaper": "Carton and papier",
@@ -164,11 +168,16 @@
             "insolationPanels": "Insulation panels"
         },
         "selectProducts": {
+            "admixtures": "Admixtures",
             "aerosol": "Aerosol",
             "batteries": "Batteries and accumulators containing hazardous substances",
+            "bituminousProductsContainingHAPs": "Bituminous Products Containing HAPs",
             "cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
+            "curingProducts": "Curing Products",
             "electricalAndElectronicWasteContainingHazardousSubstances": "Electrical and electronic waste containing hazardous substances",
             "energySavingLamps": "Energy-saving lamps",
+            "fuel": "Fuel",
+            "oils": "Oils",
             "oilSeparatorSludge": "Oil separator sludge",
             "packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
             "paintVarnish": "Paint/varnish",
@@ -177,12 +186,20 @@
         },
         "selectSpecialWaste": {
             "aerosols": "Aerosols",
+            "agglomeratedCementPanels": "Agglomerated cement panels",
+            "agglomeratedConcrete": "Agglomerated concrete",
             "agglomeratedProducts": "Agglomerated Products",
+            "asbestos": "Asbestos",
             "batteriesAndAccumulators": "Batteries and Accumulators",
             "cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
             "electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment (PCB)",
             "fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
+            "lead": "Lead",
             "paintsAndSolvents": "Paints and Solvents",
+            "particleboardPanels": "Particleboard panels",
+            "polyurethaneFoams": "Polyurethane foams",
+            "rubberProducts": "Rubber products",
+            "solventsForInsulation": "Solvents for insulation",
             "treatedWood": "Treated Wood",
             "usedOils": "Used Oils"
         }

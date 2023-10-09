@@ -15,6 +15,6 @@ export class SmeService {
 	} */
 
 	getRecommendations(body: SmeRecomendationRequest): Observable<any> {
-		return this._http.post<any>(`${this.configuration.endpoint}/v1/recommendation/smes`, body);
+		return this._http.post<any>(`${this.configuration.endpoint}/v1/demo/recommendation/smes`, body);
 	}
 }
