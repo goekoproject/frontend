@@ -16,14 +16,15 @@ export class HeaderUserComponent implements OnInit {
 	constructor(private _authservice: AuthService, private _smeServices: SmeService) {}
 
 	ngOnInit(): void {
-		this.tokenData = this._authservice.getUserInfoToken();
-		this._getSmeData();
+		this._authservice.authData.subscribe((authData) => {
+			if (authData) {
+				this.tokenData = authData;
+				this._getSmeData();
+			}
+		});
 	}
 
 	private _getSmeData() {
-		if (!this.tokenData?.externalId) {
-			return;
-		}
 		this._smeServices.getByIdExternal(this.tokenData?.externalId).subscribe(
 			(data) => {
 				console.log(data);

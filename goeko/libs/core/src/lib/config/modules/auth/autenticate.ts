@@ -10,7 +10,14 @@ export class AutenticateComponent implements OnInit {
 	constructor(private _authService: AuthService, private _router: Router) {}
 	ngOnInit(): void {
 		if (location.hash) {
-			this._authService.proccesAccessToken(location.hash);
+			this._authService.handlerAuthtentication(location.hash).subscribe({
+				next: (result) => {
+					if (result) {
+						this._router.navigate(['dashboard']);
+					}
+				},
+				complete: () => console.log('Completado'),
+			});
 		}
 	}
 }

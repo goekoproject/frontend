@@ -10,22 +10,21 @@
 	height: 100vh;
 	position: absolute;
 	left: 0;
-	transition: all 0.5s ease-in;
+	transition: all 0.1s;
 	justify-content: space-between;
 	background-color: #ffffff;
 	.menu-user-title {
-		transition: all 0.2s;
-		display: none;
+		opacity: 0;
 	}
 	&:hover {
-		width: 260px;
+		width: 230px;
 		z-index: 100000000;
 		.menu-user-options,
 		.user-logo {
 			align-self: flex-start;
 		}
 		.menu-user-title {
-			display: inline;
+			opacity: 1;
 		}
 	}
 }
@@ -40,7 +39,6 @@
 	li {
 		margin-bottom: 0.5rem;
 		color: #d4dae9;
-		transition: all 0.5s ease-in-out;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
@@ -53,7 +51,7 @@
 		}
 	}
 	i {
-		font-size: calc(30px + 1.25vw);
+		font-size: 24px;
 	}
 }
 

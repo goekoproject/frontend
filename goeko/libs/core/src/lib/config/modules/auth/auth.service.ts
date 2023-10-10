@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, from } from 'rxjs';
+import { BehaviorSubject, Observable, concat, from, of } from 'rxjs';
 import { concatMap, shareReplay } from 'rxjs/operators';
 import { CONFIGURATION } from '../../config.module';
 import { Options } from '../../models/options.interface';
@@ -12,6 +12,7 @@ import { Auth0Connected } from './auth0.abtract';
 
 export const SESSIONID = 'SESSIONID';
 export const TOKEN_USER = 'TOKEN_USER';
+export const SS_JWTDATA = 'jwtData';
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
@@ -19,19 +20,25 @@ export class AuthService extends Auth0Connected {
 	private _urlTokenAccess!: string;
 	private _clientId: string;
 	private _clientSecret: string;
-	private _authData$ = new BehaviorSubject<AuthResponse | null>(null);
+	private _authData$ = new BehaviorSubject<any | null>(null);
 	private _expirationCurrent!: number;
+
 	/********
 	 *
 	 * Get  data from reponse login
 	 *
 	 */
-	public get authData(): Observable<AuthResponse | null> {
+	public get authData(): Observable<any | null> {
 		if (!this._authData$.value) {
-			const sessionAuthData = this.sessionStorageService.getItem<AuthResponse>(SESSIONID);
+			const sessionAuthData = this.sessionStorageService.getItem<any>(SS_JWTDATA);
 			this._authData$.next(sessionAuthData);
 		}
 		return this._authData$.asObservable();
+	}
+
+	public set authData(sessionAuthData: any) {
+		this.sessionStorageService.setItem<any>(SS_JWTDATA, sessionAuthData);
+		this._authData$.next(sessionAuthData);
 	}
 
 	constructor(
@@ -40,7 +47,7 @@ export class AuthService extends Auth0Connected {
 		private readonly _http: HttpClient,
 		private router: Router
 	) {
-		super(_config.domainAuth0, _config.clientId, router);
+		super(_config.domainAuth0, _config.clientId);
 		this._url = this._config.endopoint;
 		this._urlTokenAccess = this._config.tokenAccess;
 		this._clientId = this._config.clientId;
@@ -95,10 +102,17 @@ export class AuthService extends Auth0Connected {
 		});
 	}
 
-	public proccesAccessToken(accessToken: string) {
-		this.proccesHash(accessToken);
+	public handlerAuthtentication(hash: string): Observable<any> {
+		const proccessHashPromise = from(this.decodeHash(hash));
+		return concat(of(true), proccessHashPromise);
 	}
-
+	public decodeHash(accessToken: string) {
+		return this.proccesHash(accessToken).then((result) => {
+			if (result) {
+				this.authData = result;
+			}
+		});
+	}
 	private _auth0(body: AuthRequest) {
 		return this._loginAuth0(body);
 	}

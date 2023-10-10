@@ -4,7 +4,7 @@ import { Subject, from } from 'rxjs';
 import * as jsrsasign from 'jsrsasign';
 export const ACCESS_TOKEN = 'accessToken';
 export const ID_TOKEN = 'idTokenData';
-
+export const SS_JWTDATA = 'jwtData';
 export abstract class Auth0Connected {
 	public webAuth!: WebAuth;
 	public expiresIn!: number;
@@ -12,11 +12,10 @@ export abstract class Auth0Connected {
 
 	private _domain: string;
 	private _clientID: string;
-	private _router: Router;
 	userData!: any;
 
 	userInfo$ = new Subject();
-	public proccesHash = (hash: string) => {
+	/* 	public proccesHash = (hash: string) => {
 		this.webAuth.parseHash({ hash }, (error: Auth0ParseHashError | null, result: Auth0DecodedHash | null) => {
 			if (error) {
 				console.log('Error auth0', error);
@@ -34,10 +33,9 @@ export abstract class Auth0Connected {
 				}
 			}
 		});
-	};
+	}; */
 
-	constructor(domain: string, clientId: string, router: Router) {
-		this._router = router;
+	constructor(domain: string, clientId: string) {
 		this._domain = domain;
 		this._clientID = clientId;
 		this._connectAuth0();
@@ -57,8 +55,30 @@ export abstract class Auth0Connected {
 		});
 	}
 
-	getUserInfo() {
-		return this.userData;
+	public proccesHash(hash: string) {
+		return new Promise((resolve, reject) => {
+			this.webAuth.parseHash({ hash }, (error: Auth0ParseHashError | null, result: Auth0DecodedHash | null) => {
+				if (result && result.accessToken && result.idToken) {
+					const jwtData = this._processJWSToken(result.idToken);
+					resolve(jwtData);
+				} else if (error) {
+					throw new Error(`Error: ${error.error}. Check the console for further details.`);
+				} else {
+					throw new Error(`Unknown error`);
+				}
+			});
+		});
+	}
+
+	private _processJWSToken(idToken: string) {
+		const payloadObj = jsrsasign.KJUR.jws.JWS.parse(idToken)?.payloadObj as any;
+		if (!payloadObj) {
+			return null;
+		}
+		return {
+			...payloadObj,
+			externalId: payloadObj.sub.replace('auth0|', ''),
+		};
 	}
 
 	private getUserInfoAuth0() {
@@ -71,7 +91,6 @@ export abstract class Auth0Connected {
 			console.log('User login successfull');
 			console.log(result);
 			this.userData = result;
-			this._router.navigateByUrl('/dashboard');
 			/* 			window.location.href = `${window.location.origin}/dashboard`;
 			 */
 		});
@@ -85,7 +104,7 @@ export abstract class Auth0Connected {
 			...this.jwtData,
 			externalId: this.jwtData.sub.replace('auth0|', ''),
 		};
-		sessionStorage.setItem('jwtData', window.btoa(JSON.stringify(this.jwtData)));
+		sessionStorage.setItem(SS_JWTDATA, window.btoa(JSON.stringify(this.jwtData)));
 		return this.jwtData;
 	}
 }
