@@ -19,7 +19,13 @@
 	</go-input>
 
 	<div class="profile-actions">
-		<button type="button" go-button appearance="white">
+		<button
+			type="button"
+			go-button
+			appearance="white"
+			[routerLink]="['/dashboard']"
+			routerLinkActive="router-link-active"
+		>
 			{{ 'cancel' | translate }}
 		</button>
 		<button type="button" go-button appearance="primary" type="submit" (click)="saveProfile()">

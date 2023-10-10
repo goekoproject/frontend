@@ -2,7 +2,7 @@
 	<img alt="user-logo" src="assets/logo.png" #logo class="user-logo" />
 
 	<ul class="menu-user-options">
-		<li *ngFor="let item of menuOptions">
+		<li *ngFor="let item of menuOptions" (click)="goTo(item.url)">
 			<i class="ti ti-{{ item.icon }}"></i>
 			<p class="menu-user-title">{{ item.title | translate }}</p>
 		</li>

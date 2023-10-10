@@ -13,4 +13,11 @@ export const MENU_USER = [
 		active: true,
 		icon: 'heart',
 	},
+	{
+		id: 2,
+		title: 'profile',
+		url: 'profile',
+		active: true,
+		icon: 'user-square-rounded',
+	},
 ];
