@@ -34,6 +34,16 @@ const ROUTES: Routes = [
 		canActivate: [AuthGuard],
 		loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
 	},
+	{
+		path: 'profile',
+		canActivate: [AuthGuard],
+		loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule),
+	},
+	{
+		path: 'sme-analysis',
+		canActivate: [AuthGuard],
+		loadChildren: () => import('./sme-analysis-form/sme-analysis-form.module').then((m) => m.SmeAnalysisFormModule),
+	},
 ];
 @NgModule({
 	imports: [

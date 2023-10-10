@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'platform'
+	providedIn: 'platform',
 })
 export class SessionStorageService {
 	private readonly _sessionStorage = sessionStorage;
@@ -17,8 +17,12 @@ export class SessionStorageService {
 	getItem<T>(name: string): T | null {
 		const stringifiedObj = this._sessionStorage.getItem(name);
 
-		if (stringifiedObj && stringifiedObj !== "undefined") {
-			return JSON.parse(atob(stringifiedObj)) as T;
+		if (stringifiedObj && stringifiedObj !== 'undefined') {
+			const decode = window.atob(stringifiedObj);
+			return JSON.parse(decode) as T;
+
+			/* 			return JSON.parse(atob(stringifiedObj)) as T;
+			 */
 		}
 
 		return null;
@@ -32,11 +36,11 @@ export class SessionStorageService {
 	 * @param obj object to be stored
 	 */
 	setItem<T>(name: string, obj: T, code?: boolean): void {
-		if(code) {
-			this._sessionStorage.setItem(name, btoa(JSON.stringify(obj)));
+		if (code) {
+			this._sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
 			return;
 		}
-		this._sessionStorage.setItem(name, btoa(JSON.stringify(obj)));
+		this._sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
 	}
 
 	/**

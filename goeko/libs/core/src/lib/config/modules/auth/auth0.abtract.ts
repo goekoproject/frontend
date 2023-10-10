@@ -2,6 +2,8 @@ import { Router } from '@angular/router';
 import { Auth0DecodedHash, Auth0Error, Auth0ParseHashError, Auth0UserProfile, WebAuth } from 'auth0-js';
 import { Subject, from } from 'rxjs';
 import * as jsrsasign from 'jsrsasign';
+export const ACCESS_TOKEN = 'accessToken';
+export const ID_TOKEN = 'idTokenData';
 
 export abstract class Auth0Connected {
 	public webAuth!: WebAuth;
@@ -22,13 +24,12 @@ export abstract class Auth0Connected {
 			}
 
 			if (result) {
-				const { accessToken, expiresIn, idToken } = result;
+				const { accessToken, idToken } = result;
 				if (accessToken && idToken) {
-					this.jwtData = jsrsasign.KJUR.jws.JWS.parse(idToken)?.payloadObj;
-					this.expiresIn = this.jwtData.exp;
-					sessionStorage.setItem('accessToken', accessToken);
-					sessionStorage.setItem('idTokenData', idToken);
-
+					sessionStorage.setItem(ACCESS_TOKEN, accessToken);
+					sessionStorage.setItem(ID_TOKEN, idToken);
+					const jwtData = this.getUserJWTData();
+					this.expiresIn = (jwtData as any).exp;
 					this.getUserInfoAuth0();
 				}
 			}
@@ -79,7 +80,12 @@ export abstract class Auth0Connected {
 	getUserJWTData() {
 		const idToken = sessionStorage.getItem('idTokenData') as string;
 		console.log('idToken', idToken);
-		const jwtData = jsrsasign.KJUR.jws.JWS.parse(idToken)?.payloadObj;
-		return jwtData;
+		this.jwtData = jsrsasign.KJUR.jws.JWS.parse(idToken)?.payloadObj;
+		this.jwtData = {
+			...this.jwtData,
+			externalId: this.jwtData.sub.replace('auth0|', ''),
+		};
+		sessionStorage.setItem('jwtData', window.btoa(JSON.stringify(this.jwtData)));
+		return this.jwtData;
 	}
 }

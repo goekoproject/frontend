@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<h1 class="title-platform">
+	{{ 'dashboard' | translate }}
+</h1>
+
+<div class="slot-data">
+	<ul>
+		<li [routerLink]="['/sme-analysis']" routerLinkActive="router-link-active">
+			<i class="ti ti-device-desktop-analytics"></i>
+			<h4>{{ 'analysis' | translate }}</h4>
+		</li>
+	</ul>
+</div>

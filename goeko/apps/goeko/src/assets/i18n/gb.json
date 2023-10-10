@@ -8,6 +8,7 @@
         "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
     },
     "all": "All",
+    "analysis": "Analysis",
     "availability": "Availability",
     "back": "Back",
     "bank": "Bank",
@@ -46,9 +47,11 @@
     "certified": "Certification",
     "cleantech": "Cleantech",
     "companyDetails": "Company details",
+    "completeToProfileNow": "Complete to profile now!",
     "contact": "Contact",
     "continue": "Continue",
     "costReduction": "Costos operativos",
+    "dashboard": "Dashboard",
     "decline": "Decline",
     "FOOTER": {
         "contact": "Contact",
@@ -90,6 +93,8 @@
     "none": "None",
     "ods_msg_card_result": "Positive impact on SDG",
     "ods_title": "Sustainable Development Goals",
+    "profile": "Profile",
+    "save": "Save",
     "SCENES": {
         "slogan_text1": "Connecting SMEs to clean technologies and financing",
         "slogan_text2": "Who are you?"
@@ -209,6 +214,7 @@
     "start": "Start",
     "summary": "Summary",
     "titleResult": "Most adapted eco-solutions for",
+    "upgrade": "Upgrade",
     "USER_TYPE": {
         "bank": "Bank",
         "cleanTech": "Cleantech",

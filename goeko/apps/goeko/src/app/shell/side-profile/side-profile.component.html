@@ -1,0 +1,24 @@
+<div class="profile">
+	<i class="ti ti-arrow-autofit-right profile-close" (click)="toogleSideProfile = false"></i>
+	<div class="heading-company">
+		<span class="heading-icon">
+			<i class="ti ti-building-bridge-2"></i>
+		</span>
+		<p>{{ dataProfile?.nickname }}</p>
+	</div>
+
+	<div class="banner-complete-profile" *ngIf="_notDataUser">
+		<!-- 	<i class="ti ti-user-off"></i> -->
+		<img src="assets/incompleted.png" />
+		<p>{{ 'completeToProfileNow' | translate }}</p>
+		<button
+			type="button"
+			go-button
+			appearance="primary"
+			(click)="goToProfile()"
+			routerLinkActive="router-link-active"
+		>
+			{{ 'upgrade' | translate }}
+		</button>
+	</div>
+</div>

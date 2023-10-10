@@ -2,7 +2,8 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
-import { ACCESS_TOKEN, TOKEN_USER } from './auth.service';
+import { SESSIONID, TOKEN_USER } from './auth.service';
+import { ACCESS_TOKEN, ID_TOKEN } from './auth0.abtract';
 
 /**
  * Inteceptor for authenticating a user
@@ -12,13 +13,12 @@ export class AuthInterceptor implements HttpInterceptor {
 	constructor(private _route: Router) {}
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-		const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
+		const accessToken = sessionStorage.getItem(SESSIONID);
 		const token = sessionStorage.getItem(TOKEN_USER);
-		if (token) {
+		if (accessToken) {
 			request = request.clone({
 				setHeaders: {
 					Authorization: `Bearer ${accessToken}`,
-					'X-Authorization': `Bearer ${token}`,
 				},
 			});
 		}

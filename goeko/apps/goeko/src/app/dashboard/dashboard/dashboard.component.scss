@@ -1,0 +1,21 @@
+.slot-data {
+	display: flex;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	width: max-content;
+	cursor: pointer;
+	margin: 1rem;
+	i {
+		font-size: 4rem;
+		background: -webkit-linear-gradient(180deg, #0090d6 0%, rgba(0, 82, 125, 0.4) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	h4 {
+		font-size: 1rem;
+	}
+	&:hover {
+		box-shadow: 0px 1px 8px 0px #0090d6;
+	}
+}

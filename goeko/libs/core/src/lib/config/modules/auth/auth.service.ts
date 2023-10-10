@@ -10,9 +10,8 @@ import { AuthRequest } from './auth-request.interface';
 import { AuthResponse } from './auth-response.interface';
 import { Auth0Connected } from './auth0.abtract';
 
-export const SESSIONID = 'accessToken';
+export const SESSIONID = 'SESSIONID';
 export const TOKEN_USER = 'TOKEN_USER';
-export const ACCESS_TOKEN = 'ACCESS_TOKEN';
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
@@ -55,6 +54,7 @@ export class AuthService extends Auth0Connected {
 	 */
 	isLoggedIn(body: AuthRequest) {
 		//	this.killSessions();
+		this._auth();
 		return this._auth0(body);
 	}
 
@@ -62,6 +62,8 @@ export class AuthService extends Auth0Connected {
 		this.disconnectAuth0();
 		sessionStorage.removeItem(SESSIONID);
 		sessionStorage.removeItem('idTokenData');
+		sessionStorage.removeItem('jwtData');
+		sessionStorage.removeItem('accessToken');
 	}
 
 	/**
@@ -87,8 +89,10 @@ export class AuthService extends Auth0Connected {
 	 * @param body
 	 * @returns
 	 */
-	private _auth(body: AuthRequest) {
-		return this._getTokenBasic().pipe(concatMap((res: any) => this._login(body, res.accessToken)));
+	private _auth() {
+		return this._getTokenBasic().subscribe((res: any) => {
+			sessionStorage.setItem(SESSIONID, res.access_token);
+		});
 	}
 
 	public proccesAccessToken(accessToken: string) {
@@ -115,7 +119,7 @@ export class AuthService extends Auth0Connected {
 	}
 
 	public getUserInfoToken() {
-		return this.getUserJWTData();
+		return this.sessionStorageService.getItem('jwtData');
 	}
 
 	private _getTokenBasic(): Observable<unknown> {
@@ -127,7 +131,7 @@ export class AuthService extends Auth0Connected {
 		return {
 			grant_type: 'client_credentials',
 			audience: 'goeko-backend',
-			client_id: clientId,
+			client_id: 'IIWgZSFVYDDNnAGi4XPbNq8hiv53X5BX',
 			client_secret: clientSecret,
 		};
 	}
@@ -153,7 +157,6 @@ export class AuthService extends Auth0Connected {
 					.pipe(shareReplay())
 					.subscribe((response) => {
 						if (response) {
-							this._saveAccesToken(accessToken);
 							this.manageToken(response);
 							resolve(true);
 						}
@@ -227,13 +230,5 @@ export class AuthService extends Auth0Connected {
 	 */
 	private _saveTokenUser(accessToken: string) {
 		sessionStorage.setItem(TOKEN_USER, accessToken);
-	}
-
-	/**
-	 *  Toker for header Authorization
-	 * @param accessToken
-	 */
-	private _saveAccesToken(accessToken: string) {
-		sessionStorage.setItem(ACCESS_TOKEN, accessToken);
 	}
 }

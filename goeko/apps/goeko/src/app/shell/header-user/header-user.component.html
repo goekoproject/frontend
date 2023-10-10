@@ -1,0 +1,17 @@
+<nav class="header-user">
+	<ul>
+		<li>
+			<div class="heading-company" (click)="toogleSideProfile = !toogleSideProfile">
+				<span class="heading-icon">
+					<i class="ti ti-building-bridge-2"></i>
+				</span>
+				<p>{{ tokenData?.nickname }}</p>
+			</div>
+		</li>
+	</ul>
+</nav>
+<goeko-side-profile
+	[toogleSideProfile]="toogleSideProfile"
+	[dataProfile]="tokenData"
+	[notDataUser]="!!dataUser"
+></goeko-side-profile>

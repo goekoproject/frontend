@@ -5,6 +5,7 @@ import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, View
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: {
 		class: 'goeko-header',
 	},

@@ -45,6 +45,7 @@ $color-label-pressed: #0090d6;
 	border: 1px solid rgb(217, 219, 233);
 	border-radius: 15px;
 	overflow: hidden;
+	max-width: 432px;
 	&:focus-visible {
 		outline-color: rgb(111, 87, 205);
 		box-shadow: rgba(111, 87, 205, 0.25) 0px 0px 1px 2px;

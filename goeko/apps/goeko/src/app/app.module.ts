@@ -7,7 +7,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigModule } from '@goeko/core';
-import { ContentFulModule } from '@goeko/store';
+import { ContentFulModule, SmeModule } from '@goeko/store';
 import { ButtonModule, CarouselModule } from '@goeko/ui';
 import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
@@ -20,6 +20,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { PopupModule, SelectI18nModule } from '@goeko/business-ui';
 import { MenuUserComponent } from './shell/menu-user/menu-user.component';
+import { SideProfileComponent } from './shell/side-profile/side-profile.component';
+import { HeaderUserComponent } from './shell/header-user/header-user.component';
 const httpLoaderFactory = (http: HttpClient) => {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
@@ -31,6 +33,8 @@ const httpLoaderFactory = (http: HttpClient) => {
 		HeaderComponent,
 		MenuComponent,
 		MenuUserComponent,
+		SideProfileComponent,
+		HeaderUserComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -40,6 +44,9 @@ const httpLoaderFactory = (http: HttpClient) => {
 		ContentFulModule.forRoot(ContentConfig),
 		PopupModule,
 		SelectI18nModule,
+		SmeModule.forRoot({
+			endpoint: environment.baseUrl,
+		}),
 		ConfigModule.forRoot({
 			endopoint: environment.baseUrl,
 			tokenAccess: environment.accessToken,

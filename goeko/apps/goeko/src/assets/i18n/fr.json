@@ -8,6 +8,7 @@
         "passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :"
     },
     "all": "Tout",
+    "analysis": "Analyse",
     "availability": "Disponibilité:",
     "back": "Dos",
     "bank": "Banque",
@@ -46,9 +47,11 @@
     "certified": "Certification",
     "cleantech": "Cleantech",
     "companyDetails": "Détails de l'entreprise",
+    "completeToProfileNow": "Complétez votre profil maintenant !",
     "contact": "Contact",
     "continue": "Continuer",
     "costReduction": "Coûts opérationnels",
+    "dashboard": "Dashboard",
     "decline": "Refuser",
     "FOOTER": {
         "contact": "Contact",
@@ -90,6 +93,8 @@
     "none": "Aucun",
     "ods_msg_card_result": "Impact positif sur ODD",
     "ods_title": "Objectifs de développement durable",
+    "profile": "Profil",
+    "save": "Sauvegarder",
     "SCENES": {
         "slogan_text1": "Connexion des PME aux technologies propres et au financement",
         "slogan_text2": "Est-ce que tu veux?"
@@ -209,6 +214,7 @@
     "start": "Commencer",
     "summary": "Résumé",
     "titleResult": "Les éco-solutions les plus adaptées pour",
+    "upgrade": "Mise à niveau",
     "USER_TYPE": {
         "bank": "Banque",
         "cleanTech": "Cleantech",

@@ -1,0 +1,78 @@
+.side-profile {
+	position: absolute;
+	height: 100%;
+	width: 28%;
+	background: #ffffff;
+	transform: translateX(calc(-26rem + 100vw));
+	top: 0;
+	z-index: 1;
+	transition: all 1s ease;
+}
+.profile-hide {
+	transform: translateX(calc(0rem + 100vw));
+}
+.profile {
+	padding: 1.6rem;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+	gap: 4rem;
+	height: 100%;
+	.heading-company {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		font-size: 24px;
+		text-transform: capitalize;
+		cursor: pointer;
+		flex-direction: column;
+	}
+	.heading-icon {
+		box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+		border-radius: 50%;
+		padding: 0.6rem;
+
+		color: #0191d7;
+		font-size: 40px;
+		height: 90px;
+		width: 90px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+.banner-complete-profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+	width: 227px;
+	height: 224px;
+	justify-content: center;
+	padding: 1rem;
+	text-align: center;
+	gap: 0.6rem;
+	border-radius: 14px;
+
+	i {
+		font-size: 80px;
+		top: -3rem;
+		position: relative;
+	}
+	img {
+		top: -3rem;
+		position: relative;
+	}
+	p {
+		top: -1rem;
+		position: relative;
+	}
+}
+.profile-close {
+	font-size: 1.7rem;
+	position: absolute;
+	left: 15px;
+	top: 14px;
+	cursor: pointer;
+}
