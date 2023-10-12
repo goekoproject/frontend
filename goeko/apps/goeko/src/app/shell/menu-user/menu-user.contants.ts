@@ -2,7 +2,7 @@ export const MENU_USER = [
 	{
 		id: 1,
 		title: 'MENU_USER.dashboard',
-		url: '/',
+		url: '/dashboard',
 		active: true,
 		icon: 'home',
 	},

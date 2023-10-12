@@ -12,6 +12,6 @@
 </nav>
 <goeko-side-profile
 	[toogleSideProfile]="toogleSideProfile"
-	[dataProfile]="tokenData"
-	[notDataUser]="!!dataUser"
+	[dataProfile]="dataUser ? dataUser : tokenData"
+	[missingDataProfile]="!dataUser"
 ></goeko-side-profile>

@@ -17,15 +17,15 @@ export class SideProfileComponent implements OnDestroy {
 	@Input() dataProfile!: any;
 
 	@Input()
-	get notDataUser(): boolean {
-		return this._notDataUser;
+	get missingDataProfile(): boolean {
+		return this._missingDataProfile;
 	}
-	set notDataUser(notDataUser: boolean) {
-		this._notDataUser = notDataUser;
-		this.toogleSideProfile = this._notDataUser;
+	set missingDataProfile(missingDataProfile: boolean) {
+		this._missingDataProfile = missingDataProfile;
+		this.toogleSideProfile = this._missingDataProfile;
 	}
 
-	_notDataUser = false;
+	_missingDataProfile = false;
 	constructor(private _router: Router) {}
 
 	goToProfile() {

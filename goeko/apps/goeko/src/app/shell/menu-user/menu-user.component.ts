@@ -20,6 +20,10 @@ export class MenuUserComponent implements OnInit {
 		this.dataProfile = this._authService.getUserInfoToken();
 	}
 
+	onRouterLinkActive(test: any): void {
+		console.log('onRouterLink', test);
+	}
+
 	onChangeLangs(selectedLand: any) {
 		this.translate.use(selectedLand.code);
 	}

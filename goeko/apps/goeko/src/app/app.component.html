@@ -1,10 +1,10 @@
 <goeko-header *ngIf="isHome"> </goeko-header>
-<goeko-menu-user *ngIf="getIsAuthenticated()"></goeko-menu-user>
-<div class="container" [class.is-platform]="getIsAuthenticated()">
-	<goeko-header-user *ngIf="getIsAuthenticated()"></goeko-header-user>
+<goeko-menu-user *ngIf="isAuthenticated"></goeko-menu-user>
+<div class="container" [class.is-platform]="isAuthenticated">
+	<goeko-header-user *ngIf="isAuthenticated"></goeko-header-user>
 	<router-outlet></router-outlet>
 </div>
-<footer>
+<footer *ngIf="!isAuthenticated">
 	<goeko-footer></goeko-footer>
 </footer>
 <go-popup

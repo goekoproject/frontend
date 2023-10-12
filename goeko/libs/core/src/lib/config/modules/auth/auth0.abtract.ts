@@ -60,6 +60,7 @@ export abstract class Auth0Connected {
 			this.webAuth.parseHash({ hash }, (error: Auth0ParseHashError | null, result: Auth0DecodedHash | null) => {
 				if (result && result.accessToken && result.idToken) {
 					const jwtData = this._processJWSToken(result.idToken);
+					this.expiresIn = jwtData.exp;
 					resolve(jwtData);
 				} else if (error) {
 					throw new Error(`Error: ${error.error}. Check the console for further details.`);
@@ -80,6 +81,17 @@ export abstract class Auth0Connected {
 			externalId: payloadObj.sub.replace('auth0|', ''),
 		};
 	}
+	getUserJWTData() {
+		const idToken = sessionStorage.getItem('idTokenData') as string;
+		console.log('idToken', idToken);
+		this.jwtData = jsrsasign.KJUR.jws.JWS.parse(idToken)?.payloadObj;
+		this.jwtData = {
+			...this.jwtData,
+			externalId: this.jwtData.sub.replace('auth0|', ''),
+		};
+		sessionStorage.setItem(SS_JWTDATA, window.btoa(JSON.stringify(this.jwtData)));
+		return this.jwtData;
+	}
 
 	private getUserInfoAuth0() {
 		const accessToken = sessionStorage.getItem('accessToken') as string;
@@ -94,17 +106,5 @@ export abstract class Auth0Connected {
 			/* 			window.location.href = `${window.location.origin}/dashboard`;
 			 */
 		});
-	}
-
-	getUserJWTData() {
-		const idToken = sessionStorage.getItem('idTokenData') as string;
-		console.log('idToken', idToken);
-		this.jwtData = jsrsasign.KJUR.jws.JWS.parse(idToken)?.payloadObj;
-		this.jwtData = {
-			...this.jwtData,
-			externalId: this.jwtData.sub.replace('auth0|', ''),
-		};
-		sessionStorage.setItem(SS_JWTDATA, window.btoa(JSON.stringify(this.jwtData)));
-		return this.jwtData;
 	}
 }

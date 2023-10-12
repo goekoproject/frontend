@@ -14,7 +14,6 @@ import { ContentConfig } from './content-ful.config';
 import { FooterComponent } from './shell/footer/footer.component';
 import { HeaderComponent } from './home/header/header.component';
 import { MenuComponent } from './home/header/menu/menu.component';
-import { TeamComponent } from './home/team/team.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';

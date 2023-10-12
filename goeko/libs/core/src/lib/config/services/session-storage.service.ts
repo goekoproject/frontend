@@ -15,7 +15,7 @@ export class SessionStorageService {
 	 * @generic T type of the object to be retrieved
 	 */
 	getItem<T>(name: string): T | null {
-		const stringifiedObj = this._sessionStorage.getItem(name);
+		const stringifiedObj = sessionStorage.getItem(name);
 
 		if (stringifiedObj && stringifiedObj !== 'undefined') {
 			const decode = window.atob(stringifiedObj);
@@ -37,10 +37,10 @@ export class SessionStorageService {
 	 */
 	setItem<T>(name: string, obj: T, code?: boolean): void {
 		if (code) {
-			this._sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
+			sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
 			return;
 		}
-		this._sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
+		sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
 	}
 
 	/**
@@ -49,13 +49,13 @@ export class SessionStorageService {
 	 * @param name key of the property to be removed from the session's storage
 	 */
 	removeItem(name: string): void {
-		this._sessionStorage.removeItem(name);
+		sessionStorage.removeItem(name);
 	}
 
 	/**
 	 * Method that clears the Local Storage
 	 */
 	clearItems(): void {
-		this._sessionStorage.clear();
+		sessionStorage.clear();
 	}
 }

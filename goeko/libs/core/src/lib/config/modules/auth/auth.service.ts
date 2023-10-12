@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, concat, from, of } from 'rxjs';
-import { concatMap, shareReplay } from 'rxjs/operators';
+import { BehaviorSubject, Observable, concat, from, map, of, switchMap, tap } from 'rxjs';
 import { CONFIGURATION } from '../../config.module';
 import { Options } from '../../models/options.interface';
 import { SessionStorageService } from './../../services/session-storage.service';
@@ -60,58 +59,23 @@ export class AuthService extends Auth0Connected {
 	 * @returns
 	 */
 	isLoggedIn(body: AuthRequest) {
-		//	this.killSessions();
-		this._auth();
-		return this._auth0(body);
+		this._getTokenBasic()
+			.pipe(
+				tap((res: any) => {
+					sessionStorage.setItem(SESSIONID, res.access_token);
+				})
+			)
+			.subscribe(() => this._loginAuth0(body));
 	}
-
-	logout() {
-		this.disconnectAuth0();
-		sessionStorage.removeItem(SESSIONID);
-		sessionStorage.removeItem('idTokenData');
-		sessionStorage.removeItem('jwtData');
-		sessionStorage.removeItem('accessToken');
-	}
-
-	/**
-	 *  When the user try navigate what check in the credentials
-	 * @returns If is login in
-	 */
-	isAuthenticated(): boolean {
-		const accessToken = sessionStorage.getItem(SESSIONID);
-		return !!accessToken && !this.isExpiredTOKEN(this.expiresIn);
-	}
-
-	killSessions(): void {
-		this.sessionStorageService.clearItems();
-		this._authData$.next(null);
-	}
-
-	private hasToRefresh(): boolean {
-		return !this.isExpiredTOKEN(this._expirationCurrent);
-	}
-
 	/**
 	 * Get token basic authentication credentials
 	 * @param body
 	 * @returns
 	 */
-	private _auth() {
-		return this._getTokenBasic().subscribe((res: any) => {
+	private _authTokenBasic() {
+		/* 		.subscribe((res: any) => {
 			sessionStorage.setItem(SESSIONID, res.access_token);
-		});
-	}
-
-	public handlerAuthtentication(hash: string): Observable<any> {
-		const proccessHashPromise = from(this.decodeHash(hash));
-		return concat(of(true), proccessHashPromise);
-	}
-	public decodeHash(accessToken: string) {
-		return this.proccesHash(accessToken).then((result) => {
-			if (result) {
-				this.authData = result;
-			}
-		});
+		}); */
 	}
 	private _auth0(body: AuthRequest) {
 		return this._loginAuth0(body);
@@ -132,6 +96,44 @@ export class AuthService extends Auth0Connected {
 		);
 	}
 
+	logout() {
+		this.disconnectAuth0();
+		sessionStorage.removeItem(SESSIONID);
+		sessionStorage.removeItem('idTokenData');
+		sessionStorage.removeItem('jwtData');
+		sessionStorage.removeItem('accessToken');
+	}
+
+	/**
+	 *  When the user try navigate what check in the credentials
+	 * @returns If is login in
+	 */
+	isAuthenticated(): boolean {
+		const accessToken = sessionStorage.getItem(SESSIONID);
+		return !!accessToken && !this.isExpiredTOKEN(this.expiresIn);
+	}
+
+	killSessions(): void {
+		this.logout();
+		this._authData$.next(null);
+	}
+
+	private hasToRefresh(): boolean {
+		return !this.isExpiredTOKEN(this._expirationCurrent);
+	}
+
+	public handlerAuthtentication(hash: string): Observable<any> {
+		const proccessHashPromise = from(this.decodeHash(hash));
+		return concat(of(true), proccessHashPromise);
+	}
+	public decodeHash(accessToken: string) {
+		return this.proccesHash(accessToken).then((result) => {
+			if (result) {
+				this.authData = result;
+			}
+		});
+	}
+
 	public getUserInfoToken() {
 		return this.sessionStorageService.getItem('jwtData');
 	}
@@ -148,61 +150,6 @@ export class AuthService extends Auth0Connected {
 			client_id: 'IIWgZSFVYDDNnAGi4XPbNq8hiv53X5BX',
 			client_secret: clientSecret,
 		};
-	}
-
-	/**
-	 * Method called when a users check in the credentials
-	 * @param body user & password
-	 * @returns
-	 */
-	private _login(body: AuthRequest, accessToken: string): Observable<unknown> {
-		let headers = new HttpHeaders();
-		console.log(accessToken);
-
-		headers = headers.set('Authorization', `Bearer ${accessToken}`).set('Content-Type', 'application/json');
-
-		return from(
-			new Promise((resolve) => {
-				this._http
-					.post<string>(this._url, body, {
-						headers: headers,
-						responseType: 'text' as 'json',
-					})
-					.pipe(shareReplay())
-					.subscribe((response) => {
-						if (response) {
-							this.manageToken(response);
-							resolve(true);
-						}
-					});
-			})
-		);
-	}
-
-	manageToken(token: string) {
-		const tokenData = this._stringToTokenData(token);
-		const tokenUser = this._decodeToken(token);
-
-		this._saveToken(tokenData);
-		this._saveTokenUser(tokenUser);
-		const loginData = this._loginData();
-		this._authData$.next(loginData);
-		this._expirationCurrent = this.getExpirationDate(tokenData);
-	}
-
-	private _loginData(): AuthResponse {
-		const decodeToken = this.sessionStorageService.getItem(SESSIONID) as AuthResponse;
-		return decodeToken;
-	}
-
-	private _stringToTokenData(token: string): string {
-		const decodeToken = token.split(' ')[1];
-		return decodeToken.split('.')[1];
-	}
-
-	private _decodeToken(token: string): string {
-		const decodeToken = token.split(' ')[1];
-		return decodeToken;
 	}
 
 	/**
@@ -228,21 +175,5 @@ export class AuthService extends Auth0Connected {
 		} else {
 			return -1;
 		}
-	}
-
-	/**
-	 * Called when set cookie accessToken
-	 * @param token
-	 */
-	private _saveToken(token: string) {
-		sessionStorage.setItem(SESSIONID, token);
-	}
-
-	/**
-	 *  TOken for header X-Authorization
-	 * @param accessToken
-	 */
-	private _saveTokenUser(accessToken: string) {
-		sessionStorage.setItem(TOKEN_USER, accessToken);
 	}
 }

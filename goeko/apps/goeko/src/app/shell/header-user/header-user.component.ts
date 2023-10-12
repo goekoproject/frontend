@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@goeko/core';
 import { SmeService } from '@goeko/store';
 import { error } from 'console';
+import { switchMap } from 'rxjs';
 
 @Component({
 	selector: 'goeko-header-user',
@@ -16,30 +17,23 @@ export class HeaderUserComponent implements OnInit {
 	constructor(private _authservice: AuthService, private _smeServices: SmeService) {}
 
 	ngOnInit(): void {
-		this._authservice.authData.subscribe((authData) => {
-			if (authData) {
-				this.tokenData = authData;
-				this._getSmeData();
-			}
-		});
+		this._getSmeData();
 	}
 
 	private _getSmeData() {
-		this._smeServices.getByIdExternal(this.tokenData?.externalId).subscribe(
-			(data) => {
-				console.log(data);
+		this._authservice.authData
+			.pipe(
+				switchMap(
+					(authData) => ((this.tokenData = authData), this._smeServices.getByIdExternal(authData.externalId))
+				)
+			)
+			.subscribe((data) => {
 				if (data) {
 					this.dataUser = {
 						...this.tokenData,
 						data,
 					};
 				}
-			},
-			(error) => {
-				if (error.status === 404) {
-					this.notDataUser = false;
-				}
-			}
-		);
+			});
 	}
 }

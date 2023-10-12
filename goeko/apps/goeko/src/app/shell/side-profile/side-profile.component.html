@@ -7,7 +7,7 @@
 		<p>{{ dataProfile?.nickname }}</p>
 	</div>
 
-	<div class="banner-complete-profile" *ngIf="_notDataUser">
+	<div class="banner-complete-profile" *ngIf="missingDataProfile">
 		<!-- 	<i class="ti ti-user-off"></i> -->
 		<img src="assets/incompleted.png" />
 		<p>{{ 'completeToProfileNow' | translate }}</p>
