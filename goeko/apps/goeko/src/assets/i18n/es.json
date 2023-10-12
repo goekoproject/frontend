@@ -1,223 +1,229 @@
 {
-    "accept": "Aceptar",
-    "ACCESS_ERROR": {
-        "passwordPolicy1": "Letras minúsculas (a-z)",
-        "passwordPolicy2": "Letras mayúsculas (A-Z)",
-        "passwordPolicy3": "Números (0-9)",
-        "passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
-        "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
-    },
-    "all": "Todo",
-    "analysis": "Análisis",
-    "availability": "Disponible",
-    "back": "Volver",
-    "bank": "Banco",
-    "BANNER": {
-        "affordable": "Asequible",
-        "easy": "Fácil",
-        "fast": "Rápido",
-        "green": "transición",
-        "swissCompany": "Compañia Suiza",
-        "the": "La",
-        "transition": "verde"
-    },
-    "cancel": "Cancelar",
-    "CATEGORIES": {
-        "co2emission": "Emisiones CO2",
-        "hazardousProduct": "Producto peligroso",
-        "waste": "Residuos",
-        "water": "Agua"
-    },
-    "CATEGORIES_FIELD": {
-        "amount": "Consumo de agua (2022)",
-        "energySource": "¿Le gustaría a su empresa utilizar menos energía intensiva en carbono gracias a:",
-        "fuelInvoice": "Factura de combustible",
-        "greenWaste": "Residuos Verdes",
-        "hazardousWaste": "Residuos Peligrosos",
-        "inertOrMineralWaste": "Residuos Minerales o Inertes",
-        "lastYearInvoice": "Factura de agua (2022)",
-        "mainActivity": "Actividad que más consume",
-        "mainCategoryNonInert": "Categoría principal de residuos no inertes",
-        "mainInternalCombustionEngine": "Motor de combustión interna principal",
-        "mainMineralProduct": "Principal productos minerales",
-        "mainRigidMaterial": "¿Su empresa utiliza paneles aislantes?",
-        "products": "Tipo de producto peligroso",
-        "specialWaste": "Residuos Especiales"
-    },
-    "certified": "Certificado",
-    "cleantech": "Cleantech",
-    "completeToProfileNow": "Completa al perfil ahora!",
-    "contact": "Contacto",
-    "continue": "Continuar",
-    "costReduction": "Costos operativos",
-    "dashboard": "Dashboard",
-    "decline": "Rechazar",
-    "FOOTER": {
-        "contact": "Contactar",
-        "resources": "Recursos",
-        "service": "Servicios"
-    },
-    "FORM_LABEL": {
-        "companyName": "Nombre de la Compañia",
-        "country": "Pais",
-        "email": "Email",
-        "password": "Contraseña",
-        "website": "Sito web"
-    },
-    "HOME": {
-        "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
-        "sloganCallActionsBtnSME": "Comience su transición verde aquí"
-    },
-    "LANGS": {
-        "en": "Ingles",
-        "es": "Español",
-        "fr": "Frances",
-        "gb": "Ingles(UK)"
-    },
-    "LEGAL": {
-        "cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
-        "cookiesPolicy": "Politica de cookies",
-        "privacyPolicy": "Politica de privacidad"
-    },
-    "MENU": {
-        "aboutGoEKo": "Sobre GoEko",
-        "blog": "Blog",
-        "contanctUs": "Contáctenos",
-        "login": "Accesso"
-    },
-    "MENU_USER": {
-        "dashboard": "Dashboard",
-        "favorites": "Favoritos"
-    },
-    "ods_msg_card_result": "Impacto positivo en los ODS",
-    "ods_title": "Objetivos de Desarrollo Sostenible",
-    "profile": "Perfil",
-    "save": "Guardar",
-    "SCENES": {
-        "slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
-        "slogan_text2": "¿Quiere eres?"
-    },
-    "SELECT_DATA_LABEL": {
-        "defaultLabel": "-- Por favor seleccione entre las siguientes opciones --",
-        "greenWaste": {
-            "greenWoodUntreated": "Madera verde (no tratada)",
-            "topsoil": "Tierra vegetal"
-        },
-        "none": "Ningúno",
-        "selectCountry": {
-            "france": "France",
-            "germany": "Germany",
-            "italy": "Italy",
-            "spanin": "Spain",
-            "switzerland": "Suiza"
-        },
-        "selectEnergySource": {
-            "aSmartManagementSystemOptimisingEnergyConsumption": "Sistema de gestión inteligente que optimiza el consumo de energía",
-            "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solución ecológica que produce la energía para las necesidades de tu edificio o actividad"
-        },
-        "selectHazardousWaste": {
-            "oilSeparatorSludge": "Lodo del separador de aceite",
-            "productsContainingHeavyMetals": "Productos que contienen metales pesados",
-            "productsContainingTar": "Productos que contienen alquitrán"
-        },
-        "selectInertOrMineralWaste": {
-            "brick": "Ladrillo",
-            "ceramic": "Cerámica",
-            "concrete": "Hormigón",
-            "soil": "Tierra",
-            "stone": "Piedra"
-        },
-        "selectMainActivity": {
-            "cleaningOfSiteAndPeripheryAccesses": "Limpieza de accesos de obra y periféricos",
-            "cleaningSiteVehicles": "Limpieza de vehículos en el sitio",
-            "paint": "Pintura",
-            "pouringConcrete": "Vertido de concreto",
-            "siteCleaning": "Limpieza de sitio",
-            "siteHut": "Cabaña de sitio",
-            "toolCleaning": "Limpieza de herramientas",
-            "wateringForCure": "Riego para la cura",
-            "wateringPlants": "Regando plantas"
-        },
-        "selectMainCategoryNonInert": {
-            "cardboardAndPaper": "Cartón y papel",
-            "cartridgesWithoutToxicProducts": "Cartuchos sin productos tóxicos",
-            "electricalAndElectronicEquipment": "Equipos eléctricos y electrónicos",
-            "insulationMaterials": "Materiales de aislamiento",
-            "metalsAndAlloys": "Metales y aleaciones",
-            "mineralWools": "Lanas minerales",
-            "paintVarnishGlue": "Pintura, barniz, pegamento",
-            "plaster": "Yeso",
-            "plastic": "Plástico",
-            "untreatedWood": "Madera sin tratar"
-        },
-        "selectMainInternalCombustionEngine": {
-            "aerialBucketTruck": "Camión con plataforma aérea",
-            "backhoe": "Retroexcavadora",
-            "backhoeLoader": "Cargadora retroexcavadora",
-            "bulldozer": "Bulldozer",
-            "dumper": "Volquete",
-            "equipmentCarrierTruck": "Camión portaequipos",
-            "grader": "Niveladora",
-            "loader": "Cargadora",
-            "materialsCarrierTruck": "Camión portamateriales",
-            "scraper": "Raspadora",
-            "steamRoller": "Rodillo de vapor"
-        },
-        "selectMainMineralProduct": {
-            "cement": "Cemento",
-            "concrete": "Concreto",
-            "isolation": "Paneles de aislamiento"
-        },
-        "selectMainRigidMaterial": {
-            "insolationPanels": "Paneles de aislamiento"
-        },
-        "selectProducts": {
-            "admixtures": "Aditivos",
-            "aerosol": "Aerosol",
-            "batteries": "Acumuladores y baterías que contienen sustancias peligrosas",
-            "bituminousProductsContainingHAPs": "Productos bituminosos que contienen HAP",
-            "cartridgesContainingDangerousSubstances": "Cartuchos que contienen sustancias peligrosas",
-            "curingProducts": "Productos de curado",
-            "electricalAndElectronicWasteContainingHazardousSubstances": "Residuos eléctricos y electrónicos que contienen sustancias peligrosas",
-            "energySavingLamps": "Lámparas de bajo consumo",
-            "fuel": "Combustible",
-            "oils": "Aceites",
-            "oilSeparatorSludge": "Lodos de separadores de aceite",
-            "packagingSoiledWithDangerousSubstances": "Envases ensuciados con sustancias peligrosas",
-            "paintVarnish": "Pintura/barniz",
-            "productsContainingTar": "Productos que contienen alquitrán",
-            "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
-        },
-        "selectSpecialWaste": {
-            "aerosols": "Aerosoles",
-            "agglomeratedCementPanels": "Paneles de cemento aglomerado",
-            "agglomeratedConcrete": "Hormigón aglomerado",
-            "agglomeratedProducts": "Productos aglomerados",
-            "asbestos": "Amianto",
-            "batteriesAndAccumulators": "Baterías y acumuladores",
-            "cartridgesSealantChemicalCaulking": "Cartuchos (selladores, productos químicos, calafateo...)",
-            "electricalAndElectronicEquipmentPCB": "Equipos eléctricos y electrónicos (PCB)",
-            "fluorescentTubesEnergySavingBulbsNeonTubes": "Tubos fluorescentes, bombillas de bajo consumo, tubos de neón",
-            "lead": "Plomo",
-            "paintsAndSolvents": "Pinturas y solventes",
-            "particleboardPanels": "Paneles de aglomerado de partículas",
-            "polyurethaneFoams": "Espumas de poliuretano",
-            "rubberProducts": "Productos de caucho",
-            "solventsForInsulation": "Solventes para aislamiento",
-            "treatedWood": "Madera tratada",
-            "usedOils": "Aceites usados"
-        }
-    },
-    "sloganGoeko": "The connection to efficiency",
-    "sme": "Pymes",
-    "start": "Empezar",
-    "summary": "Resumen",
-    "titleResult": "Las soluciones ecológicas más adaptadas para",
-    "upgrade": "Mejora",
-    "USER_TYPE": {
-        "bank": "Banco",
-        "cleanTech": "Cleantech",
-        "sme": "PYME"
-    },
-    "userType": "Tipo de usuario"
+	"welcome": "Bienvenido",
+	"LOGIN": {
+		"msglogin": "Inicia sesión en tu cuenta",
+		"msgsignup": "¿No tienes una cuenta todavía ?",
+		"msglogin2": "¿Ya tienes una cuenta?"
+	},
+	"accept": "Aceptar",
+	"ACCESS_ERROR": {
+		"passwordPolicy1": "Letras minúsculas (a-z)",
+		"passwordPolicy2": "Letras mayúsculas (A-Z)",
+		"passwordPolicy3": "Números (0-9)",
+		"passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
+		"passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
+	},
+	"all": "Todo",
+	"analysis": "Análisis",
+	"availability": "Disponible",
+	"back": "Volver",
+	"bank": "Banco",
+	"BANNER": {
+		"affordable": "Asequible",
+		"easy": "Fácil",
+		"fast": "Rápido",
+		"green": "transición",
+		"swissCompany": "Compañia Suiza",
+		"the": "La",
+		"transition": "verde"
+	},
+	"cancel": "Cancelar",
+	"CATEGORIES": {
+		"co2emission": "Emisiones CO2",
+		"hazardousProduct": "Producto peligroso",
+		"waste": "Residuos",
+		"water": "Agua"
+	},
+	"CATEGORIES_FIELD": {
+		"amount": "Consumo de agua (2022)",
+		"energySource": "¿Le gustaría a su empresa utilizar menos energía intensiva en carbono gracias a:",
+		"fuelInvoice": "Factura de combustible",
+		"greenWaste": "Residuos Verdes",
+		"hazardousWaste": "Residuos Peligrosos",
+		"inertOrMineralWaste": "Residuos Minerales o Inertes",
+		"lastYearInvoice": "Factura de agua (2022)",
+		"mainActivity": "Actividad que más consume",
+		"mainCategoryNonInert": "Categoría principal de residuos no inertes",
+		"mainInternalCombustionEngine": "Motor de combustión interna principal",
+		"mainMineralProduct": "Principal productos minerales",
+		"mainRigidMaterial": "¿Su empresa utiliza paneles aislantes?",
+		"products": "Tipo de producto peligroso",
+		"specialWaste": "Residuos Especiales"
+	},
+	"certified": "Certificado",
+	"cleantech": "Cleantech",
+	"completeToProfileNow": "Completa al perfil ahora!",
+	"contact": "Contacto",
+	"continue": "Continuar",
+	"costReduction": "Costos operativos",
+	"dashboard": "Dashboard",
+	"decline": "Rechazar",
+	"FOOTER": {
+		"contact": "Contactar",
+		"resources": "Recursos",
+		"service": "Servicios"
+	},
+	"FORM_LABEL": {
+		"companyName": "Nombre de la Compañia",
+		"country": "Pais",
+		"email": "Email",
+		"password": "Contraseña",
+		"website": "Sito web"
+	},
+	"HOME": {
+		"sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
+		"sloganCallActionsBtnSME": "Comience su transición verde aquí"
+	},
+	"LANGS": {
+		"en": "Ingles",
+		"es": "Español",
+		"fr": "Frances",
+		"gb": "Ingles(UK)"
+	},
+	"LEGAL": {
+		"cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
+		"cookiesPolicy": "Politica de cookies",
+		"privacyPolicy": "Politica de privacidad"
+	},
+	"MENU": {
+		"aboutGoEKo": "Sobre GoEko",
+		"blog": "Blog",
+		"contanctUs": "Contáctenos",
+		"login": "Accesso"
+	},
+	"MENU_USER": {
+		"dashboard": "Dashboard",
+		"favorites": "Favoritos"
+	},
+	"ods_msg_card_result": "Impacto positivo en los ODS",
+	"ods_title": "Objetivos de Desarrollo Sostenible",
+	"profile": "Perfil",
+	"save": "Guardar",
+	"SCENES": {
+		"slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
+		"slogan_text2": "¿Quiere eres?"
+	},
+	"SELECT_DATA_LABEL": {
+		"defaultLabel": "-- Por favor seleccione entre las siguientes opciones --",
+		"greenWaste": {
+			"greenWoodUntreated": "Madera verde (no tratada)",
+			"topsoil": "Tierra vegetal"
+		},
+		"none": "Ningúno",
+		"selectCountry": {
+			"france": "France",
+			"germany": "Germany",
+			"italy": "Italy",
+			"spanin": "Spain",
+			"switzerland": "Suiza"
+		},
+		"selectEnergySource": {
+			"aSmartManagementSystemOptimisingEnergyConsumption": "Sistema de gestión inteligente que optimiza el consumo de energía",
+			"greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solución ecológica que produce la energía para las necesidades de tu edificio o actividad"
+		},
+		"selectHazardousWaste": {
+			"oilSeparatorSludge": "Lodo del separador de aceite",
+			"productsContainingHeavyMetals": "Productos que contienen metales pesados",
+			"productsContainingTar": "Productos que contienen alquitrán"
+		},
+		"selectInertOrMineralWaste": {
+			"brick": "Ladrillo",
+			"ceramic": "Cerámica",
+			"concrete": "Hormigón",
+			"soil": "Tierra",
+			"stone": "Piedra"
+		},
+		"selectMainActivity": {
+			"cleaningOfSiteAndPeripheryAccesses": "Limpieza de accesos de obra y periféricos",
+			"cleaningSiteVehicles": "Limpieza de vehículos en el sitio",
+			"paint": "Pintura",
+			"pouringConcrete": "Vertido de concreto",
+			"siteCleaning": "Limpieza de sitio",
+			"siteHut": "Cabaña de sitio",
+			"toolCleaning": "Limpieza de herramientas",
+			"wateringForCure": "Riego para la cura",
+			"wateringPlants": "Regando plantas"
+		},
+		"selectMainCategoryNonInert": {
+			"cardboardAndPaper": "Cartón y papel",
+			"cartridgesWithoutToxicProducts": "Cartuchos sin productos tóxicos",
+			"electricalAndElectronicEquipment": "Equipos eléctricos y electrónicos",
+			"insulationMaterials": "Materiales de aislamiento",
+			"metalsAndAlloys": "Metales y aleaciones",
+			"mineralWools": "Lanas minerales",
+			"paintVarnishGlue": "Pintura, barniz, pegamento",
+			"plaster": "Yeso",
+			"plastic": "Plástico",
+			"untreatedWood": "Madera sin tratar"
+		},
+		"selectMainInternalCombustionEngine": {
+			"aerialBucketTruck": "Camión con plataforma aérea",
+			"backhoe": "Retroexcavadora",
+			"backhoeLoader": "Cargadora retroexcavadora",
+			"bulldozer": "Bulldozer",
+			"dumper": "Volquete",
+			"equipmentCarrierTruck": "Camión portaequipos",
+			"grader": "Niveladora",
+			"loader": "Cargadora",
+			"materialsCarrierTruck": "Camión portamateriales",
+			"scraper": "Raspadora",
+			"steamRoller": "Rodillo de vapor"
+		},
+		"selectMainMineralProduct": {
+			"cement": "Cemento",
+			"concrete": "Concreto",
+			"isolation": "Paneles de aislamiento"
+		},
+		"selectMainRigidMaterial": {
+			"insolationPanels": "Paneles de aislamiento"
+		},
+		"selectProducts": {
+			"admixtures": "Aditivos",
+			"aerosol": "Aerosol",
+			"batteries": "Acumuladores y baterías que contienen sustancias peligrosas",
+			"bituminousProductsContainingHAPs": "Productos bituminosos que contienen HAP",
+			"cartridgesContainingDangerousSubstances": "Cartuchos que contienen sustancias peligrosas",
+			"curingProducts": "Productos de curado",
+			"electricalAndElectronicWasteContainingHazardousSubstances": "Residuos eléctricos y electrónicos que contienen sustancias peligrosas",
+			"energySavingLamps": "Lámparas de bajo consumo",
+			"fuel": "Combustible",
+			"oils": "Aceites",
+			"oilSeparatorSludge": "Lodos de separadores de aceite",
+			"packagingSoiledWithDangerousSubstances": "Envases ensuciados con sustancias peligrosas",
+			"paintVarnish": "Pintura/barniz",
+			"productsContainingTar": "Productos que contienen alquitrán",
+			"woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
+		},
+		"selectSpecialWaste": {
+			"aerosols": "Aerosoles",
+			"agglomeratedCementPanels": "Paneles de cemento aglomerado",
+			"agglomeratedConcrete": "Hormigón aglomerado",
+			"agglomeratedProducts": "Productos aglomerados",
+			"asbestos": "Amianto",
+			"batteriesAndAccumulators": "Baterías y acumuladores",
+			"cartridgesSealantChemicalCaulking": "Cartuchos (selladores, productos químicos, calafateo...)",
+			"electricalAndElectronicEquipmentPCB": "Equipos eléctricos y electrónicos (PCB)",
+			"fluorescentTubesEnergySavingBulbsNeonTubes": "Tubos fluorescentes, bombillas de bajo consumo, tubos de neón",
+			"lead": "Plomo",
+			"paintsAndSolvents": "Pinturas y solventes",
+			"particleboardPanels": "Paneles de aglomerado de partículas",
+			"polyurethaneFoams": "Espumas de poliuretano",
+			"rubberProducts": "Productos de caucho",
+			"solventsForInsulation": "Solventes para aislamiento",
+			"treatedWood": "Madera tratada",
+			"usedOils": "Aceites usados"
+		}
+	},
+	"sloganGoeko": "The connection to efficiency",
+	"sme": "Pymes",
+	"start": "Empezar",
+	"summary": "Resumen",
+	"titleResult": "Las soluciones ecológicas más adaptadas para",
+	"upgrade": "Mejora",
+	"USER_TYPE": {
+		"bank": "Banco",
+		"cleanTech": "Cleantech",
+		"sme": "PYME"
+	},
+	"userType": "Tipo de usuario"
 }

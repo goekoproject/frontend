@@ -32,4 +32,8 @@
 	</ui-super-select>
 
 	<ng-content></ng-content>
+
+	<p>
+		{{ 'LOGIN.msglogin2' | translate }}. <a (click)="goToLoginForm()">{{ 'Log in' | translate }}</a>
+	</p>
 </ng-container>

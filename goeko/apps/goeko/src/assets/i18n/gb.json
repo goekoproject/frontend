@@ -1,224 +1,230 @@
 {
-    "accept": "Accept",
-    "ACCESS_ERROR": {
-        "passwordPolicy1": "Lowercase letters (a-z)",
-        "passwordPolicy2": "Uppercase letters (A-Z)",
-        "passwordPolicy3": "Numbers (0-9)",
-        "passwordPolicy4": "Special characters (!@# $ %^&*)",
-        "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
-    },
-    "all": "All",
-    "analysis": "Analysis",
-    "availability": "Availability",
-    "back": "Back",
-    "bank": "Bank",
-    "BANNER": {
-        "affordable": "Affordable",
-        "easy": "Easy",
-        "fast": "Fast",
-        "green": "Green",
-        "swissCompany": "A Swiss Company",
-        "the": "The",
-        "transition": "Transition"
-    },
-    "cancel": "Cancel",
-    "CATEGORIES": {
-        "co2emission": "CO2 emissions",
-        "hazardousProduct": "Hazardous Products",
-        "waste": "Waste",
-        "water": "Water"
-    },
-    "CATEGORIES_FIELD": {
-        "amount": "Water consumption (2022)",
-        "energySource": "Would your company like to use less carbon intensive energy thanks to:",
-        "fuelInvoice": "Fuel invoice",
-        "greenWaste": "Green Waste",
-        "hazardousWaste": "Hazardous Waste",
-        "inertOrMineralWaste": "Mineral or Inert Waste",
-        "lastYearInvoice": "Water invoice (2022)",
-        "mainActivity": "Activities that consume the most water",
-        "mainCategoryNonInert": "Non inert déchets",
-        "mainInternalCombustionEngine": "Main internal combustion engines",
-        "mainMineralProduct": "Main mineral products",
-        "mainRigidMaterial": "Does your company use insulation panels?",
-        "products": "Type of hazardous products",
-        "specialWaste": "Special Waste"
-    },
-    "certified": "Certification",
-    "cleantech": "Cleantech",
-    "companyDetails": "Company details",
-    "completeToProfileNow": "Complete to profile now!",
-    "contact": "Contact",
-    "continue": "Continue",
-    "costReduction": "Costos operativos",
-    "dashboard": "Dashboard",
-    "decline": "Decline",
-    "FOOTER": {
-        "contact": "Contact",
-        "resources": "Resources",
-        "service": "Service"
-    },
-    "FORM_LABEL": {
-        "companyName": "Company name",
-        "country": "Country",
-        "email": "Email",
-        "password": "Password",
-        "website": "Website"
-    },
-    "HOME": {
-        "sloganCallActionsBtn": "Free trial to connect with qualified leads",
-        "sloganCallActionsBtnSME": "Start your green transition here"
-    },
-    "LANGS": {
-        "en": "English",
-        "es": "Spanish",
-        "fr": "French",
-        "gb": "English (UK)"
-    },
-    "LEGAL": {
-        "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
-        "cookiesPolicy": "Cookies policy",
-        "privacyPolicy": "Privacy policy"
-    },
-    "MENU": {
-        "aboutGoEKo": "About GoEko",
-        "blog": "Blog",
-        "contanctUs": "Contact",
-        "login": "Login"
-    },
-    "MENU_USER": {
-        "dashboard": "Dashboard",
-        "favorites": "Favorites"
-    },
-    "none": "None",
-    "ods_msg_card_result": "Positive impact on SDG",
-    "ods_title": "Sustainable Development Goals",
-    "profile": "Profile",
-    "save": "Save",
-    "SCENES": {
-        "slogan_text1": "Connecting SMEs to clean technologies and financing",
-        "slogan_text2": "Who are you?"
-    },
-    "SELECT_DATA_LABEL": {
-        "defaultLabel": "-- Please select from the following options --",
-        "greenWaste": {
-            "greenWoodUntreated": "Green Wood (Untreated)",
-            "topsoil": "Topsoil"
-        },
-        "selectCountry": {
-            "france": "France",
-            "germany": "Germany",
-            "italy": "Italy",
-            "spain": "Spain",
-            "switzerland": "Switzerland"
-        },
-        "selectEnergySource": {
-            "aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
-            "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
-        },
-        "selectHazardousWaste": {
-            "oilSeparatorSludge": "Oil Separator Sludge",
-            "productsContainingHeavyMetals": "Products Containing Heavy Metals",
-            "productsContainingTar": "Products Containing Tar"
-        },
-        "selectInertOrMineralWaste": {
-            "brick": "Brick",
-            "ceramic": "Ceramic",
-            "concrete": "Concrete",
-            "soil": "Soil",
-            "stone": "Stone"
-        },
-        "selectMainActivity": {
-            "cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
-            "cleaningSiteVehicles": "Cleaning site vehicles",
-            "paint": "Paint",
-            "pouringConcrete": "Pouring concrete",
-            "siteCleaning": "Site cleaning",
-            "siteHut": "Site hut",
-            "toolCleaning": "Tool cleaning",
-            "wateringForCure": "Watering for Cure",
-            "wateringPlants": "Watering Plants"
-        },
-        "selectMainCategoryNonInert": {
-            "cardboardAndPaper": "Carton and papier",
-            "cartridgesWithoutToxicProducts": "Cartridges without toxic products",
-            "electricalAndElectronicEquipment": "Electrical and electronic equipment",
-            "insulationMaterials": "Insulation materials",
-            "metalsAndAlloys": "Metals and alloys",
-            "mineralWools": "Mineral wools",
-            "paintVarnishGlue": "Paint, varnish, glue",
-            "plaster": "Plaster",
-            "plastic": "Plastic (packaging, tarps, etc.)",
-            "untreatedWood": "Untreated wood"
-        },
-        "selectMainInternalCombustionEngine": {
-            "aerialBucketTruck": "Aerial bucket truck",
-            "backhoe": "Backhoe",
-            "backhoeLoader": "Backhoe loader",
-            "bulldozer": "Bulldozer",
-            "dumper": "Dumper",
-            "equipmentCarrierTruck": "Equipment carrier truck",
-            "grader": "Grader",
-            "loader": "Loader",
-            "materialsCarrierTruck": "Materials carrier truck",
-            "scraper": "Scraper",
-            "steamRoller": "Steam roller"
-        },
-        "selectMainMineralProduct": {
-            "cement": "Cement",
-            "concrete": "Concrete",
-            "isolation": "Insulation panels"
-        },
-        "selectMainRigidMaterial": {
-            "insolationPanels": "Insulation panels"
-        },
-        "selectProducts": {
-            "admixtures": "Admixtures",
-            "aerosol": "Aerosol",
-            "batteries": "Batteries and accumulators containing hazardous substances",
-            "bituminousProductsContainingHAPs": "Bituminous Products Containing HAPs",
-            "cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
-            "curingProducts": "Curing Products",
-            "electricalAndElectronicWasteContainingHazardousSubstances": "Electrical and electronic waste containing hazardous substances",
-            "energySavingLamps": "Energy-saving lamps",
-            "fuel": "Fuel",
-            "oils": "Oils",
-            "oilSeparatorSludge": "Oil separator sludge",
-            "packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
-            "paintVarnish": "Paint/varnish",
-            "productsContainingTar": "Products containing tar",
-            "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
-        },
-        "selectSpecialWaste": {
-            "aerosols": "Aerosols",
-            "agglomeratedCementPanels": "Agglomerated cement panels",
-            "agglomeratedConcrete": "Agglomerated concrete",
-            "agglomeratedProducts": "Agglomerated Products",
-            "asbestos": "Asbestos",
-            "batteriesAndAccumulators": "Batteries and Accumulators",
-            "cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
-            "electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment (PCB)",
-            "fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
-            "lead": "Lead",
-            "paintsAndSolvents": "Paints and Solvents",
-            "particleboardPanels": "Particleboard panels",
-            "polyurethaneFoams": "Polyurethane foams",
-            "rubberProducts": "Rubber products",
-            "solventsForInsulation": "Solvents for insulation",
-            "treatedWood": "Treated Wood",
-            "usedOils": "Used Oils"
-        }
-    },
-    "sloganGoeko": "The connection to efficiency",
-    "sme": "Sme",
-    "start": "Start",
-    "summary": "Summary",
-    "titleResult": "Most adapted eco-solutions for",
-    "upgrade": "Upgrade",
-    "USER_TYPE": {
-        "bank": "Bank",
-        "cleanTech": "Cleantech",
-        "sme": "SME"
-    },
-    "userType": "User type"
+	"welcome": "Welcome",
+	"accept": "Accept",
+	"LOGIN": {
+		"msglogin": "Log in in your account",
+		"msgsignup": "Do not have any account?",
+		"msglogin2": "Already have account?"
+	},
+	"ACCESS_ERROR": {
+		"passwordPolicy1": "Lowercase letters (a-z)",
+		"passwordPolicy2": "Uppercase letters (A-Z)",
+		"passwordPolicy3": "Numbers (0-9)",
+		"passwordPolicy4": "Special characters (!@# $ %^&*)",
+		"passwordPolicyTitle": "You must meet at least 3 of the following rules: "
+	},
+	"all": "All",
+	"analysis": "Analysis",
+	"availability": "Availability",
+	"back": "Back",
+	"bank": "Bank",
+	"BANNER": {
+		"affordable": "Affordable",
+		"easy": "Easy",
+		"fast": "Fast",
+		"green": "Green",
+		"swissCompany": "A Swiss Company",
+		"the": "The",
+		"transition": "Transition"
+	},
+	"cancel": "Cancel",
+	"CATEGORIES": {
+		"co2emission": "CO2 emissions",
+		"hazardousProduct": "Hazardous Products",
+		"waste": "Waste",
+		"water": "Water"
+	},
+	"CATEGORIES_FIELD": {
+		"amount": "Water consumption (2022)",
+		"energySource": "Would your company like to use less carbon intensive energy thanks to:",
+		"fuelInvoice": "Fuel invoice",
+		"greenWaste": "Green Waste",
+		"hazardousWaste": "Hazardous Waste",
+		"inertOrMineralWaste": "Mineral or Inert Waste",
+		"lastYearInvoice": "Water invoice (2022)",
+		"mainActivity": "Activities that consume the most water",
+		"mainCategoryNonInert": "Non inert déchets",
+		"mainInternalCombustionEngine": "Main internal combustion engines",
+		"mainMineralProduct": "Main mineral products",
+		"mainRigidMaterial": "Does your company use insulation panels?",
+		"products": "Type of hazardous products",
+		"specialWaste": "Special Waste"
+	},
+	"certified": "Certification",
+	"cleantech": "Cleantech",
+	"companyDetails": "Company details",
+	"completeToProfileNow": "Complete to profile now!",
+	"contact": "Contact",
+	"continue": "Continue",
+	"costReduction": "Costos operativos",
+	"dashboard": "Dashboard",
+	"decline": "Decline",
+	"FOOTER": {
+		"contact": "Contact",
+		"resources": "Resources",
+		"service": "Service"
+	},
+	"FORM_LABEL": {
+		"companyName": "Company name",
+		"country": "Country",
+		"email": "Email",
+		"password": "Password",
+		"website": "Website"
+	},
+	"HOME": {
+		"sloganCallActionsBtn": "Free trial to connect with qualified leads",
+		"sloganCallActionsBtnSME": "Start your green transition here"
+	},
+	"LANGS": {
+		"en": "English",
+		"es": "Spanish",
+		"fr": "French",
+		"gb": "English (UK)"
+	},
+	"LEGAL": {
+		"cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
+		"cookiesPolicy": "Cookies policy",
+		"privacyPolicy": "Privacy policy"
+	},
+	"MENU": {
+		"aboutGoEKo": "About GoEko",
+		"blog": "Blog",
+		"contanctUs": "Contact",
+		"login": "Login"
+	},
+	"MENU_USER": {
+		"dashboard": "Dashboard",
+		"favorites": "Favorites"
+	},
+	"none": "None",
+	"ods_msg_card_result": "Positive impact on SDG",
+	"ods_title": "Sustainable Development Goals",
+	"profile": "Profile",
+	"save": "Save",
+	"SCENES": {
+		"slogan_text1": "Connecting SMEs to clean technologies and financing",
+		"slogan_text2": "Who are you?"
+	},
+	"SELECT_DATA_LABEL": {
+		"defaultLabel": "-- Please select from the following options --",
+		"greenWaste": {
+			"greenWoodUntreated": "Green Wood (Untreated)",
+			"topsoil": "Topsoil"
+		},
+		"selectCountry": {
+			"france": "France",
+			"germany": "Germany",
+			"italy": "Italy",
+			"spain": "Spain",
+			"switzerland": "Switzerland"
+		},
+		"selectEnergySource": {
+			"aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
+			"greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
+		},
+		"selectHazardousWaste": {
+			"oilSeparatorSludge": "Oil Separator Sludge",
+			"productsContainingHeavyMetals": "Products Containing Heavy Metals",
+			"productsContainingTar": "Products Containing Tar"
+		},
+		"selectInertOrMineralWaste": {
+			"brick": "Brick",
+			"ceramic": "Ceramic",
+			"concrete": "Concrete",
+			"soil": "Soil",
+			"stone": "Stone"
+		},
+		"selectMainActivity": {
+			"cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
+			"cleaningSiteVehicles": "Cleaning site vehicles",
+			"paint": "Paint",
+			"pouringConcrete": "Pouring concrete",
+			"siteCleaning": "Site cleaning",
+			"siteHut": "Site hut",
+			"toolCleaning": "Tool cleaning",
+			"wateringForCure": "Watering for Cure",
+			"wateringPlants": "Watering Plants"
+		},
+		"selectMainCategoryNonInert": {
+			"cardboardAndPaper": "Carton and papier",
+			"cartridgesWithoutToxicProducts": "Cartridges without toxic products",
+			"electricalAndElectronicEquipment": "Electrical and electronic equipment",
+			"insulationMaterials": "Insulation materials",
+			"metalsAndAlloys": "Metals and alloys",
+			"mineralWools": "Mineral wools",
+			"paintVarnishGlue": "Paint, varnish, glue",
+			"plaster": "Plaster",
+			"plastic": "Plastic (packaging, tarps, etc.)",
+			"untreatedWood": "Untreated wood"
+		},
+		"selectMainInternalCombustionEngine": {
+			"aerialBucketTruck": "Aerial bucket truck",
+			"backhoe": "Backhoe",
+			"backhoeLoader": "Backhoe loader",
+			"bulldozer": "Bulldozer",
+			"dumper": "Dumper",
+			"equipmentCarrierTruck": "Equipment carrier truck",
+			"grader": "Grader",
+			"loader": "Loader",
+			"materialsCarrierTruck": "Materials carrier truck",
+			"scraper": "Scraper",
+			"steamRoller": "Steam roller"
+		},
+		"selectMainMineralProduct": {
+			"cement": "Cement",
+			"concrete": "Concrete",
+			"isolation": "Insulation panels"
+		},
+		"selectMainRigidMaterial": {
+			"insolationPanels": "Insulation panels"
+		},
+		"selectProducts": {
+			"admixtures": "Admixtures",
+			"aerosol": "Aerosol",
+			"batteries": "Batteries and accumulators containing hazardous substances",
+			"bituminousProductsContainingHAPs": "Bituminous Products Containing HAPs",
+			"cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
+			"curingProducts": "Curing Products",
+			"electricalAndElectronicWasteContainingHazardousSubstances": "Electrical and electronic waste containing hazardous substances",
+			"energySavingLamps": "Energy-saving lamps",
+			"fuel": "Fuel",
+			"oils": "Oils",
+			"oilSeparatorSludge": "Oil separator sludge",
+			"packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
+			"paintVarnish": "Paint/varnish",
+			"productsContainingTar": "Products containing tar",
+			"woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
+		},
+		"selectSpecialWaste": {
+			"aerosols": "Aerosols",
+			"agglomeratedCementPanels": "Agglomerated cement panels",
+			"agglomeratedConcrete": "Agglomerated concrete",
+			"agglomeratedProducts": "Agglomerated Products",
+			"asbestos": "Asbestos",
+			"batteriesAndAccumulators": "Batteries and Accumulators",
+			"cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
+			"electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment (PCB)",
+			"fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
+			"lead": "Lead",
+			"paintsAndSolvents": "Paints and Solvents",
+			"particleboardPanels": "Particleboard panels",
+			"polyurethaneFoams": "Polyurethane foams",
+			"rubberProducts": "Rubber products",
+			"solventsForInsulation": "Solvents for insulation",
+			"treatedWood": "Treated Wood",
+			"usedOils": "Used Oils"
+		}
+	},
+	"sloganGoeko": "The connection to efficiency",
+	"sme": "Sme",
+	"start": "Start",
+	"summary": "Summary",
+	"titleResult": "Most adapted eco-solutions for",
+	"upgrade": "Upgrade",
+	"USER_TYPE": {
+		"bank": "Bank",
+		"cleanTech": "Cleantech",
+		"sme": "SME"
+	},
+	"userType": "User type"
 }

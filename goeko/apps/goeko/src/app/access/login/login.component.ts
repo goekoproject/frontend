@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
+	createFormSignup(typeForm: boolean) {
+		this.typeForm = typeForm;
+		this._createFormSignup();
+	}
 	private _createFormSignup() {
 		this.formSignup = this._fb.group({
 			email: ['', [Validators.required, Validators.email]],
@@ -42,14 +46,6 @@ export class LoginComponent implements OnInit {
 			userType: ['', Validators.required],
 		});
 	}
-	valueChanbgeTypeForm(typeForm: boolean) {
-		// true = login, false = signup
-		this.typeForm = typeForm;
-		if (!typeForm) {
-			this._createFormSignup();
-		}
-	}
-
 	submit() {
 		if (this.formLogin.valid) {
 			this._accessService.login(this.formLogin.value);
