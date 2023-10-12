@@ -46,6 +46,7 @@ export abstract class Auth0Connected {
 			clientID: this._clientID,
 			returnTo: `${window.location.origin}/login`,
 		});
+		this.webAuth.crossOriginVerification();
 	}
 	private _connectAuth0() {
 		this.webAuth = new WebAuth({
