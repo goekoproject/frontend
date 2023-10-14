@@ -97,11 +97,11 @@ export class AuthService extends Auth0Connected {
 	}
 
 	logout() {
-		this.disconnectAuth0();
 		sessionStorage.removeItem(SESSIONID);
 		sessionStorage.removeItem('idTokenData');
 		sessionStorage.removeItem('jwtData');
 		sessionStorage.removeItem('accessToken');
+		this.disconnectAuth0();
 	}
 
 	/**
@@ -114,8 +114,8 @@ export class AuthService extends Auth0Connected {
 	}
 
 	killSessions(): void {
-		this.logout();
 		this._authData$.next(null);
+		this.logout();
 	}
 
 	private hasToRefresh(): boolean {
