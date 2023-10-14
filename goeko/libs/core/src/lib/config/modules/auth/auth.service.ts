@@ -31,6 +31,7 @@ export class AuthService extends Auth0Connected {
 		if (!this._authData$.value) {
 			const sessionAuthData = this.sessionStorageService.getItem<any>(SS_JWTDATA);
 			this._authData$.next(sessionAuthData);
+			return this._authData$.asObservable();
 		}
 		return this._authData$.asObservable();
 	}

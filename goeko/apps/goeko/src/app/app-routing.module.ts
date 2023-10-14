@@ -27,7 +27,7 @@ const ROUTES: Routes = [
 	},
 	{
 		path: 'autenticate',
-		component: AutenticateComponent,
+		loadComponent: () => import('@goeko/core').then((m) => m.AutenticateComponent),
 	},
 	{
 		path: 'dashboard',

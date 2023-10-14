@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@goeko/core';
 import { SmeService } from '@goeko/store';
 import { error } from 'console';
-import { switchMap } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 
 @Component({
 	selector: 'goeko-header-user',
@@ -23,9 +23,13 @@ export class HeaderUserComponent implements OnInit {
 	private _getSmeData() {
 		this._authservice.authData
 			.pipe(
-				switchMap(
-					(authData) => ((this.tokenData = authData), this._smeServices.getByIdExternal(authData.externalId))
-				)
+				switchMap((authData) => {
+					if (authData) {
+						this.tokenData = authData;
+						return this._smeServices.getByIdExternal(authData.externalId);
+					}
+					return of(null);
+				})
 			)
 			.subscribe((data) => {
 				if (data) {

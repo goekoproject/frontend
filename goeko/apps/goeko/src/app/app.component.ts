@@ -24,8 +24,12 @@ export class AppComponent {
 		return this.path?.includes('demo');
 	}
 
-	get isAuthenticated() {
-		return this._authService.isAuthenticated();
+	getIsAuthenticated() {
+		return (
+			this._authService.isAuthenticated() &&
+			!window.location.pathname.includes('/autenticate') &&
+			!window.location.pathname.includes('/login')
+		);
 	}
 	constructor(private router: Router, private route: ActivatedRoute, private _authService: AuthService) {
 		this._routeChange();
