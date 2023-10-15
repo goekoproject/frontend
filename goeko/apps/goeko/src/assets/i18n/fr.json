@@ -13,6 +13,9 @@
 		"passwordPolicy4": "Caractères spéciaux (!@# $ %^&*)",
 		"passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :"
 	},
+	"NOTIFICATION": {
+		"save_ok": "Enregistré avec succès"
+	},
 	"all": "Tout",
 	"analysis": "Analyse",
 	"availability": "Disponibilité:",

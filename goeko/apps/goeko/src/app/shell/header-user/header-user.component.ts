@@ -18,6 +18,21 @@ export class HeaderUserComponent implements OnInit {
 
 	ngOnInit(): void {
 		this._getSmeData();
+		this._getDataProfile();
+	}
+
+	private _getDataProfile(): any {
+		this._smeServices.smeCompanyDetail.subscribe((company: any) => {
+			if (company) {
+				this._smeServices.getByIdExternal(company.externalId).subscribe(
+					(data: any) =>
+						(this.dataUser = {
+							...this.tokenData,
+							data,
+						})
+				);
+			}
+		});
 	}
 
 	private _getSmeData() {

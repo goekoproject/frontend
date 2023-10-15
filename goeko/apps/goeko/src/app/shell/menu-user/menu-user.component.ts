@@ -17,7 +17,7 @@ export class MenuUserComponent implements OnInit {
 	constructor(private translate: TranslateService, private _authService: AuthService, private _router: Router) {}
 	ngOnInit(): void {
 		this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang());
-		this.dataProfile = this._authService.getUserInfoToken();
+		this._authService.authData.subscribe((authData) => (this.dataProfile = authData));
 	}
 
 	onRouterLinkActive(test: any): void {
@@ -34,7 +34,7 @@ export class MenuUserComponent implements OnInit {
 	goTo(route: string) {
 		switch (route) {
 			case 'profile':
-				this._router.navigate(['profile', this.dataProfile.sub]);
+				this._router.navigate(['profile', this.dataProfile.externalId]);
 				return;
 
 			default:

@@ -33,10 +33,19 @@ export interface WaterConsumption {
 	amount: string;
 	lastYearInvoice: string;
 }
-export interface SmeRecomendationRequest {
+export interface SmeRecomendationRequestDemo {
 	companyDetail: CompanyDetail;
 	co2Emission: Co2Emission;
 	waste: Waste;
 	hazardousProduct: HazardousProduct;
 	waterConsumption: WaterConsumption;
+}
+export interface Classifications {
+	mainCategory: string;
+	subCategory: string;
+	products: string[];
+}
+export interface SmeRecomendationRequest {
+	smeId: string;
+	classifications: Classifications[];
 }

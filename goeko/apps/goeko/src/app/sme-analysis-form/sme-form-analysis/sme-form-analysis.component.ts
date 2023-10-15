@@ -4,6 +4,8 @@ import { DataSelect } from '../select-data.constants';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Field } from '../form-field.model';
+import { SmeService } from '@goeko/store';
+import { FormValueToSmeAnalysisRequest } from './sme-analysis.request';
 
 @Component({
 	selector: 'goeko-sme-form-analysis',
@@ -15,25 +17,22 @@ export class SmeFormAnalysisComponent implements OnInit {
 	form!: FormGroup;
 	slideSelected = 0;
 	public dataSelect = DataSelect as any;
+	private _smeDataProfile!: any;
 
 	isSummarySlide() {
 		return this.slideSelected === this.formField.length - 1;
 	}
-	isBoolean(value: any) {
-		return typeof value === 'boolean';
-	}
-	isArray(value: any) {
-		return Array.isArray(value);
-	}
 
-	tranformValueArray(value: Array<any>) {
-		return value.join(',  ');
-	}
-	constructor(private _fb: FormBuilder, private _router: Router) {}
+	constructor(private _fb: FormBuilder, private _router: Router, private _smeServices: SmeService) {}
 
 	ngOnInit(): void {
 		this.form = this._fb.group({});
 		this._createFormGroup();
+		this._smeServices.smeCompanyDetail.subscribe((company) => {
+			if (company) {
+				this._smeDataProfile = company;
+			}
+		});
 	}
 
 	private _createFormGroup() {
@@ -56,5 +55,10 @@ export class SmeFormAnalysisComponent implements OnInit {
 	}
 	getResults() {
 		this._router.navigate(['demo/sme/result']);
+	}
+	saveAnalysis() {
+		console.log(this.form.value);
+		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeDataProfile.id, this.form.value);
+		this._smeServices.createRecommendations(smeAnalysisRequest).subscribe((res) => console.log(res));
 	}
 }

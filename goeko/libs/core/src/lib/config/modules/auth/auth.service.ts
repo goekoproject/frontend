@@ -62,14 +62,6 @@ export class AuthService extends Auth0Connected {
 	isLoggedIn(body: AuthRequest) {
 		this._loginAuth0(body);
 	}
-	/**
-	 * Get token basic authentication credentials
-	 * @param body
-	 * @returns
-	 */
-	private _auth0(body: AuthRequest) {
-		return this._loginAuth0(body);
-	}
 
 	private _loginAuth0(body: AuthRequest) {
 		this.webAuth.login(
@@ -93,6 +85,7 @@ export class AuthService extends Auth0Connected {
 		sessionStorage.removeItem('idTokenData');
 		sessionStorage.removeItem('jwtData');
 		sessionStorage.removeItem('accessToken');
+		sessionStorage.removeItem('SS_COMPANY');
 		this.disconnectAuth0();
 	}
 

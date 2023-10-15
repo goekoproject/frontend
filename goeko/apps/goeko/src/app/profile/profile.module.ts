@@ -5,10 +5,18 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonModule, GoInputModule } from '@goeko/ui';
+import { ButtonModule, GoInputModule, NotificationModule } from '@goeko/ui';
 
 @NgModule({
 	declarations: [ProfileComponent],
-	imports: [CommonModule, ProfileRoutingModule, ReactiveFormsModule, TranslateModule, ButtonModule, GoInputModule],
+	imports: [
+		CommonModule,
+		ProfileRoutingModule,
+		ReactiveFormsModule,
+		TranslateModule,
+		NotificationModule,
+		ButtonModule,
+		GoInputModule,
+	],
 })
 export class ProfileModule {}

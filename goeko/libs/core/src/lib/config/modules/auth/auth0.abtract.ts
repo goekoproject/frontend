@@ -16,25 +16,6 @@ export abstract class Auth0Connected {
 	userData!: any;
 
 	userInfo$ = new Subject();
-	/* 	public proccesHash = (hash: string) => {
-		this.webAuth.parseHash({ hash }, (error: Auth0ParseHashError | null, result: Auth0DecodedHash | null) => {
-			if (error) {
-				console.log('Error auth0', error);
-				return;
-			}
-
-			if (result) {
-				const { accessToken, idToken } = result;
-				if (accessToken && idToken) {
-					sessionStorage.setItem(ACCESS_TOKEN, accessToken);
-					sessionStorage.setItem(ID_TOKEN, idToken);
-					const jwtData = this.getUserJWTData();
-					this.expiresIn = (jwtData as any).exp;
-					this.getUserInfoAuth0();
-				}
-			}
-		});
-	}; */
 
 	constructor(domain: string, clientId: string) {
 		this._domain = domain;

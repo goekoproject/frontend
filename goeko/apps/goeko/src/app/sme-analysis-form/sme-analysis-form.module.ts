@@ -9,9 +9,10 @@ import { SmeModule } from '@goeko/store';
 import { environment } from '../../environments/environment';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SmeAnalysisSummaryComponent } from './sme-form-analysis/sme-analysis-summary/sme-analysis-summary.component';
 
 @NgModule({
-	declarations: [SmeFormAnalysisComponent],
+	declarations: [SmeFormAnalysisComponent, SmeAnalysisSummaryComponent],
 	imports: [
 		CommonModule,
 		SmeAnalysisFormRoutingModule,

@@ -10,12 +10,14 @@ import { SmeService } from '@goeko/store';
 })
 export class ProfileComponent implements OnInit {
 	form!: FormGroup;
+	dataProfile: any;
 	constructor(private _fb: FormBuilder, private _route: ActivatedRoute, private _smeServices: SmeService) {}
 
 	ngOnInit(): void {
 		const externalId = this._route.snapshot.params['externalId'];
 		console.log(externalId);
 		this._createFormGroup(externalId);
+		this._getDataprofile();
 	}
 
 	private _createFormGroup(externalId: string) {
@@ -28,9 +30,20 @@ export class ProfileComponent implements OnInit {
 		});
 	}
 
+	private _getDataprofile() {
+		this._smeServices.smeCompanyDetail.subscribe((companyDetail) => {
+			if (companyDetail) {
+				this.form.patchValue(companyDetail);
+				this.dataProfile = companyDetail;
+			}
+		});
+	}
+
 	saveProfile() {
 		this._smeServices.saveDataProfile(this.form.value).subscribe((res) => {
-			console.log(res);
+			if (res) {
+				this._smeServices.setSmeCompanyDetail(res);
+			}
 		});
 	}
 }

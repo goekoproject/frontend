@@ -1,0 +1,37 @@
+<div class="summary">
+	<h1>{{ element.keyLang | translate }}</h1>
+	<ul class="section-elements">
+		<ng-container *ngFor="let element of formField; last as isLast; index as index">
+			<li class="elements-field" *ngIf="!isLast">
+				<div class="summary-section-header">
+					<h2>{{ element.keyLang | translate }}</h2>
+					<span class="material-symbols-rounded" (click)="addFormGroup(index)"> edit</span>
+				</div>
+				<div class="summary-section-body">
+					<ng-container *ngFor="let field of element.fields">
+						<div class="form-field" *ngIf="this.form.value[element.controlName][field.controlName]">
+							<h4>{{ field.label | translate }}</h4>
+							<ng-container [ngSwitch]="true">
+								<p *ngSwitchCase="isBoolean(form.value[element.controlName][field.controlName])">
+									{{ form.value[element.controlName][field.controlName] ? 'YES' : 'NO' }}
+								</p>
+								<p *ngSwitchCase="isArray(form.value[element.controlName][field.controlName])">
+									{{ tranformValueArray(form.value[element.controlName][field.controlName]) }}
+								</p>
+								<p
+									*ngSwitchCase="
+										!isBoolean(form.value[element.controlName][field.controlName]) &&
+										!isArray(form.value[element.controlName][field.controlName])
+									"
+								>
+									{{ this.form.value[element.controlName][field.controlName].toString() || '-' }}
+								</p>
+								<p *ngSwitchDefault></p>
+							</ng-container>
+						</div>
+					</ng-container>
+				</div>
+			</li>
+		</ng-container>
+	</ul>
+</div>

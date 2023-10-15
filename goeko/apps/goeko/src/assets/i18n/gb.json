@@ -13,6 +13,9 @@
 		"passwordPolicy4": "Special characters (!@# $ %^&*)",
 		"passwordPolicyTitle": "You must meet at least 3 of the following rules: "
 	},
+	"NOTIFICATION": {
+		"save_ok": "Saved successfully"
+	},
 	"all": "All",
 	"analysis": "Analysis",
 	"availability": "Availability",

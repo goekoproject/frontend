@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { SmeRecomendationRequest } from '@goeko/store';
+import { SmeRecomendationRequestDemo } from '@goeko/store';
 
 @Injectable({ providedIn: 'root' })
 export class DemoService {
-	private _dataform!: SmeRecomendationRequest;
+	private _dataform!: SmeRecomendationRequestDemo;
 	constructor() {}
 
 	setDataForm(data: any) {
