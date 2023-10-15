@@ -60,24 +60,13 @@ export class AuthService extends Auth0Connected {
 	 * @returns
 	 */
 	isLoggedIn(body: AuthRequest) {
-		this._getTokenBasic()
-			.pipe(
-				tap((res: any) => {
-					sessionStorage.setItem(SESSIONID, res.access_token);
-				})
-			)
-			.subscribe(() => this._loginAuth0(body));
+		this._loginAuth0(body);
 	}
 	/**
 	 * Get token basic authentication credentials
 	 * @param body
 	 * @returns
 	 */
-	private _authTokenBasic() {
-		/* 		.subscribe((res: any) => {
-			sessionStorage.setItem(SESSIONID, res.access_token);
-		}); */
-	}
 	private _auth0(body: AuthRequest) {
 		return this._loginAuth0(body);
 	}
@@ -86,9 +75,11 @@ export class AuthService extends Auth0Connected {
 		this.webAuth.login(
 			{
 				realm: 'goeko-users',
+				clientID: this._clientId,
 				username: body.username,
 				password: body.password,
 				redirectUri: `${window.location.origin}/autenticate`,
+				audience: 'goeko-backend',
 			},
 			(error: any, result: any) => {
 				console.log(result);
@@ -110,7 +101,7 @@ export class AuthService extends Auth0Connected {
 	 * @returns If is login in
 	 */
 	isAuthenticated(): boolean {
-		const accessToken = sessionStorage.getItem(SESSIONID);
+		const accessToken = sessionStorage.getItem(SS_JWTDATA);
 		return !!accessToken && !this.isExpiredTOKEN(this.expiresIn);
 	}
 
@@ -146,9 +137,9 @@ export class AuthService extends Auth0Connected {
 
 	private _getBodyAccessToken(clientId: string, clientSecret: string) {
 		return {
-			grant_type: 'client_credentials',
+			grant_type: 'authorization_code',
 			audience: 'goeko-backend',
-			client_id: 'IIWgZSFVYDDNnAGi4XPbNq8hiv53X5BX',
+			client_id: clientId,
 			client_secret: clientSecret,
 		};
 	}

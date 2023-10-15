@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
-import { SESSIONID, TOKEN_USER } from './auth.service';
+import { SESSIONID, SS_JWTDATA, TOKEN_USER } from './auth.service';
 import { ACCESS_TOKEN, ID_TOKEN } from './auth0.abtract';
 
 /**

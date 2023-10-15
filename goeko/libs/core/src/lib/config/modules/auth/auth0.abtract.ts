@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Auth0DecodedHash, Auth0Error, Auth0ParseHashError, Auth0UserProfile, WebAuth } from 'auth0-js';
 import { Subject, from } from 'rxjs';
 import * as jsrsasign from 'jsrsasign';
+import { SESSIONID } from './auth.service';
 export const ACCESS_TOKEN = 'accessToken';
 export const ID_TOKEN = 'idTokenData';
 export const SS_JWTDATA = 'jwtData';
@@ -46,7 +47,6 @@ export abstract class Auth0Connected {
 			clientID: this._clientID,
 			returnTo: `${window.location.origin}/login`,
 		});
-		this.webAuth.crossOriginVerification();
 	}
 	private _connectAuth0() {
 		this.webAuth = new WebAuth({
@@ -61,6 +61,8 @@ export abstract class Auth0Connected {
 			this.webAuth.parseHash({ hash }, (error: Auth0ParseHashError | null, result: Auth0DecodedHash | null) => {
 				if (result && result.accessToken && result.idToken) {
 					const jwtData = this._processJWSToken(result.idToken);
+					sessionStorage.setItem(SESSIONID, result.accessToken);
+
 					this.expiresIn = jwtData.exp;
 					resolve(jwtData);
 				} else if (error) {
