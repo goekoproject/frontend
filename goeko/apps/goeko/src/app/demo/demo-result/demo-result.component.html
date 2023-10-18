@@ -59,9 +59,9 @@
 					<p class="eco-solutions-company">{{ ecoSolutions?.companyDetail?.name }}</p>
 					<span
 						class="eco-solutions-type   eco-solutions-type-{{
-							ecoSolutions?.classification.mainCategory.name
+							ecoSolutions?.classification.mainCategory
 						}}"
-						>{{ 'CATEGORIES.' + ecoSolutions?.classification.mainCategory.name | translate }}</span
+						>{{ 'CATEGORIES.' + ecoSolutions?.classification.mainCategory | translate }}</span
 					>
 
 					<div class="eco-solutions-actions">
@@ -94,9 +94,9 @@
 					<p class="eco-solutions-company">{{ selectedRecomendation?.companyDetail?.name }}</p>
 					<span
 						class="eco-solutions-type eco-solutions-type-{{
-							selectedRecomendation?.classification.mainCategory.name
+							selectedRecomendation?.classification.mainCategory
 						}}"
-						>{{ 'CATEGORIES.' + selectedRecomendation?.classification.mainCategory.name | translate }}</span
+						>{{ 'CATEGORIES.' + selectedRecomendation?.classification.mainCategory | translate }}</span
 					>
 				</div>
 				<p class="details-country">
