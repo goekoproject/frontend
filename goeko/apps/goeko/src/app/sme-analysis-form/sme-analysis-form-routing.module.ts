@@ -7,6 +7,10 @@ const routes: Routes = [
 		path: '',
 		component: SmeFormAnalysisComponent,
 	},
+	{
+		path: ':id',
+		component: SmeFormAnalysisComponent,
+	},
 ];
 
 @NgModule({

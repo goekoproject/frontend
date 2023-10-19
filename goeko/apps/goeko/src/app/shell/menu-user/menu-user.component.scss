@@ -2,7 +2,6 @@ $padding-element: 25px;
 $padding-element-active: 1.2rem;
 .menu-user {
 	width: 76px;
-	height: 982px;
 	display: flex;
 	box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 	flex-direction: column;
@@ -10,12 +9,12 @@ $padding-element-active: 1.2rem;
 	gap: 4rem;
 	padding: 1rem 0;
 	height: 100vh;
-	position: absolute;
 	left: 0;
 	transition: all 0.1s;
 	justify-content: space-between;
 	background-color: #ffffff;
 	z-index: 10;
+	position: fixed;
 
 	.menu-user-title {
 		font-size: 15px;

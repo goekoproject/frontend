@@ -249,6 +249,7 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 	_onTouched: () => void = () => {};
 
 	/** Combined stream of all of the child options' change events. */
+	// eslint-disable-next-line @typescript-eslint/member-ordering
 	readonly optionSelectionChanges: Observable<OptionSelectionEvent> = defer(() => {
 		const options = this.optionElement;
 
@@ -347,13 +348,23 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 		// has changed after it was checked" errors from Angular.
 		Promise.resolve().then(() => {
 			if (this.ngControl) {
-				this._value = this.ngControl.value;
+				this._value = this._handlerTypeValue(this.ngControl.value);
 			} else {
 				this._value = this.optionElement.find((option) => option.valueSelected)?.value;
 			}
 			this._setSelectionByValue(this._value);
 			this.stateChanges.next();
 		});
+	}
+
+	private _handlerTypeValue(value: any) {
+		if (Array.isArray(value)) {
+			return this.optionElement
+				.filter((option) => value.toString().includes(option.value.id.toString()))
+				?.map((op) => op.value);
+		} else {
+			return value;
+		}
 	}
 
 	/** Emits whenever the component is destroyed. */
@@ -372,14 +383,13 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 				throw getMatSelectNonArrayValueError();
 			}
 			value.forEach((currentValue: any) => this._selectOptionByValue(currentValue));
-		}
-		let correspondingOption: SuperOptionComponent | undefined;
-
-		correspondingOption = this._findOptionByValue(value);
-		if (correspondingOption) {
-			this._keyManager.updateActiveItem(correspondingOption);
-		} else if (!this.isOpen) {
-			this._keyManager.updateActiveItem(-1);
+		} else {
+			const correspondingOption = this._findOptionByValue(value);
+			if (correspondingOption) {
+				this._keyManager.updateActiveItem(correspondingOption);
+			} else if (!this.isOpen) {
+				this._keyManager.updateActiveItem(-1);
+			}
 		}
 
 		this._changeDetector.markForCheck();
@@ -461,6 +471,7 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 				this._propagateChanges();
 			}
 			if (this.multiple) {
+				this._propagateChanges();
 				if (isUserInput) {
 					// In case the user selected the option with their mouse, we
 					// want to restore focus back to the trigger, in order to
@@ -583,7 +594,9 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 	 * @param value New value to be written to the model.
 	 */
 	writeValue(newValue: string): void {
-		this._assignValue(newValue);
+		setTimeout(() => {
+			this._assignValue(newValue);
+		});
 	}
 
 	/**
@@ -689,10 +702,9 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 		// Always re-assign an array, because it might have been mutated.
 		if (newValue !== this._value || (this._multiple && Array.isArray(newValue))) {
 			if (this.optionElement) {
+				this._value = newValue;
 				this._setSelectionByValue(newValue);
 			}
-
-			this._value = newValue;
 			return true;
 		}
 		return false;

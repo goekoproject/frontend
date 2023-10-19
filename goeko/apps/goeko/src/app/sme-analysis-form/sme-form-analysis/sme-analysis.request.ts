@@ -14,7 +14,10 @@ const formToClassificationsMapper = (formValue: Section) => {
 			if (isObject(category)) {
 				Object.keys(category).forEach((index) => {
 					const subCategory = index;
-					const products = category[index];
+					if (!category[index]) {
+						return;
+					}
+					const products = category[index].map((res: any) => res.id.toString());
 
 					if (!products) {
 						return;
@@ -33,6 +36,37 @@ const formToClassificationsMapper = (formValue: Section) => {
 	});
 
 	return classifications;
+};
+
+interface Item {
+	mainCategory: string;
+	products: string[];
+	subCategory: string;
+}
+
+export const transformArrayToObj = (arr: Item[]) => {
+	const result: {
+		[mainCategory: string]: {
+			[subCategory: string]: string[];
+		};
+	} = {};
+
+	const transformObej = (subCategory: string, products: string[]) => {
+		return {
+			[subCategory]: products,
+		};
+	};
+
+	arr.forEach((item) => {
+		const { subCategory, products } = item;
+		if (!result[item.mainCategory]) {
+			result[item.mainCategory] = transformObej(subCategory, products);
+		} else if (!result[item.mainCategory][subCategory]) {
+			result[item.mainCategory][subCategory] = products;
+		}
+	});
+
+	return result;
 };
 
 export class FormValueToSmeAnalysisRequest implements SmeRecomendationRequest {

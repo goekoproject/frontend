@@ -7,8 +7,7 @@
 	height: 100%;
 	flex-direction: column;
 	margin: 0 auto;
-	width: 80%;
-	height: 87vh;
+	width: 100%;
 
 	.section-step {
 		display: flex;
@@ -38,22 +37,20 @@
 	margin: 0 auto;
 	position: relative;
 	border-radius: 28px;
-	max-height: 46rem;
 	flex-grow: 2;
 	flex-shrink: 2;
+	padding: 1rem;
 }
 .analysis-wrapper .section-form-demo {
 	background: transparent;
-	top: 2rem;
 }
 .analysis-wrapper .content-form {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 auto;
-	overflow-y: scroll;
-	height: 96%;
+	overflow: hidden;
 	padding: 1rem;
+	overflow-y: scroll;
 	.demo-header-icon {
 		border: 2px solid #0190d6;
 		border-radius: 14px;
@@ -68,9 +65,7 @@
 	&-demo {
 		width: 94%;
 	}
-	overflow-y: scroll;
-	height: 96%;
-	padding: 1rem;
+
 	h3 {
 		font-size: 1.3rem;
 		color: #080b17;

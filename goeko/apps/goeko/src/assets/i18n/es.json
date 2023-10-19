@@ -98,6 +98,8 @@
 		"dashboard": "Dashboard",
 		"favorites": "Favoritos"
 	},
+	"new_analysis": "Nuevo análisis",
+	"last_analysis": "Último análisis",
 	"ods_msg_card_result": "Impacto positivo en los ODS",
 	"ods_title": "Objetivos de Desarrollo Sostenible",
 	"profile": "Perfil",

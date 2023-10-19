@@ -2,11 +2,26 @@
 	{{ 'dashboard' | translate }}
 </h1>
 
-<div class="slot-data">
+<div class="dashboard-option">
 	<ul>
-		<li [routerLink]="['/sme-analysis']" routerLinkActive="router-link-active">
-			<i class="ti ti-device-desktop-analytics"></i>
-			<h4>{{ 'analysis' | translate }}</h4>
+		<li
+			[routerLink]="['/sme-analysis']"
+			routerLinkActive="router-link-active"
+			class="slot-data"
+			[attr.disabled]="!companyDetail"
+		>
+			<i class="ti ti-sphere-plus"></i>
+			<h4>{{ 'new_analysis' | translate }}</h4>
+		</li>
+
+		<li
+			[routerLink]="['/sme-analysis', companyDetail?.id]"
+			routerLinkActive="router-link-active"
+			class="slot-data"
+			[attr.disabled]="!companyDetail"
+		>
+			<i class="ti ti-restore"></i>
+			<h4>{{ 'last_analysis' | translate }}</h4>
 		</li>
 	</ul>
 </div>

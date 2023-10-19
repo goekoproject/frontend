@@ -1,5 +1,5 @@
 <div class="summary">
-	<h1>{{ element.keyLang | translate }}</h1>
+	<h1>{{ 'summary' | translate }}</h1>
 	<ul class="section-elements">
 		<ng-container *ngFor="let element of formField; last as isLast; index as index">
 			<li class="elements-field" *ngIf="!isLast">
@@ -16,7 +16,7 @@
 									{{ form.value[element.controlName][field.controlName] ? 'YES' : 'NO' }}
 								</p>
 								<p *ngSwitchCase="isArray(form.value[element.controlName][field.controlName])">
-									{{ tranformValueArray(form.value[element.controlName][field.controlName]) }}
+									{{ tranformValueArray(element, field) }}
 								</p>
 								<p
 									*ngSwitchCase="

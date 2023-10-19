@@ -96,10 +96,11 @@
 												[formControlName]="field.controlName"
 												[id]="field.controlName"
 												[name]="field.controlName"
+												[compareWith]="defaultSetSuperSelect"
 											>
 												<super-option
 													*ngFor="let option of dataSelect[field.controlName]"
-													[value]="option.keyLang | translate"
+													[value]="option"
 												>
 													{{ option.keyLang | translate }}
 												</super-option>

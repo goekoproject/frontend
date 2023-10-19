@@ -18,6 +18,8 @@
 	},
 	"all": "Tout",
 	"analysis": "Analyse",
+	"new_analysis": "Nouveau analyse",
+	"last_analysis": "Dernier analyse",
 	"availability": "Disponibilité:",
 	"back": "Dos",
 	"bank": "Banque",

@@ -63,7 +63,7 @@ export class CarouselComponent implements AfterContentInit {
 
 	public selectedSlideTemplateRef!: TemplateRef<any> | null;
 
-	private _selectedSlideIndex: number = 0;
+	private _selectedSlideIndex = 0;
 	public animateStateSlide = '';
 	public disabledButtonPrev = true;
 

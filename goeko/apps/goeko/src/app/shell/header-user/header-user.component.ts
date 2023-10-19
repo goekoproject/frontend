@@ -46,13 +46,19 @@ export class HeaderUserComponent implements OnInit {
 					return of(null);
 				})
 			)
-			.subscribe((data) => {
-				if (data) {
-					this.dataUser = {
-						...this.tokenData,
-						data,
-					};
+			.subscribe(
+				(data) => {
+					if (data) {
+						this.dataUser = {
+							...this.tokenData,
+							data,
+						};
+						this._smeServices.setSmeCompanyDetail(data);
+					}
+				},
+				(error) => {
+					this._smeServices.setSmeCompanyDetail(null);
 				}
-			});
+			);
 	}
 }

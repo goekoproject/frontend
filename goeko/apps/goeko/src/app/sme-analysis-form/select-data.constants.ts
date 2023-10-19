@@ -17,7 +17,7 @@ export const SelectMainMineralProduct = [
 	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.isolation' },
 ];
 
-export const SelectMainRigidMaterial = [{ id: 1, title: 'SELECT_DATA_LABEL.Insolation panels' }];
+export const SelectMainRigidMaterial = [{ id: 1, keyLang: 'SELECT_DATA_LABEL.Insolation panels' }];
 
 export const SelectMainCategoryNonInert = [
 	{ id: 1, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.metalsAndAlloys' },

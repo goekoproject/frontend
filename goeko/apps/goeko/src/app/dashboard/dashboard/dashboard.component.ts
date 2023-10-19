@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@goeko/core';
+import { SmeService } from '@goeko/store';
 
 @Component({
 	selector: 'goeko-dashboard',
@@ -7,9 +8,13 @@ import { AuthService } from '@goeko/core';
 	styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-	constructor(private _authService: AuthService) {}
+	public companyDetail!: any;
+	constructor(private _authService: AuthService, private _smeServices: SmeService) {}
 	ngOnInit(): void {
-		const y = this._authService.getUserInfoToken();
-		console.log(y);
+		this._smeServices.smeCompanyDetail.subscribe((companyDetail) => {
+			if (companyDetail) {
+				this.companyDetail = companyDetail;
+			}
+		});
 	}
 }

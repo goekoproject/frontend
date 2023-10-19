@@ -15,6 +15,7 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 			useExisting: SuperSelectComponent,
 		},
 	],
+	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: {
 		class: 'super-select',
 		role: 'combobox',

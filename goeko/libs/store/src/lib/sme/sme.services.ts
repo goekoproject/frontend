@@ -3,7 +3,7 @@ import { SME_CONFIGURATION } from './sme.module';
 import { SmeOptions } from './sme-options';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { SmeRecomendationRequest, SmeRecomendationRequestDemo } from './sme-request.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, find, first, from, map, mergeMap, reduce } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
 
 export const SS_COMPANY_DETAIL = 'SS_COMPANY';
@@ -38,6 +38,20 @@ export class SmeService {
 
 	getRecommendations(body: SmeRecomendationRequestDemo): Observable<any> {
 		return this._http.post<any>(`${this.configuration.endpoint}/v1/demo/recommendation/smes`, body);
+	}
+
+	getRecommendationsById(id: string): Observable<any> {
+		return this._http.get<any>(`${this.configuration.endpoint}/v1/recommendation/requests/smes/${id}`);
+	}
+
+	getLastRecommendationById(id: string): Observable<any> {
+		return this.getRecommendationsById(id).pipe(
+			map((recommendation) => recommendation.requests),
+			mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuales
+			reduce((maxItem: any, currentItem: any) =>
+				new Date(currentItem.date) > new Date(maxItem.date) ? currentItem : maxItem
+			)
+		);
 	}
 
 	createRecommendations(body: SmeRecomendationRequest): Observable<any> {
