@@ -118,7 +118,7 @@ export class DemoResultComponent implements OnInit {
 		fieldChecked.forEach((el: any) => {
 			const newArray = smeRecomendation.filter(
 				(recomendation: any) =>
-					recomendation.classification.mainCategory.name.toUpperCase() === el.controlName.toUpperCase()
+					recomendation.classification.mainCategory.toUpperCase() === el.controlName.toUpperCase()
 			);
 			newSmeRecomendation = [...newSmeRecomendation, ...newArray];
 		});
