@@ -1,37 +1,48 @@
 <h1 class="title-platform">{{ 'profile' | translate }} - {{ dataProfile?.name }}</h1>
 
-<form [formGroup]="form" class="profile-page">
-	<go-input [formControlName]="'name'">
-		<p slot="label">{{ 'FORM_LABEL.companyName' | translate }}</p>
-	</go-input>
-	<go-input [formControlName]="'country'">
-		<p slot="label">{{ 'FORM_LABEL.country' | translate }}</p>
-	</go-input>
+<div class="profile-data">
+	<form [formGroup]="form" class="profile-page">
+		<go-input [formControlName]="'name'">
+			<p slot="label">{{ 'FORM_LABEL.companyName' | translate }}</p>
+		</go-input>
+		<go-input [formControlName]="'country'">
+			<p slot="label">{{ 'FORM_LABEL.country' | translate }}</p>
+		</go-input>
 
-	<go-input [formControlName]="'email'" type="email">
-		<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
-	</go-input>
+		<go-input [formControlName]="'email'" type="email">
+			<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+		</go-input>
 
-	<go-input [formControlName]="'website'" type="url">
-		<p slot="label">{{ 'FORM_LABEL.website' | translate }}</p>
-	</go-input>
+		<go-input [formControlName]="'website'" type="url">
+			<p slot="label">{{ 'FORM_LABEL.website' | translate }}</p>
+		</go-input>
 
-	<div class="profile-actions">
-		<button
-			type="button"
-			go-button
-			appearance="white"
-			[routerLink]="['/dashboard']"
-			routerLinkActive="router-link-active"
-		>
-			{{ 'cancel' | translate }}
-		</button>
-		<button type="button" go-button appearance="primary" type="submit" (click)="saveProfile()">
-			{{ 'save' | translate }}
-		</button>
-	</div>
-</form>
-<go-notification type="info" class="notification" *ngIf="dataProfile">
+		<div class="profile-actions">
+			<button
+				type="button"
+				go-button
+				appearance="white"
+				[routerLink]="['/dashboard']"
+				routerLinkActive="router-link-active"
+			>
+				{{ 'cancel' | translate }}
+			</button>
+			<button type="button" go-button appearance="primary" type="submit" (click)="saveProfile()">
+				{{ 'save' | translate }}
+			</button>
+		</div>
+	</form>
+
+	<goeko-side-profile
+		class="side-profile"
+		[toogleSideProfile]="true"
+		[dataProfile]="dataProfile"
+		[visibility]="true"
+	></goeko-side-profile>
+</div>
+
+<br />
+<go-notification type="info" class="notification" *ngIf="savedProfile">
 	<div class="policy-password">
 		<p>{{ 'NOTIFICATION.save_ok' | translate }}</p>
 	</div>

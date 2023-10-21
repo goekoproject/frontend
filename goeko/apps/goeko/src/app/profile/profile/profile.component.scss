@@ -1,3 +1,7 @@
+.profile-data {
+	display: flex;
+	gap: 2rem;
+}
 .profile-page {
 	display: flex;
 	flex-wrap: wrap;
@@ -9,11 +13,20 @@
 	border-radius: 1rem;
 	flex-direction: column;
 	gap: 1.3rem;
+	flex-basis: 54%;
+	flex-shrink: 1;
+	flex-grow: 2;
 }
+
 .profile-actions {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+}
+.side-profile {
+	flex-basis: 40%;
+	border-radius: 1rem;
+	flex-grow: 2;
 }
 
 .notification {

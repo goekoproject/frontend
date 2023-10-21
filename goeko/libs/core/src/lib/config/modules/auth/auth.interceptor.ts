@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
-import { SESSIONID, SS_JWTDATA, TOKEN_USER } from './auth.service';
+import { AuthService, SESSIONID, SS_JWTDATA, TOKEN_USER } from './auth.service';
 import { ACCESS_TOKEN, ID_TOKEN } from './auth0.abtract';
 
 /**
@@ -10,7 +10,7 @@ import { ACCESS_TOKEN, ID_TOKEN } from './auth0.abtract';
  */
 @Injectable({ providedIn: 'platform' })
 export class AuthInterceptor implements HttpInterceptor {
-	constructor(private _route: Router) {}
+	constructor(private _route: Router, private _auth: AuthService) {}
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const accessToken = sessionStorage.getItem(SESSIONID);
@@ -28,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	private _handleError(error: HttpErrorResponse) {
 		if (error && error.status === 401) {
-			this._route.navigate(['/']);
+			this._auth.killSessions();
 		}
 		return throwError(() => error);
 	}

@@ -74,7 +74,8 @@
 		"country": "Pays",
 		"email": "Email",
 		"password": "Mot de passe",
-		"website": "Site web"
+		"website": "Site web",
+		"location": "Emplacement"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",

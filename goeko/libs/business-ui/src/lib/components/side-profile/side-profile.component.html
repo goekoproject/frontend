@@ -1,10 +1,25 @@
 <div class="profile">
-	<i class="ti ti-arrow-autofit-right profile-close" (click)="toogleSideProfile = false"></i>
+	<i class="ti ti-arrow-autofit-right profile-close" (click)="hideProfile()"></i>
 	<div class="heading-company">
 		<span class="heading-icon">
 			<i class="ti ti-building-bridge-2"></i>
 		</span>
 		<p>{{ dataProfile?.nickname }}</p>
+
+		<div class="profile-section">
+			<div class="profile-section-heading">
+				<i class="ti ti-brand-mailgun"></i>
+				<p>{{ 'FORM_LABEL.email' | translate }}</p>
+			</div>
+			<p class="profile-section-data">{{ dataProfile?.email }}</p>
+		</div>
+		<div class="profile-section">
+			<div class="profile-section-heading">
+				<i class="ti ti-map-pin"></i>
+				<p>{{ 'FORM_LABEL.location' | translate }}</p>
+			</div>
+			<p class="profile-section-data">{{ dataProfile?.country }}</p>
+		</div>
 	</div>
 
 	<div class="banner-complete-profile" *ngIf="missingDataProfile">

@@ -11,7 +11,7 @@ import { of, switchMap } from 'rxjs';
 })
 export class HeaderUserComponent implements OnInit {
 	public tokenData!: any;
-	public toogleSideProfile = true;
+	public toogleSideProfile!: boolean;
 	public dataUser!: any;
 	public notDataUser!: any;
 	constructor(private _authservice: AuthService, private _smeServices: SmeService) {}
@@ -28,13 +28,16 @@ export class HeaderUserComponent implements OnInit {
 					(data: any) =>
 						(this.dataUser = {
 							...this.tokenData,
-							data,
+							...data,
 						})
 				);
 			}
 		});
 	}
 
+	toogleProfile(toogle: boolean): void {
+		this.toogleSideProfile = toogle;
+	}
 	private _getSmeData() {
 		this._authservice.authData
 			.pipe(

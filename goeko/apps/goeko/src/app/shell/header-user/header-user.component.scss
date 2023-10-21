@@ -1,14 +1,15 @@
 .header-user {
-	height: 48px;
+	height: 38px;
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 }
 .heading-company {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	font-size: 18px;
+	font-size: 16px;
 	text-transform: capitalize;
 	cursor: pointer;
 }
@@ -16,10 +17,10 @@
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 	border-radius: 50%;
 	padding: 0.6rem;
-	font-size: 2rem;
+	font-size: 1rem;
 	color: #0191d7;
-	height: 44px;
-	width: 44px;
+	height: 35px;
+	width: 35px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule, GoInputModule, NotificationModule } from '@goeko/ui';
+import { SideProfileComponent } from '@goeko/business-ui';
 
 @NgModule({
 	declarations: [ProfileComponent],
@@ -17,6 +18,7 @@ import { ButtonModule, GoInputModule, NotificationModule } from '@goeko/ui';
 		NotificationModule,
 		ButtonModule,
 		GoInputModule,
+		SideProfileComponent,
 	],
 })
 export class ProfileModule {}

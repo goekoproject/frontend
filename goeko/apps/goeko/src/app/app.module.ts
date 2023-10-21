@@ -17,9 +17,8 @@ import { MenuComponent } from './home/header/menu/menu.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { PopupModule, SelectI18nModule } from '@goeko/business-ui';
+import { PopupModule, SelectI18nModule, SideProfileComponent } from '@goeko/business-ui';
 import { MenuUserComponent } from './shell/menu-user/menu-user.component';
-import { SideProfileComponent } from './shell/side-profile/side-profile.component';
 import { HeaderUserComponent } from './shell/header-user/header-user.component';
 const httpLoaderFactory = (http: HttpClient) => {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,10 +31,10 @@ const httpLoaderFactory = (http: HttpClient) => {
 		HeaderComponent,
 		MenuComponent,
 		MenuUserComponent,
-		SideProfileComponent,
 		HeaderUserComponent,
 	],
 	imports: [
+		SideProfileComponent,
 		BrowserModule,
 		BrowserAnimationsModule,
 		AppRoutingModule,
