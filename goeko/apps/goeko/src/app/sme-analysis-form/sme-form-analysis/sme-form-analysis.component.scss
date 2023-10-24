@@ -8,14 +8,14 @@
 	flex-direction: column;
 	margin: 0 auto;
 	width: 100%;
-
+	gap: 2rem;
 	.section-step {
 		display: flex;
 		width: 100%;
-		padding: 1rem;
 		align-items: center;
-		gap: 2rem;
-		text-align: center;
+		gap: 4rem;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 	.section-elements {
 		list-style: none;
@@ -31,7 +31,8 @@
 }
 
 .analysis-wrapper .section-form {
-	background: #edf1f2;
+	background: #ffffff;
+
 	display: flex;
 	align-items: center;
 	margin: 0 auto;
@@ -39,7 +40,8 @@
 	border-radius: 28px;
 	flex-grow: 2;
 	flex-shrink: 2;
-	padding: 1rem;
+	padding: 1rem 10px;
+	flex-direction: column;
 }
 .analysis-wrapper .section-form-demo {
 	background: transparent;
@@ -49,7 +51,7 @@
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	padding: 1rem;
+
 	overflow-y: scroll;
 	.demo-header-icon {
 		border: 2px solid #0190d6;
@@ -125,6 +127,13 @@
 	}
 }
 
+.form-field-badge-group {
+	label {
+		font-size: 20px;
+		font-weight: 600;
+	}
+}
+
 .goeko-go {
 	width: 100%;
 	height: 100%;
@@ -142,14 +151,21 @@
 }
 .analysis-wrapper .form-actions {
 	display: flex;
-	justify-content: center;
-	margin: 2rem 0;
-	position: absolute;
+	justify-content: space-around;
 	margin: 0 auto;
 	gap: 2rem;
-	left: 0;
-	right: 0;
-	bottom: -9%;
+	position: fixed;
+	bottom: 1rem;
+	width: 85%;
+	&-submit {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+}
+
+.text-support {
+	color: #c0c0c0;
 }
 
 .field-form-checked {

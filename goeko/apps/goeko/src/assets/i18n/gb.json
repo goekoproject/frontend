@@ -112,7 +112,7 @@
 		"slogan_text2": "Who are you?"
 	},
 	"SELECT_DATA_LABEL": {
-		"defaultLabel": "-- Please select from the following options --",
+		"defaultLabel": "Please select from the following options",
 		"greenWaste": {
 			"greenWoodUntreated": "Green Wood (Untreated)",
 			"topsoil": "Topsoil"

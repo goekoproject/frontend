@@ -112,7 +112,7 @@
 		"slogan_text2": "Est-ce que tu veux?"
 	},
 	"SELECT_DATA_LABEL": {
-		"defaultLabel": "-- Veuillez sélectionner parmi les options suivantes --",
+		"defaultLabel": "Veuillez sélectionner parmi les options suivantes",
 		"greenWaste": {
 			"greenWoodUntreated": "Bois vert (non traité)",
 			"topsoil": "Terre végétale"

@@ -9,3 +9,4 @@ export * from './lib/ui/goeko-button/public-api';
 export * from './lib/ui/ui-super-select/public-api';
 export * from './lib/ui/switch/public-api';
 export * from './lib/ui/notification/public-api';
+export * from './lib/ui/badge/public-api';

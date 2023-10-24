@@ -6,6 +6,7 @@ export enum STATUS_SECTION {
 }
 export const FORM_FIELD_DEMO: Section[] = [
 	{
+		id: 'co2-category-form',
 		keyLang: 'CATEGORIES.co2emission',
 		controlName: 'co2Emission',
 		status: STATUS_SECTION.COMPLETED,
@@ -15,7 +16,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		fields: [
 			{
 				controlName: 'mainInternalCombustionEngine',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainInternalCombustionEngine',
 			},
@@ -28,7 +29,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 			},
 			{
 				controlName: 'mainMineralProduct',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: 'cement, concrete, etc.',
 				label: 'CATEGORIES_FIELD.mainMineralProduct',
 			},
@@ -40,57 +41,59 @@ export const FORM_FIELD_DEMO: Section[] = [
 			}, */
 			{
 				controlName: 'energySource',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.energySource',
 			},
 		],
 	},
 	{
+		id: 'waste-category-form',
 		keyLang: 'CATEGORIES.waste',
 		controlName: 'waste',
 		status: STATUS_SECTION.COMPLETED,
-		icon: 'water_pump',
+		icon: 'waste',
 		showResult: true,
 		checked: false,
 		fields: [
 			{
 				controlName: 'mainCategoryNonInert',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainCategoryNonInert',
 			},
 			{
 				controlName: 'inertOrMineralWaste',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.inertOrMineralWaste',
 			},
 			{
 				controlName: 'greenWaste',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.greenWaste',
 			},
 			{
 				controlName: 'specialWaste',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.specialWaste',
 			},
 			{
 				controlName: 'hazardousWaste',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.hazardousWaste',
 			},
 		],
 	},
 	{
+		id: 'water-category-form',
 		keyLang: 'CATEGORIES.water',
 		controlName: 'waterConsumption',
 		status: STATUS_SECTION.COMPLETED,
-		icon: 'water_drop',
+		icon: 'water',
 		showResult: true,
 		checked: false,
 		fields: [
@@ -110,33 +113,34 @@ export const FORM_FIELD_DEMO: Section[] = [
 			},
 			{
 				controlName: 'mainActivity',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.mainActivity',
 			},
 		],
 	},
 	{
+		id: 'hp-category-form',
 		keyLang: 'CATEGORIES.hazardousProduct',
 		controlName: 'hazardousProduct',
 		status: STATUS_SECTION.COMPLETED,
-		icon: 'science',
+		icon: 'hp',
 		showResult: true,
 		checked: false,
 		fields: [
 			{
 				controlName: 'products',
-				type: 'select-multiple',
+				type: 'badge-group',
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.products',
 			},
 		],
 	},
-	{
+	/* 	{
 		keyLang: 'summary',
 		status: STATUS_SECTION.COMPLETED,
 		controlName: '',
 		showResult: false,
 		checked: false,
-	},
+	},*/
 ];

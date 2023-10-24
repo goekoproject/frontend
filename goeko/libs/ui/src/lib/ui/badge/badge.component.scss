@@ -1,0 +1,20 @@
+.badge {
+	width: max-content;
+	height: 32px;
+	padding: 0 12px;
+	display: flex;
+	align-items: center;
+	border-radius: 20px;
+	cursor: pointer;
+	border: 1px solid #c8b4ff;
+	transition: 0.3s;
+	gap: 0.2rem;
+	.badge-close {
+		font-size: 1.2rem;
+	}
+}
+[selected='true'] {
+	.badge {
+		background: #e9e1ff;
+	}
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AutenticateComponent, AuthGuard } from '@goeko/core';
+import { AuthGuard } from '@goeko/core';
 
 const ROUTES: Routes = [
 	{

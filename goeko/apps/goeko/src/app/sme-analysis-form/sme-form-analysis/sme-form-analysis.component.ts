@@ -80,9 +80,12 @@ export class SmeFormAnalysisComponent implements OnInit {
 	addFormGroup(index: any) {
 		this.slideSelected = index;
 	}
-
+	test(index: any) {
+		console.log(index);
+	}
 	gotToSummary() {
-		this.slideSelected = this.formField.length - 1;
+		/* 		this.slideSelected = this.formField.length - 1;
+		 */
 	}
 	getResults() {
 		this._router.navigate(['demo/sme/result']);

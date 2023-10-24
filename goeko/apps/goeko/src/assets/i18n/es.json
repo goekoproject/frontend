@@ -110,7 +110,7 @@
 		"slogan_text2": "¿Quiere eres?"
 	},
 	"SELECT_DATA_LABEL": {
-		"defaultLabel": "-- Por favor seleccione entre las siguientes opciones --",
+		"defaultLabel": "Por favor seleccione entre las siguientes opciones",
 		"greenWaste": {
 			"greenWoodUntreated": "Madera verde (no tratada)",
 			"topsoil": "Tierra vegetal"
