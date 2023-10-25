@@ -6,6 +6,10 @@ const routes: Routes = [
 	{
 		path: '',
 		component: SmeFormAnalysisComponent,
+		data: {
+			breadcrumb: 'new_analysis',
+			hidden: true,
+		},
 	},
 	{
 		path: ':id',

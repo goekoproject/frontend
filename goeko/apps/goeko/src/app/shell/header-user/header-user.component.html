@@ -1,15 +1,13 @@
 <nav class="header-user" *ngIf="tokenData">
-	<ul>
-		<li>
-			<div class="heading-company" (click)="toogleProfile(true)">
-				<span class="heading-icon">
-					<i class="ti ti-building-bridge-2"></i>
-				</span>
-				<p>{{ tokenData?.nickname }}</p>
-			</div>
-		</li>
-	</ul>
+	<go-badge (click)="toogleProfile(true)" fill="true">
+		<span class="heading-icon" avatar>
+			<i class="ti ti-building-bridge-2"></i>
+		</span>
+		{{ tokenData?.nickname }}
+	</go-badge>
 </nav>
+<ng-content></ng-content>
+
 <goeko-side-profile
 	[toogleSideProfile]="toogleSideProfile"
 	[dataProfile]="dataUser ? dataUser : tokenData"

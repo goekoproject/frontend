@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'go-badge',
@@ -9,14 +9,18 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
 	host: {
 		'(click)': 'onSelect(value)',
 		'[attr.selected]': 'selected',
+		'[attr.fill]': 'fill',
 	},
 })
 export class BadgeComponent {
 	@Input() value!: any;
+
+	@Input() fill!: any;
+
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelected$ = new EventEmitter();
-
 	selected!: boolean;
+
 	onSelect(value: any) {
 		this.onSelected$.emit(this);
 	}

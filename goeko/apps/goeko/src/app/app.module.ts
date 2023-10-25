@@ -8,7 +8,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigModule } from '@goeko/core';
 import { ContentFulModule, SmeModule } from '@goeko/store';
-import { ButtonModule, CarouselModule } from '@goeko/ui';
+import { BadgeModule, ButtonModule, CarouselModule, UiBreadcrumbsModule } from '@goeko/ui';
 import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
 import { FooterComponent } from './shell/footer/footer.component';
@@ -42,6 +42,8 @@ const httpLoaderFactory = (http: HttpClient) => {
 		ContentFulModule.forRoot(ContentConfig),
 		PopupModule,
 		SelectI18nModule,
+		UiBreadcrumbsModule,
+		BadgeModule,
 		SmeModule.forRoot({
 			endpoint: environment.baseUrl,
 		}),
