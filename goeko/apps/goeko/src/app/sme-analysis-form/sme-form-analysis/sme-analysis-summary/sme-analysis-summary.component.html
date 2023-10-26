@@ -4,7 +4,7 @@
 <div class="summary">
 	<ul class="section-elements" *ngIf="formValue">
 		<ng-container *ngFor="let element of formField; last as isLast; index as index">
-			<li class="elements-field" *ngIf="!isLast">
+			<li class="elements-field">
 				<div class="summary-section-header">
 					<h2>{{ element.keyLang | translate }}</h2>
 					<button class="section-header-edit" (click)="editCategory(element.id)">
