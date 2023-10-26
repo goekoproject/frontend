@@ -17,7 +17,13 @@ const formToClassificationsMapper = (formValue: Section) => {
 					if (!category[index]) {
 						return;
 					}
-					const products = category[index].map((res: any) => res?.id?.toString());
+					const products = category[index].map((res: any) => {
+						if (typeof res === 'object') {
+							return res?.id?.toString();
+						} else {
+							return res;
+						}
+					});
 
 					if (!products) {
 						return;
