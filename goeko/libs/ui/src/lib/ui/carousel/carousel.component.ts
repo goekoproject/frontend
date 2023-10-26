@@ -29,7 +29,6 @@ export class GoSlideDirective {
 		trigger('fadeIn', [
 			transition('* => next', [style({ opacity: 0 }), animate('500ms', style({ opacity: 1 }))]),
 			transition('* => prev', [animate('500ms', style({ opacity: 0 }))]),
-			transition(':enter', [animate('500ms', style({ opacity: 0 }))]),
 		]),
 	],
 	host: {
@@ -52,13 +51,15 @@ export class CarouselComponent implements AfterContentInit {
 	}
 
 	set selectedSlideIndex(index: number) {
-		if (index === undefined || !this.slide) {
-			return;
-		}
-		this._selectedSlideIndex = index;
-		this.selectedSlideTemplateRef = null;
-		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
-		this.animateStateSlide = '';
+		setTimeout(() => {
+			if (index === undefined || !this.slide) {
+				return;
+			}
+			this._selectedSlideIndex = index;
+			this.selectedSlideTemplateRef = null;
+			this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
+			this.animateStateSlide = '';
+		});
 	}
 
 	public selectedSlideTemplateRef!: TemplateRef<any> | null;

@@ -6,6 +6,10 @@ const routes: Routes = [
 	{
 		path: ':externalId',
 		component: ProfileComponent,
+		data: {
+			breadcrumb: 'profile',
+			hidden: true,
+		},
 	},
 ];
 

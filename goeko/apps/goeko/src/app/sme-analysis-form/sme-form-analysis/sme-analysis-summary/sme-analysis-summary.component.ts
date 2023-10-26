@@ -1,22 +1,26 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Section } from '../../form-field.model';
-import { Form, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SmeService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
+import { FORM_FIELD } from '../../form-field-demo.constants';
+import { Section } from '../../form-field.model';
 import { DataSelect } from '../../select-data.constants';
+import { FormValueToSmeAnalysisRequest } from '../sme-analysis.request';
+import { SmeAnalysisService } from '../sme-analysis.service';
 
 @Component({
 	selector: 'goeko-sme-analysis-summary',
 	templateUrl: './sme-analysis-summary.component.html',
 	styleUrls: ['./sme-analysis-summary.component.scss'],
 })
-export class SmeAnalysisSummaryComponent {
-	@Input() formField!: Section[];
-	@Input() element!: Section;
-	@Input() form!: FormGroup;
-	public dataSelect = DataSelect;
-
+export class SmeAnalysisSummaryComponent implements OnInit {
 	@Output() editForm: EventEmitter<number> = new EventEmitter();
-
+	public dataSelect = DataSelect;
+	formField = FORM_FIELD;
+	formValue!: any;
+	public saveOK = false;
+	private _smeId!: string;
 	isBoolean(value: any) {
 		return typeof value === 'boolean';
 	}
@@ -26,7 +30,7 @@ export class SmeAnalysisSummaryComponent {
 
 	tranformValueArray(element: Section, value: any) {
 		let valueArray;
-		const formValue = this.form.value[element.controlName][value.controlName];
+		const formValue = this.formValue[element.controlName][value.controlName];
 
 		if (this.isArrayOfType(formValue, 'string')) {
 			const dataSelect = this.dataSelect[value.controlName as keyof typeof DataSelect];
@@ -37,12 +41,22 @@ export class SmeAnalysisSummaryComponent {
 
 		return valueArray.map((optionSelect: any) => this._translateService.instant(optionSelect.keyLang)).join(',  ');
 	}
+	constructor(
+		private _translateService: TranslateService,
+		private _smeServices: SmeService,
+		private _smeAnalysisService: SmeAnalysisService,
+		private _route: ActivatedRoute,
+		private _router: Router
+	) {}
 
-	addFormGroup(index: any) {
-		this.editForm.emit(index);
+	ngOnInit(): void {
+		this._smeId = this._route.snapshot.paramMap.get('id') as string;
+		this._smeAnalysisService.getCurrentAnalysis().subscribe((res) => {
+			if (res) {
+				this.formValue = res;
+			}
+		});
 	}
-
-	constructor(private _translateService: TranslateService) {}
 
 	isArrayOfType(arr: any[], type: 'number' | 'object' | 'string'): boolean {
 		if (!Array.isArray(arr)) {
@@ -70,5 +84,24 @@ export class SmeAnalysisSummaryComponent {
 			default:
 				return false;
 		}
+	}
+
+	editCategory(categoryId: string) {
+		this._router.navigate(['sme-analysis'], {
+			queryParams: { categoryId: categoryId },
+		});
+	}
+
+	getResults() {
+		this._router.navigate(['../results', this._smeId], { relativeTo: this._route });
+	}
+	saveAnalysis() {
+		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeId, this.formValue);
+		this._smeServices.createRecommendations(smeAnalysisRequest).subscribe((res) => {
+			this.saveOK = true;
+			setTimeout(() => {
+				this.saveOK = false;
+			}, 5000);
+		});
 	}
 }

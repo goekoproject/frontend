@@ -6,6 +6,7 @@
 		"msgsignup": "Do not have any account?",
 		"msglogin2": "Already have account?"
 	},
+	"edit": "Edit",
 	"ACCESS_ERROR": {
 		"passwordPolicy1": "Lowercase letters (a-z)",
 		"passwordPolicy2": "Uppercase letters (A-Z)",
@@ -23,6 +24,8 @@
 	"availability": "Availability",
 	"back": "Back",
 	"bank": "Bank",
+	"result": "Result",
+	"your_ecosolutions": "Your Eco-solutions",
 	"BANNER": {
 		"affordable": "Affordable",
 		"easy": "Easy",

@@ -6,6 +6,7 @@
 		"msgsignup": "Vous n'avez pas de compte ?",
 		"msglogin2": "Déjà un compte ?"
 	},
+	"edit": "Modifier",
 	"ACCESS_ERROR": {
 		"passwordPolicy1": "Lettres minuscules (a-z)",
 		"passwordPolicy2": "Lettres majuscules (A-Z)",
@@ -23,6 +24,8 @@
 	"availability": "Disponibilité:",
 	"back": "Dos",
 	"bank": "Banque",
+	"result": "Résultat",
+	"your_ecosolutions": "Vos Eco-solutions",
 	"BANNER": {
 		"affordable": "Abordable",
 		"easy": "Facile",

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FORM_FIELD_DEMO } from '../form-field-demo.constants';
+import { FORM_FIELD } from '../form-field-demo.constants';
 import { DataSelect } from '../select-data.constants';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Field } from '../form-field.model';
 import { SmeService } from '@goeko/store';
 import { FormValueToSmeAnalysisRequest, transformArrayToObj } from './sme-analysis.request';
+import { SmeAnalysisService } from './sme-analysis.service';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {
 		return o1.id.toString() === o2;
@@ -24,12 +25,14 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
 })
 export class SmeFormAnalysisComponent implements OnInit {
 	public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean;
-	formField = FORM_FIELD_DEMO;
+	formField = FORM_FIELD;
 	form!: FormGroup;
 	slideSelected = 0;
 	public dataSelect = DataSelect as any;
 	private _smeDataProfile!: any;
 	private _smeId!: string;
+	private _selectedCategory!: string;
+
 	isSummarySlide() {
 		return this.slideSelected === this.formField.length - 1;
 	}
@@ -38,19 +41,38 @@ export class SmeFormAnalysisComponent implements OnInit {
 		private _fb: FormBuilder,
 		private _router: Router,
 		private _smeServices: SmeService,
-		private _route: ActivatedRoute
+		private _route: ActivatedRoute,
+		private _smeAnalysisService: SmeAnalysisService
 	) {}
 
 	ngOnInit(): void {
 		this._smeId = this._route.snapshot.paramMap.get('id') as string;
-		console.log(this._smeId);
+		this._route.queryParams.subscribe((queryParams: any) => (this._selectedCategory = queryParams.categoryId));
 		this.form = this._fb.group({});
 		this._createFormGroup();
+		this._getSmeCompanyDetail();
+		this._setLastAnalysis();
+		this._selectCatagory();
+	}
+
+	private _getSmeCompanyDetail() {
 		this._smeServices.smeCompanyDetail.subscribe((company) => {
 			if (company) {
 				this._smeDataProfile = company;
 			}
 		});
+	}
+
+	private _selectCatagory() {
+		if (!this._selectedCategory) {
+			return;
+		}
+		this._smeAnalysisService.getCurrentAnalysis().subscribe((analysis) => this.form.patchValue(analysis));
+		const indexCarousel = this.formField.findIndex((formField) => formField.id === this._selectedCategory);
+		this.slideSelected = indexCarousel;
+	}
+
+	private _setLastAnalysis() {
 		if (this._smeId) {
 			this._getLastAnalysis();
 		}
@@ -80,15 +102,13 @@ export class SmeFormAnalysisComponent implements OnInit {
 	addFormGroup(index: any) {
 		this.slideSelected = index;
 	}
-	test(index: any) {
-		console.log(index);
-	}
+
 	gotToSummary() {
-		/* 		this.slideSelected = this.formField.length - 1;
-		 */
+		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
+		setTimeout(() => this._router.navigate(['sme-analysis/summary', this._smeDataProfile.id]));
 	}
 	getResults() {
-		this._router.navigate(['demo/sme/result']);
+		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
 	}
 	saveAnalysis() {
 		console.log(this.form.value);

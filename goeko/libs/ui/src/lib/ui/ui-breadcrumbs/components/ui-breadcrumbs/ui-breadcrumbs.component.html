@@ -1,7 +1,7 @@
 <div class="breadcrumb">
 	<span class="breadcrumb--container" *ngFor="let breadcrumb of breadcrumbs$ | async; let i = index">
 		<ng-container *ngIf="!breadcrumb.hidden">
-			<i *ngIf="i > 0" class="icon-Arrow-Chevron-Forward breadcrumb--arrow"></i>
+			<span *ngIf="i > 0" class="material-symbols-rounded breadcrumb--arrow">arrow_back_ios</span>
 			<a [routerLink]="[breadcrumb.url]" queryParamsHandling="merge">{{ breadcrumb.label | translate }}</a>
 		</ng-container>
 	</span>

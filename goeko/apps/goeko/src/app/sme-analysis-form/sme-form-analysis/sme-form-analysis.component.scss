@@ -121,7 +121,7 @@
 	align-items: center;
 }
 .form-field {
-	width: 78%;
+	width: 86%;
 	&--center {
 		margin: 0 auto;
 	}
@@ -129,7 +129,7 @@
 
 .form-field-badge-group {
 	label {
-		font-size: 20px;
+		font-size: 1rem;
 		font-weight: 600;
 	}
 }
@@ -155,8 +155,10 @@
 	margin: 0 auto;
 	gap: 2rem;
 	position: fixed;
-	bottom: 1rem;
-	width: 85%;
+	bottom: 0rem;
+	width: 92%;
+	background: #f7f9fe;
+	padding: 1rem;
 	&-submit {
 		display: flex;
 		gap: 1rem;

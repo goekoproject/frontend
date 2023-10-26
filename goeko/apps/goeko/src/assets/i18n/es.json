@@ -6,6 +6,7 @@
 		"msglogin2": "¿Ya tienes una cuenta?"
 	},
 	"accept": "Aceptar",
+	"edit": "Editar",
 	"ACCESS_ERROR": {
 		"passwordPolicy1": "Letras minúsculas (a-z)",
 		"passwordPolicy2": "Letras mayúsculas (A-Z)",
@@ -105,6 +106,8 @@
 	"ods_title": "Objetivos de Desarrollo Sostenible",
 	"profile": "Perfil",
 	"save": "Guardar",
+	"result": "Resultados",
+	"our_ecosolutions": "Tus Eco-soluciones",
 	"SCENES": {
 		"slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
 		"slogan_text2": "¿Quiere eres?"

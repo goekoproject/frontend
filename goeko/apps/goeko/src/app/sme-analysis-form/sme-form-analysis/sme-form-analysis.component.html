@@ -167,10 +167,10 @@
 	<div class="form-actions">
 		<button type="button" go-button appearance="white">{{ 'cancel' | translate }}</button>
 		<div class="form-actions-submit">
-			<button type="button" go-button appearance="white" *ngIf="isSummarySlide()" (click)="saveAnalysis()">
+			<!-- 			<button type="button" go-button appearance="white" *ngIf="isSummarySlide()" (click)="saveAnalysis()">
 				{{ 'save' | translate }}
-			</button>
-			<button type="button" go-button appearance="white" (click)="gotToSummary()" *ngIf="!isSummarySlide()">
+			</button> -->
+			<button type="button" go-button appearance="white" (click)="gotToSummary()">
 				{{ 'summary' | translate }}
 			</button>
 			<go-goeko-button class="button-submit" (click)="getResults()">

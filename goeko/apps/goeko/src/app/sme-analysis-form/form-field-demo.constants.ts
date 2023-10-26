@@ -4,7 +4,7 @@ export enum STATUS_SECTION {
 	COMPLETED = 'COMPLETED',
 	INCOMPLETED = 'INCOMPLETED',
 }
-export const FORM_FIELD_DEMO: Section[] = [
+export const FORM_FIELD: Section[] = [
 	{
 		id: 'co2-category-form',
 		keyLang: 'CATEGORIES.co2emission',

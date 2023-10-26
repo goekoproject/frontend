@@ -1,30 +1,35 @@
+<go-notification type="info" *ngIf="saveOK" class="notification"
+	><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification
+>
 <div class="summary">
-	<h1>{{ 'summary' | translate }}</h1>
-	<ul class="section-elements">
+	<ul class="section-elements" *ngIf="formValue">
 		<ng-container *ngFor="let element of formField; last as isLast; index as index">
 			<li class="elements-field" *ngIf="!isLast">
 				<div class="summary-section-header">
 					<h2>{{ element.keyLang | translate }}</h2>
-					<span class="material-symbols-rounded" (click)="addFormGroup(index)"> edit</span>
+					<button class="section-header-edit" (click)="editCategory(element.id)">
+						<p>{{ 'edit' | translate }}</p>
+						<span class="material-symbols-rounded"> border_color</span>
+					</button>
 				</div>
 				<div class="summary-section-body">
 					<ng-container *ngFor="let field of element.fields">
-						<div class="form-field" *ngIf="this.form.value[element.controlName][field.controlName]">
+						<div class="formValue-field" *ngIf="formValue[element.controlName][field.controlName]">
 							<h4>{{ field.label | translate }}</h4>
 							<ng-container [ngSwitch]="true">
-								<p *ngSwitchCase="isBoolean(form.value[element.controlName][field.controlName])">
-									{{ form.value[element.controlName][field.controlName] ? 'YES' : 'NO' }}
+								<p *ngSwitchCase="isBoolean(formValue[element.controlName][field.controlName])">
+									{{ formValue[element.controlName][field.controlName] ? 'YES' : 'NO' }}
 								</p>
-								<p *ngSwitchCase="isArray(form.value[element.controlName][field.controlName])">
+								<p *ngSwitchCase="isArray(formValue[element.controlName][field.controlName])">
 									{{ tranformValueArray(element, field) }}
 								</p>
 								<p
 									*ngSwitchCase="
-										!isBoolean(form.value[element.controlName][field.controlName]) &&
-										!isArray(form.value[element.controlName][field.controlName])
+										!isBoolean(formValue[element.controlName][field.controlName]) &&
+										!isArray(formValue[element.controlName][field.controlName])
 									"
 								>
-									{{ this.form.value[element.controlName][field.controlName].toString() || '-' }}
+									{{ formValue[element.controlName][field.controlName].toString() || '-' }}
 								</p>
 								<p *ngSwitchDefault></p>
 							</ng-container>
@@ -34,4 +39,18 @@
 			</li>
 		</ng-container>
 	</ul>
+</div>
+
+<div class="form-actions">
+	<button type="button" go-button appearance="white">{{ 'cancel' | translate }}</button>
+	<div class="form-actions-submit">
+		<button type="button" go-button appearance="white" (click)="saveAnalysis()">
+			{{ 'save' | translate }}
+		</button>
+
+		<go-goeko-button class="button-submit" (click)="getResults()">
+			<span class="goeko-go" btn-logo></span>
+			Eco-solutions</go-goeko-button
+		>
+	</div>
 </div>
