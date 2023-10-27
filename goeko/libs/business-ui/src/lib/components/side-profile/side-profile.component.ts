@@ -49,7 +49,7 @@ export class SideProfileComponent implements OnDestroy {
 	}
 	goToProfile() {
 		this.toogleSideProfile = false;
-		this._router.navigate(['profile', this.dataProfile.sub]);
+		this._router.navigate(['profile', this.dataProfile.externalId]);
 	}
 
 	hideProfile() {

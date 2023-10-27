@@ -11,7 +11,7 @@ import { SmeService } from '@goeko/store';
 export class ProfileComponent implements OnInit {
 	form!: FormGroup;
 	dataProfile: any;
-	savedProfile!: boolean;
+	savedProfileOK!: boolean;
 	constructor(private _fb: FormBuilder, private _route: ActivatedRoute, private _smeServices: SmeService) {}
 
 	ngOnInit(): void {
@@ -44,7 +44,10 @@ export class ProfileComponent implements OnInit {
 		this._smeServices.saveDataProfile(this.form.value).subscribe((res) => {
 			if (res) {
 				this._smeServices.setSmeCompanyDetail(res);
-				this.savedProfile = true;
+				this.savedProfileOK = true;
+				setTimeout(() => {
+					this.savedProfileOK = false;
+				}, 3000);
 			}
 		});
 	}

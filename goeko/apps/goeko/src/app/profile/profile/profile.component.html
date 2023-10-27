@@ -1,3 +1,8 @@
+<go-notification type="info" class="notification" *ngIf="savedProfileOK">
+	<div class="policy-password">
+		<p>{{ 'NOTIFICATION.save_ok' | translate }}</p>
+	</div>
+</go-notification>
 <div class="profile-data">
 	<form [formGroup]="form" class="profile-page">
 		<go-input [formControlName]="'name'">
@@ -40,8 +45,3 @@
 </div>
 
 <br />
-<go-notification type="info" class="notification" *ngIf="savedProfile">
-	<div class="policy-password">
-		<p>{{ 'NOTIFICATION.save_ok' | translate }}</p>
-	</div>
-</go-notification>
