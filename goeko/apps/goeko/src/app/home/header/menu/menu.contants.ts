@@ -5,7 +5,7 @@ export const MENU: IMenu[] = [
 	{
 		id: ++_id,
 		keyLang: 'MENU.aboutGoEKo',
-		url: 'about',
+		url: 'home/about',
 		type: 'text',
 	},
 	{

@@ -18,6 +18,7 @@ import { TeamComponent } from './team/team.component';
 import { HeaderComponent } from './header/header.component';
 import { SelectI18nModule } from '@goeko/business-ui';
 import { LandingComponent } from './landing/landing.component';
+import { AboutComponent } from './about/about/about.component';
 
 @NgModule({
 	declarations: [
@@ -31,6 +32,7 @@ import { LandingComponent } from './landing/landing.component';
 		TeamComponent,
 		DocumentLegalComponent,
 		LandingComponent,
+		AboutComponent,
 	],
 	imports: [
 		CommonModule,
