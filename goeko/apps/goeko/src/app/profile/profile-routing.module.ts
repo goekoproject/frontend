@@ -11,6 +11,14 @@ const routes: Routes = [
 			hidden: true,
 		},
 	},
+	{
+		path: '',
+		component: ProfileComponent,
+		data: {
+			breadcrumb: 'profile',
+			hidden: true,
+		},
+	},
 ];
 
 @NgModule({

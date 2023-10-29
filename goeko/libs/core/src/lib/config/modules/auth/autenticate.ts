@@ -17,7 +17,7 @@ export class AutenticateComponent implements OnInit {
 			this._authService.handlerAuthtentication(location.hash).subscribe({
 				next: (result) => {
 					if (result) {
-						setTimeout(() => this._router.navigate(['dashboard']), 1000);
+						setTimeout(() => this._router.navigate(['dashboard']), 1500);
 					}
 				},
 				complete: () => console.log('Completado'),

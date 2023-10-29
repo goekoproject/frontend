@@ -7,7 +7,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfigModule } from '@goeko/core';
-import { ContentFulModule, SmeModule } from '@goeko/store';
+import { ContentFulModule, SmeModule, UserService } from '@goeko/store';
 import { BadgeModule, ButtonModule, CarouselModule, UiBreadcrumbsModule } from '@goeko/ui';
 import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
@@ -63,7 +63,7 @@ const httpLoaderFactory = (http: HttpClient) => {
 			},
 		}),
 	],
-	providers: [],
+	providers: [UserService],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,7 +4,7 @@ import { DataSelect } from '../select-data.constants';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Field } from '../form-field.model';
-import { SmeService } from '@goeko/store';
+import { SmeService, UserService } from '@goeko/store';
 import { FormValueToSmeAnalysisRequest, transformArrayToObj } from './sme-analysis.request';
 import { SmeAnalysisService } from './sme-analysis.service';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -40,7 +40,8 @@ export class SmeFormAnalysisComponent implements OnInit {
 	constructor(
 		private _fb: FormBuilder,
 		private _router: Router,
-		private _smeServices: SmeService,
+		private _userService: UserService,
+		private _smeService: SmeService,
 		private _route: ActivatedRoute,
 		private _smeAnalysisService: SmeAnalysisService
 	) {}
@@ -56,7 +57,7 @@ export class SmeFormAnalysisComponent implements OnInit {
 	}
 
 	private _getSmeCompanyDetail() {
-		this._smeServices.smeCompanyDetail.subscribe((company) => {
+		this._userService.companyDetail.subscribe((company) => {
 			if (company) {
 				this._smeDataProfile = company;
 			}
@@ -79,7 +80,7 @@ export class SmeFormAnalysisComponent implements OnInit {
 	}
 
 	private _getLastAnalysis() {
-		this._smeServices.getLastRecommendationById(this._smeId).subscribe((requestClassifications) => {
+		this._smeService.getLastRecommendationById(this._smeId).subscribe((requestClassifications) => {
 			if (requestClassifications) {
 				const classifications = transformArrayToObj(requestClassifications.classifications);
 				this.form.patchValue(classifications);
@@ -113,6 +114,7 @@ export class SmeFormAnalysisComponent implements OnInit {
 	saveAnalysis() {
 		console.log(this.form.value);
 		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeDataProfile.id, this.form.value);
-		this._smeServices.createRecommendations(smeAnalysisRequest).subscribe((res) => console.log(res));
+		/* 		this._smeServices.createRecommendations(smeAnalysisRequest).subscribe((res) => console.log(res));
+		 */
 	}
 }

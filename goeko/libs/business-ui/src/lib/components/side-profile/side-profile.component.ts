@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
+import { SmeService, UserService } from '@goeko/store';
 
 @Component({
 	imports: [TranslateModule, CommonModule, ButtonModule],
@@ -18,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 		'[class.profile-visibility]': 'visibility',
 	},
 })
-export class SideProfileComponent implements OnDestroy {
+export class SideProfileComponent implements OnDestroy, OnInit {
 	@Input()
 	public get toogleSideProfile(): boolean {
 		return this._toogleSideProfile;
@@ -43,13 +44,20 @@ export class SideProfileComponent implements OnDestroy {
 	@Output() dataProfileChanged = new EventEmitter();
 
 	_missingDataProfile = false;
-	constructor(private _router: Router) {}
+	private _smeID!: string;
+
+	constructor(private _router: Router, private _userService: UserService) {}
+
+	ngOnInit(): void {
+		this._userService.companyDetail.subscribe((company: any) => (this._smeID = company?.id));
+	}
 	ngOnDestroy(): void {
 		this.toogleSideProfile = false;
 	}
 	goToProfile() {
 		this.toogleSideProfile = false;
-		this._router.navigate(['profile', this.dataProfile.externalId]);
+		const id = this._smeID ? this._smeID : this.dataProfile.externalId;
+		this._router.navigate(['profile', id]);
 	}
 
 	hideProfile() {

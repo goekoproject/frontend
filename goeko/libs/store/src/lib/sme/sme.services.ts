@@ -6,25 +6,8 @@ import { SmeRecomendationRequest, SmeRecomendationRequestDemo } from './sme-requ
 import { BehaviorSubject, Observable, find, first, from, map, mergeMap, reduce } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
 
-export const SS_COMPANY_DETAIL = 'SS_COMPANY';
 @Injectable()
 export class SmeService {
-	private _smeCompanyDetail$ = new BehaviorSubject<unknown | null>(null);
-
-	get smeCompanyDetail() {
-		if (!this._smeCompanyDetail$.value) {
-			const sessionAuthData = this.sessionStorageService.getItem<any>(SS_COMPANY_DETAIL);
-			this._smeCompanyDetail$.next(sessionAuthData);
-			return this._smeCompanyDetail$.asObservable();
-		}
-		return this._smeCompanyDetail$.asObservable();
-	}
-
-	setSmeCompanyDetail(companyDetail: any): void {
-		this.sessionStorageService.setItem<any>(SS_COMPANY_DETAIL, companyDetail);
-		this._smeCompanyDetail$.next(companyDetail);
-	}
-
 	constructor(
 		@Inject(SME_CONFIGURATION) public configuration: SmeOptions,
 		private readonly sessionStorageService: SessionStorageService,
@@ -65,11 +48,14 @@ export class SmeService {
 		return this._http.get<any>(`${this.configuration.endpoint}/v1/actor/smes/external`, { params });
 	}
 
-	getById(id = '978077bc-f4cd-49a1-a1ad-9b5576ff95b7'): Observable<any> {
+	getById(id: string): Observable<any> {
 		return this._http.get<any>(`${this.configuration.endpoint}/v1/actor/smes/` + id);
 	}
 
-	saveDataProfile(body: any) {
+	createDataProfile(body: any) {
 		return this._http.post<any>(`${this.configuration.endpoint}/v1/actor/smes`, body);
+	}
+	updateDataProfile(id: any, body: any) {
+		return this._http.put<any>(`${this.configuration.endpoint}/v1/actor/smes/${id}`, body);
 	}
 }

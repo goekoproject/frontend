@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeService } from '@goeko/store';
+import { SmeService, UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { FormValueToSmeAnalysisRequest } from '../sme-form-analysis/sme-analysis.request';
@@ -47,6 +47,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 		private _smeAnalysisService: SmeAnalysisService,
 		private _translateServices: TranslateService,
 		private _route: ActivatedRoute,
+		private _userService: UserService,
 		private _router: Router
 	) {}
 
@@ -66,7 +67,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 	}
 
 	private _getSmeCompanyDetail() {
-		this._smeService.smeCompanyDetail.subscribe((company) => {
+		this._userService.companyDetail.subscribe((company) => {
 			if (company) {
 				this.smeDataProfile = company;
 			}

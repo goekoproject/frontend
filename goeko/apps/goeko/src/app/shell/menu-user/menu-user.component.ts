@@ -3,6 +3,7 @@ import { MENU_USER } from './menu-user.contants';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService, LANGS } from '@goeko/core';
 import { Router } from '@angular/router';
+import { SmeService, UserService } from '@goeko/store';
 
 @Component({
 	selector: 'goeko-menu-user',
@@ -14,10 +15,18 @@ export class MenuUserComponent implements OnInit {
 	defaultLang!: any;
 	public menuOptions = MENU_USER;
 	dataProfile!: any;
-	constructor(private translate: TranslateService, private _authService: AuthService, private _router: Router) {}
+	private _smeID!: string;
+	constructor(
+		private translate: TranslateService,
+		private _authService: AuthService,
+		private _router: Router,
+		private _smeServices: SmeService,
+		private _userService: UserService
+	) {}
 	ngOnInit(): void {
 		this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang());
 		this._authService.authData.subscribe((authData) => (this.dataProfile = authData));
+		this._userService.companyDetail.subscribe((company: any) => (this._smeID = company?.id));
 	}
 
 	onRouterLinkActive(test: any): void {
@@ -34,7 +43,9 @@ export class MenuUserComponent implements OnInit {
 	goTo(route: string) {
 		switch (route) {
 			case 'profile':
-				this._router.navigate(['profile', this.dataProfile.externalId]);
+				// eslint-disable-next-line no-case-declarations
+				const id = this._smeID;
+				this._router.navigate(['profile', id]);
 				return;
 
 			default:

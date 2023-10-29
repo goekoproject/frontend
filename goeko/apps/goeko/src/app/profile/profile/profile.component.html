@@ -30,7 +30,13 @@
 			>
 				{{ 'cancel' | translate }}
 			</button>
-			<button type="button" go-button appearance="primary" type="submit" (click)="saveProfile()">
+			<button
+				type="button"
+				go-button
+				appearance="primary"
+				type="submit"
+				(click)="dataProfile?.id ? updateProfile() : saveProfile()"
+			>
 				{{ 'save' | translate }}
 			</button>
 		</div>

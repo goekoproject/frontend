@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { AuthService } from '@goeko/core';
-import { distinctUntilChanged, filter } from 'rxjs';
+import { AuthService, UserContextService } from '@goeko/core';
+import { UserService } from '@goeko/store';
+import { combineLatest, distinctUntilChanged, filter, forkJoin, mergeAll } from 'rxjs';
 
 const KEY_COOKIES = 'cookie-policy';
 @Component({
@@ -9,11 +10,13 @@ const KEY_COOKIES = 'cookie-policy';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
 	public path!: string;
+	private _userType!: string;
+	private _externalId!: string;
 
 	get showPopupCookies() {
-		return !sessionStorage.getItem(KEY_COOKIES);
+		return !localStorage.getItem(KEY_COOKIES);
 	}
 
 	get isHome() {
@@ -31,13 +34,24 @@ export class AppComponent {
 			!window.location.pathname.includes('/login')
 		);
 	}
-	constructor(private router: Router, private route: ActivatedRoute, private _authService: AuthService) {
+	constructor(
+		private router: Router,
+		private route: ActivatedRoute,
+		private _userContextService: UserContextService,
+		private _userService: UserService,
+		private _authService: AuthService
+	) {
 		this._routeChange();
 		console.log(this.showPopupCookies);
 	}
 
+	ngAfterViewInit(): void {
+		this._getUserContext();
+	}
+
+	ngOnInit(): void {}
 	acceptCookie() {
-		sessionStorage.setItem(KEY_COOKIES, 'true');
+		localStorage.setItem(KEY_COOKIES, 'true');
 	}
 
 	private _routeChange() {
@@ -49,5 +63,20 @@ export class AppComponent {
 			.subscribe(() => {
 				this.path = (this.route.snapshot as any)['_routerState'].url;
 			});
+	}
+
+	private _getUserContext() {
+		combineLatest({
+			userType: this._userContextService.userType,
+			externalId: this._userContextService.externalId,
+		}).subscribe((res: { userType: string; externalId: string }) => {
+			if (res) {
+				this._userService.getUserProfile(res.userType, res.externalId);
+			}
+		});
+	}
+
+	private _getUserProfile() {
+		this._userService.getUserProfile(this._userType, this._externalId);
 	}
 }

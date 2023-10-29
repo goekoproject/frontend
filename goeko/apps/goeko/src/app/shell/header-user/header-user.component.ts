@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@goeko/core';
-import { SmeService } from '@goeko/store';
+import { SmeService, UserService } from '@goeko/store';
 import { error } from 'console';
 import { of, switchMap } from 'rxjs';
 
@@ -14,54 +14,21 @@ export class HeaderUserComponent implements OnInit {
 	public toogleSideProfile!: boolean;
 	public dataUser!: any;
 	public notDataUser!: any;
-	constructor(private _authservice: AuthService, private _smeServices: SmeService) {}
+	constructor(private _userService: UserService) {}
 
 	ngOnInit(): void {
-		this._getSmeData();
 		this._getDataProfile();
 	}
 
 	private _getDataProfile(): any {
-		this._smeServices.smeCompanyDetail.subscribe((company: any) => {
+		this._userService.companyDetail.subscribe((company: any) => {
 			if (company) {
-				this._smeServices.getByIdExternal(company.externalId).subscribe(
-					(data: any) =>
-						(this.dataUser = {
-							...this.tokenData,
-							...data,
-						})
-				);
+				this.dataUser = company;
 			}
 		});
 	}
 
 	toogleProfile(toogle: boolean): void {
 		this.toogleSideProfile = toogle;
-	}
-	private _getSmeData() {
-		this._authservice.authData
-			.pipe(
-				switchMap((authData) => {
-					if (authData) {
-						this.tokenData = authData;
-						return this._smeServices.getByIdExternal(authData.externalId);
-					}
-					return of(null);
-				})
-			)
-			.subscribe(
-				(data) => {
-					if (data) {
-						this.dataUser = {
-							...this.tokenData,
-							data,
-						};
-						this._smeServices.setSmeCompanyDetail(data);
-					}
-				},
-				(error) => {
-					this._smeServices.setSmeCompanyDetail(null);
-				}
-			);
 	}
 }

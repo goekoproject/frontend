@@ -1,32 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, concat, from, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, concat, from, of } from 'rxjs';
 import { CONFIGURATION } from '../../config.module';
 import { Options } from '../../models/options.interface';
 import { SessionStorageService } from './../../services/session-storage.service';
 import { AuthRequest } from './auth-request.interface';
-import { AuthResponse } from './auth-response.interface';
+import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants';
 import { Auth0Connected } from './auth0.abtract';
+import { UserContextService } from '../../../user-context/user-context.service';
 
-export const SESSIONID = 'SESSIONID';
-export const TOKEN_USER = 'TOKEN_USER';
-export const SS_JWTDATA = 'jwtData';
-
+interface loginBody {
+	username: string;
+	password: string;
+}
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
-	private _url!: string;
-	private _urlTokenAccess!: string;
 	private _clientId: string;
-	private _clientSecret: string;
-	private _authData$ = new BehaviorSubject<any | null>(null);
 	private _expirationCurrent!: number;
 
-	/********
-	 *
-	 * Get  data from reponse login
-	 *
-	 */
+	private _authData$ = new BehaviorSubject<any | null>(null);
 	public get authData(): Observable<any | null> {
 		if (!this._authData$.value) {
 			const sessionAuthData = this.sessionStorageService.getItem<any>(SS_JWTDATA);
@@ -41,17 +34,23 @@ export class AuthService extends Auth0Connected {
 		this._authData$.next(sessionAuthData);
 	}
 
+	private _dataAuthConect = ({ username = '', password = '' }) => {
+		return {
+			realm: AUTH_CONNECT.REALM,
+			clientID: this._clientId,
+			redirectUri: AUTH_CONNECT.REDIRECT_URI,
+			audience: AUTH_CONNECT.AUDIENCE,
+			username,
+			password,
+		};
+	};
 	constructor(
 		@Inject(CONFIGURATION) private _config: Options,
 		private readonly sessionStorageService: SessionStorageService,
-		private readonly _http: HttpClient,
-		private router: Router
+		private readonly userContextService: UserContextService
 	) {
 		super(_config.domainAuth0, _config.clientId);
-		this._url = this._config.endopoint;
-		this._urlTokenAccess = this._config.tokenAccess;
 		this._clientId = this._config.clientId;
-		this._clientSecret = this._config.clientSecret;
 	}
 
 	/**
@@ -60,83 +59,52 @@ export class AuthService extends Auth0Connected {
 	 * @returns
 	 */
 	isLoggedIn(body: AuthRequest) {
+		if (!body) {
+			return;
+		}
 		this._loginAuth0(body);
 	}
 
 	private _loginAuth0(body: AuthRequest) {
-		this.webAuth.login(
-			{
-				realm: 'goeko-users',
-				clientID: this._clientId,
-				username: body.username,
-				password: body.password,
-				redirectUri: `${window.location.origin}/autenticate`,
-				audience: 'goeko-backend',
-			},
-			(error: any, result: any) => {
-				console.log(result);
-				console.log(error);
+		const auth0Params = this._dataAuthConect({ username: body.username, password: body.password });
+		this.webAuth.login(auth0Params, (error: any, result: any) => {
+			console.log(result);
+			console.log(error);
+		});
+	}
+	public handlerAuthtentication(hash: string): Observable<any> {
+		const proccessHashPromise = from(this.decodeHash(hash));
+		return concat(of(true), proccessHashPromise);
+	}
+	private decodeHash(accessToken: string) {
+		return this.proccesHash(accessToken).then((result: any) => {
+			if (result) {
+				this.authData = result;
+				this.userContextService.setUserContext({
+					userType: result.userType,
+					externalId: result.externalId,
+				});
 			}
-		);
+		});
 	}
 
-	logout() {
-		sessionStorage.removeItem(SESSIONID);
-		sessionStorage.removeItem('idTokenData');
-		sessionStorage.removeItem('jwtData');
-		sessionStorage.removeItem('accessToken');
-		sessionStorage.removeItem('SS_COMPANY');
-		this.disconnectAuth0();
-	}
-
-	/**
-	 *  When the user try navigate what check in the credentials
-	 * @returns If is login in
-	 */
 	isAuthenticated(): boolean {
 		const accessToken = sessionStorage.getItem(SS_JWTDATA);
 		return !!accessToken && !this.isExpiredTOKEN(this.expiresIn);
+	}
+
+	logout() {
+		sessionStorage.clear();
+		this.disconnectAuth0();
 	}
 
 	killSessions(): void {
 		this._authData$.next(null);
 		this.logout();
 	}
-
 	private hasToRefresh(): boolean {
 		return !this.isExpiredTOKEN(this._expirationCurrent);
 	}
-
-	public handlerAuthtentication(hash: string): Observable<any> {
-		const proccessHashPromise = from(this.decodeHash(hash));
-		return concat(of(true), proccessHashPromise);
-	}
-	public decodeHash(accessToken: string) {
-		return this.proccesHash(accessToken).then((result) => {
-			if (result) {
-				this.authData = result;
-			}
-		});
-	}
-
-	public getUserInfoToken() {
-		return this.sessionStorageService.getItem('jwtData');
-	}
-
-	private _getTokenBasic(): Observable<unknown> {
-		const body = this._getBodyAccessToken(this._clientId, this._clientSecret);
-		return this._http.post(this._urlTokenAccess, body);
-	}
-
-	private _getBodyAccessToken(clientId: string, clientSecret: string) {
-		return {
-			grant_type: 'authorization_code',
-			audience: 'goeko-backend',
-			client_id: clientId,
-			client_secret: clientSecret,
-		};
-	}
-
 	/**
 	 * Check if the token has expired
 	 */
@@ -148,7 +116,6 @@ export class AuthService extends Auth0Connected {
 		const now = Math.floor(Date.now() / 1000);
 		return expiration < now;
 	}
-
 	/**
 	 * Get token expiration date
 	 */
