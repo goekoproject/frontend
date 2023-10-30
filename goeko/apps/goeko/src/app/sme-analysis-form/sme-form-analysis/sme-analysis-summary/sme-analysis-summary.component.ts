@@ -5,7 +5,7 @@ import { SmeService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../../form-field-demo.constants';
 import { Section } from '../../form-field.model';
-import { DataSelect } from '../../select-data.constants';
+import { DataSelect, DataSelectOption } from '../../select-data.constants';
 import { FormValueToSmeAnalysisRequest } from '../sme-analysis.request';
 import { SmeAnalysisService } from '../sme-analysis.service';
 
@@ -34,7 +34,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 
 		if (this.isArrayOfType(formValue, 'string')) {
 			const dataSelect = this.dataSelect[value.controlName as keyof typeof DataSelect];
-			valueArray = dataSelect.filter((option) => formValue.includes(option.id.toString()));
+			valueArray = dataSelect.filter((option: DataSelectOption) => formValue.includes(option.id));
 		} else {
 			valueArray = formValue;
 		}
