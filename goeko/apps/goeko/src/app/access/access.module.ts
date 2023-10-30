@@ -4,7 +4,14 @@ import { CommonModule } from '@angular/common';
 import { AccessRoutingModule } from './access-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { ButtonModule, GoInputModule, NotificationModule, SwitchModule, UiSuperSelectModule } from '@goeko/ui';
+import {
+	ButtonModule,
+	GoInputModule,
+	LoaderCheckComponent,
+	NotificationModule,
+	SwitchModule,
+	UiSuperSelectModule,
+} from '@goeko/ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
 		SwitchModule,
 		UiSuperSelectModule,
 		NotificationModule,
+		LoaderCheckComponent,
 	],
 })
 export class AccessModule {}

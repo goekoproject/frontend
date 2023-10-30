@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 	typeForm = true;
 	formLogin!: FormGroup;
 	formSignup!: FormGroup;
+	public signUpOk!: boolean;
 	public isErrorPolicyPassword!: boolean;
 
 	constructor(private _fb: FormBuilder, private _router: Router, private _accessService: AccessService) {}
@@ -60,8 +61,9 @@ export class LoginComponent implements OnInit {
 			);
 			this._accessService.signUp(dataSignUp).subscribe(
 				(res) => {
-					console.log(res);
-					this._router.navigate(['dashboard']);
+					this.signUpOk = true;
+					setTimeout(() => (this.signUpOk = false), 1500);
+					/* this._router.navigate(['dashboard']); */
 				},
 				(error) => {
 					console.log(error);

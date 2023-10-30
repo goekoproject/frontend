@@ -45,13 +45,23 @@
 </ng-template>
 
 <ng-template #signup>
-	<goeko-signup
-		[formSignup]="formSignup"
-		[isErrorPolicyPassword]="isErrorPolicyPassword"
-		(gotToLogin$)="createFormSignup($event)"
-	>
-		<button type="button" go-button appearance="primary" (click)="submitSignUp()" [disabled]="formSignup.invalid">
-			{{ 'Sign up' | translate }}
-		</button>
-	</goeko-signup>
+	<form>
+		<goeko-signup
+			*ngIf="!signUpOk"
+			[formSignup]="formSignup"
+			[isErrorPolicyPassword]="isErrorPolicyPassword"
+			(gotToLogin$)="createFormSignup($event)"
+		>
+			<button
+				type="button"
+				go-button
+				appearance="primary"
+				(click)="submitSignUp()"
+				[disabled]="formSignup.invalid"
+			>
+				{{ 'Sign up' | translate }}
+			</button>
+		</goeko-signup>
+		<go-loader-check *ngIf="signUpOk"></go-loader-check>
+	</form>
 </ng-template>

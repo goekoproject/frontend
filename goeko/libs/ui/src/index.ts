@@ -11,3 +11,4 @@ export * from './lib/ui/switch/public-api';
 export * from './lib/ui/notification/public-api';
 export * from './lib/ui/badge/public-api';
 export * from './lib/ui/ui-breadcrumbs/public-api';
+export * from './lib/ui/loaders/public-api';

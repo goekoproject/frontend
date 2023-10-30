@@ -25,7 +25,7 @@
 	</go-notification>
 	<ui-super-select [placeholder]="'userType' | translate" [formControlName]="'userType'">
 		<ng-container *ngFor="let option of userType">
-			<super-option *ngIf="option.active" [value]="option.value | translate">
+			<super-option *ngIf="option.active" [value]="option.value">
 				{{ option.title | translate }}
 			</super-option>
 		</ng-container>
