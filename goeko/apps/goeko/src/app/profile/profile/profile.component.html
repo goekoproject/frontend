@@ -5,7 +5,18 @@
 </go-notification>
 <div class="profile-data">
 	<form [formGroup]="form" class="profile-page">
-		<go-input [formControlName]="'name'">
+		<ng-container *ngFor="let itemForm of formProfile">
+			<ng-container [ngSwitch]="itemForm.type">
+				<ng-container *ngSwitchCase="'select'"> </ng-container>
+				<ng-container *ngSwitchDefault>
+					<go-input [formControlName]="itemForm.controlName" type="${itemForm.type}">
+						<p slot="label">{{ itemForm.label | translate }}</p>
+					</go-input>
+				</ng-container>
+			</ng-container>
+		</ng-container>
+
+		<!-- 		<go-input [formControlName]="'name'">
 			<p slot="label">{{ 'FORM_LABEL.companyName' | translate }}</p>
 		</go-input>
 		<go-input [formControlName]="'country'">
@@ -19,7 +30,7 @@
 		<go-input [formControlName]="'website'" type="url">
 			<p slot="label">{{ 'FORM_LABEL.website' | translate }}</p>
 		</go-input>
-
+ -->
 		<div class="profile-actions">
 			<button
 				type="button"

@@ -10,10 +10,8 @@ import { of, switchMap } from 'rxjs';
 	styleUrls: ['./header-user.component.scss'],
 })
 export class HeaderUserComponent implements OnInit {
-	public tokenData!: any;
 	public toogleSideProfile!: boolean;
 	public dataUser!: any;
-	public notDataUser!: any;
 	constructor(private _userService: UserService) {}
 
 	ngOnInit(): void {

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService, UserContextService } from '@goeko/core';
 import { UserService } from '@goeko/store';
-import { combineLatest, distinctUntilChanged, filter, forkJoin, mergeAll } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter } from 'rxjs';
 
 const KEY_COOKIES = 'cookie-policy';
 @Component({
@@ -69,7 +69,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 		combineLatest({
 			userType: this._userContextService.userType,
 			externalId: this._userContextService.externalId,
-		}).subscribe((res: { userType: string; externalId: string }) => {
+			username: this._userContextService.username,
+		}).subscribe((res: { userType: string; externalId: string; username: string }) => {
 			if (res) {
 				this._userService.getUserProfile(res.userType, res.externalId);
 			}

@@ -1,15 +1,4 @@
-<nav class="header-user" *ngIf="dataUser">
-	<go-badge (click)="toogleProfile(true)" fill="true">
-		<span class="heading-icon" avatar>
-			<i class="ti ti-building-bridge-2"></i>
-		</span>
-		{{ dataUser?.name }}
-	</go-badge>
-</nav>
+<nav class="header-user"></nav>
 <ng-content></ng-content>
 
-<goeko-side-profile
-	[toogleSideProfile]="toogleSideProfile"
-	[dataProfile]="dataUser"
-	(dataProfileChanged)="toogleProfile($event)"
-></goeko-side-profile>
+<goeko-side-profile [dataProfile]="dataUser"></goeko-side-profile>

@@ -1,11 +1,25 @@
-<div class="profile">
-	<i class="ti ti-arrow-autofit-right profile-close" (click)="hideProfile()"></i>
+<go-badge (click)="toogle()" fill="true" class="tag-username">
+	<span class="heading-icon" avatar>
+		<i class="ti ti-building-bridge-2"></i>
+	</span>
+	{{ username }}
+</go-badge>
+
+<dialog class="profile" #sideDialog>
+	<i class="ti ti-arrow-autofit-right profile-close" (click)="toogle()"></i>
 	<div class="heading-company">
 		<span class="heading-icon">
 			<i class="ti ti-building-bridge-2"></i>
 		</span>
 		<p>{{ dataProfile?.name }}</p>
 
+		<div class="profile-section">
+			<div class="profile-section-heading">
+				<i class="ti ti-brand-mailgun"></i>
+				<p>{{ 'user' | translate }}</p>
+			</div>
+			<p class="profile-section-data">{{ username }}</p>
+		</div>
 		<div class="profile-section">
 			<div class="profile-section-heading">
 				<i class="ti ti-brand-mailgun"></i>
@@ -22,7 +36,7 @@
 		</div>
 	</div>
 
-	<div class="banner-complete-profile" *ngIf="missingDataProfile">
+	<div class="banner-complete-profile" *ngIf="!dataProfile">
 		<!-- 	<i class="ti ti-user-off"></i> -->
 		<img src="assets/incompleted.png" />
 		<p>{{ 'completeToProfileNow' | translate }}</p>
@@ -36,4 +50,4 @@
 			{{ 'upgrade' | translate }}
 		</button>
 	</div>
-</div>
+</dialog>

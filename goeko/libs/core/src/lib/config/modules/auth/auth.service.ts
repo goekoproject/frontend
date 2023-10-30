@@ -1,19 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, concat, from, of } from 'rxjs';
+import { UserContextService } from '../../../user-context/user-context.service';
 import { CONFIGURATION } from '../../config.module';
 import { Options } from '../../models/options.interface';
 import { SessionStorageService } from './../../services/session-storage.service';
 import { AuthRequest } from './auth-request.interface';
 import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants';
 import { Auth0Connected } from './auth0.abtract';
-import { UserContextService } from '../../../user-context/user-context.service';
 
-interface loginBody {
-	username: string;
-	password: string;
-}
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
 	private _clientId: string;
@@ -83,6 +77,7 @@ export class AuthService extends Auth0Connected {
 				this.userContextService.setUserContext({
 					userType: result.userType,
 					externalId: result.externalId,
+					username: result.name,
 				});
 			}
 		});

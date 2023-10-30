@@ -1,25 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	Input,
+	OnDestroy,
+	OnInit,
+	ViewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { ButtonModule } from '@goeko/ui';
+import { UserContextService } from '@goeko/core';
+import { UserService } from '@goeko/store';
+import { BadgeModule, ButtonModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
-import { SmeService, UserService } from '@goeko/store';
 
 @Component({
-	imports: [TranslateModule, CommonModule, ButtonModule],
+	imports: [TranslateModule, CommonModule, ButtonModule, BadgeModule],
 	selector: 'goeko-side-profile',
 	templateUrl: './side-profile.component.html',
 	styleUrls: ['./side-profile.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	standalone: true,
-	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
-	host: {
-		class: 'side-profile',
-		'[class.profile-hide]': '!toogleSideProfile',
-		'[class.profile-visibility]': 'visibility',
-	},
 })
-export class SideProfileComponent implements OnDestroy, OnInit {
+export class SideProfileComponent implements OnDestroy, OnInit, AfterViewInit {
+	@ViewChild('sideDialog') sideDialog!: ElementRef<HTMLDialogElement>;
 	@Input()
 	public get toogleSideProfile(): boolean {
 		return this._toogleSideProfile;
@@ -29,40 +34,55 @@ export class SideProfileComponent implements OnDestroy, OnInit {
 	}
 	private _toogleSideProfile!: boolean;
 
-	@Input() dataProfile!: any;
+	@Input()
+	public get dataProfile(): any {
+		return this._dataProfile;
+	}
+	public set dataProfile(value: any) {
+		this._dataProfile = value;
+	}
+	private _dataProfile!: any;
+
 	@Input() visibility!: boolean;
 
-	@Input()
-	get missingDataProfile(): boolean {
-		return this._missingDataProfile;
-	}
-	set missingDataProfile(missingDataProfile: boolean) {
-		this._missingDataProfile = missingDataProfile;
-		this.toogleSideProfile = this._missingDataProfile;
-	}
+	private _externalId!: string;
+	public username!: string;
 
-	@Output() dataProfileChanged = new EventEmitter();
-
-	_missingDataProfile = false;
-	private _smeID!: string;
-
-	constructor(private _router: Router, private _userService: UserService) {}
+	constructor(
+		private _router: Router,
+		private _userService: UserService,
+		private _userContextService: UserContextService
+	) {}
 
 	ngOnInit(): void {
-		this._userService.companyDetail.subscribe((company: any) => (this._smeID = company?.id));
+		this._userContextService.username.subscribe((username: string) => (this.username = username));
+		this._userContextService.externalId.subscribe((externalId: string) => (this._externalId = externalId));
+	}
+	ngAfterViewInit(): void {
+		if (!this.dataProfile) {
+			this.sideDialog?.nativeElement?.showModal();
+		}
 	}
 	ngOnDestroy(): void {
 		this.toogleSideProfile = false;
 	}
 	goToProfile() {
-		this.toogleSideProfile = false;
-		const id = this._smeID ? this._smeID : this.dataProfile.externalId;
-		this._router.navigate(['profile', id]);
+		this._router.navigate(['profile', this._externalId]);
+	}
+	private getIsPageProfile(): boolean {
+		return this._router.url.includes('profile');
 	}
 
-	hideProfile() {
-		if (!this.visibility) {
-			this.dataProfileChanged.emit(false);
+	toogle() {
+		this.toogleSideProfile = !this.toogleSideProfile;
+		this._toogleDialog();
+	}
+	private _toogleDialog(): void {
+		if (this.toogleSideProfile) {
+			this.sideDialog?.nativeElement?.showModal();
+		} else {
+			this.sideDialog?.nativeElement?.close();
 		}
+		this.toogleSideProfile = this.sideDialog?.nativeElement.open;
 	}
 }

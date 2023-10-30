@@ -5,6 +5,7 @@
 		"msgsignup": "¿No tienes una cuenta todavía ?",
 		"msglogin2": "¿Ya tienes una cuenta?"
 	},
+	"user": "Usuario",
 	"accept": "Aceptar",
 	"edit": "Editar",
 	"ACCESS_ERROR": {

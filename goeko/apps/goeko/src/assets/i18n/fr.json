@@ -72,6 +72,7 @@
 		"resources": "Ressources",
 		"service": "Service"
 	},
+	"user": "Utilisateur",
 	"FORM_LABEL": {
 		"companyName": "Nom de l'entreprise",
 		"country": "Pays",

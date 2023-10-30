@@ -4,6 +4,7 @@ import { ActivatedRoute, Route } from '@angular/router';
 import { SS_USERTYPE, UserContextService } from '@goeko/core';
 import { SmeService, UserService } from '@goeko/store';
 import { combineLatest } from 'rxjs';
+import { PROFILE_SME } from './profile-sme.constants';
 
 @Component({
 	selector: 'goeko-profile',
@@ -14,8 +15,9 @@ export class ProfileComponent implements OnInit {
 	form!: FormGroup;
 	dataProfile: any;
 	savedProfileOK!: boolean;
-	_userType!: string;
-	_externalId!: string;
+	public formProfile = PROFILE_SME;
+	private _userType!: string;
+	private _externalId!: string;
 	constructor(
 		private _fb: FormBuilder,
 		private _route: ActivatedRoute,

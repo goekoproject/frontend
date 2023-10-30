@@ -51,11 +51,11 @@ export class CarouselComponent implements AfterContentInit {
 	}
 
 	set selectedSlideIndex(index: number) {
+		this._selectedSlideIndex = index;
 		setTimeout(() => {
 			if (index === undefined || !this.slide) {
 				return;
 			}
-			this._selectedSlideIndex = index;
 			this.selectedSlideTemplateRef = null;
 			this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
 			this.animateStateSlide = '';
@@ -79,7 +79,7 @@ export class CarouselComponent implements AfterContentInit {
 		if (this.disabledButtonNext) {
 			return;
 		}
-		this.selectedSlideIndex += 1;
+		this.selectedSlideIndex = this.selectedSlideIndex + 1;
 		/* 		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
 		 */ this.animateStateSlide = 'next';
 		this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.NEXT);
