@@ -1,10 +1,10 @@
-import { Inject, Injectable } from '@angular/core';
-import { SME_CONFIGURATION } from './sme.module';
-import { SmeOptions } from './sme-options';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { SmeRecomendationRequest, SmeRecomendationRequestDemo } from './sme-request.model';
-import { BehaviorSubject, Observable, find, first, from, map, mergeMap, reduce } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { Observable, from, map, mergeMap, reduce } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
+import { SmeOptions } from './sme-options';
+import { SmeRecomendationRequest, SmeRecomendationRequestDemo } from './sme-request.model';
+import { SME_CONFIGURATION } from './sme.module';
 
 @Injectable()
 export class SmeService {

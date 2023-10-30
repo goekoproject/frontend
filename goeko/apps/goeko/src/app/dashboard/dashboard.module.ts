@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardSmeComponent } from './dashboard/dashboard-sme.component';
+import { DashboardCleantechComponent } from './dashboard/dashboard-cleantech/dashboard-cleantech.component';
 
 @NgModule({
-	declarations: [DashboardComponent],
+	declarations: [DashboardSmeComponent, DashboardCleantechComponent],
 	imports: [CommonModule, DashboardRoutingModule, TranslateModule],
 })
 export class DashboardModule {}

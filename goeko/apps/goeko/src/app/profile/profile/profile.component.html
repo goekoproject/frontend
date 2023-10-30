@@ -7,7 +7,53 @@
 	<form [formGroup]="form" class="profile-page">
 		<ng-container *ngFor="let itemForm of formProfile">
 			<ng-container [ngSwitch]="itemForm.type">
-				<ng-container *ngSwitchCase="'select'"> </ng-container>
+				<ng-container *ngSwitchCase="'select-multiple'">
+					<div class="select-profile">
+						<label for="{{ itemForm.controlName }}">{{ itemForm.label | translate }}</label>
+
+						<ui-super-select
+							[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+							[multiple]="true"
+							[formControlName]="itemForm.controlName"
+							[id]="itemForm.controlName"
+							[name]="itemForm.controlName"
+							[compareWith]="defaultSetSuperSelect"
+						>
+							<ng-container *ngIf="itemForm.dataSelectKey">
+								<super-option
+									*ngFor="let option of dataSelect[itemForm.dataSelectKey]"
+									[value]="option"
+								>
+									{{ option.keyLang | translate }}
+								</super-option>
+							</ng-container>
+						</ui-super-select>
+					</div>
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'select'">
+					<div class="select-profile">
+						<label for="{{ itemForm.controlName }}">{{ itemForm.label | translate }}</label>
+
+						<ui-super-select
+							[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+							[formControlName]="itemForm.controlName"
+							[id]="itemForm.controlName"
+							[name]="itemForm.controlName"
+							[compareWith]="defaultSetSuperSelect"
+						>
+							<ng-container *ngIf="itemForm.dataSelectKey">
+								<super-option
+									*ngFor="let option of dataSelect[itemForm.dataSelectKey]"
+									[value]="option"
+								>
+									{{ option.keyLang | translate }}
+								</super-option>
+							</ng-container>
+						</ui-super-select>
+					</div>
+				</ng-container>
+
 				<ng-container *ngSwitchDefault>
 					<go-input [formControlName]="itemForm.controlName" type="${itemForm.type}">
 						<p slot="label">{{ itemForm.label | translate }}</p>
@@ -16,21 +62,6 @@
 			</ng-container>
 		</ng-container>
 
-		<!-- 		<go-input [formControlName]="'name'">
-			<p slot="label">{{ 'FORM_LABEL.companyName' | translate }}</p>
-		</go-input>
-		<go-input [formControlName]="'country'">
-			<p slot="label">{{ 'FORM_LABEL.country' | translate }}</p>
-		</go-input>
-
-		<go-input [formControlName]="'email'" type="email">
-			<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
-		</go-input>
-
-		<go-input [formControlName]="'website'" type="url">
-			<p slot="label">{{ 'FORM_LABEL.website' | translate }}</p>
-		</go-input>
- -->
 		<div class="profile-actions">
 			<button
 				type="button"
@@ -52,13 +83,6 @@
 			</button>
 		</div>
 	</form>
-
-	<goeko-side-profile
-		class="side-profile"
-		[toogleSideProfile]="true"
-		[dataProfile]="dataProfile"
-		[visibility]="true"
-	></goeko-side-profile>
 </div>
 
 <br />

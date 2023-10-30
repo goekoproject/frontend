@@ -36,7 +36,7 @@
 		</div>
 	</div>
 
-	<div class="banner-complete-profile" *ngIf="!dataProfile">
+	<div class="banner-complete-profile" *ngIf="!dataProfile" [class.attract-atention]="attractAtention">
 		<!-- 	<i class="ti ti-user-off"></i> -->
 		<img src="assets/incompleted.png" />
 		<p>{{ 'completeToProfileNow' | translate }}</p>

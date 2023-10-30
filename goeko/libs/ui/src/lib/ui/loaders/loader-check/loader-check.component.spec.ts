@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardComponent } from './dashboard.component';
+import { LoaderCheckComponent } from './loader-check.component';
 
-describe('DashboardComponent', () => {
-	let component: DashboardComponent;
-	let fixture: ComponentFixture<DashboardComponent>;
+describe('LoaderCheckComponent', () => {
+	let component: LoaderCheckComponent;
+	let fixture: ComponentFixture<LoaderCheckComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [DashboardComponent],
+			imports: [LoaderCheckComponent],
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(DashboardComponent);
+		fixture = TestBed.createComponent(LoaderCheckComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

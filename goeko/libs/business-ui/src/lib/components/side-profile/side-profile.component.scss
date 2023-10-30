@@ -97,7 +97,7 @@ dialog {
 	text-align: center;
 	gap: 0.6rem;
 	border-radius: 14px;
-
+	transition: 1s ease-in-out;
 	i {
 		font-size: 80px;
 		top: -3rem;
@@ -112,6 +112,23 @@ dialog {
 		position: relative;
 	}
 }
+
+@keyframes attractAtention {
+	from {
+		box-shadow: 0px 1px 10px 0px #0090d6;
+	}
+
+	to {
+		box-shadow: 0px 1px 20px 8px #0090d6;
+	}
+}
+.attract-atention {
+	animation-duration: 1.3s;
+	animation-name: attractAtention;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
 .profile-close {
 	font-size: 1.7rem;
 	position: absolute;

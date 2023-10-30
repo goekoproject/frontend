@@ -1,16 +1,21 @@
 import { Profile } from '@goeko/store';
 
-export const PROFILE_SME: Profile<'sme'>[] = [
+export const PROFILE_CLEANTECH: Profile<'cleantech'>[] = [
 	{
 		controlName: 'name',
 		label: 'FORM_LABEL.companyName',
 		type: 'text',
 	},
 	{
-		controlName: 'country',
+		controlName: 'countries',
 		label: 'FORM_LABEL.country',
-		type: 'select',
+		type: 'select-multiple',
 		dataSelectKey: 'countries',
+	},
+	{
+		controlName: 'city',
+		label: 'FORM_LABEL.city',
+		type: 'text',
 	},
 	{
 		controlName: 'email',
@@ -18,8 +23,13 @@ export const PROFILE_SME: Profile<'sme'>[] = [
 		type: 'email',
 	},
 	{
-		controlName: 'website',
+		controlName: 'link',
 		label: 'FORM_LABEL.website',
+		type: 'url',
+	},
+	{
+		controlName: 'logo',
+		label: 'FORM_LABEL.logo',
 		type: 'url',
 	},
 ];

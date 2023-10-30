@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ACTORS_TYPE, USER_TYPE } from './user-type.constants';
-import { SmeService } from '../sme/sme.services';
 import { BehaviorSubject, catchError, of, switchMap, throwError } from 'rxjs';
+import { CleanTechService } from '../cleantech/cleanteach.services';
 import { SessionStorageService } from '../session-storage.service';
+import { SmeService } from '../sme/sme.services';
+import { ACTORS_TYPE } from './user-type.constants';
 export const SS_COMPANY_DETAIL = 'SS_COMPANY';
 
 @Injectable()
@@ -22,11 +23,18 @@ export class UserService {
 		this._companyDetail.next(value);
 	}
 
-	constructor(private _smeService: SmeService, private readonly sessionStorageService: SessionStorageService) {}
+	constructor(
+		private _smeService: SmeService,
+		private _cleanTechService: CleanTechService,
+		private readonly sessionStorageService: SessionStorageService
+	) {}
 
 	getUserProfile(userType: string, externalId: string) {
 		if (userType === ACTORS_TYPE.SME) {
 			this._getSmeDataProfile(externalId);
+		}
+		if (userType === ACTORS_TYPE.CLEANTECH) {
+			this._getCleaTechDataProfile(externalId);
 		}
 	}
 
@@ -42,17 +50,56 @@ export class UserService {
 			.subscribe((data) => (this.companyDetail = data));
 	}
 
-	createDataProfile(userType: string, body: string) {
+	private _getCleaTechDataProfile(externalId: string) {
+		this._cleanTechService
+			.getByIdExternal(externalId)
+			.pipe(
+				switchMap((dataAuth0) =>
+					dataAuth0
+						? this._cleanTechService.getById(dataAuth0?.id)
+						: throwError(() => 'User not data profile')
+				),
+				catchError(() => of(null))
+			)
+			.subscribe((data) => (this.companyDetail = data));
+	}
+
+	createDataProfile(userType: string, body: any) {
 		if (userType === ACTORS_TYPE.SME) {
-			return this._smeService.createDataProfile(body);
+			const _body = this._transformbBodySme(body);
+			return this._smeService.createDataProfile(_body);
+		}
+		if (userType === ACTORS_TYPE.CLEANTECH) {
+			const _body = this._transformbBodyCleanTech(body);
+			return this._cleanTechService.createDataProfile(_body);
 		}
 		return of(null);
 	}
 
 	udpateDataProfile(userType: string, userId: string, body: any) {
 		if (userType === ACTORS_TYPE.SME) {
-			return this._smeService.updateDataProfile(userId, body);
+			const _body = this._transformbBodySme(body);
+
+			return this._smeService.updateDataProfile(userId, _body);
+		}
+		if (userType === ACTORS_TYPE.CLEANTECH) {
+			const _body = this._transformbBodyCleanTech(body);
+			return this._cleanTechService.updateDataProfile(userId, _body);
 		}
 		return of(null);
+	}
+
+	private _transformbBodySme(body: any) {
+		return {
+			...body,
+			country: body.country?.id,
+		};
+	}
+
+	private _transformbBodyCleanTech(body: any) {
+		return {
+			...body,
+			country: body.country?.id,
+		};
 	}
 }

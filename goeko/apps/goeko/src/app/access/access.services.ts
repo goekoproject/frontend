@@ -12,6 +12,9 @@ export class AccessService {
 	public signUp(body: SignUp) {
 		return this.httpClient.post(URL_SIGNUP, body);
 	}
+	public signUpAndAccess(body: SignUp) {
+		return this._authService.signUpAndLogin(body);
+	}
 
 	public login(body: any) {
 		this._authService.isLoggedIn({ username: body.email, password: body.password });

@@ -1,6 +1,7 @@
 .profile-data {
 	display: flex;
 	gap: 2rem;
+	width: 50%;
 }
 .profile-page {
 	display: flex;
@@ -17,7 +18,9 @@
 	flex-shrink: 1;
 	flex-grow: 2;
 }
-
+.select-profile {
+	width: 100%;
+}
 .profile-actions {
 	display: flex;
 	justify-content: space-between;
