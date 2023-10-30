@@ -1,10 +1,28 @@
-import { Router } from '@angular/router';
-import { Auth0DecodedHash, Auth0Error, Auth0ParseHashError, Auth0UserProfile, WebAuth } from 'auth0-js';
-import { Subject, from } from 'rxjs';
+import { Auth0DecodedHash, Auth0ParseHashError, WebAuth } from 'auth0-js';
 import * as jsrsasign from 'jsrsasign';
+import { Subject } from 'rxjs';
 import { SESSIONID } from './auth.constants';
 export const ACCESS_TOKEN = 'accessToken';
 export const SS_JWTDATA = 'jwtData';
+
+export interface AuthResponse {
+	at_hash: string;
+	aud: string;
+	email: string;
+	email_verified: boolean;
+	exp: number;
+	externalId: string;
+	iat: number;
+	iss: string;
+	name: string;
+	nickname: string;
+	nonce: string;
+	picture: string;
+	sub: string;
+	updated_at: string;
+	userType: string;
+}
+
 export abstract class Auth0Connected {
 	public webAuth!: WebAuth;
 	public expiresIn!: number;
@@ -37,7 +55,7 @@ export abstract class Auth0Connected {
 	}
 
 	public proccesHash(hash: string) {
-		return new Promise((resolve, reject) => {
+		return new Promise<AuthResponse>((resolve, reject) => {
 			this.webAuth.parseHash({ hash }, (error: Auth0ParseHashError | null, result: Auth0DecodedHash | null) => {
 				if (result && result.accessToken && result.idToken) {
 					const jwtData = this._processJWSToken(result.idToken);

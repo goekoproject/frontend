@@ -79,7 +79,9 @@
 		"email": "Email",
 		"password": "Password",
 		"website": "Website",
-		"location": "Location"
+		"location": "Location",
+		"city": "City",
+		"logo": "Logo"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Free trial to connect with qualified leads",

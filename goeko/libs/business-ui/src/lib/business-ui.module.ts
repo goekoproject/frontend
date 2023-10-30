@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BadgeModule, ButtonModule } from '@goeko/ui';
+import { NgModule } from '@angular/core';
 import { SelectI18nModule } from './components/select-i18n/select-i18n.module';
 
 @NgModule({

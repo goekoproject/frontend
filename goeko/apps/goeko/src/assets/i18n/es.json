@@ -71,7 +71,9 @@
 		"email": "Email",
 		"password": "Contraseña",
 		"website": "Sito web",
-		"location": "Ubicación"
+		"location": "Ubicación",
+		"city": "Ciudad",
+		"logo": "Logo"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",

@@ -6,17 +6,18 @@ import { Options } from '../../models/options.interface';
 import { SessionStorageService } from './../../services/session-storage.service';
 import { AuthRequest } from './auth-request.interface';
 import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants';
-import { Auth0Connected } from './auth0.abtract';
+import { Auth0Connected, AuthResponse } from './auth0.abtract';
+import { SignUp } from './signup.interface';
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
 	private _clientId: string;
 	private _expirationCurrent!: number;
 
-	private _authData$ = new BehaviorSubject<any | null>(null);
-	public get authData(): Observable<any | null> {
+	private _authData$ = new BehaviorSubject<AuthResponse | null>(null);
+	public get authData(): Observable<AuthResponse | null> {
 		if (!this._authData$.value) {
-			const sessionAuthData = this.sessionStorageService.getItem<any>(SS_JWTDATA);
+			const sessionAuthData = this.sessionStorageService.getItem<AuthResponse>(SS_JWTDATA);
 			this._authData$.next(sessionAuthData);
 			return this._authData$.asObservable();
 		}
@@ -24,7 +25,7 @@ export class AuthService extends Auth0Connected {
 	}
 
 	public set authData(sessionAuthData: any) {
-		this.sessionStorageService.setItem<any>(SS_JWTDATA, sessionAuthData);
+		this.sessionStorageService.setItem<AuthResponse>(SS_JWTDATA, sessionAuthData);
 		this._authData$.next(sessionAuthData);
 	}
 
@@ -59,6 +60,18 @@ export class AuthService extends Auth0Connected {
 		this._loginAuth0(body);
 	}
 
+	signUpAndLogin(newBody: SignUp) {
+		const body = {
+			email: newBody.email,
+			password: newBody.password,
+			connection: newBody.connection,
+			userMetadata: newBody.user_metadata,
+		};
+		return this.webAuth.signupAndAuthorize(body, (r, result) => {
+			console.log(result);
+		});
+	}
+
 	private _loginAuth0(body: AuthRequest) {
 		const auth0Params = this._dataAuthConect({ username: body.username, password: body.password });
 		this.webAuth.login(auth0Params, (error: any, result: any) => {
@@ -71,13 +84,13 @@ export class AuthService extends Auth0Connected {
 		return concat(of(true), proccessHashPromise);
 	}
 	private decodeHash(accessToken: string) {
-		return this.proccesHash(accessToken).then((result: any) => {
+		return this.proccesHash(accessToken).then((result: AuthResponse) => {
 			if (result) {
 				this.authData = result;
 				this.userContextService.setUserContext({
 					userType: result.userType,
 					externalId: result.externalId,
-					username: result.name,
+					username: result.nickname,
 				});
 			}
 		});

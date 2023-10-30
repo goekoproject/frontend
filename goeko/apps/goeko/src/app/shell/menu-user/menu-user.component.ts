@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MENU_USER } from './menu-user.contants';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthService, LANGS } from '@goeko/core';
 import { Router } from '@angular/router';
+import { AuthService, LANGS } from '@goeko/core';
 import { SmeService, UserService } from '@goeko/store';
+import { TranslateService } from '@ngx-translate/core';
+import { MENU_USER } from './menu-user.contants';
 
 @Component({
 	selector: 'goeko-menu-user',
@@ -20,7 +20,6 @@ export class MenuUserComponent implements OnInit {
 		private translate: TranslateService,
 		private _authService: AuthService,
 		private _router: Router,
-		private _smeServices: SmeService,
 		private _userService: UserService
 	) {}
 	ngOnInit(): void {

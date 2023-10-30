@@ -19,7 +19,7 @@
 	},
 	"all": "Tout",
 	"analysis": "Analyse",
-	"new_analysis": "Nouveau analyse",
+	"new_analysis": "Nouvelle analyse",
 	"last_analysis": "Dernière analyse",
 	"availability": "Disponibilité:",
 	"back": "Dos",
@@ -79,7 +79,9 @@
 		"email": "Email",
 		"password": "Mot de passe",
 		"website": "Site web",
-		"location": "Emplacement"
+		"location": "Emplacement",
+		"city": "Ville",
+		"logo": "Logo"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",

@@ -1,11 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Route } from '@angular/router';
-import { SS_USERTYPE, UserContextService } from '@goeko/core';
-import { SmeService, UserService } from '@goeko/store';
+import { ActivatedRoute } from '@angular/router';
+import { UserContextService } from '@goeko/core';
+import { ACTORS_TYPE, DataSelect, Profile, SmeService, UserService } from '@goeko/store';
 import { combineLatest } from 'rxjs';
 import { PROFILE_SME } from './profile-sme.constants';
+import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 
+export const SELECT_PROFILE = {
+	cleantech: PROFILE_CLEANTECH,
+	sme: PROFILE_SME,
+};
+
+const defaultSetSuperSelect = (o1: any, o2: any) => {
+	if (o1 && o2 && typeof o2 !== 'object') {
+		return o1.id.toString() === o2;
+	}
+
+	if (o1 && o2 && typeof o2 === 'object') {
+		return o1.id.toString() === o2.id.toString();
+	}
+
+	return null;
+};
 @Component({
 	selector: 'goeko-profile',
 	templateUrl: './profile.component.html',
@@ -15,21 +32,24 @@ export class ProfileComponent implements OnInit {
 	form!: FormGroup;
 	dataProfile: any;
 	savedProfileOK!: boolean;
-	public formProfile = PROFILE_SME;
+	public dataSelect = DataSelect as any;
+
+	public formProfile!: Profile[];
 	private _userType!: string;
 	private _externalId!: string;
+
+	public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean;
+
 	constructor(
 		private _fb: FormBuilder,
 		private _route: ActivatedRoute,
 		private _userService: UserService,
-		private _smeServices: SmeService,
 		private _userContextService: UserContextService
 	) {}
 
 	ngOnInit(): void {
 		const externalId = this._route.snapshot.params['externalId'];
 		this._getUserContext();
-		this._createFormGroup();
 		this._getDataprofile();
 	}
 
@@ -42,16 +62,42 @@ export class ProfileComponent implements OnInit {
 				this._userType = res.userType;
 				this._externalId = res.externalId;
 				this._userService.getUserProfile(res.userType, res.externalId);
+				this.formProfile = SELECT_PROFILE[res.userType as keyof typeof SELECT_PROFILE];
+				this._selectionCreateTypeForm();
 			}
 		});
 	}
 
-	private _createFormGroup() {
+	private _selectionCreateTypeForm() {
+		switch (this._userType) {
+			case ACTORS_TYPE.CLEANTECH:
+				this._createFormGroupCleanTech();
+				return;
+
+			default:
+				this._createFormGroupSme();
+				return;
+		}
+	}
+
+	private _createFormGroupSme = () => {
 		this.form = this._fb.group({
 			name: [''],
 			country: [''],
 			email: [''],
 			website: [''],
+			externalId: [this._externalId],
+		});
+	};
+
+	private _createFormGroupCleanTech() {
+		this.form = this._fb.group({
+			name: [''],
+			countries: [''],
+			email: [''],
+			link: [''],
+			logo: [''],
+			city: [''],
 			externalId: [this._externalId],
 		});
 	}

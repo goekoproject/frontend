@@ -28,6 +28,7 @@ export class SmeFormAnalysisComponent implements OnInit {
 	formField = FORM_FIELD;
 	form!: FormGroup;
 	slideSelected = 0;
+	dateLastRecomendation!: string;
 	public dataSelect = DataSelect as any;
 	private _smeDataProfile!: any;
 	private _smeId!: string;
@@ -82,6 +83,7 @@ export class SmeFormAnalysisComponent implements OnInit {
 	private _getLastAnalysis() {
 		this._smeService.getLastRecommendationById(this._smeId).subscribe((requestClassifications) => {
 			if (requestClassifications) {
+				this.dateLastRecomendation = requestClassifications.date;
 				const classifications = transformArrayToObj(requestClassifications.classifications);
 				this.form.patchValue(classifications);
 				this.form.markAllAsTouched();
@@ -110,11 +112,5 @@ export class SmeFormAnalysisComponent implements OnInit {
 	}
 	getResults() {
 		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
-	}
-	saveAnalysis() {
-		console.log(this.form.value);
-		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeDataProfile.id, this.form.value);
-		/* 		this._smeServices.createRecommendations(smeAnalysisRequest).subscribe((res) => console.log(res));
-		 */
 	}
 }
