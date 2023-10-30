@@ -111,10 +111,4 @@ export class SmeFormAnalysisComponent implements OnInit {
 	getResults() {
 		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
 	}
-	saveAnalysis() {
-		console.log(this.form.value);
-		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeDataProfile.id, this.form.value);
-		/* 		this._smeServices.createRecommendations(smeAnalysisRequest).subscribe((res) => console.log(res));
-		 */
-	}
 }
