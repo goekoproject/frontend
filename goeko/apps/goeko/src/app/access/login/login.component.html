@@ -46,6 +46,12 @@
 
 <ng-template #signup>
 	<form>
+		<div *ngIf="signUpOk" class="signup-ok">
+			<go-loader-check></go-loader-check>
+			<button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
+				{{ 'Login' | translate }}
+			</button>
+		</div>
 		<goeko-signup
 			*ngIf="!signUpOk"
 			[formSignup]="formSignup"
@@ -62,6 +68,5 @@
 				{{ 'Sign up' | translate }}
 			</button>
 		</goeko-signup>
-		<go-loader-check *ngIf="signUpOk"></go-loader-check>
 	</form>
 </ng-template>

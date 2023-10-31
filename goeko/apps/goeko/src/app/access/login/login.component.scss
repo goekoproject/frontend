@@ -68,6 +68,12 @@
 		color: #24253b;
 	}
 }
+.signup-ok {
+	width: 60%;
+	button {
+		width: 100%;
+	}
+}
 
 @media screen and (width <= 800px) {
 	.access-img {

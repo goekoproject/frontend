@@ -62,8 +62,7 @@ export class LoginComponent implements OnInit {
 			this._accessService.signUp(dataSignUp).subscribe(
 				(res) => {
 					this.signUpOk = true;
-					setTimeout(() => (this.signUpOk = false), 1500);
-					/* this._router.navigate(['dashboard']); */
+					this.formLogin.patchValue(this.formSignup.value);
 				},
 				(error) => {
 					console.log(error);
