@@ -3,6 +3,7 @@
 	"LOGIN": {
 		"msglogin": "Inicia sesión en tu cuenta",
 		"msgsignup": "¿No tienes una cuenta todavía ?",
+		"msgsignup2": "Cree su cuenta",
 		"msglogin2": "¿Ya tienes una cuenta?"
 	},
 	"user": "Usuario",

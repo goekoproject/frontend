@@ -5,7 +5,6 @@
 	</div>
 	<div class="login-singup">
 		<h1>{{ 'welcome' | translate }}!</h1>
-		<span>{{ 'LOGIN.msglogin' | translate }}</span>
 		<!-- 	<go-switch
 			class="go-switch"
 			[onLabel]="'Log in'"
@@ -22,6 +21,7 @@
 </div>
 
 <ng-template #login>
+	<span>{{ 'LOGIN.msglogin' | translate }}</span>
 	<form class="login" [formGroup]="formLogin">
 		<go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
 			<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
@@ -45,6 +45,8 @@
 </ng-template>
 
 <ng-template #signup>
+	<span>{{ 'LOGIN.msgsignup2' | translate }}</span>
+
 	<form>
 		<div *ngIf="signUpOk" class="signup-ok">
 			<go-loader-check></go-loader-check>

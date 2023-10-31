@@ -4,6 +4,7 @@
 	"LOGIN": {
 		"msglogin": "Connectez-vous à votre compte",
 		"msgsignup": "Vous n'avez pas de compte ?",
+		"msgsignup2": "Créez votre compte",
 		"msglogin2": "Déjà un compte ?"
 	},
 	"edit": "Modifier",
@@ -65,7 +66,7 @@
 	"contact": "Contact",
 	"continue": "Continuer",
 	"costReduction": "Coûts opérationnels",
-	"dashboard": "Dashboard",
+	"dashboard": "Tableau de bord",
 	"decline": "Refuser",
 	"FOOTER": {
 		"contact": "Contact",

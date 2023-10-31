@@ -4,7 +4,8 @@
 	"LOGIN": {
 		"msglogin": "Log in in your account",
 		"msgsignup": "Do not have any account?",
-		"msglogin2": "Already have account?"
+		"msglogin2": "Already have account?",
+		"msgsignup2": "Create your account"
 	},
 	"edit": "Edit",
 	"ACCESS_ERROR": {
