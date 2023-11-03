@@ -15,9 +15,8 @@
 	box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.25);
 	cursor: pointer;
 	transition: all 1s;
-	position: absolute;
-	position: sticky;
-	top: 50%;
+	position: relative;
+
 	& > span {
 		color: #0090d6;
 		font-size: 2.7rem;

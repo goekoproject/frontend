@@ -50,7 +50,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this._smeId = this._route.snapshot.paramMap.get('id') as string;
+		this._smeId = this._getSmeId();
 		this._smeAnalysisService.getCurrentAnalysis().subscribe((res) => {
 			if (res) {
 				this.formValue = res;
@@ -58,6 +58,11 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 		});
 	}
 
+	private _getSmeId(): string {
+		const idByNewAnalysis = this._route?.parent?.snapshot.params['id'] as string;
+		const idByLastRecommended = this._route.snapshot.queryParamMap.get('smeId') as string;
+		return idByNewAnalysis || idByLastRecommended;
+	}
 	isArrayOfType(arr: any[], type: 'number' | 'object' | 'string'): boolean {
 		if (!Array.isArray(arr)) {
 			return false; // No es un array
@@ -103,5 +108,9 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 				this.saveOK = false;
 			}, 5000);
 		});
+	}
+
+	cancel() {
+		this._router.navigate(['dashboard/sme']);
 	}
 }

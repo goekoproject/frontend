@@ -20,7 +20,7 @@
 			<ng-container *ngFor="let element of formField; last as isLast">
 				<section *goSlide class="content-form go-scroll">
 					<!--FORM ACTORS-->
-					<div class="form-wrapper" [formGroupName]="element.controlName">
+					<div class="form-wrapper" [id]="element.controlName" [formGroupName]="element.controlName">
 						<div
 							class="form-field form-field--center form-field-{{ field.type }}"
 							*ngFor="let field of element.fields"
@@ -32,7 +32,7 @@
 									<!-- INPUT boolean -->
 									<ng-container *ngSwitchCase="'boolean'">
 										<div class="field-form-checked">
-											<label>{{ field.label | translate }}</label>
+											<label [id]="field.controlName">{{ field.label | translate }}</label>
 											<label class="switch">
 												<input
 													type="checkbox"
@@ -50,6 +50,7 @@
 									<!-- INPUT NUMBER -->
 									<ng-container *ngSwitchCase="'number'">
 										<go-input
+											[id]="field.controlName"
 											[textHelp]="field.textHelp"
 											[formControlName]="field.controlName"
 											type="number"
@@ -80,7 +81,9 @@
 									<!-- INPUT SELECT-MULTIPLE-->
 
 									<ng-container *ngSwitchCase="'select-multiple'">
-										<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
+										<label for="{{ field.controlName }}" [id]="field.controlName">{{
+											field.label | translate
+										}}</label>
 
 										<ui-super-select
 											[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -101,7 +104,9 @@
 
 									<!-- Question card-->
 									<ng-container *ngSwitchCase="'question'">
-										<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
+										<label for="{{ field.controlName }}" [id]="field.controlName">{{
+											field.label | translate
+										}}</label>
 										<select
 											multiple
 											[formControlName]="field.controlName"
@@ -123,7 +128,9 @@
 									<!-- BADGE TEXT -->
 
 									<ng-container *ngSwitchCase="'badge-group'">
-										<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
+										<label for="{{ field.controlName }}" [id]="field.controlName">{{
+											field.label | translate
+										}}</label>
 										<p class="text-support">
 											{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}
 										</p>
@@ -150,16 +157,6 @@
 							</ng-container>
 						</div>
 					</div>
-
-					<!--SUMMARY-->
-					<!-- 		<ng-template #summary >
-						<goeko-sme-analysis-summary
-							[formField]="formField"
-							[element]="element"
-							[form]="form"
-							[index]=""
-						></goeko-sme-analysis-summary>
-					</ng-template> -->
 				</section>
 			</ng-container>
 		</go-carousel>

@@ -108,7 +108,18 @@ export class SmeFormAnalysisComponent implements OnInit {
 
 	gotToSummary() {
 		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
-		setTimeout(() => this._router.navigate(['sme-analysis/summary', this._smeDataProfile.id]));
+		setTimeout(() => {
+			if (this._smeId) {
+				this._router.navigate([`../${this._smeId}/summary`], {
+					relativeTo: this._route,
+				});
+			} else {
+				this._router.navigate([`summary`], {
+					relativeTo: this._route,
+					queryParamsHandling: 'preserve',
+				});
+			}
+		});
 	}
 	getResults() {
 		this._router.navigate(['results', this._smeId], { relativeTo: this._route });

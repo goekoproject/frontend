@@ -26,6 +26,8 @@ export const SelectMainMineralProduct: DataSelectOption[] = [
 	{ id: 'cement', keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.cement' },
 	{ id: 'concrete', keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.concrete' },
 	{ id: 'isolation', keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.isolation' },
+	{ id: 'iron', keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.iron' },
+	{ id: 'steel', keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.steel' },
 ];
 
 export const SelectMainRigidMaterial: DataSelectOption[] = [

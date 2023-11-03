@@ -186,7 +186,9 @@
 		"selectMainMineralProduct": {
 			"cement": "Ciment",
 			"concrete": "Béton",
-			"isolation": "Panneaux d’isolation thermique"
+			"isolation": "Panneaux d’isolation thermique",
+			"iron": "Fer",
+			"steel": "Acier"
 		},
 		"selectMainRigidMaterial": {
 			"insolationPanels": "Panneaux d'isolation"

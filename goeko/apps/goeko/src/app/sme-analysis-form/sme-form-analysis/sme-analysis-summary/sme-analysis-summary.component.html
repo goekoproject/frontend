@@ -42,7 +42,7 @@
 </div>
 
 <div class="form-actions">
-	<button type="button" go-button appearance="white">{{ 'cancel' | translate }}</button>
+	<button type="button" go-button appearance="white" (click)="cancel()">{{ 'cancel' | translate }}</button>
 	<div class="form-actions-submit">
 		<button type="button" go-button appearance="white" (click)="saveAnalysis()">
 			{{ 'save' | translate }}

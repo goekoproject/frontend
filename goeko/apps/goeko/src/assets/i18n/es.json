@@ -185,7 +185,9 @@
 		"selectMainMineralProduct": {
 			"cement": "Cemento",
 			"concrete": "Concreto",
-			"isolation": "Paneles de aislamiento"
+			"isolation": "Paneles de aislamiento",
+			"iron": "Hierro",
+			"steel": "Acero"
 		},
 		"selectMainRigidMaterial": {
 			"insolationPanels": "Paneles de aislamiento"

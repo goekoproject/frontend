@@ -7,20 +7,19 @@ import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-r
 
 const routes: Routes = [
 	{
-		path: '',
+		path: 'new',
 		component: SmeAnalysisComponent,
 		data: {
 			breadcrumb: 'new_analysis',
 			hidden: true,
 		},
-
 		children: [
 			{
 				path: '',
 				component: SmeFormAnalysisComponent,
 			},
 			{
-				path: 'summary/:id',
+				path: 'summary',
 				component: SmeAnalysisSummaryComponent,
 				data: {
 					breadcrumb: 'summary',
@@ -36,7 +35,7 @@ const routes: Routes = [
 		],
 	},
 	{
-		path: ':id',
+		path: 'last/:id',
 		component: SmeAnalysisComponent,
 		data: {
 			breadcrumb: 'last_analysis',
@@ -48,7 +47,7 @@ const routes: Routes = [
 				component: SmeFormAnalysisComponent,
 			},
 			{
-				path: 'summary/:id',
+				path: 'summary',
 				component: SmeAnalysisSummaryComponent,
 				data: {
 					breadcrumb: 'summary',

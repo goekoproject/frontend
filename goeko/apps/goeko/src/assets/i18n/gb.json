@@ -186,7 +186,9 @@
 		"selectMainMineralProduct": {
 			"cement": "Cement",
 			"concrete": "Concrete",
-			"isolation": "Insulation panels"
+			"isolation": "Insulation panels",
+			"iron": "Iron",
+			"steel": "Steel"
 		},
 		"selectMainRigidMaterial": {
 			"insolationPanels": "Insulation panels"

@@ -48,7 +48,6 @@ export class ProfileComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		const externalId = this._route.snapshot.params['externalId'];
 		this._getUserContext();
 		this._getDataprofile();
 	}

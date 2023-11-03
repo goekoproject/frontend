@@ -5,7 +5,9 @@
 <div class="dashboard-option">
 	<ul>
 		<li
-			[routerLink]="['/sme-analysis']"
+			[routerLink]="['/sme-analysis/new']"
+			[queryParams]="{ smeId: companyDetail?.id }"
+			[queryParamsHandling]="'merge'"
 			routerLinkActive="router-link-active"
 			class="slot-data"
 			[attr.disabled]="!companyDetail"
@@ -15,7 +17,7 @@
 		</li>
 
 		<li
-			[routerLink]="['/sme-analysis', companyDetail?.id]"
+			[routerLink]="['/sme-analysis/last', companyDetail?.id]"
 			routerLinkActive="router-link-active"
 			class="slot-data"
 			[attr.disabled]="!companyDetail"

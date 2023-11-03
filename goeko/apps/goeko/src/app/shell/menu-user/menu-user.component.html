@@ -4,6 +4,7 @@
 	<ul class="menu-user-options">
 		<li
 			*ngFor="let item of menuOptions"
+			[id]="item.id"
 			(click)="goTo(item.url)"
 			[routerLink]="item.url"
 			[routerLinkActive]="['active']"

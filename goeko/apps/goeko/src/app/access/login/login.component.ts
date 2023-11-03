@@ -5,11 +5,6 @@ import { AccessService } from '../access.services';
 import { SignUp } from '../singup.model';
 import { ERROR_TYPE } from '@goeko/core';
 
-enum TYPE_FORM_TEMPLATE {
-	true = 'login',
-	false = 'signup',
-}
-
 @Component({
 	selector: 'goeko-login',
 	templateUrl: './login.component.html',
