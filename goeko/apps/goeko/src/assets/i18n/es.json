@@ -1,5 +1,9 @@
 {
 	"welcome": "Bienvenido",
+	"my_company": "Mi empresa",
+	"new_project": "Nuevo proyecto",
+	"last_project": "Ultimo proyecto",
+	"confirm": "Confirmar",
 	"LOGIN": {
 		"msglogin": "Inicia sesión en tu cuenta",
 		"msgsignup": "¿No tienes una cuenta todavía ?",
@@ -74,7 +78,8 @@
 		"website": "Sito web",
 		"location": "Ubicación",
 		"city": "Ciudad",
-		"logo": "Logo"
+		"logo": "Logo",
+		"name_project": "Nombre del proyecto"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",

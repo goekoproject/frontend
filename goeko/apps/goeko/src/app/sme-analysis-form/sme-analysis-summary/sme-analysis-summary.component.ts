@@ -3,11 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SmeService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
-import { FORM_FIELD } from '../../form-field-demo.constants';
-import { Section } from '../../form-field.model';
-import { DataSelect, DataSelectOption } from '../../select-data.constants';
-import { FormValueToSmeAnalysisRequest } from '../sme-analysis.request';
-import { SmeAnalysisService } from '../sme-analysis.service';
+import { FORM_FIELD } from '../form-field-demo.constants';
+import { Section } from '../form-field.model';
+import { DataSelect, DataSelectOption } from '../select-data.constants';
+import { FormValueToSmeAnalysisRequest } from '../sme-form-analysis/sme-analysis.request';
+import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
 
 @Component({
 	selector: 'goeko-sme-analysis-summary',
@@ -21,6 +21,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 	formValue!: any;
 	public saveOK = false;
 	private _smeId!: string;
+	public toogleSaveName = false;
 	isBoolean(value: any) {
 		return typeof value === 'boolean';
 	}
@@ -91,6 +92,13 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 		}
 	}
 
+	onSearchNameChange(event: CustomEvent) {
+		const value = event.detail;
+		this.formValue = {
+			...this.formValue,
+			searchName: value,
+		};
+	}
 	editCategory(categoryId: string) {
 		this._router.navigate(['sme-analysis'], {
 			queryParams: { categoryId: categoryId },

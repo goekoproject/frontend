@@ -47,5 +47,6 @@ export interface Classifications {
 }
 export interface SmeRecomendationRequest {
 	smeId: string;
+	searchName?: string;
 	classifications: Classifications[];
 }

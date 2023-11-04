@@ -17,11 +17,13 @@ import { SmeModule } from '@goeko/store';
 import { environment } from '../../environments/environment';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SmeAnalysisSummaryComponent } from './sme-form-analysis/sme-analysis-summary/sme-analysis-summary.component';
+import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
 import { CategoryModule } from '@goeko/business-ui';
 import { SmeAnalysisService } from './sme-form-analysis/sme-analysis.service';
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
 import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
+import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
+import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 
 @NgModule({
 	declarations: [
@@ -29,6 +31,8 @@ import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-r
 		SmeAnalysisSummaryComponent,
 		SmeAnalysisComponent,
 		SmeAnalysisResultComponent,
+		SmeFormProjectComponent,
+		SmeFormBaseComponent,
 	],
 	imports: [
 		CommonModule,

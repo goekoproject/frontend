@@ -26,4 +26,29 @@
 			<h4>{{ 'last_analysis' | translate }}</h4>
 		</li>
 	</ul>
+
+	<ul>
+		<h2>{{ 'my_company' | translate }}</h2>
+		<li
+			[routerLink]="['/sme-analysis/new-project']"
+			[queryParams]="{ smeId: companyDetail?.id }"
+			[queryParamsHandling]="'merge'"
+			routerLinkActive="router-link-active"
+			class="slot-data"
+			[attr.disabled]="!companyDetail"
+		>
+			<i class="ti ti-sphere-plus"></i>
+			<h4>{{ 'new_project' | translate }}</h4>
+		</li>
+
+		<li
+			[routerLink]="['/sme-analysis/last-project', companyDetail?.id]"
+			routerLinkActive="router-link-active"
+			class="slot-data"
+			[attr.disabled]="!companyDetail"
+		>
+			<i class="ti ti-restore"></i>
+			<h4>{{ 'last_project' | translate }}</h4>
+		</li>
+	</ul>
 </div>

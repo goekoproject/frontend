@@ -61,8 +61,7 @@ export class GoInput extends LitElement {
 	handleInput() {
 		this.value = this.input.value;
 		this._dispatchValueChange();
-		/* 		this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
-		 */
+		this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
 	}
 
 	private _dispatchValueChange() {

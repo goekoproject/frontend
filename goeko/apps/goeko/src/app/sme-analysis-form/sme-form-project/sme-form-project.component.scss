@@ -1,8 +1,4 @@
-.demo-container {
-	width: 100%;
-}
-
-.analysis-wrapper {
+.project-wrapper {
 	display: flex;
 	height: 100%;
 	flex-direction: column;
@@ -30,28 +26,43 @@
 	}
 }
 
-.analysis-wrapper .section-form {
+%base-section {
 	background: #ffffff;
 
 	display: flex;
 	align-items: center;
 	margin: 0 auto;
 	position: relative;
-	border-radius: 28px;
+	border-radius: 16px;
 	flex-grow: 2;
 	flex-shrink: 2;
 	padding: 1rem 10px;
 	flex-direction: column;
 }
-.analysis-wrapper .section-form-demo {
-	background: transparent;
+.project-wrapper .section-form {
+	@extend %base-section;
 }
-.analysis-wrapper .content-form {
+
+.search-name-section {
+	@extend %base-section;
+	align-items: center;
+	padding-left: 2rem;
+	width: 100%;
+	flex-direction: row;
+	gap: 18rem;
+	go-input,
+	h2 {
+		width: 50%;
+		color: #080e49;
+	}
+}
+.project-wrapper .content-form {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
 	overflow-y: scroll;
+
 	h3 {
 		font-size: 1.3rem;
 		color: #080b17;
@@ -62,7 +73,7 @@
 	height: 3.4rem;
 }
 
-.analysis-wrapper .elements {
+.project-wrapper .elements {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -133,7 +144,7 @@
 	width: 184px;
 	display: block;
 }
-.analysis-wrapper .form-actions {
+.project-wrapper .form-actions {
 	display: flex;
 	justify-content: space-around;
 	margin: 0 auto;

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { AuthService } from './auth.service';
 import { LoaderCircleComponent } from './loader-animation/loader-circle/loader-circle.component';
-import { UserContextService } from '../../../user-context/user-context.service';
-import { combineLatest, forkJoin } from 'rxjs';
 
 @Component({
 	standalone: true,
@@ -21,7 +20,7 @@ export class AutenticateComponent implements OnInit {
 				authData: this._authService.authData,
 			}).subscribe({
 				next: (result) => {
-					if (result.isResolverHash) {
+					if (result.isResolverHash && result.authData) {
 						console.log(result.authData);
 						setTimeout(() => this._router.navigate([`dashboard/${result.authData?.userType}`]), 1500);
 					}

@@ -78,7 +78,9 @@ export const transformArrayToObj = (arr: Item[]) => {
 export class FormValueToSmeAnalysisRequest implements SmeRecomendationRequest {
 	smeId: string;
 	classifications: Classifications[];
+	searchName?: string;
 	constructor(smeId: string, formValue: Section) {
+		this.searchName = formValue.searchName;
 		this.smeId = smeId;
 		this.classifications = formToClassificationsMapper(formValue);
 	}

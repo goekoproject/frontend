@@ -2,6 +2,27 @@
 	><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification
 >
 <div class="summary">
+	<section class="search-name-section">
+		<go-input
+			id="searchName"
+			type="text"
+			name="searchName"
+			*ngIf="toogleSaveName"
+			(change)="onSearchNameChange($any($event))"
+		>
+			<span slot="label">{{ 'FORM_LABEL.name_project' | translate }}</span>
+		</go-input>
+
+		<button go-button appearance="primary" (click)="toogleSaveName = !toogleSaveName" *ngIf="toogleSaveName">
+			{{ 'confirm' | translate }}
+		</button>
+		<h2 *ngIf="!toogleSaveName">{{ formValue.searchName }}</h2>
+
+		<button go-button appearance="transparent" *ngIf="!toogleSaveName" (click)="toogleSaveName = !toogleSaveName">
+			{{ 'edit' | translate }}
+		</button>
+	</section>
+
 	<ul class="section-elements" *ngIf="formValue">
 		<ng-container *ngFor="let element of formField; last as isLast; index as index">
 			<li class="elements-field">

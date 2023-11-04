@@ -1,6 +1,10 @@
 {
 	"welcome": "Welcome",
 	"accept": "Accept",
+	"my_company": "My company",
+	"new_project": "New project",
+	"last_project": "Last project",
+	"confirm": "Confirm",
 	"LOGIN": {
 		"msglogin": "Log in in your account",
 		"msgsignup": "Do not have any account?",
@@ -82,7 +86,8 @@
 		"website": "Website",
 		"location": "Location",
 		"city": "City",
-		"logo": "Logo"
+		"logo": "Logo",
+		"name_project": "Project's name"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Free trial to connect with qualified leads",
