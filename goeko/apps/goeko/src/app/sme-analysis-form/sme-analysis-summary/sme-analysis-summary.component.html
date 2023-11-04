@@ -2,7 +2,7 @@
 	><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification
 >
 <div class="summary">
-	<section class="search-name-section">
+	<section class="search-name-section" *ngIf="isProject">
 		<go-input
 			id="searchName"
 			type="text"

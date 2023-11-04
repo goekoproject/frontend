@@ -49,6 +49,7 @@ interface Item {
 	products: string[];
 	subCategory: string;
 }
+export type CategoryModel = { [mainCategory: string]: { [subCategory: string]: string[] } };
 
 export const transformArrayToObj = (arr: Item[]) => {
 	const result: {

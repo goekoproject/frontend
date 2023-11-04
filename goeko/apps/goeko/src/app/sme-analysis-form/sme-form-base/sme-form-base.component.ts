@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService, SmeService } from '@goeko/store';
+import { UserService, SmeService, SmeRequestResponse, Classifications } from '@goeko/store';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { DataSelect } from '../select-data.constants';
-import { transformArrayToObj } from '../sme-form-analysis/sme-analysis.request';
+import { CategoryModel, transformArrayToObj } from '../sme-form-analysis/sme-analysis.request';
 import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
 import { Field } from '../form-field.model';
+import { Observable } from 'rxjs';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {
 		return o1.id.toString() === o2;
@@ -32,7 +33,7 @@ export class SmeFormBaseComponent implements OnInit {
 	dateLastRecomendation!: string;
 	public dataSelect = DataSelect as any;
 	private _smeDataProfile!: any;
-	private _smeId!: string;
+	public smeId!: string;
 	private _selectedCategory!: string;
 
 	isSummarySlide() {
@@ -48,13 +49,12 @@ export class SmeFormBaseComponent implements OnInit {
 		private _smeAnalysisService: SmeAnalysisService
 	) {}
 
-	ngOnInit(): void {
-		this._smeId = this._route.snapshot.paramMap.get('id') as string;
+	ngOnInit(isProject = false): void {
+		this.smeId = this._route.snapshot.paramMap.get('id') as string;
 		this._route.queryParams.subscribe((queryParams: any) => (this._selectedCategory = queryParams.categoryId));
 		this.form = this._fb.group({});
 		this._createFormGroup();
 		this._getSmeCompanyDetail();
-		this._setLastAnalysis();
 		this._selectCatagory();
 	}
 
@@ -75,23 +75,28 @@ export class SmeFormBaseComponent implements OnInit {
 		this.slideSelected = indexCarousel;
 	}
 
-	private _setLastAnalysis() {
-		if (this._smeId) {
-			this._getLastAnalysis();
+	public _setLastAnalysis(callback: any) {
+		if (this.smeId) {
+			this._getLastAnalysis(callback);
 		}
 	}
 
-	private _getLastAnalysis() {
-		this._smeService.getLastRecommendationById(this._smeId).subscribe((requestClassifications) => {
+	private _getLastAnalysis(callbackLastAnalysis: any) {
+		callbackLastAnalysis().subscribe((requestClassifications: SmeRequestResponse) => {
 			if (requestClassifications) {
 				this.dateLastRecomendation = requestClassifications.date;
 				const classifications = transformArrayToObj(requestClassifications.classifications);
-				this.form.patchValue(classifications);
-				this.form.controls['searchName']?.patchValue(requestClassifications.searchName);
-				this.form.markAllAsTouched();
-				this.onChangeLastRecomendation.emit(true);
+				const _searchName = requestClassifications?.searchName as string;
+				this._updateForm(classifications, _searchName);
 			}
 		});
+	}
+
+	private _updateForm(classifications: CategoryModel, searchName: string) {
+		this.form.patchValue(classifications);
+		this.form.controls['searchName']?.patchValue(searchName);
+		this.form.markAllAsTouched();
+		this.onChangeLastRecomendation.emit(true);
 	}
 
 	private _createFormGroup() {
@@ -112,9 +117,10 @@ export class SmeFormBaseComponent implements OnInit {
 	gotToSummary() {
 		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
 		setTimeout(() => {
-			if (this._smeId) {
-				this._router.navigate([`../${this._smeId}/summary`], {
+			if (this.smeId) {
+				this._router.navigate([`../${this.smeId}/summary`], {
 					relativeTo: this._route,
+					queryParamsHandling: 'preserve',
 				});
 			} else {
 				this._router.navigate([`summary`], {
@@ -125,6 +131,6 @@ export class SmeFormBaseComponent implements OnInit {
 		});
 	}
 	getResults() {
-		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
+		this._router.navigate(['results', this.smeId], { relativeTo: this._route });
 	}
 }

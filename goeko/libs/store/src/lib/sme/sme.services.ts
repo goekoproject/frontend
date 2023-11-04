@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, from, map, mergeMap, reduce } from 'rxjs';
+import { Observable, ObservableInput, filter, from, map, mergeMap, reduce } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
 import { SmeOptions } from './sme-options';
-import { SmeRecomendationRequest, SmeRecomendationRequestDemo } from './sme-request.model';
+import { SmeRecomendationRequest, SmeRecomendationRequestDemo, SmeRequestResponse } from './sme-request.model';
 import { SME_CONFIGURATION } from './sme.module';
 
 @Injectable()
@@ -30,7 +30,19 @@ export class SmeService {
 	getLastRecommendationById(id: string): Observable<any> {
 		return this.getRecommendationsById(id).pipe(
 			map((recommendation) => recommendation.requests),
-			mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuales
+			mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuale
+			filter((requests: any) => !requests?.searchName),
+			reduce((maxItem: any, currentItem: any) =>
+				new Date(currentItem.date) > new Date(maxItem.date) ? currentItem : maxItem
+			)
+		);
+	}
+
+	getLastProjectBySmeId(id: string): Observable<any> {
+		return this.getRecommendationsById(id).pipe(
+			map((recommendation: { requests: SmeRequestResponse[] }) => recommendation.requests),
+			mergeMap((data: unknown) => from(data as ObservableInput<any>)), // Convierte el array en un Observable de elementos individuales
+			filter((requests: any) => requests?.searchName),
 			reduce((maxItem: any, currentItem: any) =>
 				new Date(currentItem.date) > new Date(maxItem.date) ? currentItem : maxItem
 			)

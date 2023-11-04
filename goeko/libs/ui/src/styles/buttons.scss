@@ -3,9 +3,9 @@
 	align-items: center;
 	appearance: none;
 	background-color: var(--color-primary);
-	border-radius: 24px;
+	border-radius: 12px;
 	border-style: none;
-	box-shadow: 0px 0px 2px 0px #bdbfc0;
+	box-shadow: 0px 2px 4px 0px #bdbfc0;
 	box-sizing: border-box;
 	color: var(--color-background-white);
 	cursor: pointer;
@@ -32,6 +32,14 @@
 	width: auto;
 	will-change: transform, opacity;
 	z-index: 0;
+	gap: 10px;
+	i {
+		font-size: 24px;
+	}
+}
+.go-button[size='huge'] {
+	height: 120px;
+	flex-direction: column;
 }
 .go-button[appearance='link'] {
 	background-color: transparent;
@@ -47,8 +55,11 @@
 .go-button[appearance='white'] {
 	background-color: #ffffff;
 	color: #174ea6;
-
 	border: 1px solid #fff;
+}
+.go-button[appearance='secondary'] {
+	background-color: #24253b;
+	color: #ffffff;
 }
 .go-button:hover {
 	background: #f6f9fe;

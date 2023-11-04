@@ -4,12 +4,15 @@
 
 import { Directive, Input } from '@angular/core';
 
-type appearance = 'transparent' | 'primary' | 'white' | 'any' | 'link' | null;
+type appearance = 'transparent' | 'primary' | 'secondary' | 'white' | 'any' | 'link' | null;
+type size = 'huge' | 'medium';
+
 @Directive({
 	selector: '[go-button]',
 	host: {
 		class: 'go-button',
 		'[attr.appearance]': 'appearance',
+		'[attr.size]': 'size',
 	},
 })
 export class ButtonDirective {
@@ -21,4 +24,13 @@ export class ButtonDirective {
 		this._appearance = value;
 	}
 	private _appearance!: appearance;
+
+	@Input('size')
+	public get size(): size {
+		return this._size;
+	}
+	public set size(value: size) {
+		this._size = value;
+	}
+	private _size!: size;
 }

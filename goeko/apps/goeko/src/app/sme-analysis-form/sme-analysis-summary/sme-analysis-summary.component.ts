@@ -22,6 +22,10 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 	public saveOK = false;
 	private _smeId!: string;
 	public toogleSaveName = false;
+	public get isProject() {
+		return this._route?.parent?.snapshot.queryParams['isProject'] === 'true';
+	}
+
 	isBoolean(value: any) {
 		return typeof value === 'boolean';
 	}

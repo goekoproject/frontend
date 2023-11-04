@@ -50,3 +50,9 @@ export interface SmeRecomendationRequest {
 	searchName?: string;
 	classifications: Classifications[];
 }
+
+export interface SmeRequestResponse {
+	classifications: Classifications[];
+	date: string;
+	searchName?: string;
+}

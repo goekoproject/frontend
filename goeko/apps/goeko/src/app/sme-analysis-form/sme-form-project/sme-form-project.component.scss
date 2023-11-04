@@ -46,10 +46,10 @@
 .search-name-section {
 	@extend %base-section;
 	align-items: center;
-	padding-left: 2rem;
 	width: 100%;
 	flex-direction: row;
-	gap: 18rem;
+	justify-content: space-between;
+
 	go-input,
 	h2 {
 		width: 50%;

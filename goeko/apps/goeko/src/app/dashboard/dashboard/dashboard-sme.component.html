@@ -3,52 +3,69 @@
 </h1> -->
 
 <div class="dashboard-option">
-	<ul>
-		<li
-			[routerLink]="['/sme-analysis/new']"
-			[queryParams]="{ smeId: companyDetail?.id }"
+	<div class="options-for-company">
+		<span class="title-section">
+			<span class="title-tag"></span>
+			<h2>{{ 'my_company' | translate }}</h2>
+		</span>
+
+		<button
+			go-button
+			type="button"
+			[routerLink]="['/sme-analysis/new-project']"
+			[queryParams]="{ smeId: companyDetail?.id, isProject: true }"
 			[queryParamsHandling]="'merge'"
 			routerLinkActive="router-link-active"
-			class="slot-data"
-			[attr.disabled]="!companyDetail"
+			[disabled]="!companyDetail"
+			appearance="secondary"
+			size="huge"
+		>
+			<i class="ti ti-device-desktop-plus"></i>
+			<h4>{{ 'new_project' | translate }}</h4>
+		</button>
+
+		<button
+			go-button
+			type="button"
+			[routerLink]="['/sme-analysis/last-project', companyDetail?.id]"
+			[queryParams]="{ smeId: companyDetail?.id, isProject: true }"
+			[queryParamsHandling]="'merge'"
+			routerLinkActive="router-link-active"
+			[disabled]="!companyDetail"
+			appearance="white"
+			size="huge"
+		>
+			<i class="ti ti-folder-heart"></i>
+			<h4>{{ nameLastProject }}</h4>
+		</button>
+	</div>
+	<div class="options-for-analysis">
+		<button
+			go-button
+			type="button"
+			[routerLink]="['/sme-analysis/new']"
+			[queryParams]="{ smeId: companyDetail?.id, isProject: false }"
+			[queryParamsHandling]="'merge'"
+			routerLinkActive="router-link-active"
+			[disabled]="!companyDetail"
+			appearance="white"
 		>
 			<i class="ti ti-sphere-plus"></i>
 			<h4>{{ 'new_analysis' | translate }}</h4>
-		</li>
+		</button>
 
-		<li
-			[routerLink]="['/sme-analysis/last', companyDetail?.id]"
+		<button
+			go-button
+			type="button"
+			[routerLink]="['/sme-analysis/new']"
+			[queryParams]="{ smeId: companyDetail?.id, isProject: false }"
+			[queryParamsHandling]="'merge'"
 			routerLinkActive="router-link-active"
-			class="slot-data"
-			[attr.disabled]="!companyDetail"
+			[disabled]="!companyDetail"
+			appearance="white"
 		>
 			<i class="ti ti-restore"></i>
 			<h4>{{ 'last_analysis' | translate }}</h4>
-		</li>
-	</ul>
-
-	<ul>
-		<h2>{{ 'my_company' | translate }}</h2>
-		<li
-			[routerLink]="['/sme-analysis/new-project']"
-			[queryParams]="{ smeId: companyDetail?.id }"
-			[queryParamsHandling]="'merge'"
-			routerLinkActive="router-link-active"
-			class="slot-data"
-			[attr.disabled]="!companyDetail"
-		>
-			<i class="ti ti-sphere-plus"></i>
-			<h4>{{ 'new_project' | translate }}</h4>
-		</li>
-
-		<li
-			[routerLink]="['/sme-analysis/last-project', companyDetail?.id]"
-			routerLinkActive="router-link-active"
-			class="slot-data"
-			[attr.disabled]="!companyDetail"
-		>
-			<i class="ti ti-restore"></i>
-			<h4>{{ 'last_project' | translate }}</h4>
-		</li>
-	</ul>
+		</button>
+	</div>
 </div>
