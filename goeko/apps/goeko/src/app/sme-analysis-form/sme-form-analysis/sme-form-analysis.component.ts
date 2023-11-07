@@ -5,7 +5,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Field } from '../form-field.model';
 import { SmeService, UserService } from '@goeko/store';
-import { FormValueToSmeAnalysisRequest, transformArrayToObj } from './sme-analysis.request';
+import {
+	FormValueToSmeAnalysisRequest,
+	formToClassificationsMapper,
+	transformArrayToObj,
+} from './sme-analysis.request';
 import { SmeAnalysisService } from './sme-analysis.service';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {
@@ -48,13 +52,19 @@ export class SmeFormAnalysisComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this._smeId = this._route.snapshot.paramMap.get('id') as string;
+		this._smeId = this._getSmeId();
 		this._route.queryParams.subscribe((queryParams: any) => (this._selectedCategory = queryParams.categoryId));
 		this.form = this._fb.group({});
 		this._createFormGroup();
 		this._getSmeCompanyDetail();
 		this._setLastAnalysis();
 		this._selectCatagory();
+	}
+
+	private _getSmeId(): string {
+		const idByNewAnalysis = this._route.snapshot.paramMap.get('id') as string;
+		const idByLastRecommended = this._route.snapshot.queryParamMap.get('smeId') as string;
+		return idByNewAnalysis || idByLastRecommended;
 	}
 
 	private _getSmeCompanyDetail() {
@@ -122,6 +132,10 @@ export class SmeFormAnalysisComponent implements OnInit {
 		});
 	}
 	getResults() {
-		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
+		this._smeService
+			.createRecommendations({ classifications: formToClassificationsMapper(this.form.value) })
+			.subscribe(() => {
+				this._router.navigate(['results', this._smeId], { relativeTo: this._route });
+			});
 	}
 }

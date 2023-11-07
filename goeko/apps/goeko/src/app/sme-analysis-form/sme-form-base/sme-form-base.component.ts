@@ -49,7 +49,7 @@ export class SmeFormBaseComponent implements OnInit {
 		private _smeAnalysisService: SmeAnalysisService
 	) {}
 
-	ngOnInit(isProject = false): void {
+	ngOnInit(): void {
 		this.smeId = this._route.snapshot.paramMap.get('id') as string;
 		this._route.queryParams.subscribe((queryParams: any) => (this._selectedCategory = queryParams.categoryId));
 		this.form = this._fb.group({});

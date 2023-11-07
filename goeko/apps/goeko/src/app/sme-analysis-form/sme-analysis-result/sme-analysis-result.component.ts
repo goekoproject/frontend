@@ -75,7 +75,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 	}
 	private saveAnalysis() {
 		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeId, this.formValue);
-		this._smeService.createRecommendations(smeAnalysisRequest).subscribe((sme) => {
+		this._smeService.saveRecommendations(smeAnalysisRequest).subscribe((sme) => {
 			this._handleRecommendations(sme);
 		});
 	}
@@ -91,10 +91,9 @@ export class SmeAnalysisResultComponent implements OnInit {
 		this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang));
 	}
 	private _getSmeRecomendations() {
-		this.saveAnalysis();
-		/* 		this._smeService.getRecommendations(this.smeRecomendationBody).subscribe((sme) => {
+		this._smeService.getRecommendations(this.smeRecomendationBody).subscribe((sme) => {
 			this._handleRecommendations(sme);
-		}); */
+		});
 	}
 
 	private _handleRecommendations(sme: any) {
