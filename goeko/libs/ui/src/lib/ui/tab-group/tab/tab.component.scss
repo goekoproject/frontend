@@ -1,9 +1,11 @@
 .tab-element {
 	position: absolute;
+	left: 0;
+	right: 0;
 }
 
 .tab-hide {
-	display: none;
+	display: none !important;
 }
 
 .tab-show {

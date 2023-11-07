@@ -1,17 +1,60 @@
-<section>
+<section class="ecosolutions-section">
 	<go-tab-group>
 		<go-tab [title]="categorySection[0].keyLang | translate">
-			<div class="ecosolutions-card-list">
+			<div #content class="ecosolutions-card-list">
+				<button class="add-ecosolutions">
+					<i class="ti ti-plus"></i>
+					<p>{{ 'add' | translate }} Ecosolutions</p>
+				</button>
 				<goeko-card-ecosolutions
-					*ngFor="let item of ecosolutions"
+					*ngFor="let item of ecosolutionsCo2"
 					[solutionName]="item.solutionName"
 					[products]="item.products"
 					[sustainableDevelopmentGoals]="item.sustainableDevelopmentGoals"
 				></goeko-card-ecosolutions>
 			</div>
 		</go-tab>
-		<go-tab [title]="categorySection[1].keyLang | translate"> </go-tab>
-		<go-tab [title]="categorySection[2].keyLang | translate"> </go-tab>
-		<go-tab [title]="categorySection[3].keyLang | translate"> </go-tab>
+		<go-tab [title]="categorySection[1].keyLang | translate">
+			<div #content class="ecosolutions-card-list">
+				<button class="add-ecosolutions">
+					<i class="ti ti-plus"></i>
+					<p>{{ 'add' | translate }} Ecosolutions</p>
+				</button>
+				<goeko-card-ecosolutions
+					*ngFor="let item of ecosolutionsWaste"
+					[solutionName]="item.solutionName"
+					[products]="item.products"
+					[sustainableDevelopmentGoals]="item.sustainableDevelopmentGoals"
+				></goeko-card-ecosolutions>
+			</div>
+		</go-tab>
+		<go-tab [title]="categorySection[2].keyLang | translate">
+			<div #content class="ecosolutions-card-list">
+				<button class="add-ecosolutions">
+					<i class="ti ti-plus"></i>
+					<p>{{ 'add' | translate }} Ecosolutions</p>
+				</button>
+				<goeko-card-ecosolutions
+					*ngFor="let item of ecosolutionsWater"
+					[solutionName]="item.solutionName"
+					[products]="item.products"
+					[sustainableDevelopmentGoals]="item.sustainableDevelopmentGoals"
+				></goeko-card-ecosolutions>
+			</div>
+		</go-tab>
+		<go-tab [title]="categorySection[3].keyLang | translate">
+			<div #content class="ecosolutions-card-list">
+				<button class="add-ecosolutions">
+					<i class="ti ti-plus"></i>
+					<p>{{ 'add' | translate }} Ecosolutions</p>
+				</button>
+				<goeko-card-ecosolutions
+					*ngFor="let item of ecosolutionsHp"
+					[solutionName]="item.solutionName"
+					[products]="item.products"
+					[sustainableDevelopmentGoals]="item.sustainableDevelopmentGoals"
+				></goeko-card-ecosolutions>
+			</div>
+		</go-tab>
 	</go-tab-group>
 </section>

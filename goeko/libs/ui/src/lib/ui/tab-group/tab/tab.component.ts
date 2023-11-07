@@ -17,7 +17,7 @@ import {
 	encapsulation: ViewEncapsulation.None,
 })
 export class UiTabComponent implements AfterContentInit {
-	@ContentChild('div') child!: ElementRef;
+	@ContentChild('content') child!: ElementRef;
 
 	@Input()
 	public get title(): string {

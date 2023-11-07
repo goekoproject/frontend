@@ -20,3 +20,10 @@ export const CATEGORY_SECTION = [
 		keyLang: 'CATEGORIES.hazardousProduct',
 	},
 ];
+
+export enum CATEGORIES {
+	CO2_EMISSION = 'co2emission',
+	HAZARDOUS_PRODUCT = 'hazardousProduct',
+	WASTE = 'waste',
+	WATER = 'water',
+}

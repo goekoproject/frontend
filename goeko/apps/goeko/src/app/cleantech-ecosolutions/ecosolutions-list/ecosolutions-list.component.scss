@@ -1,5 +1,50 @@
+.ecosolutions-section {
+	position: relative;
+}
+
 .ecosolutions-card-list {
 	display: flex;
 	flex-wrap: wrap;
 	padding: 1rem;
+	gap: 2rem;
+}
+.add-ecosolutions {
+	width: 248px;
+	height: 312px;
+	border-radius: 12px;
+	background: #e2e9f4;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	border: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	cursor: pointer;
+	i {
+		font-size: 2rem;
+		border-radius: 50%;
+		box-shadow: 0px 0px 7px 3px #fff;
+		background: #0090d6;
+		color: #fff;
+		text-align: center;
+		cursor: pointer;
+	}
+	p {
+		color: #3f4e63;
+		font-size: 16px;
+		font-weight: 300;
+	}
+	&:hover {
+		background-color: #b2c3de73;
+		transition: 0.7s;
+	}
+	&:focus {
+		outline-color: transparent;
+		outline-style: solid;
+		box-shadow: 0 0 0 4px #e2e9f4;
+	}
+	&:active {
+		background-color: #e2e9f4;
+	}
 }

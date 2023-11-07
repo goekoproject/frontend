@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
-import { CATEGORY_SECTION } from '@goeko/business-ui';
+import { CATEGORIES, CATEGORY_SECTION } from '@goeko/business-ui';
 import { EcosolutionsService } from '@goeko/store';
 import { CardEcosolutions } from './card-ecosolutions.model';
 
@@ -11,7 +11,11 @@ import { CardEcosolutions } from './card-ecosolutions.model';
 })
 export class EcosolutionsListComponent implements OnInit {
 	public categorySection = CATEGORY_SECTION;
-	public ecosolutions!: CardEcosolutions[];
+	public ecosolutionsCo2!: CardEcosolutions[];
+	public ecosolutionsWaste!: CardEcosolutions[];
+	public ecosolutionsWater!: CardEcosolutions[];
+	public ecosolutionsHp!: CardEcosolutions[];
+
 	private _cleanTechId!: string;
 	constructor(private _ecosolutionsService: EcosolutionsService, private _route: ActivatedRoute) {}
 
@@ -20,8 +24,32 @@ export class EcosolutionsListComponent implements OnInit {
 
 		this._ecosolutionsService.getByIdCleantechId(this._cleanTechId).subscribe((ecosolutions: any) => {
 			if (ecosolutions && ecosolutions.length > 0) {
-				this.ecosolutions = ecosolutions.map((solution: any) => new CardEcosolutions(solution));
+				this._buildEcosolutionsCo2Emossion(ecosolutions);
+				this._buildEcosolutionsWaste(ecosolutions);
+				this._buildEcosolutionsWater(ecosolutions);
+				this._buildEcosolutionsHazardousProduct(ecosolutions);
 			}
 		});
+	}
+	private _buildEcosolutionsCo2Emossion(ecosolutions: any) {
+		this.ecosolutionsCo2 = ecosolutions
+			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.CO2_EMISSION)
+			.map((solution: any) => new CardEcosolutions(solution));
+	}
+
+	private _buildEcosolutionsWaste(ecosolutions: any) {
+		this.ecosolutionsWaste = ecosolutions
+			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.WASTE)
+			.map((solution: any) => new CardEcosolutions(solution));
+	}
+	private _buildEcosolutionsWater(ecosolutions: any) {
+		this.ecosolutionsWaste = ecosolutions
+			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.WATER)
+			.map((solution: any) => new CardEcosolutions(solution));
+	}
+	private _buildEcosolutionsHazardousProduct(ecosolutions: any) {
+		this.ecosolutionsHp = ecosolutions
+			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.HAZARDOUS_PRODUCT)
+			.map((solution: any) => new CardEcosolutions(solution));
 	}
 }
