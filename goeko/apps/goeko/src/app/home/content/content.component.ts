@@ -91,7 +91,7 @@ export class ContentComponent implements OnInit {
 	}
 
 	private _getContentActors(lang: string) {
-		this._homeService.getContentType('actor', lang).subscribe((res) => {
+		this._homeService.getContentType('actores', lang).subscribe((res) => {
 			this.articles = res.map((actor: any) => ({
 				...actor,
 				benefits: this._buildDataLandingPage(actor.benefits),

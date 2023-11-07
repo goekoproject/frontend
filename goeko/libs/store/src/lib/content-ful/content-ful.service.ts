@@ -41,6 +41,10 @@ export class ContentFulService {
 	}
 
 	getContentType(contentType: string, currentLang?: string) {
-		return from(this._client.getEntries({ content_type: 'actores', locale: currentLang }));
+		return from(this._client.getEntries({ content_type: contentType, locale: currentLang }));
+	}
+
+	getAssets(id: string) {
+		from(this._client.getAsset(id));
 	}
 }

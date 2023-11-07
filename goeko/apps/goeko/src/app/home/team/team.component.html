@@ -1,14 +1,25 @@
-<h1 class="title">GoEko team</h1>
+<article class="our-team">
+	<go-title-page>
+		Meet Our Team
+		<h2 class="our-team-subtitle">
+			Allow us to introduce you to the talented group of individuals leading our mission to drive a cleaner and
+			more sustainable future.
+		</h2>
+	</go-title-page>
 
-<div class="carrousel">
-	<div
-		class="member__card"
-		[ngClass]="{ 'member__card--active': member.active }"
-		*ngFor="let member of teams"
-		(click)="toogle(member)"
-	>
-		<img class="member__photo" [src]="'assets/' + member.photo" [alt]="member.name" />
-		<h2>{{ member.name }}</h2>
-		<h3>{{ member.rating }}</h3>
+	<div class="our-team-body" *ngFor="let item of dataTeams">
+		<div class="our-team-content">
+			<div class="our-team-heading">
+				<go-title-page size="large"> {{ item?.employedName }}</go-title-page>
+
+				<h4 class="our-team-job">{{ item?.job }}</h4>
+			</div>
+
+			<p *ngFor="let info of item?.info">
+				{{ info }}
+			</p>
+		</div>
+
+		<img class="member-photo" [src]="item.photoProfile" />
 	</div>
-</div>
+</article>
