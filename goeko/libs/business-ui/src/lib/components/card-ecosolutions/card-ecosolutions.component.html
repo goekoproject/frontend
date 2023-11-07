@@ -1,0 +1,17 @@
+<div class="eco-solutions-selected"></div>
+<div class="ecosolutions-heading">
+	<h1>{{ solutionName }}</h1>
+	<div class="ecosolutions-products">
+		<p>{{ products }}</p>
+		<span class="tag-vertical"></span>
+	</div>
+</div>
+
+<div class="ecosolutions-sdg">
+	<img
+		*ngFor="let item of sustainableDevelopmentGoals"
+		class="ods-icon"
+		[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + item + '.png'"
+		[alt]="item"
+	/>
+</div>

@@ -1,0 +1,37 @@
+.tab-element {
+	position: absolute;
+}
+
+.tab-hide {
+	display: none;
+}
+
+.tab-show {
+	display: block;
+}
+
+.tab-base-style {
+	padding: 12px;
+	gap: 12px;
+
+	width: 150px;
+	height: 40px;
+	cursor: pointer;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 17px;
+	color: #24253b;
+	border: none;
+	background: transparent;
+	text-align: center;
+}
+
+.tab-selected {
+	@extend .tab-base-style;
+	border-bottom: 5px solid #cce2f1;
+}
+
+.tab-not-selected {
+	@extend .tab-base-style;
+}

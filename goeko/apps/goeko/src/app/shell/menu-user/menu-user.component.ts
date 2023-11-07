@@ -19,7 +19,7 @@ export class MenuUserComponent implements OnInit {
 	langs = LANGS;
 	defaultLang!: any;
 	public menuOptions!: MenuUser[];
-	private _smeID!: string;
+	private _companyId!: string;
 	private _userType!: string;
 	constructor(
 		private translate: TranslateService,
@@ -30,7 +30,7 @@ export class MenuUserComponent implements OnInit {
 	) {}
 	ngOnInit(): void {
 		this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang());
-		this._userService.companyDetail.subscribe((company: any) => (this._smeID = company?.id));
+		this._userService.companyDetail.subscribe((company: any) => (this._companyId = company?.id));
 		this._userContextService.userType.subscribe((userType: string) => {
 			if (userType) {
 				this.menuOptions = SELECT_MENU_USER[userType as keyof typeof SELECT_MENU_USER];
@@ -53,8 +53,12 @@ export class MenuUserComponent implements OnInit {
 		switch (route) {
 			case 'profile':
 				// eslint-disable-next-line no-case-declarations
-				const id = this._smeID;
-				this._router.navigate(['profile', id]);
+				this._router.navigate(['profile', this._companyId]);
+				return;
+
+			case 'cleantech-ecosolutions':
+				// eslint-disable-next-line no-case-declarations
+				this._router.navigate(['cleantech-ecosolutions', this._companyId]);
 				return;
 
 			default:

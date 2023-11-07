@@ -13,3 +13,4 @@ export * from './lib/ui/badge/public-api';
 export * from './lib/ui/ui-breadcrumbs/public-api';
 export * from './lib/ui/loaders/public-api';
 export * from './lib/ui/title-page/public-api';
+export * from './lib/ui/tab-group/public-api';

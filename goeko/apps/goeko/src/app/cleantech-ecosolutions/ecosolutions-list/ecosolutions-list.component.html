@@ -1,0 +1,17 @@
+<section>
+	<go-tab-group>
+		<go-tab [title]="categorySection[0].keyLang | translate">
+			<div class="ecosolutions-card-list">
+				<goeko-card-ecosolutions
+					*ngFor="let item of ecosolutions"
+					[solutionName]="item.solutionName"
+					[products]="item.products"
+					[sustainableDevelopmentGoals]="item.sustainableDevelopmentGoals"
+				></goeko-card-ecosolutions>
+			</div>
+		</go-tab>
+		<go-tab [title]="categorySection[1].keyLang | translate"> </go-tab>
+		<go-tab [title]="categorySection[2].keyLang | translate"> </go-tab>
+		<go-tab [title]="categorySection[3].keyLang | translate"> </go-tab>
+	</go-tab-group>
+</section>

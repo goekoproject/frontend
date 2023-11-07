@@ -44,6 +44,12 @@ const ROUTES: Routes = [
 		canActivate: [AuthGuard],
 		loadChildren: () => import('./sme-analysis-form/sme-analysis-form.module').then((m) => m.SmeAnalysisFormModule),
 	},
+	{
+		path: 'cleantech-ecosolutions',
+		canActivate: [AuthGuard],
+		loadChildren: () =>
+			import('./cleantech-ecosolutions/cleantech-ecosolutions.module').then((m) => m.CleantechEcosolutionsModule),
+	},
 ];
 @NgModule({
 	imports: [
