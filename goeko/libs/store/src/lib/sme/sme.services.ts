@@ -3,7 +3,12 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, ObservableInput, filter, from, map, mergeMap, reduce } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
 import { SmeOptions } from './sme-options';
-import { SmeRecomendationRequest, SmeRecomendationRequestDemo, SmeRequestResponse } from './sme-request.model';
+import {
+	SmeCreateRecomendationRequest,
+	SmeRecomendationRequestDemo,
+	SmeRequestResponse,
+	SmeSaveRecomendationRequest,
+} from './sme-request.model';
 import { SME_CONFIGURATION } from './sme.module';
 
 @Injectable()
@@ -49,8 +54,12 @@ export class SmeService {
 		);
 	}
 
-	createRecommendations(body: SmeRecomendationRequest): Observable<any> {
+	createRecommendations(body: SmeCreateRecomendationRequest): Observable<any> {
 		return this._http.post<any>(`${this.configuration.endpoint}/v1/recommendation/smes`, body);
+	}
+
+	saveRecommendations(body: SmeSaveRecomendationRequest): Observable<any> {
+		return this._http.post<any>(`${this.configuration.endpoint}/v1/recommendation/requests/smes`, body);
 	}
 
 	getByIdExternal(id: string): Observable<any> {

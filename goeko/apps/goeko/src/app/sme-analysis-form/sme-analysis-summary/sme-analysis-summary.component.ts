@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { Section } from '../form-field.model';
 import { DataSelect, DataSelectOption } from '../select-data.constants';
-import { FormValueToSmeAnalysisRequest } from '../sme-form-analysis/sme-analysis.request';
+import { FormValueToSmeAnalysisRequest, formToClassificationsMapper } from '../sme-form-analysis/sme-analysis.request';
 import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
 
 @Component({
@@ -110,11 +110,17 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 	}
 
 	getResults() {
-		this._router.navigate(['../results', this._smeId], { relativeTo: this._route });
+		this._smeServices
+			.createRecommendations({ classifications: formToClassificationsMapper(this.formValue) })
+			.subscribe((res) => {
+				if (res) {
+					this._router.navigate(['../results', this._smeId], { relativeTo: this._route });
+				}
+			});
 	}
 	saveAnalysis() {
 		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeId, this.formValue);
-		this._smeServices.createRecommendations(smeAnalysisRequest).subscribe((res) => {
+		this._smeServices.saveRecommendations(smeAnalysisRequest).subscribe((res) => {
 			this.saveOK = true;
 			setTimeout(() => {
 				this.saveOK = false;

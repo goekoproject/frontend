@@ -1,7 +1,7 @@
-import { Classifications, SmeRecomendationRequest } from '@goeko/store';
+import { Classifications, SmeSaveRecomendationRequest } from '@goeko/store';
 import { Section } from '../form-field.model';
 
-const formToClassificationsMapper = (formValue: Section) => {
+export const formToClassificationsMapper = (formValue: Section) => {
 	const classifications: Classifications[] = [];
 
 	const isObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
@@ -76,12 +76,12 @@ export const transformArrayToObj = (arr: Item[]) => {
 	return result;
 };
 
-export class FormValueToSmeAnalysisRequest implements SmeRecomendationRequest {
+export class FormValueToSmeAnalysisRequest implements SmeSaveRecomendationRequest {
 	smeId: string;
 	classifications: Classifications[];
 	searchName?: string;
 	constructor(smeId: string, formValue: Section) {
-		this.searchName = formValue.searchName;
+		this.searchName = formValue.searchName || '';
 		this.smeId = smeId;
 		this.classifications = formToClassificationsMapper(formValue);
 	}
