@@ -8,7 +8,7 @@ export const FORM_FIELD: Section[] = [
 	{
 		id: 'co2-category-form',
 		keyLang: 'CATEGORIES.co2emission',
-		controlName: 'co2Emission',
+		controlName: 'co2emission',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',
 		showResult: true,

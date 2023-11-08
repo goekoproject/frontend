@@ -3,6 +3,7 @@ import { ActivatedRoute, Route } from '@angular/router';
 import { CATEGORIES, CATEGORY_SECTION } from '@goeko/business-ui';
 import { EcosolutionsService } from '@goeko/store';
 import { CardEcosolutions } from './card-ecosolutions.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'goeko-ecosolutions-list',
@@ -17,7 +18,11 @@ export class EcosolutionsListComponent implements OnInit {
 	public ecosolutionsHp!: CardEcosolutions[];
 
 	public cleanTechId!: string;
-	constructor(private _ecosolutionsService: EcosolutionsService, private _route: ActivatedRoute) {}
+	constructor(
+		private _ecosolutionsService: EcosolutionsService,
+		private _route: ActivatedRoute,
+		private translateService: TranslateService
+	) {}
 
 	ngOnInit(): void {
 		this.cleanTechId = this._route.snapshot.paramMap.get('id') as string;
@@ -34,22 +39,22 @@ export class EcosolutionsListComponent implements OnInit {
 	private _buildEcosolutionsCo2Emossion(ecosolutions: any) {
 		this.ecosolutionsCo2 = ecosolutions
 			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.CO2_EMISSION)
-			.map((solution: any) => new CardEcosolutions(solution));
+			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
 	}
 
 	private _buildEcosolutionsWaste(ecosolutions: any) {
 		this.ecosolutionsWaste = ecosolutions
 			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.WASTE)
-			.map((solution: any) => new CardEcosolutions(solution));
+			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
 	}
 	private _buildEcosolutionsWater(ecosolutions: any) {
 		this.ecosolutionsWaste = ecosolutions
 			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.WATER)
-			.map((solution: any) => new CardEcosolutions(solution));
+			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
 	}
 	private _buildEcosolutionsHazardousProduct(ecosolutions: any) {
 		this.ecosolutionsHp = ecosolutions
 			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.HAZARDOUS_PRODUCT)
-			.map((solution: any) => new CardEcosolutions(solution));
+			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
 	}
 }

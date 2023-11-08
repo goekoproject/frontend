@@ -8,10 +8,13 @@
 </div>
 
 <div class="ecosolutions-sdg">
-	<img
-		*ngFor="let item of sustainableDevelopmentGoals"
-		class="ods-icon"
-		[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + item + '.png'"
-		[alt]="item"
-	/>
+	<ng-container *ngFor="let item of sustainableDevelopmentGoals; let i = index">
+		<img
+			*ngIf="i < 3"
+			class="ods-icon"
+			[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + item + '.png'"
+			[alt]="item"
+		/>
+		<span class="more-ods" *ngIf="i === 3"> + {{ sustainableDevelopmentGoals.length - 3 }} </span>
+	</ng-container>
 </div>

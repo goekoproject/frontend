@@ -11,9 +11,10 @@ import { CleantechEcosolutionsRoutingModule } from './cleantech-ecosolutions-rou
 import { EcosolutionsFormComponent } from './ecosolutions-form/ecosolutions-form.component';
 import { EcosolutionsListComponent } from './ecosolutions-list/ecosolutions-list.component';
 import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main.component';
+import { ProductTitlePipe } from './ecosolutions-list/product-title.pipe';
 
 @NgModule({
-	declarations: [EcosolutionsMainComponent, EcosolutionsListComponent, EcosolutionsFormComponent],
+	declarations: [EcosolutionsMainComponent, EcosolutionsListComponent, EcosolutionsFormComponent, ProductTitlePipe],
 	imports: [
 		CommonModule,
 		CleantechEcosolutionsRoutingModule,

@@ -10,7 +10,7 @@
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
-	max-width: 248px;
+	max-width: 288px;
 	h1 {
 		color: #252525;
 		font-size: 20px;
@@ -40,9 +40,18 @@
 .ecosolutions-sdg {
 	display: flex;
 	gap: 0.3rem;
-	img {
-		width: 26%;
+	img,
+	.more-ods {
+		width: 60px;
 		border-radius: 6px;
+	}
+
+	.more-ods {
+		background: #c0c0c0cf;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.6rem;
 	}
 }
 .eco-solutions-selected {

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SmeService, UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../form-field-demo.constants';
-import { FormValueToSmeAnalysisRequest } from '../sme-form-analysis/sme-analysis.request';
+import { FormValueToSmeAnalysisRequest, formToClassificationsMapper } from '../sme-form-analysis/sme-analysis.request';
 import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
 
 @Component({
@@ -57,6 +57,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 		this._smeAnalysisService.getCurrentAnalysis().subscribe((analysis) => {
 			if (analysis) {
 				this.formValue = analysis;
+				this.getResults();
 			}
 		});
 		this.currentLangCode = this._translateServices.defaultLang;
@@ -72,6 +73,14 @@ export class SmeAnalysisResultComponent implements OnInit {
 				this.smeDataProfile = company;
 			}
 		});
+	}
+
+	getResults() {
+		this._smeService
+			.createRecommendations({ classifications: formToClassificationsMapper(this.formValue) })
+			.subscribe((sme) => {
+				this._handleRecommendations(sme);
+			});
 	}
 	private saveAnalysis() {
 		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeId, this.formValue);

@@ -128,10 +128,12 @@ export class SmeFormAnalysisComponent implements OnInit {
 		});
 	}
 	getResults() {
-		this._smeService
+		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
+		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
+
+		/* 	this._smeService
 			.createRecommendations({ classifications: formToClassificationsMapper(this.form.value) })
 			.subscribe(() => {
-				this._router.navigate(['results', this._smeId], { relativeTo: this._route });
-			});
+			}); */
 	}
 }
