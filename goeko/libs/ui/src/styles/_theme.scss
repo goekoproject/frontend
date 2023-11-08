@@ -156,3 +156,9 @@ input:checked + .slider:before {
 .title-platform {
 	color: #00527d;
 }
+fieldset {
+	border-radius: 12px;
+	background: #fff;
+	padding: 2rem;
+	font-size: 18px;
+}

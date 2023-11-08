@@ -16,13 +16,13 @@ export class EcosolutionsListComponent implements OnInit {
 	public ecosolutionsWater!: CardEcosolutions[];
 	public ecosolutionsHp!: CardEcosolutions[];
 
-	private _cleanTechId!: string;
+	public cleanTechId!: string;
 	constructor(private _ecosolutionsService: EcosolutionsService, private _route: ActivatedRoute) {}
 
 	ngOnInit(): void {
-		this._cleanTechId = this._route.snapshot.paramMap.get('id') as string;
+		this.cleanTechId = this._route.snapshot.paramMap.get('id') as string;
 
-		this._ecosolutionsService.getByIdCleantechId(this._cleanTechId).subscribe((ecosolutions: any) => {
+		this._ecosolutionsService.getByIdCleantechId(this.cleanTechId).subscribe((ecosolutions: any) => {
 			if (ecosolutions && ecosolutions.length > 0) {
 				this._buildEcosolutionsCo2Emossion(ecosolutions);
 				this._buildEcosolutionsWaste(ecosolutions);

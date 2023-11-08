@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ECOSOLUTIONS_CONFIGURATION } from './ecosolutions.module';
 import { EcosolutionsOptions } from './ecosolutions-options';
+import { NewEcosolutions } from './new-ecosolution.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -18,5 +19,9 @@ export class EcosolutionsService {
 
 	getByIdCleantechId(id: string) {
 		return this._http.get(`${this.configuration.endpoint}/v1/ecosolutions/cleantech/${id}`);
+	}
+
+	createEcosolutions(body: NewEcosolutions) {
+		return this._http.post(`${this.configuration.endpoint}/v1/ecosolutions`, body);
 	}
 }

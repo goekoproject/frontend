@@ -80,7 +80,15 @@
 		"location": "Ubicación",
 		"city": "Ciudad",
 		"logo": "Logo",
-		"name_project": "Nombre del proyecto"
+		"name_project": "Nombre del proyecto",
+		"solutionName": "Nombre de tu ecosolución",
+		"price": "Precio",
+		"improvement": "Mejoras",
+		"reductionPercentage": "Porcentaje de reducción",
+		"ecosolutions_sustainableDevelopmentGoals": "Selecciona los Objetivos de Desarrollo Sostenible(ODS) que aplica tu ecosolución",
+		"ecosolutions_subCategory": "Seleccione las preguntas",
+		"ecosolutions_products": "Selecciona los productos",
+		"ecosolution_classification": "Seleccione las preguntas y elija los productos para su ecosolución"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",

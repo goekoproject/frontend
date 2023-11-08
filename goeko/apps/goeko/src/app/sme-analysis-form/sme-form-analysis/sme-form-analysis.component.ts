@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FORM_FIELD } from '../form-field-demo.constants';
-import { DataSelect } from '../select-data.constants';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Field } from '../form-field.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SmeService, UserService } from '@goeko/store';
-import {
-	FormValueToSmeAnalysisRequest,
-	formToClassificationsMapper,
-	transformArrayToObj,
-} from './sme-analysis.request';
+import { FORM_FIELD } from '../form-field-demo.constants';
+import { Field } from '../form-field.model';
+import { DataSelect } from '../select-data.constants';
+import { formToClassificationsMapper, transformArrayToObj } from './sme-analysis.request';
 import { SmeAnalysisService } from './sme-analysis.service';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {

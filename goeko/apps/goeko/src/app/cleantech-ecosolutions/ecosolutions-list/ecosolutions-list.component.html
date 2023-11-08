@@ -2,7 +2,15 @@
 	<go-tab-group>
 		<go-tab [title]="categorySection[0].keyLang | translate">
 			<div #content class="ecosolutions-card-list">
-				<button class="add-ecosolutions">
+				<button
+					class="add-ecosolutions"
+					[routerLink]="['./new']"
+					[queryParams]="{
+						cleanTechId: cleanTechId,
+						mainCategory: categorySection[0].code
+					}"
+					routerLinkActive="router-link-active"
+				>
 					<i class="ti ti-plus"></i>
 					<p>{{ 'add' | translate }} Ecosolutions</p>
 				</button>

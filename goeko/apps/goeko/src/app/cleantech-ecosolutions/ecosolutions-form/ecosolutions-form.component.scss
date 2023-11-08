@@ -1,0 +1,36 @@
+.ecosolutions-form {
+	form {
+		width: 94%;
+	}
+}
+
+.ecosolutions-cuestions {
+	display: flex;
+	margin: 1rem 0;
+	cursor: pointer;
+}
+.input-radio {
+	display: flex;
+	font-size: 16px;
+	gap: 1rem;
+	background-color: #ffffff;
+	padding: 1rem;
+	width: 370px;
+	border-radius: 16px;
+	border: 2px solid #0090d6;
+	cursor: pointer;
+	input {
+		width: 24px;
+	}
+}
+
+.ecosolutions-cuestions-products {
+	display: flex;
+	gap: 6rem;
+}
+.ecosolution-ods {
+	img {
+		width: 9%;
+		border-radius: 16px;
+	}
+}
