@@ -14,10 +14,7 @@ export class HomeService {
 		return this._contentFul.getEntryId(entryId);
 	}
 
-	getContentType(contentType: string, codeLang: string) {
-		const currentLang = LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
-		return this._contentFul
-			.getContentType(contentType, currentLang)
-			.pipe(map((res) => res.items.map((item) => item.fields)));
+	getContentType(contentType: string) {
+		return this._contentFul.getContentType(contentType).pipe(map((res) => res.items.map((item) => item.fields)));
 	}
 }

@@ -55,7 +55,7 @@ export class ContentComponent implements OnInit {
 	ngOnInit(): void {
 		AOS.init();
 		this.currentLang = this._translate.defaultLang;
-		this._getContentActors(this._translate.defaultLang);
+		this._getContentActors();
 		window.addEventListener('load', AOS.refresh);
 		this._getActors();
 		this._onClickSme();
@@ -85,13 +85,13 @@ export class ContentComponent implements OnInit {
 
 	private _getActors() {
 		this._translate.onLangChange.subscribe((res) => {
-			this._getContentActors(res.lang);
+			this._getContentActors();
 			this.currentLang = res.lang;
 		});
 	}
 
-	private _getContentActors(lang: string) {
-		this._homeService.getContentType('actores', lang).subscribe((res) => {
+	private _getContentActors() {
+		this._homeService.getContentType('actores').subscribe((res) => {
 			this.articles = res.map((actor: any) => ({
 				...actor,
 				benefits: this._buildDataLandingPage(actor.benefits),

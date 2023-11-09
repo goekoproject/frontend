@@ -4,13 +4,22 @@ import { from } from 'rxjs';
 import { ContentFulConfig } from './config.interface';
 import { CONTENT_FUL_CONFIG } from './content-ful.module';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { TranslateService } from '@ngx-translate/core';
 export enum LangOfLocalecontentFul {
 	gb = 'en-US',
 	fr = 'fr',
 }
 @Injectable({ providedIn: 'root' })
 export class ContentFulService {
-	constructor(@Inject(CONTENT_FUL_CONFIG) public config: ContentFulConfig) {}
+	constructor(
+		@Inject(CONTENT_FUL_CONFIG) public config: ContentFulConfig,
+		private _translateService: TranslateService
+	) {
+		this._translateService.onLangChange.subscribe((lang) => {
+			if (lang) {
+			}
+		});
+	}
 
 	private _client = contentful.createClient({
 		space: this.config.contentFul.spaceId,
@@ -40,7 +49,9 @@ export class ContentFulService {
 		});
 	}
 
-	getContentType(contentType: string, currentLang?: string) {
+	getContentType(contentType: string) {
+		const codeLang = this._translateService.currentLang || this._translateService.defaultLang;
+		const currentLang = LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
 		return from(this._client.getEntries({ content_type: contentType, locale: currentLang }));
 	}
 
