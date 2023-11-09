@@ -1,13 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UserService, SmeService, SmeRequestResponse, Classifications } from '@goeko/store';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SmeAnalysisService, SmeRequestResponse, UserService } from '@goeko/store';
 import { FORM_FIELD } from '../form-field-demo.constants';
+import { Field } from '../form-field.model';
 import { DataSelect } from '../select-data.constants';
 import { CategoryModel, transformArrayToObj } from '../sme-form-analysis/sme-analysis.request';
-import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
-import { Field } from '../form-field.model';
-import { Observable } from 'rxjs';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {
 		return o1.id.toString() === o2;
@@ -44,7 +42,6 @@ export class SmeFormBaseComponent implements OnInit {
 		private _fb: FormBuilder,
 		private _router: Router,
 		private _userService: UserService,
-		private _smeService: SmeService,
 		private _route: ActivatedRoute,
 		private _smeAnalysisService: SmeAnalysisService
 	) {}

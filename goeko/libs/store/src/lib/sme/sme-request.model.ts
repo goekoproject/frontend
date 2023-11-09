@@ -56,6 +56,7 @@ export interface SmeCreateRecomendationRequest {
 
 export interface SmeRequestResponse {
 	classifications: Classifications[];
+	id: string;
 	date: string;
 	searchName?: string;
 }

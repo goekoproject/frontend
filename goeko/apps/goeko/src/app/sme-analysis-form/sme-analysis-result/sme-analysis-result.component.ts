@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeService, UserService } from '@goeko/store';
+import { SmeAnalysisService, SmeService, UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { FormValueToSmeAnalysisRequest, formToClassificationsMapper } from '../sme-form-analysis/sme-analysis.request';
-import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
 
 @Component({
 	selector: 'goeko-sme-analysis-result',

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { SessionStorageService } from '@goeko/store';
 import { BehaviorSubject, of } from 'rxjs';
+import { SessionStorageService } from '../session-storage.service';
 
 const SS_SME_FORM = 'go-sme-form';
-@Injectable()
+@Injectable({
+	providedIn: 'platform',
+})
 export class SmeAnalysisService {
 	private _currentAnalysis = new BehaviorSubject<any>(null);
 	constructor(private _sessionStoregeService: SessionStorageService) {}

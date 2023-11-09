@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, LANGS, UserContextService } from '@goeko/core';
+import { AuthService, UserContextService } from '@goeko/core';
 import { UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { MENU_USER_CLEANTECH, MENU_USER_SME, MenuUser } from './menu-user.contants';
@@ -16,8 +16,6 @@ export const SELECT_MENU_USER = {
 	styleUrls: ['./menu-user.component.scss'],
 })
 export class MenuUserComponent implements OnInit {
-	langs = LANGS;
-	defaultLang!: any;
 	public menuOptions!: MenuUser[];
 	private _companyId!: string;
 	private _userType!: string;
@@ -29,7 +27,6 @@ export class MenuUserComponent implements OnInit {
 		private _userContextService: UserContextService
 	) {}
 	ngOnInit(): void {
-		this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang());
 		this._userService.companyDetail.subscribe((company: any) => (this._companyId = company?.id));
 		this._userContextService.userType.subscribe((userType: string) => {
 			if (userType) {
@@ -40,10 +37,6 @@ export class MenuUserComponent implements OnInit {
 
 	onRouterLinkActive(test: any): void {
 		console.log('onRouterLink', test);
-	}
-
-	onChangeLangs(selectedLand: any) {
-		this.translate.use(selectedLand.code);
 	}
 
 	logout() {

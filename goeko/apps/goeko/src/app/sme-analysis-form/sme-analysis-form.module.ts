@@ -19,7 +19,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
 import { CategoryModule } from '@goeko/business-ui';
-import { SmeAnalysisService } from './sme-form-analysis/sme-analysis.service';
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
 import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
@@ -53,6 +52,5 @@ import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 		}),
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
-	providers: [SmeAnalysisService],
 })
 export class SmeAnalysisFormModule {}

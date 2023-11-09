@@ -1,25 +1,20 @@
-/* .side-profile {
-	position: fixed;
-	height: 100%;
-	width: 28%;
-	background: #ffffff;
-	top: 0;
-	z-index: 1;
-	right: 0;
-	transition: all 1s ease;
-	overflow: hidden;
-} */
-.tag-username {
-	position: absolute;
-	top: 2.5%;
-	right: 2%;
-}
 dialog {
 	&::backdrop {
 		background-color: #1c1c1e6e;
 	}
 	&:focus-visible {
 		outline: none;
+	}
+}
+.tag-username {
+	.heading-icon {
+		font-size: 1.5rem;
+		color: #005292;
+	}
+	p {
+		color: #252525;
+		font-weight: 700;
+		font-size: 1rem;
 	}
 }
 .profile-visibility {

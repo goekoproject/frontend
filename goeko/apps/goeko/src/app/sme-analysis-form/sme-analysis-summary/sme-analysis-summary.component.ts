@@ -1,13 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeService } from '@goeko/store';
+import { SmeAnalysisService, SmeService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { Section } from '../form-field.model';
 import { DataSelect, DataSelectOption } from '../select-data.constants';
 import { FormValueToSmeAnalysisRequest, formToClassificationsMapper } from '../sme-form-analysis/sme-analysis.request';
-import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
 
 @Component({
 	selector: 'goeko-sme-analysis-summary',

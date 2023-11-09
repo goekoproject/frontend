@@ -1,4 +1,8 @@
-export const LANGS = [
+export interface Lang {
+	code: string;
+	title: string;
+}
+export const LANGS: Lang[] = [
 	/* 		{
         code: 'es',
         locale: 'es ',

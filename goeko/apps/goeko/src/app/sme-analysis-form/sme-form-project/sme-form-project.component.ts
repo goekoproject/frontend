@@ -1,9 +1,8 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
-import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UserService, SmeService } from '@goeko/store';
-import { SmeAnalysisService } from '../sme-form-analysis/sme-analysis.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SmeAnalysisService, SmeService, UserService } from '@goeko/store';
+import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component';
 
 @Component({
 	selector: 'goeko-sme-form-project',
@@ -20,15 +19,16 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
 		private route: ActivatedRoute,
 		private smeAnalysisService: SmeAnalysisService
 	) {
-		super(fb, router, userService, smeService, route, smeAnalysisService);
+		super(fb, router, userService, route, smeAnalysisService);
 	}
 
 	override ngOnInit(): void {
 		super.ngOnInit();
 		this.form.addControl('searchName', this.fb.control('', Validators.required));
 		this.onChangeLastRecomendation.subscribe((data) => (this.toogleSaveName = !data));
-		this._setLastAnalysis(this._getLastProject);
+		this._setLastAnalysis(this._getCurrentAnalysis);
 	}
 
+	private _getCurrentAnalysis = () => this.smeAnalysisService.getCurrentAnalysis();
 	private _getLastProject = () => this.smeService.getLastProjectBySmeId(this.smeId);
 }

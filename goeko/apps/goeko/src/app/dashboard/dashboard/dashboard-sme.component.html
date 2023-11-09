@@ -34,6 +34,8 @@
 		<span class="title-section">
 			<span class="title-tag"></span>
 			<h2>{{ 'projectManagement' | translate }}</h2>
+			<span class="title-tag-small"></span>
+			<h3>{{ 'last_project' | translate }}</h3>
 		</span>
 
 		<button
@@ -45,13 +47,27 @@
 			routerLinkActive="router-link-active"
 			[disabled]="!companyDetail"
 			appearance="secondary"
-			size="huge"
 		>
 			<i class="ti ti-device-desktop-plus"></i>
 			<h4>{{ 'new_project' | translate }}</h4>
 		</button>
 
-		<button
+		<ul class="list-project">
+			<li *ngFor="let project of projects">
+				<div class="project-col project-title">
+					<i class="ti ti-folder-heart"></i>
+					<h4>{{ project.searchName }}</h4>
+				</div>
+				<div class="project-col project-date">
+					<i class="ti ti-calendar-time"></i>
+					<p>{{ project.date | date : 'short' }}</p>
+				</div>
+				<div class="project-actions" (click)="goToProject(project)">
+					<i class="ti ti-circle-arrow-right"></i>
+				</div>
+			</li>
+		</ul>
+		<!-- 		<button
 			go-button
 			type="button"
 			[routerLink]="['/sme-analysis/last-project', companyDetail?.id]"
@@ -62,8 +78,7 @@
 			appearance="white"
 			size="huge"
 		>
-			<i class="ti ti-folder-heart"></i>
-			<h4>{{ nameLastProject }}</h4>
-		</button>
+			
+		</button> -->
 	</div>
 </div>

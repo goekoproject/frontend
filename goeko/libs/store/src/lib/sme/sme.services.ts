@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, ObservableInput, filter, from, map, mergeMap, reduce } from 'rxjs';
+import { Observable, ObservableInput, filter, from, map, mergeMap, reduce, toArray } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
 import { SmeOptions } from './sme-options';
 import {
@@ -28,12 +28,15 @@ export class SmeService {
 		return this._http.post<any>(`${this.configuration.endpoint}/v1/demo/recommendation/smes`, body);
 	}
 
-	getRecommendationsByProject(body: SmeRecomendationRequestDemo): Observable<any> {
-		return this._http.post<any>(`${this.configuration.endpoint}/v1/demo/recommendation/smes`, body);
-	}
-
 	getRecommendationsById(id: string): Observable<any> {
 		return this._http.get<any>(`${this.configuration.endpoint}/v1/recommendation/requests/smes/${id}`);
+	}
+	getRecommendationsByProjectById(id: string): Observable<any> {
+		return this.getRecommendationsById(id).pipe(
+			map((recommendation) => recommendation.requests),
+			mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuale */
+			filter((requests: any) => requests?.searchName)
+		);
 	}
 
 	getLastRecommendationById(id: string): Observable<any> {

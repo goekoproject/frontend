@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SmeRequestResponse, SmeService, UserService } from '@goeko/store';
+import { Router } from '@angular/router';
+import { SmeAnalysisService, SmeRequestResponse, SmeService, UserService } from '@goeko/store';
+import { bufferCount, take, toArray } from 'rxjs';
 
 @Component({
 	selector: 'goeko-dashboard-sme',
@@ -8,9 +10,15 @@ import { SmeRequestResponse, SmeService, UserService } from '@goeko/store';
 })
 export class DashboardSmeComponent implements OnInit {
 	public companyDetail!: any;
-	public nameLastProject!: string | undefined;
-	constructor(private _userService: UserService, private _smeService: SmeService) {}
+	public projects!: Array<SmeRequestResponse>;
+	constructor(
+		private _userService: UserService,
+		private _smeAnalyticsService: SmeAnalysisService,
+		private _smeService: SmeService,
+		private _router: Router
+	) {}
 	ngOnInit(): void {
+		this.projects = new Array<SmeRequestResponse>();
 		this._userService.companyDetail.subscribe((companyDetail) => {
 			if (companyDetail) {
 				this.companyDetail = companyDetail;
@@ -20,10 +28,23 @@ export class DashboardSmeComponent implements OnInit {
 	}
 
 	private _getLastProjectName() {
-		this._smeService.getLastProjectBySmeId(this.companyDetail.id).subscribe((project: SmeRequestResponse) => {
-			if (project) {
-				this.nameLastProject = project.searchName;
-			}
+		this._smeService
+			.getRecommendationsByProjectById(this.companyDetail.id)
+			.pipe(take(3), toArray())
+			.subscribe((projects: SmeRequestResponse[]) => {
+				if (projects) {
+					this.projects = projects;
+				}
+			});
+	}
+
+	goToProject(projects: SmeRequestResponse) {
+		this._smeAnalyticsService.setCurrentAnalysis(projects);
+		this._router.navigate(['/sme-analysis/last-project', projects.id], {
+			queryParams: {
+				smeId: projects.id,
+				isProject: true,
+			},
 		});
 	}
 }

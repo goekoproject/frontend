@@ -1,7 +1,7 @@
 .badge {
 	width: max-content;
 	height: 32px;
-	padding: 0 12px;
+	padding: 1.2rem;
 	display: flex;
 	align-items: center;
 	border-radius: 20px;
@@ -9,6 +9,7 @@
 	border: 1px solid #c8b4ff;
 	transition: 0.3s;
 	gap: 0.5rem;
+	font-size: 1rem;
 	.badge-close {
 		font-size: 1.2rem;
 	}
