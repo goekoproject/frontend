@@ -28,6 +28,10 @@ export class SmeService {
 		return this._http.post<any>(`${this.configuration.endpoint}/v1/demo/recommendation/smes`, body);
 	}
 
+	getRecommendationsByProject(body: SmeRecomendationRequestDemo): Observable<any> {
+		return this._http.post<any>(`${this.configuration.endpoint}/v1/demo/recommendation/smes`, body);
+	}
+
 	getRecommendationsById(id: string): Observable<any> {
 		return this._http.get<any>(`${this.configuration.endpoint}/v1/recommendation/requests/smes/${id}`);
 	}

@@ -48,19 +48,13 @@ export class SmeFormAnalysisComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this._smeId = this._getSmeId();
+		this._smeId = this._route.snapshot.paramMap.get('id') as string;
 		this._route.queryParams.subscribe((queryParams: any) => (this._selectedCategory = queryParams.categoryId));
 		this.form = this._fb.group({});
 		this._createFormGroup();
 		this._getSmeCompanyDetail();
 		this._setLastAnalysis();
 		this._selectCatagory();
-	}
-
-	private _getSmeId(): string {
-		const idByNewAnalysis = this._route.snapshot.paramMap.get('id') as string;
-		const idByLastRecommended = this._route.snapshot.queryParamMap.get('smeId') as string;
-		return idByNewAnalysis || idByLastRecommended;
 	}
 
 	private _getSmeCompanyDetail() {
@@ -80,6 +74,21 @@ export class SmeFormAnalysisComponent implements OnInit {
 		this.slideSelected = indexCarousel;
 	}
 
+	private _createFormGroup() {
+		this.formField.forEach((group) => {
+			if (group.controlName) {
+				const formGroup = this._fb.group({});
+				group?.fields?.forEach((control: Field) => {
+					formGroup.addControl(control.controlName, this._fb.control(''));
+				});
+				this.form.addControl(group.controlName, formGroup);
+			}
+		});
+	}
+	addFormGroup(index: any) {
+		this.slideSelected = index;
+	}
+
 	private _setLastAnalysis() {
 		if (this._smeId) {
 			this._getLastAnalysis();
@@ -96,22 +105,6 @@ export class SmeFormAnalysisComponent implements OnInit {
 			}
 		});
 	}
-
-	private _createFormGroup() {
-		this.formField.forEach((group) => {
-			if (group.controlName) {
-				const formGroup = this._fb.group({});
-				group?.fields?.forEach((control: Field) => {
-					formGroup.addControl(control.controlName, this._fb.control(''));
-				});
-				this.form.addControl(group.controlName, formGroup);
-			}
-		});
-	}
-	addFormGroup(index: any) {
-		this.slideSelected = index;
-	}
-
 	gotToSummary() {
 		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
 		setTimeout(() => {
@@ -129,11 +122,19 @@ export class SmeFormAnalysisComponent implements OnInit {
 	}
 	getResults() {
 		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
+		this._smeId = this._overrideSmeId();
 		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
+	}
 
-		/* 	this._smeService
-			.createRecommendations({ classifications: formToClassificationsMapper(this.form.value) })
-			.subscribe(() => {
-			}); */
+	/**
+	 * Set smeId again if we are create new analysis and the sme is in queryParams
+	 * @returns smeID
+	 */
+	private _overrideSmeId(): string {
+		if (!this._smeId) {
+			const idByNewAnalysis = this._route.snapshot.queryParamMap.get('smeId') as string;
+			return idByNewAnalysis;
+		}
+		return this._smeId;
 	}
 }
