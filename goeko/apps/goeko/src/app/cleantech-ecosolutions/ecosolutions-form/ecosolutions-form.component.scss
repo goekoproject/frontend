@@ -28,9 +28,78 @@
 	display: flex;
 	gap: 6rem;
 }
+.fieldset-ods {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
 .ecosolution-ods {
+	cursor: pointer;
+	position: relative;
+	width: 12%;
+	height: 100%;
+	display: flex;
+	font-size: 1rem;
+	border-radius: 6px;
+	overflow: hidden;
+	flex-direction: column;
+	max-width: 11%;
+	min-width: 4rem;
+
+	input[type='checkbox'] {
+		visibility: hidden;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		display: block;
+	}
+
 	img {
-		width: 9%;
-		border-radius: 16px;
+		width: 100%;
+		border-radius: 6px;
+		transition: 0.2s ease-in;
+		border: 4px solid rgba(0, 144, 214, 0.25);
+		padding: 0.2rem;
+	}
+	span {
+		font-size: 1rem;
+		text-align: center;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		color: #252525;
+		word-break: break-word;
+	}
+	&:hover span {
+		overflow: visible;
+		white-space: normal;
+		height: auto;
+	}
+}
+.ecosolution-ods:has(input:checked) {
+	img {
+		box-shadow: inset 0px 0px 20px 5px rgba(0, 144, 214, 0.25);
+	}
+	span {
+		font-weight: 600;
+	}
+}
+.ods-check {
+	position: absolute;
+	font-size: 2rem;
+	color: #0090d6;
+	right: -2px;
+	background: #fff;
+	border-radius: 50%;
+	top: -2px;
+}
+.field-form-checked {
+	display: flex;
+	gap: 4rem;
+	margin: 0.6rem;
+	label:not(.switch) {
+		width: 50%;
 	}
 }

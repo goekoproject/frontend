@@ -145,6 +145,25 @@
 		"slogan_text1": "Connecting SMEs to clean technologies and financing",
 		"slogan_text2": "Who are you?"
 	},
+	"ODS": {
+		"ods_1": "No Poverty",
+		"ods_2": "Zero Hunger",
+		"ods_3": "Good Health and Well-being",
+		"ods_4": "Quality Education",
+		"ods_5": "Gender Equality",
+		"ods_6": "Clean Water and Sanitation",
+		"ods_7": "Affordable and Clean Energy",
+		"ods_8": "Decent Work and Economic Growth",
+		"ods_9": "Industry, Innovation, and Infrastructure",
+		"ods_10": "Reduced Inequality",
+		"ods_11": "Sustainable Cities and Communities",
+		"ods_12": "Responsible Consumption and Production",
+		"ods_13": "Climate Action",
+		"ods_14": "Life Below Water",
+		"ods_15": "Life on Land",
+		"ods_16": "Peace, Justice, and Strong Institutions",
+		"ods_17": "Partnerships for the Goals"
+	},
 	"SELECT_DATA_LABEL": {
 		"fiveBetweenTen": "Between 5 and 10 years",
 		"defaultLabel": "Please select from the following options",

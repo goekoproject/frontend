@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { ButtonModule } from '@goeko/ui';
 
 @Component({
 	selector: 'goeko-card-ecosolutions',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, ButtonModule],
 	templateUrl: './card-ecosolutions.component.html',
 	styleUrls: ['./card-ecosolutions.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -17,8 +18,19 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CardEcosolutionsComponent implements OnInit {
 	@Input() solutionName: string = 'Vertua Ultra Zero';
-	@Input() products: string[] = ['Plastics,Concrete,Cement Lighting,Building materials,Electrical machinery'];
+	@Input()
+	public get products(): string {
+		return this._products.toString().replace(/,/g, ' · ');
+	}
+	public set products(value: string) {
+		this._products = value;
+	}
+	private _products!: string;
+
 	@Input() sustainableDevelopmentGoals: number[] = [17, 9, 6];
+
+	@Output() delete = new EventEmitter<boolean>(false);
+	@Output() edit = new EventEmitter<boolean>(false);
 
 	currentLangCode!: string;
 
@@ -31,5 +43,12 @@ export class CardEcosolutionsComponent implements OnInit {
 
 	private _changeLangCode() {
 		this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang));
+	}
+
+	onDelete() {
+		this.delete.emit(true);
+	}
+	onEdit() {
+		this.edit.emit(false);
 	}
 }

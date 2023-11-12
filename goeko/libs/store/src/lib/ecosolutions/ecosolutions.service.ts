@@ -17,6 +17,9 @@ export class EcosolutionsService {
 		return this._http.get(`${this.configuration.endpoint}/v1/ecosolutions`);
 	}
 
+	deleteEcosolution(id: string) {
+		return this._http.delete(`${this.configuration.endpoint}/v1/ecosolutions/${id}`);
+	}
 	getByIdCleantechId(id: string) {
 		return this._http.get(`${this.configuration.endpoint}/v1/ecosolutions/cleantech/${id}`);
 	}

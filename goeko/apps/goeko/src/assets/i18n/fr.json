@@ -145,6 +145,25 @@
 		"slogan_text1": "Connexion des PME aux technologies propres et au financement",
 		"slogan_text2": "Est-ce que tu veux?"
 	},
+	"ODS": {
+		"ods_1": "Pas de pauvreté",
+		"ods_2": "Faim Zéro",
+		"ods_3": "Bonne santé et bien-être",
+		"ods_4": "Éducation de qualité",
+		"ods_5": "Égalité des sexes",
+		"ods_6": "Eau propre et assainissement",
+		"ods_7": "Énergie propre et d'un coût abordable",
+		"ods_8": "Travail décent et croissance économique",
+		"ods_9": "Industrie, Innovation et Infrastructure",
+		"ods_10": "Réduction des inégalités",
+		"ods_11": "Villes et communautés durables",
+		"ods_12": "Consommation et production responsables",
+		"ods_13": "Action pour le climat",
+		"ods_14": "Vie aquatique",
+		"ods_15": "Vie terrestre",
+		"ods_16": "Paix, justice et institutions fortes",
+		"ods_17": "Partenariats pour la réalisation des objectifs"
+	},
 	"SELECT_DATA_LABEL": {
 		"fiveBetweenTen": "Entre 5 et 10 années",
 		"defaultLabel": "Veuillez sélectionner parmi les options suivantes",

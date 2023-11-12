@@ -191,6 +191,26 @@ export const SelectPaybackPeriodYears: DataSelectOption[] = [
 		keyLang: 'SELECT_DATA_LABEL.fiveBetweenTen',
 	},
 ];
+
+const SelectOdsDescription: DataSelectOption[] = [
+	{ id: 'ods_1', keyLang: 'ODS.ods_1' },
+	{ id: 'ods_2', keyLang: 'ODS.ods_2' },
+	{ id: 'ods_3', keyLang: 'ODS.ods_3' },
+	{ id: 'ods_4', keyLang: 'ODS.ods_4' },
+	{ id: 'ods_5', keyLang: 'ODS.ods_5' },
+	{ id: 'ods_6', keyLang: 'ODS.ods_6' },
+	{ id: 'ods_7', keyLang: 'ODS.ods_7' },
+	{ id: 'ods_8', keyLang: 'ODS.ods_8' },
+	{ id: 'ods_9', keyLang: 'ODS.ods_9' },
+	{ id: 'ods_10', keyLang: 'ODS.ods_10' },
+	{ id: 'ods_11', keyLang: 'ODS.ods_11' },
+	{ id: 'ods_12', keyLang: 'ODS.ods_12' },
+	{ id: 'ods_13', keyLang: 'ODS.ods_13' },
+	{ id: 'ods_14', keyLang: 'ODS.ods_14' },
+	{ id: 'ods_15', keyLang: 'ODS.ods_15' },
+	{ id: 'ods_16', keyLang: 'ODS.ods_16' },
+	{ id: 'ods_17', keyLang: 'ODS.ods_17' },
+];
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -203,6 +223,7 @@ export const DataSelect = {
 	paybackPeriodYears: SelectPaybackPeriodYears,
 	inertOrMineralWaste: SelectInertOrMineralWaste,
 	greenWaste: SelectGreenWaste,
+	odsDescription: SelectOdsDescription,
 	specialWaste: SelectSpecialWaste,
 	hazardousWaste: SelectHazardousWaste,
 };

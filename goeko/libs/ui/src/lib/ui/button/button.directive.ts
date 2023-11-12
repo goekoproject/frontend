@@ -8,7 +8,7 @@ type appearance = 'transparent' | 'primary' | 'secondary' | 'white' | 'any' | 'l
 type size = 'huge' | 'medium';
 
 @Directive({
-	selector: '[go-button]',
+	selector: '[go-button], [go-button-icon]',
 	host: {
 		class: 'go-button',
 		'[attr.appearance]': 'appearance',

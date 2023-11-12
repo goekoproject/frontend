@@ -41,14 +41,15 @@
 		</section>
 
 		<section>
-			<fieldset formArrayName="sustainableDevelopmentGoals">
+			<fieldset formArrayName="sustainableDevelopmentGoals" class="fieldset-ods">
 				<legend>{{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}</legend>
-
 				<label
 					*ngFor="let codeControls of sustainableDevelopmentGoals.controls; let i = index"
 					class="ecosolution-ods"
 					[formGroupName]="i"
 				>
+					<i *ngIf="codeControls.value.checked" class="ti ti-circle-check ods-check"></i>
+
 					<input
 						type="checkbox"
 						[id]="i"
@@ -60,6 +61,7 @@
 						[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + ods[i] + '.png'"
 						[alt]="code"
 					/>
+					<span> {{ dataSelect['odsDescription'][i].keyLang | translate }}</span>
 				</label>
 			</fieldset>
 		</section>

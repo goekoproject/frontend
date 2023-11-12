@@ -101,6 +101,25 @@
 		"approvedSwiss": "Aprobada para el mercado suizo",
 		"additionalInformation": "Información adicional"
 	},
+	"ODS": {
+		"ods_1": "Sin Pobreza",
+		"ods_2": "Hambre Cero",
+		"ods_3": "Salud y Bienestar",
+		"ods_4": "Educación de Calidad",
+		"ods_5": "Igualdad de Género",
+		"ods_6": "Agua Limpia y Saneamiento",
+		"ods_7": "Energía asequible y no contaminante",
+		"ods_8": "Trabajo Decente y Crecimiento Económico",
+		"ods_9": "Industria, Innovación e Infraestructura",
+		"ods_10": "Reducción de las Desigualdades",
+		"ods_11": "Ciudades y Comunidades Sostenibles",
+		"ods_12": "Producción y Consumo Responsables",
+		"ods_13": "Acción por el Clima",
+		"ods_14": "Vida Submarina",
+		"ods_15": "Vida de Ecosistemas Terrestres",
+		"ods_16": "Paz, Justicia e Instituciones Sólidas",
+		"ods_17": "Alianzas para lograr los Objetivos"
+	},
 	"HOME": {
 		"sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
 		"sloganCallActionsBtnSME": "Comience su transición verde aquí",

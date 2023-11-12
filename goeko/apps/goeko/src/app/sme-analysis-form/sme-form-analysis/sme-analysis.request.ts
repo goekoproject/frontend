@@ -64,7 +64,7 @@ export const transformArrayToObj = (arr: Item[]) => {
 		};
 	};
 
-	arr.forEach((item) => {
+	arr?.forEach((item) => {
 		const { subCategory, products } = item;
 		if (!result[item.mainCategory]) {
 			result[item.mainCategory] = transformObej(subCategory, products);

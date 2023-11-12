@@ -1,4 +1,13 @@
-<div class="eco-solutions-selected"></div>
+<div class="eco-solutions-selected">
+	<div class="eco-solution-actions">
+		<button go-button-icon (click)="onEdit()">
+			<i class="ti ti-pencil"></i>
+		</button>
+		<button go-button-icon (click)="onDelete()">
+			<i class="ti ti-trash"></i>
+		</button>
+	</div>
+</div>
 <div class="ecosolutions-heading">
 	<h1>{{ solutionName }}</h1>
 	<div class="ecosolutions-products">

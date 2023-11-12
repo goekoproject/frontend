@@ -12,10 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class EcosolutionsListComponent implements OnInit {
 	public categorySection = CATEGORY_SECTION;
-	public ecosolutionsCo2!: CardEcosolutions[];
-	public ecosolutionsWaste!: CardEcosolutions[];
-	public ecosolutionsWater!: CardEcosolutions[];
-	public ecosolutionsHp!: CardEcosolutions[];
+	public ecosolutions!: CardEcosolutions[];
 
 	public cleanTechId!: string;
 	constructor(
@@ -26,35 +23,22 @@ export class EcosolutionsListComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.cleanTechId = this._route.snapshot.paramMap.get('id') as string;
+		this.getEcosolutionByCleanTech();
+	}
 
+	getEcosolutionByCleanTech() {
 		this._ecosolutionsService.getByIdCleantechId(this.cleanTechId).subscribe((ecosolutions: any) => {
 			if (ecosolutions && ecosolutions.length > 0) {
-				this._buildEcosolutionsCo2Emossion(ecosolutions);
-				this._buildEcosolutionsWaste(ecosolutions);
-				this._buildEcosolutionsWater(ecosolutions);
-				this._buildEcosolutionsHazardousProduct(ecosolutions);
+				this.ecosolutions = ecosolutions.map(
+					(ecosolution: any) => new CardEcosolutions(ecosolution, this.translateService)
+				);
 			}
 		});
 	}
-	private _buildEcosolutionsCo2Emossion(ecosolutions: any) {
-		this.ecosolutionsCo2 = ecosolutions
-			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.CO2_EMISSION)
-			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
-	}
 
-	private _buildEcosolutionsWaste(ecosolutions: any) {
-		this.ecosolutionsWaste = ecosolutions
-			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.WASTE)
-			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
-	}
-	private _buildEcosolutionsWater(ecosolutions: any) {
-		this.ecosolutionsWaste = ecosolutions
-			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.WATER)
-			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
-	}
-	private _buildEcosolutionsHazardousProduct(ecosolutions: any) {
-		this.ecosolutionsHp = ecosolutions
-			.filter((ecosolution: any) => ecosolution.classification.mainCategory === CATEGORIES.HAZARDOUS_PRODUCT)
-			.map((solution: any) => new CardEcosolutions(solution, this.translateService));
+	deleteEcosolution(ecosolution: CardEcosolutions) {
+		this._ecosolutionsService.deleteEcosolution(ecosolution.id).subscribe((res: any) => {
+			console.log(res);
+		});
 	}
 }

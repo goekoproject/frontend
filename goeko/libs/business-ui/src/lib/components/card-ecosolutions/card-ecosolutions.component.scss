@@ -60,9 +60,23 @@
 	position: absolute;
 	left: 0;
 	top: 0;
+
 	&:hover {
 		background-color: #0090d6;
 	}
+	.eco-solution-actions {
+		display: none;
+	}
+	&:hover .eco-solution-actions {
+		display: flex;
+	}
+}
+.eco-solution-actions {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 1rem;
+	gap: 1rem;
 }
 .ecosolutions-products {
 	position: relative;
