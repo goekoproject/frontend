@@ -7,6 +7,8 @@
 	"confirm": "Confirm",
 	"projectManagement": "Project Management",
 	"add": "Add",
+	"year": "year",
+	"years": "years",
 	"LOGIN": {
 		"msglogin": "Log in in your account",
 		"msgsignup": "Do not have any account?",
@@ -97,7 +99,15 @@
 		"ecosolutions_sustainableDevelopmentGoals": "Select Sustainable Development Goals (SDGs) that apply to your solution",
 		"ecosolutions_subCategory": "Select Subcategories",
 		"ecosolutions_products": "Select Products",
-		"ecosolution_classification": "Select questions and choose products for your eco-solution"
+		"ecosolution_classification": "Select questions and choose products for your eco-solution",
+		"deliverCountries": "Countries where it offers its ecosolution",
+		"paybackPeriodYears": "Average payback period of its ecosolution",
+		"marketReady": "Is your ecosolution market-ready?",
+		"guarantee": "Guarantee",
+		"certified": "Certified",
+		"approvedSwiss": "Approved for the Swiss market",
+		"operationalCostReductionPercentage": "Percentage of operational cost reduction",
+		"additionalInformation": "Additional information"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Free trial to connect with qualified leads",
@@ -136,6 +146,7 @@
 		"slogan_text2": "Who are you?"
 	},
 	"SELECT_DATA_LABEL": {
+		"fiveBetweenTen": "Between 5 and 10 years",
 		"defaultLabel": "Please select from the following options",
 		"greenWaste": {
 			"greenWoodUntreated": "Green Wood (Untreated)",

@@ -5,6 +5,7 @@ interface Price {
 
 interface Improvement {
 	reductionPercentage: number;
+	operationalCostReductionPercentage: number;
 }
 
 interface Classification {
@@ -16,8 +17,14 @@ interface Classification {
 export interface NewEcosolutions {
 	cleantechId: string;
 	solutionName: string;
+	classification: Classification;
 	price?: Price;
 	improvement?: Improvement;
 	sustainableDevelopmentGoals?: number[];
-	classification: Classification;
+	countries?: string[];
+	paybackPeriodYears?: number;
+	marketReady?: boolean;
+	guarantee?: boolean;
+	certified?: boolean;
+	approved?: boolean;
 }

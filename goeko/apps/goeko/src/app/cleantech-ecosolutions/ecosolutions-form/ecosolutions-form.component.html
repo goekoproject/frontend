@@ -34,6 +34,9 @@
 				<go-input [formControlName]="'reductionPercentage'" type="number">
 					<span slot="label">{{ 'FORM_LABEL.reductionPercentage' | translate }}</span>
 				</go-input>
+				<go-input [formControlName]="'operationalCostReductionPercentage'" type="number">
+					<span slot="label">{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</span>
+				</go-input>
 			</fieldset>
 		</section>
 
@@ -41,20 +44,101 @@
 			<fieldset formArrayName="sustainableDevelopmentGoals">
 				<legend>{{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}</legend>
 
-				<label *ngFor="let code of ods; let i = index" class="ecosolution-ods">
-					<input type="checkbox" [formGroupName]="i" />
+				<label
+					*ngFor="let codeControls of sustainableDevelopmentGoals.controls; let i = index"
+					class="ecosolution-ods"
+					[formGroupName]="i"
+				>
+					<input
+						type="checkbox"
+						[id]="i"
+						[formControlName]="'checked'"
+						[value]="codeControls.value.checked"
+					/>
 					<img
 						class="ods-icon"
-						[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + code + '.png'"
+						[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + ods[i] + '.png'"
 						[alt]="code"
 					/>
 				</label>
 			</fieldset>
 		</section>
 
-		<go-input [formControlName]="'price'" type="number">
-			<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
-		</go-input>
+		<section>
+			<fieldset>
+				<legend>{{ 'FORM_LABEL.improvement' | translate }}</legend>
+
+				<go-input [formControlName]="'price'" type="number">
+					<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
+				</go-input>
+
+				<div>
+					<label for="deliverCountries">{{ 'FORM_LABEL.deliverCountries' | translate }}</label>
+
+					<ui-super-select
+						[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+						[multiple]="true"
+						[formControlName]="'deliverCountries'"
+						id="deliverCountries"
+						name="deliverCountries"
+						[compareWith]="defaultSetSuperSelect"
+					>
+						<super-option *ngFor="let option of dataSelect['countries']" [value]="option">
+							{{ option.keyLang | translate }}
+						</super-option>
+					</ui-super-select>
+				</div>
+
+				<div>
+					<label for="deliverCountries">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</label>
+
+					<ui-super-select
+						[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+						[formControlName]="'paybackPeriodYears'"
+						id="paybackPeriodYears"
+						name="paybackPeriodYears"
+						[compareWith]="defaultSetSuperSelect"
+					>
+						<super-option *ngFor="let option of dataSelect['paybackPeriodYears']" [value]="option">
+							{{ option.id }} {{ option.keyLang | translate }}
+						</super-option>
+					</ui-super-select>
+				</div>
+
+				<div class="field-form-checked">
+					<label for="marketReady">{{ 'FORM_LABEL.marketReady' | translate }}</label>
+					<label class="switch">
+						<input type="checkbox" [formControlName]="'marketReady'" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<div class="field-form-checked">
+					<label for="guarantee">{{ 'FORM_LABEL.guarantee' | translate }}</label>
+					<label class="switch">
+						<input type="checkbox" [formControlName]="'guarantee'" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<div class="field-form-checked">
+					<label for="certified">{{ 'FORM_LABEL.certified' | translate }}</label>
+					<label class="switch">
+						<input type="checkbox" [formControlName]="'certified'" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<div class="field-form-checked">
+					<label for="approved">{{ 'FORM_LABEL.approvedSwiss' | translate }}</label>
+					<label class="switch">
+						<input type="checkbox" [formControlName]="'approved'" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+			</fieldset>
+		</section>
+
 		<button go-button type="submit">{{ 'Save' | translate }} Eco-solutions</button>
 	</form>
 </div>

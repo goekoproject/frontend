@@ -6,6 +6,8 @@
 	"confirm": "Confirmar",
 	"projectManagement": "Gestión de proyectos",
 	"add": "Añadir",
+	"year": "año",
+	"years": "años",
 	"LOGIN": {
 		"msglogin": "Inicia sesión en tu cuenta",
 		"msgsignup": "¿No tienes una cuenta todavía ?",
@@ -89,7 +91,15 @@
 		"ecosolutions_sustainableDevelopmentGoals": "Selecciona los Objetivos de Desarrollo Sostenible(ODS) que aplica tu ecosolución",
 		"ecosolutions_subCategory": "Seleccione las preguntas",
 		"ecosolutions_products": "Selecciona los productos",
-		"ecosolution_classification": "Seleccione las preguntas y elija los productos para su ecosolución"
+		"ecosolution_classification": "Seleccione las preguntas y elija los productos para su ecosolución",
+		"operationalCostReductionPercentage": "Porcentaje de reducción de costos operativos",
+		"deliverCountries ": "Paises donde ofrece su ecosolución",
+		"paybackPeriodYears": "Período medio de recuperación de su ecosolución",
+		"marketReady": "¿Su ecosolución está lista para el mercado?",
+		"guarantee": "Garantía",
+		"certified": "Certificado",
+		"approvedSwiss": "Aprobada para el mercado suizo",
+		"additionalInformation": "Información adicional"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
@@ -134,6 +144,7 @@
 		"slogan_text2": "¿Quiere eres?"
 	},
 	"SELECT_DATA_LABEL": {
+		"fiveBetweenTen": "Entre 5 y 10 años",
 		"defaultLabel": "Por favor seleccione entre las siguientes opciones",
 		"greenWaste": {
 			"greenWoodUntreated": "Madera verde (no tratada)",

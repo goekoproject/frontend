@@ -3,6 +3,10 @@ export interface DataSelectOption {
 	keyLang: string;
 }
 
+export interface CountrySelectOption extends DataSelectOption {
+	code: string;
+}
+
 export const SelectMainInternalCombustionEngine: DataSelectOption[] = [
 	{
 		id: 'equipmentCarrierTruck',
@@ -98,12 +102,12 @@ export const SelectEnergySource: DataSelectOption[] = [
 	{ id: 'energySource-none', keyLang: 'none' },
 ];
 
-export const SelectCountry = [
-	{ id: 'france', keyLang: 'SELECT_DATA_LABEL.selectCountry.france' },
-	{ id: 'germany', keyLang: 'SELECT_DATA_LABEL.selectCountry.germany' },
-	{ id: 'italy', keyLang: 'SELECT_DATA_LABEL.selectCountry.italy' },
-	{ id: 'spain', keyLang: 'SELECT_DATA_LABEL.selectCountry.spain' },
-	{ id: 'switzerland', keyLang: 'SELECT_DATA_LABEL.selectCountry.switzerland' },
+export const SelectCountry: CountrySelectOption[] = [
+	{ id: 'france', keyLang: 'SELECT_DATA_LABEL.selectCountry.france', code: 'FR' },
+	{ id: 'germany', keyLang: 'SELECT_DATA_LABEL.selectCountry.germany', code: 'DEU' },
+	{ id: 'italy', keyLang: 'SELECT_DATA_LABEL.selectCountry.italy', code: 'IT' },
+	{ id: 'spain', keyLang: 'SELECT_DATA_LABEL.selectCountry.spain', code: 'ES' },
+	{ id: 'switzerland', keyLang: 'SELECT_DATA_LABEL.selectCountry.switzerland', code: 'CHE' },
 ];
 
 // Resultado de la constante SelectInertOrMineralWaste
@@ -161,6 +165,32 @@ export const SelectHazardousWaste: DataSelectOption[] = [
 	{ id: 'productsContainingTar', keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.productsContainingTar' },
 	{ id: 'oilSeparatorSludge', keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.oilSeparatorSludge' },
 ];
+export const SelectPaybackPeriodYears: DataSelectOption[] = [
+	{
+		id: '1',
+		keyLang: 'year',
+	},
+	{
+		id: '2',
+		keyLang: 'years',
+	},
+	{
+		id: '3',
+		keyLang: 'years',
+	},
+	{
+		id: '4',
+		keyLang: 'years',
+	},
+	{
+		id: '5',
+		keyLang: 'years',
+	},
+	{
+		id: '',
+		keyLang: 'SELECT_DATA_LABEL.fiveBetweenTen',
+	},
+];
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -170,6 +200,7 @@ export const DataSelect = {
 	products: SelectProducts,
 	energySource: SelectEnergySource,
 	countries: SelectCountry,
+	paybackPeriodYears: SelectPaybackPeriodYears,
 	inertOrMineralWaste: SelectInertOrMineralWaste,
 	greenWaste: SelectGreenWaste,
 	specialWaste: SelectSpecialWaste,

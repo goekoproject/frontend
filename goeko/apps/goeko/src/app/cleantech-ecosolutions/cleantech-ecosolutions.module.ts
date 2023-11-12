@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardEcosolutionsComponent, CategoryModule } from '@goeko/business-ui';
 import { EcosolutionsModule } from '@goeko/store';
-import { BadgeModule, ButtonModule, GoInputModule, GoTabGroupModule } from '@goeko/ui';
+import { BadgeModule, ButtonModule, GoInputModule, GoTabGroupModule, UiSuperSelectModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
 import { CleantechEcosolutionsRoutingModule } from './cleantech-ecosolutions-routing.module';
@@ -27,6 +27,7 @@ import { ProductTitlePipe } from './ecosolutions-list/product-title.pipe';
 		TranslateModule,
 		ButtonModule,
 		BadgeModule,
+		UiSuperSelectModule,
 		EcosolutionsModule.forRoot({
 			endpoint: environment.baseUrl,
 		}),
