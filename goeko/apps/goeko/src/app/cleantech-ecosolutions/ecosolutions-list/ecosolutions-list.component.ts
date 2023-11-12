@@ -23,10 +23,10 @@ export class EcosolutionsListComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.cleanTechId = this._route.snapshot.paramMap.get('id') as string;
-		this.getEcosolutionByCleanTech();
+		this.getAllEcosolutionsByCleanTech();
 	}
 
-	getEcosolutionByCleanTech() {
+	getAllEcosolutionsByCleanTech() {
 		this._ecosolutionsService.getByIdCleantechId(this.cleanTechId).subscribe((ecosolutions: any) => {
 			if (ecosolutions && ecosolutions.length > 0) {
 				this.ecosolutions = ecosolutions.map(
@@ -38,7 +38,7 @@ export class EcosolutionsListComponent implements OnInit {
 
 	deleteEcosolution(ecosolution: CardEcosolutions) {
 		this._ecosolutionsService.deleteEcosolution(ecosolution.id).subscribe((res: any) => {
-			console.log(res);
+			this.getAllEcosolutionsByCleanTech();
 		});
 	}
 }
