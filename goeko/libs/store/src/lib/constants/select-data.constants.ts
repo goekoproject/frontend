@@ -1,5 +1,5 @@
 export interface DataSelectOption {
-	id: string;
+	id: string | number;
 	keyLang: string;
 }
 
@@ -167,27 +167,27 @@ export const SelectHazardousWaste: DataSelectOption[] = [
 ];
 export const SelectPaybackPeriodYears: DataSelectOption[] = [
 	{
-		id: '1',
+		id: 1,
 		keyLang: 'year',
 	},
 	{
-		id: '2',
+		id: 2,
 		keyLang: 'years',
 	},
 	{
-		id: '3',
+		id: 3,
 		keyLang: 'years',
 	},
 	{
-		id: '4',
+		id: 4,
 		keyLang: 'years',
 	},
 	{
-		id: '5',
+		id: 5,
 		keyLang: 'years',
 	},
 	{
-		id: '',
+		id: 6,
 		keyLang: 'SELECT_DATA_LABEL.fiveBetweenTen',
 	},
 ];

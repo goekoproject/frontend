@@ -1,3 +1,5 @@
+import { CATEGORIES } from './category.enum';
+
 export interface Field {
 	controlName: string;
 	type: string;
@@ -13,7 +15,7 @@ export interface Section {
 	status: STATUS_SECTION;
 	icon?: string;
 	fields?: Field[];
-	controlName: string;
+	controlName: CATEGORIES;
 	showResult: boolean;
 	checked?: boolean;
 }
@@ -26,7 +28,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 	{
 		id: 'co2-category-form',
 		keyLang: 'CATEGORIES.co2emission',
-		controlName: 'co2emission',
+		controlName: CATEGORIES.CO2_EMISSION,
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',
 		showResult: true,
@@ -68,7 +70,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 	{
 		id: 'waste-category-form',
 		keyLang: 'CATEGORIES.waste',
-		controlName: 'waste',
+		controlName: CATEGORIES.WASTE,
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'waste',
 		showResult: true,
@@ -109,13 +111,13 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 	{
 		id: 'water-category-form',
 		keyLang: 'CATEGORIES.water',
-		controlName: 'waterConsumption',
+		controlName: CATEGORIES.WATER,
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'water',
 		showResult: true,
 		checked: false,
 		fields: [
-			{
+			/* {
 				controlName: 'amount',
 				type: 'number',
 				textHelp: '',
@@ -128,7 +130,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 				textHelp: '',
 				label: 'CATEGORIES_FIELD.lastYearInvoice',
 				hidden: true,
-			},
+			}, */
 			{
 				controlName: 'mainActivity',
 				type: 'badge-group',
@@ -140,7 +142,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 	{
 		id: 'hp-category-form',
 		keyLang: 'CATEGORIES.hazardousProduct',
-		controlName: 'hazardousProduct',
+		controlName: CATEGORIES.HAZARDOUS_PRODUCT,
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'hp',
 		showResult: true,

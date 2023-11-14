@@ -9,6 +9,7 @@ import { AuthInterceptor } from './modules/auth/auth.interceptor';
 import { AuthService } from './modules/auth/auth.service';
 import { LoadingModule } from './services/loading/loading.module';
 import { SpinnerOverlayModule } from './services/spinner-overlay/spinner-overlay.module';
+import { EmptyElementsInterceptor } from './interceptors/empty-element.interceptor';
 
 export const CONFIGURATION = new InjectionToken<Options>('CONFIGURATION');
 
@@ -20,6 +21,7 @@ export const CONFIGURATION = new InjectionToken<Options>('CONFIGURATION');
 		{ provide: HTTP_INTERCEPTORS, useClass: TranformDateInterceptor, multi: true },
 
 		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: EmptyElementsInterceptor, multi: true },
 	],
 })
 export class ConfigModule {

@@ -1,10 +1,13 @@
 import {
 	AfterContentInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ContentChild,
 	ElementRef,
 	EventEmitter,
 	Input,
+	OnInit,
 	Output,
 	Renderer2,
 	ViewEncapsulation,
@@ -15,6 +18,7 @@ import {
 	templateUrl: './tab.component.html',
 	styleUrls: ['./tab.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiTabComponent implements AfterContentInit {
 	@ContentChild('content') child!: ElementRef;
@@ -28,16 +32,34 @@ export class UiTabComponent implements AfterContentInit {
 	}
 	private _title = '';
 
-	@Output() selectedTab = new EventEmitter<string>(); //Our parent component will subscribe to this event on all tabs
-	isTabSelected = false; //This variable sets the styles for the tab
+	@Input()
+	public get selected(): boolean {
+		return this._selected;
+	}
+	public set selected(value: boolean) {
+		this._selected = value;
+		if (value) {
+			this.showTab();
+			this.clickTab(this.title);
+			this._cdr.markForCheck();
+		}
+	}
+	private _selected = false;
 
-	constructor(private _renderer2: Renderer2) {}
+	@Output() selectedTab = new EventEmitter<string>(); //Our parent component will subscribe to this event on all tabs
+	isTabSelected!: boolean; //This variable sets the styles for the tab
+
+	constructor(private _renderer2: Renderer2, private _cdr: ChangeDetectorRef) {}
 
 	ngAfterContentInit(): void {
 		if (!this.child) {
 			return;
 		}
+		if (this.isTabSelected) {
+			return;
+		}
 		this._renderer2.addClass(this.child?.nativeElement, 'tab-hide');
+		this._cdr.markForCheck();
 	}
 
 	clickTab(event: any) {
@@ -52,6 +74,7 @@ export class UiTabComponent implements AfterContentInit {
 		}
 		this._renderer2.removeClass(this.child.nativeElement, 'tab-show');
 		this._renderer2.addClass(this.child.nativeElement, 'tab-hide');
+		this._cdr.markForCheck();
 	}
 	//this method shows the text of a tab and changes the style of the tab
 	showTab() {
@@ -62,5 +85,6 @@ export class UiTabComponent implements AfterContentInit {
 		}
 		this._renderer2.removeClass(this.child?.nativeElement, 'tab-hide');
 		this._renderer2.addClass(this.child?.nativeElement, 'tab-show');
+		this._cdr.markForCheck();
 	}
 }

@@ -1,9 +1,4 @@
-export enum CATEGORIES {
-	CO2_EMISSION = 'co2emission',
-	HAZARDOUS_PRODUCT = 'hazardousProduct',
-	WASTE = 'waste',
-	WATER = 'water',
-}
+import { CATEGORIES } from './category.enum';
 
 export const CATEGORY_SECTION = [
 	{

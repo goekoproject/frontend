@@ -1,5 +1,5 @@
 <div class="ecosolutions-form">
-	<form [formGroup]="form" (submit)="saveEcosolution()">
+	<form [formGroup]="form" (submit)="idEcosolution ? editEcosolution() : saveEcosolution()">
 		<go-input [formControlName]="'solutionName'">
 			<span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
 		</go-input>
@@ -18,7 +18,7 @@
 				</div>
 
 				<div>
-					<go-badge-group [formControlName]="'products'" [compareWith]="defaultSetSuperSelect">
+					<go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories">
 						<go-badge *ngFor="let option of productsCategories" [value]="option.id">{{
 							option.keyLang | translate
 						}}</go-badge>
@@ -83,7 +83,7 @@
 						[formControlName]="'deliverCountries'"
 						id="deliverCountries"
 						name="deliverCountries"
-						[compareWith]="defaultSetSuperSelect"
+						[compareWith]="defaultSetDeliverCountries"
 					>
 						<super-option *ngFor="let option of dataSelect['countries']" [value]="option">
 							{{ option.keyLang | translate }}
@@ -99,7 +99,7 @@
 						[formControlName]="'paybackPeriodYears'"
 						id="paybackPeriodYears"
 						name="paybackPeriodYears"
-						[compareWith]="defaultSetSuperSelect"
+						[compareWith]="defaultSetPaybackPeriodYears"
 					>
 						<super-option *ngFor="let option of dataSelect['paybackPeriodYears']" [value]="option">
 							{{ option.id }} {{ option.keyLang | translate }}

@@ -1,13 +1,12 @@
 <section class="ecosolutions-section">
 	<go-tab-group>
-		<ng-container *ngFor="let item of categorySection">
-			<go-tab [title]="item.keyLang | translate">
+		<ng-container *ngFor="let item of categorySection; let first = first">
+			<go-tab [title]="item.keyLang | translate" [selected]="first">
 				<div #content class="ecosolutions-card-list">
 					<button
 						class="add-ecosolutions"
 						[routerLink]="['./new']"
 						[queryParams]="{
-							cleanTechId: cleanTechId,
 							mainCategory: item.code
 						}"
 						routerLinkActive="router-link-active"
@@ -22,6 +21,7 @@
 							[products]="ecosolution.products"
 							[sustainableDevelopmentGoals]="ecosolution.sustainableDevelopmentGoals"
 							(delete)="deleteEcosolution(ecosolution)"
+							(edit)="editEcosolution(ecosolution)"
 						></goeko-card-ecosolutions>
 					</ng-container>
 				</div>

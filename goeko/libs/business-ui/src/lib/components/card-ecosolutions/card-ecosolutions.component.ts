@@ -17,6 +17,8 @@ import { ButtonModule } from '@goeko/ui';
 	},
 })
 export class CardEcosolutionsComponent implements OnInit {
+	private _products!: string;
+
 	@Input() solutionName: string = 'Vertua Ultra Zero';
 	@Input()
 	public get products(): string {
@@ -25,7 +27,6 @@ export class CardEcosolutionsComponent implements OnInit {
 	public set products(value: string) {
 		this._products = value;
 	}
-	private _products!: string;
 
 	@Input() sustainableDevelopmentGoals: number[] = [17, 9, 6];
 
