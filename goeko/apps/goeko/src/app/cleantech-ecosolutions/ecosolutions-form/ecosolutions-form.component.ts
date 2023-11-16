@@ -128,7 +128,7 @@ export class EcosolutionsFormComponent implements OnInit {
 	private _changeValueSubCategory() {
 		this.form.get('subCategory')?.valueChanges.subscribe((subCategory) => {
 			if (subCategory) {
-				this.productsCategories = DataSelect[subCategory as keyof typeof DataSelect];
+				this.productsCategories = DataSelect[subCategory.controlName as keyof typeof DataSelect];
 			}
 		});
 	}

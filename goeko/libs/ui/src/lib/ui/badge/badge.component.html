@@ -1,6 +1,8 @@
 <span class="badge">
 	<ng-content select="avatar"></ng-content>
 
-	<ng-content></ng-content>
+	<span #labelElement class="label-element">
+		<ng-content></ng-content>
+	</span>
 	<span class="material-symbols-rounded badge-close" *ngIf="selected"> close </span>
 </span>

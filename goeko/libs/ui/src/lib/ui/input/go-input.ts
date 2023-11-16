@@ -17,8 +17,8 @@ export class GoInput extends LitElement {
 				outline-color: #6f57cd;
 				box-shadow: 0px 0px 1px 2px rgba(111, 87, 205, 0.25);
 			}
+
 			:host {
-				width: 100%;
 				display: flex;
 				flex-direction: column;
 				position: relative;
@@ -33,6 +33,15 @@ export class GoInput extends LitElement {
 			label {
 				color: #2b2b2b;
 				font-weight: 500;
+			}
+
+			input[type='checkbox'] {
+				color: #0090d6;
+				width: 1.3rem;
+				height: 1.3rem;
+				border-radius: 3rem;
+				border: 2px solid #0090d6;
+				cursor: pointer;
 			}
 		`;
 	}

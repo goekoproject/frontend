@@ -36,9 +36,7 @@ export class GoInputDirective {
 
 	private _value = '';
 
-	constructor(private elementRef: ElementRef) {
-		console.log('init go-input...');
-	}
+	constructor(private elementRef: ElementRef) {}
 
 	writeValue(value: any) {
 		this._value = value;

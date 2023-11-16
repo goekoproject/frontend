@@ -9,23 +9,36 @@
 
 		<fieldset class="ecosolutions-cuestions-products">
 			<legend>{{ 'FORM_LABEL.products' | translate }}</legend>
-			<span>{{ 'FORM_LABEL.ecosolution_classification' | translate }}</span>
-			<div>
-				<div class="ecosolutions-cuestions" *ngFor="let item of questionsCategories">
+			<!-- 			<span>{{ 'FORM_LABEL.ecosolution_classification' | translate }}</span>
+ -->
+
+			<div class="ecosolutions-subcategory">
+				<goeko-select-subcategory-product
+					[formControlName]="'subCategory'"
+					*ngFor="let item of questionsCategories"
+					[subCategory]="item"
+				>
+					<go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories">
+						<go-badge *ngFor="let option of productsCategories" [value]="option.id">{{
+							option.keyLang | translate
+						}}</go-badge>
+					</go-badge-group>
+				</goeko-select-subcategory-product>
+				<!-- 	<div class="ecosolutions-cuestions" *ngFor="let item of questionsCategories">
 					<label class="input-radio">
 						<input type="radio" [formControlName]="'subCategory'" [value]="item.controlName" />
 						{{ item.label | translate }}
 					</label>
-				</div>
+				</div> -->
 			</div>
 
-			<div>
+			<!-- 			<div>
 				<go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories">
 					<go-badge *ngFor="let option of productsCategories" [value]="option.id">{{
 						option.keyLang | translate
 					}}</go-badge>
 				</go-badge-group>
-			</div>
+			</div> -->
 		</fieldset>
 
 		<fieldset>

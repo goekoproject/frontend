@@ -35,3 +35,8 @@
 [fill='true'] {
 	@extend .fill;
 }
+.label-element {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
