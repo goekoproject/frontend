@@ -85,10 +85,11 @@
 		"logo": "Logo",
 		"name_project": "Nombre del proyecto",
 		"solutionName": "Nombre de tu ecosolución",
+		"name": "Nombre",
 		"price": "Precio",
 		"improvement": "Mejoras",
 		"reductionPercentage": "Porcentaje de reducción",
-		"ecosolutions_sustainableDevelopmentGoals": "Selecciona los Objetivos de Desarrollo Sostenible(ODS) que aplica tu ecosolución",
+		"ecosolutions_sustainableDevelopmentGoals": "Selecciona los Objetivos de Desarrollo Sostenible(ODS)",
 		"ecosolutions_subCategory": "Seleccione las preguntas",
 		"ecosolutions_products": "Selecciona los productos",
 		"ecosolution_classification": "Seleccione las preguntas y elija los productos para su ecosolución",
@@ -99,7 +100,8 @@
 		"guarantee": "Garantía",
 		"certified": "Certificado",
 		"approvedSwiss": "Aprobada para el mercado suizo",
-		"additionalInformation": "Información adicional"
+		"additionalInformation": "Información adicional",
+		"products": "Productos"
 	},
 	"ODS": {
 		"ods_1": "Sin Pobreza",

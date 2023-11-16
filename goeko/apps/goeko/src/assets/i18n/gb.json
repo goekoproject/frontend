@@ -90,13 +90,14 @@
 		"website": "Website",
 		"location": "Location",
 		"city": "City",
+		"name": "Name",
 		"logo": "Logo",
 		"name_project": "Project's Name",
 		"solutionName": "Solution Name",
 		"price": "Price",
 		"improvement": "Improvement",
 		"reductionPercentage": "Reduction Percentage",
-		"ecosolutions_sustainableDevelopmentGoals": "Select Sustainable Development Goals (SDGs) that apply to your solution",
+		"ecosolutions_sustainableDevelopmentGoals": "Select Sustainable Development Goals (SDGs)",
 		"ecosolutions_subCategory": "Select Subcategories",
 		"ecosolutions_products": "Select Products",
 		"ecosolution_classification": "Select questions and choose products for your eco-solution",
@@ -107,7 +108,8 @@
 		"certified": "Certified",
 		"approvedSwiss": "Approved for the Swiss market",
 		"operationalCostReductionPercentage": "Percentage of operational cost reduction",
-		"additionalInformation": "Additional information"
+		"additionalInformation": "Additional information",
+		"products": "Products"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Free trial to connect with qualified leads",
