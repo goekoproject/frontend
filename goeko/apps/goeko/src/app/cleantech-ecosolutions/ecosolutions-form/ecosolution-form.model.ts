@@ -19,11 +19,11 @@ export class EcosolutionForm {
 	approved?: boolean;
 
 	constructor(ecosolution: NewEcosolutions) {
-		(this.solutionName = ecosolution.solutionName),
-			(this.subCategory = ecosolution.classification.subCategory),
-			(this.products = ecosolution.classification.products),
-			(this.reductionPercentage = ecosolution.improvement?.reductionPercentage),
-			(this.operationalCostReductionPercentage = ecosolution.improvement?.operationalCostReductionPercentage);
+		this.solutionName = ecosolution.solutionName;
+		this.subCategory = ecosolution.classification.subCategory;
+		this.products = ecosolution.classification.products;
+		this.reductionPercentage = ecosolution.improvement?.reductionPercentage;
+		this.operationalCostReductionPercentage = ecosolution.improvement?.operationalCostReductionPercentage;
 		this.sustainableDevelopmentGoals = ecosolution.sustainableDevelopmentGoals?.map((ods) => ({
 			value: ods,
 			checked: true,

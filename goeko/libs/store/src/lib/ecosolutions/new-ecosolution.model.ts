@@ -62,7 +62,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 		this.sustainableDevelopmentGoals = this.getSustainableDevelopmentGoalsChecked(formValue);
 		this.classification = {
 			mainCategory: mainCategory,
-			subCategory: formValue.subCategory,
+			subCategory: formValue.subCategory?.controlName,
 			products: formValue.products,
 		};
 		this.countries = formValue?.deliverCountries?.map((country: CountrySelectOption) => country.code);

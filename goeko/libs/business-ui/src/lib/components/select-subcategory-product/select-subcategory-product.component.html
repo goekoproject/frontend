@@ -16,16 +16,16 @@
 
 			<span class="subcategory-product-selected" *ngIf="numSelected > 2">{{ numSelected }}</span>
 		</label>
-		<span
+		<!-- 		<span
 			class="material-symbols-rounded subcategory-expand"
 			[ngClass]="{ 'subcategory-open': open }"
 			(click)="toogle(subCategory)"
 		>
 			expand_more
-		</span>
+		</span -->
 	</div>
 
-	<div class="subcategory-product" *ngIf="inputElement.checked || open">
+	<div class="subcategory-product" *ngIf="inputElement.checked && open">
 		<ng-content></ng-content>
 	</div>
 </div>

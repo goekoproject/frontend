@@ -19,6 +19,9 @@ export class EmptyElementsInterceptor implements HttpInterceptor {
 	}
 
 	private _removeEmptyElements(obj: any): any {
+		if (typeof obj === 'object' && obj.constructor?.name == 'SmeRecomendationParams') {
+			return;
+		}
 		Object.keys(obj).forEach((key) => {
 			if (obj[key] && typeof obj[key] === 'object') {
 				this._removeEmptyElements(obj[key]);
