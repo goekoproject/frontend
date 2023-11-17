@@ -7,12 +7,15 @@ import {
 	ElementRef,
 	Input,
 	NgZone,
+	Optional,
 	Provider,
 	Query,
 	QueryList,
+	Self,
+	ViewChild,
 	forwardRef,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BadgeComponent, BadgeGroupComponent, BadgeModule, GoInputModule, OptionSelectionEvent } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable, defer, merge, startWith, switchMap, take } from 'rxjs';
@@ -37,6 +40,7 @@ enum TYPE_FIELD {
 })
 export class SelectSubcategoryProductComponent implements ControlValueAccessor, AfterContentInit {
 	@ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent;
+	@ViewChild('inputElement') inputElement!: ElementRef;
 
 	@Input() subCategory: any;
 	@Input()
@@ -56,8 +60,15 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
 	private _multiple!: boolean;
 
 	get numSelected(): number {
-		return this.selected?.length;
+		this._numSelected = this.selected?.length;
+		return this._numSelected;
 	}
+
+	set numSelected(value: number) {
+		this._numSelected = value;
+	}
+
+	private _numSelected!: number;
 
 	get labelSelected(): string {
 		return this.selected?.map((select) => select.label)?.toString();
@@ -66,7 +77,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
 	_onChange: (value: any) => void = () => {};
 	_onTouched: (value?: any) => void = () => {};
 
-	constructor(private _ngZone: NgZone) {}
+	constructor() {}
 
 	ngAfterContentInit(): void {
 		this.badgeGroup.valueChangedBadge$.subscribe((badge) => {
@@ -82,7 +93,10 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
 	}
 
 	writeValue(value: any): void {
-		this._onChange(this.value);
+		if (!value) {
+			return;
+		}
+		this.assignValue(value);
 	}
 	registerOnChange(fn: (value: any) => void): void {
 		this._onChange = fn;
@@ -96,7 +110,11 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
 
 	assignValue(value: any): void {
 		this._cleanValue();
-		this.value = value;
+		if (typeof value === 'string' && this.subCategory.controlName === value) {
+			this.value = this.subCategory;
+		} else {
+			this.value = value;
+		}
 		this.open = !this.open;
 		this._onChange(this.value);
 		this._onTouched();
