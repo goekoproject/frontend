@@ -79,7 +79,6 @@ export class UserService {
 	udpateDataProfile(userType: string, userId: string, body: any) {
 		if (userType === ACTORS_TYPE.SME) {
 			const _body = this._transformbBodySme(body);
-
 			return this._smeService.updateDataProfile(userId, _body);
 		}
 		if (userType === ACTORS_TYPE.CLEANTECH) {
@@ -99,7 +98,7 @@ export class UserService {
 	private _transformbBodyCleanTech(body: any) {
 		return {
 			...body,
-			country: body.country?.id,
+			countries: body.countries.map((country: any) => country.code),
 		};
 	}
 }

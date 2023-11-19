@@ -76,6 +76,7 @@
 				type="button"
 				go-button
 				appearance="primary"
+				[disabled]="form.invalid"
 				type="submit"
 				(click)="dataProfile?.id ? updateProfile() : saveProfile()"
 			>

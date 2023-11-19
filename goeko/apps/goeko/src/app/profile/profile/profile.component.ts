@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserContextService } from '@goeko/core';
 import { ACTORS_TYPE, DataSelect, Profile, SmeService, UserService } from '@goeko/store';
@@ -83,7 +83,7 @@ export class ProfileComponent implements OnInit {
 		this.form = this._fb.group({
 			name: [''],
 			country: [''],
-			email: [''],
+			email: ['', Validators.email],
 			website: [''],
 			externalId: [this._externalId],
 		});
@@ -93,7 +93,7 @@ export class ProfileComponent implements OnInit {
 		this.form = this._fb.group({
 			name: [''],
 			countries: [''],
-			email: [''],
+			email: ['', Validators.email],
 			link: [''],
 			logo: [''],
 			city: [''],
