@@ -31,30 +31,11 @@ export class SmeService {
 	getRecommendationsById(id: string): Observable<any> {
 		return this._http.get<any>(`${this.configuration.endpoint}/v1/recommendation/requests/smes/${id}`);
 	}
-	getRecommendationsByProjectById(id: string): Observable<any> {
-		return this.getRecommendationsById(id).pipe(
-			map((recommendation) => recommendation.requests),
-			mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuale */
-			filter((requests: any) => requests?.searchName)
-		);
-	}
 
 	getLastRecommendationById(id: string): Observable<any> {
 		return this.getRecommendationsById(id).pipe(
 			map((recommendation) => recommendation.requests),
 			mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuale
-			filter((requests: any) => !requests?.searchName),
-			reduce((maxItem: any, currentItem: any) =>
-				new Date(currentItem.date) > new Date(maxItem.date) ? currentItem : maxItem
-			)
-		);
-	}
-
-	getLastProjectBySmeId(id: string): Observable<any> {
-		return this.getRecommendationsById(id).pipe(
-			map((recommendation: { requests: SmeRequestResponse[] }) => recommendation.requests),
-			mergeMap((data: unknown) => from(data as ObservableInput<any>)), // Convierte el array en un Observable de elementos individuales
-			filter((requests: any) => requests?.searchName),
 			reduce((maxItem: any, currentItem: any) =>
 				new Date(currentItem.date) > new Date(maxItem.date) ? currentItem : maxItem
 			)
@@ -67,6 +48,10 @@ export class SmeService {
 
 	saveRecommendations(body: SmeSaveRecomendationRequest): Observable<any> {
 		return this._http.post<any>(`${this.configuration.endpoint}/v1/recommendation/requests/smes`, body);
+	}
+
+	updateRecommendations(id: string, body: SmeSaveRecomendationRequest): Observable<any> {
+		return this._http.put<any>(`${this.configuration.endpoint}/v1/recommendation/requests/smes/${id}`, body);
 	}
 
 	getByIdExternal(id: string): Observable<any> {

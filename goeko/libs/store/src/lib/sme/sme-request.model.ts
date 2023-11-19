@@ -45,9 +45,20 @@ export interface Classifications {
 	subCategory: string;
 	products: string[];
 }
-export interface SmeSaveRecomendationRequest {
+
+export interface SmeSaveRequest {
+	smeId: string;
+	classifications: Classifications[];
+}
+export interface SmeSaveRecomendationRequest extends SmeSaveRequest {
 	smeId: string;
 	searchName?: string;
+	classifications: Classifications[];
+}
+
+export interface SmeSaveRecomendationProjectRequest extends SmeSaveRequest {
+	smeId: string;
+	name: string;
 	classifications: Classifications[];
 }
 export interface SmeCreateRecomendationRequest {

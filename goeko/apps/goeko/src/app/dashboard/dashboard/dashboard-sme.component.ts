@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SmeAnalysisService, SmeRequestResponse, SmeService, UserService } from '@goeko/store';
-import { bufferCount, take, toArray } from 'rxjs';
+import { ProjectService, SmeAnalysisService, SmeRequestResponse, SmeService, UserService } from '@goeko/store';
+import { take, toArray } from 'rxjs';
 
 @Component({
 	selector: 'goeko-dashboard-sme',
@@ -15,6 +15,7 @@ export class DashboardSmeComponent implements OnInit {
 		private _userService: UserService,
 		private _smeAnalyticsService: SmeAnalysisService,
 		private _smeService: SmeService,
+		private _projectService: ProjectService,
 		private _router: Router
 	) {}
 	ngOnInit(): void {
@@ -28,7 +29,7 @@ export class DashboardSmeComponent implements OnInit {
 	}
 
 	private _getLastProjectName() {
-		this._smeService
+		this._projectService
 			.getRecommendationsByProjectById(this.companyDetail.id)
 			.pipe(take(3), toArray())
 			.subscribe((projects: SmeRequestResponse[]) => {

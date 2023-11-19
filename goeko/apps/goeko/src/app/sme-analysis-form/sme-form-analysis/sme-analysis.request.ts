@@ -1,4 +1,4 @@
-import { Classifications, SmeSaveRecomendationRequest } from '@goeko/store';
+import { Classifications, SmeSaveRecomendationProjectRequest, SmeSaveRecomendationRequest } from '@goeko/store';
 import { Section } from '../form-field.model';
 
 export const formToClassificationsMapper = (formValue: Section) => {
@@ -81,8 +81,21 @@ export class FormValueToSmeAnalysisRequest implements SmeSaveRecomendationReques
 	classifications: Classifications[];
 	searchName?: string;
 	constructor(smeId: string, formValue: Section) {
-		this.searchName = formValue.searchName || '';
+		this.searchName = new Date().toDateString();
 		this.smeId = smeId;
 		this.classifications = formToClassificationsMapper(formValue);
+	}
+}
+
+export class FormValueToSmeProjectRequest implements SmeSaveRecomendationProjectRequest {
+	smeId!: string;
+	classifications!: Classifications[];
+	name!: string;
+	constructor(smeId: string, formValue: Section) {
+		if (formValue && formValue.searchName) {
+			this.name = formValue.searchName;
+			this.smeId = smeId;
+			this.classifications = formToClassificationsMapper(formValue);
+		}
 	}
 }

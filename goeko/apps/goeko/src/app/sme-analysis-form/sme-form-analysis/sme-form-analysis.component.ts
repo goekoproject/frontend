@@ -29,7 +29,6 @@ export class SmeFormAnalysisComponent implements OnInit {
 	slideSelected = 0;
 	dateLastRecomendation!: string;
 	public dataSelect = DataSelect as any;
-	private _smeDataProfile!: any;
 	private _smeId!: string;
 	private _selectedCategory!: string;
 
@@ -40,7 +39,6 @@ export class SmeFormAnalysisComponent implements OnInit {
 	constructor(
 		private _fb: FormBuilder,
 		private _router: Router,
-		private _userService: UserService,
 		private _smeService: SmeService,
 		private _route: ActivatedRoute,
 		private _smeAnalysisService: SmeAnalysisService
@@ -51,17 +49,8 @@ export class SmeFormAnalysisComponent implements OnInit {
 		this._route.queryParams.subscribe((queryParams: any) => (this._selectedCategory = queryParams.categoryId));
 		this.form = this._fb.group({});
 		this._createFormGroup();
-		this._getSmeCompanyDetail();
 		this._setLastAnalysis();
 		this._selectCatagory();
-	}
-
-	private _getSmeCompanyDetail() {
-		this._userService.companyDetail.subscribe((company) => {
-			if (company) {
-				this._smeDataProfile = company;
-			}
-		});
 	}
 
 	private _selectCatagory() {

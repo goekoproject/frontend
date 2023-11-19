@@ -79,11 +79,11 @@ export class SmeFormBaseComponent implements OnInit {
 	}
 
 	private _getLastAnalysis(callbackLastAnalysis: any) {
-		callbackLastAnalysis().subscribe((requestClassifications: SmeRequestResponse) => {
+		callbackLastAnalysis().subscribe((requestClassifications: any) => {
 			if (requestClassifications) {
 				this.dateLastRecomendation = requestClassifications.date;
 				const classifications = transformArrayToObj(requestClassifications.classifications);
-				const _searchName = requestClassifications?.searchName as string;
+				const _searchName = requestClassifications?.name as string;
 				this._updateForm(classifications, _searchName);
 			}
 		});

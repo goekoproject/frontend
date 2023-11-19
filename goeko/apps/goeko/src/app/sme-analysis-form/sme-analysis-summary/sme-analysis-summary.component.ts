@@ -1,12 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeAnalysisService, SmeService } from '@goeko/store';
+import { ProjectService, SmeAnalysisService, SmeService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { Section } from '../form-field.model';
 import { DataSelect, DataSelectOption } from '../select-data.constants';
-import { FormValueToSmeAnalysisRequest, formToClassificationsMapper } from '../sme-form-analysis/sme-analysis.request';
+import {
+	FormValueToSmeAnalysisRequest,
+	FormValueToSmeProjectRequest,
+	formToClassificationsMapper,
+} from '../sme-form-analysis/sme-analysis.request';
 
 @Component({
 	selector: 'goeko-sme-analysis-summary',
@@ -48,6 +52,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 	constructor(
 		private _translateService: TranslateService,
 		private _smeServices: SmeService,
+		private _projectService: ProjectService,
 		private _smeAnalysisService: SmeAnalysisService,
 		private _route: ActivatedRoute,
 		private _router: Router
@@ -67,6 +72,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 		const idByLastRecommended = this._route.snapshot.queryParamMap.get('smeId') as string;
 		return idByNewAnalysis || idByLastRecommended;
 	}
+	//TODO: make it pipe
 	isArrayOfType(arr: any[], type: 'number' | 'object' | 'string'): boolean {
 		if (!Array.isArray(arr)) {
 			return false; // No es un array
@@ -119,6 +125,22 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 			});
 	}
 	saveAnalysis() {
+		if (this.isProject) {
+			this._saveProject();
+		} else {
+			this._saveAnalysis();
+		}
+	}
+	private _saveProject() {
+		const smeAnalysisRequest = new FormValueToSmeProjectRequest(this._smeId, this.formValue);
+		this._projectService.saveProject(smeAnalysisRequest).subscribe((res) => {
+			this.saveOK = true;
+			setTimeout(() => {
+				this.saveOK = false;
+			}, 5000);
+		});
+	}
+	private _saveAnalysis() {
 		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeId, this.formValue);
 		this._smeServices.saveRecommendations(smeAnalysisRequest).subscribe((res) => {
 			this.saveOK = true;

@@ -30,5 +30,4 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
 	}
 
 	private _getCurrentAnalysis = () => this.smeAnalysisService.getCurrentAnalysis();
-	private _getLastProject = () => this.smeService.getLastProjectBySmeId(this.smeId);
 }
