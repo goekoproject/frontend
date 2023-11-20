@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserContextService } from '@goeko/core';
-import { ACTORS_TYPE, DataSelect, Profile, SmeService, UserService } from '@goeko/store';
+import { ACTORS_TYPE, CountrySelectOption, DataSelect, Profile, SmeService, UserService } from '@goeko/store';
 import { combineLatest } from 'rxjs';
 import { PROFILE_SME } from './profile-sme.constants';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
@@ -23,6 +23,14 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
 
 	return null;
 };
+
+const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
+	if (o1 && o2) {
+		return o1.code === o2;
+	}
+
+	return null;
+};
 @Component({
 	selector: 'goeko-profile',
 	templateUrl: './profile.component.html',
@@ -39,6 +47,7 @@ export class ProfileComponent implements OnInit {
 	private _externalId!: string;
 
 	public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean;
+	public defaultSetCountriesSme = defaultSetCountriesSme as (o1: CountrySelectOption, o2: string) => boolean;
 
 	constructor(
 		private _fb: FormBuilder,

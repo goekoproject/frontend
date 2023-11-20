@@ -88,10 +88,11 @@ export class UserService {
 		return of(null);
 	}
 
+	//TODO: arreglar ñapa
 	private _transformbBodySme(body: any) {
 		return {
 			...body,
-			country: body.country?.id,
+			country: typeof body.country === 'string' ? body.country : body.country.code,
 		};
 	}
 

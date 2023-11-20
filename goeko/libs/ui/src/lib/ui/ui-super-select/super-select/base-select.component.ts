@@ -705,7 +705,6 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 				this._value = newValue;
 				this._setSelectionByValue(newValue);
 			}
-			return true;
 		}
 		return false;
 	}
