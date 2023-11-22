@@ -1,24 +1,27 @@
 import { CommonModule } from '@angular/common';
 import {
 	AfterContentInit,
+	AfterViewChecked,
+	AfterViewInit,
+	Attribute,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	ContentChild,
-	ContentChildren,
 	ElementRef,
+	HostBinding,
+	HostListener,
 	Input,
-	NgZone,
-	Optional,
+	OnDestroy,
 	Provider,
-	Query,
-	QueryList,
-	Self,
 	ViewChild,
+	ViewEncapsulation,
 	forwardRef,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms';
-import { BadgeComponent, BadgeGroupComponent, BadgeModule, GoInputModule, OptionSelectionEvent } from '@goeko/ui';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { BadgeComponent, BadgeGroupComponent, BadgeModule, GoInputModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable, defer, merge, startWith, switchMap, take } from 'rxjs';
+import { SelectSubcategoryProductDirective } from './select-subcategory.directive';
 const CONTROL_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
 	useExisting: forwardRef(() => SelectSubcategoryProductComponent),
@@ -26,19 +29,35 @@ const CONTROL_VALUE_ACCESSOR: Provider = {
 };
 
 type TYPE_INPUT = 'radio' | 'checkbox';
-enum TYPE_FIELD {
+export enum TYPE_FIELD {
 	RADIO = 'radio',
 	CHECKBOX = 'checkbox',
 }
 @Component({
 	standalone: true,
-	imports: [BadgeModule, CommonModule, ReactiveFormsModule, TranslateModule, GoInputModule],
+	imports: [
+		BadgeModule,
+		CommonModule,
+		ReactiveFormsModule,
+		TranslateModule,
+		GoInputModule,
+		SelectSubcategoryProductDirective,
+	],
 	providers: [CONTROL_VALUE_ACCESSOR],
 	selector: 'goeko-select-subcategory-product',
 	templateUrl: './select-subcategory-product.component.html',
 	styleUrls: ['./select-subcategory-product.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
+	host: {
+		'[attr.open]': 'open',
+		'[attr.checked]': 'checked',
+	},
 })
-export class SelectSubcategoryProductComponent implements ControlValueAccessor, AfterContentInit {
+export class SelectSubcategoryProductComponent
+	implements ControlValueAccessor, AfterContentInit, AfterViewInit, OnDestroy
+{
 	@ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent;
 	@ViewChild('inputElement') inputElement!: ElementRef;
 
@@ -51,45 +70,109 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
 		this._multiple = value;
 		this.type = value ? 'checkbox' : 'radio';
 	}
+	private _multiple!: boolean;
 
 	public type: TYPE_INPUT = 'radio';
 	public disabled = false;
-	public value!: any;
-	public open = false;
-	public selected!: BadgeComponent[];
-	private _multiple!: boolean;
 
+	private _value!: any;
+	public get value(): any {
+		return this._value;
+	}
+	public set value(value: any) {
+		this._value = value;
+	}
+
+	private _open = false;
+	public get open() {
+		return this._open;
+	}
+	public set open(value: boolean) {
+		if (!value) {
+			this.badgeGroup._selectionModel.clear();
+		}
+		this._open = value;
+		this._cdf.markForCheck();
+	}
+
+	public get selected(): BadgeComponent[] {
+		this._cdf.markForCheck();
+		return this.badgeGroup?.selected;
+	}
+
+	get labelSelected(): string {
+		this._cdf.markForCheck();
+		return this.selected?.map((select) => select.label)?.toString();
+	}
+
+	private _numSelected!: number;
 	get numSelected(): number {
 		this._numSelected = this.selected?.length;
 		return this._numSelected;
 	}
-
 	set numSelected(value: number) {
 		this._numSelected = value;
 	}
 
-	private _numSelected!: number;
-
-	get labelSelected(): string {
-		return this.selected?.map((select) => select.label)?.toString();
+	private _checked = false;
+	public get checked() {
+		this._cdf.markForCheck();
+		return this._checked;
 	}
+	public set checked(value) {
+		this._checked = value;
+	}
+	private mutationObserver!: MutationObserver;
 
 	_onChange: (value: any) => void = () => {};
 	_onTouched: (value?: any) => void = () => {};
 
-	constructor() {}
+	constructor(private _cdf: ChangeDetectorRef, private _el: ElementRef) {}
 
 	ngAfterContentInit(): void {
 		this.badgeGroup.valueChangedBadge$.subscribe((badge) => {
-			this.selected = this.badgeGroup.selected;
 			this._handleCheckSubcategoryWhenProductSelected();
 		});
 	}
 
+	ngAfterViewInit() {
+		this._handlerMutationObserver();
+	}
+
+	ngOnDestroy() {
+		// Detener la observación cuando el componente se destruye
+		if (this.mutationObserver) {
+			this.mutationObserver.disconnect();
+		}
+	}
+
+	private _handlerMutationObserver() {
+		// Configuración de MutationObserver con una función de retorno de llamada
+		this.mutationObserver = new MutationObserver((mutationsList) => {
+			for (const mutation of mutationsList) {
+				if (mutation.type === 'attributes' && mutation.attributeName === 'checked') {
+					const isChecked = Boolean(this._el.nativeElement.getAttribute('checked') === 'true');
+					if (!isChecked) {
+						this.open = false;
+					} else {
+						this.open = true;
+					}
+				}
+			}
+		});
+
+		// Observar cambios en atributos del elemento host
+		this.mutationObserver.observe(this._el.nativeElement, { attributes: true });
+	}
 	private _handleCheckSubcategoryWhenProductSelected() {
 		if (this.numSelected <= 0) {
 			return;
 		}
+	}
+	onRestValue(): void {
+		setTimeout(() => {
+			this.open = this.inputElement?.nativeElement.checked || false;
+		});
 	}
 
 	writeValue(value: any): void {
@@ -108,29 +191,32 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
 		this.disabled = isDisabled;
 	}
 
-	assignValue(value: any): void {
-		this._cleanValue();
-		if (typeof value === 'string' && this.subCategory.controlName === value) {
+	assignValue(value: string): void {
+		if (this.subCategory.controlName === value) {
 			this.value = this.subCategory;
-		} else {
-			this.value = value;
+			this.checked = true;
+
+			// this will make the execution after the above boolean has changed
+			this.inputElement.nativeElement.focus();
+
+			this._onChange(this.value);
+			this._onTouched();
+			this._cdf.markForCheck();
 		}
-		this.open = !this.open;
-		this._onChange(this.value);
-		this._onTouched();
 	}
 
-	private _cleanValue() {
+	public cleanValue() {
 		if (this.type === TYPE_FIELD.CHECKBOX) {
 			return;
 		}
 
 		this.value = '';
-		this.open = false;
+		this.badgeGroup._selectionModel.clear();
 	}
 
 	toogle(value: any) {
 		this.open = !this.open;
 		this._onChange(value);
+		this._cdf.markForCheck();
 	}
 }

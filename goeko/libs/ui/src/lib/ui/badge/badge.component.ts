@@ -1,10 +1,8 @@
 import {
 	AfterContentInit,
 	Component,
-	ContentChild,
 	ElementRef,
 	EventEmitter,
-	HostBinding,
 	Input,
 	Output,
 	ViewChild,
@@ -23,7 +21,7 @@ import {
 		'[attr.fill]': 'fill',
 	},
 })
-export class BadgeComponent implements AfterContentInit {
+export class BadgeComponent {
 	@ViewChild('labelElement', { static: false }) labelElement!: ElementRef<any>;
 
 	@Input() value!: any;
@@ -36,9 +34,7 @@ export class BadgeComponent implements AfterContentInit {
 	get label() {
 		return this.labelElement?.nativeElement.textContent;
 	}
-	ngAfterContentInit(): void {
-		console.log(this.label);
-	}
+
 	onSelect(value: any) {
 		this.onSelected$.emit(this);
 		console.log(this.label);

@@ -25,6 +25,7 @@
 	gap: 1rem;
 	align-items: center;
 	width: 82%;
+	cursor: pointer;
 }
 .subcategory-title {
 	transition: 1s ease-in-out;
@@ -56,13 +57,22 @@
 	/* 	background: rgb(111 87 205 / 11%);
  */
 }
-.subcategory-open {
-	transition: 1s ease-in-out;
-	transform: rotateX(180deg);
-}
+
 .subcategory-product-selected {
 	color: #0090d6;
 	font-size: 1.2rem;
 	font-weight: 600;
 	margin-left: auto;
+}
+.subcategory-product {
+	display: none;
+}
+[open='true'] {
+	.subcategory-product {
+		display: flex;
+	}
+	.subcategory-expand {
+		transition: 0.3s;
+		transform: rotateX(180deg);
+	}
 }

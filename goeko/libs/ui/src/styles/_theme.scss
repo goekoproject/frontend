@@ -168,3 +168,6 @@ legend {
 	color: #1b1d20;
 	font-weight: 600;
 }
+input[type='radio' i]:focus-visible {
+	outline-offset: 0px;
+}

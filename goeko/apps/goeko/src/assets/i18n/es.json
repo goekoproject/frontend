@@ -74,6 +74,7 @@
 		"resources": "Recursos",
 		"service": "Servicios"
 	},
+	"selected_products": "Productos seleccionados",
 	"FORM_LABEL": {
 		"companyName": "Nombre de la Compañia",
 		"country": "Pais",

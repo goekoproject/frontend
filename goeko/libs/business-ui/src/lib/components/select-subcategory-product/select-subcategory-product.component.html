@@ -1,31 +1,26 @@
-<div class="subcategory">
+<div class="subcategory" goekoSelectSubcategoryProduct>
 	<div class="subcategory-element">
 		<label class="subcategory-control" for="{{ subCategory.controlName }}">
 			<input
 				#inputElement
 				type="{{ type }}"
 				name="subCategory"
-				[checked]="numSelected > 0"
+				[checked]="checked"
 				id="{{ subCategory.controlName }}"
-				(change)="assignValue(subCategory)"
+				(change)="assignValue(subCategory.controlName)"
 			/>
 			<div class="subcategory-title">
 				<p>{{ subCategory?.label | translate }}</p>
 				<span class="subcategory-title-products">{{ labelSelected }}</span>
 			</div>
-
-			<span class="subcategory-product-selected" *ngIf="numSelected > 2">{{ numSelected }}</span>
+			<span class="subcategory-product-selected" *ngIf="numSelected > 2"
+				>{{ numSelected }} {{ 'selected_products' | translate }}</span
+			>
 		</label>
-		<!-- 		<span
-			class="material-symbols-rounded subcategory-expand"
-			[ngClass]="{ 'subcategory-open': open }"
-			(click)="toogle(subCategory)"
-		>
-			expand_more
-		</span -->
+		<span class="material-symbols-rounded subcategory-expand" (click)="toogle(subCategory)"> expand_more </span>
 	</div>
 
-	<div class="subcategory-product" *ngIf="inputElement.checked && open">
+	<div class="subcategory-product">
 		<ng-content></ng-content>
 	</div>
 </div>
