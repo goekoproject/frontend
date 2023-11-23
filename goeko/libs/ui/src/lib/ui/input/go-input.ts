@@ -5,24 +5,26 @@ import { customElement, property, query } from 'lit/decorators.js';
 export class GoInput extends LitElement {
 	static override get styles() {
 		return css`
+			:host {
+				display: flex;
+				flex-direction: column;
+				position: relative;
+				gap: 0.5rem;
+			}
 			.go-input {
 				border-radius: 8px;
 				background: #ffffff;
 				border: 1px solid #d9dbe9;
-				height: 2rem;
+				height: 3.375rem;
 				padding: 0 1rem;
-				transition: all 0.4 s;
+				transition: all 0.4s;
+				font-size: 1rem;
 			}
 			.go-input:focus-visible {
 				outline-color: #6f57cd;
 				box-shadow: 0px 0px 1px 2px rgba(111, 87, 205, 0.25);
 			}
 
-			:host {
-				display: flex;
-				flex-direction: column;
-				position: relative;
-			}
 			.input-help {
 				position: absolute;
 				bottom: 0;
@@ -33,6 +35,8 @@ export class GoInput extends LitElement {
 			label {
 				color: #2b2b2b;
 				font-weight: 500;
+				font-size: 0.85rem;
+				font-weight: 600;
 			}
 
 			input[type='checkbox'] {
