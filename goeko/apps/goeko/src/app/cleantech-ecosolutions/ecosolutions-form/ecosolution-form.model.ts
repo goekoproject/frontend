@@ -5,6 +5,7 @@ export interface GoalChecked {
 }
 export class EcosolutionForm {
 	solutionName: string;
+	solutionDescription?: string;
 	subCategory: string;
 	products: string[];
 	reductionPercentage?: number;
@@ -20,6 +21,7 @@ export class EcosolutionForm {
 
 	constructor(ecosolution: NewEcosolutions) {
 		this.solutionName = ecosolution.solutionName;
+		this.solutionDescription = ecosolution.solutionDescription;
 		this.subCategory = ecosolution.classification.subCategory;
 		this.products = ecosolution.classification.products;
 		this.reductionPercentage = ecosolution.improvement?.reductionPercentage;

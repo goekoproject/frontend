@@ -187,7 +187,7 @@ export const SelectPaybackPeriodYears: DataSelectOption[] = [
 		keyLang: 'years',
 	},
 	{
-		id: 6,
+		id: '',
 		keyLang: 'SELECT_DATA_LABEL.fiveBetweenTen',
 	},
 ];

@@ -1,16 +1,12 @@
 import { CommonModule } from '@angular/common';
 import {
 	AfterContentInit,
-	AfterViewChecked,
 	AfterViewInit,
-	Attribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
 	ContentChild,
 	ElementRef,
-	HostBinding,
-	HostListener,
 	Input,
 	OnDestroy,
 	Provider,
@@ -97,6 +93,9 @@ export class SelectSubcategoryProductComponent
 
 	public get selected(): BadgeComponent[] {
 		this._cdf.markForCheck();
+		if (!this.open) {
+			this.badgeGroup._selectionModel.clear();
+		}
 		return this.badgeGroup?.selected;
 	}
 
@@ -137,6 +136,7 @@ export class SelectSubcategoryProductComponent
 
 	ngAfterViewInit() {
 		this._handlerMutationObserver();
+		this._cdf.markForCheck();
 	}
 
 	ngOnDestroy() {
@@ -145,7 +145,25 @@ export class SelectSubcategoryProductComponent
 			this.mutationObserver.disconnect();
 		}
 	}
+	writeValue(value: any): void {
+		if (!value) {
+			return;
+		}
+		this.assignValue(value);
+	}
+	registerOnChange(fn: (value: any) => void): void {
+		this._onChange = fn;
+	}
+	registerOnTouched(fn: () => void): void {
+		this._onTouched = fn;
+	}
+	setDisabledState(isDisabled: boolean): void {
+		this.disabled = isDisabled;
+	}
 
+	private _onFocus() {
+		this.inputElement.nativeElement.focus();
+	}
 	private _handlerMutationObserver() {
 		// Configuración de MutationObserver con una función de retorno de llamada
 		this.mutationObserver = new MutationObserver((mutationsList) => {
@@ -157,6 +175,7 @@ export class SelectSubcategoryProductComponent
 					} else {
 						this.open = true;
 					}
+					this._cdf.markForCheck();
 				}
 			}
 		});
@@ -175,30 +194,13 @@ export class SelectSubcategoryProductComponent
 		});
 	}
 
-	writeValue(value: any): void {
-		if (!value) {
-			return;
-		}
-		this.assignValue(value);
-	}
-	registerOnChange(fn: (value: any) => void): void {
-		this._onChange = fn;
-	}
-	registerOnTouched(fn: () => void): void {
-		this._onTouched = fn;
-	}
-	setDisabledState(isDisabled: boolean): void {
-		this.disabled = isDisabled;
-	}
-
 	assignValue(value: string): void {
 		if (this.subCategory.controlName === value) {
 			this.value = this.subCategory;
 			this.checked = true;
 
 			// this will make the execution after the above boolean has changed
-			this.inputElement.nativeElement.focus();
-
+			this._onFocus();
 			this._onChange(this.value);
 			this._onTouched();
 			this._cdf.markForCheck();
@@ -216,6 +218,9 @@ export class SelectSubcategoryProductComponent
 
 	toogle(value: any) {
 		this.open = !this.open;
+		if (this.open) {
+			this._onFocus();
+		}
 		this._onChange(value);
 		this._cdf.markForCheck();
 	}

@@ -95,6 +95,7 @@
 		"logo": "Logo",
 		"name_project": "Project's Name",
 		"solutionName": "Solution Name",
+		"solutionDescription": "Description",
 		"price": "Price",
 		"improvement": "Improvement",
 		"reductionPercentage": "Reduction Percentage",

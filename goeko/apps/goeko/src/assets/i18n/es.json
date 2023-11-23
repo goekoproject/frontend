@@ -86,6 +86,7 @@
 		"logo": "Logo",
 		"name_project": "Nombre del proyecto",
 		"solutionName": "Nombre de tu ecosolución",
+		"solutionDescription": "Descripción",
 		"name": "Nombre",
 		"price": "Precio",
 		"improvement": "Mejoras",

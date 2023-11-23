@@ -101,6 +101,7 @@ export class EcosolutionsFormComponent implements OnInit {
 	private _initForm() {
 		this.form = this._fb.group({
 			solutionName: ['', Validators.required],
+			solutionDescription: [''],
 			subCategory: ['', Validators.required],
 			products: ['', Validators.required],
 			reductionPercentage: [],

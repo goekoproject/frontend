@@ -19,6 +19,7 @@ interface Classification {
 export interface NewEcosolutions {
 	cleantechId: string;
 	solutionName: string;
+	solutionDescription?: string;
 	classification: Classification;
 	price?: Price;
 	improvement?: Improvement;
@@ -34,6 +35,7 @@ export interface NewEcosolutions {
 export class NewEcosolutionsBody implements NewEcosolutions {
 	cleantechId: string;
 	solutionName: string;
+	solutionDescription?: string;
 	classification: Classification;
 	price?: Price | undefined;
 	improvement?: Improvement | undefined;
@@ -51,6 +53,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 		}
 		this.cleantechId = cleanTechId;
 		this.solutionName = formValue.solutionName;
+		this.solutionDescription = formValue.solutionDescription;
 		this.price = {
 			amount: formValue.price,
 			currency: 'EUR',

@@ -95,6 +95,7 @@
 		"name": "Nom",
 		"name_project": "Nom du projet",
 		"solutionName": "Nom de votre écosolution",
+		"solutionDescription": "Description",
 		"price": "Prix",
 		"improvement": "Améliorations",
 		"reductionPercentage": "Pourcentage de réduction",
