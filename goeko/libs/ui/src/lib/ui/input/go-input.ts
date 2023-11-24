@@ -13,9 +13,6 @@ export class GoInput extends LitElement {
 				max-width: var(--medium-width-field);
 				height: var(--medium-height-field);
 			}
-			:host(> .box-file) {
-				height: 12rem;
-			}
 
 			.box-file {
 				border-style: dashed solid;
@@ -44,6 +41,9 @@ export class GoInput extends LitElement {
 				transition: all 0.4s;
 				font-size: 1rem;
 				z-index: 1;
+			}
+			:host input[type='file-link'] {
+				height: 2.5rem;
 			}
 			.go-input:focus-visible {
 				outline-color: #6f57cd;
@@ -122,11 +122,6 @@ export class GoInput extends LitElement {
 		this.heightWrapper = this.type === 'file-link' ? '12' : 'auto';
 
 		return html`
-			<style>
-				 {
-					height: ${this.heightWrapper}rem;
-				}
-			</style>
 			<link
 				rel="stylesheet"
 				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
