@@ -10,7 +10,8 @@ export class GoInput extends LitElement {
 				flex-direction: column;
 				position: relative;
 				gap: 0.5rem;
-				max-width: var(--medium-size-field);
+				max-width: var(--medium-width-field);
+				height: var(--medium-height-field);
 			}
 			:host(> .box-file) {
 				height: 12rem;
@@ -38,7 +39,7 @@ export class GoInput extends LitElement {
 				border-radius: 8px;
 				background: #ffffff;
 				border: 1px solid #d9dbe9;
-				height: 2.75rem;
+				height: 100%;
 				padding: 0 1rem;
 				transition: all 0.4s;
 				font-size: 1rem;
