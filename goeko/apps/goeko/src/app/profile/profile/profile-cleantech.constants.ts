@@ -19,7 +19,7 @@ export const PROFILE_CLEANTECH: Profile<'cleantech'>[] = [
 	},
 	{
 		controlName: 'email',
-		label: 'FORM_LABEL.email',
+		label: 'FORM_LABEL.emailSalesManager',
 		type: 'email',
 	},
 	{
@@ -30,6 +30,7 @@ export const PROFILE_CLEANTECH: Profile<'cleantech'>[] = [
 	{
 		controlName: 'logo',
 		label: 'FORM_LABEL.logo',
-		type: 'url',
+		type: 'file-link',
+		className: 'file-link',
 	},
 ];

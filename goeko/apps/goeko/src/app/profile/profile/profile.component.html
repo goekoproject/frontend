@@ -55,7 +55,11 @@
 				</ng-container>
 
 				<ng-container *ngSwitchDefault>
-					<go-input [formControlName]="itemForm.controlName" type="${itemForm.type}">
+					<go-input
+						[formControlName]="itemForm.controlName"
+						type="{{ itemForm.type }}"
+						class="{{ itemForm.className }}"
+					>
 						<p slot="label">{{ itemForm.label | translate }}</p>
 					</go-input>
 				</ng-container>

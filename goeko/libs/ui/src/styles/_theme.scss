@@ -10,6 +10,7 @@
 @import './buttons.scss';
 @import './_fonts/tabler-icons/tabler-icons.css';
 @import './media.scss';
+@import './input.scss';
 *,
 *::before,
 *::after {
@@ -40,6 +41,7 @@ body:has(div.is-platform) {
 }
 :root {
 	--center-container: 90%;
+	--medium-size-field: 24.875rem;
 }
 a {
 	text-decoration: none;

@@ -10,15 +10,39 @@ export class GoInput extends LitElement {
 				flex-direction: column;
 				position: relative;
 				gap: 0.5rem;
+				max-width: var(--medium-size-field);
+			}
+			:host(> .box-file) {
+				height: 12rem;
+			}
+
+			.box-file {
+				border-style: dashed solid;
+				border: dashed rgb(217, 219, 233);
+				position: absolute;
+				transform: translateY(19px);
+				width: 98%;
+				height: 65%;
+				border-radius: 0.5rem;
+				display: flex;
+				justify-content: center;
+				align-items: flex-end;
+				padding: 1rem 0;
+				top: 7%;
+			}
+			.file-img {
+				width: 30%;
+				height: 71%;
 			}
 			.go-input {
 				border-radius: 8px;
 				background: #ffffff;
 				border: 1px solid #d9dbe9;
-				height: 3.375rem;
+				height: 2.75rem;
 				padding: 0 1rem;
 				transition: all 0.4s;
 				font-size: 1rem;
+				z-index: 1;
 			}
 			.go-input:focus-visible {
 				outline-color: #6f57cd;
@@ -35,7 +59,7 @@ export class GoInput extends LitElement {
 			label {
 				color: #2b2b2b;
 				font-weight: 500;
-				font-size: 0.85rem;
+				font-size: 0.875rem;
 				font-weight: 600;
 			}
 
@@ -59,6 +83,7 @@ export class GoInput extends LitElement {
 	@property({ type: String }) maxLength = Infinity;
 	@property({ type: Boolean }) pattern = Infinity;
 	@property({ type: String }) autocomplete = '';
+	@property({ type: String }) heightWrapper = '';
 
 	@property({ type: String }) textHelp = '';
 	@query('input') input!: HTMLInputElement;
@@ -85,8 +110,22 @@ export class GoInput extends LitElement {
 		};
 		this.dispatchEvent(new CustomEvent('change', options));
 	}
-	override render() {
+	private _templateFileWithLinks() {
 		return html`
+			<div class="box-file">
+				<img .src="${this.value}" alt="Logo" class="file-img" />
+			</div>
+		`;
+	}
+	override render() {
+		this.heightWrapper = this.type === 'file-link' ? '12' : 'auto';
+
+		return html`
+			<style>
+				 {
+					height: ${this.heightWrapper}rem;
+				}
+			</style>
 			<link
 				rel="stylesheet"
 				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
@@ -111,6 +150,7 @@ export class GoInput extends LitElement {
 						</abbr>
 				  </section>`
 				: nothing}
+			${this.type === 'file-link' ? this._templateFileWithLinks() : nothing}
 		`;
 	}
 }
