@@ -1,9 +1,9 @@
 <div class="ecosolutions-form">
 	<form [formGroup]="form" (submit)="idEcosolution ? editEcosolution() : saveEcosolution()">
 		<fieldset class="ecosolutions-cuestions-products">
-			<legend>{{ 'FORM_LABEL.solutionName' | translate }}</legend>
+			<legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
 			<go-input [formControlName]="'solutionName'">
-				<span slot="label">{{ 'FORM_LABEL.name' | translate }}</span>
+				<span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
 			</go-input>
 
 			<go-input [formControlName]="'solutionDescription'">
@@ -13,8 +13,6 @@
 
 		<fieldset class="ecosolutions-cuestions-products">
 			<legend>{{ 'FORM_LABEL.products' | translate }}</legend>
-			<!-- 			<span>{{ 'FORM_LABEL.ecosolution_classification' | translate }}</span>
- -->
 
 			<div class="ecosolutions-subcategory">
 				<goeko-select-subcategory-product
@@ -28,25 +26,11 @@
 						}}</go-badge>
 					</go-badge-group>
 				</goeko-select-subcategory-product>
-				<!-- 	<div class="ecosolutions-cuestions" *ngFor="let item of questionsCategories">
-					<label class="input-radio">
-						<input type="radio" [formControlName]="'subCategory'" [value]="item.controlName" />
-						{{ item.label | translate }}
-					</label>
-				</div> -->
 			</div>
-
-			<!-- 			<div>
-				<go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories">
-					<go-badge *ngFor="let option of productsCategories" [value]="option.id">{{
-						option.keyLang | translate
-					}}</go-badge>
-				</go-badge-group>
-			</div> -->
 		</fieldset>
 
 		<fieldset>
-			<legend>{{ 'FORM_LABEL.improvement' | translate }}</legend>
+			<legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
 
 			<go-input [formControlName]="'reductionPercentage'" type="number">
 				<span slot="label">{{ 'FORM_LABEL.reductionPercentage' | translate }}</span>
@@ -76,7 +60,7 @@
 		</fieldset>
 
 		<fieldset>
-			<legend>{{ 'FORM_LABEL.improvement' | translate }}</legend>
+			<legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
 
 			<go-input [formControlName]="'price'" type="number">
 				<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>

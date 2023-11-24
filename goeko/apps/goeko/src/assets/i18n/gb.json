@@ -27,6 +27,10 @@
 	"NOTIFICATION": {
 		"save_ok": "Saved successfully"
 	},
+	"BREADCRUMBS": {
+		"new_ecosolutions": "New eco-solution",
+		"edit_ecosolutions": "Edit eco-solution"
+	},
 	"all": "All",
 	"new_analysis": "New analysis",
 	"last_analysis": "Last analysis",
@@ -92,11 +96,13 @@
 		"location": "Location",
 		"city": "City",
 		"name": "Name",
+		"advantagesEcosolutions": "Advantages of your eco-solution",
 		"emailSalesManager": "Email of the Sales Manager",
 		"logo": "Link to your logo",
 		"name_project": "Project's Name",
 		"solutionName": "Solution Name",
-		"solutionDescription": "Description",
+		"basicInformation": "Basic information",
+		"solutionDescription": "Description of your eco-solution",
 		"price": "Price",
 		"improvement": "Improvement",
 		"reductionPercentage": "Reduction Percentage",
@@ -112,7 +118,8 @@
 		"approvedSwiss": "Approved for the Swiss market",
 		"operationalCostReductionPercentage": "Percentage of operational cost reduction",
 		"additionalInformation": "Additional information",
-		"products": "Products"
+		"products": "Products",
+		"furtherInformation": "Additional information"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Free trial to connect with qualified leads",

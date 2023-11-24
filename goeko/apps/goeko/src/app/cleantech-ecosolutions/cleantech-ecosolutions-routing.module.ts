@@ -8,6 +8,10 @@ const routes: Routes = [
 	{
 		path: ':id',
 		component: EcosolutionsMainComponent,
+		data: {
+			breadcrumb: 'Eco-solutions',
+		},
+
 		children: [
 			{
 				path: '',
@@ -16,10 +20,16 @@ const routes: Routes = [
 			{
 				path: 'new',
 				component: EcosolutionsFormComponent,
+				data: {
+					breadcrumb: 'BREADCRUMBS.new_ecosolutions',
+				},
 			},
 			{
 				path: 'edit/:id',
 				component: EcosolutionsFormComponent,
+				data: {
+					breadcrumb: 'BREADCRUMBS.edit_ecosolutions',
+				},
 			},
 		],
 	},

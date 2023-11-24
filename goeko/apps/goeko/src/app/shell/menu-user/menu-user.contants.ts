@@ -55,7 +55,7 @@ export const MENU_USER_CLEANTECH: MenuUser[] = [
 	},
 	{
 		id: window.crypto.randomUUID(),
-		title: 'Ecosolutions',
+		title: 'Eco-solutions',
 		url: 'cleantech-ecosolutions',
 		active: true,
 		icon: 'solar-panel-2',

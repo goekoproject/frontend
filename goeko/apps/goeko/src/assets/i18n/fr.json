@@ -27,6 +27,10 @@
 	"NOTIFICATION": {
 		"save_ok": "Enregistré avec succès"
 	},
+	"BREADCRUMBS": {
+		"new_ecosolutions": "Nouvelle éco-solution",
+		"edit_ecosolutions": "Modifier éco-solution"
+	},
 	"all": "Tout",
 	"analysis": "Analyse",
 	"new_analysis": "Nouvelle analyse",
@@ -94,11 +98,14 @@
 		"logo": "Lien vers votre logo",
 		"emailSalesManager": "Email du responsable commercial",
 		"name": "Nom",
+		"basicInformation": "Informations de base",
 		"name_project": "Nom du projet",
 		"solutionName": "Nom de votre écosolution",
-		"solutionDescription": "Description",
+		"solutionDescription": "Description de votre éco-solution",
 		"price": "Prix",
+		"furtherInformation": "Informations complémentaires",
 		"improvement": "Améliorations",
+		"advantagesEcosolutions": "Avantages de votre éco-solution",
 		"reductionPercentage": "Pourcentage de réduction",
 		"ecosolutions_sustainableDevelopmentGoals": "Sélectionnez les Objectifs de développement durable (ODD)",
 		"ecosolutions_subCategory": "Sélectionnez les sous-catégories",

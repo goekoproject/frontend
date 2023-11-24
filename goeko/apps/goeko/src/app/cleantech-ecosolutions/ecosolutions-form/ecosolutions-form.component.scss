@@ -3,6 +3,13 @@
 	border-radius: 12px;
 	background: #fff;
 	padding: 2rem;
+
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		flex-wrap: wrap;
+	}
 }
 
 .ecosolutions-cuestions {
@@ -27,7 +34,7 @@
 
 .ecosolutions-cuestions-products {
 	display: flex;
-	gap: 2rem;
+	gap: 1rem;
 	flex-wrap: wrap;
 	flex-direction: column;
 }

@@ -24,6 +24,10 @@
 		"passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
 		"passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
 	},
+	"BREADCRUMBS": {
+		"new_ecosolutions": "Nueva ecosolución",
+		"edit_ecosolutions": "Editar ecosolución"
+	},
 	"all": "Todo",
 	"analysis": "Análisis",
 	"availability": "Disponible",
@@ -84,10 +88,13 @@
 		"location": "Ubicación",
 		"city": "Ciudad",
 		"logo": "Link de tu logo",
+		"furtherInformation": "Información adicional",
+		"advantagesEcosolutions": "Ventajas de su eco-solución",
 		"emailSalesManager": "Email del responsable comercial",
 		"name_project": "Nombre del proyecto",
 		"solutionName": "Nombre de tu ecosolución",
-		"solutionDescription": "Descripción",
+		"basicInformation": "Información básica",
+		"solutionDescription": "Descripción de tu eco-solución",
 		"name": "Nombre",
 		"price": "Precio",
 		"improvement": "Mejoras",

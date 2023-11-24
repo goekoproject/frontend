@@ -167,9 +167,10 @@ fieldset {
 	border: none;
 }
 legend {
-	font-size: 2rem;
+	font-size: 1.25rem;
 	color: #1b1d20;
 	font-weight: 600;
+	height: 1rem;
 }
 input[type='radio' i]:focus-visible {
 	outline: none;
