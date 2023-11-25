@@ -1,4 +1,4 @@
-$background-hover: var(--bkg-element-hover-color);
+$background-hover: var(--color-primary);
 
 .wrapper-super-option {
 	&:hover {
@@ -12,9 +12,7 @@ $background-hover: var(--bkg-element-hover-color);
 	display: flex;
 	align-items: center;
 	&:hover {
-	//	background-color: $background-hover;
-		font-family: 'Barlow-SemiBold', sans-serif;
-		font-weight: 600;
-		color: var(--color-hover);
+		background-color: $background-hover;
+		color: #fff;
 	}
 }

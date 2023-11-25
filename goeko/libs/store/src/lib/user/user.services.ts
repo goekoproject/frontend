@@ -99,7 +99,7 @@ export class UserService {
 	private _transformbBodyCleanTech(body: any) {
 		return {
 			...body,
-			countries: body.countries.map((country: any) => country.code),
+			countries: [body.countries?.code],
 		};
 	}
 }

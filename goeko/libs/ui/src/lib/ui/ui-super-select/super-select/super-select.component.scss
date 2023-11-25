@@ -10,7 +10,6 @@ $color-label-pressed: #0090d6;
 @mixin status($status, $color, $background: none) {
 	&#{$status} {
 		border: 1px solid $color;
-		border-radius: 8px;
 		background: $background;
 		background-color: $background-overlay;
 	}
@@ -43,7 +42,7 @@ $color-label-pressed: #0090d6;
 .super-select {
 	display: block;
 	border: 1px solid rgb(217, 219, 233);
-	border-radius: 15px;
+	border-radius: 8px;
 	overflow: hidden;
 	max-width: var(--medium-width-field);
 	&:focus-visible {
@@ -70,15 +69,15 @@ $color-label-pressed: #0090d6;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 1.3rem;
-
+	padding: 0 1rem;
+	font-size: 1rem;
 	height: inherit;
 	cursor: pointer;
 	position: relative;
 
 	// SIZE
 	@include size(--large, 325, 64);
-	@include size(--medium, 325, 56);
+	@include size(--medium, 325, 43);
 	@include size(--small, 325, 48);
 	@include size(--xsmall, 200, 32);
 
@@ -91,7 +90,6 @@ $color-label-pressed: #0090d6;
 		background-color: $background-overlay;
 		width: 100%;
 		box-shadow: 0px 4px 8px 0px #a0a3bd99;
-		border-radius: 12px;
 		overflow-y: scroll;
 		max-height: 20rem;
 		min-width: fit-content;

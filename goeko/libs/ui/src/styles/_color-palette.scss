@@ -1,32 +1,36 @@
 :root {
-  --color-primary: #048ABF;
-  --color-primary-support: #049DBF;
-  --color-primary-light: #A7E4F2;
-  --color-secondary: #21A650;
-  --color-secondary-light: #49A669;
-  --color-background: #06BBE3;
-  --color-background-white: #ffffff;
-  --color-background-light: #E5F7FC;
-  --color-text-dark: #001724;
-  --color-text-light:#47525E;
-  --color-swiss:#ff0000;
-  --color-green-light:#00fba0;
-  --color-gree-light2: #0cbd4a;
-  --color-co2emission: #EA8788B5;
-  --color-water: #5A7AEBB5;
-  --color-waste: linear-gradient(90deg, rgba(241, 187, 48, 0.32) 4.69%, rgba(187, 187, 187, 0.85) 27.08%, rgba(68, 136, 238, 0.54) 47.92%, rgba(67, 141, 151, 0.42) 68.75%, rgba(221, 224, 56, 0.59) 87.50%);
-  --color-hazardousProduct: #FE110FED;
-
+	--color-primary: #0090d6;
+	--color-primary-support: #049dbf;
+	--color-primary-light: #a7e4f2;
+	--color-secondary: #21a650;
+	--color-secondary-light: #49a669;
+	--color-background: #06bbe3;
+	--color-background-white: #ffffff;
+	--color-background-light: #e5f7fc;
+	--color-text-dark: #001724;
+	--color-text-light: #47525e;
+	--color-swiss: #ff0000;
+	--color-green-light: #00fba0;
+	--color-gree-light2: #0cbd4a;
+	--color-co2emission: #ea8788b5;
+	--color-water: #5a7aebb5;
+	--color-waste: linear-gradient(
+		90deg,
+		rgba(241, 187, 48, 0.32) 4.69%,
+		rgba(187, 187, 187, 0.85) 27.08%,
+		rgba(68, 136, 238, 0.54) 47.92%,
+		rgba(67, 141, 151, 0.42) 68.75%,
+		rgba(221, 224, 56, 0.59) 87.5%
+	);
+	--color-hazardousProduct: #fe110fed;
 }
 
 @mixin gradient-linear {
-    background: rgb(156,212,183);
-    background: linear-gradient(70deg, rgba(156,212,183,1) 35%, rgba(4,138,191,1) 70%);
+	background: rgb(156, 212, 183);
+	background: linear-gradient(70deg, rgba(156, 212, 183, 1) 35%, rgba(4, 138, 191, 1) 70%);
 }
 
-
 @mixin gradient-radial {
-    background: rgb(156,212,183);
-    background: linear-gradient(344deg, rgba(156,212,183,1) 38%, rgba(4,138,191,1) 70%);
-    
+	background: rgb(156, 212, 183);
+	background: linear-gradient(344deg, rgba(156, 212, 183, 1) 38%, rgba(4, 138, 191, 1) 70%);
 }

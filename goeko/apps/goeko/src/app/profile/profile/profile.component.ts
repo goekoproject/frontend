@@ -24,9 +24,9 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
 	return null;
 };
 
-const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
+const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string[]) => {
 	if (o1 && o2) {
-		return o1.code === o2;
+		return o1.code === o2[0];
 	}
 
 	return null;
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
 	private _externalId!: string;
 
 	public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean;
-	public defaultSetCountriesSme = defaultSetCountriesSme as (o1: CountrySelectOption, o2: string) => boolean;
+	public defaultSetCountriesSme = defaultSetCountriesSme as (o1: CountrySelectOption, o2: string[]) => boolean;
 
 	constructor(
 		private _fb: FormBuilder,

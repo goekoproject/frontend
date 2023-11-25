@@ -467,7 +467,7 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
 			if (isUserInput) {
 				this._keyManager.setActiveItem(option);
 			}
-			if (wasSelected !== this._selectionModel.isSelected(option)) {
+			if (this._selectionModel.isSelected(option)) {
 				this._propagateChanges();
 			}
 			if (this.multiple) {
