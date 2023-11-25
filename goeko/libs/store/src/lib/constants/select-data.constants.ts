@@ -211,6 +211,26 @@ const SelectOdsDescription: DataSelectOption[] = [
 	{ id: 'ods_16', keyLang: 'ODS.ods_16' },
 	{ id: 'ods_17', keyLang: 'ODS.ods_17' },
 ];
+const SelectSustainableBuildingOperations: DataSelectOption[] = [
+	{
+		id: 'useRenewableEnergies',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useRenewableEnergies',
+	},
+	{ id: 'recoverHeat', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.recoverHeat' },
+	{
+		id: 'useLowConsumptionLighting',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useLowConsumptionLighting',
+	},
+	{ id: 'storeEnergy', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.storeEnergy' },
+	{
+		id: 'optimizeEnergyConsumption',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.optimizeEnergyConsumption',
+	},
+	{
+		id: 'chargeElectricVehicles',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.chargeElectricVehicles',
+	},
+];
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -226,4 +246,5 @@ export const DataSelect = {
 	odsDescription: SelectOdsDescription,
 	specialWaste: SelectSpecialWaste,
 	hazardousWaste: SelectHazardousWaste,
+	sustainableBuildingOperations: SelectSustainableBuildingOperations,
 };

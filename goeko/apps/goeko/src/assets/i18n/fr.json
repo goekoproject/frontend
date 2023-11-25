@@ -72,6 +72,68 @@
 		"products": "Types de produits toxiques",
 		"specialWaste": "Avec quels types de déchets spéciaux votre entreprise est-elle principalement confrontée?"
 	},
+	"CATEGORIES_LABEL": {
+		"amount": {
+			"question": "Activités qui consomment le plus d’eau",
+			"label": ""
+		},
+		"energySource": {
+			"question": "Votre entreprise est-elle déjà équipée de :",
+			"label": ""
+		},
+		"sustainableBuildingOperations": {
+			"question": "Exploitation du bâtiment et mobilité durable",
+			"label": "Pour l’exploitation de bâtiments ou la mobilité durable,  votre éco-solution permet de:"
+		},
+		"fuelInvoice": {
+			"question": "Facture de carburant",
+			"label": ""
+		},
+		"greenWaste": {
+			"question": "Avec quels types de déchets verts votre entreprise est-elle principalement confrontée?",
+			"label": "Dans quelle(s) catégorie(s) de déchets verts votre entreprise améliore-t-elle la gestion?"
+		},
+		"hazardousWaste": {
+			"question": "Avec quels types de déchets dangereux votre entreprise est-elle principalement confrontée?",
+			"label": "Dans quelle(s) catégorie(s) de déchets dangereux votre entreprise améliore-t-elle la gestion?"
+		},
+		"inertOrMineralWaste": {
+			"question": "Avec quels types de déchets minéraux ou inertes votre entreprise est-elle principalement confrontée?",
+			"label": "Dans quelle(s) catégorie(s) de déchets minéraux ou inertes votre éco-solution améliore-t-elle la gestion?"
+		},
+		"lastYearInvoice": {
+			"question": "Facture d'eau (2022)",
+			"label": ""
+		},
+		"mainActivity": {
+			"question": "Activités de votre entreprise qui consomment le plus d’eau",
+			"label": "Pour quelle(s) activité(s) en rapport avec l’eau votre éco-solution permet-elle de réduire sa consommation ou d'améliorer sa qualité ?"
+		},
+		"mainCategoryNonInert": {
+			"question": "Avec quels types de déchets non inertes votre entreprise est-elle principalement confrontée?",
+			"label": "Dans quelle(s) catégorie(s) de déchets non inertes votre éco-solution améliore-t-elle la gestion?"
+		},
+		"mainInternalCombustionEngine": {
+			"question": "Principaux engins à moteur",
+			"label": "Engins et véhicules"
+		},
+		"mainMineralProduct": {
+			"question": "Principaux produits minéraux et métaux",
+			"label": "Produits minéraux et métaux"
+		},
+		"mainRigidMaterial": {
+			"question": "Votre entreprise utilise-t-elle des panneaux isolants ?",
+			"label": ""
+		},
+		"products": {
+			"question": "Types de produits toxiques",
+			"label": "Types de produits toxiques"
+		},
+		"specialWaste": {
+			"question": "Avec quels types de déchets spéciaux votre entreprise est-elle principalement confrontée?",
+			"label": "Dans quelle(s) catégorie(s) de déchets spéciaux votre éco-solution améliore-t-elle la gestion?"
+		}
+	},
 	"certified": "Certification",
 	"cleantech": "Cleantech",
 	"companyDetails": "Détails de l'entreprise",
@@ -206,6 +268,15 @@
 			"soil": "Terre",
 			"stone": "Pierre"
 		},
+		"selectSustainableBuildingOperations": {
+			"useRenewableEnergies": "Recourir à des énergies renouvelables",
+			"recoverHeat": "Récupérer la chaleur",
+			"useLowConsumptionLighting": "Eclairer à basse consommation",
+			"storeEnergy": "Stocker l’énergie",
+			"optimizeEnergyConsumption": "Optimiser la consommation d’énergie",
+			"chargeElectricVehicles": "Charger des véhicules électriques"
+		},
+
 		"selectMainActivity": {
 			"cleaningOfSiteAndPeripheryAccesses": "Nettoyage des accès chantier et périphérie",
 			"cleaningSiteVehicles": "Nettoyage des véhicules de chantier",

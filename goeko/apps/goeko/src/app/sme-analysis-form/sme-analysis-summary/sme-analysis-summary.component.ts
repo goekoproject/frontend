@@ -1,11 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectService, SmeAnalysisService, SmeService } from '@goeko/store';
+import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
+import { DataSelect, DataSelectOption, ProjectService, SmeAnalysisService, SmeService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
-import { FORM_FIELD } from '../form-field-demo.constants';
 import { Section } from '../form-field.model';
-import { DataSelect, DataSelectOption } from '../select-data.constants';
 import {
 	FormValueToSmeAnalysisRequest,
 	FormValueToSmeProjectRequest,
@@ -20,7 +18,7 @@ import {
 export class SmeAnalysisSummaryComponent implements OnInit {
 	@Output() editForm: EventEmitter<number> = new EventEmitter();
 	public dataSelect = DataSelect;
-	formField = FORM_FIELD;
+	formField = FORM_CATEGORIES_QUESTION;
 	formValue!: any;
 	public saveOK = false;
 	private _smeId!: string;

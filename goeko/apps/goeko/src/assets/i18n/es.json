@@ -65,6 +65,68 @@
 		"products": "Tipo de producto peligroso",
 		"specialWaste": "Residuos Especiales"
 	},
+	"CATEGORIES_LABEL": {
+		"amount": {
+			"question": "Actividades que consumen más agua",
+			"label": ""
+		},
+		"energySource": {
+			"question": "¿Tu empresa ya está equipada con:",
+			"label": ""
+		},
+		"fuelInvoice": {
+			"question": "Factura de combustible",
+			"label": ""
+		},
+		"greenWaste": {
+			"question": "¿Con qué tipos de residuos verdes se enfrenta principalmente tu empresa?",
+			"label": "¿En qué categoría(s) de residuos verdes está mejorando la gestión tu empresa?"
+		},
+		"hazardousWaste": {
+			"question": "¿Con qué tipos de residuos peligrosos se enfrenta principalmente tu empresa?",
+			"label": "¿En qué categoría(s) de residuos peligrosos está mejorando la gestión tu empresa?"
+		},
+		"inertOrMineralWaste": {
+			"question": "¿Con qué tipos de residuos inertes o minerales se enfrenta principalmente tu empresa?",
+			"label": "¿En qué categoría(s) de residuos inertes o minerales está mejorando la gestión tu eco-solución?"
+		},
+		"lastYearInvoice": {
+			"question": "Factura de agua (2022)",
+			"label": ""
+		},
+		"mainActivity": {
+			"question": "Actividades de tu empresa que consumen más agua",
+			"label": "¿Para qué actividad(es) relacionada(s) con el agua tu eco-solución reduce el consumo o mejora la calidad?"
+		},
+		"mainCategoryNonInert": {
+			"question": "¿Con qué tipos de residuos no inertes se enfrenta principalmente tu empresa?",
+			"label": "¿En qué categoría(s) de residuos no inertes está mejorando la gestión tu eco-solución?"
+		},
+		"mainInternalCombustionEngine": {
+			"question": "Equipos principales con motor de combustión interna",
+			"label": "Motores y vehículos"
+		},
+		"mainMineralProduct": {
+			"question": "Principales productos minerales y metálicos",
+			"label": "Productos minerales y metálicos"
+		},
+		"mainRigidMaterial": {
+			"question": "¿Tu empresa utiliza paneles aislantes?",
+			"label": ""
+		},
+		"products": {
+			"question": "Tipos de productos tóxicos",
+			"label": "Tipos de productos tóxicos"
+		},
+		"specialWaste": {
+			"question": "¿Con qué tipos de residuos especiales se enfrenta principalmente tu empresa?",
+			"label": "¿En qué categoría(s) de residuos especiales está mejorando la gestión tu eco-solución?"
+		},
+		"sustainableBuildingOperations": {
+			"question": "Explotación de Edificios y Movilidad Sostenible",
+			"label": "Para la explotación de edificios o movilidad sostenible, tu eco-solución permite:"
+		}
+	},
 	"certified": "Certificado",
 	"cleantech": "Cleantech",
 	"completeToProfileNow": "Completa al perfil ahora!",
@@ -204,6 +266,14 @@
 			"concrete": "Hormigón",
 			"soil": "Tierra",
 			"stone": "Piedra"
+		},
+		"selectSustainableBuildingOperations": {
+			"useRenewableEnergies": "Utilizar energías renovables",
+			"recoverHeat": "Recuperar calor",
+			"useLowConsumptionLighting": "Usar iluminación de bajo consumo",
+			"storeEnergy": "Almacenar energía",
+			"optimizeEnergyConsumption": "Optimizar el consumo de energía",
+			"chargeElectricVehicles": "Cargar vehículos eléctricos"
 		},
 		"selectMainActivity": {
 			"cleaningOfSiteAndPeripheryAccesses": "Limpieza de accesos de obra y periféricos",

@@ -63,9 +63,9 @@ export class EcosolutionsFormComponent implements OnInit {
 	) => boolean;
 	public currentLangCode!: string;
 	public dataSelect = DataSelect;
+	public mainCategory!: string;
 
 	private _cleantechId!: string;
-	private _mainCategory!: string;
 	private _fieldsCatagory = FORM_CATEGORIES_QUESTION;
 	constructor(
 		private _route: ActivatedRoute,
@@ -79,7 +79,7 @@ export class EcosolutionsFormComponent implements OnInit {
 		this.currentLangCode = this._translateServices.defaultLang;
 		this._getParamsUrl();
 		this.questionsCategories = this._fieldsCatagory
-			.filter((field) => field.controlName.toUpperCase() === this._mainCategory.toUpperCase())
+			.filter((field) => field.controlName.toUpperCase() === this.mainCategory.toUpperCase())
 			.map((co2EmissionFields) => co2EmissionFields.fields)
 			.flat();
 		this._initForm();
@@ -91,7 +91,7 @@ export class EcosolutionsFormComponent implements OnInit {
 	}
 	private _getParamsUrl() {
 		this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string;
-		this._mainCategory = this._route.snapshot.queryParamMap.get('mainCategory') as string;
+		this.mainCategory = this._route.snapshot.queryParamMap.get('mainCategory') as string;
 		this.idEcosolution = this._route.snapshot.paramMap.get('id') as string;
 	}
 	private _changeLangCode() {
@@ -140,7 +140,7 @@ export class EcosolutionsFormComponent implements OnInit {
 		});
 	}
 	editEcosolution() {
-		const body = new NewEcosolutionsBody(this._cleantechId, this._mainCategory, this.form.value);
+		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
 		this._ecosolutionsService.updateEcosolution(this.idEcosolution, body).subscribe((res: any) => {
 			const formValue = new EcosolutionForm(res);
 			this.form.patchValue(formValue);
@@ -153,7 +153,7 @@ export class EcosolutionsFormComponent implements OnInit {
 		}
 	}
 	private _createEcosolution() {
-		const body = new NewEcosolutionsBody(this._cleantechId, this._mainCategory, this.form.value);
+		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
 		this._ecosolutionsService.createEcosolutions(body).subscribe((res) => {
 			console.log(res);
 		});

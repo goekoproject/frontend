@@ -1,10 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeAnalysisService, SmeRequestResponse, UserService } from '@goeko/store';
+import { DataSelect, SmeAnalysisService, SmeRequestResponse, UserService } from '@goeko/store';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { Field } from '../form-field.model';
-import { DataSelect } from '../select-data.constants';
 import { CategoryModel, transformArrayToObj } from '../sme-form-analysis/sme-analysis.request';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {

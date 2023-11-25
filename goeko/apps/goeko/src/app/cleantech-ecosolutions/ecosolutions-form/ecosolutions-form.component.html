@@ -29,7 +29,7 @@
 			</div>
 		</fieldset>
 
-		<fieldset>
+		<fieldset *ngIf="mainCategory !== 'hazardousProduct'">
 			<legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
 
 			<go-input [formControlName]="'reductionPercentage'" type="number">

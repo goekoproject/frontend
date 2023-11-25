@@ -32,7 +32,7 @@
 									<!-- INPUT boolean -->
 									<ng-container *ngSwitchCase="'boolean'">
 										<div class="field-form-checked">
-											<label [id]="field.controlName">{{ field.label | translate }}</label>
+											<label [id]="field.controlName">{{ field.question | translate }}</label>
 											<label class="switch">
 												<input
 													type="checkbox"
@@ -55,13 +55,13 @@
 											[formControlName]="field.controlName"
 											type="number"
 										>
-											<p slot="label">{{ field.label | translate }}</p>
+											<p slot="label">{{ field.question | translate }}</p>
 										</go-input>
 									</ng-container>
 									<!-- INPUT SELECT -->
 
 									<ng-container *ngSwitchCase="'select'">
-										<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
+										<label for="{{ field.controlName }}">{{ field.question | translate }}</label>
 
 										<ui-super-select
 											[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -82,7 +82,7 @@
 
 									<ng-container *ngSwitchCase="'select-multiple'">
 										<label for="{{ field.controlName }}" [id]="field.controlName">{{
-											field.label | translate
+											field.question | translate
 										}}</label>
 
 										<ui-super-select
@@ -105,7 +105,7 @@
 									<!-- Question card-->
 									<ng-container *ngSwitchCase="'question'">
 										<label for="{{ field.controlName }}" [id]="field.controlName">{{
-											field.label | translate
+											field.question | translate
 										}}</label>
 										<select
 											multiple
@@ -129,7 +129,7 @@
 
 									<ng-container *ngSwitchCase="'badge-group'">
 										<label for="{{ field.controlName }}" [id]="field.controlName">{{
-											field.label | translate
+											field.question | translate
 										}}</label>
 										<p class="text-support">
 											{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}
@@ -150,7 +150,7 @@
 
 									<ng-container *ngSwitchDefault>
 										<go-input [textHelp]="field.textHelp" [formControlName]="field.controlName">
-											<p slot="label">{{ field.label | translate }}</p>
+											<p slot="label">{{ field.question | translate }}</p>
 										</go-input>
 									</ng-container>
 								</ng-container>
@@ -179,7 +179,7 @@
 	</div>
 </div>
 <ng-template #question let-field="field">
-	<label for="{{ field.controlName }}">{{ field.label | translate }}</label>
+	<label for="{{ field.controlName }}">{{ field.question | translate }}</label>
 	<select multiple [formControlName]="field.controlName" [id]="field.controlName" [name]="field.controlName">
 		<option value="">--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--</option>
 		<option *ngFor="let option of dataSelect[field.controlName]" [value]="option.title">

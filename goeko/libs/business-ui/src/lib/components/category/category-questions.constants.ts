@@ -4,10 +4,10 @@ export interface Field {
 	controlName: string;
 	type: string;
 	textHelp: string;
-	label: string;
+	label: string; // for cleactech
+	question?: string; // for question of sme
 	hidden?: boolean;
 }
-
 export interface Section {
 	id: string;
 	searchName?: string;
@@ -38,32 +38,43 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 				controlName: 'mainInternalCombustionEngine',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.mainInternalCombustionEngine',
+				label: 'CATEGORIES_LABEL.mainInternalCombustionEngine.label',
+				question: 'CATEGORIES_LABEL.mainInternalCombustionEngine.question',
 			},
 			/* {
 				controlName: 'fuelInvoice',
 				type: 'number',
 				textHelp: 'Fuel invoice the main combustion engine (2022)',
-				label: 'CATEGORIES_FIELD.fuelInvoice',
+				question: 'CATEGORIES_LABEL.fuelInvoice',
 				hidden: true,
 			}, */
 			{
 				controlName: 'mainMineralProduct',
 				type: 'badge-group',
 				textHelp: 'cement, concrete, etc.',
-				label: 'CATEGORIES_FIELD.mainMineralProduct',
+				question: 'CATEGORIES_LABEL.mainMineralProduct.question',
+				label: 'CATEGORIES_LABEL.mainMineralProduct.label',
 			},
 			/* 	{
 				controlName: 'mainRigidMaterial',
 				type: 'boolean',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.mainRigidMaterial',
+				question: 'CATEGORIES_LABEL.mainRigidMaterial',
 			}, */
-			{
+			/* 			{
 				controlName: 'energySource',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.energySource',
+				question: 'CATEGORIES_LABEL.energySource.question',
+				label: 'CATEGORIES_LABEL.energySource.label',
+				hidden: true,
+			}, */
+			{
+				controlName: 'sustainableBuildingOperations',
+				type: 'badge-group',
+				textHelp: '',
+				question: 'CATEGORIES_LABEL.sustainableBuildingOperations.question',
+				label: 'CATEGORIES_LABEL.sustainableBuildingOperations.label',
 			},
 		],
 	},
@@ -80,31 +91,36 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 				controlName: 'mainCategoryNonInert',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.mainCategoryNonInert',
+				question: 'CATEGORIES_LABEL.mainCategoryNonInert.question',
+				label: 'CATEGORIES_LABEL.mainCategoryNonInert.label',
 			},
 			{
 				controlName: 'inertOrMineralWaste',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.inertOrMineralWaste',
+				question: 'CATEGORIES_LABEL.inertOrMineralWaste.question',
+				label: 'CATEGORIES_LABEL.inertOrMineralWaste.label',
 			},
 			{
 				controlName: 'greenWaste',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.greenWaste',
+				question: 'CATEGORIES_LABEL.greenWaste.question',
+				label: 'CATEGORIES_LABEL.greenWaste.label',
 			},
 			{
 				controlName: 'specialWaste',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.specialWaste',
+				question: 'CATEGORIES_LABEL.specialWaste.question',
+				label: 'CATEGORIES_LABEL.specialWaste.label',
 			},
 			{
 				controlName: 'hazardousWaste',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.hazardousWaste',
+				question: 'CATEGORIES_LABEL.hazardousWaste.question',
+				label: 'CATEGORIES_LABEL.hazardousWaste.label',
 			},
 		],
 	},
@@ -121,21 +137,22 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 				controlName: 'amount',
 				type: 'number',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.amount',
+				question: 'CATEGORIES_LABEL.amount',
 				hidden: true,
 			},
 			{
 				controlName: 'lastYearInvoice',
 				type: 'number',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.lastYearInvoice',
+				question: 'CATEGORIES_LABEL.lastYearInvoice',
 				hidden: true,
 			}, */
 			{
 				controlName: 'mainActivity',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.mainActivity',
+				question: 'CATEGORIES_LABEL.mainActivity.question',
+				label: 'CATEGORIES_LABEL.mainActivity.label',
 			},
 		],
 	},
@@ -152,7 +169,8 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 				controlName: 'products',
 				type: 'badge-group',
 				textHelp: '',
-				label: 'CATEGORIES_FIELD.products',
+				question: 'CATEGORIES_LABEL.products.question',
+				label: 'CATEGORIES_LABEL.products.label',
 			},
 		],
 	},

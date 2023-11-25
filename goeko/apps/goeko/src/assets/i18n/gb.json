@@ -72,6 +72,68 @@
 		"products": "Type of hazardous products",
 		"specialWaste": "Special Waste"
 	},
+	"CATEGORIES_LABEL": {
+		"amount": {
+			"question": "Activities that consume the most water",
+			"label": ""
+		},
+		"energySource": {
+			"question": "Is your company already equipped with:",
+			"label": ""
+		},
+		"fuelInvoice": {
+			"question": "Fuel invoice",
+			"label": ""
+		},
+		"greenWaste": {
+			"question": "With what types of green waste is your company primarily dealing?",
+			"label": "In which category(ies) of green waste is your company improving management?"
+		},
+		"hazardousWaste": {
+			"question": "With what types of hazardous waste is your company primarily dealing?",
+			"label": "In which category(ies) of hazardous waste is your company improving management?"
+		},
+		"inertOrMineralWaste": {
+			"question": "With what types of inert or mineral waste is your company primarily dealing?",
+			"label": "In which category(ies) of inert or mineral waste is your eco-solution improving management?"
+		},
+		"lastYearInvoice": {
+			"question": "Water invoice (2022)",
+			"label": ""
+		},
+		"mainActivity": {
+			"question": "Activities of your company that consume the most water",
+			"label": "For which water-related activity(ies) does your eco-solution reduce consumption or improve quality?"
+		},
+		"mainCategoryNonInert": {
+			"question": "With what types of non-inert waste is your company primarily dealing?",
+			"label": "In which category(ies) of non-inert waste is your eco-solution improving management?"
+		},
+		"mainInternalCombustionEngine": {
+			"question": "Main engine-powered equipment",
+			"label": "Engines and vehicles"
+		},
+		"mainMineralProduct": {
+			"question": "Main mineral and metal products",
+			"label": "Mineral and metal products"
+		},
+		"mainRigidMaterial": {
+			"question": "Is your company using insulation panels?",
+			"label": ""
+		},
+		"products": {
+			"question": "Types of toxic products",
+			"label": "Types of toxic products"
+		},
+		"specialWaste": {
+			"question": "With what types of special waste is your company primarily dealing?",
+			"label": "In which category(ies) of special waste is your eco-solution improving management?"
+		},
+		"sustainableBuildingOperations": {
+			"question": "Building Exploitation and Sustainable Mobility",
+			"label": "For the exploitation of buildings or sustainable mobility, your eco-solution allows:"
+		}
+	},
 	"certified": "Certification",
 	"cleantech": "Cleantech",
 	"companyDetails": "Company details",
@@ -205,6 +267,14 @@
 			"concrete": "Concrete",
 			"soil": "Soil",
 			"stone": "Stone"
+		},
+		"selectSustainableBuildingOperations": {
+			"useRenewableEnergies": "Use renewable energies",
+			"recoverHeat": "Recover heat",
+			"useLowConsumptionLighting": "Use low consumption lighting",
+			"storeEnergy": "Store energy",
+			"optimizeEnergyConsumption": "Optimize energy consumption",
+			"chargeElectricVehicles": "Charge electric vehicles"
 		},
 		"selectMainActivity": {
 			"cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
