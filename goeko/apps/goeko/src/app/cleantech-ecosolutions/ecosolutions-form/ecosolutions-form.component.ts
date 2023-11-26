@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import {
+	CleanTechService,
 	CountrySelectOption,
 	DataSelect,
 	DataSelectOption,
@@ -67,10 +68,12 @@ export class EcosolutionsFormComponent implements OnInit {
 
 	private _cleantechId!: string;
 	private _fieldsCatagory = FORM_CATEGORIES_QUESTION;
+	private fileCertificate: any;
 	constructor(
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _ecosolutionsService: EcosolutionsService,
+		private _cleanTeachService: CleanTechService,
 		private _fb: FormBuilder,
 		private _translateServices: TranslateService
 	) {}
@@ -79,7 +82,7 @@ export class EcosolutionsFormComponent implements OnInit {
 		this.currentLangCode = this._translateServices.defaultLang;
 		this._getParamsUrl();
 		this.questionsCategories = this._fieldsCatagory
-			.filter((field) => field.controlName.toUpperCase() === this.mainCategory.toUpperCase())
+			.filter((field) => field.controlName.toUpperCase() === this.mainCategory?.toUpperCase())
 			.map((co2EmissionFields) => co2EmissionFields.fields)
 			.flat();
 		this._initForm();
@@ -137,11 +140,13 @@ export class EcosolutionsFormComponent implements OnInit {
 		this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((res: any) => {
 			const formValue = new EcosolutionForm(res);
 			this.form.patchValue(formValue);
+			this._getDocumentsCleantech();
 		});
 	}
 	editEcosolution() {
 		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
 		this._ecosolutionsService.updateEcosolution(this.idEcosolution, body).subscribe((res: any) => {
+			this._uploadCertificate();
 			const formValue = new EcosolutionForm(res);
 			this.form.patchValue(formValue);
 		});
@@ -155,7 +160,30 @@ export class EcosolutionsFormComponent implements OnInit {
 	private _createEcosolution() {
 		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
 		this._ecosolutionsService.createEcosolutions(body).subscribe((res) => {
+			this._uploadCertificate();
 			console.log(res);
 		});
+	}
+	fileChange(file: any) {
+		this.fileCertificate = file.target.files[0];
+		this._uploadCertificate();
+	}
+
+	private _uploadCertificate() {
+		if (!this.form.value.certified && !this.form.controls['certified']?.dirty) {
+			return;
+		}
+		this._cleanTeachService.uploadDocument(this._cleantechId, this.fileCertificate).subscribe((res) => {
+			console.log(res);
+		});
+	}
+
+	private _getDocumentsCleantech() {
+		this._cleanTeachService.getDocuments(this.idEcosolution).subscribe((res) => {
+			console.log(res);
+		});
+	}
+	goBack() {
+		this._router.navigate(['cleantech-ecosolutions', this._cleantechId]);
 	}
 }

@@ -32,7 +32,7 @@
 	}
 }
 
-.ecosolutions-cuestions-products {
+.ecosolutions-fieldset {
 	display: flex;
 	gap: 1rem;
 	flex-wrap: wrap;
@@ -99,7 +99,7 @@
 	right: -2px;
 	background: #fff;
 	border-radius: 50%;
-	top: -2px;
+	bottom: -2px;
 }
 .field-form-checked {
 	display: flex;
@@ -114,4 +114,13 @@
 	flex-direction: column;
 	gap: 1rem;
 	width: 100%;
+}
+.field-form-upload {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+.actions-button {
+	display: flex;
+	justify-content: space-between;
 }

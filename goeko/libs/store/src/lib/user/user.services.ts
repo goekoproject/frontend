@@ -82,7 +82,7 @@ export class UserService {
 			return this._smeService.updateDataProfile(userId, _body);
 		}
 		if (userType === ACTORS_TYPE.CLEANTECH) {
-			const _body = this._transformbBodyCleanTech(body);
+			const _body = this._transformbBodySme(body);
 			return this._cleanTechService.updateDataProfile(userId, _body);
 		}
 		return of(null);

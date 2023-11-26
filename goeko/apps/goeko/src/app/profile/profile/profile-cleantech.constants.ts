@@ -7,7 +7,7 @@ export const PROFILE_CLEANTECH: Profile<'cleantech'>[] = [
 		type: 'text',
 	},
 	{
-		controlName: 'countries',
+		controlName: 'country',
 		label: 'FORM_LABEL.country',
 		type: 'select',
 		dataSelectKey: 'countries',

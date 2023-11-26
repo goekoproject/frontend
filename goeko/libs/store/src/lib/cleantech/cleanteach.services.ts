@@ -24,4 +24,14 @@ export class CleanTechService {
 	updateDataProfile(id: any, body: any) {
 		return this._http.put<any>(`${this.configuration.endpoint}/v1/actor/cleantechs/${id}`, body);
 	}
+
+	uploadDocument(id: string, file: any) {
+		const formData = new FormData();
+		formData.append('file', file);
+		return this._http.post<any>(`${this.configuration.endpoint}/v1/actor/cleantechs/${id}/documentation`, formData);
+	}
+
+	getDocuments(id: string) {
+		return this._http.get<any>(`${this.configuration.endpoint}/v1/actor/cleantechs/${id}/documentation`);
+	}
 }

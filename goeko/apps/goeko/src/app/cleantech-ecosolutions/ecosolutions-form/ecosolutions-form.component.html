@@ -1,18 +1,26 @@
 <div class="ecosolutions-form">
 	<form [formGroup]="form" (submit)="idEcosolution ? editEcosolution() : saveEcosolution()">
-		<fieldset class="ecosolutions-cuestions-products">
+		<fieldset class="ecosolutions-fieldset">
 			<legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
 			<go-input [formControlName]="'solutionName'">
 				<span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
 			</go-input>
 
-			<go-input [formControlName]="'solutionDescription'">
+			<go-input [formControlName]="'solutionDescription'" type="textarea">
 				<span slot="label">{{ 'FORM_LABEL.solutionDescription' | translate }}</span>
 			</go-input>
 		</fieldset>
 
-		<fieldset class="ecosolutions-cuestions-products">
-			<legend>{{ 'FORM_LABEL.products' | translate }}</legend>
+		<fieldset class="ecosolutions-fieldset">
+			<div>
+				<legend>{{ 'FORM_LABEL.selectProducts' | translate }}</legend>
+				<p *ngIf="mainCategory === 'hazardousProduct'" class="text-support">
+					{{ 'TEXT_SUPPORT.selectProducts' | translate }}
+				</p>
+				<p *ngIf="mainCategory === 'waterConsumption'" class="text-support">
+					{{ 'TEXT_SUPPORT.waterConsumption' | translate }}
+				</p>
+			</div>
 
 			<div class="ecosolutions-subcategory">
 				<goeko-select-subcategory-product
@@ -29,7 +37,7 @@
 			</div>
 		</fieldset>
 
-		<fieldset *ngIf="mainCategory !== 'hazardousProduct'">
+		<fieldset class="ecosolutions-fieldset" *ngIf="mainCategory !== 'hazardousProduct'">
 			<legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
 
 			<go-input [formControlName]="'reductionPercentage'" type="number">
@@ -40,7 +48,7 @@
 			</go-input>
 		</fieldset>
 
-		<fieldset formArrayName="sustainableDevelopmentGoals" class="fieldset-ods">
+		<fieldset class="ecosolutions-fieldset" formArrayName="sustainableDevelopmentGoals" class="fieldset-ods">
 			<legend>{{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}</legend>
 			<label
 				*ngFor="let codeControls of sustainableDevelopmentGoals.controls; let i = index"
@@ -55,11 +63,12 @@
 					[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + ods[i] + '.png'"
 					[alt]="code"
 				/>
-				<span> {{ dataSelect['odsDescription'][i].keyLang | translate }}</span>
+				<!-- 				<span> {{ dataSelect['odsDescription'][i].keyLang | translate }}</span>
+ -->
 			</label>
 		</fieldset>
 
-		<fieldset>
+		<fieldset class="ecosolutions-fieldset">
 			<legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
 
 			<go-input [formControlName]="'price'" type="number">
@@ -85,6 +94,7 @@
 
 			<div>
 				<label for="deliverCountries">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</label>
+				<p class="text-support">{{ 'TEXT_SUPPORT.paybackPeriodYears' | translate }}</p>
 
 				<ui-super-select
 					[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -115,12 +125,16 @@
 				</label>
 			</div>
 
-			<div class="field-form-checked">
-				<label for="certified">{{ 'FORM_LABEL.certified' | translate }}</label>
-				<label class="switch">
-					<input type="checkbox" [formControlName]="'certified'" />
-					<span class="slider round"></span>
-				</label>
+			<div class="field-form-upload">
+				<div class="field-form-checked">
+					<label for="certified">{{ 'FORM_LABEL.certified' | translate }}</label>
+					<label class="switch">
+						<input type="checkbox" [formControlName]="'certified'" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<input type="file" (change)="fileChange($event)" [disabled]="!this.form?.value?.certified" />
 			</div>
 
 			<!-- 	<div class="field-form-checked">
@@ -132,6 +146,12 @@
 			</div> -->
 		</fieldset>
 
-		<button go-button type="submit">{{ 'Save' | translate }} Eco-solutions</button>
+		<div class="actions-button">
+			<button go-button appearance="white" type="button" (click)="goBack()">
+				{{ 'Cancel' | translate }}
+			</button>
+
+			<button go-button type="submit">{{ 'Save' | translate }} Eco-solutions</button>
+		</div>
 	</form>
 </div>

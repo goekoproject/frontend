@@ -65,6 +65,11 @@
 		"products": "Tipo de producto peligroso",
 		"specialWaste": "Residuos Especiales"
 	},
+	"TEXT_SUPPORT": {
+		"selectProducts": "Tipos de productos tóxicos reemplaza o mejora su solución ecológica",
+		"waterConsumption": "Actividades relacionadas con el consumo de agua",
+		"paybackPeriodYears": "¿En combinación de años la inversión en su solución ecológica es rentable por relación a una solución tradicional?"
+	},
 	"CATEGORIES_LABEL": {
 		"amount": {
 			"question": "Actividades que consumen más agua",
@@ -173,7 +178,8 @@
 		"certified": "Certificado",
 		"approvedSwiss": "Aprobada para el mercado suizo",
 		"additionalInformation": "Información adicional",
-		"products": "Productos"
+		"products": "Productos",
+		"selectProducts": "Seleccionar productos"
 	},
 	"ODS": {
 		"ods_1": "Sin Pobreza",

@@ -49,6 +49,11 @@
 		"the": "The",
 		"transition": "Transition"
 	},
+	"TEXT_SUPPORT": {
+		"selectProducts": "Type(s) of toxic products does your eco-solution replace or improve",
+		"waterConsumption": "Activities related to water consumption",
+		"paybackPeriodYears": "En combien d’années l’investissement dans votre éco-solution est-il profitable par rapport à une solution traditionnelle ?"
+	},
 	"cancel": "Cancel",
 	"CATEGORIES": {
 		"co2emission": "CO2 emissions",
@@ -181,7 +186,8 @@
 		"operationalCostReductionPercentage": "Percentage of operational cost reduction",
 		"additionalInformation": "Additional information",
 		"products": "Products",
-		"furtherInformation": "Additional information"
+		"furtherInformation": "Additional information",
+		"selectProducts": "Select Products"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Free trial to connect with qualified leads",

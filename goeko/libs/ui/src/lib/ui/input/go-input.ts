@@ -72,6 +72,9 @@ export class GoInput extends LitElement {
 				border: 2px solid #0090d6;
 				cursor: pointer;
 			}
+			textarea {
+				resize: none;
+			}
 		`;
 	}
 	@property({ type: String }) type = 'text';
@@ -85,8 +88,8 @@ export class GoInput extends LitElement {
 	@property({ type: Boolean }) pattern = Infinity;
 	@property({ type: String }) autocomplete = '';
 	@property({ type: String }) heightWrapper = '';
-
 	@property({ type: String }) textHelp = '';
+	@property({ type: String }) textSupport = '';
 	@query('input') input!: HTMLInputElement;
 
 	constructor() {
@@ -118,15 +121,23 @@ export class GoInput extends LitElement {
 			</div>
 		`;
 	}
-	override render() {
-		this.heightWrapper = this.type === 'file-link' ? '12' : 'auto';
-
+	private _templateTypeInput() {
+		if (this.type === 'textarea') {
+			/* 	return html`
+				<textarea
+					class="go-input"
+					.name="${this.name}"
+					.id="${this.id}"
+					.name="${this.name}"
+					rows="10"
+					cols="50"
+					placeholder="${this.placeholder}"
+					@input="${this.handleInput}"
+				>
+				</textarea>
+			`; */
+		}
 		return html`
-			<link
-				rel="stylesheet"
-				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
-			/>
-			<label for="${this.id}"> <slot name="label"></slot> </label>
 			<input
 				class="go-input"
 				type="${this.type}"
@@ -139,6 +150,19 @@ export class GoInput extends LitElement {
 				autocomplete="${this.autocomplete ? this.autocomplete : this.id}"
 				@input="${this.handleInput}"
 			/>
+		`;
+	}
+	override render() {
+		this.heightWrapper = this.type === 'file-link' ? '12' : 'auto';
+
+		return html`
+			<link
+				rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
+			/>
+			<label for="${this.id}"> <slot name="label"></slot> </label>
+
+			${this._templateTypeInput()}
 			${this.textHelp
 				? html`<section class="input-help">
 						<abbr title="${this.textHelp}">

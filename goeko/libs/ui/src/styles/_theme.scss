@@ -162,7 +162,7 @@ input:checked + .slider:before {
 fieldset {
 	border-radius: 12px;
 	background: #fff;
-	padding: 2rem;
+	padding: 1.5rem 0.5rem;
 	font-size: 18px;
 	border: none;
 }
@@ -170,8 +170,16 @@ legend {
 	font-size: 1.25rem;
 	color: #1b1d20;
 	font-weight: 600;
-	height: 1rem;
+	height: 2rem;
 }
 input[type='radio' i]:focus-visible {
 	outline: none;
+}
+.text-support {
+	color: #75808a;
+	font-size: 0.85rem;
+}
+[disabled='true'] {
+	opacity: 0.6;
+	cursor: not-allowed;
 }

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class EcosolutionsService {
 	constructor(
 		private _http: HttpClient,
+
 		@Inject(ECOSOLUTIONS_CONFIGURATION) public configuration: EcosolutionsOptions
 	) {}
 

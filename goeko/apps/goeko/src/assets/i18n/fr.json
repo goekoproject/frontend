@@ -49,6 +49,11 @@
 		"the": "LA",
 		"transition": "verte"
 	},
+	"TEXT_SUPPORT": {
+		"selectProducts": "Type(s) de produits toxiques votre éco-solution remplace-t-elle ou améliore-t-elle",
+		"waterConsumption": "Activités liées à la consommation d’eau",
+		"paybackPeriodYears": "En combien d’années l’investissement dans votre éco-solution est-il rentabilisé par rapport à une solution traditionnelle ?"
+	},
 	"cancel": "Annuler",
 	"CATEGORIES": {
 		"co2emission": "Emissions de CO2",
@@ -181,7 +186,8 @@
 		"certified": "Certifié",
 		"approvedSwiss": "Approuvé pour le marché suisse",
 		"additionalInformation": "Informations supplémentaires",
-		"products": "Produits"
+		"products": "Produits",
+		"selectProducts": "Sélectionner des produits"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",
