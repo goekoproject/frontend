@@ -1,4 +1,4 @@
-import { NewEcosolutions } from '@goeko/store';
+import { NewEcosolutions, ReductionPercentage } from '@goeko/store';
 export interface GoalChecked {
 	value: string;
 	checked: boolean;
@@ -8,7 +8,7 @@ export class EcosolutionForm {
 	solutionDescription?: string;
 	subCategory: string;
 	products: string[];
-	reductionPercentage?: number;
+	reductionPercentage?: ReductionPercentage;
 	operationalCostReductionPercentage?: number;
 	sustainableDevelopmentGoals?: any[] | undefined;
 	price?: number;

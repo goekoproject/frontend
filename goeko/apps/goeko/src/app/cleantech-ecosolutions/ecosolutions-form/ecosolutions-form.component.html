@@ -13,13 +13,8 @@
 
 		<fieldset class="ecosolutions-fieldset">
 			<div>
-				<legend>{{ 'FORM_LABEL.selectProducts' | translate }}</legend>
-				<p *ngIf="mainCategory === 'hazardousProduct'" class="text-support">
-					{{ 'TEXT_SUPPORT.selectProducts' | translate }}
-				</p>
-				<p *ngIf="mainCategory === 'waterConsumption'" class="text-support">
-					{{ 'TEXT_SUPPORT.waterConsumption' | translate }}
-				</p>
+				<legend>{{ 'FORM_LABEL.typeOfEcolutions' | translate }}</legend>
+				<ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
 			</div>
 
 			<div class="ecosolutions-subcategory">
@@ -38,12 +33,31 @@
 		</fieldset>
 
 		<fieldset class="ecosolutions-fieldset" *ngIf="mainCategory !== 'hazardousProduct'">
-			<legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
+			<div>
+				<legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
+				<p class="text-support">
+					{{ 'TEXT_SUPPORT.advantagesEcosolutions' | translate }}
+				</p>
+			</div>
 
-			<go-input [formControlName]="'reductionPercentage'" type="number">
-				<span slot="label">{{ 'FORM_LABEL.reductionPercentage' | translate }}</span>
-			</go-input>
-			<go-input [formControlName]="'operationalCostReductionPercentage'" type="number">
+			<label> <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container> </label>
+			<ui-super-select
+				[placeholder]="'%'"
+				[formControlName]="'reductionPercentage'"
+				id="reductionPercentage"
+				name="reductionPercentage"
+			>
+				<super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
+					{{ option.from + '%    ' }} {{ 'a' | translate }} {{ '    ' + option.to }}%
+				</super-option>
+			</ui-super-select>
+
+			<go-input
+				[formControlName]="'operationalCostReductionPercentage'"
+				type="number"
+				aria-placeholder="%"
+				placeholder="%"
+			>
 				<span slot="label">{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</span>
 			</go-input>
 		</fieldset>
@@ -63,17 +77,40 @@
 					[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + ods[i] + '.png'"
 					[alt]="code"
 				/>
-				<!-- 				<span> {{ dataSelect['odsDescription'][i].keyLang | translate }}</span>
- -->
 			</label>
 		</fieldset>
 
 		<fieldset class="ecosolutions-fieldset">
 			<legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
 
-			<go-input [formControlName]="'price'" type="number">
-				<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
-			</go-input>
+			<div class="form-row">
+				<go-input [formControlName]="'price'" type="number">
+					<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
+				</go-input>
+				<div>
+					<label for="deliverCountries">{{ 'FORM_LABEL.currency' | translate }}</label>
+					<ui-super-select
+						[placeholder]="'SELECT_DATA_LABEL.currency' | translate"
+						[formControlName]="'currency'"
+						id="currency"
+						name="currency"
+						[compareWith]="defaultSetDeliverCountries"
+					>
+						<super-option *ngFor="let option of dataSelect['currency']" [value]="option">
+							{{ option.keyLang | translate }}
+						</super-option>
+					</ui-super-select>
+				</div>
+
+				<go-input
+					[formControlName]="'unit'"
+					type="text"
+					aria-placeholder="item,m3,m2,L etc.."
+					placeholder="m3,m2,l etc.."
+				>
+					<span slot="label">{{ 'FORM_LABEL.unit' | translate }}</span>
+				</go-input>
+			</div>
 
 			<div>
 				<label for="deliverCountries">{{ 'FORM_LABEL.deliverCountries' | translate }}</label>
@@ -94,7 +131,6 @@
 
 			<div>
 				<label for="deliverCountries">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</label>
-				<p class="text-support">{{ 'TEXT_SUPPORT.paybackPeriodYears' | translate }}</p>
 
 				<ui-super-select
 					[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -107,6 +143,10 @@
 						{{ option.id }} {{ option.keyLang | translate }}
 					</super-option>
 				</ui-super-select>
+
+				<go-notification type="info">
+					{{ 'TEXT_SUPPORT.paybackPeriodYears' | translate }}
+				</go-notification>
 			</div>
 
 			<div class="field-form-checked">
@@ -117,15 +157,29 @@
 				</label>
 			</div>
 
-			<div class="field-form-checked">
-				<label for="guarantee">{{ 'FORM_LABEL.guarantee' | translate }}</label>
-				<label class="switch">
-					<input type="checkbox" [formControlName]="'guarantee'" />
-					<span class="slider round"></span>
-				</label>
+			<div class="form-col">
+				<div class="field-form-checked">
+					<label for="guarantee">{{ 'FORM_LABEL.guarantee' | translate }}</label>
+					<label class="switch">
+						<input type="checkbox" [formControlName]="'guarantee'" />
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<ui-super-select
+					[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+					[formControlName]="'yearGuarantee'"
+					id="yearGuarantee"
+					name="yearGuarantee"
+					[disabled]="!form.value.guarantee"
+				>
+					<super-option *ngFor="let option of dataSelect['yearGuarantee']" [value]="option">
+						{{ option.id }} {{ option.keyLang | translate }}
+					</super-option>
+				</ui-super-select>
 			</div>
 
-			<div class="field-form-upload">
+			<div class="form-col">
 				<div class="field-form-checked">
 					<label for="certified">{{ 'FORM_LABEL.certified' | translate }}</label>
 					<label class="switch">
@@ -136,22 +190,46 @@
 
 				<input type="file" (change)="fileChange($event)" [disabled]="!this.form?.value?.certified" />
 			</div>
-
-			<!-- 	<div class="field-form-checked">
-				<label for="approved">{{ 'FORM_LABEL.approvedSwiss' | translate }}</label>
-				<label class="switch">
-					<input type="checkbox" [formControlName]="'approved'" />
-					<span class="slider round"></span>
-				</label>
-			</div> -->
 		</fieldset>
 
 		<div class="actions-button">
-			<button go-button appearance="white" type="button" (click)="goBack()">
+			<button go-button appearance="white" type="button" (click)="goToListEcosolution()">
 				{{ 'Cancel' | translate }}
 			</button>
 
-			<button go-button type="submit">{{ 'Save' | translate }} Eco-solutions</button>
+			<button go-button type="submit">{{ 'save' | translate }} Eco-solutions</button>
 		</div>
 	</form>
 </div>
+
+<ng-template #tmpReductionPercentage>
+	<span [ngSwitch]="true" slot="label">
+		<ng-container *ngSwitchCase="mainCategory === 'co2Emission'">{{
+			'FORM_LABEL.reductionPercentageCO2' | translate
+		}}</ng-container>
+		<ng-container *ngSwitchCase="mainCategory === 'waterConsumption'">{{
+			'FORM_LABEL.reductionPercentageWater' | translate
+		}}</ng-container>
+
+		<ng-container *ngSwitchCase="mainCategory === 'waste'">{{
+			'FORM_LABEL.reductionPercentageWaste' | translate
+		}}</ng-container>
+	</span>
+</ng-template>
+
+<ng-template #textSupportFieldSettypeOfEcolutions>
+	<p [ngSwitch]="true" class="text-support">
+		<ng-container *ngSwitchCase="mainCategory === 'hazardousProduct'" class="text-support">
+			{{ 'TEXT_SUPPORT.selectProducts' | translate }}
+		</ng-container>
+		<ng-container *ngSwitchCase="mainCategory === 'waterConsumption'" class="text-support">
+			{{ 'TEXT_SUPPORT.waterConsumption' | translate }}
+		</ng-container>
+		<ng-container *ngSwitchCase="mainCategory === 'co2Emission'" class="text-support">
+			{{ 'TEXT_SUPPORT.co2Emission' | translate }}
+		</ng-container>
+		<ng-container *ngSwitchCase="mainCategory === 'waste'" class="text-support">
+			{{ 'TEXT_SUPPORT.waste' | translate }}
+		</ng-container>
+	</p>
+</ng-template>

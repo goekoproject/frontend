@@ -1,4 +1,5 @@
 {
+	"a": "à",
 	"welcome": "Bienvenue",
 	"accept": "Accepter",
 	"my_company": "Mon entreprise",
@@ -50,9 +51,12 @@
 		"transition": "verte"
 	},
 	"TEXT_SUPPORT": {
-		"selectProducts": "Type(s) de produits toxiques votre éco-solution remplace-t-elle ou améliore-t-elle",
+		"selectProducts": "Type d’éco-solution al lugar de Sélectionner des produits",
 		"waterConsumption": "Activités liées à la consommation d’eau",
-		"paybackPeriodYears": "En combien d’années l’investissement dans votre éco-solution est-il rentabilisé par rapport à une solution traditionnelle ?"
+		"paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
+		"co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
+		"advantagesEcosolutions": "Avantages de votre éco-solution par rapport à une solution traditionnelle",
+		"waste": "Types de déchets"
 	},
 	"cancel": "Annuler",
 	"CATEGORIES": {
@@ -154,7 +158,12 @@
 		"service": "Service"
 	},
 	"user": "Utilisateur",
+	"CURRENCY": {
+		"EU": "Euro",
+		"CHF": "Franc suisse"
+	},
 	"FORM_LABEL": {
+		"currency": "Devise",
 		"companyName": "Nom de l'entreprise",
 		"country": "Pays",
 		"email": "Email",
@@ -174,12 +183,17 @@
 		"improvement": "Améliorations",
 		"advantagesEcosolutions": "Avantages de votre éco-solution",
 		"reductionPercentage": "Pourcentage de réduction",
+		"reductionPercentageCO2": "Pourcentage de réduction de CO2",
+		"reductionPercentageWaste": "Pourcentage de réduction des déchets",
+		"reductionPercentageWater": "Pourcentage de réduction de la consommation d'eau",
+		"reductionPercentageHP": "Pourcentage de réduction des produits dangereux",
+
 		"ecosolutions_sustainableDevelopmentGoals": "Sélectionnez les Objectifs de développement durable (ODD)",
 		"ecosolutions_subCategory": "Sélectionnez les sous-catégories",
 		"ecosolutions_products": "Sélectionnez les produits",
 		"ecosolution_classification": "Sélectionnez des questions et choisissez des produits pour votre écosolution.",
 		"operationalCostReductionPercentage": "Pourcentage de réduction des coûts opérationnels",
-		"deliverCountries": "Pays où elle propose sa écosolution",
+		"deliverCountries": "Pays où votre éco-solution est homologuée",
 		"paybackPeriodYears": "Période moyenne de récupération de sa écosolution",
 		"marketReady": "Votre écosolution est-elle prête pour le marché?",
 		"guarantee": "Garantie",
@@ -187,7 +201,9 @@
 		"approvedSwiss": "Approuvé pour le marché suisse",
 		"additionalInformation": "Informations supplémentaires",
 		"products": "Produits",
-		"selectProducts": "Sélectionner des produits"
+		"selectProducts": "Sélectionner des produits",
+		"unit": "Unité",
+		"typeOfEcolutions": "Type d'éco-solution"
 	},
 	"HOME": {
 		"sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",
@@ -247,6 +263,7 @@
 	"SELECT_DATA_LABEL": {
 		"fiveBetweenTen": "Entre 5 et 10 années",
 		"defaultLabel": "Veuillez sélectionner parmi les options suivantes",
+		"currency": "€",
 		"greenWaste": {
 			"greenWoodUntreated": "Bois vert (non traité)",
 			"topsoil": "Terre végétale"

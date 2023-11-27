@@ -166,6 +166,11 @@ fieldset {
 	font-size: 18px;
 	border: none;
 }
+label {
+	color: rgb(43, 43, 43);
+	font-size: 0.875rem;
+	font-weight: 600;
+}
 legend {
 	font-size: 1.25rem;
 	color: #1b1d20;
@@ -182,4 +187,14 @@ input[type='radio' i]:focus-visible {
 [disabled='true'] {
 	opacity: 0.6;
 	cursor: not-allowed;
+}
+.form-row {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.form-col {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }

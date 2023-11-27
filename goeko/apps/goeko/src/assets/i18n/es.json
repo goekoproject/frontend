@@ -1,4 +1,5 @@
 {
+	"a": "a",
 	"welcome": "Bienvenido",
 	"my_company": "Mi empresa",
 	"new_project": "Nuevo proyecto",
@@ -68,7 +69,10 @@
 	"TEXT_SUPPORT": {
 		"selectProducts": "Tipos de productos tóxicos reemplaza o mejora su solución ecológica",
 		"waterConsumption": "Actividades relacionadas con el consumo de agua",
-		"paybackPeriodYears": "¿En combinación de años la inversión en su solución ecológica es rentable por relación a una solución tradicional?"
+		"paybackPeriodYears": "Número de años para rentabilizar la inversión respecto a una solución tradicional",
+		"co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO2",
+		"advantagesEcosolutions": "Ventajas de su ecosolución en comparación a una solución tradicional",
+		"waste": "Tipos de residuos"
 	},
 	"CATEGORIES_LABEL": {
 		"amount": {
@@ -146,7 +150,12 @@
 		"service": "Servicios"
 	},
 	"selected_products": "Productos seleccionados",
+	"CURRENCY": {
+		"EU": "Euro",
+		"CHF": "Franco Suizo"
+	},
 	"FORM_LABEL": {
+		"currency": "Moneda",
 		"companyName": "Nombre de la Compañia",
 		"country": "Pais",
 		"email": "Email",
@@ -165,13 +174,17 @@
 		"name": "Nombre",
 		"price": "Precio",
 		"improvement": "Mejoras",
-		"reductionPercentage": "Porcentaje de reducción",
+		"reductionPercentageCO2": "Porcentaje de reducción de CO2",
+		"reductionPercentageWaste": "Porcentaje de reducción de desechos",
+		"reductionPercentageWater": "Porcentaje de reducción de consumo de agua",
+		"reductionPercentageHP": "Porcentaje de reducción de productos peligrosos",
+
 		"ecosolutions_sustainableDevelopmentGoals": "Selecciona los Objetivos de Desarrollo Sostenible(ODS)",
 		"ecosolutions_subCategory": "Seleccione las preguntas",
 		"ecosolutions_products": "Selecciona los productos",
 		"ecosolution_classification": "Seleccione las preguntas y elija los productos para su ecosolución",
 		"operationalCostReductionPercentage": "Porcentaje de reducción de costos operativos",
-		"deliverCountries ": "Paises donde ofrece su ecosolución",
+		"deliverCountries ": "Países donde está aprobada su solución ecológica",
 		"paybackPeriodYears": "Período medio de recuperación de su ecosolución",
 		"marketReady": "¿Su ecosolución está lista para el mercado?",
 		"guarantee": "Garantía",
@@ -179,7 +192,9 @@
 		"approvedSwiss": "Aprobada para el mercado suizo",
 		"additionalInformation": "Información adicional",
 		"products": "Productos",
-		"selectProducts": "Seleccionar productos"
+		"selectProducts": "Seleccionar productos",
+		"unit": "Unidad de medida(m2,m3,l,kg)",
+		"typeOfEcolutions": "Tipo de eco-solución"
 	},
 	"ODS": {
 		"ods_1": "Sin Pobreza",
@@ -245,6 +260,7 @@
 	"SELECT_DATA_LABEL": {
 		"fiveBetweenTen": "Entre 5 y 10 años",
 		"defaultLabel": "Por favor seleccione entre las siguientes opciones",
+		"currency": "€",
 		"greenWaste": {
 			"greenWoodUntreated": "Madera verde (no tratada)",
 			"topsoil": "Tierra vegetal"

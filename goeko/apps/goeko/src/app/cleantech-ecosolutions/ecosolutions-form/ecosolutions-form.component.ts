@@ -111,10 +111,13 @@ export class EcosolutionsFormComponent implements OnInit {
 			operationalCostReductionPercentage: [],
 			sustainableDevelopmentGoals: new FormArray([]),
 			price: [0],
+			currency: [],
+			unit: [],
 			deliverCountries: [],
 			paybackPeriodYears: [''],
 			marketReady: [false],
 			guarantee: [false],
+			yearGuarantee: [],
 			certified: [false],
 			approved: [false],
 		});
@@ -147,6 +150,8 @@ export class EcosolutionsFormComponent implements OnInit {
 		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
 		this._ecosolutionsService.updateEcosolution(this.idEcosolution, body).subscribe((res: any) => {
 			this._uploadCertificate();
+			this.goToListEcosolution();
+
 			const formValue = new EcosolutionForm(res);
 			this.form.patchValue(formValue);
 		});
@@ -161,6 +166,7 @@ export class EcosolutionsFormComponent implements OnInit {
 		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
 		this._ecosolutionsService.createEcosolutions(body).subscribe((res) => {
 			this._uploadCertificate();
+			this.goToListEcosolution();
 			console.log(res);
 		});
 	}
@@ -183,7 +189,7 @@ export class EcosolutionsFormComponent implements OnInit {
 			console.log(res);
 		});
 	}
-	goBack() {
+	goToListEcosolution() {
 		this._router.navigate(['cleantech-ecosolutions', this._cleantechId]);
 	}
 }

@@ -161,6 +161,7 @@ export const SelectHazardousWaste: DataSelectOption[] = [
 	{ id: 'productsContainingTar', keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.productsContainingTar' },
 	{ id: 'oilSeparatorSludge', keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.oilSeparatorSludge' },
 ];
+
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,

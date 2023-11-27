@@ -3,10 +3,15 @@ import { CountrySelectOption } from '../constants/select-data.constants';
 interface Price {
 	amount: number;
 	currency: string;
+	unit: string;
+}
+export interface ReductionPercentage {
+	from: number;
+	to: number | string;
 }
 
 interface Improvement {
-	reductionPercentage: number;
+	reductionPercentage: ReductionPercentage;
 	operationalCostReductionPercentage: number;
 }
 
@@ -37,15 +42,18 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 	solutionName: string;
 	solutionDescription?: string;
 	classification: Classification;
-	price?: Price | undefined;
-	improvement?: Improvement | undefined;
-	sustainableDevelopmentGoals?: number[] | undefined;
-	countries?: string[] | undefined;
-	paybackPeriodYears?: number | undefined;
-	marketReady?: boolean | undefined;
-	guarantee?: boolean | undefined;
-	certified?: boolean | undefined;
-	approved?: boolean | undefined;
+	price?: Price;
+	improvement?: Improvement;
+	sustainableDevelopmentGoals?: number[];
+	countries?: string[];
+	paybackPeriodYears?: number;
+	marketReady?: boolean;
+	guarantee?: boolean;
+	yearGuarantee?: number;
+	certified?: boolean;
+	approved?: boolean;
+	unit?: string;
+	currency?: string;
 
 	constructor(cleanTechId: string, mainCategory: string, formValue: any) {
 		if (!formValue) {
@@ -56,10 +64,15 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 		this.solutionDescription = formValue.solutionDescription;
 		this.price = {
 			amount: formValue.price,
-			currency: 'EUR',
+			currency: formValue.currency,
+			unit: formValue.unit,
 		};
+		this.yearGuarantee = formValue.yearGuarantee?.id;
 		this.improvement = {
-			reductionPercentage: formValue.reductionPercentage,
+			reductionPercentage: {
+				from: formValue.reductionPercentage?.from,
+				to: formValue.reductionPercentage?.to,
+			},
 			operationalCostReductionPercentage: formValue.operationalCostReductionPercentage,
 		};
 		this.sustainableDevelopmentGoals = this.getSustainableDevelopmentGoalsChecked(formValue);

@@ -1,9 +1,17 @@
 .notification {
-    border-radius: 14px;
-    padding: 1rem;
+	border-radius: 8px;
+	padding: 1rem;
+	display: flex;
+	font-size: 0.875rem;
+	margin: 1rem 0;
+	align-items: flex-start;
+	gap: 1rem;
+	&-icon {
+		font-size: 24px;
+	}
 }
-.notification[type="info"] {
-    border: 2px solid #0090d6;
-    background: #0090d621;
-    color: #24253b;
+.notification[type='info'] {
+	border-left: 6px solid #0090d6;
+	background: #0090d621;
+	color: #0090d6;
 }

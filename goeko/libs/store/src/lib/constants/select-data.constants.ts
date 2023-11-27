@@ -7,6 +7,10 @@ export interface CountrySelectOption extends DataSelectOption {
 	code: string;
 }
 
+export interface ReductionPercentageSelectOption extends DataSelectOption {
+	from: number;
+	to: number | string;
+}
 export const SelectMainInternalCombustionEngine: DataSelectOption[] = [
 	{
 		id: 'equipmentCarrierTruck',
@@ -192,6 +196,53 @@ export const SelectPaybackPeriodYears: DataSelectOption[] = [
 	},
 ];
 
+export const SelectYearGuarantee: DataSelectOption[] = [
+	{
+		id: 1,
+		keyLang: 'year',
+	},
+	{
+		id: 2,
+		keyLang: 'years',
+	},
+	{
+		id: 3,
+		keyLang: 'years',
+	},
+	{
+		id: 4,
+		keyLang: 'years',
+	},
+	{
+		id: 5,
+		keyLang: 'years',
+	},
+	{
+		id: 6,
+		keyLang: 'years',
+	},
+	{
+		id: 7,
+		keyLang: 'years',
+	},
+	{
+		id: 8,
+		keyLang: 'years',
+	},
+	{
+		id: 9,
+		keyLang: 'years',
+	},
+	{
+		id: 10,
+		keyLang: 'years',
+	},
+	{
+		id: '+10',
+		keyLang: 'years',
+	},
+];
+
 const SelectOdsDescription: DataSelectOption[] = [
 	{ id: 'ods_1', keyLang: 'ODS.ods_1' },
 	{ id: 'ods_2', keyLang: 'ODS.ods_2' },
@@ -231,6 +282,49 @@ const SelectSustainableBuildingOperations: DataSelectOption[] = [
 		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.chargeElectricVehicles',
 	},
 ];
+export const SelectCurrency: DataSelectOption[] = [
+	{
+		id: 'EUR',
+		keyLang: 'EU',
+	},
+	{
+		id: 'CHF',
+		keyLang: 'CHF',
+	},
+];
+
+export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
+	{
+		id: 1,
+		keyLang: 'year',
+		from: 5,
+		to: 10,
+	},
+	{
+		id: 2,
+		keyLang: 'years',
+		from: 10,
+		to: 20,
+	},
+	{
+		id: 3,
+		keyLang: 'years',
+		from: 20,
+		to: 30,
+	},
+	{
+		id: 4,
+		keyLang: 'years',
+		from: 30,
+		to: 40,
+	},
+	{
+		id: 5,
+		keyLang: 'years',
+		from: 50,
+		to: '',
+	},
+];
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -247,4 +341,7 @@ export const DataSelect = {
 	specialWaste: SelectSpecialWaste,
 	hazardousWaste: SelectHazardousWaste,
 	sustainableBuildingOperations: SelectSustainableBuildingOperations,
+	yearGuarantee: SelectYearGuarantee,
+	currency: SelectCurrency,
+	reductionPercentage: SelectreductionPercentage,
 };
