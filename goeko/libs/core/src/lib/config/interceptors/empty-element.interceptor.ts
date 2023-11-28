@@ -8,7 +8,7 @@ export class EmptyElementsInterceptor implements HttpInterceptor {
 		let clonedReq = req.clone();
 
 		// Modify body for delete empty elements
-		if (clonedReq.body) {
+		if (clonedReq.body && !clonedReq.url.includes('demo')) {
 			clonedReq = clonedReq.clone({
 				body: this._removeEmptyElements(clonedReq.body),
 			});
@@ -19,9 +19,6 @@ export class EmptyElementsInterceptor implements HttpInterceptor {
 	}
 
 	private _removeEmptyElements(obj: any): any {
-		if (typeof obj === 'object' && obj.constructor?.name == 'SmeRecomendationParams') {
-			return;
-		}
 		Object.keys(obj).forEach((key) => {
 			if (obj[key] && typeof obj[key] === 'object') {
 				this._removeEmptyElements(obj[key]);
