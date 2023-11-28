@@ -158,7 +158,12 @@
 					</label>
 				</div>
 
-				<a [href]="fileData?.url" target="_blank" class="file-data" *ngIf="this.form?.value?.certified">
+				<a
+					[href]="fileData?.url"
+					target="_blank"
+					class="file-data"
+					*ngIf="this.form?.value?.certified && fileData?.url"
+				>
 					<p>{{ fileData?.name }}</p>
 					<i class="ti ti-file-download"></i>
 				</a>
