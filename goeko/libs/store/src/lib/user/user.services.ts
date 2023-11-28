@@ -66,11 +66,11 @@ export class UserService {
 
 	createDataProfile(userType: string, body: any) {
 		if (userType === ACTORS_TYPE.SME) {
-			const _body = this._transformbBodySme(body);
+			const _body = this._transformbBody(body);
 			return this._smeService.createDataProfile(_body);
 		}
 		if (userType === ACTORS_TYPE.CLEANTECH) {
-			const _body = this._transformbBodyCleanTech(body);
+			const _body = this._transformbBody(body);
 			return this._cleanTechService.createDataProfile(_body);
 		}
 		return of(null);
@@ -78,28 +78,21 @@ export class UserService {
 
 	udpateDataProfile(userType: string, userId: string, body: any) {
 		if (userType === ACTORS_TYPE.SME) {
-			const _body = this._transformbBodySme(body);
+			const _body = this._transformbBody(body);
 			return this._smeService.updateDataProfile(userId, _body);
 		}
 		if (userType === ACTORS_TYPE.CLEANTECH) {
-			const _body = this._transformbBodySme(body);
+			const _body = this._transformbBody(body);
 			return this._cleanTechService.updateDataProfile(userId, _body);
 		}
 		return of(null);
 	}
 
 	//TODO: arreglar ñapa
-	private _transformbBodySme(body: any) {
+	private _transformbBody(body: any) {
 		return {
 			...body,
-			country: typeof body.country === 'string' ? body.country : body.country.code,
-		};
-	}
-
-	private _transformbBodyCleanTech(body: any) {
-		return {
-			...body,
-			countries: [body.countries?.code],
+			country: body?.country?.code,
 		};
 	}
 }

@@ -285,7 +285,7 @@ const SelectSustainableBuildingOperations: DataSelectOption[] = [
 export const SelectCurrency: DataSelectOption[] = [
 	{
 		id: 'EUR',
-		keyLang: 'EU',
+		keyLang: 'EUR',
 	},
 	{
 		id: 'CHF',

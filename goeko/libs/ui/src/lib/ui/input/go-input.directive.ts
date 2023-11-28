@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
 	selector: 'go-input',
@@ -21,9 +21,6 @@ export class GoInputDirective {
 	_onTouched: (value?: any) => void = () => {};
 
 	set value(value: string) {
-		if (!value) {
-			return;
-		}
 		this._value = value;
 		this.elementRef.nativeElement.value = this.value;
 
@@ -34,7 +31,7 @@ export class GoInputDirective {
 		return this._value;
 	}
 
-	private _value = '';
+	private _value!: any;
 
 	constructor(private elementRef: ElementRef) {}
 
