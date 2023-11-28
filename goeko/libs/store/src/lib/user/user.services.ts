@@ -88,7 +88,6 @@ export class UserService {
 		return of(null);
 	}
 
-	//TODO: arreglar ñapa
 	private _transformbBody(body: any) {
 		return {
 			...body,
