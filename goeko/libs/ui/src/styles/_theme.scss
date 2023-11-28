@@ -198,3 +198,10 @@ input[type='radio' i]:focus-visible {
 	flex-direction: column;
 	gap: 1rem;
 }
+.cdk-overlay-pane {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	transform: translate(50%, 50%);
+}

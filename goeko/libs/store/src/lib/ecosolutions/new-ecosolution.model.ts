@@ -3,7 +3,6 @@ import { CountrySelectOption } from '../constants/select-data.constants';
 interface Price {
 	amount: number;
 	currency: string;
-	unit: string;
 }
 export interface ReductionPercentage {
 	from: number;
@@ -64,15 +63,12 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 		this.solutionDescription = formValue.solutionDescription;
 		this.price = {
 			amount: formValue.price,
-			currency: formValue.currency,
-			unit: formValue.unit,
+			currency: formValue.currency?.id,
 		};
+
 		this.yearGuarantee = formValue.yearGuarantee?.id;
 		this.improvement = {
-			reductionPercentage: {
-				from: formValue.reductionPercentage?.from,
-				to: formValue.reductionPercentage?.to,
-			},
+			reductionPercentage: formValue.reductionPercentage,
 			operationalCostReductionPercentage: formValue.operationalCostReductionPercentage,
 		};
 		this.sustainableDevelopmentGoals = this.getSustainableDevelopmentGoalsChecked(formValue);

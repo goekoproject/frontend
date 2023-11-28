@@ -14,6 +14,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { Field } from 'contentful';
 import { EcosolutionForm } from './ecosolution-form.model';
+import { forkJoin, last, of } from 'rxjs';
 
 const defaultSetProductsCategories = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {
@@ -42,6 +43,14 @@ const defaultSetPaybackPeriodYears = (option: DataSelectOption, optionSelected: 
 
 	return null;
 };
+
+const defaultSetCurrency = (option: DataSelectOption, optionSelected: number) => {
+	if (option && optionSelected) {
+		return option.id === optionSelected;
+	}
+
+	return null;
+};
 @Component({
 	selector: 'goeko-ecosolutions-form',
 	templateUrl: './ecosolutions-form.component.html',
@@ -62,10 +71,11 @@ export class EcosolutionsFormComponent implements OnInit {
 		option: DataSelectOption,
 		optionSelected: number
 	) => boolean;
+	public defaultSetCurrency = defaultSetCurrency;
 	public currentLangCode!: string;
 	public dataSelect = DataSelect;
 	public mainCategory!: string;
-
+	public fileData!: { name: string; url: string };
 	private _cleantechId!: string;
 	private _fieldsCatagory = FORM_CATEGORIES_QUESTION;
 	private fileCertificate: any;
@@ -111,7 +121,7 @@ export class EcosolutionsFormComponent implements OnInit {
 			operationalCostReductionPercentage: [],
 			sustainableDevelopmentGoals: new FormArray([]),
 			price: [0],
-			currency: [],
+			currency: ['EUR'],
 			unit: [],
 			deliverCountries: [],
 			paybackPeriodYears: [''],
@@ -141,19 +151,24 @@ export class EcosolutionsFormComponent implements OnInit {
 	}
 	getEcosolution() {
 		this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((res: any) => {
+			this._getDocumentsCleantech();
 			const formValue = new EcosolutionForm(res);
 			this.form.patchValue(formValue);
-			this._getDocumentsCleantech();
 		});
 	}
 	editEcosolution() {
 		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
-		this._ecosolutionsService.updateEcosolution(this.idEcosolution, body).subscribe((res: any) => {
-			this._uploadCertificate();
-			this.goToListEcosolution();
+		forkJoin({
+			fileCertificate: this._uploadCertificate(),
+			ecosolution: this._ecosolutionsService.updateEcosolution(this.idEcosolution, body),
+		}).subscribe((res: any) => {
+			if (res) {
+				this._uploadCertificate();
+				this.goToListEcosolution();
 
-			const formValue = new EcosolutionForm(res);
-			this.form.patchValue(formValue);
+				const formValue = new EcosolutionForm(res.ecosolution);
+				this.form.patchValue(formValue);
+			}
 		});
 	}
 
@@ -164,30 +179,34 @@ export class EcosolutionsFormComponent implements OnInit {
 	}
 	private _createEcosolution() {
 		const body = new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value);
-		this._ecosolutionsService.createEcosolutions(body).subscribe((res) => {
+		forkJoin({
+			fileCertificate: this._uploadCertificate(),
+			ecosolution: this._ecosolutionsService.createEcosolutions(body),
+		}).subscribe((res) => {
 			this._uploadCertificate();
 			this.goToListEcosolution();
-			console.log(res);
 		});
 	}
 	fileChange(file: any) {
 		this.fileCertificate = file.target.files[0];
-		this._uploadCertificate();
 	}
 
 	private _uploadCertificate() {
 		if (!this.form.value.certified && !this.form.controls['certified']?.dirty) {
-			return;
+			return of(null);
 		}
-		this._cleanTeachService.uploadDocument(this._cleantechId, this.fileCertificate).subscribe((res) => {
-			console.log(res);
-		});
+		return this._cleanTeachService.uploadDocument(this.idEcosolution, this.fileCertificate);
 	}
 
 	private _getDocumentsCleantech() {
-		this._cleanTeachService.getDocuments(this.idEcosolution).subscribe((res) => {
-			console.log(res);
-		});
+		this._cleanTeachService
+			.getDocuments(this.idEcosolution)
+			.pipe(last())
+			.subscribe((res) => {
+				if (res) {
+					this.fileData = res[res?.length - 1];
+				}
+			});
 	}
 	goToListEcosolution() {
 		this._router.navigate(['cleantech-ecosolutions', this._cleantechId]);
