@@ -12,6 +12,7 @@ export class EcosolutionForm {
 	operationalCostReductionPercentage?: number;
 	sustainableDevelopmentGoals?: any[] | undefined;
 	price?: number;
+	currency?: string;
 	deliverCountries?: string[];
 	paybackPeriodYears?: number;
 	marketReady?: boolean;
@@ -31,6 +32,7 @@ export class EcosolutionForm {
 			checked: true,
 		}));
 		this.price = ecosolution.price?.amount;
+		this.currency = ecosolution.price?.currency;
 		this.deliverCountries = ecosolution.countries;
 		this.paybackPeriodYears = ecosolution.paybackPeriodYears;
 		this.marketReady = ecosolution.marketReady;

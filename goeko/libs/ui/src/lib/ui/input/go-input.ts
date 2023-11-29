@@ -75,9 +75,14 @@ export class GoInput extends LitElement {
 			textarea {
 				resize: none;
 			}
+			input[readonly] {
+				border: none;
+				padding: 0;
+			}
 		`;
 	}
 	@property({ type: String }) type = 'text';
+	@property({ type: Boolean }) readonly = false;
 	@property({ type: String }) value = '';
 	@property({ type: String }) name = '';
 	@property({ type: String }) placeholder = '';
@@ -144,6 +149,7 @@ export class GoInput extends LitElement {
 				.value="${this.value}"
 				.id="${this.id}"
 				.name="${this.name}"
+				?readonly="${this.readonly}"
 				?maxlength="${this.maxLength}"
 				placeholder="${this.placeholder}"
 				?required="${this.required}"

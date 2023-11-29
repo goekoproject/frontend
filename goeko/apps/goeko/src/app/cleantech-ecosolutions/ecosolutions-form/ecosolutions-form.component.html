@@ -92,28 +92,19 @@
 					<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
 				</go-input>
 				<div>
-					<label for="deliverCountries">{{ 'FORM_LABEL.currency' | translate }}</label>
+					<label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
 					<ui-super-select
 						[placeholder]="'SELECT_DATA_LABEL.currency' | translate"
 						[formControlName]="'currency'"
 						id="currency"
 						name="currency"
-						[compareWith]="defaultSetDeliverCountries"
+						[compareWith]="defaultSetCurrency"
 					>
 						<super-option *ngFor="let option of dataSelect['currency']" [value]="option">
 							{{ option.keyLang | translate }}
 						</super-option>
 					</ui-super-select>
 				</div>
-
-				<go-input
-					[formControlName]="'unit'"
-					type="text"
-					aria-placeholder="item,m3,m2,L etc.."
-					placeholder="m3,m2,l etc.."
-				>
-					<span slot="label">{{ 'FORM_LABEL.unit' | translate }}</span>
-				</go-input>
 			</div>
 
 			<div>
@@ -169,18 +160,6 @@
 						<span class="slider round"></span>
 					</label>
 				</div>
-
-				<ui-super-select
-					[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-					[formControlName]="'yearGuarantee'"
-					id="yearGuarantee"
-					name="yearGuarantee"
-					[disabled]="!form.value.guarantee"
-				>
-					<super-option *ngFor="let option of dataSelect['yearGuarantee']" [value]="option">
-						{{ option.id }} {{ option.keyLang | translate }}
-					</super-option>
-				</ui-super-select>
 			</div>
 
 			<div class="form-col">
@@ -192,7 +171,21 @@
 					</label>
 				</div>
 
-				<input type="file" (change)="fileChange($event)" [disabled]="!this.form?.value?.certified" />
+				<a
+					[href]="fileData?.url"
+					target="_blank"
+					class="file-data"
+					*ngIf="this.form?.value?.certified && fileData?.url"
+				>
+					<p>{{ fileData?.name }}</p>
+					<i class="ti ti-file-download"></i>
+				</a>
+				<input
+					type="file"
+					accept="application/pdf"
+					(change)="fileChange($event)"
+					[disabled]="!this.form?.value?.certified"
+				/>
 			</div>
 		</fieldset>
 
@@ -201,7 +194,7 @@
 				{{ 'Cancel' | translate }}
 			</button>
 
-			<button go-button type="submit">{{ 'save' | translate }} Eco-solutions</button>
+			<button go-button type="submit">{{ 'Save' | translate }} Eco-solutions</button>
 		</div>
 	</form>
 </div>

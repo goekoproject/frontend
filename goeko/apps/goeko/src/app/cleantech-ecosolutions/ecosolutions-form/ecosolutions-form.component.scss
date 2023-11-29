@@ -104,7 +104,7 @@
 .field-form-checked {
 	display: flex;
 	gap: 4rem;
-	margin: 0.6rem;
+	align-items: center;
 	label:not(.switch) {
 		width: 50%;
 	}
@@ -123,4 +123,21 @@
 .actions-button {
 	display: flex;
 	justify-content: space-between;
+}
+.file-data {
+	border: 1px solid #0090d6;
+	background: rgba(0, 144, 214, 0.1294117647);
+	color: #0090d6;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 33%;
+	font-size: 1rem;
+	padding: 0.6rem;
+	cursor: pointer;
+
+	i {
+		font-size: 2rem;
+	}
 }

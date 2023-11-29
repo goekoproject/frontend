@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'galaxy-core-spinner-overlay',
+	selector: 'goeko-spinner-overlay',
 	templateUrl: './spinner-overlay.component.html',
 	styleUrls: ['./spinner-overlay.component.scss'],
 })
