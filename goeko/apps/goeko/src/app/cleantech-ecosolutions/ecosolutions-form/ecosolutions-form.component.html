@@ -52,14 +52,18 @@
 				</super-option>
 			</ui-super-select>
 
-			<go-input
+			<label>{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</label>
+
+			<ui-super-select
+				[placeholder]="'%'"
 				[formControlName]="'operationalCostReductionPercentage'"
-				type="number"
-				aria-placeholder="%"
-				placeholder="%"
+				id="operationalCostReductionPercentage"
+				name="operationalCostReductionPercentage"
 			>
-				<span slot="label">{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</span>
-			</go-input>
+				<super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
+					{{ option.from + '%    ' }} {{ 'a' | translate }} {{ '    ' + option.to }}%
+				</super-option>
+			</ui-super-select>
 		</fieldset>
 
 		<fieldset class="ecosolutions-fieldset" formArrayName="sustainableDevelopmentGoals" class="fieldset-ods">
