@@ -1,8 +1,5 @@
 {
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"implicitDependencies": [
-		"home"
-	],
 	"name": "goeko",
 	"prefix": "goeko",
 	"projectType": "application",
@@ -51,10 +48,7 @@
 			"defaultConfiguration": "production",
 			"executor": "@nrwl/angular:webpack-browser",
 			"options": {
-				"assets": [
-					"apps/goeko/src/favicon.ico",
-					"apps/goeko/src/assets"
-				],
+				"assets": ["apps/goeko/src/favicon.ico", "apps/goeko/src/assets"],
 				"customWebpackConfig": {
 					"path": "apps/goeko/webpack.config.js"
 				},
@@ -63,10 +57,7 @@
 				"main": "apps/goeko/src/main.ts",
 				"outputPath": "dist/apps/goeko",
 				"polyfills": "apps/goeko/src/polyfills.ts",
-				"scripts": [
-					"node_modules/aos/dist/aos.js",
-					"node_modules/meshwriter/dist/meshwriter.js"
-				],
+				"scripts": ["node_modules/aos/dist/aos.js", "node_modules/meshwriter/dist/meshwriter.js"],
 				"styles": [
 					"apps/goeko/src/styles.scss",
 					"node_modules/animate.css/animate.min.css",
@@ -75,9 +66,7 @@
 				],
 				"tsConfig": "apps/goeko/tsconfig.app.json"
 			},
-			"outputs": [
-				"{options.outputPath}"
-			]
+			"outputs": ["{options.outputPath}"]
 		},
 		"extract-i18n": {
 			"executor": "@angular-devkit/build-angular:extract-i18n",
@@ -88,10 +77,7 @@
 		"lint": {
 			"executor": "@nrwl/linter:eslint",
 			"options": {
-				"lintFilePatterns": [
-					"apps/goeko/**/*.ts",
-					"apps/goeko/**/*.html"
-				]
+				"lintFilePatterns": ["apps/goeko/**/*.ts", "apps/goeko/**/*.html"]
 			}
 		},
 		"serve": {
@@ -104,11 +90,7 @@
 				}
 			},
 			"defaultConfiguration": "development",
-			"executor": "@nrwl/angular:module-federation-dev-server",
-			"options": {
-				"port": 3000,
-				"publicHost": "http://localhost:3000"
-			}
+			"executor": "@nrwl/angular:module-federation-dev-server"
 		},
 		"test": {
 			"executor": "@nrwl/jest:jest",
@@ -116,9 +98,7 @@
 				"jestConfig": "apps/goeko/jest.config.ts",
 				"passWithNoTests": true
 			},
-			"outputs": [
-				"{workspaceRoot}/coverage/{projectRoot}"
-			]
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
 		}
 	}
 }

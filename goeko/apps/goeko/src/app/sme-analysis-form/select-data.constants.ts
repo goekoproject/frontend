@@ -1,5 +1,5 @@
 export interface DataSelectOption {
-	id: string;
+	id: string | number;
 	keyLang: string;
 }
 

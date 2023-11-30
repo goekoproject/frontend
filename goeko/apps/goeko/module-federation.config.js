@@ -1,6 +1,4 @@
 module.exports = {
-  name: 'goeko',
-  remotes: [
-    'home'
-  ],
+	name: 'goeko',
+	remotes: [],
 };

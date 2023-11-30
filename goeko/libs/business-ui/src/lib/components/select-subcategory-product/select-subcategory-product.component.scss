@@ -78,3 +78,12 @@
 		transform: rotateX(180deg);
 	}
 }
+goeko-select-subcategory-product[readonly='true'] {
+	.subcategory {
+		align-items: flex-start;
+		gap: 0;
+	}
+	label {
+		font-size: 1.2rem;
+	}
+}

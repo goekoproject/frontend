@@ -10,6 +10,7 @@
 	"add": "Add",
 	"year": "year",
 	"years": "years",
+	"selectCategoryEcosolutions": "Select the category for your ecosolution",
 	"selected_products": "Selected products",
 	"LOGIN": {
 		"msglogin": "Log in in your account",
@@ -30,7 +31,8 @@
 	},
 	"BREADCRUMBS": {
 		"new_ecosolutions": "New eco-solution",
-		"edit_ecosolutions": "Edit eco-solution"
+		"edit_ecosolutions": "Edit your ecosolution",
+		"view_ecosolutions": "Detail of your ecosolution"
 	},
 	"all": "All",
 	"new_analysis": "New analysis",
@@ -56,7 +58,8 @@
 		"paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
 		"co2Emission": "Area where your eco-solution reduces CO2 emissions",
 		"advantagesEcosolutions": "Advantages of your eco-solution compared to a traditional solution",
-		"waste": "Types of waste"
+		"waste": "Types of waste",
+		"ods": "Linked to your eco-solution"
 	},
 	"cancel": "Cancel",
 	"CATEGORIES": {
@@ -236,6 +239,7 @@
 	"ods_title": "Sustainable Development Goals",
 	"profile": "Profile",
 	"save": "Save",
+	"saveYou": "Save your",
 	"SCENES": {
 		"slogan_text1": "Connecting SMEs to clean technologies and financing",
 		"slogan_text2": "Who are you?"

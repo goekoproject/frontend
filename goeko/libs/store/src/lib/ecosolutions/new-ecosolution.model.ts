@@ -4,14 +4,21 @@ interface Price {
 	amount: number;
 	currency: string;
 }
-export interface ReductionPercentage {
+export interface FromTO {
 	from: number;
 	to: number | string;
 }
-
+export interface ReductionPercentage extends FromTO {
+	from: number;
+	to: number | string;
+}
+export interface OperationalCostReductionPercentage extends FromTO {
+	from: number;
+	to: number | string;
+}
 interface Improvement {
 	reductionPercentage: ReductionPercentage;
-	operationalCostReductionPercentage: number;
+	operationalCostReductionPercentage: OperationalCostReductionPercentage;
 }
 
 interface Classification {
@@ -34,6 +41,7 @@ export interface NewEcosolutions {
 	guarantee?: boolean;
 	certified?: boolean;
 	approved?: boolean;
+	guaranteeInYears?: number;
 }
 
 export class NewEcosolutionsBody implements NewEcosolutions {
@@ -48,7 +56,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 	paybackPeriodYears?: number;
 	marketReady?: boolean;
 	guarantee?: boolean;
-	yearGuarantee?: number;
+	guaranteeInYears?: number;
 	certified?: boolean;
 	approved?: boolean;
 	unit?: string;
@@ -66,10 +74,16 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 			currency: formValue.currency?.id,
 		};
 
-		this.yearGuarantee = formValue.yearGuarantee?.id;
+		this.guaranteeInYears = formValue.yearGuarantee?.id;
 		this.improvement = {
-			reductionPercentage: formValue.reductionPercentage,
-			operationalCostReductionPercentage: formValue.operationalCostReductionPercentage,
+			reductionPercentage: {
+				from: formValue?.reductionPercentage?.from,
+				to: formValue?.reductionPercentage?.to,
+			},
+			operationalCostReductionPercentage: {
+				from: formValue.operationalCostReductionPercentage?.from,
+				to: formValue?.operationalCostReductionPercentage?.to,
+			},
 		};
 		this.sustainableDevelopmentGoals = this.getSustainableDevelopmentGoalsChecked(formValue);
 		this.classification = {

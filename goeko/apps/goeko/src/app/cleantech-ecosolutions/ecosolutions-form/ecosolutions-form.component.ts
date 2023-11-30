@@ -2,55 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
-import {
-	CleanTechService,
-	CountrySelectOption,
-	DataSelect,
-	DataSelectOption,
-	EcosolutionsService,
-	NewEcosolutionsBody,
-	ODS_CODE,
-} from '@goeko/store';
+import { CleanTechService, DataSelect, EcosolutionsService, NewEcosolutionsBody, ODS_CODE } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Field } from 'contentful';
-import { EcosolutionForm } from './ecosolution-form.model';
 import { forkJoin, last, of } from 'rxjs';
+import {
+	defaultSetCurrency,
+	defaultSetDeliverCountries,
+	defaultSetPaybackPeriodYears,
+	defaultSetProductsCategories,
+	defaultSetReductions,
+	defaultSetyearGuarantee,
+} from './compare-with-select';
+import { EcosolutionForm } from './ecosolution-form.model';
 
-const defaultSetProductsCategories = (o1: any, o2: any) => {
-	if (o1 && o2 && typeof o2 !== 'object') {
-		return o1.toString() === o2;
-	}
-
-	if (o1 && o2 && typeof o2 === 'object') {
-		return o1.id.toString() === o2.id.toString();
-	}
-
-	return null;
-};
-
-const defaultSetDeliverCountries = (option: CountrySelectOption, optionSelected: string) => {
-	if (option && optionSelected) {
-		return option.code.toString() === optionSelected;
-	}
-
-	return null;
-};
-
-const defaultSetPaybackPeriodYears = (option: DataSelectOption, optionSelected: number) => {
-	if (option && optionSelected) {
-		return option.id === optionSelected;
-	}
-
-	return null;
-};
-
-const defaultSetCurrency = (option: DataSelectOption, optionSelected: number) => {
-	if (option && optionSelected) {
-		return option.id === optionSelected;
-	}
-
-	return null;
-};
 @Component({
 	selector: 'goeko-ecosolutions-form',
 	templateUrl: './ecosolutions-form.component.html',
@@ -62,23 +27,23 @@ export class EcosolutionsFormComponent implements OnInit {
 	public idEcosolution!: string;
 	public questionsCategories!: Array<Field | any>;
 	public productsCategories!: any[];
-	public defaultSetProductsCategories = defaultSetProductsCategories as (o1: any, o2: any) => boolean;
-	public defaultSetDeliverCountries = defaultSetDeliverCountries as (
-		option: CountrySelectOption,
-		optionSelected: string
-	) => boolean;
-	public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears as (
-		option: DataSelectOption,
-		optionSelected: number
-	) => boolean;
+	public defaultSetProductsCategories = defaultSetProductsCategories;
+	public defaultSetDeliverCountries = defaultSetDeliverCountries;
+	public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears;
 	public defaultSetCurrency = defaultSetCurrency;
+	public defaultSetReductions = defaultSetReductions;
+	public defaultSetyearGuarantee = defaultSetyearGuarantee;
 	public currentLangCode!: string;
 	public dataSelect = DataSelect;
 	public mainCategory!: string;
 	public fileData!: { name: string; url: string };
+	public get isReadOnly(): boolean {
+		return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true';
+	}
 	private _cleantechId!: string;
 	private _fieldsCatagory = FORM_CATEGORIES_QUESTION;
 	private fileCertificate: any;
+
 	constructor(
 		private _route: ActivatedRoute,
 		private _router: Router,
@@ -91,16 +56,21 @@ export class EcosolutionsFormComponent implements OnInit {
 	ngOnInit(): void {
 		this.currentLangCode = this._translateServices.defaultLang;
 		this._getParamsUrl();
-		this.questionsCategories = this._fieldsCatagory
-			.filter((field) => field.controlName.toUpperCase() === this.mainCategory?.toUpperCase())
-			.map((co2EmissionFields) => co2EmissionFields.fields)
-			.flat();
+		this._getQuestionsCategories();
 		this._initForm();
 		this._changeLangCode();
 		this._changeValueSubCategory();
 		if (this.idEcosolution) {
 			this.getEcosolution();
 		}
+		console.log(this.isReadOnly);
+	}
+
+	private _getQuestionsCategories() {
+		this.questionsCategories = this._fieldsCatagory
+			.filter((field) => field.controlName.toUpperCase() === this.mainCategory?.toUpperCase())
+			.map((co2EmissionFields) => co2EmissionFields.fields)
+			.flat();
 	}
 	private _getParamsUrl() {
 		this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string;

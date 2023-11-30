@@ -9,6 +9,7 @@
 	"add": "Añadir",
 	"year": "año",
 	"years": "años",
+	"selectCategoryEcosolutions": "Selecciona la categoría para tu ecosolución",
 	"LOGIN": {
 		"msglogin": "Inicia sesión en tu cuenta",
 		"msgsignup": "¿No tienes una cuenta todavía ?",
@@ -27,7 +28,8 @@
 	},
 	"BREADCRUMBS": {
 		"new_ecosolutions": "Nueva ecosolución",
-		"edit_ecosolutions": "Editar ecosolución"
+		"edit_ecosolutions": "Editar tu ecosolución",
+		"view_ecosolutions": "Detalle de tu ecosolución"
 	},
 	"all": "Todo",
 	"analysis": "Análisis",
@@ -72,7 +74,8 @@
 		"paybackPeriodYears": "Número de años para rentabilizar la inversión respecto a una solución tradicional",
 		"co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO2",
 		"advantagesEcosolutions": "Ventajas de su ecosolución en comparación a una solución tradicional",
-		"waste": "Tipos de residuos"
+		"waste": "Tipos de residuos",
+		"ods": "Vinculado a su solución ecológica"
 	},
 	"CATEGORIES_LABEL": {
 		"amount": {
@@ -251,6 +254,7 @@
 	"ods_title": "Objetivos de Desarrollo Sostenible",
 	"profile": "Perfil",
 	"save": "Guardar",
+	"saveYou": "Guardar tu",
 	"result": "Resultados",
 	"our_ecosolutions": "Tus Eco-soluciones",
 	"SCENES": {

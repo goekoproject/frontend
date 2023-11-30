@@ -16,7 +16,7 @@ import {
 	encapsulation: ViewEncapsulation.None,
 	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: {
-		'(click)': 'onSelect(value)',
+		'(click)': 'onSelect()',
 		'[attr.selected]': 'selected',
 		'[attr.fill]': 'fill',
 	},
@@ -26,6 +26,7 @@ export class BadgeComponent {
 
 	@Input() value!: any;
 	@Input() fill!: any;
+	@Input() readonly = false;
 
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelected$ = new EventEmitter();
@@ -35,9 +36,8 @@ export class BadgeComponent {
 		return this.labelElement?.nativeElement.textContent;
 	}
 
-	onSelect(value: any) {
+	onSelect() {
 		this.onSelected$.emit(this);
-		console.log(this.label);
 	}
 
 	onSelected(selected: boolean) {

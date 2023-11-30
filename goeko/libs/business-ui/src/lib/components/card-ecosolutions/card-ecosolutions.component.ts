@@ -30,9 +30,6 @@ export class CardEcosolutionsComponent implements OnInit {
 
 	@Input() sustainableDevelopmentGoals: number[] = [17, 9, 6];
 
-	@Output() delete = new EventEmitter<boolean>(false);
-	@Output() edit = new EventEmitter<boolean>(false);
-
 	currentLangCode!: string;
 
 	constructor(private _translateServices: TranslateService) {}
@@ -44,12 +41,5 @@ export class CardEcosolutionsComponent implements OnInit {
 
 	private _changeLangCode() {
 		this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang));
-	}
-
-	onDelete() {
-		this.delete.emit(true);
-	}
-	onEdit() {
-		this.edit.emit(false);
 	}
 }

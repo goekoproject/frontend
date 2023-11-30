@@ -78,6 +78,7 @@ export class GoInput extends LitElement {
 			input[readonly] {
 				border: none;
 				padding: 0;
+				pointer-events: none;
 			}
 		`;
 	}
@@ -149,7 +150,6 @@ export class GoInput extends LitElement {
 				.value="${this.value}"
 				.id="${this.id}"
 				.name="${this.name}"
-				?readonly="${this.readonly}"
 				?maxlength="${this.maxLength}"
 				placeholder="${this.placeholder}"
 				?required="${this.required}"

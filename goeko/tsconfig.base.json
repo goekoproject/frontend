@@ -1,12 +1,13 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
+		"useDefineForClassFields": false,
 		"baseUrl": ".",
 		"declaration": false,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"importHelpers": true,
-		"lib": ["es2017", "dom"],
+		"lib": ["es2020", "dom"],
 		"module": "esnext",
 		"moduleResolution": "node",
 		"paths": {

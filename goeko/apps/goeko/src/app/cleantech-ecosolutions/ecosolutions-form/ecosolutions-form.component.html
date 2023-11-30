@@ -2,11 +2,11 @@
 	<form [formGroup]="form" (submit)="idEcosolution ? editEcosolution() : saveEcosolution()">
 		<fieldset class="ecosolutions-fieldset">
 			<legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
-			<go-input [formControlName]="'solutionName'">
+			<go-input [formControlName]="'solutionName'" [readonly]="isReadOnly">
 				<span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
 			</go-input>
 
-			<go-input [formControlName]="'solutionDescription'" type="textarea">
+			<go-input [formControlName]="'solutionDescription'" type="textarea" [readonly]="isReadOnly">
 				<span slot="label">{{ 'FORM_LABEL.solutionDescription' | translate }}</span>
 			</go-input>
 		</fieldset>
@@ -22,11 +22,20 @@
 					[formControlName]="'subCategory'"
 					*ngFor="let item of questionsCategories"
 					[subCategory]="item"
+					[readonly]="isReadOnly"
 				>
-					<go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories">
-						<go-badge *ngFor="let option of productsCategories" [value]="option.id">{{
-							option.keyLang | translate
-						}}</go-badge>
+					<go-badge-group
+						[formControlName]="'products'"
+						[compareWith]="defaultSetProductsCategories"
+						[readonly]="isReadOnly"
+					>
+						<go-badge
+							[readonly]="isReadOnly"
+							*ngFor="let option of productsCategories"
+							[value]="option.id"
+							[readonly]="isReadOnly"
+							>{{ option.keyLang | translate }}</go-badge
+						>
 					</go-badge-group>
 				</goeko-select-subcategory-product>
 			</div>
@@ -42,10 +51,12 @@
 
 			<label> <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container> </label>
 			<ui-super-select
+				[readonly]="isReadOnly"
 				[placeholder]="'%'"
 				[formControlName]="'reductionPercentage'"
 				id="reductionPercentage"
 				name="reductionPercentage"
+				[compareWith]="defaultSetReductions"
 			>
 				<super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
 					{{ option.from + '%    ' }} {{ 'a' | translate }} {{ '    ' + option.to }}%
@@ -56,9 +67,11 @@
 
 			<ui-super-select
 				[placeholder]="'%'"
+				[readonly]="isReadOnly"
 				[formControlName]="'operationalCostReductionPercentage'"
 				id="operationalCostReductionPercentage"
 				name="operationalCostReductionPercentage"
+				[compareWith]="defaultSetReductions"
 			>
 				<super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
 					{{ option.from + '%    ' }} {{ 'a' | translate }} {{ '    ' + option.to }}%
@@ -67,7 +80,14 @@
 		</fieldset>
 
 		<fieldset class="ecosolutions-fieldset" formArrayName="sustainableDevelopmentGoals" class="fieldset-ods">
-			<legend>{{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}</legend>
+			<div>
+				<legend>{{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}</legend>
+
+				<p class="text-support">
+					{{ 'TEXT_SUPPORT.ods' | translate }}
+				</p>
+			</div>
+
 			<label
 				*ngFor="let codeControls of sustainableDevelopmentGoals.controls; let i = index"
 				class="ecosolution-ods"
@@ -75,7 +95,13 @@
 			>
 				<i *ngIf="codeControls.value.checked" class="ti ti-circle-check ods-check"></i>
 
-				<input type="checkbox" [id]="i" [formControlName]="'checked'" [value]="codeControls.value.checked" />
+				<input
+					type="checkbox"
+					[id]="i"
+					[formControlName]="'checked'"
+					[value]="codeControls.value.checked"
+					[readonly]="isReadOnly"
+				/>
 				<img
 					class="ods-icon"
 					[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + ods[i] + '.png'"
@@ -88,12 +114,13 @@
 			<legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
 
 			<div class="form-row">
-				<go-input [formControlName]="'price'" type="number">
+				<go-input [formControlName]="'price'" type="number" [readonly]="isReadOnly">
 					<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
 				</go-input>
 				<div>
 					<label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
 					<ui-super-select
+						[readonly]="isReadOnly"
 						[placeholder]="'SELECT_DATA_LABEL.currency' | translate"
 						[formControlName]="'currency'"
 						id="currency"
@@ -105,12 +132,22 @@
 						</super-option>
 					</ui-super-select>
 				</div>
+				<go-input
+					[formControlName]="'unit'"
+					type="text"
+					aria-placeholder="item,m3,m2,L etc.."
+					placeholder="m3,m2,l etc.."
+					[readonly]="isReadOnly"
+				>
+					<span slot="label">{{ 'FORM_LABEL.unit' | translate }}</span>
+				</go-input>
 			</div>
 
 			<div>
 				<label for="deliverCountries">{{ 'FORM_LABEL.deliverCountries' | translate }}</label>
 
 				<ui-super-select
+					[readonly]="isReadOnly"
 					[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
 					[multiple]="true"
 					[formControlName]="'deliverCountries'"
@@ -128,6 +165,7 @@
 				<label for="deliverCountries">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</label>
 
 				<ui-super-select
+					[readonly]="isReadOnly"
 					[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
 					[formControlName]="'paybackPeriodYears'"
 					id="paybackPeriodYears"
@@ -144,43 +182,57 @@
 				</go-notification>
 			</div>
 
-			<div class="field-form-checked">
+			<!-- 		<div class="field-form-checked">
 				<label for="marketReady">{{ 'FORM_LABEL.marketReady' | translate }}</label>
 				<label class="switch">
-					<input type="checkbox" [formControlName]="'marketReady'" />
+					<input type="checkbox" [formControlName]="'marketReady'" [readonly]="isReadOnly" />
 					<span class="slider round"></span>
 				</label>
-			</div>
+			</div> -->
 
 			<div class="form-col">
 				<div class="field-form-checked">
 					<label for="guarantee">{{ 'FORM_LABEL.guarantee' | translate }}</label>
 					<label class="switch">
-						<input type="checkbox" [formControlName]="'guarantee'" />
+						<input type="checkbox" [formControlName]="'guarantee'" [readonly]="isReadOnly" />
 						<span class="slider round"></span>
 					</label>
 				</div>
+				<ui-super-select
+					[readonly]="isReadOnly"
+					[placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+					[formControlName]="'yearGuarantee'"
+					id="yearGuarantee"
+					name="yearGuarantee"
+					[disabled]="!form.value.guarantee"
+					[compareWith]="defaultSetyearGuarantee"
+				>
+					<super-option *ngFor="let option of dataSelect['yearGuarantee']" [value]="option">
+						{{ option.id }} {{ option.keyLang | translate }}
+					</super-option>
+				</ui-super-select>
 			</div>
 
 			<div class="form-col">
 				<div class="field-form-checked">
 					<label for="certified">{{ 'FORM_LABEL.certified' | translate }}</label>
 					<label class="switch">
-						<input type="checkbox" [formControlName]="'certified'" />
+						<input type="checkbox" [formControlName]="'certified'" [readonly]="isReadOnly" />
 						<span class="slider round"></span>
 					</label>
 				</div>
 
 				<a
+					*ngIf="this.form?.value?.certified && fileData?.url"
 					[href]="fileData?.url"
 					target="_blank"
 					class="file-data"
-					*ngIf="this.form?.value?.certified && fileData?.url"
 				>
 					<p>{{ fileData?.name }}</p>
 					<i class="ti ti-file-download"></i>
 				</a>
 				<input
+					*ngIf="!isReadOnly"
 					type="file"
 					accept="application/pdf"
 					(change)="fileChange($event)"
@@ -194,7 +246,7 @@
 				{{ 'Cancel' | translate }}
 			</button>
 
-			<button go-button type="submit">{{ 'Save' | translate }} Eco-solutions</button>
+			<button *ngIf="!isReadOnly" go-button type="submit">{{ 'saveYou' | translate }} éco-solutions</button>
 		</div>
 	</form>
 </div>

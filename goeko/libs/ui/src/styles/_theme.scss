@@ -9,6 +9,7 @@
 
 @import './buttons.scss';
 @import './_fonts/tabler-icons/tabler-icons.css';
+
 @import './media.scss';
 @import './input.scss';
 *,
@@ -204,4 +205,8 @@ input[type='radio' i]:focus-visible {
 	bottom: 0;
 	top: 0;
 	transform: translate(50%, 50%);
+}
+.switch:has(input[readonly]) {
+	pointer-events: none;
+	cursor: not-allowed;
 }

@@ -31,14 +31,6 @@ $color-label-pressed: #0090d6;
 	}
 }
 
-@mixin label-floting {
-	&_label:has(+ div:not(:empty)):not(+ .not-floating) {
-		position: absolute;
-		font-size: 13px;
-		transform: translateY(-15px);
-	}
-}
-
 .super-select {
 	display: block;
 	border: 1px solid rgb(217, 219, 233);
@@ -109,7 +101,6 @@ $color-label-pressed: #0090d6;
 		text-overflow: ellipsis;
 		overflow: hidden;
 	}
-	@include label-floting();
 	&_arrow {
 		margin-left: auto;
 	}
@@ -158,4 +149,15 @@ $color-label-pressed: #0090d6;
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
 	opacity: 0;
+}
+ui-super-select[readonly='true'] {
+	border: none;
+	pointer-events: none;
+
+	span {
+		display: none;
+	}
+	.select {
+		padding: 0;
+	}
 }

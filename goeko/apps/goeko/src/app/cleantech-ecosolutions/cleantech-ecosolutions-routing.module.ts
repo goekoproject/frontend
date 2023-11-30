@@ -18,6 +18,13 @@ const routes: Routes = [
 				component: EcosolutionsListComponent,
 			},
 			{
+				path: 'detail/:id',
+				component: EcosolutionsFormComponent,
+				data: {
+					breadcrumb: 'BREADCRUMBS.view_ecosolutions',
+				},
+			},
+			{
 				path: 'new',
 				component: EcosolutionsFormComponent,
 				data: {

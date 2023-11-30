@@ -37,17 +37,25 @@ export class EcosolutionsListComponent implements OnInit {
 		});
 	}
 
+	viewEcosolution(ecosolution: CardEcosolutions) {
+		this._goToEcosolutionForm('detail', ecosolution.id, {
+			mainCategory: ecosolution.mainCategory,
+			isReadOnly: true,
+		});
+	}
+	editEcosolution(ecosolution: CardEcosolutions) {
+		this._goToEcosolutionForm('edit', ecosolution.id, { mainCategory: ecosolution.mainCategory });
+	}
+
 	deleteEcosolution(ecosolution: CardEcosolutions) {
 		this._ecosolutionsService.deleteEcosolution(ecosolution.id).subscribe((res: any) => {
 			this.getAllEcosolutionsByCleanTech();
 		});
 	}
 
-	editEcosolution(ecosolution: CardEcosolutions) {
-		this._roter.navigate(['./edit', ecosolution.id], {
-			queryParams: {
-				mainCategory: ecosolution.mainCategory,
-			},
+	private _goToEcosolutionForm(path: string, id: string, arg: any) {
+		this._roter.navigate([`./${path}`, id], {
+			queryParams: arg,
 			relativeTo: this._route,
 		});
 	}

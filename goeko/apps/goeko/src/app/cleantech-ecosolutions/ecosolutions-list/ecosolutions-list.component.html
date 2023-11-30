@@ -1,5 +1,9 @@
 <section class="ecosolutions-section">
 	<go-tab-group>
+		<div class="title-category" title>
+			<i class="ti ti-info-circle-filled"></i>
+			<h3>{{ 'selectCategoryEcosolutions' | translate }}</h3>
+		</div>
 		<ng-container *ngFor="let item of categorySection; let first = first">
 			<go-tab [title]="item.keyLang | translate" [selected]="first">
 				<div #content class="ecosolutions-card-list">
@@ -20,9 +24,17 @@
 							[solutionName]="ecosolution.solutionName"
 							[products]="ecosolution.products"
 							[sustainableDevelopmentGoals]="ecosolution.sustainableDevelopmentGoals"
-							(delete)="deleteEcosolution(ecosolution)"
-							(edit)="editEcosolution(ecosolution)"
-						></goeko-card-ecosolutions>
+						>
+							<button go-button-icon (click)="viewEcosolution(ecosolution)" action-view>
+								<i class="ti ti-eye"></i>
+							</button>
+							<button go-button-icon (click)="editEcosolution(ecosolution)" action-edit>
+								<i class="ti ti-pencil"></i>
+							</button>
+							<button go-button-icon (click)="deleteEcosolution(ecosolution)" action-delete>
+								<i class="ti ti-trash"></i>
+							</button>
+						</goeko-card-ecosolutions>
 					</ng-container>
 				</div>
 			</go-tab>

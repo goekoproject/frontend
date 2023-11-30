@@ -49,6 +49,7 @@ export enum TYPE_FIELD {
 	host: {
 		'[attr.open]': 'open',
 		'[attr.checked]': 'checked',
+		'[attr.readonly]': 'readonly',
 	},
 })
 export class SelectSubcategoryProductComponent
@@ -57,6 +58,7 @@ export class SelectSubcategoryProductComponent
 	@ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent;
 	@ViewChild('inputElement') inputElement!: ElementRef;
 
+	@Input() readonly = false;
 	@Input() subCategory: any;
 	@Input()
 	public get multiple(): boolean {
@@ -162,14 +164,14 @@ export class SelectSubcategoryProductComponent
 	}
 
 	private _onFocus() {
-		this.inputElement.nativeElement.focus();
+		this.inputElement?.nativeElement?.focus();
 	}
 	private _handlerMutationObserver() {
 		// Configuración de MutationObserver con una función de retorno de llamada
 		this.mutationObserver = new MutationObserver((mutationsList) => {
 			for (const mutation of mutationsList) {
 				if (mutation.type === 'attributes' && mutation.attributeName === 'checked') {
-					const isChecked = Boolean(this._el.nativeElement.getAttribute('checked') === 'true');
+					const isChecked = this._el.nativeElement.getAttribute('checked') === 'true';
 					if (!isChecked) {
 						this.open = false;
 					} else {

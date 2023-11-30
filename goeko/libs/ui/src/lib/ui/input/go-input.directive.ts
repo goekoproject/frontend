@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Directive, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
@@ -11,7 +11,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 		},
 	],
 })
-export class GoInputDirective {
+export class GoInputDirective implements AfterContentInit {
+	@Input() readonly = false;
 	@HostListener('change', ['$event.detail'])
 	onHostChange(value: string) {
 		this.value = value;
@@ -33,8 +34,17 @@ export class GoInputDirective {
 
 	private _value!: any;
 
+	private get inputElementRef() {
+		return this.elementRef.nativeElement.renderRoot.querySelectorAll('input')[0] as HTMLInputElement;
+	}
 	constructor(private elementRef: ElementRef) {}
 
+	ngAfterContentInit(): void {
+		if (!this.inputElementRef) {
+			return;
+		}
+		this.inputElementRef.readOnly = this.readonly;
+	}
 	writeValue(value: any) {
 		this._value = value;
 		this.elementRef.nativeElement.value = value || '';

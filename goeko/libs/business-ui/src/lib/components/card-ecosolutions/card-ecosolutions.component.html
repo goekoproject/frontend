@@ -1,11 +1,8 @@
 <div class="eco-solutions-selected">
 	<div class="eco-solution-actions">
-		<button go-button-icon (click)="onEdit()">
-			<i class="ti ti-pencil"></i>
-		</button>
-		<button go-button-icon (click)="onDelete()">
-			<i class="ti ti-trash"></i>
-		</button>
+		<ng-content select="[action-view]"></ng-content>
+		<ng-content select="[action-edit]"></ng-content>
+		<ng-content select="[action-delete]"></ng-content>
 	</div>
 </div>
 <div class="ecosolutions-heading">

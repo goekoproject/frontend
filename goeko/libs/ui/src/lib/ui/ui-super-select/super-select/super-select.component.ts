@@ -21,6 +21,7 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 		role: 'combobox',
 		'[attr.tabindex]': 'tabIndex',
 		'[attr.disabled]': 'disabled',
+		'[attr.readonly]': 'readonly',
 		'[class.ui-select--box]': '_appearance === "box"',
 		'[class.ui-select--active]': 'isOpen',
 		'(keydown)': '_handleKeydown($event)',
@@ -29,7 +30,8 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 	},
 })
 export class SuperSelectComponent extends BaseSelectComponent implements OnInit {
-	@Input() noFloatinglabel: boolean = false;
+	@Input() noFloatinglabel = false;
+	@Input() readonly = false;
 	override ngOnInit(): void {
 		super.ngOnInit();
 

@@ -1,4 +1,4 @@
-<div class="subcategory" goekoSelectSubcategoryProduct>
+<div class="subcategory" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
 	<div class="subcategory-element">
 		<label class="subcategory-control" for="{{ subCategory.controlName }}">
 			<input
@@ -11,9 +11,9 @@
 			/>
 			<div class="subcategory-title">
 				<p>{{ subCategory?.label | translate }}</p>
-				<span class="subcategory-title-products">{{ labelSelected }}</span>
+				<span class="subcategory-title-products" *ngIf="!readonly">{{ labelSelected }}</span>
 			</div>
-			<span class="subcategory-product-selected" *ngIf="numSelected > 2"
+			<span class="subcategory-product-selected" *ngIf="numSelected > 2 && !readonly"
 				>{{ numSelected }} {{ 'selected_products' | translate }}</span
 			>
 		</label>

@@ -48,12 +48,12 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
 		}
 		this._compareWith = fn;
 	}
+	@Input() readonly = false;
+	@Output() valueChangedBadge$ = new EventEmitter();
 
 	get selected(): BadgeComponent[] {
 		return this._selectionModel.selected;
 	}
-
-	@Output() valueChangedBadge$ = new EventEmitter();
 
 	/** Combined stream of all of the child options' change events. */
 	// eslint-disable-next-line @typescript-eslint/member-ordering
@@ -129,8 +129,8 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
 
 	private _propagateValue() {
 		const valuesBadge = this._selectionModel.selected.map((badge) => badge.value);
-		this.onChange(valuesBadge);
 		this.valueChangedBadge$.emit(valuesBadge);
+		this.onChange(valuesBadge);
 		this.onTouched();
 	}
 
