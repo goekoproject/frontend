@@ -325,6 +325,69 @@ export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
 		to: '',
 	},
 ];
+
+export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] = [
+	{
+		id: 1,
+		keyLang: 'upTo',
+		from: 0,
+		to: 10,
+	},
+	{
+		id: 2,
+		keyLang: 'upTo',
+		from: 0,
+		to: 20,
+	},
+	{
+		id: 3,
+		keyLang: 'upTo',
+		from: 0,
+		to: 30,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 40,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 50,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 60,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 70,
+	},
+	{
+		id: 5,
+		keyLang: 'upTo',
+		from: 0,
+		to: 80,
+	},
+	{
+		id: 5,
+		keyLang: 'upTo',
+		from: 0,
+		to: 90,
+	},
+	{
+		id: 5,
+		keyLang: 'upTo',
+		from: 0,
+		to: 100,
+	},
+];
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
@@ -344,4 +407,5 @@ export const DataSelect = {
 	yearGuarantee: SelectYearGuarantee,
 	currency: SelectCurrency,
 	reductionPercentage: SelectreductionPercentage,
+	operationalCostReduction: SelectOperationalCostReduction,
 };

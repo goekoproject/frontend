@@ -73,8 +73,8 @@
 				name="operationalCostReductionPercentage"
 				[compareWith]="defaultSetReductions"
 			>
-				<super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
-					{{ option.from + '%    ' }} {{ 'a' | translate }} {{ '    ' + option.to }}%
+				<super-option *ngFor="let option of dataSelect['operationalCostReduction']" [value]="option">
+					{{ option.keyLang | translate }} {{ '    ' + option.to }}%
 				</super-option>
 			</ui-super-select>
 		</fieldset>
