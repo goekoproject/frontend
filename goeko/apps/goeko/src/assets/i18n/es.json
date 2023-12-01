@@ -76,9 +76,14 @@
 		"co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO2",
 		"advantagesEcosolutions": "Ventajas de su ecosolución en comparación a una solución tradicional",
 		"waste": "Tipos de residuos",
-		"ods": "Vinculado a su solución ecológica"
+		"ods": "Vinculado a su solución ecológica",
+		"buildingOperation_question": "Está buscando una o más soluciones para reducir el consumo de agua como por ejemplo:"
 	},
 	"CATEGORIES_LABEL": {
+		"buildingOperation": {
+			"question": "Explotación del edificio",
+			"label": ""
+		},
 		"amount": {
 			"question": "Actividades que consumen más agua",
 			"label": ""
@@ -324,6 +329,10 @@
 			"plaster": "Yeso",
 			"plastic": "Plástico",
 			"untreatedWood": "Madera sin tratar"
+		},
+		"selectBuildingOperation": {
+			"greenRoofsWalls": "Techos y paredes verdes",
+			"waterManagement": "Gestión del agua"
 		},
 		"selectMainInternalCombustionEngine": {
 			"aerialBucketTruck": "Camión con plataforma aérea",

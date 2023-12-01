@@ -6,9 +6,19 @@
 				<span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
 			</go-input>
 
-			<go-input [formControlName]="'solutionDescription'" type="textarea" [readonly]="isReadOnly">
-				<span slot="label">{{ 'FORM_LABEL.solutionDescription' | translate }}</span>
-			</go-input>
+			<div class="form-col">
+				<label for="solutionDescription">
+					{{ 'FORM_LABEL.solutionDescription' | translate }}
+				</label>
+				<textarea
+					class="go-textarea"
+					rows="5"
+					id="solutionDescription"
+					[formControlName]="'solutionDescription'"
+					[readonly]="isReadOnly"
+				>
+				</textarea>
+			</div>
 		</fieldset>
 
 		<fieldset class="ecosolutions-fieldset">
@@ -58,7 +68,7 @@
 				name="reductionPercentage"
 				[compareWith]="defaultSetReductions"
 			>
-				<super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
+				<super-option *ngFor="let option of dataSelect['operationalCostReduction']" [value]="option">
 					{{ option.from + '%    ' }} {{ 'a' | translate }} {{ '    ' + option.to }}%
 				</super-option>
 			</ui-super-select>
@@ -113,7 +123,7 @@
 		<fieldset class="ecosolutions-fieldset">
 			<legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
 
-			<div class="form-row">
+			<div class="form-row" *ngIf="false">
 				<go-input [formControlName]="'price'" type="number" [readonly]="isReadOnly">
 					<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
 				</go-input>

@@ -1,16 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SmeAnalysisService, SmeService, UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FORM_FIELD } from '../form-field-demo.constants';
 import { FormValueToSmeAnalysisRequest, formToClassificationsMapper } from '../sme-form-analysis/sme-analysis.request';
+import { Subject, last, takeLast, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'goeko-sme-analysis-result',
 	templateUrl: './sme-analysis-result.component.html',
 	styleUrls: ['./sme-analysis-result.component.scss'],
 })
-export class SmeAnalysisResultComponent implements OnInit {
+export class SmeAnalysisResultComponent implements OnInit, OnDestroy {
 	odsIcons!: Array<{ code: number; active: boolean }>;
 
 	formField = FORM_FIELD;
@@ -23,6 +24,8 @@ export class SmeAnalysisResultComponent implements OnInit {
 	formValue!: any;
 	smeDataProfile: any;
 	@ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
+	onDestroy$: Subject<void> = new Subject();
+
 	get allChecked() {
 		const allChecked = !this.formField.some((field) => field.checked);
 		return allChecked;
@@ -34,7 +37,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 
 	set currentLangCode(currentLang: string) {
 		this._currentLangCode = currentLang;
-		this._getSmeRecomendations();
+		this.getResults();
 		this.closeDetails();
 	}
 
@@ -53,15 +56,17 @@ export class SmeAnalysisResultComponent implements OnInit {
 	ngOnInit(): void {
 		this._smeId = this._route.snapshot.paramMap.get('id') as string;
 
-		this._smeAnalysisService.getCurrentAnalysis().subscribe((analysis) => {
-			if (analysis) {
-				this.formValue = analysis;
-				this.getResults();
-			}
-		});
+		this._smeAnalysisService
+			.getCurrentAnalysis()
+			.pipe(takeUntil(this.onDestroy$))
+			.subscribe((analysis) => {
+				if (analysis) {
+					this.formValue = analysis;
+					this.getResults();
+				}
+			});
 		this.currentLangCode = this._translateServices.defaultLang;
 		this._changeLangCode();
-		this._getSmeRecomendations();
 		this._getOdsIcons();
 		this._getSmeCompanyDetail();
 	}
@@ -77,6 +82,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 	getResults() {
 		this._smeService
 			.createRecommendations({ classifications: formToClassificationsMapper(this.formValue) })
+			.pipe(takeUntil(this.onDestroy$), last())
 			.subscribe((sme) => {
 				this._handleRecommendations(sme);
 			});
@@ -97,11 +103,6 @@ export class SmeAnalysisResultComponent implements OnInit {
 	}
 	private _changeLangCode() {
 		this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang));
-	}
-	private _getSmeRecomendations() {
-		this._smeService.getRecommendations(this.smeRecomendationBody).subscribe((sme) => {
-			this._handleRecommendations(sme);
-		});
 	}
 
 	private _handleRecommendations(sme: any) {
@@ -143,7 +144,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 		const selectedSection = this.formField.at(index);
 		if (selectedSection) {
 			selectedSection.checked = !selectedSection.checked;
-			this._getSmeRecomendations();
+			this.getResults();
 		}
 	}
 
@@ -166,7 +167,7 @@ export class SmeAnalysisResultComponent implements OnInit {
 
 	filterBySDG(index: number, checked: boolean) {
 		this.odsIcons[index].active = !checked;
-		this._getSmeRecomendations();
+		this.getResults();
 		this._makeFilterBySDG();
 	}
 
@@ -208,6 +209,10 @@ export class SmeAnalysisResultComponent implements OnInit {
 
 	getAll(checked: boolean) {
 		this.formField = this.formField.map((field) => ({ ...field, checked: checked }));
-		this._getSmeRecomendations();
+		this.getResults();
+	}
+	ngOnDestroy() {
+		this.onDestroy$.next();
+		this.onDestroy$.complete();
 	}
 }

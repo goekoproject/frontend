@@ -60,7 +60,8 @@
 		"co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
 		"advantagesEcosolutions": "Avantages de votre éco-solution par rapport à une solution traditionnelle",
 		"waste": "Types de déchets",
-		"ods": "En lien avec votre éco-solution"
+		"ods": "En lien avec votre éco-solution",
+		"buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :"
 	},
 	"cancel": "Annuler",
 	"CATEGORIES": {
@@ -86,6 +87,10 @@
 		"specialWaste": "Avec quels types de déchets spéciaux votre entreprise est-elle principalement confrontée?"
 	},
 	"CATEGORIES_LABEL": {
+		"buildingOperation": {
+			"question": "Exploitation du bâtiment",
+			"label": ""
+		},
 		"amount": {
 			"question": "Activités qui consomment le plus d’eau",
 			"label": ""
@@ -328,6 +333,10 @@
 			"plaster": "Plâtre",
 			"plastic": "Plastique (emballages, bâches, etc.)",
 			"untreatedWood": " Bois non traité"
+		},
+		"selectBuildingOperation": {
+			"greenRoofsWalls": "Toits et murs végétalisés",
+			"waterManagement": "Gestion de l’ea"
 		},
 		"selectMainInternalCombustionEngine": {
 			"aerialBucketTruck": "Camion nacelle",

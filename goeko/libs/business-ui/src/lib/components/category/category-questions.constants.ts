@@ -154,6 +154,13 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 				question: 'CATEGORIES_LABEL.mainActivity.question',
 				label: 'CATEGORIES_LABEL.mainActivity.label',
 			},
+			{
+				controlName: 'buildingOperation',
+				type: 'badge-group',
+				textHelp: 'buildingOperation_question',
+				question: 'CATEGORIES_LABEL.buildingOperation.question',
+				label: 'CATEGORIES_LABEL.buildingOperation.label',
+			},
 		],
 	},
 	{

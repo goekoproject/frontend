@@ -69,10 +69,10 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 		this.cleantechId = cleanTechId;
 		this.solutionName = formValue.solutionName;
 		this.solutionDescription = formValue.solutionDescription;
-		this.price = {
+		/* 	this.price = {
 			amount: formValue.price,
 			currency: formValue.currency?.id,
-		};
+		}; */
 
 		this.guaranteeInYears = formValue.yearGuarantee?.id;
 		this.improvement = {

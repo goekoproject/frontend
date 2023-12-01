@@ -60,7 +60,8 @@
 		"co2Emission": "Area where your eco-solution reduces CO2 emissions",
 		"advantagesEcosolutions": "Advantages of your eco-solution compared to a traditional solution",
 		"waste": "Types of waste",
-		"ods": "Linked to your eco-solution"
+		"ods": "Linked to your eco-solution",
+		"buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:"
 	},
 	"cancel": "Cancel",
 	"CATEGORIES": {
@@ -86,6 +87,10 @@
 		"specialWaste": "Special Waste"
 	},
 	"CATEGORIES_LABEL": {
+		"buildingOperation": {
+			"question": "Building operation",
+			"label": ""
+		},
 		"amount": {
 			"question": "Activities that consume the most water",
 			"label": ""
@@ -325,6 +330,10 @@
 			"plaster": "Plaster",
 			"plastic": "Plastic (packaging, tarps, etc.)",
 			"untreatedWood": "Untreated wood"
+		},
+		"selectBuildingOperation": {
+			"greenRoofsWalls": "Green Roofs and Walls",
+			"waterManagement": "Water Management"
 		},
 		"selectMainInternalCombustionEngine": {
 			"aerialBucketTruck": "Aerial bucket truck",
