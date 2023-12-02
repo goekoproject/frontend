@@ -46,7 +46,7 @@ export class SmeFormBaseComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.smeId = this._route.snapshot.paramMap.get('id') as string;
+		this.smeId = this._route.snapshot.queryParams['smeId'] as string;
 		this._route.queryParams.subscribe((queryParams: any) => (this._selectedCategory = queryParams.categoryId));
 		this.form = this._fb.group({});
 		this._createFormGroup();

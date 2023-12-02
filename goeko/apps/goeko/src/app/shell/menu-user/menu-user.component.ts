@@ -46,17 +46,31 @@ export class MenuUserComponent implements OnInit {
 		switch (route) {
 			case 'profile':
 				// eslint-disable-next-line no-case-declarations
-				this._router.navigate(['profile', this._companyId]);
+				this._navigateWithCompanyId(route);
 				return;
 
 			case 'cleantech-ecosolutions':
 				// eslint-disable-next-line no-case-declarations
-				this._router.navigate(['cleantech-ecosolutions', this._companyId]);
+				this._navigateWithCompanyId(route);
+				return;
+
+			case 'sme-analysis/new':
+				// eslint-disable-next-line no-case-declarations
+				this._navigateWithCompanyIdInQueryParams(route, { smeId: this._companyId });
 				return;
 
 			default:
 				this._router.navigate([route]);
 				return;
 		}
+	}
+
+	private _navigateWithCompanyId(route: string) {
+		this._router.navigate([route, this._companyId]);
+	}
+	private _navigateWithCompanyIdInQueryParams(route: string, queryParams: any) {
+		this._router.navigate([route], {
+			queryParams: queryParams,
+		});
 	}
 }
