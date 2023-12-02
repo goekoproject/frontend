@@ -46,7 +46,7 @@ export const FORM_FIELD_DEMO: Section[] = [
 		],
 	},
 	{
-		keyLang: 'CATEGORIES.co2emission',
+		keyLang: 'CATEGORIES.co2Emission',
 		controlName: 'co2Emission',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',

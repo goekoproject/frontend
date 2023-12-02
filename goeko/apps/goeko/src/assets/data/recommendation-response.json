@@ -1,1 +1,142 @@
-{"recommendations":[{"companyDetail":{"name":"Gramitherm","countries":["CH","EU"],"email":"info@gramitherm.eu","link":"https://gramitherm.eu/products/?lang=en","logo":"https://gramitherm.eu/wp-content/uploads/2020/11/gramitherm-seul-2048x407.jpg"},"solutionName":"Gramitherm","price":{"amount":50000.0,"currency":"EUR"},"improvement":{"reductionPercentage":100.0,"smeReduction":1000.0},"sustainableDevelopmentGoals":[9,13],"classification":{"mainCategory":{"name":"co2emission","tittle":"CO2 emissions"},"subCategory":{"name":"rigidMaterials","tittle":"Rigid Materials"},"products":[{"name":"concrete","tittle":"Insolation panels"}]}},{"companyDetail":{"name":"Cemex","countries":["CH","EU"],"email":"cemex@gmail.com","link":"https://www.cemex.fr/fiches-techniques/vertua","logo":"https://www.cemex.com/documents/d/cemex/cemex_logo"},"solutionName":"Vertua Ultra Zero","price":{"amount":50000.0,"currency":"EUR"},"improvement":{"reductionPercentage":70.0,"smeReduction":1000.0},"sustainableDevelopmentGoals":[9,13],"classification":{"mainCategory":{"name":"co2emission","tittle":"CO2 emissions"},"subCategory":{"name":"mineralProduct","tittle":"Main mineral product"},"products":[{"name":"concrete","tittle":"Concrete"}]}},{"companyDetail":{"name":"Caterpillar","countries":["CH","EU"],"email":"dpo@monnoyeur.com","link":"https://www.bm-cat.com/fr-lu/machines/tracteurs-intermediaires/d6-xe","logo":"https://www.bm-cat.com/fr-lu/sites/all/themes/custom/theme_brg/logo.png"},"solutionName":"D6 XE","price":{"amount":50000.0,"currency":"EUR"},"improvement":{"reductionPercentage":25.0,"smeReduction":1000.0,"operationalCostReductionPercentage":50.0,"smeOperationalCostReduction":{"amount":1000.0,"currency":"EUR"},"paybackPeriodYears":5},"sustainableDevelopmentGoals":[9],"classification":{"mainCategory":{"name":"co2emission","tittle":"CO2 emissions"},"subCategory":{"name":"combustionEngine","tittle":"Main combustion engine"},"products":[{"name":"bulldozer","tittle":"Bulldozer"}]}},{"companyDetail":{"name":"Volvo","countries":["CH","EU"],"email":"info@volvo.eu","link":"https://www.volvotrucks.ch/fr-ch/trucks/trucks/volvo-fmx/volvo-fmx-electric.html","logo":"https://www.volvotrucks.ch/fr-ch/_jcr_content/root/header/logo.coreimg.svg/1654591127154/volvo-iron-mark.svg"},"solutionName":"Volvo FMX electric","price":{"amount":50000.0,"currency":"EUR"},"improvement":{"reductionPercentage":100.0,"smeReduction":1000.0,"operationalCostReductionPercentage":50.0,"smeOperationalCostReduction":{"amount":1000.0,"currency":"EUR"},"paybackPeriodYears":5},"sustainableDevelopmentGoals":[13],"classification":{"mainCategory":{"name":"co2emission","tittle":"CO2 emissions"},"subCategory":{"name":"combustionEngine","tittle":"Main combustion engine"},"products":[{"name":"equipmentCarrierTruck","tittle":"Equipment carrier truck"}]}},{"companyDetail":{"name":"Hesus","countries":["CH","EU"],"email":"info@hesus.eu","link":"https://hesus.com","logo":"https://hesus.com/wp-content/uploads/2022/03/Groupe-179.svg"},"solutionName":"Hesus","price":{"amount":50000.0,"currency":"EUR"},"improvement":{"reductionPercentage":80.0,"smeReduction":1000.0},"sustainableDevelopmentGoals":[12],"classification":{"mainCategory":{"name":"waste","tittle":"Waste"},"subCategory":{"name":"waste","tittle":"Waste"},"products":[{"name":"mineralWools","tittle":"Mineral wools"}]}},{"companyDetail":{"name":"Fenx","countries":["CH"],"email":"info@fenx.eu","link":"http://www.fenx.ch","logo":"https://media.licdn.com/dms/image/C4E0BAQFXJA3RdndLKQ/company-logo_200_200/0/1675181516093?e=2147483647&v=beta&t=Sl4QeP5WA9_ipwp5GvrWqHIOa-0fo5ct2vx2s2ZqHOI"},"solutionName":"Fenx","price":{"amount":50000.0,"currency":"EUR"},"improvement":{"reductionPercentage":100.0,"smeReduction":1000.0},"sustainableDevelopmentGoals":[12],"classification":{"mainCategory":{"name":"waste","tittle":"Waste"},"subCategory":{"name":"waste","tittle":"Waste"},"products":[{"name":"mineralWools","tittle":"Mineral wools"}]}},{"companyDetail":{"name":"Raw Paints","countries":["CH","EU"],"email":"info@rawpaints.com","link":"https://www.rawpaints.com/en/","logo":"https://www.rawpaints.com/wp-content/uploads/2019/01/logo-raw-paints-symbool-wit-480px-def.jpg"},"solutionName":"Raw Paints BW","price":{"amount":50000.0,"currency":"EUR"},"improvement":{"reductionPercentage":100.0,"smeReduction":1000.0},"sustainableDevelopmentGoals":[12],"classification":{"mainCategory":{"name":"hazardousProduct","tittle":"Hazardous product"},"subCategory":{"name":"hazardousProduct","tittle":"Hazardous product"},"products":[{"name":"paintVarnisg","tittle":"Paint / varnisg"}]}}]}
+{
+	"recommendations": [
+		{
+			"companyDetail": {
+				"name": "Gramitherm",
+				"countries": ["CH", "EU"],
+				"email": "info@gramitherm.eu",
+				"link": "https://gramitherm.eu/products/?lang=en",
+				"logo": "https://gramitherm.eu/wp-content/uploads/2020/11/gramitherm-seul-2048x407.jpg"
+			},
+			"solutionName": "Gramitherm",
+			"price": { "amount": 50000.0, "currency": "EUR" },
+			"improvement": { "reductionPercentage": 100.0, "smeReduction": 1000.0 },
+			"sustainableDevelopmentGoals": [9, 13],
+			"classification": {
+				"mainCategory": { "name": "co2Emission", "tittle": "CO2 emissions" },
+				"subCategory": { "name": "rigidMaterials", "tittle": "Rigid Materials" },
+				"products": [{ "name": "concrete", "tittle": "Insolation panels" }]
+			}
+		},
+		{
+			"companyDetail": {
+				"name": "Cemex",
+				"countries": ["CH", "EU"],
+				"email": "cemex@gmail.com",
+				"link": "https://www.cemex.fr/fiches-techniques/vertua",
+				"logo": "https://www.cemex.com/documents/d/cemex/cemex_logo"
+			},
+			"solutionName": "Vertua Ultra Zero",
+			"price": { "amount": 50000.0, "currency": "EUR" },
+			"improvement": { "reductionPercentage": 70.0, "smeReduction": 1000.0 },
+			"sustainableDevelopmentGoals": [9, 13],
+			"classification": {
+				"mainCategory": { "name": "co2Emission", "tittle": "CO2 emissions" },
+				"subCategory": { "name": "mineralProduct", "tittle": "Main mineral product" },
+				"products": [{ "name": "concrete", "tittle": "Concrete" }]
+			}
+		},
+		{
+			"companyDetail": {
+				"name": "Caterpillar",
+				"countries": ["CH", "EU"],
+				"email": "dpo@monnoyeur.com",
+				"link": "https://www.bm-cat.com/fr-lu/machines/tracteurs-intermediaires/d6-xe",
+				"logo": "https://www.bm-cat.com/fr-lu/sites/all/themes/custom/theme_brg/logo.png"
+			},
+			"solutionName": "D6 XE",
+			"price": { "amount": 50000.0, "currency": "EUR" },
+			"improvement": {
+				"reductionPercentage": 25.0,
+				"smeReduction": 1000.0,
+				"operationalCostReductionPercentage": 50.0,
+				"smeOperationalCostReduction": { "amount": 1000.0, "currency": "EUR" },
+				"paybackPeriodYears": 5
+			},
+			"sustainableDevelopmentGoals": [9],
+			"classification": {
+				"mainCategory": { "name": "co2Emission", "tittle": "CO2 emissions" },
+				"subCategory": { "name": "combustionEngine", "tittle": "Main combustion engine" },
+				"products": [{ "name": "bulldozer", "tittle": "Bulldozer" }]
+			}
+		},
+		{
+			"companyDetail": {
+				"name": "Volvo",
+				"countries": ["CH", "EU"],
+				"email": "info@volvo.eu",
+				"link": "https://www.volvotrucks.ch/fr-ch/trucks/trucks/volvo-fmx/volvo-fmx-electric.html",
+				"logo": "https://www.volvotrucks.ch/fr-ch/_jcr_content/root/header/logo.coreimg.svg/1654591127154/volvo-iron-mark.svg"
+			},
+			"solutionName": "Volvo FMX electric",
+			"price": { "amount": 50000.0, "currency": "EUR" },
+			"improvement": {
+				"reductionPercentage": 100.0,
+				"smeReduction": 1000.0,
+				"operationalCostReductionPercentage": 50.0,
+				"smeOperationalCostReduction": { "amount": 1000.0, "currency": "EUR" },
+				"paybackPeriodYears": 5
+			},
+			"sustainableDevelopmentGoals": [13],
+			"classification": {
+				"mainCategory": { "name": "co2Emission", "tittle": "CO2 emissions" },
+				"subCategory": { "name": "combustionEngine", "tittle": "Main combustion engine" },
+				"products": [{ "name": "equipmentCarrierTruck", "tittle": "Equipment carrier truck" }]
+			}
+		},
+		{
+			"companyDetail": {
+				"name": "Hesus",
+				"countries": ["CH", "EU"],
+				"email": "info@hesus.eu",
+				"link": "https://hesus.com",
+				"logo": "https://hesus.com/wp-content/uploads/2022/03/Groupe-179.svg"
+			},
+			"solutionName": "Hesus",
+			"price": { "amount": 50000.0, "currency": "EUR" },
+			"improvement": { "reductionPercentage": 80.0, "smeReduction": 1000.0 },
+			"sustainableDevelopmentGoals": [12],
+			"classification": {
+				"mainCategory": { "name": "waste", "tittle": "Waste" },
+				"subCategory": { "name": "waste", "tittle": "Waste" },
+				"products": [{ "name": "mineralWools", "tittle": "Mineral wools" }]
+			}
+		},
+		{
+			"companyDetail": {
+				"name": "Fenx",
+				"countries": ["CH"],
+				"email": "info@fenx.eu",
+				"link": "http://www.fenx.ch",
+				"logo": "https://media.licdn.com/dms/image/C4E0BAQFXJA3RdndLKQ/company-logo_200_200/0/1675181516093?e=2147483647&v=beta&t=Sl4QeP5WA9_ipwp5GvrWqHIOa-0fo5ct2vx2s2ZqHOI"
+			},
+			"solutionName": "Fenx",
+			"price": { "amount": 50000.0, "currency": "EUR" },
+			"improvement": { "reductionPercentage": 100.0, "smeReduction": 1000.0 },
+			"sustainableDevelopmentGoals": [12],
+			"classification": {
+				"mainCategory": { "name": "waste", "tittle": "Waste" },
+				"subCategory": { "name": "waste", "tittle": "Waste" },
+				"products": [{ "name": "mineralWools", "tittle": "Mineral wools" }]
+			}
+		},
+		{
+			"companyDetail": {
+				"name": "Raw Paints",
+				"countries": ["CH", "EU"],
+				"email": "info@rawpaints.com",
+				"link": "https://www.rawpaints.com/en/",
+				"logo": "https://www.rawpaints.com/wp-content/uploads/2019/01/logo-raw-paints-symbool-wit-480px-def.jpg"
+			},
+			"solutionName": "Raw Paints BW",
+			"price": { "amount": 50000.0, "currency": "EUR" },
+			"improvement": { "reductionPercentage": 100.0, "smeReduction": 1000.0 },
+			"sustainableDevelopmentGoals": [12],
+			"classification": {
+				"mainCategory": { "name": "hazardousProduct", "tittle": "Hazardous product" },
+				"subCategory": { "name": "hazardousProduct", "tittle": "Hazardous product" },
+				"products": [{ "name": "paintVarnisg", "tittle": "Paint / varnisg" }]
+			}
+		}
+	]
+}

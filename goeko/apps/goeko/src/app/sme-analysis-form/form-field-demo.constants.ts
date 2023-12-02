@@ -7,7 +7,7 @@ export enum STATUS_SECTION {
 export const FORM_FIELD: Section[] = [
 	{
 		id: 'co2-category-form',
-		keyLang: 'CATEGORIES.co2emission',
+		keyLang: 'CATEGORIES.co2Emission',
 		controlName: 'co2Emission',
 		status: STATUS_SECTION.COMPLETED,
 		icon: 'co2',

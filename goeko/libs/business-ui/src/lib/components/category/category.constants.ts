@@ -4,7 +4,7 @@ export const CATEGORY_SECTION = [
 	{
 		id: 'icon-catagory-co2',
 		icon: 'co2',
-		keyLang: 'CATEGORIES.co2emission',
+		keyLang: 'CATEGORIES.co2Emission',
 		code: CATEGORIES.CO2_EMISSION,
 	},
 	{

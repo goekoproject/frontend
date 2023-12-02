@@ -65,7 +65,7 @@
 	},
 	"cancel": "Cancel",
 	"CATEGORIES": {
-		"co2emission": "CO2 emissions",
+		"co2Emission": "CO2 emissions",
 		"hazardousProduct": "Hazardous Products",
 		"waste": "Waste",
 		"water": "Water"

@@ -65,7 +65,7 @@
 	},
 	"cancel": "Annuler",
 	"CATEGORIES": {
-		"co2emission": "Emissions de CO2",
+		"co2Emission": "Emissions de CO2",
 		"hazardousProduct": "Produits toxiques",
 		"waste": "Déchets",
 		"water": "Eau"
