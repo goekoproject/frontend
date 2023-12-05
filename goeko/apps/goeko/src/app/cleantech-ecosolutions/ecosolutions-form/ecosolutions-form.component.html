@@ -62,21 +62,22 @@
 			<label> <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container> </label>
 			<ui-super-select
 				[readonly]="isReadOnly"
-				[placeholder]="'%'"
+				[placeholder]="['upTo' | translate] + '... (%)'"
 				[formControlName]="'reductionPercentage'"
 				id="reductionPercentage"
 				name="reductionPercentage"
 				[compareWith]="defaultSetReductions"
 			>
+				<!--TODO: hacer pipe-->
 				<super-option *ngFor="let option of dataSelect['operationalCostReduction']" [value]="option">
-					{{ option.from + '%    ' }} {{ 'a' | translate }} {{ '    ' + option.to }}%
+					{{ option.keyLang | translate }} {{ '    ' + option.to }}%
 				</super-option>
 			</ui-super-select>
 
 			<label>{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</label>
 
 			<ui-super-select
-				[placeholder]="'%'"
+				[placeholder]="['upTo' | translate] + '... (%)'"
 				[readonly]="isReadOnly"
 				[formControlName]="'operationalCostReductionPercentage'"
 				id="operationalCostReductionPercentage"
@@ -256,7 +257,7 @@
 				{{ 'Cancel' | translate }}
 			</button>
 
-			<button *ngIf="!isReadOnly" go-button type="submit">{{ 'saveYou' | translate }} éco-solutions</button>
+			<button *ngIf="!isReadOnly" go-button type="submit">{{ 'saveYou' | translate }} éco-solution</button>
 		</div>
 	</form>
 </div>
