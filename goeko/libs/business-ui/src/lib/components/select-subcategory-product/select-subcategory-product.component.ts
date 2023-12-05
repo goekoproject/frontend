@@ -205,12 +205,18 @@ export class SelectSubcategoryProductComponent
 	assignValue(value: string): void {
 		if (this.multiple) {
 			this.value = value;
+			this._propagateValue();
 		} else if (this.subCategory.controlName === value) {
 			this.value = this.subCategory;
+			this._propagateValue();
 		}
-		this.checked = true;
 
 		// this will make the execution after the above boolean has changed
+	}
+
+	private _propagateValue() {
+		this.checked = true;
+
 		this._onFocus();
 		this._onChange(this.value);
 		this._onTouched();
