@@ -407,23 +407,10 @@ export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] =
 ];
 const SelectBuildingOperation: DataSelectOption[] = [
 	{
-		id: 'useRenewableEnergies',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useRenewableEnergies',
+		id: 'greenRoofsWalls',
+		keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.greenRoofsWalls',
 	},
-	{ id: 'recoverHeat', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.recoverHeat' },
-	{
-		id: 'useLowConsumptionLighting',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useLowConsumptionLighting',
-	},
-	{ id: 'storeEnergy', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.storeEnergy' },
-	{
-		id: 'optimizeEnergyConsumption',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.optimizeEnergyConsumption',
-	},
-	{
-		id: 'chargeElectricVehicles',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.chargeElectricVehicles',
-	},
+	{ id: 'waterManagement', keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement' },
 ];
 
 export const DataSelect = {

@@ -89,7 +89,7 @@
 	"CATEGORIES_LABEL": {
 		"buildingOperation": {
 			"question": "Exploitation du bâtiment",
-			"label": ""
+			"label": "Exploitation du bâtiment"
 		},
 		"amount": {
 			"question": "Activités qui consomment le plus d’eau",

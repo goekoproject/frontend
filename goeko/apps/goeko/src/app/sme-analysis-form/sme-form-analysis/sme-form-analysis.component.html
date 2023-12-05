@@ -22,6 +22,10 @@
 				<section *goSlide class="content-form go-scroll">
 					<!--FORM ACTORS-->
 					<div class="form-wrapper" [id]="element.controlName" [formGroupName]="element.controlName">
+						<div class="title-category" title>
+							<i class="ti ti-info-circle-filled"></i>
+							<h3>{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}</h3>
+						</div>
 						<!-- SUB-CATEGORY -->
 						<div
 							class="form-field form-field--center form-field-{{ field.type }}"
