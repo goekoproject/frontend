@@ -14,7 +14,7 @@ export const formToClassificationsMapper = (formValue: Section) => {
 			if (isObject(category)) {
 				Object.keys(category).forEach((index) => {
 					const subCategory = index;
-					if (!category[index]) {
+					if (!category[index] && !Array.isArray(category)) {
 						return;
 					}
 					const products = category[index].map((res: any) => {

@@ -1,4 +1,4 @@
-import { STATUS_SECTION } from './form-field-demo.constants';
+import { STATUS_SECTION } from '@goeko/business-ui';
 
 export interface Field {
 	controlName: string;

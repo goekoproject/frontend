@@ -138,7 +138,7 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
 		if (!value) {
 			return;
 		}
-		setTimeout(() => value.forEach((currentValue) => this._selectOptionValue(currentValue)));
+		setTimeout(() => value?.forEach((currentValue) => this._selectOptionValue(currentValue)));
 	}
 
 	private _selectOptionValue(value: any) {

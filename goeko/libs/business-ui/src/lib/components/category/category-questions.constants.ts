@@ -24,6 +24,7 @@ export enum STATUS_SECTION {
 	COMPLETED = 'COMPLETED',
 	INCOMPLETED = 'INCOMPLETED',
 }
+const TYPE_FIELD = 'select-subcategory-product';
 export const FORM_CATEGORIES_QUESTION: Section[] = [
 	{
 		id: 'co2-category-form',
@@ -36,7 +37,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 		fields: [
 			{
 				controlName: 'mainInternalCombustionEngine',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				label: 'CATEGORIES_LABEL.mainInternalCombustionEngine.label',
 				question: 'CATEGORIES_LABEL.mainInternalCombustionEngine.question',
@@ -50,7 +51,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 			}, */
 			{
 				controlName: 'mainMineralProduct',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: 'cement, concrete, etc.',
 				question: 'CATEGORIES_LABEL.mainMineralProduct.question',
 				label: 'CATEGORIES_LABEL.mainMineralProduct.label',
@@ -63,7 +64,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 			}, */
 			/* 			{
 				controlName: 'energySource',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.energySource.question',
 				label: 'CATEGORIES_LABEL.energySource.label',
@@ -71,7 +72,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 			}, */
 			{
 				controlName: 'sustainableBuildingOperations',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.sustainableBuildingOperations.question',
 				label: 'CATEGORIES_LABEL.sustainableBuildingOperations.label',
@@ -89,35 +90,35 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 		fields: [
 			{
 				controlName: 'mainCategoryNonInert',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.mainCategoryNonInert.question',
 				label: 'CATEGORIES_LABEL.mainCategoryNonInert.label',
 			},
 			{
 				controlName: 'inertOrMineralWaste',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.inertOrMineralWaste.question',
 				label: 'CATEGORIES_LABEL.inertOrMineralWaste.label',
 			},
 			{
 				controlName: 'greenWaste',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.greenWaste.question',
 				label: 'CATEGORIES_LABEL.greenWaste.label',
 			},
 			{
 				controlName: 'specialWaste',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.specialWaste.question',
 				label: 'CATEGORIES_LABEL.specialWaste.label',
 			},
 			{
 				controlName: 'hazardousWaste',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.hazardousWaste.question',
 				label: 'CATEGORIES_LABEL.hazardousWaste.label',
@@ -149,14 +150,14 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 			}, */
 			{
 				controlName: 'mainActivity',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.mainActivity.question',
 				label: 'CATEGORIES_LABEL.mainActivity.label',
 			},
 			{
 				controlName: 'buildingOperation',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: 'buildingOperation_question',
 				question: 'CATEGORIES_LABEL.buildingOperation.question',
 				label: 'CATEGORIES_LABEL.buildingOperation.label',
@@ -174,7 +175,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
 		fields: [
 			{
 				controlName: 'products',
-				type: 'badge-group',
+				type: TYPE_FIELD,
 				textHelp: '',
 				question: 'CATEGORIES_LABEL.products.question',
 				label: 'CATEGORIES_LABEL.products.label',

@@ -107,7 +107,8 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 		};
 	}
 	editCategory(categoryId: string) {
-		this._router.navigate(['sme-analysis/last-project', this._smeId], {
+		const pageEditCategories = this.isProject ? 'sme-analysis//new-project' : 'sme-analysis/new';
+		this._router.navigate([pageEditCategories], {
 			queryParams: { categoryId: categoryId },
 			queryParamsHandling: 'merge',
 		});

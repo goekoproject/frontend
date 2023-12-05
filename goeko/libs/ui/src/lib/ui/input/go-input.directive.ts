@@ -1,17 +1,16 @@
-import { AfterContentInit, AfterViewInit, Directive, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AfterContentInit, Directive, ElementRef, HostListener, Input, Provider, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+const CONTROL_VALUE_ACCESSOR: Provider = {
+	provide: NG_VALUE_ACCESSOR,
+	useExisting: forwardRef(() => GoInputDirective),
+	multi: true,
+};
 @Directive({
 	selector: 'go-input',
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: GoInputDirective,
-			multi: true,
-		},
-	],
+	providers: [CONTROL_VALUE_ACCESSOR],
 })
-export class GoInputDirective implements AfterContentInit {
+export class GoInputDirective implements AfterContentInit, ControlValueAccessor {
 	@Input() readonly = false;
 	@HostListener('change', ['$event.detail'])
 	onHostChange(value: string) {

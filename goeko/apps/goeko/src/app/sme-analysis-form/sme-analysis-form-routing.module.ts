@@ -67,7 +67,7 @@ const routes: Routes = [
 		path: 'new-project',
 		component: SmeAnalysisComponent,
 		data: {
-			breadcrumb: 'new_analysis',
+			breadcrumb: 'new_project',
 			hidden: true,
 		},
 		children: [
@@ -95,7 +95,7 @@ const routes: Routes = [
 		path: 'last-project/:id',
 		component: SmeAnalysisComponent,
 		data: {
-			breadcrumb: 'last_analysis',
+			breadcrumb: 'last_project',
 			hidden: true,
 		},
 		children: [

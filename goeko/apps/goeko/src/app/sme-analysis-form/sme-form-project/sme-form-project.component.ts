@@ -24,7 +24,6 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
 
 	override ngOnInit(): void {
 		super.ngOnInit();
-		this.form.addControl('searchName', this.fb.control('', Validators.required));
 		this.onChangeLastRecomendation.subscribe((data) => (this.toogleSaveName = !data));
 		this._setLastAnalysis(this._getCurrentAnalysis);
 	}

@@ -1,5 +1,6 @@
 <div class="analysis-wrapper" [formGroup]="form">
 	<section class="section-step">
+		<!-- CATEGORY -->
 		<ng-container *ngFor="let element of formField; let index = index">
 			<goeko-category
 				id="{{ index }}"
@@ -21,12 +22,13 @@
 				<section *goSlide class="content-form go-scroll">
 					<!--FORM ACTORS-->
 					<div class="form-wrapper" [id]="element.controlName" [formGroupName]="element.controlName">
+						<!-- SUB-CATEGORY -->
 						<div
 							class="form-field form-field--center form-field-{{ field.type }}"
 							*ngFor="let field of element.fields"
 						>
 							<!-- FIELD FORM -->
-
+							<!-- PRODUCTS -->
 							<ng-container *ngIf="!field.hidden">
 								<ng-container [ngSwitch]="field.type">
 									<!-- INPUT boolean -->
@@ -102,31 +104,7 @@
 										</ui-super-select>
 									</ng-container>
 
-									<!-- Question card-->
-									<ng-container *ngSwitchCase="'question'">
-										<label for="{{ field.controlName }}" [id]="field.controlName">{{
-											field.question | translate
-										}}</label>
-										<select
-											multiple
-											[formControlName]="field.controlName"
-											[id]="field.controlName"
-											[name]="field.controlName"
-										>
-											<option value="">
-												--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--
-											</option>
-											<option
-												*ngFor="let option of dataSelect[field.controlName]"
-												[value]="option.keyLang | translate"
-											>
-												{{ option.keyLang | translate }}
-											</option>
-										</select>
-									</ng-container>
-
 									<!-- BADGE TEXT -->
-
 									<ng-container *ngSwitchCase="'badge-group'">
 										<label for="{{ field.controlName }}" [id]="field.controlName">{{
 											field.question | translate
@@ -146,6 +124,30 @@
 												>{{ option.keyLang | translate }}</go-badge
 											>
 										</go-badge-group>
+									</ng-container>
+
+									<!-- SELECT SUBCATEGORY-PRODUCT -->
+									<ng-container *ngSwitchCase="'select-subcategory-product'">
+										<goeko-select-subcategory-product
+											[id]="field.controlName"
+											[subCategory]="field"
+											[typeTitle]="'question'"
+											[multiple]="true"
+											[checked]="!!form.value[element.controlName][field.controlName]"
+										>
+											<go-badge-group
+												[formControlName]="field.controlName"
+												[id]="field.controlName"
+												[name]="field.controlName"
+												[compareWith]="defaultSetSuperSelect"
+											>
+												<go-badge
+													*ngFor="let option of dataSelect[field.controlName]"
+													[value]="option"
+													>{{ option.keyLang | translate }}</go-badge
+												>
+											</go-badge-group>
+										</goeko-select-subcategory-product>
 									</ng-container>
 
 									<ng-container *ngSwitchDefault>

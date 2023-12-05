@@ -1,6 +1,6 @@
 <div class="project-wrapper" [formGroup]="form">
 	<section class="search-name-section">
-		<go-input [formControlName]="'searchName'" id="searchName" type="text" name="searchName" *ngIf="toogleSaveName">
+		<go-input [formControlName]="'searchName'" id="searchName" type="text">
 			<span slot="label">{{ 'FORM_LABEL.name_project' | translate }}</span>
 		</go-input>
 
@@ -8,14 +8,13 @@
 			go-button
 			appearance="primary"
 			(click)="toogleSaveName = !toogleSaveName"
-			*ngIf="toogleSaveName"
+			*ngIf="!toogleSaveName"
 			[disabled]="form.controls['searchName'].invalid"
 		>
 			{{ 'confirm' | translate }}
 		</button>
-		<h2 *ngIf="!toogleSaveName">{{ form.value?.searchName }}</h2>
 
-		<button go-button appearance="transparent" *ngIf="!toogleSaveName" (click)="toogleSaveName = !toogleSaveName">
+		<button go-button appearance="transparent" *ngIf="toogleSaveName" (click)="toogleSaveName = !toogleSaveName">
 			{{ 'edit' | translate }}
 		</button>
 	</section>
@@ -123,31 +122,7 @@
 										</ui-super-select>
 									</ng-container>
 
-									<!-- Question card-->
-									<ng-container *ngSwitchCase="'question'">
-										<label for="{{ field.controlName }}" [id]="field.controlName">{{
-											field.label | translate
-										}}</label>
-										<select
-											multiple
-											[formControlName]="field.controlName"
-											[id]="field.controlName"
-											[name]="field.controlName"
-										>
-											<option value="">
-												--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--
-											</option>
-											<option
-												*ngFor="let option of dataSelect[field.controlName]"
-												[value]="option.keyLang | translate"
-											>
-												{{ option.keyLang | translate }}
-											</option>
-										</select>
-									</ng-container>
-
 									<!-- BADGE TEXT -->
-
 									<ng-container *ngSwitchCase="'badge-group'">
 										<label for="{{ field.controlName }}" [id]="field.controlName">{{
 											field.label | translate
@@ -167,6 +142,30 @@
 												>{{ option.keyLang | translate }}</go-badge
 											>
 										</go-badge-group>
+									</ng-container>
+
+									<!-- SELECT SUBCATEGORY-PRODUCT -->
+									<ng-container *ngSwitchCase="'select-subcategory-product'">
+										<goeko-select-subcategory-product
+											[id]="field.controlName"
+											[subCategory]="field"
+											[typeTitle]="'question'"
+											[multiple]="true"
+											[checked]="!!form.value[element.controlName][field.controlName]"
+										>
+											<go-badge-group
+												[formControlName]="field.controlName"
+												[id]="field.controlName"
+												[name]="field.controlName"
+												[compareWith]="defaultSetSuperSelect"
+											>
+												<go-badge
+													*ngFor="let option of dataSelect[field.controlName]"
+													[value]="option"
+													>{{ option.keyLang | translate }}</go-badge
+												>
+											</go-badge-group>
+										</goeko-select-subcategory-product>
 									</ng-container>
 
 									<ng-container *ngSwitchDefault>

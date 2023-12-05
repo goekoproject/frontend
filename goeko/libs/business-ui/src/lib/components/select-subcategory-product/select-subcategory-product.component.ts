@@ -50,6 +50,7 @@ export enum TYPE_FIELD {
 		'[attr.open]': 'open',
 		'[attr.checked]': 'checked',
 		'[attr.readonly]': 'readonly',
+		'[attr.id]': 'id',
 	},
 })
 export class SelectSubcategoryProductComponent
@@ -58,8 +59,10 @@ export class SelectSubcategoryProductComponent
 	@ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent;
 	@ViewChild('inputElement') inputElement!: ElementRef;
 
+	@Input() id!: string;
 	@Input() readonly = false;
 	@Input() subCategory: any;
+	@Input() typeTitle: 'label' | 'question' = 'label';
 	@Input()
 	public get multiple(): boolean {
 		return this._multiple;
@@ -95,7 +98,7 @@ export class SelectSubcategoryProductComponent
 
 	public get selected(): BadgeComponent[] {
 		this._cdf.markForCheck();
-		if (!this.open) {
+		if (!this.open && !this.multiple) {
 			this.badgeGroup._selectionModel.clear();
 		}
 		return this.badgeGroup?.selected;
@@ -115,14 +118,17 @@ export class SelectSubcategoryProductComponent
 		this._numSelected = value;
 	}
 
-	private _checked = false;
+	@Input()
 	public get checked() {
 		this._cdf.markForCheck();
 		return this._checked;
 	}
 	public set checked(value) {
 		this._checked = value;
+		this._cdf.markForCheck();
 	}
+	private _checked = false;
+
 	private mutationObserver!: MutationObserver;
 
 	_onChange: (value: any) => void = () => {};
@@ -197,16 +203,18 @@ export class SelectSubcategoryProductComponent
 	}
 
 	assignValue(value: string): void {
-		if (this.subCategory.controlName === value) {
+		if (this.multiple) {
+			this.value = value;
+		} else if (this.subCategory.controlName === value) {
 			this.value = this.subCategory;
-			this.checked = true;
-
-			// this will make the execution after the above boolean has changed
-			this._onFocus();
-			this._onChange(this.value);
-			this._onTouched();
-			this._cdf.markForCheck();
 		}
+		this.checked = true;
+
+		// this will make the execution after the above boolean has changed
+		this._onFocus();
+		this._onChange(this.value);
+		this._onTouched();
+		this._cdf.markForCheck();
 	}
 
 	public cleanValue() {

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import { DataSelect, SmeAnalysisService, SmeService } from '@goeko/store';
-import { FORM_FIELD } from '../form-field-demo.constants';
 import { Field } from '../form-field.model';
 import { transformArrayToObj } from './sme-analysis.request';
-import { CATEGORY_SECTION, FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
 	if (o1 && o2 && typeof o2 !== 'object') {
 		return o1.id.toString() === o2;

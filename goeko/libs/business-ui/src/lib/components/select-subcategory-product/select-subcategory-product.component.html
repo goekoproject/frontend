@@ -10,7 +10,7 @@
 				(change)="assignValue(subCategory.controlName)"
 			/>
 			<div class="subcategory-title">
-				<p>{{ subCategory?.label | translate }}</p>
+				<p>{{ subCategory[typeTitle] | translate }}</p>
 				<span class="subcategory-title-products" *ngIf="!readonly">{{ labelSelected }}</span>
 			</div>
 			<span class="subcategory-product-selected" *ngIf="numSelected > 2 && !readonly"

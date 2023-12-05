@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataSelect, SmeAnalysisService, SmeRequestResponse, UserService } from '@goeko/store';
-import { FORM_FIELD } from '../form-field-demo.constants';
+import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
+import { DataSelect, SmeAnalysisService, UserService } from '@goeko/store';
 import { Field } from '../form-field.model';
 import { CategoryModel, transformArrayToObj } from '../sme-form-analysis/sme-analysis.request';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -24,7 +24,7 @@ export class SmeFormBaseComponent implements OnInit {
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onChangeLastRecomendation: EventEmitter<boolean> = new EventEmitter<any>();
 	public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean;
-	formField = FORM_FIELD;
+	formField = FORM_CATEGORIES_QUESTION;
 	form!: FormGroup;
 	slideSelected = 0;
 	dateLastRecomendation!: string;
@@ -82,7 +82,8 @@ export class SmeFormBaseComponent implements OnInit {
 			if (requestClassifications) {
 				this.dateLastRecomendation = requestClassifications.date;
 				const classifications = transformArrayToObj(requestClassifications.classifications);
-				const _searchName = requestClassifications?.name as string;
+				const _searchName =
+					(requestClassifications?.searchName as string) || (requestClassifications?.name as string);
 				this._updateForm(classifications, _searchName);
 			}
 		});
@@ -105,6 +106,7 @@ export class SmeFormBaseComponent implements OnInit {
 				this.form.addControl(group.controlName, formGroup);
 			}
 		});
+		this.form.addControl('searchName', this._fb.control('', Validators.required));
 	}
 	addFormGroup(index: any) {
 		this.slideSelected = index;
@@ -113,17 +115,17 @@ export class SmeFormBaseComponent implements OnInit {
 	gotToSummary() {
 		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
 		setTimeout(() => {
-			if (this.smeId) {
+			/* 		if (this.smeId) {
 				this._router.navigate([`../${this.smeId}/summary`], {
 					relativeTo: this._route,
 					queryParamsHandling: 'preserve',
 				});
-			} else {
-				this._router.navigate([`summary`], {
-					relativeTo: this._route,
-					queryParamsHandling: 'preserve',
-				});
-			}
+			} else { */
+			this._router.navigate([`summary`], {
+				relativeTo: this._route,
+				queryParamsHandling: 'preserve',
+			});
+			/* } */
 		});
 	}
 	getResults() {

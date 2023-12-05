@@ -3,7 +3,7 @@
 >
 <div class="summary">
 	<section class="search-name-section" *ngIf="isProject">
-		<go-input
+		<!-- 		<go-input
 			id="searchName"
 			type="text"
 			name="searchName"
@@ -11,7 +11,7 @@
 			(change)="onSearchNameChange($any($event))"
 		>
 			<span slot="label">{{ 'FORM_LABEL.name_project' | translate }}</span>
-		</go-input>
+		</go-input> -->
 
 		<button go-button appearance="primary" (click)="toogleSaveName = !toogleSaveName" *ngIf="toogleSaveName">
 			{{ 'confirm' | translate }}

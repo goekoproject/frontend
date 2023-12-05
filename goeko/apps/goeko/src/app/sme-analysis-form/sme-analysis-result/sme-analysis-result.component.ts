@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import { SmeAnalysisService, SmeService, UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
-import { FORM_FIELD } from '../form-field-demo.constants';
+import { Subject, last, takeUntil } from 'rxjs';
 import { FormValueToSmeAnalysisRequest, formToClassificationsMapper } from '../sme-form-analysis/sme-analysis.request';
-import { Subject, last, takeLast, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'goeko-sme-analysis-result',
@@ -14,7 +14,7 @@ import { Subject, last, takeLast, takeUntil } from 'rxjs';
 export class SmeAnalysisResultComponent implements OnInit, OnDestroy {
 	odsIcons!: Array<{ code: number; active: boolean }>;
 
-	formField = FORM_FIELD;
+	formField = FORM_CATEGORIES_QUESTION;
 	toogleOpenDetails = false;
 	smeRecomendation!: any;
 	selectedRecomendation: any;
