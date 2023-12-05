@@ -69,7 +69,7 @@
 				[compareWith]="defaultSetReductions"
 			>
 				<!--TODO: hacer pipe-->
-				<super-option *ngFor="let option of dataSelect['operationalCostReduction']" [value]="option">
+				<super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
 					{{ option.keyLang | translate }} {{ '    ' + option.to }}%
 				</super-option>
 			</ui-super-select>

@@ -296,53 +296,63 @@ export const SelectCurrency: DataSelectOption[] = [
 export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
 	{
 		id: 1,
-		keyLang: 'year',
-		from: 5,
+		keyLang: 'upTo',
+		from: 0,
 		to: 10,
 	},
 	{
 		id: 2,
-		keyLang: 'years',
-		from: 10,
+		keyLang: 'upTo',
+		from: 0,
 		to: 20,
 	},
 	{
 		id: 3,
-		keyLang: 'years',
-		from: 20,
+		keyLang: 'upTo',
+		from: 0,
 		to: 30,
 	},
 	{
 		id: 4,
-		keyLang: 'years',
-		from: 30,
+		keyLang: 'upTo',
+		from: 0,
 		to: 40,
 	},
 	{
-		id: 5,
-		keyLang: 'years',
-		from: 50,
-		to: '',
-	},
-];
-const SelectBuildingOperation: DataSelectOption[] = [
-	{
-		id: 'useRenewableEnergies',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useRenewableEnergies',
-	},
-	{ id: 'recoverHeat', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.recoverHeat' },
-	{
-		id: 'useLowConsumptionLighting',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useLowConsumptionLighting',
-	},
-	{ id: 'storeEnergy', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.storeEnergy' },
-	{
-		id: 'optimizeEnergyConsumption',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.optimizeEnergyConsumption',
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 50,
 	},
 	{
-		id: 'chargeElectricVehicles',
-		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.chargeElectricVehicles',
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 60,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 70,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 80,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 90,
+	},
+	{
+		id: 4,
+		keyLang: 'upTo',
+		from: 0,
+		to: 100,
 	},
 ];
 export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] = [
@@ -389,24 +399,33 @@ export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] =
 		to: 70,
 	},
 	{
-		id: 5,
-		keyLang: 'upTo',
+		id: 4,
+		keyLang: '+',
 		from: 0,
-		to: 80,
-	},
-	{
-		id: 5,
-		keyLang: 'upTo',
-		from: 0,
-		to: 90,
-	},
-	{
-		id: 5,
-		keyLang: 'upTo',
-		from: 0,
-		to: 100,
+		to: 70,
 	},
 ];
+const SelectBuildingOperation: DataSelectOption[] = [
+	{
+		id: 'useRenewableEnergies',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useRenewableEnergies',
+	},
+	{ id: 'recoverHeat', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.recoverHeat' },
+	{
+		id: 'useLowConsumptionLighting',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useLowConsumptionLighting',
+	},
+	{ id: 'storeEnergy', keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.storeEnergy' },
+	{
+		id: 'optimizeEnergyConsumption',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.optimizeEnergyConsumption',
+	},
+	{
+		id: 'chargeElectricVehicles',
+		keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.chargeElectricVehicles',
+	},
+];
+
 export const DataSelect = {
 	mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
 	mainMineralProduct: SelectMainMineralProduct,
