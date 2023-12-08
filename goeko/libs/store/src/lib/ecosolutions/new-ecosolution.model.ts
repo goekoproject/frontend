@@ -42,6 +42,7 @@ export interface NewEcosolutions {
 	certified?: boolean;
 	approved?: boolean;
 	guaranteeInYears?: number;
+	priceDescription?: string;
 }
 
 export class NewEcosolutionsBody implements NewEcosolutions {
@@ -61,7 +62,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 	approved?: boolean;
 	unit?: string;
 	currency?: string;
-
+	priceDescription?: string;
 	constructor(cleanTechId: string, mainCategory: string, formValue: any) {
 		if (!formValue) {
 			throw Error(`Missing form value for create ecosolutions`);
@@ -73,7 +74,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
 			amount: formValue.price,
 			currency: formValue.currency?.id,
 		}; */
-
+		this.priceDescription = formValue.priceDescription;
 		this.guaranteeInYears = formValue.yearGuarantee?.id;
 		this.improvement = {
 			reductionPercentage: {

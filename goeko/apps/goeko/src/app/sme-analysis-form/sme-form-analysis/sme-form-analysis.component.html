@@ -13,11 +13,7 @@
 		</ng-container>
 	</section>
 	<section class="section-form">
-		<go-carousel
-			(valueChangeButton)="addFormGroup($event.index)"
-			[hiddenButtonNext]="isSummarySlide()"
-			[selectedSlideIndex]="slideSelected"
-		>
+		<go-carousel (valueChangeButton)="addFormGroup($event.index)" [selectedSlideIndex]="slideSelected">
 			<ng-container *ngFor="let element of formField; last as isLast">
 				<section *goSlide class="content-form go-scroll">
 					<!--FORM ACTORS-->

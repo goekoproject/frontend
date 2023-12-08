@@ -13,7 +13,7 @@
 				<p>{{ subCategory[typeTitle] | translate }}</p>
 				<span class="subcategory-title-products" *ngIf="!readonly">{{ labelSelected }}</span>
 			</div>
-			<span class="subcategory-product-selected" *ngIf="numSelected > 2 && !readonly"
+			<span class="subcategory-product-selected" *ngIf="!readonly"
 				>{{ numSelected }} {{ 'selected_products' | translate }}</span
 			>
 		</label>

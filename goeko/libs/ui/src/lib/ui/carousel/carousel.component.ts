@@ -59,6 +59,7 @@ export class CarouselComponent implements AfterContentInit {
 			this.selectedSlideTemplateRef = null;
 			this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
 			this.animateStateSlide = '';
+			this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.NEXT);
 		});
 	}
 

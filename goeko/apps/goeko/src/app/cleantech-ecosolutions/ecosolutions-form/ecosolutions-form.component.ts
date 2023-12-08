@@ -93,6 +93,7 @@ export class EcosolutionsFormComponent implements OnInit {
 			price: [0],
 			currency: ['EUR'],
 			unit: [],
+			priceDescription: [''],
 			deliverCountries: [],
 			paybackPeriodYears: [''],
 			marketReady: [false],

@@ -29,11 +29,9 @@ export class EcosolutionsListComponent implements OnInit {
 
 	getAllEcosolutionsByCleanTech() {
 		this._ecosolutionsService.getEcosolutionsByCleantechId(this.cleanTechId).subscribe((ecosolutions: any) => {
-			if (ecosolutions && ecosolutions.length > 0) {
-				this.ecosolutions = ecosolutions.map(
-					(ecosolution: any) => new CardEcosolutions(ecosolution, this.translateService)
-				);
-			}
+			this.ecosolutions = ecosolutions?.map(
+				(ecosolution: any) => new CardEcosolutions(ecosolution, this.translateService)
+			);
 		});
 	}
 

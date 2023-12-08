@@ -132,11 +132,11 @@
 			"label": "Dans quelle(s) catégorie(s) de déchets non inertes votre éco-solution améliore-t-elle la gestion?"
 		},
 		"mainInternalCombustionEngine": {
-			"question": "Principaux engins à moteur",
+			"question": "Principaux engins à moteur thermique utilisés par votre entreprise",
 			"label": "Engins et véhicules"
 		},
 		"mainMineralProduct": {
-			"question": "Principaux produits minéraux et métaux",
+			"question": "Principaux produits minéraux et métaux utilisés par votre entreprise",
 			"label": "Produits minéraux et métaux"
 		},
 		"mainRigidMaterial": {
@@ -336,7 +336,7 @@
 		},
 		"selectBuildingOperation": {
 			"greenRoofsWalls": "Toits et murs végétalisés",
-			"waterManagement": "Gestion de l’ea"
+			"waterManagement": "Gestion de l’eau"
 		},
 		"selectMainInternalCombustionEngine": {
 			"aerialBucketTruck": "Camion nacelle",

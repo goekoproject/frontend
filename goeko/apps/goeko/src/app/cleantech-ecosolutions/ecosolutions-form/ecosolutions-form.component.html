@@ -124,11 +124,11 @@
 		<fieldset class="ecosolutions-fieldset">
 			<legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
 
-			<div class="form-row" *ngIf="false">
-				<go-input [formControlName]="'price'" type="number" [readonly]="isReadOnly">
+			<div class="form-row">
+				<go-input [formControlName]="'priceDescription'" [readonly]="isReadOnly">
 					<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
 				</go-input>
-				<div>
+				<div *ngIf="false">
 					<label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
 					<ui-super-select
 						[readonly]="isReadOnly"
@@ -144,6 +144,7 @@
 					</ui-super-select>
 				</div>
 				<go-input
+					*ngIf="false"
 					[formControlName]="'unit'"
 					type="text"
 					aria-placeholder="item,m3,m2,L etc.."
