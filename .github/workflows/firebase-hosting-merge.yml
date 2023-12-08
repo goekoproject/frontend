@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          check-latest: true
       #Init Node
       - name: Install Dependencies
         run: npm install --force
