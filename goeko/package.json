@@ -58,7 +58,7 @@
 		"@types/jest": "28.1.1",
 		"@types/jsonwebtoken": "^9.0.3",
 		"@types/jsrsasign": "^10.5.9",
-		"@types/node": "16.11.7",
+		"@types/node": "16.18.68",
 		"@typescript-eslint/eslint-plugin": "^5.36.1",
 		"@typescript-eslint/parser": "^5.36.1",
 		"cypress": "^11.0.0",
