@@ -90,3 +90,10 @@ goeko-select-subcategory-product[readonly='true'] {
 		font-size: 1.2rem;
 	}
 }
+.alert-select-product {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: #0090d682;
+	font-size: 0.875rem;
+}

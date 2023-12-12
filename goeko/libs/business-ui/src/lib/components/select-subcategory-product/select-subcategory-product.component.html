@@ -23,4 +23,8 @@
 	<div class="subcategory-product">
 		<ng-content></ng-content>
 	</div>
+	<span class="alert-select-product" *ngIf="open">
+		<i class="ti ti-info-triangle-filled"></i>
+		<p>{{ 'alertSelectedProduct' | translate }}</p>
+	</span>
 </div>
