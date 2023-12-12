@@ -33,7 +33,7 @@
 	"BREADCRUMBS": {
 		"new_ecosolutions": "Nouvelle éco-solution",
 		"edit_ecosolutions": "Modifier éco-solution",
-		"view_ecosolutions": "Détail de votre écosolution"
+		"view_ecosolutions": "Détails de votre écosolution"
 	},
 	"all": "Tout",
 	"analysis": "Analyse",
@@ -187,7 +187,7 @@
 		"name_project": "Nom du projet",
 		"solutionName": "Nom de votre éco-solution",
 		"solutionDescription": "Description de votre éco-solution",
-		"price": "Prix",
+		"price": "Informations sur le prix",
 		"furtherInformation": "Informations complémentaires",
 		"improvement": "Améliorations",
 		"advantagesEcosolutions": "Avantages de votre éco-solution",

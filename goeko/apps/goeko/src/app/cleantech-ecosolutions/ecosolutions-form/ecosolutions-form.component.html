@@ -123,12 +123,21 @@
 
 		<fieldset class="ecosolutions-fieldset">
 			<legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
-
-			<div class="form-row">
-				<go-input [formControlName]="'priceDescription'" [readonly]="isReadOnly">
-					<span slot="label">{{ 'FORM_LABEL.price' | translate }}</span>
-				</go-input>
-				<div *ngIf="false">
+			<div class="form-col">
+				<label for="priceDescription">
+					{{ 'FORM_LABEL.price' | translate }}
+				</label>
+				<textarea
+					class="go-textarea"
+					rows="2"
+					id="priceDescription"
+					[formControlName]="'priceDescription'"
+					[readonly]="isReadOnly"
+				>
+				</textarea>
+			</div>
+			<div class="form-row" *ngIf="false">
+				<div>
 					<label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
 					<ui-super-select
 						[readonly]="isReadOnly"
@@ -143,6 +152,7 @@
 						</super-option>
 					</ui-super-select>
 				</div>
+
 				<go-input
 					*ngIf="false"
 					[formControlName]="'unit'"
