@@ -222,16 +222,16 @@
 	color: #fff;
 
 	&-co2Emission {
-		background: var(--color-co2Emission);
+		background: var(--co2-emission);
 	}
 	&-water {
 		background: var(--color-water);
 	}
 	&-waste {
-		background: var(--color-waste);
+		background: var(--waste);
 	}
 	&-hazardousProduct {
-		background: var(--color-hazardousProduct);
+		background: var(--hp);
 	}
 }
 .detail-header {

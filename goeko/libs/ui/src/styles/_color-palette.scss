@@ -1,28 +1,27 @@
 :root {
-	--color-primary: #0090d6;
-	--color-primary-support: #049dbf;
-	--color-primary-light: #a7e4f2;
-	--color-secondary: #21a650;
-	--color-secondary-light: #49a669;
-	--color-background: #06bbe3;
-	--color-background-white: #ffffff;
-	--color-background-light: #e5f7fc;
-	--color-text-dark: #001724;
-	--color-text-light: #47525e;
-	--color-swiss: #ff0000;
-	--color-green-light: #00fba0;
-	--color-gree-light2: #0cbd4a;
-	--color-co2Emission: #ea8788b5;
-	--color-water: #5a7aebb5;
-	--color-waste: linear-gradient(
-		90deg,
-		rgba(241, 187, 48, 0.32) 4.69%,
-		rgba(187, 187, 187, 0.85) 27.08%,
-		rgba(68, 136, 238, 0.54) 47.92%,
-		rgba(67, 141, 151, 0.42) 68.75%,
-		rgba(221, 224, 56, 0.59) 87.5%
-	);
-	--color-hazardousProduct: #fe110fed;
+	/* Color styles */
+	--dark-accent: rgba(22, 57, 83, 1);
+	--light-accent: rgba(65, 196, 230, 1);
+	--soft-dark: rgba(9, 64, 86, 1);
+	--secondary-accent: rgba(33, 166, 80, 0.699999988079071);
+	--dark: rgba(39, 39, 42, 1);
+	--primary--50: rgba(240, 249, 255, 1);
+	--primary--100: rgba(224, 242, 254, 1);
+	--primary--200: rgba(185, 231, 254, 1);
+	--primary--300: rgba(124, 213, 253, 1);
+	--primary--400: rgba(54, 193, 250, 1);
+	--primary--500: rgba(12, 169, 235, 1);
+	--primary--main: rgba(0, 144, 214, 1);
+	--primary--700: rgba(1, 107, 163, 1);
+	--primary--800: rgba(6, 91, 134, 1);
+	--primary--900: rgba(11, 75, 111, 1);
+	--primary--950: rgba(7, 48, 74, 1);
+
+	/*Color category*/
+	--co2-emission: rgba(150, 150, 150, 1);
+	--waste: rgba(0, 160, 57, 1);
+	--hp: rgba(208, 0, 0, 1);
+	--water: rgba(2, 216, 224, 1);
 }
 
 @mixin gradient-linear {
