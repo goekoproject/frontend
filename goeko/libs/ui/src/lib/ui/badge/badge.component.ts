@@ -30,7 +30,7 @@ export class BadgeComponent {
 
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelected$ = new EventEmitter();
-	selected!: boolean;
+	selected = false;
 
 	get label() {
 		return this.labelElement?.nativeElement.textContent;

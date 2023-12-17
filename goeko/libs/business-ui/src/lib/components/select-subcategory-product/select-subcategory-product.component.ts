@@ -111,6 +111,7 @@ export class SelectSubcategoryProductComponent
 
 	private _numSelected!: number;
 	get numSelected(): number {
+		this._cdf.markForCheck();
 		this._numSelected = this.selected?.length;
 		return this._numSelected;
 	}
