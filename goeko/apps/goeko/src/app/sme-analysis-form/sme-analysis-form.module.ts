@@ -18,11 +18,13 @@ import { environment } from '../../environments/environment';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
-import { CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui';
+import { CategoryModule, SdgIconsComponent, SelectSubcategoryProductComponent } from '@goeko/business-ui';
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
 import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
 import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
+import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component';
+import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
 
 @NgModule({
 	declarations: [
@@ -32,6 +34,8 @@ import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 		SmeAnalysisResultComponent,
 		SmeFormProjectComponent,
 		SmeFormBaseComponent,
+		ResultDetailEcosolutionComponent,
+		EcosolutionListComponent,
 	],
 	imports: [
 		CommonModule,
@@ -46,6 +50,7 @@ import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 		GoekoButtonModule,
 		CategoryModule,
 		BadgeModule,
+		SdgIconsComponent,
 		NotificationModule,
 		SelectSubcategoryProductComponent,
 		SmeModule.forRoot({

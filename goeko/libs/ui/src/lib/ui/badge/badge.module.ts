@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { BadgeComponent } from './badge.component';
 import { CommonModule } from '@angular/common';
@@ -10,5 +10,6 @@ import { BadgeGroupComponent } from './badge-group.component';
 	exports: [BadgeComponent, BadgeGroupComponent],
 	declarations: [BadgeComponent, BadgeGroupComponent],
 	providers: [],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BadgeModule {}

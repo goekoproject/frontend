@@ -1,0 +1,72 @@
+<ng-container *ngIf="detailsEcosolution">
+	<div class="detail-heading">
+		<div>
+			<go-badge [className]="detailsEcosolution.classification.mainCategory">
+				{{ 'CATEGORIES.' + detailsEcosolution.classification.mainCategory | translate }}
+			</go-badge>
+			<h2>{{ detailsEcosolution.solutionName }}</h2>
+			<span>{{ detailsEcosolution.companyDetail.name }}</span>
+			<p>{{ detailsEcosolution.description }}</p>
+		</div>
+
+		<img
+			class="detail-logo"
+			[src]="detailsEcosolution.companyDetail.logo"
+			[alt]="'logo' + detailsEcosolution.companyDetail.name"
+		/>
+	</div>
+	<div class="detail-actions">
+		<button go-button appearance="white">
+			<i class="ti ti-file-download"></i>
+			{{ 'certified' | translate }}
+		</button>
+		<a
+			href="https://{{ detailsEcosolution?.companyDetail?.link }}"
+			target="_blank"
+			id="website_{{ detailsEcosolution.companyDetail.name }}"
+		>
+			<button go-button appearance="white">
+				<i class="ti ti-link"></i>
+				{{ 'FORM_LABEL.website' | translate }}
+			</button>
+		</a>
+	</div>
+
+	<div class="details-feature">
+		<section class="details-section">
+			<h3 class="details-section-title">{{ 'FORM_LABEL.basicInformation' | translate }}</h3>
+			<div class="details-article">
+				<div>
+					<span>
+						{{ 'FORM_LABEL.countriesAvailable' | translate }}
+					</span>
+					<p>{{ detailsEcosolution['countries'] }}</p>
+				</div>
+
+				<div>
+					<span>
+						{{ 'FORM_LABEL.price' | translate }}
+					</span>
+					<p>{{ detailsEcosolution['price'] || '-' }}</p>
+				</div>
+			</div>
+		</section>
+		<section class="details-section">
+			<div class="details-article">
+				<span>{{
+					'CATEGORIES_LABEL.' + detailsEcosolution.classification.subCategory + '.label' | translate
+				}}</span>
+				<ng-container *ngFor="let option of dataSelect[detailsEcosolution.classification.subCategory]">
+					<go-badge *ngIf="detailsEcosolution.classification.products.includes(option.id)">{{
+						option.keyLang | translate
+					}}</go-badge>
+				</ng-container>
+			</div>
+		</section>
+
+		<section class="details-section">
+			<h3 class="details-section-title">{{ 'ods_title' | translate }}</h3>
+			<goeko-sdg-icons [selected]="detailsEcosolution.sustainableDevelopmentGoals"></goeko-sdg-icons>
+		</section>
+	</div>
+</ng-container>

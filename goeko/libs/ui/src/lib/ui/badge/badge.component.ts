@@ -1,13 +1,4 @@
-import {
-	AfterContentInit,
-	Component,
-	ElementRef,
-	EventEmitter,
-	Input,
-	Output,
-	ViewChild,
-	ViewEncapsulation,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'go-badge',
@@ -28,6 +19,7 @@ export class BadgeComponent {
 	@Input() fill!: any;
 	@Input() readonly = false;
 
+	@Input() className!: string;
 	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
 	@Output() onSelected$ = new EventEmitter();
 	selected!: boolean;

@@ -1,18 +1,15 @@
 $font-roboto-regular: 'Roboto-Regular';
 $font-roboto-thin: 'Roboto-Thin';
-$font-barlow-semi-bold:'Barlow-SemiBold';
+$font-barlow-semi-bold: 'Barlow-SemiBold';
 
-$font-barlow-la-belle-aurore:'LaBelleAurore-Regular';
-$font-inter-thin:'Inter-Thin';
-
-
+$font-barlow-la-belle-aurore: 'LaBelleAurore-Regular';
+$font-inter-thin: 'Inter-Thin';
 
 :root {
-    --font-default: 14px Mukta Mahee, sans-serif;
-    --font-title: 18px 700 Mukta Mahee, sans-serif;
-    --font-subtitle: 15px Barlow-SemiBold, sans-serif;
+	--font-default: 14px Mukta Mahee, sans-serif;
+	--font-title: 18px 700 Mukta Mahee, sans-serif;
+	--font-subtitle: 15px Barlow-SemiBold, sans-serif;
 }
-
 
 $font-path: '_fonts';
 $font-path-barlow: '_fonts/barlow';
@@ -21,10 +18,7 @@ $font-path-supports: '_fonts/supports';
 
 $font-path-inter: '_fonts/inter';
 
-
-
 /** Roboto REGULAR **/
-
 
 @font-face {
 	font-family: '#{$font-roboto-regular}';
@@ -35,7 +29,6 @@ $font-path-inter: '_fonts/inter';
 }
 
 /** Roboto LIGHT **/
-
 
 @font-face {
 	font-family: '#{$font-roboto-thin}';
@@ -55,7 +48,6 @@ $font-path-inter: '_fonts/inter';
 	font-display: block;
 }
 
-
 /** La belle aurore **/
 
 @font-face {
@@ -72,5 +64,4 @@ $font-path-inter: '_fonts/inter';
 	font-family: '#{$font-inter-thin}';
 	src: url('#{$font-path-inter}/#{$font-inter-thin}.ttf?sirsoa') format('truetype');
 	font-weight: 100;
-
 }

@@ -210,3 +210,28 @@ input[type='radio' i]:focus-visible {
 	pointer-events: none;
 	cursor: not-allowed;
 }
+
+%cancel-bagde {
+	color: var(--white);
+	pointer-events: none;
+	border: none !important;
+	max-height: 2.04125rem;
+	font-size: 0.7875rem !important;
+	padding: 1rem !important;
+}
+.co2Emission {
+	background: var(--co2-emission);
+	@extend %cancel-bagde;
+}
+.water {
+	background: var(--color-water);
+	@extend %cancel-bagde;
+}
+.waste {
+	background: var(--waste);
+	@extend %cancel-bagde;
+}
+.hazardousProduct {
+	background: var(--hp);
+	@extend %cancel-bagde;
+}
