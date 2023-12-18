@@ -89,18 +89,13 @@ export class SelectSubcategoryProductComponent
 		return this._open;
 	}
 	public set open(value: boolean) {
-		if (!value) {
-			this.badgeGroup._selectionModel.clear();
-		}
 		this._open = value;
 		this._cdf.markForCheck();
 	}
 
 	public get selected(): BadgeComponent[] {
+		this._refreshValue();
 		this._cdf.markForCheck();
-		if (!this.open && !this.multiple) {
-			this.badgeGroup._selectionModel.clear();
-		}
 		return this.badgeGroup?.selected;
 	}
 
@@ -109,10 +104,9 @@ export class SelectSubcategoryProductComponent
 		return this.selected?.map((select) => select.label)?.toString();
 	}
 
-	private _numSelected!: number;
+	private _numSelected = 0;
 	get numSelected(): number {
 		this._cdf.markForCheck();
-		this._numSelected = this.selected?.length;
 		return this._numSelected;
 	}
 	set numSelected(value: number) {
@@ -193,9 +187,7 @@ export class SelectSubcategoryProductComponent
 		this.mutationObserver.observe(this._el.nativeElement, { attributes: true });
 	}
 	private _handleCheckSubcategoryWhenProductSelected() {
-		if (this.numSelected <= 0) {
-			return;
-		}
+		this._numSelected = this.selected?.length;
 	}
 	onRestValue(): void {
 		setTimeout(() => {
@@ -224,13 +216,15 @@ export class SelectSubcategoryProductComponent
 		this._cdf.markForCheck();
 	}
 
-	public cleanValue() {
+	private _refreshValue() {
 		if (this.type === TYPE_FIELD.CHECKBOX) {
 			return;
 		}
-
-		this.value = '';
-		this.badgeGroup._selectionModel.clear();
+		if (!this.open && !this.multiple) {
+			this.badgeGroup._selectionModel.clear();
+			this._numSelected = 0;
+			this.value = '';
+		}
 	}
 
 	toogle(value: any) {

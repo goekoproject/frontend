@@ -16,7 +16,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BadgeComponent } from './badge.component';
 import { Observable, defer, merge, startWith, switchMap, take } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
-import { V } from '@angular/cdk/keycodes';
 
 const CONTROL_VALUE_ACCESSOR: Provider = {
 	provide: NG_VALUE_ACCESSOR,
