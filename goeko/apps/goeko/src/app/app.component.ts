@@ -42,7 +42,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private _authService: AuthService
 	) {
 		this._routeChange();
-		console.log(this.showPopupCookies);
 	}
 
 	ngAfterViewInit(): void {
