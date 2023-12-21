@@ -10,6 +10,7 @@ import {
 	SmeSaveRecomendationRequest,
 } from './sme-request.model';
 import { SME_CONFIGURATION } from './sme.module';
+import { Recommendation, ResponseRecommendations } from './ecosolution-recomendations.model';
 
 @Injectable()
 export class SmeService {
@@ -42,8 +43,10 @@ export class SmeService {
 		);
 	}
 
-	createRecommendations(body: SmeCreateRecomendationRequest): Observable<any> {
-		return this._http.post<any>(`${this.configuration.endpoint}/v1/recommendation/smes`, body);
+	createRecommendations(body: SmeCreateRecomendationRequest): Observable<Recommendation[]> {
+		return this._http
+			.post<any>(`${this.configuration.endpoint}/v1/recommendation/smes`, body)
+			.pipe(map((request: ResponseRecommendations) => request?.recommendations));
 	}
 
 	saveRecommendations(body: SmeSaveRecomendationRequest): Observable<any> {

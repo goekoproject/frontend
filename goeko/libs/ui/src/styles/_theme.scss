@@ -235,3 +235,7 @@ input[type='radio' i]:focus-visible {
 	background: var(--hp);
 	@extend %cancel-bagde;
 }
+.go-back {
+	position: relative;
+	top: -1rem;
+}

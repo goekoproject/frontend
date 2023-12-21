@@ -30,9 +30,9 @@
 	gap: 1rem;
 	position: relative;
 	top: -1.2rem;
-	margin: 0 3rem;
+	padding: 0 5.4rem;
 }
-.details-feature {
+.detail-feature {
 	padding: 3rem 5.4rem;
 	display: flex;
 	flex-direction: column;
@@ -50,6 +50,11 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem 1.5rem;
+	flex-wrap: wrap;
+
+	&--advantages {
+		flex-direction: row;
+	}
 }
 
 @media (width <= 768px) {
@@ -59,5 +64,13 @@
 	.detail-logo {
 		width: 100%;
 		border-radius: 0.5rem;
+	}
+	.detail-actions {
+		top: 0;
+		position: relative;
+		padding: 2rem 0;
+	}
+	.detail-feature {
+		padding: 0;
 	}
 }

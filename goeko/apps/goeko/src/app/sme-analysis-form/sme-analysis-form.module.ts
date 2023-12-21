@@ -11,6 +11,8 @@ import {
 	GoInputModule,
 	GoekoButtonModule,
 	NotificationModule,
+	PercentageCardComponent,
+	PercentageModule,
 	UiSuperSelectModule,
 } from '@goeko/ui';
 import { SmeModule } from '@goeko/store';
@@ -49,6 +51,7 @@ import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list
 		OverlayModule,
 		GoekoButtonModule,
 		CategoryModule,
+		PercentageModule,
 		BadgeModule,
 		SdgIconsComponent,
 		NotificationModule,

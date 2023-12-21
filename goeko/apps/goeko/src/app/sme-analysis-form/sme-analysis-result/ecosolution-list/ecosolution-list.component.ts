@@ -86,14 +86,14 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
 		this._smeService
 			.createRecommendations({ classifications: formToClassificationsMapper(this.formValue) })
 			.pipe(takeUntil(this.onDestroy$), last())
-			.subscribe((sme) => {
-				this._handleRecommendations(sme);
+			.subscribe((recommendations) => {
+				this._handleRecommendations(recommendations);
 			});
 	}
 	private saveAnalysis() {
 		const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeId, this.formValue);
-		this._smeService.saveRecommendations(smeAnalysisRequest).subscribe((sme) => {
-			this._handleRecommendations(sme);
+		this._smeService.saveRecommendations(smeAnalysisRequest).subscribe((recommendations) => {
+			this._handleRecommendations(recommendations);
 		});
 	}
 	private _getOdsIcons() {
@@ -108,9 +108,9 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
 		this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang));
 	}
 
-	private _handleRecommendations(sme: any) {
-		if (sme && Array.isArray(sme.recommendations)) {
-			const smeRecomendation = this._filterSmeRecomendations(sme.recommendations);
+	private _handleRecommendations(recommendations: any) {
+		if (recommendations && Array.isArray(recommendations)) {
+			const smeRecomendation = this._filterSmeRecomendations(recommendations);
 			this.smeRecomendation = this._buildCountriesAvailability(smeRecomendation);
 			this._makeFilterBySDG();
 		}
