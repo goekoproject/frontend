@@ -1,7 +1,0 @@
-{
-	"extends": "./tsconfig.json",
-	"include": ["**/*.ts", "../../libs/store/src/lib/sme/sme-analysis.service.ts"],
-	"compilerOptions": {
-		"types": ["jest", "node"]
-	}
-}
