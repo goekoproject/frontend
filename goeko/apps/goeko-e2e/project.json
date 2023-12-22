@@ -1,0 +1,30 @@
+{
+  "name": "goeko-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/goeko-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/goeko-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "goeko:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "goeko:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "goeko:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["goeko"]
+}
