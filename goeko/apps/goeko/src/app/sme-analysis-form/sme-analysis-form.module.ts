@@ -18,6 +18,7 @@ import {
   NotificationModule,
   PercentageModule,
   UiSuperSelectModule,
+  YesNoPipe,
 } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
@@ -41,6 +42,7 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     SmeFormBaseComponent,
     ResultDetailEcosolutionComponent,
     EcosolutionListComponent,
+    YesNoPipe,
   ],
   imports: [
     CommonModule,

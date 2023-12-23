@@ -1,413 +1,415 @@
 {
-	"a": "to",
-	"welcome": "Welcome",
-	"accept": "Accept",
-	"my_company": "My company",
-	"new_project": "New project",
-	"last_project": "3 Last projects",
-	"confirm": "Confirm",
-	"projectManagement": "Project Management",
-	"add": "Add",
-	"year": "year",
-	"years": "years",
-	"upTo": "Up to",
-	"alertSelectedProduct": "Select one or more solutions",
-	"selectCategoryEcosolutions": "Select the category for your ecosolution",
-	"selected_products": "Selected products",
-	"LOGIN": {
-		"msglogin": "Log in in your account",
-		"msgsignup": "Do not have any account?",
-		"msglogin2": "Already have account?",
-		"msgsignup2": "Create your account"
-	},
-	"edit": "Edit",
-	"ACCESS_ERROR": {
-		"passwordPolicy1": "Lowercase letters (a-z)",
-		"passwordPolicy2": "Uppercase letters (A-Z)",
-		"passwordPolicy3": "Numbers (0-9)",
-		"passwordPolicy4": "Special characters (!@# $ %^&*)",
-		"passwordPolicyTitle": "You must meet at least 3 of the following rules: "
-	},
-	"NOTIFICATION": {
-		"save_ok": "Saved successfully"
-	},
-	"BREADCRUMBS": {
-		"new_ecosolutions": "New eco-solution",
-		"edit_ecosolutions": "Edit your ecosolution",
-		"view_ecosolutions": "Detail of your ecosolution"
-	},
-	"all": "All",
-	"new_analysis": "New analysis",
-	"last_analysis": "Last analysis",
-	"analysis": "Analysis",
-	"availability": "Availability",
-	"back": "Back",
-	"bank": "Bank",
-	"result": "Result",
-	"your_ecosolutions": "Your Eco-solutions",
-	"BANNER": {
-		"affordable": "Affordable",
-		"easy": "Easy",
-		"fast": "Fast",
-		"green": "Green",
-		"swissCompany": "A Swiss Company",
-		"the": "The",
-		"transition": "Transition"
-	},
-	"TEXT_SUPPORT": {
-		"selectProducts": "Type of toxic products does your eco-solution replace or improve",
-		"waterConsumption": "Activities related to water consumption",
-		"paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
-		"co2Emission": "Area where your eco-solution reduces CO2 emissions",
-		"advantagesEcosolutions": "Advantages of your eco-solution compared to a traditional solution",
-		"waste": "Types of waste",
-		"ods": "Linked to your eco-solution",
-		"buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:"
-	},
-	"cancel": "Cancel",
-	"CATEGORIES": {
-		"co2Emission": "CO2 emissions",
-		"hazardousProduct": "Hazardous Products",
-		"waste": "Waste",
-		"water": "Water"
-	},
-	"CATEGORIES_FIELD": {
-		"amount": "Water consumption (2022)",
-		"energySource": "Would your company like to use less carbon intensive energy thanks to:",
-		"fuelInvoice": "Fuel invoice",
-		"greenWaste": "Green Waste",
-		"hazardousWaste": "Hazardous Waste",
-		"inertOrMineralWaste": "Mineral or Inert Waste",
-		"lastYearInvoice": "Water invoice (2022)",
-		"mainActivity": "Activities that consume the most water",
-		"mainCategoryNonInert": "Non inert déchets",
-		"mainInternalCombustionEngine": "Main internal combustion engines",
-		"mainMineralProduct": "Main mineral products",
-		"mainRigidMaterial": "Does your company use insulation panels?",
-		"products": "Type of hazardous products",
-		"specialWaste": "Special Waste"
-	},
-	"CATEGORIES_LABEL": {
-		"buildingOperation": {
-			"question": "Building operation",
-			"label": ""
-		},
-		"amount": {
-			"question": "Activities that consume the most water",
-			"label": ""
-		},
-		"energySource": {
-			"question": "Is your company already equipped with:",
-			"label": ""
-		},
-		"fuelInvoice": {
-			"question": "Fuel invoice",
-			"label": ""
-		},
-		"greenWaste": {
-			"question": "With what types of green waste is your company primarily dealing?",
-			"label": "In which category(ies) of green waste is your company improving management?"
-		},
-		"hazardousWaste": {
-			"question": "With what types of hazardous waste is your company primarily dealing?",
-			"label": "In which category(ies) of hazardous waste is your company improving management?"
-		},
-		"inertOrMineralWaste": {
-			"question": "With what types of inert or mineral waste is your company primarily dealing?",
-			"label": "In which category(ies) of inert or mineral waste is your eco-solution improving management?"
-		},
-		"lastYearInvoice": {
-			"question": "Water invoice (2022)",
-			"label": ""
-		},
-		"mainActivity": {
-			"question": "Activities of your company that consume the most water",
-			"label": "For which water-related activity(ies) does your eco-solution reduce consumption or improve quality?"
-		},
-		"mainCategoryNonInert": {
-			"question": "With what types of non-inert waste is your company primarily dealing?",
-			"label": "In which category(ies) of non-inert waste is your eco-solution improving management?"
-		},
-		"mainInternalCombustionEngine": {
-			"question": "Main engine-powered equipment",
-			"label": "Engines and vehicles"
-		},
-		"mainMineralProduct": {
-			"question": "Main mineral and metal products",
-			"label": "Mineral and metal products"
-		},
-		"mainRigidMaterial": {
-			"question": "Is your company using insulation panels?",
-			"label": ""
-		},
-		"products": {
-			"question": "Types of toxic products",
-			"label": "Types of toxic products"
-		},
-		"specialWaste": {
-			"question": "With what types of special waste is your company primarily dealing?",
-			"label": "In which category(ies) of special waste is your eco-solution improving management?"
-		},
-		"sustainableBuildingOperations": {
-			"question": "Building Exploitation and Sustainable Mobility",
-			"label": "For the exploitation of buildings or sustainable mobility, your eco-solution allows:"
-		}
-	},
-	"certified": "Certification",
-	"cleantech": "Cleantech",
-	"companyDetails": "Company details",
-	"completeToProfileNow": "Complete to profile now!",
-	"contact": "Contact",
-	"continue": "Continue",
-	"costReduction": "Costos operativos",
-	"dashboard": "Dashboard",
-	"decline": "Decline",
-	"FOOTER": {
-		"contact": "Contact",
-		"resources": "Resources",
-		"service": "Service"
-	},
-	"user": "User",
-	"CURRENCY": {
-		"EU": "Euro",
-		"CHF": "Franc suisse"
-	},
-	"FORM_LABEL": {
-		"currency": "Currency",
-		"companyName": "Company name",
-		"country": "Country",
-		"email": "Email",
-		"password": "Password",
-		"website": "Website",
-		"location": "Location",
-		"city": "City",
-		"name": "Name",
-		"countriesAvailable": "Countries Available",
-		"advantages": "Advantages",
-		"advantagesEcosolutions": "Advantages of your eco-solution",
-		"emailSalesManager": "Email of the Sales Manager",
-		"logo": "Link to your logo",
-		"name_project": "Project's Name",
-		"solutionName": "Solution Name",
-		"basicInformation": "Basic information",
-		"solutionDescription": "Description of your eco-solution",
-		"price": "Price",
-		"improvement": "Improvement",
-		"reductionPercentage": "Reduction Percentage",
-		"reductionPercentageCO2": "CO2 Reduction Percentage",
-		"reductionPercentageWaste": "Waste Reduction Percentage",
-		"reductionPercentageWater": "Water Consumption Reduction Percentage",
-		"reductionPercentageHP": "Hazardous Products Reduction Percentage",
-		"ecosolutions_sustainableDevelopmentGoals": "Select Sustainable Development Goals (SDGs)",
-		"ecosolutions_subCategory": "Select Subcategories",
-		"ecosolutions_products": "Select Products",
-		"ecosolution_classification": "Select questions and choose products for your eco-solution",
-		"deliverCountries": "Countries where your eco-solution is approved",
-		"paybackPeriodYears": "Investment payback period",
-		"marketReady": "Is your ecosolution market-ready?",
-		"guarantee": "Guarantee",
-		"certified": "Certified",
-		"approvedSwiss": "Approved for the Swiss market",
-		"operationalCostReductionPercentage": "Percentage of operational cost reduction",
-		"additionalInformation": "Additional information",
-		"products": "Products",
-		"furtherInformation": "Additional information",
-		"selectProducts": "Select Products",
-		"unit": "Unit of measurement (m2, m3, y, kg)",
-		"typeOfEcolutions": "Type of eco-solution"
-	},
-	"HOME": {
-		"sloganCallActionsBtn": "Free trial to connect with qualified leads",
-		"sloganCallActionsBtnSME": "Start your green transition here",
-		"meetOurTeam": "Meet Our Team",
-		"sloganTeam": "Allow us to introduce you to the talented group of individuals leading our mission to drive a cleaner and more sustainable future."
-	},
-	"LANGS": {
-		"en": "English",
-		"es": "Spanish",
-		"fr": "French",
-		"gb": "English (UK)"
-	},
-	"LEGAL": {
-		"cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
-		"cookiesPolicy": "Cookies policy",
-		"privacyPolicy": "Privacy policy"
-	},
-	"MENU": {
-		"aboutGoEKo": "About GoEko",
-		"blog": "Blog",
-		"contanctUs": "Contact",
-		"login": "Login"
-	},
-	"MENU_USER": {
-		"dashboard": "Dashboard",
-		"favorites": "Favorites"
-	},
-	"none": "None",
-	"ods_msg_card_result": "Positive impact on SDG",
-	"ods_title": "Sustainable Development Goals (SDG)",
-	"profile": "Profile",
-	"save": "Save",
-	"saveYou": "Save your",
-	"SCENES": {
-		"slogan_text1": "Connecting SMEs to clean technologies and financing",
-		"slogan_text2": "Who are you?"
-	},
-	"ODS": {
-		"ods_1": "No Poverty",
-		"ods_2": "Zero Hunger",
-		"ods_3": "Good Health and Well-being",
-		"ods_4": "Quality Education",
-		"ods_5": "Gender Equality",
-		"ods_6": "Clean Water and Sanitation",
-		"ods_7": "Affordable and Clean Energy",
-		"ods_8": "Decent Work and Economic Growth",
-		"ods_9": "Industry, Innovation, and Infrastructure",
-		"ods_10": "Reduced Inequality",
-		"ods_11": "Sustainable Cities and Communities",
-		"ods_12": "Responsible Consumption and Production",
-		"ods_13": "Climate Action",
-		"ods_14": "Life Below Water",
-		"ods_15": "Life on Land",
-		"ods_16": "Peace, Justice, and Strong Institutions",
-		"ods_17": "Partnerships for the Goals"
-	},
-	"SELECT_DATA_LABEL": {
-		"fiveBetweenTen": "Between 5 and 10 years",
-		"defaultLabel": "Please select from the following options",
-		"currency": "€",
-		"greenWaste": {
-			"greenWoodUntreated": "Green Wood (Untreated)",
-			"topsoil": "Topsoil"
-		},
-		"selectCountry": {
-			"france": "France",
-			"germany": "Germany",
-			"italy": "Italy",
-			"spain": "Spain",
-			"switzerland": "Switzerland"
-		},
-		"selectEnergySource": {
-			"aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
-			"greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
-		},
-		"selectHazardousWaste": {
-			"oilSeparatorSludge": "Oil Separator Sludge",
-			"productsContainingHeavyMetals": "Products Containing Heavy Metals",
-			"productsContainingTar": "Products Containing Tar"
-		},
-		"selectInertOrMineralWaste": {
-			"brick": "Brick",
-			"ceramic": "Ceramic",
-			"concrete": "Concrete",
-			"soil": "Soil",
-			"stone": "Stone"
-		},
-		"selectSustainableBuildingOperations": {
-			"useRenewableEnergies": "Use renewable energies",
-			"recoverHeat": "Recover heat",
-			"useLowConsumptionLighting": "Use low consumption lighting",
-			"storeEnergy": "Store energy",
-			"optimizeEnergyConsumption": "Optimize energy consumption",
-			"chargeElectricVehicles": "Charge electric vehicles"
-		},
-		"selectMainActivity": {
-			"cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
-			"cleaningSiteVehicles": "Cleaning site vehicles",
-			"paint": "Paint",
-			"pouringConcrete": "Pouring concrete",
-			"siteCleaning": "Site cleaning",
-			"siteHut": "Site hut",
-			"toolCleaning": "Tool cleaning",
-			"wateringForCure": "Watering for Cure",
-			"wateringPlants": "Watering Plants"
-		},
-		"selectMainCategoryNonInert": {
-			"cardboardAndPaper": "Carton and papier",
-			"cartridgesWithoutToxicProducts": "Cartridges without toxic products",
-			"electricalAndElectronicEquipment": "Electrical and electronic equipment",
-			"insulationMaterials": "Insulation materials",
-			"metalsAndAlloys": "Metals and alloys",
-			"mineralWools": "Mineral wools",
-			"paintVarnishGlue": "Paint, varnish, glue",
-			"plaster": "Plaster",
-			"plastic": "Plastic (packaging, tarps, etc.)",
-			"untreatedWood": "Untreated wood"
-		},
-		"selectBuildingOperation": {
-			"greenRoofsWalls": "Green Roofs and Walls",
-			"waterManagement": "Water Management"
-		},
-		"selectMainInternalCombustionEngine": {
-			"aerialBucketTruck": "Aerial bucket truck",
-			"backhoe": "Backhoe",
-			"backhoeLoader": "Backhoe loader",
-			"bulldozer": "Bulldozer",
-			"dumper": "Dumper",
-			"equipmentCarrierTruck": "Equipment carrier truck",
-			"grader": "Grader",
-			"loader": "Loader",
-			"materialsCarrierTruck": "Materials carrier truck",
-			"scraper": "Scraper",
-			"steamRoller": "Steam roller"
-		},
-		"selectMainMineralProduct": {
-			"cement": "Cement",
-			"concrete": "Concrete",
-			"isolation": "Insulation panels",
-			"iron": "Iron",
-			"steel": "Steel"
-		},
-		"selectMainRigidMaterial": {
-			"insolationPanels": "Insulation panels"
-		},
-		"selectProducts": {
-			"admixtures": "Admixtures",
-			"aerosol": "Aerosol",
-			"batteries": "Batteries and accumulators containing hazardous substances",
-			"bituminousProductsContainingHAPs": "Bituminous Products Containing HAPs",
-			"cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
-			"curingProducts": "Curing Products",
-			"electricalAndElectronicWasteContainingHazardousSubstances": "Electrical and electronic waste containing hazardous substances",
-			"energySavingLamps": "Energy-saving lamps",
-			"fuel": "Fuel",
-			"oils": "Oils",
-			"oilSeparatorSludge": "Oil separator sludge",
-			"packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
-			"paintVarnish": "Paint/varnish",
-			"productsContainingTar": "Products containing tar",
-			"woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
-		},
-		"selectSpecialWaste": {
-			"aerosols": "Aerosols",
-			"agglomeratedCementPanels": "Agglomerated cement panels",
-			"agglomeratedConcrete": "Agglomerated concrete",
-			"agglomeratedProducts": "Agglomerated Products",
-			"asbestos": "Asbestos",
-			"batteriesAndAccumulators": "Batteries and Accumulators",
-			"cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
-			"electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment (PCB)",
-			"fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
-			"lead": "Lead",
-			"paintsAndSolvents": "Paints and Solvents",
-			"particleboardPanels": "Particleboard panels",
-			"polyurethaneFoams": "Polyurethane foams",
-			"rubberProducts": "Rubber products",
-			"solventsForInsulation": "Solvents for insulation",
-			"treatedWood": "Treated Wood",
-			"usedOils": "Used Oils"
-		}
-	},
-	"sloganGoeko": "The connection to efficiency",
-	"sme": "Sme",
-	"start": "Start",
-	"summary": "Summary",
-	"titleResult": "Most adapted eco-solutions for",
-	"upgrade": "Upgrade",
-	"USER_TYPE": {
-		"bank": "Bank",
-		"cleanTech": "Cleantech",
-		"sme": "SME"
-	},
-	"userType": "User type"
+  "a": "to",
+  "welcome": "Welcome",
+  "accept": "Accept",
+  "my_company": "My company",
+  "new_project": "New project",
+  "last_project": "3 Last projects",
+  "confirm": "Confirm",
+  "projectManagement": "Project Management",
+  "add": "Add",
+  "year": "year",
+  "years": "years",
+  "upTo": "Up to",
+  "yes": "Yes",
+  "no": "No",
+  "alertSelectedProduct": "Select one or more solutions",
+  "selectCategoryEcosolutions": "Select the category for your ecosolution",
+  "selected_products": "Selected products",
+  "LOGIN": {
+    "msglogin": "Log in in your account",
+    "msgsignup": "Do not have any account?",
+    "msglogin2": "Already have account?",
+    "msgsignup2": "Create your account"
+  },
+  "edit": "Edit",
+  "ACCESS_ERROR": {
+    "passwordPolicy1": "Lowercase letters (a-z)",
+    "passwordPolicy2": "Uppercase letters (A-Z)",
+    "passwordPolicy3": "Numbers (0-9)",
+    "passwordPolicy4": "Special characters (!@# $ %^&*)",
+    "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
+  },
+  "NOTIFICATION": {
+    "save_ok": "Saved successfully"
+  },
+  "BREADCRUMBS": {
+    "new_ecosolutions": "New eco-solution",
+    "edit_ecosolutions": "Edit your ecosolution",
+    "view_ecosolutions": "Detail of your ecosolution"
+  },
+  "all": "All",
+  "new_analysis": "New analysis",
+  "last_analysis": "Last analysis",
+  "analysis": "Analysis",
+  "availability": "Availability",
+  "back": "Back",
+  "bank": "Bank",
+  "result": "Result",
+  "your_ecosolutions": "Your Eco-solutions",
+  "BANNER": {
+    "affordable": "Affordable",
+    "easy": "Easy",
+    "fast": "Fast",
+    "green": "Green",
+    "swissCompany": "A Swiss Company",
+    "the": "The",
+    "transition": "Transition"
+  },
+  "TEXT_SUPPORT": {
+    "selectProducts": "Type of toxic products does your eco-solution replace or improve",
+    "waterConsumption": "Activities related to water consumption",
+    "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
+    "co2Emission": "Area where your eco-solution reduces CO2 emissions",
+    "advantagesEcosolutions": "Advantages of your eco-solution compared to a traditional solution",
+    "waste": "Types of waste",
+    "ods": "Linked to your eco-solution",
+    "buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:"
+  },
+  "cancel": "Cancel",
+  "CATEGORIES": {
+    "co2Emission": "CO2 emissions",
+    "hazardousProduct": "Hazardous Products",
+    "waste": "Waste",
+    "water": "Water"
+  },
+  "CATEGORIES_FIELD": {
+    "amount": "Water consumption (2022)",
+    "energySource": "Would your company like to use less carbon intensive energy thanks to:",
+    "fuelInvoice": "Fuel invoice",
+    "greenWaste": "Green Waste",
+    "hazardousWaste": "Hazardous Waste",
+    "inertOrMineralWaste": "Mineral or Inert Waste",
+    "lastYearInvoice": "Water invoice (2022)",
+    "mainActivity": "Activities that consume the most water",
+    "mainCategoryNonInert": "Non inert déchets",
+    "mainInternalCombustionEngine": "Main internal combustion engines",
+    "mainMineralProduct": "Main mineral products",
+    "mainRigidMaterial": "Does your company use insulation panels?",
+    "products": "Type of hazardous products",
+    "specialWaste": "Special Waste"
+  },
+  "CATEGORIES_LABEL": {
+    "buildingOperation": {
+      "question": "For the operation of the building, would you be interested in",
+      "label": "For the operation of the building, would you be interested in"
+    },
+    "amount": {
+      "question": "Activities that consume the most water",
+      "label": ""
+    },
+    "energySource": {
+      "question": "Is your company already equipped with:",
+      "label": ""
+    },
+    "fuelInvoice": {
+      "question": "Fuel invoice",
+      "label": ""
+    },
+    "greenWaste": {
+      "question": "With what types of green waste is your company primarily dealing?",
+      "label": "In which category(ies) of green waste is your company improving management?"
+    },
+    "hazardousWaste": {
+      "question": "With what types of hazardous waste is your company primarily dealing?",
+      "label": "In which category(ies) of hazardous waste is your company improving management?"
+    },
+    "inertOrMineralWaste": {
+      "question": "With what types of inert or mineral waste is your company primarily dealing?",
+      "label": "In which category(ies) of inert or mineral waste is your eco-solution improving management?"
+    },
+    "lastYearInvoice": {
+      "question": "Water invoice (2022)",
+      "label": ""
+    },
+    "mainActivity": {
+      "question": "Activities of your company that consume the most water",
+      "label": "For which water-related activity(ies) does your eco-solution reduce consumption or improve quality?"
+    },
+    "mainCategoryNonInert": {
+      "question": "With what types of non-inert waste is your company primarily dealing?",
+      "label": "In which category(ies) of non-inert waste is your eco-solution improving management?"
+    },
+    "mainInternalCombustionEngine": {
+      "question": "Main engine-powered equipment",
+      "label": "Engines and vehicles"
+    },
+    "mainMineralProduct": {
+      "question": "Main mineral and metal products",
+      "label": "Mineral and metal products"
+    },
+    "mainRigidMaterial": {
+      "question": "Is your company using insulation panels?",
+      "label": ""
+    },
+    "products": {
+      "question": "Types of toxic products",
+      "label": "Types of toxic products"
+    },
+    "specialWaste": {
+      "question": "With what types of special waste is your company primarily dealing?",
+      "label": "In which category(ies) of special waste is your eco-solution improving management?"
+    },
+    "sustainableBuildingOperations": {
+      "question": "For building operation and sustainable mobility, would you be interested in",
+      "label": "For the exploitation of buildings or sustainable mobility, your eco-solution allows:"
+    }
+  },
+  "certified": "Certification",
+  "cleantech": "Cleantech",
+  "companyDetails": "Company details",
+  "completeToProfileNow": "Complete to profile now!",
+  "contact": "Contact",
+  "continue": "Continue",
+  "costReduction": "Costos operativos",
+  "dashboard": "Dashboard",
+  "decline": "Decline",
+  "FOOTER": {
+    "contact": "Contact",
+    "resources": "Resources",
+    "service": "Service"
+  },
+  "user": "User",
+  "CURRENCY": {
+    "EU": "Euro",
+    "CHF": "Franc suisse"
+  },
+  "FORM_LABEL": {
+    "currency": "Currency",
+    "companyName": "Company name",
+    "country": "Country",
+    "email": "Email",
+    "password": "Password",
+    "website": "Website",
+    "location": "Location",
+    "city": "City",
+    "name": "Name",
+    "countriesAvailable": "Countries Available",
+    "advantages": "Advantages",
+    "advantagesEcosolutions": "Advantages of your eco-solution",
+    "emailSalesManager": "Email of the Sales Manager",
+    "logo": "Link to your logo",
+    "name_project": "Project's Name",
+    "solutionName": "Solution Name",
+    "basicInformation": "Basic information",
+    "solutionDescription": "Description of your eco-solution",
+    "price": "Price",
+    "improvement": "Improvement",
+    "reductionPercentage": "Reduction Percentage",
+    "reductionPercentageCO2": "CO2 Reduction Percentage",
+    "reductionPercentageWaste": "Waste Reduction Percentage",
+    "reductionPercentageWater": "Water Consumption Reduction Percentage",
+    "reductionPercentageHP": "Hazardous Products Reduction Percentage",
+    "ecosolutions_sustainableDevelopmentGoals": "Select Sustainable Development Goals (SDGs)",
+    "ecosolutions_subCategory": "Select Subcategories",
+    "ecosolutions_products": "Select Products",
+    "ecosolution_classification": "Select questions and choose products for your eco-solution",
+    "deliverCountries": "Countries where your eco-solution is approved",
+    "paybackPeriodYears": "Investment payback period",
+    "marketReady": "Is your ecosolution market-ready?",
+    "guarantee": "Guarantee",
+    "certified": "Certified",
+    "approvedSwiss": "Approved for the Swiss market",
+    "operationalCostReductionPercentage": "Percentage of operational cost reduction",
+    "additionalInformation": "Additional information",
+    "products": "Products",
+    "furtherInformation": "Additional information",
+    "selectProducts": "Select Products",
+    "unit": "Unit of measurement (m2, m3, y, kg)",
+    "typeOfEcolutions": "Type of eco-solution"
+  },
+  "HOME": {
+    "sloganCallActionsBtn": "Free trial to connect with qualified leads",
+    "sloganCallActionsBtnSME": "Start your green transition here",
+    "meetOurTeam": "Meet Our Team",
+    "sloganTeam": "Allow us to introduce you to the talented group of individuals leading our mission to drive a cleaner and more sustainable future."
+  },
+  "LANGS": {
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "gb": "English (UK)"
+  },
+  "LEGAL": {
+    "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
+    "cookiesPolicy": "Cookies policy",
+    "privacyPolicy": "Privacy policy"
+  },
+  "MENU": {
+    "aboutGoEKo": "About GoEko",
+    "blog": "Blog",
+    "contanctUs": "Contact",
+    "login": "Login"
+  },
+  "MENU_USER": {
+    "dashboard": "Dashboard",
+    "favorites": "Favorites"
+  },
+  "none": "None",
+  "ods_msg_card_result": "Positive impact on SDG",
+  "ods_title": "Sustainable Development Goals (SDG)",
+  "profile": "Profile",
+  "save": "Save",
+  "saveYou": "Save your",
+  "SCENES": {
+    "slogan_text1": "Connecting SMEs to clean technologies and financing",
+    "slogan_text2": "Who are you?"
+  },
+  "ODS": {
+    "ods_1": "No Poverty",
+    "ods_2": "Zero Hunger",
+    "ods_3": "Good Health and Well-being",
+    "ods_4": "Quality Education",
+    "ods_5": "Gender Equality",
+    "ods_6": "Clean Water and Sanitation",
+    "ods_7": "Affordable and Clean Energy",
+    "ods_8": "Decent Work and Economic Growth",
+    "ods_9": "Industry, Innovation, and Infrastructure",
+    "ods_10": "Reduced Inequality",
+    "ods_11": "Sustainable Cities and Communities",
+    "ods_12": "Responsible Consumption and Production",
+    "ods_13": "Climate Action",
+    "ods_14": "Life Below Water",
+    "ods_15": "Life on Land",
+    "ods_16": "Peace, Justice, and Strong Institutions",
+    "ods_17": "Partnerships for the Goals"
+  },
+  "SELECT_DATA_LABEL": {
+    "fiveBetweenTen": "Between 5 and 10 years",
+    "defaultLabel": "Please select from the following options",
+    "currency": "€",
+    "greenWaste": {
+      "greenWoodUntreated": "Green Wood (Untreated)",
+      "topsoil": "Topsoil"
+    },
+    "selectCountry": {
+      "france": "France",
+      "germany": "Germany",
+      "italy": "Italy",
+      "spain": "Spain",
+      "switzerland": "Switzerland"
+    },
+    "selectEnergySource": {
+      "aSmartManagementSystemOptimisingEnergyConsumption": "Smart management system optimizing energy consumption",
+      "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
+    },
+    "selectHazardousWaste": {
+      "oilSeparatorSludge": "Oil Separator Sludge",
+      "productsContainingHeavyMetals": "Products Containing Heavy Metals",
+      "productsContainingTar": "Products Containing Tar"
+    },
+    "selectInertOrMineralWaste": {
+      "brick": "Brick",
+      "ceramic": "Ceramic",
+      "concrete": "Concrete",
+      "soil": "Soil",
+      "stone": "Stone"
+    },
+    "selectSustainableBuildingOperations": {
+      "useRenewableEnergies": "Use renewable energies",
+      "recoverHeat": "Recover heat",
+      "useLowConsumptionLighting": "Use low consumption lighting",
+      "storeEnergy": "Store energy",
+      "optimizeEnergyConsumption": "Optimize energy consumption",
+      "chargeElectricVehicles": "Charge electric vehicles"
+    },
+    "selectMainActivity": {
+      "cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
+      "cleaningSiteVehicles": "Cleaning site vehicles",
+      "paint": "Paint",
+      "pouringConcrete": "Pouring concrete",
+      "siteCleaning": "Site cleaning",
+      "siteHut": "Site hut",
+      "toolCleaning": "Tool cleaning",
+      "wateringForCure": "Watering for Cure",
+      "wateringPlants": "Watering Plants"
+    },
+    "selectMainCategoryNonInert": {
+      "cardboardAndPaper": "Carton and papier",
+      "cartridgesWithoutToxicProducts": "Cartridges without toxic products",
+      "electricalAndElectronicEquipment": "Electrical and electronic equipment",
+      "insulationMaterials": "Insulation materials",
+      "metalsAndAlloys": "Metals and alloys",
+      "mineralWools": "Mineral wools",
+      "paintVarnishGlue": "Paint, varnish, glue",
+      "plaster": "Plaster",
+      "plastic": "Plastic (packaging, tarps, etc.)",
+      "untreatedWood": "Untreated wood"
+    },
+    "selectBuildingOperation": {
+      "greenRoofsWalls": "Green Roofs and Walls",
+      "waterManagement": "Water Management"
+    },
+    "selectMainInternalCombustionEngine": {
+      "aerialBucketTruck": "Aerial bucket truck",
+      "backhoe": "Backhoe",
+      "backhoeLoader": "Backhoe loader",
+      "bulldozer": "Bulldozer",
+      "dumper": "Dumper",
+      "equipmentCarrierTruck": "Equipment carrier truck",
+      "grader": "Grader",
+      "loader": "Loader",
+      "materialsCarrierTruck": "Materials carrier truck",
+      "scraper": "Scraper",
+      "steamRoller": "Steam roller"
+    },
+    "selectMainMineralProduct": {
+      "cement": "Cement",
+      "concrete": "Concrete",
+      "isolation": "Insulation panels",
+      "iron": "Iron",
+      "steel": "Steel"
+    },
+    "selectMainRigidMaterial": {
+      "insolationPanels": "Insulation panels"
+    },
+    "selectProducts": {
+      "admixtures": "Admixtures",
+      "aerosol": "Aerosol",
+      "batteries": "Batteries and accumulators containing hazardous substances",
+      "bituminousProductsContainingHAPs": "Bituminous Products Containing HAPs",
+      "cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
+      "curingProducts": "Curing Products",
+      "electricalAndElectronicWasteContainingHazardousSubstances": "Electrical and electronic waste containing hazardous substances",
+      "energySavingLamps": "Energy-saving lamps",
+      "fuel": "Fuel",
+      "oils": "Oils",
+      "oilSeparatorSludge": "Oil separator sludge",
+      "packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
+      "paintVarnish": "Paint/varnish",
+      "productsContainingTar": "Products containing tar",
+      "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
+    },
+    "selectSpecialWaste": {
+      "aerosols": "Aerosols",
+      "agglomeratedCementPanels": "Agglomerated cement panels",
+      "agglomeratedConcrete": "Agglomerated concrete",
+      "agglomeratedProducts": "Agglomerated Products",
+      "asbestos": "Asbestos",
+      "batteriesAndAccumulators": "Batteries and Accumulators",
+      "cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
+      "electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment (PCB)",
+      "fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
+      "lead": "Lead",
+      "paintsAndSolvents": "Paints and Solvents",
+      "particleboardPanels": "Particleboard panels",
+      "polyurethaneFoams": "Polyurethane foams",
+      "rubberProducts": "Rubber products",
+      "solventsForInsulation": "Solvents for insulation",
+      "treatedWood": "Treated Wood",
+      "usedOils": "Used Oils"
+    }
+  },
+  "sloganGoeko": "The connection to efficiency",
+  "sme": "Sme",
+  "start": "Start",
+  "summary": "Summary",
+  "titleResult": "Most adapted eco-solutions for",
+  "upgrade": "Upgrade",
+  "USER_TYPE": {
+    "bank": "Bank",
+    "cleanTech": "Cleantech",
+    "sme": "SME"
+  },
+  "userType": "User type"
 }

@@ -1,15 +1,24 @@
 <ng-container *ngIf="detailsEcosolution">
   <div class="detail-heading">
-    <div>
-      <go-badge [className]="detailsEcosolution.classification.mainCategory">
-        {{
-          'CATEGORIES.' + detailsEcosolution.classification.mainCategory
-            | translate
-        }}
-      </go-badge>
-      <h2>{{ detailsEcosolution.solutionName }}</h2>
-      <span>{{ detailsEcosolution.companyDetail.name }}</span>
-      <p>{{ detailsEcosolution.description }}</p>
+    <div class="detail-heading-main-info">
+      <div>
+        <go-badge [className]="detailsEcosolution.classification.mainCategory">
+          {{
+            'CATEGORIES.' + detailsEcosolution.classification.mainCategory
+              | translate
+          }}
+        </go-badge>
+        <h2 class="detail-heading--solution-name">
+          {{ detailsEcosolution.solutionName }}
+        </h2>
+        <span class="detail-heading--name-company">{{
+          detailsEcosolution.companyDetail.name
+        }}</span>
+      </div>
+
+      <p class="detail-heading--description">
+        {{ detailsEcosolution.description }}
+      </p>
     </div>
 
     <img
@@ -23,16 +32,6 @@
       <i class="ti ti-file-download"></i>
       {{ 'certified' | translate }}
     </button>
-    <a
-      href="https://{{ detailsEcosolution.companyDetail.link }}"
-      target="_blank"
-      id="website_{{ detailsEcosolution.companyDetail.name }}"
-    >
-      <button go-button appearance="white">
-        <i class="ti ti-link"></i>
-        {{ 'FORM_LABEL.website' | translate }}
-      </button>
-    </a>
   </div>
 
   <div class="detail-feature">
@@ -42,22 +41,60 @@
       </h3>
       <div class="details-article">
         <div>
-          <span>
+          <span class="details-article--label">
             {{ 'FORM_LABEL.countriesAvailable' | translate }}
           </span>
-          <p>{{ detailsEcosolution['countries'] }}</p>
+          <p class="details-article--data">
+            {{ detailsEcosolution['countries'] }}
+          </p>
         </div>
 
         <div>
-          <span>
+          <span class="details-article--label">
             {{ 'FORM_LABEL.price' | translate }}
           </span>
-          <p>{{ detailsEcosolution['priceDescription'] || '-' }}</p>
+          <p class="details-article--data">
+            {{ detailsEcosolution['priceDescription'] || '-' }}
+          </p>
+        </div>
+
+        <div>
+          <span class="details-article--label">
+            {{ 'FORM_LABEL.website' | translate }}</span
+          >
+          <p class="details-article--data">
+            <a
+              href="https://{{ detailsEcosolution.companyDetail.link }}"
+              target="_blank"
+              id="website_{{ detailsEcosolution.companyDetail.name }}"
+            >
+              {{ detailsEcosolution.companyDetail.link }}
+            </a>
+          </p>
+        </div>
+
+        <div>
+          <span class="details-article--label">
+            {{ 'FORM_LABEL.guarantee' | translate }}
+          </span>
+          <div class="info-guarantee">
+            @if (detailsEcosolution['guarantee']) {
+            <p class="details-article--data">
+              {{ detailsEcosolution['guaranteeInYears'] | number : '1.0-0' }}
+              {{ 'years' | translate }}
+            </p>
+            } @else {
+            <p class="details-article--data">
+              {{ detailsEcosolution['guarantee'] | yesNo }}
+            </p>
+
+            }
+          </div>
         </div>
       </div>
     </section>
     <section class="details-section">
-      <div class="details-article">
+      <div class="details-article details-article--products">
         <span>{{
           'CATEGORIES_LABEL.' +
             detailsEcosolution.classification.subCategory +

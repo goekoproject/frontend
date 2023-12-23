@@ -29,7 +29,7 @@ export class SdgIconsComponent implements OnInit {
 
   constructor(private _translateServices: TranslateService) {
     this.currentLangCode = this._translateServices.defaultLang;
-    this.odsCode = ODS_CODE;
+    this.odsCode = ODS_CODE.sort((a, b) => a - b);
   }
 
   ngOnInit(): void {
