@@ -1,0 +1,56 @@
+$bottomOffset: 20px;
+$lineHeight: 5px;
+$lineColor: #29EECC;
+
+.menu-wrapper {
+    display: flex;
+    gap: 3rem;
+}
+.menu-actions {
+    display: flex;
+    gap: .5rem;
+}
+.menu {
+    ul {
+        list-style: none;
+    }
+    display: flex;
+    gap : 0.5rem;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    justify-content: space-between;
+     &-item {
+        min-width: 3rem;
+    }
+
+}
+// Efect menu-item
+.menu-item > a {
+    position: relative;
+	z-index: 1;
+}
+.menu-item > a:before {
+    position: absolute;
+    content: '';
+    display: block;
+    z-index: -1;
+    background: $lineColor;
+    width: 0;
+    height: $lineHeight;
+    top: $bottomOffset;
+    left: calc($lineHeight/ -2);
+    transition: 0.3s cubic-bezier(.03,.3,.4,.96);
+    transform: skew(-10deg);
+}
+.menu-item a:hover:before {
+    width: calc(100% + $lineHeight);
+
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+    
+}

@@ -1,0 +1,74 @@
+<div class="access">
+	<img alt="logo-access" src="assets/logo.png" #logo [routerLink]="['/']" class="logo-access" />
+	<div class="access-img">
+		<img alt="logo" src="assets/photo-login.jpg" />
+	</div>
+	<div class="login-singup">
+		<h1>{{ 'welcome' | translate }}!</h1>
+		<!-- 	<go-switch
+			class="go-switch"
+			[onLabel]="'Log in'"
+			[offLabel]="'Sign up'"
+			(valueChanged)="valueChanbgeTypeForm($event)"
+		></go-switch> -->
+
+		<ng-container *ngTemplateOutlet="typeForm ? login : signup"></ng-container>
+	</div>
+
+	<button class="arrow-back" [routerLink]="['/home']">
+		<span class="material-symbols-rounded"> arrow_back_ios </span>
+	</button>
+</div>
+
+<ng-template #login>
+	<span>{{ 'LOGIN.msglogin' | translate }}</span>
+	<form class="login" [formGroup]="formLogin">
+		<go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
+			<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+		</go-input>
+		<go-input
+			[formControlName]="'password'"
+			type="password"
+			minlength="8"
+			id="current-password"
+			name="current-password"
+		>
+			<p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
+		</go-input>
+		<button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
+			{{ 'Login' | translate }}
+		</button>
+		<p>
+			{{ 'LOGIN.msgsignup' | translate }} <a (click)="createFormSignup(false)">{{ 'Sign up' | translate }}</a>
+		</p>
+	</form>
+</ng-template>
+
+<ng-template #signup>
+	<span>{{ 'LOGIN.msgsignup2' | translate }}</span>
+
+	<form>
+		<div *ngIf="signUpOk" class="signup-ok">
+			<go-loader-check></go-loader-check>
+			<button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
+				{{ 'Login' | translate }}
+			</button>
+		</div>
+		<goeko-signup
+			*ngIf="!signUpOk"
+			[formSignup]="formSignup"
+			[isErrorPolicyPassword]="isErrorPolicyPassword"
+			(gotToLogin$)="createFormSignup($event)"
+		>
+			<button
+				type="button"
+				go-button
+				appearance="primary"
+				(click)="submitSignUp()"
+				[disabled]="formSignup.invalid"
+			>
+				{{ 'Sign up' | translate }}
+			</button>
+		</goeko-signup>
+	</form>
+</ng-template>

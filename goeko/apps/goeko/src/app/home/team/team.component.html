@@ -1,0 +1,24 @@
+<article class="our-team">
+	<go-title-page>
+		{{ 'HOME.meetOurTeam' | translate }}
+		<h2 class="our-team-subtitle">
+			{{ 'HOME.sloganTeam' | translate }}
+		</h2>
+	</go-title-page>
+
+	<div class="our-team-body" *ngFor="let item of dataTeams">
+		<div class="our-team-content">
+			<div class="our-team-heading">
+				<go-title-page size="large"> {{ item?.employedName }}</go-title-page>
+
+				<h4 class="our-team-job">{{ item?.job }}</h4>
+			</div>
+
+			<p *ngFor="let info of item?.info">
+				{{ info }}
+			</p>
+		</div>
+
+		<img class="member-photo" [src]="item.photoProfile" />
+	</div>
+</article>

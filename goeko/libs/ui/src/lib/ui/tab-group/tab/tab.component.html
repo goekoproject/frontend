@@ -1,0 +1,4 @@
+<button [ngClass]="{ 'tab-selected': isTabSelected, 'tab-not-selected': !isTabSelected }" (click)="clickTab(title)">
+	{{ title }}
+</button>
+<div class="tab-element"><ng-content></ng-content></div>

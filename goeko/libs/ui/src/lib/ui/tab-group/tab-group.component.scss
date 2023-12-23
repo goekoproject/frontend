@@ -1,0 +1,17 @@
+.go-tab-group {
+	background: #ffffff;
+	width: 100%;
+	display: flex;
+	border-radius: 15px;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	[title] {
+		padding-top: 1rem;
+		color: var(--primary--main);
+	}
+}
+.go-tab-elements {
+	display: flex;
+	justify-content: center;
+}

@@ -1,0 +1,61 @@
+<div class="custom-select">
+	<h3>SIZE</h3>
+	<section>
+		<button uiButton uiButton-type="primary" *ngFor="let size of buttonSize" (click)="changeSize(size)">
+			{{ size }}
+		</button>
+	</section>
+
+	<h3>STATUS</h3>
+	<section>
+		<button uiButton uiButton-type="primary" *ngFor="let status of buttonStatus" (click)="changeStatus(status)">
+			{{ status }}
+		</button>
+	</section>
+</div>
+<div class="types-select">
+	<h3>Normal Select</h3>
+
+	<ui-super-select placeholder="Test" [size]="size" [status]="status"  [disabled]="disabled"
+    >
+		<super-option *ngFor="let option of superSelectDefault"
+         [value]="option">
+			{{ option.title }}
+		</super-option>
+	</ui-super-select>
+	<h3>Multiple Select</h3>
+	<ui-super-select placeholder="Test" [size]="size" [status]="status" [multiple]="true">
+		<super-option *ngFor="let option of superSelectDefault" [value]="option">
+			{{ option.title }}
+		</super-option>
+	</ui-super-select>
+
+	<h3>Form Multiple Select</h3>
+	<form [formGroup]="form">
+		<ui-super-select
+			placeholder="Test"
+			[size]="size"
+			formControlName="superMultipleSelect"
+			[status]="status"
+			[multiple]="true"
+		>
+			<super-option *ngFor="let option of superSelectDefault" [value]="option">
+				{{ option.title }}
+			</super-option>
+		</ui-super-select>
+		<button (click)="setValueMultiple()">Set Value Multiple</button>
+
+		Value :{{ valueMultiple | json }}
+	</form>
+
+	<h3>Form Normal Select</h3>
+	<form [formGroup]="form">
+		<ui-super-select placeholder="Test" [size]="size" formControlName="superDefualtSelect" [status]="status">
+			<super-option *ngFor="let option of superSelectDefault" [value]="option">
+				{{ option.title }}
+			</super-option>
+		</ui-super-select>
+
+		Value :{{ valueNormal | json }}
+	</form>
+</div>

@@ -1,0 +1,89 @@
+.access {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	height: 100vh;
+	padding-bottom: 2rem;
+	width: calc(100vw - 10%);
+}
+.logo-access {
+	position: absolute;
+	top: 2rem;
+	right: 0;
+}
+.login-singup {
+	width: 50%;
+	align-self: center;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	gap: 2.5rem;
+	min-height: 500px;
+	justify-content: center;
+	padding-left: 11%;
+}
+.go-switch {
+	width: 63%;
+}
+.access-img {
+	overflow: hidden;
+	width: 50%;
+	height: auto;
+	border-radius: 24px;
+	flex-grow: 2;
+	img {
+		object-fit: cover;
+		width: 127%;
+		height: 137%;
+	}
+}
+.login {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	width: 400px;
+	a {
+		cursor: pointer;
+		font-weight: 600;
+		font-size: 15px;
+		color: #184bdd;
+	}
+}
+.arrow-back {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	left: 2%;
+	bottom: 7%;
+	border-radius: 50%;
+	cursor: pointer;
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+		rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	span {
+		position: relative;
+		left: 0.3rem;
+		color: #24253b;
+	}
+}
+.signup-ok {
+	width: 60%;
+	button {
+		width: 100%;
+	}
+}
+
+@media screen and (width <= 800px) {
+	.access-img {
+		display: none;
+	}
+	.login-singup {
+		width: 100%;
+		justify-content: center;
+		padding: 0;
+		align-items: center;
+	}
+}

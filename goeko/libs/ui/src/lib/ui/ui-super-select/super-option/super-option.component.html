@@ -1,0 +1,6 @@
+<ui-select-checkbox
+	*ngIf="multiple"
+	[disabled]="disabled"
+	[state]="selected ? 'checked' : 'unchecked'"
+></ui-select-checkbox>
+<div #title><ng-content></ng-content></div>

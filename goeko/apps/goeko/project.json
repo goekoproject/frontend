@@ -17,7 +17,10 @@
         "tsConfig": "apps/goeko/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/goeko/src/favicon.ico", "apps/goeko/src/assets"],
-        "styles": ["apps/goeko/src/styles.scss"],
+        "styles": [
+          "apps/goeko/src/styles.scss",
+          "./libs/ui/src/styles/_theme.scss"
+        ],
         "scripts": []
       },
       "configurations": {

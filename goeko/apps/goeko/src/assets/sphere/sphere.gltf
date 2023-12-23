@@ -1,0 +1,298 @@
+{
+  "asset": { "version": "2.0", "generator": "VECTARY" },
+  "nodes": [
+    {
+      "translation": [
+        0.24184578628008319,
+        0.18859077287972167,
+        -0.25848764274920066
+      ],
+      "scale": [0.001, 0.001, 0.001],
+      "rotation": [
+        -0.07411152325774,
+        -0.8678725277107077,
+        -0.4719437083818647,
+        0.1362860736987363
+      ],
+      "name": "Directional Light",
+      "extensions": { "KHR_lights_punctual": { "light": 0 } }
+    },
+    {
+      "translation": [
+        0.0012162558332344702,
+        0.03874381339684888,
+        0.0032062128122945597
+      ],
+      "scale": [
+        0.001009775669552257,
+        0.001009775669552257,
+        0.001009775669552257
+      ],
+      "rotation": [
+        -0.6721602333407838,
+        0.21954639763672526,
+        0.3410130296659465,
+        0.619443390148004
+      ],
+      "name": "Sphere",
+      "mesh": 0
+    },
+    {
+      "translation": [0, 0, 0],
+      "scale": [0.001, 0.001, 0.001],
+      "rotation": [-0.7071067811865475, 0, 0, 0.7071067811865476],
+      "name": "Box - baked",
+      "mesh": 1
+    },
+    {
+      "translation": [0, 0, 0],
+      "scale": [0.006, 0.006, 0.006],
+      "rotation": [-0.7071067811865475, 0, 0, 0.7071067811865476],
+      "name": "Plane",
+      "mesh": 2
+    }
+  ],
+  "extensions": {
+    "KHR_lights_punctual": {
+      "lights": [
+        {
+          "name": "Directional Light",
+          "type": "directional",
+          "intensity": 3.4,
+          "color": [1, 1, 1]
+        }
+      ]
+    }
+  },
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8670237934377415,
+          0.8670237934377415,
+          0.8670237934377415,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.09
+      },
+      "name": "Atlantis",
+      "emissiveFactor": [
+        0.17568627450980395,
+        0.17819607843137256,
+        0.19325490196078432
+      ],
+      "extensions": {
+        "KHR_materials_transmission": { "transmissionFactor": 1 },
+        "KHR_materials_ior": { "ior": 2 },
+        "KHR_materials_volume": {
+          "thicknessFactor": 0.1,
+          "attenuationDistance": 0.014,
+          "attenuationColor": [
+            0.07450980392156863,
+            0.7294117647058823,
+            0.9098039215686274
+          ]
+        }
+      },
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8670237934377415,
+          0.8670237934377415,
+          0.8670237934377415,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.2
+      },
+      "name": "Belize",
+      "emissiveFactor": [0, 0, 0],
+      "extensions": {},
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [0, 0, 0, 1],
+        "baseColorTexture": {
+          "index": 0,
+          "extensions": {
+            "KHR_texture_transform": {
+              "offset": [0, 0],
+              "scale": [1, 1],
+              "rotation": 0
+            }
+          },
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "name": "_shadow",
+      "emissiveFactor": [0, 0, 0],
+      "extensions": {},
+      "alphaMode": "BLEND",
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "mode": 4,
+          "attributes": { "POSITION": 1, "NORMAL": 2, "TEXCOORD_0": 3 },
+          "material": 0,
+          "indices": 0
+        }
+      ]
+    },
+    {
+      "primitives": [
+        {
+          "mode": 4,
+          "attributes": { "POSITION": 5, "NORMAL": 6, "TEXCOORD_0": 7 },
+          "material": 1,
+          "indices": 4
+        }
+      ]
+    },
+    {
+      "primitives": [
+        {
+          "mode": 4,
+          "attributes": { "POSITION": 9, "NORMAL": 10, "TEXCOORD_0": 11 },
+          "material": 2,
+          "indices": 8
+        }
+      ]
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5125,
+      "count": 11904,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 2143,
+      "max": [35.400001525878906, 35.400001525878906, 70.80000305175781],
+      "min": [
+        -35.400001525878906,
+        -35.400001525878906,
+        -0.0000015258789289873675
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 2143,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 2143,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 4,
+      "byteOffset": 0,
+      "componentType": 5125,
+      "count": 2916,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 5,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 596,
+      "max": [50, 50, 29],
+      "min": [-50, -50, 0],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 6,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 596,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 7,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 596,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 8,
+      "byteOffset": 0,
+      "componentType": 5125,
+      "count": 6,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 9,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "max": [50, 50, 0],
+      "min": [-50, -50, 0],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 10,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 11,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC2"
+    }
+  ],
+  "bufferViews": [
+    { "buffer": 0, "byteOffset": 0, "byteLength": 47616, "target": 34963 },
+    { "buffer": 0, "byteOffset": 47616, "byteLength": 25716, "target": 34962 },
+    { "buffer": 0, "byteOffset": 73332, "byteLength": 25716, "target": 34962 },
+    { "buffer": 0, "byteOffset": 99048, "byteLength": 17144, "target": 34962 },
+    { "buffer": 0, "byteOffset": 116192, "byteLength": 11664, "target": 34963 },
+    { "buffer": 0, "byteOffset": 127856, "byteLength": 7152, "target": 34962 },
+    { "buffer": 0, "byteOffset": 135008, "byteLength": 7152, "target": 34962 },
+    { "buffer": 0, "byteOffset": 142160, "byteLength": 4768, "target": 34962 },
+    { "buffer": 0, "byteOffset": 146928, "byteLength": 24, "target": 34963 },
+    { "buffer": 0, "byteOffset": 146952, "byteLength": 48, "target": 34962 },
+    { "buffer": 0, "byteOffset": 147000, "byteLength": 48, "target": 34962 },
+    { "buffer": 0, "byteOffset": 147048, "byteLength": 32, "target": 34962 }
+  ],
+  "textures": [{ "sampler": 0, "source": 0 }],
+  "images": [{ "uri": "colorTexture&Plane_Cube.png", "mimeType": "image/png" }],
+  "samplers": [{ "wrapS": 10497, "wrapT": 10497 }],
+  "scene": 0,
+  "scenes": [{ "nodes": [0, 1, 2, 3], "name": "Box (template)" }],
+  "extensionsUsed": [
+    "KHR_texture_transform",
+    "KHR_lights_punctual",
+    "KHR_materials_ior",
+    "KHR_materials_volume",
+    "KHR_materials_transmission"
+  ],
+  "extensionsRequired": ["KHR_lights_punctual"],
+  "buffers": [{ "byteLength": 147080, "uri": "Box(template).bin" }]
+}

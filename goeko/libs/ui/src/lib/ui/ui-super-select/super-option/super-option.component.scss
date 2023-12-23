@@ -1,0 +1,17 @@
+$background-hover: var(--primary--main);
+
+.wrapper-super-option {
+	&:hover {
+		background-color: $background-hover;
+	}
+}
+.super-option {
+	padding: 0.9rem 1rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	&:hover {
+		background-color: $background-hover;
+		color: #fff;
+	}
+}

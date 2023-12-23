@@ -1,0 +1,241 @@
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+@import './color-palette';
+@import './fonts';
+
+@import './buttons.scss';
+@import './_fonts/tabler-icons/tabler-icons.css';
+
+@import './media.scss';
+@import './input.scss';
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+html {
+	box-sizing: border-box;
+	height: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: var(--color-background-white);
+	margin: 0 auto;
+	font: var(--font-default);
+	position: relative;
+	overflow-x: hidden;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	max-width: 1920px;
+}
+body:has(div.is-platform) {
+	background: #f7f9fe;
+}
+:root {
+	--center-container: 90%;
+	--medium-width-field: 24.875rem;
+	--medium-height-field: 4.625rem;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+canvas:focus {
+	outline: none;
+}
+.go-link {
+	cursor: pointer;
+}
+ul {
+	list-style: none;
+}
+
+select {
+	border-radius: 8px;
+	background: rgb(255, 255, 255);
+	border: 1px solid rgb(217, 219, 233);
+	height: 2rem;
+	padding: 0px 1rem;
+	width: 100%;
+	&:focus-visible {
+		outline-color: #6f57cd;
+		box-shadow: 0px 0px 1px 2px rgba(111, 87, 205, 0.25);
+	}
+	&[multiple] {
+		height: 10rem;
+	}
+}
+/* Note: The -webkit-scrollbar is not supported by Firefox or IE and Edge. */
+
+.go-scroll::-webkit-scrollbar {
+	/* width */
+	width: 8px;
+	height: 8px;
+}
+
+.go-scroll::-webkit-scrollbar-thumb {
+	/* Handle */
+	background: rgb(173 219 242);
+	border-radius: 20px;
+}
+
+.go-scroll::-webkit-scrollbar-thumb:hover {
+	/* Handle on hover */
+	background: rgb(0 144 214);
+}
+
+.go-scroll::-webkit-scrollbar-track-piece {
+	/* not handle on */
+	background: transparent;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: '';
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+}
+
+input:checked + .slider {
+	background-color: #2196f3;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+.title-platform {
+	color: #00527d;
+}
+fieldset {
+	border-radius: 12px;
+	background: #fff;
+	padding: 1.5rem 0.5rem;
+	font-size: 18px;
+	border: none;
+}
+label {
+	color: rgb(43, 43, 43);
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+legend {
+	font-size: 1.25rem;
+	color: #1b1d20;
+	font-weight: 600;
+	height: 2rem;
+}
+input[type='radio' i]:focus-visible {
+	outline: none;
+}
+.text-support {
+	color: #75808a;
+	font-size: 0.85rem;
+}
+[disabled='true'] {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+.form-row {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.form-col {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.spinner {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	transform: translate(50%, 50%);
+}
+.switch:has(input[readonly]) {
+	pointer-events: none;
+	cursor: not-allowed;
+}
+
+%cancel-bagde {
+	color: var(--white);
+	pointer-events: none;
+	border: none !important;
+	max-height: 2.04125rem;
+	font-size: 0.7875rem !important;
+	padding: 1rem !important;
+}
+.co2Emission {
+	background: var(--co2-emission);
+	@extend %cancel-bagde;
+}
+.water {
+	background: var(--color-water);
+	@extend %cancel-bagde;
+}
+.waste {
+	background: var(--waste);
+	@extend %cancel-bagde;
+}
+.hazardousProduct {
+	background: var(--hp);
+	@extend %cancel-bagde;
+}
+.go-back {
+	position: relative;
+	top: -1rem;
+}

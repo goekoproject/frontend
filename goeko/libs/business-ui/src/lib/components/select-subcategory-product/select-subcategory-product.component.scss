@@ -1,0 +1,99 @@
+.subcategory {
+	display: flex;
+	flex-direction: column;
+	padding: 12px 16px;
+	align-items: center;
+	gap: 1rem;
+	border-radius: 16px;
+	border: 1px solid #c0c0c0;
+	background: #fff;
+	font-size: 1rem;
+	transition: 0.2s;
+	input[type='checkbox'],
+	input[type='radio'] {
+		color: #0090d6;
+		min-width: 1.3rem;
+		height: 1.3rem;
+		border-radius: 3rem;
+		border: 1px solid #0090d6;
+		cursor: pointer;
+		transition: 0.2s ease-out;
+	}
+	&:has(input:checked) {
+		border: 2px solid #0090d6;
+	}
+}
+.subcategory-control {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	width: 86%;
+	cursor: pointer;
+}
+.subcategory-title {
+	transition: 0.2s ease-in-out;
+	line-height: 1.2;
+	font-size: 1rem;
+	font-weight: 500;
+	width: 100%;
+	&-products {
+		transition: 1s ease-in-out;
+		color: #75808a;
+		font-size: 0.8rem;
+		width: 19rem;
+		display: block;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		word-break: break-word;
+		white-space: nowrap;
+	}
+}
+.subcategory-element {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.subcategory-expand {
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 2rem;
+	color: #bbc4cd;
+}
+
+.subcategory-product-selected {
+	color: #0090d6;
+	font-size: 0.8rem;
+	font-weight: 600;
+	align-self: flex-end;
+	text-align: right;
+	width: 27%;
+}
+.subcategory-product {
+	display: none;
+}
+[open='true'] {
+	.subcategory-product {
+		display: flex;
+		padding: 0 1rem;
+	}
+	.subcategory-expand {
+		transition: 0.3s;
+		transform: rotateX(180deg);
+	}
+}
+goeko-select-subcategory-product[readonly='true'] {
+	.subcategory {
+		align-items: flex-start;
+		gap: 0;
+	}
+	label {
+		font-size: 1.2rem;
+	}
+}
+.alert-select-product {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: #0090d682;
+	font-size: 0.875rem;
+}

@@ -1,0 +1,39 @@
+<ng-container [formGroup]="formSignup">
+	<go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
+		<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+	</go-input>
+
+	<go-input
+		[formControlName]="'password'"
+		type="password"
+		minlength="8"
+		id="current-password"
+		name="current-password"
+	>
+		<p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
+	</go-input>
+
+	<go-notification type="info" *ngIf="isErrorPolicyPassword">
+		<div class="policy-password">
+			<span>{{ 'ACCESS_ERROR.passwordPolicyTitle' | translate }}</span>
+			<ul>
+				<li *ngFor="let item of policyPassword">
+					{{ 'ACCESS_ERROR.' + item | translate }}
+				</li>
+			</ul>
+		</div>
+	</go-notification>
+	<ui-super-select [placeholder]="'userType' | translate" [formControlName]="'userType'">
+		<ng-container *ngFor="let option of userType">
+			<super-option *ngIf="option.active" [value]="option.value">
+				{{ option.title | translate }}
+			</super-option>
+		</ng-container>
+	</ui-super-select>
+
+	<ng-content></ng-content>
+
+	<p>
+		{{ 'LOGIN.msglogin2' | translate }}. <a (click)="goToLoginForm()">{{ 'Log in' | translate }}</a>
+	</p>
+</ng-container>
