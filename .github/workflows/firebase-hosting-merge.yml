@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - feature/new-version-angular
-    paths: ["apps/goeko/**"]
 jobs:
   build:
     name: Build
