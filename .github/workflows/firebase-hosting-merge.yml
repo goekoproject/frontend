@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - feature/new-version-angular
+    paths: ["apps/goeko/**"]
 jobs:
   build:
     name: Build
@@ -25,9 +26,9 @@ jobs:
           check-latest: true
       #Init Node
       - name: Install Dependencies
-        run: npm install --force
+        run: npm install
       - name: Build
-        run: npm run build --prod
+        run: npm run build goeko --production
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v3
         with:
