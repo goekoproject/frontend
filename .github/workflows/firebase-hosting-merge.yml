@@ -31,7 +31,7 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: dist
+          name: build-project
           path: goeko/dist/apps
   deploy:
     name: Deploy
@@ -43,7 +43,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
-          name: dist
+          name: build-project
           path: goeko/dist/apps
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
