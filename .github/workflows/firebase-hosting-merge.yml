@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: npm run build goeko --production
       - name: Archive Production Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-project
           path: goeko/dist/apps
