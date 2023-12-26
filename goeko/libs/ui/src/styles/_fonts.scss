@@ -16,6 +16,8 @@ $font-inter-thin: 'Inter-Thin';
   --font-label: 14px Barlow-Medium, sans-serif;
   --font-label-semibold: 12px Barlow-SemiBold, sans-serif;
   --font-marketing-bold: 48px Barlow-Bold, sans-serif;
+  --text-thin-accent: 2rem Roboto-Thin, sans-serif;
+  --text-bold-accent: 1.875rem Roboto-Bold, sans-serif;
 }
 
 /** HEADING **/ /* epilogue-regular - latin */
@@ -70,4 +72,21 @@ $font-inter-thin: 'Inter-Thin';
   font-style: normal;
   font-weight: 700;
   src: url('_fonts/barlow/Barlow-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-100 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto-Thin';
+  font-style: normal;
+  font-weight: 100;
+  src: url('_fonts/Roboto/Roboto-Thin.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto-Bold';
+  font-style: normal;
+  font-weight: 400;
+  src: url('_fonts/Roboto/Roboto-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }

@@ -101,6 +101,7 @@ export class ContentComponent implements OnInit {
       this.articles = res.map((actor: any) => ({
         ...actor,
         benefits: this._buildDataLandingPage(actor.benefits),
+        image: actor.image?.fields?.file?.url,
       }));
     });
   }

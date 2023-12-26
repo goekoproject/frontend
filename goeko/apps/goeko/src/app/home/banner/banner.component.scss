@@ -1,3 +1,7 @@
+$default-position-layer1-video: 1.8rem;
+$default-position-layer2-video: 3.2rem;
+$default-position-layer3-video: 4.7rem;
+
 @mixin urlImg($img) {
   background-image: $img;
   background-size: cover;
@@ -13,63 +17,51 @@
 .banner {
   display: flex;
   justify-content: space-between;
-  height: 100vh;
-  position: relative;
+  border-radius: 1.5rem;
+  background: radial-gradient(
+    141.88% 100.98% at 21.55% 0%,
+    rgba(185, 231, 254, 0) 1.04%,
+    #e0f2fe 54.28%,
+    #b9e7fe 54.58%
+  );
   gap: 2rem;
+  padding: 4rem 2rem;
+  flex-wrap: wrap;
   &-content {
     display: flex;
     flex-direction: column;
-    padding-top: 2rem;
-    align-items: flex-start;
-    position: relative;
-    //align-self: center;
   }
   //@include urlImg(url(/assets/bkg-2.png));
   &-slogan {
-    color: #31363f;
-    font-family: 'Barlow-SemiBold', serif;
-    font-size: 2.85rem;
-    max-width: 640px;
-    margin-top: 1.3rem;
-    text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
-    text-align: center;
-    margin-bottom: 0;
     text-transform: uppercase;
+    font: var(--font-huge-heading);
+    font-size: clamp(2.4rem, 3rem, 3.75rem);
+    color: var(--soft-dark, #094056);
   }
   &-support-text {
-    margin-top: 0;
-    font-size: 2rem;
-    font-family: 'Roboto-Thin',sans-serif;
-    text-align: center;
-    letter-spacing: 0.47rem;
-    word-spacing: 15px;
+    font: var(--text-thin-accent);
+    font-size: clamp(1rem, 1.2rem, 2rem);
     display: flex;
     gap: 1rem;
-  
   }
 
   .word:nth-child(1) {
     animation-delay: 0.5s;
-  
   }
   .word:nth-child(2) {
     animation-delay: 1.5s;
   }
-  
-  .word:nth-child(3) { 
-    animation-delay: 2.5s;
 
+  .word:nth-child(3) {
+    animation-delay: 2.5s;
   }
-   
+
   &-info {
-    color: #31363f;
-    background-color: var(--color-background-white);
-    font-family: 'Barlow-SemiBold', serif;
-    width: fit-content;
-    padding: 4px;
+    font: var(--font-label);
+    color: var(--dark-accent, #163953);
   }
   &-shadow {
-   // background: rgba(0, 0, 0, 0.45);
+    // background: rgba(0, 0, 0, 0.45);
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -79,14 +71,8 @@
     background-image: url(/assets/marco-actors.png);
     background-repeat: no-repeat;
     background-position: top center;
-    //background-attachment: fixed;
     background-size: 100%;
-/*     background: #011c37;
- */  }
-/*   img {
-    width: 100%;
-    position: absolute;
-  } */
+  }
   &-actions {
     display: flex;
     gap: 2rem;
@@ -99,72 +85,102 @@
 }
 
 .banner-slogan--green {
-   // box-shadow: inset 0vw 0px 7px 6vw rgb(33 166 80 / 70%);
-    color:  rgb(33 166 80 / 70%);
+  // box-shadow: inset 0vw 0px 7px 6vw rgb(33 166 80 / 70%);
+  color: rgb(33 166 80 / 70%);
+}
+.banner-video {
+  position: relative;
+  .banner-video-sme {
+    z-index: 1;
+    position: relative;
+    border-radius: 33px;
+    background: #fff;
+    box-shadow: -4px 7px 19px 0px rgba(0, 0, 0, 0.09);
+  }
 }
 
-.world-europe {
+.layer {
+  border-radius: 2.0625rem;
+  background: rgba(0, 144, 214, 0.55);
+  box-shadow: -4px 7px 19px 0px rgba(0, 0, 0, 0.09);
+  width: 98%;
+  height: 15.60394rem;
   position: absolute;
-  z-index: -1;
-  width: 100%;
-  left: -41rem;
+  top: 0;
+  left: 0;
   right: 0;
-  top: 13rem;
+  margin: 0 auto;
 }
-.fill-green {
-  transition: .9s ease;
-  fill: limegreen;
-  animation: fillAnimation 2s ease-in-out;
-
-
-  //transform: scale(1.2) translate(-12.4rem, 1rem);
-
+.bkg-video {
+  .layer:nth-child(1) {
+    transform: translateY($default-position-layer1-video) scale(0.9);
+  }
+  .layer:nth-child(2) {
+    transform: translateY($default-position-layer2-video) scale(0.82);
+    background: rgba(0, 144, 214, 0.38);
+  }
+  .layer:nth-child(3) {
+    transform: translateY($default-position-layer3-video) scale(0.74);
+    background: rgba(0, 144, 214, 0.28);
+  }
+}
+.watch-video {
+  transform: translate(-50%, 7rem) scale(2);
 }
 .ods {
   position: absolute;
-    bottom: 5%;
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    width: 100%;
+  bottom: 5%;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
 }
 
 .ods-icon {
   width: 70px;
-
 }
 
 @keyframes fillAnimation {
   0% {
-    fill: #ECE2E2;
+    fill: #ece2e2;
   }
   50% {
-    fill: #ECE2E2;
+    fill: #ece2e2;
   }
   100% {
     fill: limegreen;
   }
 }
-@media (max-width: 1024px) { 
-  .banner  {
-    flex-wrap: wrap;
-    flex-direction: column;
+@media (max-width: 1024px) {
+  .banner {
     align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .banner-content {
+    align-items: center;
+  }
+  .banner-video-sme {
+    width: 90%;
+  }
+  .bkg-video {
+    display: none;
   }
 }
 
-@media (max-width: 768px) { 
-  .banner  {
-    flex-wrap: wrap;
-    flex-direction: column;
+@media (max-width: 768px) {
+  .banner {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .banner-content {
     align-items: center;
   }
-  .banner-slogan {
-    font-size: 1rem;
+  .banner-video-sme {
+    width: 90%;
   }
-  .banner-support-text {
-    font-size: 1.9rem;
-    letter-spacing: 0;
+  .bkg-video {
+    display: none;
   }
-
 }

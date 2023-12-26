@@ -1,53 +1,54 @@
 <div class="banner">
-	<div class="banner-content">
-		<span class="banner-info">{{ 'BANNER.swissCompany' | translate }}</span>
+  <div class="banner-content">
+    <div>
+      <span class="banner-info">{{ 'BANNER.swissCompany' | translate }}</span>
 
-		<h2 class="banner-slogan">
-			{{ 'BANNER.the' | translate }} <span class="banner-slogan--green">{{ 'BANNER.green' | translate }}</span>
-			{{ 'BANNER.transition' | translate }}
-		</h2>
-		<div class="banner-support-text">
-			<span class="word animate__animated" [class.animate__backInLeft]="isShowing">{{
-				'BANNER.easy' | translate
-			}}</span>
-			|
-			<span class="word animate__animated" [class.animate__backInLeft]="isShowing">{{
-				'BANNER.fast' | translate
-			}}</span>
-			|
-			<span class="word animate__animated" [class.animate__backInLeft]="isShowing">{{
-				'BANNER.affordable' | translate
-			}}</span>
-		</div>
-		<!--    <h2>
-      The Solution for SMEs.
-    </h2> -->
-		<div class="banner-actions" *ngIf="false">
-			<button go-button appearance="white">Oportunity for Clean Teach</button>
-			<button go-button>
-				Solution for SME
-				<span class="material-symbols-rounded"> file_open </span>
-			</button>
-		</div>
-	</div>
+      <h1 class="banner-slogan">
+        {{ 'BANNER.the' | translate }}
+        <span class="banner-slogan--green">{{
+          'BANNER.green' | translate
+        }}</span>
+        {{ 'BANNER.transition' | translate }}
+      </h1>
+      <div class="banner-support-text">
+        <span class="word animate__animated">{{
+          'BANNER.easy' | translate
+        }}</span>
+        |
+        <span class="word animate__animated">{{
+          'BANNER.fast' | translate
+        }}</span>
+        |
+        <span class="word animate__animated">{{
+          'BANNER.affordable' | translate
+        }}</span>
+      </div>
+    </div>
 
-	<!-- 	<div class="banner-shadow"></div>
- -->
+    <button go-button appearance="flat" (click)="watchVideo()">
+      <span class="material-symbols-rounded"> play_circle </span>
+      <p>{{ 'watchVideo' | translate }}</p>
+    </button>
+  </div>
 
-	<!-- <video width="400" controls autoplay>
-		<source src="assets/_GoEko RENDER.mov" type="video/mp4" />
-	</video> -->
+  <div class="banner-video">
+    <video width="450" autoplay class="banner-video-sme" #marketingVideo>
+      <source src="assets/GoEko_Ad_1_CC_French.mp4" type="video/mp4" />
+    </video>
 
-	<svg-icon #worldmap src="assets/world_map.svg" [class]="'world-europe'"></svg-icon>
+    <div class="bkg-video">
+      <span class="layer"></span>
+      <span class="layer"></span>
+      <span class="layer"></span>
+    </div>
+  </div>
 
-	<goeko-scenes></goeko-scenes>
-
-	<div class="ods" *ngIf="false">
-		<img
-			*ngFor="let icon of odsIcon"
-			class="ods-icon"
-			[src]="'assets/icon-ods/S-WEB-Goal-' + icon + '.png'"
-			[alt]="icon"
-		/>
-	</div>
+  <div class="ods" *ngIf="false">
+    <img
+      *ngFor="let icon of odsIcon"
+      class="ods-icon"
+      [src]="'assets/icon-ods/S-WEB-Goal-' + icon + '.png'"
+      [alt]="icon"
+    />
+  </div>
 </div>

@@ -4,7 +4,8 @@
   top: 0;
   display: block;
   z-index: 10;
-
+  width: var(--center-container);
+  margin: 0 auto;
 }
 
 .header {
@@ -12,20 +13,20 @@
   justify-content: space-between;
   margin: 0 auto;
   align-items: center;
-  width: var(--center-container);
   height: 10rem;
-  transition: .2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+  gap: 4rem;
   &-wrapper {
-    width: 60%;
     display: flex;
     align-items: center;
     height: 6rem;
     gap: 1rem;
-    
   }
   &-slogan {
-    font-family: "Roboto-Thin", sans-serif;
-    font-size: 1rem;
+    color: var(--dark-accent, #163953);
+    font: 14px 'Roboto-Thin', serif;
+    text-shadow: 3px 3px 20px var(--primary--200),
+      -2px 1px 30px var(--primary--main);
   }
   &-info {
     display: flex;
@@ -35,19 +36,17 @@
     bottom: -20px;
     position: relative;
   }
-}
-/* .logo {
-  max-width: 89px;
-  max-height: 89px; */
-  .header-wrapper > img {
-    
-    width: 12%;
-    transition: .4s ease-in-out;
-
-   /*  height: 100%;
-    object-fit: cover; */
+  &-actions {
+    display: flex;
+    gap: 1.5rem;
   }
-/* } */
+}
+.header-wrapper > img {
+  width: 12%;
+  transition: 0.4s ease-in-out;
+  min-width: 60px;
+}
+
 .contact-us {
   display: flex;
   align-items: center;
@@ -58,10 +57,9 @@
 }
 @media (max-width: 768px) {
   .header-slogan {
-      display: none;
+    display: none;
   }
   .logo {
     margin: 0 auto;
   }
-  
 }

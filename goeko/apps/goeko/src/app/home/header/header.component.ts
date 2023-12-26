@@ -7,6 +7,8 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { LANGS } from '@goeko/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'goeko-header',
@@ -33,7 +35,20 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor(private _renderer: Renderer2) {}
+  langs = LANGS;
+  defaultLang!: any;
 
-  ngOnInit(): void {}
+  constructor(
+    private _renderer: Renderer2,
+    private translate: TranslateService
+  ) {}
+
+  ngOnInit(): void {
+    this.defaultLang = this.langs.find(
+      (lang) => lang.code === this.translate.getDefaultLang()
+    );
+  }
+  onChangeLangs(selectedLand: any) {
+    this.translate.use(selectedLand.code);
+  }
 }
