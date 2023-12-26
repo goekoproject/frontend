@@ -7,8 +7,21 @@ import { GoekoButtonModule } from './ui/goeko-button/goeko-button.module';
 import { TitlePageComponent } from './ui/title-page/title-page.component';
 
 @NgModule({
-	imports: [CommonModule, ButtonModule, TooltipModule, CarouselModule, GoekoButtonModule, TitlePageComponent],
-	exports: [ButtonModule, TooltipModule, CarouselModule, GoekoButtonModule, TitlePageComponent],
-	declarations: [],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    TooltipModule,
+    CarouselModule,
+    GoekoButtonModule,
+    TitlePageComponent,
+  ],
+  exports: [
+    ButtonModule,
+    TooltipModule,
+    CarouselModule,
+    GoekoButtonModule,
+    TitlePageComponent,
+  ],
+  declarations: [],
 })
 export class UiModule {}

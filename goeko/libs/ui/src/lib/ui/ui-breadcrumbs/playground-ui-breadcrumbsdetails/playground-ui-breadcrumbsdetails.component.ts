@@ -3,12 +3,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'go-playground-ui-breadcrumbsdetails',
-	templateUrl: './playground-ui-breadcrumbsdetails.component.html',
-	styleUrls: ['./playground-ui-breadcrumbsdetails.component.scss'],
+  selector: 'go-playground-ui-breadcrumbsdetails',
+  templateUrl: './playground-ui-breadcrumbsdetails.component.html',
+  styleUrls: ['./playground-ui-breadcrumbsdetails.component.scss'],
 })
 export class PlaygroundUiBreadcrumbsdetailsComponent implements OnInit {
-	constructor() {}
+  constructor() {}
 
-	ngOnInit(): void {}
+  ngOnInit(): void {}
 }

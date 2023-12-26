@@ -110,7 +110,7 @@ export class SmeFormAnalysisComponent implements OnInit {
 	getResults() {
 		this._smeAnalysisService.setCurrentAnalysis(this.form.value);
 		this._smeId = this._overrideSmeId();
-		this._router.navigate(['results', this._smeId], { relativeTo: this._route });
+		this._router.navigate(['sme-analysis/results', this._smeId]);
 	}
 
 	/**

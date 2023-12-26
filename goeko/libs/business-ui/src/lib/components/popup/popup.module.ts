@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PopupComponent } from './popup.component';
+import { NgModule } from '@angular/core';
 import { ButtonModule } from '@goeko/ui';
+import { PopupComponent } from './popup.component';
 
 @NgModule({
-	declarations: [PopupComponent],
-	imports: [CommonModule, ButtonModule],
-	exports: [PopupComponent],
+  declarations: [PopupComponent],
+  imports: [CommonModule, ButtonModule],
+  exports: [PopupComponent],
 })
 export class PopupModule {}

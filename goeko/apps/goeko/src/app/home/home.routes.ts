@@ -10,41 +10,41 @@ const ENTRY_ID_PRIVACY_POLICY = '6pwHwtZC1ILfXS0awq85Oy';
 const ENTRY_ID_ABOUT = '4A61zIPlLwyWIVTL9DQB0U';
 
 export const routes: Routes = [
-	{
-		path: '',
-		component: HomeComponent,
-		children: [
-			{
-				path: '',
-				component: LandingComponent,
-			},
-			{
-				path: 'cookies-policy',
-				component: DocumentLegalComponent,
-				data: {
-					entryId: ENTRY_ID_COOKIES_POLICY,
-				},
-			},
-			{
-				path: 'privacy-policy',
-				component: DocumentLegalComponent,
-				data: {
-					entryId: ENTRY_ID_PRIVACY_POLICY,
-				},
-			},
-			{
-				path: 'about',
-				component: AboutComponent,
-				data: {
-					entryId: ENTRY_ID_ABOUT,
-				},
-			},
-		],
-	},
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        component: LandingComponent,
+      },
+      {
+        path: 'cookies-policy',
+        component: DocumentLegalComponent,
+        data: {
+          entryId: ENTRY_ID_COOKIES_POLICY,
+        },
+      },
+      {
+        path: 'privacy-policy',
+        component: DocumentLegalComponent,
+        data: {
+          entryId: ENTRY_ID_PRIVACY_POLICY,
+        },
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
+        data: {
+          entryId: ENTRY_ID_ABOUT,
+        },
+      },
+    ],
+  },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class HomeRouteModule {}

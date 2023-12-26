@@ -1,5 +1,5 @@
 // ***********************************************************
-// This example support/index.js is processed and
+// This example support/e2e.ts is processed and
 // loaded automatically before your test files.
 //
 // This is a great place to put global configuration and
@@ -13,5 +13,12 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+// Import commands.ts using ES2015 syntax:
 import './commands';
+
+Cypress.on('uncaught:exception', (err) => {
+  if (err.message.includes(`Cannot use 'import.meta' outside a module`)) {
+    return false;
+  }
+  return true;
+});

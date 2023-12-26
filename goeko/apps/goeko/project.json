@@ -1,104 +1,99 @@
 {
-	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"name": "goeko",
-	"prefix": "goeko",
-	"projectType": "application",
-	"sourceRoot": "apps/goeko/src",
-	"tags": [],
-	"targets": {
-		"build": {
-			"configurations": {
-				"development": {
-					"buildOptimizer": false,
-					"extractLicenses": false,
-					"namedChunks": true,
-					"optimization": false,
-					"sourceMap": true,
-					"vendorChunk": true
-				},
-				"production": {
-					"budgets": [
-						{
-							"maximumError": "1mb",
-							"maximumWarning": "500kb",
-							"type": "initial"
-						},
-						{
-							"maximumError": "6kb",
-							"maximumWarning": "2kb",
-							"type": "anyComponentStyle"
-						}
-					],
-					"customWebpackConfig": {
-						"path": "apps/goeko/webpack.prod.config.js"
-					},
-					"fileReplacements": [
-						{
-							"replace": "apps/goeko/src/environments/environment.ts",
-							"with": "apps/goeko/src/environments/environment.prod.ts"
-						},
-						{
-							"replace": "apps/goeko/src/assets/module-federation.manifest.json",
-							"with": "apps/goeko/src/assets/module-federation.manifest.pro.json"
-						}
-					],
-					"outputHashing": "all"
-				}
-			},
-			"defaultConfiguration": "production",
-			"executor": "@nrwl/angular:webpack-browser",
-			"options": {
-				"assets": ["apps/goeko/src/favicon.ico", "apps/goeko/src/assets"],
-				"customWebpackConfig": {
-					"path": "apps/goeko/webpack.config.js"
-				},
-				"index": "apps/goeko/src/index.html",
-				"inlineStyleLanguage": "scss",
-				"main": "apps/goeko/src/main.ts",
-				"outputPath": "dist/apps/goeko",
-				"polyfills": "apps/goeko/src/polyfills.ts",
-				"scripts": ["node_modules/aos/dist/aos.js", "node_modules/meshwriter/dist/meshwriter.js"],
-				"styles": [
-					"apps/goeko/src/styles.scss",
-					"node_modules/animate.css/animate.min.css",
-					"node_modules/aos/dist/aos.css",
-					"./libs/ui/src/styles/_theme.scss"
-				],
-				"tsConfig": "apps/goeko/tsconfig.app.json"
-			},
-			"outputs": ["{options.outputPath}"]
-		},
-		"extract-i18n": {
-			"executor": "@angular-devkit/build-angular:extract-i18n",
-			"options": {
-				"browserTarget": "goeko:build"
-			}
-		},
-		"lint": {
-			"executor": "@nrwl/linter:eslint",
-			"options": {
-				"lintFilePatterns": ["apps/goeko/**/*.ts", "apps/goeko/**/*.html"]
-			}
-		},
-		"serve": {
-			"configurations": {
-				"development": {
-					"browserTarget": "goeko:build:development"
-				},
-				"production": {
-					"browserTarget": "goeko:build:production"
-				}
-			},
-			"defaultConfiguration": "development",
-			"executor": "@nrwl/angular:module-federation-dev-server"
-		},
-		"test": {
-			"executor": "@nrwl/jest:jest",
-			"options": {
-				"jestConfig": "apps/goeko/jest.config.ts",
-				"passWithNoTests": true
-			},
-			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
-		}
-	}
+  "name": "goeko",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "goeko",
+  "sourceRoot": "apps/goeko/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/goeko",
+        "index": "apps/goeko/src/index.html",
+        "main": "apps/goeko/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/goeko/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/goeko/src/favicon.ico", "apps/goeko/src/assets"],
+        "styles": [
+          "apps/goeko/src/styles.scss",
+          "./libs/ui/src/styles/_theme.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "6kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/goeko/src/environments/environment.ts",
+              "with": "apps/goeko/src/environments/environment.prod.ts"
+            },
+            {
+              "replace": "apps/goeko/src/assets/module-federation.manifest.json",
+              "with": "apps/goeko/src/assets/module-federation.manifest.pro.json"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "goeko:build:production"
+        },
+        "development": {
+          "buildTarget": "goeko:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "goeko:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/goeko/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "goeko:build"
+      }
+    }
+  }
 }

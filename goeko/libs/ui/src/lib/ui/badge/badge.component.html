@@ -1,4 +1,4 @@
-<span class="badge" *ngIf="!readonly || selected">
+<span class="badge {{ className }}" *ngIf="!readonly || selected">
 	<ng-content select="avatar"></ng-content>
 
 	<span #labelElement class="label-element">

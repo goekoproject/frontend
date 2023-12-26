@@ -1,13 +1,23 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
-import * as THREE from "three";
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Input,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import {
+  CSS2DRenderer,
+  CSS2DObject,
+} from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 
 @Component({
   selector: 'app-model',
   templateUrl: './model.component.html',
-  styleUrls: ['./model.component.scss']
+  styleUrls: ['./model.component.scss'],
 })
 export class ModelComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas')
@@ -24,8 +34,7 @@ export class ModelComponent implements OnInit, AfterViewInit {
 
   @Input() public size: number = 200;
 
-  @Input() public texture: string = "/assets/texture.jpg";
-
+  @Input() public texture: string = '/assets/texture.jpg';
 
   //* Stage Properties
 
@@ -75,7 +84,6 @@ export class ModelComponent implements OnInit, AfterViewInit {
 
   private annotation!: HTMLDivElement;
 
-
   private createControls = () => {
     const labelRenderer = new CSS2DRenderer();
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
@@ -99,7 +107,7 @@ export class ModelComponent implements OnInit, AfterViewInit {
     //* Scene
     this.scene = new THREE.Scene();
     //this.scene.background = new THREE.Color(0xdddddd)
-    var renderer = new THREE.WebGLRenderer( { alpha: false } );
+    var renderer = new THREE.WebGLRenderer({ alpha: false });
     this.loaderGLTF.load('assets/Box/Box.gltf', (gltf: GLTF) => {
       this.model = gltf.scene;
       var box = new THREE.Box3().setFromObject(this.model);
@@ -107,8 +115,7 @@ export class ModelComponent implements OnInit, AfterViewInit {
       this.model.position.multiplyScalar(-1);
       this.scene.add(this.model);
     });
-   
-   
+
     //*Camera
     let aspectRatio = this.getAspectRatio();
     this.camera = new THREE.PerspectiveCamera(
@@ -116,39 +123,38 @@ export class ModelComponent implements OnInit, AfterViewInit {
       aspectRatio,
       this.nearClippingPane,
       this.farClippingPane
-    )
+    );
     this.camera.position.x = 100;
     this.camera.position.y = 100;
     this.camera.position.z = 100;
-   
 
-         this.directionalLight = new THREE.DirectionalLight(0xffffff, 40);
+    this.directionalLight = new THREE.DirectionalLight(0xffffff, 40);
     this.directionalLight.position.set(0, 1, 0);
     this.directionalLight.castShadow = true;
-    this.scene.add(this.directionalLight); 
-  
+    this.scene.add(this.directionalLight);
+
     this.light1 = new THREE.PointLight(0x101010, 80);
     this.light1.position.set(120, 260, 200);
     this.scene.add(this.light1);
-  
+
     this.light2 = new THREE.PointLight(0x101010, 80);
     this.light2.position.set(-100, 100, 200);
-     this.scene.add(this.light2);
-  
+    this.scene.add(this.light2);
+
     this.light3 = new THREE.PointLight(0x101010, 1);
     this.light3.position.set(0, 100, -500);
-  //  this.scene.add(this.light3);
-  
+    //  this.scene.add(this.light3);
+
     this.light4 = new THREE.PointLight(0x101010, 1);
     this.light4.position.set(-500, 300, 500);
-  //  this.scene.add(this.light4);
+    //  this.scene.add(this.light4);
     this.numberTexture = new THREE.CanvasTexture(this.canvas);
     this.spriteMaterial = new THREE.SpriteMaterial({
       map: this.numberTexture,
       alphaTest: 0.5,
       transparent: true,
       depthTest: false,
-      depthWrite: false
+      depthWrite: false,
     });
 
     this.sprite = new THREE.Sprite(this.spriteMaterial);
@@ -157,7 +163,7 @@ export class ModelComponent implements OnInit, AfterViewInit {
     var box = new THREE.Box3().setFromObject(this.sprite);
     box.getCenter(this.sprite.position); // this re-sets the mesh position
     this.sprite.position.multiplyScalar(-1);
- //   this.scene.add(this.sprite);
+    //   this.scene.add(this.sprite);
   }
 
   private getAspectRatio() {
@@ -165,27 +171,33 @@ export class ModelComponent implements OnInit, AfterViewInit {
   }
 
   /**
- * Start the rendering loop
- *
- * @private
- * @memberof CubeComponent
- */
+   * Start the rendering loop
+   *
+   * @private
+   * @memberof CubeComponent
+   */
   private startRenderingLoop() {
     //* Renderer
     // Use canvas element in template
-    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true, alpha: true });
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas,
+      antialias: true,
+      alpha: true,
+    });
     this.renderer.setPixelRatio(devicePixelRatio);
     this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
     let component: ModelComponent = this;
     (function render() {
       component.renderer.render(component.scene, component.camera);
       requestAnimationFrame(render);
-    }());
+    })();
   }
 
   updateAnnotationOpacity() {
     const meshDistance = this.camera.position.distanceTo(this.model.position);
-    const spriteDistance = this.camera.position.distanceTo(this.sprite.position);
+    const spriteDistance = this.camera.position.distanceTo(
+      this.sprite.position
+    );
     this.spriteBehindObject = spriteDistance > meshDistance;
     this.sprite.material.opacity = this.spriteBehindObject ? 0.25 : 1;
 
@@ -199,25 +211,27 @@ export class ModelComponent implements OnInit, AfterViewInit {
 
     vector.project(this.camera);
 
-    vector.x = Math.round((0.5 + vector.x / 2) * (this.canvas.width / window.devicePixelRatio));
-    vector.y = Math.round((0.5 - vector.y / 2) * (this.canvas.height / window.devicePixelRatio));
+    vector.x = Math.round(
+      (0.5 + vector.x / 2) * (this.canvas.width / window.devicePixelRatio)
+    );
+    vector.y = Math.round(
+      (0.5 - vector.y / 2) * (this.canvas.height / window.devicePixelRatio)
+    );
 
     this.annotation.style.top = `${vector.y}px`;
     this.annotation.style.left = `${vector.x}px`;
-    this.annotation.style.opacity = this.spriteBehindObject ? "0.25" : "1";
+    this.annotation.style.opacity = this.spriteBehindObject ? '0.25' : '1';
     const earthLabel = new CSS2DObject(this.annotation);
     earthLabel.position.set(100, 100, 0);
     this.model.add(earthLabel);
   }
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
-    this.annotation = <HTMLDivElement>document.querySelector(".annotation");
+    this.annotation = <HTMLDivElement>document.querySelector('.annotation');
     this.createScene();
     this.startRenderingLoop();
     this.createControls();
@@ -226,6 +240,4 @@ export class ModelComponent implements OnInit, AfterViewInit {
       this.updateScreenPosition();
     }, 100);
   }
-
-
 }

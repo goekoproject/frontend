@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ContentFulModule } from '@goeko/store';
-import { ButtonModule, GoekoButtonModule, TitlePageComponent, TooltipModule } from '@goeko/ui';
+import {
+  ButtonModule,
+  GoekoButtonModule,
+  TitlePageComponent,
+  TooltipModule,
+} from '@goeko/ui';
 import { BannerComponent } from './banner/banner.component';
 import { HomeRouteModule } from './home.routes';
 import { HomeComponent } from './home/home.component';
@@ -19,29 +24,29 @@ import { LandingComponent } from './landing/landing.component';
 import { TeamComponent } from './team/team.component';
 
 @NgModule({
-	declarations: [
-		HomeComponent,
-		BannerComponent,
-		ContentComponent,
-		ModelComponent,
-		SphereComponent,
-		ScenesComponent,
-		OrderByPipe,
-		TeamComponent,
-		DocumentLegalComponent,
-		LandingComponent,
-		AboutComponent,
-	],
-	imports: [
-		CommonModule,
-		HomeRouteModule,
-		ButtonModule,
-		ContentFulModule,
-		AngularSvgIconModule.forRoot(),
-		TooltipModule,
-		GoekoButtonModule,
-		TranslateModule,
-		TitlePageComponent,
-	],
+  declarations: [
+    HomeComponent,
+    BannerComponent,
+    ContentComponent,
+    ModelComponent,
+    SphereComponent,
+    ScenesComponent,
+    OrderByPipe,
+    TeamComponent,
+    DocumentLegalComponent,
+    LandingComponent,
+    AboutComponent,
+  ],
+  imports: [
+    CommonModule,
+    HomeRouteModule,
+    ButtonModule,
+    ContentFulModule,
+    AngularSvgIconModule.forRoot(),
+    TooltipModule,
+    GoekoButtonModule,
+    TranslateModule,
+    TitlePageComponent,
+  ],
 })
 export class HomeModule {}

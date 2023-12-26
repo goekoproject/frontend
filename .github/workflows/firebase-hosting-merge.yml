@@ -5,7 +5,7 @@ name: Deploy to Firebase Hosting on merge
 on:
   push:
     branches:
-      - main
+      - feature/new-version-angular
 jobs:
   build:
     name: Build
@@ -25,13 +25,13 @@ jobs:
           check-latest: true
       #Init Node
       - name: Install Dependencies
-        run: npm install --force
+        run: npm install
       - name: Build
-        run: npm run build --prod
+        run: npm run build goeko --production
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dist
+          name: build-project
           path: goeko/dist/apps
   deploy:
     name: Deploy
@@ -43,7 +43,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: dist
+          name: build-project
           path: goeko/dist/apps
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master

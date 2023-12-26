@@ -1,30 +1,30 @@
 {
-	"name": "goeko-e2e",
-	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "apps/goeko-e2e/src",
-	"projectType": "application",
-	"targets": {
-		"e2e": {
-			"executor": "@nrwl/cypress:cypress",
-			"options": {
-				"cypressConfig": "apps/goeko-e2e/cypress.config.ts",
-				"devServerTarget": "goeko:serve:development",
-				"testingType": "e2e"
-			},
-			"configurations": {
-				"production": {
-					"devServerTarget": "goeko:serve:production"
-				}
-			}
-		},
-		"lint": {
-			"executor": "@nrwl/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["apps/goeko-e2e/**/*.{js,ts}"]
-			}
-		}
-	},
-	"tags": [],
-	"implicitDependencies": ["goeko"]
+  "name": "goeko-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/goeko-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/goeko-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "goeko:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "goeko:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "goeko:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["goeko"]
 }

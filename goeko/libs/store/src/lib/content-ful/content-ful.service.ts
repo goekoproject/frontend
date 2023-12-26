@@ -6,56 +6,66 @@ import { CONTENT_FUL_CONFIG } from './content-ful.module';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { TranslateService } from '@ngx-translate/core';
 export enum LangOfLocalecontentFul {
-	gb = 'en-US',
-	fr = 'fr',
+  gb = 'en-US',
+  fr = 'fr',
 }
 @Injectable({ providedIn: 'root' })
 export class ContentFulService {
-	constructor(
-		@Inject(CONTENT_FUL_CONFIG) public config: ContentFulConfig,
-		private _translateService: TranslateService
-	) {
-		this._translateService.onLangChange.subscribe((lang) => {
-			if (lang) {
-			}
-		});
-	}
+  constructor(
+    @Inject(CONTENT_FUL_CONFIG) public config: ContentFulConfig,
+    private _translateService: TranslateService
+  ) {
+    this._translateService.onLangChange.subscribe((lang) => {
+      if (lang) {
+      }
+    });
+  }
 
-	private _client = contentful.createClient({
-		space: this.config.contentFul.spaceId,
-		accessToken: this.config.contentFul.token,
-	});
+  private _client = contentful.createClient({
+    space: this.config.contentFul.spaceId,
+    accessToken: this.config.contentFul.token,
+  });
 
-	getContentEntry(entryId: string = '15Ahom6oBNAbJP3Mth7y18') {
-		return from(this._client.getEntry(entryId));
-	}
+  getContentEntry(entryId: string = '15Ahom6oBNAbJP3Mth7y18') {
+    return from(this._client.getEntry(entryId));
+  }
 
-	getEntryId(entryId: string) {
-		return from(this._client.getEntry(entryId));
-	}
-	getEntryIdByHTML(entryId: string, codeLang: string) {
-		const currentLang = LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
-		return from(this._getBodyLikeHtml(entryId, currentLang));
-	}
-	private async _getBodyLikeHtml(entryId: string, codeLang: string) {
-		return this._client.getEntry(entryId, { locale: codeLang }).then((entry: any) => {
-			const newBody = documentToHtmlString(entry.fields.text);
-			const documentlegal = {
-				...entry.fields,
-				text: newBody,
-			};
+  getEntryId(entryId: string) {
+    return from(this._client.getEntry(entryId));
+  }
+  getEntryIdByHTML(entryId: string, codeLang: string) {
+    const currentLang =
+      LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
+    return from(this._getBodyLikeHtml(entryId, currentLang));
+  }
+  private async _getBodyLikeHtml(entryId: string, codeLang: string) {
+    return this._client
+      .getEntry(entryId, { locale: codeLang })
+      .then((entry: any) => {
+        const newBody = documentToHtmlString(entry.fields.text);
+        const documentlegal = {
+          ...entry.fields,
+          text: newBody,
+        };
 
-			return documentlegal;
-		});
-	}
+        return documentlegal;
+      });
+  }
 
-	getContentType(contentType: string) {
-		const codeLang = this._translateService.currentLang || this._translateService.defaultLang;
-		const currentLang = LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
-		return from(this._client.getEntries({ content_type: contentType, locale: currentLang }));
-	}
+  getContentType(contentType: string) {
+    const codeLang =
+      this._translateService.currentLang || this._translateService.defaultLang;
+    const currentLang =
+      LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
+    return from(
+      this._client.getEntries({
+        content_type: contentType,
+        locale: currentLang,
+      })
+    );
+  }
 
-	getAssets(id: string) {
-		from(this._client.getAsset(id));
-	}
+  getAssets(id: string) {
+    from(this._client.getAsset(id));
+  }
 }

@@ -1,7 +1,11 @@
 <nav class="header-user"></nav>
 <ng-content></ng-content>
 <div class="header-user-actions">
-	<goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang">
-	</goeko-select-i18n>
-	<goeko-side-profile [dataProfile]="dataUser"></goeko-side-profile>
+  <goeko-select-i18n
+    [langs]="langs"
+    (onSelect)="onChangeLangs($event)"
+    [defaultLang]="defaultLang"
+  >
+  </goeko-select-i18n>
+  <goeko-side-profile [dataProfile]="dataUser"></goeko-side-profile>
 </div>

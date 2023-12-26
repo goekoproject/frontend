@@ -1,76 +1,73 @@
 $font-roboto-regular: 'Roboto-Regular';
 $font-roboto-thin: 'Roboto-Thin';
-$font-barlow-semi-bold:'Barlow-SemiBold';
+$font-barlow-semi-bold: 'Barlow-SemiBold';
 
-$font-barlow-la-belle-aurore:'LaBelleAurore-Regular';
-$font-inter-thin:'Inter-Thin';
-
-
+$font-barlow-la-belle-aurore: 'LaBelleAurore-Regular';
+$font-inter-thin: 'Inter-Thin';
 
 :root {
-    --font-default: 14px Mukta Mahee, sans-serif;
-    --font-title: 18px 700 Mukta Mahee, sans-serif;
-    --font-subtitle: 15px Barlow-SemiBold, sans-serif;
+  --font-default: var(--font-body);
+  --font-huge-heading: 60px/3.875rem Epilogue-SemiBold, sans-serif;
+  --font-heading: 24px/2rem Epilogue-Bold, sans-serif;
+  --font-body: 16px/1.5rem Barlow-Regular, sans-serif;
+  --font-body-semibold: 16px Barlow-SemiBold, sans-serif;
+  --font-body-bold: 20px/1.5rem Barlow-Bold, sans-serif;
+  --font-menu: 16px Barlow-Medium, sans-serif;
+  --font-label: 14px Barlow-Medium, sans-serif;
+  --font-label-semibold: 12px Barlow-SemiBold, sans-serif;
+  --font-marketing-bold: 48px Barlow-Bold, sans-serif;
 }
 
-
-$font-path: '_fonts';
-$font-path-barlow: '_fonts/barlow';
-
-$font-path-supports: '_fonts/supports';
-
-$font-path-inter: '_fonts/inter';
-
-
-
-/** Roboto REGULAR **/
-
-
+/** HEADING **/ /* epilogue-regular - latin */
+/** fonts woff -->  https://gwfh.mranftl.com/fonts  */
+/* epilogue-600 - latin */
 @font-face {
-	font-family: '#{$font-roboto-regular}';
-	src: url('#{$font-path}/#{$font-roboto-regular}.ttf?sirsoa') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
+  font-display: swap;
+  font-family: 'Epilogue-SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  src: url('_fonts/epilogue/Epilogue-SemiBold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* epilogue-700 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Epilogue-Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('_fonts/epilogue/Epilogue-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/** Roboto LIGHT **/
-
-
+/** BODY **/
+/* barlow-regular - latin */
 @font-face {
-	font-family: '#{$font-roboto-thin}';
-	src: url('#{$font-path}/#{$font-roboto-thin}.ttf?sirsoa') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
+  font-display: swap;
+  font-family: 'Barlow-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('_fonts/barlow/Barlow-Regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/** Barlow SEMIBOLD **/
-
+/* barlow-500 - latin */
 @font-face {
-	font-family: '#{$font-barlow-semi-bold}';
-	src: url('#{$font-path-barlow}/#{$font-barlow-semi-bold}.ttf?sirsoa') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
+  font-display: swap;
+  font-family: 'Barlow-Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: url('_fonts/barlow/Barlow-Medium.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-
-/** La belle aurore **/
-
+/* barlow-600 - latin */
 @font-face {
-	font-family: '#{$font-barlow-la-belle-aurore}';
-	src: url('#{$font-path-supports}/#{$font-barlow-la-belle-aurore}.ttf?sirsoa') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
+  font-display: swap;
+  font-family: 'Barlow-SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  src: url('_fonts/barlow/Barlow-SemiBold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-/**Inter */
-
+/* barlow-700 - latin */
 @font-face {
-	font-family: '#{$font-inter-thin}';
-	src: url('#{$font-path-inter}/#{$font-inter-thin}.ttf?sirsoa') format('truetype');
-	font-weight: 100;
-
+  font-display: swap;
+  font-family: 'Barlow-Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('_fonts/barlow/Barlow-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }

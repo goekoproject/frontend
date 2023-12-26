@@ -5,6 +5,8 @@ import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
 import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
+import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component';
+import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
 
 const routes: Routes = [
 	{
@@ -26,13 +28,13 @@ const routes: Routes = [
 					breadcrumb: 'summary',
 				},
 			},
-			{
+			/* {
 				path: 'results/:id',
 				component: SmeAnalysisResultComponent,
 				data: {
 					breadcrumb: 'your_ecosolutions',
 				},
-			},
+			}, */
 		],
 	},
 	{
@@ -82,13 +84,6 @@ const routes: Routes = [
 					breadcrumb: 'summary',
 				},
 			},
-			{
-				path: 'results/:id',
-				component: SmeAnalysisResultComponent,
-				data: {
-					breadcrumb: 'your_ecosolutions',
-				},
-			},
 		],
 	},
 	{
@@ -117,6 +112,17 @@ const routes: Routes = [
 					breadcrumb: 'your_ecosolutions',
 				},
 			},
+		],
+	},
+	{
+		path: 'results/:id',
+		component: SmeAnalysisResultComponent,
+		data: {
+			breadcrumb: 'your_ecosolutions',
+		},
+		children: [
+			{ path: '', component: EcosolutionListComponent },
+			{ path: 'details', component: ResultDetailEcosolutionComponent },
 		],
 	},
 ];

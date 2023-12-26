@@ -14,3 +14,5 @@ export * from './lib/ui/ui-breadcrumbs/public-api';
 export * from './lib/ui/loaders/public-api';
 export * from './lib/ui/title-page/public-api';
 export * from './lib/ui/tab-group/public-api';
+export * from './lib/ui/percentage-card/public-api';
+export * from './lib/utils/public-api';

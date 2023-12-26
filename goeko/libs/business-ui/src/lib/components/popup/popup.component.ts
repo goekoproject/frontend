@@ -1,33 +1,41 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+/* eslint-disable @angular-eslint/no-output-on-prefix */
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
-	selector: 'go-popup',
-	templateUrl: './popup.component.html',
-	styleUrls: ['./popup.component.scss'],
-	encapsulation: ViewEncapsulation.None,
-	host: {
-		class: 'go-popup',
-	},
+  selector: 'go-popup',
+  templateUrl: './popup.component.html',
+  styleUrls: ['./popup.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: {
+    class: 'go-popup',
+  },
 })
 export class PopupComponent {
-	@Input() body: string = 'text body';
-	@Input() title: string = 'title body';
+  @Input() body: string = 'text body';
+  @Input() title: string = 'title body';
 
-	@Input('text-main-button') textMainButton!: string;
-	@Input('text-secondary-button') textSecondaryButton!: string;
+  @Input() textMainButton!: string;
+  @Input() textSecondaryButton!: string;
 
-	@Output() onClickOK: EventEmitter<boolean> = new EventEmitter();
-	@Output() onClickKO: EventEmitter<boolean> = new EventEmitter();
+  @Output() onClickOK: EventEmitter<boolean> = new EventEmitter();
+  @Output() onClickKO: EventEmitter<boolean> = new EventEmitter();
 
-	toggle!: boolean;
+  toggle!: boolean;
 
-	onOk() {
-		this.toggle = true;
-		this.onClickOK.emit(this.toggle);
-	}
+  onOk() {
+    this.toggle = true;
+    this.onClickOK.emit(this.toggle);
+  }
 
-	onKo() {
-		this.toggle = false;
-		this.onClickKO.emit(this.toggle);
-	}
+  onKo() {
+    this.toggle = false;
+    this.onClickKO.emit(this.toggle);
+  }
 }

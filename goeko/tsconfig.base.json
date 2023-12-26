@@ -1,26 +1,25 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"useDefineForClassFields": false,
-		"baseUrl": ".",
-		"declaration": false,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"importHelpers": true,
-		"lib": ["es2020", "dom"],
-		"module": "esnext",
-		"moduleResolution": "node",
-		"paths": {
-			"@goeko/business-ui": ["libs/business-ui/src/index.ts"],
-			"@goeko/core": ["libs/core/src/index.ts"],
-			"@goeko/store": ["libs/store/src/index.ts"],
-			"@goeko/ui": ["libs/ui/src/index.ts"]
-		},
-		"rootDir": ".",
-		"skipDefaultLibCheck": true,
-		"skipLibCheck": true,
-		"sourceMap": true,
-		"target": "es2015"
-	},
-	"exclude": ["node_modules", "tmp"]
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@goeko/business-ui": ["libs/business-ui/src/index.ts"],
+      "@goeko/core": ["libs/core/src/index.ts"],
+      "@goeko/store": ["libs/store/src/index.ts"],
+      "@goeko/ui": ["libs/ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
 }

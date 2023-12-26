@@ -6,8 +6,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-	declarations: [SelectI18nComponent],
-	imports: [CommonModule, ButtonModule, OverlayModule, TranslateModule],
-	exports: [SelectI18nComponent],
+  declarations: [SelectI18nComponent],
+  imports: [CommonModule, ButtonModule, OverlayModule, TranslateModule],
+  exports: [SelectI18nComponent],
 })
 export class SelectI18nModule {}

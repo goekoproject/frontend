@@ -8,13 +8,13 @@ import { PlaygroundUiBreadcrumbsComponent } from './playground-ui-breadcrumbs/pl
 import { PlaygroundUiBreadcrumbsdetailsComponent } from './playground-ui-breadcrumbsdetails/playground-ui-breadcrumbsdetails.component';
 
 @NgModule({
-	declarations: [
-		UiBreadcrumbsComponent,
-		PlaygroundUiBreadcrumbsComponent,
-		PlaygroundUiBreadcrumbsdetailsComponent,
-		BreadCrumbsFormatPipe,
-	],
-	exports: [UiBreadcrumbsComponent],
-	imports: [CommonModule, RouterModule, TranslateModule],
+  declarations: [
+    UiBreadcrumbsComponent,
+    PlaygroundUiBreadcrumbsComponent,
+    PlaygroundUiBreadcrumbsdetailsComponent,
+    BreadCrumbsFormatPipe,
+  ],
+  exports: [UiBreadcrumbsComponent],
+  imports: [CommonModule, RouterModule, TranslateModule],
 })
 export class UiBreadcrumbsModule {}
