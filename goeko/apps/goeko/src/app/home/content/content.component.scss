@@ -32,7 +32,7 @@ $color-deep-button-active: #e9e9e9f5;
   padding: 1rem 2rem;
   flex-direction: column;
   align-items: flex-start;
-
+  cursor: pointer;
   border-radius: 1.5rem;
 
   background: var(--white);
@@ -40,7 +40,7 @@ $color-deep-button-active: #e9e9e9f5;
 
   &-icon {
     font-size: 2rem;
-    color: var(--primary-main);
+    color: var(--primary--main);
   }
   &-name {
     color: var(--soft-dark, #094056);
@@ -55,7 +55,7 @@ $color-deep-button-active: #e9e9e9f5;
   display: flex;
   gap: 6rem;
   flex-wrap: wrap;
-  padding: 10rem 0;
+  padding: 6rem 0;
 
   &__actor-photo {
     width: 37%;
@@ -68,7 +68,7 @@ $color-deep-button-active: #e9e9e9f5;
   flex-direction: column;
   width: 47%;
   gap: 4rem;
-
+  flex-grow: 2;
   &-title {
     color: var(--light-accent, #41c4e6);
     font: var(--text-bold-accent);
@@ -76,6 +76,7 @@ $color-deep-button-active: #e9e9e9f5;
   &-description {
     color: var(--dark-accent, #163953);
     font: var(--font-marketing-bold);
+    font-size: clamp(2rem, 3rem, 3.5rem);
   }
 }
 .info-actors-feature {
@@ -98,7 +99,7 @@ $color-deep-button-active: #e9e9e9f5;
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    width: 12rem;
+    width: 14rem;
   }
   &-icon {
     width: 3rem;
@@ -166,9 +167,10 @@ $color-deep-button-active: #e9e9e9f5;
 
 @media (max-width: 768px) {
   .content {
-    height: auto;
     justify-content: center;
-    text-align: center;
+  }
+  .content__actor-photo {
+    display: none;
   }
 }
 .goeko-go {

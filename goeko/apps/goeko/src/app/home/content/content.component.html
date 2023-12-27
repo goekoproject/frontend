@@ -1,35 +1,21 @@
 <section class="select-actors">
   <div class="select-actors-heading">
-    <h2 class="select-actors-title">What is your path to sustainability?</h2>
+    <h2 class="select-actors-title">{{ entryDataSustainability?.text }}</h2>
     <p class="select-actors-description">
-      Connecting SMEs to clean technologies and financing
+      {{ entryDataConnecting?.text }}
     </p>
   </div>
 
   <ul class="platform-actors">
-    <li class="actors-detail">
-      <i class="ti ti-building-store actors-detail-icon"></i>
-      <h3 class="actors-detail-name">Enterprise</h3>
+    @for (actor of actors; track actor.title) {
+    <li class="actors-detail" (click)="navigateToActors(actor.id)">
+      <i class="ti {{ actor.icon }} actors-detail-icon"></i>
+      <h3 class="actors-detail-name">{{ actor.title }}</h3>
       <p class="actors-detail-description">
-        Turn your business sustainable with our platform's eco-solutions
+        {{ actor.body }}
       </p>
     </li>
-
-    <li class="actors-detail">
-      <i class="ti ti-building-store actors-detail-icon"></i>
-      <h3 class="actors-detail-name">Enterprise</h3>
-      <p class="actors-detail-description">
-        Turn your business sustainable with our platform's eco-solutions
-      </p>
-    </li>
-
-    <li class="actors-detail">
-      <i class="ti ti-building-store actors-detail-icon"></i>
-      <h3 class="actors-detail-name">Enterprise</h3>
-      <p class="actors-detail-description">
-        Turn your business sustainable with our platform's eco-solutions
-      </p>
-    </li>
+    }
   </ul>
 </section>
 
@@ -60,12 +46,13 @@
   <section class="info-actors">
     <div>
       <h1
+        id="name"
         class="info-actors-title"
         [ngClass]="{ 'title-reverse-content': !odd }"
       >
         {{ article?.name }}
       </h1>
-      <h3 class="info-actors-description">
+      <h3 class="info-actors-description" id="descriptions">
         {{ article?.descriptions }}
       </h3>
     </div>
@@ -74,15 +61,15 @@
       class="info-actors-feature"
       *ngIf="article?.benefits && article?.benefits.length > 0"
     >
-      <p class="info-actors-feature-description">
+      <p class="info-actors-feature-description" id="descriptions2">
         {{ article?.descriptions2 }}
       </p>
       <ul class="info-actors-benefis">
         @for (item of article?.benefits; track item._id) {
-        <li class="info-actors-benefis-element">
+        <li class="info-actors-benefis-element" id="{{ item?.icon }}">
           <i class="ti {{ item?.icon }} info-actors-benefis-icon"></i>
 
-          <p class="info-actors-benefis-label">{{ item?.text }}</p>
+          <p class="info-actors-benefis-label" id="text">{{ item?.text }}</p>
         </li>
         }
       </ul>
@@ -104,11 +91,8 @@
 </ng-template>
 
 <ng-template #otherActor let-id="id">
-  <h4 class="content-slogan">{{ 'HOME.sloganCallActionsBtn' | translate }}</h4>
-  <div class="goeko_in">
-    <go-goeko-button [routerLink]="'../demo/' + id" style="width: 100px">
-      <span class="goeko-go" btn-logo></span>
-      {{ 'start' | translate }}
-    </go-goeko-button>
-  </div>
+  <button go-button [routerLink]="'../demo/' + id">
+    {{ 'connectNow' | translate }}
+    <span class="material-symbols-rounded"> connect_without_contact </span>
+  </button>
 </ng-template>

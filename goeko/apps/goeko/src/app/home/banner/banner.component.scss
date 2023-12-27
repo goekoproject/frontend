@@ -1,6 +1,6 @@
-$default-position-layer1-video: 1.8rem;
-$default-position-layer2-video: 3.2rem;
-$default-position-layer3-video: 4.7rem;
+$default-position-layer1-video: 5.4rem;
+$default-position-layer2-video: 7rem;
+$default-position-layer3-video: 8.4rem;
 
 @mixin urlImg($img) {
   background-image: $img;
@@ -90,12 +90,14 @@ $default-position-layer3-video: 4.7rem;
 }
 .banner-video {
   position: relative;
+  width: clamp(430px, 100%, 549px);
   .banner-video-sme {
     z-index: 1;
     position: relative;
     border-radius: 33px;
     background: #fff;
     box-shadow: -4px 7px 19px 0px rgba(0, 0, 0, 0.09);
+    width: 100%;
   }
 }
 
