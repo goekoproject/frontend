@@ -41,7 +41,7 @@ export class BaseDataContentFulComponent implements OnDestroy {
     this._changeContent$.subscribe((content) => {
       if (content) {
         this._contentFulService
-          .getEntryIdByHTML(this.entryId, this.currentLang)
+          .getEntryIdByHTML(this.entryId)
           .subscribe((res) => this._content$.next(res));
       }
     });

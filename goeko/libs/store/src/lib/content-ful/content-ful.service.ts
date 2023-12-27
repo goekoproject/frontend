@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, signal } from '@angular/core';
 import * as contentful from 'contentful';
 import { from } from 'rxjs';
 import { ContentFulConfig } from './config.interface';
@@ -11,6 +11,13 @@ export enum LangOfLocalecontentFul {
 }
 @Injectable({ providedIn: 'root' })
 export class ContentFulService {
+  get currentLang() {
+    const codeLang =
+      this._translateService.currentLang || this._translateService.defaultLang;
+    const currentLang =
+      LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
+    return signal(currentLang);
+  }
   constructor(
     @Inject(CONTENT_FUL_CONFIG) public config: ContentFulConfig,
     private _translateService: TranslateService
@@ -31,16 +38,18 @@ export class ContentFulService {
   }
 
   getEntryId(entryId: string) {
-    return from(this._client.getEntry(entryId));
+    return from(
+      this._client.getEntry(entryId, {
+        locale: this.currentLang(),
+      })
+    );
   }
-  getEntryIdByHTML(entryId: string, codeLang: string) {
-    const currentLang =
-      LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
-    return from(this._getBodyLikeHtml(entryId, currentLang));
+  getEntryIdByHTML(entryId: string) {
+    return from(this._getBodyLikeHtml(entryId));
   }
-  private async _getBodyLikeHtml(entryId: string, codeLang: string) {
+  private async _getBodyLikeHtml(entryId: string) {
     return this._client
-      .getEntry(entryId, { locale: codeLang })
+      .getEntry(entryId, { locale: this.currentLang() })
       .then((entry: any) => {
         const newBody = documentToHtmlString(entry.fields.text);
         const documentlegal = {
@@ -53,14 +62,10 @@ export class ContentFulService {
   }
 
   getContentType(contentType: string) {
-    const codeLang =
-      this._translateService.currentLang || this._translateService.defaultLang;
-    const currentLang =
-      LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
     return from(
       this._client.getEntries({
         content_type: contentType,
-        locale: currentLang,
+        locale: this.currentLang(),
       })
     );
   }

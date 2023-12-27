@@ -77,15 +77,12 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentLang = this._translate.defaultLang;
+    this._onChangeLang();
+
     this._getContentActors();
     this._getContentDataActors();
-    this._getActors();
-    this._onClickCleanTeach();
-    this._oBank();
     this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY);
     this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING);
-
-    console.log(this.actors);
   }
 
   private _effectActors() {
@@ -100,22 +97,12 @@ export class ContentComponent implements OnInit {
     this._viewportScroller.scrollToAnchor(actor);
   }
 
-  private _onClickCleanTeach() {
-    this._interactionService.onCleanTeachClick.subscribe((res) => {
-      this._viewportScroller.scrollToAnchor('cleantech');
-    });
-  }
-
-  private _oBank() {
-    this._interactionService.onBankClick.subscribe((res) => {
-      this._viewportScroller.scrollToAnchor('bank');
-    });
-  }
-
-  private _getActors() {
+  private _onChangeLang() {
     this._translate.onLangChange.subscribe((res) => {
       this._getContentDataActors();
       this._getContentActors();
+      this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY);
+      this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING);
       this.currentLang = res.lang;
     });
   }

@@ -59,6 +59,7 @@ $default-position-layer3-video: 8.4rem;
   &-info {
     font: var(--font-label);
     color: var(--dark-accent, #163953);
+    margin-left: 0.4rem;
   }
   &-shadow {
     // background: rgba(0, 0, 0, 0.45);
@@ -141,7 +142,9 @@ $default-position-layer3-video: 8.4rem;
 .ods-icon {
   width: 70px;
 }
-
+.fi-ch {
+  border-radius: 50% 10% / 34% 20%;
+}
 @keyframes fillAnimation {
   0% {
     fill: #ece2e2;
