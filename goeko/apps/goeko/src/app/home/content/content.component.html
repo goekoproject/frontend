@@ -1,9 +1,11 @@
 <section class="select-actors">
   <div class="select-actors-heading">
-    <h2 class="select-actors-title">{{ entryDataSustainability?.text }}</h2>
+    @if (entryDataConnecting) {
+    <h2 class="select-actors-title">{{ entryDataSustainability.text }}</h2>
     <p class="select-actors-description">
-      {{ entryDataConnecting?.text }}
+      {{ entryDataConnecting.text }}
     </p>
+    }
   </div>
 
   <ul class="platform-actors">

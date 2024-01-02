@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SessionStorageService } from '../config/services/session-storage.service';
 
@@ -9,6 +9,7 @@ export const SS_USERNAME = 'user_name';
 @Injectable({ providedIn: 'platform' })
 export class UserContextService {
   private _userType = new BehaviorSubject<any>('');
+
   public get userType(): Observable<any> {
     if (!this._userType.value) {
       const sessionuserType = this.sessionStorageService.getItem<string>(

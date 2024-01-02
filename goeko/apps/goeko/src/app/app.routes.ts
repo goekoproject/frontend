@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { AuthGuard } from '@goeko/core';
+import { AuthGuard, ROLE, ROLE_ALL, hasRole } from '@goeko/core';
 
 export const appRoutes: Route[] = [
   {
@@ -33,13 +33,15 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'dashboard',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, hasRole(ROLE.SME, ROLE.CLEANTECH)],
+    canMatch: [hasRole(ROLE.SME, ROLE.CLEANTECH)],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: 'profile',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, hasRole(ROLE.SME, ROLE.CLEANTECH)],
+    canMatch: [hasRole(ROLE.SME, ROLE.CLEANTECH)],
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },

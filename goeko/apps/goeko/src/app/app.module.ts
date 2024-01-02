@@ -11,7 +11,7 @@ import {
   SelectI18nModule,
   SideProfileComponent,
 } from '@goeko/business-ui';
-import { ConfigModule } from '@goeko/core';
+import { ConfigModule, ShowForRolesDirective } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
@@ -51,6 +51,7 @@ const httpLoaderFactory = (http: HttpClient) => {
     SelectI18nModule,
     UiBreadcrumbsModule,
     BadgeModule,
+    ShowForRolesDirective,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

@@ -1,18 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, UserContextService } from '@goeko/core';
 import { UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  MENU_USER_CLEANTECH,
-  MENU_USER_SME,
-  MenuUser,
-} from './menu-user.contants';
-
-export const SELECT_MENU_USER = {
-  cleantech: MENU_USER_CLEANTECH,
-  sme: MENU_USER_SME,
-};
+import { MENU_USER, MenuUser } from './menu-user.contants';
+import { AuthService, UserContextService } from '@goeko/core';
 
 @Component({
   selector: 'goeko-menu-user',
@@ -36,8 +27,7 @@ export class MenuUserComponent implements OnInit {
     );
     this._userContextService.userType.subscribe((userType: string) => {
       if (userType) {
-        this.menuOptions =
-          SELECT_MENU_USER[userType as keyof typeof SELECT_MENU_USER];
+        this.menuOptions = MENU_USER;
       }
     });
   }
