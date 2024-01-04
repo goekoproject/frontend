@@ -1,6 +1,9 @@
 import { ModuleFederationConfig } from '@nx/webpack';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import baseConfig from '../../module-federation.config';
 
 const config: ModuleFederationConfig = {
+  ...baseConfig,
   name: 'goeko',
   /**
    * To use a remote that does not exist in your current Nx Workspace
@@ -14,7 +17,7 @@ const config: ModuleFederationConfig = {
    * declare module 'my-external-remote';
    *
    */
-  remotes: [],
+  /* remotes: [], */
 };
 
 export default config;

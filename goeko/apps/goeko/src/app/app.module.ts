@@ -15,6 +15,7 @@ import { ConfigModule, ShowForRolesDirective } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
+  GoShowUserTypeDirective,
   SmeModule,
   UserService,
 } from '@goeko/store';
@@ -52,6 +53,7 @@ const httpLoaderFactory = (http: HttpClient) => {
     UiBreadcrumbsModule,
     BadgeModule,
     ShowForRolesDirective,
+    GoShowUserTypeDirective,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

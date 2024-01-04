@@ -1,5 +1,6 @@
-export type USER_TYPE = 'sme' | 'cleantech';
-export enum ACTORS_TYPE {
-	SME = 'sme',
-	CLEANTECH = 'cleantech',
+export type UserType = 'sme' | 'cleantech' | 'admin';
+export enum USER_TYPE {
+  SME = 'sme',
+  CLEANTECH = 'cleantech',
+  ADMIN = 'admin',
 }

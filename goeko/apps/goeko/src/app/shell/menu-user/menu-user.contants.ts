@@ -1,4 +1,5 @@
-import { ROLE, Role } from '@goeko/core';
+import { ROLES, UserRoles } from '@goeko/core';
+import { USER_TYPE, UserType } from '@goeko/store';
 
 export interface MenuUser {
   // RANDOMuuid FORMAT `${string}-${string}-${string}-${string}-${string}`
@@ -7,7 +8,8 @@ export interface MenuUser {
   url: string;
   active: boolean;
   icon: string;
-  roles: Role[];
+  userType: UserType[];
+  userRoles?: UserRoles[];
 }
 export const MENU_USER: MenuUser[] = [
   {
@@ -16,7 +18,7 @@ export const MENU_USER: MenuUser[] = [
     url: '/dashboard/sme',
     active: true,
     icon: 'home',
-    roles: [ROLE.SME],
+    userType: [USER_TYPE.SME],
   },
   {
     id: window.crypto.randomUUID(),
@@ -24,7 +26,7 @@ export const MENU_USER: MenuUser[] = [
     url: '/dashboard/cleantech',
     active: true,
     icon: 'home',
-    roles: [ROLE.CLEANTECH],
+    userType: [USER_TYPE.CLEANTECH],
   },
   {
     id: window.crypto.randomUUID(),
@@ -32,7 +34,7 @@ export const MENU_USER: MenuUser[] = [
     url: 'cleantech-ecosolutions',
     active: true,
     icon: 'solar-panel-2',
-    roles: [ROLE.CLEANTECH],
+    userType: [USER_TYPE.CLEANTECH],
   },
   {
     id: window.crypto.randomUUID(),
@@ -41,7 +43,7 @@ export const MENU_USER: MenuUser[] = [
     url: 'profile',
     active: true,
     icon: 'user-square-rounded',
-    roles: [ROLE.SME, ROLE.CLEANTECH],
+    userType: [USER_TYPE.SME, USER_TYPE.CLEANTECH],
   },
   {
     id: window.crypto.randomUUID(),
@@ -49,7 +51,7 @@ export const MENU_USER: MenuUser[] = [
     url: 'sme-analysis/new',
     active: true,
     icon: 'ti ti-analyze-filled',
-    roles: [ROLE.SME],
+    userType: [USER_TYPE.SME],
   },
   {
     id: window.crypto.randomUUID(),
@@ -57,6 +59,15 @@ export const MENU_USER: MenuUser[] = [
     url: 'favorite',
     active: true,
     icon: 'heart',
-    roles: [ROLE.SME],
+    userType: [USER_TYPE.SME],
+  },
+  {
+    id: window.crypto.randomUUID(),
+    title: 'Admin Category',
+    url: 'admin',
+    active: true,
+    icon: 'settings',
+    userType: [USER_TYPE.SME],
+    userRoles: [ROLES.ADMIN],
   },
 ];

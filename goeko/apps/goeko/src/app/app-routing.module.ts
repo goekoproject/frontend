@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard, ROLE, hasRole } from '@goeko/core';
+import { AuthGuard, ROLES, hasRole } from '@goeko/core';
 
 const ROUTES: Routes = [
   {
@@ -34,22 +34,22 @@ const ROUTES: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AuthGuard, hasRole(ROLE.SME, ROLE.CLEANTECH)],
-    canMatch: [hasRole(ROLE.SME, ROLE.CLEANTECH)],
+    canActivate: [AuthGuard],
+    canMatch: [],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: 'profile',
-    canActivate: [AuthGuard, hasRole(ROLE.SME, ROLE.CLEANTECH)],
-    canMatch: [hasRole(ROLE.SME, ROLE.CLEANTECH)],
+    canActivate: [AuthGuard, hasRole(ROLES.PUBLIC)],
+    canMatch: [hasRole(ROLES.PUBLIC)],
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: 'sme-analysis',
-    canActivate: [AuthGuard, hasRole(ROLE.SME)],
-    canMatch: [hasRole(ROLE.SME)],
+    canActivate: [AuthGuard, hasRole(ROLES.PUBLIC)],
+    canMatch: [hasRole(ROLES.PUBLIC)],
     loadChildren: () =>
       import('./sme-analysis-form/sme-analysis-form.module').then(
         (m) => m.SmeAnalysisFormModule
@@ -57,12 +57,19 @@ const ROUTES: Routes = [
   },
   {
     path: 'cleantech-ecosolutions',
-    canActivate: [AuthGuard, hasRole(ROLE.CLEANTECH)],
-    canMatch: [hasRole(ROLE.CLEANTECH)],
+    canActivate: [AuthGuard, hasRole(ROLES.PUBLIC)],
+    canMatch: [hasRole(ROLES.PUBLIC)],
     loadChildren: () =>
       import('./cleantech-ecosolutions/cleantech-ecosolutions.module').then(
         (m) => m.CleantechEcosolutionsModule
       ),
+  },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard, hasRole(ROLES.ADMIN)],
+    canMatch: [hasRole(ROLES.ADMIN)],
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
   },
 ];
 @NgModule({
@@ -70,6 +77,7 @@ const ROUTES: Routes = [
     RouterModule.forRoot(ROUTES, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
+      initialNavigation: 'enabledBlocking',
       scrollOffset: [0, 100], // [x, y]
     }),
   ],

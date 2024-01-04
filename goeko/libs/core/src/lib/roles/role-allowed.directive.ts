@@ -8,7 +8,8 @@ import {
 } from '@angular/core';
 import { distinctUntilChanged, map, Subscription, tap } from 'rxjs';
 import { UserContextService } from '../user-context/user-context.service';
-import { Role } from './role-type.model';
+import { ROLES, UserRoles } from './role-type.model';
+import { handleRoles } from './has-role-factory';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -16,7 +17,7 @@ import { Role } from './role-type.model';
   standalone: true,
 })
 export class ShowForRolesDirective implements OnInit, OnDestroy {
-  @Input('goShowForRoles') allowedRoles?: Role[];
+  @Input('goShowForRoles') allowedRoles?: UserRoles[] = [ROLES.PUBLIC];
   private sub?: Subscription;
 
   constructor(
@@ -25,11 +26,9 @@ export class ShowForRolesDirective implements OnInit, OnDestroy {
     private templateRef: TemplateRef<any>
   ) {}
   ngOnInit(): void {
-    this.sub = this.userContextService.userType
+    this.sub = this.userContextService.userRole
       .pipe(
-        map((userType) =>
-          Boolean(userType && this.allowedRoles?.includes(userType))
-        ),
+        map((userRole) => handleRoles(userRole, this.allowedRoles)),
         distinctUntilChanged(),
         tap((hasRole) =>
           hasRole

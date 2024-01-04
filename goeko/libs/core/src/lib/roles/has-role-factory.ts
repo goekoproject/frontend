@@ -1,12 +1,25 @@
 import { inject } from '@angular/core';
-import { Role } from './role-type.model';
 import { UserContextService } from '../user-context/user-context.service';
-import { map, tap } from 'rxjs';
+import { distinctUntilChanged, map, tap } from 'rxjs';
+import { ROLES, UserRoles } from './role-type.model';
 
-export function hasRole(...allowedRoles: Role[]) {
+export function hasRole(...allowedRoles: UserRoles[]) {
   return () =>
-    inject(UserContextService).userType.pipe(
-      map((userType) => Boolean(userType && allowedRoles.includes(userType))),
-      tap((hasRole) => hasRole === false && alert('Access denied'))
+    inject(UserContextService).userRole.pipe(
+      map((userRole) => handleRoles(userRole, allowedRoles)),
+      distinctUntilChanged(),
+      tap((hasRole) => {
+        if (!hasRole) {
+          alert('Access denied');
+          window.history.back();
+        }
+      })
     );
 }
+
+export const handleRoles = (
+  userRole: UserRoles[],
+  allowedRoles: UserRoles[] = [ROLES.PUBLIC]
+) =>
+  userRole.includes(ROLES.ADMIN) ||
+  userRole.some((role) => Boolean(role && allowedRoles?.includes(role)));

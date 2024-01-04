@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { AuthGuard, ROLE, ROLE_ALL, hasRole } from '@goeko/core';
+import { loadRemoteModule } from '@nx/angular/mf';
 
 export const appRoutes: Route[] = [
   {

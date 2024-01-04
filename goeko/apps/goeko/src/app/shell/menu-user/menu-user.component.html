@@ -4,16 +4,18 @@
   <ul class="menu-user-options">
     @for ( item of menuOptions; track item.id) {
 
-    <li
-      *goShowForRoles="item.roles"
-      [id]="item.id"
-      (click)="goTo(item.url)"
-      [routerLink]="item.url"
-      [routerLinkActive]="['active']"
-    >
-      <i class="ti ti-{{ item.icon }}"></i>
-      <p class="menu-user-title">{{ item.title | translate }}</p>
-    </li>
+    <ng-container *goShowForRoles="item.userRoles">
+      <li
+        *goShowUserType="item.userType"
+        [id]="item.id"
+        (click)="goTo(item.url)"
+        [routerLink]="item.url"
+        [routerLinkActive]="['active']"
+      >
+        <i class="ti ti-{{ item.icon }}"></i>
+        <p class="menu-user-title">{{ item.title | translate }}</p>
+      </li>
+    </ng-container>
 
     }
   </ul>

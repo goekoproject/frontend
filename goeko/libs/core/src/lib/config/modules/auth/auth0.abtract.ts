@@ -2,6 +2,7 @@ import { Auth0DecodedHash, Auth0ParseHashError, WebAuth } from 'auth0-js';
 import * as jsrsasign from 'jsrsasign';
 import { Subject } from 'rxjs';
 import { SESSIONID } from './auth.constants';
+import { UserRoles } from '../../../roles/role-type.model';
 export const ACCESS_TOKEN = 'accessToken';
 export const SS_JWTDATA = 'jwtData';
 
@@ -21,6 +22,7 @@ export interface AuthResponse {
   sub: string;
   updated_at: string;
   userType: string;
+  roles: UserRoles[];
 }
 
 export abstract class Auth0Connected {
@@ -64,10 +66,12 @@ export abstract class Auth0Connected {
         ) => {
           if (result && result.accessToken && result.idToken) {
             const jwtData = this._processJWSToken(result.idToken);
-            sessionStorage.setItem(SESSIONID, result.accessToken);
+            const jwtAccess = this._processJWSToken(result.accessToken);
 
+            sessionStorage.setItem(SESSIONID, result.accessToken);
+            const dataUser = { ...jwtData, roles: jwtAccess.permissions };
             this.expiresIn = jwtData.exp;
-            resolve(jwtData);
+            resolve(dataUser);
           } else if (error) {
             throw new Error(
               `Error: ${error.error}. Check the console for further details.`

@@ -1,23 +1,31 @@
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SessionStorageService } from '../config/services/session-storage.service';
+import { ROLES, UserRoles } from '../roles/role-type.model';
+import { preserveDataSession } from '../utils/preserve-data';
 
 export const SS_EXTERNALID = 'external_Id';
 export const SS_USERTYPE = 'user_type';
 export const SS_USERNAME = 'user_name';
+export const SS_USERROLE = 'user_role';
 
 @Injectable({ providedIn: 'platform' })
 export class UserContextService {
+  private _userRole = new BehaviorSubject<any>('');
+
+  public get userRole(): Observable<UserRoles[]> {
+    preserveDataSession(this._userRole, SS_USERROLE);
+    return this._userRole.asObservable();
+  }
+  public set userRole(value: UserRoles[]) {
+    this.sessionStorageService.setItem<UserRoles[]>(SS_USERROLE, value);
+    this._userRole.next(value);
+  }
+
   private _userType = new BehaviorSubject<any>('');
 
   public get userType(): Observable<any> {
-    if (!this._userType.value) {
-      const sessionuserType = this.sessionStorageService.getItem<string>(
-        SS_USERTYPE
-      ) as string;
-      this._userType.next(sessionuserType);
-      return this._userType.asObservable();
-    }
+    preserveDataSession(this._userType, SS_USERTYPE);
     return this._userType.asObservable();
   }
   public set userType(value: any) {
@@ -59,9 +67,15 @@ export class UserContextService {
 
   constructor(private readonly sessionStorageService: SessionStorageService) {}
 
-  setUserContext({ userType = '', externalId = '', username = '' }) {
+  setUserContext({
+    userType = '',
+    externalId = '',
+    username = '',
+    roles = [''],
+  }) {
     this.userType = userType;
     this.externalId = externalId;
     this.username = username;
+    this.userRole = roles as UserRoles[];
   }
 }

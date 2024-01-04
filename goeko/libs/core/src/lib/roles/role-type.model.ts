@@ -1,7 +1,5 @@
-export enum ROLE {
-  SME = 'sme',
-  CLEANTECH = 'cleantech',
+export enum ROLES {
+  PUBLIC = 'public',
   ADMIN = 'admin',
 }
-
-export type Role = ROLE.SME | ROLE.CLEANTECH | ROLE.ADMIN;
+export type UserRoles = ROLES.PUBLIC | ROLES.ADMIN;
