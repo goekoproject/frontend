@@ -1,34 +1,62 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { SESSIONID } from './auth.constants';
+import { CONFIGURATION } from '../../config.module';
+import { Options } from '../../models/options.interface';
 
 /**
  * Inteceptor for authenticating a user
  */
 @Injectable({ providedIn: 'platform' })
 export class AuthInterceptor implements HttpInterceptor {
-	constructor(private _route: Router, private _auth: AuthService) {}
+  constructor(
+    private _route: Router,
+    private _auth: AuthService,
+    @Inject(CONFIGURATION) public configuration: Options
+  ) {}
 
-	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-		const accessToken = sessionStorage.getItem(SESSIONID);
-		if (accessToken) {
-			request = request.clone({
-				setHeaders: {
-					Authorization: `Bearer ${accessToken}`,
-				},
-			});
-		}
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    if (this._auth.isAuthenticated()) {
+      const accessToken = sessionStorage.getItem(SESSIONID);
 
-		return next.handle(request).pipe(catchError((error: HttpErrorResponse) => this._handleError(error)));
-	}
+      if (!request.url.includes('assets') && accessToken) {
+        request = this.requestGoekoBakend(request, accessToken);
+      }
+    }
 
-	private _handleError(error: HttpErrorResponse) {
-		if (error && error.status === 401) {
-			this._auth.killSessions();
-		}
-		return throwError(() => error);
-	}
+    return next
+      .handle(request)
+      .pipe(catchError((error: HttpErrorResponse) => this._handleError(error)));
+  }
+
+  private _handleError(error: HttpErrorResponse) {
+    if (error && error.status === 401) {
+      this._auth.killSessions();
+    }
+    return throwError(() => error);
+  }
+
+  private requestGoekoBakend(
+    request: HttpRequest<unknown>,
+    accessToken: string
+  ) {
+    return request.clone({
+      url: `${this.configuration.endopoint}${request.url}`,
+      setHeaders: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  }
 }

@@ -6,36 +6,39 @@ import { NewEcosolutions } from './new-ecosolution.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
-	providedIn: 'root',
+  providedIn: 'root',
 })
 export class EcosolutionsService {
-	constructor(
-		private _http: HttpClient,
+  constructor(
+    private _http: HttpClient,
 
-		@Inject(ECOSOLUTIONS_CONFIGURATION) public configuration: EcosolutionsOptions
-	) {}
+    @Inject(ECOSOLUTIONS_CONFIGURATION)
+    public configuration: EcosolutionsOptions
+  ) {}
 
-	getAll() {
-		return this._http.get(`${this.configuration.endpoint}/v1/ecosolutions`);
-	}
+  getAll() {
+    return this._http.get(`/v1/ecosolutions`);
+  }
 
-	deleteEcosolution(id: string) {
-		return this._http.delete(`${this.configuration.endpoint}/v1/ecosolutions/${id}`);
-	}
+  deleteEcosolution(id: string) {
+    return this._http.delete(`/v1/ecosolutions/${id}`);
+  }
 
-	updateEcosolution(id: string, body: NewEcosolutions) {
-		return this._http.put(`${this.configuration.endpoint}/v1/ecosolutions/${id}`, body);
-	}
+  updateEcosolution(id: string, body: NewEcosolutions) {
+    return this._http.put(`/v1/ecosolutions/${id}`, body);
+  }
 
-	getEcosolutionById(id: string): Observable<NewEcosolutions> {
-		return this._http.get<NewEcosolutions>(`${this.configuration.endpoint}/v1/ecosolutions/${id}`);
-	}
+  getEcosolutionById(id: string): Observable<NewEcosolutions> {
+    return this._http.get<NewEcosolutions>(`/v1/ecosolutions/${id}`);
+  }
 
-	getEcosolutionsByCleantechId(id: string) {
-		return this._http.get<NewEcosolutions[]>(`${this.configuration.endpoint}/v1/ecosolutions/cleantech/${id}`);
-	}
+  getEcosolutionsByCleantechId(id: string) {
+    return this._http.get<NewEcosolutions[]>(
+      `/v1/ecosolutions/cleantech/${id}`
+    );
+  }
 
-	createEcosolutions(body: NewEcosolutions) {
-		return this._http.post(`${this.configuration.endpoint}/v1/ecosolutions`, body);
-	}
+  createEcosolutions(body: NewEcosolutions) {
+    return this._http.post(`/v1/ecosolutions`, body);
+  }
 }

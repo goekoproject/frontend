@@ -199,6 +199,9 @@
     "improvement": "Improvement",
     "reductionPercentage": "Reduction Percentage",
     "reductionPercentageCO2": "CO2 Reduction Percentage",
+    "subcategoryForLangCleantech": "Subcategory by language for Cleantech",
+    "subcategoryForLangSME": "Subcategory by language for SMEs",
+
     "reductionPercentageWaste": "Waste Reduction Percentage",
     "reductionPercentageWater": "Water Consumption Reduction Percentage",
     "reductionPercentageHP": "Hazardous Products Reduction Percentage",

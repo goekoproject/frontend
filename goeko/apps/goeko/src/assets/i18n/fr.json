@@ -203,6 +203,8 @@
     "reductionPercentageWaste": "Pourcentage de réduction des déchets",
     "reductionPercentageWater": "Pourcentage de réduction de la consommation d'eau",
     "reductionPercentageHP": "Pourcentage de réduction des produits dangereux",
+    "subcategoryForLangCleantech": "Sous-catégorie par langue pour les Cleantech",
+    "subcategoryForLangSME": "Sous-catégorie par langue pour les PME",
 
     "ecosolutions_sustainableDevelopmentGoals": "Sélectionnez les Objectifs de développement durable (ODD)",
     "ecosolutions_subCategory": "Sélectionnez les sous-catégories",

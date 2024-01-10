@@ -19,7 +19,12 @@ import {
   SmeModule,
   UserService,
 } from '@goeko/store';
-import { BadgeModule, ButtonModule, UiBreadcrumbsModule } from '@goeko/ui';
+import {
+  BadgeModule,
+  ButtonModule,
+  SideDialogModule,
+  UiBreadcrumbsModule,
+} from '@goeko/ui';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
@@ -51,6 +56,7 @@ const httpLoaderFactory = (http: HttpClient) => {
     PopupModule,
     SelectI18nModule,
     UiBreadcrumbsModule,
+    SideDialogModule,
     BadgeModule,
     ShowForRolesDirective,
     GoShowUserTypeDirective,

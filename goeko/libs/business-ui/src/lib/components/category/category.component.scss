@@ -1,55 +1,56 @@
 $size-category: 60px;
 $size-icon: 62%;
 .wrapper-category {
-	display: flex;
-	flex-direction: column;
-	gap: 0.2rem;
-	align-items: center;
-	width: max-content;
-	[title] {
-		width: max-content;
-		color: #24253b;
-	}
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: center;
+  width: max-content;
+  min-width: 8rem;
+  [title] {
+    width: max-content;
+    color: #24253b;
+  }
 }
 .category {
-	max-width: 120px;
-	max-height: 120px;
-	min-width: 50px;
-	min-height: 50px;
-	border-radius: 50%;
-	width: $size-category;
-	height: $size-category;
+  max-width: 120px;
+  max-height: 120px;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 50%;
+  width: $size-category;
+  height: $size-category;
 
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 
-	transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 
-	border: 4px solid #24253b;
-	svg-icon {
-		object-fit: cover;
-		height: $size-icon;
-	}
+  border: 4px solid #24253b;
+  svg-icon {
+    object-fit: cover;
+    height: $size-icon;
+  }
 }
 svg {
-	height: 100%;
-	width: max-content;
+  height: 100%;
+  width: max-content;
 }
 
 [selected='true'] {
-	.category {
-		background: #24253b;
-	}
-	[title] {
-		font-weight: 700;
-	}
-	svg {
-		fill: #ffff;
-	}
-	path:not([id='Vector']) {
-		stroke: #ffff !important;
-	}
+  .category {
+    background: #24253b;
+  }
+  [title] {
+    font-weight: 700;
+  }
+  svg {
+    fill: #ffff;
+  }
+  path:not([id='Vector']) {
+    stroke: #ffff !important;
+  }
 }

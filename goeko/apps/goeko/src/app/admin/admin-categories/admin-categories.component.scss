@@ -1,0 +1,82 @@
+.section-step {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+  > * {
+    flex: 1 1 0px;
+    display: flex;
+    justify-content: center;
+  }
+}
+.section-subcategories {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem;
+  padding-top: 4rem;
+}
+
+.subcategories-summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 4rem;
+  background: url(https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg)
+    no-repeat 14px 50%;
+  background-size: 18px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.subcategories-summary {
+  color: var(--primary--main);
+  border-radius: 5px;
+  p:nth-child(odd) {
+    color: var(--secondary-accent);
+  }
+}
+
+.subcategories[open] .subcategories-summary {
+  border-radius: 5px 5px 0 0;
+}
+
+.subcategories {
+  background-color: var(--primary--100);
+  border-radius: 1rem;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+.subcategories-translations {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 4rem;
+  background: var(--primary--50);
+  border: 2rem solid var(--primary--100);
+  border-radius: 4rem;
+  position: relative;
+}
+.subcategories-sentence {
+  text-transform: uppercase;
+}
+.subcategories-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 0rem 2rem 1rem 0rem;
+  align-items: center;
+}
+.section-legeng-subcategories {
+  padding: 4px 1rem;
+  background: var(--light-accent);
+  border-radius: 0.5rem;
+}
+
+.button-actions-section {
+  position: absolute;
+  top: -3rem;
+  right: 1rem;
+}

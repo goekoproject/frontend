@@ -1,0 +1,25 @@
+<h2>{{ 'FORM_LABEL.products' | translate }}</h2>
+
+<go-badge-group
+  [id]="'products'"
+  name="products"
+  (valueSelected)="valueSelected($event)"
+>
+  @for ( product of products(); track product.id) {
+  <go-badge
+    [value]="product"
+    [selected]="codeProductsSeclected().includes(product.id)"
+    >{{ product.keyLang | translate }}
+  </go-badge>
+
+  }
+</go-badge-group>
+
+<div class="product-actions">
+  <button go-button appearance="white">
+    {{ 'cancel' | translate }}
+  </button>
+  <button go-button (click)="addProducts()">
+    {{ 'add' | translate }} {{ 'product' | translate }}
+  </button>
+</div>

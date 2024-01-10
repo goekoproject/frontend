@@ -38,7 +38,7 @@ body {
   max-width: 1920px;
 }
 body:has(div.is-platform) {
-  background: #f7f9fe;
+  background: var(--primary--50);
 }
 :root {
   --center-container: 90%;
@@ -178,7 +178,7 @@ label {
 }
 legend {
   font-size: 1.25rem;
-  color: #1b1d20;
+  color: var(--soft-dark);
   font-weight: 600;
   height: 2rem;
 }

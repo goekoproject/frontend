@@ -5,3 +5,4 @@ export * from './category/public-api';
 export * from './card-ecosolutions/public-api';
 export * from './select-subcategory-product/public-api';
 export * from './sdg-icons/public-api';
+export * from './products-management/public-api';

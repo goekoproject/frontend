@@ -8,3 +8,4 @@ export * from './lib/sme/public-api';
 export * from './lib/store.module';
 export * from './lib/user/public-api';
 export * from './lib/ecosolutions/public-api';
+export * from './lib/admin/public-api';

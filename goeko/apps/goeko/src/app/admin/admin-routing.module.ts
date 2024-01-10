@@ -5,7 +5,9 @@ const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./admin.component').then((c) => c.AdminComponent),
+      import('./admin-categories/admin-categories.component').then(
+        (c) => c.AdminCategoriesComponent
+      ),
   },
 ];
 
