@@ -21,7 +21,10 @@
     #detailCategory
   >
     <summary class="subcategories-summary">
-      <p>{{ subcategory.code }}</p>
+      <p>
+        {{ subcategory.label.translations[0].label }}
+      </p>
+      <p>( {{ subcategory.code }})</p>
     </summary>
     <div class="subcategories-body">
       <!--  Question for Cleantech-->

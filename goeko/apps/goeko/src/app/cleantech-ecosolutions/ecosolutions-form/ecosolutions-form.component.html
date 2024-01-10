@@ -25,7 +25,7 @@
     </fieldset>
 
     <fieldset class="ecosolutions-fieldset">
-      <div>
+      <div class="legend--info">
         <legend>{{ 'FORM_LABEL.typeOfEcolutions' | translate }}</legend>
         <ng-container
           *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"
@@ -60,7 +60,7 @@
       class="ecosolutions-fieldset"
       *ngIf="mainCategory !== 'hazardousProduct'"
     >
-      <div>
+      <div class="legend--info">
         <legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
         <p class="text-support">
           {{ 'TEXT_SUPPORT.advantagesEcosolutions' | translate }}
@@ -113,7 +113,7 @@
       formArrayName="sustainableDevelopmentGoals"
       class="fieldset-ods"
     >
-      <div>
+      <div class="legend--info">
         <legend>
           {{
             'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate

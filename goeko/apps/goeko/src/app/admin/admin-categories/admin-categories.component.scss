@@ -33,7 +33,7 @@
 .subcategories-summary {
   color: var(--primary--main);
   border-radius: 5px;
-  p:nth-child(odd) {
+  p:nth-child(even) {
     color: var(--secondary-accent);
   }
 }
@@ -71,7 +71,7 @@ summary::-webkit-details-marker {
 }
 .section-legeng-subcategories {
   padding: 4px 1rem;
-  background: var(--light-accent);
+  background: var(--primary--200);
   border-radius: 0.5rem;
 }
 
