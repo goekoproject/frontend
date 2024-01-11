@@ -8,12 +8,21 @@ import {
 } from '@angular/core';
 import { DIALOG_DATA } from './dialog-data.token';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { Observable, filter, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, filter, of } from 'rxjs';
 @Injectable()
 export class DialogService {
   private injector = inject(Injector);
 
-  dialogData = signal<any>(undefined);
+  /*  dialogData = signal<any>(undefined); */
+
+  public get dialogData$() {
+    return this._dialogData$;
+  }
+  public set dialogData$(value) {
+    this._dialogData$ = value;
+  }
+  private _dialogData$!: Subject<any>;
+
   dialog = signal({
     open: false,
     component: {} as ComponentType<any>,
@@ -25,6 +34,7 @@ export class DialogService {
   constructor() {}
 
   openDialog<T>(component: ComponentType<T>, data: any): Observable<any> {
+    this.dialogData$ = new Subject<any>();
     this.dialog.update((dialog) => ({
       ...dialog,
       open: true,
@@ -36,14 +46,13 @@ export class DialogService {
       injector: this._createInjector(data),
     }));
 
-    return toObservable(this.dialogData, {
-      injector: this.injector,
-    }).pipe(filter((result) => !!result));
+    return this.dialogData$.asObservable().pipe(filter((result) => !!result));
   }
 
   closeDialog<T>(data?: T) {
-    this.dialogData.set(data);
+    this.dialogData$.next(data);
     this.dialog.update((dialog) => ({ ...dialog, open: false }));
+    this.dialogData$.complete();
   }
 
   private _createInjector(data: any): Injector {

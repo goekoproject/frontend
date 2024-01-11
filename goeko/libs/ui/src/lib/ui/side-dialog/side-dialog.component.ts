@@ -74,7 +74,4 @@ export class SideDialogComponent implements OnDestroy {
     );
     this.sideBar.nativeElement.setAttribute('closing', 'true');
   }
-  animationEnd() {
-    console.log('animationEnd');
-  }
 }

@@ -27,20 +27,15 @@ import {
   ButtonModule,
   DialogService,
   GoInputModule,
-  SideDialogModule,
 } from '@goeko/ui';
 import {
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AdminCategoriesService } from './admin-categories.services';
-import {
-  AdminCategoriesDynamicForm,
-  mergeProducts,
-} from './admin-categories.dynamic-form';
+import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 
@@ -80,11 +75,17 @@ export class AdminCategoriesComponent {
 
   public form!: FormGroup;
 
-  closeDetailByIndex = (index: number) => {
+  private _closeDetailByIndex = (index: number) => {
     const elementDetail = this.detailCategory.get(index)?.nativeElement;
     if (elementDetail) {
       elementDetail.open = false;
     }
+  };
+
+  private _closeAllDetail = () => {
+    this.detailCategory?.forEach((elementDetail, index: number) =>
+      this._closeDetailByIndex(index)
+    );
   };
 
   private productControl = (subcategoryCode: string): FormGroup =>
@@ -133,17 +134,12 @@ export class AdminCategoriesComponent {
   }
 
   selectCategory(categorySelected: ClassificationCategory): void {
+    this._closeAllDetail();
     this.categorySelected.set(categorySelected);
-  }
-  selectSubcategory(id: string | undefined): void {
-    if (id) {
-      this.subCategorySelectedIndex.set(id);
-      this._createFormGroup();
-    }
   }
 
   closeDetailCategory(index: number): void {
-    this.closeDetailByIndex(index);
+    this._closeDetailByIndex(index);
   }
   saveSubcategory() {
     const updateCategory: ManageCategory = {
