@@ -78,8 +78,4 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     );
   }
-
-  private _getUserProfile() {
-    this._userService.getUserProfile(this._userType, this._externalId);
-  }
 }

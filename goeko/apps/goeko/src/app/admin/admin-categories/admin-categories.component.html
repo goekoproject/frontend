@@ -111,10 +111,9 @@
           [id]="'products'"
           name="products"
         >
-          @for ( product of getLabelForLangProducts(subcategory.code); track
-          product.code) {
-          <go-badge [value]="product | translate"
-            >{{ product.lableForLang?.label }}
+          @for ( product of subcategory.products; track product.code) {
+          <go-badge [value]="product"
+            >{{ product | productToCurrentLang }}
           </go-badge>
 
           }

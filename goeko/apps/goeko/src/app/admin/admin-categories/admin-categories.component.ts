@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import {
   CategoryModule,
   Product,
+  ProductToCurrentLangPipe,
   ProductsManagementComponent,
 } from '@goeko/business-ui';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -58,6 +59,7 @@ import { map } from 'rxjs';
     ButtonModule,
     BadgeModule,
     ProductsManagementComponent,
+    ProductToCurrentLangPipe,
   ],
   providers: [AdminCategoriesService],
   templateUrl: './admin-categories.component.html',
@@ -95,15 +97,6 @@ export class AdminCategoriesComponent {
     return this.form?.get(subcategory);
   }
 
-  getLabelForLangProducts(code: string) {
-    return this.productControl(code)?.value?.map((product: ManageProduct) => ({
-      ...product,
-      lableForLang: product?.label?.translations.find(
-        (translation: Translations) => translation.lang === this.currentLang()
-      ),
-    }));
-  }
-
   getTranslations(
     subcategory: string,
     typeQuestion: 'label' | 'question'
@@ -113,13 +106,7 @@ export class AdminCategoriesComponent {
       ?.get('translations') as FormArray;
   }
 
-  public currentLang = toSignal(
-    this._translations.onLangChange.pipe(map((data) => data.lang)),
-    {
-      initialValue: this._translations.defaultLang,
-      manualCleanup: true,
-    }
-  );
+  private _translationsForLang: any = {};
 
   constructor(
     private _adminCategories: AdminCategoriesService,
@@ -131,8 +118,16 @@ export class AdminCategoriesComponent {
     effect(() => {
       this._createFormGroup();
     });
+    this._getTranslationsForLang();
   }
 
+  private _getTranslationsForLang() {
+    ['gb', 'fr', 'es'].forEach((lang) => {
+      this._translations.getTranslation(lang).subscribe((translations: any) => {
+        this._translationsForLang[lang] = translations;
+      });
+    });
+  }
   selectCategory(categorySelected: ClassificationCategory): void {
     this._closeAllDetail();
     this.categorySelected.set(categorySelected);
@@ -173,35 +168,11 @@ export class AdminCategoriesComponent {
 
   addProducts(subcategoryCode: string) {
     const dialogResponse = this._openDialogAddProducts(subcategoryCode);
-
     dialogResponse.subscribe((productsSelected: Product[]) => {
-      this.productControl(subcategoryCode)?.patchValue(
-        productsSelected?.map((product) => ({
-          ...new ProductSelectToManageProduct(
-            product.id,
-            this._getTranslations(product.keyLang)
-          ),
-        }))
-      );
-      this.form.markAllAsTouched();
-      this.form.markAsDirty();
+      this._toProductsWithTranslated(productsSelected, subcategoryCode);
     });
   }
-  private _getTranslations(label: string) {
-    const translations = new Array<Translations>();
-    this._translations.getLangs().forEach((lang) => {
-      this._translations.getTranslation(lang).subscribe((translation: any) => {
-        const array = label.split('.');
-        const labelTranslate = translation[array[0]][array[1]][array[2]];
-        translations.push({
-          label: labelTranslate,
-          lang: lang,
-        });
-        this._cdf.markForCheck();
-      });
-    });
-    return translations;
-  }
+
   private _openDialogAddProducts = (subcategoryCode: string) => {
     return this._dialogService.openDialog<ProductsManagementComponent>(
       ProductsManagementComponent,
@@ -211,4 +182,31 @@ export class AdminCategoriesComponent {
       }
     );
   };
+
+  private _toProductsWithTranslated(
+    productsSelected: Product[],
+    subcategoryCode: string
+  ) {
+    const newProductsValue = productsSelected?.map((product) => {
+      const translations = new Array<Translations>();
+      this._getTranslationsForProduct(product.keyLang, translations);
+      return new ProductSelectToManageProduct(product.id, translations);
+    });
+    this.productControl(subcategoryCode)?.patchValue(newProductsValue);
+    this.form.markAllAsTouched();
+    this.form.markAsDirty();
+    this._cdf.markForCheck();
+  }
+  private async _getTranslationsForProduct(
+    keyLang: string,
+    translations: Array<Translations>
+  ) {
+    const keys = keyLang.split('.');
+    await Object.keys(this._translationsForLang).forEach((lang) =>
+      translations.push({
+        label: this._translationsForLang[lang][keys[0]][keys[1]][keys[2]],
+        lang: lang,
+      })
+    );
+  }
 }

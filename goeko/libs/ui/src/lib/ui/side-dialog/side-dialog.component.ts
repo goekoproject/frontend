@@ -12,7 +12,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ComponentType } from '@angular/cdk/portal';
 import { DialogService } from './dialog.services';
-
+import { isObjectEmpty } from '@goeko/core';
 @Component({
   selector: 'goeko-side-dialog',
   templateUrl: './side-dialog.component.html',
@@ -26,10 +26,7 @@ export class SideDialogComponent implements OnDestroy {
   dialog = this._dialogService.dialog;
   private _config = this._dialogService.config;
   component!: ComponentRef<any>;
-  constructor(
-    private _dialogService: DialogService,
-    private viewRef: ViewContainerRef
-  ) {
+  constructor(private _dialogService: DialogService) {
     effect(() => {
       this._createComponent();
       this._toggleDialog();
@@ -43,7 +40,7 @@ export class SideDialogComponent implements OnDestroy {
   private _createComponent() {
     this.componenteRef.clear();
 
-    if (!this.dialog()?.component) {
+    if (!this.dialog()?.component || isObjectEmpty(this.dialog()?.component)) {
       return;
     }
     this.component = this.componenteRef.createComponent(

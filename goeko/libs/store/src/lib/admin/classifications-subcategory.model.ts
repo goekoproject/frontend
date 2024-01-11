@@ -41,10 +41,10 @@ export class ProductSelectToManageProduct implements ManageProduct {
   code: string;
   label: { translations: Translations[] };
   disabled: boolean;
-  constructor(id: string, label: Translations[]) {
+  constructor(id: string, translations: Translations[]) {
     this.code = id;
     this.label = {
-      translations: label,
+      translations: translations,
     };
     this.disabled = false;
   }
