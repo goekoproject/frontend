@@ -12,10 +12,15 @@
   }
 </section>
 @if (form ) {
-<section class="section-subcategories" [formGroup]="form">
+<section
+  class="section-subcategories"
+  [formGroup]="form"
+  [@listAnimation]="subCategorySelected().subcategories.length"
+>
   @for (subcategory of subCategorySelected().subcategories; track
   subcategory.id; let index = $index) {
   <details
+    [@fadeAnimation]
     class="subcategories"
     formGroupName="{{ subcategory.code }}"
     #detailCategory
@@ -111,8 +116,13 @@
           [id]="'products'"
           name="products"
         >
-          @for ( product of subcategory.products; track product.code) {
-          <go-badge [value]="product"
+          @for ( product of productControl(subcategory.code).value; track
+          product.code) {
+          <go-badge
+            [value]="product"
+            [readonly]="true"
+            [selected]="true"
+            [@fadeAnimation]
             >{{ product | productToCurrentLang }}
           </go-badge>
 

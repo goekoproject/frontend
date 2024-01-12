@@ -17,3 +17,4 @@ export * from './lib/ui/tab-group/public-api';
 export * from './lib/ui/percentage-card/public-api';
 export * from './lib/utils/public-api';
 export * from './lib/ui/side-dialog/public-api';
+export * from './lib/ui/animations/public-api';

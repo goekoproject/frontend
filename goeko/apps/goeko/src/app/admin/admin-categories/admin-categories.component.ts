@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -18,7 +19,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   ClassificationCategory,
   ManageCategory,
-  ManageProduct,
   ManageSubcategory,
   ProductSelectToManageProduct,
   Translations,
@@ -28,6 +28,8 @@ import {
   ButtonModule,
   DialogService,
   GoInputModule,
+  fadeAnimation,
+  listAnimation,
 } from '@goeko/ui';
 import {
   FormArray,
@@ -37,8 +39,6 @@ import {
 } from '@angular/forms';
 import { AdminCategoriesService } from './admin-categories.services';
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 
 /**
  * merge the categories section and the categories get backend for we have data like icons and preloading data
@@ -65,8 +65,9 @@ import { map } from 'rxjs';
   templateUrl: './admin-categories.component.html',
   styleUrl: './admin-categories.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeAnimation, listAnimation],
 })
-export class AdminCategoriesComponent {
+export class AdminCategoriesComponent implements AfterContentInit {
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>;
   //Signal
@@ -90,7 +91,7 @@ export class AdminCategoriesComponent {
     );
   };
 
-  private productControl = (subcategoryCode: string): FormGroup =>
+  productControl = (subcategoryCode: string): FormGroup =>
     this.form.get(subcategoryCode)?.get('products') as FormGroup;
 
   getControlForSubCategory(subcategory: string) {
@@ -117,35 +118,20 @@ export class AdminCategoriesComponent {
   ) {
     effect(() => {
       this._createFormGroup();
+      this._cdf.markForCheck();
     });
     this._getTranslationsForLang();
   }
 
+  ngAfterContentInit(): void {
+    this._cdf.markForCheck();
+  }
   private _getTranslationsForLang() {
     ['gb', 'fr', 'es'].forEach((lang) => {
       this._translations.getTranslation(lang).subscribe((translations: any) => {
         this._translationsForLang[lang] = translations;
       });
     });
-  }
-  selectCategory(categorySelected: ClassificationCategory): void {
-    this._closeAllDetail();
-    this.categorySelected.set(categorySelected);
-  }
-
-  closeDetailCategory(index: number): void {
-    this._closeDetailByIndex(index);
-  }
-  saveSubcategory() {
-    const updateCategory: ManageCategory = {
-      ...this.subCategorySelected(),
-      id: undefined,
-      subcategories: Object.values(this.form.value).map((subcategory: any) => ({
-        ...subcategory,
-        lang: undefined,
-      })),
-    };
-    this._adminCategories.updateSubcategorySelected(updateCategory);
   }
   private _createFormGroup() {
     this.form = this._fb.group({});
@@ -164,6 +150,27 @@ export class AdminCategoriesComponent {
     formGroup: FormGroup
   ) {
     AdminCategoriesDynamicForm.buildForm({ fb: this._fb, group, formGroup });
+  }
+
+  selectCategory(categorySelected: ClassificationCategory): void {
+    this._closeAllDetail();
+    this._cdf.markForCheck();
+    this.categorySelected.set(categorySelected);
+  }
+
+  closeDetailCategory(index: number): void {
+    this._closeDetailByIndex(index);
+  }
+  saveSubcategory() {
+    const updateCategory: ManageCategory = {
+      ...this.subCategorySelected(),
+      id: undefined,
+      subcategories: Object.values(this.form.value).map((subcategory: any) => ({
+        ...subcategory,
+        lang: undefined,
+      })),
+    };
+    this._adminCategories.updateSubcategorySelected(updateCategory);
   }
 
   addProducts(subcategoryCode: string) {
