@@ -1,8 +1,13 @@
-<span class="badge {{ className }}" *ngIf="!readonly || selected">
-	<ng-content select="avatar"></ng-content>
+<span class="badge {{ className }}">
+  <ng-content select="avatar"></ng-content>
 
-	<span #labelElement class="label-element">
-		<ng-content></ng-content>
-	</span>
-	<span class="material-symbols-rounded badge-close" *ngIf="!readonly && selected"> close </span>
+  <span #labelElement class="label-element">
+    <ng-content></ng-content>
+  </span>
+  <span
+    class="material-symbols-rounded badge-close"
+    *ngIf="!readonly && selected"
+  >
+    close
+  </span>
 </span>

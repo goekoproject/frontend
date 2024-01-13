@@ -22,13 +22,23 @@ import {
   host: {
     '(click)': 'onSelect()',
     '[attr.selected]': 'selected',
+    '[attr.readonly]': 'readonly',
     '[attr.fill]': 'fill',
   },
 })
 export class BadgeComponent implements AfterContentInit {
   @ViewChild('labelElement', { static: false }) labelElement!: ElementRef<any>;
 
-  @Input() value!: any;
+  @Input()
+  public get value(): any {
+    return this._value;
+  }
+  public set value(value: any) {
+    this._value = value;
+    this._cdf.markForCheck();
+  }
+  private _value!: any;
+
   @Input() fill!: any;
   @Input()
   public get readonly() {
@@ -45,13 +55,14 @@ export class BadgeComponent implements AfterContentInit {
   @Output() onSelected$ = new EventEmitter();
   @Input()
   public get selected() {
+    this._cdf.markForCheck();
     return this._selected;
   }
   public set selected(value) {
     this._selected = value;
     this._cdf.markForCheck();
   }
-  private _selected = false;
+  private _selected!: boolean;
 
   get label() {
     return this.labelElement?.nativeElement.textContent;
@@ -63,11 +74,17 @@ export class BadgeComponent implements AfterContentInit {
     this._cdf.markForCheck();
   }
   onSelect() {
+    if (this.readonly) {
+      return;
+    }
     this.onSelected$.emit(this);
     this._cdf.markForCheck();
   }
 
   onSelected(selected: boolean) {
+    if (this.readonly) {
+      return;
+    }
     this.selected = !selected;
   }
 }

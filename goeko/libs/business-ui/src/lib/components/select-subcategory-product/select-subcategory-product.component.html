@@ -14,7 +14,10 @@
         (change)="assignValue(subCategory.code)"
       />
       <div class="subcategory-title">
-        <p>{{ subCategory[typeTitle] | translate }}</p>
+        <ng-content select="[title]"></ng-content>
+
+        <!--         <p>{{ subCategory[typeTitle] | translate }}</p>
+ -->
         <span class="subcategory-title-products" *ngIf="!readonly">{{
           labelSelected
         }}</span>

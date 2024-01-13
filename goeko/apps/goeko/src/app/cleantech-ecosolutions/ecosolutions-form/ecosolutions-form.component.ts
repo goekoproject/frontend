@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FORM_CATEGORIES_QUESTION, Field } from '@goeko/business-ui';
 import {
   CleanTechService,
   DataSelect,
@@ -20,6 +19,7 @@ import {
   defaultSetyearGuarantee,
 } from './compare-with-select';
 import { EcosolutionForm } from './ecosolution-form.model';
+import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
 
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -30,7 +30,8 @@ export class EcosolutionsFormComponent implements OnInit {
   public form!: FormGroup;
   public ods = ODS_CODE;
   public idEcosolution!: string;
-  public questionsCategories!: Array<Field | any>;
+  public questionsCategories =
+    this._cleantechEcosolutionsService.subCategorySelected;
   public productsCategories!: any[];
   public defaultSetProductsCategories = defaultSetProductsCategories;
   public defaultSetDeliverCountries = defaultSetDeliverCountries;
@@ -46,7 +47,6 @@ export class EcosolutionsFormComponent implements OnInit {
     return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true';
   }
   private _cleantechId!: string;
-  private _fieldsCatagory = FORM_CATEGORIES_QUESTION;
   private fileCertificate: any;
 
   constructor(
@@ -55,31 +55,21 @@ export class EcosolutionsFormComponent implements OnInit {
     private _ecosolutionsService: EcosolutionsService,
     private _cleanTeachService: CleanTechService,
     private _fb: FormBuilder,
-    private _translateServices: TranslateService
+    private _translateServices: TranslateService,
+    private _cleantechEcosolutionsService: CleantechEcosolutionsService
   ) {}
 
   ngOnInit(): void {
     this.currentLangCode = this._translateServices.defaultLang;
     this._getParamsUrl();
-    this._getQuestionsCategories();
     this._initForm();
     this._changeLangCode();
     this._changeValueSubCategory();
     if (this.idEcosolution) {
       this.getEcosolution();
     }
-    console.log(this.isReadOnly);
   }
 
-  private _getQuestionsCategories() {
-    this.questionsCategories = this._fieldsCatagory
-      .filter(
-        (field) =>
-          field.controlName.toUpperCase() === this.mainCategory?.toUpperCase()
-      )
-      .map((co2EmissionFields) => co2EmissionFields.fields)
-      .flat();
-  }
   private _getParamsUrl() {
     this._cleantechId = this._route.snapshot.parent?.paramMap.get(
       'id'

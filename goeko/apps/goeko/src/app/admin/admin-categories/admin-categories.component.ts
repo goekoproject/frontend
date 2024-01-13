@@ -85,6 +85,13 @@ export class AdminCategoriesComponent implements AfterContentInit {
     }
   };
 
+  private _toogleSubcategory = (index: number) => {
+    const elementDetail = this.detailCategory.get(index)?.nativeElement;
+    if (elementDetail) {
+      elementDetail.open = !elementDetail.open;
+    }
+  };
+
   private _closeAllDetail = () => {
     this.detailCategory?.forEach((elementDetail, index: number) =>
       this._closeDetailByIndex(index)
@@ -161,6 +168,10 @@ export class AdminCategoriesComponent implements AfterContentInit {
   closeDetailCategory(index: number): void {
     this._closeDetailByIndex(index);
   }
+  toogleSubcategory(event: Event, index: number) {
+    this._toogleSubcategory(index);
+    event.preventDefault();
+  }
   saveSubcategory() {
     const updateCategory: ManageCategory = {
       ...this.subCategorySelected(),
@@ -199,7 +210,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
       this._getTranslationsForProduct(product.keyLang, translations);
       return new ProductSelectToManageProduct(product.id, translations);
     });
-    this.productControl(subcategoryCode)?.patchValue(newProductsValue);
+    this.productControl(subcategoryCode)?.setValue(newProductsValue);
     this.form.markAllAsTouched();
     this.form.markAsDirty();
     this._cdf.markForCheck();

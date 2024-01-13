@@ -40,5 +40,8 @@
   align-items: center;
   gap: 1rem;
 }
-[class]:not([class='']) {
+
+[readonly='true'] {
+  pointer-events: none;
+  cursor: auto;
 }

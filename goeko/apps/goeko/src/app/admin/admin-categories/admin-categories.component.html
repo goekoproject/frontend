@@ -25,12 +25,16 @@
     formGroupName="{{ subcategory.code }}"
     #detailCategory
   >
-    <summary class="subcategories-summary">
+    <summary
+      class="subcategories-summary"
+      (click)="toogleSubcategory($event, index)"
+    >
       <p>
         {{ subcategory.label.translations[0].label }}
       </p>
       <p>( {{ subcategory.code }})</p>
     </summary>
+    @defer (when detailCategory.open) {
     <div class="subcategories-body">
       <!--  Question for Cleantech-->
       <section formGroupName="label">
@@ -116,13 +120,9 @@
           [id]="'products'"
           name="products"
         >
-          @for ( product of productControl(subcategory.code).value; track
-          product.code) {
-          <go-badge
-            [value]="product"
-            [readonly]="true"
-            [selected]="true"
-            [@fadeAnimation]
+          @for ( product of form.get(subcategory.code)?.get('products')?.value;
+          track product.code) {
+          <go-badge [value]="product" [readonly]="true" [@fadeAnimation]
             >{{ product | productToCurrentLang }}
           </go-badge>
 
@@ -142,6 +142,7 @@
         </button>
       </div>
     </div>
+    }
   </details>
   }
 </section>
