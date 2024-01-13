@@ -26,7 +26,7 @@
   <ul class="section-elements">
     @for ( category of allCategories.selected; track category.code) { @defer
     (when category) {
-    <li class="elements-field" [@fadeAnimation]>
+    <li class="elements-field">
       <div class="summary-section-header">
         <h2>{{ category.label | translate }}</h2>
       </div>
