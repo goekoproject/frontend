@@ -64,6 +64,7 @@ export class BadgeComponent implements AfterContentInit {
   }
   onSelect() {
     this.onSelected$.emit(this);
+    this._cdf.markForCheck();
   }
 
   onSelected(selected: boolean) {

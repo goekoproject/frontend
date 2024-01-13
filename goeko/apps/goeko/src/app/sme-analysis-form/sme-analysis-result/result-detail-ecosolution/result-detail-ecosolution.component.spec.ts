@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResultDetailEcosolutionComponent } from './result-detail-ecosolution.component';
-import { Recommendation, SmeAnalysisService } from '@goeko/store';
+import { Recommendation, SmeAnalysisStoreService } from '@goeko/store';
 import { Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BadgeModule, ButtonModule, PercentageModule } from '@goeko/ui';
@@ -54,7 +54,7 @@ const detailsEcosolution = {
   certified: false,
   approved: false,
 };
-const mockSmeAnalysisService = {
+const mockSmeAnalysisStoreService = {
   getDetailEcosolutions: jest.fn(),
 };
 
@@ -76,15 +76,15 @@ describe('ResultDetailEcosolutionComponent', () => {
       declarations: [ResultDetailEcosolutionComponent],
       providers: [
         {
-          provide: SmeAnalysisService,
-          useValue: mockSmeAnalysisService,
+          provideSmeAnalysisStoreService,
+          useValue: mockSmeAnalysisStoreService,
         },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ResultDetailEcosolutionComponent);
     component = fixture.componentInstance;
-    mockSmeAnalysisService.getDetailEcosolutions.mockReturnValue(
+    mockSmeAnalysisStoreService.getDetailEcosolutions.mockReturnValue(
       of(detailsEcosolution)
     );
     fixture.detectChanges();

@@ -7,6 +7,8 @@ import {
 } from '@angular/animations';
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   EventEmitter,
@@ -31,6 +33,7 @@ export class GoSlideDirective {
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeIn', [
       transition('* => next', [
@@ -71,6 +74,7 @@ export class CarouselComponent implements AfterContentInit {
         this.slide.toArray()[this.selectedSlideIndex]?.template;
       this.animateStateSlide = '';
       this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.NEXT);
+      this._cdf.markForCheck();
     });
   }
 
@@ -83,9 +87,10 @@ export class CarouselComponent implements AfterContentInit {
   get isLastSlide() {
     return this.selectedSlideIndex + 1 === this.slide.length;
   }
-  constructor() {}
+  constructor(private _cdf: ChangeDetectorRef) {}
   ngAfterContentInit(): void {
     this.selectedSlideTemplateRef = this.slide.first?.template;
+    this._cdf.markForCheck();
   }
   next() {
     if (this.disabledButtonNext) {
@@ -95,6 +100,7 @@ export class CarouselComponent implements AfterContentInit {
     /* 		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
      */ this.animateStateSlide = 'next';
     this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.NEXT);
+    this._cdf.markForCheck();
   }
 
   prev() {
@@ -105,6 +111,7 @@ export class CarouselComponent implements AfterContentInit {
     /* 		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
      */ this.animateStateSlide = 'prev';
     this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.PREV);
+    this._cdf.markForCheck();
   }
 
   private _handlerArrowButton(animateStateSlide: ANIMATION_CAROUSEL_STATE) {

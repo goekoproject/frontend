@@ -1,5 +1,3 @@
-import { TranslateService } from '@ngx-translate/core';
-
 export interface ManageCategory {
   id?: string;
   code: string;

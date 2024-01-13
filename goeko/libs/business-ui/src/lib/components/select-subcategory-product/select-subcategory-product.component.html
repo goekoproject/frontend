@@ -1,30 +1,41 @@
-<div class="subcategory" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
-	<div class="subcategory-element">
-		<label class="subcategory-control" for="{{ subCategory.controlName }}">
-			<input
-				#inputElement
-				type="{{ type }}"
-				name="subCategory"
-				[checked]="checked"
-				id="{{ subCategory.controlName }}"
-				(change)="assignValue(subCategory.controlName)"
-			/>
-			<div class="subcategory-title">
-				<p>{{ subCategory[typeTitle] | translate }}</p>
-				<span class="subcategory-title-products" *ngIf="!readonly">{{ labelSelected }}</span>
-			</div>
-			<span class="subcategory-product-selected" *ngIf="!readonly"
-				>{{ numSelected }} {{ 'selected_products' | translate }}</span
-			>
-		</label>
-		<span class="material-symbols-rounded subcategory-expand" (click)="toogle(subCategory)"> expand_more </span>
-	</div>
+<div
+  class="subcategory"
+  goekoSelectSubcategoryProduct
+  *ngIf="checked || !readonly"
+>
+  <div class="subcategory-element">
+    <label class="subcategory-control" for="{{ subCategory.code }}">
+      <input
+        #inputElement
+        type="{{ type }}"
+        name="subCategory"
+        [checked]="checked"
+        id="{{ subCategory.code }}"
+        (change)="assignValue(subCategory.code)"
+      />
+      <div class="subcategory-title">
+        <p>{{ subCategory[typeTitle] | translate }}</p>
+        <span class="subcategory-title-products" *ngIf="!readonly">{{
+          labelSelected
+        }}</span>
+      </div>
+      <span class="subcategory-product-selected" *ngIf="!readonly"
+        >{{ numSelected }} {{ 'selected_products' | translate }}</span
+      >
+    </label>
+    <span
+      class="material-symbols-rounded subcategory-expand"
+      (click)="toogle(subCategory)"
+    >
+      expand_more
+    </span>
+  </div>
 
-	<div class="subcategory-product">
-		<ng-content></ng-content>
-	</div>
-	<span class="alert-select-product" *ngIf="open">
-		<i class="ti ti-info-triangle-filled"></i>
-		<p>{{ 'alertSelectedProduct' | translate }}</p>
-	</span>
+  <div class="subcategory-product">
+    <ng-content></ng-content>
+  </div>
+  <span class="alert-select-product" *ngIf="open">
+    <i class="ti ti-info-triangle-filled"></i>
+    <p>{{ 'alertSelectedProduct' | translate }}</p>
+  </span>
 </div>

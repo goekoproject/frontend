@@ -5,6 +5,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   CategoryModule,
+  ProductsManagementComponent,
   SdgIconsComponent,
   SelectSubcategoryProductComponent,
 } from '@goeko/business-ui';
@@ -31,6 +32,8 @@ import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
 import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
 import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
+import { SmeAnalysisService } from './sme-analysis.service';
+import { DataArraySummaryPipe } from './sme-analysis-summary/data-array-summary.pipe';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     ResultDetailEcosolutionComponent,
     EcosolutionListComponent,
     YesNoPipe,
+    DataArraySummaryPipe,
   ],
   imports: [
     CommonModule,
@@ -61,10 +65,12 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     SdgIconsComponent,
     NotificationModule,
     SelectSubcategoryProductComponent,
+    ProductsManagementComponent,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),
   ],
+  providers: [SmeAnalysisService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SmeAnalysisFormModule {}

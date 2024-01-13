@@ -18,7 +18,7 @@ export class ClassificationCategoryService {
       '/v1/classifications/category'
     );
   }
-  getClassificationForCategory(
+  getClassificationForCategoryTranslated(
     category: string
   ): Observable<ClassificationCategory> {
     return this._httpClient.get<ClassificationCategory>(

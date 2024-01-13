@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
-import { SmeService, SmeAnalysisService, UserService } from '@goeko/store';
+import { SmeService, SmeAnalysisStoreService, UserService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil, last } from 'rxjs';
 import {
@@ -55,7 +55,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   smeRecomendationBody!: any;
   constructor(
     private _smeService: SmeService,
-    private _smeAnalysisService: SmeAnalysisService,
+    private _smeAnalysisStore: SmeAnalysisStoreService,
     private _translateServices: TranslateService,
     private _route: ActivatedRoute,
     private _userService: UserService,
@@ -65,7 +65,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._smeId = this._route.snapshot.paramMap.get('id') as string;
 
-    this._smeAnalysisService
+    this._smeAnalysisStore
       .getCurrentAnalysis()
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((analysis) => {
@@ -156,7 +156,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     selectedRecomendation: any,
     selectedRecomendationIndex: number
   ) {
-    this._smeAnalysisService.setDetailEcosolutions(selectedRecomendation);
+    this._smeAnalysisStore.setDetailEcosolutions(selectedRecomendation);
     this._router.navigate(['details'], { relativeTo: this._route });
     /* 	this.selectedRecomendation = selectedRecomendation;
 		if (!this.toogleOpenDetails) {

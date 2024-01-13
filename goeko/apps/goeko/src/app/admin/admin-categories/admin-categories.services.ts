@@ -7,7 +7,11 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CATEGORY_SECTION, CategorySection } from '@goeko/business-ui';
+import {
+  CATEGORY_SECTION,
+  CategorySection,
+  mergeCategoriesSectionWithClassificationCategory,
+} from '@goeko/business-ui';
 import {
   ClassificationCategory,
   ClassificationCategoryService,
@@ -18,18 +22,6 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, tap } from 'rxjs';
 
-const mergeCategoriesSectionWithClassificationCategory = (
-  classificationCategory: ClassificationCategory[]
-) =>
-  CATEGORY_SECTION.map((category: CategorySection) => {
-    const findCategoryData = classificationCategory.find(
-      (categoryData) => categoryData.code === category.code
-    );
-    return {
-      ...category,
-      ...findCategoryData,
-    };
-  });
 export function equalPrimitives(a: any, b: any) {
   return a.id === b.id;
 }
@@ -38,7 +30,7 @@ export class AdminCategoriesService {
   private injector = inject(Injector);
 
   categories = toSignal(this._getAllCategories$(), {
-    initialValue: CATEGORY_SECTION,
+    initialValue: CATEGORY_SECTION as any[],
     injector: this.injector,
   });
 

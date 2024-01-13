@@ -1,7 +1,7 @@
 export interface ClassificationCategory {
   id: string;
   code: string;
-  label?: string;
+  label: string;
   subcategories?: ClassificationSubcategory[];
 }
 
@@ -22,5 +22,6 @@ export interface ClassificationCategoryProduct {
 
 export const NULL_CLASSIFICATION_CATEGORY: ClassificationCategory = {
   id: '',
-  code: 'none',
+  code: '',
+  label: '',
 };

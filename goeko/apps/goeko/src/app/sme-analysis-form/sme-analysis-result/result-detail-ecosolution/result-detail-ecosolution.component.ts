@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSelect, Recommendation, SmeAnalysisService } from '@goeko/store';
+import {
+  DataSelect,
+  Recommendation,
+  SmeAnalysisStoreService,
+} from '@goeko/store';
 import { AutoUnsubscribe } from '@goeko/ui';
 import { Subject, takeUntil } from 'rxjs';
 import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants';
@@ -16,10 +20,10 @@ export class ResultDetailEcosolutionComponent implements OnInit {
   public detailsEcosolution!: Recommendation;
   public sectionFeatureDetail = SECTION_FEATURE_DETAIL_ECOSOLUTION;
   public dataSelect = DataSelect as any;
-  constructor(private _smeAnalysisService: SmeAnalysisService) {}
+  constructor(private _smeAnalysisStore: SmeAnalysisStoreService) {}
 
   ngOnInit(): void {
-    this._smeAnalysisService
+    this._smeAnalysisStore
       .getDetailEcosolutions()
       .pipe(takeUntil(this.destroy$))
       .subscribe(
