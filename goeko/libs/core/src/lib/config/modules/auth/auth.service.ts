@@ -9,6 +9,7 @@ import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants';
 import { Auth0Connected, AuthResponse } from './auth0.abtract';
 import { SignUp } from './signup.interface';
 import { ROLES } from '../../../roles/role-type.model';
+import { AuthService as Auth0 } from '@auth0/auth0-angular';
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
@@ -44,16 +45,26 @@ export class AuthService extends Auth0Connected {
       password,
     };
   };
+
+  get isAuthenticated$(): Observable<boolean> {
+    return this._auth0.isAuthenticated$;
+  }
   constructor(
     @Inject(CONFIGURATION) private _config: Options,
     private readonly sessionStorageService: SessionStorageService,
-    private readonly userContextService: UserContextService
+    private readonly userContextService: UserContextService,
+    private readonly _auth0: Auth0
   ) {
     super(_config.domainAuth0, _config.clientId);
     this._clientId = this._config.clientId;
   }
 
+  universalLogin(): Observable<any> {
+    return this._auth0.loginWithRedirect();
+  }
+
   /**
+   * @deprecated Use universalLogin
    *  Manages the access token
    * @param body
    * @returns
@@ -105,6 +116,10 @@ export class AuthService extends Auth0Connected {
     });
   }
 
+  /**
+   * @deprecated Use isAuthenticated$()
+   * @returns
+   */
   isAuthenticated(): boolean {
     const accessToken = sessionStorage.getItem(SS_JWTDATA);
     return !!accessToken && !this.isExpiredTOKEN(this.expiresIn);

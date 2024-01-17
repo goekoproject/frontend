@@ -29,9 +29,9 @@ export class DashboardSmeComponent implements OnInit {
     this._userService.companyDetail.subscribe((companyDetail) => {
       if (companyDetail) {
         this.companyDetail = companyDetail;
+        this._getLastProjectName();
       }
     });
-    this._getLastProjectName();
   }
 
   private _getLastProjectName() {

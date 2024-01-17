@@ -48,6 +48,7 @@
     "@angular/cli": "~17.0.0",
     "@angular/compiler-cli": "~17.0.0",
     "@angular/language-service": "~17.0.0",
+    "@auth0/auth0-angular": "^2.2.2",
     "@babylonjs/core": "^6.35.0",
     "@babylonjs/loaders": "^6.35.0",
     "@nx/cypress": "17.2.7",

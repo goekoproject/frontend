@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, effect, signal } from '@angular/core';
 import { BehaviorSubject, catchError, of, switchMap, throwError } from 'rxjs';
 import { CleanTechService } from '../cleantech/cleanteach.services';
 import { SessionStorageService } from '../session-storage.service';
 import { SmeService } from '../sme/sme.services';
 import { USER_TYPE } from './user-type.constants';
+import { User } from '@auth0/auth0-angular';
 export const SS_COMPANY_DETAIL = 'SS_COMPANY';
 
 @Injectable()
 export class UserService {
   private _companyDetail = new BehaviorSubject<unknown | null>(null);
+  public user = signal<User>({});
 
   get companyDetail() {
     if (!this._companyDetail.value) {
@@ -28,9 +30,17 @@ export class UserService {
     private _smeService: SmeService,
     private _cleanTechService: CleanTechService,
     private readonly sessionStorageService: SessionStorageService
-  ) {}
+  ) {
+    effect(() => {
+      if (this.user().sub) {
+        const userType = this.user()['userType'];
+        const externalId = this.user()['externalId'];
+        this.getUserProfile(userType, externalId);
+      }
+    });
+  }
 
-  getUserProfile(userType: string, externalId: string) {
+  getUserProfile(userType: string = '', externalId: string = '') {
     if (userType === USER_TYPE.SME) {
       this._getSmeDataProfile(externalId);
     }

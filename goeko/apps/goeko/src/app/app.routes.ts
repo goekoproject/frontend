@@ -1,5 +1,13 @@
+import { inject } from '@angular/core';
 import { Route } from '@angular/router';
-import { AuthGuard, ROLE, ROLE_ALL, hasRole } from '@goeko/core';
+import {
+  AuthGuard,
+  AuthService,
+  ROLE,
+  ROLE_ALL,
+  goToUniversalLogin,
+  hasRole,
+} from '@goeko/core';
 import { loadRemoteModule } from '@nx/angular/mf';
 
 export const appRoutes: Route[] = [
@@ -24,8 +32,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./access/access.module').then((m) => m.AccessModule),
+    canMatch: [goToUniversalLogin],
   },
   {
     path: 'autenticate',

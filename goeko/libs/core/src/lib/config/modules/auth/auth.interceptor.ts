@@ -8,10 +8,10 @@ import {
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
-import { AuthService } from './auth.service';
 import { SESSIONID } from './auth.constants';
 import { CONFIGURATION } from '../../config.module';
 import { Options } from '../../models/options.interface';
+import { AuthService } from '@auth0/auth0-angular';
 
 /**
  * Inteceptor for authenticating a user
@@ -28,12 +28,10 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (this._auth.isAuthenticated()) {
-      const accessToken = sessionStorage.getItem(SESSIONID);
+    const accessToken = sessionStorage.getItem(SESSIONID);
 
-      if (!request.url.includes('assets') && accessToken) {
-        request = this.requestGoekoBakend(request, accessToken);
-      }
+    if (!request.url.includes('assets')) {
+      request = this.requestGoekoBakend(request);
     }
 
     return next
@@ -43,20 +41,18 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private _handleError(error: HttpErrorResponse) {
     if (error && error.status === 401) {
-      this._auth.killSessions();
+      /*       this._auth.killSessions();
+       */
     }
     return throwError(() => error);
   }
 
-  private requestGoekoBakend(
-    request: HttpRequest<unknown>,
-    accessToken: string
-  ) {
+  private requestGoekoBakend(request: HttpRequest<unknown>) {
     return request.clone({
       url: `${this.configuration.endopoint}${request.url}`,
-      setHeaders: {
+      /*  setHeaders: {
         Authorization: `Bearer ${accessToken}`,
-      },
+      }, */
     });
   }
 }

@@ -4,14 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   PopupModule,
   SelectI18nModule,
   SideProfileComponent,
 } from '@goeko/business-ui';
-import { ConfigModule, ShowForRolesDirective } from '@goeko/core';
+import { AUTH_CONNECT, ConfigModule, ShowForRolesDirective } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
@@ -34,6 +34,7 @@ import { FooterComponent } from './shell/footer/footer.component';
 import { HeaderUserComponent } from './shell/header-user/header-user.component';
 import { MenuUserComponent } from './shell/menu-user/menu-user.component';
 import { HeaderComponent } from './home/header/header.component';
+import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 const httpLoaderFactory = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
@@ -59,6 +60,16 @@ const httpLoaderFactory = (http: HttpClient) => {
     SideDialogModule,
     BadgeModule,
     ShowForRolesDirective,
+    AuthModule.forRoot({
+      domain: environment.domainAuth0,
+      clientId: environment.clientId,
+      authorizationParams: {
+        redirect_uri: AUTH_CONNECT.REDIRECT_URI,
+      },
+      httpInterceptor: {
+        allowedList: ['https://goeko-backend.herokuapp.com/v1/*'],
+      },
+    }),
     GoShowUserTypeDirective,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
@@ -82,7 +93,14 @@ const httpLoaderFactory = (http: HttpClient) => {
       },
     }),
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

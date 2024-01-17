@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard, ROLES, hasRole } from '@goeko/core';
+import {
+  AuthGuard,
+  ROLES,
+  goToUniversalLogin,
+  hasRole,
+  isAuthenticated,
+} from '@goeko/core';
 
 const ROUTES: Routes = [
   {
@@ -24,8 +30,8 @@ const ROUTES: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./access/access.module').then((m) => m.AccessModule),
+    canMatch: [goToUniversalLogin],
+    loadComponent: () => goToUniversalLogin(),
   },
   {
     path: 'autenticate',
@@ -34,8 +40,6 @@ const ROUTES: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AuthGuard],
-    canMatch: [],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },

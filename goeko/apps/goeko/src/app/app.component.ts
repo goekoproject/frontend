@@ -34,6 +34,8 @@ export class AppComponent implements OnInit, AfterViewInit {
       !window.location.pathname.includes('/login')
     );
   }
+
+  public isAuthenticated$ = this._authService.isAuthenticated$;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -45,9 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     console.log(this.showPopupCookies);
   }
 
-  ngAfterViewInit(): void {
-    this._getUserContext();
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
   acceptCookie() {

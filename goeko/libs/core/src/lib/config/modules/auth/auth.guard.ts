@@ -1,28 +1,54 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, UrlTree, Router } from '@angular/router';
+import { Injectable, Injector, Type, inject } from '@angular/core';
+import {
+  CanActivate,
+  UrlTree,
+  Router,
+  CanActivateFn,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  CanMatchFn,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
-	providedIn: 'root',
+  providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-	constructor(private readonly _authService: AuthService, private readonly _router: Router) {}
+export class AuthGuard {
+  private injector = inject(Injector);
 
-	canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-		return this._isAuthenticated();
-	}
+  constructor(
+    private readonly _authService: AuthService,
+    private readonly _router: Router
+  ) {}
 
-	/**
-	 *  Method that checks if there is a token present, that means the user is logged,
-	 * if the token is invalid the AuthService will take care of it
-	 */
-	private _isAuthenticated(): Observable<boolean> | boolean {
-		if (!this._authService.isAuthenticated()) {
-			this._authService.killSessions();
-			this._router.navigate(['login']);
-			return false;
-		}
-		return this._authService.isAuthenticated();
-	}
+  canActivate():
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    return this._authService.isAuthenticated$;
+  }
+
+  /**
+   *  Method that checks if there is a token present, that means the user is logged,
+   * if the token is invalid the AuthService will take care of it
+   */
 }
+
+export const isAuthenticated: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+):
+  | Observable<boolean | UrlTree>
+  | Promise<boolean | UrlTree>
+  | boolean
+  | UrlTree => {
+  return inject(AuthService).isAuthenticated$
+    ? true
+    : inject(Router).createUrlTree(['/login']);
+};
+
+export const goToUniversalLogin = (): Observable<Type<unknown>> => {
+  return inject(AuthService).universalLogin();
+};
