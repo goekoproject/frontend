@@ -5,7 +5,23 @@ import { ManageProduct } from '@goeko/store';
   name: 'dataArraySummary',
 })
 export class DataArraySummaryPipe implements PipeTransform {
-  transform(value: any, ...args: any[]): any {
-    return value.map((product: ManageProduct) => product.label).join(',  ');
+  transform(value: any, subcategoryOfProduct: any[] | undefined): any {
+    if (typeof value === 'object') {
+      return value
+        .map((product: any) =>
+          product.label
+            ? product.label
+            : this._codeProductToObjectProduct(product, subcategoryOfProduct)
+        )
+        .join(' , ');
+    }
+  }
+
+  private _codeProductToObjectProduct(
+    codeProduct: string,
+    subcategoryOfProduct: ManageProduct[] | undefined
+  ): any {
+    return subcategoryOfProduct?.find((product) => product.code === codeProduct)
+      ?.label;
   }
 }

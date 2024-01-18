@@ -213,6 +213,7 @@ export class SelectSubcategoryProductComponent
     if (this.multiple) {
       this.value = value;
       this._propagateValue();
+      this.open = false;
     } else if (this.subCategory.code === value) {
       this.value = this.subCategory;
       this._propagateValue();

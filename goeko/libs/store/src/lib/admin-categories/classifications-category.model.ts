@@ -11,6 +11,7 @@ export interface ClassificationSubcategory {
   label: string;
   question?: string;
   products?: ClassificationCategoryProduct[];
+  order?: number;
 }
 
 export interface ClassificationCategoryProduct {

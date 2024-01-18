@@ -7,6 +7,7 @@ export interface Field {
   label: string; // for cleactech
   question: string; // for question of sme
   hidden?: boolean;
+  order: number; //
 }
 export interface Section {
   id: string;
@@ -18,6 +19,7 @@ export interface Section {
   controlName: CATEGORIES;
   showResult: boolean;
   checked?: boolean;
+  code: CATEGORIES;
 }
 
 export enum STATUS_SECTION {
@@ -28,6 +30,7 @@ const TYPE_FIELD = 'select-subcategory-product';
 export const FORM_CATEGORIES_QUESTION: Section[] = [
   {
     id: 'co2-category-form',
+    code: CATEGORIES.CO2_EMISSION,
     keyLang: 'CATEGORIES.co2Emission',
     controlName: CATEGORIES.CO2_EMISSION,
     status: STATUS_SECTION.COMPLETED,
@@ -41,6 +44,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         label: 'CATEGORIES_LABEL.mainInternalCombustionEngine.label',
         question: 'CATEGORIES_LABEL.mainInternalCombustionEngine.question',
+        order: 1,
       },
       /* {
 				controlName: 'fuelInvoice',
@@ -55,6 +59,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: 'cement, concrete, etc.',
         question: 'CATEGORIES_LABEL.mainMineralProduct.question',
         label: 'CATEGORIES_LABEL.mainMineralProduct.label',
+        order: 2,
       },
       /* 	{
 				controlName: 'mainRigidMaterial',
@@ -76,6 +81,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.sustainableBuildingOperations.question',
         label: 'CATEGORIES_LABEL.sustainableBuildingOperations.label',
+        order: 3,
       },
     ],
   },
@@ -87,6 +93,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
     icon: 'waste',
     showResult: true,
     checked: false,
+    code: CATEGORIES.WASTE,
     fields: [
       {
         controlName: 'mainCategoryNonInert',
@@ -94,6 +101,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.mainCategoryNonInert.question',
         label: 'CATEGORIES_LABEL.mainCategoryNonInert.label',
+        order: 1,
       },
       {
         controlName: 'inertOrMineralWaste',
@@ -101,6 +109,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.inertOrMineralWaste.question',
         label: 'CATEGORIES_LABEL.inertOrMineralWaste.label',
+        order: 2,
       },
       {
         controlName: 'greenWaste',
@@ -108,6 +117,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.greenWaste.question',
         label: 'CATEGORIES_LABEL.greenWaste.label',
+        order: 3,
       },
       {
         controlName: 'specialWaste',
@@ -115,6 +125,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.specialWaste.question',
         label: 'CATEGORIES_LABEL.specialWaste.label',
+        order: 4,
       },
       {
         controlName: 'hazardousWaste',
@@ -122,11 +133,13 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.hazardousWaste.question',
         label: 'CATEGORIES_LABEL.hazardousWaste.label',
+        order: 5,
       },
     ],
   },
   {
     id: 'water-category-form',
+    code: CATEGORIES.WATER,
     keyLang: 'CATEGORIES.water',
     controlName: CATEGORIES.WATER,
     status: STATUS_SECTION.COMPLETED,
@@ -154,6 +167,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.mainActivity.question',
         label: 'CATEGORIES_LABEL.mainActivity.label',
+        order: 1,
       },
       {
         controlName: 'buildingOperation',
@@ -161,11 +175,13 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: 'buildingOperation_question',
         question: 'CATEGORIES_LABEL.buildingOperation.question',
         label: 'CATEGORIES_LABEL.buildingOperation.label',
+        order: 2,
       },
     ],
   },
   {
     id: 'hp-category-form',
+    code: CATEGORIES.HAZARDOUS_PRODUCT,
     keyLang: 'CATEGORIES.hazardousProduct',
     controlName: CATEGORIES.HAZARDOUS_PRODUCT,
     status: STATUS_SECTION.COMPLETED,
@@ -179,6 +195,7 @@ export const FORM_CATEGORIES_QUESTION: Section[] = [
         textHelp: '',
         question: 'CATEGORIES_LABEL.products.question',
         label: 'CATEGORIES_LABEL.products.label',
+        order: 1,
       },
     ],
   },

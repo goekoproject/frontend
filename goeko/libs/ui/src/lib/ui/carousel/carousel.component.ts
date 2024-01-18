@@ -49,7 +49,7 @@ export class GoSlideDirective {
 })
 export class CarouselComponent implements AfterContentInit {
   @ContentChildren(GoSlideDirective, { descendants: true })
-  slide!: QueryList<any>;
+  slides!: QueryList<any>;
 
   @Output() valueChangeButton = new EventEmitter();
   @Input() hiddenButton = false;
@@ -66,12 +66,12 @@ export class CarouselComponent implements AfterContentInit {
   set selectedSlideIndex(index: number) {
     this._selectedSlideIndex = index;
     setTimeout(() => {
-      if (index === undefined || !this.slide) {
+      if (index === undefined || !this.slides) {
         return;
       }
       this.selectedSlideTemplateRef = null;
       this.selectedSlideTemplateRef =
-        this.slide.toArray()[this.selectedSlideIndex]?.template;
+        this.slides.toArray()[this.selectedSlideIndex]?.template;
       this.animateStateSlide = '';
       this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.NEXT);
       this._cdf.markForCheck();
@@ -85,11 +85,11 @@ export class CarouselComponent implements AfterContentInit {
   public disabledButtonPrev = true;
 
   get isLastSlide() {
-    return this.selectedSlideIndex + 1 === this.slide.length;
+    return this.selectedSlideIndex + 1 === this.slides.length;
   }
   constructor(private _cdf: ChangeDetectorRef) {}
   ngAfterContentInit(): void {
-    this.selectedSlideTemplateRef = this.slide.first?.template;
+    this.selectedSlideTemplateRef = this.slides.first?.template;
     this._cdf.markForCheck();
   }
   next() {
@@ -97,7 +97,7 @@ export class CarouselComponent implements AfterContentInit {
       return;
     }
     this.selectedSlideIndex = this.selectedSlideIndex + 1;
-    /* 		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
+    /* 		this.selectedSlideTemplateRef = this.slides.toArray().at(this.selectedSlideIndex)?.template;
      */ this.animateStateSlide = 'next';
     this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.NEXT);
     this._cdf.markForCheck();
@@ -108,7 +108,7 @@ export class CarouselComponent implements AfterContentInit {
       return;
     }
     this.selectedSlideIndex -= 1;
-    /* 		this.selectedSlideTemplateRef = this.slide.toArray().at(this.selectedSlideIndex)?.template;
+    /* 		this.selectedSlideTemplateRef = this.slides.toArray().at(this.selectedSlideIndex)?.template;
      */ this.animateStateSlide = 'prev';
     this._handlerArrowButton(ANIMATION_CAROUSEL_STATE.PREV);
     this._cdf.markForCheck();
@@ -116,7 +116,7 @@ export class CarouselComponent implements AfterContentInit {
 
   private _handlerArrowButton(animateStateSlide: ANIMATION_CAROUSEL_STATE) {
     this.animateStateSlide = animateStateSlide;
-    this.disabledButtonNext = this.selectedSlideIndex >= this.slide.length - 1;
+    this.disabledButtonNext = this.selectedSlideIndex >= this.slides.length - 1;
     this.disabledButtonPrev = this.selectedSlideIndex <= 0;
     this.valueChangeButton.emit({
       typeButton: animateStateSlide,

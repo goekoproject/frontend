@@ -66,7 +66,6 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   }
 
   constructor(
-    private _translateService: TranslateService,
     private _smeServices: SmeService,
     private _projectService: ProjectService,
     private _smeAnalysisStore: SmeAnalysisStoreService,
@@ -168,9 +167,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
       })
       .subscribe((res) => {
         if (res) {
-          this._router.navigate(['../results', this._smeId], {
-            relativeTo: this._route,
-          });
+          this._router.navigate(['sme-analysis/results', this._smeId]);
         }
       });
   }

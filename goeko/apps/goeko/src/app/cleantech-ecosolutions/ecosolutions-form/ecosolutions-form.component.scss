@@ -25,7 +25,7 @@
   padding: 1rem;
   width: 370px;
   border-radius: 16px;
-  border: 2px solid #0090d6;
+  border: 2px solid var(--primary--main);
   cursor: pointer;
   input {
     width: 24px;
@@ -95,7 +95,7 @@
 .ods-check {
   position: absolute;
   font-size: 2rem;
-  color: #0090d6;
+  color: var(--primary--main);
   right: -2px;
   background: #fff;
   border-radius: 50%;
@@ -125,9 +125,9 @@
   justify-content: space-between;
 }
 .file-data {
-  border: 1px solid #0090d6;
+  border: 1px solid var(--primary--main);
   background: rgba(0, 144, 214, 0.1294117647);
-  color: #0090d6;
+  color: var(--primary--main);
   border-radius: 8px;
   display: flex;
   align-items: center;

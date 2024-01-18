@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -13,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import {
   ClassificationCategory,
+  ClassificationCategoryProduct,
   ClassificationSubcategory,
   DataSelect,
   SmeAnalysisStoreService,
@@ -22,7 +24,12 @@ import { transformArrayToObj } from './sme-analysis.request';
 import { Subject, takeUntil } from 'rxjs';
 import { AutoUnsubscribe } from '@goeko/ui';
 import { SmeAnalysisService } from '../sme-analysis.service';
-
+import { SelectionModel } from '@angular/cdk/collections';
+import { EllipseCurve } from 'three';
+const compareWithClassificationCategory = (
+  c1: ClassificationCategory,
+  c2: ClassificationCategory
+) => c1.code === c2.code;
 @AutoUnsubscribe()
 @Component({
   selector: 'goeko-sme-form-analysis',
@@ -30,21 +37,25 @@ import { SmeAnalysisService } from '../sme-analysis.service';
   styleUrls: ['./sme-form-analysis.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SmeFormAnalysisComponent implements OnInit {
+export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
+  compareWithProdcuts = (
+    product: ClassificationCategoryProduct,
+    productCodeSelected: string
+  ) => {
+    return product.code === productCodeSelected;
+  };
   formField = FORM_CATEGORIES_QUESTION;
   form!: FormGroup;
   dateLastRecomendation!: string;
   public dataSelect = DataSelect as any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   private _smeId!: string;
-  private _selectedCategory!: string;
 
   //Signal
   categories = this._smeAnalysisService.categories;
   categorySelected = this._smeAnalysisService.categorySelected;
   dataCategorySelected = this._smeAnalysisService.dataCategorySelected;
   currentAnalytics = this._smeAnalysisService.currentAnalytics;
-
   slideSelected = computed(() =>
     this.categories().findIndex(
       (category: ClassificationCategory) =>
@@ -58,70 +69,53 @@ export class SmeFormAnalysisComponent implements OnInit {
     private _smeService: SmeService,
     private _route: ActivatedRoute,
     private _smeAnalysisService: SmeAnalysisService,
-    private _cdf: ChangeDetectorRef,
-    private _smeAnalysisStore: SmeAnalysisStoreService
+    private _cdf: ChangeDetectorRef
   ) {
     effect(() => {
       if (this.dataCategorySelected()?.code === this.categorySelected().code) {
         this._createFormGroup();
+        this._setLastAnalysis();
       }
     });
   }
 
   ngOnInit(): void {
-    this.categorySelected.set(this.categories()[0]);
     this._smeId = this._route.snapshot.paramMap.get('id') as string;
-    this._route.queryParams.subscribe(
-      (queryParams: any) => (this._selectedCategory = queryParams.categoryId)
-    );
-    this.form = this._fb.group({});
-    this._setLastAnalysis();
-    this._selectCatagory();
+    this._initForm();
   }
 
-  private _selectCatagory() {
-    if (!this._selectedCategory) {
-      return;
-    }
-    this._smeAnalysisStore
-      .getCurrentAnalysis()
-      .subscribe((analysis) => this.form.patchValue(analysis));
-
-    const indexCarousel = this.formField.findIndex(
-      (formField) => formField.id === this._selectedCategory
-    );
+  ngAfterViewInit(): void {
+    this.categorySelected.set(this.categories()[0]);
+  }
+  private _initForm() {
+    this.form = this._fb.group({
+      co2Emission: this._fb.group({}),
+      waste: this._fb.group({}),
+      waterConsumption: this._fb.group({}),
+      hazardousProduct: this._fb.group({}),
+    });
+  }
+  selectCategory(categorySelected: ClassificationCategory): void {
+    this.categorySelected.set(categorySelected);
   }
 
-  private _createFormGroup() {
-    this._preserveData();
-    const controlNameCatgory = this.categorySelected().code;
-    // if it exists, not create a new group
-    if (!controlNameCatgory || this.form.controls[controlNameCatgory]) {
-      this._cdf.markForCheck();
-      return;
-    }
-    const formGroup = this._fb.group({});
-    this.dataCategorySelected()?.subcategories?.forEach(
+  private _createFormGroup(
+    controlNameCatgory = this.categorySelected().code,
+    dataCategorySelected = this.dataCategorySelected()
+  ) {
+    const formGroup = this.form.get(controlNameCatgory) as FormGroup;
+    dataCategorySelected?.subcategories?.forEach(
       (subcategory: ClassificationSubcategory) => {
+        if (this.form.get(controlNameCatgory)?.get(subcategory.code)) {
+          return;
+        }
+
         formGroup.addControl(subcategory.code, this._fb.control(''));
+        this._cdf.markForCheck();
       }
     );
     this.form.addControl(controlNameCatgory, formGroup);
     this._cdf.markForCheck();
-  }
-  private _preserveData() {
-    this._smeAnalysisStore
-      .getCurrentAnalysis()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((res) => {
-        if (res) {
-          this.form.patchValue(res);
-        }
-      });
-  }
-
-  selectCategory(categorySelected: ClassificationCategory): void {
-    this.categorySelected.set(categorySelected);
   }
 
   private _setLastAnalysis() {
@@ -139,29 +133,40 @@ export class SmeFormAnalysisComponent implements OnInit {
           const classifications = transformArrayToObj(
             requestClassifications.classifications
           );
+
+          this._createFormForEdit(classifications);
           this.form.patchValue(classifications);
-          this.form.markAllAsTouched();
+          this._cdf.markForCheck();
         }
       });
   }
-  gotToSummary() {
-    this.currentAnalytics.set(this.form.value);
-    /*     this._smeAnalysisStore.setCurrentAnalysis(this.form.value);
-     */ setTimeout(() => {
-      if (this._smeId) {
-        this._router.navigate([`../${this._smeId}/summary`], {
-          relativeTo: this._route,
-        });
-      } else {
-        this._router.navigate([`summary`], {
-          relativeTo: this._route,
-          queryParamsHandling: 'preserve',
-        });
-      }
+  private _createFormForEdit(classifications: any) {
+    Object.keys(classifications).forEach((controlName) => {
+      Object.keys(classifications[controlName]).forEach(
+        (controlNameSubcategory) => {
+          (this.form.get(controlName) as FormGroup).addControl(
+            controlNameSubcategory,
+            this._fb.control('')
+          );
+        }
+      );
     });
   }
+  gotToSummary() {
+    this.currentAnalytics.set(this.form.value);
+
+    if (this._smeId) {
+      this._router.navigate([`../${this._smeId}/summary`], {
+        relativeTo: this._route,
+      });
+    } else {
+      this._router.navigate([`summary`], {
+        relativeTo: this._route,
+        queryParamsHandling: 'preserve',
+      });
+    }
+  }
   getResults() {
-    this._smeAnalysisStore.setCurrentAnalysis(this.form.value);
     this._smeId = this._overrideSmeId();
     this._router.navigate(['sme-analysis/results', this._smeId]);
   }

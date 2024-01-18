@@ -31,7 +31,7 @@
 }
 
 .handle.off {
-  left: 48.2%;
+  left: 49.5%;
 }
 
 .off-label,
@@ -39,7 +39,6 @@
   z-index: 1;
   font-weight: 600;
   transition: all 0.2s ease-in-out;
-
 }
 
 .switch {
@@ -49,10 +48,10 @@
 }
 
 .switch.off {
-    .off-label {
-       color: #24253b;
-    }
-    .on-label {
-        color: #fff;
-      }
+  .off-label {
+    color: #24253b;
   }
+  .on-label {
+    color: #fff;
+  }
+}
