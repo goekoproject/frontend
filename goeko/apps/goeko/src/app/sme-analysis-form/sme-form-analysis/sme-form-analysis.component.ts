@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -7,7 +6,6 @@ import {
   OnInit,
   computed,
   effect,
-  signal,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,15 +15,12 @@ import {
   ClassificationCategoryProduct,
   ClassificationSubcategory,
   DataSelect,
-  SmeAnalysisStoreService,
   SmeService,
 } from '@goeko/store';
 import { transformArrayToObj } from './sme-analysis.request';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AutoUnsubscribe } from '@goeko/ui';
 import { SmeAnalysisService } from '../sme-analysis.service';
-import { SelectionModel } from '@angular/cdk/collections';
-import { EllipseCurve } from 'three';
 const compareWithClassificationCategory = (
   c1: ClassificationCategory,
   c2: ClassificationCategory
@@ -154,7 +149,6 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
   }
   gotToSummary() {
     this.currentAnalytics.set(this.form.value);
-
     if (this._smeId) {
       this._router.navigate([`../${this._smeId}/summary`], {
         relativeTo: this._route,
@@ -167,6 +161,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
     }
   }
   getResults() {
+    this.currentAnalytics.set(this.form.value);
     this._smeId = this._overrideSmeId();
     this._router.navigate(['sme-analysis/results', this._smeId]);
   }
