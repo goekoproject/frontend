@@ -84,14 +84,14 @@
     font-weight: bold;
   }
   &-icon {
-    color: #0090d6;
+    color: var(--primary--main);
     font-size: 1.5rem;
   }
   &-title {
     font-size: 1rem;
   }
   &:hover {
-    filter: drop-shadow(1px 1px 9px #0090d6);
+    filter: drop-shadow(1px 1px 9px var(--primary--main));
     color: #080b17e0;
   }
 }
@@ -201,6 +201,6 @@ ui-super-select {
   display: flex;
   gap: 1rem;
   align-items: center;
-  color: #0090d6;
+  color: var(--primary--main);
   font-size: 1.5rem;
 }

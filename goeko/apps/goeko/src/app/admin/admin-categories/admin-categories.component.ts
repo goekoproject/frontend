@@ -7,6 +7,7 @@ import {
   QueryList,
   ViewChildren,
   effect,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -19,6 +20,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   ClassificationCategory,
   ManageCategory,
+  ManageProduct,
   ManageSubcategory,
   ProductSelectToManageProduct,
   Translations,
@@ -28,6 +30,7 @@ import {
   ButtonModule,
   DialogService,
   GoInputModule,
+  SwitchModule,
   fadeAnimation,
   listAnimation,
 } from '@goeko/ui';
@@ -60,6 +63,7 @@ import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form';
     BadgeModule,
     ProductsManagementComponent,
     ProductToCurrentLangPipe,
+    SwitchModule,
   ],
   providers: [AdminCategoriesService],
   templateUrl: './admin-categories.component.html',
@@ -115,7 +119,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
   }
 
   private _translationsForLang: any = {};
-
+  toggleActor = signal<boolean>(false);
   constructor(
     private _adminCategories: AdminCategoriesService,
     private _fb: FormBuilder,
@@ -132,6 +136,9 @@ export class AdminCategoriesComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     this._cdf.markForCheck();
+  }
+  hanldertoggleActor(toggleActor: boolean): void {
+    this.toggleActor.set(toggleActor);
   }
   private _getTranslationsForLang() {
     ['gb', 'fr', 'es'].forEach((lang) => {
@@ -163,15 +170,18 @@ export class AdminCategoriesComponent implements AfterContentInit {
     this._closeAllDetail();
     this._cdf.markForCheck();
     this.categorySelected.set(categorySelected);
-  }
-
-  closeDetailCategory(index: number): void {
-    this._closeDetailByIndex(index);
+    this.toggleActor.set(true);
   }
   toogleSubcategory(event: Event, index: number) {
     this._toogleSubcategory(index);
+    this.toggleActor.set(true);
     event.preventDefault();
   }
+  closeDetailCategory(index: number): void {
+    this._closeDetailByIndex(index);
+  }
+
+  //TODO: create object for mapping
   saveSubcategory() {
     const updateCategory: ManageCategory = {
       ...this.subCategorySelected(),
@@ -179,6 +189,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
       subcategories: Object.values(this.form.value).map((subcategory: any) => ({
         ...subcategory,
         lang: undefined,
+        order: undefined,
       })),
     };
     this._adminCategories.updateSubcategorySelected(updateCategory);

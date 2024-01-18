@@ -1,25 +1,29 @@
 <button
-	*ngIf="!hiddenButton && !hiddenButtonPrev"
-	class="button-slide button-slide--prev"
-	(click)="prev()"
-	[disabled]="disabledButtonPrev"
+  *ngIf="!hiddenButton && !hiddenButtonPrev"
+  class="button-slide button-slide--prev"
+  (click)="prev()"
+  [disabled]="disabledButtonPrev"
 >
-	<span class="material-symbols-rounded"> chevron_left </span>
+  <span class="material-symbols-rounded"> chevron_left </span>
 </button>
 
 <div #element>
-	<ng-content></ng-content>
+  <ng-content></ng-content>
 </div>
 
 <div [@fadeIn]="animateStateSlide" class="wrapper-slide">
-	<ng-container [ngTemplateOutlet]="selectedSlideTemplateRef"></ng-container>
+  <ng-container [ngTemplateOutlet]="selectedSlideTemplateRef"></ng-container>
+
+  <!--   @for ( slide of slides; track slide.template) {
+
+  } -->
 </div>
 
 <button
-	*ngIf="!hiddenButton && !hiddenButtonNext"
-	class="button-slide button-slide--next"
-	(click)="next()"
-	[disabled]="disabledButtonNext"
+  *ngIf="!hiddenButton && !hiddenButtonNext"
+  class="button-slide button-slide--next"
+  (click)="next()"
+  [disabled]="disabledButtonNext"
 >
-	<span class="material-symbols-rounded"> chevron_right </span>
+  <span class="material-symbols-rounded"> chevron_right </span>
 </button>

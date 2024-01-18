@@ -4,7 +4,7 @@
     @for (category of categories(); track category.id) {
     <goeko-category
       id="{{ category.id }}"
-      [selected]="category.id === categorySelected().id"
+      [selected]="category.code === categorySelected().code"
       (click)="selectCategory(category)"
       [icon]="'assets/category/' + category.icon + '.svg'"
     >
@@ -27,7 +27,7 @@
           <h3>{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}</h3>
         </div>
         @for (subcategory of dataCategorySelected().subcategories; track
-        subcategory.code) {
+        subcategory.code ; let index = $index;){
         @if(form.get(dataCategorySelected().code)?.get(subcategory.code)) {
         <!--FORM ACTORS-->
         <div class="form-field form-field--center">
@@ -47,6 +47,7 @@
               [formControlName]="subcategory.code"
               [id]="subcategory.code"
               [name]="subcategory.code"
+              [compareWith]="compareWithProdcuts"
             >
               @for (product of subcategory.products; track product.code) {
               @if(!product.disabled) {

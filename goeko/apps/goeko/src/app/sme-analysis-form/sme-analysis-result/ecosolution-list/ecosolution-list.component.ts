@@ -14,6 +14,7 @@ import {
   formToClassificationsMapper,
   FormValueToSmeAnalysisRequest,
 } from '../../sme-form-analysis/sme-analysis.request';
+import { SmeAnalysisService } from '../../sme-analysis.service';
 
 @Component({
   selector: 'goeko-ecosolution-list',
@@ -51,6 +52,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   }
 
   private _currentLangCode!: string;
+  currentAnalytics = this._smeAnalysisService.currentAnalytics;
 
   smeRecomendationBody!: any;
   constructor(
@@ -59,21 +61,14 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     private _translateServices: TranslateService,
     private _route: ActivatedRoute,
     private _userService: UserService,
-    private _router: Router
+    private _router: Router,
+    private _smeAnalysisService: SmeAnalysisService
   ) {}
 
   ngOnInit(): void {
     this._smeId = this._route.snapshot.paramMap.get('id') as string;
 
-    this._smeAnalysisStore
-      .getCurrentAnalysis()
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe((analysis) => {
-        if (analysis) {
-          this.formValue = analysis;
-          this.getResults();
-        }
-      });
+    this.getResults();
     this.currentLangCode = this._translateServices.defaultLang;
     this._changeLangCode();
     this._getOdsIcons();
@@ -91,7 +86,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   getResults() {
     this._smeService
       .createRecommendations({
-        classifications: formToClassificationsMapper(this.formValue),
+        classifications: formToClassificationsMapper(this.currentAnalytics()),
       })
       .pipe(takeUntil(this.onDestroy$), last())
       .subscribe((recommendations) => {

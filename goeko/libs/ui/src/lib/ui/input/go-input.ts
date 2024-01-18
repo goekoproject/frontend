@@ -65,11 +65,11 @@ export class GoInput extends LitElement {
       }
 
       input[type='checkbox'] {
-        color: #0090d6;
+        color: var(--primary--main);
         width: 1.3rem;
         height: 1.3rem;
         border-radius: 3rem;
-        border: 2px solid #0090d6;
+        border: 2px solid var(--primary--main);
         cursor: pointer;
       }
       textarea {

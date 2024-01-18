@@ -1,31 +1,31 @@
 @mixin center {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 .loading-goeko {
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	left: 0;
-	right: 0;
-	background: #0090d6;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  background: var(--primary--main);
 
-	.logo-loading {
-		@include center;
-		border-radius: 13%;
-		width: 84px;
-		height: 72px;
-		overflow: hidden;
-		display: flex;
-		img {
-			object-fit: none;
-		}
-	}
+  .logo-loading {
+    @include center;
+    border-radius: 13%;
+    width: 84px;
+    height: 72px;
+    overflow: hidden;
+    display: flex;
+    img {
+      object-fit: none;
+    }
+  }
 }
 /* .loader-auth {
 	@include center;

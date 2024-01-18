@@ -11,14 +11,14 @@
   </goeko-category>
   }
 </section>
-@if (form ) {
+@defer (when categorySelected().code === subCategorySelected().code ) {
 <section
   class="section-subcategories"
   [formGroup]="form"
   [@listAnimation]="subCategorySelected().subcategories.length"
 >
   @for (subcategory of subCategorySelected().subcategories; track
-  subcategory.id; let index = $index) {
+  subcategory.code; let index = $index) {
   <details
     [@fadeAnimation]
     class="subcategories"
@@ -36,6 +36,46 @@
     </summary>
     @defer (when detailCategory.open) {
     <div class="subcategories-body">
+      <go-switch
+        class="button-toogle-actors"
+        (valueChanged)="hanldertoggleActor($event)"
+        [leftLabel]="'USER_TYPE.sme' | translate"
+        [rightLabel]="'USER_TYPE.cleanTech' | translate"
+      ></go-switch>
+      <!--Question for SME's-->
+      @if (toggleActor() ) {
+      <section formGroupName="question">
+        <fieldset
+          formArrayName="translations"
+          class="subcategories-translations"
+        >
+          <legend class="section-legeng-subcategories">
+            {{ 'FORM_LABEL.subcategoryForLangSME' | translate }}
+          </legend>
+
+          @for ( translation of
+          getTranslations(subcategory.code,'question').controls; track
+          translation.value.lang; let index = $index) {
+
+          <article [formGroupName]="index" class="subcategories-sentence">
+            <go-input [formControlName]="'label'">
+              <p slot="label">
+                <span
+                  class="fi fi-{{
+                    translation.value.lang !== 'en'
+                      ? translation.value.lang
+                      : 'gb'
+                  }}"
+                ></span>
+                {{ translation.value.lang }}
+              </p>
+            </go-input>
+          </article>
+
+          }
+        </fieldset>
+      </section>
+      } @else {
       <!--  Question for Cleantech-->
       <section formGroupName="label">
         <fieldset
@@ -68,38 +108,7 @@
           }
         </fieldset>
       </section>
-      <!--Question for SME's-->
-      <section formGroupName="question">
-        <fieldset
-          formArrayName="translations"
-          class="subcategories-translations"
-        >
-          <legend class="section-legeng-subcategories">
-            {{ 'FORM_LABEL.subcategoryForLangSME' | translate }}
-          </legend>
-
-          @for ( translation of
-          getTranslations(subcategory.code,'question').controls; track
-          translation.value.lang; let index = $index) {
-
-          <article [formGroupName]="index" class="subcategories-sentence">
-            <go-input [formControlName]="'label'">
-              <p slot="label">
-                <span
-                  class="fi fi-{{
-                    translation.value.lang !== 'en'
-                      ? translation.value.lang
-                      : 'gb'
-                  }}"
-                ></span>
-                {{ translation.value.lang }}
-              </p>
-            </go-input>
-          </article>
-
-          }
-        </fieldset>
-      </section>
+      }
 
       <fieldset class="subcategories-translations">
         <legend class="section-legeng-subcategories">
@@ -146,4 +155,6 @@
   </details>
   }
 </section>
+} @loading {
+<div>loading</div>
 }

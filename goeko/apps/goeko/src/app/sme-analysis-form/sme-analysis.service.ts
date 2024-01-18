@@ -2,14 +2,16 @@ import { Injectable, Injector, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   CATEGORY_SECTION,
+  FORM_CATEGORIES_QUESTION,
   mergeCategoriesSectionWithClassificationCategory,
 } from '@goeko/business-ui';
 import {
   ClassificationCategory,
   ClassificationCategoryService,
+  ClassificationSubcategory,
   NULL_CLASSIFICATION_CATEGORY,
 } from '@goeko/store';
-import { map, tap } from 'rxjs';
+import { map, tap, toArray } from 'rxjs';
 
 export interface CurrecurrentAnalytics {
   co2Emission: { [key: string]: any };
@@ -17,11 +19,27 @@ export interface CurrecurrentAnalytics {
   waterConsumption: { [key: string]: any };
   hazardousProduct: { [key: string]: any };
 }
-const CURRECURRENT = {
-  co2Emission: {},
-  waste: {},
-  waterConsumption: {},
-  hazardousProduct: {},
+
+const mapToCategoriesSectionForOrderBy = (
+  classificationCategory: ClassificationCategory
+) => {
+  const subcategoriesSections = FORM_CATEGORIES_QUESTION.find(
+    (category) => category.code === classificationCategory.code
+  )?.fields;
+  const getOrderSubcategory = (subcategory: ClassificationSubcategory) =>
+    subcategoriesSections?.find(
+      (subcategorySection) =>
+        subcategorySection.controlName === subcategory.code
+    )?.order;
+  return {
+    ...classificationCategory,
+    subcategories: classificationCategory.subcategories
+      ?.map((subcategory) => ({
+        ...subcategory,
+        order: getOrderSubcategory(subcategory),
+      }))
+      .sort((a: any, b: any) => a.order - b.order),
+  };
 };
 @Injectable()
 export class SmeAnalysisService {
@@ -67,6 +85,11 @@ export class SmeAnalysisService {
   private _getClassificationForCategoryTranslated() {
     this.classificationCategoryService
       .getClassificationForCategoryTranslated(this.categorySelected().code)
+      .pipe(
+        map((classificationCategory) =>
+          mapToCategoriesSectionForOrderBy(classificationCategory)
+        )
+      )
       .subscribe((dataCategory) => {
         if (dataCategory) {
           this.dataCategorySelected.set(dataCategory);
