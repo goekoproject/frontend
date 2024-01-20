@@ -41,7 +41,7 @@ export class SmeService {
   }
 
   getRecommendationsById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/ecosolution/search/requests/${id}`);
+    return this._http.get<any>(`/v1/ecosolution/search/requests/smes/${id}`);
   }
 
   getLastRecommendationById(id: string): Observable<any> {
