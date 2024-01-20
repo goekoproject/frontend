@@ -29,22 +29,22 @@ export class ProjectService {
   ) {}
 
   getProjectById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/ecosolution/search/projects/smes/${id}`);
+    return this._http.get<any>(`v1/ecosolution/search/projects/${id}`);
   }
 
   createProject(body: SmeCreateRecomendationRequest): Observable<any> {
-    return this._http.post<any>(`/v1/ecosolution/search/projects/smes`, body);
+    return this._http.post<any>(`v1/ecosolution/search/projects`, body);
   }
 
   saveProject(body: SmeSaveRecomendationRequest): Observable<any> {
-    return this._http.post<any>(`/v1/ecosolution/search/projects/smes`, body);
+    return this._http.post<any>(`v1/ecosolution/search/projects`, body);
   }
 
   updateProject(
     id: string,
     body: SmeSaveRecomendationRequest
   ): Observable<any> {
-    return this._http.put<any>(`/v1/ecosolution/search/projects/smes/${id}`, body);
+    return this._http.put<any>(`v1/ecosolution/search/projects/${id}`, body);
   }
   getLastProjectBySmeId(id: string): Observable<any> {
     return this.getProjectById(id).pipe(
