@@ -29,7 +29,7 @@ export class ProjectService {
   ) {}
 
   getProjectById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/ecosolution/search/projects/smes${id}`);
+    return this._http.get<any>(`/v1/ecosolution/search/projects/smes/${id}`);
   }
 
   createProject(body: SmeCreateRecomendationRequest): Observable<any> {
