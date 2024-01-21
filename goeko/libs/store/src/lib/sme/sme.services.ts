@@ -37,11 +37,11 @@ export class SmeService {
 	} */
 
   getRecommendations(body: SmeRecomendationRequestDemo): Observable<any> {
-    return this._http.post<any>(`/v1/demo/recommendation/smes`, body);
+    return this._http.post<any>(`/v1/demo/ecosolution/search`, body);
   }
 
   getRecommendationsById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/recommendation/requests/smes/${id}`);
+    return this._http.get<any>(`/v1/ecosolution/search/requests/smes/${id}`);
   }
 
   getLastRecommendationById(id: string): Observable<any> {
@@ -60,21 +60,21 @@ export class SmeService {
     body: SmeCreateRecomendationRequest
   ): Observable<Recommendation[]> {
     return this._http
-      .post<any>(`/v1/recommendation/smes`, body)
+      .post<any>(`/v1/ecosolution/search`, body)
       .pipe(
-        map((request: ResponseRecommendations) => request?.recommendations)
+        map((request: ResponseRecommendations) => request?.ecosolutions)
       );
   }
 
   saveRecommendations(body: SmeSaveRecomendationRequest): Observable<any> {
-    return this._http.post<any>(`/v1/recommendation/requests/smes`, body);
+    return this._http.post<any>(`/v1/ecosolution/search/requests/smes`, body);
   }
 
   updateRecommendations(
     id: string,
     body: SmeSaveRecomendationRequest
   ): Observable<any> {
-    return this._http.put<any>(`/v1/recommendation/requests/smes/${id}`, body);
+    return this._http.put<any>(`/v1/ecosolution/search/requests/smes/${id}`, body);
   }
 
   getByIdExternal(id: string): Observable<any> {
