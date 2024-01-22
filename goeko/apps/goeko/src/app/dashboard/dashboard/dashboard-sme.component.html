@@ -4,10 +4,10 @@
       go-button
       type="button"
       [routerLink]="['/sme-analysis/new']"
-      [queryParams]="{ smeId: companyDetail?.id, isProject: false }"
+      [queryParams]="{ smeId: userProfile().id, isProject: false }"
       [queryParamsHandling]="'merge'"
       routerLinkActive="router-link-active"
-      [disabled]="!companyDetail"
+      [disabled]="!userProfile()"
       appearance="white"
       size="huge"
     >
@@ -18,11 +18,11 @@
     <button
       go-button
       type="button"
-      [routerLink]="['/sme-analysis/last', companyDetail?.id]"
+      [routerLink]="['/sme-analysis/last', userProfile().id]"
       [queryParams]="{ isProject: false }"
       [queryParamsHandling]="'merge'"
       routerLinkActive="router-link-active"
-      [disabled]="!companyDetail"
+      [disabled]="!userProfile()"
       appearance="white"
       size="huge"
     >
@@ -42,10 +42,10 @@
       go-button
       type="button"
       [routerLink]="['/sme-analysis/new-project']"
-      [queryParams]="{ smeId: companyDetail?.id, isProject: true }"
+      [queryParams]="{ smeId: userProfile().id, isProject: true }"
       [queryParamsHandling]="'merge'"
       routerLinkActive="router-link-active"
-      [disabled]="!companyDetail"
+      [disabled]="!userProfile()"
       appearance="secondary"
     >
       <i class="ti ti-device-desktop-plus"></i>

@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  AuthGuard,
-  ROLES,
-  goToUniversalLogin,
-  hasRole,
-  isAuthenticated,
-} from '@goeko/core';
+import { AuthGuard, goToUniversalLogin } from '@goeko/core';
+import { ROLES, hasRole } from '@goeko/store';
 
 const ROUTES: Routes = [
   {
@@ -36,10 +31,11 @@ const ROUTES: Routes = [
   {
     path: 'autenticate',
     loadComponent: () =>
-      import('@goeko/core').then((m) => m.AutenticateComponent),
+      import('@goeko/business-ui').then((m) => m.AutenticateComponent),
   },
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },

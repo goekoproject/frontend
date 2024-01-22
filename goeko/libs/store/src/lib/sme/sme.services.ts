@@ -23,6 +23,7 @@ import {
   Recommendation,
   ResponseRecommendations,
 } from './ecosolution-recomendations.model';
+import { USER_TYPE, UserType } from '../user/user-type.constants';
 
 @Injectable()
 export class SmeService {
@@ -75,23 +76,5 @@ export class SmeService {
     body: SmeSaveRecomendationRequest
   ): Observable<any> {
     return this._http.put<any>(`/v1/recommendation/requests/smes/${id}`, body);
-  }
-
-  getByIdExternal(id: string): Observable<any> {
-    const _id = encodeURIComponent(id);
-    const params = new HttpParams().set('id', _id);
-
-    return this._http.get<any>(`/v1/actor/smes/external`, { params });
-  }
-
-  getById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/actor/smes/` + id);
-  }
-
-  createDataProfile(body: any) {
-    return this._http.post<any>(`/v1/actor/smes`, body);
-  }
-  updateDataProfile(id: any, body: any) {
-    return this._http.put<any>(`/v1/actor/smes/${id}`, body);
   }
 }

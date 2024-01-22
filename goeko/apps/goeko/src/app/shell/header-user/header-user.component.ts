@@ -12,7 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderUserComponent implements OnInit {
   langs = LANGS;
   public toogleSideProfile!: boolean;
-  public dataUser!: any;
   defaultLang!: Lang;
 
   constructor(
@@ -24,16 +23,8 @@ export class HeaderUserComponent implements OnInit {
     this.defaultLang = this.langs.find(
       (lang) => lang.code === this._translate.getDefaultLang()
     ) as Lang;
-    this._getDataProfile();
   }
 
-  private _getDataProfile(): any {
-    this._userService.companyDetail.subscribe((company: any) => {
-      if (company) {
-        this.dataUser = company;
-      }
-    });
-  }
   onChangeLangs(selectedLand: any) {
     this._translate.use(selectedLand.code);
   }

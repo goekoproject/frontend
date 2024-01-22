@@ -1,10 +1,11 @@
 import { inject } from '@angular/core';
 import { distinctUntilChanged, map, tap } from 'rxjs';
-import { UserContextService, UserRoles } from '@goeko/core';
+import { UserType } from './user-type.constants';
+import { UserService } from './user.services';
 
-export function hasUserType(...allowedUserType: UserRoles[]) {
+export function hasUserType(...allowedUserType: UserType[]) {
   return () =>
-    inject(UserContextService).userType.pipe(
+    inject(UserService).userType$.pipe(
       map((userType) =>
         Boolean(userType && allowedUserType.includes(userType))
       ),

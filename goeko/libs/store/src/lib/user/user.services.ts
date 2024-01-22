@@ -1,16 +1,36 @@
-import { Injectable, effect, signal } from '@angular/core';
-import { BehaviorSubject, catchError, of, switchMap, throwError } from 'rxjs';
-import { CleanTechService } from '../cleantech/cleanteach.services';
-import { SessionStorageService } from '../session-storage.service';
-import { SmeService } from '../sme/sme.services';
-import { USER_TYPE } from './user-type.constants';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, computed, effect, signal } from '@angular/core';
 import { User } from '@auth0/auth0-angular';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  of,
+  switchMap,
+  throwError,
+} from 'rxjs';
+import { SessionStorageService } from '../session-storage.service';
+import { UserBuilder } from './user.builder';
+import { UserFactory } from './user.factory';
+import { toObservable } from '@angular/core/rxjs-interop';
+
+import IUser from './user.model';
+import { UserRoles, UserType } from './public-api';
 export const SS_COMPANY_DETAIL = 'SS_COMPANY';
 
 @Injectable()
 export class UserService {
   private _companyDetail = new BehaviorSubject<unknown | null>(null);
-  public user = signal<User>({});
+  public userAuth = signal<User>({});
+  public userProfile = signal<IUser>(new UserBuilder());
+
+  private actorsEndpoint = computed(() => this.userAuth()['userType'] + 's');
+  public externalId = computed(() => this.userAuth()['externalId']);
+  public userType = computed(() => this.userAuth()['userType']);
+  public userRoles = computed(() => this.userAuth()['roles']);
+
+  public userRoles$ = toObservable<UserRoles[]>(this.userRoles());
+  public userType$ = toObservable<UserType>(this.userAuth()['userType']);
 
   get companyDetail() {
     if (!this._companyDetail.value) {
@@ -27,78 +47,55 @@ export class UserService {
   }
 
   constructor(
-    private _smeService: SmeService,
-    private _cleanTechService: CleanTechService,
-    private readonly sessionStorageService: SessionStorageService
+    private readonly sessionStorageService: SessionStorageService,
+    public _http: HttpClient
   ) {
     effect(() => {
-      if (this.user().sub) {
-        const userType = this.user()['userType'];
-        const externalId = this.user()['externalId'];
-        this.getUserProfile(userType, externalId);
+      if (this.userAuth().sub) {
+        this._getDataProfile();
       }
     });
   }
 
-  getUserProfile(userType: string = '', externalId: string = '') {
-    if (userType === USER_TYPE.SME) {
-      this._getSmeDataProfile(externalId);
-    }
-    if (userType === USER_TYPE.CLEANTECH) {
-      this._getCleaTechDataProfile(externalId);
-    }
-  }
-
-  private _getSmeDataProfile(externalId: string) {
-    this._smeService
-      .getByIdExternal(externalId)
+  private _getDataProfile() {
+    this._getByIdExternal()
       .pipe(
         switchMap((dataAuth0) =>
           dataAuth0
-            ? this._smeService.getById(dataAuth0?.id)
+            ? this.getById(dataAuth0?.id)
             : throwError(() => 'User not data profile')
         ),
         catchError(() => of(null))
       )
-      .subscribe((data) => (this.companyDetail = data));
+      .subscribe((data) => {
+        const user = UserFactory.createUserProfileBuilder(
+          this.userAuth()['userType']
+        )
+          .init(data)
+          .build();
+        this.userProfile.set(user);
+      });
+  }
+  private _getByIdExternal(): Observable<any> {
+    const _id = this.externalId();
+    const params = new HttpParams().set('id', _id);
+    return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/external`, {
+      params,
+    });
   }
 
-  private _getCleaTechDataProfile(externalId: string) {
-    this._cleanTechService
-      .getByIdExternal(externalId)
-      .pipe(
-        switchMap((dataAuth0) =>
-          dataAuth0
-            ? this._cleanTechService.getById(dataAuth0?.id)
-            : throwError(() => 'User not data profile')
-        ),
-        catchError(() => of(null))
-      )
-      .subscribe((data) => (this.companyDetail = data));
+  createUserProfile(body: any) {
+    return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}`, body);
   }
 
-  createDataProfile(userType: string, body: any) {
-    if (userType === USER_TYPE.SME) {
-      const _body = this._transformbBody(body);
-      return this._smeService.createDataProfile(_body);
-    }
-    if (userType === USER_TYPE.CLEANTECH) {
-      const _body = this._transformbBody(body);
-      return this._cleanTechService.createDataProfile(_body);
-    }
-    return of(null);
+  updateUserProfile(id: any, body: any) {
+    return this._http.put<any>(
+      `/v1/actor/${this.actorsEndpoint()}/${id}`,
+      body
+    );
   }
-
-  udpateDataProfile(userType: string, userId: string, body: any) {
-    if (userType === USER_TYPE.SME) {
-      const _body = this._transformbBody(body);
-      return this._smeService.updateDataProfile(userId, _body);
-    }
-    if (userType === USER_TYPE.CLEANTECH) {
-      const _body = this._transformbBody(body);
-      return this._cleanTechService.updateDataProfile(userId, _body);
-    }
-    return of(null);
+  getById(id: string): Observable<any> {
+    return this._http.get<any>(`/v1/actor/smes/` + id);
   }
 
   private _transformbBody(body: any) {

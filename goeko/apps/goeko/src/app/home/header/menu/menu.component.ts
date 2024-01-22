@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MENU } from './menu.contants';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'goeko-menu',

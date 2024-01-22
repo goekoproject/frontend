@@ -6,3 +6,5 @@ export * from './card-ecosolutions/public-api';
 export * from './select-subcategory-product/public-api';
 export * from './sdg-icons/public-api';
 export * from './products-management/public-api';
+export * from './loader-animation/public-api';
+export * from './first-loading/public-api';

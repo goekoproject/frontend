@@ -1,5 +1,5 @@
 export enum ROLES {
   PUBLIC = 'public',
-  ADMIN = 'admin',
+  ADMIN = 'administrator',
 }
 export type UserRoles = ROLES.PUBLIC | ROLES.ADMIN;

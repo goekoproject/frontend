@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ProjectService,
@@ -15,7 +15,7 @@ import { take, toArray } from 'rxjs';
   styleUrls: ['./dashboard-sme.component.scss'],
 })
 export class DashboardSmeComponent implements OnInit {
-  public companyDetail!: any;
+  public userProfile = this._userService.userProfile;
   public projects!: Array<SmeRequestResponse>;
   constructor(
     private _userService: UserService,
@@ -23,20 +23,20 @@ export class DashboardSmeComponent implements OnInit {
     private _smeService: SmeService,
     private _projectService: ProjectService,
     private _router: Router
-  ) {}
-  ngOnInit(): void {
-    this.projects = new Array<SmeRequestResponse>();
-    this._userService.companyDetail.subscribe((companyDetail) => {
-      if (companyDetail) {
-        this.companyDetail = companyDetail;
+  ) {
+    effect(() => {
+      if (this.userProfile().id) {
         this._getLastProjectName();
       }
     });
   }
+  ngOnInit(): void {
+    this.projects = new Array<SmeRequestResponse>();
+  }
 
   private _getLastProjectName() {
     this._projectService
-      .getRecommendationsByProjectById(this.companyDetail.id)
+      .getRecommendationsByProjectById(this.userProfile().id)
       .pipe(take(3), toArray())
       .subscribe((projects: SmeRequestResponse[]) => {
         if (projects) {

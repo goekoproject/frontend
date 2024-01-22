@@ -9,6 +9,7 @@ import {
 import { UserType } from './user-type.constants';
 import { UserContextService } from '@goeko/core';
 import { Subscription, map, distinctUntilChanged, tap } from 'rxjs';
+import { UserService } from './user.services';
 
 @Directive({ selector: '[goShowUserType]', standalone: true })
 export class GoShowUserTypeDirective implements OnInit, OnDestroy {
@@ -17,24 +18,22 @@ export class GoShowUserTypeDirective implements OnInit, OnDestroy {
   private sub?: Subscription;
 
   constructor(
-    private userContextService: UserContextService,
+    private userServices: UserService,
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>
   ) {}
   ngOnInit(): void {
-    this.sub = this.userContextService.userType
-      .pipe(
-        map((userType) =>
-          Boolean(userType && this.allowedUserType.includes(userType))
-        ),
-        distinctUntilChanged(),
-        tap((hasUserType) =>
-          hasUserType
-            ? this.viewContainerRef.createEmbeddedView(this.templateRef)
-            : this.viewContainerRef.clear()
-        )
-      )
-      .subscribe();
+    const userType = this.userServices.userType();
+
+    if (this.allowedUserType) {
+      if (this.allowedUserType.includes(userType)) {
+        this.viewContainerRef.createEmbeddedView(this.templateRef);
+      } else {
+        this.viewContainerRef.clear();
+      }
+    } else {
+      this.viewContainerRef.createEmbeddedView(this.templateRef);
+    }
   }
   ngOnDestroy(): void {
     this.sub?.unsubscribe();

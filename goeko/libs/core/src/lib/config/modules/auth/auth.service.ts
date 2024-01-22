@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { AppState, AuthService as Auth0, User } from '@auth0/auth0-angular';
 import { BehaviorSubject, Observable, concat, from, of } from 'rxjs';
 import { UserContextService } from '../../../user-context/user-context.service';
 import { CONFIGURATION } from '../../config.module';
@@ -8,8 +9,6 @@ import { AuthRequest } from './auth-request.interface';
 import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants';
 import { Auth0Connected, AuthResponse } from './auth0.abtract';
 import { SignUp } from './signup.interface';
-import { ROLES } from '../../../roles/role-type.model';
-import { AuthService as Auth0 } from '@auth0/auth0-angular';
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
@@ -48,6 +47,12 @@ export class AuthService extends Auth0Connected {
 
   get isAuthenticated$(): Observable<boolean> {
     return this._auth0.isAuthenticated$;
+  }
+  get appState$(): Observable<AppState> {
+    return this._auth0.appState$;
+  }
+  get userAuth$(): Observable<User | null | undefined> {
+    return this._auth0.user$;
   }
   constructor(
     @Inject(CONFIGURATION) private _config: Options,
@@ -110,7 +115,6 @@ export class AuthService extends Auth0Connected {
           userType: result.userType,
           externalId: result.externalId,
           username: result.nickname,
-          roles: result.roles?.length > 0 ? result.roles : [ROLES.PUBLIC],
         });
       }
     });
@@ -127,7 +131,7 @@ export class AuthService extends Auth0Connected {
 
   logout() {
     sessionStorage.clear();
-    this.disconnectAuth0();
+    this._auth0.logout();
   }
 
   killSessions(): void {

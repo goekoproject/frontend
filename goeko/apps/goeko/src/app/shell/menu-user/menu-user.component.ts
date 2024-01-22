@@ -12,24 +12,14 @@ import { AuthService, UserContextService } from '@goeko/core';
 })
 export class MenuUserComponent implements OnInit {
   public menuOptions!: MenuUser[];
-  private _companyId!: string;
-  private _userType!: string;
+  private user = this._userService.userProfile;
   constructor(
-    private translate: TranslateService,
     private _authService: AuthService,
     private _router: Router,
-    private _userService: UserService,
-    private _userContextService: UserContextService
+    private _userService: UserService
   ) {}
   ngOnInit(): void {
-    this._userService.companyDetail.subscribe(
-      (company: any) => (this._companyId = company?.id)
-    );
-    this._userContextService.userType.subscribe((userType: string) => {
-      if (userType) {
-        this.menuOptions = MENU_USER;
-      }
-    });
+    this.menuOptions = MENU_USER;
   }
 
   onRouterLinkActive(test: any): void {
@@ -54,7 +44,7 @@ export class MenuUserComponent implements OnInit {
       case 'sme-analysis/new':
         // eslint-disable-next-line no-case-declarations
         this._navigateWithCompanyIdInQueryParams(route, {
-          smeId: this._companyId,
+          smeId: this.user().id,
         });
         return;
 
@@ -65,7 +55,7 @@ export class MenuUserComponent implements OnInit {
   }
 
   private _navigateWithCompanyId(route: string) {
-    this._router.navigate([route, this._companyId]);
+    this._router.navigate([route, this.user().id]);
   }
   private _navigateWithCompanyIdInQueryParams(route: string, queryParams: any) {
     this._router.navigate([route], {

@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserContextService } from '@goeko/core';
+import { UserService } from '@goeko/store';
 import { BadgeModule, ButtonModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -34,14 +35,7 @@ export class SideProfileComponent implements OnDestroy, OnInit, AfterViewInit {
   }
   private _toogleSideProfile!: boolean;
 
-  @Input()
-  public get dataProfile(): any {
-    return this._dataProfile;
-  }
-  public set dataProfile(value: any) {
-    this._dataProfile = value;
-  }
-  private _dataProfile!: any;
+  public userProfile = this._userService.userProfile;
 
   @Input() visibility!: boolean;
 
@@ -51,20 +45,13 @@ export class SideProfileComponent implements OnDestroy, OnInit, AfterViewInit {
   public attractAtention!: boolean;
   constructor(
     private _router: Router,
-    private _userContextService: UserContextService,
+    private _userService: UserService,
     private _renderer: Renderer2
   ) {}
 
-  ngOnInit(): void {
-    this._userContextService.username.subscribe(
-      (username: string) => (this.username = username)
-    );
-    this._userContextService.externalId.subscribe(
-      (externalId: string) => (this._externalId = externalId)
-    );
-  }
+  ngOnInit(): void {}
   ngAfterViewInit(): void {
-    if (!this.dataProfile) {
+    if (!this.userProfile().id) {
       this.toogleSideProfile = true;
       this._toogleDialog();
     }

@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit, effect } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { AuthService, UserContextService } from '@goeko/core';
+import { AuthService } from '@goeko/core';
 import { UserService } from '@goeko/store';
-import { combineLatest, distinctUntilChanged, filter } from 'rxjs';
+import { LoadingGoekoervice } from 'libs/business-ui/src/lib/components/first-loading/goeko-loading';
+import { distinctUntilChanged, filter } from 'rxjs';
+const namespace = 'https://goeko';
 
 const KEY_COOKIES = 'cookie-policy';
 @Component({
@@ -10,7 +12,7 @@ const KEY_COOKIES = 'cookie-policy';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   public path!: string;
   private _userType!: string;
   private _externalId!: string;
@@ -27,29 +29,41 @@ export class AppComponent implements OnInit, AfterViewInit {
     return this.path?.includes('demo');
   }
 
-  getIsAuthenticated() {
-    return (
-      this._authService.isAuthenticated() &&
-      !window.location.pathname.includes('/autenticate') &&
-      !window.location.pathname.includes('/login')
-    );
-  }
-
   public isAuthenticated$ = this._authService.isAuthenticated$;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private _userContextService: UserContextService,
     private _userService: UserService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _userServcies: UserService
   ) {
     this._routeChange();
-    console.log(this.showPopupCookies);
   }
 
-  ngAfterViewInit(): void {}
+  ngOnInit(): void {
+    this._reload();
+  }
 
-  ngOnInit(): void {}
+  private _reload() {
+    this.isAuthenticated$.subscribe((isAuthenticated) => {
+      if (isAuthenticated) {
+        this._loadUserData();
+      }
+    });
+  }
+  private _loadUserData() {
+    this._authService.userAuth$.subscribe((userData) => {
+      if (userData) {
+        const userDataTransform = {
+          ...userData,
+          externalId: userData?.sub?.replace('auth0|', ''),
+          roles: userData[`${namespace}/roles`],
+        };
+        this._userService.userAuth.set(userDataTransform);
+        this.router.navigate([`dashboard/${userData['userType']}`]);
+      }
+    });
+  }
   acceptCookie() {
     localStorage.setItem(KEY_COOKIES, 'true');
   }
@@ -63,19 +77,5 @@ export class AppComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         this.path = (this.route.snapshot as any)['_routerState'].url;
       });
-  }
-
-  private _getUserContext() {
-    combineLatest({
-      userType: this._userContextService.userType,
-      externalId: this._userContextService.externalId,
-      username: this._userContextService.username,
-    }).subscribe(
-      (res: { userType: string; externalId: string; username: string }) => {
-        if (res) {
-          this._userService.getUserProfile(res.userType, res.externalId);
-        }
-      }
-    );
   }
 }

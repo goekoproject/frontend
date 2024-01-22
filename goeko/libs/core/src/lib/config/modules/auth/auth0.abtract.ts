@@ -2,7 +2,6 @@ import { Auth0DecodedHash, Auth0ParseHashError, WebAuth } from 'auth0-js';
 import * as jsrsasign from 'jsrsasign';
 import { Subject } from 'rxjs';
 import { SESSIONID } from './auth.constants';
-import { UserRoles } from '../../../roles/role-type.model';
 export const ACCESS_TOKEN = 'accessToken';
 export const SS_JWTDATA = 'jwtData';
 
@@ -22,7 +21,6 @@ export interface AuthResponse {
   sub: string;
   updated_at: string;
   userType: string;
-  roles: UserRoles[];
 }
 
 export abstract class Auth0Connected {

@@ -4,18 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthModule } from '@auth0/auth0-angular';
 import {
   PopupModule,
   SelectI18nModule,
   SideProfileComponent,
 } from '@goeko/business-ui';
-import { AUTH_CONNECT, ConfigModule, ShowForRolesDirective } from '@goeko/core';
+import { AUTH_CONNECT, ConfigModule } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
   GoShowUserTypeDirective,
+  ShowForRolesDirective,
   SmeModule,
   UserService,
 } from '@goeko/store';
@@ -29,12 +31,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
+import { HeaderComponent } from './home/header/header.component';
 import { MenuComponent } from './home/header/menu/menu.component';
 import { FooterComponent } from './shell/footer/footer.component';
 import { HeaderUserComponent } from './shell/header-user/header-user.component';
 import { MenuUserComponent } from './shell/menu-user/menu-user.component';
-import { HeaderComponent } from './home/header/header.component';
-import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 const httpLoaderFactory = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
@@ -65,9 +66,10 @@ const httpLoaderFactory = (http: HttpClient) => {
       clientId: environment.clientId,
       authorizationParams: {
         redirect_uri: AUTH_CONNECT.REDIRECT_URI,
+        audience: AUTH_CONNECT.AUDIENCE,
       },
       httpInterceptor: {
-        allowedList: ['https://goeko-backend.herokuapp.com/v1/*'],
+        allowedList: [`${environment.baseUrl}/*`],
       },
     }),
     GoShowUserTypeDirective,
@@ -93,14 +95,7 @@ const httpLoaderFactory = (http: HttpClient) => {
       },
     }),
   ],
-  providers: [
-    UserService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,53 +1,57 @@
 <go-badge (click)="toogle()" fill="true" class="tag-username">
-	<span class="heading-icon">
-		<i class="ti ti-building-community"></i>
-	</span>
-	<p>{{ username }}</p>
+  <span class="heading-icon">
+    <i class="ti ti-building-community"></i>
+  </span>
+  <p>{{ userProfile().name }}</p>
 </go-badge>
 
 <dialog class="profile" #sideDialog>
-	<i class="ti ti-playstation-x profile-close" (click)="toogle()"></i>
-	<div class="heading-company">
-		<span class="heading-icon">
-			<i class="ti ti-building-bridge-2"></i>
-		</span>
-		<p>{{ dataProfile?.name }}</p>
+  <i class="ti ti-playstation-x profile-close" (click)="toogle()"></i>
+  <div class="heading-company">
+    <span class="heading-icon">
+      <i class="ti ti-building-bridge-2"></i>
+    </span>
+    <p>{{ userProfile().name }}</p>
 
-		<div class="profile-section">
-			<div class="profile-section-heading">
-				<i class="ti ti-brand-mailgun"></i>
-				<p>{{ 'user' | translate }}</p>
-			</div>
-			<p class="profile-section-data">{{ username }}</p>
-		</div>
-		<div class="profile-section">
-			<div class="profile-section-heading">
-				<i class="ti ti-brand-mailgun"></i>
-				<p>{{ 'FORM_LABEL.email' | translate }}</p>
-			</div>
-			<p class="profile-section-data">{{ dataProfile?.email }}</p>
-		</div>
-		<div class="profile-section">
-			<div class="profile-section-heading">
-				<i class="ti ti-map-pin"></i>
-				<p>{{ 'FORM_LABEL.location' | translate }}</p>
-			</div>
-			<p class="profile-section-data">{{ dataProfile?.country }}</p>
-		</div>
-	</div>
+    <div class="profile-section">
+      <div class="profile-section-heading">
+        <i class="ti ti-brand-mailgun"></i>
+        <p>{{ 'user' | translate }}</p>
+      </div>
+      <p class="profile-section-data">{{ username }}</p>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-heading">
+        <i class="ti ti-brand-mailgun"></i>
+        <p>{{ 'FORM_LABEL.email' | translate }}</p>
+      </div>
+      <p class="profile-section-data">{{ userProfile().email }}</p>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-heading">
+        <i class="ti ti-map-pin"></i>
+        <p>{{ 'FORM_LABEL.location' | translate }}</p>
+      </div>
+      <p class="profile-section-data">{{ userProfile().country }}</p>
+    </div>
+  </div>
 
-	<div class="banner-complete-profile" *ngIf="!dataProfile" [class.attract-atention]="attractAtention">
-		<!-- 	<i class="ti ti-user-off"></i> -->
-		<img src="assets/incompleted.png" />
-		<p>{{ 'completeToProfileNow' | translate }}</p>
-		<button
-			type="button"
-			go-button
-			appearance="primary"
-			(click)="goToProfile()"
-			routerLinkActive="router-link-active"
-		>
-			{{ 'upgrade' | translate }}
-		</button>
-	</div>
+  <div
+    class="banner-complete-profile"
+    *ngIf="!userProfile()"
+    [class.attract-atention]="attractAtention"
+  >
+    <!-- 	<i class="ti ti-user-off"></i> -->
+    <img src="assets/incompleted.png" />
+    <p>{{ 'completeToProfileNow' | translate }}</p>
+    <button
+      type="button"
+      go-button
+      appearance="primary"
+      (click)="goToProfile()"
+      routerLinkActive="router-link-active"
+    >
+      {{ 'upgrade' | translate }}
+    </button>
+  </div>
 </dialog>

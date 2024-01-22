@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserContextService } from '@goeko/core';
@@ -15,7 +15,7 @@ import { PROFILE_SME } from './profile-sme.constants';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 
 export const SELECT_PROFILE = {
-  cleantech: PROFILE_CLEANTECH,
+  cleantechs: PROFILE_CLEANTECH,
   sme: PROFILE_SME,
 };
 
@@ -45,11 +45,12 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
 })
 export class ProfileComponent implements OnInit {
   form!: FormGroup;
-  dataProfile: any;
   savedProfileOK!: boolean;
   public dataSelect = DataSelect as any;
 
   public formProfile!: Profile[];
+  dataProfile = this._userService.userProfile;
+
   private _userType!: string;
   private _externalId!: string;
 
@@ -65,30 +66,17 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _route: ActivatedRoute,
-    private _userService: UserService,
-    private _userContextService: UserContextService
-  ) {}
-
-  ngOnInit(): void {
-    this._getUserContext();
-    this._getDataprofile();
-  }
-
-  private _getUserContext() {
-    combineLatest({
-      userType: this._userContextService.userType,
-      externalId: this._userContextService.externalId,
-    }).subscribe((res: { userType: string; externalId: string }) => {
-      if (res) {
-        this._userType = res.userType;
-        this._externalId = res.externalId;
-        this._userService.getUserProfile(res.userType, res.externalId);
-        this.formProfile =
-          SELECT_PROFILE[res.userType as keyof typeof SELECT_PROFILE];
+    private _userService: UserService
+  ) {
+    effect(() => {
+      if (this.dataProfile()) {
+        this.form.patchValue(this.dataProfile());
         this._selectionCreateTypeForm();
       }
     });
   }
+
+  ngOnInit(): void {}
 
   private _selectionCreateTypeForm() {
     switch (this._userType) {
@@ -124,18 +112,9 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  private _getDataprofile() {
-    this._userService.companyDetail.subscribe((companyDetail) => {
-      if (companyDetail) {
-        this.form.patchValue(companyDetail);
-        this.dataProfile = companyDetail;
-      }
-    });
-  }
-
   saveProfile() {
     this._userService
-      .createDataProfile(this._userType, this.form.value)
+      .createUserProfile(this.form.value)
       .subscribe((dataProfile) => {
         if (dataProfile) {
           this._changeDataProfile(dataProfile);
@@ -145,7 +124,7 @@ export class ProfileComponent implements OnInit {
 
   updateProfile() {
     this._userService
-      .udpateDataProfile(this._userType, this.dataProfile?.id, this.form.value)
+      .updateUserProfile(this.dataProfile().id, this.form.value)
       .subscribe((dataProfile: any) => {
         this._changeDataProfile(dataProfile);
       });

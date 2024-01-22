@@ -1,5 +1,4 @@
-import { ROLES, UserRoles } from '@goeko/core';
-import { USER_TYPE, UserType } from '@goeko/store';
+import { ROLES, USER_TYPE, UserRoles, UserType } from '@goeko/store';
 
 export interface MenuUser {
   // RANDOMuuid FORMAT `${string}-${string}-${string}-${string}-${string}`

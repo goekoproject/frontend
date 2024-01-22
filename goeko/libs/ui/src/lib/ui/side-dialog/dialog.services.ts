@@ -6,9 +6,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { Observable, Subject, filter } from 'rxjs';
 import { DIALOG_DATA } from './dialog-data.token';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, Observable, Subject, filter, of } from 'rxjs';
 @Injectable()
 export class DialogService {
   private injector = inject(Injector);
