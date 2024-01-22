@@ -1,5 +1,5 @@
 export interface ResponseRecommendations {
-	recommendations: Recommendation[];
+  ecosolutions: Recommendation[];
 }
 
 export interface Recommendation {
