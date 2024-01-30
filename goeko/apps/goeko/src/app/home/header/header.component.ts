@@ -7,7 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { LANGS } from '@goeko/core';
+import { AuthService, LANGS } from '@goeko/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private _renderer: Renderer2,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -50,5 +51,8 @@ export class HeaderComponent implements OnInit {
   }
   onChangeLangs(selectedLand: any) {
     this.translate.use(selectedLand.code);
+  }
+  goTologin() {
+    this._authService.universalLogin();
   }
 }

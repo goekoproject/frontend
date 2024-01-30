@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit, computed } from '@angular/core';
+import { SideProfileComponent } from '@goeko/business-ui';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { LANGS, Lang } from '@goeko/core';
 import { UserService } from '@goeko/store';
+import { DialogService } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -9,14 +11,18 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './header-user.component.html',
   styleUrls: ['./header-user.component.scss'],
 })
-export class HeaderUserComponent implements OnInit {
+export class HeaderUserComponent implements OnInit, AfterContentInit {
   langs = LANGS;
-  public toogleSideProfile!: boolean;
   defaultLang!: Lang;
-
+  userProfile = computed(() =>
+    this._userService.userProfile().id
+      ? this._userService.userProfile()
+      : this._userService.userAuth()
+  );
   constructor(
     private _userService: UserService,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -25,11 +31,18 @@ export class HeaderUserComponent implements OnInit {
     ) as Lang;
   }
 
+  ngAfterContentInit(): void {
+    if (!this._userService.userProfile().id) {
+      this.toogleSideProfile();
+    }
+  }
   onChangeLangs(selectedLand: any) {
     this._translate.use(selectedLand.code);
   }
 
-  toogleProfile(toogle: boolean): void {
-    this.toogleSideProfile = toogle;
+  toogleSideProfile() {
+    return this._dialogService.openDialog<SideProfileComponent>(
+      SideProfileComponent
+    );
   }
 }

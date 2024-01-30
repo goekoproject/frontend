@@ -1,18 +1,17 @@
 import { Component, OnInit, effect } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { UserContextService } from '@goeko/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {
-  USER_TYPE,
   CountrySelectOption,
   DataSelect,
   Profile,
-  SmeService,
+  UserModal,
   UserService,
+  UserSwitch,
 } from '@goeko/store';
-import { combineLatest } from 'rxjs';
-import { PROFILE_SME } from './profile-sme.constants';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
+import { ProfileFormFactory } from './profile-form.factory';
+import { PROFILE_SME } from './profile-sme.constants';
+import { DialogService } from '@goeko/ui';
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -38,6 +37,11 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
 
   return null;
 };
+
+const TYPE_FORM_FOR_USERTYPE: UserSwitch<Profile[]> = {
+  sme: PROFILE_SME,
+  cleantech: PROFILE_CLEANTECH,
+};
 @Component({
   selector: 'goeko-profile',
   templateUrl: './profile.component.html',
@@ -51,9 +55,8 @@ export class ProfileComponent implements OnInit {
   public formProfile!: Profile[];
   dataProfile = this._userService.userProfile;
 
-  private _userType!: string;
-  private _externalId!: string;
-
+  private _userType = this._userService.userType;
+  private _externalId = this._userService.externalId;
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
     o2: any
@@ -64,54 +67,28 @@ export class ProfileComponent implements OnInit {
   ) => boolean;
 
   constructor(
-    private _fb: FormBuilder,
-    private _route: ActivatedRoute,
+    private _dialogService: DialogService,
     private _userService: UserService
   ) {
     effect(() => {
-      if (this.dataProfile()) {
-        this.form.patchValue(this.dataProfile());
-        this._selectionCreateTypeForm();
-      }
+      this._effectBuildForm();
     });
   }
 
-  ngOnInit(): void {}
-
-  private _selectionCreateTypeForm() {
-    switch (this._userType) {
-      case USER_TYPE.CLEANTECH:
-        this._createFormGroupCleanTech();
-        return;
-
-      default:
-        this._createFormGroupSme();
-        return;
+  ngOnInit() {
+    this._dialogService.closeDialog();
+  }
+  private _effectBuildForm() {
+    if (this.dataProfile()) {
+      this.form = ProfileFormFactory.createProfileForm(this._userType());
+      this.formProfile =
+        TYPE_FORM_FOR_USERTYPE[
+          this._userType() as keyof typeof TYPE_FORM_FOR_USERTYPE
+        ];
+      this.form.patchValue(this.dataProfile());
+      this.form.get('externalId')?.patchValue(this._externalId());
     }
   }
-
-  private _createFormGroupSme = () => {
-    this.form = this._fb.group({
-      name: [''],
-      country: [''],
-      email: ['', Validators.email],
-      website: [''],
-      externalId: [this._externalId],
-    });
-  };
-
-  private _createFormGroupCleanTech() {
-    this.form = this._fb.group({
-      name: [''],
-      country: [''],
-      email: ['', Validators.email],
-      link: [''],
-      logo: [''],
-      city: [''],
-      externalId: [this._externalId],
-    });
-  }
-
   saveProfile() {
     this._userService
       .createUserProfile(this.form.value)
@@ -130,9 +107,9 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  private _changeDataProfile(dataProfile: any) {
+  private _changeDataProfile(dataProfile: UserModal) {
     this.savedProfileOK = true;
-    this._userService.companyDetail = dataProfile;
+    this.dataProfile.set(dataProfile);
     setTimeout(() => {
       this.savedProfileOK = false;
     }, 3000);

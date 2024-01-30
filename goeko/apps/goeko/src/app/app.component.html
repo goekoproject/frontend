@@ -1,14 +1,14 @@
-<goeko-header *ngIf="isHome"> </goeko-header>
-
-@if (isAuthenticated$ | async; as isAuthenticated) {
+@if(isPrivateZone) {
 <goeko-menu-user></goeko-menu-user>
-<div class="container" [class.is-platform]="isAuthenticated">
+<div class="container" [class.is-platform]="isPrivateZone">
   <goeko-header-user>
     <go-breadcrumbs></go-breadcrumbs>
   </goeko-header-user>
   <router-outlet></router-outlet>
 </div>
+<goeko-side-dialog></goeko-side-dialog>
 } @else {
+<goeko-header> </goeko-header>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
@@ -32,4 +32,3 @@
     >
   </p>
 </go-popup>
-<goeko-side-dialog></goeko-side-dialog>

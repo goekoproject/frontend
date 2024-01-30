@@ -1,38 +1,34 @@
 .header-user {
-	height: 38px;
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
+  height: 38px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .heading-company {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	font-size: 16px;
-	text-transform: capitalize;
-	cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 16px;
+  text-transform: capitalize;
+  cursor: pointer;
 }
 .heading-icon {
-	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-	border-radius: 50%;
-	padding: 0.6rem;
-	font-size: 1rem;
-	color: #0191d7;
-	height: 35px;
-	width: 35px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 50%;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--primary-main);
+  display: flex;
+  background: #fff;
 }
 .header-user-actions {
-	display: flex;
-	position: absolute;
-	top: 0;
-	margin: 1rem;
-	right: 0;
-	align-items: center;
-	gap: 1rem;
-	line-height: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+  margin: 1rem;
+  right: 0;
+  align-items: center;
+  gap: 1rem;
+  line-height: 0;
 }

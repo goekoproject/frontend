@@ -3,6 +3,8 @@
     <p>{{ 'NOTIFICATION.save_ok' | translate }}</p>
   </div>
 </go-notification>
+
+@if (form) {
 <div class="profile-data">
   <form [formGroup]="form" class="profile-page">
     <ng-container *ngFor="let itemForm of formProfile">
@@ -49,7 +51,7 @@
               <ng-container *ngIf="itemForm.dataSelectKey">
                 <super-option
                   *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
-                  [value]="option"
+                  [value]="option.code"
                 >
                   {{ option.keyLang | translate }}
                 </super-option>
@@ -93,5 +95,6 @@
     </div>
   </form>
 </div>
+}
 
 <br />

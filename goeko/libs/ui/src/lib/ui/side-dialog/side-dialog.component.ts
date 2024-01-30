@@ -1,6 +1,4 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
   ComponentRef,
   ElementRef,
@@ -9,10 +7,8 @@ import {
   ViewContainerRef,
   effect,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ComponentType } from '@angular/cdk/portal';
-import { DialogService } from './dialog.services';
 import { isObjectEmpty } from '@goeko/core';
+import { DialogService } from './dialog.services';
 @Component({
   selector: 'goeko-side-dialog',
   templateUrl: './side-dialog.component.html',

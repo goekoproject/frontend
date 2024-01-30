@@ -1,19 +1,14 @@
 import { UserType } from './user-type.constants';
-import CleantechsUser from './user-type/cleantechs.model';
-import SmeUser from './user-type/sme-user.model';
-import { UserBuilder } from './user.builder';
-import IUser from './user.model';
+import { UserModal, UserSwitch } from './user-type/user-switch.type';
+import { CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder';
 
-type UserSwitch = {
-  [key in UserType]: UserBuilder;
-};
-const USER_TO_CREATE: UserSwitch = {
-  sme: new SmeUser(),
-  cleantech: new CleantechsUser(),
+const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
+  sme: new SmeBuilder(),
+  cleantech: new CleantechBuilder(),
 };
 
 export abstract class UserFactory {
-  static createUserProfileBuilder(userType: UserType): UserBuilder {
+  static createUserProfileBuilder(userType: UserType): IUserBuilder<UserModal> {
     return USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE];
   }
 }

@@ -1,26 +1,21 @@
 import { Injectable, Injector, Type, inject } from '@angular/core';
 import {
-  CanActivate,
-  UrlTree,
-  Router,
-  CanActivateFn,
   ActivatedRouteSnapshot,
+  CanActivateFn,
+  Router,
   RouterStateSnapshot,
-  CanMatchFn,
+  UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ROLES, UserService } from '@goeko/store';
+import { Observable, map, of, tap } from 'rxjs';
 import { AuthService } from './auth.service';
+import { User } from '@auth0/auth0-angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard {
-  private injector = inject(Injector);
-
-  constructor(
-    private readonly _authService: AuthService,
-    private readonly _router: Router
-  ) {}
+  constructor(private readonly _authService: AuthService) {}
 
   canActivate():
     | Observable<boolean | UrlTree>
@@ -49,6 +44,15 @@ export const isAuthenticated: CanActivateFn = (
     : inject(Router).createUrlTree(['/login']);
 };
 
-export const goToUniversalLogin = (): Observable<Type<unknown>> => {
-  return inject(AuthService).universalLogin();
+export const goToUniversalLogin = (): Observable<any> => {
+  const authService = inject(AuthService);
+  return authService.isAuthenticated$.pipe(
+    map((isAuthenticated: any) => {
+      if (isAuthenticated) {
+        return of(isAuthenticated);
+      } else {
+        return authService.universalLogin();
+      }
+    })
+  );
 };

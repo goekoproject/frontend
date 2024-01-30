@@ -11,7 +11,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserContextService } from '@goeko/core';
 import { UserService } from '@goeko/store';
 import { BadgeModule, ButtonModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None,
   standalone: true,
 })
-export class SideProfileComponent implements OnDestroy, OnInit, AfterViewInit {
+export class SideProfileComponent implements OnDestroy, AfterViewInit {
   @ViewChild('sideDialog') sideDialog!: ElementRef<HTMLDialogElement>;
   @Input()
   public get toogleSideProfile(): boolean {
@@ -36,10 +35,10 @@ export class SideProfileComponent implements OnDestroy, OnInit, AfterViewInit {
   private _toogleSideProfile!: boolean;
 
   public userProfile = this._userService.userProfile;
+  public userAuth = this._userService.userAuth;
 
   @Input() visibility!: boolean;
 
-  private _externalId!: string;
   public username!: string;
 
   public attractAtention!: boolean;
@@ -49,12 +48,7 @@ export class SideProfileComponent implements OnDestroy, OnInit, AfterViewInit {
     private _renderer: Renderer2
   ) {}
 
-  ngOnInit(): void {}
   ngAfterViewInit(): void {
-    if (!this.userProfile().id) {
-      this.toogleSideProfile = true;
-      this._toogleDialog();
-    }
     this._renderer.listen(this.sideDialog.nativeElement, 'click', () => {
       this.attractAtention = true;
     });
@@ -63,22 +57,6 @@ export class SideProfileComponent implements OnDestroy, OnInit, AfterViewInit {
     this.toogleSideProfile = false;
   }
   goToProfile() {
-    this._router.navigate(['profile', this._externalId]);
-  }
-  private getIsPageProfile(): boolean {
-    return this._router.url.includes('profile');
-  }
-
-  toogle() {
-    this.toogleSideProfile = !this.toogleSideProfile;
-    this._toogleDialog();
-  }
-  private _toogleDialog(): void {
-    if (this.toogleSideProfile) {
-      this.sideDialog?.nativeElement?.showModal();
-    } else {
-      this.sideDialog?.nativeElement?.close();
-    }
-    this.toogleSideProfile = this.sideDialog?.nativeElement.open;
+    this._router.navigate(['profile', this.userAuth()['externalId']]);
   }
 }

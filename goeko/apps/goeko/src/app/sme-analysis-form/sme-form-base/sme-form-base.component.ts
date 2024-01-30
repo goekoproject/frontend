@@ -59,16 +59,7 @@ export class SmeFormBaseComponent implements OnInit {
     );
     this.form = this._fb.group({});
     this._createFormGroup();
-    this._getSmeCompanyDetail();
     this._selectCatagory();
-  }
-
-  private _getSmeCompanyDetail() {
-    this._userService.companyDetail.subscribe((company) => {
-      if (company) {
-        this._smeDataProfile = company;
-      }
-    });
   }
 
   private _selectCatagory() {

@@ -1,12 +1,4 @@
-<go-badge (click)="toogle()" fill="true" class="tag-username">
-  <span class="heading-icon">
-    <i class="ti ti-building-community"></i>
-  </span>
-  <p>{{ userProfile().name }}</p>
-</go-badge>
-
 <dialog class="profile" #sideDialog>
-  <i class="ti ti-playstation-x profile-close" (click)="toogle()"></i>
   <div class="heading-company">
     <span class="heading-icon">
       <i class="ti ti-building-bridge-2"></i>
@@ -38,7 +30,7 @@
 
   <div
     class="banner-complete-profile"
-    *ngIf="!userProfile()"
+    *ngIf="!userProfile().id"
     [class.attract-atention]="attractAtention"
   >
     <!-- 	<i class="ti ti-user-off"></i> -->

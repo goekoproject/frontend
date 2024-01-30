@@ -1,14 +1,7 @@
-import { inject } from '@angular/core';
 import { Route } from '@angular/router';
-import {
-  AuthGuard,
-  AuthService,
-  ROLE,
-  ROLE_ALL,
-  goToUniversalLogin,
-  hasRole,
-} from '@goeko/core';
-import { loadRemoteModule } from '@nx/angular/mf';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { AuthGuard, goToUniversalLogin, hasRole } from '@goeko/core';
+import { ROLES } from '@goeko/store';
 
 export const appRoutes: Route[] = [
   {
@@ -41,15 +34,15 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'dashboard',
-    canActivate: [AuthGuard, hasRole(ROLE.SME, ROLE.CLEANTECH)],
-    canMatch: [hasRole(ROLE.SME, ROLE.CLEANTECH)],
+    canActivate: [AuthGuard],
+    canMatch: [],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: 'profile',
-    canActivate: [AuthGuard, hasRole(ROLE.SME, ROLE.CLEANTECH)],
-    canMatch: [hasRole(ROLE.SME, ROLE.CLEANTECH)],
+    canActivate: [AuthGuard],
+    canMatch: [],
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },

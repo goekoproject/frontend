@@ -34,16 +34,13 @@ export class ShowForRolesDirective implements OnDestroy {
   }
 
   private _handlerElement() {
+    this.viewContainerRef.clear();
     const userRoles = this.userServices.userRoles();
 
-    if (this.allowedRoles && this.allowedRoles?.length > 0) {
-      if (handleRoles(userRoles, this.allowedRoles)) {
-        this.viewContainerRef.createEmbeddedView(this.templateRef);
-      } else {
-        this.viewContainerRef.clear();
-      }
-    } else {
+    if (handleRoles(userRoles, this.allowedRoles)) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainerRef.clear();
     }
   }
   ngOnDestroy(): void {

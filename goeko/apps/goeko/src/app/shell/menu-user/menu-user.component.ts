@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@goeko/core';
 import { UserService } from '@goeko/store';
-import { TranslateService } from '@ngx-translate/core';
 import { MENU_USER, MenuUser } from './menu-user.contants';
-import { AuthService, UserContextService } from '@goeko/core';
 
 @Component({
   selector: 'goeko-menu-user',
@@ -13,6 +12,9 @@ import { AuthService, UserContextService } from '@goeko/core';
 export class MenuUserComponent implements OnInit {
   public menuOptions!: MenuUser[];
   private user = this._userService.userProfile;
+
+  private userAuth = this._userService.userAuth;
+
   constructor(
     private _authService: AuthService,
     private _router: Router,
@@ -20,10 +22,6 @@ export class MenuUserComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.menuOptions = MENU_USER;
-  }
-
-  onRouterLinkActive(test: any): void {
-    console.log('onRouterLink', test);
   }
 
   logout() {
@@ -55,7 +53,8 @@ export class MenuUserComponent implements OnInit {
   }
 
   private _navigateWithCompanyId(route: string) {
-    this._router.navigate([route, this.user().id]);
+    const _id = this.user().id || this.userAuth()['externalId'];
+    this._router.navigate([route, this.user()?.id]);
   }
   private _navigateWithCompanyIdInQueryParams(route: string, queryParams: any) {
     this._router.navigate([route], {

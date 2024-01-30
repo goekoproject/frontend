@@ -6,9 +6,8 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UserType } from './user-type.constants';
-import { UserContextService } from '@goeko/core';
-import { Subscription, map, distinctUntilChanged, tap } from 'rxjs';
 import { UserService } from './user.services';
 
 @Directive({ selector: '[goShowUserType]', standalone: true })
@@ -25,14 +24,10 @@ export class GoShowUserTypeDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     const userType = this.userServices.userType();
 
-    if (this.allowedUserType) {
-      if (this.allowedUserType.includes(userType)) {
-        this.viewContainerRef.createEmbeddedView(this.templateRef);
-      } else {
-        this.viewContainerRef.clear();
-      }
-    } else {
+    if (this.allowedUserType.includes(userType)) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainerRef.clear();
     }
   }
   ngOnDestroy(): void {

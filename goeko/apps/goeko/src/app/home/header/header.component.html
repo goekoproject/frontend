@@ -12,7 +12,7 @@
   </div>
   <goeko-menu></goeko-menu>
   <div class="header-actions">
-    <button go-button [routerLink]="'../login'">
+    <button go-button (click)="goTologin()">
       {{ 'MENU.login' | translate }}
     </button>
     <goeko-select-i18n

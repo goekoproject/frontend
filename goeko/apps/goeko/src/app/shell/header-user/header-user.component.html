@@ -7,5 +7,10 @@
     [defaultLang]="defaultLang"
   >
   </goeko-select-i18n>
-  <goeko-side-profile></goeko-side-profile>
+  <go-badge (click)="toogleSideProfile()" fill="true" class="tag-username">
+    <span class="heading-icon">
+      <i class="ti ti-building-community"></i>
+    </span>
+    <p>{{ userProfile().name }}</p>
+  </go-badge>
 </div>

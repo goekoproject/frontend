@@ -1,9 +1,14 @@
 import { USER_TYPE } from '../user-type.constants';
-import { UserBuilder } from '../user.builder';
 
-export default class CleantechsUser extends UserBuilder {
+export class CleantechsUser {
+  id!: string;
+  name!: string;
+  country!: string;
+  email!: string;
+  link!: string;
+  logo!: string;
+  city!: string;
+  externalId!: string;
   userType = USER_TYPE.CLEANTECH;
-  constructor() {
-    super();
-  }
+  constructor() {}
 }

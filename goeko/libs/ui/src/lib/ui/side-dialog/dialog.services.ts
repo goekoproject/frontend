@@ -32,7 +32,7 @@ export class DialogService {
   });
   constructor() {}
 
-  openDialog<T>(component: ComponentType<T>, data: any): Observable<any> {
+  openDialog<T>(component: ComponentType<T>, data?: any): Observable<any> {
     this.dialogData$ = new Subject<any>();
     this.dialog.update((dialog) => ({
       ...dialog,

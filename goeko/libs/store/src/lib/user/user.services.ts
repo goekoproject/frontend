@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, computed, effect, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { User } from '@auth0/auth0-angular';
 import {
   BehaviorSubject,
@@ -9,47 +10,26 @@ import {
   switchMap,
   throwError,
 } from 'rxjs';
-import { SessionStorageService } from '../session-storage.service';
-import { UserBuilder } from './user.builder';
 import { UserFactory } from './user.factory';
-import { toObservable } from '@angular/core/rxjs-interop';
 
-import IUser from './user.model';
-import { UserRoles, UserType } from './public-api';
+import { UserModal, UserType } from './public-api';
+import { SmeBuilder } from './user.builder';
 export const SS_COMPANY_DETAIL = 'SS_COMPANY';
 
 @Injectable()
 export class UserService {
   private _companyDetail = new BehaviorSubject<unknown | null>(null);
   public userAuth = signal<User>({});
-  public userProfile = signal<IUser>(new UserBuilder());
+  public userProfile = signal<UserModal>(new SmeBuilder().empty());
 
   private actorsEndpoint = computed(() => this.userAuth()['userType'] + 's');
   public externalId = computed(() => this.userAuth()['externalId']);
   public userType = computed(() => this.userAuth()['userType']);
   public userRoles = computed(() => this.userAuth()['roles']);
 
-  public userRoles$ = toObservable<UserRoles[]>(this.userRoles());
   public userType$ = toObservable<UserType>(this.userAuth()['userType']);
 
-  get companyDetail() {
-    if (!this._companyDetail.value) {
-      const sessionCompanyDetail =
-        this.sessionStorageService.getItem<any>(SS_COMPANY_DETAIL);
-      this._companyDetail.next(sessionCompanyDetail);
-      return this._companyDetail.asObservable();
-    }
-    return this._companyDetail.asObservable();
-  }
-  public set companyDetail(value) {
-    this.sessionStorageService.setItem<any>(SS_COMPANY_DETAIL, value);
-    this._companyDetail.next(value);
-  }
-
-  constructor(
-    private readonly sessionStorageService: SessionStorageService,
-    public _http: HttpClient
-  ) {
+  constructor(public _http: HttpClient) {
     effect(() => {
       if (this.userAuth().sub) {
         this._getDataProfile();

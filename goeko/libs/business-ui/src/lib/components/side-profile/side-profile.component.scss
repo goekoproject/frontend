@@ -20,20 +20,18 @@ dialog {
 .profile-visibility {
   position: relative;
 }
-.profile-hide {
-  right: -100%;
-}
+
 .profile {
+  display: flex;
   padding: 1.6rem;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  gap: 4rem;
-  height: 100%;
-  margin-left: auto;
-  width: 28%;
+  height: 95vh;
+  width: 80%;
   border: none;
   max-height: 100%;
+  margin: 0 auto;
   &[open] {
     display: flex;
   }

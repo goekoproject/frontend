@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
 import {
+  LoadDataUser,
   PopupModule,
   SelectI18nModule,
   SideProfileComponent,
@@ -95,7 +96,7 @@ const httpLoaderFactory = (http: HttpClient) => {
       },
     }),
   ],
-  providers: [UserService],
+  providers: [UserService, LoadDataUser],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

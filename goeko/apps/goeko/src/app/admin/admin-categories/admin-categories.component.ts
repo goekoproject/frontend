@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -9,18 +10,21 @@ import {
   effect,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import {
   CategoryModule,
   Product,
   ProductToCurrentLangPipe,
   ProductsManagementComponent,
 } from '@goeko/business-ui';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   ClassificationCategory,
   ManageCategory,
-  ManageProduct,
   ManageSubcategory,
   ProductSelectToManageProduct,
   Translations,
@@ -34,14 +38,9 @@ import {
   fadeAnimation,
   listAnimation,
 } from '@goeko/ui';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { AdminCategoriesService } from './admin-categories.services';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form';
+import { AdminCategoriesService } from './admin-categories.services';
 
 /**
  * merge the categories section and the categories get backend for we have data like icons and preloading data

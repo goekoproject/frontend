@@ -7,7 +7,12 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
-import { SmeService, SmeAnalysisStoreService, UserService } from '@goeko/store';
+import {
+  SmeService,
+  SmeAnalysisStoreService,
+  UserService,
+  ODS_CODE,
+} from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil, last } from 'rxjs';
 import {
@@ -22,6 +27,8 @@ import { SmeAnalysisService } from '../../sme-analysis.service';
   styleUrls: ['./ecosolution-list.component.scss'],
 })
 export class EcosolutionListComponent implements OnInit, OnDestroy {
+  @ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
+
   odsIcons!: Array<{ code: number; active: boolean }>;
 
   formField = FORM_CATEGORIES_QUESTION;
@@ -32,8 +39,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   zoomOutIn = false;
   private _smeId!: string;
   formValue!: any;
-  smeDataProfile: any;
-  @ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
+  smeDataProfile = this._userService.userProfile();
   onDestroy$: Subject<void> = new Subject();
 
   get allChecked() {
@@ -72,15 +78,6 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     this.currentLangCode = this._translateServices.defaultLang;
     this._changeLangCode();
     this._getOdsIcons();
-    this._getSmeCompanyDetail();
-  }
-
-  private _getSmeCompanyDetail() {
-    this._userService.companyDetail.subscribe((company) => {
-      if (company) {
-        this.smeDataProfile = company;
-      }
-    });
   }
 
   getResults() {
@@ -105,9 +102,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
       });
   }
   private _getOdsIcons() {
-    const odsIconsCode = [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-    ];
+    const odsIconsCode = ODS_CODE;
 
     this.odsIcons = odsIconsCode.map((code: number) => ({
       code: code,

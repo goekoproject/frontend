@@ -5,28 +5,12 @@ import { ROLES, hasRole } from '@goeko/store';
 
 const ROUTES: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home',
-  },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./langing-page/landing-page.module').then((m) => m.LandingModule),
-  },
-
-  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'demo',
     loadChildren: () => import('./demo/demo.module').then((m) => m.DemoModule),
-  },
-  {
-    path: 'login',
-    canMatch: [goToUniversalLogin],
-    loadComponent: () => goToUniversalLogin(),
   },
   {
     path: 'autenticate',
@@ -70,6 +54,11 @@ const ROUTES: Routes = [
     canMatch: [hasRole(ROLES.ADMIN)],
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'home',
   },
 ];
 @NgModule({

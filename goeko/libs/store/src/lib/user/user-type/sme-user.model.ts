@@ -1,10 +1,13 @@
 import { USER_TYPE } from '../user-type.constants';
-import { UserBuilder } from '../user.builder';
-import { UserProfile } from '../user.model';
 
-export default class SmeUser extends UserBuilder {
+export class SmeUser {
   userType = USER_TYPE.SME;
-  constructor() {
-    super();
-  }
+  id!: string;
+  name!: string;
+  country!: string;
+  email!: string;
+  website!: string;
+  externalId!: string;
+
+  constructor() {}
 }
