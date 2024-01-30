@@ -5,7 +5,6 @@ import {
   ElementRef,
   Input,
   OnDestroy,
-  OnInit,
   Renderer2,
   ViewChild,
   ViewEncapsulation,
@@ -38,8 +37,6 @@ export class SideProfileComponent implements OnDestroy, AfterViewInit {
   public userAuth = this._userService.userAuth;
 
   @Input() visibility!: boolean;
-
-  public username!: string;
 
   public attractAtention!: boolean;
   constructor(
