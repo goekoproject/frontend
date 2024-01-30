@@ -316,7 +316,8 @@
       "useLowConsumptionLighting": "Use low consumption lighting",
       "storeEnergy": "Store energy",
       "optimizeEnergyConsumption": "Optimize energy consumption",
-      "chargeElectricVehicles": "Charge electric vehicles"
+      "chargeElectricVehicles": "Charge electric vehicles",
+      "electricMeansOfTransport": "Des moyens de transport électrique​"
     },
     "selectMainActivity": {
       "cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
@@ -351,19 +352,27 @@
       "backhoeLoader": "Backhoe loader",
       "bulldozer": "Bulldozer",
       "dumper": "Dumper",
+      "mechanicalPalletTruck": "Transpalette mécanique​",
       "equipmentCarrierTruck": "Equipment carrier truck",
       "grader": "Grader",
       "loader": "Loader",
       "materialsCarrierTruck": "Materials carrier truck",
       "scraper": "Scraper",
-      "steamRoller": "Steam roller"
+      "steamRoller": "Steam roller",
+      "slicer": "Trancheuse",
+      "compressor": "Compresseur​",
+      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​",
+      "generator": "Génératrice​"
     },
     "selectMainMineralProduct": {
       "cement": "Cement",
       "concrete": "Concrete",
       "isolation": "Insulation panels",
       "iron": "Iron",
-      "steel": "Steel"
+      "steel": "Steel",
+      "copper": "Cuivre",
+      "zinc": "Zinc",
+      "aluminum": "Aluminium​"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Insulation panels"

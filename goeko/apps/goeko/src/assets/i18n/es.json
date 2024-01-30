@@ -314,7 +314,8 @@
       "useLowConsumptionLighting": "Usar iluminación de bajo consumo",
       "storeEnergy": "Almacenar energía",
       "optimizeEnergyConsumption": "Optimizar el consumo de energía",
-      "chargeElectricVehicles": "Cargar vehículos eléctricos"
+      "chargeElectricVehicles": "Cargar vehículos eléctricos",
+      "electricMeansOfTransport": "Des moyens de transport électrique​"
     },
     "selectMainActivity": {
       "cleaningOfSiteAndPeripheryAccesses": "Limpieza de accesos de obra y periféricos",
@@ -349,19 +350,27 @@
       "backhoeLoader": "Cargadora retroexcavadora",
       "bulldozer": "Bulldozer",
       "dumper": "Volquete",
+      "mechanicalPalletTruck": "Transpalette mécanique​",
       "equipmentCarrierTruck": "Camión portaequipos",
       "grader": "Niveladora",
       "loader": "Cargadora",
       "materialsCarrierTruck": "Camión portamateriales",
       "scraper": "Raspadora",
-      "steamRoller": "Rodillo de vapor"
+      "steamRoller": "Rodillo de vapor",
+      "slicer": "Trancheuse",
+      "compressor": "Compresseur​",
+      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​",
+      "generator": "Génératrice​"
     },
     "selectMainMineralProduct": {
       "cement": "Cemento",
       "concrete": "Concreto",
       "isolation": "Paneles de aislamiento",
       "iron": "Hierro",
-      "steel": "Acero"
+      "steel": "Acero",
+      "copper": "Cuivre",
+      "zinc": "Zinc",
+      "aluminum": "Aluminium​"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Paneles de aislamiento"

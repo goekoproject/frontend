@@ -317,7 +317,8 @@
       "useLowConsumptionLighting": "Eclairer à basse consommation",
       "storeEnergy": "Stocker l’énergie",
       "optimizeEnergyConsumption": "Optimiser la consommation d’énergie",
-      "chargeElectricVehicles": "Charger des véhicules électriques"
+      "chargeElectricVehicles": "Charger des véhicules électriques",
+      "electricMeansOfTransport": "Des moyens de transport électrique​"
     },
 
     "selectMainActivity": {
@@ -349,23 +350,31 @@
     },
     "selectMainInternalCombustionEngine": {
       "aerialBucketTruck": "Camion nacelle",
-      "backhoe": "Rétrocaveuse",
-      "backhoeLoader": "Chargeuse-pelleteuse",
+      "backhoe": "Raboteuse",
+      "backhoeLoader": "Pelle mécanique​",
       "bulldozer": "Bulldozer",
-      "dumper": "Tombereau",
+      "dumper": "Dumper",
       "equipmentCarrierTruck": "Camion de transport d’équipements",
       "grader": "Niveleuse",
-      "loader": "Chargeur",
+      "loader": "Chargeuse",
+      "mechanicalPalletTruck": "Transpalette mécanique​",
       "materialsCarrierTruck": "Camion de transport de matériaux",
-      "scraper": "Décapeuse",
-      "steamRoller": "Rouleau compresseur"
+      "scraper": "Scraper",
+      "steamRoller": "Rouleau compresseur",
+      "slicer": "Trancheuse",
+      "compressor": "Compresseur​",
+      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​",
+      "generator": "Génératrice​"
     },
     "selectMainMineralProduct": {
       "cement": "Ciment",
       "concrete": "Béton",
-      "isolation": "Panneaux d’isolation thermique",
-      "iron": "Fer",
-      "steel": "Acier"
+      "isolation": "Isolation thermique​",
+      "iron": "Inox",
+      "steel": "Acier",
+      "copper": "Cuivre",
+      "zinc": "Zinc",
+      "aluminum": "Aluminium​"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Panneaux d'isolation"
