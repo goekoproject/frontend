@@ -300,28 +300,19 @@ export const SelectSpecialWaste: DataSelectOption[] = [
     keyLang:
       'SELECT_DATA_LABEL.selectSpecialWaste.cartridgesSealantChemicalCaulking',
   },
-  {
-    id: 'agglomeratedProducts',
-    keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.agglomeratedProducts',
-  },
+
   {
     id: 'treatedWood',
     keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.treatedWood',
-  },
-
-  {
-    id: 'solventsForInsulation',
-    keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.solventsForInsulation',
   },
   {
     id: 'polyurethaneFoams',
     keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.polyurethaneFoams',
   },
-  { id: 'lead', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.lead' },
   { id: 'asbestos', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.asbestos' },
   {
-    id: 'particleboardPanels',
-    keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.particleboardPanels',
+    id: 'pouredAsphalt',
+    keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.pouredAsphalt',
   },
   {
     id: 'agglomeratedConcrete',

@@ -404,7 +404,7 @@
       "asbestos": "Asbestos",
       "batteriesAndAccumulators": "Batteries and Accumulators",
       "cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
-      "electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment (PCB)",
+      "electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment",
       "fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
       "lead": "Lead",
       "paintsAndSolvents": "Paints and Solvents",
@@ -413,7 +413,8 @@
       "rubberProducts": "Rubber products",
       "solventsForInsulation": "Solvents for insulation",
       "treatedWood": "Treated Wood",
-      "usedOils": "Used Oils"
+      "usedOils": "Used Oils",
+      "pouredAsphalt": "Poured asphalt"
     }
   },
   "sloganGoeko": "The connection to efficiency",

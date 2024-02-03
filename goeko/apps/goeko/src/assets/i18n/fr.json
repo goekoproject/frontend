@@ -287,7 +287,7 @@
     "defaultLabel": "Veuillez sélectionner parmi les options suivantes",
     "currency": "€",
     "greenWaste": {
-      "greenWoodUntreated": "Bois vert (non traité)",
+      "greenWoodUntreated": "Bois naturel​",
       "topsoil": "Terre végétale"
     },
     "selectCountry": {
@@ -303,11 +303,11 @@
     },
     "selectHazardousWaste": {
       "oilSeparatorSludge": "Boue de séparateur d'huile",
-      "productsContainingHeavyMetals": "Produits contenant des métaux lourds",
-      "productsContainingTar": "Produits contenant du goudron"
+      "productsContainingHeavyMetals": "Boues de centrale à béton avec du chrome 6",
+      "productsContainingTar": "Produits contenant des HAP​"
     },
     "selectInertOrMineralWaste": {
-      "brick": "Brique",
+      "brick": "Brique/tuile​",
       "ceramic": "Céramique",
       "concrete": "Béton",
       "soil": "Terre",
@@ -401,12 +401,12 @@
     "selectSpecialWaste": {
       "aerosols": "Aérosols",
       "agglomeratedCementPanels": "Panneaux de ciment aggloméré",
-      "agglomeratedConcrete": "Béton Aggloméré",
+      "agglomeratedConcrete": "Béton pollué",
       "agglomeratedProducts": "Produits agglomérés",
       "asbestos": "Amiante",
       "batteriesAndAccumulators": "Batteries et accumulateurs",
-      "cartridgesSealantChemicalCaulking": "Cartouches (mastic, produit chimique, calfeutrage…)",
-      "electricalAndElectronicEquipmentPCB": "Équipements électriques et électroniques (PCB)",
+      "cartridgesSealantChemicalCaulking": "Cartouches (produit chimique, calfeutrage…)",
+      "electricalAndElectronicEquipmentPCB": "Équipements électriques et électroniques",
       "fluorescentTubesEnergySavingBulbsNeonTubes": "Tubes fluorescents, ampoules à économie d'énergie, rampes de néon",
       "lead": "Plomb",
       "paintsAndSolvents": "Peintures et solvants",
@@ -415,7 +415,8 @@
       "rubberProducts": "Produits en caoutchouc",
       "solventsForInsulation": "Solvants pour isolants",
       "treatedWood": "Bois traités",
-      "usedOils": "Huiles usagées"
+      "usedOils": "Huiles usagées",
+      "pouredAsphalt": "Asphalte coulée"
     }
   },
   "sloganGoeko": "The connection to efficiency",
