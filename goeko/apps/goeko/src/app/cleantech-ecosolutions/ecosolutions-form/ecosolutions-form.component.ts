@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -39,7 +39,7 @@ export class EcosolutionsFormComponent implements OnInit {
   public defaultSetCurrency = defaultSetCurrency;
   public defaultSetReductions = defaultSetReductions;
   public defaultSetyearGuarantee = defaultSetyearGuarantee;
-  public currentLangCode!: string;
+  langSignal = signal(this._translateServices.currentLang ||  this._translateServices.defaultLang);
   public dataSelect = DataSelect;
   public mainCategory!: string;
   public fileData!: { name: string; url: string };
@@ -60,7 +60,6 @@ export class EcosolutionsFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentLangCode = this._translateServices.defaultLang;
     this._getParamsUrl();
     this._initForm();
     this._changeLangCode();
@@ -81,7 +80,10 @@ export class EcosolutionsFormComponent implements OnInit {
   }
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe(
-      (res) => (this.currentLangCode = res.lang)
+      (current) => {
+        this._cleantechEcosolutionsService.getSubcategorySelected(this.mainCategory);
+        this.langSignal.set(current.lang)
+        }
     );
   }
 
@@ -89,6 +91,7 @@ export class EcosolutionsFormComponent implements OnInit {
     this.form = this._fb.group({
       solutionName: ['', Validators.required],
       solutionDescription: [''],
+      detailedDescription: [''],
       subCategory: ['', Validators.required],
       products: ['', Validators.required],
       reductionPercentage: [],

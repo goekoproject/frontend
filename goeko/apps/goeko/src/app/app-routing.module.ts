@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard, goToUniversalLogin } from '@goeko/core';
+import { AuthGuard } from '@goeko/core';
 import { ROLES, hasRole } from '@goeko/store';
 
 const ROUTES: Routes = [

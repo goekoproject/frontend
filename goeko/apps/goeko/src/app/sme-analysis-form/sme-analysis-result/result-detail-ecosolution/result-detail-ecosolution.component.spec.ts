@@ -47,7 +47,7 @@ const detailsEcosolution = {
       'chargeElectricVehicles',
     ],
   },
-  countries: ['CHE', 'FR', 'DEU', 'IT', 'ES'],
+  countries: ['CH', 'FR', 'DE', 'IT', 'ES'],
   marketReady: true,
   guarantee: true,
   guaranteeInYears: 1.0,

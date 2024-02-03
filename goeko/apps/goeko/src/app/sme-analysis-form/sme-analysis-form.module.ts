@@ -34,6 +34,7 @@ import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
 import { SmeAnalysisService } from './sme-analysis.service';
 import { DataArraySummaryPipe } from './sme-analysis-summary/data-array-summary.pipe';
+import { CodeCountryPipe } from 'libs/business-ui/src/lib/pipes/code-country.pipe';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { DataArraySummaryPipe } from './sme-analysis-summary/data-array-summary.
     NotificationModule,
     SelectSubcategoryProductComponent,
     ProductsManagementComponent,
+    CodeCountryPipe,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

@@ -238,14 +238,14 @@ export const SelectCountry: CountrySelectOption[] = [
   {
     id: 'germany',
     keyLang: 'SELECT_DATA_LABEL.selectCountry.germany',
-    code: 'DEU',
+    code: 'DE',
   },
   { id: 'italy', keyLang: 'SELECT_DATA_LABEL.selectCountry.italy', code: 'IT' },
   { id: 'spain', keyLang: 'SELECT_DATA_LABEL.selectCountry.spain', code: 'ES' },
   {
     id: 'switzerland',
     keyLang: 'SELECT_DATA_LABEL.selectCountry.switzerland',
-    code: 'CHE',
+    code: 'CH',
   },
 ];
 

@@ -13,9 +13,10 @@ import { Router } from '@angular/router';
 import { UserService } from '@goeko/store';
 import { BadgeModule, ButtonModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
+import { CodeCountryPipe } from '../../pipes/code-country.pipe';
 
 @Component({
-  imports: [TranslateModule, CommonModule, ButtonModule, BadgeModule],
+  imports: [TranslateModule, CommonModule, ButtonModule, BadgeModule,CodeCountryPipe],
   selector: 'goeko-side-profile',
   templateUrl: './side-profile.component.html',
   styleUrls: ['./side-profile.component.scss'],
@@ -34,7 +35,7 @@ export class SideProfileComponent implements OnDestroy, AfterViewInit {
   private _toogleSideProfile!: boolean;
 
   public userProfile = this._userService.userProfile;
-  public userAuth = this._userService.userAuth;
+  public userAuth = this._userService.userAuthData;
 
   @Input() visibility!: boolean;
 

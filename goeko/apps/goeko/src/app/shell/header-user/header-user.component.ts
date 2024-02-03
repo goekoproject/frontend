@@ -1,6 +1,5 @@
 import { AfterContentInit, Component, OnInit, computed } from '@angular/core';
 import { SideProfileComponent } from '@goeko/business-ui';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { LANGS, Lang } from '@goeko/core';
 import { UserService } from '@goeko/store';
 import { DialogService } from '@goeko/ui';
@@ -17,7 +16,7 @@ export class HeaderUserComponent implements OnInit, AfterContentInit {
   userProfile = computed(() =>
     this._userService.userProfile().id
       ? this._userService.userProfile()
-      : this._userService.userAuth()
+      : this._userService.userAuthData()
   );
   constructor(
     private _userService: UserService,

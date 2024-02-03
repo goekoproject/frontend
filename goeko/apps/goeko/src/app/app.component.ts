@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadDataUser } from '@goeko/business-ui';
 import { AuthService } from '@goeko/core';
+import { take } from 'rxjs';
 
 const KEY_COOKIES = 'cookie-policy';
 @Component({
@@ -26,12 +28,19 @@ export class AppComponent implements OnInit {
   public isAuthenticated$ = this._authService.isAuthenticated$;
   public isPrivateZone: boolean = false;
 
-  constructor(private router: Router, private _authService: AuthService) {}
+  constructor(private router: Router, private _authService: AuthService,private loadDataUser: LoadDataUser) {}
 
   ngOnInit(): void {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isPrivateZone = isAuthenticated && !this.isHomePage();
+      console.log(this.isPrivateZone);
+      if(this.isPrivateZone) {
+        this.loadDataUser.resolve().pipe(take(1)).subscribe();
+      }     
+
     });
+
+
   }
   acceptCookie() {
     localStorage.setItem(KEY_COOKIES, 'true');

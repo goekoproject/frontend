@@ -6,6 +6,7 @@ import {
   CardEcosolutionsComponent,
   CategoryModule,
   ProductToCurrentLangPipe,
+  SdgIconsComponent,
   SelectSubcategoryProductComponent,
   SubcategoryToCurrentLangPipe,
 } from '@goeko/business-ui';
@@ -50,6 +51,7 @@ import { CleantechEcosolutionsService } from './cleantech-ecosolutions.services'
     SelectSubcategoryProductComponent,
     UiSuperSelectModule,
     ProductToCurrentLangPipe,
+    SdgIconsComponent,
     SubcategoryToCurrentLangPipe,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,

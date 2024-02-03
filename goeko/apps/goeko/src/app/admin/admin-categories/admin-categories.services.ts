@@ -1,17 +1,15 @@
 import {
   Injectable,
   Injector,
-  Signal,
-  computed,
   effect,
   inject,
-  signal,
+  signal
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
   CATEGORY_SECTION,
-  CategorySection,
   FORM_CATEGORIES_QUESTION,
-  mergeCategoriesSectionWithClassificationCategory,
+  mergeCategoriesSectionWithClassificationCategory
 } from '@goeko/business-ui';
 import {
   ClassificationCategory,
@@ -21,7 +19,6 @@ import {
   NULL_CLASSIFICATION_CATEGORY,
   NULL_MANAGE_CATEGORY,
 } from '@goeko/store';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { map, tap } from 'rxjs';
 
 export function equalPrimitives(a: any, b: any) {

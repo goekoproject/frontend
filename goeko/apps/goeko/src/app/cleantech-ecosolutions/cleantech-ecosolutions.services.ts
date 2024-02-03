@@ -7,9 +7,7 @@ import {
 import {
   ClassificationCategory,
   ClassificationCategoryService,
-  ManageCategory,
-  NULL_CLASSIFICATION_CATEGORY,
-  NULL_MANAGE_CATEGORY,
+  NULL_CLASSIFICATION_CATEGORY
 } from '@goeko/store';
 import { map, tap } from 'rxjs';
 
@@ -17,7 +15,10 @@ import { map, tap } from 'rxjs';
 export class CleantechEcosolutionsService {
   private injector = inject(Injector);
 
-  subCategorySelected = signal<ManageCategory>(NULL_MANAGE_CATEGORY);
+  subCategorySelected = signal<ClassificationCategory>({id: '',
+  code: '',
+  label:''
+});
 
   categories = toSignal(this._getAllCategories$(), {
     initialValue: CATEGORY_SECTION as any[],
@@ -32,7 +33,7 @@ export class CleantechEcosolutionsService {
   ) {
     effect(() => {
       if (this.categorySelected().id !== '') {
-        this._getSubcategorySelected(this.categorySelected().id);
+        this.getSubcategorySelected(this.categorySelected().code);
       }
     });
   }
@@ -44,9 +45,9 @@ export class CleantechEcosolutionsService {
       tap((categories) => this.categorySelected.set(categories[0]))
     );
   }
-  private _getSubcategorySelected(id: string) {
+  public getSubcategorySelected(code: string) {
     this.classificationCategoryService
-      .getClassificationById(id)
+      .getClassificationForCategoryTranslated(code)
       .subscribe((subcategorySelected) => {
         if (subcategorySelected) {
           this.subCategorySelected.set(subcategorySelected);

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '@auth0/auth0-angular';
 import { AuthService } from '@goeko/core';
 import { ROLES, UserService } from '@goeko/store';
-import { Observable, map } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 
 const namespace = 'https://goeko';
 
@@ -16,6 +16,7 @@ export class LoadDataUser {
   ) {}
   resolve(): Observable<any> {
     return this._authService.userAuth$.pipe(
+      take(1),
       map((userData) => {
         if (userData) {
           const userDataTransform = {
@@ -23,7 +24,7 @@ export class LoadDataUser {
             externalId: userData?.sub?.replace('auth0|', ''),
             roles: this._getUserRole(userData),
           };
-          this._userServices.userAuth.set(userDataTransform);
+          this._userServices.userAuthData.set(userDataTransform);
           this._router.navigate([`dashboard/${userData['userType']}`]);
         }
       })

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ODS_CODE } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 
+//TODO: To do value accessort
 @Component({
   standalone: true,
   imports: [CommonModule],

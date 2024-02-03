@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CATEGORY_SECTION } from '@goeko/business-ui';
 import {
   ClassificationCategory,
-  EcosolutionsService,
-  ManageCategory,
+  EcosolutionsService
 } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
-import { CardEcosolutions } from './card-ecosolutions.model';
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
+import { CardEcosolutions } from './card-ecosolutions.model';
 
 @Component({
   selector: 'goeko-ecosolutions-list',

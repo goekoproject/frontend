@@ -22,6 +22,20 @@
         >
         </textarea>
       </div>
+
+      <div class="form-col">
+        <label for="detailedDescription">
+          {{ 'FORM_LABEL.technicalDescription' | translate }}
+        </label>
+        <textarea
+          class="go-textarea"
+          rows="5"
+          id="detailedDescription"
+          [formControlName]="'detailedDescription'"
+          [readonly]="isReadOnly"
+        >
+        </textarea>
+      </div>
     </fieldset>
 
     <fieldset class="ecosolutions-fieldset">
@@ -42,7 +56,7 @@
           [readonly]="isReadOnly"
         >
           <p title>
-            {{ subcategory | subcategoryToCurrentLang }}
+            {{ subcategory.label }}
           </p>
 
           <go-badge-group
@@ -55,7 +69,7 @@
               [readonly]="isReadOnly"
               [value]="product.code"
               [readonly]="isReadOnly"
-              >{{ product | productToCurrentLang }}</go-badge
+              >{{ product.label }}</go-badge
             >
             }
           </go-badge-group>
@@ -153,10 +167,11 @@
           [value]="codeControls.value.checked"
           [readonly]="isReadOnly"
         />
+
         <img
           class="ods-icon"
           [src]="
-            'assets/icon-ods/' + currentLangCode + '-Goal-' + ods[i] + '.png'
+            'assets/icon-ods/' + this.langSignal() + '-Goal-' + ods[i] + '.png'
           "
           [alt]="ods[i]"
         />

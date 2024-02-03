@@ -4,7 +4,6 @@ import {
   ProjectService,
   SmeAnalysisStoreService,
   SmeRequestResponse,
-  SmeService,
   UserService,
 } from '@goeko/store';
 import { take, toArray } from 'rxjs';
@@ -20,7 +19,6 @@ export class DashboardSmeComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _smeAnalyticsStore: SmeAnalysisStoreService,
-    private _smeService: SmeService,
     private _projectService: ProjectService,
     private _router: Router
   ) {

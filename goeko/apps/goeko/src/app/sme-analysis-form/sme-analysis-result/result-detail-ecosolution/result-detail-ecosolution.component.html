@@ -45,7 +45,7 @@
             {{ 'FORM_LABEL.countriesAvailable' | translate }}
           </span>
           <p class="details-article--data">
-            {{ detailsEcosolution['countries'] }}
+            {{ detailsEcosolution['countries'] | country }}
           </p>
         </div>
 
@@ -72,6 +72,17 @@
             </a>
           </p>
         </div>
+
+        @if (detailsEcosolution.paybackPeriodYears ) {
+        <div>
+          <span class="details-article--label">
+            {{ 'FORM_LABEL.paybackPeriodYears' | translate }}</span
+          >
+          <p class="details-article--data">
+            {{ detailsEcosolution.paybackPeriodYears }}
+          </p>
+        </div>
+        }
 
         <div>
           <span class="details-article--label">

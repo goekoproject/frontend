@@ -1,4 +1,4 @@
-import { CleantechsUser, SmeUser } from './public-api';
+import { CleantechsUser, SmeUser } from "./public-api";
 
 export interface IUserBuilder<T = any> {
   build(): T;
@@ -9,8 +9,8 @@ export class SmeBuilder implements IUserBuilder<SmeUser> {
   private smeUser!: SmeUser;
   constructor() {}
 
-  public empty(): SmeUser {
-    return new SmeUser();
+  public empty(): any {
+    return new Object();
   }
   public init(data: any) {
     this.smeUser = new SmeUser();

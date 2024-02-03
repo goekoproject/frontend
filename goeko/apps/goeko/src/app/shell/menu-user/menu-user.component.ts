@@ -13,7 +13,7 @@ export class MenuUserComponent implements OnInit {
   public menuOptions!: MenuUser[];
   private user = this._userService.userProfile;
 
-  private userAuth = this._userService.userAuth;
+  private userAuth = this._userService.userAuthData;
 
   constructor(
     private _authService: AuthService,
