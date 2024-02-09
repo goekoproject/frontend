@@ -30,6 +30,8 @@ export class MenuUserComponent implements OnInit {
   goTo(route: string) {
     switch (route) {
       case 'profile':
+      case 'sme-analysis/list':
+
         // eslint-disable-next-line no-case-declarations
         this._navigateWithCompanyId(route);
         return;
@@ -54,7 +56,7 @@ export class MenuUserComponent implements OnInit {
 
   private _navigateWithCompanyId(route: string) {
     const _id = this.user().id || this.userAuth()['externalId'];
-    this._router.navigate([route, this.user()?.id]);
+    this._router.navigate([route, _id]);
   }
   private _navigateWithCompanyIdInQueryParams(route: string, queryParams: any) {
     this._router.navigate([route], {

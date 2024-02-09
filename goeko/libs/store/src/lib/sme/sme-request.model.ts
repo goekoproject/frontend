@@ -65,10 +65,14 @@ export interface SmeCreateRecomendationRequest {
   classifications: Classifications[];
 }
 
+
 export interface SmeRequestResponse {
   classifications: Classifications[];
   id: string;
   date: string;
   searchName?: string;
   name?: string;
+}
+export interface Requests {
+  requests: SmeRequestResponse[];
 }

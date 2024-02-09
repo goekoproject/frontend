@@ -17,6 +17,7 @@ import {
   SmeRequestResponse,
   SmeSaveRecomendationRequest,
 } from './sme-request.model';
+import { Q } from '@angular/cdk/keycodes';
 //TODO: Change obj modal
 
 @Injectable()
@@ -66,5 +67,10 @@ export class ProjectService {
       map((recommendation) => recommendation.projects),
       mergeMap((data) => from(data)) // Convierte el array en un Observable de elementos individuale */
     );
+  }
+
+  deleteProject(id: string): Observable<any> {
+    return this._http.delete<any>(`/v1/ecosolution/search/projects/smes/${id}`);
+
   }
 }

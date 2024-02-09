@@ -15,6 +15,7 @@ import {
   ClassificationCategoryProduct,
   ClassificationSubcategory,
   DataSelect,
+  SmeRequestResponse,
   SmeService,
 } from '@goeko/store';
 import { transformArrayToObj } from './sme-analysis.request';
@@ -46,6 +47,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   private _smeId!: string;
 
+  queryParamsSelected!:{[key: string]: string}
   //Signal
   categories = this._smeAnalysisService.categories;
   categorySelected = this._smeAnalysisService.categorySelected;
@@ -76,6 +78,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._smeId = this._route.snapshot.paramMap.get('id') as string;
+    this.queryParamsSelected = this._route.snapshot.queryParams;
     this._initForm();
   }
 
@@ -117,6 +120,9 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
     if (this._smeId) {
       this._getLastAnalysis();
     }
+    if(this.queryParamsSelected) {
+      this._getRequiestSelected();
+    }
   }
 
   private _getLastAnalysis() {
@@ -125,15 +131,30 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
       .subscribe((requestClassifications) => {
         if (requestClassifications) {
           this.dateLastRecomendation = requestClassifications.date;
-          const classifications = transformArrayToObj(
-            requestClassifications.classifications
-          );
-
-          this._createFormForEdit(classifications);
-          this.form.patchValue(classifications);
-          this._cdf.markForCheck();
+          this._fillForm(requestClassifications);
         }
       });
+  }
+
+  private _getRequiestSelected() {
+    this._smeService
+      .getRequestById({smeId: this.queryParamsSelected['smeId'], requestId: this.queryParamsSelected['requestId']})
+      .subscribe((requestClassifications) => {
+        if (requestClassifications) {
+          this.dateLastRecomendation = requestClassifications.date;
+          this._fillForm(requestClassifications);
+        }
+      });
+  }
+
+  private _fillForm(requestClassifications : SmeRequestResponse) {
+    const classifications = transformArrayToObj(
+      requestClassifications.classifications
+    );
+
+    this._createFormForEdit(classifications);
+    this.form.patchValue(classifications);
+    this._cdf.markForCheck();
   }
   private _createFormForEdit(classifications: any) {
     Object.keys(classifications).forEach((controlName) => {
@@ -154,15 +175,14 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
         relativeTo: this._route,
       });
     } else {
-      this._router.navigate([`summary`], {
-        relativeTo: this._route,
+      this._router.navigate([`/sme-analysis/summary`], {
         queryParamsHandling: 'preserve',
       });
     }
   }
   getResults() {
     this.currentAnalytics.set(this.form.value);
-    this._smeId = this._overrideSmeId();
+    this._smeId = this._smeId || this.queryParamsSelected['smeId'];
     this._router.navigate(['sme-analysis/results', this._smeId]);
   }
 

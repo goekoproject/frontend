@@ -2,6 +2,9 @@
   "a": "a",
   "welcome": "Bienvenido",
   "my_company": "Mi empresa",
+  "details": "Detalles",
+  "categories": "Categorias",
+  "creationDate": "Fecha de creacion",
   "new_project": "Nuevo proyecto",
   "last_project": "3 Ultimos proyectos",
   "confirm": "Confirmar",
@@ -57,7 +60,8 @@
     "co2Emission": "Emisiones CO2",
     "hazardousProduct": "Producto peligroso",
     "waste": "Residuos",
-    "water": "Agua"
+    "water": "Agua",
+    "waterConsumption":"Agua"
   },
   "CATEGORIES_FIELD": {
     "amount": "Consumo de agua (2022)",

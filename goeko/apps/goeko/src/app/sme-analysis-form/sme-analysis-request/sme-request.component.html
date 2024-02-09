@@ -1,0 +1,29 @@
+<goeko-go-table [dataSources]="analysisRequests">
+  <button go-button header-action (click)="newRequest()">
+        {{'new_analysis' | translate}}
+  </button>
+  <ng-template goCellRef let-element>
+    {{element['classifications'] | categoryRequest }}
+  </ng-template>
+
+  <ng-template goCellRef let-element>
+    {{element['date'] | date : 'short' }}
+  </ng-template>
+
+
+  <ng-template goElementAction let-element>
+    <i class="ti ti-trash text-2xl cursor-pointer" (click)="deleteRequest(element)"></i>
+    <button go-button appearance="flat" (click)="goToDetails(element)">
+      {{'details' | translate}}
+      <i class="ti ti-arrow-right" ></i>
+  </button>
+  </ng-template>
+  
+  
+  <ng-template [goHeaderRef]="displayColumns"> </ng-template>
+  
+  
+ 
+
+  
+</goeko-go-table>

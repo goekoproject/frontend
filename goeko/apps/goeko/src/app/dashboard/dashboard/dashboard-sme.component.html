@@ -62,6 +62,9 @@
           <i class="ti ti-calendar-time"></i>
           <p>{{ project.date | date : 'short' }}</p>
         </div>
+        <div class="project-actions" (click)="deleteProject(project.id)">
+          <i class="ti ti-trash"></i>
+        </div>
         <div class="project-actions" (click)="goToProject(project)">
           <i class="ti ti-circle-arrow-right"></i>
         </div>

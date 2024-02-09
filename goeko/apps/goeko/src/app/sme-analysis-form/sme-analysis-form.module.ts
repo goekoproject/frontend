@@ -5,9 +5,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   CategoryModule,
+  CodeCountryPipe,
+  GoTableModule,
   ProductsManagementComponent,
   SdgIconsComponent,
-  SelectSubcategoryProductComponent,
+  SelectSubcategoryProductComponent
 } from '@goeko/business-ui';
 import { SmeModule } from '@goeko/store';
 import {
@@ -24,17 +26,18 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
 import { SmeAnalysisFormRoutingModule } from './sme-analysis-form-routing.module';
+import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component';
 import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
 import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component';
 import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
+import { DataArraySummaryPipe } from './sme-analysis-summary/data-array-summary.pipe';
 import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
+import { SmeAnalysisService } from './sme-analysis.service';
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
 import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
 import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
-import { SmeAnalysisService } from './sme-analysis.service';
-import { DataArraySummaryPipe } from './sme-analysis-summary/data-array-summary.pipe';
-import { CodeCountryPipe } from 'libs/business-ui/src/lib/pipes/code-country.pipe';
+import { CategoryRequestPipe } from './get-category-request.pipe';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { CodeCountryPipe } from 'libs/business-ui/src/lib/pipes/code-country.pip
     EcosolutionListComponent,
     YesNoPipe,
     DataArraySummaryPipe,
+    SmeRequestAnalisysComponent,
+    CategoryRequestPipe,
+
   ],
   imports: [
     CommonModule,
@@ -67,6 +73,7 @@ import { CodeCountryPipe } from 'libs/business-ui/src/lib/pipes/code-country.pip
     NotificationModule,
     SelectSubcategoryProductComponent,
     ProductsManagementComponent,
+    GoTableModule, 
     CodeCountryPipe,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,

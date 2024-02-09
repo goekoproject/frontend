@@ -83,8 +83,6 @@ export class SmeAnalysisSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this._smeAnalysisService.getAllDataCategories();
-    console.log(this.allCategories);
-    console.log(this.currentAnalytics());
 
     this._smeId = this._getSmeId();
     this._smeAnalysisStore.getCurrentAnalysis().subscribe((res) => {

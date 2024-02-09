@@ -52,4 +52,11 @@ export class DashboardSmeComponent implements OnInit {
       },
     });
   }
+
+  deleteProject(id:string) {
+    this._projectService.deleteProject(id).subscribe(data  => {
+      this._getLastProjectName();
+
+    });
+  }
 }

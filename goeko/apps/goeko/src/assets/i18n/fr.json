@@ -2,6 +2,9 @@
   "a": "à",
   "welcome": "Bienvenue",
   "accept": "Accepter",
+  "details": "Détails",
+  "categories": "Catégories",
+  "creationDate": "Date de creation",
   "my_company": "Mon entreprise",
   "new_project": "Nouveau projet",
   "last_project": "3 Derniers projets",
@@ -74,7 +77,9 @@
     "co2Emission": "Emissions de CO2",
     "hazardousProduct": "Produits toxiques",
     "waste": "Déchets",
-    "water": "Eau"
+    "water": "Eau",
+    "waterConsumption":"Eau"
+
   },
   "CATEGORIES_FIELD": {
     "amount": "Activités qui consomment le plus d’eau",

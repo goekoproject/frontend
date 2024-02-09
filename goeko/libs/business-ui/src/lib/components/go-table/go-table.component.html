@@ -1,0 +1,57 @@
+<div class="sm:px-6 w-full">
+  <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+    <div class="inline-flex justify-end w-full">
+      <ng-content select="[header-action]"></ng-content>
+    </div>
+
+    <div class="mt-7 overflow-x-auto">
+      <table class="w-full whitespace-nowrap">
+        <thead>
+       
+            <tr scope="col" >
+              @for( title of headers.goHeaderRef; track title) {
+              <th class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"> {{title | translate }}</th>
+            }
+            <tr>
+         
+
+        </thead>
+        <tbody>
+          @for ( element of dataSources; track element.id) {
+          <tr
+            tabindex="0"
+            class="focus:outline-none h-16 border border-gray-100 rounded"
+          >
+            @for ( cell of cells; track cell.id) {
+            <td id="{{ cell.id }}">
+              <div class="flex items-center pl-5">
+                <p
+                  class="text-base font-medium leading-none text-gray-700 mr-2"
+                >
+                  <ng-container
+                    [ngTemplateOutlet]="cell.template"
+                    [ngTemplateOutletContext]="{ $implicit: element }"
+                  ></ng-container>
+                </p>
+              </div>
+            </td>
+            } 
+            
+            @for( action of elementActions; track action.id) {
+
+            <td>
+              <div class="flex items-center gap-2">
+                <ng-container
+                  [ngTemplateOutlet]="action.template"
+                  [ngTemplateOutletContext]="{ $implicit: element }"
+                ></ng-container>
+              </div>
+            </td>
+            }
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
