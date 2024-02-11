@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultDetailEcosolutionComponent } from './result-detail-ecosolution.component';
-import { Recommendation, SmeAnalysisStoreService } from '@goeko/store';
-import { Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { BadgeModule, ButtonModule, PercentageModule } from '@goeko/ui';
-import { SdgIconsComponent } from '@goeko/business-ui';
-import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SdgIconsComponent } from '@goeko/business-ui';
+import { BadgeModule, ButtonModule, PercentageModule } from '@goeko/ui';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { ResultDetailEcosolutionComponent } from './result-detail-ecosolution.component';
 const detailsEcosolution = {
   companyDetail: {
     name: 'Neolec',
@@ -76,7 +75,7 @@ describe('ResultDetailEcosolutionComponent', () => {
       declarations: [ResultDetailEcosolutionComponent],
       providers: [
         {
-          provideSmeAnalysisStoreService,
+          mockSmeAnalysisStoreService,
           useValue: mockSmeAnalysisStoreService,
         },
       ],

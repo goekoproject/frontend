@@ -25,7 +25,7 @@ export class LoadDataUser {
             roles: this._getUserRole(userData),
           };
           this._userServices.userAuthData.set(userDataTransform);
-          this._router.navigate([`dashboard/${userData['userType']}`]);
+           this._router.navigate([`dashboard/${userData['userType']}`]);
         }
       })
     );

@@ -9,3 +9,4 @@ export * from './products-management/public-api';
 export * from './loader-animation/public-api';
 export * from './first-loading/public-api';
 export * from './go-table/public-api';
+export * from './lead-form/public-api';

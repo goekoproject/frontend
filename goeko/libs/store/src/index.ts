@@ -9,3 +9,4 @@ export * from './lib/store.module';
 export * from './lib/user/public-api';
 export * from './lib/ecosolutions/public-api';
 export * from './lib/admin-categories/public-api';
+export * from './lib/lead/public-api'

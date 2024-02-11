@@ -7,6 +7,7 @@ import {
   CategoryModule,
   CodeCountryPipe,
   GoTableModule,
+  LeadFormComponent,
   ProductsManagementComponent,
   SdgIconsComponent,
   SelectSubcategoryProductComponent
@@ -75,6 +76,7 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     ProductsManagementComponent,
     GoTableModule, 
     CodeCountryPipe,
+    LeadFormComponent,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

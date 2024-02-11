@@ -49,6 +49,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
   cleantechId: string;
   solutionName: string;
   solutionDescription?: string;
+  detailedDescription?: string;
   classification: Classification;
   price?: Price;
   improvement?: Improvement;
@@ -70,6 +71,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
     this.cleantechId = cleanTechId;
     this.solutionName = formValue.solutionName;
     this.solutionDescription = formValue.solutionDescription;
+    this.detailedDescription = formValue.detailedDescription;
     /* 	this.price = {
 			amount: formValue.price,
 			currency: formValue.currency?.id,

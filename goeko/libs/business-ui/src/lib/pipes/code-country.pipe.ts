@@ -20,7 +20,7 @@ export class CodeCountryPipe implements PipeTransform {
             return code;
         }
         if(code instanceof  Array) {
-            return code.map(codeLang => this._getNameCountryForLang(codeLang));
+            return code.map(codeLang => this._getNameCountryForLang(codeLang)).join(', ');
         }
         return this._getNameCountryForLang(code);
     }
