@@ -55,7 +55,7 @@ const ROUTES: Routes = [
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
-   {
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'home',

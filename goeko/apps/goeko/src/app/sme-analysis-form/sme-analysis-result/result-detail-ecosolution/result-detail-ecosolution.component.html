@@ -34,133 +34,138 @@
     </button>
   </div>
 
-  <div class="detail-feature">
-    <section class="details-section">
-      <h3 class="details-section-title">
-        {{ 'FORM_LABEL.basicInformation' | translate }}
-      </h3>
-      <div class="details-article">
-        <div>
-          <span class="details-article--label">
-            {{ 'FORM_LABEL.countriesAvailable' | translate }}
-          </span>
-          <p class="details-article--data">
-            {{ detailsEcosolution['countries'] | country }}
-          </p>
-        </div>
-
-        <div>
-          <span class="details-article--label">
-            {{ 'FORM_LABEL.price' | translate }}
-          </span>
-          <p class="details-article--data">
-            {{ detailsEcosolution['priceDescription'] || '-' }}
-          </p>
-        </div>
-
-        <div>
-          <span class="details-article--label">
-            {{ 'FORM_LABEL.website' | translate }}</span
-          >
-          <p class="details-article--data">
-            <a
-              href="https://{{ detailsEcosolution.companyDetail.link }}"
-              target="_blank"
-              id="website_{{ detailsEcosolution.companyDetail.name }}"
+  <div class="ecosolution-content-details">
+    <div class="detail-feature">
+      <section class="details-section">
+        <h3 class="details-section-title">
+          {{ 'FORM_LABEL.basicInformation' | translate }}
+        </h3>
+        <div class="details-article">
+          <div>
+            <span class="details-article--label">
+              {{ 'FORM_LABEL.countriesAvailable' | translate }}
+            </span>
+            <p class="details-article--data">
+              {{ detailsEcosolution['countries'] | country }}
+            </p>
+          </div>
+  
+          <div>
+            <span class="details-article--label">
+              {{ 'FORM_LABEL.price' | translate }}
+            </span>
+            <p class="details-article--data">
+              {{ detailsEcosolution['priceDescription'] || '-' }}
+            </p>
+          </div>
+  
+          <div>
+            <span class="details-article--label">
+              {{ 'FORM_LABEL.website' | translate }}</span
             >
-              {{ detailsEcosolution.companyDetail.link }}
-            </a>
-          </p>
-        </div>
-
-        @if (detailsEcosolution.paybackPeriodYears ) {
-        <div>
-          <span class="details-article--label">
-            {{ 'FORM_LABEL.paybackPeriodYears' | translate }}</span
-          >
-          <p class="details-article--data">
-            {{ detailsEcosolution.paybackPeriodYears }}
-          </p>
-        </div>
-        }
-
-        <div>
-          <span class="details-article--label">
-            {{ 'FORM_LABEL.guarantee' | translate }}
-          </span>
-          <div class="info-guarantee">
-            @if (detailsEcosolution['guarantee']) {
             <p class="details-article--data">
-              {{ detailsEcosolution['guaranteeInYears'] | number : '1.0-0' }}
-              {{ 'years' | translate }}
+              <a
+                href="https://{{ detailsEcosolution.companyDetail.link }}"
+                target="_blank"
+                id="website_{{ detailsEcosolution.companyDetail.name }}"
+              >
+                {{ detailsEcosolution.companyDetail.link }}
+              </a>
             </p>
-            } @else {
+          </div>
+  
+          @if (detailsEcosolution.paybackPeriodYears ) {
+          <div>
+            <span class="details-article--label">
+              {{ 'FORM_LABEL.paybackPeriodYears' | translate }}</span
+            >
             <p class="details-article--data">
-              {{ detailsEcosolution['guarantee'] | yesNo }}
+              {{ detailsEcosolution.paybackPeriodYears }}
             </p>
-
-            }
+          </div>
+          }
+  
+          <div>
+            <span class="details-article--label">
+              {{ 'FORM_LABEL.guarantee' | translate }}
+            </span>
+            <div class="info-guarantee">
+              @if (detailsEcosolution['guarantee']) {
+              <p class="details-article--data">
+                {{ detailsEcosolution['guaranteeInYears'] | number : '1.0-0' }}
+                {{ 'years' | translate }}
+              </p>
+              } @else {
+              <p class="details-article--data">
+                {{ detailsEcosolution['guarantee'] | yesNo }}
+              </p>
+  
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="details-section">
-      <div class="details-article details-article--products">
-        <span>{{
-          'CATEGORIES_LABEL.' +
-            detailsEcosolution.classification.subCategory +
-            '.label' | translate
-        }}</span>
-        <ng-container
-          *ngFor="
-            let option of dataSelect[
-              detailsEcosolution.classification.subCategory
-            ]
-          "
-        >
-          <go-badge
-            *ngIf="
-              detailsEcosolution.classification.products.includes(option.id)
+      </section>
+      <section class="details-section">
+        <div class="details-article details-article--products">
+          <span>{{
+            'CATEGORIES_LABEL.' +
+              detailsEcosolution.classification.subCategory +
+              '.label' | translate
+          }}</span>
+          <ng-container
+            *ngFor="
+              let option of dataSelect[
+                detailsEcosolution.classification.subCategory
+              ]
             "
-            >{{ option.keyLang | translate }}</go-badge
           >
-        </ng-container>
-      </div>
-    </section>
+            <go-badge
+              *ngIf="
+                detailsEcosolution.classification.products.includes(option.id)
+              "
+              >{{ option.keyLang | translate }}</go-badge
+            >
+          </ng-container>
+        </div>
+      </section>
+  
+      <section class="details-section">
+        <h3 class="details-section-title">{{ 'ods_title' | translate }}</h3>
+        <div class="details-article">
+          <goeko-sdg-icons
+            [selected]="detailsEcosolution.sustainableDevelopmentGoals"
+          ></goeko-sdg-icons>
+        </div>
+      </section>
+  
+      <section class="details-section">
+        <h3 class="details-section-title">
+          {{ 'FORM_LABEL.advantages' | translate }}
+        </h3>
+        <div
+          class="details-article details-article--advantages"
+          *ngIf="detailsEcosolution?.improvement"
+        >
+          <go-percentage-card
+            [label]="'FORM_LABEL.reductionPercentageCO2'"
+            [percentage]="
+              detailsEcosolution.improvement.reductionPercentage.to || 0
+            "
+          ></go-percentage-card>
+          <go-percentage-card
+            [label]="'FORM_LABEL.operationalCostReductionPercentage'"
+            [percentage]="
+              detailsEcosolution.improvement.operationalCostReductionPercentage
+                .to || 0
+            "
+          ></go-percentage-card>
+        </div>
+      </section>
+    </div>
+    <goeko-lead-form></goeko-lead-form>
 
-    <section class="details-section">
-      <h3 class="details-section-title">{{ 'ods_title' | translate }}</h3>
-      <div class="details-article">
-        <goeko-sdg-icons
-          [selected]="detailsEcosolution.sustainableDevelopmentGoals"
-        ></goeko-sdg-icons>
-      </div>
-    </section>
-
-    <section class="details-section">
-      <h3 class="details-section-title">
-        {{ 'FORM_LABEL.advantages' | translate }}
-      </h3>
-      <div
-        class="details-article details-article--advantages"
-        *ngIf="detailsEcosolution?.improvement"
-      >
-        <go-percentage-card
-          [label]="'FORM_LABEL.reductionPercentageCO2'"
-          [percentage]="
-            detailsEcosolution.improvement.reductionPercentage.to || 0
-          "
-        ></go-percentage-card>
-        <go-percentage-card
-          [label]="'FORM_LABEL.operationalCostReductionPercentage'"
-          [percentage]="
-            detailsEcosolution.improvement.operationalCostReductionPercentage
-              .to || 0
-          "
-        ></go-percentage-card>
-      </div>
-    </section>
   </div>
+
   <div class="go-back">
     <button
       go-button

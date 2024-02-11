@@ -237,7 +237,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     this.getResults();
   }
   ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
+ /*    this.onDestroy$.next();
+    this.onDestroy$.complete(); */
   }
 }

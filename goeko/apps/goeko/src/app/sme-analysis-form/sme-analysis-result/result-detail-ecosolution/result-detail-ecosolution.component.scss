@@ -87,6 +87,10 @@
   &--products {
     flex-direction: row;
   }
+
+}
+.ecosolution-content-details {
+  display: flex;
 }
 
 @media (width <= 768px) {
