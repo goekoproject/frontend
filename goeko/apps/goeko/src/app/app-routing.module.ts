@@ -4,6 +4,7 @@ import { AuthGuard } from '@goeko/core';
 import { ROLES, hasRole } from '@goeko/store';
 
 const ROUTES: Routes = [
+
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
@@ -55,10 +56,10 @@ const ROUTES: Routes = [
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
-  {
+   {
     path: '**',
-    pathMatch: 'full',
     redirectTo: 'home',
+    pathMatch: 'full'
   }, 
 ];
 @NgModule({
@@ -66,7 +67,6 @@ const ROUTES: Routes = [
     RouterModule.forRoot(ROUTES, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
-      initialNavigation: 'enabledBlocking',
       scrollOffset: [0, 100], // [x, y]
     }),
   ],

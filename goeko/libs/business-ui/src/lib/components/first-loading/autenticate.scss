@@ -8,9 +8,10 @@
 }
 
 .loading-goeko {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
+  top: 0;
   left: 0;
   right: 0;
   background: var(--primary--main);
@@ -27,4 +28,11 @@
       object-fit: none;
     }
   }
+}
+.loader-goeko {
+  z-index: 10000;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
 }

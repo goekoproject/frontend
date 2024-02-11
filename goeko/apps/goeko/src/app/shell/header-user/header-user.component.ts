@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './header-user.component.html',
   styleUrls: ['./header-user.component.scss'],
 })
-export class HeaderUserComponent implements OnInit, AfterContentInit {
+export class HeaderUserComponent implements OnInit {
   langs = LANGS;
   defaultLang!: Lang;
   userProfile = computed(() =>
@@ -30,11 +30,7 @@ export class HeaderUserComponent implements OnInit, AfterContentInit {
     ) as Lang;
   }
 
-  ngAfterContentInit(): void {
-    if (!this._userService.userProfile().id) {
-      this.toogleSideProfile();
-    }
-  }
+
   onChangeLangs(selectedLand: any) {
     this._translate.use(selectedLand.code);
   }

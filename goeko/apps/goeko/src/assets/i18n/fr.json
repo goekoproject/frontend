@@ -16,6 +16,10 @@
   "upTo": "Jusqu'à",
   "yes": "Oui",
   "no": "Non",
+  "INPUT_FILE": {
+    "image": "Sélectionnez une image",
+    "certified": "Sélectionnez votre certificat"
+  },
   "connectNow": "Connectez-vous maintenant!",
   "watchVideo": "Voir vidéo",
   "leadFormTitle": "Contactez-nous dès aujourd'hui et commencez votre voyage vers un avenir durable!",

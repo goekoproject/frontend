@@ -28,6 +28,10 @@ export class EcosolutionsService {
     return this._http.put(`/v1/ecosolutions/${id}`, body);
   }
 
+  uploadImage(idEcosolution: string, file: any) {
+    return this._http.post(`/v1/ecosolutions/${idEcosolution}/picture`,file);
+  }
+
   getEcosolutionById(id: string): Observable<NewEcosolutions> {
     return this._http.get<NewEcosolutions>(`/v1/ecosolutions/${id}`);
   }
@@ -38,7 +42,7 @@ export class EcosolutionsService {
     );
   }
 
-  createEcosolutions(body: NewEcosolutions) {
-    return this._http.post(`/v1/ecosolutions`, body);
+  createEcosolutions(body: NewEcosolutions): Observable<any> {
+    return this._http.post<Observable<any>>(`/v1/ecosolutions`, body);
   }
 }

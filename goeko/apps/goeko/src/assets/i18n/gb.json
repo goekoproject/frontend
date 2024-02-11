@@ -16,6 +16,10 @@
   "upTo": "Up to",
   "yes": "Yes",
   "no": "No",
+  "INPUT_FILE": {
+    "image": "Select an image",
+    "certified": "Select your certificate"
+  },
   "watchVideo": "Watch video",
   "leadFormTitle": "Contact us today and start your journey to a sustainable future!",
   "connectNow": "Connect now!",

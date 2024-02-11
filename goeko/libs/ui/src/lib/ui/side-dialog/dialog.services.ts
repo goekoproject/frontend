@@ -49,7 +49,7 @@ export class DialogService {
   }
 
   closeDialog<T>(data?: T) {
-    this.dialogData$.next(data);
+    this.dialogData$?.next(data);
     this.dialog.update((dialog) => ({ ...dialog, open: false }));
     this.dialogData$.complete();
   }

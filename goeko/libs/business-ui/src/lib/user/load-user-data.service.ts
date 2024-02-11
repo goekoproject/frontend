@@ -11,7 +11,6 @@ const namespace = 'https://goeko';
 export class LoadDataUser {
   constructor(
     private _userServices: UserService,
-    private _router: Router,
     private _authService: AuthService
   ) {}
   resolve(): Observable<any> {
@@ -25,7 +24,6 @@ export class LoadDataUser {
             roles: this._getUserRole(userData),
           };
           this._userServices.userAuthData.set(userDataTransform);
-           this._router.navigate([`dashboard/${userData['userType']}`]);
         }
       })
     );

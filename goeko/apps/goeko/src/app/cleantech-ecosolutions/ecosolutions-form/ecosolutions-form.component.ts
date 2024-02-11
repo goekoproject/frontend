@@ -48,7 +48,8 @@ export class EcosolutionsFormComponent implements OnInit {
   }
   private _cleantechId!: string;
   private fileCertificate: any;
-
+  private imgEcosolution = File;
+  public urlImgEcosolution!: string;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -158,6 +159,7 @@ export class EcosolutionsFormComponent implements OnInit {
       if (res) {
         this._uploadCertificate();
         this.goToListEcosolution();
+        this._uploadImg(res.ecosolution);
 
         const formValue = new EcosolutionForm(res.ecosolution);
         this.form.patchValue(formValue);
@@ -182,10 +184,37 @@ export class EcosolutionsFormComponent implements OnInit {
     }).subscribe((res) => {
       this._uploadCertificate();
       this.goToListEcosolution();
+      this._uploadImg(res.ecosolution);
     });
   }
+
+  private _uploadImg(ecosolution : any) {
+    if(this.imgEcosolution && ecosolution) {
+      this._ecosolutionsService.uploadImage(ecosolution?.id, this.imgEcosolution).subscribe();
+
+    }
+  }
+
   fileChange(file: any) {
     this.fileCertificate = file.target.files[0];
+  }
+
+  uploadImgEcosolutions(file: any) {
+    this.imgEcosolution = file.target.files[0];
+    this._buildSrcImgEcosolution(file.target.files[0]);
+  }
+  
+  private _buildSrcImgEcosolution(file: File) {
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.urlImgEcosolution = event.target.result;
+    };
+
+    reader.onerror = (event: any) => {
+      console.log("File could not be read: " + event.target.error.code);
+    };
+
+    reader.readAsDataURL(file);
   }
 
   private _uploadCertificate() {

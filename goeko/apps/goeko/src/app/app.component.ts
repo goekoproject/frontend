@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   isHomePage() {
-    return this.router.url.includes('home') || this.router.url.includes('demo');
+    return this.router.url.includes('home') || this.router.url.includes('demo') || this.router.url === '/';
   }
 
   get isDemo() {

@@ -7,11 +7,11 @@ import { UserFactory } from "./user.factory";
 
 import { ROLES, UserModal, UserType } from "./public-api";
 import { SmeBuilder } from "./user.builder";
+import { M } from "@angular/cdk/keycodes";
 export const SS_COMPANY_DETAIL = "SS_COMPANY";
 
 @Injectable()
 export class UserService {
-  private _companyDetail = new BehaviorSubject<unknown | null>(null);
   public userAuthData = signal<User>({});
   public userProfile = signal<UserModal>(new SmeBuilder().empty());
 
@@ -22,6 +22,7 @@ export class UserService {
 
   public userType$ = toObservable<UserType>(this.userAuthData()["userType"]);
 
+  public completeLoadUser = new BehaviorSubject<boolean>(false);
   constructor(public _http: HttpClient) {
     effect(() => {
       if (this.userAuthData().sub) {
@@ -39,6 +40,8 @@ export class UserService {
       .subscribe((data) => {
         const user = UserFactory.createUserProfileBuilder(this.userAuthData()["userType"]).init(data).build();
         this.userProfile.set(user);
+        this.completeLoadUser.next(true);
+        this.completeLoadUser.complete();
       });
   }
   private _getByIdExternal(): Observable<any> {
