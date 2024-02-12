@@ -2,7 +2,6 @@
 <div class="wrapper-form-ecosolutions">
   <ng-container *ngTemplateOutlet="ecosolutionsForm"></ng-container>
   
-  <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
 
 </div>
 <ng-template #imageUpload>
@@ -62,6 +61,8 @@
           >
           </textarea>
         </div>
+        <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
+
       </fieldset>
   
       <fieldset class="ecosolutions-fieldset">

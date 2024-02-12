@@ -127,7 +127,7 @@ const routes: Routes = [
 		},
 		children: [
 			{ path: '', component: EcosolutionListComponent },
-			{ path: 'details', component: ResultDetailEcosolutionComponent },
+			{ path: 'details/:idEcosolution', component: ResultDetailEcosolutionComponent },
 		],
 	},
 ];

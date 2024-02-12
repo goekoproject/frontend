@@ -29,7 +29,9 @@ export class EcosolutionsService {
   }
 
   uploadImage(idEcosolution: string, file: any) {
-    return this._http.post(`/v1/ecosolutions/${idEcosolution}/picture`,file);
+    const formData = new FormData();
+    formData.append('file', file);
+    return this._http.post(`/v1/ecosolutions/${idEcosolution}/picture`,formData);
   }
 
   getEcosolutionById(id: string): Observable<NewEcosolutions> {

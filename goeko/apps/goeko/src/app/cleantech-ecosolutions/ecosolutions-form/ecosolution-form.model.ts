@@ -21,6 +21,7 @@ export class EcosolutionForm {
 	approved?: boolean;
 	yearGuarantee?: number;
 	priceDescription?: string;
+	detailedDescription?: string;
 	constructor(ecosolution: NewEcosolutions) {
 		this.solutionName = ecosolution.solutionName;
 		this.solutionDescription = ecosolution.solutionDescription;
@@ -42,5 +43,6 @@ export class EcosolutionForm {
 		this.approved = ecosolution.approved;
 		this.yearGuarantee = ecosolution.guaranteeInYears;
 		this.priceDescription = ecosolution.priceDescription;
+		this.detailedDescription = ecosolution.detailedDescription;
 	}
 }

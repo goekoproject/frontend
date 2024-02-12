@@ -155,15 +155,10 @@
 }
 .ecosolution-upload {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  height: 20rem;
   border-radius: 1rem;
-  margin: 1rem;
   overflow: hidden;
   justify-content: space-around;
-  background: radial-gradient(106.83% 112.27% at 18.23% 12.89%, rgba(185, 231, 254, 0.00) 1%, rgba(185, 231, 254, 0.00) 1.01%, rgba(186, 231, 254, 0.01) 1.02%, rgba(185, 231, 254, 0.00) 29.7%, #E0F2FE 57.28%, #B9E7FE 60.33%);
-  width: 12rem;
   flex-grow: 2;
   img {
     width: 13rem;

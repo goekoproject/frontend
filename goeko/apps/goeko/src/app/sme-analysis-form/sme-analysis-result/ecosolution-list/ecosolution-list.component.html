@@ -49,7 +49,7 @@
     <div class="eco-solutions-result go-scroll" *ngIf="smeRecomendation">
       <div
         class="eco-solutions"
-        (click)="handlerOpenDetail(ecoSolutions, index)"
+        (click)="handlerOpenDetail(ecoSolutions)"
         *ngFor="let ecoSolutions of smeRecomendation; let index = index"
         [ngClass]="{
           'eco-solutions-selected': selectedRecomendationIndex === index

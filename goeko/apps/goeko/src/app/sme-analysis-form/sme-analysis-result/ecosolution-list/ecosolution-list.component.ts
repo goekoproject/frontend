@@ -144,10 +144,9 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
 
   handlerOpenDetail(
     selectedRecomendation: any,
-    selectedRecomendationIndex: number
   ) {
     this._smeAnalysisStore.setDetailEcosolutions(selectedRecomendation);
-    this._router.navigate(['details'], { relativeTo: this._route });
+    this._router.navigate(['details', 'id'], { relativeTo: this._route });
     /* 	this.selectedRecomendation = selectedRecomendation;
 		if (!this.toogleOpenDetails) {
 			this.toogleOpenDetails = true;

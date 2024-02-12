@@ -43,6 +43,7 @@ export interface NewEcosolutions {
   approved?: boolean;
   guaranteeInYears?: number;
   priceDescription?: string;
+  detailedDescription? :string;
 }
 
 export class NewEcosolutionsBody implements NewEcosolutions {

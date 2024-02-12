@@ -48,7 +48,7 @@ export class EcosolutionsFormComponent implements OnInit {
   }
   private _cleantechId!: string;
   private fileCertificate: any;
-  private imgEcosolution = File;
+  private _fileEcosolution = File;
   public urlImgEcosolution!: string;
   constructor(
     private _route: ActivatedRoute,
@@ -139,6 +139,7 @@ export class EcosolutionsFormComponent implements OnInit {
       .getEcosolutionById(this.idEcosolution)
       .subscribe((res: any) => {
         this._getDocumentsCleantech();
+        this.urlImgEcosolution = res.pictures[0].url;
         const formValue = new EcosolutionForm(res);
         this.form.patchValue(formValue);
       });
@@ -189,8 +190,8 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   private _uploadImg(ecosolution : any) {
-    if(this.imgEcosolution && ecosolution) {
-      this._ecosolutionsService.uploadImage(ecosolution?.id, this.imgEcosolution).subscribe();
+    if(this._fileEcosolution && ecosolution) {
+      this._ecosolutionsService.uploadImage(ecosolution?.id, this._fileEcosolution).subscribe();
 
     }
   }
@@ -200,11 +201,11 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   uploadImgEcosolutions(file: any) {
-    this.imgEcosolution = file.target.files[0];
-    this._buildSrcImgEcosolution(file.target.files[0]);
+    this._fileEcosolution = file.target.files[0];
+    this._buildImgEcosolution(file.target.files[0]);
   }
   
-  private _buildSrcImgEcosolution(file: File) {
+  private _buildImgEcosolution(file: File) {
     const reader = new FileReader();
     reader.onload = (event: any) => {
       this.urlImgEcosolution = event.target.result;
