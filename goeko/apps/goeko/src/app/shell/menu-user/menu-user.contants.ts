@@ -46,6 +46,14 @@ export const MENU_USER: MenuUser[] = [
   },
   {
     id: window.crypto.randomUUID(),
+    title: 'leads',
+    url: 'leads',
+    active: true,
+    icon: 'ti ti-access-point',
+    userType: [USER_TYPE.CLEANTECH],
+  },
+  {
+    id: window.crypto.randomUUID(),
     title: 'analysis',
     url: 'sme-analysis/list',
     active: true,
@@ -56,7 +64,7 @@ export const MENU_USER: MenuUser[] = [
     id: window.crypto.randomUUID(),
     title: 'MENU_USER.favorites',
     url: 'favorite',
-    active: true,
+    active: false,
     icon: 'heart',
     userType: [USER_TYPE.SME],
   },

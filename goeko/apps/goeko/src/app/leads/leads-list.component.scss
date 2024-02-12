@@ -1,0 +1,28 @@
+.leads-list {
+    display: flex;
+ ul {
+    width: 30%;
+ }
+}
+
+.lead-elements {
+    border: 1px solid var(--primary--300);
+    padding: 1rem;
+    cursor: pointer;
+    background: var(--white);
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    &:hover {
+        border: 1.5px solid var(--primary--400);
+    }
+}
+.lead-content {
+    padding: 4rem;
+    background: var(--white);
+    border: 1.5px solid var(--primary--400);
+    border-left: none;
+    border-radius: 1rem;
+    border-top-left-radius: 0;
+    width: 100%;
+}

@@ -1,1 +1,13 @@
-<p>dashboard-cleantech works!</p>
+@if (this.cleantechLeads$ | async; as leads ) {
+    <div class="card-lead">
+        <object  class="card-lead-icon" data="assets/lead.svg"></object>
+        <div class="lead-lastest-message">
+            <span class="lead-lastest-title">{{'lastLead' | translate}}</span>
+            <p class="lead-lastest-text">{{leads.at(-1)?.message}}</p>
+
+        </div>
+        <button go-button appearance="white" [routerLink]="'/leads'" >
+            {{'showLead' | translate}}
+        </button>
+    </div>
+}

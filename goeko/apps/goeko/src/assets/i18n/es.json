@@ -16,6 +16,9 @@
   "yes": "Si",
   "no": "No",
   "connectNow": "¡Conecta ahora!",
+  "showLead": "Mostrar clientes potenciales",
+  "lastLead":"Ultimo cliente potencial",
+  "leads": "Clientes potenciales",
   "watchVideo": "Ver video",
   "INPUT_FILE": {
     "image": "Selecciona una imagen",

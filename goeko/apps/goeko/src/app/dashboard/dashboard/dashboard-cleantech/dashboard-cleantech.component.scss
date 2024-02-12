@@ -1,0 +1,37 @@
+.card-lead {
+    box-shadow: 0px 3px 6px 0px rgba(24, 167, 212, 0.25);
+    background: var(--primary-100, #E0F2FE);
+    border-radius: 0.5rem;
+    width: 55.5rem;
+    height: 6.6875rem;
+    display: flex;
+    align-items: center;
+    margin-top: 8rem;
+    padding: 1rem;
+    gap: 3rem;
+    justify-content: space-around;
+}
+.card-lead-icon {
+    width: 25%;
+    position: relative;
+    top: -68%;
+    left: 0%;
+}
+.lead-lastest-message {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.lead-lastest-title {
+    color: var(--dark, #27272A);
+    font: var(--font-label-semibold);
+}
+.lead-lastest-text {
+    color: var(--soft-dark, #094056);
+    font: var(--font-label);
+    font-style: italic;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
+    width: 92%;
+}

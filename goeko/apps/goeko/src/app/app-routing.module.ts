@@ -50,6 +50,15 @@ const ROUTES: Routes = [
       ),
   },
   {
+    path: 'leads',
+    canActivate: [AuthGuard, hasRole(ROLES.PUBLIC)],
+    canMatch: [hasRole(ROLES.PUBLIC)],
+    loadChildren: () =>
+      import('./leads/leads.module').then(
+        (m) => m.LeadsModule
+      ),
+  },
+  {
     path: 'admin',
     canActivate: [AuthGuard, hasRole(ROLES.ADMIN)],
     canMatch: [hasRole(ROLES.ADMIN)],
