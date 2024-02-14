@@ -3,12 +3,14 @@ export interface ResponseRecommendations {
 }
 
 export interface Recommendation {
+	id:string;
 	approved: boolean;
 	certified: boolean;
 	classification: Classification;
 	companyDetail: CompanyDetailOfEcosolution;
 	countries: string[];
 	description: string;
+	detailedDescription: string;
 	guarantee: boolean;
 	guaranteeInYears?: number;
 	improvement: ImprovementOfEcosolution;
@@ -17,6 +19,7 @@ export interface Recommendation {
 	priceDescription?: string;
 	solutionName: string;
 	sustainableDevelopmentGoals: number[];
+	pictures: PictureEcosolution[];
 }
 
 export interface Classification {
@@ -33,6 +36,7 @@ export interface CompanyDetailOfEcosolution {
 	link: string;
 	logo: string;
 	name: string;
+	id:string;
 }
 
 export interface ImprovementOfEcosolution {
@@ -50,4 +54,9 @@ export interface ReductionPercentageOfEcosolution {
 export interface SMEOperationalCostReduction {
 	amount: number;
 	currency: string;
+}
+export interface PictureEcosolution {
+	id: string;
+	name: string;
+	url: string;
 }

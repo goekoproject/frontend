@@ -30,6 +30,7 @@ export class LeadFormComponent implements OnInit{
   @Input() cleantechId!: string;
 
   public leadForm!: FormGroup;
+  public email = this._userService.userProfile().email;
   private dataLead!: LeadCreate;
 
   

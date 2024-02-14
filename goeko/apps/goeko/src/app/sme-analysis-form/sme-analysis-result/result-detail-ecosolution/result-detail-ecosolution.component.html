@@ -105,6 +105,22 @@
           </div>
         </div>
       </section>
+
+      <section class="details-section">
+        <h3 class="details-section-title">
+          {{ 'FORM_LABEL.technicalDescription' | translate }}
+        </h3>
+   
+        <div class="details-article">
+          @for ( picture of detailsEcosolution['pictures']; track picture?.id) {
+            <img class="details-article-picture" [src]="picture?.url" [alt]="picture?.name"/>
+          }
+            <p>
+              {{ detailsEcosolution['detailedDescription'] || '-' }}
+            </p>
+        </div>
+    
+      </section>
       <section class="details-section">
         <div class="details-article details-article--products">
           <span>{{
@@ -161,8 +177,10 @@
           ></go-percentage-card>
         </div>
       </section>
+      
+
     </div>
-    <goeko-lead-form></goeko-lead-form>
+    <goeko-lead-form [ecosolutionId]="detailsEcosolution.id"  [cleantechId]="detailsEcosolution.companyDetail.id" ></goeko-lead-form>
 
   </div>
 
