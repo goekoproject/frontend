@@ -3,7 +3,7 @@
         <object  class="card-lead-icon" data="assets/lead.svg"></object>
         <div class="lead-lastest-message">
             <span class="lead-lastest-title">{{'lastLead' | translate}}</span>
-            <p class="lead-lastest-text">{{leads.at(-1)?.message}}</p>
+            <p class="lead-lastest-text" [innerHTML]="leads.at(-1)?.message"></p>
 
         </div>
         <button go-button appearance="white" [routerLink]="'/leads'" >

@@ -20,6 +20,7 @@
   "lastLead":"Ultimo cliente potencial",
   "leads": "Clientes potenciales",
   "watchVideo": "Ver video",
+  "defaultMessageLead": "Hola, estoy interesado en tu solución ecológica. Por favor contácteme a la siguiente dirección de correo electrónico:",
   "INPUT_FILE": {
     "image": "Selecciona una imagen",
     "certified": "Seleccione su certificado"
@@ -225,7 +226,8 @@
     "products": "Productos",
     "selectProducts": "Seleccionar productos",
     "unit": "Unidad de medida(m2,m3,l,kg)",
-    "typeOfEcolutions": "Tipo de eco-solución"
+    "typeOfEcolutions": "Tipo de eco-solución",
+    "messageLead": "Escribe tu mensaje"
   },
   "ODS": {
     "ods_1": "Sin Pobreza",

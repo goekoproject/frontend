@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LeadCreate, LeadService, UserService } from '@goeko/store';
 import { ButtonModule, GoInputModule } from '@goeko/ui';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface LeadForm {
   message: any;
+  email: any;
 }
 @Component({
   selector: 'goeko-lead-form',
@@ -59,14 +60,20 @@ export class LeadFormComponent implements OnInit{
   }
   private _initForm() {
     this.leadForm = this._fb.group<LeadForm>({
-      message: ['', Validators.required]
+      email: [this.email],
+      message: [ this._translateService.instant('defaultMessageLead'), Validators.required]
     })
   }
   createLead() {
-    this.dataLead =  {...this.dataLead, message: this.leadForm.value.message};
+    this._buildMessage();
     this._leadService.create(this.dataLead).subscribe(data => {
       console.log(data);
     })
+  }
+
+  private _buildMessage () {
+    this.dataLead =  {...this.dataLead, message: ` <b>${this._translateService.instant('FORM_LABEL.email')} :</b> ${this.leadForm.value.email};  <br> ${this.leadForm.value.message};`};
+
   }
 
 }

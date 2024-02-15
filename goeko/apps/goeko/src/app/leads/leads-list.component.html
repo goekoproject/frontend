@@ -12,7 +12,7 @@
     </ul>
     @defer (when lead) {
         <div class="lead-content">
-            <p>{{lead.message}}</p>
+            <p [innerHTML]="lead?.message"></p>
         </div>
     }
 </section>

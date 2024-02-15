@@ -23,6 +23,7 @@
   "connectNow": "Connectez-vous maintenant!",
   "showLead": "Afficher les clients potentiels",
   "lastLead":"Dernier prospect",
+  "defaultMessageLead": "Bonjour, Je suis intéressé par votre éco-solution. Merci de bien vouloir me contacter à l’adresse e-mail suivante:",
   "leads": "Prospects",
   "watchVideo": "Voir vidéo",
   "leadFormTitle": "Contactez-nous dès aujourd'hui et commencez votre voyage vers un avenir durable!",
@@ -236,7 +237,8 @@
     "products": "Produits",
     "selectProducts": "Sélectionner des produits",
     "unit": "Unité",
-    "typeOfEcolutions": "Type d'éco-solution"
+    "typeOfEcolutions": "Type d'éco-solution",
+    "messageLead": "Écrivez votre message"
   },
   "HOME": {
     "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",

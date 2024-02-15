@@ -15,12 +15,13 @@ import { Observable } from 'rxjs';
 export class LeadsListComponent implements OnInit {
 
   public leads!: Observable<LeadResponse[]>;
-  public lead!: LeadResponse;
+  public lead?: LeadResponse;
   constructor(private managerLeadsService: ManagerLeadsService){}
 
 
   ngOnInit() {
       this.leads = this.managerLeadsService.getLeads();
+      this._selectedLeadFirst();
   }
   
   selectedLead(lead: LeadResponse) {
@@ -28,5 +29,13 @@ export class LeadsListComponent implements OnInit {
       return;
     }
     this.lead = lead;
+  }
+
+  private _selectedLeadFirst() {
+    this.managerLeadsService.getLeads().subscribe((leads: LeadResponse[]) => { 
+      if(leads) {
+        this.lead = leads.at(0)
+      }
+    })
   }
 }

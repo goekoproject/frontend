@@ -36,10 +36,9 @@ export class BannerComponent implements AfterViewInit, OnInit {
     );
   }
   watchVideo() {
-    /*     this._renderer.addClass(this.marketingVideo.nativeElement, 'watch-video');
-     */
+    this.marketingVideo.nativeElement.currentTime = 0.00;
     this.marketingVideo.nativeElement.requestFullscreen();
-
+    this.marketingVideo.nativeElement.controls = 
     this.marketingVideo.nativeElement.controls = true;
     this.marketingVideo.nativeElement.play();
   }
