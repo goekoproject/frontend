@@ -188,8 +188,7 @@
     <button
       go-button
       appearance="white"
-      [routerLink]="'..'"
-      [queryParamsHandling]="'preserve'"
+      (click)="goBack()"
     >
       <i class="ti ti-square-rounded-arrow-left"></i>
       {{ 'back' | translate }}

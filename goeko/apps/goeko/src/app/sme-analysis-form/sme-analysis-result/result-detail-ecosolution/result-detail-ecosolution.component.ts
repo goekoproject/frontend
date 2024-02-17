@@ -7,6 +7,7 @@ import {
 import { AutoUnsubscribe } from '@goeko/ui';
 import { Subject, takeUntil } from 'rxjs';
 import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants';
+import { Router } from '@angular/router';
 
 @AutoUnsubscribe()
 @Component({
@@ -20,7 +21,7 @@ export class ResultDetailEcosolutionComponent implements OnInit {
   public detailsEcosolution!: Recommendation;
   public sectionFeatureDetail = SECTION_FEATURE_DETAIL_ECOSOLUTION;
   public dataSelect = DataSelect as any;
-  constructor(private _smeAnalysisStore: SmeAnalysisStoreService) {}
+  constructor(private _smeAnalysisStore: SmeAnalysisStoreService, private _router:Router) {}
 
   ngOnInit(): void {
     this._smeAnalysisStore
@@ -30,5 +31,9 @@ export class ResultDetailEcosolutionComponent implements OnInit {
         (detailsEcosolution: Recommendation) =>
           (this.detailsEcosolution = detailsEcosolution)
       );
+  }
+
+  goBack() {
+    this._router.navigate(['sme-analysis/results', this.detailsEcosolution.id])
   }
 }

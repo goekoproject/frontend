@@ -3,15 +3,17 @@
   align-items: center;
   appearance: none;
   background-color: var(--primary--500);
-  border-radius: 0.75rem;
+  border-radius: 0.675rem;
   border-style: none;
-  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   color: var(--white);
   cursor: pointer;
   display: inline-flex;
-  font: var(--font-body-semibold);
-  height: 3rem;
+  font: var(--font-menu);
+  box-shadow: var(0 0 #0000, 0 0 #0000), 
+  var(0 0 #0000, 0 0 #0000),0 0 #0000;
+  height: 2.625rem;
+  line-height: 1.25rem;
   justify-content: center;
   padding: 0.5rem 1rem;
   position: relative;
@@ -22,11 +24,9 @@
   max-width: max-content;
   &:hover {
     background: var(--primary--main);
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.2);
   }
   &:active {
     background: var(--primary--700);
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.2);
     outline: none;
   }
   &:disabled {
@@ -35,6 +35,12 @@
     pointer-events: none;
     cursor: none;
     color: var(--primary--700);
+  }
+  &:focus {
+    outline-offset: 2px;
+    outline-color: var(--primary--500);
+    outline-width: 2px;
+    outline-style: solid;
   }
   i {
     font-size: 24px;
@@ -58,7 +64,7 @@
 .go-button[appearance='white'] {
   background-color: var(--white);
   color: var(--primary--700);
-  border: 1px solid var(--primary-700);
+  border: 1px solid rgb(209 213 219 /1);
 
   &:hover {
     background: var(--primary--50);
@@ -81,9 +87,7 @@
   color: #ffffff;
 }
 
-.go-button:focus {
-  outline: none;
-}
+
 
 [go-button-icon] {
   padding: 1rem;

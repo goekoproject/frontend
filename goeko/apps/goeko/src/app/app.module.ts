@@ -25,8 +25,9 @@ import {
 import {
   BadgeModule,
   ButtonModule,
+  DialogMessageModule,
   SideDialogModule,
-  UiBreadcrumbsModule,
+  UiBreadcrumbsModule
 } from '@goeko/ui';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -62,6 +63,7 @@ const httpLoaderFactory = (http: HttpClient) => {
     SideDialogModule,
     BadgeModule,
     ShowForRolesDirective,
+    DialogMessageModule,
     AuthModule.forRoot({
       domain: environment.domainAuth0,
       clientId: environment.clientId,

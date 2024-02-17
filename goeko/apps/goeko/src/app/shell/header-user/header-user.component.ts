@@ -2,7 +2,7 @@ import { AfterContentInit, Component, OnInit, computed } from '@angular/core';
 import { SideProfileComponent } from '@goeko/business-ui';
 import { LANGS, Lang } from '@goeko/core';
 import { UserService } from '@goeko/store';
-import { DialogService } from '@goeko/ui';
+import { SideDialogService } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -21,7 +21,7 @@ export class HeaderUserComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _translate: TranslateService,
-    private _dialogService: DialogService
+    private _sideDialogService: SideDialogService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class HeaderUserComponent implements OnInit {
   }
 
   toogleSideProfile() {
-    return this._dialogService.openDialog<SideProfileComponent>(
+    return this._sideDialogService.openDialog<SideProfileComponent>(
       SideProfileComponent
     );
   }

@@ -8,7 +8,7 @@ import {
   effect,
 } from '@angular/core';
 import { isObjectEmpty } from '@goeko/core';
-import { DialogService } from './dialog.services';
+import { SideDialogService } from './side-dialog.services';
 @Component({
   selector: 'goeko-side-dialog',
   templateUrl: './side-dialog.component.html',
@@ -19,10 +19,10 @@ export class SideDialogComponent implements OnDestroy {
   @ViewChild('componenteRef', { static: true, read: ViewContainerRef })
   componenteRef!: ViewContainerRef;
 
-  dialog = this._dialogService.dialog;
-  private _config = this._dialogService.config;
+  dialog = this._sideDialogService.dialog;
+  private _config = this._sideDialogService.config;
   component!: ComponentRef<any>;
-  constructor(private _dialogService: DialogService) {
+  constructor(private _sideDialogService: SideDialogService) {
     effect(() => {
       this._createComponent();
       this._toggleDialog();
@@ -59,7 +59,7 @@ export class SideDialogComponent implements OnDestroy {
       'animationend',
       (e: AnimationEvent) => {
         if (e.animationName.includes('slideOut')) {
-          this._dialogService.closeDialog();
+          this._sideDialogService.closeDialog();
           this.sideBar.nativeElement.removeAttribute('closing');
         }
       },

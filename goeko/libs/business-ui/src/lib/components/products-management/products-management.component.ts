@@ -12,7 +12,7 @@ import {
   BadgeModule,
   ButtonModule,
   DIALOG_DATA,
-  DialogService,
+  SideDialogService,
 } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -41,7 +41,7 @@ export class ProductsManagementComponent implements OnInit {
     @Optional()
     @Inject(DIALOG_DATA)
     public data: DialogData,
-    private _dialogService: DialogService
+    private _sideDialogService: SideDialogService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +53,6 @@ export class ProductsManagementComponent implements OnInit {
   }
 
   addProducts() {
-    this._dialogService.closeDialog<Product[]>(this._productSelected);
+    this._sideDialogService.closeDialog<Product[]>(this._productSelected);
   }
 }

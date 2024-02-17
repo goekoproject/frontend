@@ -32,7 +32,7 @@ import {
 import {
   BadgeModule,
   ButtonModule,
-  DialogService,
+  SideDialogService,
   GoInputModule,
   SwitchModule,
   fadeAnimation,
@@ -123,7 +123,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
     private _adminCategories: AdminCategoriesService,
     private _fb: FormBuilder,
     private _translations: TranslateService,
-    private _dialogService: DialogService,
+    private _sideDialogService: SideDialogService,
     private _cdf: ChangeDetectorRef
   ) {
     effect(() => {
@@ -202,7 +202,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
   }
 
   private _openDialogAddProducts = (subcategoryCode: string) => {
-    return this._dialogService.openDialog<ProductsManagementComponent>(
+    return this._sideDialogService.openDialog<ProductsManagementComponent>(
       ProductsManagementComponent,
       {
         productSelected: this.productControl(subcategoryCode)?.value,

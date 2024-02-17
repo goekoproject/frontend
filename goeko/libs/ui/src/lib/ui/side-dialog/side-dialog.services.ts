@@ -9,7 +9,7 @@ import {
 import { Observable, Subject, filter } from 'rxjs';
 import { DIALOG_DATA } from './dialog-data.token';
 @Injectable()
-export class DialogService {
+export class SideDialogService {
   private injector = inject(Injector);
 
   /*  dialogData = signal<any>(undefined); */

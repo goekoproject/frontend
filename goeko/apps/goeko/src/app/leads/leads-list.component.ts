@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Lead, LeadResponse, LeadService } from '@goeko/store';
-import { ManagerLeadsService } from './manager-leads.services';
+import { Component, OnInit } from '@angular/core';
+import { LeadResponse, LeadService } from '@goeko/store';
 import { Observable } from 'rxjs';
+import { ManagerLeadsService } from './manager-leads.services';
 
 @Component({
   selector: 'goeko-leads-list',

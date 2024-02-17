@@ -32,7 +32,7 @@ import {
 } from '../sme-form-analysis/sme-analysis.request';
 import { SmeAnalysisService } from '../sme-analysis.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DialogService } from '@goeko/ui';
+import { SideDialogService } from '@goeko/ui';
 
 const compareWithClassificationCategory = (
   c1: ClassificationCategory,
@@ -72,7 +72,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _smeAnalysisService: SmeAnalysisService,
-    private _dialogService: DialogService
+    private _sideDialogService: SideDialogService
   ) {
     effect(() => {
       if (this.dataCategorySelected().code) {
@@ -129,7 +129,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
     categoryCode = '',
     subcategoryCode = '',
   }) => {
-    return this._dialogService.openDialog<ProductsManagementComponent>(
+    return this._sideDialogService.openDialog<ProductsManagementComponent>(
       ProductsManagementComponent,
       {
         productSelected: this.currentAnalytics()[categoryCode][subcategoryCode],

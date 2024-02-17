@@ -11,7 +11,7 @@ import {
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFormFactory } from './profile-form.factory';
 import { PROFILE_SME } from './profile-sme.constants';
-import { DialogService } from '@goeko/ui';
+import { SideDialogService } from '@goeko/ui';
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
   ) => boolean;
 
   constructor(
-    private _dialogService: DialogService,
+    private _sideDialogService: SideDialogService,
     private _userService: UserService
   ) {
     effect(() => {
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._dialogService.closeDialog();
+    this._sideDialogService.closeDialog();
   }
   private _effectBuildForm() {
     if (this.dataProfile()) {
