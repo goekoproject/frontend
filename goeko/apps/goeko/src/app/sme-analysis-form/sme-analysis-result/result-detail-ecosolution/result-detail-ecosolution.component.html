@@ -121,29 +121,32 @@
         </div>
     
       </section>
-      <section class="details-section">
-        <div class="details-article details-article--products">
-          <span>{{
-            'CATEGORIES_LABEL.' +
-              detailsEcosolution.classification.subCategory +
-              '.label' | translate
-          }}</span>
-          <ng-container
-            *ngFor="
-              let option of dataSelect[
-                detailsEcosolution.classification.subCategory
-              ]
-            "
-          >
-            <go-badge
-              *ngIf="
-                detailsEcosolution.classification.products.includes(option.id)
+      @if(detailsEcosolution.classification) {
+        <section class="details-section">
+          <div class="details-article details-article--products">
+            <span>{{
+              'CATEGORIES_LABEL.' +
+                detailsEcosolution.classification.subCategory +
+                '.label' | translate
+            }}</span>
+            <ng-container
+              *ngFor="
+                let option of dataSelect[
+                  detailsEcosolution.classification.subCategory
+                ]
               "
-              >{{ option.keyLang | translate }}</go-badge
             >
-          </ng-container>
-        </div>
-      </section>
+              <go-badge
+                *ngIf="
+                  detailsEcosolution.classification.products.includes(option.id)
+                "
+                >{{ option.keyLang | translate }}</go-badge
+              >
+            </ng-container>
+          </div>
+        </section>
+      }
+    
   
       <section class="details-section">
         <h3 class="details-section-title">{{ 'ods_title' | translate }}</h3>
