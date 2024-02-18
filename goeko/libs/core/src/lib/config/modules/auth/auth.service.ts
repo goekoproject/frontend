@@ -7,6 +7,7 @@ import { AuthRequest } from './auth-request.interface';
 import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants';
 import { Auth0Connected, AuthResponse } from './auth0.abtract';
 import { SignUp } from './signup.interface';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
@@ -34,6 +35,7 @@ export class AuthService extends Auth0Connected {
   }
   constructor(
     @Inject(CONFIGURATION) private _config: Options,
+    @Inject(DOCUMENT) private doc: Document,
     private readonly _auth0: Auth0
   ) {
     super(_config.domainAuth0, _config.clientId);
@@ -111,7 +113,7 @@ export class AuthService extends Auth0Connected {
 
   logout() {
     sessionStorage.clear();
-    this._auth0.logout();
+    this._auth0.logout({ logoutParams: { returnTo: this.doc.location.origin }});
   }
 
   killSessions(): void {
