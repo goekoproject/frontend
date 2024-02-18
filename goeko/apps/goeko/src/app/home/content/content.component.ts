@@ -8,12 +8,10 @@ import {
   ViewEncapsulation,
   effect,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
-import { InteractionService } from '../banner/scenes/interaction.service';
 import { HomeService } from '../home.service';
 import { CONTENT } from './content.contants';
-import { TranslateService } from '@ngx-translate/core';
 
 enum CONTENT_TYPE_DATA {
   ACTORS = 'actores',
@@ -67,9 +65,7 @@ export class ContentComponent implements OnInit {
 
   constructor(
     private _homeService: HomeService,
-    private _router: Router,
     private _translate: TranslateService,
-    private _interactionService: InteractionService,
     private _viewportScroller: ViewportScroller
   ) {
     this._effectActors();

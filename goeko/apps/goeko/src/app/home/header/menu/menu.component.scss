@@ -22,29 +22,76 @@ $lineColor: var(--primary--100);
 }
 // Efect menu-item
 .menu-item {
+  position: relative;
+  height: 6rem;
+  align-items: center;
+  display: flex;
+
   &--link {
     position: relative;
     z-index: 1;
     color: var(--dark, #27272a);
     font: var(--font-menu);
+    padding: 0.5rem; 
+    transition: all 0.3s;
+  }
+
+}
+
+
+.menu-item:hover:has(.submenu:not(:empty)) {
+ .menu-item--link {
+  background: var(--primary--400);
+  color: var(--primary--50);
+  border-radius: 0.5rem;
+ }
+}
+
+.submenu {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 90%;
+  height: 14rem;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 4rem;
+  border-radius: 0.6rem;
+  top: 13%;
+  box-shadow: 0px 8px 8px 0px rgb(219, 171, 219);
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  gap: 5rem;
+  text-align: left;
+  line-height: 2.4;
+  overflow: hidden;
+  &:hover {
+    display: flex;
+  }
+  &-subtitle {
+    font: var(--font-menu);
+    color: var(--dark-accent);
+  }
+  &-element {
+    font: var(--font-default);
+    color: var(--soft-dark);
+
   }
 }
-.menu-item > a:before {
+.menu-item:hover .submenu:not(:empty) {
+  display: flex;
+}
+
+.icon-contact {
+  width: 34%;
   position: absolute;
-  content: '';
-  display: block;
-  z-index: -1;
-  background: $lineColor;
-  width: 0;
-  height: $lineHeight;
-  top: $bottomOffset;
-  left: calc($lineHeight/ -2);
-  transition: 0.3s cubic-bezier(0.03, 0.3, 0.4, 0.96);
-  transform: skew(-10deg);
+  right: 9rem;
+  top: -22px;
+  opacity: 0.7;
 }
-.menu-item a:hover:before {
-  width: calc(100% + $lineHeight);
-}
+
 
 @media (max-width: 768px) {
   .menu {

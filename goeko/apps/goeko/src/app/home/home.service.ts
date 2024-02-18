@@ -1,7 +1,15 @@
 import { Injectable, signal } from '@angular/core';
-import { ContentFulService, LangOfLocalecontentFul } from '@goeko/store';
-import { map } from 'rxjs';
+import { ContentFulService } from '@goeko/store';
+import { map, toArray } from 'rxjs';
 
+
+const compareFn = (a: any , b: any) => {
+  if (a.order < b.order)
+    return -1;
+  if (a.order > b.order)
+    return 1;
+  return 0;
+};
 @Injectable({ providedIn: 'root' })
 export class HomeService {
   dataContentTypeSignal = signal<unknown | null>(null);
@@ -45,7 +53,10 @@ export class HomeService {
   getContentTypeSignal(contentType: string) {
     return this._contentFul
       .getContentType(contentType)
-      .pipe(map((res) => res.items.map((item) => item.fields)))
+      .pipe(map((res) => res.items.map((item) =>item.fields   )),
+      map((fields) => fields.sort(compareFn) )
+      )
+     
       .subscribe((dataContentTypeSignal) => {
         if (dataContentTypeSignal) {
           this.dataContentTypeSignal.set(dataContentTypeSignal);

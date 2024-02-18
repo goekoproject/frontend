@@ -196,7 +196,7 @@
   "MENU": {
     "aboutGoEKo": "A propos de GoEko",
     "blog": "Blog",
-    "contanctUs": "Contact",
+    "contacttUs": "Contact",
     "login": "Login "
   },
   "MENU_USER": {
@@ -409,7 +409,7 @@
   "creationDate": "Date de creation",
   "dashboard": "Tableau de bord",
   "decline": "Refuser",
-  "defaultMessageLead": "Bonjour, Je suis intéressé par votre éco-solution. Merci de bien vouloir me contacter à l’adresse e-mail suivante:",
+  "defaultMessageLead": "Bonjour, Je suis intéressé par votre éco-solution. Merci de bien vouloir me contacter par e-mail.",
   "details": "Détails",
   "edit": "Modifier",
   "lastLead": "Dernier prospect",

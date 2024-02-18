@@ -1,7 +1,37 @@
 <div class="menu-wrapper">
-  <div class="menu-item" *ngFor="let item of menu">
+  <div class="menu-item" *ngFor="let item of menu()">
     <a class="menu-item--link" [routerLink]="item.url">{{
       item.keyLang | translate
     }}</a>
+
+    <!-- Submenu-->
+    @switch (item.code) { @case ('contact') {
+    <ng-container
+      *ngTemplateOutlet="contactSubmenu; context: { submenu: item.submenu }"
+    ></ng-container>
+
+    } }
   </div>
 </div>
+
+<ng-template #contactSubmenu let-submenu="submenu">
+  @if (submenu) {
+  <div class="submenu">
+    @for ( item of submenu; track item) {
+
+    <div>
+      <span class="submenu-subtitle">{{ item.contactsName }}</span>
+      <p class="submenu-element">
+        <i class="ti ti-mail-filled"></i>
+        {{ item.email }}</p>
+      <p class="submenu-element">
+        <i class="ti ti-phone-call"></i>
+        {{ item.phoneNumber }}</p>
+    </div>
+    }
+    <img  class="icon-contact" src="assets/connection.svg"  alt="connection"/>
+
+  </div>
+
+  }
+</ng-template>

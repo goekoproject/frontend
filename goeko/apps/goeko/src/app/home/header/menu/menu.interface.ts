@@ -1,7 +1,9 @@
 export interface IMenu {
-	id: number;
+	id: string;
+	code: string;
 	keyLang: string;
 	url: string;
 	className?: string;
 	type: 'text' | 'button';
+	submenu?: any[]
 }
