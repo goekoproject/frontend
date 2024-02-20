@@ -41,15 +41,10 @@ export const FOOTER_INFO = [
     title: 'FOOTER.contact',
     elements: [
       {
-        title: 'info@goeko.com',
+        title: 'info@goeko.ch',
         url: '',
         logo: 'mail',
-      },
-      {
-        title: '999999999',
-        url: '',
-        logo: 'settings_phone',
-      },
+      }
     ],
   },
 ];

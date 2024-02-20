@@ -60,14 +60,14 @@ export const MENU_USER: MenuUser[] = [
     icon: 'ti ti-analyze-filled',
     userType: [USER_TYPE.SME],
   },
-  {
+/*   {
     id: window.crypto.randomUUID(),
     title: 'MENU_USER.favorites',
     url: 'favorite',
     active: false,
     icon: 'heart',
     userType: [USER_TYPE.SME],
-  },
+  }, */
   {
     id: window.crypto.randomUUID(),
     title: 'Admin Category',

@@ -1,5 +1,5 @@
 import { Component, OnInit, effect } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import {
   CountrySelectOption,
   DataSelect,
@@ -8,10 +8,10 @@ import {
   UserService,
   UserSwitch,
 } from '@goeko/store';
+import { SideDialogService } from '@goeko/ui';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFormFactory } from './profile-form.factory';
 import { PROFILE_SME } from './profile-sme.constants';
-import { SideDialogService } from '@goeko/ui';
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
