@@ -9,7 +9,7 @@
         #inputElement
         type="{{ type }}"
         name="subCategory"
-        [checked]="checked"
+        [checked]="checked || numSelected > 0"
         id="{{ subCategory.code }}"
         (change)="assignValue(subCategory.code)"
       />

@@ -81,9 +81,6 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   }
 
   getResults() {
-    if(!this.currentAnalytics() ||  this.currentAnalytics().length > 0) {
-      return;
-    }
     this._smeService
       .createRecommendations({
         classifications: formToClassificationsMapper(this.currentAnalytics()),

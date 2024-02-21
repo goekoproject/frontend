@@ -168,6 +168,10 @@ export class BadgeGroupComponent
     }
     return badgeOption;
   }
+
+  clearAll() {
+    this.badge.forEach((badge) => badge.clear());
+  }
 }
 function deepEqual(object1: any, object2: any): boolean {
   const keys1 = Object.keys(object1);

@@ -78,7 +78,7 @@
     </div>
 
     <ng-container
-      [ngTemplateOutlet]="article.id === 'sme' ? sme : otherActor"
+      [ngTemplateOutlet]="article.id === 'sme' ||  article.id === 'cleantech'  ? sme : otherActor"
       [ngTemplateOutletContext]="{ id: article.id }"
     >
     </ng-container>
@@ -86,15 +86,15 @@
 </article>
 
 <ng-template #sme let-id="id">
-  <button go-button [routerLink]="'login'">
+  <button go-button (click)="goTologin()">
     {{ 'HOME.sloganCallActionsBtnSME' | translate }}
     <span class="material-symbols-rounded"> arrow_forward_ios </span>
   </button>
 </ng-template>
 
 <ng-template #otherActor let-id="id">
-  <button go-button [routerLink]="'login'">
-    {{ 'connectNow' | translate }}
-    <span class="material-symbols-rounded"> connect_without_contact </span>
+  <button go-button appearance="white">
+   Coming soon
+  <i class="ti ti-clock-filled"></i>
   </button>
 </ng-template>

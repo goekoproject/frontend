@@ -6,6 +6,7 @@ import {
   from,
   map,
   mergeMap,
+  of,
   reduce
 } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
@@ -68,7 +69,10 @@ export class SmeService {
 
   createRecommendations(
     body: SmeCreateRecomendationRequest
-  ): Observable<Recommendation[]> {
+  ): Observable<Recommendation[] | null>{
+    if(!body || body.classifications.length <= 0) {
+      return of(null);
+    }
     return this._http
       .post<any>(`/v1/ecosolution/search`, body)
       .pipe(

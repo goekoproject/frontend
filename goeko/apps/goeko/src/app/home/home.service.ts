@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { AuthService } from '@goeko/core';
 import { ContentFulService } from '@goeko/store';
 import { map, toArray } from 'rxjs';
 
@@ -16,7 +17,7 @@ export class HomeService {
   entryDataConnecting = signal<any | null>(null);
   entryDataSustainability = signal<any | null>(null);
 
-  constructor(private _contentFul: ContentFulService) {}
+  constructor(private _contentFul: ContentFulService, private _authService: AuthService) {}
 
   getContent() {
     return this._contentFul.getContentEntry();
@@ -62,5 +63,8 @@ export class HomeService {
           this.dataContentTypeSignal.set(dataContentTypeSignal);
         }
       });
+  }
+  goTologin() {
+    this._authService.universalLogin();
   }
 }

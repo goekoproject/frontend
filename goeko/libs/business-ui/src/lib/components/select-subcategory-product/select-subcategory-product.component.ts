@@ -116,11 +116,11 @@ export class SelectSubcategoryProductComponent
   private _numSelected = 0;
   get numSelected(): number {
     this._cdf.markForCheck();
-    return this._numSelected;
+    return this.badgeGroup.badge.filter(badge => badge.selected)?.length || 0;
   }
-  set numSelected(value: number) {
+ /*  set numSelected(value: number) {
     this._numSelected = value;
-  }
+  } */
 
   @Input()
   public get checked() {
@@ -188,6 +188,7 @@ export class SelectSubcategoryProductComponent
             this._el.nativeElement.getAttribute('checked') === 'true';
           if (!isChecked) {
             this.open = false;
+            this.badgeGroup.clearAll();
           } else {
             this.open = true;
           }

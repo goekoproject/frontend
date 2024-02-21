@@ -118,4 +118,9 @@ export class ContentComponent implements OnInit {
   private _getContentActors() {
     this._homeService.getContentTypeSignal(CONTENT_TYPE_DATA.LANDING_PAGE);
   }
+
+  goTologin() {
+    this._homeService.goTologin();
+
+  }
 }
