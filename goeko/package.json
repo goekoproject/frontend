@@ -34,7 +34,7 @@
     "ng-circle-progress": "^1.7.1",
     "rxjs": "~7.8.0",
     "rxjs-interop": "^2.0.0",
-    "three": "^0.160.0",
+    "three": "^0.162.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.0"
   },
@@ -67,7 +67,7 @@
     "@types/jest": "^29.4.0",
     "@types/jsrsasign": "^10.5.12",
     "@types/node": "18.16.9",
-    "@types/three": "^0.159.0",
+    "@types/three": "^0.162.0",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "autoprefixer": "^10.4.17",
