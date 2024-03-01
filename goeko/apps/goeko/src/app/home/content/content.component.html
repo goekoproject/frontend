@@ -1,13 +1,12 @@
 <section class="select-actors">
+  @if (entryDataConnecting && entryDataSustainability) {
   <div class="select-actors-heading">
-    @if (entryDataConnecting && entryDataSustainability) {
-    <h2 class="select-actors-title"> {{ entryDataConnecting.text }}</h2>
-   <p class="select-actors-description">
-      {{ entryDataSustainability.text }}
-    </p>
-    }
+    <h3 class="select-actors-title">{{ entryDataConnecting.text }}</h3>
   </div>
-
+  <h4 class="select-actors-description">
+    {{ entryDataSustainability.text }}
+  </h4>
+  }
   <ul class="platform-actors">
     @for (actor of actors; track actor.title) {
     <li class="actors-detail" (click)="navigateToActors(actor.id)">
@@ -31,27 +30,15 @@
     let odd = odd
   "
 >
-  <img
-    class="content__actor-photo"
-    [src]="article.image"
-    [alt]="article.name"
-  />
+  <img class="content__actor-photo" [src]="article.image" [alt]="article.name" />
 
   <div class="ods-info" *ngIf="false">
-    <img
-      width="100%"
-      [src]="'assets/icon-ods/ods-logo-wheel.png'"
-      [alt]="currentLang"
-    />
+    <img width="100%" [src]="'assets/icon-ods/ods-logo-wheel.png'" [alt]="currentLang" />
     <h1>{{ 'ods_title' | translate }}</h1>
   </div>
   <section class="info-actors">
     <div>
-      <h1
-        id="name"
-        class="info-actors-title"
-        [ngClass]="{ 'title-reverse-content': !odd }"
-      >
+      <h1 id="name" class="info-actors-title" [ngClass]="{ 'title-reverse-content': !odd }">
         {{ article?.name }}
       </h1>
       <h3 class="info-actors-description" id="descriptions">
@@ -59,10 +46,7 @@
       </h3>
     </div>
 
-    <div
-      class="info-actors-feature"
-      *ngIf="article?.benefits && article?.benefits.length > 0"
-    >
+    <div class="info-actors-feature" *ngIf="article?.benefits && article?.benefits.length > 0">
       <p class="info-actors-feature-description" id="descriptions2">
         {{ article?.descriptions2 }}
       </p>
@@ -77,11 +61,7 @@
       </ul>
     </div>
 
-    <ng-container
-      [ngTemplateOutlet]="article.id === 'sme' ||  article.id === 'cleantech'  ? sme : otherActor"
-      [ngTemplateOutletContext]="{ id: article.id }"
-    >
-    </ng-container>
+    <ng-container [ngTemplateOutlet]="article.id === 'sme' ||  article.id === 'cleantech'  ? sme : otherActor" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
   </section>
 </article>
 
@@ -94,7 +74,7 @@
 
 <ng-template #otherActor let-id="id">
   <button go-button appearance="white">
-   Coming soon
-  <i class="ti ti-clock-filled"></i>
+    Coming soon
+    <i class="ti ti-clock-filled"></i>
   </button>
 </ng-template>

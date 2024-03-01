@@ -14,9 +14,12 @@
 	}
 	&-body {
 		display: flex;
-		gap: 10rem;
+		gap: 6rem;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: center;
 		img {
-			border-radius: 6px;
+			border-radius: 10rem
 		}
 	}
 }
@@ -25,6 +28,7 @@
 	gap: 2rem;
 	display: flex;
 	flex-direction: column;
+	width: 63%;
 	p {
 		font-size: 15px;
 		font-weight: 300;
@@ -37,6 +41,6 @@
 }
 
 .member-photo {
-	width: 382px;
-	height: 449px;
+	width: 20%;
+	aspect-ratio: 3/4;
 }

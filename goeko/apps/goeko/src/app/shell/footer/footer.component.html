@@ -1,17 +1,23 @@
 <div class="footer">
   <img class="footer__logo" src="assets/logo_footer.png" alt="logo_footer" />
-  <div *ngFor="let item of footerInfo">
+  @for (item of footerInfo; track $index) {
+  <div>
     <h1 class="title-footer-column">{{ item.title | translate }}</h1>
-    <div *ngFor="let element of item.elements" class="footer__element">
+
+    @for ( element of item.elements; track $index) { @if (element.url) {
+    <div class="footer__element">
       <ng-container
         *ngTemplateOutlet="
-          element.logo ? withLogo : text;
-          context: { element: element }
-        "
+                  element.logo ? withLogo : text;
+                  context: { element: element }
+                "
       >
       </ng-container>
     </div>
+    } }
   </div>
+
+  }
 </div>
 <div class="footer__extra-info">
   <hr />

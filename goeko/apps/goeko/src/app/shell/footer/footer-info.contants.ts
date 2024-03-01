@@ -9,7 +9,7 @@ export interface Elements {
 }
 
 export const FOOTER_INFO = [
-  {
+/*   {
     title: 'FOOTER.service',
     elements: [
       {
@@ -17,7 +17,7 @@ export const FOOTER_INFO = [
         url: '',
       },
     ],
-  },
+  }, */
 
   {
     title: 'FOOTER.resources',
@@ -42,7 +42,7 @@ export const FOOTER_INFO = [
     elements: [
       {
         title: 'info@goeko.ch',
-        url: '',
+        url: 'malito:info@goeko.ch',
         logo: 'mail',
       }
     ],

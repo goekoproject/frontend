@@ -28,14 +28,16 @@ export class PopupComponent {
   @Output() onClickKO: EventEmitter<boolean> = new EventEmitter();
 
   toggle!: boolean;
-
+  hide = false;
   onOk() {
     this.toggle = true;
+    this.hide = true;
     this.onClickOK.emit(this.toggle);
   }
 
   onKo() {
     this.toggle = false;
+    this.hide = true;
     this.onClickKO.emit(this.toggle);
   }
 }
