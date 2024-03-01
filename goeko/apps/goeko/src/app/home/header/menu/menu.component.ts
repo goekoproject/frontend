@@ -46,7 +46,6 @@ export class MenuComponent implements OnInit {
         this.menu.update((dataMenu) => [
           ...this._buildSubmenu(dataMenu, 'contact', data),
         ]);
-        console.log(this.menu());
       });
   }
 }
