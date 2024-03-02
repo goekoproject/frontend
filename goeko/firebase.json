@@ -1,7 +1,7 @@
 {
-  "hosting": [
-    {
+  "hosting": {
     "public": "dist/apps/goeko",
+
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
@@ -10,6 +10,4 @@
       }
     ]
   }
-
-]
 }
