@@ -1,18 +1,5 @@
 {
   "projects": {
     "default": "goeko-c8a23"
-  },
-  "targets": {
-    "goeko-c8a23": {
-      "hosting": {
-        "pro": [
-          "goeko.ch"
-        ],
-        "dev": [
-          "goeko-c8a23.web.app"
-        ]
-      }
-    }
-  },
-  "etags": {}
+  }
 }
