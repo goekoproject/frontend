@@ -23,11 +23,13 @@ jobs:
         with:
           node-version: 18
           check-latest: true
-      #Init Node
+      - name: Install Firebase Tools
+        run: npm install firebase-tools -g
+      #Init dependencies
       - name: Install Dependencies
         run: npm install
       - name: Build
-        run: npm run build goeko --development
+        run: npm run build:dev goeko --development
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v4
         with:
