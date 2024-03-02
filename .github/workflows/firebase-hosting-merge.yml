@@ -23,8 +23,12 @@ jobs:
         with:
           node-version: 18
           check-latest: true
-      - name: Install Firebase Tools
-        run: npm install firebase-tools -g
+      - name: Use Firebase dev
+        uses: w9jds/firebase-action@master
+        with:
+            args: use dev
+        env:
+            FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
       #Init dependencies
       - name: Install Dependencies
         run: npm install
