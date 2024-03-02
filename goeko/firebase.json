@@ -1,7 +1,19 @@
 {
-  "hosting": {
+  "hosting": [
+    {
     "public": "dist/apps/goeko",
-
+    "tarjet": "dev",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  {
+    "public": "dist/apps/goeko",
+    "tarjet": "pro",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
@@ -10,4 +22,5 @@
       }
     ]
   }
+]
 }
