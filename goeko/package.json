@@ -5,7 +5,9 @@
   "scripts": {
     "ng": "nx",
     "start": "nx serve",
-    "build:dev": "nx build"
+    "build:dev": "nx build",
+    "build:pro": "nx build"
+
   },
   "private": true,
   "dependencies": {
