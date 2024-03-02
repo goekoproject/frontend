@@ -48,7 +48,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:1//03yutOTKP0ul_CgYIARAAGAMSNwF-L9IrdEyrGm5WnxXRT1S2VfW3lA2RbZ4RGIOlcGd1WfOZ53LpGwXJRlUCzVR8bzM9DEL6EDY -P goeko-pro
+          args: deploy --only hosting -P goeko-pro
         env:
-          FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
+          FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN_PRO }}"
           PROJECT_PATH : ./goeko
