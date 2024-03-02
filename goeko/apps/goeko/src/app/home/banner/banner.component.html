@@ -25,13 +25,14 @@
       </div>
     </div>
 
-    <button go-button appearance="flat" (click)="watchVideo()">
-      <span class="material-symbols-rounded"> play_circle </span>
-      <p>{{ 'watchVideo' | translate }}</p>
-    </button>
   </div>
 
   <div class="banner-video">
+    
+    <button go-button appearance="flat" (click)="watchVideo()" class="button-play">
+      <span class="material-symbols-rounded"> play_circle </span>
+      <p>{{ 'watchVideo' | translate }}</p>
+    </button>
     <video autoplay loop class="banner-video-sme" #marketingVideo>
       <source
         src="assets/GoEko_Ad_1_CC_{{ this.currentLangCode }}.mp4#t=40"
