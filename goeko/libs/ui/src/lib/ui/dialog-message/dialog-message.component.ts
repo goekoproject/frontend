@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DialogMessageService } from './dialog-message.service';
 
 @Component({
@@ -26,7 +25,8 @@ export class DialogMessageComponent {
     }
   }
 
-  closeDialog() {
+  closeDialog(isAccept = false) {
+    this._dialogMessageService.onSubmitAccept(isAccept);
     this.dialogMsg?.nativeElement.close();
 
   }

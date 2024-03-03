@@ -382,8 +382,11 @@
   },
   "DIALOG": {
     "messageSendOk": "Your message has been sent successfully!",
-    "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have."
+    "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have.",
+    "warningDelete": "Are you sure you want to delete {{item}} ?"
+
   },
+  "logout":"Log out",
   "a": "to",
   "your":"Your",
   "accept": "Accept",

@@ -382,9 +382,12 @@
   },
   "DIALOG": {
     "messageSendOk": "Votre message a été envoyé avec succès !",
-    "messageBodyLead" : "Un représentant de Goeko sera heureux de répondre à toutes vos questions."
+    "messageBodyLead" : "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
+    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?"
+
 
   },
+  "logout":"Log out",
   "a": "à",
   "your":"Votre",
   "accept": "Accepter",

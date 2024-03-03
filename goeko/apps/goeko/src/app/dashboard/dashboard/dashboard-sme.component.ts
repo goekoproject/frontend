@@ -1,17 +1,20 @@
 import { Component, OnInit, effect } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from '@goeko/business-ui';
 import {
   ProjectService,
   SmeAnalysisStoreService,
   SmeRequestResponse,
   UserService,
 } from '@goeko/store';
+import { MESSAGE_TYPE } from '@goeko/ui';
 import { take, toArray } from 'rxjs';
 
 @Component({
   selector: 'goeko-dashboard-sme',
   templateUrl: './dashboard-sme.component.html',
   styleUrls: ['./dashboard-sme.component.scss'],
+  providers: [MessageService],
 })
 export class DashboardSmeComponent implements OnInit {
   public userProfile = this._userService.userProfile;
@@ -20,7 +23,8 @@ export class DashboardSmeComponent implements OnInit {
     private _userService: UserService,
     private _smeAnalyticsStore: SmeAnalysisStoreService,
     private _projectService: ProjectService,
-    private _router: Router
+    private _router: Router,
+    private _messageService: MessageService
   ) {
     effect(() => {
       if (this.userProfile().id) {
@@ -53,10 +57,15 @@ export class DashboardSmeComponent implements OnInit {
     });
   }
 
-  deleteProject(id:string) {
-    this._projectService.deleteProject(id).subscribe(data  => {
-      this._getLastProjectName();
-
-    });
+  deleteProject(project: SmeRequestResponse) {
+    this._messageService
+      .showMessage(MESSAGE_TYPE.WARNING, project.name)
+      .subscribe((res) => {
+        if (res) {
+          this._projectService.deleteProject(project.id).subscribe((data) => {
+            this._getLastProjectName();
+          });
+        }
+      });
   }
 }

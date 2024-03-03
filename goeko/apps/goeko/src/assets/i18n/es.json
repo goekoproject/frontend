@@ -382,9 +382,11 @@
   },
   "DIALOG": {
     "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
-    "messageBodyLead" : "Un representante de Goeko estará encantado de atender cualquier consulta que tenga."
+    "messageBodyLead" : "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
+    "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?"
 
   },
+  "logout":"Cerrar sesión",
   "your":"tu",
   "a": "a",
   "accept": "Aceptar",

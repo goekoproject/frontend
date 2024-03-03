@@ -7,11 +7,14 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
 import { CardEcosolutions } from './card-ecosolutions.model';
+import { MessageService } from '@goeko/business-ui';
+import { MESSAGE_TYPE } from '@goeko/ui';
 
 @Component({
   selector: 'goeko-ecosolutions-list',
   templateUrl: './ecosolutions-list.component.html',
   styleUrls: ['./ecosolutions-list.component.scss'],
+  providers: [MessageService]
 })
 export class EcosolutionsListComponent implements OnInit {
   public categorySection = this._cleantechEcosolutionsService.categories();
@@ -23,7 +26,8 @@ export class EcosolutionsListComponent implements OnInit {
     private _route: ActivatedRoute,
     private _roter: Router,
     private translateService: TranslateService,
-    private _cleantechEcosolutionsService: CleantechEcosolutionsService
+    private _cleantechEcosolutionsService: CleantechEcosolutionsService,
+    private _messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -55,11 +59,17 @@ export class EcosolutionsListComponent implements OnInit {
   }
 
   deleteEcosolution(ecosolution: CardEcosolutions) {
-    this._ecosolutionsService
-      .deleteEcosolution(ecosolution.id)
-      .subscribe((res: any) => {
-        this.getAllEcosolutionsByCleanTech();
-      });
+    this._messageService.showMessage(MESSAGE_TYPE.WARNING,ecosolution.solutionName).subscribe(isDelete => {
+
+      if(isDelete) {
+        this._ecosolutionsService
+        .deleteEcosolution(ecosolution.id)
+        .subscribe((res: any) => {
+          this.getAllEcosolutionsByCleanTech();
+        });
+      }
+    })
+
   }
 
   private _goToEcosolutionForm(path: string, id: string, arg: any) {

@@ -35,9 +35,4 @@ export class HeaderUserComponent implements OnInit {
     this._translate.use(selectedLand.code);
   }
 
-  toogleSideProfile() {
-    return this._sideDialogService.openDialog<SideProfileComponent>(
-      SideProfileComponent
-    );
-  }
 }

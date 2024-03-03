@@ -1,5 +1,9 @@
 .dialog-icon {
     color: var(--primary--500);
+    &-warning {
+        color: var(--hp);
+        background: #d000004d;
+    }
 }
 .dialog-content {
     h3 {

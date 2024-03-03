@@ -84,3 +84,21 @@ $padding-element-active: 1.2rem;
 		color: #00527d;
 	}
 }
+
+.user-logout {
+	display: flex;
+	gap:1rem;
+	cursor: pointer;
+	.user-logout-title{
+		opacity: 0;
+		display: none;
+
+	}
+}
+.menu-user-options:hover ~ .user-actions, .menu-user:hover  {
+	.user-logout .user-logout-title {
+		opacity: 1;
+		display: block;
+
+	}
+}

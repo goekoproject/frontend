@@ -21,6 +21,10 @@
   </ul>
 
   <div class="user-actions">
-    <i class="ti ti-logout-2" (click)="logout()"></i>
+    <div class="user-logout" (click)="logout()">
+      <i class="ti ti-logout-2"></i>
+      <p class="user-logout-title"> {{'logout' | translate}}</p>
+    </div>
+    
   </div>
 </nav>
