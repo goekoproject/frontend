@@ -61,7 +61,20 @@
       </ul>
     </div>
 
-    <ng-container [ngTemplateOutlet]="article.id === 'sme' ||  article.id === 'cleantech'  ? sme : otherActor" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
+     @if (article?.id === 'bank') {
+      <ng-container [ngTemplateOutlet]="bank" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
+
+     }
+     @if (article?.id === 'cleantech') {
+      <ng-container [ngTemplateOutlet]="cleantech" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
+
+     }
+     @if (article?.id === 'sme') {
+      <ng-container [ngTemplateOutlet]="sme" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
+     }
+
+
+
   </section>
 </article>
 
@@ -72,7 +85,15 @@
   </button>
 </ng-template>
 
-<ng-template #otherActor let-id="id">
+<ng-template #cleantech let-id="id">
+  <button go-button (click)="goTologin()">
+    {{ 'HOME.btnCleantech' | translate }}
+    <span class="material-symbols-rounded"> arrow_forward_ios </span>
+  </button>
+</ng-template>
+
+
+<ng-template #bank let-id="id">
   <button go-button appearance="white">
     Coming soon
     <i class="ti ti-clock-filled"></i>

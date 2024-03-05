@@ -100,19 +100,18 @@ $default-position-layer3-video: 8.4rem;
   position: absolute;
   display: flex;
   flex-direction: column;
-  right: 0;
-  left: 0;
+  right: -11px;
   bottom: 50%;
-  top: 50%;
-  margin: 0 auto;
+  top: 10%;
   z-index: 10;
   width: 100%;
   align-items: center;
   filter: drop-shadow(4px 6px 8px white);
   opacity: 0.8;
+  gap: 0;
   span {
-    font-size: 8rem;
-    color: var(--primary--950);
+    font-size: 4rem;
+    color: var(--primary--700);
   }
 }
 

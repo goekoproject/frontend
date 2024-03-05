@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private _authService: AuthService,private loadDataUser: LoadDataUser) {}
 
   ngOnInit(): void {
+    console.log(window.location.pathname);
     this.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isPrivateZone = isAuthenticated && !this.isHomePage();
       console.log(this.isPrivateZone);

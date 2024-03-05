@@ -65,6 +65,6 @@ export class HomeService {
       });
   }
   goTologin() {
-    this._authService.universalLogin();
+    this._authService.universalLogin()
   }
 }
