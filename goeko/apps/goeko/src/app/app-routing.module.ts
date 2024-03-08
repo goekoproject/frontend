@@ -19,6 +19,16 @@ const ROUTES: Routes = [
       import('@goeko/business-ui').then((m) => m.AutenticateComponent),
   },
   {
+    path: 'autenticate/:error',
+    loadComponent: () =>
+      import('@goeko/business-ui').then((m) => m.AutenticateComponent),
+  },
+  {
+    path: 'verify-email',
+    loadComponent: () =>
+      import('./shell/verify-email.component').then((m) => m.VerifyEmailComponent),
+  },
+  {
     path: 'dashboard',
     canActivate: [AuthGuard],
     loadChildren: () =>

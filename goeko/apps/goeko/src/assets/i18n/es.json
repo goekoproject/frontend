@@ -165,6 +165,10 @@
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sito web"
   },
+  "VERIFY_EMAIL": {
+    "title":"Revisa tu bandeja de entrada.",
+    "body": "¡Nos alegra que estés con nosotros! Te hemos enviado un enlace de verificación a tu dirección de correo electrónico."
+  },
   "HOME": {
     "meetOurTeam": "Conoce a Nuestro Equipo",
     "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",

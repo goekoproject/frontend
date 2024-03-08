@@ -166,6 +166,10 @@
     "unit": "Unit of measurement (m2, m3, y, kg)",
     "website": "Website"
   },
+  "VERIFY_EMAIL": {
+    "title": "Check your inbox",
+    "body": "We are glad, that you’re with us ? We’ve sent you a verification link to yours email address"
+  },
   "HOME": {
     "meetOurTeam": "Meet Our Team",
     "sloganCallActionsBtn": "Free trial to connect with qualified leads",

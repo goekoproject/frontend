@@ -166,6 +166,10 @@
     "unit": "Unité",
     "website": "Site web"
   },
+  "VERIFY_EMAIL": {
+    "title": "Consultez votre boîte de réception.",
+    "body": "Nous sommes ravis que vous soyez des nôtres ! Nous vous avons envoyé un lien de vérification à votre adresse e-mail."
+  },
   "HOME": {
     "meetOurTeam": "Notre Equipe",
     "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",
