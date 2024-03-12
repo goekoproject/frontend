@@ -15,7 +15,7 @@
   <section class="section-form">
     @defer (when form && form.get(dataCategorySelected().code)) {
 
-    <go-carousel [selectedSlideIndex]="slideSelected() || 0">
+    <go-carousel [selectedSlideIndex]="slideSelected() || 0" (valueChangeButton)="selectCategoryByCarousel($event.index)">
       @for (category of categories(); track category.id; let index = $index) {
       <section
         *goSlide

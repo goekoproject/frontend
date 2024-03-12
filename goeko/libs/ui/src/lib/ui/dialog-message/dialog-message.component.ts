@@ -27,8 +27,11 @@ export class DialogMessageComponent {
 
   closeDialog(isAccept = false) {
     this._dialogMessageService.onSubmitAccept(isAccept);
-    this.dialogMsg?.nativeElement.close();
+    this.close();
+  }
 
+  close() {
+    this.dialogMsg?.nativeElement.close();
   }
   
 }

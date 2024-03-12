@@ -168,6 +168,10 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
       );
     });
   }
+  selectCategoryByCarousel(index: number) {
+    console.log(index);
+    this.categorySelected.set(this.categories()[index]);
+  }
   gotToSummary() {
     this.currentAnalytics.set(this.form.value);
     if (this._smeId) {
@@ -186,17 +190,5 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
     this._router.navigate(['sme-analysis/results', this._smeId]);
   }
 
-  /**
-   * Set smeId again if we are create new analysis and the sme is in queryParams
-   * @returns smeID
-   */
-  private _overrideSmeId(): string {
-    if (!this._smeId) {
-      const idByNewAnalysis = this._route.snapshot.queryParamMap.get(
-        'smeId'
-      ) as string;
-      return idByNewAnalysis;
-    }
-    return this._smeId;
-  }
+
 }
