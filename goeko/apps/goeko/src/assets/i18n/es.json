@@ -43,6 +43,8 @@
     "products": "Tipo de producto peligroso",
     "specialWaste": "Residuos Especiales"
   },
+  "infoSaveMessages": "¡Guarda tu análisis para futuras consultas!",
+  "searchEcosolutions": "Buscar ecosoluciones",
   "CATEGORIES_LABEL": {
     "amount": {
       "label": "",

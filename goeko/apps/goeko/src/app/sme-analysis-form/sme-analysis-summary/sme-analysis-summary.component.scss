@@ -46,22 +46,7 @@
   gap: 1rem 5rem;
   padding: 2rem 0;
 }
-.form-actions {
-  display: flex;
-  justify-content: space-around;
-  margin: 0 auto;
-  gap: 2rem;
-  position: fixed;
-  bottom: 0rem;
-  width: 92%;
-  background: #f7f9fe;
-  padding: 1rem;
-  &-submit {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-}
+
 .notification {
   width: 94%;
   display: block;
@@ -72,7 +57,7 @@
   height: 100%;
   border-radius: 50%;
   display: block;
-  background-image: url('/assets/logo.png');
+  background-image: url("/assets/logo.png");
   background-size: 38px;
   background-position: center;
   background-repeat: no-repeat;
@@ -119,4 +104,15 @@
     font-size: 0.8rem;
     height: 0;
   }
+}
+.notification-save-analysis {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary--200);
+  border-radius: 0.6rem;
+  font: var(--font-label);
+  color: var(--soft-dark);
 }

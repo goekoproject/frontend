@@ -118,6 +118,8 @@
     "resources": "Ressources",
     "service": "Service"
   },
+  "infoSaveMessages": "Enregistrez votre analyse pour consultation ultérieure!",
+  "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",

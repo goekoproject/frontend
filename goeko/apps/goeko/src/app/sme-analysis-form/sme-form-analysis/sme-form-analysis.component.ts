@@ -22,10 +22,7 @@ import { transformArrayToObj } from './sme-analysis.request';
 import { Subject } from 'rxjs';
 import { AutoUnsubscribe } from '@goeko/ui';
 import { SmeAnalysisService } from '../sme-analysis.service';
-const compareWithClassificationCategory = (
-  c1: ClassificationCategory,
-  c2: ClassificationCategory
-) => c1.code === c2.code;
+
 @AutoUnsubscribe()
 @Component({
   selector: 'goeko-sme-form-analysis',

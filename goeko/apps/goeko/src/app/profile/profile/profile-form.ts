@@ -15,7 +15,7 @@ export const smeFormGroup = new FormGroup({
 });
 
 export const cleanTechFormGroup = new FormGroup({
-  name: new FormControl(),
+  name: new FormControl('', Validators.required),
   country: new FormControl(),
   email: new FormControl('', Validators.email),
   link: new FormControl(),

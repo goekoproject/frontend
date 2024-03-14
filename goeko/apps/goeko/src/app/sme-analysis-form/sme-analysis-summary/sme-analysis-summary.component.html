@@ -2,6 +2,13 @@
   ><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification
 >
 <div class="summary">
+    <div class="notification-save-analysis">
+      <p>{{ 'infoSaveMessages' | translate }}</p>
+      <button type="button" go-button appearance="white" (click)="saveAnalysis()">
+        {{ 'save' | translate }}
+      </button>
+    </div>
+
   <section class="search-name-section" *ngIf="isProject">
     <button
       go-button
@@ -59,20 +66,19 @@
     </li>
     } }
   </ul>
-</div>
-
+  
 <div class="form-actions">
   <button type="button" go-button appearance="white" (click)="cancel()">
     {{ 'cancel' | translate }}
   </button>
   <div class="form-actions-submit">
-    <button type="button" go-button appearance="white" (click)="saveAnalysis()">
-      {{ 'save' | translate }}
-    </button>
+ 
 
     <go-goeko-button class="button-submit" (click)="getResults()">
       <span class="goeko-go" btn-logo></span>
-      Eco-solutions</go-goeko-button
+      {{'searchEcosolutions' | translate}}</go-goeko-button
     >
   </div>
 </div>
+</div>
+

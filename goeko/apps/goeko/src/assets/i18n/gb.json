@@ -27,6 +27,8 @@
     "water": "Water",
     "waterConsumption": "Water"
   },
+  "infoSaveMessages": "Save your analysis for future reference!",
+  "searchEcosolutions": "Search eco-solutions",
   "CATEGORIES_FIELD": {
     "amount": "Water consumption (2022)",
     "energySource": "Would your company like to use less carbon intensive energy thanks to:",
