@@ -7,15 +7,15 @@ export const PROFILE_SME: Profile<'sme'>[] = [
 		type: 'text',
 	},
 	{
+		controlName: 'email',
+		label: 'FORM_LABEL.email',
+		type: 'email',
+	},
+	{
 		controlName: 'country',
 		label: 'FORM_LABEL.country',
 		type: 'select',
 		dataSelectKey: 'countries',
-	},
-	{
-		controlName: 'email',
-		label: 'FORM_LABEL.email',
-		type: 'email',
 	},
 	{
 		controlName: 'website',

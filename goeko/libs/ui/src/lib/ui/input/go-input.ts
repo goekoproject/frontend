@@ -80,6 +80,15 @@ export class GoInput extends LitElement {
         padding: 0;
         pointer-events: none;
       }
+      .content-label {
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+      }
+      .optional {
+        font-size:12px;
+ 
+      }
     `;
   }
   @property({ type: String }) type = 'text';
@@ -166,7 +175,12 @@ export class GoInput extends LitElement {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
       />
-      <label for="${this.id}"> <slot name="label"></slot> </label>
+      <div class="content-label">
+      <label for="${this.id}"> <slot name="label"></slot> </label>      
+      ${this.required ? html`<span class="optional">(Obligatoire)</span>` : ''}
+      </div>
+   
+
 
       ${this._templateTypeInput()}
       ${this.textHelp

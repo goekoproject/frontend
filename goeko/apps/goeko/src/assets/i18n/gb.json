@@ -120,6 +120,7 @@
     "resources": "Resources",
     "service": "Service"
   },
+  "editSelection": "Modifier selection",
   "FORM_LABEL": {
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
