@@ -1,12 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, computed, effect } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
-import { DataSelect, SmeAnalysisStoreService, UserService } from '@goeko/store';
-import { Field } from '../form-field.model';
+import { ClassificationCategory, ClassificationCategoryProduct, ClassificationSubcategory, DataSelect, SmeRequestResponse, SmeService } from '@goeko/store';
+import { AutoUnsubscribe } from '@goeko/ui';
+import { Subject } from 'rxjs';
+import { SmeAnalysisService } from '../sme-analysis.service';
 import {
-  CategoryModel,
-  transformArrayToObj,
+  transformArrayToObj
 } from '../sme-form-analysis/sme-analysis.request';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
   if (o1 && o2 && typeof o2 !== 'object') {
@@ -19,11 +19,15 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
 
   return null;
 };
+
+
+
+@AutoUnsubscribe()
 @Component({
   selector: 'goeko-sme-form-base',
   template: `<div>goeko-sme-form-base</div>`,
 })
-export class SmeFormBaseComponent implements OnInit {
+export class SmeFormBaseComponent implements OnInit, AfterViewInit{
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onChangeLastRecomendation: EventEmitter<boolean> =
     new EventEmitter<any>();
@@ -31,114 +35,155 @@ export class SmeFormBaseComponent implements OnInit {
     o1: any,
     o2: any
   ) => boolean;
-  formField = FORM_CATEGORIES_QUESTION;
-  form!: FormGroup;
-  slideSelected = 0;
-  dateLastRecomendation!: string;
+  public compareWithProdcuts = (
+    product: ClassificationCategoryProduct,
+    productCodeSelected: string
+  ) => {
+    return product.code === productCodeSelected;
+  };
+  public dateLastRecomendation!: string;
   public dataSelect = DataSelect as any;
-  private _smeDataProfile!: any;
-  public smeId!: string;
-  private _selectedCategory!: string;
+  public destroy$: Subject<boolean> = new Subject<boolean>();
+  public form!: FormGroup;
+  public resultPath = 'sme-analysis/results';
 
-  isSummarySlide() {
-    return this.slideSelected === this.formField.length - 1;
-  }
+  categories = this._smeAnalysisService.categories;
+  categorySelected = this._smeAnalysisService.categorySelected;
+  dataCategorySelected = this._smeAnalysisService.dataCategorySelected;
+  currentAnalytics = this._smeAnalysisService.currentAnalytics;
+  slideSelected = computed(() =>
+  this.categories().findIndex(
+    (category: ClassificationCategory) =>
+      category.code === this.categorySelected().code
+  ));
+
+  private _smeId!: string;
+  private _queryParamsSelected!:{[key: string]: string}
+
 
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
-    private _userService: UserService,
+    private _smeService: SmeService,
     private _route: ActivatedRoute,
-    private _smeAnalysisStore: SmeAnalysisStoreService
-  ) {}
+    private _smeAnalysisService: SmeAnalysisService,
+    private _cdf: ChangeDetectorRef
+  ) {
+    effect(() => {
+      if (this.dataCategorySelected()?.code === this.categorySelected().code) {
+        this._createFormGroup();
+        this._setLastAnalysis();
+      }
+    });
+  }
 
   ngOnInit(): void {
-    this.smeId = this._route.snapshot.queryParams['smeId'] as string;
-    this._route.queryParams.subscribe(
-      (queryParams: any) => (this._selectedCategory = queryParams.categoryId)
-    );
-    this.form = this._fb.group({});
-    this._createFormGroup();
-    this._selectCatagory();
+    this._smeId = this._route.snapshot.paramMap.get('id') as string;
+    this._queryParamsSelected = this._route.snapshot.queryParams;
   }
 
-  private _selectCatagory() {
-    if (!this._selectedCategory) {
-      return;
-    }
-    this._smeAnalysisStore
-      .getCurrentAnalysis()
-      .subscribe((analysis) => this.form.patchValue(analysis));
-    const indexCarousel = this.formField.findIndex(
-      (formField) => formField.id === this._selectedCategory
-    );
-    this.slideSelected = indexCarousel;
+  ngAfterViewInit(): void {
+    this.categorySelected.set(this.categories()[0]);
   }
 
-  public _setLastAnalysis(callback: any) {
-    if (this.smeId) {
-      this._getLastAnalysis(callback);
-    }
-  }
+  private _createFormGroup(
+    controlNameCatgory = this.categorySelected().code,
+    dataCategorySelected = this.dataCategorySelected()
+  ) {
+    const formGroup = this.form.get(controlNameCatgory) as FormGroup;
+    dataCategorySelected?.subcategories?.forEach(
+      (subcategory: ClassificationSubcategory) => {
+        if (this.form.get(controlNameCatgory)?.get(subcategory.code)) {
+          return;
+        }
 
-  private _getLastAnalysis(callbackLastAnalysis: any) {
-    callbackLastAnalysis().subscribe((requestClassifications: any) => {
-      if (requestClassifications) {
-        this.dateLastRecomendation = requestClassifications.date;
-        const classifications = transformArrayToObj(
-          requestClassifications.classifications
-        );
-        const _searchName =
-          (requestClassifications?.searchName as string) ||
-          (requestClassifications?.name as string);
-        this._updateForm(classifications, _searchName);
+        formGroup.addControl(subcategory.code, this._fb.control(''));
+        this._cdf.markForCheck();
       }
-    });
+    );
+    this.form.addControl(controlNameCatgory, formGroup);
+    this._cdf.markForCheck();
   }
 
-  private _updateForm(classifications: CategoryModel, searchName: string) {
+  selectCategory(categorySelected: ClassificationCategory): void {
+    this.categorySelected.set(categorySelected);
+  }
+
+  selectCategoryByCarousel(index: number) {
+    this.categorySelected.set(this.categories()[index]);
+  }
+
+  private _setLastAnalysis() {
+    if (this._smeId) {
+      this._getLastAnalysis();
+    }
+    if(this._queryParamsSelected) {
+      this._getRequiestSelected();
+    }
+  }
+  private _getLastAnalysis() {
+    this._smeService
+      .getLastRecommendationById(this._smeId)
+      .subscribe((requestClassifications) => {
+        if (requestClassifications) {
+          this.dateLastRecomendation = requestClassifications.date;
+          this._fillForm(requestClassifications);
+        }
+      });
+  }
+
+  private _getRequiestSelected() {
+    this._smeService
+      .getRequestById({smeId: this._queryParamsSelected['smeId'], requestId: this._queryParamsSelected['requestId']})
+      .subscribe((requestClassifications) => {
+        if (requestClassifications) {
+          this.dateLastRecomendation = requestClassifications.date;
+          this._fillForm(requestClassifications);
+        }
+      });
+  }
+
+  
+  private _fillForm(requestClassifications : SmeRequestResponse) {
+    const classifications = transformArrayToObj(
+      requestClassifications.classifications
+    );
+
+    this._createFormForEdit(classifications);
     this.form.patchValue(classifications);
-    this.form.controls['searchName']?.patchValue(searchName);
-    this.form.markAllAsTouched();
-    this.onChangeLastRecomendation.emit(true);
+    this._cdf.markForCheck();
   }
 
-  private _createFormGroup() {
-    this.formField.forEach((group) => {
-      if (group.controlName) {
-        const formGroup = this._fb.group({});
-        group?.fields?.forEach((control: Field) => {
-          formGroup.addControl(control.controlName, this._fb.control(''));
-        });
-        this.form.addControl(group.controlName, formGroup);
-      }
+  
+  private _createFormForEdit(classifications: any) {
+    Object.keys(classifications).forEach((controlName) => {
+      Object.keys(classifications[controlName]).forEach(
+        (controlNameSubcategory) => {
+          (this.form.get(controlName) as FormGroup).addControl(
+            controlNameSubcategory,
+            this._fb.control('')
+          );
+        }
+      );
     });
-    this.form.addControl(
-      'searchName',
-      this._fb.control('', Validators.required)
-    );
-  }
-  addFormGroup(index: any) {
-    this.slideSelected = index;
   }
 
   gotToSummary() {
-    this._smeAnalysisStore.setCurrentAnalysis(this.form.value);
-    setTimeout(() => {
-      /* 		if (this.smeId) {
-				this._router.navigate([`../${this.smeId}/summary`], {
-					relativeTo: this._route,
-					queryParamsHandling: 'preserve',
-				});
-			} else { */
-      this._router.navigate([`summary`], {
+    this.currentAnalytics.set(this.form.value);
+    if (this._smeId) {
+      this._router.navigate([`../${this._smeId}/summary`], {
         relativeTo: this._route,
+      });
+    } else {
+      this._router.navigate([`/sme-analysis/summary`], {
         queryParamsHandling: 'preserve',
       });
-      /* } */
-    });
+    }
   }
   getResults() {
-    this._router.navigate(['results', this.smeId], { relativeTo: this._route });
+    this.currentAnalytics.set(this.form.value);
+    this._smeId = this._smeId || this._queryParamsSelected['smeId'];
+    this._router.navigate([this.resultPath, this._smeId]);
   }
+
 }

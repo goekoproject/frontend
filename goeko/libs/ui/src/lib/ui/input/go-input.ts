@@ -108,11 +108,10 @@ export class GoInput extends LitElement {
 
   handleInput() {
     this.value = this.input.value;
-    this._dispatchValueChange();
     this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
   }
 
-  private _dispatchValueChange() {
+  handleChange() {
     const options = {
       detail: this.value,
       bubbles: true,
@@ -155,6 +154,7 @@ export class GoInput extends LitElement {
         ?required="${this.required}"
         autocomplete="${this.autocomplete ? this.autocomplete : this.id}"
         @input="${this.handleInput}"
+        @change="${this.handleChange}"
       />
     `;
   }

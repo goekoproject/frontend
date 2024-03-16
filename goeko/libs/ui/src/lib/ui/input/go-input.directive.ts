@@ -1,4 +1,4 @@
-import { AfterContentInit, Directive, ElementRef, HostListener, Input, Provider, forwardRef } from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, EventEmitter, HostListener, Input, Output, Provider, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const CONTROL_VALUE_ACCESSOR: Provider = {
@@ -12,9 +12,11 @@ const CONTROL_VALUE_ACCESSOR: Provider = {
 })
 export class GoInputDirective implements AfterContentInit, ControlValueAccessor {
 	@Input() readonly = false;
+	@Output() valueChange = new EventEmitter();
 	@HostListener('change', ['$event.detail'])
 	onHostChange(value: string) {
 		this.value = value;
+		this.valueChange.emit(value);
 	}
 
 	_onChange: (value: any) => void = () => {};
