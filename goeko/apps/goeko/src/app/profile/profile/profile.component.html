@@ -59,10 +59,10 @@
             </div>
         }
 
-    <!--     @case ('file-link') {
-          <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
+        @case ('file-link') {
+        <goeko-input-file (fileChange)="fileChange($event)" [fileUrl]="fileProfile?.url" [alt]="fileProfile?.id"></goeko-input-file>
 
-        } -->
+        } 
         @default {
           
           <go-input
@@ -103,19 +103,4 @@
 }
 
 <br />
-<ng-template #imageUpload>
-<!-- 
-  <div class="ecosolution-upload">
-    <img [src]="urlImgEcosolution"  alt="img ecosolutions"/> 
 
-    <label>
-      {{ 'INPUT_FILE.image' | translate}}
-      <input class="file-ecosolutions"
-      type="file"
-      accept="application/png"
-      (change)="uploadImgEcosolutions($event)"
-    />
-    </label>
-    
-  </div> -->
-</ng-template>

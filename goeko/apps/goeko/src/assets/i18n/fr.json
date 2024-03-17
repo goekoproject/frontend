@@ -181,7 +181,7 @@
   },
   "INPUT_FILE": {
     "certified": "Sélectionnez votre certificat",
-    "image": "Sélectionnez une image"
+    "image": "Glissez-déposez ou cliquez pour sélectionner une image"
   },
   "LANGS": {
     "en": "Anglais",
@@ -394,6 +394,7 @@
 
 
   },
+  "dragAndDrop": "Glisser déposer",
   "editSelection": "Modifier sélection",
   "logout":"Log out",
   "a": "à",

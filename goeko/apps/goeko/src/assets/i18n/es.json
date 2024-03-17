@@ -120,6 +120,7 @@
     "resources": "Recursos",
     "service": "Servicios"
   },
+  "dragAndDrop": "Arrastar y soltar",
   "editSelection": "Modificar selección",
   "FORM_LABEL": {
     "additionalInformation": "Información adicional",
@@ -181,7 +182,7 @@
   },
   "INPUT_FILE": {
     "certified": "Seleccione su certificado",
-    "image": "Selecciona una imagen"
+    "image": "Arrastra y suelta o haz click para selecciona una imagen"
   },
   "LANGS": {
     "en": "Ingles",

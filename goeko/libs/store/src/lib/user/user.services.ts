@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, computed, effect, signal } from "@angular/core";
 import { toObservable } from "@angular/core/rxjs-interop";
 import { User } from "@auth0/auth0-angular";
-import { BehaviorSubject, Observable, catchError, of, switchMap, throwError } from "rxjs";
+import { BehaviorSubject, Observable, catchError, map, of, switchMap, throwError } from "rxjs";
 import { UserFactory } from "./user.factory";
 
 import { ROLES, UserModal, UserType } from "./public-api";
@@ -61,6 +61,18 @@ export class UserService {
 
   updateUserProfile(id: any, body: any) {
     return this._http.put<any>(`/v1/actor/${this.actorsEndpoint()}/${id}`, body);
+  }
+
+  getImgProfile(id: any) {
+    return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/${id}/documentation`).pipe(
+      map((response: any)  => response[0])
+    );
+  }
+  uploadImgProfile(id: string, file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}/${id}/documentation`, formData);
+
   }
 
   private _transformbBody(body: any) {

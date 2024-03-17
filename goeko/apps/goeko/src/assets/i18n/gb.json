@@ -121,6 +121,7 @@
     "service": "Service"
   },
   "editSelection": "Modifier selection",
+  "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
@@ -182,7 +183,7 @@
   },
   "INPUT_FILE": {
     "certified": "Select your certificate",
-    "image": "Select an image"
+    "image": "Drag and drop or click to select an image"
   },
   "LANGS": {
     "en": "English",

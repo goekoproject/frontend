@@ -38,6 +38,7 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
   return null;
 };
 
+
 const TYPE_FORM_FOR_USERTYPE: UserSwitch<Profile[]> = {
   sme: PROFILE_SME,
   cleantech: PROFILE_CLEANTECH,
@@ -57,6 +58,8 @@ export class ProfileComponent implements OnInit {
 
   private _userType = this._userService.userType;
   private _externalId = this._userService.externalId;
+  public profileImg!: File;
+  public fileProfile: any
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
     o2: any
@@ -87,7 +90,20 @@ export class ProfileComponent implements OnInit {
         ];
       this.form.patchValue(this.dataProfile());
       this.form.get('externalId')?.patchValue(this._externalId());
+      this._getImgProfile();
     }
+  }
+
+  private _getImgProfile() {
+    if(!this.dataProfile().id) {
+      return;
+    }
+    this._userService.getImgProfile(this.dataProfile().id).subscribe(file => {
+      if(file) {
+        this.fileProfile = file;
+
+      }
+    })
   }
   saveProfile() {
     this._userService
@@ -95,6 +111,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((dataProfile) => {
         if (dataProfile) {
           this._changeDataProfile(dataProfile);
+          this._saveProfileImg();
         }
       });
   }
@@ -104,6 +121,7 @@ export class ProfileComponent implements OnInit {
       .updateUserProfile(this.dataProfile().id, this.form.value)
       .subscribe((dataProfile: any) => {
         this._changeDataProfile(dataProfile);
+        this._saveProfileImg();
       });
   }
 
@@ -113,5 +131,18 @@ export class ProfileComponent implements OnInit {
     setTimeout(() => {
       this.savedProfileOK = false;
     }, 3000);
+  }
+
+  private _saveProfileImg() {
+    if(!this.profileImg) {
+      return;
+    }
+    this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg).subscribe((dataProfile) => {
+      console.log(dataProfile);
+    })
+  }
+
+  fileChange(file : File) {
+    this.profileImg =file;
   }
 }
