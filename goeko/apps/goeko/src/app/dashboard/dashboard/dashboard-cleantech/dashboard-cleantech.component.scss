@@ -2,7 +2,7 @@
     box-shadow: 0px 3px 6px 0px rgba(24, 167, 212, 0.25);
     background: var(--primary-100, #E0F2FE);
     border-radius: 0.5rem;
-    width: 55.5rem;
+    width: 94%;
     height: 6.6875rem;
     display: flex;
     align-items: center;
@@ -21,8 +21,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    max-width: 33%;
-}
+     max-width: 33%;
+ }
+
+ .lead-message {
+    max-width: 100%;
+ }
 .lead-lastest-title {
     color: var(--dark, #27272A);
     font: var(--font-label-semibold);
@@ -35,4 +39,8 @@
     overflow: hidden;
     text-wrap: nowrap;
     width: 92%;
+}
+.lead-text-default {
+    font: var(--font-body-semibold);
+    color: var(--primary--950);
 }
