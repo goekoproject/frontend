@@ -181,7 +181,8 @@
   },
   "INPUT_FILE": {
     "certified": "Sélectionnez votre certificat",
-    "image": "Glissez-déposez ou cliquez pour sélectionner une image"
+    "image": "Glissez-déposez ou cliquez pour",
+    "image2": "sélectionner une image"
   },
   "LANGS": {
     "en": "Anglais",

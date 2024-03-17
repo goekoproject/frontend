@@ -182,7 +182,8 @@
   },
   "INPUT_FILE": {
     "certified": "Seleccione su certificado",
-    "image": "Arrastra y suelta o haz click para selecciona una imagen"
+    "image": "Arrastra y suelta o haz click para",
+    "image2": "para selecciona una imagen"
   },
   "LANGS": {
     "en": "Ingles",

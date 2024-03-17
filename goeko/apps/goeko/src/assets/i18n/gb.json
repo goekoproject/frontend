@@ -183,7 +183,9 @@
   },
   "INPUT_FILE": {
     "certified": "Select your certificate",
-    "image": "Drag and drop or click to select an image"
+    "image": "Drag and drop or click to",
+    "image2": "select an image"
+
   },
   "LANGS": {
     "en": "English",
