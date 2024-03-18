@@ -32,9 +32,10 @@ import { transformArrayToObj } from './sme-analysis.request';
 export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
   compareWithProdcuts = (
     product: ClassificationCategoryProduct,
-    productCodeSelected: string
+    productCodeSelected: ClassificationCategoryProduct | string | any
   ) => {
-    return product.code === productCodeSelected;
+    return product.code === productCodeSelected?.code ||  product.code === productCodeSelected;
+    
   };
   public form!: FormGroup;
   public dateLastRecomendation!: string;
