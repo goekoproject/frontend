@@ -60,7 +60,7 @@
         }
 
         @case ('file-link') {
-        <goeko-input-file (fileChange)="fileChange($event)" [fileUrl]="fileProfile?.url" [alt]="fileProfile?.id"></goeko-input-file>
+        <goeko-input-file (fileChange)="fileChange($event)" [fileUrl]="this.dataProfile().logo" [alt]="fileProfile?.id"></goeko-input-file>
 
         } 
         @default {

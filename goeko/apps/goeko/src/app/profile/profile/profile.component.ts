@@ -12,6 +12,7 @@ import { SideDialogService } from '@goeko/ui';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFormFactory } from './profile-form.factory';
 import { PROFILE_SME } from './profile-sme.constants';
+import { forkJoin } from 'rxjs';
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -69,6 +70,7 @@ export class ProfileComponent implements OnInit {
     o2: string
   ) => boolean;
 
+  private _uploadImg$ = () =>  this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg);
   constructor(
     private _sideDialogService: SideDialogService,
     private _userService: UserService
@@ -80,6 +82,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this._sideDialogService.closeDialog();
+    this._userService.fetchUser();
   }
   private _effectBuildForm() {
     if (this.dataProfile()) {
@@ -90,21 +93,9 @@ export class ProfileComponent implements OnInit {
         ];
       this.form.patchValue(this.dataProfile());
       this.form.get('externalId')?.patchValue(this._externalId());
-      this._getImgProfile();
     }
   }
 
-  private _getImgProfile() {
-    if(!this.dataProfile().id) {
-      return;
-    }
-    this._userService.getImgProfile(this.dataProfile().id).subscribe(file => {
-      if(file) {
-        this.fileProfile = file;
-
-      }
-    })
-  }
   saveProfile() {
     this._userService
       .createUserProfile(this.form.value)
@@ -116,12 +107,13 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  updateProfile() {
-    this._userService
+  updateProfile() { 
+    forkJoin({
+      uploadImg : this._uploadImg$(),
+      profile : this._userService
       .updateUserProfile(this.dataProfile().id, this.form.value)
-      .subscribe((dataProfile: any) => {
-        this._changeDataProfile(dataProfile);
-        this._saveProfileImg();
+    }).subscribe((dataProfile: any) => {
+        this._changeDataProfile(dataProfile.profile);
       });
   }
 
@@ -134,12 +126,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private _saveProfileImg() {
-    if(!this.profileImg) {
-      return;
-    }
-    this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg).subscribe((dataProfile) => {
-      console.log(dataProfile);
-    })
+    return this._uploadImg$().subscribe(() =>{});
   }
 
   fileChange(file : File) {

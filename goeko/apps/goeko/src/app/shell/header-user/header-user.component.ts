@@ -1,8 +1,6 @@
-import { AfterContentInit, Component, OnInit, computed } from '@angular/core';
-import { SideProfileComponent } from '@goeko/business-ui';
+import { Component, OnInit, computed } from '@angular/core';
 import { LANGS, Lang } from '@goeko/core';
 import { UserService } from '@goeko/store';
-import { SideDialogService } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -20,8 +18,7 @@ export class HeaderUserComponent implements OnInit {
   );
   constructor(
     private _userService: UserService,
-    private _translate: TranslateService,
-    private _sideDialogService: SideDialogService
+    private _translate: TranslateService
   ) {}
 
   ngOnInit(): void {

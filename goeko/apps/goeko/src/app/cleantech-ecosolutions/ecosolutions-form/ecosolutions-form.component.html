@@ -389,7 +389,7 @@
           {{ 'Cancel' | translate }}
         </button>
   
-        <button *ngIf="!isReadOnly" go-button type="submit">
+        <button *ngIf="!isReadOnly" go-button type="submit" [disabled]="form.invalid">
           {{ 'saveYou' | translate }} éco-solution
         </button>
       </div>

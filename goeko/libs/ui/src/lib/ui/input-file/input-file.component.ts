@@ -23,7 +23,7 @@ export class InputFileComponent {
   private _acceptedFileTypes: string = 'application/jpeg';
   
   @Input()
-  public fileUrl!: File;
+  public fileUrl!: string | undefined;
 
   @Input()
   public id!: string;

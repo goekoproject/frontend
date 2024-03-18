@@ -15,7 +15,7 @@ export class CodeCountryPipe implements PipeTransform {
         this._translateService.onLangChange.pipe(
           map(current => current.lang === 'gb'  ?  {...current, lang: 'en'}: current)
         ).subscribe(current => this.langSignal.set(current.lang))}
-    transform(code: string | string[]): any {
+    transform(code: string | string[] | undefined): any {
         if(!code) {
             return code;
         }

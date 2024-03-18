@@ -6,10 +6,9 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 
 @Component({
@@ -24,6 +23,7 @@ import {
     '[attr.selected]': 'selected',
     '[attr.readonly]': 'readonly',
     '[attr.fill]': 'fill',
+
   },
 })
 export class BadgeComponent implements AfterContentInit {
