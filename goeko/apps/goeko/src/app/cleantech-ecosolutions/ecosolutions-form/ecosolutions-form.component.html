@@ -7,7 +7,10 @@
 <ng-template #imageUpload>
 
   <div class="ecosolution-upload">
-    <img [src]="urlImgEcosolution"  alt="img ecosolutions"/> 
+    @if (urlImgEcosolution) {
+      <img [src]="urlImgEcosolution"  alt="img ecosolutions"/> 
+
+    }
 
     <label>
       {{ 'INPUT_FILE.image' | translate}} (jpg)
