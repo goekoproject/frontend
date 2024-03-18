@@ -8,58 +8,63 @@
 <div class="profile-data">
   <form [formGroup]="form" class="profile-page">
     <ng-container *ngFor="let itemForm of formProfile">
-      <ng-container [ngSwitch]="itemForm.type">
-        <ng-container *ngSwitchCase="'select-multiple'">
-          <div class="select-profile">
-            <label for="{{ itemForm.controlName }}">{{
-              itemForm.label | translate
-            }}</label>
+      @switch (itemForm.type) {
+        @case ('select-multiple') {
+            <div class="select-profile">
+              <label for="{{ itemForm.controlName }}">{{
+                itemForm.label | translate
+              }}</label>
+  
+              <ui-super-select
+                [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                [multiple]="true"
+                [formControlName]="itemForm.controlName"
+                [id]="itemForm.controlName"
+                [name]="itemForm.controlName"
+                [compareWith]="defaultSetSuperSelect"
+              >
+                <ng-container *ngIf="itemForm.dataSelectKey">
+                  <super-option
+                    *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
+                    [value]="option"
+                  >
+                    {{ option.keyLang | translate }}
+                  </super-option>
+                </ng-container>
+              </ui-super-select>
+            </div>
+        }
 
-            <ui-super-select
-              [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-              [multiple]="true"
-              [formControlName]="itemForm.controlName"
-              [id]="itemForm.controlName"
-              [name]="itemForm.controlName"
-              [compareWith]="defaultSetSuperSelect"
-            >
-              <ng-container *ngIf="itemForm.dataSelectKey">
-                <super-option
-                  *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
-                  [value]="option"
-                >
-                  {{ option.keyLang | translate }}
-                </super-option>
-              </ng-container>
-            </ui-super-select>
-          </div>
-        </ng-container>
+        @case ('select') {
+            <div class="select-profile">
+              <label for="{{ itemForm.controlName }}">{{
+                itemForm.label | translate
+              }}</label>
+  
+              <ui-super-select
+                [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                [formControlName]="itemForm.controlName"
+                [id]="itemForm.controlName"
+                [name]="itemForm.controlName"
+              >
+                <ng-container *ngIf="itemForm.dataSelectKey">
+                  <super-option
+                    *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
+                    [value]="option.code"
+                  >
+                    {{ option.keyLang | translate }}
+                  </super-option>
+                </ng-container>
+              </ui-super-select>
+            </div>
+        }
 
-        <ng-container *ngSwitchCase="'select'">
-          <div class="select-profile">
-            <label for="{{ itemForm.controlName }}">{{
-              itemForm.label | translate
-            }}</label>
+        @case ('file-link') {
+        <goeko-input-file (fileChange)="fileChange($event)" [fileUrl]="this.dataProfile().logo" [alt]="fileProfile?.id"></goeko-input-file>
 
-            <ui-super-select
-              [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-              [formControlName]="itemForm.controlName"
-              [id]="itemForm.controlName"
-              [name]="itemForm.controlName"
-            >
-              <ng-container *ngIf="itemForm.dataSelectKey">
-                <super-option
-                  *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
-                  [value]="option.code"
-                >
-                  {{ option.keyLang | translate }}
-                </super-option>
-              </ng-container>
-            </ui-super-select>
-          </div>
-        </ng-container>
-
-        <ng-container *ngSwitchDefault>
+        } 
+        @default {
+          
           <go-input
             [formControlName]="itemForm.controlName"
             type="{{ itemForm.type }}"
@@ -67,8 +72,9 @@
           >
             <p slot="label">{{ itemForm.label | translate }}</p>
           </go-input>
-        </ng-container>
-      </ng-container>
+        }
+          
+      }
     </ng-container>
 
     <div class="profile-actions">
@@ -97,3 +103,4 @@
 }
 
 <br />
+

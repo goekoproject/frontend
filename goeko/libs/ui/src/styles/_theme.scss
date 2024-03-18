@@ -249,3 +249,22 @@ input[type='radio' i]:focus-visible {
   position: relative;
   top: -1rem;
 }
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  position: sticky;
+  bottom: 0rem;
+  width: 100%;
+  background: #f7f9fe;
+  padding: 1rem 0;
+  &-submit {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+.required-field {
+  font-size: 12px;
+  font-weight: 100;
+}

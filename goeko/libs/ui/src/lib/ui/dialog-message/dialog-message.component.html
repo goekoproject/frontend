@@ -51,7 +51,7 @@
                 <button type="button" go-button *ngIf="data()?.buttonPrimary"  (click)="closeDialog(true)">
                   {{data()?.buttonPrimary}}
                 </button>
-                <button type="button" go-button [appearance]="'white'" *ngIf="data()?.buttonSecondary">
+                <button type="button" go-button [appearance]="'white'" *ngIf="data()?.buttonSecondary"  (click)="close()">
                   {{data()?.buttonSecondary}}
                 </button>
               </div>

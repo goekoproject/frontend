@@ -10,10 +10,10 @@
     <img [src]="urlImgEcosolution"  alt="img ecosolutions"/> 
 
     <label>
-      {{ 'INPUT_FILE.image' | translate}}
+      {{ 'INPUT_FILE.image' | translate}} (jpg)
       <input class="file-ecosolutions"
       type="file"
-      accept="application/png"
+      accept="application/jpg"
       (change)="uploadImgEcosolutions($event)"
     />
     </label>
@@ -37,6 +37,8 @@
         <div class="form-col">
           <label for="solutionDescription">
             {{ 'FORM_LABEL.solutionDescription' | translate }}
+            <span class="required-field">(Obligatoire)</span>
+
           </label>
           <textarea
             class="go-textarea"
@@ -51,6 +53,8 @@
         <div class="form-col">
           <label for="detailedDescription">
             {{ 'FORM_LABEL.technicalDescription' | translate }}
+            <span class="required-field">(Obligatoire)</span>
+
           </label>
           <textarea
             class="go-textarea"
@@ -67,7 +71,10 @@
   
       <fieldset class="ecosolutions-fieldset">
         <div class="legend--info">
-          <legend>{{ 'FORM_LABEL.typeOfEcolutions' | translate }}</legend>
+          <legend>{{ 'FORM_LABEL.typeOfEcolutions' | translate }}
+            <span class="required-field">(Obligatoire)</span>
+          </legend>
+
           <ng-container
             *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"
           ></ng-container>
@@ -295,10 +302,7 @@
               {{ option.id }} {{ option.keyLang | translate }}
             </super-option>
           </ui-super-select>
-  
-          <go-notification type="info">
-            {{ 'TEXT_SUPPORT.paybackPeriodYears' | translate }}
-          </go-notification>
+
         </div>
   
         <!-- 		<div class="field-form-checked">
@@ -385,7 +389,7 @@
           {{ 'Cancel' | translate }}
         </button>
   
-        <button *ngIf="!isReadOnly" go-button type="submit">
+        <button *ngIf="!isReadOnly" go-button type="submit" [disabled]="form.invalid">
           {{ 'saveYou' | translate }} éco-solution
         </button>
       </div>

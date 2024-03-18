@@ -27,6 +27,8 @@
     "water": "Water",
     "waterConsumption": "Water"
   },
+  "infoSaveMessages": "Save your analysis for future reference!",
+  "searchEcosolutions": "Search eco-solutions",
   "CATEGORIES_FIELD": {
     "amount": "Water consumption (2022)",
     "energySource": "Would your company like to use less carbon intensive energy thanks to:",
@@ -118,6 +120,8 @@
     "resources": "Resources",
     "service": "Service"
   },
+  "editSelection": "Modifier selection",
+  "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
@@ -166,6 +170,10 @@
     "unit": "Unit of measurement (m2, m3, y, kg)",
     "website": "Website"
   },
+  "VERIFY_EMAIL": {
+    "title": "Check your inbox",
+    "body": "We are glad, that you’re with us ? We’ve sent you a verification link to yours email address"
+  },
   "HOME": {
     "meetOurTeam": "Meet Our Team",
     "sloganCallActionsBtn": "Free trial to connect with qualified leads",
@@ -175,7 +183,9 @@
   },
   "INPUT_FILE": {
     "certified": "Select your certificate",
-    "image": "Select an image"
+    "image": "Drag and drop or click to",
+    "image2": "select an image"
+
   },
   "LANGS": {
     "en": "English",
@@ -413,6 +423,7 @@
   "dashboard": "Dashboard",
   "decline": "Decline",
   "defaultMessageLead": "Hello, I am interested in your ecological solution. Please contact me at the following email address:",
+  "cleantechLeadDefault": "Close to finding new sustainable leads. Get ready to connect!",
   "details": "Details",
   "edit": "Edit",
   "lastLead": "Latest lead",

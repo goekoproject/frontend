@@ -1,0 +1,20 @@
+<div class="w-[400px] relative border-2 border-gray-300 border-dashed rounded-lg p-6" id="dropzone" #dropzone (dragover)="onDragOver($event)" (drop)="onDrop($event)" (dropleave)="onDragLeave($event)">
+  <div class="text-center m-4">
+    <i class="ti ti-file-upload icon-upload"></i>
+    <h3 class="mt-2 text-sm font-medium text-gray-900">
+      <label class="relative cursor-pointer text-label">
+        <p>{{ 'INPUT_FILE.image' | translate}}</p>
+        <a>{{ 'INPUT_FILE.image2' | translate}}</a>
+        <input class="sr-only" type="file" [id]="id" accept="{{acceptedFileTypes}}" (change)="uploadFile($event)" />
+      </label>
+    </h3>
+    <p class="mt-1 text-xs text-gray-500">
+      (JPGE, JPG)
+    </p>
+  </div>
+
+  @defer (when fileUrl) {
+  <img [src]="fileUrl" [alt]="id" class="rounded-lg" />
+
+  }
+</div>

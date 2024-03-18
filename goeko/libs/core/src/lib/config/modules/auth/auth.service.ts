@@ -30,6 +30,9 @@ export class AuthService extends Auth0Connected {
   get appState$(): Observable<AppState> {
     return this._auth0.appState$;
   }
+  get error$(): Observable<Error> {
+    return this._auth0.error$;
+  }
   get userAuth$(): Observable<User | null | undefined> {
     return this._auth0.user$;
   }
@@ -111,9 +114,9 @@ export class AuthService extends Auth0Connected {
     return !!accessToken;
   }
 
-  logout() {
+  logout(returnTo =  this.doc.location.origin ) {
     sessionStorage.clear();
-    this._auth0.logout({ logoutParams: { returnTo: this.doc.location.origin }});
+    this._auth0.logout({ logoutParams: { returnTo: returnTo }});
   }
 
   killSessions(): void {

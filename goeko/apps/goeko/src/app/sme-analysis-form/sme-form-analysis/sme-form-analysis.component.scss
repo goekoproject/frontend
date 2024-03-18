@@ -42,6 +42,7 @@
   flex-shrink: 2;
   padding: 1rem 10px;
   flex-direction: column;
+  aspect-ratio: 10/6;
 }
 .analysis-wrapper .section-form-demo {
   background: transparent;
@@ -135,22 +136,7 @@
   width: 184px;
   display: block;
 }
-.analysis-wrapper .form-actions {
-  display: flex;
-  justify-content: space-around;
-  margin: 0 auto;
-  gap: 2rem;
-  position: fixed;
-  bottom: 0rem;
-  width: 92%;
-  background: #f7f9fe;
-  padding: 1rem;
-  &-submit {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-}
+
 
 .text-support {
   color: #c0c0c0;

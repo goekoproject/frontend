@@ -16,26 +16,22 @@ import { LoaderCircleComponent } from '../loader-animation/loader-circle/loader-
 export class AutenticateComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _userServices: UserService,    private _router: Router,
-    ) {
-  }
+  constructor(private _userServices: UserService, private _router: Router) {}
 
   ngOnInit(): void {
-      this._userServices.completeLoadUser.subscribe(loadUser => {
-        if(loadUser){
-          this._redirectWhenLoadUser();
-        }
-      })
+    this._userServices.completeLoadUser.subscribe((loadUser) => {
+      if (loadUser) {
+        this._redirectWhenLoadUser();
+      }
+    });
   }
 
-
-
   private _redirectWhenLoadUser() {
-    if(this._userServices.userProfile().id) {
-        this._redirectDashboard();
-      } else {
-        this._redirectProfile();
-     }
+    if (this._userServices.userProfile().id) {
+      this._redirectDashboard();
+    } else {
+      this._redirectProfile();
+    }
   }
 
   private _redirectDashboard() {
@@ -43,8 +39,7 @@ export class AutenticateComponent implements OnInit {
     this._router.navigate([`dashboard/${userType}`]);
   }
   private _redirectProfile() {
-    const externalId= this._userServices.externalId();
+    const externalId = this._userServices.externalId();
     this._router.navigate([`profile/${externalId}`]);
   }
- 
 }

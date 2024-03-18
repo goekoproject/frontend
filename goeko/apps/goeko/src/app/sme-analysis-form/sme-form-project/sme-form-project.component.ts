@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeAnalysisStoreService, SmeService, UserService } from '@goeko/store';
+import { SmeService } from '@goeko/store';
+import { SmeAnalysisService } from '../sme-analysis.service';
 import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component';
 
 @Component({
@@ -9,30 +10,42 @@ import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component';
   templateUrl: './sme-form-project.component.html',
   styleUrls: ['./sme-form-project.component.scss'],
 })
-export class SmeFormProjectComponent
-  extends SmeFormBaseComponent
-  implements OnInit
+export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnInit
 {
   public toogleSaveName = true;
+
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService,
     private smeService: SmeService,
     private route: ActivatedRoute,
-    private smeAnalysisStore: SmeAnalysisStoreService
+    private smeAnalysisService: SmeAnalysisService,
+    private cdf: ChangeDetectorRef
+
   ) {
-    super(fb, router, userService, route, smeAnalysisStore);
+    super(fb, router,smeService, route, smeAnalysisService,cdf);
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
+    this._initForm();
     this.onChangeLastRecomendation.subscribe(
       (data) => (this.toogleSaveName = !data)
     );
-    this._setLastAnalysis(this._getCurrentAnalysis);
+    this.resultPath = 'new-project/results';
+
   }
 
-  private _getCurrentAnalysis = () =>
-    this.smeAnalysisStore.getCurrentAnalysis();
+  private _initForm() {
+    this.form = this.fb.group({
+      searchName: this.fb.control(''),
+      co2Emission: this.fb.group({}),
+      waste: this.fb.group({}),
+      waterConsumption: this.fb.group({}),
+      hazardousProduct: this.fb.group({}),
+    });
+  }
+
+  
 }

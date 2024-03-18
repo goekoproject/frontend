@@ -2,26 +2,21 @@
   ><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification
 >
 <div class="summary">
-  <section class="search-name-section" *ngIf="isProject">
-    <button
-      go-button
-      appearance="primary"
-      (click)="toogleSaveName = !toogleSaveName"
-      *ngIf="toogleSaveName"
-    >
-      {{ 'confirm' | translate }}
-    </button>
-    <h2 *ngIf="!toogleSaveName">{{ formValue.searchName }}</h2>
+    <div class="notification-save-analysis">
+      <p>{{ 'infoSaveMessages' | translate }}</p>
+      <button type="button" go-button appearance="white" (click)="saveAnalysis()">
+        {{ 'save' | translate }}
+      </button>
+    </div>
 
-    <button
-      go-button
-      appearance="transparent"
-      *ngIf="!toogleSaveName"
-      (click)="toogleSaveName = !toogleSaveName"
-    >
-      {{ 'edit' | translate }}
-    </button>
-  </section>
+    @if (isProject) {
+      <section class="search-name-section">
+        <go-input [value]="currentAnalytics()?.searchName" id="searchName" type="text" (valueChange)="changeSearchName($event)">
+          <span slot="label">{{ 'FORM_LABEL.name_project' | translate }}</span>
+        </go-input>
+      </section>
+    }
+
 
   <ul class="section-elements">
     @for ( category of allCategories.selected; track category.code) { @defer
@@ -46,7 +41,7 @@
               appearance="flat"
               (click)="editCategory(category.code, subcategory.code)"
             >
-              <p>{{ 'edit' | translate }} {{ 'product' | translate }}</p>
+              <p>{{ 'editSelection' | translate }}</p>
             </button>
           </div>
 
@@ -59,20 +54,19 @@
     </li>
     } }
   </ul>
-</div>
-
+  
 <div class="form-actions">
   <button type="button" go-button appearance="white" (click)="cancel()">
     {{ 'cancel' | translate }}
   </button>
   <div class="form-actions-submit">
-    <button type="button" go-button appearance="white" (click)="saveAnalysis()">
-      {{ 'save' | translate }}
-    </button>
+ 
 
     <go-goeko-button class="button-submit" (click)="getResults()">
       <span class="goeko-go" btn-logo></span>
-      Eco-solutions</go-goeko-button
+      {{'searchEcosolutions' | translate}}</go-goeko-button
     >
   </div>
 </div>
+</div>
+

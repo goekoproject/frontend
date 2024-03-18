@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadDataUser } from '@goeko/business-ui';
 import { AuthService } from '@goeko/core';
 import { take } from 'rxjs';
@@ -30,22 +31,36 @@ export class AppComponent implements OnInit {
   public isAuthenticated$ = this._authService.isAuthenticated$;
   public isPrivateZone: boolean = false;
 
-  constructor(private router: Router, private _authService: AuthService,private loadDataUser: LoadDataUser) {}
+  constructor(private _router: Router,private route: ActivatedRoute,
+    @Inject(DOCUMENT) private doc: Document,
+
+     private _authService: AuthService,private loadDataUser: LoadDataUser) {}
 
   ngOnInit(): void {
-    console.log(window.location.pathname);
+    this._manageClientZone();
+    this._messageAfterSignUp();
+  }
+
+  private _manageClientZone() {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isPrivateZone = isAuthenticated && !this.isHomePage();
       console.log(this.isPrivateZone);
       if(this.isPrivateZone) {
         this.loadDataUser.resolve().pipe(take(1)).subscribe();
-      }     
-
+      } 
+      
     });
+  } 
 
-
+  private _messageAfterSignUp() {
+    const urlAutenticateDecoe = decodeURI(window.location.search);
+    if(urlAutenticateDecoe.includes('verify')) {
+      this._authService.logout( `${this.doc.location.origin}/verify-email`);
+   }
   }
   acceptCookie() {
     localStorage.setItem(KEY_COOKIES, 'true');
   }
+
+
 }

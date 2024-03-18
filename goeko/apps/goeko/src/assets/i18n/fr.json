@@ -118,6 +118,8 @@
     "resources": "Ressources",
     "service": "Service"
   },
+  "infoSaveMessages": "Enregistrez votre analyse pour consultation ultérieure!",
+  "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",
@@ -141,15 +143,15 @@
     "guarantee": "Garantie",
     "improvement": "Améliorations",
     "location": "Emplacement",
-    "logo": "Lien vers votre logo",
+    "logo": "Teléchargez le logo de votre entreprise",
     "marketReady": "Votre éco-solution est-elle prête pour le marché?",
     "messageLead": "Écrivez votre message",
     "name": "Nom",
     "name_project": "Nom du projet",
     "operationalCostReductionPercentage": "Pourcentage de réduction des coûts opérationnels",
     "password": "Mot de passe",
-    "paybackPeriodYears": "Délai de récupération de l’investissement",
-    "price": "Informations sur le prix",
+    "paybackPeriodYears": "Délai de récupération de l’investissement par rapport à une solution standard",
+    "price": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
     "products": "Produits",
     "reductionPercentage": "Pourcentage de réduction",
     "reductionPercentageCO2": "Pourcentage de réduction de CO2",
@@ -166,6 +168,10 @@
     "unit": "Unité",
     "website": "Site web"
   },
+  "VERIFY_EMAIL": {
+    "title": "Consultez votre boîte de réception.",
+    "body": "Nous sommes ravis que vous soyez des nôtres ! Nous vous avons envoyé un lien de vérification à votre adresse e-mail."
+  },
   "HOME": {
     "meetOurTeam": "Notre Equipe",
     "sloganCallActionsBtn": "Essai gratuit pour vous connecter avec des leads qualifiés",
@@ -175,7 +181,8 @@
   },
   "INPUT_FILE": {
     "certified": "Sélectionnez votre certificat",
-    "image": "Sélectionnez une image"
+    "image": "Glissez-déposez ou cliquez pour",
+    "image2": "sélectionner une image"
   },
   "LANGS": {
     "en": "Anglais",
@@ -388,6 +395,8 @@
 
 
   },
+  "dragAndDrop": "Glisser déposer",
+  "editSelection": "Modifier sélection",
   "logout":"Log out",
   "a": "à",
   "your":"Votre",
@@ -414,6 +423,8 @@
   "dashboard": "Tableau de bord",
   "decline": "Refuser",
   "defaultMessageLead": "Bonjour, Je suis intéressé par votre éco-solution. Merci de bien vouloir me contacter par e-mail.",
+  "cleantechLeadDefault": "Sur le point de découvrir de nouveaux prospects durables. Préparez-vous à vous connecter !",
+
   "details": "Détails",
   "edit": "Modifier",
   "lastLead": "Dernier prospect",

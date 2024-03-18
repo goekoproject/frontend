@@ -1,11 +1,10 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
   Component,
   EventEmitter,
   OnInit,
   Output,
-  computed,
-  effect,
-  signal,
+  effect
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -18,21 +17,17 @@ import {
   ClassificationCategoryProduct,
   ClassificationSubcategory,
   DataSelect,
-  DataSelectOption,
   ProjectService,
   SmeAnalysisStoreService,
-  SmeService,
+  SmeService
 } from '@goeko/store';
-import { TranslateService } from '@ngx-translate/core';
-import { Section } from '../form-field.model';
+import { SideDialogService } from '@goeko/ui';
+import { SmeAnalysisService } from '../sme-analysis.service';
 import {
   FormValueToSmeAnalysisRequest,
   FormValueToSmeProjectRequest,
   formToClassificationsMapper,
 } from '../sme-form-analysis/sme-analysis.request';
-import { SmeAnalysisService } from '../sme-analysis.service';
-import { SelectionModel } from '@angular/cdk/collections';
-import { SideDialogService } from '@goeko/ui';
 
 const compareWithClassificationCategory = (
   c1: ClassificationCategory,
@@ -157,6 +152,10 @@ export class SmeAnalysisSummaryComponent implements OnInit {
     );
     this.currentAnalytics()[categoryCode][subcategoryCode] =
       productSelectedOfSubcategory;
+  }
+
+  changeSearchName(searchName: string): void {
+    this.currentAnalytics.update( value => ({...value, searchName: searchName}));
   }
   getResults() {
     this._smeServices

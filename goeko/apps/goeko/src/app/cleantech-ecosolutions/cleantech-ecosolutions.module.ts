@@ -16,6 +16,7 @@ import {
   ButtonModule,
   GoInputModule,
   GoTabGroupModule,
+  InputFileComponent,
   NotificationModule,
   UiSuperSelectModule,
 } from '@goeko/ui';
@@ -36,6 +37,7 @@ import { CleantechEcosolutionsService } from './cleantech-ecosolutions.services'
     ProductTitlePipe,
   ],
   imports: [
+    InputFileComponent,
     CommonModule,
     CleantechEcosolutionsRoutingModule,
     CategoryModule,

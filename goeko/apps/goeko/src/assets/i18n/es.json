@@ -43,6 +43,8 @@
     "products": "Tipo de producto peligroso",
     "specialWaste": "Residuos Especiales"
   },
+  "infoSaveMessages": "¡Guarda tu análisis para futuras consultas!",
+  "searchEcosolutions": "Buscar ecosoluciones",
   "CATEGORIES_LABEL": {
     "amount": {
       "label": "",
@@ -118,6 +120,8 @@
     "resources": "Recursos",
     "service": "Servicios"
   },
+  "dragAndDrop": "Arrastar y soltar",
+  "editSelection": "Modificar selección",
   "FORM_LABEL": {
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
@@ -165,6 +169,10 @@
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sito web"
   },
+  "VERIFY_EMAIL": {
+    "title":"Revisa tu bandeja de entrada.",
+    "body": "¡Nos alegra que estés con nosotros! Te hemos enviado un enlace de verificación a tu dirección de correo electrónico."
+  },
   "HOME": {
     "meetOurTeam": "Conoce a Nuestro Equipo",
     "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
@@ -174,7 +182,8 @@
   },
   "INPUT_FILE": {
     "certified": "Seleccione su certificado",
-    "image": "Selecciona una imagen"
+    "image": "Arrastra y suelta o haz click para",
+    "image2": "para selecciona una imagen"
   },
   "LANGS": {
     "en": "Ingles",
@@ -412,6 +421,7 @@
   "dashboard": "Dashboard",
   "decline": "Rechazar",
   "defaultMessageLead": "Hola, estoy interesado en tu solución ecológica. Por favor contácteme a la siguiente dirección de correo electrónico:",
+  "cleantechLeadDefault": "Cerca de nuevos leads sostenibles. ¡Prepárate para conectar con ellos!",
   "details": "Detalles",
   "edit": "Editar",
   "lastLead": "Ultimo cliente potencial",

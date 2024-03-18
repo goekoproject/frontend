@@ -1,6 +1,7 @@
-@if (this.cleantechLeads$ | async; as leads ) {
     <div class="card-lead">
         <object  class="card-lead-icon" data="assets/lead.svg"></object>
+        @if (this.cleantechLeads$ | async; as leads ) {
+
         <div class="lead-lastest-message">
             <span class="lead-lastest-title">{{'lastLead' | translate}}</span>
             <p class="lead-lastest-text" [innerHTML]="leads.at(-1)?.message"></p>
@@ -9,5 +10,11 @@
         <button go-button appearance="white" [routerLink]="'/leads'" >
             {{'showLead' | translate}}
         </button>
+
+    } @else {
+        <div class="lead-message">
+            <p class="lead-text-default">{{ 'cleantechLeadDefault' | translate}}</p>
+        </div>
+
+    }
     </div>
-}

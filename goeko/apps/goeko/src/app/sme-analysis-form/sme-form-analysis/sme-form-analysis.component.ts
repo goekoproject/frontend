@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import {
   ClassificationCategory,
   ClassificationCategoryProduct,
@@ -18,14 +17,11 @@ import {
   SmeRequestResponse,
   SmeService,
 } from '@goeko/store';
-import { transformArrayToObj } from './sme-analysis.request';
-import { Subject } from 'rxjs';
 import { AutoUnsubscribe } from '@goeko/ui';
+import { Subject } from 'rxjs';
 import { SmeAnalysisService } from '../sme-analysis.service';
-const compareWithClassificationCategory = (
-  c1: ClassificationCategory,
-  c2: ClassificationCategory
-) => c1.code === c2.code;
+import { transformArrayToObj } from './sme-analysis.request';
+
 @AutoUnsubscribe()
 @Component({
   selector: 'goeko-sme-form-analysis',
@@ -40,14 +36,13 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
   ) => {
     return product.code === productCodeSelected;
   };
-  formField = FORM_CATEGORIES_QUESTION;
-  form!: FormGroup;
-  dateLastRecomendation!: string;
+  public form!: FormGroup;
+  public dateLastRecomendation!: string;
   public dataSelect = DataSelect as any;
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
+  
   private _smeId!: string;
-
-  queryParamsSelected!:{[key: string]: string}
+  private _queryParamsSelected!:{[key: string]: string}
   //Signal
   categories = this._smeAnalysisService.categories;
   categorySelected = this._smeAnalysisService.categorySelected;
@@ -78,7 +73,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._smeId = this._route.snapshot.paramMap.get('id') as string;
-    this.queryParamsSelected = this._route.snapshot.queryParams;
+    this._queryParamsSelected = this._route.snapshot.queryParams;
     this._initForm();
   }
 
@@ -120,7 +115,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
     if (this._smeId) {
       this._getLastAnalysis();
     }
-    if(this.queryParamsSelected) {
+    if(this._queryParamsSelected) {
       this._getRequiestSelected();
     }
   }
@@ -138,7 +133,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
 
   private _getRequiestSelected() {
     this._smeService
-      .getRequestById({smeId: this.queryParamsSelected['smeId'], requestId: this.queryParamsSelected['requestId']})
+      .getRequestById({smeId: this._queryParamsSelected['smeId'], requestId: this._queryParamsSelected['requestId']})
       .subscribe((requestClassifications) => {
         if (requestClassifications) {
           this.dateLastRecomendation = requestClassifications.date;
@@ -168,6 +163,10 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
       );
     });
   }
+  selectCategoryByCarousel(index: number) {
+    console.log(index);
+    this.categorySelected.set(this.categories()[index]);
+  }
   gotToSummary() {
     this.currentAnalytics.set(this.form.value);
     if (this._smeId) {
@@ -182,21 +181,9 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
   }
   getResults() {
     this.currentAnalytics.set(this.form.value);
-    this._smeId = this._smeId || this.queryParamsSelected['smeId'];
+    this._smeId = this._smeId || this._queryParamsSelected['smeId'];
     this._router.navigate(['sme-analysis/results', this._smeId]);
   }
 
-  /**
-   * Set smeId again if we are create new analysis and the sme is in queryParams
-   * @returns smeID
-   */
-  private _overrideSmeId(): string {
-    if (!this._smeId) {
-      const idByNewAnalysis = this._route.snapshot.queryParamMap.get(
-        'smeId'
-      ) as string;
-      return idByNewAnalysis;
-    }
-    return this._smeId;
-  }
+
 }

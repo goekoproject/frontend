@@ -7,6 +7,11 @@ export const PROFILE_CLEANTECH: Profile<'cleantech'>[] = [
 		type: 'text',
 	},
 	{
+		controlName: 'email',
+		label: 'FORM_LABEL.emailSalesManager',
+		type: 'email',
+	},
+	{
 		controlName: 'country',
 		label: 'FORM_LABEL.country',
 		type: 'select',
@@ -16,11 +21,6 @@ export const PROFILE_CLEANTECH: Profile<'cleantech'>[] = [
 		controlName: 'city',
 		label: 'FORM_LABEL.city',
 		type: 'text',
-	},
-	{
-		controlName: 'email',
-		label: 'FORM_LABEL.emailSalesManager',
-		type: 'email',
 	},
 	{
 		controlName: 'link',

@@ -12,6 +12,7 @@ import { SideDialogService } from '@goeko/ui';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFormFactory } from './profile-form.factory';
 import { PROFILE_SME } from './profile-sme.constants';
+import { forkJoin } from 'rxjs';
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -38,6 +39,7 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
   return null;
 };
 
+
 const TYPE_FORM_FOR_USERTYPE: UserSwitch<Profile[]> = {
   sme: PROFILE_SME,
   cleantech: PROFILE_CLEANTECH,
@@ -57,6 +59,8 @@ export class ProfileComponent implements OnInit {
 
   private _userType = this._userService.userType;
   private _externalId = this._userService.externalId;
+  public profileImg!: File;
+  public fileProfile: any
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
     o2: any
@@ -66,6 +70,7 @@ export class ProfileComponent implements OnInit {
     o2: string
   ) => boolean;
 
+  private _uploadImg$ = () =>  this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg);
   constructor(
     private _sideDialogService: SideDialogService,
     private _userService: UserService
@@ -77,6 +82,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this._sideDialogService.closeDialog();
+    this._userService.fetchUser();
   }
   private _effectBuildForm() {
     if (this.dataProfile()) {
@@ -89,21 +95,25 @@ export class ProfileComponent implements OnInit {
       this.form.get('externalId')?.patchValue(this._externalId());
     }
   }
+
   saveProfile() {
     this._userService
       .createUserProfile(this.form.value)
       .subscribe((dataProfile) => {
         if (dataProfile) {
           this._changeDataProfile(dataProfile);
+          this._saveProfileImg();
         }
       });
   }
 
-  updateProfile() {
-    this._userService
+  updateProfile() { 
+    forkJoin({
+      uploadImg : this._uploadImg$(),
+      profile : this._userService
       .updateUserProfile(this.dataProfile().id, this.form.value)
-      .subscribe((dataProfile: any) => {
-        this._changeDataProfile(dataProfile);
+    }).subscribe((dataProfile: any) => {
+        this._changeDataProfile(dataProfile.profile);
       });
   }
 
@@ -113,5 +123,13 @@ export class ProfileComponent implements OnInit {
     setTimeout(() => {
       this.savedProfileOK = false;
     }, 3000);
+  }
+
+  private _saveProfileImg() {
+    return this._uploadImg$().subscribe(() =>{});
+  }
+
+  fileChange(file : File) {
+    this.profileImg =file;
   }
 }

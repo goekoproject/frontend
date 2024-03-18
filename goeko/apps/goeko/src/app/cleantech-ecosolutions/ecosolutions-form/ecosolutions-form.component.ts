@@ -10,6 +10,7 @@ import {
 } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, last, of } from 'rxjs';
+import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
 import {
   defaultSetCurrency,
   defaultSetDeliverCountries,
@@ -19,7 +20,6 @@ import {
   defaultSetyearGuarantee,
 } from './compare-with-select';
 import { EcosolutionForm } from './ecosolution-form.model';
-import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
 
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -91,8 +91,8 @@ export class EcosolutionsFormComponent implements OnInit {
   private _initForm() {
     this.form = this._fb.group({
       solutionName: ['', Validators.required],
-      solutionDescription: [''],
-      detailedDescription: [''],
+      solutionDescription: ['',Validators.required],
+      detailedDescription: ['',Validators.required],
       subCategory: ['', Validators.required],
       products: ['', Validators.required],
       reductionPercentage: [],
@@ -139,7 +139,7 @@ export class EcosolutionsFormComponent implements OnInit {
       .getEcosolutionById(this.idEcosolution)
       .subscribe((res: any) => {
         this._getDocumentsCleantech();
-        this.urlImgEcosolution = res?.pictures[0]?.url;
+        this.urlImgEcosolution = res?.pictures  ? res?.pictures[0]?.url : '';
         const formValue = new EcosolutionForm(res);
         this.form.patchValue(formValue);
       });
