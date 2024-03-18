@@ -80,7 +80,10 @@ export class UserService {
     );
   }
 
-  uploadImgProfile(id: string, file: File) {
+  uploadImgProfile(id: string, file: File | string |  undefined) {
+    if(!file) {
+      return of();
+    }
     const formData = new FormData();
     formData.append('file', file);
     return this._http.post<any>(

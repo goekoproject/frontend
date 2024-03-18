@@ -9,10 +9,10 @@ import {
   UserSwitch,
 } from '@goeko/store';
 import { SideDialogService } from '@goeko/ui';
+import { forkJoin, of } from 'rxjs';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFormFactory } from './profile-form.factory';
 import { PROFILE_SME } from './profile-sme.constants';
-import { forkJoin } from 'rxjs';
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
 
   private _userType = this._userService.userType;
   private _externalId = this._userService.externalId;
-  public profileImg!: File;
+  public profileImg!: File | string |  undefined;
   public fileProfile: any
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
@@ -108,11 +108,12 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() { 
-    forkJoin({
-      uploadImg : this._uploadImg$(),
+    const dataForUpdated = {
+      uploadImg : this.profileImg ? this._uploadImg$() : of(null),
       profile : this._userService
       .updateUserProfile(this.dataProfile().id, this.form.value)
-    }).subscribe((dataProfile: any) => {
+    } 
+    forkJoin(dataForUpdated).subscribe((dataProfile: any) => {
         this._changeDataProfile(dataProfile.profile);
       });
   }
