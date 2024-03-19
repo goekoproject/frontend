@@ -35,7 +35,7 @@ export class UserService {
   public completeLoadUser = new BehaviorSubject<boolean>(false);
   constructor(public _http: HttpClient) {
     effect(() => {
-      if (this.userAuthData().sub && !this.userProfile().id) {
+      if (this.userAuthData().sub) {
         this._getDataProfile();
       }
     });
