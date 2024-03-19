@@ -47,7 +47,7 @@
               [formControlName]="subcategory.code"
               [id]="subcategory.code"
               [name]="subcategory.code"
-              [compareWith]="compareWithProdcuts"
+              [compareWith]="compareWithProducts"
             >
               @for (product of subcategory.products; track product.code) {
               @if(!product.disabled) {

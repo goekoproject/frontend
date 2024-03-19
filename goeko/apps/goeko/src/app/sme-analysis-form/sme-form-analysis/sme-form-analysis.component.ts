@@ -11,14 +11,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ClassificationCategory,
-  ClassificationCategoryProduct,
   ClassificationSubcategory,
   DataSelect,
   SmeRequestResponse,
-  SmeService,
+  SmeService
 } from '@goeko/store';
 import { AutoUnsubscribe } from '@goeko/ui';
 import { Subject } from 'rxjs';
+import { compareWithProducts } from '../sme-analysis..util';
 import { SmeAnalysisService } from '../sme-analysis.service';
 import { transformArrayToObj } from './sme-analysis.request';
 
@@ -30,13 +30,7 @@ import { transformArrayToObj } from './sme-analysis.request';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
-  compareWithProdcuts = (
-    product: ClassificationCategoryProduct,
-    productCodeSelected: ClassificationCategoryProduct | string | any
-  ) => {
-    return product.code === productCodeSelected?.code ||  product.code === productCodeSelected;
-    
-  };
+  compareWithProducts = compareWithProducts;
   public form!: FormGroup;
   public dateLastRecomendation!: string;
   public dataSelect = DataSelect as any;

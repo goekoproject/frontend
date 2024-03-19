@@ -8,6 +8,7 @@ import { SmeAnalysisService } from '../sme-analysis.service';
 import {
   transformArrayToObj
 } from '../sme-form-analysis/sme-analysis.request';
+import { compareWithProducts } from '../sme-analysis..util';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
   if (o1 && o2 && typeof o2 !== 'object') {
     return o1.id.toString() === o2;
@@ -35,12 +36,8 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit{
     o1: any,
     o2: any
   ) => boolean;
-  public compareWithProdcuts = (
-    product: ClassificationCategoryProduct,
-    productCodeSelected: string
-  ) => {
-    return product.code === productCodeSelected;
-  };
+  public compareWithProducts = compareWithProducts;
+
   public dateLastRecomendation!: string;
   public dataSelect = DataSelect as any;
   public destroy$: Subject<boolean> = new Subject<boolean>();
