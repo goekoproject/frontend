@@ -6,9 +6,11 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
 	templateUrl: './notification.component.html',
 	styleUrls: ['./notification.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: {
 		class: 'notification',
-	},
+		'[attr.type]':'type'
+ 	},
 })
 export class NotificationComponent {
 	@Input() type = 'info' || 'warning' || 'error';

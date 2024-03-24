@@ -3,6 +3,12 @@
 <div class="container" [class.is-platform]="isPrivateZone">
   <goeko-header-user>
     <go-breadcrumbs></go-breadcrumbs>
+    @if (!isSubscribed) {
+      <go-notification [type]="'info'">
+        <p>Aquí va el mensaje</p>
+      </go-notification>
+    }
+ 
   </goeko-header-user>
   <router-outlet></router-outlet>
 </div>

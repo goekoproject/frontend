@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadDataUser } from '@goeko/business-ui';
 import { AuthService } from '@goeko/core';
-import { take } from 'rxjs';
+import { PaymentSystemService } from '@goeko/store';
 
 const KEY_COOKIES = 'cookie-policy';
 @Component({
@@ -27,14 +27,17 @@ export class AppComponent implements OnInit {
   get isDemo() {
     return this.path?.includes('demo');
   }
+  get isSubscribed() {
+    return this._paymentService.isSubscription
+  }
 
   public isAuthenticated$ = this._authService.isAuthenticated$;
   public isPrivateZone: boolean = false;
 
   constructor(private _router: Router,private route: ActivatedRoute,
     @Inject(DOCUMENT) private doc: Document,
-
-     private _authService: AuthService,private loadDataUser: LoadDataUser) {}
+    private _paymentService: PaymentSystemService,
+     private _authService: AuthService) {}
 
   ngOnInit(): void {
     this._manageClientZone();
@@ -45,9 +48,6 @@ export class AppComponent implements OnInit {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isPrivateZone = isAuthenticated && !this.isHomePage();
       console.log(this.isPrivateZone);
-      if(this.isPrivateZone) {
-        this.loadDataUser.resolve().pipe(take(1)).subscribe();
-      } 
       
     });
   } 
