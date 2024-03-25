@@ -39,7 +39,7 @@ export class CleantechBuilder implements IUserBuilder<CleantechsUser> {
     this.cleantechUser.name = data?.name;
     this.cleantechUser.country = data?.country;
     this.cleantechUser.email = data?.email;
-    this.cleantechUser.link = data?.website;
+    this.cleantechUser.link = data?.link;
     this.cleantechUser.city = data?.city;
     this.cleantechUser.logo = data?.logo;
     this.cleantechUser.externalId = data?.externalId;
