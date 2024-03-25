@@ -395,6 +395,10 @@
 
 
   },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "Attention ! Pour continuer, vous devez vous abonner.",
+    "messageContact": "Contactez-nous à "
+  },
   "dragAndDrop": "Glisser déposer",
   "editSelection": "Modifier sélection",
   "logout":"Log out",

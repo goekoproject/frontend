@@ -396,6 +396,10 @@
     "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?"
 
   },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "¡Atención! Para poder continuar, necesitas suscribirte.",
+    "messageContact": "Ponte en contacto con nosotros en "
+  },
   "logout":"Cerrar sesión",
   "your":"tu",
   "a": "a",
