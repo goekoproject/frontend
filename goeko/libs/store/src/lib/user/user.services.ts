@@ -5,6 +5,7 @@ import { User } from '@auth0/auth0-angular';
 import {
   BehaviorSubject,
   Observable,
+  Subject,
   catchError,
   of,
   switchMap,
@@ -21,6 +22,7 @@ export class UserService {
   public userAuthData = signal<User>({});
   public userProfile = signal<Actor>(USER_DEFAULT);
 
+  public fechAuthUser = new Subject();
   private actorsEndpoint = computed(
     () => this.userAuthData()['userType'] + 's'
   );
@@ -53,6 +55,8 @@ export class UserService {
       )
       .subscribe((data) => {
         this.propagateDataUser(data);
+        this.fechAuthUser.next(true);
+
       });
   }
   private _getByIdExternal(): Observable<any> {

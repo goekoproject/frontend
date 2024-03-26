@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import {
   PopupModule,
   SelectI18nModule,
   SideProfileComponent,
+  loadDataUserFactory,
 } from '@goeko/business-ui';
 import { AUTH_CONNECT, ConfigModule } from '@goeko/core';
 import {
@@ -21,11 +22,13 @@ import {
   ShowForRolesDirective,
   SmeModule,
   UserService,
+  isSubscribedCleantech,
 } from '@goeko/store';
 import {
   BadgeModule,
   ButtonModule,
   DialogMessageModule,
+  NotificationModule,
   SideDialogModule,
   UiBreadcrumbsModule
 } from '@goeko/ui';
@@ -97,8 +100,15 @@ const httpLoaderFactory = (http: HttpClient) => {
         deps: [HttpClient],
       },
     }),
+    NotificationModule
   ],
-  providers: [UserService, LoadDataUser],
+  providers: [UserService, LoadDataUser, isSubscribedCleantech, 
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: loadDataUserFactory,
+      deps: [LoadDataUser]
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

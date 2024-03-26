@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '@auth0/auth0-angular';
 import { AuthService } from '@goeko/core';
 import { ROLES, UserService } from '@goeko/store';
@@ -33,4 +32,9 @@ export class LoadDataUser {
     const roles = userData[`${namespace}/roles`];
     return [ROLES.PUBLIC, ...roles];
   };
+}
+
+
+export function loadDataUserFactory(loadDataUser: LoadDataUser) {
+  return () =>loadDataUser.resolve().pipe(take(1)).subscribe();
 }
