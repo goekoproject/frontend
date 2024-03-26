@@ -33,3 +33,12 @@ go-popup {
   gap: 1.2rem;
   width: calc(89% - 80px);
 }
+.subscription-contact {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  a {
+    color: var(--dark-accent);
+    font: var(--font-body-semibold);
+  } 
+}

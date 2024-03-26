@@ -395,6 +395,10 @@
 
 
   },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
+    "messageContact": "Contactez-nous à "
+  },
   "dragAndDrop": "Glisser déposer",
   "editSelection": "Modifier sélection",
   "logout":"Log out",
