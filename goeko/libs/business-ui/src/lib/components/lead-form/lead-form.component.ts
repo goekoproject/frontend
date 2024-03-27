@@ -112,7 +112,7 @@ export class LeadFormComponent implements OnInit {
         'FORM_LABEL.email'
       )} :</b> ${this.leadForm.value.email};  <br> ${
         this.leadForm.value.message
-      };`,
+      }`,
     };
   }
 
