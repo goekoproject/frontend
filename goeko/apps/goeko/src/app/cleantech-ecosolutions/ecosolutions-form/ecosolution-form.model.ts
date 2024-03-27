@@ -29,10 +29,7 @@ export class EcosolutionForm {
 		this.products = ecosolution.classification.products;
 		this.reductionPercentage = ecosolution.improvement?.reductionPercentage;
 		this.operationalCostReductionPercentage = ecosolution.improvement?.operationalCostReductionPercentage;
-		this.sustainableDevelopmentGoals = ecosolution.sustainableDevelopmentGoals?.map((ods) => ({
-			value: ods,
-			checked: true,
-		}));
+		this.sustainableDevelopmentGoals = ecosolution.sustainableDevelopmentGoals;
 		this.price = ecosolution.price?.amount;
 		this.currency = ecosolution.price?.currency;
 		this.deliverCountries = ecosolution.countries;

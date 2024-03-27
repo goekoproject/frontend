@@ -89,8 +89,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
         to: formValue?.operationalCostReductionPercentage?.to,
       },
     };
-    this.sustainableDevelopmentGoals =
-      this.getSustainableDevelopmentGoalsChecked(formValue);
+    this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals;
     this.classification = {
       mainCategory: mainCategory,
       subCategory: formValue.subCategory?.code,
@@ -106,12 +105,4 @@ export class NewEcosolutionsBody implements NewEcosolutions {
     this.approved = formValue.approved;
   }
 
-  getSustainableDevelopmentGoalsChecked(formValue: any) {
-    return formValue.sustainableDevelopmentGoals
-      .filter(
-        (goalChecked: { value: string; checked: boolean }) =>
-          goalChecked.checked
-      )
-      .map((goal: { value: string; checked: boolean }) => goal.value);
-  }
 }
