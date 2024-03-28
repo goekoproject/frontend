@@ -5,7 +5,7 @@
 	border-radius: 12px;
 	display: flex;
 	flex-direction: column;
-
+	background: var(--primary--50);
 	li {
 		text-align: center;
 		padding: 0.4rem;
@@ -14,8 +14,8 @@
 		gap: 0.8rem;
 
 		&:hover {
-			background: rgb(0 144 214 / 24%);
-			color: #ffff;
+			background: var(--primary--200);
+			color: var(--soft-dark);
 		}
 		&:first-child {
 			border-top-left-radius: 0.7rem;
@@ -29,7 +29,7 @@
 }
 
 .langs-selected {
-	background: rgb(22 133 187 / 78%);
+	background: var(--primary--500);
 	color: #ffff;
 }
 
