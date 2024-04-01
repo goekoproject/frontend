@@ -11,6 +11,8 @@
 	font-size: 1rem;
 	resize: none;
 	font-family: Arial, sans-serif;
+	field-sizing: content;
+    max-width: 398px;
 	&:focus-visible {
 		outline-color: #6f57cd;
 		box-shadow: 0px 0px 1px 2px rgba(111, 87, 205, 0.25);

@@ -1,8 +1,16 @@
 <div class="ods">
-	<img
-		*ngFor="let code of odsCode"
-		class="ods-icon"
-		[src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + code + '.png'"
-		[alt]="code"
-	/>
+	@for ( code of odsCode; track code; let i= $index) {
+	    <label class="ecosolution-ods">
+			@if (value() && value().includes(+elementOds.value)) {
+				<i class="ti ti-circle-check ods-check"></i>
+			}
+			<input type="checkbox" [id]="i" [value]="code" [checked]="value() && value().includes(code)" (change)="selectedElement($event,+elementOds.value)" #elementOds  >
+			<img class="ods-icon" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + code + '.png'" [alt]="code" />
+			<span class="ecosolution-unchecked" (click)="selectedElement($event,code)">
+				<i class="ti ti-trash icon-delete"></i>
+			</span>
+
+		  </label>
+	}
+
 </div>

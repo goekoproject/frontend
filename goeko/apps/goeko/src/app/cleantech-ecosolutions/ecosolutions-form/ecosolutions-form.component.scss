@@ -49,55 +49,7 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
-.ecosolution-ods {
-  cursor: pointer;
-  position: relative;
-  width: 15%;
-  height: 100%;
-  display: flex;
-  font-size: 1rem;
-  border-radius: 6px;
-  overflow: hidden;
-  flex-direction: column;
-  max-width: 15%;
-  min-width: 4rem;
 
-  input[type='checkbox'] {
-    visibility: hidden;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: block;
-  }
-
-  img {
-    width: 100%;
-    border-radius: 6px;
-    transition: 0.2s ease-in;
-    padding: 0.2rem;
-  }
-  span {
-    font-size: 1rem;
-    text-align: center;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: #252525;
-    word-break: break-word;
-  }
-  &:hover span {
-    overflow: visible;
-    white-space: normal;
-    height: auto;
-  }
-}
-.ecosolution-ods:has(input:checked) {
-  span {
-    font-weight: 600;
-  }
-}
 .ods-check {
   position: absolute;
   font-size: 2rem;
