@@ -6,8 +6,8 @@
   justify-content: center;
 }
 .button-slide {
-  height: 2.8rem;
-  width: 2.8rem;
+  min-height: 2.8rem;
+  min-width: 2.8rem;
   align-self: center;
   border-radius: 50%;
   display: flex;
