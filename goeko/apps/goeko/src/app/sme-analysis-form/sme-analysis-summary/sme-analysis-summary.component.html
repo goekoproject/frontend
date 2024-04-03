@@ -19,8 +19,8 @@
 
 
   <ul class="section-elements">
-    @for ( category of allCategories.selected; track category.code) { @defer
-    (when category) {
+    @for ( category of allCategories.selected; track category.code) { 
+      @defer(when currentAnalytics()[category.code]) {
     <li class="elements-field">
       <div class="summary-section-header">
         <h2>{{ category.label | translate }}</h2>
