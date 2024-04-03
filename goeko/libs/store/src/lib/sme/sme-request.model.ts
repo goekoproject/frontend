@@ -65,7 +65,6 @@ export interface SmeCreateRecomendationRequest {
   classifications: Classifications[];
 }
 
-
 export interface SmeRequestResponse {
   classifications: Classifications[];
   id: string;
@@ -75,4 +74,7 @@ export interface SmeRequestResponse {
 }
 export interface Requests {
   requests: SmeRequestResponse[];
+}
+export interface Projetcs {
+  projects: SmeRequestResponse[];
 }

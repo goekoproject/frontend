@@ -64,7 +64,7 @@
       }
     </go-carousel>
     }
-    <p>{{ dateLastRecomendation | date : 'short' }}</p>
+    <p>{{ dateLastRecomendation | goDateFormat | date : 'short' }}</p>
   </section>
   <div class="form-actions">
     <button type="button" go-button appearance="white">

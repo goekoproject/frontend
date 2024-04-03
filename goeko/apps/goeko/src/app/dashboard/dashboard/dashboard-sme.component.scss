@@ -50,6 +50,11 @@
     flex-grow: 2;
   }
 }
+.options-for-company-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
 .list-project {
   display: flex;
   flex-direction: column;

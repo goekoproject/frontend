@@ -17,6 +17,7 @@ import {
   BadgeModule,
   ButtonModule,
   CarouselModule,
+  GoDateFormatPipe,
   GoInputModule,
   GoekoButtonModule,
   NotificationModule,
@@ -54,6 +55,7 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     DataArraySummaryPipe,
     SmeRequestAnalisysComponent,
     CategoryRequestPipe,
+    GoDateFormatPipe
 
   ],
   imports: [

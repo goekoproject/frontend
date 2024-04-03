@@ -11,8 +11,10 @@ import {
   ObservableInput,
   filter,
   reduce,
+  find,
 } from 'rxjs';
 import {
+  Projetcs,
   SmeCreateRecomendationRequest,
   SmeRequestResponse,
   SmeSaveRecomendationRequest,
@@ -29,8 +31,8 @@ export class ProjectService {
     private _http: HttpClient
   ) {}
 
-  getProjectById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/ecosolution/search/projects/smes/${id}`);
+  getProjects(id: string): Observable<Projetcs> {
+    return this._http.get<Projetcs>(`/v1/ecosolution/search/projects/smes/${id}`);
   }
 
   createProject(body: SmeCreateRecomendationRequest): Observable<any> {
@@ -47,8 +49,8 @@ export class ProjectService {
   ): Observable<any> {
     return this._http.put<any>(`/v1/ecosolution/search/projects/smes${id}`, body);
   }
-  getLastProjectBySmeId(id: string): Observable<any> {
-    return this.getProjectById(id).pipe(
+  getLastProjectBySmeId(id: string): Observable<SmeRequestResponse> {
+    return this.getProjects(id).pipe(
       map(
         (recommendation: { projects: SmeRequestResponse[] }) =>
           recommendation.projects
@@ -62,8 +64,17 @@ export class ProjectService {
     );
   }
 
+  
+  getProjectId({smeId='', projectId= ''}): Observable<SmeRequestResponse |undefined> {
+    return this.getProjects(smeId).pipe(
+      map((recommendation) => recommendation.projects),
+      mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuale
+      find((project) => project.id === projectId), //
+    );
+  }
+
   getRecommendationsByProjectById(id: string): Observable<any> {
-    return this.getProjectById(id).pipe(
+    return this.getProjects(id).pipe(
       map((recommendation) => recommendation.projects),
       mergeMap((data) => from(data)) // Convierte el array en un Observable de elementos individuale */
     );

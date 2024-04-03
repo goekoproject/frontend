@@ -121,7 +121,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit {
       .subscribe((requestClassifications) => {
         if (requestClassifications) {
           this.dateLastRecomendation = requestClassifications.date;
-          this._fillForm(requestClassifications);
+          this._fillForm(requestClassifications); 
         }
       });
   }
