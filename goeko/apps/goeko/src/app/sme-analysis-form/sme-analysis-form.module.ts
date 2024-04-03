@@ -54,8 +54,7 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     YesNoPipe,
     DataArraySummaryPipe,
     SmeRequestAnalisysComponent,
-    CategoryRequestPipe,
-    GoDateFormatPipe
+    CategoryRequestPipe
 
   ],
   imports: [
@@ -79,6 +78,7 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     GoTableModule, 
     CodeCountryPipe,
     LeadFormComponent,
+    GoDateFormatPipe,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

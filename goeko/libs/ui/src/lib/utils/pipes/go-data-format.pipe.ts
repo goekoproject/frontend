@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment'
 @Pipe({
-    name: 'goDateFormat'
+    name: 'goDateFormat',
+    standalone: true,
 })
 
 export class GoDateFormatPipe implements PipeTransform {

@@ -243,7 +243,7 @@
 
 .eco-solutions-actions {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   position: relative;
   color: var(--primary--main);
   gap: 0.3rem;
@@ -274,7 +274,7 @@
   padding: 1rem;
   &-info {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: center;
     width: 55%;
