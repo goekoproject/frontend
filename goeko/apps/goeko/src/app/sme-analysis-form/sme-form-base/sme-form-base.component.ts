@@ -1,13 +1,28 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, computed, effect } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  computed,
+  effect,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClassificationCategory, ClassificationCategoryProduct, ClassificationSubcategory, DataSelect, SmeRequestResponse, SmeService } from '@goeko/store';
+import {
+  ClassificationCategory,
+  ClassificationCategoryProduct,
+  ClassificationSubcategory,
+  DataSelect,
+  ProjectService,
+  SmeRequestResponse,
+  SmeService,
+} from '@goeko/store';
 import { AutoUnsubscribe } from '@goeko/ui';
 import { Subject } from 'rxjs';
 import { SmeAnalysisService } from '../sme-analysis.service';
-import {
-  transformArrayToObj
-} from '../sme-form-analysis/sme-analysis.request';
+import { transformArrayToObj } from '../sme-form-analysis/sme-analysis.request';
 import { compareWithProducts } from '../sme-analysis..util';
 const defaultSetSuperSelect = (o1: any, o2: any) => {
   if (o1 && o2 && typeof o2 !== 'object') {
@@ -21,14 +36,12 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
   return null;
 };
 
-
-
 @AutoUnsubscribe()
 @Component({
   selector: 'goeko-sme-form-base',
   template: `<div>goeko-sme-form-base</div>`,
 })
-export class SmeFormBaseComponent implements OnInit, AfterViewInit{
+export class SmeFormBaseComponent implements OnInit, AfterViewInit {
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onChangeLastRecomendation: EventEmitter<boolean> =
     new EventEmitter<any>();
@@ -49,14 +62,14 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit{
   dataCategorySelected = this._smeAnalysisService.dataCategorySelected;
   currentAnalytics = this._smeAnalysisService.currentAnalytics;
   slideSelected = computed(() =>
-  this.categories().findIndex(
-    (category: ClassificationCategory) =>
-      category.code === this.categorySelected().code
-  ));
+    this.categories().findIndex(
+      (category: ClassificationCategory) =>
+        category.code === this.categorySelected().code
+    )
+  );
 
   private _smeId!: string;
-  private _queryParamsSelected!:{[key: string]: string}
-
+  private _queryParamsSelected!: { [key: string]: string };
 
   constructor(
     private _fb: FormBuilder,
@@ -64,6 +77,7 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit{
     private _smeService: SmeService,
     private _route: ActivatedRoute,
     private _smeAnalysisService: SmeAnalysisService,
+    private _projectService: ProjectService,
     private _cdf: ChangeDetectorRef
   ) {
     effect(() => {
@@ -111,16 +125,13 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit{
   }
 
   private _setLastAnalysis() {
-    if (this._smeId) {
-      this._getLastAnalysis();
-    }
-    if(this._queryParamsSelected) {
+    if (this._queryParamsSelected) {
       this._getRequiestSelected();
     }
   }
   private _getLastAnalysis() {
-    this._smeService
-      .getLastRecommendationById(this._smeId)
+    this._projectService
+      .getLastProjectBySmeId(this._smeId)
       .subscribe((requestClassifications) => {
         if (requestClassifications) {
           this.dateLastRecomendation = requestClassifications.date;
@@ -130,8 +141,11 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit{
   }
 
   private _getRequiestSelected() {
-    this._smeService
-      .getRequestById({smeId: this._queryParamsSelected['smeId'], requestId: this._queryParamsSelected['requestId']})
+    this._projectService
+      .getProjectId({
+        smeId: this._smeId,
+        projectId: this._queryParamsSelected['projectId'],
+      })
       .subscribe((requestClassifications) => {
         if (requestClassifications) {
           this.dateLastRecomendation = requestClassifications.date;
@@ -140,18 +154,17 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit{
       });
   }
 
-  
-  private _fillForm(requestClassifications : SmeRequestResponse) {
+  private _fillForm(requestClassifications: SmeRequestResponse) {
     const classifications = transformArrayToObj(
       requestClassifications.classifications
     );
 
     this._createFormForEdit(classifications);
     this.form.patchValue(classifications);
+    this.form.controls['searchName'].patchValue(requestClassifications.name);
     this._cdf.markForCheck();
   }
 
-  
   private _createFormForEdit(classifications: any) {
     Object.keys(classifications).forEach((controlName) => {
       Object.keys(classifications[controlName]).forEach(
@@ -182,5 +195,4 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit{
     this._smeId = this._smeId || this._queryParamsSelected['smeId'];
     this._router.navigate([this.resultPath, this._smeId]);
   }
-
 }

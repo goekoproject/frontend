@@ -31,26 +31,30 @@
     </button>
   </div>
   <div class="options-for-company">
-    <span class="title-section">
-      <span class="title-tag"></span>
-      <h2>{{ 'projectManagement' | translate }}</h2>
-      <span class="title-tag-small"></span>
-      <h3>{{ 'last_project' | translate }}</h3>
-    </span>
 
-    <button
-      go-button
-      type="button"
-      [routerLink]="['/sme-analysis/new-project']"
-      [queryParams]="{ smeId: userProfile().id, isProject: true }"
-      [queryParamsHandling]="'merge'"
-      routerLinkActive="router-link-active"
-      [disabled]="!userProfile()"
-      appearance="secondary"
-    >
-      <i class="ti ti-device-desktop-plus"></i>
-      <h4>{{ 'new_project' | translate }}</h4>
-    </button>
+    <div class="options-for-company-header">
+      <span class="title-section">
+        <span class="title-tag"></span>
+        <h2>{{ 'projectManagement' | translate }}</h2>
+        <span class="title-tag-small"></span>
+        <h3>{{ 'last_project' | translate }}</h3>
+      </span>
+  
+      <button
+        go-button
+        type="button"
+        [routerLink]="['/sme-analysis/new-project']"
+        [queryParams]="{ smeId: userProfile().id, isProject: true }"
+        [queryParamsHandling]="'merge'"
+        routerLinkActive="router-link-active"
+        [disabled]="!userProfile()"
+        appearance="secondary"
+      >
+        <i class="ti ti-device-desktop-plus"></i>
+        {{ 'new_project' | translate }}
+      </button>
+    </div>
+   
 
     <ul class="list-project">
       <li *ngFor="let project of projects">
@@ -60,7 +64,7 @@
         </div>
         <div class="project-col project-date">
           <i class="ti ti-calendar-time"></i>
-          <p>{{ project.date | date : 'short' }}</p>
+          <p>{{ project.date | goDateFormat | date : 'short' }}</p>
         </div>
         <div class="project-actions" (click)="deleteProject(project)">
           <i class="ti ti-trash"></i>
