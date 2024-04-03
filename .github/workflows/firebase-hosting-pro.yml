@@ -21,7 +21,7 @@ jobs:
       - name: Install Node 18
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           check-latest: true
       #Init Node
       - name: Install Dependencies
@@ -46,7 +46,7 @@ jobs:
           name: build-project
           path: goeko/dist/apps
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+        uses: w9jds/firebase-action@13.6.1
         with:
           args: deploy --only hosting -P goeko-pro
         env:
