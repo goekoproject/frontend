@@ -46,7 +46,7 @@ jobs:
           name: build-project
           path: goeko/dist/apps
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@stable
+        uses: docker://w9jds/firebase-action:latest
         with:
           args: deploy --only hosting -P goeko-pro
         env:
