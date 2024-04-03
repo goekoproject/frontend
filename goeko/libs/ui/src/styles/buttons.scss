@@ -45,6 +45,12 @@
   i {
     font-size: 24px;
   }
+  .rounded {
+    outline-offset: 2px;
+    outline-color: var(--primary--300);
+    outline-width: 2px;
+    outline-style: solid;
+  }
 }
 .go-button[size='huge'] {
   height: 120px;
