@@ -49,10 +49,9 @@ export class DashboardSmeComponent implements OnInit {
 
   goToProject(projects: SmeRequestResponse) {
     this._smeAnalyticsStore.setCurrentAnalysis(projects);
-    this._router.navigate(['/sme-analysis/last-project', projects.id], {
+    this._router.navigate(['/sme-analysis/last-project',this.userProfile().id], {
       queryParams: {
-        smeId: projects.id,
-        isProject: true,
+        projectId: projects.id
       },
     });
   }
