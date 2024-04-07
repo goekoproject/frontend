@@ -1,14 +1,13 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import {
   Component,
   EventEmitter,
   OnInit,
-  Output,
-  effect
+  Output
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   FORM_CATEGORIES_QUESTION,
+  MessageService,
   Product,
   ProductsManagementComponent,
 } from '@goeko/business-ui';
@@ -21,7 +20,7 @@ import {
   SmeAnalysisStoreService,
   SmeService
 } from '@goeko/store';
-import { SideDialogService } from '@goeko/ui';
+import { MESSAGE_TYPE, SideDialogService } from '@goeko/ui';
 import { SmeAnalysisService } from '../sme-analysis.service';
 import {
   FormValueToSmeAnalysisRequest,
@@ -37,6 +36,7 @@ const compareWithClassificationCategory = (
   selector: 'goeko-sme-analysis-summary',
   templateUrl: './sme-analysis-summary.component.html',
   styleUrls: ['./sme-analysis-summary.component.scss'],
+  providers: [MessageService]
 })
 export class SmeAnalysisSummaryComponent implements OnInit {
   @Output() editForm: EventEmitter<number> = new EventEmitter();
@@ -50,16 +50,15 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   currentAnalytics = this._smeAnalysisService.currentAnalytics;
   categories = this._smeAnalysisService.categories;
   dataCategorySelected = this._smeAnalysisService.dataCategorySelected;
-  allCategories = new SelectionModel<ClassificationCategory>(
-    true,
-    [],
-    true,
-    compareWithClassificationCategory
-  );
+  
+  allCategories = this._smeAnalysisService.dataAllCategory;
   public get isProject() {
-    return this._route?.parent?.snapshot.queryParams['isProject'] === 'true';
+    return this._router.url.includes('projects');
   }
 
+  private get _resultPath(): string { 
+    return this.isProject ? 'sme-analysis/projects/results': 'sme-analysis/results'
+  }
   constructor(
     private _smeServices: SmeService,
     private _projectService: ProjectService,
@@ -67,24 +66,21 @@ export class SmeAnalysisSummaryComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _smeAnalysisService: SmeAnalysisService,
-    private _sideDialogService: SideDialogService
+    private _sideDialogService: SideDialogService,
+    private _messageService:MessageService,
+
   ) {
-    effect(() => {
-      if (this.dataCategorySelected().code) {
-        this.allCategories.select(this.dataCategorySelected());
-      }
-    });
   }
 
   ngOnInit(): void {
     this._smeAnalysisService.getAllDataCategories();
-
     this._smeId = this._getSmeId();
     this._smeAnalysisStore.getCurrentAnalysis().subscribe((res) => {
       if (res) {
         this.formValue = res;
       }
     });
+
   }
 
   private _getSmeId(): string {
@@ -140,7 +136,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
     const codeProductSelected = productsSelected.map(
       (product: Product) => product.id
     );
-    const categoryForUpdate = this.allCategories.selected.find(
+    const categoryForUpdate = this.allCategories().find(
       (c: ClassificationCategory) => c.code === categoryCode
     );
     const productBySubcategory = categoryForUpdate?.subcategories?.find(
@@ -157,17 +153,29 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   changeSearchName(searchName: string): void {
     this.currentAnalytics.update( value => ({...value, searchName: searchName}));
   }
-  getResults() {
-    this._smeServices
+
+  goToSearchEcosolutions() {
+    this._getResults();
+
+    /* this._messageService.infoMessage(MESSAGE_TYPE.WARNING, {title: 'DIALOG.saveMessageGeneric'}).subscribe(saveAnalysis=> {
+        if(saveAnalysis) {
+          this.saveAnalysis();
+        }
+    }); */
+  }
+  private _getResults() {
+      this._smeServices
       .createRecommendations({
         classifications: formToClassificationsMapper(this.currentAnalytics()),
       })
       .subscribe((res) => {
         if (res) {
-          this._router.navigate(['sme-analysis/results', this._smeId]);
+          this._router.navigate([this._resultPath, this._smeId]);
         }
       });
   }
+
+
   saveAnalysis() {
     if (this.isProject) {
       this._saveProject();
@@ -203,6 +211,13 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   }
 
   cancel() {
-    this._router.navigate(['dashboard/sme']);
+    this._messageService.infoMessage(MESSAGE_TYPE.WARNING, {title: 'DIALOG.saveMessageGeneric'}).subscribe(saveAnalysis=> {
+      if(saveAnalysis) {
+        this._saveAnalysis();
+      }
+      this._router.navigate(['dashboard/sme']);
+
+    })
+
   }
 }

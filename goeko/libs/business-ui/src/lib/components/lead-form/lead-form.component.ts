@@ -17,9 +17,8 @@ import { LeadCreate, LeadService, UserService } from '@goeko/store';
 import {
   ButtonModule,
   DialogData,
-  DialogMessageComponent,
   DialogMessageService,
-  GoInputModule,
+  GoInputModule
 } from '@goeko/ui';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 

@@ -20,22 +20,22 @@
 
   </section>
   <section class="section-form">
-    @defer (when form && form.get(dataCategorySelected().code)) {
+    @defer (when dataCategorySelected && form && form.get(dataCategorySelected.code)) {
 
-    <go-carousel [selectedSlideIndex]="slideSelected() || 0" (valueChangeButton)="selectCategoryByCarousel($event.index)">
+    <go-carousel [selectedSlideIndex]="slideSelected() || 0" (valueChangeButton)="selectCategoryByCarousel(categories()[$event.index])">
       @for (category of categories(); track category.id; let index = $index) {
       <section
         *goSlide
         class="content-form go-scroll"
-        formGroupName="{{ this.dataCategorySelected().code }}"
+        formGroupName="{{ dataCategorySelected.code }}"
       >
         <div class="title-category" title>
           <i class="ti ti-info-circle-filled"></i>
           <h3>{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}</h3>
         </div>
-        @for (subcategory of dataCategorySelected().subcategories; track
+        @for (subcategory of dataCategorySelected.subcategories; track
         subcategory.code ; let index = $index;){
-        @if(form.get(dataCategorySelected().code)?.get(subcategory.code)) {
+        @if(form.get(dataCategorySelected.code)?.get(subcategory.code)) {
         <!--FORM ACTORS-->
         <div class="form-field form-field--center">
           <!-- PRODUCTS (disabled = false)-->
@@ -46,7 +46,7 @@
             [typeTitle]="'question'"
             [multiple]="true"
             [checked]="
-              !!form.value[this.dataCategorySelected().code][subcategory.code]
+              !!form.value[this.dataCategorySelected.code][subcategory.code]
             "
           >
             <p title>{{ subcategory.question }}</p>

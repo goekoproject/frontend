@@ -8,19 +8,32 @@ export class MessageService {
 
   private _item?:string;
   private _type!: MessageType;
-  get title(): string {
-    return this._translate.instant('DIALOG.warningDelete', {
-      item: this._item,
-    });
+  get title(): string | undefined {
+    return this._title;
   }
+
+  set title(title: string | undefined) {
+    this._title = title;
+  }
+  private _title?: string;
   constructor(private _dialogMessage: DialogMessageService, private _translate : TranslateService
     ) { }
 
-  showMessage(type: MessageType,item?: string): Observable<any> {
-   this._item = item;
+  infoMessage(type: MessageType,data: {item?: string,title: string}): Observable<any> {
    this._type = type;
+   this._item = data.item;
+   this.title = this._translate.instant(data.title)
    return this.openMessageDialog();
   }
+
+  deleteMessage(type: MessageType,item?: string): Observable<any> {
+    this._type = type;
+    this._item = item;
+    this.title = this._translate.instant('DIALOG.warningDelete', {
+      item: this._item,
+    });;
+    return this.openMessageDialog();
+   }
 
   private openMessageDialog() {
     const dialogRef = this._dialogMessage.open(this._buildDialogData());

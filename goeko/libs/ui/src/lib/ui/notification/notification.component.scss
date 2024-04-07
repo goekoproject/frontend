@@ -12,10 +12,23 @@
   &-icon {
     font-size: 24px;
   }
+  &[type='info'] {
+    border: 1px solid var(--primary--main);
+    border-left: 6px solid var(--primary--main);
+    font: var(--font-label-semibold);
+    font-style: italic;
+  }
+
 }
-.notification[type='info'] {
-  border: 1px solid var(--primary--main);
-  border-left: 6px solid var(--primary--main);
-  font: var(--font-label-semibold);
-  font-style: italic;
+
+.notification[appearance='flat'] {
+  border: none;
+  background: transparent;
+  font: var(--font-default);
+  gap: 0.7rem;
+  color: var(--soft-dark);
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+  align-items: flex-start;
 }

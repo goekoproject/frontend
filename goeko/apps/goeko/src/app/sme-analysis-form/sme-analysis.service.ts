@@ -1,7 +1,8 @@
-import { Injectable, Injector, effect, inject, signal } from '@angular/core';
+import { Injectable, Injector, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   CATEGORY_SECTION,
+  CategorySection,
   FORM_CATEGORIES_QUESTION,
   mergeCategoriesSectionWithClassificationCategory,
 } from '@goeko/business-ui';
@@ -11,7 +12,7 @@ import {
   ClassificationSubcategory,
   NULL_CLASSIFICATION_CATEGORY,
 } from '@goeko/store';
-import { map, tap, toArray } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 
 export interface CurrecurrentAnalytics {
   co2Emission: { [key: string]: any };
@@ -41,6 +42,11 @@ const mapToCategoriesSectionForOrderBy = (
       .sort((a: any, b: any) => a.order - b.order),
   };
 };
+
+export const compareWithClassificationCategory = (
+  c1: ClassificationCategory,
+  c2: ClassificationCategory
+) => c1.code === c2.code;
 @Injectable()
 export class SmeAnalysisService {
   private injector = inject(Injector);
@@ -58,16 +64,13 @@ export class SmeAnalysisService {
   );
   subCategorySelectedIndex = signal<string>('');
 
+  dataAllCategory = signal<Array<ClassificationCategory>>([]);
   currentAnalytics = signal({} as any);
 
   constructor(
     private classificationCategoryService: ClassificationCategoryService
   ) {
-    effect(() => {
-      if (this.categorySelected().id !== '') {
-        this._getClassificationForCategoryTranslated();
-      }
-    });
+   
   }
 
   private _getAllCategories$() {
@@ -82,25 +85,29 @@ export class SmeAnalysisService {
       );
   }
 
-  private _getClassificationForCategoryTranslated() {
-    this.classificationCategoryService
-      .getClassificationForCategoryTranslated(this.categorySelected().code)
-      .pipe(
-        map((classificationCategory) =>
-          mapToCategoriesSectionForOrderBy(classificationCategory)
+  private _getClassificationForCategory$(codeCategory: string): Observable<ClassificationCategory> {
+        return  this.classificationCategoryService
+        .getClassificationForCategoryTranslated(codeCategory)
+        .pipe(
+          map((classificationCategory) =>
+            mapToCategoriesSectionForOrderBy(classificationCategory)
+          )
         )
-      )
+  }
+  private _getClassificationForCategoryTranslated() {
+   this._getClassificationForCategory$(this.categorySelected().code)
       .subscribe((dataCategory) => {
         if (dataCategory) {
-          this.dataCategorySelected.set(dataCategory);
+/*           this.dataCategorySelected.set(dataCategory);
+ */          
         }
       });
   }
 
+
+
   getAllDataCategories() {
-    this.categories()?.forEach((category: ClassificationCategory) => {
-      this.categorySelected.set(category);
-      this._getClassificationForCategoryTranslated();
-    });
+    const allCategories$ = this.categories().map((category:CategorySection) => this._getClassificationForCategory$(category.code)) ;
+    forkJoin(allCategories$).subscribe((dataCategories) => this.dataAllCategory.set(dataCategories as ClassificationCategory[]));
   }
 }

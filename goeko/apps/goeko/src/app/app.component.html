@@ -13,11 +13,12 @@
 <div class="container">
   <router-outlet></router-outlet>
 </div>
-}
-
 <footer>
   <goeko-footer></goeko-footer>
 </footer>
+}
+
+
 <go-popup
   *ngIf="showPopupCookies"
   [title]="'LEGAL.cookiesPolicy' | translate"
