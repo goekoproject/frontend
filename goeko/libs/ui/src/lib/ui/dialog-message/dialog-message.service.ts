@@ -8,7 +8,7 @@ export enum MESSAGE_TYPE {
 
 }
 export interface DialogData {
-    title: string;
+    title?: string;
     body?: string;
     buttonPrimary?: string ;
     buttonSecondary?: string;

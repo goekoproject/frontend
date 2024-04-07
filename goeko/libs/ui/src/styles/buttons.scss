@@ -13,7 +13,6 @@
   height: 2.625rem;
   line-height: 1.25rem;
   justify-content: center;
-  margin: 20px;
   padding: 0.5rem 1rem;
   position: relative;
   text-align: center;
@@ -61,6 +60,8 @@
   color: var(--primary--700);
   border: none;
   box-shadow: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 .go-button[appearance='transparent'] {
   background-color: transparent;

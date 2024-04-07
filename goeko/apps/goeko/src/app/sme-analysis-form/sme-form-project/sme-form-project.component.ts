@@ -34,7 +34,7 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
     this.onChangeLastRecomendation.subscribe(
       (data) => (this.toogleSaveName = !data)
     );
-    this.resultPath = 'new-project/results';
+    this.form.patchValue(this.currentAnalytics());
 
   }
 

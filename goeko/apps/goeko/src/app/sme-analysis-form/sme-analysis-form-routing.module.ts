@@ -1,139 +1,120 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
+import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component';
+import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
+import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component';
+import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
 import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
-import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
+import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
-import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component';
-import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
-import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: SmeAnalysisComponent,
-		data: {
-			breadcrumb: 'analysis',
-			hidden: true,
-		},
-		children: [
-			{
-				path: 'list/:id',
-				component: SmeRequestAnalisysComponent,
-				data: {
-					breadcrumb: 'analysis',
-				},
-			},
-			{
-				path: 'request',
-				component:SmeFormAnalysisComponent
-			},
-			{
-				path: 'new',
-				component: SmeFormAnalysisComponent,
-				data: {
-					breadcrumb: 'new_analysis',
-				}
-			},
-			{
-				path: 'summary',
-				component: SmeAnalysisSummaryComponent,
-				data: {
-					breadcrumb: 'summary',
-				},
-			},
-	
-			
-			
-		],
-	},
-	{
-		path: 'last/:id',
-		component: SmeAnalysisComponent,
-		data: {
-			breadcrumb: 'last_analysis',
-			hidden: true,
-		},
-		children: [
-			{
-				path: '',
-				component: SmeFormAnalysisComponent,
-			},
-			{
-				path: 'summary',
-				component: SmeAnalysisSummaryComponent,
-				data: {
-					breadcrumb: 'summary',
-				},
-			}
-			
-		],
-	},
-	{
-		path: 'new-project',
-		component: SmeAnalysisComponent,
-		data: {
-			breadcrumb: 'new_project',
-			hidden: true,
-		},
-		children: [
-			{
-				path: '',
-				component: SmeFormProjectComponent,
-			},
-			{
-				path: 'summary',
-				component: SmeAnalysisSummaryComponent,
-				data: {
-					breadcrumb: 'summary',
-				},
-			},
-		],
-	},
-	{
-		path: 'last-project/:id',
-		component: SmeAnalysisComponent,
-		data: {
-			breadcrumb: 'last_project',
-			hidden: true,
-		},
-		children: [
-			{
-				path: '',
-				component: SmeFormProjectComponent,
-			},
-			{
-				path: 'summary',
-				component: SmeAnalysisSummaryComponent,
-				data: {
-					breadcrumb: 'summary',
-				},
-			},
-			{
-				path: 'results/:id',
-				component: SmeAnalysisResultComponent,
-				data: {
-					breadcrumb: 'your_ecosolutions',
-				},
-			},
-		],
-	},
-	{
-		path: 'results/:id',
-		component: SmeAnalysisResultComponent,
-		data: {
-			breadcrumb: 'your_ecosolutions',
-		},
-		children: [
-			{ path: '', component: EcosolutionListComponent },
-			{ path: 'details/:idEcosolution', component: ResultDetailEcosolutionComponent },
-		],
-	},
+  {
+    path: '',
+    component: SmeAnalysisComponent,
+    data: {
+      breadcrumb: 'analysis',
+      hidden: true,
+    },
+    children: [
+      {
+        path: 'list/:id',
+        component: SmeRequestAnalisysComponent,
+        data: {
+          breadcrumb: 'analysis',
+        },
+      },
+      {
+        path: 'request',
+        component: SmeFormAnalysisComponent,
+      },
+      {
+        path: 'last/:id',
+        component: SmeFormAnalysisComponent,
+        data: {
+          breadcrumb: 'last_analysis',
+          hidden: true,
+        },
+      },
+      {
+        path: 'new',
+        component: SmeFormAnalysisComponent,
+        data: {
+          breadcrumb: 'new_analysis',
+        },
+      },
+      {
+        path: 'summary',
+        component: SmeAnalysisSummaryComponent,
+        data: {
+          breadcrumb: 'summary',
+        },
+      },
+      {
+        path: 'results/:id',
+        component: SmeAnalysisResultComponent,
+        data: {
+          breadcrumb: 'your_ecosolutions',
+        },
+        children: [
+          { path: '', component: EcosolutionListComponent },
+          {
+            path: 'details/:idEcosolution',
+            component: ResultDetailEcosolutionComponent,
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    path: 'projects',
+    component: SmeAnalysisComponent,
+    data: {
+      breadcrumb: 'new_project',
+      hidden: true,
+    },
+    children: [
+      {
+        path: 'new',
+        component: SmeFormProjectComponent,
+      },
+      {
+        path: 'project/:id',
+        component: SmeFormProjectComponent,
+        data: {
+          breadcrumb: 'last_project',
+          hidden: true,
+        },
+      },
+      {
+        path: 'summary',
+        component: SmeAnalysisSummaryComponent,
+        data: {
+          breadcrumb: 'summary',
+        },
+      },
+      {
+        path: 'results/:id',
+        component: SmeAnalysisResultComponent,
+        data: {
+          breadcrumb: 'your_ecosolutions',
+        },
+        children: [
+          { path: '', component: EcosolutionListComponent },
+          {
+            path: 'details/:idEcosolution',
+            component: ResultDetailEcosolutionComponent,
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class SmeAnalysisFormRoutingModule {}

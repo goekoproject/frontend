@@ -6,8 +6,11 @@ import {
 import { Section } from '../form-field.model';
 
 export const formToClassificationsMapper = (formValue: Section) => {
-  const classifications: Classifications[] = [];
 
+  const classifications: Classifications[] = [];
+  if(!formValue) {
+    return classifications;
+  }
   const isObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
 
   Object.entries(formValue).map((value) => {

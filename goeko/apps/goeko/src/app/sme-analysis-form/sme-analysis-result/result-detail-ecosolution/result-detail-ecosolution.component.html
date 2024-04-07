@@ -28,7 +28,7 @@
     />
   </div>
   <div class="detail-actions">
-    <button go-button appearance="white">
+    <button go-button appearance="white" *ngIf="detailsEcosolution.certified">
       <i class="ti ti-file-download"></i>
       {{ 'certified' | translate }}
     </button>

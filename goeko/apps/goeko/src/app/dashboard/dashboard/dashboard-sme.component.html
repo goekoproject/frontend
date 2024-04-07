@@ -19,7 +19,7 @@
       go-button
       type="button"
       [routerLink]="['/sme-analysis/last', userProfile().id]"
-      [queryParams]="{ isProject: false }"
+      [queryParams]="{ isLast: false }"
       [queryParamsHandling]="'merge'"
       routerLinkActive="router-link-active"
       [disabled]="!userProfile()"
@@ -43,8 +43,8 @@
       <button
         go-button
         type="button"
-        [routerLink]="['/sme-analysis/new-project']"
-        [queryParams]="{ smeId: userProfile().id, isProject: true }"
+        [routerLink]="['/sme-analysis/projects/new']"
+        [queryParams]="{ smeId: userProfile().id }"
         [queryParamsHandling]="'merge'"
         routerLinkActive="router-link-active"
         [disabled]="!userProfile()"
@@ -64,7 +64,7 @@
         </div>
         <div class="project-col project-date">
           <i class="ti ti-calendar-time"></i>
-          <p>{{ project.date | goDateFormat | date : 'short' }}</p>
+          <p>{{ project.date | goDateFormat  }}</p>
         </div>
         <div class="project-actions" (click)="deleteProject(project)">
           <i class="ti ti-trash"></i>

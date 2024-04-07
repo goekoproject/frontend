@@ -43,7 +43,7 @@
     "products": "Tipo de producto peligroso",
     "specialWaste": "Residuos Especiales"
   },
-  "infoSaveMessages": "¡Guarda tu análisis para futuras consultas!",
+  "infoSaveMessages": "Tienes la opción de guardar tus datos en este momento, lo cual asegurará que estén disponibles para futuras consultas, brindándote la certeza de contar con ellos cuando los necesites.",
   "searchEcosolutions": "Buscar ecosoluciones",
   "CATEGORIES_LABEL": {
     "amount": {
@@ -393,7 +393,8 @@
   "DIALOG": {
     "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
     "messageBodyLead" : "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
-    "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?"
+    "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?",
+    "saveMessageGeneric": "¿Deseas guardar los datos antes de continuar?"
 
   },
   "logout":"Cerrar sesión",
@@ -427,7 +428,7 @@
   "lastLead": "Ultimo cliente potencial",
   "last_analysis": "Último análisis",
   "last_project": "3 Ultimos proyectos",
-  "leadFormTitle": "¡Contáctenos hoy y comience su viaje hacia un futuro sostenible!",
+  "leadFormTitle": "¡Ponte en contacto con la cleantech con tan solo un clic para mejorar tu impacto ambiental!",
   "leads": "Clientes potenciales",
   "my_company": "Mi empresa",
   "new_analysis": "Nuevo análisis",

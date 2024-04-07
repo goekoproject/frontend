@@ -118,7 +118,7 @@
     "resources": "Ressources",
     "service": "Service"
   },
-  "infoSaveMessages": "Enregistrez votre analyse pour consultation ultérieure!",
+  "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures, vous donnant confiance en leur accès lorsque nécessaire.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
     "additionalInformation": "Informations supplémentaires",
@@ -391,7 +391,8 @@
   "DIALOG": {
     "messageSendOk": "Votre message a été envoyé avec succès !",
     "messageBodyLead" : "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
-    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?"
+    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
+    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?"
 
 
   },
@@ -415,22 +416,22 @@
   "companyDetails": "Détails de l'entreprise",
   "completeToProfileNow": "Complétez votre profil maintenant !",
   "confirm": "Confirmer",
-  "connectNow": "Connectez-vous maintenant!",
+  "connectNow": "Contactez-nous maintenant!",
   "contact": "Contact",
   "continue": "Continuer",
   "costReduction": "Coûts opérationnels",
   "creationDate": "Date de creation",
   "dashboard": "Tableau de bord",
   "decline": "Refuser",
-  "defaultMessageLead": "Bonjour, Je suis intéressé par votre éco-solution. Merci de bien vouloir me contacter par e-mail.",
+  "defaultMessageLead": "Bonjour, votre éco-solution m’intéresse. Merci de bien vouloir me conctacter par e-mail.",
   "cleantechLeadDefault": "Sur le point de découvrir de nouveaux prospects durables. Préparez-vous à vous connecter !",
 
   "details": "Détails",
   "edit": "Modifier",
   "lastLead": "Dernier prospect",
   "last_analysis": "Dernière analyse",
-  "last_project": "3 Derniers projets",
-  "leadFormTitle": "Contactez-nous dès aujourd'hui et commencez votre voyage vers un avenir durable!",
+  "last_project": "Derniers projets",
+  "leadFormTitle": "Entrez en contact en un clic avec la cleantech pour améliorer votre impact environnemental!",
   "leads": "Prospects",
   "my_company": "Mon entreprise",
   "new_analysis": "Nouvelle analyse",

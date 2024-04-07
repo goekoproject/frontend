@@ -27,7 +27,7 @@
     "water": "Water",
     "waterConsumption": "Water"
   },
-  "infoSaveMessages": "Save your analysis for future reference!",
+  "infoSaveMessages": "You have the option to save your data now, ensuring it's available for future reference, providing you with confidence in accessing it when needed.",
   "searchEcosolutions": "Search eco-solutions",
   "CATEGORIES_FIELD": {
     "amount": "Water consumption (2022)",
@@ -394,7 +394,8 @@
   "DIALOG": {
     "messageSendOk": "Your message has been sent successfully!",
     "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have.",
-    "warningDelete": "Are you sure you want to delete {{item}} ?"
+    "warningDelete": "Are you sure you want to delete {{item}} ?",
+    "saveMessageGeneric": "Do you want to save the data before continuing?"
 
   },
   "logout":"Log out",
@@ -429,7 +430,7 @@
   "lastLead": "Latest lead",
   "last_analysis": "Last analysis",
   "last_project": "3 Last projects",
-  "leadFormTitle": "Contact us today and start your journey to a sustainable future!",
+  "leadFormTitle": "Connect in one click with the cleantech to improve your environmental impact!",
   "leads": "Leads",
   "my_company": "My company",
   "new_analysis": "New analysis",

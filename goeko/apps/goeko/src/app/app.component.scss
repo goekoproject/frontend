@@ -32,4 +32,6 @@ go-popup {
   flex-direction: column;
   gap: 1.2rem;
   width: calc(89% - 80px);
+  height: 100vh;
+  min-height: 100%;
 }
