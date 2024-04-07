@@ -8,7 +8,7 @@ import {
 
 export const smeFormGroup = new FormGroup({
   name: new FormControl('',Validators.required),
-  email: new FormControl('', Validators.email),
+  email: new FormControl('',[Validators.required, Validators.email]),
   country: new FormControl('',Validators.required),
   website: new FormControl(),
   externalId: new FormControl(),
