@@ -141,7 +141,7 @@ export class EcosolutionsFormComponent implements OnInit {
       .getEcosolutionById(this.idEcosolution)
       .subscribe((res: any) => {
         this._getDocumentsCleantech();
-        this.urlImgEcosolution = res?.pictures  ? res?.pictures[0]?.url : '';
+        this.urlImgEcosolution = res?.pictures  ? res?.pictures.at(-1)?.url : '';
         const formValue = new EcosolutionForm(res);
         this.form.patchValue(formValue);
       });
