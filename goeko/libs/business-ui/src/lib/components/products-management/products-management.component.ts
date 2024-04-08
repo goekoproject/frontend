@@ -32,6 +32,7 @@ export interface Product {
   styleUrl: './products-management.component.scss',
 })
 export class ProductsManagementComponent implements OnInit {
+  buttonText = 'PRODUCT_ACTIONS.addProduct';
   products = signal<Product[]>([] as any);
   codeProductsSeclected = signal(
     this.data.productSelected.map((product) => product.code)

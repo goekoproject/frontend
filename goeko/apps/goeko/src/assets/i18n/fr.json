@@ -233,6 +233,9 @@
     "ods_8": "Travail décent et croissance économique",
     "ods_9": "Industrie, Innovation et Infrastructure"
   },
+  "PRODUCT_ACTIONS": {
+    "addProduct": "Ajouter le produit"
+  },
   "SCENES": {
     "slogan_text1": "Connexion des PME aux technologies propres et au financement",
     "slogan_text2": "Est-ce que tu veux?"
