@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { Location } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -69,7 +70,8 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
     private _smeService: SmeService,
     private _route: ActivatedRoute,
     private _smeAnalysisService: SmeAnalysisService,
-    private _cdf: ChangeDetectorRef
+    private _cdf: ChangeDetectorRef,
+    private _location: Location
   ) {
     effect(() => {
       if(this.dataAllCategory().length > 0) {
@@ -147,7 +149,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
 
   private _setLastAnalysis() {
     const {smeId, requestId, isLast} = this._queryParamsSelected;
-    if (isLast) {
+    if (isLast && !this.currentAnalytics()) {
       this._getLastAnalysis();
     }
     if(smeId && requestId) {
@@ -212,4 +214,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
     this._router.navigate(['sme-analysis/results', this._smeId]);
   }
 
+  goToBack() {
+    this._location.back();
+  }
 }

@@ -70,8 +70,8 @@
     <p>{{ dateLastRecomendation | goDateFormat }}</p>
   </section>
   <div class="form-actions">
-    <button type="button" go-button appearance="white">
-      {{ 'cancel' | translate }}
+    <button type="button" go-button appearance="white" (click)="goToBack()">
+      {{ 'back' | translate }}
     </button>
     <div class="form-actions-submit">
       <!-- 			<button type="button" go-button appearance="white" *ngIf="isSummarySlide()" (click)="saveAnalysis()">

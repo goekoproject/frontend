@@ -34,7 +34,6 @@ const routes: Routes = [
         component: SmeFormAnalysisComponent,
         data: {
           breadcrumb: 'last_analysis',
-          hidden: true,
         },
       },
       {
@@ -73,7 +72,6 @@ const routes: Routes = [
     component: SmeAnalysisComponent,
     data: {
       breadcrumb: 'new_project',
-      hidden: true,
     },
     children: [
       {

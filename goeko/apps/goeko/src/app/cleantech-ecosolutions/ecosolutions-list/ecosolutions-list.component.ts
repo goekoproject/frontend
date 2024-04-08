@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from '@goeko/business-ui';
 import {
   ClassificationCategory,
   EcosolutionsService
 } from '@goeko/store';
+import { MESSAGE_TYPE } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
 import { CardEcosolutions } from './card-ecosolutions.model';
-import { MessageService } from '@goeko/business-ui';
-import { MESSAGE_TYPE } from '@goeko/ui';
 
 @Component({
   selector: 'goeko-ecosolutions-list',
@@ -59,7 +59,7 @@ export class EcosolutionsListComponent implements OnInit {
   }
 
   deleteEcosolution(ecosolution: CardEcosolutions) {
-    this._messageService.deleteMessage(MESSAGE_TYPE.WARNING,ecosolution.solutionName).subscribe(isDelete => {
+    this._messageService.deleteMessage(MESSAGE_TYPE.WARNING,ecosolution.solutionName).afterClosed().subscribe(isDelete => {
 
       if(isDelete) {
         this._ecosolutionsService

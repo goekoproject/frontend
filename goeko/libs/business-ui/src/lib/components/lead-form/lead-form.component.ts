@@ -16,7 +16,7 @@ import {
 import { LeadCreate, LeadService, UserService } from '@goeko/store';
 import {
   ButtonModule,
-  DialogData,
+  DialogConfig,
   DialogMessageService,
   GoInputModule
 } from '@goeko/ui';
@@ -70,7 +70,6 @@ export class LeadFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     this._initForm();
     this._buildDataLead();
   }
@@ -119,7 +118,7 @@ export class LeadFormComponent implements OnInit {
     const dataDialog = this._getDataDialog();
     this._dialogMessage.open(dataDialog);
   }
-  private _getDataDialog(): DialogData {
+  private _getDataDialog(): DialogConfig {
     return {
       title: this._translateService.instant('DIALOG.messageSendOk'),
       body: this._translateService.instant('DIALOG.messageBodyLead'),

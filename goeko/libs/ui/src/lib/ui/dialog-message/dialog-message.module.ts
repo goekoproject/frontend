@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ButtonModule } from '../button/button.module';
 import { DialogMessageComponent } from './dialog-message.component';
 import { DialogMessageService } from './dialog-message.service';
-import { ButtonModule } from '../button/button.module';
+import { OverlayRefService } from './overlay-ref.service';
 
 
 @NgModule({
     imports: [CommonModule, ButtonModule],
     exports: [DialogMessageComponent],
     declarations: [DialogMessageComponent],
-    providers: [DialogMessageService],
+    providers: [DialogMessageService,OverlayRefService],
 })
 export class DialogMessageModule { }

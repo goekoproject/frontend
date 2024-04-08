@@ -56,6 +56,10 @@ export class SmeAnalysisSummaryComponent implements OnInit {
     return this._router.url.includes('projects');
   }
 
+  private get _dialogInfoMessage() {
+    return this._messageService.infoMessage(MESSAGE_TYPE.WARNING, {title: 'DIALOG.saveMessageGeneric', buttonPrimary: 'save', buttonSecondary: 'notSave'});
+  }
+
   private get _resultPath(): string { 
     return this.isProject ? 'sme-analysis/projects/results': 'sme-analysis/results'
   }
@@ -155,13 +159,12 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   }
 
   goToSearchEcosolutions() {
-    this._getResults();
-
-    /* this._messageService.infoMessage(MESSAGE_TYPE.WARNING, {title: 'DIALOG.saveMessageGeneric'}).subscribe(saveAnalysis=> {
+     this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
         if(saveAnalysis) {
           this.saveAnalysis();
         }
-    }); */
+        this._getResults();
+    }); 
   }
   private _getResults() {
       this._smeServices
@@ -211,12 +214,11 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   }
 
   cancel() {
-    this._messageService.infoMessage(MESSAGE_TYPE.WARNING, {title: 'DIALOG.saveMessageGeneric'}).subscribe(saveAnalysis=> {
+    this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
       if(saveAnalysis) {
         this._saveAnalysis();
       }
-      this._router.navigate(['dashboard/sme']);
-
+       this._router.navigate(['dashboard/sme']); 
     })
 
   }

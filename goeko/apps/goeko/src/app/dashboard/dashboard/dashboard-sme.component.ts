@@ -59,7 +59,7 @@ export class DashboardSmeComponent implements OnInit {
   deleteProject(project: SmeRequestResponse) {
     this._messageService
       .deleteMessage(MESSAGE_TYPE.WARNING, project.name)
-      .subscribe((res) => {
+      .afterClosed().subscribe((res) => {
         if (res) {
           this._projectService.deleteProject(project.id).subscribe((data) => {
             this._getLastProjectName();

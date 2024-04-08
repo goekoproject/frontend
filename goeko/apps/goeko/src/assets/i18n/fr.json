@@ -396,6 +396,7 @@
 
 
   },
+  "exit": "Sortir",
   "dragAndDrop": "Glisser déposer",
   "editSelection": "Modifier sélection",
   "logout":"Log out",
@@ -444,6 +445,7 @@
   "projectManagement": "Gestion de projet",
   "result": "Résultat",
   "save": "Sauvegarder",
+  "notSave": "Fermer sans sauvegarder",
   "saveYou": "Sauvegarder votre",
   "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre écosolution",
   "selected_products": "Produits sélectionnés",

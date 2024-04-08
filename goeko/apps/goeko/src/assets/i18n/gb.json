@@ -398,6 +398,7 @@
     "saveMessageGeneric": "Do you want to save the data before continuing?"
 
   },
+  "exit": "Exit",
   "logout":"Log out",
   "a": "to",
   "your":"Your",
@@ -443,6 +444,7 @@
   "projectManagement": "Project Management",
   "result": "Result",
   "save": "Save",
+  "notSave": "Close without saving",
   "saveYou": "Save your",
   "selectCategoryEcosolutions": "Select the category for your ecosolution",
   "selected_products": "Selected products",

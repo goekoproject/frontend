@@ -1,5 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DialogMessageComponent } from './dialog-message.component';
+import { OverlayRefService } from './overlay-ref.service';
+import { UIDialogRef } from './ui-dialog-ref';
 export type MessageType  = 'info' | 'warning' | 'error';
 export enum MESSAGE_TYPE {
     INFO = 'info',
@@ -7,7 +10,7 @@ export enum MESSAGE_TYPE {
     ERROR = 'error',
 
 }
-export interface DialogData {
+export interface DialogConfig {
     title?: string;
     body?: string;
     buttonPrimary?: string ;
@@ -15,7 +18,7 @@ export interface DialogData {
     type?:MessageType;
 
 }
-const DEFAULT_DATA: DialogData = {
+const DEFAULT_DATA: DialogConfig = {
     title : '',
     body: '',
     buttonPrimary : '',
@@ -31,21 +34,19 @@ export class DialogMessageService {
     public set data(value) {
         this._data = value;
     }
-    private _data = signal<DialogData | null>(DEFAULT_DATA);
+    private _data = signal<DialogConfig | null>(DEFAULT_DATA);
+	private _uiDialogRef!: UIDialogRef<DialogMessageComponent>;
 
     private _responseMessage = new BehaviorSubject<boolean>(false);
-    constructor() { }
+    constructor(private _dialogRef: OverlayRefService) { }
 
 
-    open(data: DialogData) {
-        this.data.set(data);
-        return this._responseMessage.asObservable();
+    open(config: DialogConfig):UIDialogRef<any> {
+        this.data.set(config);
+        this._uiDialogRef = this._dialogRef.attach<DialogMessageComponent>(DialogMessageComponent, config);
+        return this._uiDialogRef;
     }
 
-    onSubmitAccept(isAccept: boolean) {
-        this._responseMessage.next(isAccept);
-        this._responseMessage.complete();
-    }
 
 
   

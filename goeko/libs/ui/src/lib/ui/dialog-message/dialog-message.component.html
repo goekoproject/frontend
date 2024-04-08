@@ -10,7 +10,7 @@
 
       <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
         <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
-          <button type="button" data-behavior="cancel" class="bg-white rounded-md text-gray-400 hover:text-gray-500" (click)="closeDialog()">
+          <button type="button" data-behavior="cancel" class="bg-white rounded-md text-gray-400 hover:text-gray-500" (click)="close()">
             <span class="material-symbols-rounded">
               close
             </span>
@@ -48,7 +48,7 @@
         </div>
         @if (data()?.buttonPrimary || data()?.buttonSecondary) {
             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse gap-3">
-                <button type="button" go-button *ngIf="data()?.buttonPrimary"  (click)="closeDialog(true)">
+                <button type="button" go-button *ngIf="data()?.buttonPrimary"  (click)="close(true)">
                   {{data()?.buttonPrimary}}
                 </button>
                 <button type="button" go-button [appearance]="'white'" *ngIf="data()?.buttonSecondary"  (click)="close()">
