@@ -19,7 +19,7 @@
       go-button
       type="button"
       [routerLink]="['/sme-analysis/last', userProfile().id]"
-      [queryParams]="{ isLast: false }"
+      [queryParams]="{ isLast: true }"
       [queryParamsHandling]="'merge'"
       routerLinkActive="router-link-active"
       [disabled]="!userProfile()"

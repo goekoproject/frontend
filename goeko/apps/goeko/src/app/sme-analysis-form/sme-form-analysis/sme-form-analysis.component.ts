@@ -51,6 +51,11 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
   get dataCategorySelected(): ClassificationCategory {
     return this._dataCategories?.selected[0];
   }
+
+  get isDataSetLastAnalysis() {
+    const  isLast = this._queryParamsSelected['isLast'];
+    return isLast && JSON.parse(isLast) && (!this.currentAnalytics() || Object.keys(this.currentAnalytics()).length === 0)
+  }
   //Signal
   categories = this._smeAnalysisService.categories;
   categorySelected = this._smeAnalysisService.categorySelected;
@@ -148,8 +153,8 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
 
 
   private _setLastAnalysis() {
-    const {smeId, requestId, isLast} = this._queryParamsSelected;
-    if (isLast && !this.currentAnalytics()) {
+    const {smeId, requestId} = this._queryParamsSelected;
+    if (this.isDataSetLastAnalysis) {
       this._getLastAnalysis();
     }
     if(smeId && requestId) {
