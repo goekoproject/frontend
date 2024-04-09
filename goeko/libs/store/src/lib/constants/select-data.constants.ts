@@ -193,6 +193,11 @@ export const SelectProducts: DataSelectOption[] = [
     keyLang:
       'SELECT_DATA_LABEL.selectProducts.woodTreatedWithHazardousSubstances',
   },
+  {
+    id: 'collects',
+    keyLang:
+      'SELECT_DATA_LABEL.selectProducts.collects',
+  },
   /* 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectProducts.packagingSoiledWithDangerousSubstances' },
  { id: 5, keyLang: 'SELECT_DATA_LABEL.selectProducts.oilSeparatorSludge' },	
 	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectProducts.cartridgesContainingDangerousSubstances' },
@@ -454,6 +459,11 @@ const SelectSustainableBuildingOperations: DataSelectOption[] = [
       'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useLowConsumptionLighting',
   },
   {
+    id: 'sustainableLightingSystems',
+    keyLang:
+      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.sustainableLightingSystems',
+  },
+  {
     id: 'storeEnergy',
     keyLang:
       'SELECT_DATA_LABEL.selectSustainableBuildingOperations.storeEnergy',
@@ -606,6 +616,10 @@ const SelectBuildingOperation: DataSelectOption[] = [
   {
     id: 'waterManagement',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement',
+  },
+  {
+    id: 'waterManagementGray',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementGray',
   },
 ];
 

@@ -253,7 +253,8 @@
     },
     "selectBuildingOperation": {
       "greenRoofsWalls": "Green Roofs and Walls",
-      "waterManagement": "Water Management"
+      "waterManagement": "Solutions for rainwater management",
+      "waterManagementGray": "Solutions for gray water management"
     },
     "selectCountry": {
       "france": "France",
@@ -347,7 +348,8 @@
       "packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
       "paintVarnish": "Paint/varnish",
       "productsContainingTar": "Products containing tar",
-      "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
+      "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances",
+      "collects": "Collects"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosols",
@@ -376,7 +378,9 @@
       "recoverHeat": "Recover heat",
       "storeEnergy": "Store energy",
       "useLowConsumptionLighting": "Use low consumption lighting",
-      "useRenewableEnergies": "Use renewable energies"
+      "useRenewableEnergies": "Use renewable energies",
+      "sustainableLightingSystems": "Sustainable lighting systems"
+
     }
   },
   "TEXT_SUPPORT": {

@@ -252,7 +252,8 @@
     "none": "Ningúno",
     "selectBuildingOperation": {
       "greenRoofsWalls": "Techos y paredes verdes",
-      "waterManagement": "Gestión del agua"
+      "waterManagement": "Soluciones para la gestión del agua de lluvia",
+      "waterManagementGray": "Soluciones para la gestión de aguas grise"
     },
     "selectCountry": {
       "france": "France",
@@ -346,7 +347,8 @@
       "packagingSoiledWithDangerousSubstances": "Envases ensuciados con sustancias peligrosas",
       "paintVarnish": "Pintura/barniz",
       "productsContainingTar": "Productos que contienen alquitrán",
-      "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
+      "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas",
+      "collects": "Aleaciones"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosoles",
@@ -375,7 +377,9 @@
       "recoverHeat": "Recuperar calor",
       "storeEnergy": "Almacenar energía",
       "useLowConsumptionLighting": "Usar iluminación de bajo consumo",
-      "useRenewableEnergies": "Utilizar energías renovables"
+      "useRenewableEnergies": "Utilizar energías renovables",
+      "sustainableLightingSystems": "Sistemas de iluminación sostenibles"
+
     }
   },
   "TEXT_SUPPORT": {

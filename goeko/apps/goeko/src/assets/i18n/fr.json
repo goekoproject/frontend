@@ -250,7 +250,9 @@
     },
     "selectBuildingOperation": {
       "greenRoofsWalls": "Toits et murs végétalisés",
-      "waterManagement": "Gestion de l’eau"
+      "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
+      "waterManagementGray": "Des solutions pour la gestion de l’eau grise"
+
     },
     "selectCountry": {
       "france": "France",
@@ -284,7 +286,7 @@
       "siteHut": "Cabane de chantier",
       "toolCleaning": "Nettoyage du matériel",
       "wateringForCure": "Arrosage pour la cure",
-      "wateringPlants": "Arrosage des plantes"
+      "wateringPlants": "Arrosage des végétaux"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Carton et papier",
@@ -344,7 +346,8 @@
       "packagingSoiledWithDangerousSubstances": "Emballages souillés par des substances dangereuses",
       "paintVarnish": "Solvants à peintures/ vernis",
       "productsContainingTar": "Produits contenant du goudron",
-      "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses"
+      "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses",
+      "collects": "Colles"
     },
     "selectSpecialWaste": {
       "aerosols": "Aérosols",
@@ -372,8 +375,9 @@
       "optimizeEnergyConsumption": "Optimiser la consommation d’énergie",
       "recoverHeat": "Récupérer la chaleur",
       "storeEnergy": "Stocker l’énergie",
-      "useLowConsumptionLighting": "Eclairer à basse consommation",
-      "useRenewableEnergies": "Recourir à des énergies renouvelables"
+      "useLowConsumptionLighting": "Des solutions de refroidissement écologiques",
+      "useRenewableEnergies": "Recourir à des énergies renouvelables",
+      "sustainableLightingSystems": "Des systèmes d’éclairage durables"
     }
   },
   "TEXT_SUPPORT": {
