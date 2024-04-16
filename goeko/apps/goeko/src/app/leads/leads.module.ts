@@ -8,7 +8,7 @@ import { leadRoutes } from './leads.route';
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(leadRoutes)
+        RouterModule.forChild(leadRoutes),
     ],
     declarations: [LeadsComponent]
 })

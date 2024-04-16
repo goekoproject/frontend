@@ -8,10 +8,15 @@ import * as moment from 'moment';
 })
 
 export class GoDateFormatPipe implements PipeTransform {
-    langSignal = signal(this._translateService.currentLang ||  this._translateService.defaultLang);
+    langSignal = signal(this._translateService.currentLang || this._translateService.defaultLang);
 
-    constructor(private _translateService: TranslateService) {}
-    transform(value: string): any {
+    constructor(private _translateService: TranslateService) {
+        this._translateService.onLangChange.pipe(
+    
+        ).subscribe(current => this.langSignal.set(current.lang))
+    }
+    transform(value: string | Date): any {
+
         if(value) {
             return moment.utc(value).local().locale(this.langSignal()).format('LLL')
         }
