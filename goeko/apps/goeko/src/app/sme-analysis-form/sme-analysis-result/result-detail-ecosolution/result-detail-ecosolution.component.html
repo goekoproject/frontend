@@ -78,13 +78,18 @@
             </p>
           </div>
   
-          @if (detailsEcosolution.paybackPeriodYears ) {
+          @if (detailsEcosolution.paybackPeriodYears) {
           <div>
             <span class="details-article--label">
               {{ 'FORM_LABEL.paybackPeriodYears' | translate }}</span
             >
             <p class="details-article--data">
-              {{ detailsEcosolution.paybackPeriodYears }} {{'year' | translate}}
+              @if (detailsEcosolution.paybackPeriodYears > 1) {
+                {{ detailsEcosolution.paybackPeriodYears }} {{'years' | translate}}
+              }
+              @else {
+                {{ detailsEcosolution.paybackPeriodYears }} {{'year' | translate}}
+              }
             </p>
           </div>
           }
