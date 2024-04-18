@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class PercentageCardComponent {
   @Input() percentage: number = 15;
   @Input() label = '';
+  @Input() isUpto = false;
 }

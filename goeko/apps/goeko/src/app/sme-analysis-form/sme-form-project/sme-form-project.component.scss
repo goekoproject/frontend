@@ -144,14 +144,15 @@
 }
 .project-wrapper .form-actions {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0 auto;
   gap: 2rem;
-  position: fixed;
-  bottom: 0rem;
-  width: 92%;
-  background: #f7f9fe;
+  position: sticky;
+  bottom: 1rem;
   padding: 1rem;
+  background: var(--primary--100);
+  padding: 1rem;
+  border-radius: 1rem;
   &-submit {
     display: flex;
     gap: 1rem;

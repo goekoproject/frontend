@@ -1,13 +1,17 @@
-<ng-container *ngIf="detailsEcosolution">
+
+@if (detailsEcosolution) {
   <div class="detail-heading">
     <div class="detail-heading-main-info">
       <div>
-        <go-badge [className]="detailsEcosolution.classification.mainCategory">
-          {{
-            'CATEGORIES.' + detailsEcosolution.classification.mainCategory
-              | translate
-          }}
-        </go-badge>
+        @if(detailsEcosolution.classification) {
+          <go-badge [className]="detailsEcosolution.classification.mainCategory">
+            {{
+              'CATEGORIES.' + detailsEcosolution.classification.mainCategory
+                | translate
+            }}
+          </go-badge>
+        }
+
         <h2 class="detail-heading--solution-name">
           {{ detailsEcosolution.solutionName }}
         </h2>
@@ -161,18 +165,23 @@
         <h3 class="details-section-title">
           {{ 'FORM_LABEL.advantages' | translate }}
         </h3>
+        <p class="text-support">
+          {{ 'FORM_LABEL.advantagesSupportText' | translate }}
+        </p>
         <div
           class="details-article details-article--advantages"
           *ngIf="detailsEcosolution?.improvement"
         >
           <go-percentage-card
             [label]="'FORM_LABEL.reductionPercentageCO2'"
+            [isUpto]="true"
             [percentage]="
               detailsEcosolution.improvement.reductionPercentage.to || 0
             "
           ></go-percentage-card>
           <go-percentage-card
             [label]="'FORM_LABEL.operationalCostReductionPercentage'"
+            [isUpto]="true"
             [percentage]="
               detailsEcosolution.improvement.operationalCostReductionPercentage
                 .to || 0
@@ -197,4 +206,5 @@
       {{ 'back' | translate }}
     </button>
   </div>
-</ng-container>
+}
+

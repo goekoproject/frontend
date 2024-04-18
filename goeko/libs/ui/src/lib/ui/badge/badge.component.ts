@@ -50,7 +50,7 @@ export class BadgeComponent implements AfterContentInit {
   }
   private _readonly = false;
 
-  @Input() className!: string;
+  @Input() className!: string |undefined;
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onSelected$ = new EventEmitter();
   @Input()

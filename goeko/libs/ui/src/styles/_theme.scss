@@ -254,10 +254,11 @@ input[type='radio' i]:focus-visible {
   justify-content: space-between;
   margin: 0 auto;
   position: sticky;
-  bottom: 0rem;
+  bottom: 1rem;
   width: 100%;
-  background: #f7f9fe;
-  padding: 1rem 0;
+  background: var(--primary--100);
+  padding: 1rem;
+  border-radius: 1rem;
   &-submit {
     display: flex;
     gap: 1rem;
