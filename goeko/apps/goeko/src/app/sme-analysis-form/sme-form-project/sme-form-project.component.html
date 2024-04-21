@@ -74,7 +74,7 @@
     <p>{{ dateLastRecomendation | date : 'short' }}</p>
   </section>
   <div class="form-actions">
-    <button type="button" go-button appearance="white">
+    <button type="button" go-button appearance="white"  (click)="goToBack()">
       {{ 'cancel' | translate }}
     </button>
     <div class="form-actions-submit">

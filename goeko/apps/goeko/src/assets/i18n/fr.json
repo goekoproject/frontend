@@ -118,7 +118,7 @@
     "resources": "Ressources",
     "service": "Service"
   },
-  "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures, vous donnant confiance en leur accès lorsque nécessaire.",
+  "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
     "additionalInformation": "Informations supplémentaires",
