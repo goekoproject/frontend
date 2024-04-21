@@ -348,6 +348,14 @@ export const SelectHazardousWaste: DataSelectOption[] = [
     id: 'oilSeparatorSludge',
     keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.oilSeparatorSludge',
   },
+  {
+    id: 'productsContainingHCB',
+    keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.productsContainingHCB',
+  },
+  {
+    id: 'landsContainingPFAS',
+    keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.landsContainingPFAS',
+  },
 ];
 export const SelectPaybackPeriodYears: DataSelectOption[] = [
   {

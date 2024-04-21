@@ -269,7 +269,9 @@
     "selectHazardousWaste": {
       "oilSeparatorSludge": "Boue de séparateur d'huile",
       "productsContainingHeavyMetals": "Boues de centrale à béton avec du chrome 6",
-      "productsContainingTar": "Produits contenant des HAP​"
+      "productsContainingTar": "Produits contenant des HAP​",
+      "productsContainingHCB": "Produits contenant du HCB",
+      "landsContainingPFAS": "Terres contenant des PFAS"
     },
     "selectInertOrMineralWaste": {
       "brick": "Brique/tuile​",

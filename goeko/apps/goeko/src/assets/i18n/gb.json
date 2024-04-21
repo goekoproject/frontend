@@ -271,7 +271,9 @@
     "selectHazardousWaste": {
       "oilSeparatorSludge": "Oil Separator Sludge",
       "productsContainingHeavyMetals": "Products Containing Heavy Metals",
-      "productsContainingTar": "Products Containing Tar"
+      "productsContainingTar": "Products Containing Tar",
+      "productsContainingHCB": "Products containing HCB",
+      "landsContainingPFAS": "Soils containing PFAS"
     },
     "selectInertOrMineralWaste": {
       "brick": "Brick",
