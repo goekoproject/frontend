@@ -16,6 +16,7 @@ export const PROFILE_SME: Profile<'sme'>[] = [
 		label: 'FORM_LABEL.country',
 		type: 'select',
 		dataSelectKey: 'countries',
+		required: true
 	},
 	{
 		controlName: 'website',

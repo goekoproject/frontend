@@ -37,9 +37,7 @@
 
         @case ('select') {
             <div class="select-profile">
-              <label for="{{ itemForm.controlName }}">{{
-                itemForm.label | translate
-              }}</label>
+             
   
               <ui-super-select
                 [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -47,6 +45,9 @@
                 [id]="itemForm.controlName"
                 [name]="itemForm.controlName"
               >
+              <label title for="{{ itemForm.controlName }}">
+                {{itemForm.label | translate}}
+               </label>
                 <ng-container *ngIf="itemForm.dataSelectKey">
                   <super-option
                     *ngFor="let option of dataSelect[itemForm.dataSelectKey]"

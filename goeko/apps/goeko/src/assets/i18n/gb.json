@@ -408,6 +408,7 @@
     "saveMessageGeneric": "Do you want to save the data before continuing?"
 
   },
+  "mandatory" :"Mandatory",
   "exit": "Exit",
   "logout":"Log out",
   "a": "to",

@@ -407,6 +407,7 @@
     "saveMessageGeneric": "¿Deseas guardar los datos antes de continuar?"
 
   },
+  "mandatory" :"Obligatorio",
   "exit": "Salir",
   "logout":"Cerrar sesión",
   "your":"tu",

@@ -406,6 +406,7 @@
 
 
   },
+  "mandatory" :"Obligatoire",
   "exit": "Sortir",
   "dragAndDrop": "Glisser déposer",
   "editSelection": "Modifier sélection",
