@@ -5,7 +5,13 @@
     <go-breadcrumbs></go-breadcrumbs>
     @if (!isSubscribed) {
       <go-notification [type]="'info'">
-        <p>Aquí va el mensaje</p>
+        <div class="container-subscription-banner">
+          <p>{{'MESSAGE_SUBSCRIPTION_BANNER.messageAlert' | translate }}</p>
+          <span class="subscription-contact">
+            <p>{{'MESSAGE_SUBSCRIPTION_BANNER.messageContact' | translate }}</p>
+            <a href="malito:info@goeko.ch">info&#64;goeko.ch</a>
+          </span>
+        </div>
       </go-notification>
     }
  
@@ -20,6 +26,7 @@
   <router-outlet></router-outlet>
 </div>
 }
+
 
 <footer>
   <goeko-footer></goeko-footer>

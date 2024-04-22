@@ -397,6 +397,10 @@
     "warningDelete": "Are you sure you want to delete {{item}} ?"
 
   },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "Subscribe for full access! Discover more.",
+    "messageContact": "Contact us at "
+  },
   "logout":"Log out",
   "a": "to",
   "your":"Your",
