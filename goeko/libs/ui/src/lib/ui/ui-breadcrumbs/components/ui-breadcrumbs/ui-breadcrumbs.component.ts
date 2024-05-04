@@ -3,8 +3,9 @@ import { of } from 'rxjs';
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { distinctUntilChanged, filter, mergeAll, takeLast, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, mergeAll, takeLast } from 'rxjs/operators';
 
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { BreadcrumbService } from './breadcrumb.service';
 import { BreadCrumb } from './breadcrumbs.interface';
@@ -25,11 +26,17 @@ export class UiBreadcrumbsComponent implements OnInit {
 	get lastBreadcrumb(): Observable<BreadCrumb> {
 		return this.breadcrumbs$?.pipe(mergeAll(), takeLast(1));
 	}
+	get thirdToLast$(): Observable<BreadCrumb> {
+		return this.breadcrumbs$?.pipe(mergeAll(), takeLast(2));
+
+	}
+
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private readonly _breadcrumbsService: BreadcrumbService,
-		private router: Router
+		private router: Router,
+		private location: Location
 	) {
 		this._routeChange();
 		//this.breadcrumbSectionSubtitle$ = this._breadcrumbsService.getSectionSubtitle();
@@ -48,11 +55,8 @@ export class UiBreadcrumbsComponent implements OnInit {
 				this.breadcrumbs$ = this._breadcrumbsService.buildBreadCrumb(this.activatedRoute.root);
 			});
 	}
-	goBack(crumb: BreadCrumb | undefined) {
-		if (crumb?.url) {
-			this.router.navigate([crumb?.url]);
-		} else {
-			window.history.back();
-		}
+	goBack() {
+		this.location.back();
+
 	}
 }

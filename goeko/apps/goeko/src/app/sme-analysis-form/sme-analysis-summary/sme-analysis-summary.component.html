@@ -1,46 +1,37 @@
-<go-notification type="info" *ngIf="saveOK" class="notification"
-  ><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification
->
+<go-notification type="info" *ngIf="saveOK" class="notification"><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification>
 <div class="summary">
-    <div class="notification-save-analysis">
+  <!--  <div class="notification-save-analysis">
       <p>{{ 'infoSaveMessages' | translate }}</p>
       <button type="button" go-button appearance="white" (click)="saveAnalysis()">
         {{ 'save' | translate }}
       </button>
-    </div>
+    </div> -->
 
-    @if (isProject) {
-      <section class="search-name-section">
-        <go-input [value]="currentAnalytics()?.searchName" id="searchName" type="text" (valueChange)="changeSearchName($event)">
-          <span slot="label">{{ 'FORM_LABEL.name_project' | translate }}</span>
-        </go-input>
-      </section>
-    }
-
+  @if (isProject) {
+  <section class="search-name-section">
+    <go-input [value]="currentAnalytics()?.searchName" id="searchName" type="text" (valueChange)="changeSearchName($event)">
+      <span slot="label">{{ 'FORM_LABEL.name_project' | translate }}</span>
+    </go-input>
+  </section>
+  }
 
   <ul class="section-elements">
-    @for ( category of allCategories.selected; track category.code) { @defer
-    (when category) {
+    @for ( category of allCategories(); track category.code) { 
+      
     <li class="elements-field">
       <div class="summary-section-header">
         <h2>{{ category.label | translate }}</h2>
       </div>
 
       <div class="summary-section-body">
-        @for ( subcategory of category.subcategories; track subcategory.code) {
-        @if (currentAnalytics()[category.code] &&
-        currentAnalytics()[category.code][subcategory.code]; as field ) {
+        @for (subcategory of category.subcategories; track subcategory.code) { 
+          @if (currentAnalytics() && currentAnalytics()[category.code] && currentAnalytics()[category.code][subcategory.code]; as field ) {
 
         <div class="form-value-field">
           <div class="form-value-heading">
-            <h4>{{ subcategory.label }}</h4>
+            <h4>{{ subcategory.question }}</h4>
 
-            <button
-              class="form-value-edit"
-              go-button
-              appearance="flat"
-              (click)="editCategory(category.code, subcategory.code)"
-            >
+            <button class="form-value-edit" go-button appearance="flat" (click)="editCategory(category.code, subcategory.code)">
               <p>{{ 'editSelection' | translate }}</p>
             </button>
           </div>
@@ -49,24 +40,34 @@
             {{ field | dataArraySummary : subcategory.products }}
           </p>
         </div>
-        } }
+        } 
+      
+      }
+      
       </div>
     </li>
-    } }
+    
+    }
   </ul>
-  
-<div class="form-actions">
-  <button type="button" go-button appearance="white" (click)="cancel()">
-    {{ 'cancel' | translate }}
-  </button>
-  <div class="form-actions-submit">
- 
 
-    <go-goeko-button class="button-submit" (click)="getResults()">
-      <span class="goeko-go" btn-logo></span>
-      {{'searchEcosolutions' | translate}}</go-goeko-button
-    >
+  <div class="form-actions flex-col">
+
+    <div class="flex justify-between w-full">
+      <button type="button" go-button appearance="flat" (click)="cancel()">
+        {{ 'cancel' | translate }}
+      </button>
+      <div class="flex items-center gap-4">
+        <button type="button" go-button appearance="white" (click)="saveAnalysis()">
+          {{ 'save' | translate }}
+        </button>
+        <go-goeko-button class="button-submit" (click)="goToSearchEcosolutions()">
+          <span class="goeko-go" btn-logo></span>
+          {{'searchEcosolutions' | translate}}</go-goeko-button
+        >
+      </div>
+
+    </div>
+    <go-notification type="info" appearance="flat" class="notification"><p>{{ 'infoSaveMessages' | translate }}</p></go-notification>
+
   </div>
 </div>
-</div>
-

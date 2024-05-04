@@ -68,8 +68,8 @@
           >
           </textarea>
         </div>
-        <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
-
+         <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
+          
       </fieldset>
   
       <fieldset class="ecosolutions-fieldset">
@@ -169,7 +169,6 @@
   
       <fieldset
         class="ecosolutions-fieldset"
-        formArrayName="sustainableDevelopmentGoals"
         class="fieldset-ods"
       >
         <div class="legend--info">
@@ -184,35 +183,8 @@
           </p>
         </div>
   
-        <label
-          *ngFor="
-            let codeControls of sustainableDevelopmentGoals.controls;
-            let i = index
-          "
-          class="ecosolution-ods"
-          [formGroupName]="i"
-        >
-          <i
-            *ngIf="codeControls.value.checked"
-            class="ti ti-circle-check ods-check"
-          ></i>
-  
-          <input
-            type="checkbox"
-            [id]="i"
-            [formControlName]="'checked'"
-            [value]="codeControls.value.checked"
-            [readonly]="isReadOnly"
-          />
-  
-          <img
-            class="ods-icon"
-            [src]="
-              'assets/icon-ods/' + this.langSignal() + '-Goal-' + ods[i] + '.png'
-            "
-            [alt]="ods[i]"
-          />
-        </label>
+        <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
+
       </fieldset>
   
       <fieldset class="ecosolutions-fieldset">
@@ -308,13 +280,6 @@
 
         </div>
   
-        <!-- 		<div class="field-form-checked">
-          <label for="marketReady">{{ 'FORM_LABEL.marketReady' | translate }}</label>
-          <label class="switch">
-            <input type="checkbox" [formControlName]="'marketReady'" [readonly]="isReadOnly" />
-            <span class="slider round"></span>
-          </label>
-        </div> -->
   
         <div class="form-col">
           <div class="field-form-checked">
@@ -372,7 +337,7 @@
             <p>{{ fileData.name }}</p>
             <i class="ti ti-file-download"></i>
           </a>
-          <input
+          <input #inputCertified
             *ngIf="!isReadOnly"
             type="file"
             accept="application/pdf"

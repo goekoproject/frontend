@@ -49,18 +49,17 @@ export class DashboardSmeComponent implements OnInit {
 
   goToProject(projects: SmeRequestResponse) {
     this._smeAnalyticsStore.setCurrentAnalysis(projects);
-    this._router.navigate(['/sme-analysis/last-project', projects.id], {
+    this._router.navigate(['/sme-analysis/projects/project',this.userProfile().id], {
       queryParams: {
-        smeId: projects.id,
-        isProject: true,
+        projectId: projects.id
       },
     });
   }
 
   deleteProject(project: SmeRequestResponse) {
     this._messageService
-      .showMessage(MESSAGE_TYPE.WARNING, project.name)
-      .subscribe((res) => {
+      .deleteMessage(MESSAGE_TYPE.WARNING, project.name)
+      .afterClosed().subscribe((res) => {
         if (res) {
           this._projectService.deleteProject(project.id).subscribe((data) => {
             this._getLastProjectName();

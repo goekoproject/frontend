@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LeadResponse, LeadService } from '@goeko/store';
+import { GoDateFormatPipe } from '@goeko/ui';
 import { Observable } from 'rxjs';
 import { ManagerLeadsService } from './manager-leads.services';
 
 @Component({
-  selector: 'goeko-leads-list',
-  standalone: true,
-  imports: [CommonModule],
-  providers: [LeadService, ManagerLeadsService],
-  templateUrl: './leads-list.component.html',
-  styleUrl: './leads-list.component.scss',
+    selector: 'goeko-leads-list',
+    standalone: true,
+    providers: [LeadService, ManagerLeadsService],
+    templateUrl: './leads-list.component.html',
+    styleUrl: './leads-list.component.scss',
+    imports: [CommonModule, GoDateFormatPipe]
 })
 export class LeadsListComponent implements OnInit {
 

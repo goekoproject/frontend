@@ -37,7 +37,7 @@ import {
   forwardRef,
   isDevMode,
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { ControlValueAccessor, NgControl, Validators } from '@angular/forms';
 import {
   Observable,
   Subject,
@@ -187,6 +187,10 @@ export abstract class BaseSelectComponent
     return !this._selectionModel || this._selectionModel.isEmpty();
   }
 
+  public get isRequired(): boolean {
+    return Boolean(this.ngControl?.control?.hasValidator(Validators.required))  
+  }
+
   /** Whether the select is disabled. */
   @Input()
   get disabled() {
@@ -197,6 +201,7 @@ export abstract class BaseSelectComponent
   }
   private _disabled: true | null = null;
 
+  @Input() name!: string;
   @Input()
   public get first() {
     return this._first;

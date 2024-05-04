@@ -27,7 +27,7 @@
     "water": "Water",
     "waterConsumption": "Water"
   },
-  "infoSaveMessages": "Save your analysis for future reference!",
+  "infoSaveMessages": "You have the option to save your data now, ensuring it's available for future reference, providing you with confidence in accessing it when needed.",
   "searchEcosolutions": "Search eco-solutions",
   "CATEGORIES_FIELD": {
     "amount": "Water consumption (2022)",
@@ -125,6 +125,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
+    "advantagesSupportText": "Advantages compared to a standard solution",
     "advantagesEcosolutions": "Advantages of your eco-solution",
     "approvedSwiss": "Approved for the Swiss market",
     "basicInformation": "Basic information",
@@ -152,7 +153,7 @@
     "name_project": "Project's Name",
     "operationalCostReductionPercentage": "Percentage of operational cost reduction",
     "password": "Password",
-    "paybackPeriodYears": "Investment payback period",
+    "paybackPeriodYears": "Return on investment time compared to a standard solution",
     "price": "Price",
     "products": "Products",
     "reductionPercentage": "Reduction Percentage",
@@ -236,6 +237,9 @@
     "ods_8": "Decent Work and Economic Growth",
     "ods_9": "Industry, Innovation, and Infrastructure"
   },
+  "PRODUCT_ACTIONS": {
+    "addProduct": "Update"
+  },
   "SCENES": {
     "slogan_text1": "Connecting SMEs to clean technologies and financing",
     "slogan_text2": "Who are you?"
@@ -250,7 +254,8 @@
     },
     "selectBuildingOperation": {
       "greenRoofsWalls": "Green Roofs and Walls",
-      "waterManagement": "Water Management"
+      "waterManagement": "Solutions for rainwater management",
+      "waterManagementGray": "Solutions for gray water management"
     },
     "selectCountry": {
       "france": "France",
@@ -266,7 +271,9 @@
     "selectHazardousWaste": {
       "oilSeparatorSludge": "Oil Separator Sludge",
       "productsContainingHeavyMetals": "Products Containing Heavy Metals",
-      "productsContainingTar": "Products Containing Tar"
+      "productsContainingTar": "Products Containing Tar",
+      "productsContainingHCB": "Products containing HCB",
+      "landsContainingPFAS": "Soils containing PFAS"
     },
     "selectInertOrMineralWaste": {
       "brick": "Brick",
@@ -344,7 +351,8 @@
       "packagingSoiledWithDangerousSubstances": "Packaging soiled with dangerous substances",
       "paintVarnish": "Paint/varnish",
       "productsContainingTar": "Products containing tar",
-      "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances"
+      "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances",
+      "collects": "Collects"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosols",
@@ -373,7 +381,9 @@
       "recoverHeat": "Recover heat",
       "storeEnergy": "Store energy",
       "useLowConsumptionLighting": "Use low consumption lighting",
-      "useRenewableEnergies": "Use renewable energies"
+      "useRenewableEnergies": "Use renewable energies",
+      "sustainableLightingSystems": "Sustainable lighting systems"
+
     }
   },
   "TEXT_SUPPORT": {
@@ -394,13 +404,16 @@
   "DIALOG": {
     "messageSendOk": "Your message has been sent successfully!",
     "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have.",
-    "warningDelete": "Are you sure you want to delete {{item}} ?"
+    "warningDelete": "Are you sure you want to delete {{item}} ?",
+    "saveMessageGeneric": "Do you want to save the data before continuing?"
 
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at "
   },
+  "mandatory" :"Mandatory",
+  "exit": "Exit",
   "logout":"Log out",
   "a": "to",
   "your":"Your",
@@ -433,7 +446,7 @@
   "lastLead": "Latest lead",
   "last_analysis": "Last analysis",
   "last_project": "3 Last projects",
-  "leadFormTitle": "Contact us today and start your journey to a sustainable future!",
+  "leadFormTitle": "Connect in one click with the cleantech to improve your environmental impact!",
   "leads": "Leads",
   "my_company": "My company",
   "new_analysis": "New analysis",
@@ -446,6 +459,7 @@
   "projectManagement": "Project Management",
   "result": "Result",
   "save": "Save",
+  "notSave": "Close without saving",
   "saveYou": "Save your",
   "selectCategoryEcosolutions": "Select the category for your ecosolution",
   "selected_products": "Selected products",

@@ -1,3 +1,11 @@
+<div>
+	<ng-content select="[title]"></ng-content>
+	@if (isRequired ) {
+		<span class="mandatory"> ({{'mandatory' | translate}})</span>
+	}
+</div>
+
+
 <div class="before-icon-select" [ngClass]="{ 'position-icon-select': positionIco !== 'left' }">
 	<ng-content select="i"></ng-content>
 </div>
@@ -22,11 +30,11 @@
 		class="select_label"
 		[ngClass]="{ 'not-floating': noFloatinglabel }"
 		#labelElement
-		>{{ placeholder }}</label
-	>
+		>{{ placeholder }} </label>
 
 	<div *ngIf="!empty" class="select_value">
 		{{ label }}
+
 	</div>
 
 	<i id="{{ arrowId }}" class="icon-Arrow-Chevron-Down select_arrow" [ngClass]="{ 'select-arrow--rotate': isOpen }">
@@ -55,6 +63,7 @@
 			class="select_options go-scroll"
 			cdkTrapFocus
 		>
+
 			<ng-content></ng-content>
 		</div>
 	</ng-template>

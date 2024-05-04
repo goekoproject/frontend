@@ -16,10 +16,10 @@
 </go-badge-group>
 
 <div class="product-actions">
-  <button go-button appearance="white">
+  <button go-button appearance="white" (click)="close()">
     {{ 'cancel' | translate }}
   </button>
   <button go-button (click)="addProducts()">
-    {{ 'add' | translate }} {{ 'product' | translate }}
+    {{ buttonText | translate }} 
   </button>
 </div>

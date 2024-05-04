@@ -4,10 +4,9 @@
   <span #labelElement class="label-element">
     <ng-content></ng-content>
   </span>
-  <span
-    class="material-symbols-rounded badge-close"
-    *ngIf="!readonly && selected"
-  >
-    close
-  </span>
+  @if (!readonly && selected) {
+    <i class="ti ti-x"></i>
+
+  }
+
 </span>

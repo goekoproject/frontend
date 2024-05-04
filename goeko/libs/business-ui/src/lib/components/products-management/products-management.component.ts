@@ -1,18 +1,17 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   Inject,
   OnInit,
   Optional,
-  effect,
-  signal,
+  signal
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DataSelect, DataSelectOption, ManageProduct } from '@goeko/store';
+import { DataSelect, ManageProduct } from '@goeko/store';
 import {
   BadgeModule,
   ButtonModule,
   DIALOG_DATA,
-  SideDialogService,
+  SideDialogService
 } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -32,6 +31,7 @@ export interface Product {
   styleUrl: './products-management.component.scss',
 })
 export class ProductsManagementComponent implements OnInit {
+  buttonText = 'PRODUCT_ACTIONS.addProduct';
   products = signal<Product[]>([] as any);
   codeProductsSeclected = signal(
     this.data.productSelected.map((product) => product.code)
@@ -54,5 +54,9 @@ export class ProductsManagementComponent implements OnInit {
 
   addProducts() {
     this._sideDialogService.closeDialog<Product[]>(this._productSelected);
+  }
+  close() {
+    this._sideDialogService.closeDialog<Product[]>();
+
   }
 }

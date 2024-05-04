@@ -1,49 +1,54 @@
 <div class="breadcrumb">
-	<span class="breadcrumb--container" *ngFor="let breadcrumb of breadcrumbs$ | async; let i = index">
-		<ng-container *ngIf="!breadcrumb.hidden">
-			<span *ngIf="i > 0" class="material-symbols-rounded breadcrumb--arrow">arrow_back_ios</span>
-			<a [routerLink]="[breadcrumb.url]" queryParamsHandling="merge">{{ breadcrumb.label | translate }}</a>
-		</ng-container>
-	</span>
+  @if (thirdToLast$ | async; as thirdToLast) { @if (!thirdToLast.hidden) {
+
+  <a (click)="goBack()" queryParamsHandling="merge" class="go-back-page">
+    <i class="ti ti-arrow-back back-arrow"></i>
+    {{ 'back' | translate }}</a
+  >
+  } }
 </div>
 
 <div *ngIf="lastBreadcrumb" class="breadcrumbs-title">
-	<!-- Ttile page and  Arrow BACK-->
-	<ng-container *ngIf="breadcrumbs$ | async as breadcrumbs">
-		<span
-			*ngIf="breadcrumbs.length >= 1 && (lastBreadcrumb | async)?.onBack"
-			class="material-symbols-rounded back-arrow"
-			(click)="goBack(breadcrumbs[breadcrumbs.length])"
-			queryParamsHandling="merge"
-		>
-			arrow_back_ios</span
-		>
-	</ng-container>
-	{{ (lastBreadcrumb | async)?.label | format | translate }}
-	<!-- Info crumbs-->
-	<div *ngIf="(lastBreadcrumb | async)?.queryParams?.length" class="breadcrumb-section-subtitle-container">
-		<div class="breadcrumb-section-subtitle-separator"></div>
-		<div class="breadcrumb-section-subtitle">
-			<ng-container *ngFor="let queryParam of (lastBreadcrumb | async)?.queryParams; let last = last">
-				<ng-container [ngSwitch]="queryParam.key.toLowerCase().includes('date')">
-					<ng-container *ngSwitchCase="true">
-						{{ queryParam.value }}
-					</ng-container>
-					<ng-container *ngSwitchCase="false">
-						{{ queryParam.value }}
-					</ng-container>
-				</ng-container>
-				<ng-container *ngIf="!last">-</ng-container>
-			</ng-container>
-		</div>
-	</div>
-	<!--Icon info-->
-	<a *ngIf="(lastBreadcrumb | async)?.infoLink" [routerLink]="[(lastBreadcrumb | async)?.infoLink]" class="info-link">
-		<i
-			class="icon-Information info-link--icon"
-			data-toggle="tooltip"
-			title="{{ (lastBreadcrumb | async)?.infoLink }}"
-		>
-		</i>
-	</a>
+  <!-- Ttile page and  Arrow BACK-->
+  {{ (lastBreadcrumb | async)?.label | format | translate }}
+  <!-- Info crumbs-->
+  <div
+    *ngIf="(lastBreadcrumb | async)?.queryParams?.length"
+    class="breadcrumb-section-subtitle-container"
+  >
+    <div class="breadcrumb-section-subtitle-separator"></div>
+    <div class="breadcrumb-section-subtitle">
+      <ng-container
+        *ngFor="
+          let queryParam of (lastBreadcrumb | async)?.queryParams;
+          let last = last
+        "
+      >
+        <ng-container
+          [ngSwitch]="queryParam.key.toLowerCase().includes('date')"
+        >
+          <ng-container *ngSwitchCase="true">
+            {{ queryParam.value }}
+          </ng-container>
+          <ng-container *ngSwitchCase="false">
+            {{ queryParam.value }}
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!last">-</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <!--Icon info-->
+  <a
+    *ngIf="(lastBreadcrumb | async)?.infoLink"
+    [routerLink]="[(lastBreadcrumb | async)?.infoLink]"
+    class="info-link"
+  >
+    <i
+      class="icon-Information info-link--icon"
+      data-toggle="tooltip"
+      title="{{ (lastBreadcrumb | async)?.infoLink }}"
+    >
+    </i>
+  </a>
 </div>

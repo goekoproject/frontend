@@ -34,7 +34,7 @@ export class SmeAnalysisStoreService {
   setDetailEcosolutions(detailEcosolutions: any) {
     this._sessionStoregeService.setItem<any>(
       SS_ECOSOLUTION_DETAIL,
-      detailEcosolutions
+      escape(detailEcosolutions)
     );
     this._detailEcosolutions.next(detailEcosolutions);
   }

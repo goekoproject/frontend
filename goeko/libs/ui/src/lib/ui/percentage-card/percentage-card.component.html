@@ -1,4 +1,7 @@
 <div class="percentage-card">
+	@if (isUpto ) {
+	  <p>{{ 'upTo' | translate}}</p>
+	}
 	<div class="percentage">
 		<circle-progress
 			[percent]="percentage"
@@ -13,5 +16,5 @@
 			[animationDuration]="300"
 		></circle-progress>
 	</div>
-	<p>{{ label | translate }}</p>
+	<p class="percentage-label">{{ label | translate }}</p>
 </div>

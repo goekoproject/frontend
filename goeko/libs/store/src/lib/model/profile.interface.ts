@@ -8,4 +8,5 @@ export interface Profile<T = 'cleantech' | 'sme' | 'bank'> {
 	type: FieldForm;
 	dataSelectKey?: keyof typeof DataSelect;
 	className?: string;
+	required?: boolean
 }

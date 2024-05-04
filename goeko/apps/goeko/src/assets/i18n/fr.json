@@ -118,11 +118,12 @@
     "resources": "Ressources",
     "service": "Service"
   },
-  "infoSaveMessages": "Enregistrez votre analyse pour consultation ultérieure!",
+  "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",
+    "advantagesSupportText": "Avantages par rapport à une solution standard",
     "advantagesEcosolutions": "Avantages de votre éco-solution",
     "approvedSwiss": "Approuvé pour le marché suisse",
     "basicInformation": "Informations de base",
@@ -150,7 +151,7 @@
     "name_project": "Nom du projet",
     "operationalCostReductionPercentage": "Pourcentage de réduction des coûts opérationnels",
     "password": "Mot de passe",
-    "paybackPeriodYears": "Délai de récupération de l’investissement par rapport à une solution standard",
+    "paybackPeriodYears": "Temps de retour sur investissement par rapport à une solution standard",
     "price": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
     "products": "Produits",
     "reductionPercentage": "Pourcentage de réduction",
@@ -233,6 +234,9 @@
     "ods_8": "Travail décent et croissance économique",
     "ods_9": "Industrie, Innovation et Infrastructure"
   },
+  "PRODUCT_ACTIONS": {
+    "addProduct": "Actualiser"
+  },
   "SCENES": {
     "slogan_text1": "Connexion des PME aux technologies propres et au financement",
     "slogan_text2": "Est-ce que tu veux?"
@@ -247,7 +251,9 @@
     },
     "selectBuildingOperation": {
       "greenRoofsWalls": "Toits et murs végétalisés",
-      "waterManagement": "Gestion de l’eau"
+      "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
+      "waterManagementGray": "Des solutions pour la gestion de l’eau grise"
+
     },
     "selectCountry": {
       "france": "France",
@@ -263,7 +269,9 @@
     "selectHazardousWaste": {
       "oilSeparatorSludge": "Boue de séparateur d'huile",
       "productsContainingHeavyMetals": "Boues de centrale à béton avec du chrome 6",
-      "productsContainingTar": "Produits contenant des HAP​"
+      "productsContainingTar": "Produits contenant des HAP​",
+      "productsContainingHCB": "Produits contenant du HCB",
+      "landsContainingPFAS": "Terres contenant des PFAS"
     },
     "selectInertOrMineralWaste": {
       "brick": "Brique/tuile​",
@@ -281,7 +289,7 @@
       "siteHut": "Cabane de chantier",
       "toolCleaning": "Nettoyage du matériel",
       "wateringForCure": "Arrosage pour la cure",
-      "wateringPlants": "Arrosage des plantes"
+      "wateringPlants": "Arrosage des végétaux"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Carton et papier",
@@ -341,7 +349,8 @@
       "packagingSoiledWithDangerousSubstances": "Emballages souillés par des substances dangereuses",
       "paintVarnish": "Solvants à peintures/ vernis",
       "productsContainingTar": "Produits contenant du goudron",
-      "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses"
+      "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses",
+      "collects": "Colles"
     },
     "selectSpecialWaste": {
       "aerosols": "Aérosols",
@@ -369,8 +378,9 @@
       "optimizeEnergyConsumption": "Optimiser la consommation d’énergie",
       "recoverHeat": "Récupérer la chaleur",
       "storeEnergy": "Stocker l’énergie",
-      "useLowConsumptionLighting": "Eclairer à basse consommation",
-      "useRenewableEnergies": "Recourir à des énergies renouvelables"
+      "useLowConsumptionLighting": "Des solutions de refroidissement écologiques",
+      "useRenewableEnergies": "Recourir à des énergies renouvelables",
+      "sustainableLightingSystems": "Des systèmes d’éclairage durables"
     }
   },
   "TEXT_SUPPORT": {
@@ -391,7 +401,8 @@
   "DIALOG": {
     "messageSendOk": "Votre message a été envoyé avec succès !",
     "messageBodyLead" : "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
-    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?"
+    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
+    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?"
 
 
   },
@@ -399,6 +410,8 @@
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à "
   },
+  "mandatory" :"Obligatoire",
+  "exit": "Sortir",
   "dragAndDrop": "Glisser déposer",
   "editSelection": "Modifier sélection",
   "logout":"Log out",
@@ -410,7 +423,7 @@
   "all": "Tout",
   "analysis": "Analyse",
   "availability": "Disponibilité:",
-  "back": "Dos",
+  "back": "Retour",
   "bank": "Banque",
   "cancel": "Annuler",
   "categories": "Catégories",
@@ -419,22 +432,22 @@
   "companyDetails": "Détails de l'entreprise",
   "completeToProfileNow": "Complétez votre profil maintenant !",
   "confirm": "Confirmer",
-  "connectNow": "Connectez-vous maintenant!",
+  "connectNow": "Contactez-nous maintenant!",
   "contact": "Contact",
   "continue": "Continuer",
   "costReduction": "Coûts opérationnels",
   "creationDate": "Date de creation",
   "dashboard": "Tableau de bord",
   "decline": "Refuser",
-  "defaultMessageLead": "Bonjour, Je suis intéressé par votre éco-solution. Merci de bien vouloir me contacter par e-mail.",
+  "defaultMessageLead": "Bonjour, votre éco-solution m’intéresse. Merci de bien vouloir me contacter par e-mail.",
   "cleantechLeadDefault": "Sur le point de découvrir de nouveaux prospects durables. Préparez-vous à vous connecter !",
 
   "details": "Détails",
   "edit": "Modifier",
   "lastLead": "Dernier prospect",
   "last_analysis": "Dernière analyse",
-  "last_project": "3 Derniers projets",
-  "leadFormTitle": "Contactez-nous dès aujourd'hui et commencez votre voyage vers un avenir durable!",
+  "last_project": "Derniers projets",
+  "leadFormTitle": "Entrez en contact en un clic avec la cleantech pour améliorer votre impact environnemental!",
   "leads": "Prospects",
   "my_company": "Mon entreprise",
   "new_analysis": "Nouvelle analyse",
@@ -447,6 +460,7 @@
   "projectManagement": "Gestion de projet",
   "result": "Résultat",
   "save": "Sauvegarder",
+  "notSave": "Fermer sans sauvegarder",
   "saveYou": "Sauvegarder votre",
   "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre écosolution",
   "selected_products": "Produits sélectionnés",

@@ -1,37 +1,30 @@
-import { Component, ElementRef, ViewChild, effect } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Optional, ViewChild } from '@angular/core';
 import { DialogMessageService } from './dialog-message.service';
+import { UIDialogRef } from './ui-dialog-ref';
 
 @Component({
   selector: 'goeko-dialog-message',
   templateUrl: './dialog-message.component.html',
   styleUrl: './dialog-message.component.scss',
 })
-export class DialogMessageComponent {
+export class DialogMessageComponent implements AfterViewInit {
   @ViewChild('dialogMsg') dialogMsg!: ElementRef<HTMLDialogElement>;
 
   public data = this._dialogMessageService.data;
 
-  constructor(private _dialogMessageService: DialogMessageService){
-    effect(() => {
-      this._toggleDialog();
-
-    })
-  }
-  private _toggleDialog() {
-    if (this.data()?.title) {
-      this.dialogMsg?.nativeElement.showModal();
-    } else {
-      this.dialogMsg?.nativeElement.close();
-    }
+  constructor(
+    private _dialogMessageService: DialogMessageService, 
+    @Optional() private _uiDialogRef: UIDialogRef<DialogMessageComponent>
+  ){
   }
 
-  closeDialog(isAccept = false) {
-    this._dialogMessageService.onSubmitAccept(isAccept);
-    this.close();
+  ngAfterViewInit(): void {
+    this.dialogMsg?.nativeElement.showModal();
   }
 
-  close() {
+  close(data?: any) {
     this.dialogMsg?.nativeElement.close();
+    this._uiDialogRef.close(data);
   }
   
 }

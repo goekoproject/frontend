@@ -1,13 +1,17 @@
-<ng-container *ngIf="detailsEcosolution">
+
+@if (detailsEcosolution) {
   <div class="detail-heading">
     <div class="detail-heading-main-info">
       <div>
-        <go-badge [className]="detailsEcosolution.classification.mainCategory">
-          {{
-            'CATEGORIES.' + detailsEcosolution.classification.mainCategory
-              | translate
-          }}
-        </go-badge>
+        @if(detailsEcosolution.classification) {
+          <go-badge [className]="detailsEcosolution.classification.mainCategory">
+            {{
+              'CATEGORIES.' + detailsEcosolution.classification.mainCategory
+                | translate
+            }}
+          </go-badge>
+        }
+
         <h2 class="detail-heading--solution-name">
           {{ detailsEcosolution.solutionName }}
         </h2>
@@ -28,7 +32,7 @@
     />
   </div>
   <div class="detail-actions">
-    <button go-button appearance="white">
+    <button go-button appearance="white" *ngIf="detailsEcosolution.certified">
       <i class="ti ti-file-download"></i>
       {{ 'certified' | translate }}
     </button>
@@ -74,13 +78,18 @@
             </p>
           </div>
   
-          @if (detailsEcosolution.paybackPeriodYears ) {
+          @if (detailsEcosolution.paybackPeriodYears) {
           <div>
             <span class="details-article--label">
               {{ 'FORM_LABEL.paybackPeriodYears' | translate }}</span
             >
             <p class="details-article--data">
-              {{ detailsEcosolution.paybackPeriodYears }} {{'year' | translate}}
+              @if (detailsEcosolution.paybackPeriodYears > 1) {
+                {{ detailsEcosolution.paybackPeriodYears }} {{'years' | translate}}
+              }
+              @else {
+                {{ detailsEcosolution.paybackPeriodYears }} {{'year' | translate}}
+              }
             </p>
           </div>
           }
@@ -151,7 +160,7 @@
       <section class="details-section">
         <h3 class="details-section-title">{{ 'ods_title' | translate }}</h3>
         <div class="details-article">
-          <goeko-sdg-icons
+          <goeko-sdg-icons [readonly]="true"
             [selected]="detailsEcosolution.sustainableDevelopmentGoals"
           ></goeko-sdg-icons>
         </div>
@@ -161,18 +170,23 @@
         <h3 class="details-section-title">
           {{ 'FORM_LABEL.advantages' | translate }}
         </h3>
+        <p class="text-support">
+          {{ 'FORM_LABEL.advantagesSupportText' | translate }}
+        </p>
         <div
           class="details-article details-article--advantages"
           *ngIf="detailsEcosolution?.improvement"
         >
           <go-percentage-card
             [label]="'FORM_LABEL.reductionPercentageCO2'"
+            [isUpto]="true"
             [percentage]="
               detailsEcosolution.improvement.reductionPercentage.to || 0
             "
           ></go-percentage-card>
           <go-percentage-card
             [label]="'FORM_LABEL.operationalCostReductionPercentage'"
+            [isUpto]="true"
             [percentage]="
               detailsEcosolution.improvement.operationalCostReductionPercentage
                 .to || 0
@@ -197,4 +211,5 @@
       {{ 'back' | translate }}
     </button>
   </div>
-</ng-container>
+}
+

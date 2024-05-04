@@ -59,7 +59,7 @@ export class GoInputDirective
   private _value!: any;
   private _ngControl!: any;
   private get required() {
-	return this._ngControl.hasValidator(Validators.required)
+	return this._ngControl?.hasValidator(Validators.required)
   }
   private get inputElementRef() {
     return this.elementRef.nativeElement.renderRoot.querySelectorAll(
@@ -75,9 +75,6 @@ export class GoInputDirective
   ngOnInit(): void {
 	const injectedControl = this.injector.get(NgControl);
     this._ngControl =  this.injector.get(FormGroupDirective).getControl(injectedControl as FormControlName);
-
-	console.log(this.required);
-
   }
   ngAfterContentInit(): void {
 	this._setAttributeRequired();

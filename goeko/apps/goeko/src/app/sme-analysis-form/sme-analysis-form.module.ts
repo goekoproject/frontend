@@ -17,6 +17,7 @@ import {
   BadgeModule,
   ButtonModule,
   CarouselModule,
+  GoDateFormatPipe,
   GoInputModule,
   GoekoButtonModule,
   NotificationModule,
@@ -53,7 +54,7 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     YesNoPipe,
     DataArraySummaryPipe,
     SmeRequestAnalisysComponent,
-    CategoryRequestPipe,
+    CategoryRequestPipe
 
   ],
   imports: [
@@ -77,6 +78,7 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     GoTableModule, 
     CodeCountryPipe,
     LeadFormComponent,
+    GoDateFormatPipe,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

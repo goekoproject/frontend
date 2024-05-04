@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -27,6 +27,8 @@ import { EcosolutionForm } from './ecosolution-form.model';
   styleUrls: ['./ecosolutions-form.component.scss'],
 })
 export class EcosolutionsFormComponent implements OnInit {
+
+  @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>;
   public form!: FormGroup;
   public ods = ODS_CODE;
   public idEcosolution!: string;
@@ -48,7 +50,7 @@ export class EcosolutionsFormComponent implements OnInit {
   }
   private _cleantechId!: string;
   private fileCertificate: any;
-  private _fileEcosolution = File;
+  private _fileEcosolution!: File;
   public urlImgEcosolution!: string;
   constructor(
     private _route: ActivatedRoute,
@@ -97,7 +99,7 @@ export class EcosolutionsFormComponent implements OnInit {
       products: ['', Validators.required],
       reductionPercentage: [],
       operationalCostReductionPercentage: [],
-      sustainableDevelopmentGoals: new FormArray([]),
+      sustainableDevelopmentGoals: [],
       price: [0],
       currency: ['EUR'],
       unit: [],
@@ -110,8 +112,8 @@ export class EcosolutionsFormComponent implements OnInit {
       certified: [false],
       approved: [false],
     });
-    this.initCheckboxControlSustainableDevelopmentGoals();
-  }
+/*     this.initCheckboxControlSustainableDevelopmentGoals();
+ */  }
 
   initCheckboxControlSustainableDevelopmentGoals(): void {
     const odsControls = this.ods.map((ods) =>
@@ -139,7 +141,7 @@ export class EcosolutionsFormComponent implements OnInit {
       .getEcosolutionById(this.idEcosolution)
       .subscribe((res: any) => {
         this._getDocumentsCleantech();
-        this.urlImgEcosolution = res?.pictures  ? res?.pictures[0]?.url : '';
+        this.urlImgEcosolution = res?.pictures  ? res?.pictures.at(-1)?.url : '';
         const formValue = new EcosolutionForm(res);
         this.form.patchValue(formValue);
       });
@@ -158,7 +160,6 @@ export class EcosolutionsFormComponent implements OnInit {
       ),
     }).subscribe((res: any) => {
       if (res) {
-        this._uploadCertificate();
         this.goToListEcosolution();
         this._uploadImg(res.ecosolution);
 
@@ -180,12 +181,11 @@ export class EcosolutionsFormComponent implements OnInit {
       this.form.value
     );
     forkJoin({
-      fileCertificate: this._uploadCertificate(),
       ecosolution: this._ecosolutionsService.createEcosolutions(body),
     }).subscribe((res) => {
       this._uploadCertificate();
-      this.goToListEcosolution();
       this._uploadImg(res.ecosolution);
+      this.goToListEcosolution();
     });
   }
 
@@ -218,25 +218,27 @@ export class EcosolutionsFormComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  private _uploadCertificate() {
-    if (!this.form.value.certified && !this.form.controls['certified']?.dirty) {
-      return of(null);
-    }
-    return this._cleanTeachService.uploadDocument(
-      this.idEcosolution,
-      this.fileCertificate
-    );
-  }
+
 
   private _getDocumentsCleantech() {
     this._cleanTeachService
-      .getDocuments(this.idEcosolution)
+      .getDocuments(this._cleantechId)
       .pipe(last())
       .subscribe((res) => {
         if (res) {
           this.fileData = res[res?.length - 1];
         }
       });
+  }
+
+  private _uploadCertificate() {
+    if ((!this.form.value.certified && !this.form.controls['certified']?.dirty) || !this.inputCertified.nativeElement.value) {
+      return of(null);
+    }
+    return this._cleanTeachService.uploadDocument(
+      this._cleantechId,
+      this.fileCertificate
+    );
   }
   goToListEcosolution() {
     this._router.navigate(['cleantech-ecosolutions', this._cleantechId]);

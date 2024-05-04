@@ -1,7 +1,8 @@
+import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeService } from '@goeko/store';
+import { ProjectService, SmeService } from '@goeko/store';
 import { SmeAnalysisService } from '../sme-analysis.service';
 import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component';
 
@@ -21,10 +22,12 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
     private smeService: SmeService,
     private route: ActivatedRoute,
     private smeAnalysisService: SmeAnalysisService,
-    private cdf: ChangeDetectorRef
+    private projectService :ProjectService,
+    private cdf: ChangeDetectorRef,
+    private _location: Location
 
   ) {
-    super(fb, router,smeService, route, smeAnalysisService,cdf);
+    super(fb, router,smeService, route, smeAnalysisService,projectService,cdf);
   }
 
   override ngOnInit(): void {
@@ -33,7 +36,7 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
     this.onChangeLastRecomendation.subscribe(
       (data) => (this.toogleSaveName = !data)
     );
-    this.resultPath = 'new-project/results';
+    this.form.patchValue(this.currentAnalytics());
 
   }
 
@@ -47,5 +50,8 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
     });
   }
 
-  
+  goToBack() {
+    this._location.back();
+
+  }
 }

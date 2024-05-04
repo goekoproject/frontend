@@ -43,7 +43,7 @@
     "products": "Tipo de producto peligroso",
     "specialWaste": "Residuos Especiales"
   },
-  "infoSaveMessages": "¡Guarda tu análisis para futuras consultas!",
+  "infoSaveMessages": "Tienes la opción de guardar tus datos en este momento, lo cual asegurará que estén disponibles para futuras consultas, brindándote la certeza de contar con ellos cuando los necesites.",
   "searchEcosolutions": "Buscar ecosoluciones",
   "CATEGORIES_LABEL": {
     "amount": {
@@ -125,6 +125,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
+    "advantagesSupportText": "Ventajas en comparación con una solución estándar",
     "advantagesEcosolutions": "Ventajas de su eco-solución",
     "approvedSwiss": "Aprobada para el mercado suizo",
     "basicInformation": "Información básica",
@@ -152,7 +153,7 @@
     "name_project": "Nombre del proyecto",
     "operationalCostReductionPercentage": "Porcentaje de reducción de costos operativos",
     "password": "Contraseña",
-    "paybackPeriodYears": "Período de recuperación de la inversión",
+    "paybackPeriodYears": "Tiempo de retorno de inversión en comparación con solución estándar",
     "price": "Precio",
     "products": "Productos",
     "reductionPercentageCO2": "Porcentaje de reducción de CO2",
@@ -234,6 +235,9 @@
     "ods_8": "Trabajo Decente y Crecimiento Económico",
     "ods_9": "Industria, Innovación e Infraestructura"
   },
+  "PRODUCT_ACTIONS": {
+    "addProduct": "Actualizar"
+  },
   "SCENES": {
     "slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
     "slogan_text2": "¿Quiere eres?"
@@ -249,7 +253,8 @@
     "none": "Ningúno",
     "selectBuildingOperation": {
       "greenRoofsWalls": "Techos y paredes verdes",
-      "waterManagement": "Gestión del agua"
+      "waterManagement": "Soluciones para la gestión del agua de lluvia",
+      "waterManagementGray": "Soluciones para la gestión de aguas grise"
     },
     "selectCountry": {
       "france": "France",
@@ -265,7 +270,9 @@
     "selectHazardousWaste": {
       "oilSeparatorSludge": "Lodo del separador de aceite",
       "productsContainingHeavyMetals": "Productos que contienen metales pesados",
-      "productsContainingTar": "Productos que contienen alquitrán"
+      "productsContainingTar": "Productos que contienen alquitrán",
+      "productsContainingHCB": "Productos que contienen HCB",
+      "landsContainingPFAS": "Tierras que contienen PFAS"
     },
     "selectInertOrMineralWaste": {
       "brick": "Ladrillo",
@@ -343,7 +350,8 @@
       "packagingSoiledWithDangerousSubstances": "Envases ensuciados con sustancias peligrosas",
       "paintVarnish": "Pintura/barniz",
       "productsContainingTar": "Productos que contienen alquitrán",
-      "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
+      "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas",
+      "collects": "Aleaciones"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosoles",
@@ -372,7 +380,9 @@
       "recoverHeat": "Recuperar calor",
       "storeEnergy": "Almacenar energía",
       "useLowConsumptionLighting": "Usar iluminación de bajo consumo",
-      "useRenewableEnergies": "Utilizar energías renovables"
+      "useRenewableEnergies": "Utilizar energías renovables",
+      "sustainableLightingSystems": "Sistemas de iluminación sostenibles"
+
     }
   },
   "TEXT_SUPPORT": {
@@ -393,13 +403,16 @@
   "DIALOG": {
     "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
     "messageBodyLead" : "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
-    "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?"
+    "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?",
+    "saveMessageGeneric": "¿Deseas guardar los datos antes de continuar?"
 
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
     "messageContact": "Ponte en contacto con nosotros en "
   },
+  "mandatory" :"Obligatorio",
+  "exit": "Salir",
   "logout":"Cerrar sesión",
   "your":"tu",
   "a": "a",
@@ -424,14 +437,14 @@
   "creationDate": "Fecha de creacion",
   "dashboard": "Dashboard",
   "decline": "Rechazar",
-  "defaultMessageLead": "Hola, estoy interesado en tu solución ecológica. Por favor contácteme a la siguiente dirección de correo electrónico:",
+  "defaultMessageLead": "Hola, estoy interesado en tu solución ecológica. Por favor contáctame a la siguiente dirección de correo electrónico:",
   "cleantechLeadDefault": "Cerca de nuevos leads sostenibles. ¡Prepárate para conectar con ellos!",
   "details": "Detalles",
   "edit": "Editar",
   "lastLead": "Ultimo cliente potencial",
   "last_analysis": "Último análisis",
   "last_project": "3 Ultimos proyectos",
-  "leadFormTitle": "¡Contáctenos hoy y comience su viaje hacia un futuro sostenible!",
+  "leadFormTitle": "¡Ponte en contacto con la cleantech con tan solo un clic para mejorar tu impacto ambiental!",
   "leads": "Clientes potenciales",
   "my_company": "Mi empresa",
   "new_analysis": "Nuevo análisis",
@@ -444,6 +457,7 @@
   "projectManagement": "Gestión de proyectos",
   "result": "Resultados",
   "save": "Guardar",
+  "notSave": "Cerrar sin guardar",
   "saveYou": "Guardar tu",
   "selectCategoryEcosolutions": "Selecciona la categoría para tu ecosolución",
   "selected_products": "Productos seleccionados",

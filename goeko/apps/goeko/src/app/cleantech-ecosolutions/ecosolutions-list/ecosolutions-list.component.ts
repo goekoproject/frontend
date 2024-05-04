@@ -60,7 +60,7 @@ export class EcosolutionsListComponent implements OnInit {
   }
 
   deleteEcosolution(ecosolution: CardEcosolutions) {
-    this._messageService.showMessage(MESSAGE_TYPE.WARNING,ecosolution.solutionName).subscribe(isDelete => {
+    this._messageService.deleteMessage(MESSAGE_TYPE.WARNING,ecosolution.solutionName).afterClosed().subscribe(isDelete => {
 
       if(isDelete) {
         this._ecosolutionsService

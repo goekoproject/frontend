@@ -2,3 +2,8 @@
 	<h1 class="document-legal-title">{{ this.title }}</h1>
 	<div [innerHTML]="this.textLegal"></div>
 </article>
+
+<button go-button routerLink="/home">
+	<i class="ti ti-square-rounded-arrow-left"></i>
+	{{ 'home' | translate }}
+</button>
