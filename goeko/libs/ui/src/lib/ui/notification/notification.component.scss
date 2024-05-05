@@ -42,3 +42,6 @@
   padding: 0;
   align-items: flex-start;
 }
+.notification:empty {
+  display: none;
+}

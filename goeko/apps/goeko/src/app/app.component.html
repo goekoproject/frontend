@@ -3,17 +3,7 @@
 <div class="container" [class.is-platform]="isPrivateZone">
   <goeko-header-user>
     <go-breadcrumbs></go-breadcrumbs>
-    @if (!isSubscribed) {
-    <go-notification [type]="'info'">
-      <div class="container-subscription-banner">
-        <p>{{ 'MESSAGE_SUBSCRIPTION_BANNER.messageAlert' | translate }}</p>
-        <span class="subscription-contact">
-          <p>{{ 'MESSAGE_SUBSCRIPTION_BANNER.messageContact' | translate }}</p>
-          <a href="malito:info@goeko.ch">info&#64;goeko.ch</a>
-        </span>
-      </div>
-    </go-notification>
-    }
+    <go-notification></go-notification>
   </goeko-header-user>
   <router-outlet></router-outlet>
 </div>

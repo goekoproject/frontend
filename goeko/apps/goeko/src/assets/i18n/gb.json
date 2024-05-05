@@ -410,7 +410,7 @@
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
-    "messageContact": "Contact us at "
+    "messageContact": "Contact us at {{email}}"
   },
   "mandatory" :"Mandatory",
   "exit": "Exit",

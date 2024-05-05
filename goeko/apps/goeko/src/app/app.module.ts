@@ -29,6 +29,7 @@ import {
   ButtonModule,
   DialogMessageModule,
   NotificationModule,
+  NotificationService,
   SideDialogModule,
   UiBreadcrumbsModule
 } from '@goeko/ui';
@@ -102,7 +103,7 @@ const httpLoaderFactory = (http: HttpClient) => {
     }),
     NotificationModule
   ],
-  providers: [UserService, LoadDataUser, isSubscribedCleantech, 
+  providers: [UserService, LoadDataUser, isSubscribedCleantech, NotificationService,
     {
       provide: APP_INITIALIZER,
       multi: true,

@@ -409,7 +409,7 @@
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
-    "messageContact": "Ponte en contacto con nosotros en "
+    "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
   "mandatory" :"Obligatorio",
   "exit": "Salir",
