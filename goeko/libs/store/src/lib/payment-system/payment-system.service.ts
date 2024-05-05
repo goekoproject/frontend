@@ -4,12 +4,13 @@ import { BehaviorSubject, EMPTY, Observable, catchError, map } from 'rxjs';
 import { SessionStorageService } from '../session-storage.service';
 import { PaymentSuscription } from './payment-subscription.interface';
 export const KEY_STORAGE = 'GO_IS_SUS';
+export const STATUS_PENDING = 'pending';
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentSystemService {
   private _isSubscription = signal(
-    this.sessionStorageService.getItem(KEY_STORAGE)
+    this.sessionStorageService.getItem(KEY_STORAGE) || STATUS_PENDING,
   );
 
   public get isSubscription() {
@@ -44,6 +45,7 @@ export class PaymentSystemService {
         }),
         catchError(() => {
           this.sessionStorageService.setItem(KEY_STORAGE, false);
+          this._saveIsSuscription('');
           return EMPTY;
         })
       )

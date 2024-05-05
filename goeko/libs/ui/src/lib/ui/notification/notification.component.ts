@@ -1,13 +1,13 @@
 import {
-	Component,
-	EventEmitter,
-	Input,
-	OnInit,
-	Output,
-	ViewEncapsulation,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { NotificationService } from './notification.services';
-
 @Component({
   selector: 'go-notification',
   templateUrl: './notification.component.html',
@@ -20,7 +20,7 @@ import { NotificationService } from './notification.services';
     '[attr.appearance]': 'appearance',
   },
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent implements OnInit, OnDestroy {
   @Input() type = 'info' || 'warning' || 'error';
   @Input() appearance = 'fill' || 'flat';
   @Output() close$ = new EventEmitter();
@@ -38,5 +38,8 @@ export class NotificationComponent implements OnInit {
     });
   }
 
-
+ngOnDestroy(): void {
+  this._notificationService.data.next(null);
+  this._notificationService.data.complete();
+}
 }

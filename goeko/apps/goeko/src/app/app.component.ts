@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, effect } from '@angular/core';
 import { VAR_GENERAL } from '@goeko/business-ui';
 import { AuthService } from '@goeko/core';
-import { PaymentSystemService, USER_TYPE, UserService } from '@goeko/store';
+import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store';
 import { NotificationService } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
 
 
   private _hanlderCleantechSuscriptions(): void {
-    if(this.userService.userType()) {
+    if(this.userService.userType() && this.isSubscribed !== STATUS_PENDING) {
       this.cleantechUnsubscribed = this.userService.userType() === USER_TYPE.CLEANTECH && !this.isSubscribed;
       this._showNotificationsCleantechUnsubscribed();
     }
