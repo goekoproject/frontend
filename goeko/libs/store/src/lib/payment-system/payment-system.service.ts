@@ -8,8 +8,9 @@ export const KEY_STORAGE = 'GO_IS_SUS';
   providedIn: 'root',
 })
 export class PaymentSystemService {
-  private _isSubscription = signal(this.sessionStorageService.getItem(KEY_STORAGE));
- 
+  private _isSubscription = signal(
+    this.sessionStorageService.getItem(KEY_STORAGE)
+  );
 
   public get isSubscription() {
     return this._isSubscription();
@@ -23,10 +24,9 @@ export class PaymentSystemService {
     this._isSubscription$ = value;
   }
 
-  
   constructor(
     private _http: HttpClient,
-    private readonly sessionStorageService: SessionStorageService,
+    private readonly sessionStorageService: SessionStorageService
   ) {}
 
   cleantechSubscription(id: string): Observable<PaymentSuscription> {
@@ -36,20 +36,23 @@ export class PaymentSystemService {
   }
 
   isSubscribedForActor(id: string) {
-    this.cleantechSubscription(id).pipe(
-      map((isSubscribed: PaymentSuscription) =>
-       { this.sessionStorageService.setItem(
-          KEY_STORAGE,
-          isSubscribed.providerDetails.subscriptionId
-       );
-       this._isSubscription$.next(isSubscribed.providerDetails.subscriptionId)
+    this.cleantechSubscription(id)
+      .pipe(
+        map((isSubscribed: PaymentSuscription) => {
+          const subscriptionId = isSubscribed.providerDetails.subscriptionId;
+          this._saveIsSuscription(subscriptionId);
+        }),
+        catchError(() => {
+          this.sessionStorageService.setItem(KEY_STORAGE, false);
+          return EMPTY;
+        })
+      )
+      .subscribe();
+  }
 
-        }
-      ),
-      catchError(() => {
-        this.sessionStorageService.setItem(KEY_STORAGE, false);
-        return EMPTY;
-      })
-    ).subscribe();
+  private _saveIsSuscription(subscriptionId: string) {
+    this.sessionStorageService.setItem(KEY_STORAGE, subscriptionId);
+    this._isSubscription.set(subscriptionId);
+    this._isSubscription$.next(subscriptionId);
   }
 }
