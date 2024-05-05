@@ -65,7 +65,7 @@ export class EcosolutionsListComponent implements OnInit {
       if(isDelete) {
         this._ecosolutionsService
         .deleteEcosolution(ecosolution.id)
-        .subscribe((res: any) => {
+        .subscribe(() => {
           this.getAllEcosolutionsByCleanTech();
         });
       }
