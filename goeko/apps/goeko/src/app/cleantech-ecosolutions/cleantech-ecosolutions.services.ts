@@ -7,7 +7,8 @@ import {
 import {
   ClassificationCategory,
   ClassificationCategoryService,
-  NULL_CLASSIFICATION_CATEGORY
+  NULL_CLASSIFICATION_CATEGORY,
+  PaymentSystemService
 } from '@goeko/store';
 import { map, tap } from 'rxjs';
 
@@ -28,8 +29,14 @@ export class CleantechEcosolutionsService {
   categorySelected = signal<ClassificationCategory>(
     NULL_CLASSIFICATION_CATEGORY
   );
+
+  
+  get isSubscribed() {
+   return this._paymentsService.isSubscription;
+  }
   constructor(
-    private classificationCategoryService: ClassificationCategoryService
+    private classificationCategoryService: ClassificationCategoryService,
+    private _paymentsService: PaymentSystemService
   ) {
     effect(() => {
       if (this.categorySelected().id !== '') {
@@ -54,4 +61,6 @@ export class CleantechEcosolutionsService {
         }
       });
   }
+
+ 
 }

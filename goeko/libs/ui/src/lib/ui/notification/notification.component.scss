@@ -1,16 +1,19 @@
 .notification {
   border-radius: 8px;
-  padding: 0.5rem;
-  padding-right: 1.2rem;
+  padding: 1rem;
   display: flex;
   font-size: 0.875rem;
   margin: 1rem 0;
   align-items: center;
   gap: 1rem;
-  width: max-content;
-  background: var(--white);
+  width: 100%;
+  box-shadow: 0 10px 40px -12px rgba(16,24,40,.1);
+  border-color: var(--primary--400);
+  border-width: 1px;
+  background-color: var(--primary--100);
+  color: var(--soft-dark);
   &-icon {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
   &[type='info'] {
     border: 1px solid var(--primary--main);
@@ -19,6 +22,13 @@
     font-style: italic;
   }
 
+}
+.notification[type='info'] {
+  i {
+    color: var(--primary--100);
+    border-radius: 1rem;
+    background-color: var(--primary--500);
+  }
 }
 
 .notification[appearance='flat'] {
@@ -31,4 +41,7 @@
   margin: 0;
   padding: 0;
   align-items: flex-start;
+}
+.notification:empty {
+  display: none;
 }

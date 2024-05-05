@@ -1,3 +1,5 @@
+import { VAR_GENERAL } from "@goeko/business-ui";
+
 export interface FooterInfo {
   title: string;
   elements: Elements[];
@@ -41,8 +43,8 @@ export const FOOTER_INFO = [
     title: 'FOOTER.contact',
     elements: [
       {
-        title: 'info@goeko.ch',
-        url: 'malito:info@goeko.ch',
+        title: VAR_GENERAL.GOEKO_EMAIL,
+        url: `malito:${VAR_GENERAL.GOEKO_EMAIL}`,
         logo: 'mail',
       }
     ],

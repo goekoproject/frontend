@@ -408,6 +408,10 @@
     "saveMessageGeneric": "Do you want to save the data before continuing?"
 
   },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "Subscribe for full access! Discover more.",
+    "messageContact": "Contact us at {{email}}"
+  },
   "mandatory" :"Mandatory",
   "exit": "Exit",
   "logout":"Log out",

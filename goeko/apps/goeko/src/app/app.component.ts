@@ -1,9 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoadDataUser } from '@goeko/business-ui';
+import { Component, Inject, OnInit, effect } from '@angular/core';
+import { VAR_GENERAL } from '@goeko/business-ui';
 import { AuthService } from '@goeko/core';
-import { take } from 'rxjs';
+import { PaymentSystemService, USER_TYPE, UserService } from '@goeko/store';
+import { NotificationService } from '@goeko/ui';
+import { TranslateService } from '@ngx-translate/core';
 
 const KEY_COOKIES = 'cookie-policy';
 @Component({
@@ -27,27 +28,64 @@ export class AppComponent implements OnInit {
   get isDemo() {
     return this.path?.includes('demo');
   }
+  get isSubscribed() {
+    return this._paymentService.isSubscription
+  }
+
+  get cleantechUnsubscribed() {
+    return this._cleantechUnsubscribed;
+  }
+
+  set cleantechUnsubscribed(value: boolean) {
+    this._cleantechUnsubscribed = value;
+  }
+
+  private _cleantechUnsubscribed!: boolean;
+
 
   public isAuthenticated$ = this._authService.isAuthenticated$;
   public isPrivateZone: boolean = false;
-
-  constructor(private _router: Router,private route: ActivatedRoute,
+  constructor(
     @Inject(DOCUMENT) private doc: Document,
+    private _paymentService: PaymentSystemService,
+    private _authService: AuthService,
+    private _notificationService: NotificationService,
+    private _translate: TranslateService,
+    private readonly userService: UserService
 
-     private _authService: AuthService,private loadDataUser: LoadDataUser) {}
+    ) {
+      effect(()=> {
+        this._hanlderCleantechSuscriptions();
+      })
+    }
 
   ngOnInit(): void {
     this._manageClientZone();
     this._messageAfterSignUp();
   }
 
+
+  private _hanlderCleantechSuscriptions(): void {
+    if(this.userService.userType()) {
+      this.cleantechUnsubscribed = this.userService.userType() === USER_TYPE.CLEANTECH && !this.isSubscribed;
+      this._showNotificationsCleantechUnsubscribed();
+    }
+  }
+
+  private _showNotificationsCleantechUnsubscribed() {
+      if(this.cleantechUnsubscribed) {
+        this._notificationService.notify( {data: { texts: [
+          'MESSAGE_SUBSCRIPTION_BANNER.messageAlert',
+           this._translate.instant('MESSAGE_SUBSCRIPTION_BANNER.messageContact',{email: VAR_GENERAL.GOEKO_EMAIL})
+        ]}})
+      }
+  }
+ 
+
   private _manageClientZone() {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isPrivateZone = isAuthenticated && !this.isHomePage();
       console.log(this.isPrivateZone);
-      if(this.isPrivateZone) {
-        this.loadDataUser.resolve().pipe(take(1)).subscribe();
-      } 
       
     });
   } 
