@@ -1,5 +1,8 @@
-import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, signal } from '@angular/core';
 import { AppState, AuthService as Auth0, User } from '@auth0/auth0-angular';
+import { LangOfLocalecontentFul } from '@goeko/store';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, concat, from, of } from 'rxjs';
 import { CONFIGURATION } from '../../config.module';
 import { Options } from '../../models/options.interface';
@@ -7,12 +10,17 @@ import { AuthRequest } from './auth-request.interface';
 import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants';
 import { Auth0Connected, AuthResponse } from './auth0.abtract';
 import { SignUp } from './signup.interface';
-import { DOCUMENT } from '@angular/common';
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
   private _clientId: string;
-
+  get currentLang() {
+    const codeLang =
+      this._translate.currentLang || this._translate.defaultLang;
+    const currentLang =
+      LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul];
+    return signal(currentLang);
+  }
   private _dataAuthConect = ({ username = '', password = '' }) => {
     return {
       realm: AUTH_CONNECT.REALM,
@@ -39,14 +47,17 @@ export class AuthService extends Auth0Connected {
   constructor(
     @Inject(CONFIGURATION) private _config: Options,
     @Inject(DOCUMENT) private doc: Document,
-    private readonly _auth0: Auth0
+    private readonly _auth0: Auth0,
+    private readonly _translate: TranslateService
   ) {
     super(_config.domainAuth0, _config.clientId);
     this._clientId = this._config.clientId;
   }
 
   universalLogin(): Observable<any> {
-    return this._auth0.loginWithRedirect();
+    return this._auth0.loginWithRedirect({
+      authorizationParams : {ui_locales: this.currentLang()}
+    });
   }
 
   /**
