@@ -3,14 +3,14 @@ import { FormGroup } from '@angular/forms';
 import {
   CountrySelectOption,
   DataSelect,
-  Profile,
   UserModal,
   UserService,
-  UserSwitch,
+  UserSwitch
 } from '@goeko/store';
 import { SideDialogService } from '@goeko/ui';
 import { forkJoin, of } from 'rxjs';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
+import { ProfileFieldset } from './profile-fieldset.interface';
 import { ProfileFormFactory } from './profile-form.factory';
 import { PROFILE_SME } from './profile-sme.constants';
 
@@ -40,7 +40,7 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
 };
 
 
-const TYPE_FORM_FOR_USERTYPE: UserSwitch<Profile[]> = {
+const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantech'>>> = {
   sme: PROFILE_SME,
   cleantech: PROFILE_CLEANTECH,
 };
@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
   savedProfileOK!: boolean;
   public dataSelect = DataSelect as any;
 
-  public formProfile!: Profile[];
+  public formProfile!: Array<ProfileFieldset<'sme'|'cleantech'>>;
   dataProfile = this._userService.userProfile;
 
   private _userType = this._userService.userType;

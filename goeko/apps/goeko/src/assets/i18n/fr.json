@@ -167,7 +167,11 @@
     "technicalDescription": "Description détaillée",
     "typeOfEcolutions": "Type d'éco-solution",
     "unit": "Unité",
-    "website": "Site web"
+    "website": "Site web",
+    "yourLocation": "Sélectionnez le pays et la province",
+    "yourLocationTextSupport": "Vos données de localisation seront utilisées pour personnaliser les recommandations de solutions écologiques."
+
+
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",

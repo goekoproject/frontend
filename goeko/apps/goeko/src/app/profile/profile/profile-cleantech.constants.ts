@@ -1,36 +1,41 @@
-import { Profile } from '@goeko/store';
+import { ProfileFieldset } from './profile-fieldset.interface';
 
-export const PROFILE_CLEANTECH: Profile<'cleantech'>[] = [
-	{
-		controlName: 'name',
-		label: 'FORM_LABEL.companyName',
-		type: 'text',
-	},
-	{
-		controlName: 'email',
-		label: 'FORM_LABEL.emailSalesManager',
-		type: 'email',
-	},
-	{
-		controlName: 'country',
-		label: 'FORM_LABEL.country',
-		type: 'select',
-		dataSelectKey: 'countries',
-	},
-	{
-		controlName: 'city',
-		label: 'FORM_LABEL.city',
-		type: 'text',
-	},
-	{
-		controlName: 'link',
-		label: 'FORM_LABEL.website',
-		type: 'url',
-	},
-	{
-		controlName: 'logo',
-		label: 'FORM_LABEL.logo',
-		type: 'file-link',
-		className: 'file-link',
-	},
+export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
+  {
+    legend: '',
+    fields: [
+      {
+        controlName: 'name',
+        label: 'FORM_LABEL.companyName',
+        type: 'text',
+      },
+      {
+        controlName: 'email',
+        label: 'FORM_LABEL.emailSalesManager',
+        type: 'email',
+      },
+      {
+        controlName: 'country',
+        label: 'FORM_LABEL.country',
+        type: 'select',
+        dataSelectKey: 'countries',
+      },
+      {
+        controlName: 'city',
+        label: 'FORM_LABEL.city',
+        type: 'text',
+      },
+      {
+        controlName: 'link',
+        label: 'FORM_LABEL.website',
+        type: 'url',
+      },
+      {
+        controlName: 'logo',
+        label: 'FORM_LABEL.logo',
+        type: 'file-link',
+        className: 'file-link',
+      },
+    ],
+  },
 ];

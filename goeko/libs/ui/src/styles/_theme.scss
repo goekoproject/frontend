@@ -188,6 +188,14 @@ legend {
   font-weight: 600;
   line-height: 1.5;
 }
+fieldset:not(:has(legend)) {
+  padding: 0;
+}
+.fieldset-text-support {
+  margin-bottom: 1rem;
+}
+
+
 input[type='radio' i]:focus-visible {
   outline: none;
 }
