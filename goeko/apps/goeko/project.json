@@ -19,6 +19,8 @@
         "assets": ["apps/goeko/src/favicon.ico", "apps/goeko/src/assets"],
         "styles": [
           "apps/goeko/src/styles.scss",
+          "apps/goeko/src/tailwind.scss",
+          "apps/goeko/src/tailwind-styles.scss",
           "./libs/ui/src/styles/_theme.scss"
         ],
         "scripts": []

@@ -4,9 +4,14 @@
   </div>
 </go-notification>
 
+
 @if (form) {
 <div class="profile-data">
   <form [formGroup]="form" class="profile-page">
+    <div class="profile-data-heading flex items-center gap-4">
+      <i class="ti ti-building-community icon-profile bg-primary-400"></i>
+      <p> {{this.dataProfile().name}}</p>
+    </div>
     @for ( fieldset of formProfile; track fieldset.fields) {
       <fieldset>
         <div class="fieldset-text-support">
