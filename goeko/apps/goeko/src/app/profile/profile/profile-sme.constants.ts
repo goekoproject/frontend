@@ -23,4 +23,10 @@ export const PROFILE_SME: Profile<'sme'>[] = [
 		label: 'FORM_LABEL.website',
 		type: 'url',
 	},
+	{
+		controlName: 'numEmployees',
+		label: 'FORM_LABEL.numEmployees',
+		type: 'number',
+	},
+	
 ];

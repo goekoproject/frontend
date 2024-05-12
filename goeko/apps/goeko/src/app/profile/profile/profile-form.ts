@@ -11,6 +11,7 @@ export const smeFormGroup = new FormGroup({
   email: new FormControl('',[Validators.required, Validators.email]),
   country: new FormControl('',Validators.required),
   website: new FormControl(),
+  numEmployees: new FormControl('',[Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
 });
 
