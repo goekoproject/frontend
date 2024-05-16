@@ -1,6 +1,6 @@
 import { DataSelect } from '../constants/select-data.constants';
 
-type FieldForm = 'text' | 'email' | 'password' | 'url' | 'select' | 'select-multiple' | 'file-link';
+type FieldForm = 'text' | 'email' | 'password' | 'url' | 'select' | 'select-multiple' | 'file-link' | 'country' | 'regions';
 export interface Profile<T = 'cleantech' | 'sme' | 'bank'> {
 	userType?: T;
 	controlName: string;

@@ -4,103 +4,105 @@
   </div>
 </go-notification>
 
-
 @if (form) {
 <div class="profile-data">
   <form [formGroup]="form" class="profile-page">
     <div class="profile-data-heading flex items-center gap-4">
       <i class="ti ti-building-community icon-profile bg-primary-400"></i>
-      <p> {{this.dataProfile().name}}</p>
+      <p>{{ this.dataProfile().name }}</p>
     </div>
-    @for ( fieldset of formProfile; track fieldset.fields) {
-      <fieldset>
-        <div class="fieldset-text-support">
-          @if(fieldset.legend) {
-            <legend>{{ fieldset.legend | translate }}</legend>
-          }
-          @if(fieldset.textSupport) {
-            <p class="text-support">
-              {{ fieldset.textSupport  | translate }}
-            </p>
-          }
-        </div>
-       
-        @for (itemForm of fieldset.fields; track itemForm.controlName) {
-          @switch (itemForm.type) {
-            @case ('select-multiple') {
-                <div class="select-profile">
-                  <label for="{{ itemForm.controlName }}">{{
-                    itemForm.label | translate
-                  }}</label>
-      
-                  <ui-super-select
-                    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-                    [multiple]="true"
-                    [formControlName]="itemForm.controlName"
-                    [id]="itemForm.controlName"
-                    [name]="itemForm.controlName"
-                    [compareWith]="defaultSetSuperSelect"
-                  >
-                    <ng-container *ngIf="itemForm.dataSelectKey">
-                      <super-option
-                        *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
-                        [value]="option"
-                      >
-                        {{ option.keyLang | translate }}
-                      </super-option>
-                    </ng-container>
-                  </ui-super-select>
-                </div>
-            }
-    
-            @case ('select') {
-                <div class="select-profile">
-                 
-      
-                  <ui-super-select
-                    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-                    [formControlName]="itemForm.controlName"
-                    [id]="itemForm.controlName"
-                    [name]="itemForm.controlName"
-                  >
-                  <label title for="{{ itemForm.controlName }}">
-                    {{itemForm.label | translate}}
-                   </label>
-                    <ng-container *ngIf="itemForm.dataSelectKey">
-                      <super-option
-                        *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
-                        [value]="option.code"
-                      >
-                        {{ option.keyLang | translate }}
-                      </super-option>
-                    </ng-container>
-                  </ui-super-select>
-                </div>
-            }
-    
-            @case ('file-link') {
-            <goeko-input-file (fileChange)="fileChange($event)" [fileUrl]="this.dataProfile().logo" [alt]="fileProfile?.id"></goeko-input-file>
-    
-            } 
-            @default {
-              
-              <go-input
-                [formControlName]="itemForm.controlName"
-                type="{{ itemForm.type }}"
-                class="{{ itemForm.className }}"
-              >
-                <p slot="label">{{ itemForm.label | translate }}</p>
-              </go-input>
-            }
-              
-          }
+    @for ( fieldset of formSection; track fieldset.fields) {
+    <fieldset>
+      <div class="fieldset-text-support">
+        @if(fieldset.legend) {
+        <legend>{{ fieldset.legend | translate }}</legend>
+        } @if(fieldset.textSupport) {
+        <p class="text-support">
+          {{ fieldset.textSupport | translate }}
+        </p>
         }
-      </fieldset>
-      
-    
-    }
-  
+      </div>
 
+      @for (itemForm of fieldset.fields; track itemForm.controlName) { @switch
+      (itemForm.type) { 
+        
+      @case ('select-multiple') {
+      <div class="select-profile">
+        <label for="{{ itemForm.controlName }}">{{
+          itemForm.label | translate
+        }}</label>
+
+        <ui-super-select
+          [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+          [multiple]="true"
+          [formControlName]="itemForm.controlName"
+          [id]="itemForm.controlName"
+          [name]="itemForm.controlName"
+          [compareWith]="defaultSetSuperSelect"
+        >
+          <ng-container *ngIf="itemForm.dataSelectKey">
+            <super-option
+              *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
+              [value]="option"
+            >
+              {{ option.keyLang | translate }}
+            </super-option>
+          </ng-container>
+        </ui-super-select>
+      </div>
+      } @case ('select') {
+      <div class="select-profile">
+        <ui-super-select
+          [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+          [formControlName]="itemForm.controlName"
+          [id]="itemForm.controlName"
+          [name]="itemForm.controlName"
+        >
+          <label title for="{{ itemForm.controlName }}">
+            {{ itemForm.label | translate }}
+          </label>
+          <ng-container *ngIf="itemForm.dataSelectKey">
+            <super-option
+              *ngFor="let option of dataSelect[itemForm.dataSelectKey]"
+              [value]="option.code"
+            >
+              {{ option.keyLang | translate }}
+            </super-option>
+          </ng-container>
+        </ui-super-select>
+      </div>
+      } @case ('file-link') {
+      <goeko-input-file
+        (fileChange)="fileChange($event)"
+        [fileUrl]="this.dataProfile().logo"
+        [alt]="fileProfile?.id"
+      ></goeko-input-file>
+
+      } @case('country') {
+      <ng-container
+        [ngTemplateOutlet]="select"
+        [ngTemplateOutletContext]="{ itemForm: itemForm, source: countries(), formTemplate: form }"
+      ></ng-container>
+      } @case('regions') {
+      <ng-container
+        [ngTemplateOutlet]="select"
+        [ngTemplateOutletContext]="{ itemForm: itemForm, source: regions(), 
+          multiSelect: true,
+          formTemplate: form }"
+      ></ng-container>
+      } @default {
+
+      <go-input
+        [formControlName]="itemForm.controlName"
+        type="{{ itemForm.type }}"
+        class="{{ itemForm.className }}"
+      >
+        <p slot="label">{{ itemForm.label | translate }}</p>
+      </go-input>
+      } } }
+    </fieldset>
+
+    }
 
     <div class="profile-actions">
       <button
@@ -129,3 +131,27 @@
 
 <br />
 
+<ng-template #select let-itemForm="itemForm" let-source="source" 
+let-multiSelect="multiSelect"
+let-formTemplate="formTemplate">
+  <div class="select-profile" [formGroup]="formTemplate">
+    <ui-super-select
+      [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+      [formControlName]="itemForm.controlName"
+      [id]="itemForm.controlName"
+      [multiple]="multiSelect"
+      [name]="itemForm.controlName"
+      [compareWith]="defaultSetSuperSelect"
+
+    >
+      <label title for="{{ itemForm.controlName }}">
+        {{ itemForm.label | translate }}
+      </label>
+      <ng-container *ngIf="itemForm.dataSelectKey">
+        <super-option *ngFor="let option of source" [value]="option">
+          {{ option.label | translate }}
+        </super-option>
+      </ng-container>
+    </ui-super-select>
+  </div>
+</ng-template>

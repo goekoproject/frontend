@@ -170,7 +170,8 @@
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sito web",
     "yourLocation": "Seleccione el país y la provincia",
-    "yourLocationTextSupport": "Los datos de su ubicación serán utilizados para personalizar las recomendaciones de soluciones ecológicas."
+    "yourLocationTextSupport": "Los datos de su ubicación serán utilizados para personalizar las recomendaciones de soluciones ecológicas.",
+    "province": "Provincia"
   },
   "VERIFY_EMAIL": {
     "title":"Revisa tu bandeja de entrada.",

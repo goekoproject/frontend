@@ -169,9 +169,8 @@
     "unit": "Unité",
     "website": "Site web",
     "yourLocation": "Sélectionnez le pays et la province",
-    "yourLocationTextSupport": "Vos données de localisation seront utilisées pour personnaliser les recommandations de solutions écologiques."
-
-
+    "yourLocationTextSupport": "Vos données de localisation seront utilisées pour personnaliser les recommandations de solutions écologiques.",
+    "province": "Région"
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",

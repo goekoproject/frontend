@@ -28,7 +28,14 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
       {
         controlName: 'country',
         label: 'FORM_LABEL.country',
-        type: 'select',
+        type: 'country',
+        dataSelectKey: 'countries',
+        required: true,
+      },
+      {
+        controlName: 'regions',
+        label: 'FORM_LABEL.province',
+        type: 'regions',
         dataSelectKey: 'countries',
         required: true,
       },
