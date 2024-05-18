@@ -1,7 +1,7 @@
 .profile-data {
 	display: flex;
 	gap: 2rem;
-	@apply max-w-2xl;
+	@apply max-w-4xl;
 }
 .profile-page {
 	display: flex;
@@ -39,4 +39,4 @@
 
 .icon-profile {
 	@apply border-0 border-solid border-transparent rounded-full text-white text-4xl p-4 flex justify-center items-center w-20 h-20;
-  } 
+}

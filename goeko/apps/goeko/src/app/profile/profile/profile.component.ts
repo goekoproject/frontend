@@ -1,5 +1,5 @@
 import { Component, OnInit, effect } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import {
   CountrySelectOption,
   DataSelect,
@@ -84,6 +84,10 @@ export class ProfileComponent implements OnInit {
 
   private _uploadImg$ = () =>
     this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg);
+
+  public  get locationsArrays(): FormArray {
+    return this.form.get('locations') as FormArray;
+  }
   constructor(
     private _sideDialogService: SideDialogService,
     private _userService: UserService,
@@ -96,6 +100,7 @@ export class ProfileComponent implements OnInit {
     this._sideDialogService.closeDialog();
     this._userService.fetchUser();
     this._createFormForUserType();
+    this._loadDataProfile();
     this._countryChanges();
   }
   private _createFormForUserType() {
@@ -105,16 +110,38 @@ export class ProfileComponent implements OnInit {
         TYPE_FORM_FOR_USERTYPE[
           this._userType() as keyof typeof TYPE_FORM_FOR_USERTYPE
         ];
-      this.form.patchValue(this.dataProfile());
-      this.form.get('externalId')?.patchValue(this._externalId());
-      this._setLocaltionInFormForSme();
     }
   }
 
+  private _loadDataProfile() {
+    this.form.patchValue(this.dataProfile());
+    this.form.get('externalId')?.patchValue(this._externalId());
+    this._setLocaltionInFormForSme();
+  }
+
+  private _createLocations():FormGroup {
+    return new FormGroup({
+      country: new FormGroup({
+        code: new FormControl(),
+        regions: new FormControl()
+      }),
+    });
+  }
+
+  private _addLocations() {
+    this.locationsArrays.push(this._createLocations());
+  }
+
+
   private _setLocaltionInFormForSme() {
     if(this._userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
-      this.form.get('country')?.patchValue((this.dataProfile() as SmeUser).locations[0].country.code);
-      this.form.get('regions')?.patchValue((this.dataProfile() as SmeUser).locations[0].country.regions);
+      this.locationsArrays.clear();
+   
+      (this.dataProfile() as SmeUser).locations.forEach((loc)=> {
+        this._addLocations();
+        
+      })
+      this.form.get('locations')?.patchValue((this.dataProfile() as SmeUser).locations);
     }
   }
   private _countryChanges() {

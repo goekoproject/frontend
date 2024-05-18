@@ -1,0 +1,120 @@
+<div>
+  <ng-container *ngTemplateOutlet="main"></ng-container>
+
+  @if(!hiddenLocationElement) {
+  <div
+    (click)="addLocation()"
+    class="flex items-center justify-center h-16 border rounded-md border-dashed border-primary-500 text-primary-500 text-4xl cursor-pointer"
+  >
+    <i class="ti ti-plus"></i>
+  </div>
+  }
+</div>
+
+<ng-template #main>
+  <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
+</ng-template>
+
+<ng-template #readonly let-location="location" let-index="index">
+  @if(location) {
+  <article class="locations-selected border-primary-500 text-primary-500">
+    <section class="selected-element">
+      <span class="title-elements">
+        {{ 'FORM_LABEL.country' | translate }}</span
+      >
+      <p class="country">
+        {{ location.get(controlNameCountry)?.value.code?.label }}
+      </p>
+    </section>
+
+    <section class="selected-element">
+      <span class="title-elements">
+        {{ 'FORM_LABEL.province' | translate }}</span
+      >
+
+      <div class="selected-provinces">
+        @for ( provinces of location.get(controlNameCountry)?.value.regions;
+        track provinces.code) {
+        <p class="provinces bg-primary-300 text-darkAccent">
+          {{ provinces.label }}
+        </p>
+        }
+      </div>
+    </section>
+    <i
+      class="ti ti-edit text-4xl m-auto cursor-pointer"
+      (click)="editLocation(location, index)"
+    ></i>
+  </article>
+  }
+</ng-template>
+
+<ng-template #formSelectLocation>
+  <div class="select-profile" [formGroup]="form">
+    <div formArrayName="locations" class="flex flex-col gap-4">
+      @for(location of controlLocations.controls; track location; let i=$index){
+
+      {{ hiddenLocationElement && i ===selectedLocationsIndex()}} 
+      <div>
+        @if (location) {
+        <div
+          [class.hidden-selected]="hiddenLocationElement && i === selectedLocationsIndex()"
+        >
+          <ng-container
+            [ngTemplateOutlet]="readonly"
+            [ngTemplateOutletContext]="{ location: location, index: i }"
+          ></ng-container>
+        </div>
+        }
+        <div
+          [formGroupName]="i"
+          [class.hidden-selected]="!(hiddenLocationElement && i === selectedLocationsIndex())"
+          class="locations-selected border-primary-500"
+        >
+          <div [formGroupName]="controlNameCountry">
+            <ui-super-select
+              [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+              [formControlName]="'code'"
+              [id]="controlNameCountry"
+              [compareWith]="defaultSetSuperSelect"
+            >
+              <label title for="{{ controlNameCountry }}">
+                {{ 'FORM_LABEL.country' | translate }}
+              </label>
+              <super-option *ngFor="let option of countries()" [value]="option">
+                {{ option.label | translate }}
+              </super-option>
+            </ui-super-select>
+
+            <ui-super-select
+              [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+              [formControlName]="'regions'"
+              [id]="controlNameProvince"
+              [multiple]="true"
+              [compareWith]="defaultSetSuperSelect"
+            >
+              <label title for="{{ controlNameProvince }}">
+                {{ 'FORM_LABEL.province' | translate }}
+              </label>
+              <super-option *ngFor="let option of regions()" [value]="option">
+                {{ option.label | translate }}
+              </super-option>
+            </ui-super-select>
+          </div>
+          <div class="m-auto flex gap-2">
+            <i
+              class="ti ti-circle-x text-5xl cursor-pointer text-softDark"
+              (click)="toogleEdit = false"
+            ></i>
+            <i [attr.disabled]="location.get(controlNameCountry)?.invalid"
+              class="ti ti-circle-check-filled text-5xl cursor-pointer text-primary-500"
+              (click)="toogleEdit = false"
+            ></i>
+          </div>
+        </div>
+      </div>
+
+      }
+    </div>
+  </div>
+</ng-template>

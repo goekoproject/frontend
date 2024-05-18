@@ -24,9 +24,7 @@
       </div>
 
       @for (itemForm of fieldset.fields; track itemForm.controlName) { @switch
-      (itemForm.type) { 
-        
-      @case ('select-multiple') {
+      (itemForm.type) { @case ('select-multiple') {
       <div class="select-profile">
         <label for="{{ itemForm.controlName }}">{{
           itemForm.label | translate
@@ -81,15 +79,29 @@
       } @case('country') {
       <ng-container
         [ngTemplateOutlet]="select"
-        [ngTemplateOutletContext]="{ itemForm: itemForm, source: countries(), formTemplate: form }"
+        [ngTemplateOutletContext]="{
+          itemForm: itemForm,
+          source: countries(),
+          formTemplate: form
+        }"
       ></ng-container>
       } @case('regions') {
       <ng-container
         [ngTemplateOutlet]="select"
-        [ngTemplateOutletContext]="{ itemForm: itemForm, source: regions(), 
+        [ngTemplateOutletContext]="{
+          itemForm: itemForm,
+          source: regions(),
           multiSelect: true,
-          formTemplate: form }"
+          formTemplate: form
+        }"
       ></ng-container>
+      } @case ('select-locations') {
+      <goeko-select-locations
+        [form]="form"
+        [controlLocations]="locationsArrays"
+        [controlNameCountry]="'country'"
+        [controlNameProvince]="'regions'"
+      ></goeko-select-locations>
       } @default {
 
       <go-input
@@ -131,9 +143,13 @@
 
 <br />
 
-<ng-template #select let-itemForm="itemForm" let-source="source" 
-let-multiSelect="multiSelect"
-let-formTemplate="formTemplate">
+<ng-template
+  #select
+  let-itemForm="itemForm"
+  let-source="source"
+  let-multiSelect="multiSelect"
+  let-formTemplate="formTemplate"
+>
   <div class="select-profile" [formGroup]="formTemplate">
     <ui-super-select
       [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -142,7 +158,6 @@ let-formTemplate="formTemplate">
       [multiple]="multiSelect"
       [name]="itemForm.controlName"
       [compareWith]="defaultSetSuperSelect"
-
     >
       <label title for="{{ itemForm.controlName }}">
         {{ itemForm.label | translate }}

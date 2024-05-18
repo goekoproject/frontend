@@ -1,17 +1,17 @@
-interface SelectLocation {
+/* interface SelectLocation {
   code: string;
   label: string;
-}
+} */
 
 export interface UserProfileForm {
   name: string;
   identifier: string;
-  country: SelectLocation;
+  country: any;
   city: string;
   email: string;
   website: string;
   externalId: string;
   employees: number;
   phoneNumber: string;
-  regions: Array<SelectLocation>;
+  locations: any[];
 }

@@ -1,0 +1,24 @@
+.locations-selected {
+    @apply flex gap-8 border rounded-md border-dashed p-4;
+}
+
+.selected-element {
+    @apply flex gap-2 flex-col;
+}
+.selected-provinces {
+    @apply flex gap-2 flex-wrap;
+}
+.provinces {
+    @apply border rounded-3xl px-4 py-2;
+    font: var(--font-label);
+}
+.title-elements {
+    font: var(--font-body);
+    color: var(--soft-dark);
+}
+.country {
+    font: var(--font-body-semibold);
+}
+.hidden-selected{
+	@apply invisible h-0;
+} 

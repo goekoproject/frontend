@@ -19,23 +19,16 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         label: 'FORM_LABEL.website',
         type: 'url',
       },
-    ]
+    ],
   },
   {
     legend: 'FORM_LABEL.yourLocation',
-	textSupport: 'FORM_LABEL.yourLocationTextSupport',
+    textSupport: 'FORM_LABEL.yourLocationTextSupport',
     fields: [
       {
         controlName: 'country',
         label: 'FORM_LABEL.country',
-        type: 'country',
-        dataSelectKey: 'countries',
-        required: true,
-      },
-      {
-        controlName: 'regions',
-        label: 'FORM_LABEL.province',
-        type: 'regions',
+        type: 'select-locations',
         dataSelectKey: 'countries',
         required: true,
       },

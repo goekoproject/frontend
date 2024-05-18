@@ -9,26 +9,29 @@ const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
 };
 
 export abstract class UserFactory {
+ 
   static createUserProfileBuilder(userType: UserType): IUserBuilder<UserModal> {
     return USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE];
   }
 
   static createSmeUserProfileDto(userProfileForm: UserProfileForm) {
     const userProfile = {
-      name: userProfileForm.name,
-      email: userProfileForm.email,
-      externalId: userProfileForm.externalId,
-      country: userProfileForm.country.code,
-      locations:[
-      {
-        country :{
-          code: userProfileForm.country.code,
-          regions: userProfileForm.regions.map(region => region.code)
-        },
-        
-      }
-    ] }
+    ...userProfileForm,
+    country: 'CH',
+    locations: _mapLocations(userProfileForm.locations)
+  }
     return userProfile;
   }
 
+
+
+}
+function _mapLocations(locations: any[]): any[] {
+  return locations.map(location => ({
+    ...location,
+    country: {
+      code: location.country.code.code,
+      regions: location.country.regions.map((region:any) => region.code)
+    },
+  }));
 }
