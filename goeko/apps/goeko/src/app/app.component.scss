@@ -35,3 +35,12 @@ go-popup {
   height: 100vh;
   min-height: 100%;
 }
+.subscription-contact {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  a {
+    color: var(--dark-accent);
+    font: var(--font-body-semibold);
+  } 
+}

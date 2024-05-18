@@ -164,7 +164,7 @@
     "solutionName": "Nom de votre éco-solution",
     "subcategoryForLangCleantech": "Sous-catégorie par langue pour les Cleantech",
     "subcategoryForLangSME": "Sous-catégorie par langue pour les PME",
-    "technicalDescription": "Description technique",
+    "technicalDescription": "Description détaillée",
     "typeOfEcolutions": "Type d'éco-solution",
     "unit": "Unité",
     "website": "Site web"
@@ -405,6 +405,10 @@
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?"
 
 
+  },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
+    "messageContact": "Contactez-nous à {{email}}"
   },
   "mandatory" :"Obligatoire",
   "exit": "Sortir",

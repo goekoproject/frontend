@@ -18,6 +18,7 @@ import { CardEcosolutions } from './card-ecosolutions.model';
 })
 export class EcosolutionsListComponent implements OnInit {
   public categorySection = this._cleantechEcosolutionsService.categories();
+  public isSubscribed = !!this._cleantechEcosolutionsService.isSubscribed;
   public ecosolutions!: CardEcosolutions[];
   public cleanTechId!: string;
 
@@ -64,7 +65,7 @@ export class EcosolutionsListComponent implements OnInit {
       if(isDelete) {
         this._ecosolutionsService
         .deleteEcosolution(ecosolution.id)
-        .subscribe((res: any) => {
+        .subscribe(() => {
           this.getAllEcosolutionsByCleanTech();
         });
       }

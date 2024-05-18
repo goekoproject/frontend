@@ -165,7 +165,7 @@
     "solutionName": "Nombre de tu ecosolución",
     "subcategoryForLangCleantech": "Subcategory por idiomas para las Cleantech",
     "subcategoryForLangSME": "Subcategory por idiomas para las pymes",
-    "technicalDescription": "Descripción técnica",
+    "technicalDescription": "Descripción detallada",
     "typeOfEcolutions": "Tipo de eco-solución",
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sito web"
@@ -406,6 +406,10 @@
     "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?",
     "saveMessageGeneric": "¿Deseas guardar los datos antes de continuar?"
 
+  },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
+    "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
   "mandatory" :"Obligatorio",
   "exit": "Salir",
