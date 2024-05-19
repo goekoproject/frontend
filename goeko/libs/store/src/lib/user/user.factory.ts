@@ -30,8 +30,8 @@ function _mapLocations(locations: any[]): any[] {
   return locations.map(location => ({
     ...location,
     country: {
-      code: location.country.code.code,
-      regions: location.country.regions.map((region:any) => region.code)
+      code: location?.country?.code?.code,
+      regions: location?.country?.regions.map((region:any) => region.code)
     },
   }));
 }
