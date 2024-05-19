@@ -171,7 +171,8 @@
     "website": "Sito web",
     "yourLocation": "Seleccione el país y la provincia",
     "yourLocationTextSupport": "Los datos de su ubicación serán utilizados para personalizar las recomendaciones de soluciones ecológicas.",
-    "province": "Provincia"
+    "province": "Provincia",
+    "newProvince": "Nueva comunidad autónoma"
   },
   "VERIFY_EMAIL": {
     "title":"Revisa tu bandeja de entrada.",

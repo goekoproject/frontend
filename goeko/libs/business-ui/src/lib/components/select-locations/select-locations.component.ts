@@ -3,7 +3,7 @@ import { Component, Input, OnInit, inject, signal } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AutoUnsubscribe, UiSuperSelectModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { SelectLocationsService } from './select-locations.service';
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -57,33 +57,28 @@ export class SelectLocationsComponent implements OnInit {
   public get hiddenLocationElement() {
     return this.toogleEdit && this.newLocation
   }
-  public selectedLocationsIndex = signal<number |null>(0)
+  public get controlCountryCode() {
+    return (((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup)?.controls['code'];
+  }
+  public selectedLocationsIndex = signal<number>(0)
   ngOnInit(): void {
-    this.subscribeToFormArrayChanges();
   }
 
-  subscribeToFormArrayChanges() {
-    this.controlLocations.controls.forEach((control: any) => {
-      this.subscribeToLocationChanges(control);
-    });
-  }
 
   // Suscribirse a los cambios de cada FormGroup dentro del FormArray
-  subscribeToLocationChanges(location: FormGroup) {
-    location
-      .get(this.controlNameCountry)
-      ?.valueChanges.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
-      .subscribe((value) => {
-        if (this._selectedCodeLang() !== value.code) {
-          this._selectedCodeLang.set(value.code);
-          this._selectLocationsService.getRegions();
-        }
-      });
+ onCodeChange(country:{code: string, label: string}) {
+    this._getRegionsForCodeCountry(country.code);
+ 
+  }
+
+  private _getRegionsForCodeCountry(code:string) {
+    this._selectedCodeLang.set(code)
+    this._selectLocationsService.getRegions();
   }
 
   addLocation(){
     this.controlLocations.push(this._createLocations());
-    this.newLocation = !this.newLocation;
+    this.newLocation = true;
     this.toogleEdit = true;
     this.selectedLocationsIndex.set(this.lastLocations);
   }
@@ -101,5 +96,25 @@ export class SelectLocationsComponent implements OnInit {
     this.selectedLocationsIndex.set(index);
   }
 
+  closeForm(){
+    this.toogleEdit = false;
+    this.controlLocations.removeAt(this.selectedLocationsIndex());
+  }
+
+  deleteLocation(index:number):void {
+    this.controlLocations.removeAt(index);
+
+  }
+  confirmLocation(locationCountryControl: FormGroup | AbstractControl) {
+    if(locationCountryControl.get(this.controlNameCountry)?.invalid) {
+      return;
+    }
+    this.toogleEdit = false
+  }
+  closeFormLocation(index: number) {
+    this.deleteLocation(index);
+    this.toogleEdit = false
+
+  }
   
 }

@@ -47,7 +47,6 @@ import {
   merge,
   startWith,
   switchMap,
-  take,
   takeUntil,
 } from 'rxjs';
 import {
@@ -86,7 +85,7 @@ export abstract class BaseSelectComponent
   })
   optionElement!: QueryList<SuperOptionComponent & Highlightable>;
 
-  @Output() valueChange: EventEmitter<{ value: string; isUserInput: boolean }> =
+  @Output() valueChange: EventEmitter<{ value: any; isUserInput: boolean }> =
     new EventEmitter();
 
   @HostListener('click', ['$event']) onClick(_event: MouseEvent): void {}
@@ -252,6 +251,7 @@ export abstract class BaseSelectComponent
   }
   private _status = STATUS.default;
 
+  @Input() loadInit = false;
   /** Whether the select is focused. */
   get focused(): boolean {
     return this._focused || this.isOpen;
@@ -295,6 +295,8 @@ export abstract class BaseSelectComponent
   /** `View -> model callback called when select has been touched` */
   _onTouched: () => void = () => {};
 
+  private _initialized = new Subject();
+
   /** Combined stream of all of the child options' change events. */
   // eslint-disable-next-line @typescript-eslint/member-ordering
   readonly optionSelectionChanges: Observable<OptionSelectionEvent> = defer(
@@ -314,8 +316,7 @@ export abstract class BaseSelectComponent
         );
       }
 
-      return this._ngZone.onStable.pipe(
-        take(1),
+      return this._initialized.pipe(
         switchMap(() => this.optionSelectionChanges)
       );
     }
@@ -391,6 +392,8 @@ export abstract class BaseSelectComponent
     this.stateChanges.complete();
   }
   ngAfterContentInit(): void {
+    this._initialized.next(null);
+    this._initialized.complete();
     this._initKeyManager();
 
     this._selectionModel?.changed
@@ -423,8 +426,6 @@ export abstract class BaseSelectComponent
     });
   }
 
-
-
   /**
    * Sets the selected option based on a value. If no option can be
    * found with the designated value, the select trigger is cleared.
@@ -433,7 +434,7 @@ export abstract class BaseSelectComponent
     this._selectionModel?.selected.forEach((option) =>
       option?.setInactiveStyles()
     );
-    this._selectionModel?.clear();
+    this._selectionModel.clear();
 
     if (this.multiple && value) {
       if (!Array.isArray(value) && typeof isDevMode === 'undefined') {
@@ -532,11 +533,10 @@ export abstract class BaseSelectComponent
       if (isUserInput) {
         this._keyManager.setActiveItem(option);
       }
-      if (this._selectionModel.isSelected(option)) {
+      if (this._selectionModel.isSelected(option) && this.loadInit) {
         this._propagateChanges();
       }
       if (this.multiple) {
-        this._propagateChanges();
         if (isUserInput) {
           // In case the user selected the option with their mouse, we
           // want to restore focus back to the trigger, in order to
@@ -546,19 +546,9 @@ export abstract class BaseSelectComponent
         }
       }
     }
-    if (wasSelected !== this._selectionModel.isSelected(option)) {
+    if (wasSelected !== this._selectionModel.isSelected(option) && !this.loadInit) {
       this._propagateChanges();
     }
-  }
-
-  updateLabelMulti(): void {
-    this.labelMulti = this.selectedMulti.length
-      ? this.selectedMulti.map((s) => s.titleMulti).join()
-      : this.label;
-    this._onChange(this.labelMulti);
-    this._onTouched();
-    this.valueChange.emit({ value: this.labelMulti, isUserInput: true }); //cambiar por valueMulti??? this.selectedMulti.map(sm => sm.valueMulti)
-    this._changeDetector.markForCheck();
   }
 
   /** Toggles the overlay panel open or closed. */
@@ -776,7 +766,10 @@ export abstract class BaseSelectComponent
    */
   private _assignValue(newValue: any | any[]) {
     // Always re-assign an array, because it might have been mutated.
-    if (newValue !== this._value ||(this._multiple && Array.isArray(newValue))) {
+    if (
+      newValue !== this._value ||
+      (this._multiple && Array.isArray(newValue))
+    ) {
       if (this.optionElement) {
         this._value = newValue;
         this._setSelectionByValue(newValue);

@@ -679,6 +679,10 @@ video {
   margin-top: 1.75rem;
 }
 
+.mt-16 {
+  margin-top: 4rem;
+}
+
 .block {
   display: block;
 }
@@ -751,6 +755,10 @@ video {
   height: 1.5rem;
 }
 
+.h-28 {
+  height: 7rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -785,6 +793,10 @@ video {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.basis-full {
+  flex-basis: 100%;
 }
 
 .rotate-2 {
@@ -857,6 +869,10 @@ video {
   justify-content: space-between;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
@@ -867,6 +883,10 @@ video {
 
 .gap-4 {
   gap: 1rem;
+}
+
+.gap-1 {
+  gap: 0.25rem;
 }
 
 .overflow-hidden {
@@ -956,6 +976,11 @@ video {
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
 
+.bg-primary-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(124 213 253 / var(--tw-bg-opacity));
+}
+
 .bg-primary-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(54 193 250 / var(--tw-bg-opacity));
@@ -964,11 +989,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-primary-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(124 213 253 / var(--tw-bg-opacity));
 }
 
 .p-6 {
@@ -1051,6 +1071,11 @@ video {
   line-height: 2.5rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .text-\[42px\] {
   font-size: 42px;
 }
@@ -1073,16 +1098,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
 }
 
 .font-bold {
@@ -1111,6 +1126,11 @@ video {
 
 .tracking-wider {
   letter-spacing: 0.05em;
+}
+
+.text-darkAccent {
+  --tw-text-opacity: 1;
+  color: rgb(22 57 83 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
@@ -1143,6 +1163,11 @@ video {
   color: rgb(12 169 235 / var(--tw-text-opacity));
 }
 
+.text-softDark {
+  --tw-text-opacity: 1;
+  color: rgb(9 64 86 / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1158,14 +1183,9 @@ video {
   color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
-.text-darkAccent {
+.text-hp {
   --tw-text-opacity: 1;
-  color: rgb(22 57 83 / var(--tw-text-opacity));
-}
-
-.text-softDark {
-  --tw-text-opacity: 1;
-  color: rgb(9 64 86 / var(--tw-text-opacity));
+  color: rgb(208 0 0 / var(--tw-text-opacity));
 }
 
 .underline {
