@@ -24,7 +24,7 @@ export const PROFILE_SME: Profile<'sme'>[] = [
 		type: 'url',
 	},
 	{
-		controlName: 'numEmployees',
+		controlName: 'employees',
 		label: 'FORM_LABEL.numEmployees',
 		type: 'number',
 	},

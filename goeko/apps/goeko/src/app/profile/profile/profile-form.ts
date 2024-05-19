@@ -1,9 +1,7 @@
-import { inject } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
-  Validators,
+  Validators
 } from '@angular/forms';
 
 export const smeFormGroup = new FormGroup({
@@ -11,7 +9,7 @@ export const smeFormGroup = new FormGroup({
   email: new FormControl('',[Validators.required, Validators.email]),
   country: new FormControl('',Validators.required),
   website: new FormControl(),
-  numEmployees: new FormControl('',[Validators.required, Validators.min(1)]),
+  employees: new FormControl('',[Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
 });
 
