@@ -1,4 +1,4 @@
-import { Injectable, Injector, Type, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivateFn,
@@ -6,10 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { ROLES, UserService } from '@goeko/store';
-import { Observable, map, of, tap } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { AuthService } from './auth.service';
-import { User } from '@auth0/auth0-angular';
 
 @Injectable({
   providedIn: 'root',

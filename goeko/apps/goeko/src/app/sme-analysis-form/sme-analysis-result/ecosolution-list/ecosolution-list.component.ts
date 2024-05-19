@@ -1,32 +1,32 @@
 import {
   Component,
   ElementRef,
-  OnDestroy,
   OnInit,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import {
-  SmeService,
-  SmeAnalysisStoreService,
-  UserService,
   ODS_CODE,
+  SmeAnalysisStoreService,
+  SmeService,
+  UserService,
 } from '@goeko/store';
+import { AutoUnsubscribe } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject, takeUntil, last } from 'rxjs';
-import {
-  formToClassificationsMapper,
-  FormValueToSmeAnalysisRequest,
-} from '../../sme-form-analysis/sme-analysis.request';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 import { SmeAnalysisService } from '../../sme-analysis.service';
+import {
+  formToClassificationsMapper
+} from '../../sme-form-analysis/sme-analysis.request';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'goeko-ecosolution-list',
   templateUrl: './ecosolution-list.component.html',
   styleUrls: ['./ecosolution-list.component.scss'],
 })
-export class EcosolutionListComponent implements OnInit, OnDestroy {
+export class EcosolutionListComponent implements OnInit {
   @ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
 
   odsIcons!: Array<{ code: number; active: boolean }>;
@@ -40,7 +40,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   private _smeId!: string;
   formValue!: any;
   smeDataProfile = this._userService.userProfile();
-  onDestroy$: Subject<void> = new Subject();
+  private destroy$ = new Subject<void>();
 
   get allChecked() {
     const allChecked = !this.formField.some((field) => field.checked);
@@ -53,7 +53,6 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
 
   set currentLangCode(currentLang: string) {
     this._currentLangCode = currentLang;
-    this.getResults();
     this.closeDetails();
   }
 
@@ -82,21 +81,10 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
 
   getResults() {
     this._smeService
-      .createRecommendations({
+      .ecosolutionSearch({
         classifications: formToClassificationsMapper(this.currentAnalytics()),
       })
-      .pipe(takeUntil(this.onDestroy$), last())
-      .subscribe((recommendations) => {
-        this._handleRecommendations(recommendations);
-      });
-  }
-  private saveAnalysis() {
-    const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(
-      this._smeId,
-      this.formValue
-    );
-    this._smeService
-      .saveRecommendations(smeAnalysisRequest)
+      .pipe(takeUntil(this.destroy$), distinctUntilChanged())
       .subscribe((recommendations) => {
         this._handleRecommendations(recommendations);
       });
@@ -111,7 +99,7 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   }
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe(
-      (res) => (this.currentLangCode = res.lang)
+      (res) => {(this.currentLangCode = res.lang),this.getResults()}
     );
   }
 
@@ -235,8 +223,5 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     }));
     this.getResults();
   }
-  ngOnDestroy() {
- /*    this.onDestroy$.next();
-    this.onDestroy$.complete(); */
-  }
+
 }

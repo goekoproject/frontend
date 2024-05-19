@@ -13,14 +13,13 @@ import {
 } from 'rxjs';
 import { UserFactory } from './user.factory';
 
-import { ROLES, USER_DEFAULT, UserType } from './public-api';
-import { Actor } from './user-type/actor.abstracts';
+import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api';
 export const SS_COMPANY_DETAIL = 'SS_COMPANY';
 
 @Injectable()
 export class UserService {
   public userAuthData = signal<User>({});
-  public userProfile = signal<Actor>(USER_DEFAULT);
+  public userProfile = signal<SmeUser | CleantechsUser>(USER_DEFAULT);
 
   public fechAuthUser = new Subject();
   private actorsEndpoint = computed(

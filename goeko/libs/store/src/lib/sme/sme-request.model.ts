@@ -45,15 +45,22 @@ export interface Classifications {
   subCategory: string;
   products: string[];
 }
-
+export interface SmeCountry {
+  code: string;
+  regions?:Array<string>;
+}
+export interface Locations {
+   country: SmeCountry
+}
 export interface SmeSaveRequest {
   smeId: string;
   classifications: Classifications[];
+  locations?: Array<Locations>
 }
 export interface SmeSaveRecomendationRequest extends SmeSaveRequest {
   smeId: string;
-  searchName?: string;
   classifications: Classifications[];
+  searchName?: string;
 }
 
 export interface SmeSaveRecomendationProjectRequest extends SmeSaveRequest {
@@ -63,6 +70,7 @@ export interface SmeSaveRecomendationProjectRequest extends SmeSaveRequest {
 }
 export interface SmeCreateRecomendationRequest {
   classifications: Classifications[];
+  locations?: Array<Locations>
 }
 
 export interface SmeRequestResponse {
