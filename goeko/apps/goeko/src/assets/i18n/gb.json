@@ -173,8 +173,9 @@
     "yourLocation": "Select country and province",
     "yourLocationTextSupport": "Your location data will be used to personalize recommendations for eco-friendly solutions.",
     "province": "Province",
-    "newProvince": "Add a new province"
-
+    "newProvince": "Add a new province",
+    "selectProvinces": "Selection of provinces",
+    "allProvinces": "All regions"
 
   },
   "VERIFY_EMAIL": {

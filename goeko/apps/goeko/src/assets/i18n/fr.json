@@ -171,8 +171,9 @@
     "yourLocation": "Sélectionnez le pays et la region",
     "yourLocationTextSupport": "Vos données de localisation seront utilisées pour personnaliser les recommandations de solutions écologiques.",
     "province": "Région",
-    "newProvince": "Ajouter une nouvelle région"
-
+    "newProvince": "Ajouter une nouvelle région",
+    "selectProvinces": "Sélection de régions",
+    "allProvinces": "Toutes les régions"
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",

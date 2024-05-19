@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, inject, signal } from '@angular/core';
+import { Component, Input, inject, signal } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AutoUnsubscribe, UiSuperSelectModule } from '@goeko/ui';
+import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { SelectLocationsService } from './select-locations.service';
@@ -26,12 +26,13 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
     TranslateModule,
     UiSuperSelectModule,
     ReactiveFormsModule,
+    SwitchModule
   ],
   providers: [SelectLocationsService],
   templateUrl: './select-locations.component.html',
   styleUrl: './select-locations.component.scss',
 })
-export class SelectLocationsComponent implements OnInit {
+export class SelectLocationsComponent {
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
     o2: any
@@ -50,7 +51,7 @@ export class SelectLocationsComponent implements OnInit {
   public regions = this._selectLocationsService.regions;
   public toogleEdit = false;
   public newLocation = false;
-
+  public isAllProvince = false;
   public get lastLocations() {
     return this.controlLocations.value?.length -1;
   }
@@ -61,9 +62,6 @@ export class SelectLocationsComponent implements OnInit {
     return (((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup)?.controls['code'];
   }
   public selectedLocationsIndex = signal<number>(0)
-  ngOnInit(): void {
-  }
-
 
   // Suscribirse a los cambios de cada FormGroup dentro del FormArray
  onCodeChange(country:{code: string, label: string}) {
@@ -87,7 +85,7 @@ export class SelectLocationsComponent implements OnInit {
     return new FormGroup({
       country: new FormGroup({
         code: new FormControl('', Validators.required),
-        regions: new FormControl('', Validators.required)
+        regions: new FormControl('')
       }),
     });
   }
@@ -114,7 +112,10 @@ export class SelectLocationsComponent implements OnInit {
   closeFormLocation(index: number) {
     this.deleteLocation(index);
     this.toogleEdit = false
+  }
 
+  getIsProvince(event: EventTarget | null) {
+    this.isAllProvince = (event as HTMLInputElement).checked
   }
   
 }
