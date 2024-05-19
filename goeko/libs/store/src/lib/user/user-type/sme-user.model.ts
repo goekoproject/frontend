@@ -9,6 +9,7 @@ export class SmeUser extends Actor {
   override userType = USER_TYPE.SME;
   website?: string;
   locations!: Array<Country>;
+  employees!: string;
   constructor() {
     super();
   }

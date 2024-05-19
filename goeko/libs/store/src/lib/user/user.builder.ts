@@ -21,6 +21,7 @@ export class SmeBuilder implements IUserBuilder<SmeUser> {
     this.smeUser.website = data?.website;
     this.smeUser.externalId = data?.externalId;
     this.smeUser.locations = data?.locations;
+    this.smeUser.employees = data?.employees;
     return this;
   }
   build() {
