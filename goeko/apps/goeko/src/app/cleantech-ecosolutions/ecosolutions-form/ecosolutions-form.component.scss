@@ -5,11 +5,10 @@
 }
 
 .ecosolutions-form {
-  width: 64%;
   border-radius: 12px;
   background: #fff;
   padding: 2rem;
-
+  @apply max-w-2xl;
   form {
     display: flex;
     flex-direction: column;
@@ -38,12 +37,7 @@
   }
 }
 
-.ecosolutions-fieldset {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
+
 .fieldset-ods {
   display: flex;
   gap: 1rem;

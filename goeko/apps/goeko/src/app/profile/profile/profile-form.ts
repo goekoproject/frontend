@@ -1,4 +1,5 @@
 import {
+  FormArray,
   FormControl,
   FormGroup,
   Validators
@@ -7,7 +8,9 @@ import {
 export const smeFormGroup = new FormGroup({
   name: new FormControl('',Validators.required),
   email: new FormControl('',[Validators.required, Validators.email]),
-  country: new FormControl('',Validators.required),
+/*   country: new FormControl( {},Validators.required),
+  regions: new FormControl(), */
+  locations: new FormArray([]),
   website: new FormControl(),
   employees: new FormControl('',[Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
