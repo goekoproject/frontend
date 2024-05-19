@@ -85,17 +85,8 @@
           formTemplate: form
         }"
       ></ng-container>
-      } @case('regions') {
-      <ng-container
-        [ngTemplateOutlet]="select"
-        [ngTemplateOutletContext]="{
-          itemForm: itemForm,
-          source: regions(),
-          multiSelect: true,
-          formTemplate: form
-        }"
-      ></ng-container>
-      } @case ('select-locations') {
+      } 
+       @case ('select-locations') {
       <goeko-select-locations
         [form]="form"
         [controlLocations]="locationsArrays"
