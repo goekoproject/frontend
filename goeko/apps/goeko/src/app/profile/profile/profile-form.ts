@@ -12,6 +12,7 @@ export const smeFormGroup = new FormGroup({
   regions: new FormControl(), */
   locations: new FormArray([]),
   website: new FormControl(),
+  employees: new FormControl('',[Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
 });
 
