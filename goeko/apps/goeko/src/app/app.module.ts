@@ -19,6 +19,7 @@ import {
   CleantechModule,
   ContentFulModule,
   GoShowUserTypeDirective,
+  LocationsService,
   ShowForRolesDirective,
   SmeModule,
   UserService,
@@ -104,6 +105,7 @@ const httpLoaderFactory = (http: HttpClient) => {
     NotificationModule
   ],
   providers: [UserService, LoadDataUser, isSubscribedCleantech, NotificationService,
+    LocationsService,
     {
       provide: APP_INITIALIZER,
       multi: true,

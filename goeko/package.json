@@ -4,9 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
-    "start": "nx serve",
+    "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run compiler-tailwind\"",
     "build:dev": "nx build",
-    "build:pro": "nx build"
+    "build:pro": "nx build",
+    "compiler-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./apps/goeko/src/tailwind-styles.scss --watch"
   },
   "private": true,
   "dependencies": {
@@ -73,6 +74,7 @@
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "autoprefixer": "^10.4.17",
+    "concurrently": "^8.2.2",
     "cypress": "^13.0.0",
     "eslint": "~8.48.0",
     "eslint-config-prettier": "^9.0.0",

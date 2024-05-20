@@ -151,6 +151,7 @@
     "messageLead": "Escribe tu mensaje",
     "name": "Nombre",
     "name_project": "Nombre del proyecto",
+    "numEmployees": "Número de empleados",
     "operationalCostReductionPercentage": "Porcentaje de reducción de costos operativos",
     "password": "Contraseña",
     "paybackPeriodYears": "Tiempo de retorno de inversión en comparación con solución estándar",
@@ -168,7 +169,13 @@
     "technicalDescription": "Descripción detallada",
     "typeOfEcolutions": "Tipo de eco-solución",
     "unit": "Unidad de medida(m2,m3,l,kg)",
-    "website": "Sito web"
+    "website": "Sito web",
+    "yourLocation": "Seleccione el país y la provincia",
+    "yourLocationTextSupport": "Los datos de su ubicación serán utilizados para personalizar las recomendaciones de soluciones ecológicas.",
+    "province": "Provincia",
+    "newProvince": "Nueva comunidad autónoma",
+    "selectProvinces": "Selección comunidad autónoma",
+    "allProvinces": "Todas las comunidades autonomas"
   },
   "VERIFY_EMAIL": {
     "title":"Revisa tu bandeja de entrada.",

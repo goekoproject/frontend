@@ -67,7 +67,7 @@ export class SmeService {
     );
   }
 
-  createRecommendations(
+  ecosolutionSearch(
     body: SmeCreateRecomendationRequest
   ): Observable<Recommendation[] | null>{
     if(!body || body.classifications.length <= 0) {

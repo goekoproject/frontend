@@ -1,18 +1,22 @@
 import { Component, OnInit, effect } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import {
   CountrySelectOption,
   DataSelect,
-  Profile,
+  SmeUser,
+  USER_TYPE,
+  UserFactory,
   UserModal,
   UserService,
   UserSwitch,
 } from '@goeko/store';
-import { SideDialogService } from '@goeko/ui';
-import { forkJoin, of } from 'rxjs';
+import { AutoUnsubscribe, SideDialogService } from '@goeko/ui';
+import { Subject, distinctUntilChanged, forkJoin, of, takeUntil } from 'rxjs';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
+import { ProfileFieldset } from './profile-fieldset.interface';
 import { ProfileFormFactory } from './profile-form.factory';
 import { PROFILE_SME } from './profile-sme.constants';
+import { ProfileService } from './profile.service';
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -21,11 +25,11 @@ export const SELECT_PROFILE = {
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
   if (o1 && o2 && typeof o2 !== 'object') {
-    return o1.id.toString() === o2;
+    return o1.code.toString() === o2;
   }
 
   if (o1 && o2 && typeof o2 === 'object') {
-    return o1.id.toString() === o2.id.toString();
+    return o1.code?.toString() === o2.code?.toString();
   }
 
   return null;
@@ -39,11 +43,14 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
   return null;
 };
 
-
-const TYPE_FORM_FOR_USERTYPE: UserSwitch<Profile[]> = {
+const TYPE_FORM_FOR_USERTYPE: UserSwitch<
+  Array<ProfileFieldset<'sme' | 'cleantech'>>
+> = {
   sme: PROFILE_SME,
   cleantech: PROFILE_CLEANTECH,
 };
+
+@AutoUnsubscribe()
 @Component({
   selector: 'goeko-profile',
   templateUrl: './profile.component.html',
@@ -54,13 +61,18 @@ export class ProfileComponent implements OnInit {
   savedProfileOK!: boolean;
   public dataSelect = DataSelect as any;
 
-  public formProfile!: Profile[];
-  dataProfile = this._userService.userProfile;
-
+  public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>;
+  public dataProfile = this._userService.userProfile;
   private _userType = this._userService.userType;
   private _externalId = this._userService.externalId;
-  public profileImg!: File | string |  undefined;
-  public fileProfile: any
+  private destroy$ = new Subject<void>();
+
+  private _selectedCodeLang = this._profieService.selectedCodeLang;
+  public profileImg!: File | string | undefined;
+  public countries = this._profieService.countries;
+  public regions = this._profieService.regions;
+
+  public fileProfile: any;
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
     o2: any
@@ -70,30 +82,73 @@ export class ProfileComponent implements OnInit {
     o2: string
   ) => boolean;
 
-  private _uploadImg$ = () =>  this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg);
+  private _uploadImg$ = () =>
+    this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg);
+
+  public  get locationsArrays(): FormArray {
+    return this.form.get('locations') as FormArray;
+  }
   constructor(
     private _sideDialogService: SideDialogService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _profieService: ProfileService
   ) {
-    effect(() => {
-      this._effectBuildForm();
-    });
+    effect(() => {});
   }
 
   ngOnInit() {
     this._sideDialogService.closeDialog();
     this._userService.fetchUser();
+    this._createFormForUserType();
+    this._loadDataProfile();
+    this._countryChanges();
   }
-  private _effectBuildForm() {
+  private _createFormForUserType() {
     if (this.dataProfile()) {
       this.form = ProfileFormFactory.createProfileForm(this._userType());
-      this.formProfile =
+      this.formSection =
         TYPE_FORM_FOR_USERTYPE[
           this._userType() as keyof typeof TYPE_FORM_FOR_USERTYPE
         ];
-      this.form.patchValue(this.dataProfile());
-      this.form.get('externalId')?.patchValue(this._externalId());
     }
+  }
+
+  private _loadDataProfile() {
+    this.form.patchValue(this.dataProfile());
+    this.form.get('externalId')?.patchValue(this._externalId());
+    this._setLocaltionInFormForSme();
+  }
+
+  private _createLocations():FormGroup {
+    return new FormGroup({
+      country: new FormGroup({
+        code: new FormControl(),
+        regions: new FormControl()
+      }),
+    });
+  }
+
+  private _addLocations() {
+    this.locationsArrays.push(this._createLocations());
+  }
+
+
+  private _setLocaltionInFormForSme() {
+    if(this._userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
+      this.locationsArrays.clear();
+   
+      (this.dataProfile() as SmeUser).locations.forEach((loc)=> {
+        this._addLocations();
+        
+      })
+      this.form.get('locations')?.patchValue((this.dataProfile() as SmeUser).locations);
+    }
+  }
+  private _countryChanges() {
+    this.form?.get('country')?.valueChanges.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((country) => {
+      this._selectedCodeLang.set(country);
+      this._profieService.getRegions();
+    });
   }
 
   saveProfile() {
@@ -107,15 +162,18 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  updateProfile() { 
+  updateProfile() {
+    const userFactory = UserFactory.createSmeUserProfileDto(this.form.value);
     const dataForUpdated = {
-      uploadImg : this.profileImg ? this._uploadImg$() : of(null),
-      profile : this._userService
-      .updateUserProfile(this.dataProfile().id, this.form.value)
-    } 
+      uploadImg: this.profileImg ? this._uploadImg$() : of(null),
+      profile: this._userService.updateUserProfile(
+        this.dataProfile().id,
+        userFactory
+      ),
+    };
     forkJoin(dataForUpdated).subscribe((dataProfile: any) => {
-        this._changeDataProfile(dataProfile.profile);
-      });
+      this._changeDataProfile(dataProfile.profile);
+    });
   }
 
   private _changeDataProfile(dataProfile: UserModal) {
@@ -127,10 +185,12 @@ export class ProfileComponent implements OnInit {
   }
 
   private _saveProfileImg() {
-    return this._uploadImg$().subscribe(() =>{});
+    return this._uploadImg$().subscribe(() => {});
   }
 
-  fileChange(file : File) {
-    this.profileImg =file;
+  fileChange(file: File) {
+    this.profileImg = file;
   }
+
+
 }

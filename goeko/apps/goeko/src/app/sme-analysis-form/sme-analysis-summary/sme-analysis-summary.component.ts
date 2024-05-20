@@ -20,18 +20,15 @@ import {
   SmeAnalysisStoreService,
   SmeService
 } from '@goeko/store';
-import { MESSAGE_TYPE, SideDialogService } from '@goeko/ui';
+import { AutoUnsubscribe, MESSAGE_TYPE, SideDialogService } from '@goeko/ui';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 import { SmeAnalysisService } from '../sme-analysis.service';
 import {
   FormValueToSmeAnalysisRequest,
-  FormValueToSmeProjectRequest,
-  formToClassificationsMapper,
+  FormValueToSmeProjectRequest
 } from '../sme-form-analysis/sme-analysis.request';
 
-const compareWithClassificationCategory = (
-  c1: ClassificationCategory,
-  c2: ClassificationCategory
-) => c1.code === c2.code;
+@AutoUnsubscribe()
 @Component({
   selector: 'goeko-sme-analysis-summary',
   templateUrl: './sme-analysis-summary.component.html',
@@ -46,6 +43,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   public saveOK = false;
   private _smeId!: string;
   public toogleSaveName = false;
+  private destroy$ = new Subject<void>();
 
   currentAnalytics = this._smeAnalysisService.currentAnalytics;
   categories = this._smeAnalysisService.categories;
@@ -79,7 +77,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   ngOnInit(): void {
     this._smeAnalysisService.getAllDataCategories();
     this._smeId = this._getSmeId();
-    this._smeAnalysisStore.getCurrentAnalysis().subscribe((res) => {
+    this._smeAnalysisStore.getCurrentAnalysis().pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
       if (res) {
         this.formValue = res;
       }
@@ -163,21 +161,9 @@ export class SmeAnalysisSummaryComponent implements OnInit {
         if(saveAnalysis) {
           this.saveAnalysis();
         }
-        this._getResults();
-    }); 
+        this._router.navigate([this._resultPath, this._smeId]);
+      }); 
   }
-  private _getResults() {
-      this._smeServices
-      .createRecommendations({
-        classifications: formToClassificationsMapper(this.currentAnalytics()),
-      })
-      .subscribe((res) => {
-        if (res) {
-          this._router.navigate([this._resultPath, this._smeId]);
-        }
-      });
-  }
-
 
   saveAnalysis() {
     if (this.isProject) {
@@ -191,7 +177,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
       this._smeId,
       this.currentAnalytics()
     );
-    this._projectService.saveProject(smeAnalysisRequest).subscribe((res) => {
+    this._projectService.saveProject(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
       this.saveOK = true;
       setTimeout(() => {
         this.saveOK = false;
@@ -204,7 +190,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
       this.currentAnalytics()
     );
     this._smeServices
-      .saveRecommendations(smeAnalysisRequest)
+      .saveRecommendations(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$))
       .subscribe((res) => {
         this.saveOK = true;
         setTimeout(() => {
