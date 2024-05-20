@@ -1,9 +1,9 @@
 <div
-  class="subcategory"
+  class="subcategory hover:border-primary-500 transition-colors duration-150"
   goekoSelectSubcategoryProduct
   *ngIf="checked || !readonly"
 >
-  <div class="subcategory-element">
+  <div class="subcategory-element" (click)="toogle(subCategory)">
     <label class="subcategory-control" for="{{ subCategory.code }}">
       <input
         #inputElement
@@ -28,7 +28,7 @@
     </label>
     <span
       class="material-symbols-rounded subcategory-expand"
-      (click)="toogle(subCategory)"
+      
     >
       expand_more
     </span>
