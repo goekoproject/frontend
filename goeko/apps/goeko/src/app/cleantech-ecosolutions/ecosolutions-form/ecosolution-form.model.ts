@@ -1,4 +1,4 @@
-import { FromTO, NewEcosolutions, ReductionPercentage } from '@goeko/store';
+import { Country, FromTO, NewEcosolutions, ReductionPercentage } from '@goeko/store';
 export interface GoalChecked {
 	value: string;
 	checked: boolean;
@@ -22,6 +22,7 @@ export class EcosolutionForm {
 	yearGuarantee?: number;
 	priceDescription?: string;
 	detailedDescription?: string;
+	locations?: Array<Country>
 	constructor(ecosolution: NewEcosolutions) {
 		this.solutionName = ecosolution.solutionName;
 		this.solutionDescription = ecosolution.solutionDescription;
@@ -41,5 +42,6 @@ export class EcosolutionForm {
 		this.yearGuarantee = ecosolution.guaranteeInYears;
 		this.priceDescription = ecosolution.priceDescription;
 		this.detailedDescription = ecosolution.detailedDescription;
+		this.locations = ecosolution.locations;
 	}
 }

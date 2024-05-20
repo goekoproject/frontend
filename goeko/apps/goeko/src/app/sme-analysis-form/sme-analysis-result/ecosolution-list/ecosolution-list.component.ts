@@ -10,6 +10,7 @@ import {
   ODS_CODE,
   SmeAnalysisStoreService,
   SmeService,
+  SmeUser,
   UserService,
 } from '@goeko/store';
 import { AutoUnsubscribe } from '@goeko/ui';
@@ -83,6 +84,7 @@ export class EcosolutionListComponent implements OnInit {
     this._smeService
       .ecosolutionSearch({
         classifications: formToClassificationsMapper(this.currentAnalytics()),
+        locations : (this._userService.userProfile() as SmeUser).locations
       })
       .pipe(takeUntil(this.destroy$), distinctUntilChanged())
       .subscribe((recommendations) => {

@@ -137,7 +137,7 @@ export class ProfileComponent implements OnInit {
     if(this._userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
       this.locationsArrays.clear();
    
-      (this.dataProfile() as SmeUser).locations.forEach((loc)=> {
+      (this.dataProfile() as SmeUser).locations.forEach(()=> {
         this._addLocations();
         
       })
@@ -152,8 +152,9 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfile() {
+    const userFactory = UserFactory.createSmeUserProfileDto(this.form.value);
     this._userService
-      .createUserProfile(this.form.value)
+      .createUserProfile(userFactory)
       .subscribe((dataProfile) => {
         if (dataProfile) {
           this._changeDataProfile(dataProfile);

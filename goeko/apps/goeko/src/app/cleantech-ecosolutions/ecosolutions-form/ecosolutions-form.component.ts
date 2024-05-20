@@ -1,5 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  signal,
+} from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   CleanTechService,
@@ -27,7 +39,6 @@ import { EcosolutionForm } from './ecosolution-form.model';
   styleUrls: ['./ecosolutions-form.component.scss'],
 })
 export class EcosolutionsFormComponent implements OnInit {
-
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>;
   public form!: FormGroup;
   public ods = ODS_CODE;
@@ -41,17 +52,31 @@ export class EcosolutionsFormComponent implements OnInit {
   public defaultSetCurrency = defaultSetCurrency;
   public defaultSetReductions = defaultSetReductions;
   public defaultSetyearGuarantee = defaultSetyearGuarantee;
-  langSignal = signal(this._translateServices.currentLang ||  this._translateServices.defaultLang);
+  langSignal = signal(
+    this._translateServices.currentLang || this._translateServices.defaultLang
+  );
   public dataSelect = DataSelect;
   public mainCategory!: string;
   public fileData!: { name: string; url: string };
-  public get isReadOnly(): boolean {
-    return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true';
-  }
+
   private _cleantechId!: string;
   private fileCertificate: any;
   private _fileEcosolution!: File;
   public urlImgEcosolution!: string;
+  public get isReadOnly(): boolean {
+    return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true';
+  }
+  public get locationsArrays(): FormArray {
+    return this.form.get('locations') as FormArray;
+  }
+
+  public get bodyRequestEcosolution(): NewEcosolutionsBody {
+    return new NewEcosolutionsBody(
+      this._cleantechId,
+      this.mainCategory,
+      this.form.value
+    );
+  }
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -82,19 +107,19 @@ export class EcosolutionsFormComponent implements OnInit {
     this.idEcosolution = this._route.snapshot.paramMap.get('id') as string;
   }
   private _changeLangCode() {
-    this._translateServices.onLangChange.subscribe(
-      (current) => {
-        this._cleantechEcosolutionsService.getSubcategorySelected(this.mainCategory);
-        this.langSignal.set(current.lang)
-        }
-    );
+    this._translateServices.onLangChange.subscribe((current) => {
+      this._cleantechEcosolutionsService.getSubcategorySelected(
+        this.mainCategory
+      );
+      this.langSignal.set(current.lang);
+    });
   }
 
   private _initForm() {
     this.form = this._fb.group({
       solutionName: ['', Validators.required],
-      solutionDescription: ['',Validators.required],
-      detailedDescription: ['',Validators.required],
+      solutionDescription: ['', Validators.required],
+      detailedDescription: ['', Validators.required],
       subCategory: ['', Validators.required],
       products: ['', Validators.required],
       reductionPercentage: [],
@@ -111,9 +136,11 @@ export class EcosolutionsFormComponent implements OnInit {
       yearGuarantee: [],
       certified: [false],
       approved: [false],
+      locations: new FormArray([]),
     });
-/*     this.initCheckboxControlSustainableDevelopmentGoals();
- */  }
+    /*     this.initCheckboxControlSustainableDevelopmentGoals();
+     */
+  }
 
   initCheckboxControlSustainableDevelopmentGoals(): void {
     const odsControls = this.ods.map((ods) =>
@@ -139,24 +166,26 @@ export class EcosolutionsFormComponent implements OnInit {
   getEcosolution() {
     this._ecosolutionsService
       .getEcosolutionById(this.idEcosolution)
-      .subscribe((res: any) => {
+      .subscribe((ecosolution: any) => {
         this._getDocumentsCleantech();
-        this.urlImgEcosolution = res?.pictures  ? res?.pictures.at(-1)?.url : '';
-        const formValue = new EcosolutionForm(res);
-        this.form.patchValue(formValue);
+        this.urlImgEcosolution = ecosolution?.pictures
+          ? ecosolution?.pictures.at(-1)?.url
+          : '';
+        this._patchDataToForm(ecosolution);
       });
   }
+
+  private _patchDataToForm(ecosolution: any): void {
+    const formValue = new EcosolutionForm(ecosolution);
+    this.form.patchValue(formValue);
+    this._patchValueLocationsFormControl(formValue);
+  }
   editEcosolution() {
-    const body = new NewEcosolutionsBody(
-      this._cleantechId,
-      this.mainCategory,
-      this.form.value
-    );
     forkJoin({
       fileCertificate: this._uploadCertificate(),
       ecosolution: this._ecosolutionsService.updateEcosolution(
         this.idEcosolution,
-        body
+        this.bodyRequestEcosolution
       ),
     }).subscribe((res: any) => {
       if (res) {
@@ -165,8 +194,29 @@ export class EcosolutionsFormComponent implements OnInit {
 
         const formValue = new EcosolutionForm(res.ecosolution);
         this.form.patchValue(formValue);
+        this._patchValueLocationsFormControl(formValue);
       }
     });
+  }
+
+  private _patchValueLocationsFormControl(formValue: EcosolutionForm) {
+    formValue.locations?.forEach(() => {
+      this._addLocations();
+    });
+    this.form.get('locations')?.patchValue(formValue.locations);
+  }
+
+  private _createLocations(): FormGroup {
+    return new FormGroup({
+      country: new FormGroup({
+        code: new FormControl(),
+        regions: new FormControl(),
+      }),
+    });
+  }
+
+  private _addLocations() {
+    this.locationsArrays.push(this._createLocations());
   }
 
   saveEcosolution() {
@@ -175,13 +225,10 @@ export class EcosolutionsFormComponent implements OnInit {
     }
   }
   private _createEcosolution() {
-    const body = new NewEcosolutionsBody(
-      this._cleantechId,
-      this.mainCategory,
-      this.form.value
-    );
     forkJoin({
-      ecosolution: this._ecosolutionsService.createEcosolutions(body),
+      ecosolution: this._ecosolutionsService.createEcosolutions(
+        this.bodyRequestEcosolution
+      ),
     }).subscribe((res) => {
       this._uploadCertificate();
       this._uploadImg(res.ecosolution);
@@ -189,10 +236,11 @@ export class EcosolutionsFormComponent implements OnInit {
     });
   }
 
-  private _uploadImg(ecosolution : any) {
-    if(this._fileEcosolution && ecosolution) {
-      this._ecosolutionsService.uploadImage(ecosolution?.id, this._fileEcosolution).subscribe();
-
+  private _uploadImg(ecosolution: any) {
+    if (this._fileEcosolution && ecosolution) {
+      this._ecosolutionsService
+        .uploadImage(ecosolution?.id, this._fileEcosolution)
+        .subscribe();
     }
   }
 
@@ -204,7 +252,7 @@ export class EcosolutionsFormComponent implements OnInit {
     this._fileEcosolution = file.target.files[0];
     this._buildImgEcosolution(file.target.files[0]);
   }
-  
+
   private _buildImgEcosolution(file: File) {
     const reader = new FileReader();
     reader.onload = (event: any) => {
@@ -212,13 +260,11 @@ export class EcosolutionsFormComponent implements OnInit {
     };
 
     reader.onerror = (event: any) => {
-      console.log("File could not be read: " + event.target.error.code);
+      console.log('File could not be read: ' + event.target.error.code);
     };
 
     reader.readAsDataURL(file);
   }
-
-
 
   private _getDocumentsCleantech() {
     this._cleanTeachService
@@ -232,7 +278,10 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   private _uploadCertificate() {
-    if ((!this.form.value.certified && !this.form.controls['certified']?.dirty) || !this.inputCertified.nativeElement.value) {
+    if (
+      (!this.form.value.certified && !this.form.controls['certified']?.dirty) ||
+      !this.inputCertified.nativeElement.value
+    ) {
       return of(null);
     }
     return this._cleanTeachService.uploadDocument(

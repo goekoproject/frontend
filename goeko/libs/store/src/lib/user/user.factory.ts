@@ -1,3 +1,4 @@
+import { mapperLocations } from '@goeko/core';
 import { UserProfileForm } from './user-profile-form.interface';
 import { UserType } from './user-type.constants';
 import { UserModal, UserSwitch } from './user-type/user-switch.type';
@@ -18,20 +19,11 @@ export abstract class UserFactory {
     const userProfile = {
     ...userProfileForm,
     country: 'CH',
-    locations: _mapLocations(userProfileForm.locations)
+    locations: mapperLocations(userProfileForm.locations)
   }
     return userProfile;
   }
 
 
 
-}
-function _mapLocations(locations: any[]): any[] {
-  return locations.map(location => ({
-    ...location,
-    country: {
-      code: location?.country?.code?.code,
-      regions: location?.country?.regions.map((region:any) => region.code)
-    },
-  }));
 }

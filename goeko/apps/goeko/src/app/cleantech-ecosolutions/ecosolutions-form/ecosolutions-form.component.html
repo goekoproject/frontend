@@ -238,7 +238,7 @@
           <label for="deliverCountries">{{
             'FORM_LABEL.deliverCountries' | translate
           }}</label>
-  
+   <!--
           <ui-super-select
             [readonly]="isReadOnly"
             [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -254,7 +254,14 @@
             >
               {{ option.keyLang | translate }}
             </super-option>
-          </ui-super-select>
+          </ui-super-select> -->
+
+          <goeko-select-locations
+          [form]="form"
+          [controlLocations]="locationsArrays"
+          [controlNameCountry]="'country'"
+          [controlNameProvince]="'regions'"
+        ></goeko-select-locations>
         </div>
   
         <div>

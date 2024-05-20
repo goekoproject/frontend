@@ -8,3 +8,13 @@ export function valueChangeArray(value: FormArray): Observable<any> {
 		)
 	);
 }
+
+export function mapperLocations(locations: any[]): any[] {
+	return locations.map(location => ({
+	  ...location,
+	  country: {
+		code: location?.country?.code?.code,
+		regions: location?.country?.regions ? location?.country?.regions?.map((region:any) => region.code) : undefined
+	  },
+	}));
+  }
