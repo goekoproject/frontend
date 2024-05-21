@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SmeRequestResponse, SmeService } from '@goeko/store';
 import { DISPLAY_COLUMNS } from './display-columns.contants';
+import { MESSAGE_TYPE } from '@goeko/ui';
+import { MessageService } from '@goeko/business-ui';
+import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 
 @Component({
   selector: 'goeko-sme-analysis-request',
   templateUrl: './sme-request.component.html',
   styleUrl: './sme-request.component.scss',
+  providers: [MessageService]
 })
 export class SmeRequestAnalisysComponent implements OnInit {
 
@@ -17,7 +21,9 @@ export class SmeRequestAnalisysComponent implements OnInit {
 
   constructor(private _smeServices: SmeService,    
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _messageService: MessageService,
+    private _translateServices: TranslateService
     ){
 
   }
@@ -52,9 +58,13 @@ export class SmeRequestAnalisysComponent implements OnInit {
   }
 
   deleteRequest(request:SmeRequestResponse) {
-    this._smeServices.deleteRequests(request.id).subscribe(res => {
-      this._getAnalysisRequests();
-
+    this._messageService.deleteMessage(MESSAGE_TYPE.WARNING,request.searchName).afterClosed().subscribe(isDelete => {
+      
+      if(isDelete) {
+        this._smeServices.deleteRequests(request.id).subscribe(res => {
+          this._getAnalysisRequests();
+        });
+      }
     });
   }
 }
