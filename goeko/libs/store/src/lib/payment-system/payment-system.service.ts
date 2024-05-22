@@ -14,6 +14,7 @@ export class PaymentSystemService {
   );
 
   public get isSubscription() {
+    return true;
     return this._isSubscription();
   }
 
