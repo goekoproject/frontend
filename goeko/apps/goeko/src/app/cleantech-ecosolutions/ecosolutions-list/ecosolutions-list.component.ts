@@ -28,10 +28,10 @@ export class EcosolutionsListComponent implements OnInit {
     private _roter: Router,
     private translateService: TranslateService,
     private _cleantechEcosolutionsService: CleantechEcosolutionsService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.cleanTechId = this._route.snapshot.paramMap.get('id') as string;
     this.getAllEcosolutionsByCleanTech();
   }
