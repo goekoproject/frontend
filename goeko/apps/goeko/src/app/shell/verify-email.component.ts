@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './verify-email.component.html',
   styleUrl: './verify-email.component.scss',
   encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     class: 'goeko-verify-email'
   }
