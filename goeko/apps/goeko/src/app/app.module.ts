@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClient } from '@angular/common/http';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
 import {
@@ -14,7 +15,7 @@ import {
   SideProfileComponent,
   loadDataUserFactory,
 } from '@goeko/business-ui';
-import { AUTH_CONNECT, ConfigModule } from '@goeko/core';
+import { AUTH_CONNECT, ConfigModule, GoRemoteConfigModule } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
@@ -102,9 +103,11 @@ const httpLoaderFactory = (http: HttpClient) => {
         deps: [HttpClient],
       },
     }),
-    NotificationModule
+    NotificationModule,
+    GoRemoteConfigModule
   ],
   providers: [UserService, LoadDataUser, isSubscribedCleantech, NotificationService,
+    provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
     LocationsService,
     {
       provide: APP_INITIALIZER,
@@ -114,4 +117,6 @@ const httpLoaderFactory = (http: HttpClient) => {
   }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  
+}
