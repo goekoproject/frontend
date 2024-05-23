@@ -21,7 +21,26 @@
       </ng-container>
     </ul>
 
-    <ul class="filter-ods">
+    <fieldset
+        class="ecosolutions-fieldset"
+        class="fieldset-ods"
+      >
+        <div class="legend--info">
+          <legend>
+            {{
+              'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate
+            }}
+          </legend>
+  
+          <p class="text-support">
+            {{ 'TEXT_SUPPORT.ods' | translate }}
+          </p>
+        </div>
+  
+        <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
+
+      </fieldset>
+    <!-- <ul class="filter-ods">
       <li
         [class.active]="icon.active"
         *ngFor="let icon of odsIcons; index as index"
@@ -35,7 +54,7 @@
           [alt]="icon"
         />
       </li>
-    </ul>
+    </ul> -->
   </section>
 
   <section class="result">
