@@ -4,12 +4,13 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://goeko-backend.herokuapp.com',
-  accessToken: 'https://soft-glitter-5713.eu.auth0.com/oauth/token',
-  domainAuth0: 'soft-glitter-5713.eu.auth0.com',
+  baseUrl: 'https://platform-stage.goeko-api.com',
   clientId: 'ly5mBoJd8sgMxqF8MpWVsE24kkhAZIHW',
   clientSecret:
-    'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',
+  'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',
+  audience: 'goeko-backend',
+  accessToken: 'https://soft-glitter-5713.eu.auth0.com/oauth/token',
+  domainAuth0: 'soft-glitter-5713.eu.auth0.com',
   firebaseApp: {
     apiKey: 'AIzaSyBoLASPKVeKXwrV4Do6MTm1pLHbRk2RUdI',
     authDomain: 'goeko-c8a23.firebaseapp.com',

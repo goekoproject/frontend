@@ -75,7 +75,7 @@ const httpLoaderFactory = (http: HttpClient) => {
       clientId: environment.clientId,
       authorizationParams: {
         redirect_uri: AUTH_CONNECT.REDIRECT_URI,
-        audience: AUTH_CONNECT.AUDIENCE,
+        audience: environment.audience,
       },
       httpInterceptor: {
         allowedList: [`${environment.baseUrl}/*`],
