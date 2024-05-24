@@ -30,6 +30,7 @@ export class UserService {
   public userRoles = computed(
     () => this.userAuthData()['roles'] || [ROLES.PUBLIC]
   );
+  public username = computed(() => this.userAuthData()['email']);
 
   public userType$ = toObservable<UserType>(this.userAuthData()['userType']);
 

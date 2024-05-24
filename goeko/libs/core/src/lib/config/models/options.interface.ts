@@ -11,4 +11,5 @@ export interface Options {
 
 	clientSecret: string;
 	clientId: string;
+	audience: string;
 }

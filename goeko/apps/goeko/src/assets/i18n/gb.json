@@ -413,7 +413,9 @@
     "messageSendOk": "Your message has been sent successfully!",
     "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have.",
     "warningDelete": "Are you sure you want to delete {{item}} ?",
-    "saveMessageGeneric": "Do you want to save the data before continuing?"
+    "saveMessageGeneric": "Do you want to save the data before continuing?",
+    "messaggeProfileUncompletedTitle": "Complete your profile",
+    "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools."
 
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {

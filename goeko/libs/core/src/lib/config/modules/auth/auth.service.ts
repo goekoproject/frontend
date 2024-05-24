@@ -56,7 +56,11 @@ export class AuthService extends Auth0Connected {
 
   universalLogin(): Observable<any> {
     return this._auth0.loginWithRedirect({
-      authorizationParams : {ui_locales: this.currentLang()}
+      authorizationParams : {
+        ui_locales: this.currentLang(),
+        
+      },
+
     });
   }
 
