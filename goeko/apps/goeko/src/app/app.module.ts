@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HttpClient } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthModule } from '@auth0/auth0-angular';
 import {
   LoadDataUser,
   PopupModule,
@@ -15,7 +14,7 @@ import {
   SideProfileComponent,
   loadDataUserFactory,
 } from '@goeko/business-ui';
-import { AUTH_CONNECT, ConfigModule, GoRemoteConfigModule } from '@goeko/core';
+import { ConfigModule, GoRemoteConfigModule } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
@@ -70,17 +69,6 @@ const httpLoaderFactory = (http: HttpClient) => {
     BadgeModule,
     ShowForRolesDirective,
     DialogMessageModule,
-    AuthModule.forRoot({
-      domain: environment.domainAuth0,
-      clientId: environment.clientId,
-      authorizationParams: {
-        redirect_uri: AUTH_CONNECT.REDIRECT_URI,
-        audience: environment.audience,
-      },
-      httpInterceptor: {
-        allowedList: [`${environment.baseUrl}/*`],
-      },
-    }),
     GoShowUserTypeDirective,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
@@ -94,6 +82,7 @@ const httpLoaderFactory = (http: HttpClient) => {
       clientSecret: environment.clientSecret,
       clientId: environment.clientId,
       domainAuth0: environment.domainAuth0,
+      audience: environment.audience,
     }),
     TranslateModule.forRoot({
       defaultLanguage: 'fr',
@@ -108,6 +97,7 @@ const httpLoaderFactory = (http: HttpClient) => {
   ],
   providers: [UserService, LoadDataUser, isSubscribedCleantech, NotificationService,
     provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
+ 
     LocationsService,
     {
       provide: APP_INITIALIZER,

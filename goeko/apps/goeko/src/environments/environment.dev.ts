@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    baseUrl: 'https://platform-stage.goeko-api.com',
+    baseUrl: 'https://platform.goeko-api.com',
     clientId: 'ly5mBoJd8sgMxqF8MpWVsE24kkhAZIHW',
     clientSecret:
     'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',

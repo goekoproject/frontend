@@ -409,7 +409,9 @@
     "messageSendOk": "Votre message a été envoyé avec succès !",
     "messageBodyLead" : "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
     "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
-    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?"
+    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
+    "messaggeProfileUncompletedTitle": "Complétez votre profil",
+    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko."
 
 
   },

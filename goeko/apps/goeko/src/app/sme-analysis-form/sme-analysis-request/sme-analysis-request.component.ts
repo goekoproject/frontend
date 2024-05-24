@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmeRequestResponse, SmeService } from '@goeko/store';
-import { DISPLAY_COLUMNS } from './display-columns.contants';
-import { MESSAGE_TYPE } from '@goeko/ui';
 import { MessageService } from '@goeko/business-ui';
-import { TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs';
+import { SmeRequestResponse, SmeService } from '@goeko/store';
+import { MESSAGE_TYPE } from '@goeko/ui';
+import { DISPLAY_COLUMNS } from './display-columns.contants';
 
 @Component({
   selector: 'goeko-sme-analysis-request',
@@ -22,8 +20,7 @@ export class SmeRequestAnalisysComponent implements OnInit {
   constructor(private _smeServices: SmeService,    
     private _route: ActivatedRoute,
     private _router: Router,
-    private _messageService: MessageService,
-    private _translateServices: TranslateService
+    private _messageService: MessageService
     ){
 
   }

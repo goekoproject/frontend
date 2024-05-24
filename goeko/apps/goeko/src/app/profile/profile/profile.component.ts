@@ -1,14 +1,13 @@
-import { Component, OnInit, effect } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { CanComponentDeactivate } from '@goeko/business-ui';
 import {
   CountrySelectOption,
   DataSelect,
   SmeUser,
   USER_TYPE,
-  UserFactory,
   UserModal,
-  UserService,
-  UserSwitch,
+  UserSwitch
 } from '@goeko/store';
 import { AutoUnsubscribe, SideDialogService } from '@goeko/ui';
 import { Subject, distinctUntilChanged, forkJoin, of, takeUntil } from 'rxjs';
@@ -55,23 +54,25 @@ const TYPE_FORM_FOR_USERTYPE: UserSwitch<
   selector: 'goeko-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  providers: []
+
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit,CanComponentDeactivate {
   form!: FormGroup;
   savedProfileOK!: boolean;
   public dataSelect = DataSelect as any;
 
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>;
-  public dataProfile = this._userService.userProfile;
-  private _userType = this._userService.userType;
-  private _externalId = this._userService.externalId;
+  public dataProfile = this._profieService.userProfile;
+  private _userType = this._profieService.userType;
+  private _externalId = this._profieService.externalId;
   private destroy$ = new Subject<void>();
 
   private _selectedCodeLang = this._profieService.selectedCodeLang;
   public profileImg!: File | string | undefined;
   public countries = this._profieService.countries;
   public regions = this._profieService.regions;
-
+  public username = this._profieService.username;
   public fileProfile: any;
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
@@ -83,22 +84,24 @@ export class ProfileComponent implements OnInit {
   ) => boolean;
 
   private _uploadImg$ = () =>
-    this._userService.uploadImgProfile(this.dataProfile().id, this.profileImg);
+    this._profieService.uploadImgProfile(this.dataProfile().id, this.profileImg);
 
   public  get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray;
   }
   constructor(
     private _sideDialogService: SideDialogService,
-    private _userService: UserService,
     private _profieService: ProfileService
   ) {
-    effect(() => {});
   }
+  canDeactivate () { 
+    return !!this.dataProfile().id
+  }
+  
 
   ngOnInit() {
     this._sideDialogService.closeDialog();
-    this._userService.fetchUser();
+    this._profieService.fetchUser();
     this._createFormForUserType();
     this._loadDataProfile();
     this._countryChanges();
@@ -152,9 +155,8 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfile() {
-    const userFactory = UserFactory.createSmeUserProfileDto(this.form.value);
-    this._userService
-      .createUserProfile(userFactory)
+    this._profieService
+      .createUserProfile(this.form.value)
       .subscribe((dataProfile) => {
         if (dataProfile) {
           this._changeDataProfile(dataProfile);
@@ -164,12 +166,11 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
-    const userFactory = UserFactory.createSmeUserProfileDto(this.form.value);
     const dataForUpdated = {
       uploadImg: this.profileImg ? this._uploadImg$() : of(null),
-      profile: this._userService.updateUserProfile(
+      profile: this._profieService.updateUserProfile(
         this.dataProfile().id,
-        userFactory
+        this.form.value
       ),
     };
     forkJoin(dataForUpdated).subscribe((dataProfile: any) => {
