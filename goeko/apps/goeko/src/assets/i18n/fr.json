@@ -278,7 +278,8 @@
       "ceramic": "Céramique",
       "concrete": "Béton",
       "soil": "Terre",
-      "stone": "Pierre"
+      "stone": "Pierre",
+      "glass": "Verre"
     },
     "selectMainActivity": {
       "cleaningOfSiteAndPeripheryAccesses": "Nettoyage des accès chantier et périphérie",
@@ -289,7 +290,8 @@
       "siteHut": "Cabane de chantier",
       "toolCleaning": "Nettoyage du matériel",
       "wateringForCure": "Arrosage pour la cure",
-      "wateringPlants": "Arrosage des végétaux"
+      "wateringPlants": "Arrosage des végétaux",
+      "constructionSiteWater": "Eau de chantier"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Carton et papier",

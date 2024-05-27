@@ -280,7 +280,8 @@
       "ceramic": "Ceramic",
       "concrete": "Concrete",
       "soil": "Soil",
-      "stone": "Stone"
+      "stone": "Stone",
+      "glass": "Glass"
     },
     "selectMainActivity": {
       "cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
@@ -291,7 +292,8 @@
       "siteHut": "Site hut",
       "toolCleaning": "Tool cleaning",
       "wateringForCure": "Watering for Cure",
-      "wateringPlants": "Watering Plants"
+      "wateringPlants": "Watering Plants",
+      "constructionSiteWater": "Construction site water"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Carton and papier",
