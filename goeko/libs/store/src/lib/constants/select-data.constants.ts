@@ -179,6 +179,10 @@ export const SelectMainActivity: DataSelectOption[] = [
     id: 'wateringPlants',
     keyLang: 'SELECT_DATA_LABEL.selectMainActivity.wateringPlants',
   },
+  {
+    id: 'constructionSiteWater',
+    keyLang: 'SELECT_DATA_LABEL.selectMainActivity.constructionSiteWater',
+  },
 ];
 export const SelectProducts: DataSelectOption[] = [
   { id: 'aerosol', keyLang: 'SELECT_DATA_LABEL.selectProducts.aerosol' },
@@ -266,6 +270,10 @@ export const SelectInertOrMineralWaste: DataSelectOption[] = [
   {
     id: 'ceramic',
     keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.ceramic',
+  },
+  {
+    id: 'glass',
+    keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.glass',
   },
 ];
 

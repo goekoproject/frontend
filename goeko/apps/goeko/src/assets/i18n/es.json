@@ -286,7 +286,8 @@
       "ceramic": "Cerámica",
       "concrete": "Hormigón",
       "soil": "Tierra",
-      "stone": "Piedra"
+      "stone": "Piedra",
+      "glass": "Vidrio"
     },
     "selectMainActivity": {
       "cleaningOfSiteAndPeripheryAccesses": "Limpieza de accesos de obra y periféricos",
@@ -297,7 +298,8 @@
       "siteHut": "Cabaña de sitio",
       "toolCleaning": "Limpieza de herramientas",
       "wateringForCure": "Riego para la cura",
-      "wateringPlants": "Regando plantas"
+      "wateringPlants": "Regando plantas",
+      "constructionSiteWater": "Agua de obra"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Cartón y papel",
