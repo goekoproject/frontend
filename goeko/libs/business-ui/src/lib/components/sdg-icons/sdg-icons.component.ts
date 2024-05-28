@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, forwardRef, signal,Output,EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, forwardRef, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ODS_CODE } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 
+type Size = 'small' | 'medium' | 'large';
 //TODO: To do value accessort
 @Component({
   standalone: true,
@@ -11,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'goeko-sdg-icons',
   templateUrl: './sdg-icons.component.html',
   styleUrls: ['./sdg-icons.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -20,7 +22,9 @@ import { TranslateService } from '@ngx-translate/core';
   ],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    '[attr.readonly]': 'readonly'
+    '[attr.readonly]': 'readonly',
+    '[attr.size]': 'size'
+    
   }
 })
 export class SdgIconsComponent implements OnInit, ControlValueAccessor {
@@ -49,6 +53,8 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
     this._selected = sustainableDevelopmentGoals;
   }
   private _selected!: number[];
+
+  @Input() size: Size = 'small';
 
   constructor(private _translateServices: TranslateService) {
     this.currentLangCode = this._translateServices.defaultLang;
