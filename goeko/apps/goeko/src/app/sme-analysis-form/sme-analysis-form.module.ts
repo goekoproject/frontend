@@ -8,6 +8,7 @@ import {
   CodeCountryPipe,
   GoTableModule,
   LeadFormComponent,
+  MessageService,
   ProductsManagementComponent,
   SdgIconsComponent,
   SelectSubcategoryProductComponent
@@ -27,6 +28,7 @@ import {
 } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
+import { CategoryRequestPipe } from './get-category-request.pipe';
 import { SmeAnalysisFormRoutingModule } from './sme-analysis-form-routing.module';
 import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component';
 import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
@@ -39,7 +41,6 @@ import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
 import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
 import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
-import { CategoryRequestPipe } from './get-category-request.pipe';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,7 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
       endpoint: environment.baseUrl,
     }),
   ],
-  providers: [SmeAnalysisService],
+  providers: [SmeAnalysisService, MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SmeAnalysisFormModule {}

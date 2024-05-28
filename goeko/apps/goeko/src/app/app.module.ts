@@ -10,7 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   LoadDataUser,
   PopupModule,
-  SelectI18nModule,
+
+  SelectI18nComponent,
+
   SideProfileComponent,
   loadDataUserFactory,
 } from '@goeko/business-ui';
@@ -63,7 +65,7 @@ const httpLoaderFactory = (http: HttpClient) => {
     ButtonModule,
     ContentFulModule.forRoot(ContentConfig),
     PopupModule,
-    SelectI18nModule,
+    SelectI18nComponent,
     UiBreadcrumbsModule,
     SideDialogModule,
     BadgeModule,

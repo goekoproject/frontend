@@ -1,15 +1,17 @@
 import {
   Component,
   EventEmitter,
+  HostListener,
   OnInit,
   Output
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  CanAnalysisDeactivate,
   FORM_CATEGORIES_QUESTION,
   MessageService,
   Product,
-  ProductsManagementComponent,
+  ProductsManagementComponent
 } from '@goeko/business-ui';
 import {
   ClassificationCategory,
@@ -21,7 +23,7 @@ import {
   SmeService
 } from '@goeko/store';
 import { AutoUnsubscribe, MESSAGE_TYPE, SideDialogService } from '@goeko/ui';
-import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { Observable, Subject, distinctUntilChanged, of, takeUntil } from 'rxjs';
 import { SmeAnalysisService } from '../sme-analysis.service';
 import {
   FormValueToSmeAnalysisRequest,
@@ -35,12 +37,19 @@ import {
   styleUrls: ['./sme-analysis-summary.component.scss'],
   providers: [MessageService]
 })
-export class SmeAnalysisSummaryComponent implements OnInit {
+export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivate {
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent) {
+    const canDeactivate = this.canDeactivate();
+    if(!canDeactivate)  {
+      event.preventDefault();
+    }
+  }
   @Output() editForm: EventEmitter<number> = new EventEmitter();
   public dataSelect = DataSelect;
   formField = FORM_CATEGORIES_QUESTION;
   formValue!: any;
-  public saveOK = false;
+  public savedAnalysis = false;
   private _smeId!: string;
   public toogleSaveName = false;
   private destroy$ = new Subject<void>();
@@ -55,6 +64,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   }
 
   private get _dialogInfoMessage() {
+    
     return this._messageService.infoMessage(MESSAGE_TYPE.WARNING, {title: 'DIALOG.saveMessageGeneric', buttonPrimary: 'save', buttonSecondary: 'notSave'});
   }
 
@@ -74,6 +84,7 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   ) {
   }
 
+
   ngOnInit(): void {
     this._smeAnalysisService.getAllDataCategories();
     this._smeId = this._getSmeId();
@@ -84,6 +95,15 @@ export class SmeAnalysisSummaryComponent implements OnInit {
     });
 
   }
+
+  canDeactivate = ():boolean | Promise<boolean> | Observable<boolean> => {
+    return this.savedAnalysis;
+  };
+
+  saveAnalysis = (): Observable<boolean> => {
+   this.saveAnalysisOrProject();
+   return of(true)
+  };
 
   private _getSmeId(): string {
     const idByNewAnalysis = this._route?.parent?.snapshot.params[
@@ -159,43 +179,48 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   goToSearchEcosolutions() {
      this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
         if(saveAnalysis) {
-          this.saveAnalysis();
+          this.saveAnalysisOrProject(this._resultPath);
+          this.savedAnalysis = true;
+
+        } else {
+          this._router.navigate([this._resultPath, this._smeId]);
+          this.savedAnalysis = true;
+
         }
-        this._router.navigate([this._resultPath, this._smeId]);
       }); 
   }
 
-  saveAnalysis() {
+  saveAnalysisOrProject(route?: string) {
     if (this.isProject) {
-      this._saveProject();
+      this._saveProject(route);
     } else {
-      this._saveAnalysis();
+      this._saveAnalysis(route);
     }
   }
-  private _saveProject() {
+  private _saveProject(route?:string) {
     const smeAnalysisRequest = new FormValueToSmeProjectRequest(
       this._smeId,
       this.currentAnalytics()
     );
     this._projectService.saveProject(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
-      this.saveOK = true;
-      setTimeout(() => {
-        this.saveOK = false;
-      }, 5000);
+      this.savedAnalysis = true;
+      this._router.navigate([this._resultPath, this._smeId]);
+      this._goToResult(route)
+
     });
   }
-  private _saveAnalysis() {
+  private _saveAnalysis(route?:string) {
     const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(
       this._smeId,
       this.currentAnalytics()
     );
     this._smeServices
       .saveRecommendations(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$))
-      .subscribe((res) => {
-        this.saveOK = true;
-        setTimeout(() => {
-          this.saveOK = false;
-        }, 5000);
+      .subscribe(() => {
+        this.savedAnalysis = true;
+        if(route)
+        this._router.navigate([this._resultPath, this._smeId]);
+        this._goToResult(route)
       });
   }
 
@@ -206,6 +231,14 @@ export class SmeAnalysisSummaryComponent implements OnInit {
       }
        this._router.navigate(['dashboard/sme']); 
     })
+
+  }
+
+  private _goToResult(route?:string) {
+    if(!route) {
+      return;
+    }
+    this._router.navigate([route, this._smeId]);
 
   }
 }

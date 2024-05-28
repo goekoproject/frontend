@@ -44,6 +44,12 @@ export class LoadingService {
         this._loading$.next(false);
       }
     }, 500);
+
+    setTimeout(() => {
+
+      this._loading$.next(false);
+
+    }, 1000)
   }
 
   /**

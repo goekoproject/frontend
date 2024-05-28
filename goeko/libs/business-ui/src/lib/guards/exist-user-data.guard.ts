@@ -2,16 +2,14 @@ import { inject } from '@angular/core';
 import { CanDeactivateFn } from '@angular/router';
 import { DialogMessageService } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from './can-component-deactivate.interface';
 
 // Consider using this interface for all CanDeactivate guards,
 // and have your components implement this interface, too.
 //
 //   e.g. export class VillainsComponent implements CanComponentDeactivate { ...
 //
-export interface CanComponentDeactivate {
-    canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
-}
+
 
 export const existUserDataGuard: CanDeactivateFn<CanComponentDeactivate> = (
     component: CanComponentDeactivate

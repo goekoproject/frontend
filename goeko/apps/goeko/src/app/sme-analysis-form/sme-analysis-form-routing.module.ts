@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { unSavedChangesGuard } from '@goeko/business-ui';
 import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component';
 import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
 import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
       {
         path: 'last/:id',
         component: SmeFormAnalysisComponent,
+        canDeactivate: [unSavedChangesGuard],
         data: {
           breadcrumb: 'last_analysis',
         },
@@ -39,6 +41,7 @@ const routes: Routes = [
       {
         path: 'new',
         component: SmeFormAnalysisComponent,
+        canDeactivate: [unSavedChangesGuard],
         data: {
           breadcrumb: 'new_analysis',
         },
@@ -46,6 +49,7 @@ const routes: Routes = [
       {
         path: 'summary',
         component: SmeAnalysisSummaryComponent,
+        canDeactivate: [unSavedChangesGuard],
         data: {
           breadcrumb: 'summary',
         },
