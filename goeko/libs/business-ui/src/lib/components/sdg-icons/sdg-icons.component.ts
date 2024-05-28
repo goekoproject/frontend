@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, forwardRef, signal } from '@angular/core';
+import { Component, Input, OnInit, forwardRef, signal,Output,EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ODS_CODE } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,6 +31,9 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
 
   onChange: (value: Array<number>) => void = () => {};
   onTouched: () => void = () => {};
+
+  @Output() valueSelected = new EventEmitter();
+
   @Input()
   public get selected(): number[] {
     return this._selected;
@@ -81,6 +84,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
     this.value.set(Array.from(this._sdeSelected));
     this.onTouched();
     this.onChange(this.value());
+    this.valueSelected.emit(this.value());
     event.preventDefault();
 
   }

@@ -37,7 +37,7 @@
           </p>
         </div>
   
-        <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
+        <goeko-sdg-icons (valueSelected)="filterBySDG($event)"></goeko-sdg-icons>
 
       </fieldset>
     <!-- <ul class="filter-ods">
