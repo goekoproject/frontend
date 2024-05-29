@@ -34,7 +34,7 @@ export class EcosolutionListComponent implements OnInit {
   private _smeId!: string;
   formValue!: any;
   smeDataProfile = this._userService.userProfile();
-  private _codeActive = signal<Array<number>>([])
+  private _codesActive = signal<Array<number>>([])
   private destroy$ = new Subject<void>();
 
   get allChecked() {
@@ -162,17 +162,17 @@ export class EcosolutionListComponent implements OnInit {
     return newSmeRecomendation;
   }
 
-  filterBySDG(code: Array<number>) {
-    this._codeActive.set(code);
+  filterBySDG(codes: Array<number>) {
+    this._codesActive.set(codes);
     this.getResults();
     this._makeFilterBySDG();
   }
 
   private _makeFilterBySDG() {
-    if( this._codeActive().length > 0) {
+    if( this._codesActive().length > 0) {
       this.smeRecomendation = this.smeRecomendation.filter(
         (recomendation: any) =>
-          this._codeActive().some((elemento) =>
+          this._codesActive().some((elemento) =>
             recomendation.sustainableDevelopmentGoals.includes(elemento)
           )
       );
