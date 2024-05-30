@@ -124,8 +124,7 @@
           @for ( picture of detailsEcosolution['pictures']; track picture?.id) {
             <img class="details-article-picture" [src]="picture?.url" [alt]="picture?.name"/>
           }
-            <p>
-              {{ detailsEcosolution['detailedDescription'] || '-' }}
+            <p [innerHTML]="detailsEcosolution['detailedDescription']">
             </p>
         </div>
     

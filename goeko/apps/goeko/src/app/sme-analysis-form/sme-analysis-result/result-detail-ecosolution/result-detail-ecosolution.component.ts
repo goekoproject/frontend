@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   DataSelect,
   Recommendation,
@@ -7,7 +8,6 @@ import {
 import { AutoUnsubscribe } from '@goeko/ui';
 import { Subject, takeUntil } from 'rxjs';
 import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants';
-import { Router } from '@angular/router';
 
 @AutoUnsubscribe()
 @Component({
@@ -29,7 +29,10 @@ export class ResultDetailEcosolutionComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (detailsEcosolution: Recommendation) =>
-          (this.detailsEcosolution = detailsEcosolution)
+         {
+           this.detailsEcosolution = detailsEcosolution
+           this.detailsEcosolution.detailedDescription =   this.detailsEcosolution?.detailedDescription?.split("\n").join("<br />");
+          }
       );
   }
 
