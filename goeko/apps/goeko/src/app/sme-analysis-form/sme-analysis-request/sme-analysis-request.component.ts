@@ -46,11 +46,12 @@ export class SmeRequestAnalisysComponent implements OnInit {
   }
 
   goToDetails(request:SmeRequestResponse ) {
-    this._router.navigate(['sme-analysis/request'], {
+    this._router.navigate(['request'], {
       queryParams: {
         smeId: this._smeId,
         requestId: request.id
-      }
+      },
+      relativeTo: this._route.parent
     });
   }
 

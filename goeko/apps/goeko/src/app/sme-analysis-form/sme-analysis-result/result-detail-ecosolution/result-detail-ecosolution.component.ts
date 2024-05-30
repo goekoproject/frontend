@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   DataSelect,
   Recommendation,
@@ -21,7 +21,11 @@ export class ResultDetailEcosolutionComponent implements OnInit {
   public detailsEcosolution!: Recommendation;
   public sectionFeatureDetail = SECTION_FEATURE_DETAIL_ECOSOLUTION;
   public dataSelect = DataSelect as any;
-  constructor(private _smeAnalysisStore: SmeAnalysisStoreService, private _router:Router) {}
+  constructor(
+    private _smeAnalysisStore: SmeAnalysisStoreService,
+    private _router: Router,
+    private _route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this._smeAnalysisStore
@@ -34,6 +38,9 @@ export class ResultDetailEcosolutionComponent implements OnInit {
   }
 
   goBack() {
-    this._router.navigate(['sme-analysis/results', this.detailsEcosolution.id])
+    this._router.navigate(
+      ['results', this.detailsEcosolution.id],
+      { relativeTo: this._route.parent?.parent}
+    );
   }
 }

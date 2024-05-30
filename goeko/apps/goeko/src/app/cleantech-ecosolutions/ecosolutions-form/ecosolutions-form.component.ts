@@ -290,6 +290,7 @@ export class EcosolutionsFormComponent implements OnInit {
     );
   }
   goToListEcosolution() {
-    this._router.navigate(['cleantech-ecosolutions', this._cleantechId]);
+    this._router.navigate(['../cleantech-ecosolutions', this._cleantechId],
+     {relativeTo: this._route.parent?.parent});
   }
 }

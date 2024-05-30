@@ -30,14 +30,7 @@ const routes: Routes = [
         path: 'request',
         component: SmeFormAnalysisComponent,
       },
-      {
-        path: 'last/:id',
-        component: SmeFormAnalysisComponent,
-        canDeactivate: [unSavedChangesGuard],
-        data: {
-          breadcrumb: 'last_analysis',
-        },
-      },
+  
       {
         path: 'new',
         component: SmeFormAnalysisComponent,
@@ -67,6 +60,14 @@ const routes: Routes = [
             component: ResultDetailEcosolutionComponent,
           },
         ],
+      },
+      {
+        path: ':id',
+        component: SmeFormAnalysisComponent,
+        canDeactivate: [unSavedChangesGuard],
+        data: {
+          breadcrumb: 'last_analysis',
+        },
       },
     ],
   },

@@ -1,12 +1,8 @@
-import { Component, OnInit,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   distinctUntilChanged,
-  filter,
   map,
-  mergeAll,
-  mergeMap,
-  switchMap,
-  tap,
+  tap
 } from 'rxjs';
 import { HomeService } from '../home.service';
 
@@ -35,6 +31,7 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    console.log('holla');
     this._homeService
       .getContent()
       .pipe(

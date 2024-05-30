@@ -69,7 +69,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
   }
 
   private get _resultPath(): string { 
-    return this.isProject ? 'sme-analysis/projects/results': 'sme-analysis/results'
+    return this.isProject ? 'projects/results': 'results'
   }
   constructor(
     private _smeServices: SmeService,
@@ -183,7 +183,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
           this.savedAnalysis = true;
 
         } else {
-          this._router.navigate([this._resultPath, this._smeId]);
+          this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
           this.savedAnalysis = true;
 
         }
@@ -204,7 +204,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
     );
     this._projectService.saveProject(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
       this.savedAnalysis = true;
-      this._router.navigate([this._resultPath, this._smeId]);
+      this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
       this._goToResult(route)
 
     });
@@ -219,7 +219,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
       .subscribe(() => {
         this.savedAnalysis = true;
         if(route)
-        this._router.navigate([this._resultPath, this._smeId]);
+        this._router.navigate([this._resultPath, this._smeId], {relativeTo: this._route});
         this._goToResult(route)
       });
   }
@@ -227,9 +227,13 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
   cancel() {
     this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
       if(saveAnalysis) {
-        this._saveAnalysis();
+        this._saveAnalysis('../dashboard/sme');
+        this.savedAnalysis = true;
+
+      } else {
+        this._router.navigate(['../dashboard/sme'], {relativeTo: this._route.parent}); 
+        this.savedAnalysis = true;
       }
-       this._router.navigate(['dashboard/sme']); 
     })
 
   }
@@ -238,7 +242,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
     if(!route) {
       return;
     }
-    this._router.navigate([route, this._smeId]);
+    this._router.navigate([route, this._smeId], {relativeTo: this._route.parent});
 
   }
 }

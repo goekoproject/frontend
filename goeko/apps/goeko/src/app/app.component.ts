@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     return !localStorage.getItem(KEY_COOKIES);
   }
 
-  isHomePage() {
+  private _isHomePage() {
     return location.pathname.includes('home') || location.pathname
     .includes('demo') || location.pathname
     === '/';
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
   private _isSuscriptionNeed = signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
 
   public isAuthenticated$ = this._authService.isAuthenticated$;
-  public isPrivateZone: boolean = false;
+  public isPrivateZone = signal<boolean>(false);
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private _paymentService: PaymentSystemService,
@@ -63,6 +63,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._manageClientZone();
     this._messageAfterSignUp();
+    this._translate.use('fr');
+
   }
 
 
@@ -88,7 +90,8 @@ export class AppComponent implements OnInit {
 
   private _manageClientZone() {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
-      this.isPrivateZone = isAuthenticated && !this.isHomePage();      
+      const isPrivateZone = isAuthenticated && !this._isHomePage();
+      this.isPrivateZone.set(isPrivateZone);      
     });
   } 
 

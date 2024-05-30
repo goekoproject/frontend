@@ -1,5 +1,5 @@
 import { Component, OnInit, effect } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from '@goeko/business-ui';
 import {
   ProjectService,
@@ -24,7 +24,8 @@ export class DashboardSmeComponent implements OnInit {
     private _smeAnalyticsStore: SmeAnalysisStoreService,
     private _projectService: ProjectService,
     private _router: Router,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    public route: ActivatedRoute
   ) {
     effect(() => {
       if (this.userProfile().id) {

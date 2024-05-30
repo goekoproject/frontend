@@ -1,0 +1,11 @@
+.is-platform {
+    margin: 0 auto;
+    padding-top: 1.4rem;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: calc(100% - 80px);
+    height: 100vh;
+    min-height: 100%;
+    width: 100vw;
+    display: flex;
+  }

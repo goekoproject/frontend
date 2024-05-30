@@ -3,7 +3,7 @@
     <button
       go-button
       type="button"
-      [routerLink]="['/sme-analysis/new']"
+      [routerLink]="['../sme-analysis/new']" [relativeTo]="route.parent"
       [queryParams]="{ smeId: userProfile().id, isProject: false }"
       [queryParamsHandling]="'merge'"
       routerLinkActive="router-link-active"
@@ -18,7 +18,8 @@
     <button
       go-button
       type="button"
-      [routerLink]="['/sme-analysis/last', userProfile().id]"
+      [routerLink]="['../sme-analysis', userProfile().id]"
+      [relativeTo]="route.parent"
       [queryParams]="{ isLast: true }"
       [queryParamsHandling]="'merge'"
       routerLinkActive="router-link-active"

@@ -30,10 +30,8 @@
   <div class="banner-video">
     
     <button go-button appearance="flat" (click)="watchVideo()" class="button-play">
-      <span class="material-symbols-rounded"> play_circle </span>
-      <p>{{ 'watchVideo' | translate }}</p>
+      <i class="ti ti-player-play-filled"></i>      <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    {{this.currentLangCode()}}
     <video autoplay loop class="banner-video-sme" #marketingVideo>
       <source
         type="video/mp4"

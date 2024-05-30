@@ -263,10 +263,11 @@ export class SmeFormAnalysisComponent
   gotToSummary() {
     this.goToSummary= true;
     this.currentAnalytics.set(this.form.value);
-    this._router.navigate([`/sme-analysis/summary`], {
+    this._router.navigate(['summary'], {
       queryParams: {
         smeId: this._smeId,
       },
+      relativeTo: this._route.parent
     });
   }
 

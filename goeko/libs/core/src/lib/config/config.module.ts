@@ -46,7 +46,7 @@ export const CONFIGURATION = new InjectionToken<Options>('CONFIGURATION');
   ],
 })
 export class ConfigModule {
-  static forRoot(config?: Options): ModuleWithProviders<ConfigModule> {
+  static forRoot(config: Options): ModuleWithProviders<ConfigModule> {
     return {
       ngModule: ConfigModule,
 
@@ -58,7 +58,7 @@ export class ConfigModule {
         },
        provideAuth0({
           domain: config?.domainAuth0 as string,
-          clientId: 'ly5mBoJd8sgMxqF8MpWVsE24kkhAZIHW',
+          clientId: config?.clientId,
           authorizationParams : {
             redirect_uri: AUTH_CONNECT.REDIRECT_URI,
             audience: config?.audience,
