@@ -112,8 +112,8 @@
         type="button"
         go-button
         appearance="white"
-        [routerLink]="['/dashboard']"
-        routerLinkActive="router-link-active"
+        [routerLink]="['../dashboard', userType()]"
+        [relativeTo]="route.parent"
       >
         {{ 'cancel' | translate }}
       </button>

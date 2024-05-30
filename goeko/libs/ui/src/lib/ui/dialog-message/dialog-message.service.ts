@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { DialogMessageComponent } from './dialog-message.component';
 import { OverlayRefService } from './overlay-ref.service';
 import { UIDialogRef } from './ui-dialog-ref';
@@ -37,7 +36,6 @@ export class DialogMessageService {
     private _data = signal<DialogConfig | null>(DEFAULT_DATA);
 	private _uiDialogRef!: UIDialogRef<DialogMessageComponent>;
 
-    private _responseMessage = new BehaviorSubject<boolean>(false);
     constructor(private _dialogRef: OverlayRefService) { }
 
 

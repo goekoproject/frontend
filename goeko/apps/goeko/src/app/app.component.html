@@ -1,23 +1,10 @@
-@if(isPrivateZone) {
-<goeko-menu-user></goeko-menu-user>
-<div class="container" [class.is-platform]="isPrivateZone">
-  <goeko-header-user>
-    <go-breadcrumbs></go-breadcrumbs>
-    <go-notification></go-notification>
-  </goeko-header-user>
-  <router-outlet></router-outlet>
-</div>
-<goeko-side-dialog></goeko-side-dialog>
-<goeko-dialog-message></goeko-dialog-message>
-} @else {
-<goeko-header> </goeko-header>
+
 <div class="container">
   <router-outlet></router-outlet>
 </div>
-<footer>
-  <goeko-footer></goeko-footer>
-</footer>
-} @if(showPopupCookies) {
+
+
+@if(showPopupCookies) {
 <go-popup
   [title]="'LEGAL.cookiesPolicy' | translate"
   [textMainButton]="'accept' | translate"

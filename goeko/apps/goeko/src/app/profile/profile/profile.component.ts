@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CanComponentDeactivate } from '@goeko/business-ui';
 import {
   CountrySelectOption,
@@ -64,7 +65,7 @@ export class ProfileComponent implements OnInit,CanComponentDeactivate {
 
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>;
   public dataProfile = this._profieService.userProfile;
-  private _userType = this._profieService.userType;
+  public userType = this._profieService.userType;
   private _externalId = this._profieService.externalId;
   private destroy$ = new Subject<void>();
 
@@ -91,7 +92,8 @@ export class ProfileComponent implements OnInit,CanComponentDeactivate {
   }
   constructor(
     private _sideDialogService: SideDialogService,
-    private _profieService: ProfileService
+    private _profieService: ProfileService,
+    public route: ActivatedRoute
   ) {
   }
   canDeactivate () { 
@@ -108,10 +110,10 @@ export class ProfileComponent implements OnInit,CanComponentDeactivate {
   }
   private _createFormForUserType() {
     if (this.dataProfile()) {
-      this.form = ProfileFormFactory.createProfileForm(this._userType());
+      this.form = ProfileFormFactory.createProfileForm(this.userType());
       this.formSection =
         TYPE_FORM_FOR_USERTYPE[
-          this._userType() as keyof typeof TYPE_FORM_FOR_USERTYPE
+          this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE
         ];
     }
   }
@@ -137,7 +139,7 @@ export class ProfileComponent implements OnInit,CanComponentDeactivate {
 
 
   private _setLocaltionInFormForSme() {
-    if(this._userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
+    if(this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
       this.locationsArrays.clear();
    
       (this.dataProfile() as SmeUser).locations.forEach(()=> {

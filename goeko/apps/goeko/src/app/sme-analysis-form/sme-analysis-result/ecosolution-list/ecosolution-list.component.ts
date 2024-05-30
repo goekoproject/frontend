@@ -128,12 +128,6 @@ export class EcosolutionListComponent implements OnInit {
   handlerOpenDetail(selectedRecomendation: any) {
     this._smeAnalysisStore.setDetailEcosolutions(selectedRecomendation);
     this._router.navigate(['details', 'id'], { relativeTo: this._route });
-    /* 	this.selectedRecomendation = selectedRecomendation;
-		if (!this.toogleOpenDetails) {
-			this.toogleOpenDetails = true;
-		}
-
-		this.selectedRecomendationIndex = selectedRecomendationIndex; */
   }
 
   onCheckboxStateChange(checked: any, index: number) {

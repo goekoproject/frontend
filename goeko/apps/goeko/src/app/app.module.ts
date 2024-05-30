@@ -10,9 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   LoadDataUser,
   PopupModule,
-
   SelectI18nComponent,
-
   SideProfileComponent,
   loadDataUserFactory,
 } from '@goeko/business-ui';
@@ -20,43 +18,26 @@ import { ConfigModule, GoRemoteConfigModule } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
-  GoShowUserTypeDirective,
   LocationsService,
-  ShowForRolesDirective,
   SmeModule,
   UserService,
   isSubscribedCleantech,
 } from '@goeko/store';
 import {
-  BadgeModule,
   ButtonModule,
-  DialogMessageModule,
-  NotificationModule,
   NotificationService,
   SideDialogModule,
-  UiBreadcrumbsModule
+  UiBreadcrumbsModule,
 } from '@goeko/ui';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
-import { HeaderComponent } from './home/header/header.component';
-import { MenuComponent } from './home/header/menu/menu.component';
-import { FooterComponent } from './shell/footer/footer.component';
-import { HeaderUserComponent } from './shell/header-user/header-user.component';
-import { MenuUserComponent } from './shell/menu-user/menu-user.component';
-const httpLoaderFactory = (http: HttpClient) => {
+export const httpLoaderFactory = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    MenuComponent,
-    MenuUserComponent,
-    HeaderUserComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     SideProfileComponent,
     BrowserModule,
@@ -68,10 +49,6 @@ const httpLoaderFactory = (http: HttpClient) => {
     SelectI18nComponent,
     UiBreadcrumbsModule,
     SideDialogModule,
-    BadgeModule,
-    ShowForRolesDirective,
-    DialogMessageModule,
-    GoShowUserTypeDirective,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),
@@ -94,21 +71,23 @@ const httpLoaderFactory = (http: HttpClient) => {
         deps: [HttpClient],
       },
     }),
-    NotificationModule,
-    GoRemoteConfigModule
+    GoRemoteConfigModule,
   ],
-  providers: [UserService, LoadDataUser, isSubscribedCleantech, NotificationService,
+  providers: [
+    UserService,
+    LoadDataUser,
+    isSubscribedCleantech,
+    NotificationService,
     provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
- 
+
     LocationsService,
     {
       provide: APP_INITIALIZER,
       multi: true,
       useFactory: loadDataUserFactory,
-      deps: [LoadDataUser]
-  }],
+      deps: [LoadDataUser],
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-  
-}
+export class AppModule {}

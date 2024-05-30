@@ -1,5 +1,4 @@
 import { mapperLocations } from '@goeko/core';
-import { CountrySelectOption } from '../constants/select-data.constants';
 import { Country } from '../user/public-api';
 
 interface Price {
@@ -96,9 +95,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
       subCategory: formValue.subCategory?.code,
       products: formValue.products,
     };
-    this.countries = formValue?.deliverCountries?.map(
-      (country: CountrySelectOption) => country.code
-    );
+    this.countries = undefined;
     this.paybackPeriodYears = formValue?.paybackPeriodYears?.id;
     this.marketReady = formValue.marketReady;
     this.guarantee = formValue.guarantee;
