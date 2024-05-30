@@ -33,9 +33,9 @@
       <span class="material-symbols-rounded"> play_circle </span>
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
+    {{this.currentLangCode()}}
     <video autoplay loop class="banner-video-sme" #marketingVideo>
       <source
-        src="assets/GoEko_Ad_1_CC_{{ this.currentLangCode }}.mp4#t=40"
         type="video/mp4"
       />
     </video>

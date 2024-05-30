@@ -4,6 +4,7 @@ import {
   ElementRef,
   OnInit,
   ViewChild,
+  signal,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,10 +14,13 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./banner.component.scss'],
 })
 export class BannerComponent implements AfterViewInit, OnInit {
-  public currentLangCode!: string;
+  public currentLangCode = signal(this._translateServices.defaultLang);
   @ViewChild('marketingVideo') marketingVideo!: ElementRef<HTMLMediaElement>;
   public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15];
 
+  private get urlSrcVideo() {
+    return `assets/GoEko_Ad_1_CC_${this.currentLangCode()}.mp4#t=40`;
+  }
   constructor(private _translateServices: TranslateService) {}
 
   ngAfterViewInit(): void {
@@ -24,22 +28,23 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return;
     }
     this.marketingVideo.nativeElement.muted = true;
+    this.marketingVideo.nativeElement.src = this.urlSrcVideo;
   }
 
   ngOnInit(): void {
-    this.currentLangCode = this._translateServices.defaultLang;
     this._changeLangCode();
   }
   private _changeLangCode() {
-    this._translateServices.onLangChange.subscribe(
-      (res) => (this.currentLangCode = res.lang)
-    );
+    this._translateServices.onLangChange.subscribe((res) => {
+      this.currentLangCode.set(res.lang);
+      this.marketingVideo.nativeElement.src = this.urlSrcVideo;
+    });
   }
   watchVideo() {
-    this.marketingVideo.nativeElement.currentTime = 0.00;
+    this.marketingVideo.nativeElement.currentTime = 0.0;
     this.marketingVideo.nativeElement.requestFullscreen();
-    this.marketingVideo.nativeElement.controls = 
-    this.marketingVideo.nativeElement.controls = true;
+    this.marketingVideo.nativeElement.controls =
+      this.marketingVideo.nativeElement.controls = true;
     this.marketingVideo.nativeElement.play();
   }
 }
