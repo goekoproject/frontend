@@ -8,7 +8,7 @@ tmp
 # dependencies
 node_modules
 package-lock.json
-/apps/goeko/src/tailwind-styles.scss
+tailwind-styles.scss
 # IDEs and editors
 /.idea
 .project
