@@ -5,7 +5,13 @@
       <label class="relative cursor-pointer text-label">
         <p>{{ 'INPUT_FILE.image' | translate}}</p>
         <a>{{ 'INPUT_FILE.image2' | translate}}</a>
-        <input class="sr-only" type="file" [id]="id" accept="{{acceptedFileTypes}}" (change)="uploadFile($event)" />
+        @if(multiple) {
+          <input class="sr-only" type="file" [id]="id" accept="{{acceptedFileTypes}}" (change)="uploadFile($event)" multiple />
+
+        } @else {
+          <input class="sr-only" type="file" [id]="id" accept="{{acceptedFileTypes}}" (change)="uploadFile($event)" />
+
+        }
       </label>
     </h3>
     <p class="mt-1 text-xs text-gray-500">
@@ -14,7 +20,19 @@
   </div>
 
   @defer (when fileUrl) {
-  <img [src]="fileUrl" [alt]="id" class="rounded-lg" />
 
+    @if(multiple) {
+      <div class="embla" emblaCarousel>
+        <div class="embla__container">
+          @for (file of fileUrl; track file) {
+            <img [src]="file" [alt]="id" class="rounded-lg embla__slide" />
+      }
+</div>
+      
+     </div>
+    } @else {
+      <img [src]="fileUrl" [alt]="id" class="rounded-lg" />
+
+    }
   }
 </div>

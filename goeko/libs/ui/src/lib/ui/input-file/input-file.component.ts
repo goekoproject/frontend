@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-
+import {
+  EmblaCarouselDirective
+} from 'embla-carousel-angular';
 @Component({
   selector: 'goeko-input-file',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule,EmblaCarouselDirective],
   templateUrl: './input-file.component.html',
   styleUrl: './input-file.component.scss',
 })
@@ -23,16 +25,24 @@ export class InputFileComponent {
   private _acceptedFileTypes: string = 'application/jpeg';
   
   @Input()
-  public fileUrl!: string | undefined;
+  public fileUrl!: string | undefined | Array<string>
 
   @Input()
   public id!: string;
+
+  @Input()
+  multiple: boolean = false;
+
+  private _files = (event:EventTarget |  DataTransfer | null):FileList | File  => {
+    const files = ((event as HTMLInputElement).files as FileList);
+    return this.multiple ? files: files[0]
+  }
 
   private _loadFile = (event:EventTarget | DataTransfer | null) => {
     if(!event) {
       return null;
     }
-    const file:File =((event as HTMLInputElement).files as FileList)[0];
+    const file = this._files(event);
     return  file;
   }
   constructor(private _renderer: Renderer2){}
@@ -64,17 +74,48 @@ export class InputFileComponent {
     this._renderer.addClass(this.dropzone.nativeElement, 'border-indigo-600');
 
   }
-  private _readFile(file: File) {
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.fileUrl = event.target.result;
-      this.fileChange.emit(file);
-    };
+  private _readFile(files: File | FileList) {
+    if(this.multiple) {
+      this._readFileMultifile(files as FileList);
+    } else {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.fileUrl = event.target.result;
+        this.fileChange.emit(files);
+      };
+      reader.onerror = (event: any) => {
+        console.log("File could not be read: " + event.target.error.code);
+      };
+      const file = files as File;
+        reader.readAsDataURL(file);
+    }
 
-    reader.onerror = (event: any) => {
-      console.log("File could not be read: " + event.target.error.code);
-    };
 
-    reader.readAsDataURL(file);
+
+  }
+
+  private _readFileMultifile(files: FileList) {
+    const fileList  = files as FileList; 
+    this.fileUrl  = []
+
+    Array.from(fileList).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        (this.fileUrl as Array<string>).push(event.target.result as any);
+        if (this.fileUrl?.length === files.length) { 
+          console.log(this.fileUrl);
+          this.fileChange.emit(files); // Emitir todos los archivos cuando todos estén listos
+        }
+      };
+
+      reader.onerror = (event: any) => {
+        console.log("File could not be read: " + event.target.error.code);
+      };
+
+    
+        reader.readAsDataURL(file);
+
+      })
+    
   }
 }
