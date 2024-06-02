@@ -177,7 +177,7 @@
           *ngIf="detailsEcosolution?.improvement"
         >
           <go-percentage-card
-            [label]="'FORM_LABEL.reductionPercentageCO2'"
+            [label]="detailsEcosolution.classification.mainCategory === 'waste' ?  'FORM_LABEL.reductionPercentageWaste' : 'FORM_LABEL.reductionPercentageCO2'"
             [isUpto]="true"
             [percentage]="
               detailsEcosolution.improvement.reductionPercentage.to || 0
