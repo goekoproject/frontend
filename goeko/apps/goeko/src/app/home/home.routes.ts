@@ -39,6 +39,10 @@ export const routes: Routes = [
           entryId: ENTRY_ID_ABOUT,
         },
       },
+      {
+        path: 'contact',
+        loadComponent: () => import('./data-contact/data-contact.component').then((m) => m.DataContactComponent),
+      }
     ],
   },
 ];
