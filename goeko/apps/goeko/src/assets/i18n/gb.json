@@ -193,7 +193,8 @@
   "INPUT_FILE": {
     "certified": "Select your certificate",
     "image": "Drag and drop or click to",
-    "image2": "select an image"
+    "image2": "Select an image",
+    "image3": "Add image"
 
   },
   "LANGS": {

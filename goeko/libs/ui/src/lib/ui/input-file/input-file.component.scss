@@ -9,12 +9,12 @@
         font: var(--font-label);
         border-radius: 2rem;
         border: 1px solid;
-        padding: 0.4rem;
+        padding: 0.6rem 1.2rem;
         line-height: 4;
 
     }
 }
-.embla {
+.embla,.thumb {
     overflow: hidden;
   }
   .embla__container {

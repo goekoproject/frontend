@@ -191,7 +191,9 @@
   "INPUT_FILE": {
     "certified": "Seleccione su certificado",
     "image": "Arrastra y suelta o haz click para",
-    "image2": "para selecciona una imagen"
+    "image2": "Selecciona una imagen",
+    "image3": "Añadir imagen"
+
   },
   "LANGS": {
     "en": "Ingles",
