@@ -9,6 +9,13 @@ const routes: Routes = [
         (c) => c.AdminCategoriesComponent
       ),
   },
+  {
+    path: 'user-data',
+    loadComponent: () =>
+      import('./data-admin/data-admin.component').then(
+        (c) => c.DataAdminComponent
+      ),
+  },
 ];
 
 @NgModule({
