@@ -61,7 +61,7 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _cleantechId!: string;
   private fileCertificate: any;
-  private _fileEcosolution!: File;
+  private _fileEcosolution!: File[];
   public urlImgEcosolution!: string;
   public get isReadOnly(): boolean {
     return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true';
@@ -239,7 +239,7 @@ export class EcosolutionsFormComponent implements OnInit {
   private _uploadImg(ecosolution: any) {
     if (this._fileEcosolution && ecosolution) {
       this._ecosolutionsService
-        .uploadImage(ecosolution?.id, this._fileEcosolution)
+        .uploadImage(ecosolution?.id, this._fileEcosolution[0])
         .subscribe();
     }
   }
@@ -249,8 +249,7 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   uploadImgEcosolutions(file: any) {
-    this._fileEcosolution = file.target.files[0];
-    this._buildImgEcosolution(file.target.files[0]);
+    this._fileEcosolution = file;
   }
 
   private _buildImgEcosolution(file: File) {

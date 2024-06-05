@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ECOSOLUTIONS_CONFIGURATION } from './ecosolutions.module';
-import { EcosolutionsOptions } from './ecosolutions-options';
-import { NewEcosolutions } from './new-ecosolution.model';
 import { Observable } from 'rxjs';
+import { EcosolutionsOptions } from './ecosolutions-options';
+import { ECOSOLUTIONS_CONFIGURATION } from './ecosolutions.module';
+import { NewEcosolutions } from './new-ecosolution.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class EcosolutionsService {
     return this._http.put(`/v1/ecosolutions/${id}`, body);
   }
 
-  uploadImage(idEcosolution: string, file: any) {
+  uploadImage(idEcosolution: string, file: File) {
     const formData = new FormData();
     formData.append('file', file);
     return this._http.post(`/v1/ecosolutions/${idEcosolution}/picture`,formData);

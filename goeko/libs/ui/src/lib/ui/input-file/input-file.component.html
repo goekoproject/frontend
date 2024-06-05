@@ -29,21 +29,22 @@
   <div class="embla" emblaCarousel>
     <div class="embla__container">
       @for (file of fileUrl; track file; let i = $index) {
-      <img [src]="file" [alt]="id" class="rounded-lg embla__slide" />
+        <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{id: i, url: file }" ></ng-container>
       }
     </div>
-
-
   </div>
 
   <div class="thumb py-4" thumb>
-    <div class="embla__container basis-24 shrink-0 grow-0  flex gap-3 mt-4 rounded">
+    <div class="embla__container basis-24 shrink-0 grow-0 flex gap-3 mt-4 rounded-2xl">
       @for (file of fileUrl; track file; let i = $index) {
-      <button (click)="selectedImg(i)" class="embla__slide max-w-28 max-h-20" [ngClass]="{
-        'shadow-inner' : selectedSlideMain() === i,
-        'shadow-current' : selectedSlideMain() === i
-      }">
-        <img [src]="file" [alt]="id" class="rounded-lg h-full object-cover" />
+      <button
+        (click)="selectedImg(i)"
+        class="embla__slide max-w-28 max-h-20 rounded-2xl transition-all"
+        [ngClass]="{
+        'border-[0.1rem] shadow-md shadow-primary-900' : selectedSlideMain() === i,
+      }"
+      >
+        <img [src]="file" [alt]="id" class="rounded-2xl h-full object-cover" />
       </button>
       }
     </div>
@@ -54,8 +55,20 @@
     <i class="ti ti-circle-arrow-left cursor-pointer" (click)="prev()"></i>
     <i class="ti ti-circle-arrow-right cursor-pointer" (click)="next()"></i>
   </div>
-  } } @else {
-  <img [src]="fileUrl" [alt]="id" class="rounded-lg" />
+  } 
+
+} @else {
+    <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{id: 0, url: fileUrl[0] }" ></ng-container>
+
 
   }
 </div>
+
+<ng-template #preview let-url="url" let-id="id">
+  <div class="relative min-w-full">
+    <i class="ti ti-circle-x absolute right-0 text-3xl m-4 cursor-pointer text-white" (click)="removeSlide(id)"></i>
+    <img [src]="url" [alt]="id" class="rounded-2xl" />
+  </div>
+
+
+</ng-template>

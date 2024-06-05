@@ -8,7 +8,7 @@ import {
   Output,
   Renderer2,
   ViewChild,
-  signal
+  signal,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -29,12 +29,10 @@ import { ThumbCarrouselDirective } from './thumb-carrousel.directive';
   styleUrl: './input-file.component.scss',
 })
 export class InputFileComponent implements AfterViewInit {
-  
   @ViewChild(EmblaCarouselDirective) emblaRef!: EmblaCarouselDirective;
   @ViewChild(ThumbCarrouselDirective) thumbRef!: ThumbCarrouselDirective;
   private emblaApi?: EmblaCarouselType;
   private thumbApi?: EmblaCarouselType;
-
 
   @ViewChild('dropzone') dropzone!: ElementRef;
   @Output() fileChange = new EventEmitter();
@@ -58,14 +56,14 @@ export class InputFileComponent implements AfterViewInit {
 
   selectedSlideMain = signal<number>(this._selectedSlideMain);
 
-  private get _selectedSlideMain(): number{
-    return this.emblaApi ?  this.emblaApi?.selectedScrollSnap() : 0
+  private get _selectedSlideMain(): number {
+    return this.emblaApi ? this.emblaApi?.selectedScrollSnap() : 0;
   }
   private _files = (
     event: EventTarget | DataTransfer | null
-  ): FileList | File => {
-    const files = (event as HTMLInputElement).files as FileList;
-    return this.multiple ? files : files[0];
+  ):  File[] => {
+    const files = Array.from((event as HTMLInputElement).files as FileList) as File[];
+    return this.multiple ? files : files;
   };
 
   private _loadFile = (event: EventTarget | DataTransfer | null) => {
@@ -75,12 +73,13 @@ export class InputFileComponent implements AfterViewInit {
     const file = this._files(event);
     return file;
   };
+  private _fileSetMultiple!:Array<File>;
 
   private get lastSlide() {
-    if(!this.emblaApi) {
-      return 0
+    if (!this.emblaApi) {
+      return 0;
     }
-    return this.emblaApi?.slideNodes().length - 1
+    return this.emblaApi?.slideNodes().length - 1;
   }
   constructor(private _renderer: Renderer2) {}
 
@@ -95,9 +94,8 @@ export class InputFileComponent implements AfterViewInit {
     }
   }
   uploadFile(event: Event) {
-    const file = this._loadFile(event.target) as File;
+    const file = this._loadFile(event.target) as File[];
     this._readFile(file);
-   
   }
 
   onDragOver(event: Event) {
@@ -112,7 +110,7 @@ export class InputFileComponent implements AfterViewInit {
   }
   onDrop(event: DragEvent) {
     event.preventDefault();
-    const file = this._loadFile(event.dataTransfer) as File;
+    const file = this._loadFile(event.dataTransfer) as File[];
     this._readFile(file);
     this._displayPreview();
   }
@@ -122,7 +120,6 @@ export class InputFileComponent implements AfterViewInit {
     const previousScrollSnap = this.emblaApi?.selectedScrollSnap() as number;
     this.thumbApi?.scrollTo(previousScrollSnap);
     this.selectedSlideMain.set(this._selectedSlideMain);
-
   }
 
   next() {
@@ -132,20 +129,26 @@ export class InputFileComponent implements AfterViewInit {
     this.thumbApi?.scrollPrev();
   }
 
+  removeSlide(id: number) {
+    (this.fileUrl as Array<string>).splice(id, 1);
+    this._fileSetMultiple.splice(id, 1);
+    this._propagateSelected(this._fileSetMultiple);
+
+  }
+
   private _displayPreview() {
     this._renderer.addClass(this.dropzone.nativeElement, 'border-indigo-600');
   }
   private _setSelectedLastSlided() {
-    if(this.multiple) {
-      setTimeout(() => { 
+    if (this.multiple) {
+      setTimeout(() => {
         this.emblaApi?.scrollTo(this.lastSlide);
-      })
-
+      });
     }
   }
-  private _readFile(files: File | FileList) {
+  private _readFile(files: File[]) {
     if (this.multiple) {
-      this._readFileMultifile(files as FileList);
+      this._readFileMultifile(files);
     } else {
       const reader = new FileReader();
       reader.onload = (event: any) => {
@@ -155,26 +158,22 @@ export class InputFileComponent implements AfterViewInit {
       reader.onerror = (event: any) => {
         console.log('File could not be read: ' + event.target.error.code);
       };
-      const file = files as File;
+      const file = files[0];
       reader.readAsDataURL(file);
     }
   }
 
-  private _readFileMultifile(files: FileList) {
-    const fileList = files as FileList;
-
-    Array.from(fileList).forEach((file) => {
+  private _readFileMultifile(files: File[]) {
+    this._initFileSetMultiple(files);
+    Array.from(files).forEach((file) => {
       const reader = new FileReader();
       reader.onload = (event: any) => {
-        (this.fileUrl as Array<string>).push(event.target.result as any);
-        if (this.fileUrl?.length === files.length) {
-          this.fileChange.emit(files); // Emitir todos los archivos cuando todos estén listos
+        const { result } = event.target;
+        this._addNewFile(result);
+        this._propagateSelected(files);
+        if (files.length === 1) {
+          this._setSelectedLastSlided();
         }
-          if(files.length === 1) {
-            this._setSelectedLastSlided();
-           }
-        
-  
       };
 
       reader.onerror = (event: any) => {
@@ -184,5 +183,17 @@ export class InputFileComponent implements AfterViewInit {
     });
   }
 
+  private _initFileSetMultiple(files: File[]) {
+    this._fileSetMultiple = this._fileSetMultiple ? [...files,...this._fileSetMultiple] : [...files] ;
 
+  }
+  private _addNewFile(urlFile: string) {
+    (this.fileUrl as Array<string>).push(urlFile);
+  }
+
+  private _propagateSelected(files: File[]) {
+    if (this.fileUrl?.length === this._fileSetMultiple.length) {
+      this.fileChange.emit(this._fileSetMultiple); // Emitir todos los archivos cuando todos estén listos
+    } 
+  }
 }
