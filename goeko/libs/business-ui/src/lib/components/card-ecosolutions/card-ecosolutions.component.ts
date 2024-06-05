@@ -28,7 +28,14 @@ export class CardEcosolutionsComponent implements OnInit {
     this._products = value;
   }
 
-  @Input() sustainableDevelopmentGoals: number[] = [17, 9, 6];
+  @Input()
+  public get sustainableDevelopmentGoals(): number[] {
+    return this._sustainableDevelopmentGoals.sort((a, b) => b - a);
+  }
+  public set sustainableDevelopmentGoals(value: number[]) {
+    this._sustainableDevelopmentGoals = value;
+  }
+  private _sustainableDevelopmentGoals: number[] = [];
 
   currentLangCode!: string;
 
