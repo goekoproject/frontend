@@ -13,8 +13,7 @@ export class UIDialogRef<T> {
 	private _data: any;
 
 	constructor(private overlayRef: OverlayRef) {
-		this._afterClosed.next(false);
-		this._afterClosed.complete();
+		
 	}
 
 	close<T>(data?: any): void {
