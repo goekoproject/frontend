@@ -25,6 +25,7 @@ import {
 } from '@goeko/store';
 import {
   ButtonModule,
+  DialogMessageModule,
   NotificationService,
   SideDialogModule,
   UiBreadcrumbsModule,
@@ -46,6 +47,7 @@ export const httpLoaderFactory = (http: HttpClient) => {
     ButtonModule,
     ContentFulModule.forRoot(ContentConfig),
     PopupModule,
+    DialogMessageModule,
     SelectI18nComponent,
     UiBreadcrumbsModule,
     SideDialogModule,

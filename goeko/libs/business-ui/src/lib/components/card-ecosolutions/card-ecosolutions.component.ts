@@ -30,7 +30,7 @@ export class CardEcosolutionsComponent implements OnInit {
 
   @Input()
   public get sustainableDevelopmentGoals(): number[] {
-    return this._sustainableDevelopmentGoals.sort((a, b) => b - a);
+    return this._sustainableDevelopmentGoals?.sort((a, b) => b - a);
   }
   public set sustainableDevelopmentGoals(value: number[]) {
     this._sustainableDevelopmentGoals = value;

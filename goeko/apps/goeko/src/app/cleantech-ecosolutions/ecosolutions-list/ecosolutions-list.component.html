@@ -7,7 +7,7 @@
     <ng-container *ngFor="let item of categorySection; let first = first">
       <go-tab
         [title]="item.keyLang | translate"
-        [selected]="first"
+        [selected]="categorySelected().code ===item.code"
         (selectedTab)="selectedTab(item)"
       >
         <div #content class="ecosolutions-card-list">
