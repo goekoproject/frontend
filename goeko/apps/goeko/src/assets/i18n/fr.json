@@ -174,7 +174,9 @@
     "province": "Région",
     "newProvince": "Ajouter une nouvelle région",
     "selectProvinces": "Sélection de régions",
-    "allProvinces": "Toutes les régions"
+    "allProvinces": "Toutes les régions",
+    "showProvinces": "Voir les régions"
+
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",
@@ -421,6 +423,8 @@
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à {{email}}"
   },
+  "notAvailable":"Pas disponible",
+
   "mandatory" :"Obligatoire",
   "exit": "Sortir",
   "dragAndDrop": "Glisser déposer",

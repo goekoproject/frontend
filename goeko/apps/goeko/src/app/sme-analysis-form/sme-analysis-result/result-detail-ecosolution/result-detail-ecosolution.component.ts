@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogProvincesComponent } from '@goeko/business-ui';
 import {
   DataSelect,
+  ElementLocation,
   Recommendation,
   SmeAnalysisStoreService,
+  SmeCountryResponse
 } from '@goeko/store';
-import { AutoUnsubscribe } from '@goeko/ui';
+import { AutoUnsubscribe, DialogService } from '@goeko/ui';
 import { Subject, takeUntil } from 'rxjs';
 import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants';
 
@@ -24,7 +27,8 @@ export class ResultDetailEcosolutionComponent implements OnInit {
   constructor(
     private _smeAnalysisStore: SmeAnalysisStoreService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -42,5 +46,11 @@ export class ResultDetailEcosolutionComponent implements OnInit {
       ['results', this.detailsEcosolution.id],
       { relativeTo: this._route.parent?.parent}
     );
+  }
+
+  showProvinces(country: SmeCountryResponse,provinces: Array<ElementLocation>) {
+    this._dialogService.open(DialogProvincesComponent, {
+      data: {country,provinces}
+    }).afterClosed().subscribe(() => console.log(country));
   }
 }

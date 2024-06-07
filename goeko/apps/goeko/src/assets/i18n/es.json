@@ -175,7 +175,8 @@
     "province": "Provincia",
     "newProvince": "Nueva comunidad autónoma",
     "selectProvinces": "Selección comunidad autónoma",
-    "allProvinces": "Todas las comunidades autonomas"
+    "allProvinces": "Todas las comunidades autonomas",
+    "showProvinces": "Ver provincias"
   },
   "VERIFY_EMAIL": {
     "title":"Revisa tu bandeja de entrada.",
@@ -423,6 +424,7 @@
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
     "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
+  "notAvailable":"No disponible",
   "mandatory" :"Obligatorio",
   "exit": "Salir",
   "logout":"Cerrar sesión",

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardSmeComponent } from './dashboard/dashboard-sme.component';
 import { DashboardCleantechComponent } from './dashboard/dashboard-cleantech/dashboard-cleantech.component';
+import { DashboardSmeComponent } from './dashboard/dashboard-sme.component';
 
 const routes: Routes = [
 	{
@@ -12,6 +12,7 @@ const routes: Routes = [
 			hidden: true,
 			onBack: false,
 		},
+		pathMatch: 'full'
 	},
 	{
 		path: 'cleantech',

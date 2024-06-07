@@ -176,7 +176,9 @@
     "province": "Province",
     "newProvince": "Add a new province",
     "selectProvinces": "Selection of provinces",
-    "allProvinces": "All regions"
+    "allProvinces": "All regions",
+    "showProvinces": "Show regions"
+
 
   },
   "VERIFY_EMAIL": {
@@ -424,6 +426,7 @@
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at {{email}}"
   },
+  "notAvailable":"Not available",
   "mandatory" :"Mandatory",
   "exit": "Exit",
   "logout":"Log out",

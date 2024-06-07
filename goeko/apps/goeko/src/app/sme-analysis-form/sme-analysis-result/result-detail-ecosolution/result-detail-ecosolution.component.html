@@ -1,23 +1,25 @@
 
-@if (detailsEcosolution) {
+@if (detailsEcosolution && detailsEcosolution.classification && detailsEcosolution.companyDetail) {
   <div class="detail-heading">
     <div class="detail-heading-main-info">
       <div>
-        @if(detailsEcosolution.classification) {
           <go-badge [className]="detailsEcosolution.classification.mainCategory">
             {{
               'CATEGORIES.' + detailsEcosolution.classification.mainCategory
                 | translate
             }}
           </go-badge>
-        }
+        
 
-        <h2 class="detail-heading--solution-name">
-          {{ detailsEcosolution.solutionName }}
-        </h2>
-        <span class="detail-heading--name-company">{{
-          detailsEcosolution.companyDetail.name
-        }}</span>
+        
+          <h2 class="detail-heading--solution-name">
+            {{ detailsEcosolution.solutionName }}
+          </h2>
+          <span class="detail-heading--name-company">{{
+            detailsEcosolution.companyDetail.name
+          }}</span>
+   
+  
       </div>
 
       <p class="detail-heading--description">
@@ -39,7 +41,7 @@
   </div>
 
   <div class="ecosolution-content-details">
-    <div class="detail-feature">
+    <div class="detail-feature break-all">
       <section class="details-section">
         <h3 class="details-section-title">
           {{ 'FORM_LABEL.basicInformation' | translate }}
@@ -49,9 +51,29 @@
             <span class="details-article--label">
               {{ 'FORM_LABEL.countriesAvailable' | translate }}
             </span>
-            <p class="details-article--data">
-              {{ detailsEcosolution['countries'] | country }}
-            </p>
+            <div class="details-article--data mt-1">
+              @if(detailsEcosolution['locations']) {
+                @for (location of detailsEcosolution['locations']; track location?.country?.code) {
+
+                  <div class="flex gap-2 rounded-lg border-2 border-primary-300 max-w-max p-2 items-center">
+                    <span class="fi fi-{{ location.country.code | lowercase }}"></span>
+                    <p> {{ location.country.label }}</p>
+                    @if(location.country.regions) {
+                      <div class="flex gap-1 text-sm items-center text-primary-400 cursor-pointer" (click)="showProvinces(location.country, location.country.regions)">
+                        <i class="ti ti-eye text-2xl"></i>
+                        <p class="link-show-provinces text-sm hover:text-primary-800"> {{'FORM_LABEL.showProvinces' | translate}}</p>
+                      </div>
+    
+                    }
+                  </div>
+                }
+              } @else {
+                 <p> {{ 'notAvailable' | translate}}</p>
+              }
+      
+              
+
+            </div>
           </div>
   
           <div>

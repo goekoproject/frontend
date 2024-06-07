@@ -24,7 +24,7 @@ import {
   NotificationModule,
   PercentageModule,
   UiSuperSelectModule,
-  YesNoPipe,
+  YesNoPipe
 } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';

@@ -23,8 +23,8 @@ export class DialogMessageComponent implements AfterViewInit {
   }
 
   close(data?: any) {
-    this.dialogMsg?.nativeElement.close();
     this._uiDialogRef.close(data);
+    this.dialogMsg?.nativeElement.close();
   }
   
 }
