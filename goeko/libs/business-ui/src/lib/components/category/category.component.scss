@@ -3,14 +3,13 @@ $size-icon: 62%;
 .wrapper-category {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
   align-items: center;
-  width: max-content;
   min-width: 8rem;
   [title] {
     width: max-content;
-    color: #24253b;
+    font: var(--font-body);
   }
+  @apply h-52 p-4 rounded-3xl
 }
 .category {
   max-width: 120px;

@@ -36,6 +36,7 @@ import {
   templateUrl: './sme-form-analysis.component.html',
   styleUrls: ['./sme-form-analysis.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class SmeFormAnalysisComponent
   implements OnInit, AfterViewInit, OnDestroy, CanAnalysisDeactivate
@@ -117,6 +118,8 @@ export class SmeFormAnalysisComponent
       emitEvent: false,
       onlySelf: false,
     });
+    console.log(this.form.get('co2Emission')?.getRawValue()
+  );
   }
 
   ngAfterViewInit(): void {

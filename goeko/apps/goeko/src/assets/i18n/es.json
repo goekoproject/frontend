@@ -424,6 +424,8 @@
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
     "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
+  "questionsAnswered": "Preguntas contestadas",
+  "selectedProducts": "Soluciones seleccionados",
   "notAvailable":"No disponible",
   "mandatory" :"Obligatorio",
   "exit": "Salir",

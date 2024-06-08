@@ -177,20 +177,30 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
   }
 
   goToSearchEcosolutions() {
-     this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
+    if(!this.savedAnalysis) {
+      this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
         if(saveAnalysis) {
           this.saveAnalysisOrProject(this._resultPath);
           this.savedAnalysis = true;
 
         } else {
-          this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
-          this.savedAnalysis = true;
-
+          this._goToSearchEcosolutions()
         }
       }); 
+    } else{
+      this._goToSearchEcosolutions()
+
+    }
+
+  }
+
+  private _goToSearchEcosolutions() {
+    this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
+    this.savedAnalysis = true;
   }
 
   saveAnalysisOrProject(route?: string) {
+    this.savedAnalysis = true;
     if (this.isProject) {
       this._saveProject(route);
     } else {

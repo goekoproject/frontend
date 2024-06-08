@@ -423,8 +423,9 @@
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à {{email}}"
   },
+  "questionsAnswered": "Questions répondues",
+  "selectedProducts": "Solutions sélectionnés",
   "notAvailable":"Pas disponible",
-
   "mandatory" :"Obligatoire",
   "exit": "Sortir",
   "dragAndDrop": "Glisser déposer",

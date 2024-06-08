@@ -426,6 +426,8 @@
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at {{email}}"
   },
+  "questionsAnswered": "Questions answered",
+  "selectedProducts": "Selected solutions",
   "notAvailable":"Not available",
   "mandatory" :"Mandatory",
   "exit": "Exit",
