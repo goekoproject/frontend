@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './data-admin.component.html',
   styleUrl: './data-admin.component.scss',
 })
-export class DataAdminComponent {}
+export class DataAdminComponent {
+   
+}

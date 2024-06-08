@@ -1,1 +1,60 @@
-<p>data-admin works!</p>
+<!--<p>data-admin works!</p>-->
+
+<div class="sm:px-6 w-full">
+    <div class="breadcrumbs-title">Admin Panel</div>   
+                <div class="px-4 md:px-10 py-4 md:py-7">
+                    <div class="flex items-center justify-between">
+                        <h2 tabindex="0" class="text-gray-800 text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal">Users</h2>
+                    </div>
+                </div>
+                <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+                    <div class="sm:flex items-center justify-between">
+                        <div class="flex items-center">
+                            <a class="rounded-full focus:outline-none focus:ring-2  focus:bg-primary-300 focus:ring-primary-400" href=" javascript:void(0)">
+                                <div class="py-2 px-8 bg-primary-300 hover:bg-primary-400 text-white rounded-full">
+                                    <p>All</p>
+                                </div>
+                            </a>
+                            <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-primary-400 ml-4 sm:ml-8" href="javascript:void(0)">
+                                <div class="py-2 px-8 text-primary-500 hover:text-white hover:bg-primary-400 rounded-full ">
+                                    <p>SME</p>
+                                </div>
+                            </a>
+                            <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-primary-400 ml-4 sm:ml-8" href="javascript:void(0)">
+                                <div class="py-2 px-8 text-primary-500 hover:text-white hover:bg-primary-400 rounded-full ">
+                                    <p>Cleantech</p>
+                                </div>
+                            </a>
+                        </div>
+                        <button onclick="popuphandler(true)" class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-800 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-gray-800 focus:outline-none rounded">
+                            <p class="text-sm font-medium leading-none text-white">Add New User</p>
+                        </button>
+                    </div>
+                    <div class="mt-7 overflow-x-auto rounded-lg">
+                        <table class="w-full">
+                                <tbody bg-white divide-y divide-gray-200>
+                                        
+                                        <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <input type="checkbox" class="h-4 w-4 rounded"/>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ExampleCompany</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">examplecompany&#64;gmail.com</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">20.12.2013</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Cleantech</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="text-sm uppercase font-medium text-green-500 bg-green-300 rounded-full bg-opacity-400">Subscribed</span>
+
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex space-x-4">
+                                                  <i class="ti ti-trash"></i>
+                                                  <i class="ti ti-pencil"></i>
+                                                </div>
+                                              </td>    
+                                        </tr>
+                                </tbody>    
+                        </table>
+                    </div>
+                </div>
+</div>
