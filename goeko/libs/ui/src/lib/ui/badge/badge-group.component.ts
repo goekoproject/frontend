@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
   AfterViewInit,
   Component,
@@ -13,9 +14,8 @@ import {
   isDevMode,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BadgeComponent } from './badge.component';
 import { Observable, defer, merge, startWith, switchMap, take } from 'rxjs';
-import { SelectionModel } from '@angular/cdk/collections';
+import { BadgeComponent } from './badge.component';
 
 const CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
@@ -171,6 +171,10 @@ export class BadgeGroupComponent
 
   clearAll() {
     this.badge.forEach((badge) => badge.clear());
+  }
+  selectAll() {
+    this.badge.forEach((badge) => badge.onSelect());
+
   }
 }
 function deepEqual(object1: any, object2: any): boolean {

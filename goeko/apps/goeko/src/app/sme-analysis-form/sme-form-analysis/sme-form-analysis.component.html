@@ -1,10 +1,17 @@
 <div class="analysis-wrapper" [formGroup]="form">
-  <section class="section-form gap-8">
-    @defer (when dataCategorySelected && form &&
-    form.get(dataCategorySelected.code)) {
-
-    <section class="section-step">
-      <!-- CATEGORY -->
+  
+  <section class="section-form gap-16">
+    <div class="flex gap-1 text-2xl text-primary-900 items-center">
+      <i class="ti ti-info-circle-filled"></i>
+      <h3>
+        {{ 'FORM_LABEL.titleFormAnalysis' | translate }}
+      </h3>
+    </div>
+   
+    @defer (when dataCategorySelected && form && form.get(dataCategorySelected.code)) {
+    
+    <!-- CATEGORY -->
+    <section class="section-step items-start">
       @for (category of categories(); track category.id) {
       <goeko-category
         id="{{ category.id }}"
@@ -14,27 +21,31 @@
       >
         <p title class="text-primary-950">{{ category.keyLang | translate }}</p>
         <div dataExtra>
-          <p>
-            {{ form.get(category.code)?.getRawValue() | countSubcategory}} {{ 'questionsAnswered' | translate }}
-          </p>
-          <p>
-            {{ form.get(category.code)?.getRawValue() | countProduct}}  {{ 'selectedProducts' | translate }}
-          </p>
+          @if((form.get(category.code)?.getRawValue() | countSubcategory) !== 0) {
+            <p>
+              {{ form.get(category.code)?.getRawValue() | countSubcategory}} {{ 'questionsAnswered' | translate }}
+            </p>
+            <p>
+              {{ form.get(category.code)?.getRawValue() | countProduct}}  {{ 'selectedProducts' | translate }}
+            </p>
+          } 
+         
         </div>
       </goeko-category>
       }
     </section>
 
+    <!-- SUBCATEGORY -->
     @for (category of categories(); track category.id; let index = $index) {
     @if(category.code === categorySelected().code) {
     <section
       class="content-form go-scroll"
       formGroupName="{{ dataCategorySelected.code }}"
     >
-      <div class="title-category" title>
+     <!--  <div class="title-category" title>
         <i class="ti ti-info-circle-filled"></i>
         <h3>{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}</h3>
-      </div>
+      </div> -->
       @for (subcategory of dataCategorySelected.subcategories; track
       subcategory.code ; let index = $index;){
       @if(form.get(dataCategorySelected.code)?.get(subcategory.code)) {

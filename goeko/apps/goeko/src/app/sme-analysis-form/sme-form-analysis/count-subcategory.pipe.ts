@@ -6,7 +6,7 @@ import { ClassificationCategory } from '@goeko/store';
 
 export class CountSubcategoryPipe implements PipeTransform {
     transform(value: ClassificationCategory): any {
-        return Object.values(value).filter(el => Array.isArray(el)).length 
+        return Object.values(value).filter(el => Array.isArray(el) && el.length >  0).length 
     }
 }
 

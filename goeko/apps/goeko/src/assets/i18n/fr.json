@@ -121,6 +121,7 @@
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
+    "titleFormAnalysis":"Choisissez une Catégorie et Trouvez Vos Éco-Solutions",
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",
     "advantagesSupportText": "Avantages par rapport à une solution standard",
@@ -423,6 +424,7 @@
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à {{email}}"
   },
+  "selectAll": "Sélectionner tout",
   "questionsAnswered": "Questions répondues",
   "selectedProducts": "Solutions sélectionnés",
   "notAvailable":"Pas disponible",

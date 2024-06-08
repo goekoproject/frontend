@@ -123,6 +123,7 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
+    "titleFormAnalysis":"Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
     "advantagesSupportText": "Advantages compared to a standard solution",
@@ -426,6 +427,7 @@
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at {{email}}"
   },
+  "selectAll": "Select All",
   "questionsAnswered": "Questions answered",
   "selectedProducts": "Selected solutions",
   "notAvailable":"Not available",

@@ -7,9 +7,8 @@ $size-icon: 62%;
   min-width: 8rem;
   [title] {
     width: max-content;
-    font: var(--font-body);
   }
-  @apply h-52 p-4 rounded-3xl
+  @apply p-4 rounded-3xl cursor-pointer border transition-all min-w-48
 }
 .category {
   max-width: 120px;

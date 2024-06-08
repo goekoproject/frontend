@@ -251,4 +251,7 @@ export class SelectSubcategoryProductComponent
     this._onChange(value);
     this._cdf.markForCheck();
   }
+  selectAll() {
+    this.badgeGroup.selectAll();
+  }
 }

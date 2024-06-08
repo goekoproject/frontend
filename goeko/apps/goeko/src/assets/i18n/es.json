@@ -123,6 +123,7 @@
   "dragAndDrop": "Arrastar y soltar",
   "editSelection": "Modificar selección",
   "FORM_LABEL": {
+    "titleFormAnalysis":"Elija una Categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
@@ -424,6 +425,7 @@
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
     "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
+  "selectAll": "Seleccionar todo",
   "questionsAnswered": "Preguntas contestadas",
   "selectedProducts": "Soluciones seleccionados",
   "notAvailable":"No disponible",

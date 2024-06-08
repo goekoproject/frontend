@@ -8,6 +8,7 @@ import {
   CodeCountryPipe,
   GoTableModule,
   LeadFormComponent,
+  LineBreakPipe,
   MessageService,
   ProductsManagementComponent,
   SdgIconsComponent,
@@ -83,6 +84,7 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     CodeCountryPipe,
     LeadFormComponent,
     GoDateFormatPipe,
+    LineBreakPipe,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

@@ -19,7 +19,10 @@ export class DialogMessageComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dialogMsg?.nativeElement.showModal();
+    if(this.data()) {
+      this.dialogMsg?.nativeElement.showModal();
+
+    }
   }
 
   close(data?: any) {
