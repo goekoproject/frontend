@@ -95,4 +95,6 @@ export class SmeService {
     return this._http.delete<Requests>(`/v1/ecosolution/search/requests/smes/${id}`);
 
   }
+
+  //TODO: getAll 
 }
