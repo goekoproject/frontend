@@ -37,10 +37,10 @@ export class SessionStorageService {
 	 */
 	setItem<T>(name: string, obj: T, code?: boolean): void {
 		if (code) {
-			sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
+			sessionStorage.setItem(name, window.btoa(encodeURIComponent(JSON.stringify(obj))));
 			return;
 		}
-		sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)));
+		sessionStorage.setItem(name, window.btoa(encodeURIComponent(JSON.stringify(obj))));
 	}
 
 	/**
