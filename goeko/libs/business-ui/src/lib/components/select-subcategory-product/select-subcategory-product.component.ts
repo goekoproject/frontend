@@ -245,7 +245,6 @@ export class SelectSubcategoryProductComponent
   }
 
   toogle(value: any) {
-    this.assignValue(value.code);
     this.open = !this.open;
     if (this.open) {
       this._onFocus();
