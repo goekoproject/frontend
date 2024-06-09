@@ -132,6 +132,7 @@
     "city": "Ville",
     "companyName": "Nom de l'entreprise",
     "countriesAvailable": "Pays disponibles",
+    "countriesProvincesAvailable": "Pays et régions de distribution",
     "country": "Pays",
     "currency": "Devise",
     "deliverCountries": "Pays où votre éco-solution est livrable",

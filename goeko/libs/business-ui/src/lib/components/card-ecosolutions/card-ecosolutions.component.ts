@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { OrderByPipe } from '@goeko/core';
 import { ButtonModule } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'goeko-card-ecosolutions',
   standalone: true,
-  imports: [CommonModule, ButtonModule],
+  imports: [CommonModule, ButtonModule,OrderByPipe],
   templateUrl: './card-ecosolutions.component.html',
   styleUrls: ['./card-ecosolutions.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -30,7 +31,7 @@ export class CardEcosolutionsComponent implements OnInit {
 
   @Input()
   public get sustainableDevelopmentGoals(): number[] {
-    return this._sustainableDevelopmentGoals?.sort((a, b) => b - a);
+    return this._sustainableDevelopmentGoals
   }
   public set sustainableDevelopmentGoals(value: number[]) {
     this._sustainableDevelopmentGoals = value;

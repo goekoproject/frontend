@@ -134,6 +134,7 @@
     "city": "City",
     "companyName": "Company name",
     "countriesAvailable": "Countries Available",
+    "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
     "currency": "Currency",
     "deliverCountries": "Countries where your eco-solution is approved",
