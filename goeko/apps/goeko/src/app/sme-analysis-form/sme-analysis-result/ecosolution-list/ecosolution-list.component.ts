@@ -1,32 +1,26 @@
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import {
-  SmeService,
-  SmeAnalysisStoreService,
-  UserService,
   ODS_CODE,
+  SmeAnalysisStoreService,
+  SmeService,
+  SmeUser,
+  UserService,
 } from '@goeko/store';
+import { AutoUnsubscribe } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject, takeUntil, last } from 'rxjs';
-import {
-  formToClassificationsMapper,
-  FormValueToSmeAnalysisRequest,
-} from '../../sme-form-analysis/sme-analysis.request';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 import { SmeAnalysisService } from '../../sme-analysis.service';
+import { formToClassificationsMapper } from '../../sme-form-analysis/sme-analysis.request';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'goeko-ecosolution-list',
   templateUrl: './ecosolution-list.component.html',
   styleUrls: ['./ecosolution-list.component.scss'],
 })
-export class EcosolutionListComponent implements OnInit, OnDestroy {
+export class EcosolutionListComponent implements OnInit {
   @ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>;
 
   odsIcons!: Array<{ code: number; active: boolean }>;
@@ -40,7 +34,8 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
   private _smeId!: string;
   formValue!: any;
   smeDataProfile = this._userService.userProfile();
-  onDestroy$: Subject<void> = new Subject();
+  private _codesActive = signal<Array<number>>([])
+  private destroy$ = new Subject<void>();
 
   get allChecked() {
     const allChecked = !this.formField.some((field) => field.checked);
@@ -53,7 +48,6 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
 
   set currentLangCode(currentLang: string) {
     this._currentLangCode = currentLang;
-    this.getResults();
     this.closeDetails();
   }
 
@@ -82,21 +76,11 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
 
   getResults() {
     this._smeService
-      .createRecommendations({
+      .ecosolutionSearch({
         classifications: formToClassificationsMapper(this.currentAnalytics()),
+        locations : (this._userService.userProfile() as SmeUser).locations
       })
-      .pipe(takeUntil(this.onDestroy$), last())
-      .subscribe((recommendations) => {
-        this._handleRecommendations(recommendations);
-      });
-  }
-  private saveAnalysis() {
-    const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(
-      this._smeId,
-      this.formValue
-    );
-    this._smeService
-      .saveRecommendations(smeAnalysisRequest)
+      .pipe(takeUntil(this.destroy$), distinctUntilChanged())
       .subscribe((recommendations) => {
         this._handleRecommendations(recommendations);
       });
@@ -110,16 +94,15 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     }));
   }
   private _changeLangCode() {
-    this._translateServices.onLangChange.subscribe(
-      (res) => (this.currentLangCode = res.lang)
-    );
+    this._translateServices.onLangChange.subscribe((res) => {
+      (this.currentLangCode = res.lang), this.getResults();
+    });
   }
 
   private _handleRecommendations(recommendations: any) {
     if (recommendations && Array.isArray(recommendations)) {
       const smeRecomendation = this._filterSmeRecomendations(recommendations);
-      this.smeRecomendation =
-        this._buildCountriesAvailability(smeRecomendation);
+      this.smeRecomendation = this._buildCountriesAvailability(smeRecomendation);
       this._makeFilterBySDG();
     }
   }
@@ -142,17 +125,9 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     return ` ${regionNames.of(countries)}`;
   }
 
-  handlerOpenDetail(
-    selectedRecomendation: any,
-  ) {
+  handlerOpenDetail(selectedRecomendation: any) {
     this._smeAnalysisStore.setDetailEcosolutions(selectedRecomendation);
     this._router.navigate(['details', 'id'], { relativeTo: this._route });
-    /* 	this.selectedRecomendation = selectedRecomendation;
-		if (!this.toogleOpenDetails) {
-			this.toogleOpenDetails = true;
-		}
-
-		this.selectedRecomendationIndex = selectedRecomendationIndex; */
   }
 
   onCheckboxStateChange(checked: any, index: number) {
@@ -181,24 +156,23 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
     return newSmeRecomendation;
   }
 
-  filterBySDG(index: number, checked: boolean) {
-    this.odsIcons[index].active = !checked;
+  filterBySDG(codes: Array<number>) {
+    this._codesActive.set(codes);
     this.getResults();
     this._makeFilterBySDG();
   }
 
   private _makeFilterBySDG() {
-    const codeActive = this.odsIcons
-      .filter((sdg) => sdg.active)
-      .map((sdgActive) => sdgActive.code);
-    if (!this.odsIcons.every((codeActive) => !codeActive.active)) {
+    if( this._codesActive().length > 0) {
       this.smeRecomendation = this.smeRecomendation.filter(
         (recomendation: any) =>
-          codeActive.some((elemento) =>
+          this._codesActive().some((elemento) =>
             recomendation.sustainableDevelopmentGoals.includes(elemento)
           )
       );
+   
     }
+
   }
 
   contieneArray(arrPrincipal: any, arrBuscado: any) {
@@ -234,9 +208,5 @@ export class EcosolutionListComponent implements OnInit, OnDestroy {
       checked: checked,
     }));
     this.getResults();
-  }
-  ngOnDestroy() {
- /*    this.onDestroy$.next();
-    this.onDestroy$.complete(); */
   }
 }

@@ -12,7 +12,7 @@ import {
   Provider,
   ViewChild,
   ViewEncapsulation,
-  forwardRef,
+  forwardRef
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -118,9 +118,7 @@ export class SelectSubcategoryProductComponent
     this._cdf.markForCheck();
     return this.badgeGroup.badge.filter(badge => badge.selected)?.length || 0;
   }
- /*  set numSelected(value: number) {
-    this._numSelected = value;
-  } */
+
 
   @Input()
   public get checked() {
@@ -133,6 +131,9 @@ export class SelectSubcategoryProductComponent
   }
   private _checked = false;
 
+  get isSelectedAll() {
+    return this.badgeGroup.isSelectAll;
+  }
   private mutationObserver!: MutationObserver;
 
   _onChange: (value: any) => void = () => {};
@@ -244,11 +245,20 @@ export class SelectSubcategoryProductComponent
   }
 
   toogle(value: any) {
+    this.assignValue(value.code);
     this.open = !this.open;
     if (this.open) {
       this._onFocus();
     }
     this._onChange(value);
     this._cdf.markForCheck();
+  }
+  selectAll(event: Event) {
+    this.badgeGroup.selectAll();
+    event.stopPropagation();
+  }
+  deSelectAll() {
+    this.badgeGroup.selectAll();
+
   }
 }

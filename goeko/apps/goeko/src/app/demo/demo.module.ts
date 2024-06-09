@@ -1,24 +1,22 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { DemoRoutingModule } from './demo-routing.module';
-import { DemoContainerComponent } from './demo-container/demo-container.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SmeModule } from '@goeko/store';
 import '@goeko/ui';
 import {
 	ButtonModule,
-	CarouselComponent,
 	CarouselModule,
-	GoInputDirective,
 	GoInputModule,
 	GoekoButtonModule,
-	UiSuperSelectModule,
+	UiSuperSelectModule
 } from '@goeko/ui';
-import { ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { DemoResultComponent } from './demo-result/demo-result.component';
-import { SmeModule } from '@goeko/store';
-import { environment } from '../../environments/environment';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { TranslateModule } from '@ngx-translate/core';
+import { environment } from '../../environments/environment';
+import { DemoContainerComponent } from './demo-container/demo-container.component';
+import { DemoResultComponent } from './demo-result/demo-result.component';
+import { DemoRoutingModule } from './demo-routing.module';
 
 @NgModule({
 	declarations: [DemoContainerComponent, DemoResultComponent],

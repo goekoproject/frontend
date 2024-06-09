@@ -8,6 +8,8 @@ import {
   CodeCountryPipe,
   GoTableModule,
   LeadFormComponent,
+  LineBreakPipe,
+  MessageService,
   ProductsManagementComponent,
   SdgIconsComponent,
   SelectSubcategoryProductComponent
@@ -23,10 +25,11 @@ import {
   NotificationModule,
   PercentageModule,
   UiSuperSelectModule,
-  YesNoPipe,
+  YesNoPipe
 } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
+import { CategoryRequestPipe } from './get-category-request.pipe';
 import { SmeAnalysisFormRoutingModule } from './sme-analysis-form-routing.module';
 import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component';
 import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
@@ -36,10 +39,10 @@ import { DataArraySummaryPipe } from './sme-analysis-summary/data-array-summary.
 import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
 import { SmeAnalysisService } from './sme-analysis.service';
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
+import { CountProductPipe, CountSubcategoryPipe } from './sme-form-analysis/count-subcategory.pipe';
 import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
 import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
-import { CategoryRequestPipe } from './get-category-request.pipe';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,9 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     YesNoPipe,
     DataArraySummaryPipe,
     SmeRequestAnalisysComponent,
-    CategoryRequestPipe
+    CategoryRequestPipe,
+    CountSubcategoryPipe,
+    CountProductPipe
 
   ],
   imports: [
@@ -79,11 +84,12 @@ import { CategoryRequestPipe } from './get-category-request.pipe';
     CodeCountryPipe,
     LeadFormComponent,
     GoDateFormatPipe,
+    LineBreakPipe,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),
   ],
-  providers: [SmeAnalysisService],
+  providers: [SmeAnalysisService, MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SmeAnalysisFormModule {}

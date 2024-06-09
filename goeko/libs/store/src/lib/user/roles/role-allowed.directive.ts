@@ -2,10 +2,9 @@ import {
   Directive,
   Input,
   OnDestroy,
-  OnInit,
   TemplateRef,
   ViewContainerRef,
-  effect,
+  effect
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserService } from '../user.services';

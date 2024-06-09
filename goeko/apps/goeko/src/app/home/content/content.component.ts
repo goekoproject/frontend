@@ -73,12 +73,13 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentLang = this._translate.defaultLang;
-    this._onChangeLang();
 
     this._getContentActors();
     this._getContentDataActors();
     this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY);
     this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING);
+    this._onChangeLang();
+
   }
 
   private _effectActors() {

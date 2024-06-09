@@ -101,10 +101,10 @@ export class FormValueToSmeAnalysisRequest
 export class FormValueToSmeProjectRequest
   implements SmeSaveRecomendationProjectRequest
 {
-  smeId!: string;
   classifications!: Classifications[];
   name!: string;
-  constructor(smeId: string, formValue: Section) {
+  smeId?: string; 
+  constructor(formValue?: Section,smeId?: string) {
     if (formValue && formValue.searchName) {
       this.name = formValue.searchName;
       this.smeId = smeId;

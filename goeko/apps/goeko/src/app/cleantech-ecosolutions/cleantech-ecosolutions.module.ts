@@ -7,6 +7,7 @@ import {
   CategoryModule,
   ProductToCurrentLangPipe,
   SdgIconsComponent,
+  SelectLocationsComponent,
   SelectSubcategoryProductComponent,
   SubcategoryToCurrentLangPipe,
 } from '@goeko/business-ui';
@@ -23,11 +24,11 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
 import { CleantechEcosolutionsRoutingModule } from './cleantech-ecosolutions-routing.module';
+import { CleantechEcosolutionsService } from './cleantech-ecosolutions.services';
 import { EcosolutionsFormComponent } from './ecosolutions-form/ecosolutions-form.component';
 import { EcosolutionsListComponent } from './ecosolutions-list/ecosolutions-list.component';
-import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main.component';
 import { ProductTitlePipe } from './ecosolutions-list/product-title.pipe';
-import { CleantechEcosolutionsService } from './cleantech-ecosolutions.services';
+import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { CleantechEcosolutionsService } from './cleantech-ecosolutions.services'
     ProductToCurrentLangPipe,
     SdgIconsComponent,
     SubcategoryToCurrentLangPipe,
+    SelectLocationsComponent,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
     }),

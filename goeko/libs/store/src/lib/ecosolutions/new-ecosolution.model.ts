@@ -1,4 +1,7 @@
 
+import { mapperLocations } from '@goeko/core';
+import { Country } from '../user/public-api';
+
 interface Price {
   amount: number;
   currency: string;
@@ -43,6 +46,8 @@ export interface NewEcosolutions {
   guaranteeInYears?: number;
   priceDescription?: string;
   detailedDescription? :string;
+  locations?: Array<Country>
+
 }
 
 export class NewEcosolutionsBody implements NewEcosolutions {
@@ -64,6 +69,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
   unit?: string;
   currency?: string;
   priceDescription?: string;
+  locations?: Array<Country>;
   constructor(cleanTechId: string, mainCategory: string, formValue: any) {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`);
@@ -72,10 +78,6 @@ export class NewEcosolutionsBody implements NewEcosolutions {
     this.solutionName = formValue.solutionName;
     this.solutionDescription = formValue.solutionDescription;
     this.detailedDescription = formValue.detailedDescription;
-    /* 	this.price = {
-			amount: formValue.price,
-			currency: formValue.currency?.id,
-		}; */
     this.priceDescription = formValue.priceDescription;
     this.guaranteeInYears = formValue.yearGuarantee?.id;
     this.improvement = {
@@ -100,6 +102,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
     this.guarantee = formValue.guarantee;
     this.certified = formValue.certified;
     this.approved = formValue.approved;
+    this.locations = mapperLocations(formValue.locations);
   }
 
 }

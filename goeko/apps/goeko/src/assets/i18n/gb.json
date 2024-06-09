@@ -123,6 +123,7 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
+    "titleFormAnalysis":"Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
     "advantagesSupportText": "Advantages compared to a standard solution",
@@ -133,6 +134,7 @@
     "city": "City",
     "companyName": "Company name",
     "countriesAvailable": "Countries Available",
+    "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
     "currency": "Currency",
     "deliverCountries": "Countries where your eco-solution is approved",
@@ -151,6 +153,7 @@
     "messageLead": "Write your message",
     "name": "Name",
     "name_project": "Project's Name",
+    "numEmployees": "Number of employees",
     "operationalCostReductionPercentage": "Percentage of operational cost reduction",
     "password": "Password",
     "paybackPeriodYears": "Return on investment time compared to a standard solution",
@@ -169,7 +172,16 @@
     "technicalDescription": "Detailed description",
     "typeOfEcolutions": "Type of eco-solution",
     "unit": "Unit of measurement (m2, m3, y, kg)",
-    "website": "Website"
+    "website": "Website",
+    "yourLocation": "Select country and province",
+    "yourLocationTextSupport": "Your location data will be used to personalize recommendations for eco-friendly solutions.",
+    "province": "Province",
+    "newProvince": "Add a new province",
+    "selectProvinces": "Selection of provinces",
+    "allProvinces": "All regions",
+    "showProvinces": "Show regions"
+
+
   },
   "VERIFY_EMAIL": {
     "title": "Check your inbox",
@@ -407,13 +419,20 @@
     "messageSendOk": "Your message has been sent successfully!",
     "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have.",
     "warningDelete": "Are you sure you want to delete {{item}} ?",
-    "saveMessageGeneric": "Do you want to save the data before continuing?"
+    "saveMessageGeneric": "Do you want to save the data before continuing?",
+    "messaggeProfileUncompletedTitle": "Complete your profile",
+    "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools."
 
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at {{email}}"
   },
+  "selectAll": "Select All",
+  "deSelectAll": "Deselect all",
+  "questionsAnswered": "Questions answered",
+  "selectedProducts": "Selected products",
+  "notAvailable":"Not available",
   "mandatory" :"Mandatory",
   "exit": "Exit",
   "logout":"Log out",

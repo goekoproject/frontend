@@ -84,4 +84,5 @@ export class BadgeComponent implements AfterContentInit {
   clear()  {
     this.selected = false;
   }
+  
 }

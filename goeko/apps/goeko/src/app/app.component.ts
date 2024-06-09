@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, effect } from '@angular/core';
+import { Component, Inject, OnInit, effect, signal } from '@angular/core';
 import { VAR_GENERAL } from '@goeko/business-ui';
-import { AuthService } from '@goeko/core';
+import { AuthService, REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core';
 import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store';
 import { NotificationService } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     return !localStorage.getItem(KEY_COOKIES);
   }
 
-  isHomePage() {
+  private _isHomePage() {
     return location.pathname.includes('home') || location.pathname
     .includes('demo') || location.pathname
     === '/';
@@ -41,17 +41,18 @@ export class AppComponent implements OnInit {
   }
 
   private _cleantechUnsubscribed!: boolean;
-
+  private _isSuscriptionNeed = signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
 
   public isAuthenticated$ = this._authService.isAuthenticated$;
-  public isPrivateZone: boolean = false;
+  public isPrivateZone = signal<boolean>(false);
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private _paymentService: PaymentSystemService,
     private _authService: AuthService,
     private _notificationService: NotificationService,
     private _translate: TranslateService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly _remoteConfigService: RemoteConfigService
 
     ) {
       effect(()=> {
@@ -62,10 +63,15 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._manageClientZone();
     this._messageAfterSignUp();
+    this._translate.use('fr');
+
   }
 
 
   private _hanlderCleantechSuscriptions(): void {
+    if(!this._isSuscriptionNeed()) {
+      return;
+    }
     if(this.userService.userType() && this.isSubscribed !== STATUS_PENDING) {
       this.cleantechUnsubscribed = this.userService.userType() === USER_TYPE.CLEANTECH && !this.isSubscribed;
       this._showNotificationsCleantechUnsubscribed();
@@ -84,9 +90,8 @@ export class AppComponent implements OnInit {
 
   private _manageClientZone() {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
-      this.isPrivateZone = isAuthenticated && !this.isHomePage();
-      console.log(this.isPrivateZone);
-      
+      const isPrivateZone = isAuthenticated && !this._isHomePage();
+      this.isPrivateZone.set(isPrivateZone);      
     });
   } 
 

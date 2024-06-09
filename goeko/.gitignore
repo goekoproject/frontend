@@ -7,7 +7,7 @@ tmp
 
 # dependencies
 node_modules
-
+package-lock.json
 # IDEs and editors
 /.idea
 .project
@@ -40,3 +40,6 @@ Thumbs.db
 
 .nx/cache
 .angular
+
+# Project
+apps/goeko/src/tailwind-styles.scss

@@ -5,25 +5,30 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  HostListener,
   OnDestroy,
   OnInit,
   computed,
-  effect
+  effect,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CanAnalysisDeactivate } from '@goeko/business-ui';
 import {
   ClassificationCategory,
   ClassificationSubcategory,
   DataSelect,
   SmeRequestResponse,
-  SmeService
+  SmeService,
 } from '@goeko/store';
 import { AutoUnsubscribe } from '@goeko/ui';
-import { Subject } from 'rxjs';
+import { Observable, Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 import { compareWithProducts } from '../sme-analysis..util';
 import { SmeAnalysisService } from '../sme-analysis.service';
-import { transformArrayToObj } from './sme-analysis.request';
+import {
+  FormValueToSmeAnalysisRequest,
+  transformArrayToObj,
+} from './sme-analysis.request';
 
 @AutoUnsubscribe()
 @Component({
@@ -31,31 +36,53 @@ import { transformArrayToObj } from './sme-analysis.request';
   templateUrl: './sme-form-analysis.component.html',
   styleUrls: ['./sme-form-analysis.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
-export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestroy {
+export class SmeFormAnalysisComponent
+  implements OnInit, AfterViewInit, OnDestroy, CanAnalysisDeactivate
+{
+  
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent) {
+    const canDeactivate = this.canDeactivate();
+    if(!canDeactivate)  {
+      event.preventDefault();
+    }
+  }
+  
   compareWithProducts = compareWithProducts;
   public form!: FormGroup;
   public dateLastRecomendation!: string;
   public dataSelect = DataSelect as any;
   public destroy$: Subject<boolean> = new Subject<boolean>();
-  
+  private goToSummary = false;
   private get _smeId(): string {
-    return this._route.snapshot.paramMap.get('id') || this._route.snapshot.queryParamMap.get('smeId') ||'';
+    return (
+      this._route.snapshot.paramMap.get('id') ||
+      this._route.snapshot.queryParamMap.get('smeId') ||
+      ''
+    );
   }
 
-  private get _queryParamsSelected(): {[key: string]: string} {
+  private get _queryParamsSelected(): { [key: string]: string } {
     return this._route.snapshot.queryParams;
   }
-  private _dataCategories!:SelectionModel<ClassificationCategory>;
+  private _dataCategories!: SelectionModel<ClassificationCategory>;
 
   get dataCategorySelected(): ClassificationCategory {
     return this._dataCategories?.selected[0];
   }
 
   get isDataSetLastAnalysis() {
-    const  isLast = this._queryParamsSelected['isLast'];
-    return isLast && JSON.parse(isLast) && (!this.currentAnalytics() || Object.keys(this.currentAnalytics()).length === 0)
+    const isLast = this._queryParamsSelected['isLast'];
+    return (
+      isLast &&
+      JSON.parse(isLast) &&
+      (!this.currentAnalytics() ||
+        Object.keys(this.currentAnalytics()).length === 0)
+    );
   }
+
   //Signal
   categories = this._smeAnalysisService.categories;
   categorySelected = this._smeAnalysisService.categorySelected;
@@ -68,7 +95,6 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
     )
   );
 
-
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
@@ -79,34 +105,51 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
     private _location: Location
   ) {
     effect(() => {
-      if(this.dataAllCategory().length > 0) {
+      if (this.dataAllCategory().length > 0) {
         this._loadDataCategories();
       }
     });
   }
-  
 
   ngOnInit(): void {
     this._smeAnalysisService.getAllDataCategories();
     this._initForm();
-    this.form.patchValue(this.currentAnalytics());
+    this.form.patchValue(this.currentAnalytics(), {
+      emitEvent: false,
+      onlySelf: false,
+    });
+    console.log(this.form.get('co2Emission')?.getRawValue()
+  );
   }
 
   ngAfterViewInit(): void {
     this.categorySelected.set(this.categories()[0]);
   }
- 
+
   ngOnDestroy(): void {
     this._smeAnalysisService.dataAllCategory.set([]);
   }
-
+  canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => {
+    return this.goToSummary || !this.form.dirty && !this.form.touched && this.form.pristine; 
+  };
+  saveAnalysis = (): Observable<boolean> => {
+    const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(
+      this._smeId,
+      this.form.value
+    );
+    return this._smeService
+      .saveRecommendations(smeAnalysisRequest)
+      .pipe(distinctUntilChanged(), takeUntil(this.destroy$));
+  };
   private _loadDataCategories(): void {
     this._dataCategories = new SelectionModel(false, this.dataAllCategory());
-    this.dataAllCategory().forEach((category) => this._createFormGroup(category));
+    this.dataAllCategory().forEach((category) =>
+      this._createFormGroup(category)
+    );
     this._dataCategories.select(this.dataAllCategory()[0]);
     this._setLastAnalysis();
   }
-  
+
   private _initForm() {
     this.form = this._fb.group({
       co2Emission: this._fb.group({}),
@@ -115,11 +158,9 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
       hazardousProduct: this._fb.group({}),
     });
   }
-  private _createFormGroup(
-    selectedCategory: ClassificationCategory
-  ) {
-    const dataCategorySelected = selectedCategory
-    const controlNameCatgory  = selectedCategory.code;
+  private _createFormGroup(selectedCategory: ClassificationCategory) {
+    const dataCategorySelected = selectedCategory;
+    const controlNameCatgory = selectedCategory.code;
 
     const formGroup = this.form.get(controlNameCatgory) as FormGroup;
     dataCategorySelected?.subcategories?.forEach(
@@ -128,37 +169,43 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
           return;
         }
 
-        const _valueControl = this.currentAnalytics()&& this.currentAnalytics()[controlNameCatgory] ?  
-        this.currentAnalytics()[controlNameCatgory][subcategory.code] : '';
-        formGroup.addControl(subcategory.code, this._fb.control(_valueControl));
+        const _valueControl =
+          this.currentAnalytics() && this.currentAnalytics()[controlNameCatgory]
+            ? this.currentAnalytics()[controlNameCatgory][subcategory.code]
+            : '';
+        formGroup.addControl(
+          subcategory.code,
+          this._fb.control(_valueControl),
+          { emitEvent: false }
+        );
         this._cdf.markForCheck();
-
       }
     );
-    this.form.addControl(controlNameCatgory, formGroup);
+    this.form.addControl(controlNameCatgory, formGroup, { emitEvent: false });
     this._cdf.markForCheck();
   }
   selectCategory(categorySelected: ClassificationCategory): void {
     this._selectedCategory(categorySelected);
   }
   selectCategoryByCarousel(categorySelected: ClassificationCategory) {
-   this._selectedCategory(categorySelected);
+    this._selectedCategory(categorySelected);
   }
 
   private _selectedCategory(categorySelected: ClassificationCategory) {
     this.categorySelected.set(categorySelected);
-    const dataCategorySelected = this.dataAllCategory().find((category) => category.code === categorySelected.code) as ClassificationCategory;
+    const dataCategorySelected = this.dataAllCategory().find(
+      (category) => category.code === categorySelected.code
+    ) as ClassificationCategory;
     this._dataCategories.select(dataCategorySelected);
   }
 
-
   private _setLastAnalysis() {
-    const {smeId, requestId} = this._queryParamsSelected;
+    const { smeId, requestId } = this._queryParamsSelected;
     if (this.isDataSetLastAnalysis) {
       this._getLastAnalysis();
     }
-    if(smeId && requestId) {
-      this._getRequiestSelected(smeId,requestId);
+    if (smeId && requestId) {
+      this._getRequiestSelected(smeId, requestId);
     }
   }
 
@@ -168,15 +215,15 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
       .subscribe((requestClassifications) => {
         if (requestClassifications) {
           this.dateLastRecomendation = requestClassifications.date;
-          this._fillForm(requestClassifications); 
+          this._fillForm(requestClassifications);
         }
       });
   }
 
-  private _getRequiestSelected( smeId: string,requestId:string ) {
+  private _getRequiestSelected(smeId: string, requestId: string) {
     this._smeService
-      .getRequestById({smeId, requestId})
-      .subscribe((requestClassifications) => {
+      .getRequestById({ smeId, requestId })
+      .subscribe((requestClassifications: any) => {
         if (requestClassifications) {
           this.dateLastRecomendation = requestClassifications.date;
           this._fillForm(requestClassifications);
@@ -184,14 +231,23 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
       });
   }
 
-  private _fillForm(requestClassifications : SmeRequestResponse) {
+  private _fillForm(requestClassifications: SmeRequestResponse) {
     const classifications = transformArrayToObj(
       requestClassifications.classifications
     );
 
     this._createFormForEdit(classifications);
-    this.form.patchValue(classifications);
+    this.form.patchValue(classifications, { emitEvent: false, onlySelf: true });
+    this._cleanUpForm();
+
     this._cdf.markForCheck();
+  }
+
+  private _cleanUpForm() {
+    setTimeout(() => {
+      this.form.markAsPristine();
+      this.form.markAsUntouched();
+    }, 1000);
   }
   private _createFormForEdit(classifications: any) {
     Object.keys(classifications).forEach((controlName) => {
@@ -199,7 +255,8 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
         (controlNameSubcategory) => {
           (this.form.get(controlName) as FormGroup).addControl(
             controlNameSubcategory,
-            this._fb.control('')
+            this._fb.control(''),
+            { emitEvent: false }
           );
         }
       );
@@ -207,16 +264,14 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit ,OnDestro
   }
 
   gotToSummary() {
+    this.goToSummary= true;
     this.currentAnalytics.set(this.form.value);
-    this._router.navigate([`/sme-analysis/summary`], {
+    this._router.navigate(['summary'], {
       queryParams: {
-        smeId : this._smeId
-      }
+        smeId: this._smeId,
+      },
+      relativeTo: this._route.parent
     });
-  }
-  getResults() {
-    this.currentAnalytics.set(this.form.value);
-    this._router.navigate(['sme-analysis/results', this._smeId]);
   }
 
   goToBack() {

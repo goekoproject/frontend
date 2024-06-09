@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FORM_FIELD_DEMO } from '../demo-container/form-field-demo.constants';
-import { SmeRecomendation, SmeService } from '@goeko/store';
-import { DemoService } from '../demo.services';
-import { SmeRecomendationParams } from '../demo-result.request';
+import { SmeService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
+import { FORM_FIELD_DEMO } from '../demo-container/form-field-demo.constants';
+import { SmeRecomendationParams } from '../demo-result.request';
+import { DemoService } from '../demo.services';
 
 @Component({
   selector: 'goeko-demo-result',

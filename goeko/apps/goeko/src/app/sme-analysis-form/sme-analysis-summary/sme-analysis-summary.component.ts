@@ -1,15 +1,17 @@
 import {
   Component,
   EventEmitter,
+  HostListener,
   OnInit,
   Output
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  CanAnalysisDeactivate,
   FORM_CATEGORIES_QUESTION,
   MessageService,
   Product,
-  ProductsManagementComponent,
+  ProductsManagementComponent
 } from '@goeko/business-ui';
 import {
   ClassificationCategory,
@@ -20,32 +22,37 @@ import {
   SmeAnalysisStoreService,
   SmeService
 } from '@goeko/store';
-import { MESSAGE_TYPE, SideDialogService } from '@goeko/ui';
+import { AutoUnsubscribe, MESSAGE_TYPE, SideDialogService } from '@goeko/ui';
+import { Observable, Subject, distinctUntilChanged, of, takeUntil } from 'rxjs';
 import { SmeAnalysisService } from '../sme-analysis.service';
 import {
   FormValueToSmeAnalysisRequest,
-  FormValueToSmeProjectRequest,
-  formToClassificationsMapper,
+  FormValueToSmeProjectRequest
 } from '../sme-form-analysis/sme-analysis.request';
 
-const compareWithClassificationCategory = (
-  c1: ClassificationCategory,
-  c2: ClassificationCategory
-) => c1.code === c2.code;
+@AutoUnsubscribe()
 @Component({
   selector: 'goeko-sme-analysis-summary',
   templateUrl: './sme-analysis-summary.component.html',
   styleUrls: ['./sme-analysis-summary.component.scss'],
   providers: [MessageService]
 })
-export class SmeAnalysisSummaryComponent implements OnInit {
+export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivate {
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent) {
+    const canDeactivate = this.canDeactivate();
+    if(!canDeactivate)  {
+      event.preventDefault();
+    }
+  }
   @Output() editForm: EventEmitter<number> = new EventEmitter();
   public dataSelect = DataSelect;
   formField = FORM_CATEGORIES_QUESTION;
   formValue!: any;
-  public saveOK = false;
+  public savedAnalysis = false;
   private _smeId!: string;
   public toogleSaveName = false;
+  private destroy$ = new Subject<void>();
 
   currentAnalytics = this._smeAnalysisService.currentAnalytics;
   categories = this._smeAnalysisService.categories;
@@ -57,11 +64,18 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   }
 
   private get _dialogInfoMessage() {
+    
     return this._messageService.infoMessage(MESSAGE_TYPE.WARNING, {title: 'DIALOG.saveMessageGeneric', buttonPrimary: 'save', buttonSecondary: 'notSave'});
   }
 
   private get _resultPath(): string { 
-    return this.isProject ? 'sme-analysis/projects/results': 'sme-analysis/results'
+    return 'results'
+  }
+
+  private get projectId(): string {
+    return this._route.snapshot.queryParamMap.get(
+      'projectId'
+    ) as string;
   }
   constructor(
     private _smeServices: SmeService,
@@ -76,16 +90,26 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   ) {
   }
 
+
   ngOnInit(): void {
     this._smeAnalysisService.getAllDataCategories();
     this._smeId = this._getSmeId();
-    this._smeAnalysisStore.getCurrentAnalysis().subscribe((res) => {
+    this._smeAnalysisStore.getCurrentAnalysis().pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
       if (res) {
         this.formValue = res;
       }
     });
 
   }
+
+  canDeactivate = ():boolean | Promise<boolean> | Observable<boolean> => {
+    return this.savedAnalysis;
+  };
+
+  saveAnalysis = (): Observable<boolean> => {
+   this.saveAnalysisOrProject();
+   return of(true)
+  };
 
   private _getSmeId(): string {
     const idByNewAnalysis = this._route?.parent?.snapshot.params[
@@ -159,67 +183,96 @@ export class SmeAnalysisSummaryComponent implements OnInit {
   }
 
   goToSearchEcosolutions() {
-     this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
+    if(!this.savedAnalysis) {
+      this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
         if(saveAnalysis) {
-          this.saveAnalysis();
+          this.saveAnalysisOrProject(this._resultPath);
+          this.savedAnalysis = true;
+
+        } else {
+          this._goToSearchEcosolutions()
         }
-        this._getResults();
-    }); 
-  }
-  private _getResults() {
-      this._smeServices
-      .createRecommendations({
-        classifications: formToClassificationsMapper(this.currentAnalytics()),
-      })
-      .subscribe((res) => {
-        if (res) {
-          this._router.navigate([this._resultPath, this._smeId]);
-        }
-      });
+      }); 
+    } else{
+      this._goToSearchEcosolutions()
+
+    }
+
   }
 
+  private _goToSearchEcosolutions() {
+    this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
+    this.savedAnalysis = true;
+  }
 
-  saveAnalysis() {
+  saveAnalysisOrProject(route?: string) {
+    this.savedAnalysis = true;
     if (this.isProject) {
-      this._saveProject();
+      this._updateOfCreateProject(route);
     } else {
-      this._saveAnalysis();
+      this._saveAnalysis(route);
     }
   }
-  private _saveProject() {
+
+  private _updateOfCreateProject(route?: string) {
+    if(this.projectId) {
+      this._updateProject(route);
+    } else {
+      this._saveProject(route);
+
+    }
+  }
+  private _saveProject(route?:string) {
     const smeAnalysisRequest = new FormValueToSmeProjectRequest(
+      this.currentAnalytics(),
       this._smeId,
-      this.currentAnalytics()
     );
-    this._projectService.saveProject(smeAnalysisRequest).subscribe((res) => {
-      this.saveOK = true;
-      setTimeout(() => {
-        this.saveOK = false;
-      }, 5000);
+    this._projectService.saveProject(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
+      this.savedAnalysis = true;
     });
   }
-  private _saveAnalysis() {
+
+  private _updateProject(route?:string) {
+    const smeAnalysisRequest = new FormValueToSmeProjectRequest(
+      this.currentAnalytics()
+    );
+    this._projectService.updateProject(this.projectId,smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
+      this.savedAnalysis = true;
+    });
+  }
+  private _saveAnalysis(route?:string) {
     const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(
       this._smeId,
       this.currentAnalytics()
     );
     this._smeServices
-      .saveRecommendations(smeAnalysisRequest)
-      .subscribe((res) => {
-        this.saveOK = true;
-        setTimeout(() => {
-          this.saveOK = false;
-        }, 5000);
+      .saveRecommendations(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.savedAnalysis = true;
+        if(route)
+        this._goToResult(route)
       });
   }
 
   cancel() {
     this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
       if(saveAnalysis) {
-        this._saveAnalysis();
+        this._saveAnalysis('../dashboard/sme');
+        this.savedAnalysis = true;
+
+      } else {
+        this._router.navigate(['../dashboard/sme'], {relativeTo: this._route.parent}); 
+        this.savedAnalysis = true;
       }
-       this._router.navigate(['dashboard/sme']); 
     })
+
+  }
+
+  private _goToResult(route?:string) {
+    if(!route) {
+      return;
+    }
+    this._router.navigate([route, this._smeId], {relativeTo: this._route.parent});
 
   }
 }

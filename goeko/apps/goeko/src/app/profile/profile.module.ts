@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SideProfileComponent } from '@goeko/business-ui';
+import { MessageService, SelectLocationsComponent, SideProfileComponent } from '@goeko/business-ui';
 import { ButtonModule, GoInputModule, InputFileComponent, NotificationModule, UiSuperSelectModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileService } from './profile/profile.service';
 
 @NgModule({
 	declarations: [ProfileComponent],
@@ -22,7 +23,9 @@ import { ProfileComponent } from './profile/profile.component';
 		GoInputModule,
 		SideProfileComponent,
 		UiSuperSelectModule,
+		SelectLocationsComponent
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	providers:[ProfileService,MessageService]
 })
 export class ProfileModule {}

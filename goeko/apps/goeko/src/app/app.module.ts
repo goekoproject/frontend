@@ -5,55 +5,40 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClient } from '@angular/common/http';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthModule } from '@auth0/auth0-angular';
 import {
   LoadDataUser,
   PopupModule,
-  SelectI18nModule,
+  SelectI18nComponent,
   SideProfileComponent,
   loadDataUserFactory,
 } from '@goeko/business-ui';
-import { AUTH_CONNECT, ConfigModule } from '@goeko/core';
+import { ConfigModule, GoRemoteConfigModule } from '@goeko/core';
 import {
   CleantechModule,
   ContentFulModule,
-  GoShowUserTypeDirective,
-  ShowForRolesDirective,
+  LocationsService,
   SmeModule,
   UserService,
   isSubscribedCleantech,
 } from '@goeko/store';
 import {
-  BadgeModule,
   ButtonModule,
   DialogMessageModule,
-  NotificationModule,
   NotificationService,
   SideDialogModule,
-  UiBreadcrumbsModule
+  UiBreadcrumbsModule,
 } from '@goeko/ui';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { ContentConfig } from './content-ful.config';
-import { HeaderComponent } from './home/header/header.component';
-import { MenuComponent } from './home/header/menu/menu.component';
-import { FooterComponent } from './shell/footer/footer.component';
-import { HeaderUserComponent } from './shell/header-user/header-user.component';
-import { MenuUserComponent } from './shell/menu-user/menu-user.component';
-const httpLoaderFactory = (http: HttpClient) => {
+export const httpLoaderFactory = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    MenuComponent,
-    MenuUserComponent,
-    HeaderUserComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     SideProfileComponent,
     BrowserModule,
@@ -62,24 +47,10 @@ const httpLoaderFactory = (http: HttpClient) => {
     ButtonModule,
     ContentFulModule.forRoot(ContentConfig),
     PopupModule,
-    SelectI18nModule,
+    DialogMessageModule,
+    SelectI18nComponent,
     UiBreadcrumbsModule,
     SideDialogModule,
-    BadgeModule,
-    ShowForRolesDirective,
-    DialogMessageModule,
-    AuthModule.forRoot({
-      domain: environment.domainAuth0,
-      clientId: environment.clientId,
-      authorizationParams: {
-        redirect_uri: AUTH_CONNECT.REDIRECT_URI,
-        audience: AUTH_CONNECT.AUDIENCE,
-      },
-      httpInterceptor: {
-        allowedList: [`${environment.baseUrl}/*`],
-      },
-    }),
-    GoShowUserTypeDirective,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),
@@ -92,6 +63,7 @@ const httpLoaderFactory = (http: HttpClient) => {
       clientSecret: environment.clientSecret,
       clientId: environment.clientId,
       domainAuth0: environment.domainAuth0,
+      audience: environment.audience,
     }),
     TranslateModule.forRoot({
       defaultLanguage: 'fr',
@@ -101,15 +73,23 @@ const httpLoaderFactory = (http: HttpClient) => {
         deps: [HttpClient],
       },
     }),
-    NotificationModule
+    GoRemoteConfigModule,
   ],
-  providers: [UserService, LoadDataUser, isSubscribedCleantech, NotificationService,
+  providers: [
+    UserService,
+    LoadDataUser,
+    isSubscribedCleantech,
+    NotificationService,
+    provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
+
+    LocationsService,
     {
       provide: APP_INITIALIZER,
       multi: true,
       useFactory: loadDataUserFactory,
-      deps: [LoadDataUser]
-  }],
+      deps: [LoadDataUser],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

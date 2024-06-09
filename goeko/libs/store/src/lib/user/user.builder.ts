@@ -14,13 +14,14 @@ export class SmeBuilder implements IUserBuilder<SmeUser> {
   }
   public init(data: any) {
     this.smeUser = new SmeUser();
-
     this.smeUser.id = data?.id;
     this.smeUser.name = data?.name;
     this.smeUser.country = data?.country;
     this.smeUser.email = data?.email;
     this.smeUser.website = data?.website;
     this.smeUser.externalId = data?.externalId;
+    this.smeUser.locations = data?.locations;
+    this.smeUser.employees = data?.employees;
     return this;
   }
   build() {

@@ -18,6 +18,7 @@ import { CardEcosolutions } from './card-ecosolutions.model';
 })
 export class EcosolutionsListComponent implements OnInit {
   public categorySection = this._cleantechEcosolutionsService.categories();
+  public categorySelected = this._cleantechEcosolutionsService.categorySelected;
   public isSubscribed = !!this._cleantechEcosolutionsService.isSubscribed;
   public ecosolutions!: CardEcosolutions[];
   public cleanTechId!: string;
@@ -28,10 +29,10 @@ export class EcosolutionsListComponent implements OnInit {
     private _roter: Router,
     private translateService: TranslateService,
     private _cleantechEcosolutionsService: CleantechEcosolutionsService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.cleanTechId = this._route.snapshot.paramMap.get('id') as string;
     this.getAllEcosolutionsByCleanTech();
   }
@@ -81,6 +82,6 @@ export class EcosolutionsListComponent implements OnInit {
   }
 
   selectedTab(category: ClassificationCategory) {
-    this._cleantechEcosolutionsService.categorySelected.set(category);
+    this.categorySelected.set(category);
   }
 }

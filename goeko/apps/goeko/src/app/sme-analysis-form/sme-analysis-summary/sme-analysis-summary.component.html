@@ -1,4 +1,3 @@
-<go-notification type="info" *ngIf="saveOK" class="notification"><p>{{ 'NOTIFICATION.save_ok' | translate }}</p></go-notification>
 <div class="summary">
   <!--  <div class="notification-save-analysis">
       <p>{{ 'infoSaveMessages' | translate }}</p>
@@ -57,7 +56,7 @@
         {{ 'cancel' | translate }}
       </button>
       <div class="flex items-center gap-4">
-        <button type="button" go-button appearance="white" (click)="saveAnalysis()">
+        <button type="button" go-button appearance="white" (click)="saveAnalysisOrProject()">
           {{ 'save' | translate }}
         </button>
         <go-goeko-button class="button-submit" (click)="goToSearchEcosolutions()">

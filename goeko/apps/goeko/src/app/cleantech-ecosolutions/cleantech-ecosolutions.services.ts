@@ -1,9 +1,10 @@
-import { Injectable, Injector, effect, inject, signal } from '@angular/core';
+import { Injectable, Injector, Signal, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   CATEGORY_SECTION,
   mergeCategoriesSectionWithClassificationCategory,
 } from '@goeko/business-ui';
+import { REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core';
 import {
   ClassificationCategory,
   ClassificationCategoryService,
@@ -31,12 +32,21 @@ export class CleantechEcosolutionsService {
   );
 
   
+  public get isSupcriptionNeed(): Signal<boolean> {
+    console.log(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean());
+    return signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean());
+  }
   get isSubscribed() {
+    if(!this.isSupcriptionNeed()) {
+      return true;
+    }
    return this._paymentsService.isSubscription;
   }
+ 
   constructor(
     private classificationCategoryService: ClassificationCategoryService,
-    private _paymentsService: PaymentSystemService
+    private _paymentsService: PaymentSystemService,
+    private _remoteConfigService: RemoteConfigService,
   ) {
     effect(() => {
       if (this.categorySelected().id !== '') {
@@ -61,6 +71,8 @@ export class CleantechEcosolutionsService {
         }
       });
   }
+
+ 
 
  
 }
