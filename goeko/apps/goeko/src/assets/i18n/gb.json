@@ -429,8 +429,9 @@
     "messageContact": "Contact us at {{email}}"
   },
   "selectAll": "Select All",
+  "deSelectAll": "Deselect all",
   "questionsAnswered": "Questions answered",
-  "selectedProducts": "Selected solutions",
+  "selectedProducts": "Selected products",
   "notAvailable":"Not available",
   "mandatory" :"Mandatory",
   "exit": "Exit",

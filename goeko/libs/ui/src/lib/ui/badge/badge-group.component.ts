@@ -57,6 +57,10 @@ export class BadgeGroupComponent
     return this._selectionModel.selected;
   }
 
+  get isSelectAll(): boolean {
+    return this.badge.toArray().every(bage => bage.selected);
+  }
+
   /** Combined stream of all of the child options' change events. */
   // eslint-disable-next-line @typescript-eslint/member-ordering
   readonly optionSelectionChanges: Observable<any> = defer(() => {
@@ -174,7 +178,6 @@ export class BadgeGroupComponent
   }
   selectAll() {
     this.badge.forEach((badge) => badge.onSelect());
-
   }
 }
 function deepEqual(object1: any, object2: any): boolean {

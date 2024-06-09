@@ -23,9 +23,6 @@
         <div dataExtra>
           @if((form.get(category.code)?.getRawValue() | countSubcategory) !== 0) {
             <p>
-              {{ form.get(category.code)?.getRawValue() | countSubcategory}} {{ 'questionsAnswered' | translate }}
-            </p>
-            <p>
               {{ form.get(category.code)?.getRawValue() | countProduct}}  {{ 'selectedProducts' | translate }}
             </p>
           } 

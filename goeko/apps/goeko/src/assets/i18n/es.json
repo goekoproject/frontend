@@ -427,8 +427,9 @@
     "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
   "selectAll": "Seleccionar todo",
+  "deSelectAll": "Deseleccionar todo",
   "questionsAnswered": "Preguntas contestadas",
-  "selectedProducts": "Soluciones seleccionados",
+  "selectedProducts": "Productos seleccionados",
   "notAvailable":"No disponible",
   "mandatory" :"Obligatorio",
   "exit": "Salir",

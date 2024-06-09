@@ -12,7 +12,7 @@ export class CountSubcategoryPipe implements PipeTransform {
 
 
 @Pipe({
-    name: 'countProduct'
+    name: 'countProduct',
 })
 
 export class CountProductPipe implements PipeTransform {

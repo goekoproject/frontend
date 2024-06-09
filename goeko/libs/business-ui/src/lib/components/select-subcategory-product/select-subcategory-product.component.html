@@ -19,9 +19,6 @@
 
       <div class="subcategory-title">
         <ng-content select="[title]"></ng-content>
-
-        <!--         <p>{{ subCategory[typeTitle] | translate }}</p>
- -->
         <span class="subcategory-title-products" *ngIf="!readonly">{{
           labelSelected
         }}</span>
@@ -40,9 +37,16 @@
 
   <div class="subcategory-product flex-wrap flex-col w-full items-start">
     
-    <button class="text-primary-main hover:text-primary-800" (click)="selectAll()">
-      {{ 'selectAll' | translate }}
-    </button>
+    @if(isSelectedAll) {
+      <button class="text-primary-main hover:text-primary-800" (click)="deSelectAll()">
+        {{ 'deSelectAll' | translate }}
+      </button>
+    } @else {
+      <button class="text-primary-main hover:text-primary-800" (click)="selectAll($event)">
+        {{ 'selectAll' | translate }}
+      </button>
+    }
+
     <ng-content></ng-content>
   </div>
   <span class="alert-select-product" *ngIf="open">
