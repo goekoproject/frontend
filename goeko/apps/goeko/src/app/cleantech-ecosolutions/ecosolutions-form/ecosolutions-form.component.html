@@ -69,6 +69,19 @@
         </div>
       </fieldset>
 
+      <fieldset>
+        <div class="legend--info">
+          <legend>
+            {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
+            <span class="required-field">(Obligatoire)</span>
+          </legend>
+        </div>
+        @if(locationsArrays.length > 0 || !idEcosolution) {
+          <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [controlNameCountry]="'country'" [controlNameProvince]="'regions'"></goeko-select-locations>
+
+          }
+      </fieldset>
+
       <fieldset class="ecosolutions-fieldset" *ngIf="mainCategory !== 'hazardousProduct'">
         <div class="legend--info">
           <legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
@@ -134,29 +147,6 @@
         </div>
 
         <div>
-          <label for="deliverCountries">{{ 'FORM_LABEL.deliverCountries' | translate }}</label>
-          <!--
-          <ui-super-select
-            [readonly]="isReadOnly"
-            [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-            [multiple]="true"
-            [formControlName]="'deliverCountries'"
-            id="deliverCountries"
-            name="deliverCountries"
-            [compareWith]="defaultSetDeliverCountries"
-          >
-            <super-option
-              *ngFor="let option of dataSelect['countries']"
-              [value]="option"
-            >
-              {{ option.keyLang | translate }}
-            </super-option>
-          </ui-super-select> -->
-
-          <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [controlNameCountry]="'country'" [controlNameProvince]="'regions'"></goeko-select-locations>
-        </div>
-
-        <div>
           <label for="deliverCountries">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</label>
 
           <ui-super-select [readonly]="isReadOnly" [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate" [formControlName]="'paybackPeriodYears'" id="paybackPeriodYears" name="paybackPeriodYears" [compareWith]="defaultSetPaybackPeriodYears">
@@ -200,7 +190,7 @@
 
       <div class="actions-button">
         <button go-button appearance="white" type="button" (click)="goToListEcosolution()">
-          {{ 'Cancel' | translate }}
+          {{ 'back' | translate }}
         </button>
 
         <button *ngIf="!isReadOnly" go-button type="submit" [disabled]="form.invalid" (click)="idEcosolution ? editEcosolution() : saveEcosolution()">

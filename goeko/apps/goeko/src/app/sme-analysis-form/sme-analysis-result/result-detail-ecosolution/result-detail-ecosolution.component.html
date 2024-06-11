@@ -50,11 +50,11 @@
             <span class="details-article--label">
               {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
             </span>
-            <div class="details-article--data mt-1">
+            <div class="details-article--data mt-1 flex flex-wrap gap-1">
               @if(detailsEcosolution['locations']) {
                 @for (location of detailsEcosolution['locations']; track location?.country?.code) {
 
-                  <div class="flex gap-2 rounded-lg border-2 border-primary-300 max-w-max p-2 items-center">
+                  <div class="flex gap-2 rounded-lg border-2 border-primary-300 max-w-max p-1 items-center">
                     <span class="fi fi-{{ location.country.code | lowercase }}"></span>
                     <p> {{ location.country.label }}</p>
                     @if(location.country.regions) {
@@ -119,7 +119,7 @@
               {{ 'FORM_LABEL.guarantee' | translate }}
             </span>
             <div class="info-guarantee">
-              @if (detailsEcosolution['guarantee']) {
+              @if (detailsEcosolution['guarantee'] && detailsEcosolution['guaranteeInYears'] ) {
               <p class="details-article--data">
                 {{ detailsEcosolution['guaranteeInYears'] | number : '1.0-0' }}
                 {{ 'years' | translate }}

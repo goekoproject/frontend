@@ -425,7 +425,7 @@
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à {{email}}"
   },
-  "selectAll": "Sélectionner tout",
+  "selectAll": "Tout sélectionner",
   "deSelectAll": "Tout déselectionner",
   "questionsAnswered": "Questions répondues",
   "selectedProducts": "Produits sélectionnés",
@@ -460,7 +460,7 @@
   "dashboard": "Tableau de bord",
   "decline": "Refuser",
   "defaultMessageLead": "Bonjour, votre éco-solution m’intéresse. Merci de bien vouloir me contacter par e-mail.",
-  "cleantechLeadDefault": "Sur le point de découvrir de nouveaux prospects durables. Préparez-vous à vous connecter !",
+  "cleantechLeadDefault": "Suivez les connexions avec vos leads qualifiés.",
 
   "details": "Détails",
   "edit": "Modifier",

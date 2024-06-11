@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogProvincesComponent } from '@goeko/business-ui';
 import {
   DataSelect,
-  ElementLocation,
+  LocationCountryTranslated,
+  LocationRegions,
   Recommendation,
-  SmeAnalysisStoreService,
-  SmeCountryResponse
+  SmeAnalysisStoreService
 } from '@goeko/store';
 import { AutoUnsubscribe, DialogService } from '@goeko/ui';
 import { Subject, takeUntil } from 'rxjs';
@@ -51,7 +51,7 @@ export class ResultDetailEcosolutionComponent implements OnInit {
     );
   }
 
-  showProvinces(country: SmeCountryResponse,provinces: Array<ElementLocation>) {
+  showProvinces(country: LocationCountryTranslated,provinces: Array<LocationRegions>) {
     this._dialogService.open(DialogProvincesComponent, {
       data: {country,provinces}
     }).afterClosed().subscribe(() => console.log(country));

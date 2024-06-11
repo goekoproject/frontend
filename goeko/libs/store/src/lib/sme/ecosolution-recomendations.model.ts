@@ -1,3 +1,4 @@
+import { LocationTranslated } from "../model/location-translated.interface";
 
 export interface ResponseRecommendations {
   ecosolutions: Recommendation[];
@@ -21,19 +22,7 @@ export interface Recommendation {
 	solutionName: string;
 	sustainableDevelopmentGoals: number[];
 	pictures: PictureEcosolution[];
-	locations: LocationsResponse[]
-}
-export interface LocationsResponse {
-	country: SmeCountryResponse
-}
-export interface SmeCountryResponse {
-	code: string;
-	regions?:Array<ElementLocation>;
-	label?:string;
-}
-export interface ElementLocation {
-	code: string;
-	label: string;
+	locations: LocationTranslated[]
 }
 
 
