@@ -65,7 +65,7 @@ ul {
   list-style: none;
 }
 p {
-  @apply break-words;
+  word-break: break-word;
 }
 
 select {
