@@ -64,6 +64,9 @@ canvas:focus {
 ul {
   list-style: none;
 }
+p {
+  @apply break-words;
+}
 
 select {
   border-radius: 8px;
