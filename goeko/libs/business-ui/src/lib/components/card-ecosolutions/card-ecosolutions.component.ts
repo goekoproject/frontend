@@ -4,11 +4,12 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { OrderByPipe } from '@goeko/core';
 import { ButtonModule } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
+import { DisplayProductsPipe } from './display-products.pipe';
 
 @Component({
   selector: 'goeko-card-ecosolutions',
   standalone: true,
-  imports: [CommonModule, ButtonModule,OrderByPipe],
+  imports: [CommonModule, ButtonModule,OrderByPipe,DisplayProductsPipe],
   templateUrl: './card-ecosolutions.component.html',
   styleUrls: ['./card-ecosolutions.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -22,8 +23,8 @@ export class CardEcosolutionsComponent implements OnInit {
 
   @Input() solutionName: string = 'Vertua Ultra Zero';
   @Input()
-  public get products(): string {
-    return this._products.toString().replace(/,/g, ' · ');
+  public get products(): string[] {
+    return this._products;
   }
   public set products(value: string[]) {
     this._products = value;
