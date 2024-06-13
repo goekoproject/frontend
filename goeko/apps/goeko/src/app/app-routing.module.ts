@@ -1,25 +1,11 @@
-import { NgModule, inject } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthService } from '@goeko/core';
 
-function gotTOPageEmailVerify() {
-  return() => {
-    const urlAutenticateDecoe = decodeURI(window.location.search);
-    const _authService = inject(AuthService);
-    const urlPageEmailVerify = `${window.location.origin}/verify-email`;
-    console.log(urlAutenticateDecoe);
-    if(urlAutenticateDecoe.includes('verify')) {
-      _authService.logout(urlPageEmailVerify);
-   }
-  }
-
-}
 
 
 const ROUTES: Routes = [
   {
     path: '',
-    canMatch: [gotTOPageEmailVerify],
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
