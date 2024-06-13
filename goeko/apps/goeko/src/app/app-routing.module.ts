@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const ROUTES: Routes = [
 
+
+const ROUTES: Routes = [
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
@@ -12,14 +17,9 @@ const ROUTES: Routes = [
     loadChildren: () => import('./demo/demo.module').then((m) => m.DemoModule),
   },
    {
-    path: 'platform', 
+    path: 'platform',
     loadChildren: () => import('./platform/platform.module').then((m) =>m.PlatformModule)
    },
-  {
-    path: 'autenticate/:error',
-    loadComponent: () =>
-      import('@goeko/business-ui').then((m) => m.AutenticateComponent),
-  },
   {
     path: 'verify-email',
     loadComponent: () =>
@@ -29,7 +29,7 @@ const ROUTES: Routes = [
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  
+  },
 ];
 @NgModule({
   imports: [
