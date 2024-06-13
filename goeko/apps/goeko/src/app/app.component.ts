@@ -62,8 +62,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this._manageClientZone();
-    this._messageAfterSignUp();
-    this._translate.use('fr');
+/*     this._messageAfterSignUp();
+ */    this._translate.use('fr');
 
   }
 
@@ -86,14 +86,14 @@ export class AppComponent implements OnInit {
         ]}})
       }
   }
- 
+
 
   private _manageClientZone() {
     this.isAuthenticated$.subscribe((isAuthenticated) => {
       const isPrivateZone = isAuthenticated && !this._isHomePage();
-      this.isPrivateZone.set(isPrivateZone);      
+      this.isPrivateZone.set(isPrivateZone);
     });
-  } 
+  }
 
   private _messageAfterSignUp() {
     const urlAutenticateDecoe = decodeURI(window.location.search);
