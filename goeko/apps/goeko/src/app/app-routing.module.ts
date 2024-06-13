@@ -12,14 +12,9 @@ const ROUTES: Routes = [
     loadChildren: () => import('./demo/demo.module').then((m) => m.DemoModule),
   },
    {
-    path: 'platform', 
+    path: 'platform',
     loadChildren: () => import('./platform/platform.module').then((m) =>m.PlatformModule)
    },
-  {
-    path: 'autenticate/:error',
-    loadComponent: () =>
-      import('@goeko/business-ui').then((m) => m.AutenticateComponent),
-  },
   {
     path: 'verify-email',
     loadComponent: () =>
@@ -29,7 +24,7 @@ const ROUTES: Routes = [
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  
+  },
 ];
 @NgModule({
   imports: [
