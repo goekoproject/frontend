@@ -58,7 +58,9 @@ export class AuthService extends Auth0Connected {
     return this._auth0.loginWithRedirect({
       authorizationParams : {
         ui_locales: this.currentLang(),
-        
+        appState: { target: '/platfrom/autenticate' }
+
+
       },
 
     });

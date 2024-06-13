@@ -53,6 +53,10 @@ export class HeaderComponent implements OnInit {
     this.translate.use(selectedLand.code);
   }
   goTologin() {
-    this._authService.universalLogin();
+    this._authService.universalLogin().subscribe({
+      next:(v) => console.log('response',v),
+      error:(r) => console.log('error',r)
+      }
+    );
   }
 }

@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const ROUTES: Routes = [
-
+  {
+    path: '',
+    canMatch: [() => console.log(window.location)],
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
