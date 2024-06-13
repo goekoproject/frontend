@@ -4,10 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const ROUTES: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-  },
+
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
@@ -24,6 +21,11 @@ const ROUTES: Routes = [
     path: 'verify-email',
     loadComponent: () =>
       import('./shell/verify-email.component').then((m) => m.VerifyEmailComponent),
+  },
+  {
+    path: 'autenticate',
+    loadComponent: () =>
+      import('@goeko/business-ui').then((m) => m.AutenticateComponent),
   },
    {
     path: '**',
