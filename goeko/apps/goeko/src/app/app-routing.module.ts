@@ -7,6 +7,7 @@ function gotTOPageEmailVerify() {
     const urlAutenticateDecoe = decodeURI(window.location.search);
     const _authService = inject(AuthService);
     const urlPageEmailVerify = `${window.location.origin}/verify-email`;
+    console.log(urlAutenticateDecoe);
     if(urlAutenticateDecoe.includes('verify')) {
       _authService.logout(urlPageEmailVerify);
    }
