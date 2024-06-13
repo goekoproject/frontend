@@ -446,7 +446,7 @@ export abstract class BaseSelectComponent
       const valuesSelected= (this.selected as SuperOptionComponent[]).map(
         (option) => option.value
       );
-      if(valuesSelected && valuesSelected.length > 0) {  
+      if(valuesSelected && valuesSelected.length > 0) {
          this._propagateChanges();      }
 
     } else {
