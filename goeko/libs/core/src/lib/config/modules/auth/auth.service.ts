@@ -33,9 +33,6 @@ export class AuthService extends Auth0Connected {
   };
 
   get isAuthenticated$(): Observable<boolean> {
-
-    console.log(this._auth0.getAccessTokenSilently())
-
     return this._auth0.isAuthenticated$;
   }
   get appState$(): Observable<AppState> {

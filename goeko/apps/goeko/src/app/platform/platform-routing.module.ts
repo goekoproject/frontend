@@ -11,7 +11,6 @@ const routes: Routes = [
     children: [
       {
         path: 'autenticate',
-        canMatch: [() => console.log(' autenticate')],
         loadComponent: () =>
           import('@goeko/business-ui').then((m) => m.AutenticateComponent),
       },
