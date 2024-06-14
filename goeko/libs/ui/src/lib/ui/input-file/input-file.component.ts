@@ -45,8 +45,19 @@ export class InputFileComponent implements AfterViewInit {
   }
   private _acceptedFileTypes: string = 'application/jpeg';
 
+  @Input() readonly = false;
+
   @Input()
-  public filesUrl?: Array<string>;
+  public get filesUrl(): Array<string> | string | undefined {
+    return this._filesUrl;
+  }
+  public set filesUrl(value: Array<string> | string | undefined) {
+    if (!value) {
+      return;
+    }
+    this._processFilesUrl(value);
+  }
+  private _filesUrl?: Array<string> | string | undefined = [];
 
   @Input()
   public id!: string;
@@ -58,6 +69,14 @@ export class InputFileComponent implements AfterViewInit {
   label!: string;
 
   selectedSlideMain = signal<number>(this._selectedSlideMain);
+
+  private _processFilesUrl(value: string | string[]) {
+    if (!Array.isArray(value)) {
+      this._filesUrl = [value];
+    } else {
+      this._filesUrl = value;
+    }
+  }
 
   private get _selectedSlideMain(): number {
     return this.emblaApi ? this.emblaApi?.selectedScrollSnap() : 0;
@@ -87,13 +106,11 @@ export class InputFileComponent implements AfterViewInit {
   constructor(private _renderer: Renderer2) {}
 
   ngAfterViewInit() {
-    const { emblaApi } = this.emblaRef;
-    const { emblaApiThumb } = this.thumbRef;
-
     if (this.multiple) {
+      const { emblaApi } = this.emblaRef;
+      const { emblaApiThumb } = this.thumbRef;
       this.emblaApi = emblaApi;
       this.thumbApi = emblaApiThumb;
-      this.filesUrl = [];
     }
   }
   uploadFile(event: Event) {
@@ -126,10 +143,12 @@ export class InputFileComponent implements AfterViewInit {
   }
 
   next() {
-    this.thumbApi?.scrollNext();
+    const next = this._selectedSlideMain + 1;
+    this.selectedImg(next);
   }
   prev() {
-    this.thumbApi?.scrollPrev();
+    const prev = this._selectedSlideMain - 1;
+    this.selectedImg(prev);
   }
 
   removeSlide(id: number) {

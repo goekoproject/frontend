@@ -4,47 +4,50 @@
 
 <div
   [ngClass]="{ flex: this.multiple, 'flex-col-reverse': this.multiple }"
-  class="w-[500px] relative border-2 border-gray-300 border-dashed rounded-lg p-6"
+  class="w-3/4 relative border-2 border-gray-300 border-dashed rounded-lg p-6 transition-all"
+  [ngClass]="{ 'input-readonly': readonly }"
   id="dropzone"
   #dropzone
   (dragover)="onDragOver($event)"
   (drop)="onDrop($event)"
   (dropleave)="onDragLeave($event)"
 >
-  <div class="text-center m-4">
-    @if (!this.multiple) {
-      <i class="ti ti-file-upload icon-upload"></i>
-    }
-    <h3 class="mt-2 text-sm font-medium text-gray-900">
-      <label class="relative cursor-pointer text-label">
-        <p>{{ 'INPUT_FILE.image' | translate }}</p>
-        @if (this.multiple) {
-          <a>{{ 'INPUT_FILE.image3' | translate }}</a>
-        } @else {
-          <a>{{ 'INPUT_FILE.image2' | translate }}</a>
-        }
-        @if (multiple) {
-          <input
-            class="sr-only"
-            type="file"
-            [id]="id"
-            accept="{{ acceptedFileTypes }}"
-            (change)="uploadFile($event)"
-            multiple
-          />
-        } @else {
-          <input
-            class="sr-only"
-            type="file"
-            [id]="id"
-            accept="{{ acceptedFileTypes }}"
-            (change)="uploadFile($event)"
-          />
-        }
-      </label>
-    </h3>
-    <p class="mt-1 text-xs text-gray-500">(JPGE, JPG)</p>
-  </div>
+  @defer (when !readonly) {
+    <div class="text-center m-4">
+      @if (!this.multiple) {
+        <i class="ti ti-file-upload icon-upload"></i>
+      }
+      <h3 class="mt-2 text-sm font-medium text-gray-900">
+        <label class="relative cursor-pointer text-label">
+          <p>{{ 'INPUT_FILE.image' | translate }}</p>
+          @if (this.multiple) {
+            <a>{{ 'INPUT_FILE.image3' | translate }}</a>
+          } @else {
+            <a>{{ 'INPUT_FILE.image2' | translate }}</a>
+          }
+          @if (multiple) {
+            <input
+              class="sr-only"
+              type="file"
+              [id]="id"
+              accept="{{ acceptedFileTypes }}"
+              (change)="uploadFile($event)"
+              multiple
+            />
+          } @else {
+            <input
+              class="sr-only"
+              type="file"
+              [id]="id"
+              accept="{{ acceptedFileTypes }}"
+              (change)="uploadFile($event)"
+            />
+          }
+        </label>
+      </h3>
+      <p class="mt-1 text-xs text-gray-500">(JPGE, JPG)</p>
+    </div>
+  }
 
   @if (multiple) {
     <div class="embla" emblaCarousel>
@@ -73,7 +76,7 @@
           >
             <img
               [src]="file"
-              [alt]="id"
+              [alt]="'tumb' + i"
               class="rounded-2xl h-full object-cover max-h-80"
             />
           </button>
@@ -97,10 +100,13 @@
 
 <ng-template #preview let-url="url" let-id="id">
   <div class="relative min-w-full">
-    <i
-      class="ti ti-circle-x absolute right-0 text-3xl m-4 cursor-pointer text-white"
-      (click)="removeSlide(id)"
-    ></i>
+    @defer (when !readonly) {
+      <i
+        class="ti ti-circle-x absolute right-0 text-3xl m-4 cursor-pointer text-white"
+        (click)="removeSlide(id)"
+      ></i>
+    }
+
     <img [src]="url" [alt]="id" class="rounded-2xl" />
   </div>
 </ng-template>

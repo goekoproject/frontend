@@ -56,8 +56,12 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
 export class SelectLocationsComponent implements AfterViewInit {
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
-    o2: any
+    o2: any,
   ) => boolean;
+
+  public compareSelectedCountry = (o1: any, o2: any) => {
+    return o1 === o2;
+  };
   private destroy$ = new Subject<void>();
 
   public optionAllProvince = {
@@ -112,12 +116,12 @@ export class SelectLocationsComponent implements AfterViewInit {
   formArraySubscription!: Subscription;
   public getOnlyRegions() {
     return this.controlCountryRegionsByIndex?.value?.filter(
-      (region: LocationRegions) => region.code !== this.optionAllProvince.code
+      (region: LocationRegions) => region.code !== this.optionAllProvince.code,
     );
   }
   public getAllReggions() {
     return this.controlCountryRegionsByIndex?.value?.filter(
-      (region: LocationRegions) => region.code === this.optionAllProvince.code
+      (region: LocationRegions) => region.code === this.optionAllProvince.code,
     );
   }
 
@@ -138,19 +142,19 @@ export class SelectLocationsComponent implements AfterViewInit {
           map((value) => ({ index, value })),
           filter((change) => change.index >= 0), // only index positive
           distinctUntilChanged(
-            (prev, curr) => prev.value.country.code === curr.value.country.code
+            (prev, curr) => prev.value.country.code === curr.value.country.code,
           ),
           map((change) => change.value.country.code.code), // Transforma el cambio en el código de país
-          takeUntil(this.destroy$)
-        )
-      )
+          takeUntil(this.destroy$),
+        ),
+      ),
     )
       .pipe(
         mergeMap((countryCode) =>
           this._selectLocationsService.getRegions$(countryCode).pipe(
-            map((regiones) => ({ countryCode, regiones })) // Mapea las regiones junto con el countryCode
-          )
-        )
+            map((regiones) => ({ countryCode, regiones })), // Mapea las regiones junto con el countryCode
+          ),
+        ),
       )
       .subscribe(({ countryCode, regiones }) => {
         this.addRegionsForCodeCountry(countryCode, [

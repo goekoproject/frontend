@@ -791,6 +791,10 @@ video {
   width: 100%;
 }
 
+.w-3\/4 {
+  width: 75%;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -806,6 +810,14 @@ video {
 
 .max-w-xl {
   max-width: 36rem;
+}
+
+.max-w-\[1200\] {
+  max-width: 1200;
+}
+
+.max-w-\[1200px\] {
+  max-width: 1200px;
 }
 
 .flex-shrink {
@@ -1010,6 +1022,10 @@ video {
   border-width: 0.1rem;
 }
 
+.border-0 {
+  border-width: 0px;
+}
+
 .border-b-2 {
   border-bottom-width: 2px;
 }
@@ -1098,6 +1114,10 @@ video {
 
 .p-6 {
   padding: 1.5rem;
+}
+
+.p-0 {
+  padding: 0px;
 }
 
 .px-4 {

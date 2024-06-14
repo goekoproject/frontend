@@ -16,13 +16,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   CleanTechService,
   DataSelect,
+  Ecosolution,
   Ecosolutions,
   EcosolutionsService,
   NewEcosolutionsBody,
   ODS_CODE,
 } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, last, of, switchMap } from 'rxjs';
+import { forkJoin, last, of, switchMap, tap } from 'rxjs';
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
 import {
   defaultSetCurrency,
@@ -137,21 +138,10 @@ export class EcosolutionsFormComponent implements OnInit {
       yearGuarantee: [],
       certified: [false],
       approved: [false],
-      locations: new FormArray([]),
+      locations: new FormArray([], Validators.required),
     });
-    /*     this.initCheckboxControlSustainableDevelopmentGoals();
-     */
   }
 
-  initCheckboxControlSustainableDevelopmentGoals(): void {
-    const odsControls = this.ods.map((ods) =>
-      this._fb.group({ checked: false, value: ods }),
-    );
-    this.form.setControl(
-      'sustainableDevelopmentGoals',
-      this._fb.array(odsControls),
-    );
-  }
   get sustainableDevelopmentGoals(): FormArray {
     return this.form.get('sustainableDevelopmentGoals') as FormArray;
   }
@@ -181,9 +171,9 @@ export class EcosolutionsFormComponent implements OnInit {
     this.form.patchValue(formValue);
     this._patchValueLocationsFormControl(formValue);
   }
+
   editEcosolution() {
     forkJoin({
-      fileCertificate: this._uploadCertificate(),
       ecosolution: this._ecosolutionsService.updateEcosolution(
         this.idEcosolution,
         this.bodyRequestEcosolution,
@@ -192,7 +182,7 @@ export class EcosolutionsFormComponent implements OnInit {
       if (res) {
         this.goToListEcosolution();
         this._uploadImg(res.ecosolution);
-
+        this._uploadCertificate(res.ecosolution);
         const formValue = new EcosolutionForm(res.ecosolution);
         this.form.patchValue(formValue);
         this._patchValueLocationsFormControl(formValue);
@@ -231,12 +221,18 @@ export class EcosolutionsFormComponent implements OnInit {
       .pipe(
         switchMap((ecosolution) => {
           const uploadImage$ = this._uploadImg(ecosolution);
-          const uploadCertificate$ = this._uploadCertificate();
+          const uploadCertificate$ = this._uploadCertificate(ecosolution);
           return forkJoin([uploadImage$, uploadCertificate$]);
         }),
+        tap(() => this.goToListEcosolution()),
       )
-      .subscribe(() => {
-        this.goToListEcosolution();
+      .subscribe({
+        next: (result) => {
+          console.log('Ecosolution creado con éxito', result);
+        },
+        error: (error) => {
+          console.error('Error al crear Ecosolution ', error);
+        },
       });
   }
 
@@ -260,7 +256,7 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _getDocumentsCleantech() {
     this._cleanTeachService
-      .getDocuments(this._cleantechId)
+      .getDocuments(this.idEcosolution)
       .pipe(last())
       .subscribe((res) => {
         if (res) {
@@ -269,7 +265,7 @@ export class EcosolutionsFormComponent implements OnInit {
       });
   }
 
-  private _uploadCertificate() {
+  private _uploadCertificate(ecosolution: Ecosolution) {
     if (
       (!this.form.value.certified && !this.form.controls['certified']?.dirty) ||
       !this.inputCertified.nativeElement.value
@@ -277,7 +273,7 @@ export class EcosolutionsFormComponent implements OnInit {
       return of(null);
     }
     return this._cleanTeachService.uploadDocument(
-      this._cleantechId,
+      ecosolution.id,
       this.fileCertificate,
     );
   }
