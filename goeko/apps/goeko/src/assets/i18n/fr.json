@@ -121,7 +121,8 @@
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
-    "titleFormAnalysis":"Sélectionnez vos catégories pour trouver des éco-solutions",
+    "titleSelectImgEcosolution": "Choisissez plusieurs images pour votre EcoSolution",
+    "titleFormAnalysis": "Sélectionnez vos catégories pour trouver des éco-solutions",
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",
     "advantagesSupportText": "Avantages par rapport à une solution standard",
@@ -178,7 +179,6 @@
     "selectProvinces": "Sélection de régions",
     "allProvinces": "Toutes les régions",
     "showProvinces": "Voir les régions"
-
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",
@@ -196,7 +196,6 @@
     "image": "Glissez-déposez ou cliquez pour",
     "image2": "Sélectionner une image",
     "image3": "Ajouter une image"
-
   },
   "LANGS": {
     "en": "Anglais",
@@ -266,7 +265,6 @@
       "greenRoofsWalls": "Toits et murs végétalisés",
       "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
       "waterManagementGray": "Des solutions pour la gestion de l’eau grise"
-
     },
     "selectCountry": {
       "france": "France",
@@ -415,13 +413,11 @@
   },
   "DIALOG": {
     "messageSendOk": "Votre message a été envoyé avec succès !",
-    "messageBodyLead" : "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
+    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
     "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",
     "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko."
-
-
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
@@ -431,14 +427,14 @@
   "deSelectAll": "Tout déselectionner",
   "questionsAnswered": "Questions répondues",
   "selectedProducts": "Produits sélectionnés",
-  "notAvailable":"Pas disponible",
-  "mandatory" :"Obligatoire",
+  "notAvailable": "Pas disponible",
+  "mandatory": "Obligatoire",
   "exit": "Sortir",
   "dragAndDrop": "Glisser déposer",
   "editSelection": "Modifier sélection",
-  "logout":"Log out",
+  "logout": "Log out",
   "a": "à",
-  "your":"Votre",
+  "your": "Votre",
   "accept": "Accepter",
   "add": "Ajouter",
   "alertSelectedProduct": "Sélectionnez une ou plusieurs produits",

@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import {
@@ -34,7 +40,7 @@ export class EcosolutionListComponent implements OnInit {
   private _smeId!: string;
   formValue!: any;
   smeDataProfile = this._userService.userProfile();
-  private _codesActive = signal<Array<number>>([])
+  private _codesActive = signal<Array<number>>([]);
   private destroy$ = new Subject<void>();
 
   get allChecked() {
@@ -78,7 +84,7 @@ export class EcosolutionListComponent implements OnInit {
     this._smeService
       .ecosolutionSearch({
         classifications: formToClassificationsMapper(this.currentAnalytics()),
-        locations : (this._userService.userProfile() as SmeUser).locations
+        locations: (this._userService.userProfile() as SmeUser).locations,
       })
       .pipe(takeUntil(this.destroy$), distinctUntilChanged())
       .subscribe((recommendations) => {
@@ -102,7 +108,8 @@ export class EcosolutionListComponent implements OnInit {
   private _handleRecommendations(recommendations: any) {
     if (recommendations && Array.isArray(recommendations)) {
       const smeRecomendation = this._filterSmeRecomendations(recommendations);
-      this.smeRecomendation = this._buildCountriesAvailability(smeRecomendation);
+      this.smeRecomendation =
+        this._buildCountriesAvailability(smeRecomendation);
       this._makeFilterBySDG();
     }
   }
@@ -163,16 +170,14 @@ export class EcosolutionListComponent implements OnInit {
   }
 
   private _makeFilterBySDG() {
-    if( this._codesActive().length > 0) {
+    if (this._codesActive().length > 0) {
       this.smeRecomendation = this.smeRecomendation.filter(
         (recomendation: any) =>
           this._codesActive().some((elemento) =>
             recomendation.sustainableDevelopmentGoals.includes(elemento)
           )
       );
-   
     }
-
   }
 
   contieneArray(arrPrincipal: any, arrBuscado: any) {

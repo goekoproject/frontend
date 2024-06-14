@@ -46,7 +46,7 @@ export class InputFileComponent implements AfterViewInit {
   private _acceptedFileTypes: string = 'application/jpeg';
 
   @Input()
-  public fileUrl!: string | Array<string>;
+  public filesUrl?: Array<string>;
 
   @Input()
   public id!: string;
@@ -54,15 +54,18 @@ export class InputFileComponent implements AfterViewInit {
   @Input()
   multiple: boolean = false;
 
+  @Input()
+  label!: string;
+
   selectedSlideMain = signal<number>(this._selectedSlideMain);
 
   private get _selectedSlideMain(): number {
     return this.emblaApi ? this.emblaApi?.selectedScrollSnap() : 0;
   }
-  private _files = (
-    event: EventTarget | DataTransfer | null
-  ):  File[] => {
-    const files = Array.from((event as HTMLInputElement).files as FileList) as File[];
+  private _files = (event: EventTarget | DataTransfer | null): File[] => {
+    const files = Array.from(
+      (event as HTMLInputElement).files as FileList,
+    ) as File[];
     return this.multiple ? files : files;
   };
 
@@ -73,7 +76,7 @@ export class InputFileComponent implements AfterViewInit {
     const file = this._files(event);
     return file;
   };
-  private _fileSetMultiple!:Array<File>;
+  private _fileSetMultiple!: Array<File>;
 
   private get lastSlide() {
     if (!this.emblaApi) {
@@ -90,7 +93,7 @@ export class InputFileComponent implements AfterViewInit {
     if (this.multiple) {
       this.emblaApi = emblaApi;
       this.thumbApi = emblaApiThumb;
-      this.fileUrl = [];
+      this.filesUrl = [];
     }
   }
   uploadFile(event: Event) {
@@ -130,10 +133,9 @@ export class InputFileComponent implements AfterViewInit {
   }
 
   removeSlide(id: number) {
-    (this.fileUrl as Array<string>).splice(id, 1);
+    (this.filesUrl as Array<string>).splice(id, 1);
     this._fileSetMultiple.splice(id, 1);
     this._propagateSelected(this._fileSetMultiple);
-
   }
 
   private _displayPreview() {
@@ -152,7 +154,7 @@ export class InputFileComponent implements AfterViewInit {
     } else {
       const reader = new FileReader();
       reader.onload = (event: any) => {
-        this.fileUrl = event.target.result;
+        this.filesUrl = event.target.result;
         this.fileChange.emit(files);
       };
       reader.onerror = (event: any) => {
@@ -184,16 +186,17 @@ export class InputFileComponent implements AfterViewInit {
   }
 
   private _initFileSetMultiple(files: File[]) {
-    this._fileSetMultiple = this._fileSetMultiple ? [...files,...this._fileSetMultiple] : [...files] ;
-
+    this._fileSetMultiple = this._fileSetMultiple
+      ? [...files, ...this._fileSetMultiple]
+      : [...files];
   }
   private _addNewFile(urlFile: string) {
-    (this.fileUrl as Array<string>).push(urlFile);
+    (this.filesUrl as Array<string>).push(urlFile);
   }
 
   private _propagateSelected(files: File[]) {
-    if (this.fileUrl?.length === this._fileSetMultiple.length) {
+    if (this.filesUrl?.length === this._fileSetMultiple.length) {
       this.fileChange.emit(this._fileSetMultiple); // Emitir todos los archivos cuando todos estén listos
-    } 
+    }
   }
 }

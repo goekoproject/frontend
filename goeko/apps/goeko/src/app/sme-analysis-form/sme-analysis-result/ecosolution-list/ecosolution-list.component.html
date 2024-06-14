@@ -21,25 +21,24 @@
       </ng-container>
     </ul>
 
-    <fieldset
-        class="ecosolutions-fieldset"
-        class="fieldset-ods"
-      >
-        <div class="legend--info">
-          <legend>
-            {{
-              'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate
-            }}
-          </legend>
-  
-          <p class="text-support">
-            {{ 'TEXT_SUPPORT.ods' | translate }}
-          </p>
-        </div>
-  
-        <goeko-sdg-icons (valueSelected)="filterBySDG($event)" [size]="'large'"></goeko-sdg-icons>
+    <fieldset class="ecosolutions-fieldset" class="fieldset-ods">
+      <div class="legend--info">
+        <legend>
+          {{
+            'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate
+          }}
+        </legend>
 
-      </fieldset>
+        <p class="text-support">
+          {{ 'TEXT_SUPPORT.ods' | translate }}
+        </p>
+      </div>
+
+      <goeko-sdg-icons
+        (valueSelected)="filterBySDG($event)"
+        [size]="'large'"
+      ></goeko-sdg-icons>
+    </fieldset>
     <!-- <ul class="filter-ods">
       <li
         [class.active]="icon.active"

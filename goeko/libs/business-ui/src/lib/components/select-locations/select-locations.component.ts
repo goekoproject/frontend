@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  inject,
-  signal
-} from '@angular/core';
+import { AfterViewInit, Component, Input, inject, signal } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -66,7 +60,11 @@ export class SelectLocationsComponent implements AfterViewInit {
   ) => boolean;
   private destroy$ = new Subject<void>();
 
-  public optionAllProvince = { code: null, label: 'FORM_LABEL.allProvinces', isAll : true};
+  public optionAllProvince = {
+    code: null,
+    label: 'FORM_LABEL.allProvinces',
+    isAll: true,
+  };
   @Input() controlNameCountry!: string;
   @Input() controlNameProvince!: string;
   @Input()
@@ -113,19 +111,21 @@ export class SelectLocationsComponent implements AfterViewInit {
   public selectedLocationsIndex = signal<number>(0);
   formArraySubscription!: Subscription;
   public getOnlyRegions() {
-    return  this.controlCountryRegionsByIndex?.value?.filter((region : LocationRegions) => region.code !== this.optionAllProvince.code)
+    return this.controlCountryRegionsByIndex?.value?.filter(
+      (region: LocationRegions) => region.code !== this.optionAllProvince.code
+    );
   }
   public getAllReggions() {
-    return  this.controlCountryRegionsByIndex?.value?.filter((region : LocationRegions) => region.code === this.optionAllProvince.code)
+    return this.controlCountryRegionsByIndex?.value?.filter(
+      (region: LocationRegions) => region.code === this.optionAllProvince.code
+    );
   }
 
   public loadRegions(regions: LocationRegions[]) {
     return regions.every((region) => region.code);
   }
 
-  constructor() {
-
-  }
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges();
@@ -153,7 +153,10 @@ export class SelectLocationsComponent implements AfterViewInit {
         )
       )
       .subscribe(({ countryCode, regiones }) => {
-        this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince,...regiones]);
+        this.addRegionsForCodeCountry(countryCode, [
+          this.optionAllProvince,
+          ...regiones,
+        ]);
       });
   }
 
@@ -167,16 +170,19 @@ export class SelectLocationsComponent implements AfterViewInit {
 
   selectALL() {
     const allRegions = this.getAllReggions();
-    if(allRegions) {
-      this.controlCountryRegionsByIndex.patchValue(allRegions,{emitEvent: false})
+    if (allRegions) {
+      this.controlCountryRegionsByIndex.patchValue(allRegions, {
+        emitEvent: false,
+      });
     }
-
   }
 
   deselectAll() {
     const regions = this.getOnlyRegions();
-    if(regions) {
-      this.controlCountryRegionsByIndex.patchValue(regions,{emitEvent: false});
+    if (regions) {
+      this.controlCountryRegionsByIndex.patchValue(regions, {
+        emitEvent: false,
+      });
     }
   }
 
@@ -220,5 +226,4 @@ export class SelectLocationsComponent implements AfterViewInit {
     this.deleteLocation(index);
     this.toogleEdit = false;
   }
-
 }

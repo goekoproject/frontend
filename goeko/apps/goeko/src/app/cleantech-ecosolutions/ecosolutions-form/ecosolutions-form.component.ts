@@ -16,12 +16,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   CleanTechService,
   DataSelect,
+  Ecosolutions,
   EcosolutionsService,
   NewEcosolutionsBody,
   ODS_CODE,
 } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, last, of } from 'rxjs';
+import { forkJoin, last, of, switchMap } from 'rxjs';
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services';
 import {
   defaultSetCurrency,
@@ -53,7 +54,7 @@ export class EcosolutionsFormComponent implements OnInit {
   public defaultSetReductions = defaultSetReductions;
   public defaultSetyearGuarantee = defaultSetyearGuarantee;
   langSignal = signal(
-    this._translateServices.currentLang || this._translateServices.defaultLang
+    this._translateServices.currentLang || this._translateServices.defaultLang,
   );
   public dataSelect = DataSelect;
   public mainCategory!: string;
@@ -62,7 +63,7 @@ export class EcosolutionsFormComponent implements OnInit {
   private _cleantechId!: string;
   private fileCertificate: any;
   private _fileEcosolution!: File[];
-  public urlImgEcosolution!: string;
+  public urlPicEcosolution?: string[];
   public get isReadOnly(): boolean {
     return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true';
   }
@@ -74,7 +75,7 @@ export class EcosolutionsFormComponent implements OnInit {
     return new NewEcosolutionsBody(
       this._cleantechId,
       this.mainCategory,
-      this.form.value
+      this.form.value,
     );
   }
   constructor(
@@ -84,7 +85,7 @@ export class EcosolutionsFormComponent implements OnInit {
     private _cleanTeachService: CleanTechService,
     private _fb: FormBuilder,
     private _translateServices: TranslateService,
-    private _cleantechEcosolutionsService: CleantechEcosolutionsService
+    private _cleantechEcosolutionsService: CleantechEcosolutionsService,
   ) {}
 
   ngOnInit(): void {
@@ -99,17 +100,17 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _getParamsUrl() {
     this._cleantechId = this._route.snapshot.parent?.paramMap.get(
-      'id'
+      'id',
     ) as string;
     this.mainCategory = this._route.snapshot.queryParamMap.get(
-      'mainCategory'
+      'mainCategory',
     ) as string;
     this.idEcosolution = this._route.snapshot.paramMap.get('id') as string;
   }
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((current) => {
       this._cleantechEcosolutionsService.getSubcategorySelected(
-        this.mainCategory
+        this.mainCategory,
       );
       this.langSignal.set(current.lang);
     });
@@ -144,11 +145,11 @@ export class EcosolutionsFormComponent implements OnInit {
 
   initCheckboxControlSustainableDevelopmentGoals(): void {
     const odsControls = this.ods.map((ods) =>
-      this._fb.group({ checked: false, value: ods })
+      this._fb.group({ checked: false, value: ods }),
     );
     this.form.setControl(
       'sustainableDevelopmentGoals',
-      this._fb.array(odsControls)
+      this._fb.array(odsControls),
     );
   }
   get sustainableDevelopmentGoals(): FormArray {
@@ -166,11 +167,11 @@ export class EcosolutionsFormComponent implements OnInit {
   getEcosolution() {
     this._ecosolutionsService
       .getEcosolutionById(this.idEcosolution)
-      .subscribe((ecosolution: any) => {
+      .subscribe((ecosolution: Ecosolutions) => {
         this._getDocumentsCleantech();
-        this.urlImgEcosolution = ecosolution?.pictures
-          ? ecosolution?.pictures.at(-1)?.url
-          : '';
+        this.urlPicEcosolution = ecosolution?.pictures?.map(
+          (picture) => picture.url,
+        );
         this._patchDataToForm(ecosolution);
       });
   }
@@ -185,7 +186,7 @@ export class EcosolutionsFormComponent implements OnInit {
       fileCertificate: this._uploadCertificate(),
       ecosolution: this._ecosolutionsService.updateEcosolution(
         this.idEcosolution,
-        this.bodyRequestEcosolution
+        this.bodyRequestEcosolution,
       ),
     }).subscribe((res: any) => {
       if (res) {
@@ -225,23 +226,28 @@ export class EcosolutionsFormComponent implements OnInit {
     }
   }
   private _createEcosolution() {
-    forkJoin({
-      ecosolution: this._ecosolutionsService.createEcosolutions(
-        this.bodyRequestEcosolution
-      ),
-    }).subscribe((res) => {
-      this._uploadCertificate();
-      this._uploadImg(res.ecosolution);
-      this.goToListEcosolution();
-    });
+    this._ecosolutionsService
+      .createEcosolutions(this.bodyRequestEcosolution)
+      .pipe(
+        switchMap((ecosolution) => {
+          const uploadImage$ = this._uploadImg(ecosolution);
+          const uploadCertificate$ = this._uploadCertificate();
+          return forkJoin([uploadImage$, uploadCertificate$]);
+        }),
+      )
+      .subscribe(() => {
+        this.goToListEcosolution();
+      });
   }
 
   private _uploadImg(ecosolution: any) {
     if (this._fileEcosolution && ecosolution) {
-      this._ecosolutionsService
-        .uploadImage(ecosolution?.id, this._fileEcosolution[0])
-        .subscribe();
+      return this._ecosolutionsService.uploadImage(
+        ecosolution?.id,
+        this._fileEcosolution,
+      );
     }
+    return of(null);
   }
 
   fileChange(file: any) {
@@ -250,19 +256,6 @@ export class EcosolutionsFormComponent implements OnInit {
 
   uploadImgEcosolutions(file: any) {
     this._fileEcosolution = file;
-  }
-
-  private _buildImgEcosolution(file: File) {
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.urlImgEcosolution = event.target.result;
-    };
-
-    reader.onerror = (event: any) => {
-      console.log('File could not be read: ' + event.target.error.code);
-    };
-
-    reader.readAsDataURL(file);
   }
 
   private _getDocumentsCleantech() {
@@ -285,11 +278,12 @@ export class EcosolutionsFormComponent implements OnInit {
     }
     return this._cleanTeachService.uploadDocument(
       this._cleantechId,
-      this.fileCertificate
+      this.fileCertificate,
     );
   }
   goToListEcosolution() {
-    this._router.navigate(['../cleantech-ecosolutions', this._cleantechId],
-     {relativeTo: this._route.parent?.parent});
+    this._router.navigate(['../cleantech-ecosolutions', this._cleantechId], {
+      relativeTo: this._route.parent?.parent,
+    });
   }
 }
