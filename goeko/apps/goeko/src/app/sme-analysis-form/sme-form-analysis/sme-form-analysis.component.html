@@ -1,5 +1,4 @@
 <div class="analysis-wrapper" [formGroup]="form">
-  
   <section class="section-form gap-16">
     <div class="flex gap-1 text-2xl text-primary-900 items-center">
       <i class="ti ti-info-circle-filled"></i>
@@ -7,78 +6,98 @@
         {{ 'FORM_LABEL.titleFormAnalysis' | translate }}
       </h3>
     </div>
-   
-    @defer (when dataCategorySelected && form && form.get(dataCategorySelected.code)) {
-    
-    <!-- CATEGORY -->
-    <section class="section-step items-start">
-      @for (category of categories(); track category.id) {
-      <goeko-category
-        id="{{ category.id }}"
-        [selected]="category.code === categorySelected().code"
-        (click)="selectCategory(category)"
-        [icon]="'assets/category/' + category.icon + '.svg'"
-      >
-        <p title class="text-primary-950">{{ category.keyLang | translate }}</p>
-        <div dataExtra>
-          @if((form.get(category.code)?.getRawValue() | countSubcategory) !== 0) {
-            <p>
-              {{ form.get(category.code)?.getRawValue() | countProduct}}  {{ 'selectedProducts' | translate }}
-            </p>
-          } 
-         
-        </div>
-      </goeko-category>
-      }
-    </section>
 
-    <!-- SUBCATEGORY -->
-    @for (category of categories(); track category.id; let index = $index) {
-    @if(category.code === categorySelected().code) {
-    <section
-      class="content-form go-scroll"
-      formGroupName="{{ dataCategorySelected.code }}"
-    >
-     <!--  <div class="title-category" title>
-        <i class="ti ti-info-circle-filled"></i>
-        <h3>{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}</h3>
-      </div> -->
-      @for (subcategory of dataCategorySelected.subcategories; track
-      subcategory.code ; let index = $index;){
-      @if(form.get(dataCategorySelected.code)?.get(subcategory.code)) {
-      <!--FORM ACTORS-->
-      <div class="form-field form-field--center">
-        <!-- PRODUCTS (disabled = false)-->
-
-        <goeko-select-subcategory-product
-          [id]="subcategory.code"
-          [subCategory]="subcategory"
-          [typeTitle]="'question'"
-          [multiple]="true"
-          [checked]="
-            !!form.value[this.dataCategorySelected.code][subcategory.code]
-          "
-        >
-          <p title>{{ subcategory.question }}</p>
-          <go-badge-group
-            [formControlName]="subcategory.code"
-            [id]="subcategory.code"
-            [name]="subcategory.code"
-            [compareWith]="compareWithProducts"
+    @defer (
+      when dataCategorySelected && form && form.get(dataCategorySelected.code)
+    ) {
+      <!-- CATEGORY -->
+      <section class="section-step items-start">
+        @for (category of categories(); track category.id) {
+          <goeko-category
+            id="{{ category.id }}"
+            [selected]="category.code === categorySelected().code"
+            (click)="selectCategory(category)"
+            [icon]="'assets/category/' + category.icon + '.svg'"
           >
-            @for (product of subcategory.products; track product.code) {
-            @if(!product.disabled) {
+            <p title class="text-primary-950">
+              {{ category.keyLang | translate }}
+            </p>
+            <div dataExtra>
+              @if (
+                (form.get(category.code)?.getRawValue() | countSubcategory) !==
+                0
+              ) {
+                <p>
+                  @if (
+                    (form.get(category.code)?.getRawValue() | countProduct) > 1;
+                    as countProduct
+                  ) {
+                    {{ form.get(category.code)?.getRawValue() | countProduct }}
+                    {{ 'selectedProducts' | translate }}
+                  } @else {
+                    1 {{ 'selectedProduct' | translate }}
+                  }
+                </p>
+              }
+            </div>
+          </goeko-category>
+        }
+      </section>
 
-            <go-badge [value]="product">{{
-              product.label | translate
-            }}</go-badge>
-            } }
-          </go-badge-group>
-        </goeko-select-subcategory-product>
-      </div>
-      } }
-    </section>
-    } } }
+      <!-- SUBCATEGORY -->
+      @for (category of categories(); track category.id; let index = $index) {
+        @if (category.code === categorySelected().code) {
+          <section
+            class="content-form go-scroll"
+            formGroupName="{{ dataCategorySelected.code }}"
+          >
+            @for (
+              subcategory of dataCategorySelected.subcategories;
+              track subcategory.code;
+              let index = $index
+            ) {
+              @if (form.get(dataCategorySelected.code)?.get(subcategory.code)) {
+                <!--FORM ACTORS-->
+                <div class="form-field form-field--center">
+                  <!-- PRODUCTS (disabled = false)-->
+
+                  <goeko-select-subcategory-product
+                    [id]="subcategory.code"
+                    [subCategory]="subcategory"
+                    [typeTitle]="'question'"
+                    [multiple]="true"
+                    [checked]="
+                      !!form.value[this.dataCategorySelected.code][
+                        subcategory.code
+                      ]
+                    "
+                  >
+                    <p title>{{ subcategory.question }}</p>
+                    <go-badge-group
+                      [formControlName]="subcategory.code"
+                      [id]="subcategory.code"
+                      [name]="subcategory.code"
+                      [compareWith]="compareWithProducts"
+                    >
+                      @for (
+                        product of subcategory.products;
+                        track product.code
+                      ) {
+                        @if (!product.disabled) {
+                          <go-badge [value]="product">{{
+                            product.label | translate
+                          }}</go-badge>
+                        }
+                      }
+                    </go-badge-group>
+                  </goeko-select-subcategory-product>
+                </div>
+              }
+            }
+          </section>
+        }
+      }
+    }
     <p>{{ dateLastRecomendation | goDateFormat }}</p>
   </section>
   <div class="form-actions">

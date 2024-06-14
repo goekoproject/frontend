@@ -426,7 +426,9 @@
   "selectAll": "Tout sélectionner",
   "deSelectAll": "Tout déselectionner",
   "questionsAnswered": "Questions répondues",
-  "selectedProducts": "Produits sélectionnés",
+  "selectedProducts": " Produits sélectionnés",
+  "selectedProduct": "Produit sélectionné",
+
   "notAvailable": "Pas disponible",
   "mandatory": "Obligatoire",
   "exit": "Sortir",
