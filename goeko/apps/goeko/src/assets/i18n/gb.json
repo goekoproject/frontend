@@ -123,6 +123,7 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
+    "titleFormAnalysis":"Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
     "advantagesSupportText": "Advantages compared to a standard solution",
@@ -133,6 +134,7 @@
     "city": "City",
     "companyName": "Company name",
     "countriesAvailable": "Countries Available",
+    "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
     "currency": "Currency",
     "deliverCountries": "Countries where your eco-solution is approved",
@@ -176,7 +178,9 @@
     "province": "Province",
     "newProvince": "Add a new province",
     "selectProvinces": "Selection of provinces",
-    "allProvinces": "All regions"
+    "allProvinces": "All regions",
+    "showProvinces": "Show regions"
+
 
   },
   "VERIFY_EMAIL": {
@@ -425,6 +429,11 @@
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at {{email}}"
   },
+  "selectAll": "Select All",
+  "deSelectAll": "Deselect all",
+  "questionsAnswered": "Questions answered",
+  "selectedProducts": "Selected products",
+  "notAvailable":"Not available",
   "mandatory" :"Mandatory",
   "exit": "Exit",
   "logout":"Log out",
@@ -453,7 +462,7 @@
   "dashboard": "Dashboard",
   "decline": "Decline",
   "defaultMessageLead": "Hello, I am interested in your ecological solution. Please contact me at the following email address:",
-  "cleantechLeadDefault": "Close to finding new sustainable leads. Get ready to connect!",
+  "cleantechLeadDefault": "Track connections with your qualified leads.",
   "details": "Details",
   "edit": "Edit",
   "lastLead": "Latest lead",

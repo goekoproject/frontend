@@ -443,6 +443,12 @@ export abstract class BaseSelectComponent
       value.forEach((currentValue: any) =>
         this._selectOptionByValue(currentValue)
       );
+      const valuesSelected= (this.selected as SuperOptionComponent[]).map(
+        (option) => option.value
+      );
+      if(valuesSelected && valuesSelected.length > 0) {
+         this._propagateChanges();      }
+
     } else {
       const correspondingOption = this._findOptionByValue(value);
       if (correspondingOption) {
@@ -475,6 +481,7 @@ export abstract class BaseSelectComponent
 
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption);
+
     }
 
     return correspondingOption;
@@ -503,6 +510,8 @@ export abstract class BaseSelectComponent
     ) as SuperOptionComponent;
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption);
+      this._onChange(correspondingOption?.value);
+
     }
     return correspondingOption;
   }
@@ -517,7 +526,6 @@ export abstract class BaseSelectComponent
    */
   _onSelect(option: SuperOptionComponent, isUserInput: boolean): void {
     const wasSelected = this._selectionModel.isSelected(option);
-
     if (option.value == null && !this.multiple) {
       option.deselect();
       this._selectionModel.clear();
@@ -533,9 +541,9 @@ export abstract class BaseSelectComponent
       if (isUserInput) {
         this._keyManager.setActiveItem(option);
       }
-      if (this._selectionModel.isSelected(option) && this.loadInit) {
+     /*  if (this._selectionModel.isSelected(option)) {
         this._propagateChanges();
-      }
+      } */
       if (this.multiple) {
         if (isUserInput) {
           // In case the user selected the option with their mouse, we
@@ -546,7 +554,7 @@ export abstract class BaseSelectComponent
         }
       }
     }
-    if (wasSelected !== this._selectionModel.isSelected(option) && !this.loadInit) {
+    if (wasSelected !== this._selectionModel.isSelected(option)) {
       this._propagateChanges();
     }
   }
@@ -598,7 +606,7 @@ export abstract class BaseSelectComponent
       !hasModifierKey(event)
     ) {
       event.preventDefault();
-      manager?.activeItem?.selectViaInteraction();
+      manager?.activeItem?._selectViaInteraction();
     } else {
       manager.onKeydown(event);
     }
@@ -771,9 +779,10 @@ export abstract class BaseSelectComponent
       (this._multiple && Array.isArray(newValue))
     ) {
       if (this.optionElement) {
-        this._value = newValue;
         this._setSelectionByValue(newValue);
       }
+      this._value = newValue;
+      return true;
     }
     return false;
   }

@@ -121,6 +121,7 @@
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
+    "titleFormAnalysis":"Sélectionnez vos catégories pour trouver des éco-solutions",
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",
     "advantagesSupportText": "Avantages par rapport à une solution standard",
@@ -131,6 +132,7 @@
     "city": "Ville",
     "companyName": "Nom de l'entreprise",
     "countriesAvailable": "Pays disponibles",
+    "countriesProvincesAvailable": "Pays et régions de distribution",
     "country": "Pays",
     "currency": "Devise",
     "deliverCountries": "Pays où votre éco-solution est livrable",
@@ -174,7 +176,9 @@
     "province": "Région",
     "newProvince": "Ajouter une nouvelle région",
     "selectProvinces": "Sélection de régions",
-    "allProvinces": "Toutes les régions"
+    "allProvinces": "Toutes les régions",
+    "showProvinces": "Voir les régions"
+
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",
@@ -423,6 +427,11 @@
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à {{email}}"
   },
+  "selectAll": "Tout sélectionner",
+  "deSelectAll": "Tout déselectionner",
+  "questionsAnswered": "Questions répondues",
+  "selectedProducts": "Produits sélectionnés",
+  "notAvailable":"Pas disponible",
   "mandatory" :"Obligatoire",
   "exit": "Sortir",
   "dragAndDrop": "Glisser déposer",
@@ -432,7 +441,7 @@
   "your":"Votre",
   "accept": "Accepter",
   "add": "Ajouter",
-  "alertSelectedProduct": "Sélectionnez une ou plusieurs solutions",
+  "alertSelectedProduct": "Sélectionnez une ou plusieurs produits",
   "all": "Tout",
   "analysis": "Analyse",
   "availability": "Disponibilité:",
@@ -453,7 +462,7 @@
   "dashboard": "Tableau de bord",
   "decline": "Refuser",
   "defaultMessageLead": "Bonjour, votre éco-solution m’intéresse. Merci de bien vouloir me contacter par e-mail.",
-  "cleantechLeadDefault": "Sur le point de découvrir de nouveaux prospects durables. Préparez-vous à vous connecter !",
+  "cleantechLeadDefault": "Suivez les connexions avec vos leads qualifiés.",
 
   "details": "Détails",
   "edit": "Modifier",

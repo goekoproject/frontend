@@ -8,13 +8,13 @@
 <div class="ecosolutions-heading">
 	<h1>{{ solutionName }}</h1>
 	<div class="ecosolutions-products">
-		<p>{{ products }}</p>
+		<p>{{ products | displayProducts }}</p>
 		<span class="tag-vertical"></span>
 	</div>
 </div>
 
 <div class="ecosolutions-sdg">
-	<ng-container *ngFor="let item of sustainableDevelopmentGoals; let i = index">
+	<ng-container *ngFor="let item of sustainableDevelopmentGoals | orderBy; let i = index">
 		<img
 			*ngIf="i < 3"
 			class="ods-icon"

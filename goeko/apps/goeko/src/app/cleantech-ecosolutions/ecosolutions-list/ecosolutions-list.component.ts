@@ -18,6 +18,7 @@ import { CardEcosolutions } from './card-ecosolutions.model';
 })
 export class EcosolutionsListComponent implements OnInit {
   public categorySection = this._cleantechEcosolutionsService.categories();
+  public categorySelected = this._cleantechEcosolutionsService.categorySelected;
   public isSubscribed = !!this._cleantechEcosolutionsService.isSubscribed;
   public ecosolutions!: CardEcosolutions[];
   public cleanTechId!: string;
@@ -81,6 +82,6 @@ export class EcosolutionsListComponent implements OnInit {
   }
 
   selectedTab(category: ClassificationCategory) {
-    this._cleantechEcosolutionsService.categorySelected.set(category);
+    this.categorySelected.set(category);
   }
 }

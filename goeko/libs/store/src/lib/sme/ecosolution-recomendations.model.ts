@@ -1,3 +1,5 @@
+import { LocationTranslated } from "../model/location-translated.interface";
+
 export interface ResponseRecommendations {
   ecosolutions: Recommendation[];
 }
@@ -20,7 +22,10 @@ export interface Recommendation {
 	solutionName: string;
 	sustainableDevelopmentGoals: number[];
 	pictures: PictureEcosolution[];
+	locations: LocationTranslated[]
 }
+
+
 
 export interface Classification {
 	mainCategory: string;

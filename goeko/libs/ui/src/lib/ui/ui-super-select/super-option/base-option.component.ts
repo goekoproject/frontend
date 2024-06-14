@@ -45,8 +45,12 @@ export abstract class BaseOptionComponent implements FocusableOption, Highlighta
 	}
 	public set valueSelected(value: any) {
 		this._valueSelected = value;
-		this.selected = true;
-		this.select();
+		if(value) {
+			this.select();
+
+		}  else {
+			this.deselect()
+		}
 		this._changeDetector.detectChanges();
 	}
 	private _valueSelected: any;
@@ -114,18 +118,11 @@ export abstract class BaseOptionComponent implements FocusableOption, Highlighta
 		this._activeOption = false;
 	}
 
-	selectViaInteraction(): void {
-		if (!this.disabled) {
-			this._activeOption = true;
-			this._changeDetector.markForCheck();
-			this.focus();
-			this._emitSelectionChangeEvent(true);
-		}
-	}
+
 
 	_handleKeydown(event: KeyboardEvent) {
 		if ((event.keyCode === ENTER || event.keyCode === SPACE) && !hasModifierKey(event)) {
-			this.selectViaInteraction();
+			this._selectViaInteraction();
 			event.preventDefault();
 		}
 	}

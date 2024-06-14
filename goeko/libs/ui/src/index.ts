@@ -5,6 +5,7 @@ export * from './lib/ui/badge/public-api';
 export * from './lib/ui/button/public-api';
 export * from './lib/ui/carousel/public-api';
 export * from './lib/ui/dialog-message/public-api';
+export * from './lib/ui/dialog/public-api';
 export * from './lib/ui/goeko-button/public-api';
 export * from './lib/ui/input-file/public-api';
 export * from './lib/ui/input/go-input.directive';

@@ -208,11 +208,13 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
   gotToSummary() {
     this.currentAnalytics.set(this.form.value);
-    this._router.navigate([`/sme-analysis/projects/summary`], {
-      relativeTo: this._route,
+    this._router.navigate([`summary`], {
+      relativeTo: this._route.parent,
       queryParams: {
         smeId : this._smeId
-      }
+      },
+      queryParamsHandling: 'merge'
+
     });
   }
 }

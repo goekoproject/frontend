@@ -3,7 +3,7 @@
 @if(!newLocation || !toogleEdit) {
 <div
   (click)="addLocation()"
-  class="flex items-center justify-center h-16 border rounded-md border-dashed  border-primary-500 text-primary-500 text-4xl cursor-pointer"
+  class="flex items-center justify-center h-16 border rounded-md border-dashed border-primary-500 text-primary-500 text-4xl cursor-pointer"
 >
   <i class="ti ti-plus"></i>
   <p class="text-base">{{ 'FORM_LABEL.newProvince' | translate }}</p>
@@ -16,7 +16,6 @@
       @for(location of controlLocations.controls; track location; let i=$index){
       @if (location) {
       <div
-        class="h-28"
         [class.hidden-selected]="toogleEdit && i === selectedLocationsIndex()"
       >
         <ng-container
@@ -33,23 +32,26 @@
         "
         class="locations-selected border-primary-500"
       >
-        <div [formGroupName]="controlNameCountry">
+        <div [formGroupName]="controlNameCountry" class="w-full">
+          @if(controlCountryCodeByIndex) {
           <ui-super-select
             [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
             [formControlName]="'code'"
             [id]="controlNameCountry"
             [compareWith]="defaultSetSuperSelect"
-            (valueChange)="onCodeChange($event.value)"
-            [loadInit]="true"
           >
             <label title for="{{ controlNameCountry }}">
               {{ 'FORM_LABEL.country' | translate }}
             </label>
-            <super-option *ngFor="let option of countries()" [value]="option">
+            @for ( option of countries(); track option.code) {
+            <super-option [value]="option">
               {{ option.label | translate }}
             </super-option>
+            }
           </ui-super-select>
+          }
 
+          @if(location.value.country.code.code; as codeCountry) {
           <div class="flex gap-4 items-center">
             <ui-super-select
               [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -57,30 +59,27 @@
               [id]="controlNameProvince"
               [multiple]="true"
               [compareWith]="defaultSetSuperSelect"
-              [loadInit]="true"
-              [disabled]="isAllProvince"
             >
               <label title for="{{ controlNameProvince }}">
                 {{ 'FORM_LABEL.province' | translate }}
               </label>
-              <super-option *ngFor="let option of regions()" [value]="option">
-                {{ option.label | translate }}
-              </super-option>
-            </ui-super-select>
 
-            <div class="flex gap-1 items-center cursor-pointer">
-              <input
-                type="checkbox"
-                id="allProvinces"
-                name="allProvinces"
-                [checked]="isAllProvince"
-                (change)="getIsProvince($event.target)"
-              />
-              <label for="allProvinces">{{
-                'FORM_LABEL.allProvinces' | translate
-              }}</label>
-            </div>
+               @for(option of this.dataSourceSelect.get(codeCountry); track option) {
+
+                @if(option.code === optionAllProvince.code) {
+                  <super-option [value]="option" (click)="selectALL()">
+                    {{ option.label | translate }}
+                  </super-option>
+                } @else {
+                  <super-option [value]="option" (click)="deselectAll()">
+                    {{ option.label | translate }}
+                  </super-option>
+                }
+
+              }
+            </ui-super-select>
           </div>
+          }
         </div>
         <div class="m-auto flex gap-2 mr-0">
           <i
@@ -104,7 +103,7 @@
   <article
     class="locations-selected border-primary-500 text-primary-500 justify-around"
   >
-    <section class="selected-element">
+    <section class="selected-element basis-32">
       <span class="title-elements">
         {{ 'FORM_LABEL.country' | translate }}</span
       >
@@ -118,19 +117,23 @@
         {{ 'FORM_LABEL.province' | translate }}</span
       >
 
+      @if(location.get(controlNameCountry)?.value) {
       <div class="selected-provinces">
-        @if(location.get(controlNameCountry)?.value.regions) { @for ( provinces
-        of location.get(controlNameCountry)?.value.regions; track
-        provinces.code) {
+        @if(location.get(controlNameCountry)?.value.regions && location.get(controlNameCountry)?.value.regions.length > 0) {
+           @for(provinces of location.get(controlNameCountry)?.value.regions; track provinces.code) {
         <p class="provinces bg-primary-300 text-darkAccent">
-          {{ provinces.label }}
+          {{ provinces.label | translate}}
         </p>
-        } } @else {
+          }
+        }
+        @else {
         <p class="provinces bg-primary-300 text-darkAccent">
           {{ 'FORM_LABEL.allProvinces' | translate }}
         </p>
         }
       </div>
+
+      }
     </section>
     <i
       class="ti ti-edit text-4xl m-auto cursor-pointer"

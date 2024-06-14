@@ -7,7 +7,7 @@
     <ng-container *ngFor="let item of categorySection; let first = first">
       <go-tab
         [title]="item.keyLang | translate"
-        [selected]="first"
+        [selected]="categorySelected().code ===item.code"
         (selectedTab)="selectedTab(item)"
       >
         <div #content class="ecosolutions-card-list">
@@ -23,38 +23,40 @@
             <i class="ti ti-plus"></i>
             <p>{{ 'add' | translate }} Ecosolutions</p>
           </button>
-          <ng-container *ngFor="let ecosolution of ecosolutions">
+          @for (ecosolution of ecosolutions; track ecosolution.id) {
+
             <goeko-card-ecosolutions
-              *ngIf="item.code === ecosolution.mainCategory"
-              [solutionName]="ecosolution.solutionName"
-              [products]="ecosolution.products"
-              [sustainableDevelopmentGoals]="
-                ecosolution.sustainableDevelopmentGoals
-              "
+            *ngIf="item.code === ecosolution.mainCategory"
+            [solutionName]="ecosolution.solutionName"
+            [products]="ecosolution.products"
+            [sustainableDevelopmentGoals]="
+              ecosolution.sustainableDevelopmentGoals
+            "
+          >
+            <button
+              go-button-icon
+              (click)="viewEcosolution(ecosolution)"
+              action-view
             >
-              <button
-                go-button-icon
-                (click)="viewEcosolution(ecosolution)"
-                action-view
-              >
-                <i class="ti ti-eye"></i>
-              </button>
-              <button
-                go-button-icon
-                (click)="editEcosolution(ecosolution)"
-                action-edit
-              >
-                <i class="ti ti-pencil"></i>
-              </button>
-              <button
-                go-button-icon
-                (click)="deleteEcosolution(ecosolution)"
-                action-delete
-              >
-                <i class="ti ti-trash"></i>
-              </button>
-            </goeko-card-ecosolutions>
-          </ng-container>
+              <i class="ti ti-eye"></i>
+            </button>
+            <button
+              go-button-icon
+              (click)="editEcosolution(ecosolution)"
+              action-edit
+            >
+              <i class="ti ti-pencil"></i>
+            </button>
+            <button
+              go-button-icon
+              (click)="deleteEcosolution(ecosolution)"
+              action-delete
+            >
+              <i class="ti ti-trash"></i>
+            </button>
+          </goeko-card-ecosolutions>
+          }
+          
         </div>
       </go-tab>
     </ng-container>

@@ -41,6 +41,9 @@ export class SelectSubcategoryProductDirective implements AfterContentInit {
 	}
 
 	private _onFocusElement() {
+		if(!this.inputElement) {
+			return;
+		}
 		this._renderer.listen(this.inputElement, 'focus', (inputElement) => {
 			if (inputElement.type === TYPE_FIELD.RADIO) {
 				this._showSubCategorySelected(inputElement.srcElement);

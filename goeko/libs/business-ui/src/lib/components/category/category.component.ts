@@ -17,5 +17,6 @@ export class CategoryComponent {
 
 	@Input() icon!: string;
 
+
 	constructor() {}
 }

@@ -69,7 +69,13 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
   }
 
   private get _resultPath(): string { 
-    return this.isProject ? 'projects/results': 'results'
+    return 'results'
+  }
+
+  private get projectId(): string {
+    return this._route.snapshot.queryParamMap.get(
+      'projectId'
+    ) as string;
   }
   constructor(
     private _smeServices: SmeService,
@@ -177,36 +183,61 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
   }
 
   goToSearchEcosolutions() {
-     this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
+    if(!this.savedAnalysis) {
+      this._dialogInfoMessage.afterClosed().subscribe(saveAnalysis=> {
         if(saveAnalysis) {
           this.saveAnalysisOrProject(this._resultPath);
           this.savedAnalysis = true;
 
         } else {
-          this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
-          this.savedAnalysis = true;
-
+          this._goToSearchEcosolutions()
         }
       }); 
+    } else{
+      this._goToSearchEcosolutions()
+
+    }
+
+  }
+
+  private _goToSearchEcosolutions() {
+    this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
+    this.savedAnalysis = true;
   }
 
   saveAnalysisOrProject(route?: string) {
+    this.savedAnalysis = true;
     if (this.isProject) {
-      this._saveProject(route);
+      this._updateOfCreateProject(route);
     } else {
       this._saveAnalysis(route);
     }
   }
+
+  private _updateOfCreateProject(route?: string) {
+    if(this.projectId) {
+      this._updateProject(route);
+    } else {
+      this._saveProject(route);
+
+    }
+  }
   private _saveProject(route?:string) {
     const smeAnalysisRequest = new FormValueToSmeProjectRequest(
+      this.currentAnalytics(),
       this._smeId,
-      this.currentAnalytics()
     );
     this._projectService.saveProject(smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
       this.savedAnalysis = true;
-      this._router.navigate([`../${this._resultPath}`, this._smeId], {relativeTo: this._route});
-      this._goToResult(route)
+    });
+  }
 
+  private _updateProject(route?:string) {
+    const smeAnalysisRequest = new FormValueToSmeProjectRequest(
+      this.currentAnalytics()
+    );
+    this._projectService.updateProject(this.projectId,smeAnalysisRequest).pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((res) => {
+      this.savedAnalysis = true;
     });
   }
   private _saveAnalysis(route?:string) {
@@ -219,7 +250,6 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
       .subscribe(() => {
         this.savedAnalysis = true;
         if(route)
-        this._router.navigate([this._resultPath, this._smeId], {relativeTo: this._route});
         this._goToResult(route)
       });
   }

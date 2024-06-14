@@ -3,14 +3,12 @@ $size-icon: 62%;
 .wrapper-category {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
   align-items: center;
-  width: max-content;
   min-width: 8rem;
   [title] {
     width: max-content;
-    color: #24253b;
   }
+  @apply p-4 rounded-3xl cursor-pointer border transition-all min-w-48
 }
 .category {
   max-width: 120px;

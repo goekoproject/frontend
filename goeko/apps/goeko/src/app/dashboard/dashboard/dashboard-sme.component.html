@@ -44,7 +44,8 @@
       <button
         go-button
         type="button"
-        [routerLink]="['/sme-analysis/projects/new']"
+        [routerLink]="['../sme-analysis/projects/new']"
+        [relativeTo]="route.parent"
         [queryParams]="{ smeId: userProfile().id }"
         [queryParamsHandling]="'merge'"
         routerLinkActive="router-link-active"

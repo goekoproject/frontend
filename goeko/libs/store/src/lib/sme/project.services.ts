@@ -1,25 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { SessionStorageService } from '../session-storage.service';
-import { SmeOptions } from './sme-options';
-import { SME_CONFIGURATION } from './sme.module';
 import {
   Observable,
+  ObservableInput,
+  find,
+  from,
   map,
   mergeMap,
-  from,
-  ObservableInput,
-  filter,
-  reduce,
-  find,
+  reduce
 } from 'rxjs';
+import { SessionStorageService } from '../session-storage.service';
+import { SmeOptions } from './sme-options';
 import {
   Projetcs,
   SmeCreateRecomendationRequest,
   SmeRequestResponse,
   SmeSaveRecomendationRequest,
 } from './sme-request.model';
-import { Q } from '@angular/cdk/keycodes';
+import { SME_CONFIGURATION } from './sme.module';
 //TODO: Change obj modal
 
 @Injectable()
@@ -47,7 +45,7 @@ export class ProjectService {
     id: string,
     body: SmeSaveRecomendationRequest
   ): Observable<any> {
-    return this._http.put<any>(`/v1/ecosolution/search/projects/smes${id}`, body);
+    return this._http.put<any>(`/v1/ecosolution/search/projects/smes/${id}`, body);
   }
   getLastProjectBySmeId(id: string): Observable<SmeRequestResponse> {
     return this.getProjects(id).pipe(

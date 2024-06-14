@@ -14,7 +14,7 @@ export function mapperLocations(locations: any[]): any[] {
 	  ...location,
 	  country: {
 		code: location?.country?.code?.code,
-		regions: location?.country?.regions ? location?.country?.regions?.map((region:any) => region.code) : undefined
+		regions: location?.country?.regions && location?.country?.regions?.every((region:any) => region.code) ? location?.country?.regions?.map((region:any) => region.code) : undefined
 	  },
 	}));
   }

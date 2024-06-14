@@ -123,6 +123,7 @@
   "dragAndDrop": "Arrastar y soltar",
   "editSelection": "Modificar selección",
   "FORM_LABEL": {
+    "titleFormAnalysis":"Elija una Categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
@@ -133,6 +134,7 @@
     "city": "Ciudad",
     "companyName": "Nombre de la Compañia",
     "countriesAvailable": "Países disponibles",
+    "countriesProvincesAvailable": "Países y regiones de distribución",
     "country": "Pais",
     "currency": "Moneda",
     "deliverCountries ": "Países donde está aprobada su solución ecológica",
@@ -175,7 +177,8 @@
     "province": "Provincia",
     "newProvince": "Nueva comunidad autónoma",
     "selectProvinces": "Selección comunidad autónoma",
-    "allProvinces": "Todas las comunidades autonomas"
+    "allProvinces": "Todas las comunidades autonomas",
+    "showProvinces": "Ver provincias"
   },
   "VERIFY_EMAIL": {
     "title":"Revisa tu bandeja de entrada.",
@@ -425,6 +428,11 @@
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
     "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
+  "selectAll": "Seleccionar todo",
+  "deSelectAll": "Deseleccionar todo",
+  "questionsAnswered": "Preguntas contestadas",
+  "selectedProducts": "Productos seleccionados",
+  "notAvailable":"No disponible",
   "mandatory" :"Obligatorio",
   "exit": "Salir",
   "logout":"Cerrar sesión",
@@ -452,7 +460,7 @@
   "dashboard": "Dashboard",
   "decline": "Rechazar",
   "defaultMessageLead": "Hola, estoy interesado en tu solución ecológica. Por favor contáctame a la siguiente dirección de correo electrónico:",
-  "cleantechLeadDefault": "Cerca de nuevos leads sostenibles. ¡Prepárate para conectar con ellos!",
+  "cleantechLeadDefault": "Realice un seguimiento de las conexiones con sus clientes potenciales calificados.",
   "details": "Detalles",
   "edit": "Editar",
   "lastLead": "Ultimo cliente potencial",

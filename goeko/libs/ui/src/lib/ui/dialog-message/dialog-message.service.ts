@@ -15,6 +15,7 @@ export interface DialogConfig {
     buttonPrimary?: string ;
     buttonSecondary?: string;
     type?:MessageType;
+    data?: any;
 
 }
 const DEFAULT_DATA: DialogConfig = {
@@ -22,7 +23,9 @@ const DEFAULT_DATA: DialogConfig = {
     body: '',
     buttonPrimary : '',
     buttonSecondary: '',
-    type : MESSAGE_TYPE.INFO
+    type : MESSAGE_TYPE.INFO,
+    data: null
+
 }
 @Injectable()
 export class DialogMessageService {
