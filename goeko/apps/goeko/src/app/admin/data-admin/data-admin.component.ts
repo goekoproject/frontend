@@ -13,7 +13,23 @@ import { SmeService } from '@goeko/store';
 export class DataAdminComponent implements OnInit {
 
   //delcare var 
+  public smeUsers: any[] = [];
+  public headers = [
+    {
+      title: 'ID',
+      key: 'id'
+    },
+    {
+      title: 'b',
+      key: '2'
+    },
+    {
+      title: 'b2',
+      key: '3'
+    },
+  ]
   //TODO: contrustor(private _smeServices: SmeServices)
+  constructor(private _smeServices: SmeService) { }
 
    /* define public var headers = [
                   {
@@ -31,15 +47,18 @@ export class DataAdminComponent implements OnInit {
           
           */
 
-          /**
+          /*
            *  Para body
            *   @for() -->smeUsers
            * 
            * 
            */
   ngOnInit(): void {
-    //this._smeServices.getAll().subscribe( smeUsers => console.log(smeUsers));
-  // create public var this.smeUser= smeUsers ( into suscribe)
+    this._smeServices.getAllSmesData().subscribe( smeUsersData => {
+      this.smeUsers = smeUsersData;
+      console.log(smeUsersData);
+    });
+   
   }
-   //
+   
 }

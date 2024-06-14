@@ -24,20 +24,26 @@
                     </div>
                     <div class="mt-7 overflow-x-auto rounded-lg">
                         <table class="w-full">
+                                <thead>
+                                    <tr scope="col">
+                                        @for( header of headers; track header) {
+                                            <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">{{ header.title }}</th>
+                                        }
+                                    </tr>
+                                </thead>
                                 <tbody bg-white divide-y divide-gray-200>
-                                        
+                                    @for( smeUser of smeUsers; track smeUser) {
                                         <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <!--<input type="checkbox" class="h-4 w-4 rounded"/>-->
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ExampleCompany</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">examplecompany&#64;gmail.com</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">20.12.2013</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Cleantech</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="text-sm uppercase font-medium text-green-500 bg-green-300 rounded-full bg-opacity-400">Subscribed</span>
+                                            <!--<td class="px-6 py-4 whitespace-nowrap">
+                                                <input type="checkbox" class="h-4 w-4 rounded"/>
+                                            </td>-->
 
-                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.id }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.country }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.email }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.website }}</td>
+                                        
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex space-x-4">
                                                   <i class="ti ti-trash"></i>
@@ -45,6 +51,7 @@
                                                 </div>
                                               </td>    
                                         </tr>
+                                    }
                                 </tbody>    
                         </table>
                     </div>
