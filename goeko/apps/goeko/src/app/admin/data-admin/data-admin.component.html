@@ -1,7 +1,7 @@
 <!--<p>data-admin works!</p>-->
 
 <div class="sm:px-6 w-full">
-    <h2 class="text-sky-700 font-sans text-3xl font-bold">Admin Panel</h2>   
+    <h2 class="text-sky-700 font-sans text-3xl font-bold">Admin Panel</h2>
                 <div class="px-4 md:px-10 py-4 md:py-7">
                     <div class="flex items-center justify-between">
                         <h2 tabindex="0" class="text-gray-800 text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal">Users</h2>
@@ -20,7 +20,7 @@
                                     <p>Cleantech</p>
                                 </div>
                             </button>
-                        </div>        
+                        </div>
                     </div>
                     <div class="mt-7 overflow-x-auto rounded-lg">
                         <table class="w-full">
@@ -30,6 +30,8 @@
                                             <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">{{ header.title }}</th>
                                         }
                                     </tr>
+                                    {{ smeUsers.length }}
+                                    {{ cleantechUsers.length }}
                                 </thead>
                                 <tbody bg-white divide-y divide-gray-200>
                                     @for( smeUser of smeUsers; track smeUser) {
@@ -43,16 +45,38 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.country }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.email }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.website }}</td>
-                                        
+
+
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex space-x-4">
                                                   <i class="ti ti-trash"></i>
                                                   <!--<i class="ti ti-pencil"></i>-->
                                                 </div>
-                                              </td>    
+                                              </td>
                                         </tr>
                                     }
-                                </tbody>    
+                                    @for( cleantechUser of cleantechUsers; track cleantechUser) {
+                                      <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                                          <!--<td class="px-6 py-4 whitespace-nowrap">
+                                              <input type="checkbox" class="h-4 w-4 rounded"/>
+                                          </td>-->
+
+                                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ cleantechUser.id }}</td>
+                                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ cleantechUser.name }}</td>
+                                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ cleantechUser.country }}</td>
+                                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ cleantechUser.email }}</td>
+                                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ cleantechUser.website }}</td>
+
+
+                                          <td class="px-6 py-4 whitespace-nowrap">
+                                              <div class="flex space-x-4">
+                                                <i class="ti ti-trash"></i>
+                                                <!--<i class="ti ti-pencil"></i>-->
+                                              </div>
+                                            </td>
+                                      </tr>
+                                  }
+                                </tbody>
                         </table>
                     </div>
                 </div>
