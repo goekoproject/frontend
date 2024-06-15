@@ -42,4 +42,5 @@ Thumbs.db
 .angular
 
 # Project
-goeko/apps/goeko/src/tailwind-styles.scss
+# Project
+tailwind-styles.scss
