@@ -20,12 +20,20 @@ export class DataAdminComponent implements OnInit {
       key: 'id'
     },
     {
-      title: 'b',
-      key: '2'
+      title: 'NAME',
+      key: 'name'
     },
     {
-      title: 'b2',
-      key: '3'
+      title: 'COUNTRY',
+      key: 'country'
+    },
+    {
+      title: 'EMAIL',
+      key: 'email'
+    },
+    {
+      title: 'WEBSITE',
+      key: 'website'
     },
   ]
   //TODO: contrustor(private _smeServices: SmeServices)

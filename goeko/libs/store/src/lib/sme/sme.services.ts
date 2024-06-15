@@ -97,4 +97,7 @@ export class SmeService {
   }
 
   //TODO: getAll 
+  getAllSmesData(): Observable<any> {
+    return this._http.get<any>(`/v1/actor/smes`);
+  }
 }
