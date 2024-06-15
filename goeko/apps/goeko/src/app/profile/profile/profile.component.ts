@@ -182,8 +182,8 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
           }
           return of(null);
         }),
-        tap(() => {
-          this._propageDataUser(this.dataProfile());
+        tap((dataProfile) => {
+          this._propageDataUser(dataProfile);
         }),
       )
       .subscribe({
