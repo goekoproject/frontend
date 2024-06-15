@@ -47,7 +47,7 @@ export class AuthService extends Auth0Connected {
   constructor(
     @Inject(CONFIGURATION) private _config: Options,
     @Inject(DOCUMENT) private doc: Document,
-    private readonly _auth0: Auth0,
+    public readonly _auth0: Auth0,
     private readonly _translate: TranslateService
   ) {
     super(_config.domainAuth0, _config.clientId);
@@ -58,7 +58,9 @@ export class AuthService extends Auth0Connected {
     return this._auth0.loginWithRedirect({
       authorizationParams : {
         ui_locales: this.currentLang(),
-        
+        appState: { target: '/platfrom/autenticate' }
+
+
       },
 
     });

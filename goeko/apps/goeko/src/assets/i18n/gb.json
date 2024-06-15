@@ -123,6 +123,8 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
+    "titleSelectImgEcosolution": "Choose multiple images for your EcoSolution",
+    "titleFormAnalysis": "Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
     "advantagesSupportText": "Advantages compared to a standard solution",
@@ -133,6 +135,7 @@
     "city": "City",
     "companyName": "Company name",
     "countriesAvailable": "Countries Available",
+    "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
     "currency": "Currency",
     "deliverCountries": "Countries where your eco-solution is approved",
@@ -176,8 +179,8 @@
     "province": "Province",
     "newProvince": "Add a new province",
     "selectProvinces": "Selection of provinces",
-    "allProvinces": "All regions"
-
+    "allProvinces": "All regions",
+    "showProvinces": "Show regions"
   },
   "VERIFY_EMAIL": {
     "title": "Check your inbox",
@@ -193,8 +196,8 @@
   "INPUT_FILE": {
     "certified": "Select your certificate",
     "image": "Drag and drop or click to",
-    "image2": "select an image"
-
+    "image2": "Select an image",
+    "image3": "Add image"
   },
   "LANGS": {
     "en": "English",
@@ -393,7 +396,6 @@
       "useLowConsumptionLighting": "Use low consumption lighting",
       "useRenewableEnergies": "Use renewable energies",
       "sustainableLightingSystems": "Sustainable lighting systems"
-
     }
   },
   "TEXT_SUPPORT": {
@@ -413,22 +415,27 @@
   },
   "DIALOG": {
     "messageSendOk": "Your message has been sent successfully!",
-    "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have.",
+    "messageBodyLead": "A Goeko representative will be happy to assist you with any questions you have.",
     "warningDelete": "Are you sure you want to delete {{item}} ?",
     "saveMessageGeneric": "Do you want to save the data before continuing?",
     "messaggeProfileUncompletedTitle": "Complete your profile",
     "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools."
-
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at {{email}}"
   },
-  "mandatory" :"Mandatory",
+  "selectAll": "Select All",
+  "deSelectAll": "Deselect all",
+  "questionsAnswered": "Questions answered",
+  "selectedProducts": " Selected products",
+  "selectedProduct": "Selected product",
+  "notAvailable": "Not available",
+  "mandatory": "Mandatory",
   "exit": "Exit",
-  "logout":"Log out",
+  "logout": "Log out",
   "a": "to",
-  "your":"Your",
+  "your": "Your",
   "accept": "Accept",
   "add": "Add",
   "alertSelectedProduct": "Select one or more solutions",
@@ -452,7 +459,7 @@
   "dashboard": "Dashboard",
   "decline": "Decline",
   "defaultMessageLead": "Hello, I am interested in your ecological solution. Please contact me at the following email address:",
-  "cleantechLeadDefault": "Close to finding new sustainable leads. Get ready to connect!",
+  "cleantechLeadDefault": "Track connections with your qualified leads.",
   "details": "Details",
   "edit": "Edit",
   "lastLead": "Latest lead",

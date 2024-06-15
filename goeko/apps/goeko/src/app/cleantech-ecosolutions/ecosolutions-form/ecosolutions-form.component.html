@@ -1,47 +1,28 @@
-
 <div class="wrapper-form-ecosolutions">
   <ng-container *ngTemplateOutlet="ecosolutionsForm"></ng-container>
-  
-
 </div>
 <ng-template #imageUpload>
-
-  <div class="ecosolution-upload">
-    @if (urlImgEcosolution) {
-      <img [src]="urlImgEcosolution"  alt="img ecosolutions"/> 
-
-    }
-
-    <label>
-      {{ 'INPUT_FILE.image' | translate}} (jpg)
-      <input class="file-ecosolutions"
-      type="file"
-      accept="application/jpg"
-      (change)="uploadImgEcosolutions($event)"
-    />
-    </label>
-    
-  </div>
+  <goeko-input-file
+    (fileChange)="uploadImgEcosolutions($event)"
+    [filesUrl]="urlPicEcosolution"
+    [multiple]="true"
+    [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"
+  ></goeko-input-file>
 </ng-template>
 
-
 <ng-template #ecosolutionsForm>
-  <div class="ecosolutions-form" >
-    <form
-      [formGroup]="form"
-      (submit)="idEcosolution ? editEcosolution() : saveEcosolution()"
-    >
+  <div class="ecosolutions-form">
+    <form [formGroup]="form">
       <fieldset class="ecosolutions-fieldset">
         <legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
         <go-input [formControlName]="'solutionName'" [readonly]="isReadOnly">
           <span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
         </go-input>
-  
+
         <div class="form-col">
           <label for="solutionDescription">
             {{ 'FORM_LABEL.solutionDescription' | translate }}
             <span class="required-field">(Obligatoire)</span>
-
           </label>
           <textarea
             class="go-textarea"
@@ -52,12 +33,11 @@
           >
           </textarea>
         </div>
-  
+
         <div class="form-col">
           <label for="detailedDescription">
             {{ 'FORM_LABEL.technicalDescription' | translate }}
             <span class="required-field">(Obligatoire)</span>
-
           </label>
           <textarea
             class="go-textarea"
@@ -68,13 +48,12 @@
           >
           </textarea>
         </div>
-         <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
-          
       </fieldset>
-  
+
       <fieldset>
         <div class="legend--info">
-          <legend>{{ 'FORM_LABEL.typeOfEcolutions' | translate }}
+          <legend>
+            {{ 'FORM_LABEL.typeOfEcolutions' | translate }}
             <span class="required-field">(Obligatoire)</span>
           </legend>
 
@@ -82,39 +61,60 @@
             *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"
           ></ng-container>
         </div>
-  
+
         <div class="ecosolutions-subcategory">
-          @for ( subcategory of questionsCategories().subcategories; track
-          subcategory.code) {
-          <goeko-select-subcategory-product
-            [id]="subcategory.code"
-            [formControlName]="'subCategory'"
-            [subCategory]="subcategory"
-            [readonly]="isReadOnly"
-          >
-            <p title>
-              {{ subcategory.label }}
-            </p>
-  
-            <go-badge-group
-              [formControlName]="'products'"
-              [compareWith]="defaultSetProductsCategories"
+          @for (
+            subcategory of questionsCategories().subcategories;
+            track subcategory.code
+          ) {
+            <goeko-select-subcategory-product
+              [id]="subcategory.code"
+              [formControlName]="'subCategory'"
+              [subCategory]="subcategory"
               [readonly]="isReadOnly"
             >
-              @for ( product of subcategory.products; track product.code) {
-              <go-badge
+              <p title>
+                {{ subcategory.label }}
+              </p>
+
+              <go-badge-group
+                [formControlName]="'products'"
+                [compareWith]="defaultSetProductsCategories"
                 [readonly]="isReadOnly"
-                [value]="product.code"
-                [readonly]="isReadOnly"
-                >{{ product.label }}</go-badge
               >
-              }
-            </go-badge-group>
-          </goeko-select-subcategory-product>
+                @for (product of subcategory.products; track product.code) {
+                  <go-badge
+                    [readonly]="isReadOnly"
+                    [value]="product.code"
+                    [readonly]="isReadOnly"
+                    >{{ product.label }}</go-badge
+                  >
+                }
+              </go-badge-group>
+            </goeko-select-subcategory-product>
           }
         </div>
+
+        <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
       </fieldset>
-  
+
+      <fieldset>
+        <div class="legend--info">
+          <legend>
+            {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
+            <span class="required-field">(Obligatoire)</span>
+          </legend>
+        </div>
+        @if (locationsArrays.length > 0 || !idEcosolution) {
+          <goeko-select-locations
+            [form]="form"
+            [controlLocations]="locationsArrays"
+            [controlNameCountry]="'country'"
+            [controlNameProvince]="'regions'"
+          ></goeko-select-locations>
+        }
+      </fieldset>
+
       <fieldset
         class="ecosolutions-fieldset"
         *ngIf="mainCategory !== 'hazardousProduct'"
@@ -125,9 +125,11 @@
             {{ 'TEXT_SUPPORT.advantagesEcosolutions' | translate }}
           </p>
         </div>
-  
+
         <label>
-          <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container>
+          <ng-container
+            *ngTemplateOutlet="tmpReductionPercentage"
+          ></ng-container>
         </label>
         <ui-super-select
           [readonly]="isReadOnly"
@@ -142,14 +144,14 @@
             *ngFor="let option of dataSelect['reductionPercentage']"
             [value]="option"
           >
-            {{ option.keyLang | translate }} {{ '    ' + option.to }}%
+            {{ option.keyLang | translate }} {{ ' ' + option.to }}%
           </super-option>
         </ui-super-select>
-  
+
         <label>{{
           'FORM_LABEL.operationalCostReductionPercentage' | translate
         }}</label>
-  
+
         <ui-super-select
           [placeholder]="['upTo' | translate] + '... (%)'"
           [readonly]="isReadOnly"
@@ -162,31 +164,29 @@
             *ngFor="let option of dataSelect['operationalCostReduction']"
             [value]="option"
           >
-            {{ option.keyLang | translate }} {{ '    ' + option.to }}%
+            {{ option.keyLang | translate }} {{ ' ' + option.to }}%
           </super-option>
         </ui-super-select>
       </fieldset>
-  
-      <fieldset
-        class="ecosolutions-fieldset"
-        class="fieldset-ods"
-      >
+
+      <fieldset class="ecosolutions-fieldset" class="fieldset-ods">
         <div class="legend--info">
           <legend>
             {{
               'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate
             }}
           </legend>
-  
+
           <p class="text-support">
             {{ 'TEXT_SUPPORT.ods' | translate }}
           </p>
         </div>
-  
-        <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
 
+        <goeko-sdg-icons
+          [formControlName]="'sustainableDevelopmentGoals'"
+        ></goeko-sdg-icons>
       </fieldset>
-  
+
       <fieldset class="ecosolutions-fieldset">
         <legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
         <div class="form-col">
@@ -204,7 +204,9 @@
         </div>
         <div class="form-row" *ngIf="false">
           <div>
-            <label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
+            <label for="currency">{{
+              'FORM_LABEL.currency' | translate
+            }}</label>
             <ui-super-select
               [readonly]="isReadOnly"
               [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
@@ -221,7 +223,7 @@
               </super-option>
             </ui-super-select>
           </div>
-  
+
           <go-input
             *ngIf="false"
             [formControlName]="'unit'"
@@ -233,42 +235,12 @@
             <span slot="label">{{ 'FORM_LABEL.unit' | translate }}</span>
           </go-input>
         </div>
-  
-        <div>
-          <label for="deliverCountries">{{
-            'FORM_LABEL.deliverCountries' | translate
-          }}</label>
-   <!--
-          <ui-super-select
-            [readonly]="isReadOnly"
-            [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-            [multiple]="true"
-            [formControlName]="'deliverCountries'"
-            id="deliverCountries"
-            name="deliverCountries"
-            [compareWith]="defaultSetDeliverCountries"
-          >
-            <super-option
-              *ngFor="let option of dataSelect['countries']"
-              [value]="option"
-            >
-              {{ option.keyLang | translate }}
-            </super-option>
-          </ui-super-select> -->
 
-          <goeko-select-locations
-          [form]="form"
-          [controlLocations]="locationsArrays"
-          [controlNameCountry]="'country'"
-          [controlNameProvince]="'regions'"
-        ></goeko-select-locations>
-        </div>
-  
         <div>
           <label for="deliverCountries">{{
             'FORM_LABEL.paybackPeriodYears' | translate
           }}</label>
-  
+
           <ui-super-select
             [readonly]="isReadOnly"
             [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -284,10 +256,8 @@
               {{ option.id }} {{ option.keyLang | translate }}
             </super-option>
           </ui-super-select>
-
         </div>
-  
-  
+
         <div class="form-col">
           <div class="field-form-checked">
             <label for="guarantee">{{
@@ -319,7 +289,7 @@
             </super-option>
           </ui-super-select>
         </div>
-  
+
         <div class="form-col">
           <div class="field-form-checked">
             <label for="certified">{{
@@ -334,7 +304,7 @@
               <span class="slider round"></span>
             </label>
           </div>
-  
+
           <a
             *ngIf="this.form?.value?.certified && fileData?.url"
             [href]="fileData.url"
@@ -344,7 +314,8 @@
             <p>{{ fileData.name }}</p>
             <i class="ti ti-file-download"></i>
           </a>
-          <input #inputCertified
+          <input
+            #inputCertified
             *ngIf="!isReadOnly"
             type="file"
             accept="application/pdf"
@@ -353,7 +324,7 @@
           />
         </div>
       </fieldset>
-  
+
       <div class="actions-button">
         <button
           go-button
@@ -361,18 +332,22 @@
           type="button"
           (click)="goToListEcosolution()"
         >
-          {{ 'Cancel' | translate }}
+          {{ 'back' | translate }}
         </button>
-  
-        <button *ngIf="!isReadOnly" go-button type="submit" [disabled]="form.invalid">
+
+        <button
+          *ngIf="!isReadOnly"
+          go-button
+          type="submit"
+          [disabled]="form.invalid"
+          (click)="idEcosolution ? editEcosolution() : saveEcosolution()"
+        >
           {{ 'saveYou' | translate }} éco-solution
         </button>
       </div>
     </form>
   </div>
 </ng-template>
-
-
 
 <ng-template #tmpReductionPercentage>
   <span [ngSwitch]="true" slot="label">

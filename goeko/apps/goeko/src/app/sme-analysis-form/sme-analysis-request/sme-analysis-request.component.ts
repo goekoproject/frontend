@@ -38,10 +38,11 @@ export class SmeRequestAnalisysComponent implements OnInit {
     .subscribe(analysisRequests => this.analysisRequests = analysisRequests);
   }
   newRequest() {
-      this._router.navigate(['sme-analysis/new'], {
+      this._router.navigate(['new'], {
         queryParams: {
           smeId: this._smeId
-        }
+        },
+        relativeTo: this._route.parent
       })
   }
 

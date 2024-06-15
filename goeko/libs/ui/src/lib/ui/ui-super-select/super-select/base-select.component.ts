@@ -150,7 +150,7 @@ export abstract class BaseSelectComponent
   get label(): string {
     if (this._multiple) {
       const selectedOptions = this._selectionModel?.selected.map(
-        (option) => option.title
+        (option) => option.title,
       );
 
       if (this._isRtl()) {
@@ -223,7 +223,7 @@ export abstract class BaseSelectComponent
       this._renderer.setAttribute(
         this._elementRef.nativeElement,
         'style',
-        `width:${this._width}px`
+        `width:${this._width}px`,
       );
     }
   }
@@ -309,17 +309,17 @@ export abstract class BaseSelectComponent
           switchMap(() =>
             merge(
               ...options.map(
-                (option: SuperOptionComponent) => option.onSelectionChange
-              )
-            )
-          )
+                (option: SuperOptionComponent) => option.onSelectionChange,
+              ),
+            ),
+          ),
         );
       }
 
       return this._initialized.pipe(
-        switchMap(() => this.optionSelectionChanges)
+        switchMap(() => this.optionSelectionChanges),
       );
-    }
+    },
   ) as Observable<OptionSelectionEvent>;
 
   /**
@@ -361,7 +361,7 @@ export abstract class BaseSelectComponent
 
     private _dir: Directionality,
     @Self() @Optional() public ngControl: NgControl,
-    public _elementRef: ElementRef
+    public _elementRef: ElementRef,
   ) {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
@@ -370,7 +370,7 @@ export abstract class BaseSelectComponent
 
   ngOnInit(): void {
     this._selectionModel = new SelectionModel<SuperOptionComponent>(
-      this.multiple
+      this.multiple,
     );
     this.stateChanges.next();
 
@@ -418,7 +418,7 @@ export abstract class BaseSelectComponent
         this._value = this.ngControl.value;
       } else {
         this._value = this.optionElement.find(
-          (option) => option.valueSelected
+          (option) => option.valueSelected,
         )?.value;
       }
       this._setSelectionByValue(this._value);
@@ -432,7 +432,7 @@ export abstract class BaseSelectComponent
    */
   private _setSelectionByValue(value: any | any[]): void {
     this._selectionModel?.selected.forEach((option) =>
-      option?.setInactiveStyles()
+      option?.setInactiveStyles(),
     );
     this._selectionModel.clear();
 
@@ -441,8 +441,14 @@ export abstract class BaseSelectComponent
         throw getMatSelectNonArrayValueError();
       }
       value.forEach((currentValue: any) =>
-        this._selectOptionByValue(currentValue)
+        this._selectOptionByValue(currentValue),
       );
+      const valuesSelected = (this.selected as SuperOptionComponent[]).map(
+        (option) => option.value,
+      );
+      if (valuesSelected && valuesSelected.length > 0) {
+        this._propagateChanges();
+      }
     } else {
       const correspondingOption = this._findOptionByValue(value);
       if (correspondingOption) {
@@ -470,7 +476,7 @@ export abstract class BaseSelectComponent
         } catch (error) {
           return false;
         }
-      }
+      },
     );
 
     if (correspondingOption) {
@@ -499,10 +505,11 @@ export abstract class BaseSelectComponent
           }
           return false;
         }
-      }
+      },
     ) as SuperOptionComponent;
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption);
+      this._propagateChanges();
     }
     return correspondingOption;
   }
@@ -517,7 +524,6 @@ export abstract class BaseSelectComponent
    */
   _onSelect(option: SuperOptionComponent, isUserInput: boolean): void {
     const wasSelected = this._selectionModel.isSelected(option);
-
     if (option.value == null && !this.multiple) {
       option.deselect();
       this._selectionModel.clear();
@@ -533,9 +539,9 @@ export abstract class BaseSelectComponent
       if (isUserInput) {
         this._keyManager.setActiveItem(option);
       }
-      if (this._selectionModel.isSelected(option) && this.loadInit) {
+      /*  if (this._selectionModel.isSelected(option)) {
         this._propagateChanges();
-      }
+      } */
       if (this.multiple) {
         if (isUserInput) {
           // In case the user selected the option with their mouse, we
@@ -546,7 +552,7 @@ export abstract class BaseSelectComponent
         }
       }
     }
-    if (wasSelected !== this._selectionModel.isSelected(option) && !this.loadInit) {
+    if (wasSelected !== this._selectionModel.isSelected(option)) {
       this._propagateChanges();
     }
   }
@@ -598,7 +604,7 @@ export abstract class BaseSelectComponent
       !hasModifierKey(event)
     ) {
       event.preventDefault();
-      manager?.activeItem?.selectViaInteraction();
+      manager?.activeItem?._selectViaInteraction();
     } else {
       manager.onKeydown(event);
     }
@@ -704,7 +710,7 @@ export abstract class BaseSelectComponent
    */
   private _initKeyManager() {
     this._keyManager = new ActiveDescendantKeyManager<SuperOptionComponent>(
-      this.optionElement
+      this.optionElement,
     )
       .withWrap()
       .withVerticalOrientation()
@@ -742,7 +748,7 @@ export abstract class BaseSelectComponent
 
     if (this.multiple) {
       valueToEmit = (this.selected as SuperOptionComponent[]).map(
-        (option) => option.value
+        (option) => option.value,
       );
     } else {
       valueToEmit = this.selected
@@ -771,9 +777,10 @@ export abstract class BaseSelectComponent
       (this._multiple && Array.isArray(newValue))
     ) {
       if (this.optionElement) {
-        this._value = newValue;
         this._setSelectionByValue(newValue);
       }
+      this._value = newValue;
+      return true;
     }
     return false;
   }

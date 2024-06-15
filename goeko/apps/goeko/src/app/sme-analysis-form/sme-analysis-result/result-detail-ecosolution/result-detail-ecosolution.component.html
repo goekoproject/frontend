@@ -1,45 +1,52 @@
-
-@if (detailsEcosolution) {
+@if (detailsEcosolution() && detailsEcosolution().classification) {
   <div class="detail-heading">
     <div class="detail-heading-main-info">
       <div>
-        @if(detailsEcosolution.classification) {
-          <go-badge [className]="detailsEcosolution.classification.mainCategory">
-            {{
-              'CATEGORIES.' + detailsEcosolution.classification.mainCategory
-                | translate
-            }}
-          </go-badge>
-        }
+        <go-badge
+          [className]="detailsEcosolution().classification.mainCategory"
+        >
+          {{
+            'CATEGORIES.' + detailsEcosolution().classification.mainCategory
+              | translate
+          }}
+        </go-badge>
 
         <h2 class="detail-heading--solution-name">
-          {{ detailsEcosolution.solutionName }}
+          {{ detailsEcosolution().solutionName }}
         </h2>
         <span class="detail-heading--name-company">{{
-          detailsEcosolution.companyDetail.name
+          detailsEcosolution().companyDetail.name
         }}</span>
       </div>
 
-      <p class="detail-heading--description">
-        {{ detailsEcosolution.description }}
-      </p>
+      <p
+        class="detail-heading--description"
+        [innerHTML]="detailsEcosolution().description | lineBreak"
+      ></p>
     </div>
 
     <img
       class="detail-logo"
-      [src]="detailsEcosolution.companyDetail.logo"
-      [alt]="'logo' + detailsEcosolution.companyDetail.name"
+      [src]="detailsEcosolution().companyDetail.logo"
+      [alt]="'logo' + detailsEcosolution().companyDetail.name"
     />
   </div>
   <div class="detail-actions">
-    <button go-button appearance="white" *ngIf="detailsEcosolution.certified">
+    <button
+      go-button
+      appearance="white"
+      *ngIf="
+        detailsEcosolution()?.certified &&
+        detailsEcosolution().documents['length'] > 0
+      "
+    >
       <i class="ti ti-file-download"></i>
       {{ 'certified' | translate }}
     </button>
   </div>
 
   <div class="ecosolution-content-details">
-    <div class="detail-feature">
+    <div class="detail-feature break-all">
       <section class="details-section">
         <h3 class="details-section-title">
           {{ 'FORM_LABEL.basicInformation' | translate }}
@@ -47,68 +54,108 @@
         <div class="details-article">
           <div>
             <span class="details-article--label">
-              {{ 'FORM_LABEL.countriesAvailable' | translate }}
+              {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
             </span>
-            <p class="details-article--data">
-              {{ detailsEcosolution['countries'] | country }}
-            </p>
+            <div class="details-article--data mt-1 flex flex-wrap gap-1">
+              @if (detailsEcosolution().locations) {
+                @for (
+                  location of detailsEcosolution().locations;
+                  track location?.country?.code
+                ) {
+                  <div
+                    class="flex gap-2 rounded-lg border-2 border-primary-300 max-w-max p-1 items-center"
+                  >
+                    <span
+                      class="fi fi-{{ location.country.code | lowercase }}"
+                    ></span>
+                    <p>{{ location.country.label }}</p>
+                    @if (location.country.regions) {
+                      <div
+                        class="flex gap-1 text-sm items-center text-primary-400 cursor-pointer"
+                        (click)="
+                          showProvinces(
+                            location.country,
+                            location.country.regions
+                          )
+                        "
+                      >
+                        <i class="ti ti-eye text-2xl"></i>
+                        <p
+                          class="link-show-provinces text-sm hover:text-primary-800"
+                        >
+                          {{ 'FORM_LABEL.showProvinces' | translate }}
+                        </p>
+                      </div>
+                    }
+                  </div>
+                }
+              } @else {
+                <p>{{ 'notAvailable' | translate }}</p>
+              }
+            </div>
           </div>
-  
+
           <div>
             <span class="details-article--label">
               {{ 'FORM_LABEL.price' | translate }}
             </span>
-            <p class="details-article--data">
-              {{ detailsEcosolution['priceDescription'] || '-' }}
-            </p>
+            <p
+              class="details-article--data"
+              [innerHTML]="detailsEcosolution().priceDescription | lineBreak"
+            ></p>
           </div>
-  
+
           <div>
             <span class="details-article--label">
               {{ 'FORM_LABEL.website' | translate }}</span
             >
             <p class="details-article--data">
               <a
-                href="https://{{ detailsEcosolution.companyDetail.link }}"
+                href="https://{{ detailsEcosolution().companyDetail.link }}"
                 target="_blank"
-                id="website_{{ detailsEcosolution.companyDetail.name }}"
+                id="website_{{ detailsEcosolution().companyDetail.name }}"
               >
-                {{ detailsEcosolution.companyDetail.link }}
+                {{ detailsEcosolution().companyDetail.link }}
               </a>
             </p>
           </div>
-  
-          @if (detailsEcosolution.paybackPeriodYears) {
-          <div>
-            <span class="details-article--label">
-              {{ 'FORM_LABEL.paybackPeriodYears' | translate }}</span
-            >
-            <p class="details-article--data">
-              @if (detailsEcosolution.paybackPeriodYears > 1) {
-                {{ detailsEcosolution.paybackPeriodYears }} {{'years' | translate}}
-              }
-              @else {
-                {{ detailsEcosolution.paybackPeriodYears }} {{'year' | translate}}
-              }
-            </p>
-          </div>
+
+          @if (detailsEcosolution().paybackPeriodYears) {
+            <div>
+              <span class="details-article--label">
+                {{ 'FORM_LABEL.paybackPeriodYears' | translate }}</span
+              >
+              <p class="details-article--data">
+                @if (detailsEcosolution().paybackPeriodYears > 1) {
+                  {{ detailsEcosolution().paybackPeriodYears }}
+                  {{ 'years' | translate }}
+                } @else {
+                  {{ detailsEcosolution().paybackPeriodYears }}
+                  {{ 'year' | translate }}
+                }
+              </p>
+            </div>
           }
-  
+
           <div>
             <span class="details-article--label">
               {{ 'FORM_LABEL.guarantee' | translate }}
             </span>
             <div class="info-guarantee">
-              @if (detailsEcosolution['guarantee']) {
-              <p class="details-article--data">
-                {{ detailsEcosolution['guaranteeInYears'] | number : '1.0-0' }}
-                {{ 'years' | translate }}
-              </p>
+              @if (
+                detailsEcosolution()['guarantee'] &&
+                detailsEcosolution()['guaranteeInYears']
+              ) {
+                <p class="details-article--data">
+                  {{
+                    detailsEcosolution()['guaranteeInYears'] | number: '1.0-0'
+                  }}
+                  {{ 'years' | translate }}
+                </p>
               } @else {
-              <p class="details-article--data">
-                {{ detailsEcosolution['guarantee'] | yesNo }}
-              </p>
-  
+                <p class="details-article--data">
+                  {{ detailsEcosolution()['guarantee'] | yesNo }}
+                </p>
               }
             </div>
           </div>
@@ -119,35 +166,40 @@
         <h3 class="details-section-title">
           {{ 'FORM_LABEL.technicalDescription' | translate }}
         </h3>
-   
+
         <div class="details-article">
-          @for ( picture of detailsEcosolution['pictures']; track picture?.id) {
-            <img class="details-article-picture" [src]="picture?.url" [alt]="picture?.name"/>
-          }
-            <p>
-              {{ detailsEcosolution['detailedDescription'] || '-' }}
-            </p>
+          <goeko-input-file
+            [filesUrl]="detailsEcosolution()['pictures'] | pictureGetUrl"
+            [multiple]="true"
+            [readonly]="true"
+          >
+          </goeko-input-file>
+
+          <p
+            [innerHTML]="detailsEcosolution().detailedDescription | lineBreak"
+          ></p>
         </div>
-    
       </section>
-      @if(detailsEcosolution.classification) {
+      @if (detailsEcosolution().classification) {
         <section class="details-section">
           <div class="details-article details-article--products">
-            <span>{{
+            <span class="w-full">{{
               'CATEGORIES_LABEL.' +
-                detailsEcosolution.classification.subCategory +
+                detailsEcosolution().classification.subCategory +
                 '.label' | translate
             }}</span>
             <ng-container
               *ngFor="
                 let option of dataSelect[
-                  detailsEcosolution.classification.subCategory
+                  detailsEcosolution().classification.subCategory
                 ]
               "
             >
               <go-badge
                 *ngIf="
-                  detailsEcosolution.classification.products.includes(option.id)
+                  detailsEcosolution().classification.products.includes(
+                    option.id
+                  )
                 "
                 >{{ option.keyLang | translate }}</go-badge
               >
@@ -155,17 +207,17 @@
           </div>
         </section>
       }
-    
-  
+
       <section class="details-section">
         <h3 class="details-section-title">{{ 'ods_title' | translate }}</h3>
         <div class="details-article">
-          <goeko-sdg-icons [readonly]="true"
-            [selected]="detailsEcosolution.sustainableDevelopmentGoals"
+          <goeko-sdg-icons
+            [readonly]="true"
+            [selected]="detailsEcosolution().sustainableDevelopmentGoals"
           ></goeko-sdg-icons>
         </div>
       </section>
-  
+
       <section class="details-section">
         <h3 class="details-section-title">
           {{ 'FORM_LABEL.advantages' | translate }}
@@ -175,41 +227,40 @@
         </p>
         <div
           class="details-article details-article--advantages"
-          *ngIf="detailsEcosolution?.improvement"
+          *ngIf="detailsEcosolution()?.improvement"
         >
           <go-percentage-card
-            [label]="'FORM_LABEL.reductionPercentageCO2'"
+            [label]="
+              detailsEcosolution().classification.mainCategory === 'waste'
+                ? 'FORM_LABEL.reductionPercentageWaste'
+                : 'FORM_LABEL.reductionPercentageCO2'
+            "
             [isUpto]="true"
             [percentage]="
-              detailsEcosolution.improvement.reductionPercentage.to || 0
+              detailsEcosolution().improvement.reductionPercentage.to || 0
             "
           ></go-percentage-card>
           <go-percentage-card
             [label]="'FORM_LABEL.operationalCostReductionPercentage'"
             [isUpto]="true"
             [percentage]="
-              detailsEcosolution.improvement.operationalCostReductionPercentage
-                .to || 0
+              detailsEcosolution().improvement
+                .operationalCostReductionPercentage.to || 0
             "
           ></go-percentage-card>
         </div>
       </section>
-      
-
     </div>
-    <goeko-lead-form [ecosolutionId]="detailsEcosolution.id"  [cleantechId]="detailsEcosolution.companyDetail.id" ></goeko-lead-form>
-
+    <goeko-lead-form
+      [ecosolutionId]="detailsEcosolution().id"
+      [cleantechId]="detailsEcosolution().companyDetail.id"
+    ></goeko-lead-form>
   </div>
 
   <div class="go-back">
-    <button
-      go-button
-      appearance="white"
-      (click)="goBack()"
-    >
+    <button go-button appearance="white" (click)="goBack()">
       <i class="ti ti-square-rounded-arrow-left"></i>
       {{ 'back' | translate }}
     </button>
   </div>
 }
-

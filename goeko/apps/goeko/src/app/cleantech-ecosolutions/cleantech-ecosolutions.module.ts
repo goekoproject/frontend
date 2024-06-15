@@ -57,6 +57,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     SdgIconsComponent,
     SubcategoryToCurrentLangPipe,
     SelectLocationsComponent,
+    InputFileComponent,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
     }),

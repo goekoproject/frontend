@@ -123,6 +123,8 @@
   "dragAndDrop": "Arrastar y soltar",
   "editSelection": "Modificar selección",
   "FORM_LABEL": {
+    "titleSelectImgEcosolution": "Elija varias imágenes para su EcoSolution",
+    "titleFormAnalysis": "Elija una Categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
@@ -133,6 +135,7 @@
     "city": "Ciudad",
     "companyName": "Nombre de la Compañia",
     "countriesAvailable": "Países disponibles",
+    "countriesProvincesAvailable": "Países y regiones de distribución",
     "country": "Pais",
     "currency": "Moneda",
     "deliverCountries ": "Países donde está aprobada su solución ecológica",
@@ -175,10 +178,11 @@
     "province": "Provincia",
     "newProvince": "Nueva comunidad autónoma",
     "selectProvinces": "Selección comunidad autónoma",
-    "allProvinces": "Todas las comunidades autonomas"
+    "allProvinces": "Todas las comunidades autonomas",
+    "showProvinces": "Ver provincias"
   },
   "VERIFY_EMAIL": {
-    "title":"Revisa tu bandeja de entrada.",
+    "title": "Revisa tu bandeja de entrada.",
     "body": "¡Nos alegra que estés con nosotros! Te hemos enviado un enlace de verificación a tu dirección de correo electrónico."
   },
   "HOME": {
@@ -191,7 +195,8 @@
   "INPUT_FILE": {
     "certified": "Seleccione su certificado",
     "image": "Arrastra y suelta o haz click para",
-    "image2": "para selecciona una imagen"
+    "image2": "Selecciona una imagen",
+    "image3": "Añadir imagen"
   },
   "LANGS": {
     "en": "Ingles",
@@ -391,7 +396,6 @@
       "useLowConsumptionLighting": "Usar iluminación de bajo consumo",
       "useRenewableEnergies": "Utilizar energías renovables",
       "sustainableLightingSystems": "Sistemas de iluminación sostenibles"
-
     }
   },
   "TEXT_SUPPORT": {
@@ -411,22 +415,26 @@
   },
   "DIALOG": {
     "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
-    "messageBodyLead" : "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
+    "messageBodyLead": "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
     "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?",
     "saveMessageGeneric": "¿Deseas guardar los datos antes de continuar?",
     "messaggeProfileUncompletedTitle": "Completa tu perfil",
     "messaggeProfileUncompletedBody": "Actualiza tu perfil para acceder a todas las herramientas de Goeko."
-
-
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
     "messageContact": "Ponte en contacto con nosotros en {{email}}"
   },
-  "mandatory" :"Obligatorio",
+  "selectAll": "Seleccionar todo",
+  "deSelectAll": "Deseleccionar todo",
+  "questionsAnswered": "Preguntas contestadas",
+  "selectedProducts": " Productos seleccionados",
+  "selectedProduct": "Producto seleccionados",
+  "notAvailable": "No disponible",
+  "mandatory": "Obligatorio",
   "exit": "Salir",
-  "logout":"Cerrar sesión",
-  "your":"tu",
+  "logout": "Cerrar sesión",
+  "your": "tu",
   "a": "a",
   "accept": "Aceptar",
   "add": "Añadir",
@@ -450,7 +458,7 @@
   "dashboard": "Dashboard",
   "decline": "Rechazar",
   "defaultMessageLead": "Hola, estoy interesado en tu solución ecológica. Por favor contáctame a la siguiente dirección de correo electrónico:",
-  "cleantechLeadDefault": "Cerca de nuevos leads sostenibles. ¡Prepárate para conectar con ellos!",
+  "cleantechLeadDefault": "Realice un seguimiento de las conexiones con sus clientes potenciales calificados.",
   "details": "Detalles",
   "edit": "Editar",
   "lastLead": "Ultimo cliente potencial",

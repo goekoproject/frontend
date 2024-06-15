@@ -20,16 +20,13 @@ export class HeaderUserComponent implements OnInit {
     private _userService: UserService,
     private _translate: TranslateService
   ) {}
-
   ngOnInit(): void {
     this.defaultLang = this.langs.find(
       (lang) => lang.code === this._translate.getDefaultLang()
     ) as Lang;
   }
 
-
   onChangeLangs(selectedLand: any) {
     this._translate.use(selectedLand.code);
   }
-
 }

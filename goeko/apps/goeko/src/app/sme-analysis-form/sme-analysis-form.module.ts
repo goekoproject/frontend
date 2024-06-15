@@ -8,10 +8,12 @@ import {
   CodeCountryPipe,
   GoTableModule,
   LeadFormComponent,
+  LineBreakPipe,
   MessageService,
+  PictureGetUrlPipe,
   ProductsManagementComponent,
   SdgIconsComponent,
-  SelectSubcategoryProductComponent
+  SelectSubcategoryProductComponent,
 } from '@goeko/business-ui';
 import { SmeModule } from '@goeko/store';
 import {
@@ -21,6 +23,7 @@ import {
   GoDateFormatPipe,
   GoInputModule,
   GoekoButtonModule,
+  InputFileComponent,
   NotificationModule,
   PercentageModule,
   UiSuperSelectModule,
@@ -38,6 +41,10 @@ import { DataArraySummaryPipe } from './sme-analysis-summary/data-array-summary.
 import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
 import { SmeAnalysisService } from './sme-analysis.service';
 import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
+import {
+  CountProductPipe,
+  CountSubcategoryPipe,
+} from './sme-form-analysis/count-subcategory.pipe';
 import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
 import { SmeFormBaseComponent } from './sme-form-base/sme-form-base.component';
 import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
@@ -55,8 +62,9 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     YesNoPipe,
     DataArraySummaryPipe,
     SmeRequestAnalisysComponent,
-    CategoryRequestPipe
-
+    CategoryRequestPipe,
+    CountSubcategoryPipe,
+    CountProductPipe,
   ],
   imports: [
     CommonModule,
@@ -76,10 +84,13 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     NotificationModule,
     SelectSubcategoryProductComponent,
     ProductsManagementComponent,
-    GoTableModule, 
+    GoTableModule,
     CodeCountryPipe,
     LeadFormComponent,
     GoDateFormatPipe,
+    LineBreakPipe,
+    InputFileComponent,
+    PictureGetUrlPipe,
     SmeModule.forRoot({
       endpoint: environment.baseUrl,
     }),

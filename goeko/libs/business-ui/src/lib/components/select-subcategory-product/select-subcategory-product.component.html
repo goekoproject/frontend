@@ -5,7 +5,8 @@
 >
   <div class="subcategory-element" (click)="toogle(subCategory)">
     <label class="subcategory-control" for="{{ subCategory.code }}">
-      <input
+      @if(!this.multiple) {
+        <input
         #inputElement
         type="{{ type }}"
         name="subCategory"
@@ -13,11 +14,11 @@
         id="{{ subCategory.code }}"
         (change)="assignValue(subCategory.code)"
       />
+      }
+
+
       <div class="subcategory-title">
         <ng-content select="[title]"></ng-content>
-
-        <!--         <p>{{ subCategory[typeTitle] | translate }}</p>
- -->
         <span class="subcategory-title-products" *ngIf="!readonly">{{
           labelSelected
         }}</span>
@@ -34,7 +35,18 @@
     </span>
   </div>
 
-  <div class="subcategory-product">
+  <div class="subcategory-product flex-wrap flex-col w-full items-start">
+    
+    @if(isSelectedAll) {
+      <button class="text-primary-main hover:text-primary-800" (click)="deSelectAll()">
+        {{ 'deSelectAll' | translate }}
+      </button>
+    } @else {
+      <button class="text-primary-main hover:text-primary-800" (click)="selectAll($event)">
+        {{ 'selectAll' | translate }}
+      </button>
+    }
+
     <ng-content></ng-content>
   </div>
   <span class="alert-select-product" *ngIf="open">

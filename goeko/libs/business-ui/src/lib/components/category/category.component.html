@@ -1,8 +1,15 @@
-<div class="wrapper-category">
-	<div class="category">
-		<svg-icon #iconCategory [src]="icon"></svg-icon>
-
-		<ng-content select="img"></ng-content>
+<div class="wrapper-category gap-4 text-primary-950"  [ngClass]="{'bg-primary-200 border-primary-main': selected ,'': selected}">
+	<div class="flex flex-col items-center gap-1">
+		<div class="category">
+			<svg-icon #iconCategory [src]="icon"></svg-icon>
+	
+			<ng-content select="img"></ng-content>
+		</div>
+		<ng-content select="[title]"></ng-content>
 	</div>
-	<ng-content select="[title]"></ng-content>
+
+	<div class="text-sm text-primary-900 opacity-80">
+		<ng-content select="[dataExtra]"></ng-content>
+	</div>
+
 </div>

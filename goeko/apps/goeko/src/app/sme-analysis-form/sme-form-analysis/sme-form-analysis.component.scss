@@ -12,7 +12,6 @@
   .section-step {
     display: flex;
     width: 100%;
-    align-items: center;
     gap: 4rem;
     justify-content: center;
     flex-wrap: wrap;
@@ -34,7 +33,6 @@
   background: #ffffff;
   width: 100%;
   display: flex;
-  align-items: center;
   margin: 0 auto;
   position: relative;
   border-radius: 28px;
@@ -54,7 +52,7 @@
   overflow-y: scroll;
   flex-direction: column;
   gap: 1rem;
-
+  width: 100%;
   h3 {
     font-size: 1.3rem;
     color: #080b17;

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SelectI18nComponent } from '@goeko/business-ui';
 import { GoShowUserTypeDirective, ShowForRolesDirective } from '@goeko/store';
-import { BadgeModule, DialogMessageModule, NotificationModule, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui';
+import { BadgeModule, DialogMessageModule, DialogService, NotificationModule, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderUserComponent } from '../shell/header-user/header-user.component';
 import { MenuUserComponent } from '../shell/menu-user/menu-user.component';
@@ -30,5 +30,6 @@ import { PlatformComponent } from './platform.component';
     ShowForRolesDirective,
     GoShowUserTypeDirective,
   ],
+  providers: [DialogService]
 })
 export class PlatformModule { }

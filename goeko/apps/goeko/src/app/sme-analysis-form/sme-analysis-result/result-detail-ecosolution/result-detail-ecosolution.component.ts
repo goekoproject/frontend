@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogProvincesComponent } from '@goeko/business-ui';
 import {
   DataSelect,
+  LocationCountryTranslated,
+  LocationRegions,
   Recommendation,
   SmeAnalysisStoreService,
+  SmeService,
 } from '@goeko/store';
-import { AutoUnsubscribe } from '@goeko/ui';
+import { AutoUnsubscribe, DialogService } from '@goeko/ui';
 import { Subject, takeUntil } from 'rxjs';
 import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants';
 
@@ -18,29 +22,49 @@ import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants';
 export class ResultDetailEcosolutionComponent implements OnInit {
   private destroy$ = new Subject<void>();
 
-  public detailsEcosolution!: Recommendation;
+  public detailsEcosolution = signal<Recommendation>({} as Recommendation);
   public sectionFeatureDetail = SECTION_FEATURE_DETAIL_ECOSOLUTION;
   public dataSelect = DataSelect as any;
+  public get ecosolutionId(): string {
+    return this._route.snapshot.params['idEcosolution'];
+  }
+
   constructor(
-    private _smeAnalysisStore: SmeAnalysisStoreService,
+    private _smeServices: SmeService,
+    private _smeStore: SmeAnalysisStoreService,
+
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
-    this._smeAnalysisStore
-      .getDetailEcosolutions()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (detailsEcosolution: Recommendation) =>
-          (this.detailsEcosolution = detailsEcosolution)
-      );
+    this._getEcosolutionData();
   }
 
+  private _getEcosolutionData() {
+    this._smeStore
+      .getDetailEcosolutions()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((detailsEcosolution: Recommendation) => {
+        this.detailsEcosolution.set(detailsEcosolution);
+      });
+  }
   goBack() {
-    this._router.navigate(
-      ['results', this.detailsEcosolution.id],
-      { relativeTo: this._route.parent?.parent}
-    );
+    this._router.navigate(['results', this.detailsEcosolution()?.id], {
+      relativeTo: this._route.parent?.parent,
+    });
+  }
+
+  showProvinces(
+    country: LocationCountryTranslated,
+    provinces: Array<LocationRegions>,
+  ) {
+    this._dialogService
+      .open(DialogProvincesComponent, {
+        data: { country, provinces },
+      })
+      .afterClosed()
+      .subscribe(() => console.log(country));
   }
 }

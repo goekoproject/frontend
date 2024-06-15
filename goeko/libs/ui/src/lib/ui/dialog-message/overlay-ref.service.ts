@@ -11,10 +11,10 @@ export interface Config {
 	data?: any;
 	elementRef?: any;
 }
-const DEFAULT_CONFIG: Config = {
+export const DEFAULT_CONFIG: Config = {
 	hasBackdrop: true,
-	backdropClass: 'modal-backdrop',
-	panelClass: 'ui-modal',
+	backdropClass: 'go-dialog-backdrop',
+	panelClass: 'go-dialog',
 	data: null,
 	elementRef: null
 };
@@ -63,7 +63,7 @@ export class OverlayRefService {
 		const positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically();
 
 		const overlayConfig = new OverlayConfig({
-			hasBackdrop: false,
+			hasBackdrop: true,
 			backdropClass: this.config.backdropClass,
 			panelClass: this.config.panelClass,
 			scrollStrategy: this.overlay.scrollStrategies.block(),

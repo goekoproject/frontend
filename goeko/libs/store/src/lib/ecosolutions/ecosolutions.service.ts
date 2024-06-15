@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ECOSOLUTIONS_CONFIGURATION } from './ecosolutions.module';
+import { Observable, catchError, of } from 'rxjs';
 import { EcosolutionsOptions } from './ecosolutions-options';
-import { NewEcosolutions } from './new-ecosolution.model';
-import { Observable } from 'rxjs';
+import { ECOSOLUTIONS_CONFIGURATION } from './ecosolutions.module';
+import { Ecosolutions } from './new-ecosolution.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class EcosolutionsService {
     private _http: HttpClient,
 
     @Inject(ECOSOLUTIONS_CONFIGURATION)
-    public configuration: EcosolutionsOptions
+    public configuration: EcosolutionsOptions,
   ) {}
 
   getAll() {
@@ -24,27 +24,35 @@ export class EcosolutionsService {
     return this._http.delete(`/v1/ecosolutions/${id}`);
   }
 
-  updateEcosolution(id: string, body: NewEcosolutions) {
+  updateEcosolution(id: string, body: Ecosolutions) {
     return this._http.put(`/v1/ecosolutions/${id}`, body);
   }
 
-  uploadImage(idEcosolution: string, file: any) {
+  uploadImage(idEcosolution: string, files: File[]) {
     const formData = new FormData();
-    formData.append('file', file);
-    return this._http.post(`/v1/ecosolutions/${idEcosolution}/picture`,formData);
+
+    files.forEach((file) => {
+      formData.append('file', file);
+    });
+    return this._http
+      .post(`/v1/ecosolutions/${idEcosolution}/picture`, formData)
+      .pipe(
+        catchError((error) => {
+          console.error('Error uploading image', error);
+          return of(null);
+        }),
+      );
   }
 
-  getEcosolutionById(id: string): Observable<NewEcosolutions> {
-    return this._http.get<NewEcosolutions>(`/v1/ecosolutions/${id}`);
+  getEcosolutionById(id: string): Observable<Ecosolutions> {
+    return this._http.get<Ecosolutions>(`/v1/ecosolutions/${id}`);
   }
 
   getEcosolutionsByCleantechId(id: string) {
-    return this._http.get<NewEcosolutions[]>(
-      `/v1/ecosolutions/cleantech/${id}`
-    );
+    return this._http.get<Ecosolutions[]>(`/v1/ecosolutions/cleantech/${id}`);
   }
 
-  createEcosolutions(body: NewEcosolutions): Observable<any> {
+  createEcosolutions(body: Ecosolutions): Observable<any> {
     return this._http.post<Observable<any>>(`/v1/ecosolutions`, body);
   }
 }

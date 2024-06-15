@@ -1,4 +1,5 @@
 import { mapperLocations } from '@goeko/core';
+import { Picture } from '../model/pictures.interface';
 import { Country } from '../user/public-api';
 
 interface Price {
@@ -28,7 +29,7 @@ interface Classification {
   products: string[];
 }
 
-export interface NewEcosolutions {
+export interface Ecosolutions {
   cleantechId: string;
   solutionName: string;
   solutionDescription?: string;
@@ -44,12 +45,12 @@ export interface NewEcosolutions {
   approved?: boolean;
   guaranteeInYears?: number;
   priceDescription?: string;
-  detailedDescription? :string;
-  locations?: Array<Country>
-
+  detailedDescription?: string;
+  locations: Array<Country>;
+  pictures?: Picture[];
 }
 
-export class NewEcosolutionsBody implements NewEcosolutions {
+export class NewEcosolutionsBody implements Ecosolutions {
   cleantechId: string;
   solutionName: string;
   solutionDescription?: string;
@@ -68,7 +69,7 @@ export class NewEcosolutionsBody implements NewEcosolutions {
   unit?: string;
   currency?: string;
   priceDescription?: string;
-  locations?: Array<Country>;
+  locations: Array<Country>;
   constructor(cleanTechId: string, mainCategory: string, formValue: any) {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`);
@@ -103,5 +104,4 @@ export class NewEcosolutionsBody implements NewEcosolutions {
     this.approved = formValue.approved;
     this.locations = mapperLocations(formValue.locations);
   }
-
 }

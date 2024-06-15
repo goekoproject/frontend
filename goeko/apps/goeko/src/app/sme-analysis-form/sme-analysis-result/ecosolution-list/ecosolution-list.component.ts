@@ -1,8 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui';
 import {
   ODS_CODE,
+  Recommendation,
   SmeAnalysisStoreService,
   SmeService,
   SmeUser,
@@ -34,7 +41,7 @@ export class EcosolutionListComponent implements OnInit {
   private _smeId!: string;
   formValue!: any;
   smeDataProfile = this._userService.userProfile();
-  private _codesActive = signal<Array<number>>([])
+  private _codesActive = signal<Array<number>>([]);
   private destroy$ = new Subject<void>();
 
   get allChecked() {
@@ -62,7 +69,7 @@ export class EcosolutionListComponent implements OnInit {
     private _route: ActivatedRoute,
     private _userService: UserService,
     private _router: Router,
-    private _smeAnalysisService: SmeAnalysisService
+    private _smeAnalysisService: SmeAnalysisService,
   ) {}
 
   ngOnInit(): void {
@@ -78,11 +85,13 @@ export class EcosolutionListComponent implements OnInit {
     this._smeService
       .ecosolutionSearch({
         classifications: formToClassificationsMapper(this.currentAnalytics()),
-        locations : (this._userService.userProfile() as SmeUser).locations
+        locations: (this._userService.userProfile() as SmeUser).locations,
       })
       .pipe(takeUntil(this.destroy$), distinctUntilChanged())
       .subscribe((recommendations) => {
-        this._handleRecommendations(recommendations);
+        if (recommendations && recommendations.length > 0) {
+          this._handleRecommendations(recommendations);
+        }
       });
   }
   private _getOdsIcons() {
@@ -99,15 +108,16 @@ export class EcosolutionListComponent implements OnInit {
     });
   }
 
-  private _handleRecommendations(recommendations: any) {
+  private _handleRecommendations(recommendations: Recommendation[]) {
     if (recommendations && Array.isArray(recommendations)) {
       const smeRecomendation = this._filterSmeRecomendations(recommendations);
-      this.smeRecomendation = this._buildCountriesAvailability(smeRecomendation);
+      this.smeRecomendation =
+        this._buildCountriesAvailability(smeRecomendation);
       this._makeFilterBySDG();
     }
   }
 
-  private _buildCountriesAvailability(solutions: any) {
+  private _buildCountriesAvailability(solutions: Recommendation[]) {
     return solutions.map((res: any) => ({
       ...res,
       companyDetail: {
@@ -125,9 +135,11 @@ export class EcosolutionListComponent implements OnInit {
     return ` ${regionNames.of(countries)}`;
   }
 
-  handlerOpenDetail(selectedRecomendation: any) {
+  goToViewDetailEcosolution(selectedRecomendation: Recommendation) {
     this._smeAnalysisStore.setDetailEcosolutions(selectedRecomendation);
-    this._router.navigate(['details', 'id'], { relativeTo: this._route });
+    this._router.navigate(['details', selectedRecomendation.id], {
+      relativeTo: this._route,
+    });
   }
 
   onCheckboxStateChange(checked: any, index: number) {
@@ -138,7 +150,7 @@ export class EcosolutionListComponent implements OnInit {
     }
   }
 
-  private _filterSmeRecomendations(smeRecomendation: any) {
+  private _filterSmeRecomendations(smeRecomendation: Recommendation[]) {
     if (this.checkedAll?.nativeElement?.checked) {
       return smeRecomendation;
     }
@@ -147,9 +159,9 @@ export class EcosolutionListComponent implements OnInit {
     const fieldChecked = this.formField.filter((field) => field.checked);
     fieldChecked.forEach((el: any) => {
       const newArray = smeRecomendation.filter(
-        (recomendation: any) =>
+        (recomendation: Recommendation) =>
           recomendation.classification.mainCategory.toUpperCase() ===
-          el.controlName.toUpperCase()
+          el.controlName.toUpperCase(),
       );
       newSmeRecomendation = [...newSmeRecomendation, ...newArray];
     });
@@ -163,40 +175,16 @@ export class EcosolutionListComponent implements OnInit {
   }
 
   private _makeFilterBySDG() {
-    if( this._codesActive().length > 0) {
+    if (this._codesActive().length > 0) {
       this.smeRecomendation = this.smeRecomendation.filter(
-        (recomendation: any) =>
+        (recomendation: Recommendation) =>
           this._codesActive().some((elemento) =>
-            recomendation.sustainableDevelopmentGoals.includes(elemento)
-          )
+            recomendation.sustainableDevelopmentGoals.includes(elemento),
+          ),
       );
-   
     }
-
   }
 
-  contieneArray(arrPrincipal: any, arrBuscado: any) {
-    // Iterar a través de los elementos del array principal
-    for (let i = 0; i <= arrPrincipal.length - arrBuscado.length; i++) {
-      let coincide = true;
-
-      // Comprobar si el subarray coincide en esta posición
-      for (let j = 0; j < arrBuscado.length; j++) {
-        if (arrPrincipal[i + j] !== arrBuscado[j]) {
-          coincide = false;
-          return;
-        }
-      }
-
-      // Si el subarray coincide, retornar true
-      if (coincide) {
-        return true;
-      }
-    }
-
-    // Si no se encuentra el subarray, retornar false
-    return false;
-  }
   closeDetails() {
     this.toogleOpenDetails = false;
     this.zoomOutIn = false;

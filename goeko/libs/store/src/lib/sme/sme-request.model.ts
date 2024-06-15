@@ -48,23 +48,24 @@ export interface Classifications {
 export interface SmeCountry {
   code: string;
   regions?:Array<string>;
+  label?:string;
 }
 export interface Locations {
    country: SmeCountry
 }
 export interface SmeSaveRequest {
-  smeId: string;
+  smeId?: string;
   classifications: Classifications[];
   locations?: Array<Locations>
 }
 export interface SmeSaveRecomendationRequest extends SmeSaveRequest {
-  smeId: string;
+  smeId?: string;
   classifications: Classifications[];
   searchName?: string;
 }
 
 export interface SmeSaveRecomendationProjectRequest extends SmeSaveRequest {
-  smeId: string;
+  smeId?: string;
   name: string;
   classifications: Classifications[];
 }
