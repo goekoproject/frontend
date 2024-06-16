@@ -14,7 +14,7 @@
           <button
             class="add-ecosolutions"
             [routerLink]="['./new']"
-            [disabled]="!!isSubscribed"
+            [disabled]="!isSubscribed"
             [queryParams]="{
               mainCategory: item.code,
             }"
