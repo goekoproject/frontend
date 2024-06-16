@@ -8,6 +8,7 @@ export * from './message/public-api';
 export * from './popup/public-api';
 export * from './products-management/public-api';
 export * from './sdg-icons/public-api';
+export * from './select-form-lang/public-api';
 export * from './select-i18n/public-api';
 export * from './select-locations/public-api';
 export * from './select-subcategory-product/public-api';

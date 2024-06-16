@@ -1,4 +1,5 @@
 import { mapperLocations } from '@goeko/core';
+import { FiledTranslations } from '../model/field-translations.interface';
 import { Picture } from '../model/pictures.interface';
 import { Country } from '../user/public-api';
 
@@ -48,6 +49,7 @@ export interface Ecosolutions {
   detailedDescription?: string;
   locations: Array<Country>;
   pictures?: Picture[];
+  nameTranslations: FiledTranslations[];
 }
 
 export class NewEcosolutionsBody implements Ecosolutions {
@@ -70,6 +72,8 @@ export class NewEcosolutionsBody implements Ecosolutions {
   currency?: string;
   priceDescription?: string;
   locations: Array<Country>;
+  nameTranslations!: FiledTranslations[];
+
   constructor(cleanTechId: string, mainCategory: string, formValue: any) {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`);
@@ -103,5 +107,6 @@ export class NewEcosolutionsBody implements Ecosolutions {
     this.certified = formValue.certified;
     this.approved = formValue.approved;
     this.locations = mapperLocations(formValue.locations);
+    this.nameTranslations = formValue.nameTranslations;
   }
 }

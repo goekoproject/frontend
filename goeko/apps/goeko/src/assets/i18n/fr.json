@@ -121,6 +121,7 @@
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
+    "labelSelectedFormLang": "Sélectionnez la langue que vous préférez pour compléter votre éco-solution.",
     "titleSelectImgEcosolution": "Choisissez plusieurs images pour votre EcoSolution",
     "titleFormAnalysis": "Sélectionnez vos catégories pour trouver des éco-solutions",
     "additionalInformation": "Informations supplémentaires",
@@ -201,7 +202,7 @@
     "en": "Anglais",
     "es": "Espagnol",
     "fr": "Français",
-    "gb": "Anglais (Royaume-Uni)"
+    "gb": "Anglais"
   },
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",

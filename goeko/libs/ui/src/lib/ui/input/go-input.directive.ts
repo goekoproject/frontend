@@ -1,25 +1,25 @@
 import {
-	AfterContentInit,
-	Directive,
-	ElementRef,
-	EventEmitter,
-	HostListener,
-	Inject,
-	Injector,
-	Input,
-	OnInit,
-	Output,
-	Provider,
-	Renderer2,
-	forwardRef
+  AfterContentInit,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Inject,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+  Provider,
+  Renderer2,
+  forwardRef,
 } from '@angular/core';
 import {
-	ControlValueAccessor,
-	FormControlName,
-	FormGroupDirective,
-	NG_VALUE_ACCESSOR,
-	NgControl,
-	Validators,
+  ControlValueAccessor,
+  FormControlName,
+  FormGroupDirective,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  Validators,
 } from '@angular/forms';
 
 const CONTROL_VALUE_ACCESSOR: Provider = {
@@ -59,34 +59,48 @@ export class GoInputDirective
   private _value!: any;
   private _ngControl!: any;
   private get required() {
-	return this._ngControl?.hasValidator(Validators.required)
+    return this._ngControl?.hasValidator(Validators.required);
   }
   private get inputElementRef() {
     return this.elementRef.nativeElement.renderRoot.querySelectorAll(
-      'input'
+      'input',
     )[0] as HTMLInputElement;
   }
   constructor(
     @Inject(Injector) private injector: Injector,
     private _renderer: Renderer2,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
   ) {}
 
   ngOnInit(): void {
-	const injectedControl = this.injector.get(NgControl);
-    this._ngControl =  this.injector.get(FormGroupDirective).getControl(injectedControl as FormControlName);
+    const injectedControl = this.injector.get(NgControl);
+    this._ngControl = this.injector
+      .get(FormGroupDirective)
+      .getControl(injectedControl as FormControlName);
   }
   ngAfterContentInit(): void {
-	this._setAttributeRequired();
+    this._setAttributeRequired();
     if (!this.inputElementRef) {
       return;
     }
     this.inputElementRef.readOnly = this.readonly;
   }
   writeValue(value: any) {
-    this._value = value;
-    this.elementRef.nativeElement.value = value || '';
-    this._renderer.setProperty(this.elementRef.nativeElement, 'value', value || '');
+    this._value = this._assingValue(value);
+    this.elementRef.nativeElement.value = this._value || '';
+    this._renderer.setProperty(
+      this.elementRef.nativeElement,
+      'value',
+      this._value || '',
+    );
+  }
+
+  private _assingValue(newValue: any) {
+    if (typeof newValue === 'object') {
+      return newValue.label;
+    } else {
+      return newValue;
+    }
   }
 
   registerOnChange(fn: any) {
@@ -102,6 +116,10 @@ export class GoInputDirective
   }
 
   private _setAttributeRequired() {
-	this._renderer.setProperty(this.elementRef.nativeElement, 'required', this.required);
+    this._renderer.setProperty(
+      this.elementRef.nativeElement,
+      'required',
+      this.required,
+    );
   }
 }

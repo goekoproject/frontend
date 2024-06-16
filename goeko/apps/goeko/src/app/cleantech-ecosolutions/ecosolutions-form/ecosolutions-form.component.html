@@ -9,15 +9,62 @@
     [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"
   ></goeko-input-file>
 </ng-template>
+<ng-template #heading>
+  <div
+    class="flex gap-1 items-center justify-between rounded-md p-4 bg-primary-100 bg-opacity-65 mb-10"
+  >
+    @if (form.value.solutionName) {
+      <h1 class="text-3xl font-bold text-primary-950">
+        {{ form.value.solutionName }}
+      </h1>
+    } @else {
+      <h1 class="text-3xl text-primary-950 text-opacity-40 font-thin">
+        {{ 'BREADCRUMBS.new_ecosolutions' | translate }}
+      </h1>
+    }
+
+    <p
+      class="text-sm rounded-full border-2 py-2 px-4 border-softDark text-softDark"
+    >
+      {{ 'CATEGORIES.' + mainCategory | translate }}
+    </p>
+  </div>
+</ng-template>
 
 <ng-template #ecosolutionsForm>
   <div class="ecosolutions-form">
+    <ng-container *ngTemplateOutlet="heading"></ng-container>
+    <goeko-select-form-lang
+      (selected)="selectedFormLangChange($event)"
+    ></goeko-select-form-lang>
     <form [formGroup]="form">
       <fieldset class="ecosolutions-fieldset">
         <legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
-        <go-input [formControlName]="'solutionName'" [readonly]="isReadOnly">
+        <ng-container formArrayName="nameTranslations">
+          @for (
+            translation of nameTranslations.controls;
+            track translation;
+            let i = $index
+          ) {
+            {{ translation.value?.code }}
+            {{ selectedFormLang().code }}
+            @if (
+              translation.value &&
+              translation.value?.code === selectedFormLang().code
+            ) {
+              <go-input [formControlName]="i" [readonly]="isReadOnly">
+                <span slot="label">
+                  {{ translation.value.lang | translate }}
+                  {{ 'FORM_LABEL.solutionName' | translate }}</span
+                >
+              </go-input>
+            }
+          }
+        </ng-container>
+
+        <!--        <go-input [formControlName]="'solutionName'" [readonly]="isReadOnly">
           <span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
-        </go-input>
+        </go-input> -->
 
         <div class="form-col">
           <label for="solutionDescription">

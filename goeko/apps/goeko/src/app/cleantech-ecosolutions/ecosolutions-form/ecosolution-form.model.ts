@@ -1,6 +1,7 @@
 import {
   Country,
   Ecosolutions,
+  FiledTranslations,
   FromTO,
   ReductionPercentage,
 } from '@goeko/store';
@@ -28,6 +29,7 @@ export class EcosolutionForm {
   priceDescription?: string;
   detailedDescription?: string;
   locations?: Array<Country>;
+  nameTranslations!: FiledTranslations[];
   constructor(ecosolution: Ecosolutions) {
     this.solutionName = ecosolution.solutionName;
     this.solutionDescription = ecosolution.solutionDescription;
@@ -49,5 +51,6 @@ export class EcosolutionForm {
     this.priceDescription = ecosolution.priceDescription;
     this.detailedDescription = ecosolution.detailedDescription;
     this.locations = ecosolution.locations;
+    this.nameTranslations = ecosolution.nameTranslations;
   }
 }

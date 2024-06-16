@@ -1,12 +1,12 @@
 import { Inject, Injectable, signal } from '@angular/core';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { TranslateService } from '@ngx-translate/core';
 import * as contentful from 'contentful';
 import { from } from 'rxjs';
 import { ContentFulConfig } from './config.interface';
 import { CONTENT_FUL_CONFIG } from './content-ful.module';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { TranslateService } from '@ngx-translate/core';
 export enum LangOfLocalecontentFul {
-  gb = 'en-US',
+  en = 'en-US',
   fr = 'fr',
 }
 @Injectable({ providedIn: 'root' })
@@ -20,7 +20,7 @@ export class ContentFulService {
   }
   constructor(
     @Inject(CONTENT_FUL_CONFIG) public config: ContentFulConfig,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
   ) {
     this._translateService.onLangChange.subscribe((lang) => {
       if (lang) {
@@ -41,7 +41,7 @@ export class ContentFulService {
     return from(
       this._client.getEntry(entryId, {
         locale: this.currentLang(),
-      })
+      }),
     );
   }
   getEntryIdByHTML(entryId: string) {
@@ -66,7 +66,7 @@ export class ContentFulService {
       this._client.getEntries({
         content_type: contentType,
         locale: this.currentLang(),
-      })
+      }),
     );
   }
 

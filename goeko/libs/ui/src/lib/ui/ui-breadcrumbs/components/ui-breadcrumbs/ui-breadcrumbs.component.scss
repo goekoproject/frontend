@@ -2,80 +2,79 @@
 $primary-blue: #080e49;
 
 .breadcrumb {
-	display: flex;
-	align-items: center;
-	&:has(span:empty) {
-		display: none;
-	}
+  display: flex;
+  align-items: center;
+  &:has(span:empty) {
+    display: none;
+  }
 
-	&--container {
-		display: flex;
-		&:empty {
-			display: none;
-		}
-	}
-	&--arrow {
-		display: flex;
-		color: $breadcrumbs-color-icon;
-		font-size: $breadcrumbs-icon-font-size;
-		margin: 0 0.4rem;
-	}
+  &--container {
+    display: flex;
+    &:empty {
+      display: none;
+    }
+  }
+  &--arrow {
+    display: flex;
+    color: $breadcrumbs-color-icon;
+    font-size: $breadcrumbs-icon-font-size;
+    margin: 0 0.4rem;
+  }
 
-	a:hover {
-		color: $breadcrumbs-color-text-hover;
-	}
-	a:active {
-		color: $breadcrumbs-color-text-active;
-	}
+  a:hover {
+    color: $breadcrumbs-color-text-hover;
+  }
+  a:active {
+    color: $breadcrumbs-color-text-active;
+  }
 }
 
 .breadcrumbs-title {
-	color: var(--primary--700);
-	font: var(--font-body-bold);
-    font-size: 2rem;
-	display: flex;
-	align-items: center;
-	font-weight: 700;
+  color: var(--primary--700);
+  font: var(--font-body-bold);
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
 }
 
 .info-link {
-	text-decoration: none;
-	margin-left: 16px;
-	display: flex;
+  text-decoration: none;
+  margin-left: 16px;
+  display: flex;
 
-	&--icon {
-		color: $breadcrumbs-info-link-color;
-		font-size: 16px;
-	}
+  &--icon {
+    color: $breadcrumbs-info-link-color;
+    font-size: 16px;
+  }
 }
 
-
 .breadcrumb-section-subtitle-container {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .breadcrumb-section-subtitle {
-	font-family: 'Barlow-Regular', sans-serif;
-	font-weight: 600;
-	font-size: 1.25rem;
-	line-height: 24px;
-	color: $primary-blue;
+  font-family: 'Barlow-Regular', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 24px;
+  color: $primary-blue;
 }
 
 .breadcrumb-section-subtitle-separator {
-	margin: 0 0.6rem;
-	width: 0.83rem;
-	height: 0.08rem;
-	background-color: $primary-blue;
+  margin: 0 0.6rem;
+  width: 0.83rem;
+  height: 0.08rem;
+  background-color: $primary-blue;
 }
 .go-back-page {
-	cursor: pointer;
-	font-size: 1rem;
-	color: var(--primary--800);
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--primary--800);
 }
 .back-arrow {
-	line-height: 1.7;
-    padding: 0px 0.1rem;
+  line-height: 1.7;
+  padding: 0px 0.1rem;
 }

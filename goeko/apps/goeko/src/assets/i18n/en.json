@@ -123,6 +123,7 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
+    "labelSelectedFormLang": "Select the language you prefer to complete your eco-solution.",
     "titleSelectImgEcosolution": "Choose multiple images for your EcoSolution",
     "titleFormAnalysis": "Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",

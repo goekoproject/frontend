@@ -13,6 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LANGS } from '@goeko/core';
 import {
   CleanTechService,
   DataSelect,
@@ -54,9 +55,11 @@ export class EcosolutionsFormComponent implements OnInit {
   public defaultSetCurrency = defaultSetCurrency;
   public defaultSetReductions = defaultSetReductions;
   public defaultSetyearGuarantee = defaultSetyearGuarantee;
+  public langs = LANGS;
   langSignal = signal(
     this._translateServices.currentLang || this._translateServices.defaultLang,
   );
+  public selectedFormLang = signal({ code: this.langSignal(), index: 0 });
   public dataSelect = DataSelect;
   public mainCategory!: string;
   public fileData!: { name: string; url: string };
@@ -70,6 +73,14 @@ export class EcosolutionsFormComponent implements OnInit {
   }
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray;
+  }
+  public get nameTranslations(): FormArray {
+    return this.form.get('nameTranslations') as FormArray;
+  }
+  public get selectedNameTranslationsControls() {
+    return (
+      this.nameTranslations.controls[this.selectedFormLang().index] as FormGroup
+    ).controls['translation'];
   }
 
   public get bodyRequestEcosolution(): NewEcosolutionsBody {
@@ -92,6 +103,8 @@ export class EcosolutionsFormComponent implements OnInit {
   ngOnInit(): void {
     this._getParamsUrl();
     this._initForm();
+    this._addNameTranslations();
+    console.log(this.form);
     this._changeLangCode();
     this._changeValueSubCategory();
     if (this.idEcosolution) {
@@ -120,8 +133,11 @@ export class EcosolutionsFormComponent implements OnInit {
   private _initForm() {
     this.form = this._fb.group({
       solutionName: ['', Validators.required],
+      nameTranslations: new FormArray([]),
       solutionDescription: ['', Validators.required],
+      descriptionTranslations: new FormArray([]),
       detailedDescription: ['', Validators.required],
+      detailedDescriptionTranslations: new FormArray([]),
       subCategory: ['', Validators.required],
       products: ['', Validators.required],
       reductionPercentage: [],
@@ -131,6 +147,7 @@ export class EcosolutionsFormComponent implements OnInit {
       currency: ['EUR'],
       unit: [],
       priceDescription: [''],
+      priceDescriptionTranslations: new FormArray([]),
       deliverCountries: [],
       paybackPeriodYears: [''],
       marketReady: [false],
@@ -152,6 +169,15 @@ export class EcosolutionsFormComponent implements OnInit {
         this.productsCategories =
           DataSelect[subCategory.controlName as keyof typeof DataSelect];
       }
+    });
+  }
+
+  private _addNameTranslations(): void {
+    const nameTranslations = this.form.get('nameTranslations') as FormArray;
+    this.langs.forEach((lang) => {
+      nameTranslations.push(
+        new FormControl({ label: '', lang: lang.code }, Validators.required),
+      );
     });
   }
   getEcosolution() {
@@ -281,5 +307,11 @@ export class EcosolutionsFormComponent implements OnInit {
     this._router.navigate(['../cleantech-ecosolutions', this._cleantechId], {
       relativeTo: this._route.parent?.parent,
     });
+  }
+
+  selectedFormLangChange($event: any) {
+    console.log(this.selectedFormLang());
+    this.selectedFormLang.set($event);
+    console.log(this.selectedFormLang());
   }
 }
