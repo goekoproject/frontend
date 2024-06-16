@@ -54,7 +54,7 @@ export class CleantechEcosolutionsService {
   }
   get isSubscribed() {
     if (!environment.production) {
-      return false;
+      return true;
     }
     if (!this.isSupcriptionNeed()) {
       return true;
