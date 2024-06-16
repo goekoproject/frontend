@@ -1,6 +1,8 @@
+import { DATA_ACTOR_SWITCH } from './../data-actors-switch.constants';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { SmeService, UserService } from '@goeko/store';
+
 
 @Component({
   selector: 'goeko-data-admin',
@@ -36,6 +38,8 @@ export class DataAdminComponent implements OnInit {
       key: 'website'
     },
   ]
+  public DATA_ACTOR_SWITCH = DATA_ACTOR_SWITCH;
+  public userType: string = 'SME';
 
   constructor(private _smeServices: SmeService, private _cleantechServices:UserService) { }
 
@@ -50,6 +54,10 @@ export class DataAdminComponent implements OnInit {
       console.log(cleantechData);
     });
 
+  }
+
+  changeUserType(type: string): void {
+    this.userType = type;
   }
 
 }

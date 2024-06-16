@@ -10,16 +10,13 @@
                 <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
                     <div class="sm:flex items-center justify-between">
                         <div class="flex items-center">
-                            <button class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-primary-400 ml-4 sm:ml-8">
+                          <div *ngFor="let actor of DATA_ACTOR_SWITCH">
+                            <button (click)="changeUserType(actor.type)" class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-primary-400 ml-4 sm:ml-8">
                                 <div class="py-2 px-8 text-primary-500 hover:text-white hover:bg-primary-400 rounded-full">
-                                    <p>SME</p>
+                                    <p>{{ actor.name }}</p>
                                 </div>
                             </button>
-                            <button class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-primary-400 ml-4 sm:ml-8">
-                                <div class="py-2 px-8 text-primary-500 hover:text-white hover:bg-primary-400 rounded-full ">
-                                    <p>Cleantech</p>
-                                </div>
-                            </button>
+                          </div>
                         </div>
                     </div>
                     <div class="mt-7 overflow-x-auto rounded-lg">
@@ -30,16 +27,19 @@
                                             <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">{{ header.title }}</th>
                                         }
                                     </tr>
-                                    {{ smeUsers.length }}
-                                    {{ cleantechUsers.length }}
+
                                 </thead>
                                 <tbody bg-white divide-y divide-gray-200>
+                                  <ng-container *ngIf="userType === 'SME'; then showSmeData"></ng-container>
+
+                                  <!--@if ("userType == 'SME'") {-->
+                                  <ng-template #showSmeData>
+
                                     @for( smeUser of smeUsers; track smeUser) {
                                         <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
                                             <!--<td class="px-6 py-4 whitespace-nowrap">
                                                 <input type="checkbox" class="h-4 w-4 rounded"/>
                                             </td>-->
-
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.id }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.name }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ smeUser.country }}</td>
@@ -55,6 +55,12 @@
                                               </td>
                                         </tr>
                                     }
+                                  <!--}-->
+                                  </ng-template>
+
+                                  <ng-container *ngIf="userType === 'Cleantech'; then showCleantechData"></ng-container>
+                                  <ng-template #showCleantechData>
+                                  <!--@if ("userType == 'Cleantech'") {-->
                                     @for( cleantechUser of cleantechUsers; track cleantechUser) {
                                       <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
                                           <!--<td class="px-6 py-4 whitespace-nowrap">
@@ -75,9 +81,17 @@
                                               </div>
                                             </td>
                                       </tr>
-                                  }
+                                    }
+                                <!--}-->
+                                  </ng-template>
                                 </tbody>
                         </table>
+                        <div class="mt-7 overflow-x-auto rounded-lg">
+                          <p class="uppercase dark:text-gray-400">Number of SME Users:</p>
+                          <p class="uppercase dark:text-gray-700"> {{ smeUsers.length }}</p>
+                          <p class="uppercase dark:text-gray-400">Number of Cleantech Users:</p>
+                          <p class="uppercase dark:text-gray-700"> {{ cleantechUsers.length }}</p>
+                        </div>
                     </div>
                 </div>
 </div>
