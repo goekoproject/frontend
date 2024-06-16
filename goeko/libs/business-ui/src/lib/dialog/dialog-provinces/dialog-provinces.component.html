@@ -1,18 +1,19 @@
-<i class="ti ti-circle-x absolute top-0 right-0 m-4 text-2xl cursor-pointer text-primary-950 hover:text-primary-900"
-(click)="close()"
+<i
+  class="ti ti-circle-x absolute top-0 right-0 m-4 text-2xl cursor-pointer text-primary-950 hover:text-primary-900"
+  (click)="close()"
 ></i>
-<div class="flex gap-1 items-center border-b-2 text-xl py-2 text-primary-950 font-semibold">
-    <span class="fi fi-{{ country()?.code | lowercase }}"></span>
-    <h4>{{country()?.label}}</h4>
+<div
+  class="flex gap-1 items-center border-b-2 text-xl py-2 text-primary-950 font-semibold"
+>
+  <span class="fi fi-{{ country()?.code | lowercase }}"></span>
+  <h4>{{ country()?.label }}</h4>
 </div>
 <div class="flex flex-col gap-1 overflow-auto">
-    <h5>{{ 'FORM_LABEL.allProvinces' | translate}}</h5>
-    @for ( province of  provinces(); track province) {
-        <div class="flex items-center gap-1 text-primary-700">
-            <i class="ti ti-map-pin-filled"></i>
-            <p>{{province.label}}</p>
-        </div>
-        
-      
-    }
+  <h5>{{ 'FORM_LABEL.regions' | translate }}</h5>
+  @for (province of provinces(); track province) {
+    <div class="flex items-center gap-1 text-primary-700">
+      <i class="ti ti-map-pin-filled"></i>
+      <p>{{ province.label }}</p>
+    </div>
+  }
 </div>
