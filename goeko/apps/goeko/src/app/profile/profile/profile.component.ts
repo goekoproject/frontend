@@ -15,10 +15,12 @@ import {
   Subject,
   distinctUntilChanged,
   forkJoin,
+  map,
   of,
   switchMap,
   takeUntil,
   tap,
+  throwError,
 } from 'rxjs';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFieldset } from './profile-fieldset.interface';
@@ -178,11 +180,16 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       .pipe(
         switchMap((dataProfile) => {
           if (dataProfile) {
-            return this._uploadImg$();
+            return this._uploadImg$().pipe(
+              map((uploadResult) => ({ dataProfile, uploadResult })),
+            );
           }
-          return of(null);
+          return throwError(
+            () => new Error('No se pudo crear el perfil de usuario'),
+          );
         }),
-        tap((dataProfile) => {
+
+        tap(({ dataProfile }) => {
           this._propageDataUser(dataProfile);
         }),
       )
