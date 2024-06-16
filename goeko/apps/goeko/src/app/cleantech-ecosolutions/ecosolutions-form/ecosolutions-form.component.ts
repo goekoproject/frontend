@@ -20,6 +20,7 @@ import {
   Ecosolution,
   Ecosolutions,
   EcosolutionsService,
+  FiledTranslations,
   NewEcosolutionsBody,
   ODS_CODE,
 } from '@goeko/store';
@@ -176,7 +177,10 @@ export class EcosolutionsFormComponent implements OnInit {
     const nameTranslations = this.form.get('nameTranslations') as FormArray;
     this.langs.forEach((lang) => {
       nameTranslations.push(
-        new FormControl({ label: '', lang: lang.code }, Validators.required),
+        new FormControl<FiledTranslations>(
+          { label: '', lang: lang.code } as FiledTranslations,
+          Validators.required,
+        ),
       );
     });
   }
@@ -310,8 +314,6 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   selectedFormLangChange($event: any) {
-    console.log(this.selectedFormLang());
     this.selectedFormLang.set($event);
-    console.log(this.selectedFormLang());
   }
 }

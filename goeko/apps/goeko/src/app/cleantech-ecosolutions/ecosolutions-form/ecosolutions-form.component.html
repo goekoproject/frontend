@@ -1,4 +1,7 @@
 <div class="wrapper-form-ecosolutions">
+  <goeko-select-form-lang
+    (selected)="selectedFormLangChange($event)"
+  ></goeko-select-form-lang>
   <ng-container *ngTemplateOutlet="ecosolutionsForm"></ng-container>
 </div>
 <ng-template #imageUpload>
@@ -34,9 +37,7 @@
 <ng-template #ecosolutionsForm>
   <div class="ecosolutions-form">
     <ng-container *ngTemplateOutlet="heading"></ng-container>
-    <goeko-select-form-lang
-      (selected)="selectedFormLangChange($event)"
-    ></goeko-select-form-lang>
+
     <form [formGroup]="form">
       <fieldset class="ecosolutions-fieldset">
         <legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
@@ -46,12 +47,7 @@
             track translation;
             let i = $index
           ) {
-            {{ translation.value?.code }}
-            {{ selectedFormLang().code }}
-            @if (
-              translation.value &&
-              translation.value?.code === selectedFormLang().code
-            ) {
+            @if (translation.value?.lang == selectedFormLang().code) {
               <go-input [formControlName]="i" [readonly]="isReadOnly">
                 <span slot="label">
                   {{ translation.value.lang | translate }}
@@ -62,11 +58,7 @@
           }
         </ng-container>
 
-        <!--        <go-input [formControlName]="'solutionName'" [readonly]="isReadOnly">
-          <span slot="label">{{ 'FORM_LABEL.solutionName' | translate }}</span>
-        </go-input> -->
-
-        <div class="form-col">
+        <div class="flex flex-col gap-4">
           <label for="solutionDescription">
             {{ 'FORM_LABEL.solutionDescription' | translate }}
             <span class="required-field">(Obligatoire)</span>
@@ -81,7 +73,7 @@
           </textarea>
         </div>
 
-        <div class="form-col">
+        <div class="flex flex-col gap-4">
           <label for="detailedDescription">
             {{ 'FORM_LABEL.technicalDescription' | translate }}
             <span class="required-field">(Obligatoire)</span>
@@ -97,7 +89,9 @@
         </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset
+        [ngClass]="{ hidden: selectedFormLang().code !== langSignal() }"
+      >
         <div class="legend--info">
           <legend>
             {{ 'FORM_LABEL.typeOfEcolutions' | translate }}
@@ -145,7 +139,7 @@
         <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
       </fieldset>
 
-      <fieldset>
+      <fieldset [class.hidden]="selectedFormLang().code !== langSignal()">
         <div class="legend--info">
           <legend>
             {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
@@ -163,8 +157,8 @@
       </fieldset>
 
       <fieldset
-        class="ecosolutions-fieldset"
         *ngIf="mainCategory !== 'hazardousProduct'"
+        [ngClass]="{ hidden: selectedFormLang().code !== langSignal() }"
       >
         <div class="legend--info">
           <legend>{{ 'FORM_LABEL.advantagesEcosolutions' | translate }}</legend>
@@ -216,7 +210,10 @@
         </ui-super-select>
       </fieldset>
 
-      <fieldset class="ecosolutions-fieldset" class="fieldset-ods">
+      <fieldset
+        class="flex gap-4 flex-wrap"
+        [class.hidden]="selectedFormLang().code !== langSignal()"
+      >
         <div class="legend--info">
           <legend>
             {{
@@ -236,7 +233,7 @@
 
       <fieldset class="ecosolutions-fieldset">
         <legend>{{ 'FORM_LABEL.furtherInformation' | translate }}</legend>
-        <div class="form-col">
+        <div class="flex flex-col gap-4">
           <label for="priceDescription">
             {{ 'FORM_LABEL.price' | translate }}
           </label>
@@ -283,7 +280,7 @@
           </go-input>
         </div>
 
-        <div>
+        <div [ngClass]="{ hidden: selectedFormLang().code !== langSignal() }">
           <label for="deliverCountries">{{
             'FORM_LABEL.paybackPeriodYears' | translate
           }}</label>
@@ -305,7 +302,10 @@
           </ui-super-select>
         </div>
 
-        <div class="form-col">
+        <div
+          class="flex flex-col gap-4"
+          [ngClass]="{ hidden: selectedFormLang().code !== langSignal() }"
+        >
           <div class="field-form-checked">
             <label for="guarantee">{{
               'FORM_LABEL.guarantee' | translate
@@ -337,7 +337,10 @@
           </ui-super-select>
         </div>
 
-        <div class="form-col">
+        <div
+          class="flex flex-col gap-4"
+          [ngClass]="{ hidden: selectedFormLang().code !== langSignal() }"
+        >
           <div class="field-form-checked">
             <label for="certified">{{
               'FORM_LABEL.certified' | translate
