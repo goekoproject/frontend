@@ -7,7 +7,7 @@
     <ng-container *ngFor="let item of categorySection; let first = first">
       <go-tab
         [title]="item.keyLang | translate"
-        [selected]="categorySelected().code ===item.code"
+        [selected]="categorySelected().code === item.code"
         (selectedTab)="selectedTab(item)"
       >
         <div #content class="ecosolutions-card-list">
@@ -16,14 +16,14 @@
             [routerLink]="['./new']"
             [disabled]="!isSubscribed"
             [queryParams]="{
-              mainCategory: item.code
+              mainCategory: item.code,
             }"
             routerLinkActive="router-link-active"
           >
             <i class="ti ti-plus"></i>
             <p>{{ 'add' | translate }} Ecosolutions</p>
           </button>
-          <ng-container *ngFor="let ecosolution of ecosolutions">
+          @for (ecosolution of ecosolutions; track ecosolution.id) {
             <goeko-card-ecosolutions
               *ngIf="item.code === ecosolution.mainCategory"
               [solutionName]="ecosolution.solutionName"
@@ -54,7 +54,7 @@
                 <i class="ti ti-trash"></i>
               </button>
             </goeko-card-ecosolutions>
-          </ng-container>
+          }
         </div>
       </go-tab>
     </ng-container>

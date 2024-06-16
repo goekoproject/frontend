@@ -1,16 +1,29 @@
 .icon-upload {
-    font-size: 3rem;
-    color: var(--soft-dark);
+  font-size: 3rem;
+  color: var(--soft-dark);
 }
 .text-label {
-    font-weight: 100;
-    a {
-        color: var(--primary--400);
-        font: var(--font-label);
-        border-radius: 2rem;
-        border: 1px solid;
-        padding: 0.4rem;
-        line-height: 4;
-
-    }
+  font-weight: 100;
+  a {
+    color: var(--primary--400);
+    font: var(--font-label);
+    border-radius: 2rem;
+    border: 1px solid;
+    padding: 0.6rem 1.2rem;
+    line-height: 4;
+  }
+}
+.input-readonly {
+  @apply border-none p-0;
+}
+.embla,
+.thumb {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
 }

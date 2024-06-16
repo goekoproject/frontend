@@ -8,10 +8,20 @@ import {
   SmeUser,
   USER_TYPE,
   UserModal,
-  UserSwitch
+  UserSwitch,
 } from '@goeko/store';
 import { AutoUnsubscribe, SideDialogService } from '@goeko/ui';
-import { Subject, distinctUntilChanged, forkJoin, of, takeUntil } from 'rxjs';
+import {
+  Subject,
+  distinctUntilChanged,
+  forkJoin,
+  map,
+  of,
+  switchMap,
+  takeUntil,
+  tap,
+  throwError,
+} from 'rxjs';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFieldset } from './profile-fieldset.interface';
 import { ProfileFormFactory } from './profile-form.factory';
@@ -55,10 +65,9 @@ const TYPE_FORM_FOR_USERTYPE: UserSwitch<
   selector: 'goeko-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  providers: []
-
+  providers: [],
 })
-export class ProfileComponent implements OnInit,CanComponentDeactivate {
+export class ProfileComponent implements OnInit, CanComponentDeactivate {
   form!: FormGroup;
   savedProfileOK!: boolean;
   public dataSelect = DataSelect as any;
@@ -70,36 +79,40 @@ export class ProfileComponent implements OnInit,CanComponentDeactivate {
   private destroy$ = new Subject<void>();
 
   private _selectedCodeLang = this._profieService.selectedCodeLang;
-  public profileImg!: File | string | undefined;
+  public profileImg!: File[];
   public countries = this._profieService.countries;
   public regions = this._profieService.regions;
   public username = this._profieService.username;
-  public fileProfile: any;
   public defaultSetSuperSelect = defaultSetSuperSelect as (
     o1: any,
-    o2: any
+    o2: any,
   ) => boolean;
   public defaultSetCountriesSme = defaultSetCountriesSme as (
     o1: CountrySelectOption,
-    o2: string
+    o2: string,
   ) => boolean;
 
-  private _uploadImg$ = () =>
-    this._profieService.uploadImgProfile(this.dataProfile().id, this.profileImg);
+  private _uploadImg$ = () => {
+    if (this.profileImg) {
+      return this._profieService.uploadImgProfile(
+        this.dataProfile().id,
+        this.profileImg,
+      );
+    }
+    return of(null);
+  };
 
-  public  get locationsArrays(): FormArray {
+  public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray;
   }
   constructor(
     private _sideDialogService: SideDialogService,
     private _profieService: ProfileService,
-    public route: ActivatedRoute
-  ) {
+    public route: ActivatedRoute,
+  ) {}
+  canDeactivate() {
+    return !!this.dataProfile().id;
   }
-  canDeactivate () { 
-    return !!this.dataProfile().id
-  }
-  
 
   ngOnInit() {
     this._sideDialogService.closeDialog();
@@ -124,77 +137,104 @@ export class ProfileComponent implements OnInit,CanComponentDeactivate {
     this._setLocaltionInFormForSme();
   }
 
-  private _createLocations():FormGroup {
-    return new FormGroup({
-      country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl()
-      }),
-    });
-  }
-
   private _addLocations() {
     this.locationsArrays.push(this._createLocations());
   }
 
-
+  private _createLocations(): FormGroup {
+    return new FormGroup({
+      country: new FormGroup({
+        code: new FormControl(),
+        regions: new FormControl([]),
+      }),
+    });
+  }
   private _setLocaltionInFormForSme() {
-    if(this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
+    if (
+      this.userType() === USER_TYPE.SME &&
+      (this.dataProfile() as SmeUser).locations
+    ) {
       this.locationsArrays.clear();
-   
-      (this.dataProfile() as SmeUser).locations.forEach(()=> {
+
+      (this.dataProfile() as SmeUser).locations.forEach(() => {
         this._addLocations();
-        
-      })
-      this.form.get('locations')?.patchValue((this.dataProfile() as SmeUser).locations);
+      });
+      this.form
+        .get('locations')
+        ?.patchValue((this.dataProfile() as SmeUser).locations);
     }
   }
   private _countryChanges() {
-    this.form?.get('country')?.valueChanges.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((country) => {
-      this._selectedCodeLang.set(country);
-      this._profieService.getRegions();
-    });
+    this.form
+      ?.get('country')
+      ?.valueChanges.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((country) => {
+        this._selectedCodeLang.set(country);
+        this._profieService.getRegions();
+      });
   }
 
   saveProfile() {
     this._profieService
       .createUserProfile(this.form.value)
-      .subscribe((dataProfile) => {
-        if (dataProfile) {
-          this._changeDataProfile(dataProfile);
-          this._saveProfileImg();
-        }
+      .pipe(
+        switchMap((dataProfile) => {
+          if (dataProfile) {
+            return this._uploadImg$().pipe(
+              map((uploadResult) => ({ dataProfile, uploadResult })),
+            );
+          }
+          return throwError(
+            () => new Error('No se pudo crear el perfil de usuario'),
+          );
+        }),
+
+        tap(({ dataProfile }) => {
+          this._propageDataUser(dataProfile);
+        }),
+      )
+      .subscribe({
+        next: (result) => {
+          console.log('Perfil creado con éxito', result);
+        },
+        error: (error) => {
+          console.error('Error al crear el perfil', error);
+        },
       });
   }
 
   updateProfile() {
-    const dataForUpdated = {
-      uploadImg: this.profileImg ? this._uploadImg$() : of(null),
-      profile: this._profieService.updateUserProfile(
-        this.dataProfile().id,
-        this.form.value
-      ),
-    };
-    forkJoin(dataForUpdated).subscribe((dataProfile: any) => {
-      this._changeDataProfile(dataProfile.profile);
-    });
+    const profileUpdate$ = this._profieService.updateUserProfile(
+      this.dataProfile().id,
+      this.form.value,
+    );
+
+    forkJoin({ profileUpdate: profileUpdate$, imageUpdate: this._uploadImg$() })
+      .pipe(
+        tap((dataProfile) => {
+          if (dataProfile) {
+            this._propageDataUser(dataProfile.profileUpdate);
+          }
+        }),
+      )
+      .subscribe({
+        next: (result) => {
+          console.log('Perfil actualizado con éxito', result);
+        },
+        error: (error) => {
+          console.error('Error al actualizar el perfil', error);
+        },
+      });
   }
 
-  private _changeDataProfile(dataProfile: UserModal) {
+  private _propageDataUser(dataProfile: UserModal) {
     this.savedProfileOK = true;
     this.dataProfile.set(dataProfile);
     setTimeout(() => {
       this.savedProfileOK = false;
     }, 3000);
   }
-
-  private _saveProfileImg() {
-    return this._uploadImg$().subscribe(() => {});
-  }
-
-  fileChange(file: File) {
+  fileChange(file: File[]) {
     this.profileImg = file;
   }
-
-
 }

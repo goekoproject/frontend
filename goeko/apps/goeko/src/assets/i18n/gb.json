@@ -123,7 +123,8 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
-    "titleFormAnalysis":"Choose a Category and Find Your Eco-Solutions",
+    "titleSelectImgEcosolution": "Choose multiple images for your EcoSolution",
+    "titleFormAnalysis": "Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
     "advantagesSupportText": "Advantages compared to a standard solution",
@@ -180,8 +181,6 @@
     "selectProvinces": "Selection of provinces",
     "allProvinces": "All regions",
     "showProvinces": "Show regions"
-
-
   },
   "VERIFY_EMAIL": {
     "title": "Check your inbox",
@@ -197,8 +196,8 @@
   "INPUT_FILE": {
     "certified": "Select your certificate",
     "image": "Drag and drop or click to",
-    "image2": "select an image"
-
+    "image2": "Select an image",
+    "image3": "Add image"
   },
   "LANGS": {
     "en": "English",
@@ -397,7 +396,6 @@
       "useLowConsumptionLighting": "Use low consumption lighting",
       "useRenewableEnergies": "Use renewable energies",
       "sustainableLightingSystems": "Sustainable lighting systems"
-
     }
   },
   "TEXT_SUPPORT": {
@@ -417,12 +415,11 @@
   },
   "DIALOG": {
     "messageSendOk": "Your message has been sent successfully!",
-    "messageBodyLead" : "A Goeko representative will be happy to assist you with any questions you have.",
+    "messageBodyLead": "A Goeko representative will be happy to assist you with any questions you have.",
     "warningDelete": "Are you sure you want to delete {{item}} ?",
     "saveMessageGeneric": "Do you want to save the data before continuing?",
     "messaggeProfileUncompletedTitle": "Complete your profile",
     "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools."
-
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
@@ -431,13 +428,14 @@
   "selectAll": "Select All",
   "deSelectAll": "Deselect all",
   "questionsAnswered": "Questions answered",
-  "selectedProducts": "Selected products",
-  "notAvailable":"Not available",
-  "mandatory" :"Mandatory",
+  "selectedProducts": " Selected products",
+  "selectedProduct": "Selected product",
+  "notAvailable": "Not available",
+  "mandatory": "Mandatory",
   "exit": "Exit",
-  "logout":"Log out",
+  "logout": "Log out",
   "a": "to",
-  "your":"Your",
+  "your": "Your",
   "accept": "Accept",
   "add": "Add",
   "alertSelectedProduct": "Select one or more solutions",
@@ -500,5 +498,7 @@
   "year": "year",
   "years": "years",
   "yes": "Yes",
-  "your_ecosolutions": "Your Eco-solutions"
+  "your_ecosolutions": "Your Eco-solutions",
+  "regions": "Provinces",
+  "titleBannerLead": " Qualified Leads Tracking"
 }

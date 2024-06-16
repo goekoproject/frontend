@@ -13,7 +13,13 @@ import {
 } from 'rxjs';
 import { UserFactory } from './user.factory';
 
-import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api';
+import {
+  CleantechsUser,
+  ROLES,
+  SmeUser,
+  USER_DEFAULT,
+  UserType,
+} from './public-api';
 export const SS_COMPANY_DETAIL = 'SS_COMPANY';
 
 @Injectable()
@@ -23,12 +29,12 @@ export class UserService {
 
   public fechAuthUser = new Subject();
   private actorsEndpoint = computed(
-    () => this.userAuthData()['userType'] + 's'
+    () => this.userAuthData()['userType'] + 's',
   );
   public externalId = computed(() => this.userAuthData()['externalId']);
   public userType = computed(() => this.userAuthData()['userType']);
   public userRoles = computed(
-    () => this.userAuthData()['roles'] || [ROLES.PUBLIC]
+    () => this.userAuthData()['roles'] || [ROLES.PUBLIC],
   );
   public username = computed(() => this.userAuthData()['email']);
 
@@ -49,14 +55,13 @@ export class UserService {
         switchMap((dataAuth0) =>
           dataAuth0
             ? this.getById(dataAuth0?.id)
-            : throwError(() => 'User not data profile')
+            : throwError(() => 'User not data profile'),
         ),
-        catchError(() => of(null))
+        catchError(() => of(null)),
       )
       .subscribe((data) => {
         this.propagateDataUser(data);
         this.fechAuthUser.next(true);
-
       });
   }
   private _getByIdExternal(): Observable<any> {
@@ -71,7 +76,9 @@ export class UserService {
     return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/` + id);
   }
   fetchUser() {
-    this.getById(this.userProfile().id).subscribe((data) => this.propagateDataUser(data));
+    this.getById(this.userProfile().id).subscribe((data) =>
+      this.propagateDataUser(data),
+    );
   }
   createUserProfile(body: any) {
     return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}`, body);
@@ -80,25 +87,27 @@ export class UserService {
   updateUserProfile(id: any, body: any) {
     return this._http.put<any>(
       `/v1/actor/${this.actorsEndpoint()}/${id}`,
-      body
+      body,
     );
   }
 
-  uploadImgProfile(id: string, file: File | string |  undefined) {
-    if(!file) {
+  uploadImgProfile(id: string, files: File[]) {
+    if (!files) {
       return of();
     }
     const formData = new FormData();
-    formData.append('file', file);
+    files.forEach((file) => {
+      formData.append('file', file);
+    });
     return this._http.post<any>(
       `/v1/actor/${this.actorsEndpoint()}/${id}/logo`,
-      formData
+      formData,
     );
   }
 
   private propagateDataUser(data: any) {
     const user = UserFactory.createUserProfileBuilder(
-      this.userAuthData()['userType']
+      this.userAuthData()['userType'],
     )
       .init(data)
       .build();

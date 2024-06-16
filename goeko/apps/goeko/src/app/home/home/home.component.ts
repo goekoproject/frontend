@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log('holla');
     this._homeService
       .getContent()
       .pipe(
