@@ -98,7 +98,6 @@ export class SmeService {
     return this._http.get<Recommendation>(`/v1/ecosolutions/${id}`);
   }
 
-
   getAllSmesData(): Observable<any> {
     return this._http.get<any>(`/v1/actor/smes`);
   }

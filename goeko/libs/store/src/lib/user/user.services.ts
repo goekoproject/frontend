@@ -119,4 +119,5 @@ export class UserService {
   getAllCleantechData(): Observable<any> {
     return this._http.get<any>(`/v1/actor/cleantechs`);
   }
+
 }

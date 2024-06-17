@@ -62,7 +62,6 @@ export class DataAdminComponent implements OnInit {
     this._cleantechServices.getAllCleantechData().subscribe( cleantechData => {
       this.cleantechUsers = cleantechData;
     });
-
   }
 
   changeUserType(type: USER_TYPE): void {
