@@ -43,4 +43,4 @@ Thumbs.db
 
 # Project
 # Project
-apps/goeko/tailwind-styles.scss
+apps/goeko/src/tailwind-styles.scss
