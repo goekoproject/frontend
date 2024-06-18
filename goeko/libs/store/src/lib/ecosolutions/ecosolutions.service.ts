@@ -28,7 +28,7 @@ export class EcosolutionsService {
     return this._http.put(`/v1/ecosolutions/${id}`, body);
   }
 
-  uploadImage(idEcosolution: string, files: File[]) {
+  uploadPicture(idEcosolution: string, files: File[]) {
     const formData = new FormData();
 
     files.forEach((file) => {
@@ -42,6 +42,26 @@ export class EcosolutionsService {
           return of(null);
         }),
       );
+  }
+
+  uploadDocumentation(idEcosolution: string, files: File[]) {
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append('file', file);
+    });
+    return this._http
+      .post(`/v1/ecosolutions/${idEcosolution}/documentation`, formData)
+      .pipe(
+        catchError((error) => {
+          console.error('Error uploading documentation', error);
+          return of(null);
+        }),
+      );
+  }
+
+  getEcosolutionsDocumentationById(id: string) {
+    return this._http.get(`/v1/ecosolutions/${id}/documentation`);
   }
 
   getEcosolutionById(id: string): Observable<Ecosolutions> {
