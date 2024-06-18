@@ -20,7 +20,7 @@
         "styles": [
           "apps/goeko/src/styles.scss",
           "apps/goeko/src/tailwind.scss",
-          "apps/goeko/src/tailwind-styles.scss",
+          "apps/goeko/tailwind-styles.scss",
           "./libs/ui/src/styles/_theme.scss"
         ],
         "scripts": []

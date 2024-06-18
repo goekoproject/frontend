@@ -42,5 +42,4 @@ Thumbs.db
 .angular
 
 # Project
-apps/*
-tailwind.config.js
+
