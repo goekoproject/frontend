@@ -7,7 +7,7 @@
     "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run compiler-tailwind\"",
     "build:dev": "nx build",
     "build:pro": "nx build",
-    "compiler-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./apps/goeko/tailwind-styles.scss --watch",
+    "compiler-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --watch",
     "lint": "nx lint"
   },
   "private": true,
