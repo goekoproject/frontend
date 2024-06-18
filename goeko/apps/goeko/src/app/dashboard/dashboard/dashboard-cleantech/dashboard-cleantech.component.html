@@ -1,24 +1,3 @@
-<!-- <div class="card-lead">
-  <object class="card-lead-icon" data="assets/lead.svg"></object>
-  @if (this.cleantechLeads$ | async; as leads) {
-    @if (leads && leads.length > 0) {
-      <div class="lead-lastest-message">
-        <span class="lead-lastest-title">{{ 'lastLead' | translate }}</span>
-        <p class="lead-lastest-text" [innerHTML]="leads.at(-1)?.message"></p>
-      </div>
-      <button go-button appearance="white" [routerLink]="'/leads'">
-        {{ 'showLead' | translate }}
-      </button>
-    } @else {
-      <div class="lead-message">
-        <p class="lead-text-default">
-          {{ 'cleantechLeadDefault' | translate }}
-        </p>
-      </div>
-    }
-  }
-</div> -->
-
 <section
   class="bg-white p-3 rounded-xl shadow-xl flex items-center justify-between mt-4 gap-2"
 >
@@ -34,14 +13,11 @@
             class="lead-lastest-text w-[60%]"
             [innerHTML]="leads.at(-1)?.message"
           ></p>
+        } @else {
+          <ng-container *ngTemplateOutlet="defaultMsgLead"></ng-container>
         }
       } @else {
-        <p class="font-semibold text-base">
-          {{ 'titleBannerLead' | translate }}
-        </p>
-        <p class="font-semibold text-sm text-gray-400">
-          {{ 'cleantechLeadDefault' | translate }}
-        </p>
+        <ng-container *ngTemplateOutlet="defaultMsgLead"></ng-container>
       }
     </div>
   </div>
@@ -55,3 +31,12 @@
     }
   }
 </section>
+
+<ng-template #defaultMsgLead>
+  <p class="font-semibold text-base">
+    {{ 'titleBannerLead' | translate }}
+  </p>
+  <p class="font-semibold text-sm text-gray-400">
+    {{ 'cleantechLeadDefault' | translate }}
+  </p>
+</ng-template>
