@@ -5,12 +5,11 @@
   "scripts": {
     "ng": "nx",
     "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run start-tailwind\"",
-    "build:dev": "nx build",
+    "build:dev": "node build.js",
     "build:pro": "nx build",
     "start-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --watch --minify",
     "lint": "nx lint",
-    "prestart": "node prestart.js",
-    "prebuild": "start-tailwind"
+    "prestart": "node prestart.js"
   },
   "private": true,
   "dependencies": {
