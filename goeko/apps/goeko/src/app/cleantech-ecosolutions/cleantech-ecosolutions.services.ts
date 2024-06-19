@@ -1,4 +1,11 @@
-import { Injectable, Injector, Signal, effect, inject, signal } from '@angular/core';
+import {
+  Injectable,
+  Injector,
+  Signal,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   CATEGORY_SECTION,
@@ -9,18 +16,20 @@ import {
   ClassificationCategory,
   ClassificationCategoryService,
   NULL_CLASSIFICATION_CATEGORY,
-  PaymentSystemService
+  PaymentSystemService,
 } from '@goeko/store';
 import { map, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CleantechEcosolutionsService {
   private injector = inject(Injector);
 
-  subCategorySelected = signal<ClassificationCategory>({id: '',
-  code: '',
-  label:''
-});
+  subCategorySelected = signal<ClassificationCategory>({
+    id: '',
+    code: '',
+    label: '',
+  });
 
   categories = toSignal(this._getAllCategories$(), {
     initialValue: CATEGORY_SECTION as any[],
@@ -28,21 +37,31 @@ export class CleantechEcosolutionsService {
   });
 
   categorySelected = signal<ClassificationCategory>(
-    NULL_CLASSIFICATION_CATEGORY
+    NULL_CLASSIFICATION_CATEGORY,
   );
 
-  
   public get isSupcriptionNeed(): Signal<boolean> {
-    console.log(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean());
-    return signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean());
+    console.log(
+      this._remoteConfigService
+        .getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED)
+        .asBoolean(),
+    );
+    return signal(
+      this._remoteConfigService
+        .getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED)
+        .asBoolean(),
+    );
   }
   get isSubscribed() {
-    if(!this.isSupcriptionNeed()) {
+    if (!environment.production) {
       return true;
     }
-   return this._paymentsService.isSubscription;
+    if (!this.isSupcriptionNeed()) {
+      return true;
+    }
+    return this._paymentsService.isSubscription;
   }
- 
+
   constructor(
     private classificationCategoryService: ClassificationCategoryService,
     private _paymentsService: PaymentSystemService,
@@ -57,9 +76,11 @@ export class CleantechEcosolutionsService {
   private _getAllCategories$() {
     return this.classificationCategoryService.getClassificationsCategory().pipe(
       map((classificationCategory) =>
-        mergeCategoriesSectionWithClassificationCategory(classificationCategory)
+        mergeCategoriesSectionWithClassificationCategory(
+          classificationCategory,
+        ),
       ),
-      tap((categories) => this.categorySelected.set(categories[0]))
+      tap((categories) => this.categorySelected.set(categories[0])),
     );
   }
   public getSubcategorySelected(code: string) {
@@ -71,8 +92,4 @@ export class CleantechEcosolutionsService {
         }
       });
   }
-
- 
-
- 
 }

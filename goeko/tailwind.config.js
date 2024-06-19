@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./apps/**/*.{html,ts}', './libs/**/*.{html,ts}'],
+  content: ['../apps/**/*.{html,ts,scss}', './libs/**/*.{html,ts}'],
   theme: {
     extend: {
       colors: {
@@ -32,5 +32,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    { ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}) },
+  ],
 };

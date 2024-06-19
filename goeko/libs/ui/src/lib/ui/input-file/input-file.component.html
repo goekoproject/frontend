@@ -101,10 +101,11 @@
 <ng-template #preview let-url="url" let-id="id">
   <div class="relative min-w-full">
     @defer (when !readonly) {
-      <i
-        class="ti ti-circle-x absolute right-0 text-3xl m-4 cursor-pointer text-white"
-        (click)="removeSlide(id)"
-      ></i>
+      <div
+        class="flex transition-all absolute right-0 text-3xl m-4 cursor-pointer bg-primary-950 rounded-full text-white hover:text-4xl"
+      >
+        <i class="ti ti-circle-x" (click)="removeSlide(id)"></i>
+      </div>
     }
 
     <img [src]="url" [alt]="id" class="rounded-2xl" />

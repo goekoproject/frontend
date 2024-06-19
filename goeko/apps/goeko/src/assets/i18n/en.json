@@ -285,7 +285,8 @@
       "productsContainingHeavyMetals": "Products Containing Heavy Metals",
       "productsContainingTar": "Products Containing Tar",
       "productsContainingHCB": "Products containing HCB",
-      "landsContainingPFAS": "Soils containing PFAS"
+      "landsContainingPFAS": "Soils containing PFAS",
+      "lead": "Lead"
     },
     "selectInertOrMineralWaste": {
       "brick": "Brick",
@@ -396,7 +397,8 @@
       "storeEnergy": "Store energy",
       "useLowConsumptionLighting": "Use low consumption lighting",
       "useRenewableEnergies": "Use renewable energies",
-      "sustainableLightingSystems": "Sustainable lighting systems"
+      "sustainableLightingSystems": "Sustainable lighting systems",
+      "intelligentHeatingSystems": "Intelligent heating systems"
     }
   },
   "TEXT_SUPPORT": {
@@ -499,5 +501,7 @@
   "year": "year",
   "years": "years",
   "yes": "Yes",
-  "your_ecosolutions": "Your Eco-solutions"
+  "your_ecosolutions": "Your Eco-solutions",
+  "regions": "Provinces",
+  "titleBannerLead": " Qualified Leads Tracking"
 }

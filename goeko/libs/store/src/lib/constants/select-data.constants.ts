@@ -199,11 +199,10 @@ export const SelectProducts: DataSelectOption[] = [
   },
   {
     id: 'collects',
-    keyLang:
-      'SELECT_DATA_LABEL.selectProducts.collects',
+    keyLang: 'SELECT_DATA_LABEL.selectProducts.collects',
   },
   /* 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectProducts.packagingSoiledWithDangerousSubstances' },
- { id: 5, keyLang: 'SELECT_DATA_LABEL.selectProducts.oilSeparatorSludge' },	
+ { id: 5, keyLang: 'SELECT_DATA_LABEL.selectProducts.oilSeparatorSludge' },
 	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectProducts.cartridgesContainingDangerousSubstances' },
 	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectProducts.energySavingLamps' },
 	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectProducts.electricalAndElectronicWasteContainingHazardousSubstances' }*/
@@ -364,6 +363,10 @@ export const SelectHazardousWaste: DataSelectOption[] = [
     id: 'landsContainingPFAS',
     keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.landsContainingPFAS',
   },
+  {
+    id: 'lead',
+    keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.lead',
+  },
 ];
 export const SelectPaybackPeriodYears: DataSelectOption[] = [
   {
@@ -498,6 +501,11 @@ const SelectSustainableBuildingOperations: DataSelectOption[] = [
     id: 'electricMeansOfTransport',
     keyLang:
       'SELECT_DATA_LABEL.selectSustainableBuildingOperations.electricMeansOfTransport',
+  },
+  {
+    id: 'intelligentHeatingSystems',
+    keyLang:
+      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.intelligentHeatingSystems',
   },
 ];
 export const SelectCurrency: DataSelectOption[] = [

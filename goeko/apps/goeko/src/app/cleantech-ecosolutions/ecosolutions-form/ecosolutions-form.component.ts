@@ -17,7 +17,6 @@ import { LANGS } from '@goeko/core';
 import {
   CleanTechService,
   DataSelect,
-  Ecosolution,
   Ecosolutions,
   EcosolutionsService,
   FiledTranslations,
@@ -188,7 +187,7 @@ export class EcosolutionsFormComponent implements OnInit {
     this._ecosolutionsService
       .getEcosolutionById(this.idEcosolution)
       .subscribe((ecosolution: Ecosolutions) => {
-        this._getDocumentsCleantech();
+        this._getCertificateEcosolution();
         this.urlPicEcosolution = ecosolution?.pictures?.map(
           (picture) => picture.url,
         );
@@ -200,24 +199,6 @@ export class EcosolutionsFormComponent implements OnInit {
     const formValue = new EcosolutionForm(ecosolution);
     this.form.patchValue(formValue);
     this._patchValueLocationsFormControl(formValue);
-  }
-
-  editEcosolution() {
-    forkJoin({
-      ecosolution: this._ecosolutionsService.updateEcosolution(
-        this.idEcosolution,
-        this.bodyRequestEcosolution,
-      ),
-    }).subscribe((res: any) => {
-      if (res) {
-        this.goToListEcosolution();
-        this._uploadImg(res.ecosolution);
-        this._uploadCertificate(res.ecosolution);
-        const formValue = new EcosolutionForm(res.ecosolution);
-        this.form.patchValue(formValue);
-        this._patchValueLocationsFormControl(formValue);
-      }
-    });
   }
 
   private _patchValueLocationsFormControl(formValue: EcosolutionForm) {
@@ -250,9 +231,9 @@ export class EcosolutionsFormComponent implements OnInit {
       .createEcosolutions(this.bodyRequestEcosolution)
       .pipe(
         switchMap((ecosolution) => {
-          const uploadImage$ = this._uploadImg(ecosolution);
+          const uploadPicture$ = this._uploadPicture(ecosolution);
           const uploadCertificate$ = this._uploadCertificate(ecosolution);
-          return forkJoin([uploadImage$, uploadCertificate$]);
+          return forkJoin([uploadPicture$, uploadCertificate$]);
         }),
         tap(() => this.goToListEcosolution()),
       )
@@ -266,9 +247,30 @@ export class EcosolutionsFormComponent implements OnInit {
       });
   }
 
-  private _uploadImg(ecosolution: any) {
+  editEcosolution() {
+    this._ecosolutionsService
+      .updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
+      .pipe(
+        switchMap((ecosolution) => {
+          const uploadPicture$ = this._uploadPicture(ecosolution);
+          const uploadCertificate$ = this._uploadCertificate(ecosolution);
+          return forkJoin([uploadPicture$, uploadCertificate$]);
+        }),
+        tap(() => this.goToListEcosolution()),
+      )
+      .subscribe({
+        next: (result) => {
+          console.log('Ecosolution update ok', result);
+        },
+        error: (error) => {
+          console.error('Fail update ecosolution', error);
+        },
+      });
+  }
+
+  private _uploadPicture(ecosolution: any) {
     if (this._fileEcosolution && ecosolution) {
-      return this._ecosolutionsService.uploadImage(
+      return this._ecosolutionsService.uploadPicture(
         ecosolution?.id,
         this._fileEcosolution,
       );
@@ -284,28 +286,27 @@ export class EcosolutionsFormComponent implements OnInit {
     this._fileEcosolution = file;
   }
 
-  private _getDocumentsCleantech() {
-    this._cleanTeachService
-      .getDocuments(this.idEcosolution)
+  private _getCertificateEcosolution() {
+    this._ecosolutionsService
+      .getEcosolutionsDocumentationById(this.idEcosolution)
       .pipe(last())
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         if (res) {
           this.fileData = res[res?.length - 1];
         }
       });
   }
 
-  private _uploadCertificate(ecosolution: Ecosolution) {
+  private _uploadCertificate(ecosolution: any) {
     if (
       (!this.form.value.certified && !this.form.controls['certified']?.dirty) ||
       !this.inputCertified.nativeElement.value
     ) {
       return of(null);
     }
-    return this._cleanTeachService.uploadDocument(
-      ecosolution.id,
+    return this._ecosolutionsService.uploadDocumentation(ecosolution.id, [
       this.fileCertificate,
-    );
+    ]);
   }
   goToListEcosolution() {
     this._router.navigate(['../cleantech-ecosolutions', this._cleantechId], {

@@ -285,7 +285,8 @@
       "productsContainingHeavyMetals": "Productos que contienen metales pesados",
       "productsContainingTar": "Productos que contienen alquitrán",
       "productsContainingHCB": "Productos que contienen HCB",
-      "landsContainingPFAS": "Tierras que contienen PFAS"
+      "landsContainingPFAS": "Tierras que contienen PFAS",
+      "lead": "Plomo"
     },
     "selectInertOrMineralWaste": {
       "brick": "Ladrillo",
@@ -396,7 +397,8 @@
       "storeEnergy": "Almacenar energía",
       "useLowConsumptionLighting": "Usar iluminación de bajo consumo",
       "useRenewableEnergies": "Utilizar energías renovables",
-      "sustainableLightingSystems": "Sistemas de iluminación sostenibles"
+      "sustainableLightingSystems": "Sistemas de iluminación sostenibles",
+      "intelligentHeatingSystems": "Sistemas de calefacción inteligentes"
     }
   },
   "TEXT_SUPPORT": {
@@ -497,5 +499,7 @@
   "welcome": "Bienvenido",
   "year": "año",
   "years": "años",
-  "yes": "Si"
+  "yes": "Si",
+  "regions": "Comunidades Autónomas",
+  "titleBannerLead": "Seguimiento de Leads Calificados"
 }

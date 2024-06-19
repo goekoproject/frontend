@@ -5,7 +5,7 @@ export const MENU: IMenu[] = [
     id: window.crypto.randomUUID(),
     code: 'about',
     keyLang: 'MENU.aboutGoEKo',
-    url: 'home/about',
+    url: 'about',
     type: 'text',
   },
   {
@@ -20,6 +20,6 @@ export const MENU: IMenu[] = [
     code: 'contact',
     keyLang: 'MENU.contacttUs',
     url: '',
-    type: 'text'
+    type: 'text',
   },
 ];
