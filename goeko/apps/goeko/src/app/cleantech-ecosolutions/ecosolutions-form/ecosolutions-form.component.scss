@@ -1,6 +1,5 @@
 .wrapper-form-ecosolutions {
-  display: flex;
-  flex-wrap: wrap;
+  @apply flex flex-col;
 }
 
 .ecosolutions-form {

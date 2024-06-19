@@ -47,46 +47,69 @@
             track translation;
             let i = $index
           ) {
-            @if (translation.value?.lang == selectedFormLang().code) {
-              <go-input [formControlName]="i" [readonly]="isReadOnly">
-                <span slot="label">
-                  {{ translation.value.lang | translate }}
-                  {{ 'FORM_LABEL.solutionName' | translate }}</span
-                >
-              </go-input>
-            }
+            <ng-container [formGroupName]="i">
+              @if (translation.value?.lang == selectedFormLang().code) {
+                <go-input [formControlName]="'label'" [readonly]="isReadOnly">
+                  <span slot="label">
+                    {{ translation.value.lang | translate }}
+                    {{ 'FORM_LABEL.solutionName' | translate }}</span
+                  >
+                </go-input>
+              }
+            </ng-container>
           }
         </ng-container>
 
-        <div class="flex flex-col gap-4">
-          <label for="solutionDescription">
-            {{ 'FORM_LABEL.solutionDescription' | translate }}
-            <span class="required-field">(Obligatoire)</span>
-          </label>
-          <textarea
-            class="go-textarea"
-            rows="5"
-            id="solutionDescription"
-            [formControlName]="'solutionDescription'"
-            [readonly]="isReadOnly"
-          >
-          </textarea>
-        </div>
+        <ng-container formArrayName="descriptionTranslations">
+          @for (
+            translation of descriptionTranslations.controls;
+            track translation;
+            let i = $index
+          ) {
+            <ng-container [formGroupName]="i">
+              @if (translation.value?.lang == selectedFormLang().code) {
+                <label for="descriptionTranslations">
+                  {{ 'FORM_LABEL.solutionDescription' | translate }}
+                  <span class="required-field">(Obligatoire)</span>
+                </label>
+                {{ translation.value.lang }}
+                <textarea
+                  class="go-textarea"
+                  rows="5"
+                  id="descriptionTranslations"
+                  [formControlName]="'label'"
+                  [readonly]="isReadOnly"
+                >
+                </textarea>
+              }
+            </ng-container>
+          }
+        </ng-container>
 
-        <div class="flex flex-col gap-4">
-          <label for="detailedDescription">
-            {{ 'FORM_LABEL.technicalDescription' | translate }}
-            <span class="required-field">(Obligatoire)</span>
-          </label>
-          <textarea
-            class="go-textarea"
-            rows="5"
-            id="detailedDescription"
-            [formControlName]="'detailedDescription'"
-            [readonly]="isReadOnly"
-          >
-          </textarea>
-        </div>
+        <ng-container formArrayName="detailedDescriptionTranslations">
+          @for (
+            translation of detailedDescriptionTranslations.controls;
+            track translation;
+            let i = $index
+          ) {
+            <ng-container [formGroupName]="i">
+              @if (translation.value?.lang == selectedFormLang().code) {
+                <label for="detailedDescriptionTranslations">
+                  {{ 'FORM_LABEL.technicalDescription' | translate }}
+                  <span class="required-field">(Obligatoire)</span>
+                </label>
+                <textarea
+                  class="go-textarea"
+                  rows="5"
+                  id="detailedDescriptionTranslations"
+                  [formControlName]="'label'"
+                  [readonly]="isReadOnly"
+                >
+                </textarea>
+              }
+            </ng-container>
+          }
+        </ng-container>
       </fieldset>
 
       <fieldset

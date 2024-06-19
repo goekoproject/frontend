@@ -15,7 +15,6 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { LANGS } from '@goeko/core';
 import {
-  CleanTechService,
   DataSelect,
   Ecosolutions,
   EcosolutionsService,
@@ -77,6 +76,17 @@ export class EcosolutionsFormComponent implements OnInit {
   public get nameTranslations(): FormArray {
     return this.form.get('nameTranslations') as FormArray;
   }
+
+  public get descriptionTranslations(): FormArray {
+    return this.form.get('descriptionTranslations') as FormArray;
+  }
+  public get detailedDescriptionTranslations(): FormArray {
+    return this.form.get('detailedDescriptionTranslations') as FormArray;
+  }
+  public get priceDescriptionTranslations(): FormArray {
+    return this.form.get('priceDescriptionTranslations') as FormArray;
+  }
+
   public get selectedNameTranslationsControls() {
     return (
       this.nameTranslations.controls[this.selectedFormLang().index] as FormGroup
@@ -94,7 +104,6 @@ export class EcosolutionsFormComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _ecosolutionsService: EcosolutionsService,
-    private _cleanTeachService: CleanTechService,
     private _fb: FormBuilder,
     private _translateServices: TranslateService,
     private _cleantechEcosolutionsService: CleantechEcosolutionsService,
@@ -102,8 +111,7 @@ export class EcosolutionsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this._getParamsUrl();
-    this._initForm();
-    this._addNameTranslations();
+    this._buildFrom();
     console.log(this.form);
     this._changeLangCode();
     this._changeValueSubCategory();
@@ -128,6 +136,14 @@ export class EcosolutionsFormComponent implements OnInit {
       );
       this.langSignal.set(current.lang);
     });
+  }
+
+  private _buildFrom() {
+    this._initForm();
+    this._addNameTranslations();
+    this._addDescriptionTranslations();
+    this._detailDescriptionTranslations();
+    this._priceDescriptionTranslations();
   }
 
   private _initForm() {
@@ -176,6 +192,47 @@ export class EcosolutionsFormComponent implements OnInit {
     const nameTranslations = this.form.get('nameTranslations') as FormArray;
     this.langs.forEach((lang) => {
       nameTranslations.push(
+        this._fb.group({
+          label: new FormControl('', Validators.required),
+          lang: new FormControl(lang.code, Validators.required),
+        }),
+      );
+    });
+  }
+  private _addDescriptionTranslations(): void {
+    const descriptionTranslations = this.form.get(
+      'descriptionTranslations',
+    ) as FormArray;
+    this.langs.forEach((lang) => {
+      descriptionTranslations.push(
+        this._fb.group({
+          label: new FormControl('', Validators.required),
+          lang: new FormControl(lang.code, Validators.required),
+        }),
+      );
+    });
+  }
+
+  private _detailDescriptionTranslations(): void {
+    const detailedDescriptionTranslations = this.form.get(
+      'detailedDescriptionTranslations',
+    ) as FormArray;
+    this.langs.forEach((lang) => {
+      detailedDescriptionTranslations.push(
+        this._fb.group({
+          label: new FormControl('', Validators.required),
+          lang: new FormControl(lang.code, Validators.required),
+        }),
+      );
+    });
+  }
+
+  private _priceDescriptionTranslations(): void {
+    const priceDescriptionTranslations = this.form.get(
+      'priceDescriptionTranslations',
+    ) as FormArray;
+    this.langs.forEach((lang) => {
+      priceDescriptionTranslations.push(
         new FormControl<FiledTranslations>(
           { label: '', lang: lang.code } as FiledTranslations,
           Validators.required,
