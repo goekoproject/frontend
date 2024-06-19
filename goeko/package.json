@@ -5,9 +5,10 @@
   "scripts": {
     "ng": "nx",
     "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run start-tailwind\"",
-    "build:dev": "concurrently  -c \"blue,green\"  \"nx build goeko\" \"npm run start-tailwind\"",
+    "build:dev": "concurrently  -c \"blue,green\"  \"nx build goeko\" \"npm run start-tailwind:build\"",
     "build:pro": "nx build",
     "start-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --watch --minify",
+    "start-tailwind:build": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --minify",
     "lint": "nx lint",
     "prestart": "node prestart.js"
   },
