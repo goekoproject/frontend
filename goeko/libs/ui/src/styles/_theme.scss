@@ -43,7 +43,7 @@ body:has(div.is-platform) {
 }
 :root {
   --center-container: 90%;
-  --medium-width-field: 24.875rem;
+  --medium-width-field: 24rem;
   --medium-height-field: 4.625rem;
 }
 a {
@@ -174,7 +174,7 @@ fieldset {
   padding: 1.5rem 0.5rem;
   font-size: 18px;
   border: none;
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-8;
 }
 label {
   color: var(--primary--950);

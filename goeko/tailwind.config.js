@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['../apps/**/*.{html,ts,scss}', './libs/**/*.{html,ts}'],
+  content: ['./apps/**/*.{html,ts}', './libs/**/*.{html,ts}'],
   theme: {
     extend: {
       colors: {
@@ -34,5 +34,6 @@ module.exports = {
   },
   plugins: [
     { ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}) },
+    'prettier-plugin-tailwindcss',
   ],
-};
+}

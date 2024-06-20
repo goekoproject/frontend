@@ -117,3 +117,6 @@
     background-color: white;
   }
 }
+.wrapper-textarea {
+  @apply relative flex w-full max-w-[24rem] flex-col gap-2;
+}
