@@ -2,12 +2,13 @@
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:107842066.
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:554572676.
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:2115446450.
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
     HttpErrorResponse,
     HttpEvent,
     HttpHandler,
     HttpInterceptor,
+    HttpInterceptorFn,
     HttpRequest,
     HttpResponse,
 } from '@angular/common/http';
@@ -18,32 +19,24 @@ const ERROR_MESSAGE = {
     500 : { message: 'Ha ocurrido un error en el servidor', type: TOAST_NOTIFICATION_TYPE.ERROR},
     404 : { message: 'Ha ocurrido un error en el servido', type :TOAST_NOTIFICATION_TYPE.WARNING},
 }
-@Injectable()
-export class HandlerHttpInterceptor implements HttpInterceptor {
-    constructor(private toastService: ToastService) { }
-
-    intercept(
-        req: HttpRequest<any>,
-        next: HttpHandler
-    ): Observable<HttpEvent<any>> {
-        return next.handle(req).pipe(
+export const handlerHttpInterceptor: HttpInterceptorFn = (req, next) => {
+    const _toastService = inject(ToastService);
+        return next(req).pipe(
             tap((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    const notificationService = new NotificationService(this.toastService);
+                    const notificationService = new NotificationService(_toastService);
                     notificationService.notify(req.method);
                 }
             }),
-            catchError((err) => {
-                return this._handlerError(err);
+            catchError((error) => {
+                const errorMessage = ERROR_MESSAGE[error.status as keyof typeof  ERROR_MESSAGE];
+                _toastService.notify(errorMessage.message, errorMessage.type);
+                return throwError(() => error);
             })
         );
-
+       
     }
-    private _handlerError(error: HttpErrorResponse) {
-        const errorMessage = ERROR_MESSAGE[error.status as keyof typeof  ERROR_MESSAGE];
-        this.toastService.notify(errorMessage.message, errorMessage.type);
-        return throwError(() => error);
-    }
+ 
 
 }
 class NotificationService {
