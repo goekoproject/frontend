@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
+
+export type ToastNotification = 'SUCCESS' | 'UPDATE' | 'ERROR' | 'DELETE'; 
+export enum TOAST_NOTIFICATION_TYPE {
+  SUCCESS = 'SUCCESS',
+  UPDATE = 'UPDATE',
+  DELETE = 'DELETE',
+  ERROR = 'ERROR',
+}
+
 export interface Notification  {
   message: string
   type: string
@@ -28,7 +37,7 @@ export class ToastService {
   constructor() {
   }
 
-  notify(message: string, type: string, subtype?: string) {
+  notify(message: string, type: ToastNotification, subtype?: string) {
     this.messageSource.next({ message, type, subtype })
   }
 }
