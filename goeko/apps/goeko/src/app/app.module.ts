@@ -51,9 +51,7 @@ export const httpLoaderFactory = (http: HttpClient) => {
     SelectI18nComponent,
     UiBreadcrumbsModule,
     SideDialogModule,
-    SmeModule.forRoot({
-      endpoint: environment.baseUrl,
-    }),
+    SmeModule,
     CleantechModule.forRoot({
       endpoint: environment.baseUrl,
     }),

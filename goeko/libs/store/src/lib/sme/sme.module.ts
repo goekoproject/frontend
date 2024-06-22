@@ -11,16 +11,4 @@ export const SME_CONFIGURATION = new InjectionToken<SmeOptions>('SME_CONFIGURATI
 	declarations: [],
 	providers: [SmeService, ProjectService],
 })
-export class SmeModule {
-	static forRoot(option: SmeOptions): ModuleWithProviders<SmeModule> {
-		return {
-			ngModule: SmeModule,
-			providers: [
-				{
-					provide: SME_CONFIGURATION,
-					useValue: option ? option : {},
-				},
-			],
-		};
-	}
-}
+export class SmeModule {}

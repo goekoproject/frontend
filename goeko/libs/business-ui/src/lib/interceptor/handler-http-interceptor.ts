@@ -16,27 +16,27 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { TOAST_NOTIFICATION_TYPE, ToastService } from '@goeko/store';
 const ERROR_MESSAGE = {
-    500 : { message: 'Ha ocurrido un error en el servidor', type: TOAST_NOTIFICATION_TYPE.ERROR},
-    404 : { message: 'Ha ocurrido un error en el servido', type :TOAST_NOTIFICATION_TYPE.WARNING},
+    500: { message: 'Ha ocurrido un error en el servidor', type: TOAST_NOTIFICATION_TYPE.ERROR },
+    404: { message: 'Ha ocurrido un error en el servido', type: TOAST_NOTIFICATION_TYPE.WARNING },
 }
 export const handlerHttpInterceptor: HttpInterceptorFn = (req, next) => {
     const _toastService = inject(ToastService);
-        return next(req).pipe(
-            tap((event: HttpEvent<any>) => {
-                if (event instanceof HttpResponse) {
-                    const notificationService = new NotificationService(_toastService);
-                    notificationService.notify(req.method);
-                }
-            }),
-            catchError((error) => {
-                const errorMessage = ERROR_MESSAGE[error.status as keyof typeof  ERROR_MESSAGE];
-                _toastService.notify(errorMessage.message, errorMessage.type);
-                return throwError(() => error);
-            })
-        );
-       
-    }
- 
+    return next(req).pipe(
+        tap((event: HttpEvent<any>) => {
+            if (event instanceof HttpResponse) {
+                const notificationService = new NotificationService(_toastService);
+                notificationService.notify(req.method);
+            }
+        }),
+        catchError((error) => {
+            const errorMessage = ERROR_MESSAGE[error.status as keyof typeof ERROR_MESSAGE];
+            _toastService.notify(errorMessage.message, errorMessage.type);
+            return throwError(() => error);
+        })
+    );
+
+}
+
 
 class NotificationService {
     constructor(private toastService: ToastService) { }

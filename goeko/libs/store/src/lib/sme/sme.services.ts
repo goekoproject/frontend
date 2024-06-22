@@ -12,12 +12,10 @@ import {
   SmeRequestResponse,
   SmeSaveRecomendationRequest,
 } from './sme-request.model'
-import { SME_CONFIGURATION } from './sme.module'
 
 @Injectable()
 export class SmeService extends TranslateChangeService {
   constructor(
-    @Inject(SME_CONFIGURATION) public configuration: SmeOptions,
     private readonly sessionStorageService: SessionStorageService,
     public _http: HttpClient,
   ) {
