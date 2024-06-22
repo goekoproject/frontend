@@ -38,7 +38,6 @@ export const handlerHttpInterceptor: HttpInterceptorFn = (req, next) => {
     }
  
 
-}
 class NotificationService {
     constructor(private toastService: ToastService) { }
 
