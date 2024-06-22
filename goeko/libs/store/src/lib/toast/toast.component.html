@@ -1,0 +1,36 @@
+@for (message of messages(); track message; let index = $index) {
+  @defer (when message.type === 'success') {
+    <ng-container
+      [ngTemplateOutlet]="toastSuccess"
+      [ngTemplateOutletContext]="{
+        $implicit: message,
+        index: index,
+      }"></ng-container>
+  }
+}
+
+<ng-template #toastSuccess let-message let-index="index">
+  <div
+    id="toast-success"
+    class="animate-fadeIn mb-4 flex w-full items-center justify-around rounded-lg border border-primary-400 bg-primary-200 p-4 text-primary-950 shadow"
+    role="alert"
+    [ngClass]="{ 'animate-fadeOut': removing[index] }">
+    <div class="flex items-center">
+      <i class="ti ti-rosette-discount-check-filled text-2xl text-primary-main"></i>
+
+      <div class="ms-3 text-sm font-normal">{{ message.message }}</div>
+    </div>
+
+    <button
+      (click)="closeToast(index)"
+      type="button"
+      class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent p-1.5 text-primary-800 hover:bg-primary-300 hover:text-primary-100 focus:ring-2 focus:ring-gray-300"
+      data-dismiss-target="#toast-success"
+      aria-label="Close">
+      <span class="sr-only">Close</span>
+      <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+      </svg>
+    </button>
+  </div>
+</ng-template>
