@@ -33,11 +33,26 @@ module.exports = {
     },
     animation: {
       fadeIn: 'fadeIn 1s ease-in-out',
-      fadeOut: 'fadeOut 3s ease-in-out',
+      fadeOut: 'fadeOut 200ms ease-in-out',
+      fadeOutLeft: 'fadeOutLeft 300ms ease-in-out',
+      fadeInRight: 'fadeInRight 300ms ease-in-out',
+      fadeOutRight: 'fadeOutRight 300ms ease-in-out',
     },
     keyframes: {
       fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
       fadeOut: { '0%': { opacity: '1' }, '100%': { opacity: '0' } },
+      fadeInRight: {
+        '0%': { opacity: '0', transform: 'translateX(100%)' },
+        '100%': { opacity: '1', transform: 'translateX(0)' },
+      },
+      fadeOutRight: {
+        '0%': { opacity: '1', transform: 'translateX(0)' },
+        '100%': { opacity: '0', transform: 'translateX(100%)' },
+      },
+      fadeOutLeft: {
+        '0%': { opacity: '1', transform: 'translateX(0)' },
+        '100%': { opacity: '0', transform: 'translateX(-100%)' },
+      }
     },
   },
   plugins: [{ ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}) }, 'prettier-plugin-tailwindcss'],
