@@ -91,9 +91,7 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     LineBreakPipe,
     InputFileComponent,
     PictureGetUrlPipe,
-    SmeModule.forRoot({
-      endpoint: environment.baseUrl,
-    }),
+    SmeModule
   ],
   providers: [SmeAnalysisService, MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

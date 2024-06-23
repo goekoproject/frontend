@@ -1,0 +1,55 @@
+@for (message of messages(); track message; let index = $index) {
+  @defer (when message) {
+    <ng-container
+      [ngTemplateOutlet]="boxToast"
+      [ngTemplateOutletContext]="{
+        $implicit: message,
+        index: index,
+        type: message?.type,
+      }"></ng-container>
+  }
+}
+
+<ng-template #boxToast let-message let-index="index" let-type="type">
+  <div
+    id="toast-success"
+    class="mb-4 flex w-full animate-fadeInRight items-center justify-around rounded-lg border p-4 shadow"
+    role="alert"
+    [ngClass]="{
+      'animate-fadeOutRight': removing[index],
+      'animate-fadeOutRightLarge': removingAll,
+
+      'border-primary-400 bg-primary-200 text-primary-950': type === 'SUCCESS',
+      'border-yellow-500 bg-yellow-50 text-yellow-900': type === 'WARNING',
+      'text-textError border-red-700 bg-red-200': type === 'ERROR',
+    }">
+    <div class="flex items-center">
+      @switch (type) {
+        @case ('ERROR') {
+          <i class="ti ti-circle-x text-3xl"></i>
+        }
+
+        @case ('WARNING') {
+          <i class="ti ti-exclamation-circle text-3xl"></i>
+        }
+        @default {
+          <i class="ti ti-circle-check text-3xl text-primary-700"></i>
+        }
+      }
+
+      <div class="ms-3 text-sm font-normal">{{ message.message | translate }}</div>
+    </div>
+
+    <button
+      (click)="closeToast(index)"
+      type="button"
+      class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent p-1.5 hover:bg-white focus:ring-2 focus:ring-gray-300"
+      data-dismiss-target="#toast-success"
+      aria-label="Close">
+      <span class="sr-only">Close</span>
+      <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+      </svg>
+    </button>
+  </div>
+</ng-template>

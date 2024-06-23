@@ -140,7 +140,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
     this.toggleActor.set(toggleActor);
   }
   private _getTranslationsForLang() {
-    ['gb', 'fr', 'es'].forEach((lang) => {
+    ['en', 'fr', 'es'].forEach((lang) => {
       this._translations.getTranslation(lang).subscribe((translations: any) => {
         this._translationsForLang[lang] = translations;
       });

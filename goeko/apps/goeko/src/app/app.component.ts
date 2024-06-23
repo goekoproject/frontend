@@ -1,10 +1,20 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, effect, signal } from '@angular/core';
 import { VAR_GENERAL } from '@goeko/business-ui';
-import { AuthService, REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core';
-import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store';
+import {
+  AuthService,
+  REMOTE_CONFIG_PARAMS,
+  RemoteConfigService,
+} from '@goeko/core';
+import {
+  PaymentSystemService,
+  STATUS_PENDING,
+  USER_TYPE,
+  UserService,
+} from '@goeko/store';
 import { NotificationService } from '@goeko/ui';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../environments/environment';
 
 const KEY_COOKIES = 'cookie-policy';
 @Component({
@@ -19,17 +29,14 @@ export class AppComponent implements OnInit {
     return !localStorage.getItem(KEY_COOKIES);
   }
 
-  private _isHomePage() {
-    return location.pathname.includes('home') || location.pathname
-    .includes('demo') || location.pathname
-    === '/';
-  }
-
   get isDemo() {
     return this.path?.includes('demo');
   }
   get isSubscribed() {
-    return this._paymentService.isSubscription
+    if (!environment.production) {
+      return true;
+    }
+    return this._paymentService.isSubscription;
   }
 
   get cleantechUnsubscribed() {
@@ -41,7 +48,11 @@ export class AppComponent implements OnInit {
   }
 
   private _cleantechUnsubscribed!: boolean;
-  private _isSuscriptionNeed = signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
+  private _isSuscriptionNeed = signal(
+    this._remoteConfigService
+      .getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED)
+      .asBoolean(),
+  );
 
   public isAuthenticated$ = this._authService.isAuthenticated$;
   public isPrivateZone = signal<boolean>(false);
@@ -52,53 +63,57 @@ export class AppComponent implements OnInit {
     private _notificationService: NotificationService,
     private _translate: TranslateService,
     private readonly userService: UserService,
-    private readonly _remoteConfigService: RemoteConfigService
-
-    ) {
-      effect(()=> {
-        this._hanlderCleantechSuscriptions();
-      })
-    }
+    private readonly _remoteConfigService: RemoteConfigService,
+  ) {
+    effect(() => {
+      this._hanlderCleantechSuscriptions();
+    });
+  }
 
   ngOnInit(): void {
-     this._messageAfterSignUp();
+    this._messageAfterSignUp();
     this._translate.use('fr');
   }
 
-
   private _hanlderCleantechSuscriptions(): void {
-    if(!this._isSuscriptionNeed()) {
+    if (!this._isSuscriptionNeed()) {
       return;
     }
-    if(this.userService.userType() && this.isSubscribed !== STATUS_PENDING) {
-      this.cleantechUnsubscribed = this.userService.userType() === USER_TYPE.CLEANTECH && !this.isSubscribed;
+    if (this.userService.userType() && this.isSubscribed !== STATUS_PENDING) {
+      this.cleantechUnsubscribed =
+        this.userService.userType() === USER_TYPE.CLEANTECH &&
+        !this.isSubscribed;
       this._showNotificationsCleantechUnsubscribed();
     }
   }
 
   private _showNotificationsCleantechUnsubscribed() {
-      if(this.cleantechUnsubscribed) {
-        this._notificationService.notify( {data: { texts: [
-          'MESSAGE_SUBSCRIPTION_BANNER.messageAlert',
-           this._translate.instant('MESSAGE_SUBSCRIPTION_BANNER.messageContact',{email: VAR_GENERAL.GOEKO_EMAIL})
-        ]}})
-      }
+    if (this.cleantechUnsubscribed) {
+      this._notificationService.notify({
+        data: {
+          texts: [
+            'MESSAGE_SUBSCRIPTION_BANNER.messageAlert',
+            this._translate.instant(
+              'MESSAGE_SUBSCRIPTION_BANNER.messageContact',
+              { email: VAR_GENERAL.GOEKO_EMAIL },
+            ),
+          ],
+        },
+      });
+    }
   }
-
 
   private _messageAfterSignUp() {
     this._authService._auth0.getAccessTokenSilently().subscribe({
       error: (error) => {
         const urlPageEmailVerify = `${this.doc.location.origin}/verify-email`;
-        if(error.error_description.includes('verify your email')) {
+        if (error.error_description.includes('verify your email')) {
           this._authService.logout(urlPageEmailVerify);
-       }
-      }
-   })
+        }
+      },
+    });
   }
   acceptCookie() {
     localStorage.setItem(KEY_COOKIES, 'true');
   }
-
-
 }

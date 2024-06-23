@@ -27,12 +27,12 @@ export class PaymentSystemService {
 
   constructor(
     private _http: HttpClient,
-    private readonly sessionStorageService: SessionStorageService
+    private readonly sessionStorageService: SessionStorageService,
   ) {}
 
   cleantechSubscription(id: string): Observable<PaymentSuscription> {
     return this._http.get<PaymentSuscription>(
-      `/v1/payment/cleantech/${id}/subscription`
+      `/v1/payment/cleantech/${id}/subscription`,
     );
   }
 
@@ -47,7 +47,7 @@ export class PaymentSystemService {
           this.sessionStorageService.setItem(KEY_STORAGE, false);
           this._saveIsSuscription('');
           return EMPTY;
-        })
+        }),
       )
       .subscribe();
   }

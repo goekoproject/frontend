@@ -4,11 +4,14 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
-    "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run compiler-tailwind\"",
-    "build:dev": "nx build",
-    "build:pro": "nx build",
-    "compiler-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./apps/goeko/src/tailwind-styles.scss --watch",
-    "lint": "nx lint"
+    "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run start-tailwind\"",
+    "build:dev": "concurrently  -c \"blue,green\"  \"nx run goeko:build:development\" \"npm run start-tailwind:build\"",
+    "build:pro": "concurrently  -c \"blue,green\"  \"nx run goeko:build:production\" \"npm run start-tailwind:build\"",
+    "start-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --watch",
+    "start-tailwind:build": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --minify",
+    "lint": "nx lint",
+    "prestart": "node prestart.js",
+    "build": ""
   },
   "private": true,
   "dependencies": {
@@ -91,6 +94,7 @@
     "nx": "17.2.7",
     "postcss": "^8.4.34",
     "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.1.1",
     "ts-node": "10.9.1",

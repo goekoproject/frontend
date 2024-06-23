@@ -17,13 +17,10 @@ import {
   SmeRequestResponse,
   SmeSaveRecomendationRequest,
 } from './sme-request.model';
-import { SME_CONFIGURATION } from './sme.module';
-//TODO: Change obj modal
 
 @Injectable()
 export class ProjectService {
   constructor(
-    @Inject(SME_CONFIGURATION) public configuration: SmeOptions,
     private readonly sessionStorageService: SessionStorageService,
 
     private _http: HttpClient

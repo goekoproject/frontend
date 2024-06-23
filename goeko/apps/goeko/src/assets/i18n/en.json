@@ -6,6 +6,16 @@
     "passwordPolicy4": "Special characters (!@# $ %^&*)",
     "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
   },
+  "ERROR_MESSAGES": {
+    "500": "Oops, something went wrong. Try later.",
+    "400": "Check your info and try again.",
+    "404": "Couldn't find that. Check the link."
+  },
+  "SUCCESS_MESSAGES": {
+    "POST": "Created successfully!",
+    "PUT": "Updated successfully.",
+    "DELETE": "Deleted successfully."
+  },
   "BANNER": {
     "affordable": "Affordable",
     "easy": "Easy",
@@ -123,6 +133,7 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
+    "labelSelectedFormLang": "Select the language you prefer to complete your eco-solution.",
     "titleSelectImgEcosolution": "Choose multiple images for your EcoSolution",
     "titleFormAnalysis": "Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",
@@ -284,7 +295,8 @@
       "productsContainingHeavyMetals": "Products Containing Heavy Metals",
       "productsContainingTar": "Products Containing Tar",
       "productsContainingHCB": "Products containing HCB",
-      "landsContainingPFAS": "Soils containing PFAS"
+      "landsContainingPFAS": "Soils containing PFAS",
+      "lead": "Lead"
     },
     "selectInertOrMineralWaste": {
       "brick": "Brick",
@@ -395,7 +407,8 @@
       "storeEnergy": "Store energy",
       "useLowConsumptionLighting": "Use low consumption lighting",
       "useRenewableEnergies": "Use renewable energies",
-      "sustainableLightingSystems": "Sustainable lighting systems"
+      "sustainableLightingSystems": "Sustainable lighting systems",
+      "intelligentHeatingSystems": "Intelligent heating systems"
     }
   },
   "TEXT_SUPPORT": {
@@ -498,5 +511,7 @@
   "year": "year",
   "years": "years",
   "yes": "Yes",
-  "your_ecosolutions": "Your Eco-solutions"
+  "your_ecosolutions": "Your Eco-solutions",
+  "regions": "Provinces",
+  "titleBannerLead": " Qualified Leads Tracking"
 }

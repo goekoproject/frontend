@@ -1,4 +1,5 @@
 export interface Lang {
+  codeContentFul: string;
   code: string;
   title: string;
 }
@@ -8,11 +9,13 @@ export const LANGS: Lang[] = [
         locale: 'es ',
     }, */
   {
-    code: 'fr',
+    codeContentFul: 'fr',
     title: 'LANGS.fr',
+    code: 'fr',
   },
   {
-    code: 'gb',
+    codeContentFul: 'gb',
     title: 'LANGS.gb',
+    code: 'en',
   },
 ];

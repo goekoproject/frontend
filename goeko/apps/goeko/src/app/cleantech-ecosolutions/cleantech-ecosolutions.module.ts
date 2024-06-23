@@ -7,6 +7,7 @@ import {
   CategoryModule,
   ProductToCurrentLangPipe,
   SdgIconsComponent,
+  SelectFormLangComponent,
   SelectLocationsComponent,
   SelectSubcategoryProductComponent,
   SubcategoryToCurrentLangPipe,
@@ -57,6 +58,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     SdgIconsComponent,
     SubcategoryToCurrentLangPipe,
     SelectLocationsComponent,
+    SelectFormLangComponent,
     InputFileComponent,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,

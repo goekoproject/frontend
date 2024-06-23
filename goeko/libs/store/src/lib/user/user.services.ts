@@ -1,119 +1,92 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, computed, effect, signal } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { User } from '@auth0/auth0-angular';
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  catchError,
-  of,
-  switchMap,
-  throwError,
-} from 'rxjs';
-import { UserFactory } from './user.factory';
+import { HttpClient, HttpParams } from '@angular/common/http'
+import { Injectable, computed, effect, signal } from '@angular/core'
+import { toObservable } from '@angular/core/rxjs-interop'
+import { User } from '@auth0/auth0-angular'
+import { BehaviorSubject, Observable, Subject, catchError, distinctUntilChanged, of, switchMap } from 'rxjs'
+import { UserFactory } from './user.factory'
 
-import {
-  CleantechsUser,
-  ROLES,
-  SmeUser,
-  USER_DEFAULT,
-  UserType,
-} from './public-api';
-export const SS_COMPANY_DETAIL = 'SS_COMPANY';
+import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api'
+export const SS_COMPANY_DETAIL = 'SS_COMPANY'
 
 @Injectable()
 export class UserService {
-  public userAuthData = signal<User>({});
-  public userProfile = signal<SmeUser | CleantechsUser>(USER_DEFAULT);
+  public userAuthData = signal<User>({})
+  public userProfile = signal<SmeUser | CleantechsUser>(USER_DEFAULT)
 
-  public fechAuthUser = new Subject();
-  private actorsEndpoint = computed(
-    () => this.userAuthData()['userType'] + 's',
-  );
-  public externalId = computed(() => this.userAuthData()['externalId']);
-  public userType = computed(() => this.userAuthData()['userType']);
-  public userRoles = computed(
-    () => this.userAuthData()['roles'] || [ROLES.PUBLIC],
-  );
-  public username = computed(() => this.userAuthData()['email']);
+  public fechAuthUser = new Subject()
+  private actorsEndpoint = computed(() => this.userAuthData()['userType'] + 's')
+  public externalId = computed(() => this.userAuthData()['externalId'])
+  public userType = computed(() => this.userAuthData()['userType'])
+  public userRoles = computed(() => this.userAuthData()['roles'] || [ROLES.PUBLIC])
+  public username = computed(() => this.userAuthData()['email'])
 
-  public userType$ = toObservable<UserType>(this.userAuthData()['userType']);
+  public userType$ = toObservable<UserType>(this.userAuthData()['userType'])
 
-  public completeLoadUser = new BehaviorSubject<boolean>(false);
+  public completeLoadUser = new BehaviorSubject<boolean>(false)
   constructor(public _http: HttpClient) {
     effect(() => {
       if (this.userAuthData().sub) {
-        this._getDataProfile();
+        this._getDataProfile()
       }
-    });
+    })
   }
 
   private _getDataProfile() {
     this._getByIdExternal()
       .pipe(
-        switchMap((dataAuth0) =>
-          dataAuth0
-            ? this.getById(dataAuth0?.id)
-            : throwError(() => 'User not data profile'),
-        ),
-        catchError(() => of(null)),
+        distinctUntilChanged((prev, next) => prev?.id === next?.id),
+        switchMap((dataAuth0) => {
+          if (dataAuth0) {
+            return this.getById(dataAuth0?.id)
+          }
+          return of(null)
+        }),
       )
       .subscribe((data) => {
-        this.propagateDataUser(data);
-        this.fechAuthUser.next(true);
-      });
+        if (data) {
+          this.propagateDataUser(data)
+          this.fechAuthUser.next(true)
+        }
+      })
   }
   private _getByIdExternal(): Observable<any> {
-    const _id = this.externalId();
-    const params = new HttpParams().set('id', _id);
+    const _id = this.externalId()
+    const params = new HttpParams().set('id', _id)
     return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/external`, {
       params,
-    });
+    })
   }
 
   getById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/` + id);
+    return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/` + id)
   }
   fetchUser() {
-    this.getById(this.userProfile().id).subscribe((data) =>
-      this.propagateDataUser(data),
-    );
+    this.getById(this.userProfile().id).subscribe((data) => this.propagateDataUser(data))
   }
   createUserProfile(body: any) {
-    return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}`, body);
+    return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}`, body)
   }
 
   updateUserProfile(id: any, body: any) {
-    return this._http.put<any>(
-      `/v1/actor/${this.actorsEndpoint()}/${id}`,
-      body,
-    );
+    return this._http.put<any>(`/v1/actor/${this.actorsEndpoint()}/${id}`, body)
   }
 
   uploadImgProfile(id: string, files: File[]) {
     if (!files) {
-      return of();
+      return of()
     }
-    const formData = new FormData();
+    const formData = new FormData()
     files.forEach((file) => {
-      formData.append('file', file);
-    });
-    return this._http.post<any>(
-      `/v1/actor/${this.actorsEndpoint()}/${id}/logo`,
-      formData,
-    );
+      formData.append('file', file)
+    })
+    return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}/${id}/logo`, formData)
   }
 
   private propagateDataUser(data: any) {
-    const user = UserFactory.createUserProfileBuilder(
-      this.userAuthData()['userType'],
-    )
-      .init(data)
-      .build();
-    this.userProfile.set(user);
-    this.completeLoadUser.next(true);
-    this.completeLoadUser.complete();
+    const user = UserFactory.createUserProfileBuilder(this.userAuthData()['userType']).init(data).build()
+    this.userProfile.set(user)
+    this.completeLoadUser.next(true)
+    this.completeLoadUser.complete()
   }
 
   getAllCleantechData(): Observable<any> {

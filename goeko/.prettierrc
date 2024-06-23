@@ -1,3 +1,9 @@
 {
-  "singleQuote": true
+  "singleQuote": true,
+  "semi": false,
+  "printWidth": 140,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "pluginSearchDirs": false,
+  "tabWidth": 2,
+  "bracketSameLine": true
 }

@@ -58,10 +58,9 @@ export class GoInput extends LitElement {
         color: #6a6d8c;
       }
       label {
-        color: #2b2b2b;
+        color: var(--primary--950);
         font-weight: 500;
         font-size: 0.875rem;
-        font-weight: 600;
       }
 
       input[type='checkbox'] {
@@ -86,8 +85,7 @@ export class GoInput extends LitElement {
         align-items: center;
       }
       .optional {
-        font-size:12px;
- 
+        font-size: 12px;
       }
     `;
   }
@@ -176,11 +174,11 @@ export class GoInput extends LitElement {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
       />
       <div class="content-label">
-      <label for="${this.id}"> <slot name="label"></slot> </label>      
-      ${this.required ? html`<span class="optional">(Obligatoire)</span>` : ''}
+        <label for="${this.id}"> <slot name="label"></slot> </label>
+        ${this.required
+          ? html`<span class="optional">(Obligatoire)</span>`
+          : ''}
       </div>
-   
-
 
       ${this._templateTypeInput()}
       ${this.textHelp

@@ -6,6 +6,16 @@
     "passwordPolicy4": "Caractères spéciaux (!@# $ %^&*)",
     "passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :"
   },
+  "ERROR_MESSAGES": {
+    "500": "Oups, quelque chose a mal tourné. Essayez plus tard.",
+    "400": "Vérifiez vos infos et réessayez.",
+    "404": "Impossible de trouver cela. Vérifiez le lien."
+  },
+  "SUCCESS_MESSAGES": {
+    "POST": "Créé avec succès!",
+    "PUT": "Mis à jour avec succès.",
+    "DELETE": "Supprimé avec succès."
+  },
   "BANNER": {
     "affordable": "Abordable",
     "easy": "Facile",
@@ -121,6 +131,7 @@
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
+    "labelSelectedFormLang": "Sélectionnez la langue que vous préférez pour compléter votre éco-solution.",
     "titleSelectImgEcosolution": "Choisissez plusieurs images pour votre EcoSolution",
     "titleFormAnalysis": "Sélectionnez vos catégories pour trouver des éco-solutions",
     "additionalInformation": "Informations supplémentaires",
@@ -193,7 +204,7 @@
   },
   "INPUT_FILE": {
     "certified": "Sélectionnez votre certificat",
-    "image": "Glissez-déposez ou cliquez pour",
+    "image": "Glissez une image ou cliquez",
     "image2": "Sélectionner une image",
     "image3": "Ajouter une image"
   },
@@ -201,7 +212,7 @@
     "en": "Anglais",
     "es": "Espagnol",
     "fr": "Français",
-    "gb": "Anglais (Royaume-Uni)"
+    "gb": "Anglais"
   },
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
@@ -282,7 +293,8 @@
       "productsContainingHeavyMetals": "Boues de centrale à béton avec du chrome 6",
       "productsContainingTar": "Produits contenant des HAP​",
       "productsContainingHCB": "Produits contenant du HCB",
-      "landsContainingPFAS": "Terres contenant des PFAS"
+      "landsContainingPFAS": "Terres contenant des PFAS",
+      "lead": "Plomb"
     },
     "selectInertOrMineralWaste": {
       "brick": "Brique/tuile​",
@@ -298,7 +310,7 @@
       "paint": "Peinture",
       "pouringConcrete": "Production du béton",
       "siteCleaning": "Arrosage du chantier",
-      "siteHut": "Cabane de chantier",
+      "siteHut": "Base de vie",
       "toolCleaning": "Nettoyage du matériel",
       "wateringForCure": "Arrosage pour la cure",
       "wateringPlants": "Arrosage des végétaux",
@@ -393,7 +405,8 @@
       "storeEnergy": "Stocker l’énergie",
       "useLowConsumptionLighting": "Des solutions de refroidissement écologiques",
       "useRenewableEnergies": "Recourir à des énergies renouvelables",
-      "sustainableLightingSystems": "Des systèmes d’éclairage durables"
+      "sustainableLightingSystems": "Des systèmes d’éclairage durables",
+      "intelligentHeatingSystems": "Systèmes de chauffage intelligents"
     }
   },
   "TEXT_SUPPORT": {
@@ -500,5 +513,7 @@
   "year": "année",
   "years": "années",
   "yes": "Oui",
-  "your_ecosolutions": "Vos Eco-solutions"
+  "your_ecosolutions": "Vos Eco-solutions",
+  "regions": "Régions",
+  "titleBannerLead": "Suivi des leads qualifiés"
 }

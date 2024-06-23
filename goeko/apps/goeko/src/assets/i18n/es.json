@@ -6,6 +6,16 @@
     "passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
     "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
   },
+  "ERROR_MESSAGES": {
+    "500": "Ups, algo salió mal. Prueba luego.",
+    "400": "Revisa tu info y prueba otra vez.",
+    "404": "No encontramos eso. Revisa el enlace."
+  },
+  "SUCCESS_MESSAGES": {
+    "POST": "¡Creado con éxito!",
+    "PUT": "Actualizado con éxito.",
+    "DELETE": "Eliminado con éxito."
+  },
   "BANNER": {
     "affordable": "Asequible",
     "easy": "Fácil",
@@ -123,6 +133,7 @@
   "dragAndDrop": "Arrastar y soltar",
   "editSelection": "Modificar selección",
   "FORM_LABEL": {
+    "labelSelectedFormLang": "Selecciona el idioma que prefieres para completar tu eco-solución.",
     "titleSelectImgEcosolution": "Elija varias imágenes para su EcoSolution",
     "titleFormAnalysis": "Elija una Categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
@@ -202,7 +213,7 @@
     "en": "Ingles",
     "es": "Español",
     "fr": "Frances",
-    "gb": "Ingles(UK)"
+    "gb": "Ingles"
   },
   "LEGAL": {
     "cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
@@ -284,7 +295,8 @@
       "productsContainingHeavyMetals": "Productos que contienen metales pesados",
       "productsContainingTar": "Productos que contienen alquitrán",
       "productsContainingHCB": "Productos que contienen HCB",
-      "landsContainingPFAS": "Tierras que contienen PFAS"
+      "landsContainingPFAS": "Tierras que contienen PFAS",
+      "lead": "Plomo"
     },
     "selectInertOrMineralWaste": {
       "brick": "Ladrillo",
@@ -395,7 +407,8 @@
       "storeEnergy": "Almacenar energía",
       "useLowConsumptionLighting": "Usar iluminación de bajo consumo",
       "useRenewableEnergies": "Utilizar energías renovables",
-      "sustainableLightingSystems": "Sistemas de iluminación sostenibles"
+      "sustainableLightingSystems": "Sistemas de iluminación sostenibles",
+      "intelligentHeatingSystems": "Sistemas de calefacción inteligentes"
     }
   },
   "TEXT_SUPPORT": {
@@ -496,5 +509,7 @@
   "welcome": "Bienvenido",
   "year": "año",
   "years": "años",
-  "yes": "Si"
+  "yes": "Si",
+  "regions": "Comunidades Autónomas",
+  "titleBannerLead": "Seguimiento de Leads Calificados"
 }
