@@ -1,21 +1,37 @@
 @for (message of messages(); track message; let index = $index) {
-  @defer (when message.type === 'success') {
+  @defer (when message) {
     <ng-container
-      [ngTemplateOutlet]="toastSuccess"
+      [ngTemplateOutlet]="boxToast"
       [ngTemplateOutletContext]="{
         $implicit: message,
         index: index,
+        type: message?.type
       }"></ng-container>
   }
 }
 
-<ng-template #toastSuccess let-message let-index="index">
+<ng-template #boxToast let-message let-index="index" let-type="type">
   <div
     id="toast-success"
-    class="animate-fadeInRight mb-4 flex w-full items-center justify-around rounded-lg border border-primary-400 bg-primary-200 p-4 text-primary-950 shadow"
+    class="animate-fadeInRight mb-4 p-4 flex w-full items-center justify-around rounded-lg border  shadow"
     role="alert"
-    [ngClass]="{ 'animate-fadeOutRight': removing[index] }">
+    [ngClass]="{ 
+      'animate-fadeOutRight': removing[index],
+      'border-primary-400 bg-primary-200  text-primary-950' : type === 'SUCCESS',
+      'text-yellow-500 border-yellow-500 bg-yellow-50' : type === 'WARNING',
+      'border-primary-100 bg-red-300  text-primary-100': type === 'ERROR'}">
     <div class="flex items-center">
+      @switch (type) {
+        @case ('SUCCESS')
+          <i class="ti ti-check-circle-fill text-2xl text-primary-main"></i>
+          break;
+        @case ('WARNING')
+          <i class="ti ti-alert-triangle-fill text-2xl text-yellow-500"></i>
+          break;
+        @default  {
+          <i class="ti ti-che ck-circle-fill text-2xl text-primary-main"></i>
+        }
+      }
       <i class="ti ti-rosette-discount-check-filled text-2xl text-primary-main"></i>
 
       <div class="ms-3 text-sm font-normal">{{ message.message }}</div>

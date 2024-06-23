@@ -18,7 +18,7 @@ import { Notification, ToastService } from './toast.service'
 export class ToastComponent implements OnInit {
   private _toastService = inject(ToastService)
 
-  public messages = signal<Array<Notification>>([])
+  public messages = signal<Array<Notification | null>>([])
   public removing: any = {}
 
   ngOnInit(): void {
@@ -27,6 +27,9 @@ export class ToastComponent implements OnInit {
 
   private _getMessages() {
     this._toastService.messageSource.subscribe((newMessage) => {
+      if(!newMessage) {
+        return;
+      }
       this.messages.update((message) => [...message, newMessage])
     })
   }

@@ -13,7 +13,7 @@ export enum TOAST_NOTIFICATION_TYPE {
 
 export interface Notification  {
   message: string
-  type: string
+  type: ToastNotification
   subtype?: string
 
 }
@@ -23,11 +23,7 @@ export interface Notification  {
   providedIn: 'root',
 })
 export class ToastService {
-  private _messageSource = new BehaviorSubject<Notification>({
-    message: 'Probando probando ..',
-    type: 'success',
-    subtype: undefined,
-  })
+  private _messageSource = new BehaviorSubject<Notification | null >(null);
   public get messageSource() {
     return this._messageSource
   }
