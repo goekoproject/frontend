@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Observable, find, from, map, mergeMap, of, reduce } from 'rxjs'
 import { SessionStorageService } from '../session-storage.service'
 import { TranslateChangeService } from '../util/translate-change'
 import { Recommendation, ResponseRecommendations } from './ecosolution-recomendations.model'
-import { SmeOptions } from './sme-options'
 import {
   Requests,
   SmeCreateRecomendationRequest,

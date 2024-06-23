@@ -1,9 +1,11 @@
-import { _filterNotNull } from '@goeko/business-ui'
 import { mapperLocations } from '@goeko/core'
 import { FiledTranslations } from '../model/field-translations.interface'
 import { Picture } from '../model/pictures.interface'
 import { Country } from '../user/public-api'
 
+export function _filterNotNull<T>(items: Array<T | null | undefined>): T[] {
+  return items.filter((item): item is T => item !== null && item !== undefined)
+}
 interface Price {
   amount: number
   currency: string

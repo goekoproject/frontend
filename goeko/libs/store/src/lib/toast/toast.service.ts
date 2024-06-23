@@ -1,29 +1,31 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
+export type ToastNotification = 'SUCCESS' | 'ERROR' | 'WARNING'
+export type ToastNotificationSubType = 'POST' | 'PUT' | 'DELETE'
 
-export type ToastNotification = 'SUCCESS' | 'UPDATE' | 'ERROR' | 'DELETE' | 'WARNING'; 
 export enum TOAST_NOTIFICATION_TYPE {
   SUCCESS = 'SUCCESS',
-  UPDATE = 'UPDATE',
-  DELETE = 'DELETE',
   ERROR = 'ERROR',
-  WARNING = 'WARNING'
+  WARNING = 'WARNING',
+}
+export enum TOAST_NOTIFICATION_SUBTYPE {
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
 }
 
-export interface Notification  {
+export interface Notification {
   message: string
   type: ToastNotification
-  subtype?: string
-
+  subtype?: ToastNotificationSubType
 }
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  private _messageSource = new BehaviorSubject<Notification | null >(null);
+  private _messageSource = new BehaviorSubject<Notification | null>(null)
   public get messageSource() {
     return this._messageSource
   }
@@ -31,10 +33,9 @@ export class ToastService {
     this._messageSource = value
   }
 
-  constructor() {
-  }
+  constructor() {}
 
-  notify(message: string, type: ToastNotification, subtype?: string) {
+  notify(message: string, type: ToastNotification, subtype?: ToastNotificationSubType) {
     this.messageSource.next({ message, type, subtype })
   }
 }

@@ -1,17 +1,13 @@
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, catchError, throwError } from 'rxjs';
-import { SESSIONID } from './auth.constants';
-import { CONFIGURATION } from '../../config.module';
-import { Options } from '../../models/options.interface';
-import { AuthService } from '@auth0/auth0-angular';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
+import { Inject, Injectable } from '@angular/core'
+import { Router } from '@angular/router'
+import { AuthService } from '@auth0/auth0-angular'
+import { Observable, catchError, throwError } from 'rxjs'
+import { CONFIGURATION } from '../../config.module'
+import { Options } from '../../models/options.interface'
+import { SESSIONID } from './auth.constants'
+
+const isPlatformGoeko = (request: HttpRequest<unknown>) => request.url.includes('assets')
 
 /**
  * Inteceptor for authenticating a user
@@ -21,22 +17,17 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private _route: Router,
     private _auth: AuthService,
-    @Inject(CONFIGURATION) public configuration: Options
+    @Inject(CONFIGURATION) public configuration: Options,
   ) {}
 
-  intercept(
-    request: HttpRequest<unknown>,
-    next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
-    const accessToken = sessionStorage.getItem(SESSIONID);
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    const accessToken = sessionStorage.getItem(SESSIONID)
 
-    if (!request.url.includes('assets')) {
-      request = this.requestGoekoBakend(request);
+    if (!isPlatformGoeko(request)) {
+      request = this.requestGoekoBakend(request)
     }
 
-    return next
-      .handle(request)
-      .pipe(catchError((error: HttpErrorResponse) => this._handleError(error)));
+    return next.handle(request).pipe(catchError((error: HttpErrorResponse) => this._handleError(error)))
   }
 
   private _handleError(error: HttpErrorResponse) {
@@ -44,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
       /*       this._auth.killSessions();
        */
     }
-    return throwError(() => error);
+    return throwError(() => error)
   }
 
   private requestGoekoBakend(request: HttpRequest<unknown>) {
@@ -53,6 +44,6 @@ export class AuthInterceptor implements HttpInterceptor {
       /*  setHeaders: {
         Authorization: `Bearer ${accessToken}`,
       }, */
-    });
+    })
   }
 }

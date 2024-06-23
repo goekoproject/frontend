@@ -5,7 +5,7 @@
       [ngTemplateOutletContext]="{
         $implicit: message,
         index: index,
-        type: message?.type
+        type: message?.type,
       }"></ng-container>
   }
 }
@@ -13,34 +13,37 @@
 <ng-template #boxToast let-message let-index="index" let-type="type">
   <div
     id="toast-success"
-    class="animate-fadeInRight mb-4 p-4 flex w-full items-center justify-around rounded-lg border  shadow"
+    class="mb-4 flex w-full animate-fadeInRight items-center justify-around rounded-lg border p-4 shadow"
     role="alert"
-    [ngClass]="{ 
+    [ngClass]="{
       'animate-fadeOutRight': removing[index],
-      'border-primary-400 bg-primary-200  text-primary-950' : type === 'SUCCESS',
-      'text-yellow-500 border-yellow-500 bg-yellow-50' : type === 'WARNING',
-      'border-primary-100 bg-red-300  text-primary-100': type === 'ERROR'}">
+      'animate-fadeOutRightLarge': removingAll,
+
+      'border-primary-400 bg-primary-200 text-primary-950': type === 'SUCCESS',
+      'border-yellow-500 bg-yellow-50 text-yellow-900': type === 'WARNING',
+      'text-textError border-red-700 bg-red-200': type === 'ERROR',
+    }">
     <div class="flex items-center">
       @switch (type) {
-        @case ('SUCCESS')
-          <i class="ti ti-check-circle-fill text-2xl text-primary-main"></i>
-          break;
-        @case ('WARNING')
-          <i class="ti ti-alert-triangle-fill text-2xl text-yellow-500"></i>
-          break;
-        @default  {
-          <i class="ti ti-che ck-circle-fill text-2xl text-primary-main"></i>
+        @case ('ERROR') {
+          <i class="ti ti-circle-x text-3xl"></i>
+        }
+
+        @case ('WARNING') {
+          <i class="ti ti-exclamation-circle text-3xl"></i>
+        }
+        @default {
+          <i class="ti ti-circle-check text-3xl text-primary-700"></i>
         }
       }
-      <i class="ti ti-rosette-discount-check-filled text-2xl text-primary-main"></i>
 
-      <div class="ms-3 text-sm font-normal">{{ message.message }}</div>
+      <div class="ms-3 text-sm font-normal">{{ message.message | translate }}</div>
     </div>
 
     <button
       (click)="closeToast(index)"
       type="button"
-      class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent p-1.5 text-primary-800 hover:bg-primary-300 hover:text-primary-100 focus:ring-2 focus:ring-gray-300"
+      class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent p-1.5 hover:bg-white focus:ring-2 focus:ring-gray-300"
       data-dismiss-target="#toast-success"
       aria-label="Close">
       <span class="sr-only">Close</span>

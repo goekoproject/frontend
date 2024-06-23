@@ -1,42 +1,30 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { APP_INITIALIZER, NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
 
-import { HttpClient } from '@angular/common/http';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {
   LoadDataUser,
   PopupModule,
   SelectI18nComponent,
   SideProfileComponent,
+  handlerHttpInterceptor,
   loadDataUserFactory,
-} from '@goeko/business-ui';
-import { ConfigModule, GoRemoteConfigModule } from '@goeko/core';
-import {
-  CleantechModule,
-  ContentFulModule,
-  LocationsService,
-  SmeModule,
-  UserService,
-  isSubscribedCleantech,
-} from '@goeko/store';
-import {
-  ButtonModule,
-  DialogMessageModule,
-  NotificationService,
-  SideDialogModule,
-  UiBreadcrumbsModule,
-} from '@goeko/ui';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { environment } from '../environments/environment';
-import { ContentConfig } from './content-ful.config';
+} from '@goeko/business-ui'
+import { ConfigModule, GoRemoteConfigModule } from '@goeko/core'
+import { CleantechModule, ContentFulModule, LocationsService, SmeModule, UserService, isSubscribedCleantech } from '@goeko/store'
+import { ButtonModule, DialogMessageModule, NotificationService, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui'
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { environment } from '../environments/environment'
+import { ContentConfig } from './content-ful.config'
 export const httpLoaderFactory = (http: HttpClient) => {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-};
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json')
+}
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -74,6 +62,7 @@ export const httpLoaderFactory = (http: HttpClient) => {
     GoRemoteConfigModule,
   ],
   providers: [
+    provideHttpClient(withInterceptors([handlerHttpInterceptor])),
     UserService,
     LoadDataUser,
     isSubscribedCleantech,

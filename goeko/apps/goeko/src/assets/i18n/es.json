@@ -6,6 +6,16 @@
     "passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
     "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
   },
+  "ERROR_MESSAGES": {
+    "500": "Ups, algo salió mal. Prueba luego.",
+    "400": "Revisa tu info y prueba otra vez.",
+    "404": "No encontramos eso. Revisa el enlace."
+  },
+  "SUCCESS_MESSAGES": {
+    "POST": "¡Creado con éxito!",
+    "PUT": "Actualizado con éxito.",
+    "DELETE": "Eliminado con éxito."
+  },
   "BANNER": {
     "affordable": "Asequible",
     "easy": "Fácil",

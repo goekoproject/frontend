@@ -10,6 +10,7 @@ module.exports = {
         secondaryAccent: '#21a650',
         dark: '#27272a',
         white: '#ffffff',
+        textError: 'rgb(124 28 28)',
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -37,6 +38,7 @@ module.exports = {
       fadeOutLeft: 'fadeOutLeft 300ms ease-in-out',
       fadeInRight: 'fadeInRight 300ms ease-in-out',
       fadeOutRight: 'fadeOutRight 300ms ease-in-out',
+      fadeOutRightLarge: 'fadeOutRight 3s 5s ease-in-out',
     },
     keyframes: {
       fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
@@ -52,7 +54,7 @@ module.exports = {
       fadeOutLeft: {
         '0%': { opacity: '1', transform: 'translateX(0)' },
         '100%': { opacity: '0', transform: 'translateX(-100%)' },
-      }
+      },
     },
   },
   plugins: [{ ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}) }, 'prettier-plugin-tailwindcss'],
