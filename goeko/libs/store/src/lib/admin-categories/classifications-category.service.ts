@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, map } from 'rxjs';
 import { ClassificationCategory } from './classifications-category.model';
 import { ManageCategory } from './classifications-subcategory.model';
+import { CODE_LANG } from '@goeko/core';
 
 @Injectable({ providedIn: 'root' })
 export class ClassificationCategoryService {
@@ -13,8 +14,8 @@ export class ClassificationCategoryService {
     private _translateService: TranslateService
   ) {
     this._translateService.onLangChange.pipe(
-    
-    ).subscribe(current => this.langSignal.set(current.lang))
+
+    ).subscribe(current => this.langSignal.set(current.lang === CODE_LANG.EN ? CODE_LANG.GB : current.lang))
   }
 
   getClassificationsCategory(): Observable<ClassificationCategory[]> {

@@ -1,39 +1,15 @@
 $padding-element: 25px;
 $padding-element-active: 1.2rem;
 .menu-user {
-  width: 76px;
   display: flex;
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
   flex-direction: column;
-  align-items: center;
-  gap: 4rem;
   padding: 1rem 0;
-  height: 100vh;
-  left: 0;
-  transition: all 0.1s;
-  justify-content: space-between;
-  background-color: #ffffff;
-  z-index: 10;
-  position: fixed;
-
-  .menu-user-title {
-    font-size: 15px;
-    font-weight: 500;
-    opacity: 0;
-  }
-  &:hover {
-    width: 230px;
-    .menu-user-options,
-    .menu-user-title {
-      opacity: 1;
-    }
-  }
+  height: 100%;
 }
 
 @mixin element-selected {
   color: #00517dd5;
   background-color: #e6ffff;
-  font-weight: 600;
 }
 
 .user-logo {
@@ -44,44 +20,30 @@ $padding-element-active: 1.2rem;
   width: 100%;
   height: 100%;
   li {
-    margin-bottom: 0.5rem;
-    color: #d4dae9;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.6rem;
     border-radius: 10px;
-    padding: 0.4rem $padding-element;
-    height: 48px;
-    &:hover {
-      color: #00517dd5;
-      background-color: #e6ffff;
-      font-weight: 600;
-    }
   }
   i {
     font-size: 30px;
   }
   .active {
     border-right: 6px solid var(--light-accent);
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
     @include element-selected();
   }
 }
 
 .user-actions {
-  align-self: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  i {
-    cursor: pointer;
-    font-size: calc(18px + 1vw);
-    color: #00527d;
-  }
+
 }
 
 .user-logout {

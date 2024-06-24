@@ -1,0 +1,54 @@
+<div class="w-full sm:px-6">
+  <h2 class="font-sans text-3xl font-bold text-sky-700">Admin Panel</h2>
+  <div class="px-4 py-4 md:px-10 md:py-7">
+    <div class="flex items-center justify-between">
+      <h2 tabindex="0" class="text-base font-bold leading-normal text-gray-800 sm:text-lg md:text-xl lg:text-2xl">Users</h2>
+    </div>
+  </div>
+  <div class="bg-white px-4 py-4 md:px-8 md:py-7 xl:px-10">
+    <div class="items-center justify-between sm:flex">
+      <div class="flex items-center">
+        <ng-container *ngFor="let actor of dataActorSwitch">
+          <button
+            [ngClass]="{ 'bg-primary-400': selectedUserType === actor.type, 'text-white': selectedUserType === actor.type }"
+            (click)="changeUserType(actor.type)"
+            class="flex items-center gap-2 ml-4 px-4 rounded-full text-primary-900 focus:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 sm:ml-8">
+            <div class="0 rounded-full px-8 py-2 hover:bg-primary-400 hover:text-white">
+              <p>{{ actor.name }}</p>
+            </div>
+            @if (selectedUserType === actor.type && (dataSources | async); as dataSource) {
+              <p class="rounded-2xl bg-white text-primary-950 p-1">{{ dataSource.length }}</p>
+            }
+          </button>
+        </ng-container>
+      </div>
+    </div>
+    <div class="mt-7 overflow-x-auto rounded-lg">
+      <table class="w-full">
+        <thead>
+          <tr scope="col">
+            <ng-container *ngFor="let header of headers">
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700 dark:text-gray-400">
+                {{ header.title }}
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody bg-white divide-y divide-gray-200>
+          @for (dataUser of dataSources | async; track dataUser.id) {
+            <tr tabindex="0" class="h-16 rounded border border-gray-100 focus:outline-none">
+              @for (header of headers; track header.key) {
+                <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{{ dataUser[header.key] }}</td>
+              }
+              <td class="whitespace-nowrap px-6 py-4">
+                <div class="flex space-x-4">
+                  <i class="ti ti-trash"></i>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

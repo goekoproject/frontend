@@ -88,4 +88,9 @@ export class UserService {
     this.completeLoadUser.next(true)
     this.completeLoadUser.complete()
   }
+
+  getAllCleantechData(): Observable<any> {
+    return this._http.get<any>(`/v1/actor/cleantechs`);
+  }
+
 }
