@@ -240,10 +240,16 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _uploadPicture(ecosolution: any) {
     if (this._fileEcosolution && ecosolution) {
-      return this._ecosolutionsService.uploadPicture(
-        ecosolution?.id,
-        this._fileEcosolution,
-      );
+      const createOrUpdatePicture = this.idEcosolution
+        ? this._ecosolutionsService.updatePicture(
+            ecosolution?.id,
+            this._fileEcosolution,
+          )
+        : this._ecosolutionsService.uploadPicture(
+            ecosolution?.id,
+            this._fileEcosolution,
+          );
+      return createOrUpdatePicture;
     }
     return of(null);
   }
