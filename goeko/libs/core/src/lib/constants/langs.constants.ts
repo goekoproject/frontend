@@ -1,7 +1,14 @@
 export interface Lang {
-  codeContentFul: string;
-  code: string;
-  title: string;
+  codeContentFul: string
+  code: string
+  title: string
+}
+
+export enum CODE_LANG {
+  ES = 'es',
+  FR = 'fr',
+  EN = 'en',
+  GB = 'gb',
 }
 export const LANGS: Lang[] = [
   /* 		{
@@ -9,13 +16,13 @@ export const LANGS: Lang[] = [
         locale: 'es ',
     }, */
   {
-    codeContentFul: 'fr',
+    codeContentFul: CODE_LANG.GB,
     title: 'LANGS.fr',
-    code: 'fr',
+    code: CODE_LANG.FR,
   },
   {
-    codeContentFul: 'gb',
+    codeContentFul: CODE_LANG.GB,
     title: 'LANGS.gb',
-    code: 'en',
+    code: CODE_LANG.EN,
   },
-];
+]

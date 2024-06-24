@@ -1,14 +1,15 @@
-import { ROLES, USER_TYPE, UserRoles, UserType } from '@goeko/store';
+import { ROLES, USER_TYPE, UserRoles, UserType } from '@goeko/store'
 
 export interface MenuUser {
   // RANDOMuuid FORMAT `${string}-${string}-${string}-${string}-${string}`
-  id: string;
-  title: string;
-  url: string;
-  active: boolean;
-  icon: string;
-  userType: UserType[];
-  userRoles?: UserRoles[];
+  id: string
+  title: string
+  url: string
+  active: boolean
+  icon?: string
+  userType: UserType[]
+  userRoles?: UserRoles[]
+  submenu?: MenuUser[]
 }
 export const MENU_USER: MenuUser[] = [
   {
@@ -70,11 +71,27 @@ export const MENU_USER: MenuUser[] = [
   }, */
   {
     id: window.crypto.randomUUID(),
-    title: 'Admin Category',
+    title: 'Admin',
     url: 'admin',
     active: true,
     icon: 'settings',
     userType: [USER_TYPE.SME],
     userRoles: [ROLES.ADMIN],
+    submenu: [
+      {
+        id: window.crypto.randomUUID(),
+        title: 'Category',
+        url: 'admin/admin-category',
+        active: true,
+        userType: [USER_TYPE.SME],
+      },
+      {
+        id: window.crypto.randomUUID(),
+        title: 'User',
+        url: 'admin/user-data',
+        active: true,
+        userType: [USER_TYPE.SME],
+      },
+    ],
   },
-];
+]
