@@ -43,6 +43,21 @@ export class EcosolutionsService {
         }),
       );
   }
+ updatePicture(idEcosolution: string, files: File[]) {
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append('file', file);
+    });
+    return this._http
+      .put(`/v1/ecosolutions/${idEcosolution}/picture`, formData)
+      .pipe(
+        catchError((error) => {
+          console.error('Error uploading image', error);
+          return of(null);
+        }),
+      );
+  }
 
   uploadDocumentation(idEcosolution: string, files: File[]) {
     const formData = new FormData();

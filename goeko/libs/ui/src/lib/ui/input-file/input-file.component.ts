@@ -76,6 +76,7 @@ export class InputFileComponent implements AfterViewInit {
     } else {
       this._filesUrl = value;
     }
+    this.loadFilesFromUrls(this._filesUrl);
   }
 
   private get _selectedSlideMain(): number {
@@ -154,7 +155,7 @@ export class InputFileComponent implements AfterViewInit {
   removeSlide(id: number) {
     (this.filesUrl as Array<string>).splice(id, 1);
     this._fileSetMultiple.splice(id, 1);
-    this._propagateSelected(this._fileSetMultiple);
+    this._propagateSelected();
   }
 
   private _displayPreview() {
@@ -191,7 +192,7 @@ export class InputFileComponent implements AfterViewInit {
       reader.onload = (event: any) => {
         const { result } = event.target;
         this._addNewFile(result);
-        this._propagateSelected(files);
+        this._propagateSelected();
         if (files.length === 1) {
           this._setSelectedLastSlided();
         }
@@ -213,9 +214,21 @@ export class InputFileComponent implements AfterViewInit {
     (this.filesUrl as Array<string>).push(urlFile);
   }
 
-  private _propagateSelected(files: File[]) {
+  private _propagateSelected() {
     if (this.filesUrl?.length === this._fileSetMultiple.length) {
       this.fileChange.emit(this._fileSetMultiple); // Emitir todos los archivos cuando todos estén listos
     }
+  }
+  async loadFilesFromUrls(fileUrls: string[]) {
+    const filePromises = fileUrls.map(async (url) => {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      // Aquí asumimos que puedes obtener un nombre de archivo de alguna manera
+      const filename = url.split('/').pop() || 'defaultName';
+      return new File([blob], filename, { type: blob.type });
+    });
+
+    this._fileSetMultiple = await Promise.all(filePromises);
+    // Aquí tienes tus archivos cargados en `this.files` y puedes manejarlos como desees
   }
 }
