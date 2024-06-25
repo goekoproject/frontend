@@ -92,9 +92,6 @@ export class UserService {
   }
 
   uploadImgProfile(id: string, files: File[]) {
-    if (!files) {
-      return of();
-    }
     const formData = new FormData();
     files.forEach((file) => {
       formData.append('file', file);

@@ -33,7 +33,7 @@
   </div>
   <div class="detail-actions">
     <button
-      go-button
+      go-button (click)="downloadCertified()"
       appearance="white"
       *ngIf="
         detailsEcosolution()?.certified &&

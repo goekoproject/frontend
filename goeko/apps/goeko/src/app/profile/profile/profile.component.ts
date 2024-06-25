@@ -16,7 +16,6 @@ import {
   distinctUntilChanged,
   forkJoin,
   map,
-  of,
   switchMap,
   takeUntil,
   tap,
@@ -93,13 +92,10 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   ) => boolean;
 
   private _uploadImg$ = () => {
-    if (this.profileImg) {
-      return this._profieService.uploadImgProfile(
-        this.dataProfile().id,
-        this.profileImg,
-      );
-    }
-    return of(null);
+    return this._profieService.uploadImgProfile(
+      this.dataProfile().id,
+      this.profileImg,
+    );
   };
 
   public get locationsArrays(): FormArray {
