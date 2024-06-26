@@ -231,6 +231,7 @@ export class InputFileComponent implements AfterViewInit {
     });
 
     this._fileSetMultiple = await Promise.all(filePromises);
+    this._propagateSelected();
     // Aquí tienes tus archivos cargados en `this.files` y puedes manejarlos como desees
   }
 }

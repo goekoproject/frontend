@@ -19,7 +19,6 @@ import {
   switchMap,
   takeUntil,
   tap,
-  throwError,
 } from 'rxjs';
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
 import { ProfileFieldset } from './profile-fieldset.interface';
@@ -91,11 +90,8 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     o2: string,
   ) => boolean;
 
-  private _uploadImg$ = () => {
-    return this._profieService.uploadImgProfile(
-      this.dataProfile().id,
-      this.profileImg,
-    );
+  private _uploadImg$ = (id = this.dataProfile()?.id) => {
+    return this._profieService.uploadImgProfile(id, this.profileImg);
   };
 
   public get locationsArrays(): FormArray {
@@ -175,14 +171,13 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       .createUserProfile(this.form.value)
       .pipe(
         switchMap((dataProfile) => {
-          if (dataProfile) {
-            return this._uploadImg$().pipe(
+          if (dataProfile && this.profileImg) {
+            return this._uploadImg$(dataProfile.id).pipe(
               map((uploadResult) => ({ dataProfile, uploadResult })),
             );
+          } else {
+            return [{ dataProfile }];
           }
-          return throwError(
-            () => new Error('No se pudo crear el perfil de usuario'),
-          );
         }),
 
         tap(({ dataProfile }) => {
