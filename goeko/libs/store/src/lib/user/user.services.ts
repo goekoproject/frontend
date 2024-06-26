@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable, computed, effect, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
 import { User } from '@auth0/auth0-angular'
-import { BehaviorSubject, Observable, Subject, catchError, distinctUntilChanged, of, switchMap } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, distinctUntilChanged, of, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
 import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api'
@@ -72,9 +72,6 @@ export class UserService {
   }
 
   uploadImgProfile(id: string, files: File[]) {
-    if (!files) {
-      return of()
-    }
     const formData = new FormData()
     files.forEach((file) => {
       formData.append('file', file)
@@ -90,7 +87,6 @@ export class UserService {
   }
 
   getAllCleantechData(): Observable<any> {
-    return this._http.get<any>(`/v1/actor/cleantechs`);
+    return this._http.get<any>(`/v1/actor/cleantechs`)
   }
-
 }

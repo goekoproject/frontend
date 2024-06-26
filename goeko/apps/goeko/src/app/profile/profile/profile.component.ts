@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
 import { CountrySelectOption, DataSelect, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
 import { AutoUnsubscribe, SideDialogService } from '@goeko/ui'
-import { Subject, distinctUntilChanged, forkJoin, map, of, switchMap, takeUntil, tap, throwError } from 'rxjs'
+import { Subject, distinctUntilChanged, forkJoin, map, switchMap, takeUntil, tap } from 'rxjs'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
 import { ProfileFormFactory } from './profile-form.factory'
@@ -67,11 +67,8 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
   public defaultSetCountriesSme = defaultSetCountriesSme as (o1: CountrySelectOption, o2: string) => boolean
 
-  private _uploadImg$ = () => {
-    if (this.profileImg) {
-      return this._profieService.uploadImgProfile(this.dataProfile().id, this.profileImg)
-    }
-    return of(null)
+  private _uploadImg$ = (id = this.dataProfile()?.id) => {
+    return this._profieService.uploadImgProfile(id, this.profileImg)
   }
 
   public get locationsArrays(): FormArray {
@@ -121,7 +118,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   private _setLocaltionInFormForSme() {
     if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
       this.locationsArrays.clear()
-
       ;(this.dataProfile() as SmeUser).locations.forEach(() => {
         this._addLocations()
       })
@@ -143,10 +139,11 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       .createUserProfile(this.form.value)
       .pipe(
         switchMap((dataProfile) => {
-          if (dataProfile) {
-            return this._uploadImg$().pipe(map((uploadResult) => ({ dataProfile, uploadResult })))
+          if (dataProfile && this.profileImg) {
+            return this._uploadImg$(dataProfile.id).pipe(map((uploadResult) => ({ dataProfile, uploadResult })))
+          } else {
+            return [{ dataProfile }]
           }
-          return throwError(() => new Error('No se pudo crear el perfil de usuario'))
         }),
 
         tap(({ dataProfile }) => {

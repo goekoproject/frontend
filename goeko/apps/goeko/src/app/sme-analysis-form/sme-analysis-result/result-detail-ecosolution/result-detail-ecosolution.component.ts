@@ -67,4 +67,11 @@ export class ResultDetailEcosolutionComponent implements OnInit {
       .afterClosed()
       .subscribe(() => console.log(country));
   }
+
+  downloadCertified() {
+    const certified = this.detailsEcosolution()?.documents[0];
+    if (certified && certified.url) {
+      window.open(certified.url, '_blank');
+    }
+  }
 }

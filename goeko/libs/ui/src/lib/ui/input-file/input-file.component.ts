@@ -221,14 +221,17 @@ export class InputFileComponent implements AfterViewInit {
   }
   async loadFilesFromUrls(fileUrls: string[]) {
     const filePromises = fileUrls.map(async (url) => {
-      const response = await fetch(url);
+      const secureUrl = url.startsWith('https')
+        ? url
+        : `https://${url.split('//').pop()}`;
+      const response = await fetch(secureUrl);
       const blob = await response.blob();
-      // Aquí asumimos que puedes obtener un nombre de archivo de alguna manera
       const filename = url.split('/').pop() || 'defaultName';
       return new File([blob], filename, { type: blob.type });
     });
 
     this._fileSetMultiple = await Promise.all(filePromises);
+    this._propagateSelected();
     // Aquí tienes tus archivos cargados en `this.files` y puedes manejarlos como desees
   }
 }
