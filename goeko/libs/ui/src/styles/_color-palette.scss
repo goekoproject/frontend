@@ -21,24 +21,16 @@
   --co2-emission: #969696;
   --waste: #00a039;
   --hp: #d00000;
-  --water: #02d8e0;
+  --water: #00ffff;
   --border-color: #d9dbe9;
 }
 
 @mixin gradient-linear {
   background: rgb(156, 212, 183);
-  background: linear-gradient(
-    70deg,
-    rgba(156, 212, 183, 1) 35%,
-    rgba(4, 138, 191, 1) 70%
-  );
+  background: linear-gradient(70deg, rgba(156, 212, 183, 1) 35%, rgba(4, 138, 191, 1) 70%);
 }
 
 @mixin gradient-radial {
   background: rgb(156, 212, 183);
-  background: linear-gradient(
-    344deg,
-    rgba(156, 212, 183, 1) 38%,
-    rgba(4, 138, 191, 1) 70%
-  );
+  background: linear-gradient(344deg, rgba(156, 212, 183, 1) 38%, rgba(4, 138, 191, 1) 70%);
 }
