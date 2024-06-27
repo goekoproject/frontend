@@ -4,21 +4,20 @@
 
 <div
   [ngClass]="{ flex: this.multiple, 'flex-col-reverse': this.multiple }"
-  class="w-3/4 relative border-2 border-gray-300 border-dashed rounded-lg p-6 transition-all"
+  class="relative w-full rounded-lg border-2 border-dashed border-gray-300 p-6 transition-all"
   [ngClass]="{ 'input-readonly': readonly }"
   id="dropzone"
   #dropzone
   (dragover)="onDragOver($event)"
   (drop)="onDrop($event)"
-  (dropleave)="onDragLeave($event)"
->
+  (dropleave)="onDragLeave($event)">
   @defer (when !readonly) {
-    <div class="text-center m-4">
+    <div class="m-4 text-center">
       @if (!this.multiple) {
         <i class="ti ti-file-upload icon-upload"></i>
       }
       <h3 class="mt-2 text-sm font-medium text-gray-900">
-        <label class="relative cursor-pointer text-label">
+        <label class="text-label relative cursor-pointer">
           <p>{{ 'INPUT_FILE.image' | translate }}</p>
           @if (this.multiple) {
             <a>{{ 'INPUT_FILE.image3' | translate }}</a>
@@ -26,22 +25,9 @@
             <a>{{ 'INPUT_FILE.image2' | translate }}</a>
           }
           @if (multiple) {
-            <input
-              class="sr-only"
-              type="file"
-              [id]="id"
-              accept="{{ acceptedFileTypes }}"
-              (change)="uploadFile($event)"
-              multiple
-            />
+            <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)" multiple />
           } @else {
-            <input
-              class="sr-only"
-              type="file"
-              [id]="id"
-              accept="{{ acceptedFileTypes }}"
-              (change)="uploadFile($event)"
-            />
+            <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)" />
           }
         </label>
       </h3>
@@ -50,68 +36,53 @@
   }
 
   @if (multiple && filesUrl) {
-    <div class="embla" emblaCarousel>
+    <div class="embla w-full" emblaCarousel>
       <div class="embla__container">
         @for (file of filesUrl; track file; let i = $index) {
-          <ng-container
-            [ngTemplateOutlet]="preview"
-            [ngTemplateOutletContext]="{ id: i, url: file }"
-          ></ng-container>
+          <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ id: i, url: file }"></ng-container>
         }
       </div>
     </div>
 
     <div class="thumb py-4" thumb>
-      <div
-        class="embla__container basis-24 shrink-0 grow-0 flex gap-3 mt-4 rounded-2xl"
-      >
+      <div class="embla__container mt-4 flex shrink-0 grow-0 basis-24 gap-3 rounded-2xl">
         @for (file of filesUrl; track file; let i = $index) {
           <button
             (click)="selectedImg(i)"
-            class="embla__slide max-w-28 max-h-20 rounded-2xl transition-all"
+            class="embla__slide max-h-20 max-w-28 rounded-2xl transition-all"
             [ngClass]="{
-              'border-[0.1rem] shadow-md shadow-primary-900':
-                selectedSlideMain() === i,
-            }"
-          >
-            <img
-              [src]="file"
-              [alt]="'tumb' + i"
-              class="rounded-2xl h-full object-cover max-h-80"
-            />
+              'border-[0.1rem] shadow-md shadow-primary-900': selectedSlideMain() === i,
+            }">
+            <img [src]="file" [alt]="'tumb' + i" class="h-full max-h-80 rounded-2xl object-cover" />
           </button>
         }
       </div>
     </div>
 
     @if (filesUrl.length > 0) {
-      <div class="flex text-4xl text-primary-900 self-end">
+      <div class="flex self-end text-4xl text-primary-900">
         <i class="ti ti-circle-arrow-left cursor-pointer" (click)="prev()"></i>
         <i class="ti ti-circle-arrow-right cursor-pointer" (click)="next()"></i>
       </div>
     }
   } @else if (filesUrl && filesUrl.length > 0) {
-    <ng-container
-      [ngTemplateOutlet]="preview"
-      [ngTemplateOutletContext]="{ id: 0, url: filesUrl[0] }"
-    ></ng-container>
+    <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ id: 0, url: filesUrl[0] }"></ng-container>
   }
 </div>
 
 <ng-template #preview let-url="url" let-id="id">
-  <div class="relative min-w-full">
+  <div class="relative h-fit min-w-full">
     @defer (when !readonly) {
-
-      @if(this.multiple) {
-        <div
-        class="flex transition-all absolute right-0 text-3xl m-4 cursor-pointer bg-primary-950 rounded-full text-white hover:text-4xl"
-      >
-        <i class="ti ti-circle-x" (click)="removeSlide(id)"></i>
-      </div>
+      @if (this.multiple) {
+        <div class="absolute right-0 m-4 flex cursor-pointer rounded-full bg-primary-950 text-3xl text-white transition-all hover:text-4xl">
+          <i class="ti ti-circle-x" (click)="removeSlide(id)"></i>
+        </div>
       }
-
     }
 
-    <img [src]="url" [alt]="id" class="rounded-2xl" />
+    {{ id === selectedSlideMain() }}
+    @if (id === selectedSlideMain()) {
+      <img [src]="url" [alt]="id" class="rounded-2xl" />
+    }
   </div>
 </ng-template>

@@ -79,7 +79,7 @@ export class InputFileComponent implements AfterViewInit {
     this.loadFilesFromUrls(this._filesUrl);
   }
 
-  private get _selectedSlideMain(): number {
+  public get _selectedSlideMain(): number {
     return this.emblaApi ? this.emblaApi?.selectedScrollSnap() : 0;
   }
   private _files = (event: EventTarget | DataTransfer | null): File[] => {
