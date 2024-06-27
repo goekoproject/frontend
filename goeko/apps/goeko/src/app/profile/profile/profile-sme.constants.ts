@@ -1,4 +1,4 @@
-import { ProfileFieldset } from './profile-fieldset.interface';
+import { ProfileFieldset } from './profile-fieldset.interface'
 
 export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
   {
@@ -14,11 +14,11 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         label: 'FORM_LABEL.email',
         type: 'email',
       },
-	  {
-		controlName: 'employees',
-		label: 'FORM_LABEL.numEmployees',
-		type: 'number',
-	},
+      {
+        controlName: 'employees',
+        label: 'FORM_LABEL.numEmployees',
+        type: 'number',
+      },
       {
         controlName: 'website',
         label: 'FORM_LABEL.website',
@@ -39,4 +39,4 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
       },
     ],
   },
-];
+]

@@ -3,7 +3,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
 import { CountrySelectOption, DataSelect, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
-import { AutoUnsubscribe, SideDialogService } from '@goeko/ui'
+import { AutoUnsubscribe } from '@goeko/ui'
 import { Subject, distinctUntilChanged, forkJoin, map, switchMap, takeUntil, tap } from 'rxjs'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     return this.form.get('locations') as FormArray
   }
   constructor(
-    private _sideDialogService: SideDialogService,
     private _profieService: ProfileService,
     public route: ActivatedRoute,
   ) {}
@@ -84,17 +83,14 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   }
 
   ngOnInit() {
-    this._sideDialogService.closeDialog()
     this._profieService.fetchUser()
     this._createFormForUserType()
     this._loadDataProfile()
     this._countryChanges()
   }
   private _createFormForUserType() {
-    if (this.dataProfile()) {
-      this.form = ProfileFormFactory.createProfileForm(this.userType())
-      this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
-    }
+    this.form = ProfileFormFactory.createProfileForm(this.userType())
+    this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
   }
 
   private _loadDataProfile() {
@@ -139,6 +135,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       .createUserProfile(this.form.value)
       .pipe(
         switchMap((dataProfile) => {
+          console.debug('this.profileImg', this.profileImg)
           if (dataProfile && this.profileImg) {
             return this._uploadImg$(dataProfile.id).pipe(map((uploadResult) => ({ dataProfile, uploadResult })))
           } else {
