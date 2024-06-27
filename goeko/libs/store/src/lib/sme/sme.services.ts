@@ -76,6 +76,8 @@ export class SmeService extends TranslateChangeService {
   }
 
   getAllSmesData(): Observable<any> {
-    return this._http.get<any>(`/v1/actor/smes`);
+    return this._http.get<any>(`/v1/actor/smes`)
   }
+
+  //delete sme user
 }

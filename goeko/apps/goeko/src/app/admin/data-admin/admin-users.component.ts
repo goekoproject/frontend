@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
-import { SmeService, USER_TYPE, UserService, UserType } from '@goeko/store'
+import { Component } from '@angular/core'
+import { CleanTechService, SmeService, USER_TYPE, UserType } from '@goeko/store'
 import { Observable } from 'rxjs'
 import { DATA_ACTOR_SWITCH } from '../data-actors-switch.constants'
 
@@ -18,20 +18,18 @@ type DataSourcesByUserType = {
   selector: 'goeko-data-admin',
   standalone: true,
   imports: [CommonModule],
-  providers: [SmeService, UserService],
+  providers: [SmeService, CleanTechService],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss',
 })
-export class AdminUserComponent implements OnInit {
-  public dataSourcesByUserType: DataSourcesByUserType = {
+export class AdminUserComponent {
+  private _dataSourcesByUserType: DataSourcesByUserType = {
     sme: this._smeServices.getAllSmesData(),
     cleantech: this._cleantechServices.getAllCleantechData(),
   }
-  public smeUsers = this._smeServices.getAllSmesData()
-  public cleantechUsers = this._cleantechServices.getAllCleantechData()
 
   public get dataSources() {
-    return this.dataSourcesByUserType[this.selectedUserType as keyof DataSourcesByUserType] as Observable<User[]>
+    return this._dataSourcesByUserType[this.selectedUserType as keyof DataSourcesByUserType] as Observable<User[]>
   }
   public headers: { title: string; key: keyof User }[] = [
     {
@@ -55,17 +53,22 @@ export class AdminUserComponent implements OnInit {
       key: 'website',
     },
   ]
+
   public dataActorSwitch = DATA_ACTOR_SWITCH
   public selectedUserType = USER_TYPE.SME
 
   constructor(
     private _smeServices: SmeService,
-    private _cleantechServices: UserService,
+    private _cleantechServices: CleanTechService,
   ) {}
-
-  ngOnInit(): void {}
 
   changeUserType(type: USER_TYPE): void {
     this.selectedUserType = type
+  }
+  deleteUser(id: number): void {
+    console.log('delete user', id)
+    ///this.adminService.deleteUser(id, selectedUserType)
+    // deleteUser(id, selectedUserType) {
+    //switch(selectedUserType) { case return this._smeServices.deleteSme(id); case return this._cleantechServices.deleteCleantech(id); }
   }
 }

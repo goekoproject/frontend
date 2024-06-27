@@ -44,4 +44,9 @@ export class CleanTechService {
   getDocuments(id: string) {
     return this._http.get<any>(`/v1/actor/cleantechs/${id}/documentation`);
   }
+  getAllCleantechData(): Observable<any> {
+    return this._http.get<any>(`/v1/actor/cleantechs`)
+  }
+
+  //delete cleantech
 }
