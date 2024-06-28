@@ -72,6 +72,9 @@ export class UserService {
   }
 
   uploadImgProfile(id: string, files: File[]) {
+    if (!files) {
+      return of(null)
+    }
     const formData = new FormData()
     files.forEach((file) => {
       formData.append('file', file)
@@ -85,6 +88,4 @@ export class UserService {
     this.completeLoadUser.next(true)
     this.completeLoadUser.complete()
   }
-
-
 }
