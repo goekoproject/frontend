@@ -8,11 +8,13 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         controlName: 'name',
         label: 'FORM_LABEL.companyName',
         type: 'text',
+        required: true,
       },
       {
         controlName: 'email',
         label: 'FORM_LABEL.emailSalesManager',
         type: 'email',
+        required: true,
       },
       {
         controlName: 'country',

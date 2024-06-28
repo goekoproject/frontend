@@ -53,7 +53,7 @@ export class GoInputDirective implements OnInit, AfterContentInit, ControlValueA
     return this._ngControl?.hasValidator(Validators.required)
   }
   private get inputElementRef() {
-    return this.elementRef.nativeElement.renderRoot.querySelectorAll('input')[0] as HTMLInputElement
+    return (this.elementRef.nativeElement?.renderRoot?.querySelectorAll('input')[0] as HTMLInputElement) || this.elementRef.nativeElement
   }
   constructor(
     @Inject(Injector) private injector: Injector,

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { GoInputDirective } from './go-input.directive';
+import { NgModule } from '@angular/core'
+import { GoInputDirective } from './go-input.directive'
 
 @NgModule({
   imports: [],
