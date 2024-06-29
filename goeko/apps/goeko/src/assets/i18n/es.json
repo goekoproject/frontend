@@ -432,7 +432,9 @@
     "warningDelete": "¿Estás seguro de que deseas eliminar {{item}}?",
     "saveMessageGeneric": "¿Deseas guardar los datos antes de continuar?",
     "messaggeProfileUncompletedTitle": "Completa tu perfil",
-    "messaggeProfileUncompletedBody": "Actualiza tu perfil para acceder a todas las herramientas de Goeko."
+    "messaggeProfileUncompletedBody": "Actualiza tu perfil para acceder a todas las herramientas de Goeko.",
+    "messageNotification": "Activa las notificaciones por email para recibir las últimas ecosoluciones para tu cuestionario."
+
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
