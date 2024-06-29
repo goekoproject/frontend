@@ -43,7 +43,7 @@ export class UserService {
       )
       .subscribe((data) => {
         if (data) {
-          this.propagateDataUser(true)
+          this.propagateDataUser(data)
         }
         this.fechAuthUser.next(true)
       })
