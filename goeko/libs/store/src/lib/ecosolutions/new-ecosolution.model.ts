@@ -3,8 +3,8 @@ import { FiledTranslations } from '../model/field-translations.interface'
 import { Picture } from '../model/pictures.interface'
 import { Country } from '../user/public-api'
 
-export function _filterNotNull<T>(items: Array<T | null | undefined>): T[] {
-  return items.filter((item): item is T => item !== null && item !== undefined)
+export function _filterNotNull(items: Array<FiledTranslations>): FiledTranslations[] {
+  return items.filter((item) => item.label && item.lang)
 }
 interface Price {
   amount: number
