@@ -23,7 +23,7 @@ export class AutenticateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._userServices.completeLoadUser.subscribe((loadUser) => {
+    this._userServices.fechAuthUser.subscribe((loadUser) => {
       if (loadUser) {
         this._redirectWhenLoadUser();
       }

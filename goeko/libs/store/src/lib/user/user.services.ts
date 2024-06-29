@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable, computed, effect, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
 import { User } from '@auth0/auth0-angular'
-import { BehaviorSubject, Observable, Subject, distinctUntilChanged, of, switchMap } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
 import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api'
@@ -34,7 +34,6 @@ export class UserService {
   private _getDataProfile() {
     this._getByIdExternal()
       .pipe(
-        distinctUntilChanged((prev, next) => prev?.id === next?.id),
         switchMap((dataAuth0) => {
           if (dataAuth0) {
             return this.getById(dataAuth0?.id)
@@ -44,9 +43,9 @@ export class UserService {
       )
       .subscribe((data) => {
         if (data) {
-          this.propagateDataUser(data)
-          this.fechAuthUser.next(true)
+          this.propagateDataUser(true)
         }
+        this.fechAuthUser.next(true)
       })
   }
   private _getByIdExternal(): Observable<any> {
