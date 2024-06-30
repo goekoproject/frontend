@@ -155,14 +155,12 @@
           {{ 'FORM_LABEL.advantagesSupportText' | translate }}
         </p>
         <div class="details-article details-article--advantages" *ngIf="detailsEcosolution()?.improvement">
-          <go-percentage-card
-            [label]="
-              detailsEcosolution().classification.mainCategory === 'waste'
-                ? 'FORM_LABEL.reductionPercentageWaste'
-                : 'FORM_LABEL.reductionPercentageCO2'
-            "
-            [isUpto]="true"
-            [percentage]="detailsEcosolution().improvement.reductionPercentage.to || 0"></go-percentage-card>
+          <ng-container
+            [ngTemplateOutlet]="percentageReductionTpl"
+            [ngTemplateOutletContext]="{
+              $implicit: detailsEcosolution().classification.mainCategory,
+            }"></ng-container>
+
           <go-percentage-card
             [label]="'FORM_LABEL.operationalCostReductionPercentage'"
             [isUpto]="true"
@@ -180,3 +178,38 @@
     </button>
   </div>
 }
+
+<ng-template #percentageReductionTpl let-mainCategory>
+  @switch (mainCategory) {
+    @case (CATEGORIES.WASTE) {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageWaste'"
+        [isUpto]="true"
+        [percentage]="detailsEcosolution().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+
+    @case (CATEGORIES.WATER) {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageWater'"
+        [isUpto]="true"
+        [percentage]="detailsEcosolution().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+    @case (CATEGORIES.HAZARDOUS_PRODUCT) {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageHP'"
+        [isUpto]="true"
+        [percentage]="detailsEcosolution().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+
+    @default {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageCO2'"
+        [isUpto]="true"
+        [percentage]="detailsEcosolution().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+  }
+</ng-template>
