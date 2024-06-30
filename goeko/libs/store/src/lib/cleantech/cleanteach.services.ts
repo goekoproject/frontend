@@ -49,4 +49,7 @@ export class CleanTechService {
   }
 
   //delete cleantech
+  deleteCleantechUser(id: number): Observable<any> {
+    return this._http.delete<any>(`/v1/actor/cleantechs/${id}`)
+  }
 }

@@ -80,4 +80,7 @@ export class SmeService extends TranslateChangeService {
   }
 
   //delete sme user
+  deleteSmeUser(id: number): Observable<any> {
+    return this._http.delete<any>(`/v1/actor/smes/${id}`)
+  }
 }
