@@ -170,6 +170,7 @@
     "password": "Password",
     "paybackPeriodYears": "Return on investment time compared to a standard solution",
     "price": "Price",
+    "infoPrice": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
     "products": "Products",
     "reductionPercentage": "Reduction Percentage",
     "reductionPercentageCO2": "CO2 Reduction Percentage",

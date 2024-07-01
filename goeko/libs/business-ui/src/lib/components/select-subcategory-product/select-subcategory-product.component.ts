@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
 import {
   AfterContentInit,
   AfterViewInit,
@@ -12,42 +12,26 @@ import {
   Provider,
   ViewChild,
   ViewEncapsulation,
-  forwardRef
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {
-  BadgeComponent,
-  BadgeGroupComponent,
-  BadgeModule,
-  GoInputModule,
-} from '@goeko/ui';
-import { TranslateModule } from '@ngx-translate/core';
-import { SelectSubcategoryProductDirective } from './select-subcategory.directive';
+  forwardRef,
+} from '@angular/core'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms'
+import { BadgeComponent, BadgeGroupComponent, BadgeModule, GoInputModule } from '@goeko/ui'
+import { TranslateModule } from '@ngx-translate/core'
+import { SelectSubcategoryProductDirective } from './select-subcategory.directive'
 const CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => SelectSubcategoryProductComponent),
   multi: true,
-};
+}
 
-type TYPE_INPUT = 'radio' | 'checkbox';
+type TYPE_INPUT = 'radio' | 'checkbox'
 export enum TYPE_FIELD {
   RADIO = 'radio',
   CHECKBOX = 'checkbox',
 }
 @Component({
   standalone: true,
-  imports: [
-    BadgeModule,
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    GoInputModule,
-    SelectSubcategoryProductDirective,
-  ],
+  imports: [BadgeModule, CommonModule, ReactiveFormsModule, TranslateModule, GoInputModule, SelectSubcategoryProductDirective],
   providers: [CONTROL_VALUE_ACCESSOR],
   selector: 'goeko-select-subcategory-product',
   templateUrl: './select-subcategory-product.component.html',
@@ -62,202 +46,197 @@ export enum TYPE_FIELD {
     '[attr.id]': 'id',
   },
 })
-export class SelectSubcategoryProductComponent
-  implements ControlValueAccessor, AfterContentInit, AfterViewInit, OnDestroy
-{
-  @ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent;
-  @ViewChild('inputElement') inputElement!: ElementRef;
+export class SelectSubcategoryProductComponent implements ControlValueAccessor, AfterContentInit, AfterViewInit, OnDestroy {
+  @ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent
+  @ViewChild('inputElement') inputElement!: ElementRef
 
-  @Input() id!: string;
-  @Input() readonly = false;
-  @Input() subCategory: any;
-  @Input() typeTitle: 'label' | 'question' = 'label';
+  @Input() id!: string
+  @Input() readonly = false
+  @Input() subCategory: any
+  @Input() typeTitle: 'label' | 'question' = 'label'
   @Input()
   public get multiple(): boolean {
-    return this._multiple;
+    return this._multiple
   }
   public set multiple(value: boolean) {
-    this._multiple = value;
-    this.type = value ? 'checkbox' : 'radio';
+    this._multiple = value
+    this.type = value ? 'checkbox' : 'radio'
   }
-  private _multiple!: boolean;
+  private _multiple!: boolean
 
-  public type: TYPE_INPUT = 'radio';
-  public disabled = false;
+  public type: TYPE_INPUT = 'radio'
+  public disabled = false
 
-  private _value!: any;
+  private _value!: any
   public get value(): any {
-    return this._value;
+    return this._value
   }
   public set value(value: any) {
-    this._value = value;
+    this._value = value
   }
 
-  private _open = false;
+  private _open = false
   public get open() {
-    return this._open;
+    return this._open
   }
   public set open(value: boolean) {
-    this._open = value;
-    this._cdf.markForCheck();
+    this._open = value
+    this._cdf.markForCheck()
   }
 
   public get selected(): BadgeComponent[] {
-    this._refreshValue();
-    this._cdf.markForCheck();
-    return this.badgeGroup?.selected;
+    this._refreshValue()
+    this._cdf.markForCheck()
+    return this.badgeGroup?.selected
   }
 
   get labelSelected(): string {
-    this._cdf.markForCheck();
-    return this.selected?.map((select) => select.label)?.toString();
+    this._cdf.markForCheck()
+    return this.selected?.map((select) => select.label)?.toString()
   }
 
-  private _numSelected = 0;
+  private _numSelected = 0
   get numSelected(): number {
-    this._cdf.markForCheck();
-    return this.badgeGroup.badge.filter(badge => badge.selected)?.length || 0;
+    this._cdf.markForCheck()
+    return this.badgeGroup.badge.filter((badge) => badge.selected)?.length || 0
   }
-
 
   @Input()
   public get checked() {
-    this._cdf.markForCheck();
-    return this._checked;
+    this._cdf.markForCheck()
+    return this._checked
   }
   public set checked(value) {
-    this._checked = value;
-    this._cdf.markForCheck();
+    this._checked = value
+    this._cdf.markForCheck()
   }
-  private _checked = false;
+  private _checked = false
 
   get isSelectedAll() {
-    return this.badgeGroup.isSelectAll;
+    return this.badgeGroup.isSelectAll
   }
-  private mutationObserver!: MutationObserver;
+  private mutationObserver!: MutationObserver
 
-  _onChange: (value: any) => void = () => {};
-  _onTouched: (value?: any) => void = () => {};
+  _onChange: (value: any) => void = () => {}
+  _onTouched: (value?: any) => void = () => {}
 
-  constructor(private _cdf: ChangeDetectorRef, private _el: ElementRef) {}
+  constructor(
+    private _cdf: ChangeDetectorRef,
+    private _el: ElementRef,
+  ) {}
 
   ngAfterContentInit(): void {
     this.badgeGroup.valueChangedBadge$.subscribe((badge) => {
-      this._handleCheckSubcategoryWhenProductSelected();
-    });
+      this._handleCheckSubcategoryWhenProductSelected()
+    })
   }
 
   ngAfterViewInit() {
-    this._handlerMutationObserver();
-    this._cdf.markForCheck();
+    this._handlerMutationObserver()
+    this._cdf.markForCheck()
   }
 
   ngOnDestroy() {
     // Detener la observación cuando el componente se destruye
     if (this.mutationObserver) {
-      this.mutationObserver.disconnect();
+      this.mutationObserver.disconnect()
     }
   }
   writeValue(value: any): void {
     if (!value) {
-      return;
+      return
     }
-    this.assignValue(value);
+    this.assignValue(value)
   }
   registerOnChange(fn: (value: any) => void): void {
-    this._onChange = fn;
+    this._onChange = fn
   }
   registerOnTouched(fn: () => void): void {
-    this._onTouched = fn;
+    this._onTouched = fn
   }
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled = isDisabled
   }
 
   private _onFocus() {
-    this.inputElement?.nativeElement?.focus();
+    this.inputElement?.nativeElement?.focus()
   }
   private _handlerMutationObserver() {
     // Configuración de MutationObserver con una función de retorno de llamada
     this.mutationObserver = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
-        if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'checked'
-        ) {
-          const isChecked =
-            this._el.nativeElement.getAttribute('checked') === 'true';
+        if (mutation.type === 'attributes' && mutation.attributeName === 'checked') {
+          const isChecked = this._el.nativeElement.getAttribute('checked') === 'true'
           if (!isChecked) {
-            this.open = false;
-            this.badgeGroup.clearAll();
+            this.open = false
+            this.badgeGroup.clearAll()
           } else {
-            this.open = true;
+            this.open = true
           }
-          this._cdf.markForCheck();
+          this._cdf.markForCheck()
         }
       }
-    });
+    })
 
     // Observar cambios en atributos del elemento host
-    this.mutationObserver.observe(this._el.nativeElement, { attributes: true });
+    this.mutationObserver.observe(this._el.nativeElement, { attributes: true })
   }
   private _handleCheckSubcategoryWhenProductSelected() {
-    this._numSelected = this.selected?.length;
-    this._cdf.markForCheck();
+    this._numSelected = this.selected?.length
+    this._cdf.markForCheck()
   }
   onRestValue(): void {
     setTimeout(() => {
-      this.open = this.inputElement?.nativeElement.checked || false;
-    });
+      this.open = this.inputElement?.nativeElement.checked || false
+    })
   }
 
   assignValue(value: string): void {
     if (this.multiple) {
-      this.value = value;
-      this._propagateValue();
-      this.open = false;
+      this.value = value
+      this._propagateValue()
+      this.open = false
     } else if (this.subCategory.code === value) {
-      this.value = this.subCategory;
-      this._propagateValue();
+      this.value = this.subCategory
+      this._propagateValue()
     }
 
     // this will make the execution after the above boolean has changed
   }
 
   private _propagateValue() {
-    this.checked = true;
+    this.checked = true
 
-    this._onFocus();
-    this._onChange(this.value);
-    this._onTouched();
-    this._cdf.markForCheck();
+    this._onFocus()
+    this._onChange(this.value)
+    this._onTouched()
+    this._cdf.markForCheck()
   }
 
   private _refreshValue() {
     if (this.type === TYPE_FIELD.CHECKBOX) {
-      return;
+      return
     }
     if (!this.open && !this.multiple) {
-      this.badgeGroup._selectionModel.clear();
-      this._numSelected = 0;
-      this.value = '';
+      this.badgeGroup._selectionModel.clear()
+      this._numSelected = 0
+      this.value = ''
     }
   }
 
   toogle(value: any) {
-    this.open = !this.open;
+    this.open = !this.open
     if (this.open) {
-      this._onFocus();
+      this._onFocus()
     }
-    this._onChange(value);
-    this._cdf.markForCheck();
+    this._onChange(value)
+    this._cdf.markForCheck()
   }
   selectAll(event: Event) {
-    this.badgeGroup.selectAll();
-    event.stopPropagation();
+    this.badgeGroup.selectAll()
+    event.stopPropagation()
   }
   deSelectAll() {
-    this.badgeGroup.selectAll();
-
+    this.badgeGroup.selectAll()
   }
 }
