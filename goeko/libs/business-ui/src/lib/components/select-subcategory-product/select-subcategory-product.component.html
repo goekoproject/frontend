@@ -1,43 +1,27 @@
-<div
-  class="subcategory hover:border-primary-500 transition-colors duration-150"
-  goekoSelectSubcategoryProduct
-  *ngIf="checked || !readonly"
->
+<div class="subcategory transition-colors duration-150 hover:border-primary-500" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
   <div class="subcategory-element" (click)="toogle(subCategory)">
     <label class="subcategory-control" for="{{ subCategory.code }}">
-      @if(!this.multiple) {
+      @if (!this.multiple) {
         <input
-        #inputElement
-        type="{{ type }}"
-        name="subCategory"
-        [checked]="checked || numSelected > 0"
-        id="{{ subCategory.code }}"
-        (change)="assignValue(subCategory.code)"
-      />
+          #inputElement
+          type="{{ type }}"
+          name="subCategory"
+          [checked]="checked || numSelected > 0"
+          id="{{ subCategory.code }}"
+          (change)="assignValue(subCategory.code)" />
       }
-
 
       <div class="subcategory-title">
         <ng-content select="[title]"></ng-content>
-        <span class="subcategory-title-products" *ngIf="!readonly">{{
-          labelSelected
-        }}</span>
+        <span class="subcategory-title-products" *ngIf="!readonly">{{ labelSelected }}</span>
       </div>
-      <span class="subcategory-product-selected" *ngIf="!readonly"
-        >{{ numSelected }} {{ 'selected_products' | translate }}</span
-      >
+      <span class="subcategory-product-selected" *ngIf="!readonly">{{ numSelected }} {{ 'selected_products' | translate }}</span>
     </label>
-    <span
-      class="material-symbols-rounded subcategory-expand"
-      
-    >
-      expand_more
-    </span>
+    <span class="material-symbols-rounded subcategory-expand"> expand_more </span>
   </div>
 
-  <div class="subcategory-product flex-wrap flex-col w-full items-start">
-    
-    @if(isSelectedAll) {
+  <div class="subcategory-product w-full flex-col flex-wrap items-start">
+    @if (isSelectedAll) {
       <button class="text-primary-main hover:text-primary-800" (click)="deSelectAll()">
         {{ 'deSelectAll' | translate }}
       </button>

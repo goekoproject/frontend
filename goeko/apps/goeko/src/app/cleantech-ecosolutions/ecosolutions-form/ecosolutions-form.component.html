@@ -216,7 +216,7 @@
             @if (translation.value?.lang == selectedFormLang().code) {
               <div [formGroupName]="i" class="wrapper-textarea">
                 <label for="priceDescriptionTranslations">
-                  {{ 'FORM_LABEL.price' | translate }}
+                  {{ 'FORM_LABEL.infoPrice' | translate }}
                   <span class="required-field">{{ 'mandatory' | translate }}</span>
                   <span class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
                     {{ translation.value.lang | translate }}

@@ -16,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CanAnalysisDeactivate } from '@goeko/business-ui'
 import { ClassificationCategory, ClassificationSubcategory, DataSelect, SmeRequestResponse, SmeService } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
+import { TranslateService } from '@ngx-translate/core'
 import { Observable, Subject, distinctUntilChanged, takeUntil } from 'rxjs'
 import { compareWithProducts } from '../sme-analysis..util'
 import { SmeAnalysisService } from '../sme-analysis.service'
@@ -78,6 +79,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
     private _smeAnalysisService: SmeAnalysisService,
     private _cdf: ChangeDetectorRef,
     private _location: Location,
+    private _translateService: TranslateService,
   ) {
     effect(() => {
       if (this.dataAllCategory().length > 0) {
@@ -93,7 +95,13 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
       emitEvent: false,
       onlySelf: false,
     })
-    console.log(this.form.get('co2Emission')?.getRawValue())
+    this._changeLang()
+  }
+
+  private _changeLang() {
+    this._translateService.onLangChange.subscribe(() => {
+      this._smeAnalysisService.getAllDataCategories()
+    })
   }
 
   ngAfterViewInit(): void {

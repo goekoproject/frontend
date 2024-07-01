@@ -170,6 +170,7 @@
     "password": "Contraseña",
     "paybackPeriodYears": "Tiempo de retorno de inversión en comparación con solución estándar",
     "price": "Precio",
+    "infoPrice": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
     "products": "Productos",
     "reductionPercentageCO2": "Porcentaje de reducción de CO2",
     "reductionPercentageHP": "Porcentaje de reducción de productos peligrosos",
