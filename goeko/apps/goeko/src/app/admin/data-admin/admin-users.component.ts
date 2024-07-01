@@ -1,8 +1,12 @@
+
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
 import { CleanTechService, SmeService, USER_TYPE, UserType } from '@goeko/store'
 import { Observable } from 'rxjs'
 import { DATA_ACTOR_SWITCH } from '../data-actors-switch.constants'
+import { MessageService } from '@goeko/business-ui'
+import { MESSAGE_TYPE } from '@goeko/ui';
+
 
 interface User {
   id: number
@@ -18,7 +22,7 @@ type DataSourcesByUserType = {
   selector: 'goeko-data-admin',
   standalone: true,
   imports: [CommonModule],
-  providers: [SmeService, CleanTechService],
+  providers: [SmeService, CleanTechService, MessageService],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss',
 })
@@ -31,6 +35,7 @@ export class AdminUserComponent {
   public get dataSources() {
     return this._dataSourcesByUserType[this.selectedUserType as keyof DataSourcesByUserType] as Observable<User[]>
   }
+
   public headers: { title: string; key: keyof User }[] = [
     {
       title: 'NAME',
@@ -60,15 +65,34 @@ export class AdminUserComponent {
   constructor(
     private _smeServices: SmeService,
     private _cleantechServices: CleanTechService,
+    private MessageService: MessageService,
   ) {}
+
+
 
   changeUserType(type: USER_TYPE): void {
     this.selectedUserType = type
   }
   deleteUser(id: number): void {
-    console.log('delete user', id)
-    ///this.adminService.deleteUser(id, selectedUserType)
-    // deleteUser(id, selectedUserType) {
-    //switch(selectedUserType) { case return this._smeServices.deleteSme(id); case return this._cleantechServices.deleteCleantech(id); }
+    this.MessageService.deleteMessage(MESSAGE_TYPE.WARNING, `${id}`).afterClosed().subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        switch(this.selectedUserType) {
+          case USER_TYPE.SME:
+            this._smeServices.deleteSmeUser(id).subscribe(() => {
+              this._smeServices.getAllSmesData().subscribe(smesData => {
+              });
+            });
+            break;
+          case USER_TYPE.CLEANTECH:
+            this._cleantechServices.deleteCleantechUser(id).subscribe(() => {
+              this._cleantechServices.getAllCleantechData().subscribe(cleantechData => {
+              });
+            });
+            break;
+          default:
+            console.error(`Unsupported user type: ${this.selectedUserType}`);
+        }
+      }
+    });
   }
 }
