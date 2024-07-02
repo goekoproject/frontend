@@ -6,16 +6,8 @@
         <p>{{ 'all' | translate }}</p>
       </li>
       <ng-container *ngFor="let element of formField; let index = index">
-        <li
-          *ngIf="element.showResult"
-          (click)="onCheckboxStateChange(section.checked, index)"
-        >
-          <input
-            type="checkbox"
-            #section
-            [checked]="element.checked && !all.checked"
-            id="{{ element.controlName }}"
-          />
+        <li *ngIf="element.showResult" (click)="onCheckboxStateChange(section.checked, index)">
+          <input type="checkbox" #section [checked]="element.checked && !all.checked" id="{{ element.controlName }}" />
           <p>{{ element.keyLang | translate }}</p>
         </li>
       </ng-container>
@@ -24,9 +16,7 @@
     <fieldset class="ecosolutions-fieldset" class="fieldset-ods">
       <div class="legend--info">
         <legend>
-          {{
-            'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate
-          }}
+          {{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}
         </legend>
 
         <p class="text-support">
@@ -34,10 +24,7 @@
         </p>
       </div>
 
-      <goeko-sdg-icons
-        (valueSelected)="filterBySDG($event)"
-        [size]="'large'"
-      ></goeko-sdg-icons>
+      <goeko-sdg-icons (valueSelected)="filterBySDG($event)" [size]="'large'"></goeko-sdg-icons>
     </fieldset>
     <!-- <ul class="filter-ods">
       <li
@@ -71,14 +58,10 @@
         *ngFor="let ecoSolutions of smeRecomendation; let index = index"
         [ngClass]="{
           'eco-solutions-selected': selectedRecomendationIndex === index,
-        }"
-      >
+        }">
         <div class="eco-solutions-header">
           <div class="eco-solutions-logo">
-            <img
-              src="{{ ecoSolutions?.companyDetail?.logo }}"
-              alt="eco solutions logo"
-            />
+            <img src="{{ ecoSolutions?.companyDetail?.logo }}" alt="eco solutions logo" />
           </div>
         </div>
         <div class="eco-solutions-body">
@@ -89,29 +72,14 @@
           <p class="eco-solutions-company">
             {{ ecoSolutions?.companyDetail?.name }}
           </p>
-          <span
-            class="eco-solutions-type   eco-solutions-type-{{
-              ecoSolutions?.classification.mainCategory
-            }}"
-            >{{
-              'CATEGORIES.' + ecoSolutions?.classification.mainCategory
-                | translate
-            }}</span
-          >
+          <span class="eco-solutions-type   eco-solutions-type-{{ ecoSolutions?.classification.mainCategory }}">{{
+            'CATEGORIES.' + ecoSolutions?.classification.mainCategory | translate
+          }}</span>
 
-          <!--Mas adelante-->
-          <div class="eco-solutions-actions" *ngIf="false">
-            <abbr title="Save"
-              ><span class="material-symbols-rounded"> favorite </span></abbr
-            >
-            <abbr title="{{ ecoSolutions?.companyDetail?.link }}"
-              ><a
-                href="http://{{ ecoSolutions?.companyDetail?.link }}"
-                target="_blank"
-              >
-                <span class="material-symbols-rounded"> link </span>
-              </a></abbr
-            >
+          <div class="eco-solutions-actions">
+            <abbr title="Save">
+              <i class="ti ti-heart"></i>
+            </abbr>
           </div>
         </div>
       </div>
