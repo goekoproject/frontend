@@ -18,7 +18,7 @@
             <p>{{ 'add' | translate }} Ecosolutions</p>
           </button>
           @for (ecosolution of ecosolutions; track ecosolution.id) {
-            @defer (when ecosolution && ecosolution.nameTranslations) {
+            @defer (when ecosolution) {
               <goeko-card-ecosolutions
                 *ngIf="item.code === ecosolution.mainCategory"
                 [solutionName]="ecosolution.nameTranslations[0].label"
