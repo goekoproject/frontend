@@ -167,7 +167,8 @@
     "operationalCostReductionPercentage": "Pourcentage de réduction des coûts opérationnels",
     "password": "Mot de passe",
     "paybackPeriodYears": "Temps de retour sur investissement par rapport à une solution standard",
-    "price": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
+    "price": "Prix",
+    "infoPrice": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
     "products": "Produits",
     "reductionPercentage": "Pourcentage de réduction",
     "reductionPercentageCO2": "Pourcentage de réduction de CO2",
@@ -430,7 +431,8 @@
     "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",
-    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko."
+    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
+    "messageNotification": "Activez les notifications par email pour recevoir les dernières écosolutions pour votre questionnaire."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
@@ -452,7 +454,7 @@
   "your": "Votre",
   "accept": "Accepter",
   "add": "Ajouter",
-  "alertSelectedProduct": "Sélectionnez une ou plusieurs produits",
+  "alertSelectedProduct": "Sélectionnez un ou plusieurs produits",
   "all": "Tout",
   "analysis": "Analyse",
   "availability": "Disponibilité:",

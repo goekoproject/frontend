@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogProvincesComponent } from '@goeko/business-ui';
+import { CATEGORIES, DialogProvincesComponent } from '@goeko/business-ui';
 import {
   DataSelect,
   LocationCountryTranslated,
@@ -21,7 +21,7 @@ import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants';
 })
 export class ResultDetailEcosolutionComponent implements OnInit {
   private destroy$ = new Subject<void>();
-
+  public CATEGORIES = CATEGORIES;
   public detailsEcosolution = signal<Recommendation>({} as Recommendation);
   public sectionFeatureDetail = SECTION_FEATURE_DETAIL_ECOSOLUTION;
   public dataSelect = DataSelect as any;

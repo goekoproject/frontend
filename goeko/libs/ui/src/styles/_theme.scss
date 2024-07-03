@@ -36,9 +36,11 @@ body {
   flex-direction: column;
   height: 100%;
   max-width: 1920px;
+  align-items: center;
 }
 body:has(div.is-platform) {
   background: var(--primary--50);
+  align-items: stretch;
 }
 :root {
   --center-container: 90%;

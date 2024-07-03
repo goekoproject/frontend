@@ -8,16 +8,19 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         controlName: 'name',
         label: 'FORM_LABEL.companyName',
         type: 'text',
+        required: true,
       },
       {
         controlName: 'email',
         label: 'FORM_LABEL.email',
         type: 'email',
+        required: true,
       },
       {
         controlName: 'employees',
         label: 'FORM_LABEL.numEmployees',
         type: 'number',
+        required: true,
       },
       {
         controlName: 'website',

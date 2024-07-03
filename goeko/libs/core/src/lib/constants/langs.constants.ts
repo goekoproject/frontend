@@ -16,7 +16,7 @@ export const LANGS: Lang[] = [
         locale: 'es ',
     }, */
   {
-    codeContentFul: CODE_LANG.GB,
+    codeContentFul: CODE_LANG.FR,
     title: 'LANGS.fr',
     code: CODE_LANG.FR,
   },

@@ -46,6 +46,7 @@
                       {{ translation.value.lang | translate }}</span
                     >
                   </span>
+                  <p class="required-field" slot="required">{{ 'mandatory' | translate }}</p>
                 </go-input>
               }
             </ng-container>
@@ -58,7 +59,7 @@
               <div [formGroupName]="i" class="wrapper-textarea">
                 <label for="descriptionTranslations">
                   {{ 'FORM_LABEL.solutionDescription' | translate }}
-                  <span class="required-field">(Obligatoire)</span>
+                  <span class="required-field">{{ 'mandatory' | translate }}</span>
                   <span class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
                     {{ translation.value.lang | translate }}</span
                   >
@@ -76,7 +77,7 @@
               <div [formGroupName]="i" class="wrapper-textarea">
                 <label for="detailedDescriptionTranslations">
                   {{ 'FORM_LABEL.technicalDescription' | translate }}
-                  <span class="required-field">(Obligatoire)</span>
+                  <span class="required-field">{{ 'mandatory' | translate }}</span>
                   <span class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
                     {{ translation.value.lang | translate }}
                   </span>
@@ -101,7 +102,7 @@
         <div class="legend--info">
           <legend>
             {{ 'FORM_LABEL.typeOfEcolutions' | translate }}
-            <span class="required-field">(Obligatoire)</span>
+            <span class="required-field">{{ 'mandatory' | translate }}</span>
           </legend>
 
           <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
@@ -134,7 +135,7 @@
         <div class="legend--info">
           <legend>
             {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
-            <span class="required-field">(Obligatoire)</span>
+            <span class="required-field">{{ 'mandatory' | translate }}</span>
           </legend>
         </div>
         @if (locationsArrays.length > 0 || !idEcosolution) {
@@ -215,8 +216,8 @@
             @if (translation.value?.lang == selectedFormLang().code) {
               <div [formGroupName]="i" class="wrapper-textarea">
                 <label for="priceDescriptionTranslations">
-                  {{ 'FORM_LABEL.price' | translate }}
-                  <span class="required-field">(Obligatoire)</span>
+                  {{ 'FORM_LABEL.infoPrice' | translate }}
+                  <span class="required-field">{{ 'mandatory' | translate }}</span>
                   <span class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
                     {{ translation.value.lang | translate }}
                   </span>

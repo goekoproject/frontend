@@ -92,6 +92,7 @@ export class EcosolutionsFormComponent implements OnInit {
     }
   }
 
+
   private _getParamsUrl() {
     this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string
     this.mainCategory = this._route.snapshot.queryParamMap.get('mainCategory') as string

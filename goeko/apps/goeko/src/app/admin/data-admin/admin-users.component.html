@@ -8,19 +8,19 @@
   <div class="bg-white px-4 py-4 md:px-8 md:py-7 xl:px-10">
     <div class="items-center justify-between sm:flex">
       <div class="flex items-center">
-        <ng-container *ngFor="let actor of dataActorSwitch">
+        @for (actor of dataActorSwitch; track actor.id) {
           <button
             [ngClass]="{ 'bg-primary-400': selectedUserType === actor.type, 'text-white': selectedUserType === actor.type }"
             (click)="changeUserType(actor.type)"
-            class="flex items-center gap-2 ml-4 px-4 rounded-full text-primary-900 focus:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 sm:ml-8">
+            class="ml-4 flex items-center gap-2 rounded-full px-4 text-primary-900 focus:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400 sm:ml-8">
             <div class="0 rounded-full px-8 py-2 hover:bg-primary-400 hover:text-white">
               <p>{{ actor.name }}</p>
             </div>
             @if (selectedUserType === actor.type && (dataSources | async); as dataSource) {
-              <p class="rounded-2xl bg-white text-primary-950 p-1">{{ dataSource.length }}</p>
+              <p class="rounded-2xl bg-white p-1 text-primary-950">{{ dataSource.length }}</p>
             }
           </button>
-        </ng-container>
+        }
       </div>
     </div>
     <div class="mt-7 overflow-x-auto rounded-lg">
@@ -40,7 +40,7 @@
               @for (header of headers; track header.key) {
                 <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{{ dataUser[header.key] }}</td>
               }
-              <td class="whitespace-nowrap px-6 py-4">
+              <td class="whitespace-nowrap px-6 py-4 cursor-pointer hover:scale-110" (click)="deleteUser(dataUser.id)">
                 <div class="flex space-x-4">
                   <i class="ti ti-trash"></i>
                 </div>

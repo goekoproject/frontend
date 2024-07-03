@@ -1,114 +1,110 @@
-import {
-  Classifications,
-  SmeSaveRecomendationProjectRequest,
-  SmeSaveRecomendationRequest,
-} from '@goeko/store';
-import { Section } from '../form-field.model';
+import { Classifications, NotificationSearch, SmeSaveRecomendationProjectRequest, SmeSaveRecomendationRequest } from '@goeko/store'
+import { Section } from '../form-field.model'
 
 export const formToClassificationsMapper = (formValue: Section) => {
-
-  const classifications: Classifications[] = [];
-  if(!formValue) {
-    return classifications;
+  const classifications: Classifications[] = []
+  if (!formValue) {
+    return classifications
   }
-  const isObject = (obj: unknown) => typeof obj === 'object' && obj !== null;
+  const isObject = (obj: unknown) => typeof obj === 'object' && obj !== null
 
   Object.entries(formValue).map((value) => {
-    let mainCategory!: string;
-    let categoryClassification;
+    let mainCategory!: string
+    let categoryClassification
 
     value.forEach((category: any) => {
       if (isObject(category)) {
         Object.keys(category).forEach((index) => {
-          const subCategory = index;
+          const subCategory = index
           if (!category[index] && !Array.isArray(category)) {
-            return;
+            return
+          }
+          if (!Array.isArray(category[index])) {
+            return
           }
           const products = category[index].map((res: any) => {
             if (typeof res === 'object') {
-              return res?.code?.toString();
+              return res?.code?.toString()
             } else {
-              return res;
+              return res
             }
-          });
+          })
 
           if (!products) {
-            return;
+            return
           }
           categoryClassification = {
             mainCategory,
             subCategory,
             products,
-          };
-          classifications.push(categoryClassification);
-        });
+          }
+          classifications.push(categoryClassification)
+        })
       } else {
-        mainCategory = category;
+        mainCategory = category
       }
-    });
-  });
+    })
+  })
 
-  return classifications;
-};
+  return classifications
+}
 
 interface Item {
-  mainCategory: string;
-  products: string[];
-  subCategory: string;
+  mainCategory: string
+  products: string[]
+  subCategory: string
 }
 export type CategoryModel = {
-  [mainCategory: string]: { [subCategory: string]: string[] };
-};
+  [mainCategory: string]: { [subCategory: string]: string[] }
+}
 
 export const transformArrayToObj = (arr: Item[]) => {
   const result: {
     [mainCategory: string]: {
-      [subCategory: string]: string[];
-    };
-  } = {};
+      [subCategory: string]: string[]
+    }
+  } = {}
 
   const transformObej = (subCategory: string, products: string[]) => {
     return {
       [subCategory]: products,
-    };
-  };
+    }
+  }
 
   arr?.forEach((item) => {
-    const { subCategory, products } = item;
+    const { subCategory, products } = item
     if (!result[item.mainCategory]) {
-      result[item.mainCategory] = transformObej(subCategory, products);
+      result[item.mainCategory] = transformObej(subCategory, products)
     } else if (!result[item.mainCategory][subCategory]) {
-      result[item.mainCategory][subCategory] = products;
+      result[item.mainCategory][subCategory] = products
     }
-  });
+  })
 
-  return result;
-};
+  return result
+}
 
-export class FormValueToSmeAnalysisRequest
-  implements SmeSaveRecomendationRequest
-{
-  smeId: string;
-  classifications: Classifications[];
-  searchName?: string;
+export class FormValueToSmeAnalysisRequest implements SmeSaveRecomendationRequest {
+  smeId: string
+  classifications: Classifications[]
+  searchName?: string
+  notification?: NotificationSearch
   constructor(smeId: string, formValue: Section) {
-    this.searchName = new Date().toDateString();
-    this.smeId = smeId;
-    this.classifications = formToClassificationsMapper(formValue);
+    this.searchName = new Date().toDateString()
+    this.smeId = smeId
+    this.classifications = formToClassificationsMapper(formValue)
+    this.notification = formValue.notification
   }
 }
 
-export class FormValueToSmeProjectRequest
-  implements SmeSaveRecomendationProjectRequest
-{
-  classifications!: Classifications[];
-  name!: string;
-  smeId?: string; 
-  constructor(formValue?: Section,smeId?: string) {
+export class FormValueToSmeProjectRequest implements SmeSaveRecomendationProjectRequest {
+  classifications!: Classifications[]
+  name!: string
+  smeId?: string
+  constructor(formValue?: Section, smeId?: string) {
     if (formValue && formValue.searchName) {
-      this.name = formValue.searchName;
-      this.smeId = smeId;
-      this.classifications = formToClassificationsMapper(formValue);
+      this.name = formValue.searchName
+      this.smeId = smeId
+      this.classifications = formToClassificationsMapper(formValue)
     }
   }
 }

@@ -22,9 +22,7 @@
             @switch (itemForm.type) {
               @case ('select-multiple') {
                 <div class="select-profile">
-                  <label for="{{ itemForm.controlName }}">{{
-                    itemForm.label | translate
-                  }}</label>
+                  <label for="{{ itemForm.controlName }}">{{ itemForm.label | translate }}</label>
 
                   <ui-super-select
                     [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -32,15 +30,9 @@
                     [formControlName]="itemForm.controlName"
                     [id]="itemForm.controlName"
                     [name]="itemForm.controlName"
-                    [compareWith]="defaultSetSuperSelect"
-                  >
+                    [compareWith]="defaultSetSuperSelect">
                     <ng-container *ngIf="itemForm.dataSelectKey">
-                      <super-option
-                        *ngFor="
-                          let option of dataSelect[itemForm.dataSelectKey]
-                        "
-                        [value]="option"
-                      >
+                      <super-option *ngFor="let option of dataSelect[itemForm.dataSelectKey]" [value]="option">
                         {{ option.keyLang | translate }}
                       </super-option>
                     </ng-container>
@@ -53,18 +45,12 @@
                     [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
                     [formControlName]="itemForm.controlName"
                     [id]="itemForm.controlName"
-                    [name]="itemForm.controlName"
-                  >
+                    [name]="itemForm.controlName">
                     <label title for="{{ itemForm.controlName }}">
                       {{ itemForm.label | translate }}
                     </label>
                     <ng-container *ngIf="itemForm.dataSelectKey">
-                      <super-option
-                        *ngFor="
-                          let option of dataSelect[itemForm.dataSelectKey]
-                        "
-                        [value]="option.code"
-                      >
+                      <super-option *ngFor="let option of dataSelect[itemForm.dataSelectKey]" [value]="option.code">
                         {{ option.keyLang | translate }}
                       </super-option>
                     </ng-container>
@@ -72,10 +58,7 @@
                 </div>
               }
               @case ('file-link') {
-                <goeko-input-file
-                  (fileChange)="fileChange($event)"
-                  [filesUrl]="this.dataProfile().logo"
-                ></goeko-input-file>
+                <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo"></goeko-input-file>
               }
               @case ('country') {
                 <ng-container
@@ -84,24 +67,21 @@
                     itemForm: itemForm,
                     source: countries(),
                     formTemplate: form,
-                  }"
-                ></ng-container>
+                  }"></ng-container>
               }
               @case ('select-locations') {
                 <goeko-select-locations
                   [form]="form"
                   [controlLocations]="locationsArrays"
                   [controlNameCountry]="'country'"
-                  [controlNameProvince]="'regions'"
-                ></goeko-select-locations>
+                  [controlNameProvince]="'regions'"></goeko-select-locations>
               }
               @default {
-                <go-input
-                  [formControlName]="itemForm.controlName"
-                  type="{{ itemForm.type }}"
-                  class="{{ itemForm.className }}"
-                >
+                <go-input [formControlName]="itemForm.controlName" type="{{ itemForm.type }}" class="{{ itemForm.className }}">
                   <p slot="label">{{ itemForm.label | translate }}</p>
+                  @if (itemForm.required) {
+                    <p class="required-field" slot="required">{{ 'mandatory' | translate }}</p>
+                  }
                 </go-input>
               }
             }
@@ -110,13 +90,7 @@
       }
 
       <div class="profile-actions">
-        <button
-          type="button"
-          go-button
-          appearance="white"
-          [routerLink]="['../dashboard', userType()]"
-          [relativeTo]="route.parent"
-        >
+        <button type="button" go-button appearance="white" [routerLink]="['../dashboard', userType()]" [relativeTo]="route.parent">
           {{ 'cancel' | translate }}
         </button>
         <button
@@ -125,8 +99,7 @@
           appearance="primary"
           [disabled]="form.invalid"
           type="submit"
-          (click)="dataProfile().id ? updateProfile() : saveProfile()"
-        >
+          (click)="dataProfile().id ? updateProfile() : saveProfile()">
           {{ 'save' | translate }}
         </button>
       </div>
@@ -136,13 +109,7 @@
 
 <br />
 
-<ng-template
-  #select
-  let-itemForm="itemForm"
-  let-source="source"
-  let-multiSelect="multiSelect"
-  let-formTemplate="formTemplate"
->
+<ng-template #select let-itemForm="itemForm" let-source="source" let-multiSelect="multiSelect" let-formTemplate="formTemplate">
   <div class="select-profile" [formGroup]="formTemplate">
     <ui-super-select
       [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
@@ -150,8 +117,7 @@
       [id]="itemForm.controlName"
       [multiple]="multiSelect"
       [name]="itemForm.controlName"
-      [compareWith]="defaultSetSuperSelect"
-    >
+      [compareWith]="defaultSetSuperSelect">
       <label title for="{{ itemForm.controlName }}">
         {{ itemForm.label | translate }}
       </label>
