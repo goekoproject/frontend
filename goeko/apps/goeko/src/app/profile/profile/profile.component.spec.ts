@@ -1,10 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute, RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
-import { SmeUser, USER_TYPE } from '@goeko/store'
+import { Picture, SmeUser, USER_TYPE } from '@goeko/store'
 import { ButtonModule, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -21,8 +21,34 @@ describe('ProfileComponent SME', () => {
     // Mock del ProfileService
     profileServiceMock = {
       fetchUser: jest.fn(),
-      createUserProfile: jest.fn().mockReturnValue(of({})),
-      updateUserProfile: jest.fn().mockReturnValue(of({})),
+      createUserProfile: jest.fn().mockReturnValue({
+        pipe: jest.fn().mockReturnValue({
+          subscribe: jest.fn().mockImplementation((callbacks) => {
+            callbacks.next({ id: 1 })
+          }),
+        }),
+      }),
+      updateUserProfile: jest.fn().mockReturnValue({
+        pipe: jest.fn().mockReturnValue({
+          subscribe: jest.fn().mockImplementation((callbacks) => {
+            callbacks.next({ id: 1 })
+          }),
+        }),
+      }),
+      uploadImgProfile: jest.fn().mockReturnValue({
+        pipe: jest.fn().mockReturnValue({
+          subscribe: jest.fn().mockImplementation((callbacks) => {
+            callbacks.next([
+              {
+                id: 1,
+                url: 'http://test.com/test.png',
+                name: 'test.png',
+              },
+            ])
+          }),
+        }),
+      }),
+
       userType: signal(USER_TYPE.SME),
       externalId: signal('123'),
       selectedCodeLang: signal({ code: 'en', label: 'English' }),
@@ -124,36 +150,150 @@ describe('ProfileComponent SME', () => {
     expect(profileComponent.form.get('externalId')?.value).toBe('123')
   })
 
-  it('should create a user profile successfully when form data is valid', () => {
-    component.form = new FormGroup({
-      name: new FormControl('Test Company'),
-      email: new FormControl('test@test.com', Validators.email),
-      employees: new FormControl(10),
-    })
-    const profileServiceMock = {
-      createUserProfile: jest.fn().mockReturnValue({
-        pipe: jest.fn().mockReturnValue({
-          switchMap: jest.fn().mockReturnValue(of({id: '123'})),
-        }),
-        subscribe: jest.fn((callbacks) => {
-          callbacks.next({ id: '123' })
-        }),
-      }),
-      uploadImgProfile: jest.fn().mockReturnValue({
-        pipe: jest.fn().mockRejectedValue({
-          switchMap: jest.fn().mockReturnValue(of({})),
-        }),
-        subscribe: jest.fn((callbacks) => {
-          callbacks.next([{ url: 'test.png' }])
-        }),
-      }),
+  // Save User
+  it('should successfully create user profile sme when form is valid with a picture', () => {
+    const profileComponent = component
+    const newUser: SmeUser = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User',
+      email: 'text@test.com',
+      locations: [],
+      employees: 0,
     }
+    const pic: Picture[] = [
+      {
+        id: '1',
+        url: 'http://test.com/test.png',
+        name: 'test.png',
+      },
+    ]
+    profileComponent.ngOnInit()
+    profileComponent.fileChange([new File([], 'test.png')])
 
-    component.profileImg = [new File([], 'test.png')]
+    jest.spyOn(profileServiceMock, 'createUserProfile').mockReturnValue(of(newUser))
+    jest.spyOn(profileServiceMock, 'uploadImgProfile').mockReturnValue(of(pic))
 
-    component.saveProfile()
-
+    profileComponent.saveProfile()
     expect(profileServiceMock.createUserProfile).toHaveBeenCalled()
     expect(profileServiceMock.uploadImgProfile).toHaveBeenCalled()
+    expect(profileComponent.dataProfile()).toEqual(newUser)
+  })
+  it('should successfully create user profile sme when form is valid whithout a picture', () => {
+    const profileComponent = component
+    const newUser: SmeUser = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User',
+      email: 'text@test.com',
+      locations: [],
+      employees: 0,
+    }
+
+    profileComponent.ngOnInit()
+
+    jest.spyOn(profileServiceMock, 'createUserProfile').mockReturnValue(of(newUser))
+
+    profileComponent.saveProfile()
+    expect(profileServiceMock.createUserProfile).toHaveBeenCalled()
+    expect(profileServiceMock.uploadImgProfile).toHaveBeenCalledTimes(0)
+    expect(profileComponent.dataProfile()).toEqual(newUser)
+  })
+
+  // Update User
+  it('should successfully update user profile sme when form is valid with a picture', () => {
+    const profileComponent = component
+    const updateUser = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User',
+      email: 'text@test.com',
+      locations: [],
+      employees: 0,
+    }
+    jest.spyOn(profileServiceMock, 'userProfile').mockReturnValue(updateUser)
+
+    profileComponent.ngOnInit()
+    profileComponent.fileChange([new File([], 'test.png')])
+    component.form.patchValue({ name: 'Test User', email: 'test@example.com', employees: 10 })
+
+    jest.spyOn(profileServiceMock, 'updateUserProfile').mockReturnValue(of(updateUser))
+
+    profileComponent.updateProfile()
+    expect(profileServiceMock.updateUserProfile).toHaveBeenCalled()
+    expect(profileServiceMock.uploadImgProfile).toHaveBeenCalled()
+  })
+  // Update User
+  it('should successfully update name user profile sme when form is valid without a picture', () => {
+    const profileComponent = component
+    const user = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User',
+      email: 'text@test.com',
+      locations: [],
+      employees: 0,
+    }
+    const updateUser = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User2',
+      email: 'test@test.com',
+      locations: [],
+      employees: 0,
+    }
+    jest.spyOn(profileServiceMock, 'userProfile').mockReturnValue(user)
+
+    profileComponent.ngOnInit()
+    component.form.patchValue({ name: user.name, email: user.email, employees: user.employees })
+
+    jest.spyOn(profileServiceMock, 'updateUserProfile').mockReturnValue(of(updateUser))
+    jest.spyOn(profileServiceMock, 'uploadImgProfile').mockReturnValue(of(null))
+
+    profileComponent.updateProfile()
+    expect(profileServiceMock.updateUserProfile).toHaveBeenCalled()
+    expect(profileComponent.dataProfile()).toEqual(updateUser)
+  })
+  // clears the locations array when userType is SME and locations exist
+  it('should clear the locations array when userType is SME and locations exist', () => {
+    const user = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User',
+      email: 'text@test.com',
+      locations: [{ country: { code: { code: 'CH', label: 'Suisse' }, regions: [] } }],
+      employees: 0,
+    }
+    component.dataProfile = signal(user)
+
+    component.ngOnInit()
+
+    expect(component.locationsArrays.length).toBe(1)
+  })
+
+  it('should return true when dataProfile().id is defined', () => {
+    const user = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User',
+      email: 'text@test.com',
+      locations: [{ country: { code: { code: 'CH', label: 'Suisse' }, regions: [] } }],
+      employees: 0,
+    }
+    component.dataProfile = signal(user)
+    const result = component.canDeactivate()
+    expect(result).toBe(true)
+  })
+  it('should return false when dataProfile().id is undefined', () => {
+    component.dataProfile = signal(new SmeUser())
+    const result = component.canDeactivate()
+    expect(result).toBe(false)
   })
 })

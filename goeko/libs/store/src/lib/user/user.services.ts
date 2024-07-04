@@ -71,15 +71,15 @@ export class UserService {
     return this._http.put<SmeUser | CleantechsUser>(`/v1/actor/${this.actorsEndpoint()}/${id}`, body)
   }
 
-  uploadImgProfile(id: string, files: File[]) {
-    if (!files) {
-      return of(null)
+  uploadImgProfile(id: string, files: File[]): Observable<Picture[] | null> {
+    if (files) {
+      const formData = new FormData()
+      files.forEach((file) => {
+        formData.append('file', file)
+      })
+      return this._http.post<Picture[]>(`/v1/actor/${this.actorsEndpoint()}/${id}/logo`, formData)
     }
-    const formData = new FormData()
-    files.forEach((file) => {
-      formData.append('file', file)
-    })
-    return this._http.post<Picture[]>(`/v1/actor/${this.actorsEndpoint()}/${id}/logo`, formData)
+    return of(null)
   }
 
   private propagateDataUser(data: any) {

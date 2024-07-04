@@ -25,15 +25,7 @@ export class ProfileService {
     private _userService: UserService,
   ) {}
 
-  getRegions() {
-    this._locationsService
-      .getRegions(this.selectedCodeLang().code)
-      .subscribe((regions) => {
-        if (regions) {
-          this.regions.set(regions);
-        }
-      });
-  }
+
 
   fetchUser() {
     this._userService.fetchUser();
