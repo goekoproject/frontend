@@ -143,7 +143,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
     )
     this.currentAnalytics()[categoryCode][subcategoryCode] = productSelectedOfSubcategory
   }
- 
+
   changeSearchName(searchName: string): void {
     this.currentAnalytics.update((value) => ({ ...value, searchName: searchName }))
   }
@@ -191,6 +191,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
       .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((res) => {
         this.savedAnalysis = true
+        if (route) this._goToResult(route)
       })
   }
 
@@ -201,6 +202,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
       .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((res) => {
         this.savedAnalysis = true
+        if (route) this._goToResult(route)
       })
   }
   private _saveAnalysis(route?: string) {
