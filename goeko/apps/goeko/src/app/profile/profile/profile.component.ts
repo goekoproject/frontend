@@ -3,8 +3,8 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
 import { CountrySelectOption, DataSelect, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
-import { AutoUnsubscribe, SideDialogService } from '@goeko/ui'
-import { Subject, distinctUntilChanged, forkJoin, map, switchMap, takeUntil, tap } from 'rxjs'
+import { AutoUnsubscribe } from '@goeko/ui'
+import { Subject, forkJoin, map, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
 import { ProfileFormFactory } from './profile-form.factory'
@@ -59,10 +59,8 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   private _externalId = this._profieService.externalId
   private destroy$ = new Subject<void>()
 
-  private _selectedCodeLang = this._profieService.selectedCodeLang
   public profileImg!: File[]
   public countries = this._profieService.countries
-  public regions = this._profieService.regions
   public username = this._profieService.username
   public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
   public defaultSetCountriesSme = defaultSetCountriesSme as (o1: CountrySelectOption, o2: string) => boolean
@@ -75,26 +73,23 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     return this.form.get('locations') as FormArray
   }
   constructor(
-    private _sideDialogService: SideDialogService,
     private _profieService: ProfileService,
     public route: ActivatedRoute,
   ) {}
+
   canDeactivate() {
     return !!this.dataProfile().id
   }
 
   ngOnInit() {
-    this._sideDialogService.closeDialog()
     this._profieService.fetchUser()
     this._createFormForUserType()
     this._loadDataProfile()
-    this._countryChanges()
   }
+
   private _createFormForUserType() {
-    if (this.dataProfile()) {
-      this.form = ProfileFormFactory.createProfileForm(this.userType())
-      this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
-    }
+    this.form = ProfileFormFactory.createProfileForm(this.userType())
+    this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
   }
 
   private _loadDataProfile() {
@@ -103,18 +98,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this._setLocaltionInFormForSme()
   }
 
-  private _addLocations() {
-    this.locationsArrays.push(this._createLocations())
-  }
-
-  private _createLocations(): FormGroup {
-    return new FormGroup({
-      country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl([]),
-      }),
-    })
-  }
   private _setLocaltionInFormForSme() {
     if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
       this.locationsArrays.clear()
@@ -124,20 +107,25 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       this.form.get('locations')?.patchValue((this.dataProfile() as SmeUser).locations)
     }
   }
-  private _countryChanges() {
-    this.form
-      ?.get('country')
-      ?.valueChanges.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
-      .subscribe((country) => {
-        this._selectedCodeLang.set(country)
-        this._profieService.getRegions()
-      })
+  private _addLocations() {
+    this.locationsArrays.push(this._createLocations())
   }
-
+  private _createLocations(): FormGroup {
+    return new FormGroup({
+      country: new FormGroup({
+        code: new FormControl(),
+        regions: new FormControl([]),
+      }),
+    })
+  }
+  fileChange(file: File[]) {
+    this.profileImg = file
+  }
   saveProfile() {
     this._profieService
       .createUserProfile(this.form.value)
       .pipe(
+        takeUntil(this.destroy$),
         switchMap((dataProfile) => {
           if (dataProfile && this.profileImg) {
             return this._uploadImg$(dataProfile.id).pipe(map((uploadResult) => ({ dataProfile, uploadResult })))
@@ -145,14 +133,10 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
             return [{ dataProfile }]
           }
         }),
-
-        tap(({ dataProfile }) => {
-          this._propageDataUser(dataProfile)
-        }),
       )
       .subscribe({
-        next: (result) => {
-          console.log('Perfil creado con éxito', result)
+        next: ({ dataProfile }) => {
+          this._propageDataUser(dataProfile)
         },
         error: (error) => {
           console.error('Error al crear el perfil', error)
@@ -164,16 +148,12 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     const profileUpdate$ = this._profieService.updateUserProfile(this.dataProfile().id, this.form.value)
 
     forkJoin({ profileUpdate: profileUpdate$, imageUpdate: this._uploadImg$() })
-      .pipe(
-        tap((dataProfile) => {
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (dataProfile) => {
           if (dataProfile) {
             this._propageDataUser(dataProfile.profileUpdate)
           }
-        }),
-      )
-      .subscribe({
-        next: (result) => {
-          console.log('Perfil actualizado con éxito', result)
         },
         error: (error) => {
           console.error('Error al actualizar el perfil', error)
@@ -183,8 +163,5 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   private _propageDataUser(dataProfile: UserModal) {
     this.dataProfile.set(dataProfile)
-  }
-  fileChange(file: File[]) {
-    this.profileImg = file
   }
 }

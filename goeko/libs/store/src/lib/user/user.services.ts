@@ -5,6 +5,7 @@ import { User } from '@auth0/auth0-angular'
 import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
+import { Picture } from '../model/pictures.interface'
 import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
 
@@ -63,22 +64,22 @@ export class UserService {
     this.getById(this.userProfile().id).subscribe((data) => this.propagateDataUser(data))
   }
   createUserProfile(body: any) {
-    return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}`, body)
+    return this._http.post<SmeUser | CleantechsUser>(`/v1/actor/${this.actorsEndpoint()}`, body)
   }
 
-  updateUserProfile(id: any, body: any) {
-    return this._http.put<any>(`/v1/actor/${this.actorsEndpoint()}/${id}`, body)
+  updateUserProfile(id: string, body: any) {
+    return this._http.put<SmeUser | CleantechsUser>(`/v1/actor/${this.actorsEndpoint()}/${id}`, body)
   }
 
-  uploadImgProfile(id: string, files: File[]) {
-    if (!files) {
-      return of(null)
+  uploadImgProfile(id: string, files: File[]): Observable<Picture[] | null> {
+    if (files) {
+      const formData = new FormData()
+      files.forEach((file) => {
+        formData.append('file', file)
+      })
+      return this._http.post<Picture[]>(`/v1/actor/${this.actorsEndpoint()}/${id}/logo`, formData)
     }
-    const formData = new FormData()
-    files.forEach((file) => {
-      formData.append('file', file)
-    })
-    return this._http.post<any>(`/v1/actor/${this.actorsEndpoint()}/${id}/logo`, formData)
+    return of(null)
   }
 
   private propagateDataUser(data: any) {
