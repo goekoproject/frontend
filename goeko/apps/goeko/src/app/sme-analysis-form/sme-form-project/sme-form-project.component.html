@@ -8,79 +8,64 @@
     <section class="section-step">
       <!-- CATEGORY -->
       @for (category of categories(); track category.id) {
-      <goeko-category
-        id="{{ category.id }}"
-        [selected]="category.code === categorySelected().code"
-        (click)="selectCategory(category)"
-        [icon]="'assets/category/' + category.icon + '.svg'"
-      >
-        <p title>{{ category.keyLang | translate }}</p>
-        <div dataExtra>
-          @if((form.get(category.code)?.getRawValue() | countSubcategory) !== 0) {
-            <p>
-              {{ form.get(category.code)?.getRawValue() | countProduct}}  {{ 'selectedProducts' | translate }}
-            </p>
-          } 
-         
-        </div>
-      </goeko-category>
+        <goeko-category
+          id="{{ category.id }}"
+          [selected]="category.code === categorySelected().code"
+          (click)="selectCategory(category)"
+          [icon]="'assets/category/' + category.icon + '.svg'">
+          <p title>{{ category.keyLang | translate }}</p>
+          <div dataExtra>
+            @if ((form.get(category.code)?.getRawValue() | countSubcategory) !== 0) {
+              <p>{{ form.get(category.code)?.getRawValue() | countProduct }} {{ 'selectedProducts' | translate }}</p>
+            }
+          </div>
+        </goeko-category>
       }
     </section>
     @defer (when dataCategorySelected && form &&
-    form.get(dataCategorySelected.code)) { @for (category of categories(); track
-    category.id; let index = $index) { @if(category.code ===
-    categorySelected().code) {
+    form.get(dataCategorySelected.code)) {
+      @for (category of categories(); track category.id; let index = $index) {
+        @if (category.code === categorySelected().code) {
+          <section class="content-form go-scroll w-full" formGroupName="{{ dataCategorySelected.code }}">
+            @for (subcategory of dataCategorySelected.subcategories; track subcategory.code; let index = $index) {
+              @if (form.get(dataCategorySelected.code)?.get(subcategory.code)) {
+                <!--FORM ACTORS-->
+                <div class="form-field form-field--center">
+                  <!-- PRODUCTS (disabled = false)-->
 
-    <section
-      class="content-form go-scroll w-full"
-      formGroupName="{{ dataCategorySelected.code }}"
-    >
-      @for (subcategory of dataCategorySelected.subcategories; track
-      subcategory.code ; let index = $index;){
-      @if(form.get(dataCategorySelected.code)?.get(subcategory.code)) {
-      <!--FORM ACTORS-->
-      <div class="form-field form-field--center">
-        <!-- PRODUCTS (disabled = false)-->
-
-        <goeko-select-subcategory-product
-          [id]="subcategory.code"
-          [subCategory]="subcategory"
-          [typeTitle]="'question'"
-          [multiple]="true"
-          [checked]="
-            !!form.value[this.dataCategorySelected.code][subcategory.code]
-          "
-        >
-          <p title>{{ subcategory.question }}</p>
-          <go-badge-group
-            [formControlName]="subcategory.code"
-            [id]="subcategory.code"
-            [name]="subcategory.code"
-            [compareWith]="compareWithProducts"
-          >
-            @for (product of subcategory.products; track product.code) {
-            @if(!product.disabled) {
-
-            <go-badge [value]="product">{{
-              product.label | translate
-            }}</go-badge>
-            } }
-          </go-badge-group>
-        </goeko-select-subcategory-product>
-      </div>
-      } }
-    </section>
-    } } }
-    <p>{{ dateLastRecomendation | date : 'short' }}</p>
+                  <goeko-select-subcategory-product
+                    [id]="subcategory.code"
+                    [subCategory]="subcategory"
+                    [typeTitle]="'question'"
+                    [multiple]="true"
+                    [checked]="!!form.value[this.dataCategorySelected.code][subcategory.code]">
+                    <p title>{{ subcategory.question }}</p>
+                    <go-badge-group
+                      [formControlName]="subcategory.code"
+                      [id]="subcategory.code"
+                      [name]="subcategory.code"
+                      [compareWith]="compareWithProducts">
+                      @for (product of subcategory.products; track product.code) {
+                        @if (!product.disabled) {
+                          <go-badge [value]="product">{{ product.label | translate }}</go-badge>
+                        }
+                      }
+                    </go-badge-group>
+                  </goeko-select-subcategory-product>
+                </div>
+              }
+            }
+          </section>
+        }
+      }
+    }
+    <p>{{ dateLastRecomendation | date: 'short' }}</p>
   </section>
   <div class="form-actions">
     <button type="button" go-button appearance="white" (click)="goToBack()">
       {{ 'cancel' | translate }}
     </button>
     <div class="form-actions-submit">
-      <!-- 			<button type="button" go-button appearance="white" *ngIf="isSummarySlide()" (click)="saveAnalysis()">
-				{{ 'save' | translate }}
-			</button> -->
       <button type="button" go-button (click)="gotToSummary()">
         {{ 'summary' | translate }}
       </button>
@@ -89,19 +74,9 @@
 </div>
 <ng-template #question let-field="field">
   <label for="{{ field.controlName }}">{{ field.question | translate }}</label>
-  <select
-    multiple
-    [formControlName]="field.controlName"
-    [id]="field.controlName"
-    [name]="field.controlName"
-  >
-    <option value="">
-      --{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--
-    </option>
-    <option
-      *ngFor="let option of dataSelect[field.controlName]"
-      [value]="option.title"
-    >
+  <select multiple [formControlName]="field.controlName" [id]="field.controlName" [name]="field.controlName">
+    <option value="">--{{ 'SELECT_DATA_LABEL.defaultLabel' | translate }}--</option>
+    <option *ngFor="let option of dataSelect[field.controlName]" [value]="option.title">
       {{ option.title }}
     </option>
   </select>

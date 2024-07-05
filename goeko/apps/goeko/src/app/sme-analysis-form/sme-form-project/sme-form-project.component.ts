@@ -1,20 +1,18 @@
-import { Location } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectService, SmeService } from '@goeko/store';
-import { SmeAnalysisService } from '../sme-analysis.service';
-import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component';
+import { Location } from '@angular/common'
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
+import { FormBuilder } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { ProjectService, SmeService } from '@goeko/store'
+import { SmeAnalysisService } from '../sme-analysis.service'
+import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component'
 
 @Component({
   selector: 'goeko-sme-form-project',
   templateUrl: './sme-form-project.component.html',
   styleUrls: ['./sme-form-project.component.scss'],
 })
-export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnInit
-{
-  public toogleSaveName = true;
-
+export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnInit {
+  public toogleSaveName = true
 
   constructor(
     private fb: FormBuilder,
@@ -22,22 +20,18 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
     private smeService: SmeService,
     private route: ActivatedRoute,
     private smeAnalysisService: SmeAnalysisService,
-    private projectService :ProjectService,
+    private projectService: ProjectService,
     private cdf: ChangeDetectorRef,
-    private _location: Location
-
+    private _location: Location,
   ) {
-    super(fb, router,smeService, route, smeAnalysisService,projectService,cdf);
+    super(fb, router, smeService, route, smeAnalysisService, projectService, cdf)
   }
 
   override ngOnInit(): void {
-    super.ngOnInit();
-    this._initForm();
-    this.onChangeLastRecomendation.subscribe(
-      (data) => (this.toogleSaveName = !data)
-    );
-    this.form.patchValue(this.currentAnalytics());
-
+    super.ngOnInit()
+    this._initForm()
+    this.onChangeLastRecomendation.subscribe((data) => (this.toogleSaveName = !data))
+    this.form.patchValue(this.currentAnalytics())
   }
 
   private _initForm() {
@@ -47,11 +41,13 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
       waste: this.fb.group({}),
       waterConsumption: this.fb.group({}),
       hazardousProduct: this.fb.group({}),
-    });
+      notification: this.fb.group({
+        onNewEcosolution: this.fb.control(false),
+      }),
+    })
   }
 
   goToBack() {
-    this._location.back();
-
+    this._location.back()
   }
 }

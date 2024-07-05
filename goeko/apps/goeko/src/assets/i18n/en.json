@@ -170,7 +170,7 @@
     "password": "Password",
     "paybackPeriodYears": "Return on investment time compared to a standard solution",
     "price": "Price",
-    "infoPrice": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
+    "infoPrice": "Information on the price of your eco-solution (example: minimum price)",
     "products": "Products",
     "reductionPercentage": "Reduction Percentage",
     "reductionPercentageCO2": "CO2 Reduction Percentage",
@@ -435,7 +435,6 @@
     "messaggeProfileUncompletedTitle": "Complete your profile",
     "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools.",
     "messageNotification": "Enable email notifications to receive the latest ecosolutions for your questionnaire."
-
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",

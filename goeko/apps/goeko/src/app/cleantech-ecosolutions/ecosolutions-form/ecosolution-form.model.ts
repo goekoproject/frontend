@@ -48,9 +48,19 @@ export class EcosolutionForm {
     this.priceDescription = ecosolution.priceDescription
     this.detailedDescription = ecosolution.detailedDescription
     this.locations = ecosolution.locations
-    this.nameTranslations = ecosolution.nameTranslations
-    this.detailedDescriptionTranslations = ecosolution.detailedDescriptionTranslations
-    this.descriptionTranslations = ecosolution.descriptionTranslations
-    this.priceDescriptionTranslations = ecosolution.priceDescriptionTranslations
+    ;(this.nameTranslations = this.getLabelTranslated(ecosolution.nameTranslations, ecosolution.solutionName)),
+      (this.detailedDescriptionTranslations = this.getLabelTranslated(
+        ecosolution.detailedDescriptionTranslations,
+        ecosolution.detailedDescription,
+      ))
+    ;(this.descriptionTranslations = this.getLabelTranslated(ecosolution.descriptionTranslations, ecosolution.solutionDescription)),
+      (this.priceDescriptionTranslations = this.getLabelTranslated(ecosolution.priceDescriptionTranslations, ecosolution.priceDescription))
+  }
+  private getLabelTranslated(labelTranslate: FiledTranslations[], preValue: string | undefined) {
+    if (labelTranslate && labelTranslate.length > 0) {
+      return labelTranslate
+    } else {
+      return [{ lang: 'fr', label: preValue } as FiledTranslations]
+    }
   }
 }
