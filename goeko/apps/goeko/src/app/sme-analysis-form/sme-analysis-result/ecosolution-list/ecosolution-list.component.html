@@ -51,38 +51,20 @@
       </h1>
     </div>
 
-    <div class="eco-solutions-result go-scroll" *ngIf="smeRecomendation">
-      <div
-        class="eco-solutions"
-        (click)="goToViewDetailEcosolution(ecoSolutions)"
-        *ngFor="let ecoSolutions of smeRecomendation; let index = index"
-        [ngClass]="{
-          'eco-solutions-selected': selectedRecomendationIndex === index,
-        }">
-        <div class="eco-solutions-header">
-          <div class="eco-solutions-logo">
-            <img src="{{ ecoSolutions?.companyDetail?.logo }}" alt="eco solutions logo" />
-          </div>
-        </div>
-        <div class="eco-solutions-body">
-          <h3 class="eco-solutions-name">{{ ecoSolutions?.solutionName }}</h3>
-          <p class="eco-solutions-desciption">
-            {{ ecoSolutions?.description }}
-          </p>
-          <p class="eco-solutions-company">
-            {{ ecoSolutions?.companyDetail?.name }}
-          </p>
-          <span class="eco-solutions-type   eco-solutions-type-{{ ecoSolutions?.classification.mainCategory }}">{{
-            'CATEGORIES.' + ecoSolutions?.classification.mainCategory | translate
-          }}</span>
-
-          <div class="eco-solutions-actions">
-            <abbr title="Save">
-              <i class="ti ti-heart"></i>
-            </abbr>
-          </div>
-        </div>
+    @if (smeRecomendation) {
+      <div class="go-scroll grid grid-cols-1 gap-6 max-xl:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        @for (ecoSolutions of smeRecomendation; track ecoSolutions.solutionName) {
+          <goeko-card-product
+            [title]="ecoSolutions.solutionName"
+            [description]="ecoSolutions.description"
+            [image]="ecoSolutions.companyDetail.logo"
+            [category]="'CATEGORIES.' + ecoSolutions.classification.mainCategory | translate"
+            [classNameCategoy]="ecoSolutions.classification.mainCategory"
+            [isFavorite]="ecoSolutions.tag === TAGGING.FAVOURITES"
+            (changeFavorite)="changeFavorite(ecoSolutions)"
+            (changeShowMore)="goToViewDetailEcosolution(ecoSolutions)" />
+        }
       </div>
-    </div>
+    }
   </section>
 </div>

@@ -19,6 +19,7 @@ import { SmeModule } from '@goeko/store'
 import {
   BadgeModule,
   ButtonModule,
+  CardProductComponent,
   CarouselModule,
   GoDateFormatPipe,
   GoInputModule,
@@ -91,6 +92,7 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     SmeModule,
     ToggleSwitchComponent,
     NotificationModule,
+    CardProductComponent,
   ],
   providers: [SmeAnalysisService, MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

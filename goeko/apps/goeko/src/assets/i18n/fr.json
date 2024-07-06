@@ -234,7 +234,7 @@
   },
   "MENU_USER": {
     "dashboard": "Tableau de bord",
-    "favorites": "Favoris"
+    "favourites": "Favoris"
   },
   "NOTIFICATION": {
     "save_ok": "Enregistré avec succès"
@@ -499,6 +499,7 @@
   "saveYou": "Sauvegarder votre",
   "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre écosolution",
   "selected_products": "Produits sélectionnés",
+  "showMore": "Voir plus",
   "showLead": "Afficher les clients potentiels",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "La connexion des entreprises aux technologies propres et au financement",

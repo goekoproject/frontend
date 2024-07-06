@@ -1,9 +1,19 @@
 import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui'
-import { ODS_CODE, Recommendation, SmeAnalysisStoreService, SmeService, UserService } from '@goeko/store'
+import {
+  ECOSOLUTIONS_CONFIGURATION,
+  EcosolutionsTaggingService,
+  ODS_CODE,
+  Recommendation,
+  SmeAnalysisStoreService,
+  SmeService,
+  TAGGING,
+  UserService,
+} from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
+import { environment } from 'apps/goeko/src/environments/environment'
 import { Subject, distinctUntilChanged, takeUntil } from 'rxjs'
 import { SmeAnalysisService } from '../../sme-analysis.service'
 import { CriteriaEcosolutionSearch } from './criteria-ecosolution-search.model'
@@ -13,6 +23,15 @@ import { CriteriaEcosolutionSearch } from './criteria-ecosolution-search.model'
   selector: 'goeko-ecosolution-list',
   templateUrl: './ecosolution-list.component.html',
   styleUrls: ['./ecosolution-list.component.scss'],
+  providers: [
+    EcosolutionsTaggingService,
+    {
+      provide: ECOSOLUTIONS_CONFIGURATION,
+      useValue: {
+        endpoint: environment.baseUrl,
+      },
+    },
+  ],
 })
 export class EcosolutionListComponent implements OnInit {
   @ViewChild('all') checkedAll!: ElementRef<HTMLInputElement>
@@ -30,7 +49,7 @@ export class EcosolutionListComponent implements OnInit {
   smeDataProfile = this._userService.userProfile()
   private _codesActive = signal<Array<number>>([])
   private destroy$ = new Subject<void>()
-
+  public TAGGING = TAGGING
   get allChecked() {
     const allChecked = !this.formField.some((field) => field.checked)
     return allChecked
@@ -57,6 +76,7 @@ export class EcosolutionListComponent implements OnInit {
     private _userService: UserService,
     private _router: Router,
     private _smeAnalysisService: SmeAnalysisService,
+    private _taggingService: EcosolutionsTaggingService,
   ) {}
 
   ngOnInit(): void {
@@ -120,6 +140,14 @@ export class EcosolutionListComponent implements OnInit {
     this._router.navigate(['details', selectedRecomendation.id], {
       relativeTo: this._route,
     })
+  }
+
+  changeFavorite(recomendation: Recommendation) {
+    if(recomendation.tag === TAGGING.FAVOURITES) {
+      this._taggingService.removeFavorite(recomendation.id).subscribe(() => {})
+      return
+    }
+    this._taggingService.addFavorite(this._smeId, recomendation.id).subscribe(() => {})
   }
 
   onCheckboxStateChange(checked: any, index: number) {

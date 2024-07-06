@@ -1,3 +1,5 @@
+import { Tagging } from '../ecosolutions/tagging';
+import { TaggingEnum } from '../ecosolutions/tagging.enum';
 import { LocationTranslated } from '../model/location-translated.interface';
 
 export interface ResponseRecommendations {
@@ -24,6 +26,7 @@ export interface Recommendation {
   pictures: PictureEcosolution[];
   locations: LocationTranslated[];
   documents: any[];
+  tag: TaggingEnum;
 }
 
 export interface Classification {
