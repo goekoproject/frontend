@@ -311,14 +311,14 @@
       "paint": "Peinture",
       "pouringConcrete": "Production du béton",
       "siteCleaning": "Arrosage du chantier",
-      "siteHut": "Base de vie",
+      "siteHut": "Base vie de chantier",
       "toolCleaning": "Nettoyage du matériel",
-      "wateringForCure": "Arrosage pour la cure",
+      "wateringForCure": "Arrosage pour la cure du béton",
       "wateringPlants": "Arrosage des végétaux",
       "constructionSiteWater": "Eau de chantier"
     },
     "selectMainCategoryNonInert": {
-      "cardboardAndPaper": "Carton et papier",
+      "cardboardAndPaper": "Carton et papier ",
       "cartridgesWithoutToxicProducts": "Cartouches sans produits toxiques",
       "electricalAndElectronicEquipment": "Equipements électriques et électroniques",
       "insulationMaterials": "Matériaux d'isolation",
@@ -345,7 +345,7 @@
       "scraper": "Scraper",
       "slicer": "Trancheuse",
       "steamRoller": "Rouleau compresseur",
-      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​"
+      "vehicleFortransportingPeople​​": "Véhicule de transport de personnes​"
     },
     "selectMainMineralProduct": {
       "aluminum": "Aluminium​",
@@ -407,7 +407,7 @@
       "useLowConsumptionLighting": "Des solutions de refroidissement écologiques",
       "useRenewableEnergies": "Recourir à des énergies renouvelables",
       "sustainableLightingSystems": "Des systèmes d’éclairage durables",
-      "intelligentHeatingSystems": "Systèmes de chauffage intelligents"
+      "intelligentHeatingSystems": "Systèmes de chauffage intelligent"
     }
   },
   "TEXT_SUPPORT": {
