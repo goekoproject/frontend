@@ -3,18 +3,19 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui'
 import {
   ECOSOLUTIONS_CONFIGURATION,
+  EcosolutionSearchResponse,
   EcosolutionsTaggingService,
   ODS_CODE,
-  Recommendation,
   SmeAnalysisStoreService,
   SmeService,
+  SmeUser,
   TAGGING,
   UserService,
 } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
-import { environment } from 'apps/goeko/src/environments/environment'
 import { Subject, distinctUntilChanged, takeUntil } from 'rxjs'
+import { environment } from '../../../../environments/environment'
 import { SmeAnalysisService } from '../../sme-analysis.service'
 import { CriteriaEcosolutionSearch } from './criteria-ecosolution-search.model'
 
@@ -40,7 +41,7 @@ export class EcosolutionListComponent implements OnInit {
 
   formField = FORM_CATEGORIES_QUESTION
   toogleOpenDetails = false
-  smeRecomendation!: any
+  ecosolutions = signal<Array<EcosolutionSearchResponse>>([])
   selectedRecomendation: any
   selectedRecomendationIndex: any
   zoomOutIn = false
@@ -89,11 +90,11 @@ export class EcosolutionListComponent implements OnInit {
 
   getResults() {
     this._smeService
-      .ecosolutionSearch(new CriteriaEcosolutionSearch(this.currentAnalytics(), this._userService.userProfile()))
+      .ecosolutionSearch(new CriteriaEcosolutionSearch(this.currentAnalytics(), this._userService.userProfile() as SmeUser))
       .pipe(takeUntil(this.destroy$), distinctUntilChanged())
-      .subscribe((recommendations) => {
-        if (recommendations && recommendations.length > 0) {
-          this._handleRecommendations(recommendations)
+      .subscribe((ecosolutions) => {
+        if (ecosolutions && ecosolutions.length > 0) {
+          this._handleRecommendations(ecosolutions)
         }
       })
   }
@@ -111,15 +112,15 @@ export class EcosolutionListComponent implements OnInit {
     })
   }
 
-  private _handleRecommendations(recommendations: Recommendation[]) {
+  private _handleRecommendations(recommendations: EcosolutionSearchResponse[]) {
     if (recommendations && Array.isArray(recommendations)) {
       const smeRecomendation = this._filterSmeRecomendations(recommendations)
-      this.smeRecomendation = this._buildCountriesAvailability(smeRecomendation)
+      this.ecosolutions.set(this._buildCountriesAvailability(smeRecomendation))
       this._makeFilterBySDG()
     }
   }
 
-  private _buildCountriesAvailability(solutions: Recommendation[]) {
+  private _buildCountriesAvailability(solutions: EcosolutionSearchResponse[]) {
     return solutions.map((res: any) => ({
       ...res,
       companyDetail: {
@@ -135,19 +136,19 @@ export class EcosolutionListComponent implements OnInit {
     return ` ${regionNames.of(countries)}`
   }
 
-  goToViewDetailEcosolution(selectedRecomendation: Recommendation) {
-    this._smeAnalysisStore.setDetailEcosolutions(selectedRecomendation)
-    this._router.navigate(['details', selectedRecomendation.id], {
+  goToViewDetailEcosolution(ecosolution: EcosolutionSearchResponse) {
+    this._smeAnalysisStore.setDetailEcosolutions(ecosolution)
+    this._router.navigate(['details', ecosolution.id], {
       relativeTo: this._route,
     })
   }
 
-  changeFavorite(recomendation: Recommendation) {
-    if(recomendation.tag === TAGGING.FAVOURITES) {
-      this._taggingService.removeFavorite(recomendation.id).subscribe(() => {})
+  changeFavorite(ecosolution: EcosolutionSearchResponse) {
+    if (ecosolution.favourite) {
+      this._taggingService.removeFavorite(ecosolution.id).subscribe(() => {})
       return
     }
-    this._taggingService.addFavorite(this._smeId, recomendation.id).subscribe(() => {})
+    this._taggingService.addFavorite(this._smeId, ecosolution.id).subscribe(() => {})
   }
 
   onCheckboxStateChange(checked: any, index: number) {
@@ -158,7 +159,7 @@ export class EcosolutionListComponent implements OnInit {
     }
   }
 
-  private _filterSmeRecomendations(smeRecomendation: Recommendation[]) {
+  private _filterSmeRecomendations(smeRecomendation: EcosolutionSearchResponse[]) {
     if (this.checkedAll?.nativeElement?.checked) {
       return smeRecomendation
     }
@@ -167,7 +168,8 @@ export class EcosolutionListComponent implements OnInit {
     const fieldChecked = this.formField.filter((field) => field.checked)
     fieldChecked.forEach((el: any) => {
       const newArray = smeRecomendation.filter(
-        (recomendation: Recommendation) => recomendation.classification.mainCategory.toUpperCase() === el.controlName.toUpperCase(),
+        (recomendation: EcosolutionSearchResponse) =>
+          recomendation.classification.mainCategory.toUpperCase() === el.controlName.toUpperCase(),
       )
       newSmeRecomendation = [...newSmeRecomendation, ...newArray]
     })
@@ -182,8 +184,10 @@ export class EcosolutionListComponent implements OnInit {
 
   private _makeFilterBySDG() {
     if (this._codesActive().length > 0) {
-      this.smeRecomendation = this.smeRecomendation.filter((recomendation: Recommendation) =>
-        this._codesActive().some((elemento) => recomendation.sustainableDevelopmentGoals.includes(elemento)),
+      this.ecosolutions.update((ecosolutions) =>
+        ecosolutions.filter((ecosolution) =>
+          this._codesActive().some((elemento) => ecosolution.sustainableDevelopmentGoals.includes(elemento)),
+        ),
       )
     }
   }

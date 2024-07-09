@@ -26,21 +26,6 @@
 
       <goeko-sdg-icons (valueSelected)="filterBySDG($event)" [size]="'large'"></goeko-sdg-icons>
     </fieldset>
-    <!-- <ul class="filter-ods">
-      <li
-        [class.active]="icon.active"
-        *ngFor="let icon of odsIcons; index as index"
-        (click)="filterBySDG(index, icon.active)"
-      >
-        <img
-          class="ods-icon"
-          [src]="
-            'assets/icon-ods/' + currentLangCode + '-Goal-' + icon.code + '.png'
-          "
-          [alt]="icon"
-        />
-      </li>
-    </ul> -->
   </section>
 
   <section class="result">
@@ -51,18 +36,18 @@
       </h1>
     </div>
 
-    @if (smeRecomendation) {
+    @if (ecosolutions()) {
       <div class="go-scroll grid grid-cols-1 gap-6 max-xl:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        @for (ecoSolutions of smeRecomendation; track ecoSolutions.solutionName) {
+        @for (ecosolution of ecosolutions(); track ecosolution.id) {
           <goeko-card-product
-            [title]="ecoSolutions.solutionName"
-            [description]="ecoSolutions.description"
-            [image]="ecoSolutions.companyDetail.logo"
-            [category]="'CATEGORIES.' + ecoSolutions.classification.mainCategory | translate"
-            [classNameCategoy]="ecoSolutions.classification.mainCategory"
-            [isFavorite]="ecoSolutions.tag === TAGGING.FAVOURITES"
-            (changeFavorite)="changeFavorite(ecoSolutions)"
-            (changeShowMore)="goToViewDetailEcosolution(ecoSolutions)" />
+            [title]="ecosolution.solutionName"
+            [description]="ecosolution.description"
+            [image]="ecosolution.companyDetail.logo"
+            [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
+            [classNameCategoy]="ecosolution.classification.mainCategory"
+            [isFavorite]="ecosolution.favourite"
+            (changeFavorite)="changeFavorite(ecosolution)"
+            (changeShowMore)="goToViewDetailEcosolution(ecosolution)" />
         }
       </div>
     }

@@ -1,29 +1,21 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, find, from, map, mergeMap, of, reduce } from 'rxjs'
-import { SessionStorageService } from '../session-storage.service'
+import { Observable, find, from, map, mergeMap, reduce } from 'rxjs'
+import { EcosolutionSearchRequest } from '../ecosolutions/ecosolution-search.request.model'
+import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
+import { EcosolutionsService } from '../ecosolutions/ecosolutions.service'
 import { TranslateChangeService } from '../util/translate-change'
-import { Recommendation, ResponseRecommendations } from './ecosolution-recomendations.model'
-import {
-  Requests,
-  SmeCreateRecomendationRequest,
-  SmeRecomendationRequestDemo,
-  SmeRequestResponse,
-  SmeSaveRecomendationRequest,
-} from './sme-request.model'
+import { Recommendation } from './ecosolution-recomendations.model'
+import { Requests, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 
 @Injectable()
 export class SmeService extends TranslateChangeService {
   constructor(
-    private readonly sessionStorageService: SessionStorageService,
+    private readonly _ecosolutionServices: EcosolutionsService,
     public _http: HttpClient,
   ) {
     super()
     this.changeLang()
-  }
-
-  getRecommendations(body: SmeRecomendationRequestDemo): Observable<any> {
-    return this._http.post<any>(`/v1/demo/ecosolution/search`, body)
   }
 
   getRequests(id: string): Observable<Requests> {
@@ -50,13 +42,12 @@ export class SmeService extends TranslateChangeService {
     )
   }
 
-  ecosolutionSearch(body: SmeCreateRecomendationRequest): Observable<Recommendation[] | null> {
-    if (!body || body.classifications.length <= 0) {
-      return of(null)
-    }
-    return this._http
-      .post<any>(`/v1/ecosolution/search?lang=${this.lang()}`, body)
-      .pipe(map((request: ResponseRecommendations) => request?.ecosolutions))
+  ecosolutionSearch(body: EcosolutionSearchRequest): Observable<EcosolutionSearchResponse[] | null> {
+    return this._ecosolutionServices.ecosolutionSearch(body)
+  }
+
+  ecosolutionSearchById(id: string, smeId: string): Observable<EcosolutionSearchResponse> {
+    return this._ecosolutionServices.getEcosolutionSearchById(id, smeId)
   }
 
   saveRecommendations(body: SmeSaveRecomendationRequest): Observable<any> {
@@ -78,6 +69,4 @@ export class SmeService extends TranslateChangeService {
   getAllSmesData(): Observable<any> {
     return this._http.get<any>(`/v1/actor/smes`)
   }
-
-  //delete sme user
 }

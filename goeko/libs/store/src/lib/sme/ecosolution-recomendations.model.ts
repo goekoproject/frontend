@@ -1,69 +1,68 @@
-import { Tagging } from '../ecosolutions/tagging';
-import { TaggingEnum } from '../ecosolutions/tagging.enum';
-import { LocationTranslated } from '../model/location-translated.interface';
+import { LocationTranslated } from '../model/location-translated.interface'
 
 export interface ResponseRecommendations {
-  ecosolutions: Recommendation[];
+  ecosolutions: Recommendation[]
 }
 
 export interface Recommendation {
-  id: string;
-  approved: boolean;
-  certified: boolean;
-  classification: Classification;
-  companyDetail: CompanyDetailOfEcosolution;
-  countries: string[];
-  description: string;
-  detailedDescription: string;
-  guarantee: boolean;
-  guaranteeInYears?: number;
-  improvement: ImprovementOfEcosolution;
-  marketReady: boolean;
-  paybackPeriodYears: number;
-  priceDescription?: string;
-  solutionName: string;
-  sustainableDevelopmentGoals: number[];
-  pictures: PictureEcosolution[];
-  locations: LocationTranslated[];
-  documents: any[];
-  tag: TaggingEnum;
+  id: string
+  approved: boolean
+  certified: boolean
+  classification: Classification
+  companyDetail: CompanyDetailOfEcosolution
+  countries: string[]
+  description: string
+  detailedDescription: string
+  guarantee: boolean
+  guaranteeInYears?: number
+  improvement: ImprovementOfEcosolution
+  marketReady: boolean
+  paybackPeriodYears: number
+  priceDescription?: string
+  solutionName: string
+  sustainableDevelopmentGoals: number[]
+  pictures: PictureEcosolution[]
+  locations: LocationTranslated[]
+  documents: any[]
+  favourite: boolean
+  notInterested: boolean
 }
 
 export interface Classification {
-  mainCategory: string;
-  products: string[];
-  subCategory: string;
+  mainCategory: string
+  products: string[]
+  subCategory: string
 }
 
 export interface CompanyDetailOfEcosolution {
-  city: string;
-  countries: string[];
-  country: string;
-  email: string;
-  link: string;
-  logo: string;
-  name: string;
-  id: string;
+  city: string
+  countries: string[]
+  country: string
+  email: string
+  link: string
+  logo: string
+  name: string
+  id: string
 }
 
 export interface ImprovementOfEcosolution {
-  operationalCostReductionPercentage: ReductionPercentageOfEcosolution;
-  reductionPercentage: ReductionPercentageOfEcosolution;
-  smeOperationalCostReduction: SMEOperationalCostReduction;
-  smeReduction: number;
+  operationalCostReductionPercentage: ReductionPercentageOfEcosolution
+  reductionPercentage: ReductionPercentageOfEcosolution
+  smeOperationalCostReduction: SMEOperationalCostReduction
+  smeReduction: number
 }
 
 export interface ReductionPercentageOfEcosolution {
-  from: number;
-  to: number;
+  from: number
+  to: number
 }
 
 export interface SMEOperationalCostReduction {
-  amount: number;
-  currency: string;
+  amount: number
+  currency: string
 }
 export interface PictureEcosolution {
-  id: string;
-  name: string;
-  url: string;
+  id: string
+  name: string
+  url: string
 }

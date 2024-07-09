@@ -1,3 +1,5 @@
+export * from './ecosolution-search.request.model'
+export * from './ecosolution-search.response.interface'
 export * from './ecosolutions.module'
 export * from './ecosolutions.service'
 export * from './ecosolutions.tagging.service'
