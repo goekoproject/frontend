@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
-import { CleanTechService, SmeService, USER_TYPE, UserType } from '@goeko/store'
+import { MessageService } from '@goeko/business-ui'
+import { CleanTechService, CleantechsUser, SmeService, SmeUser, USER_TYPE, UserService, UserType } from '@goeko/store'
+import { MESSAGE_TYPE } from '@goeko/ui'
 import { Observable } from 'rxjs'
 import { DATA_ACTOR_SWITCH } from '../data-actors-switch.constants'
 
@@ -18,7 +20,7 @@ type DataSourcesByUserType = {
   selector: 'goeko-data-admin',
   standalone: true,
   imports: [CommonModule],
-  providers: [SmeService, CleanTechService],
+  providers: [SmeService, CleanTechService, MessageService],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss',
 })
@@ -28,9 +30,6 @@ export class AdminUserComponent {
     cleantech: this._cleantechServices.getAllCleantechData(),
   }
 
-  public get dataSources() {
-    return this._dataSourcesByUserType[this.selectedUserType as keyof DataSourcesByUserType] as Observable<User[]>
-  }
   public headers: { title: string; key: keyof User }[] = [
     {
       title: 'NAME',
@@ -56,19 +55,58 @@ export class AdminUserComponent {
 
   public dataActorSwitch = DATA_ACTOR_SWITCH
   public selectedUserType = USER_TYPE.SME
+  public get dataSources(): Observable<SmeUser[] | CleantechsUser[] | any> {
+    return this._dataSources
+  }
+
+  public set dataSources(value: Observable<SmeUser[] | CleantechsUser[]>) {
+    this._dataSources = value
+  }
+
+  private _dataSources = this._dataSourcesByUserType[this.selectedUserType as keyof DataSourcesByUserType] as Observable<
+    SmeUser[] | CleantechsUser[]
+  >
+
+  public userProfile = this._userService.userProfile()
 
   constructor(
     private _smeServices: SmeService,
     private _cleantechServices: CleanTechService,
+    private MessageService: MessageService,
+    private _userService: UserService,
   ) {}
 
   changeUserType(type: USER_TYPE): void {
     this.selectedUserType = type
   }
-  deleteUser(id: number): void {
-    console.log('delete user', id)
-    ///this.adminService.deleteUser(id, selectedUserType)
-    // deleteUser(id, selectedUserType) {
-    //switch(selectedUserType) { case return this._smeServices.deleteSme(id); case return this._cleantechServices.deleteCleantech(id); }
+  deleteUser(id: string): void {
+    this.MessageService.deleteMessage(MESSAGE_TYPE.WARNING, `${id}`)
+      .afterClosed()
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+          switch (this.selectedUserType) {
+            case USER_TYPE.SME:
+              this._deleteSmeUser(id)
+              return
+            case USER_TYPE.CLEANTECH:
+              this._deleteCleantechUser(id)
+              return
+            default:
+              console.error(`Unsupported user type: ${this.selectedUserType}`)
+          }
+        }
+      })
+  }
+
+  private _deleteSmeUser(id: string): void {
+    this._smeServices.deleteSmeUser(id).subscribe(() => {
+      this.dataSources = this._smeServices.getAllSmesData()
+    })
+  }
+
+  private _deleteCleantechUser(id: string): void {
+    this._cleantechServices.deleteCleantechUser(id).subscribe(() => {
+      this.dataSources = this._cleantechServices.getAllCleantechData()
+    })
   }
 }
