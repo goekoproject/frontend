@@ -131,7 +131,7 @@
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
-    "labelSelectedFormLang": "Sélectionnez la langue que vous préférez pour compléter votre éco-solution.",
+    "labelSelectedFormLang": "Sélectionnez la langue pour compléter votre éco-solution.",
     "titleSelectImgEcosolution": "Choisissez plusieurs images pour votre EcoSolution",
     "titleFormAnalysis": "Sélectionnez vos catégories pour trouver des éco-solutions",
     "additionalInformation": "Informations supplémentaires",
