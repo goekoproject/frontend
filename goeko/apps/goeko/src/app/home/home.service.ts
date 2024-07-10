@@ -1,30 +1,30 @@
-import { Injectable, signal } from '@angular/core';
-import { AuthService } from '@goeko/core';
-import { ContentFulService } from '@goeko/store';
-import { map, toArray } from 'rxjs';
+import { Injectable, signal } from '@angular/core'
+import { Router } from '@angular/router'
+import { ContentFulService } from '@goeko/store'
+import { map } from 'rxjs'
 
-
-const compareFn = (a: any , b: any) => {
-  if (a.order < b.order)
-    return -1;
-  if (a.order > b.order)
-    return 1;
-  return 0;
-};
+const compareFn = (a: any, b: any) => {
+  if (a.order < b.order) return -1
+  if (a.order > b.order) return 1
+  return 0
+}
 @Injectable({ providedIn: 'root' })
 export class HomeService {
-  dataContentTypeSignal = signal<unknown | null>(null);
-  entryDataConnecting = signal<any | null>(null);
-  entryDataSustainability = signal<any | null>(null);
+  dataContentTypeSignal = signal<unknown | null>(null)
+  entryDataConnecting = signal<any | null>(null)
+  entryDataSustainability = signal<any | null>(null)
 
-  constructor(private _contentFul: ContentFulService, private _authService: AuthService) {}
+  constructor(
+    private _contentFul: ContentFulService,
+    private _router: Router,
+  ) {}
 
   getContent() {
-    return this._contentFul.getContentEntry();
+    return this._contentFul.getContentEntry()
   }
 
   getEntry(entryId: string) {
-    return this._contentFul.getEntryId(entryId);
+    return this._contentFul.getEntryId(entryId)
   }
 
   getSloganConnecting(entryId: string) {
@@ -32,39 +32,38 @@ export class HomeService {
       .pipe(map((res) => res.fields))
       .subscribe((entryData: any) => {
         if (entryData) {
-          this.entryDataConnecting.set(entryData);
+          this.entryDataConnecting.set(entryData)
         }
-      });
+      })
   }
   getSloganSustainability(entryId: string) {
     this.getEntry(entryId)
       .pipe(map((res) => res.fields))
       .subscribe((entryData: any) => {
         if (entryData) {
-          this.entryDataSustainability.set(entryData);
+          this.entryDataSustainability.set(entryData)
         }
-      });
+      })
   }
   getContentType(contentType: string) {
-    return this._contentFul
-      .getContentType(contentType)
-      .pipe(map((res) => res.items.map((item) => item.fields)));
+    return this._contentFul.getContentType(contentType).pipe(map((res) => res.items.map((item) => item.fields)))
   }
 
   getContentTypeSignal(contentType: string) {
     return this._contentFul
       .getContentType(contentType)
-      .pipe(map((res) => res.items.map((item) =>item.fields   )),
-      map((fields) => fields.sort(compareFn) )
+      .pipe(
+        map((res) => res.items.map((item) => item.fields)),
+        map((fields) => fields.sort(compareFn)),
       )
-     
+
       .subscribe((dataContentTypeSignal) => {
         if (dataContentTypeSignal) {
-          this.dataContentTypeSignal.set(dataContentTypeSignal);
+          this.dataContentTypeSignal.set(dataContentTypeSignal)
         }
-      });
+      })
   }
   goTologin() {
-    this._authService.universalLogin()
+    this._router.navigate(['/platform'])
   }
 }

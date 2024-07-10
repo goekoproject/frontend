@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core'
-import { AuthService, LANGS } from '@goeko/core'
+import { Router } from '@angular/router'
+import { LANGS } from '@goeko/core'
 import { TranslateService } from '@ngx-translate/core'
 
 @Component({
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private _renderer: Renderer2,
     private translate: TranslateService,
-    private _authService: AuthService,
+    private _router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -43,9 +44,6 @@ export class HeaderComponent implements OnInit {
     this.translate.use(selectedCodeLand)
   }
   goTologin() {
-    this._authService.universalLogin().subscribe({
-      next: (v) => console.log('response', v),
-      error: (r) => console.log('error', r),
-    })
+    this._router.navigate(['/login-universal'])
   }
 }

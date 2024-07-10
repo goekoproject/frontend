@@ -8,12 +8,12 @@ const ROUTES: Routes = [
     component: AppComponent,
     children: [
       {
-        path: 'home',
-        loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+        path: 'login-universal',
+        loadComponent: () => import('./access/login-universal.component').then((m) => m.LoginUniversalComponent),
       },
       {
-        path: 'demo',
-        loadChildren: () => import('./demo/demo.module').then((m) => m.DemoModule),
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'platform',
@@ -38,9 +38,6 @@ const ROUTES: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(ROUTES, {
-      scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled',
-      scrollOffset: [0, 100], // [x, y]
       bindToComponentInputs: true,
     }),
   ],
