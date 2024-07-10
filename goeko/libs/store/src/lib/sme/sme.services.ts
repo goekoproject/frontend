@@ -5,7 +5,6 @@ import { EcosolutionSearchRequest } from '../ecosolutions/ecosolution-search.req
 import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
 import { EcosolutionsService } from '../ecosolutions/ecosolutions.service'
 import { TranslateChangeService } from '../util/translate-change'
-import { Recommendation } from './ecosolution-recomendations.model'
 import { Requests, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 
 @Injectable()
@@ -61,11 +60,6 @@ export class SmeService extends TranslateChangeService {
   deleteRequests(id: string): Observable<any> {
     return this._http.delete<Requests>(`/v1/ecosolution/search/requests/smes/${id}`)
   }
-
-  getEcosolutionsById(id: string): Observable<Recommendation> {
-    return this._http.get<Recommendation>(`/v1/ecosolutions/${id}`)
-  }
-
   getAllSmesData(): Observable<any> {
     return this._http.get<any>(`/v1/actor/smes`)
   }

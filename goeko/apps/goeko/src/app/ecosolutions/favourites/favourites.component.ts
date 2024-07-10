@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core'
 import { ECOSOLUTIONS_CONFIGURATION, EcosolutionsTaggingService, TAGGING, UserService } from '@goeko/store'
 import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { environment } from 'apps/goeko/src/environments/environment'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'goeko-favorite',

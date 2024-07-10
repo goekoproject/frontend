@@ -1,4 +1,3 @@
-export * from './ecosolution-recomendations.model'
 export * from './project.services'
 export * from './sme-analysis.store'
 export * from './sme-request.model'
