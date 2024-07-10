@@ -170,6 +170,7 @@
     "password": "Password",
     "paybackPeriodYears": "Return on investment time compared to a standard solution",
     "price": "Price",
+    "infoPrice": "Information on the price of your eco-solution (example: minimum price)",
     "products": "Products",
     "reductionPercentage": "Reduction Percentage",
     "reductionPercentageCO2": "CO2 Reduction Percentage",
@@ -235,7 +236,7 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favorites": "Favorites"
+    "favourites": "Favourites"
   },
   "NOTIFICATION": {
     "save_ok": "Saved successfully"
@@ -434,7 +435,6 @@
     "messaggeProfileUncompletedTitle": "Complete your profile",
     "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools.",
     "messageNotification": "Enable email notifications to receive the latest ecosolutions for your questionnaire."
-
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
@@ -497,6 +497,7 @@
   "saveYou": "Save your",
   "selectCategoryEcosolutions": "Select the category for your ecosolution",
   "selected_products": "Selected products",
+  "showMore": "Learn more",
   "showLead": "Show leads",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Connecting businesses to clean technology and financing",

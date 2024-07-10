@@ -11,7 +11,7 @@
     "start-tailwind:build": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --minify",
     "lint": "nx lint",
     "prestart": "node prestart.js",
-    "build": ""
+    "test:profile": "nx test goeko --codeCoverage=true --test-file profile.component.spec.ts"
   },
   "private": true,
   "dependencies": {

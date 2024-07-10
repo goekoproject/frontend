@@ -100,11 +100,13 @@ export class FormValueToSmeProjectRequest implements SmeSaveRecomendationProject
   classifications!: Classifications[]
   name!: string
   smeId?: string
+  notification?: NotificationSearch
   constructor(formValue?: Section, smeId?: string) {
     if (formValue && formValue.searchName) {
       this.name = formValue.searchName
       this.smeId = smeId
       this.classifications = formToClassificationsMapper(formValue)
+      this.notification = formValue.notification
     }
   }
 }

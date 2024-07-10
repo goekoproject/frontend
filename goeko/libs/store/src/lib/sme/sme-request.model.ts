@@ -1,3 +1,6 @@
+import { Classifications } from '../model/classificaciones.interface'
+import { Locations } from '../model/locations.interface'
+
 export interface MainProduct {
   name: string
   lastYearInvoice: string
@@ -7,13 +10,6 @@ export interface MainRigidMaterial {
   name: string
 }
 
-export interface CompanyDetail {
-  name: string
-  numberEmployees: string
-  countries: string[]
-  email: string
-  link: string
-}
 export interface Co2Emission {
   mainInternalCombustionEngine: MainProduct
   mainMineralProduct: MainProduct
@@ -33,26 +29,7 @@ export interface WaterConsumption {
   amount: string
   lastYearInvoice: string
 }
-export interface SmeRecomendationRequestDemo {
-  companyDetail: CompanyDetail
-  co2Emission: Co2Emission
-  waste: Waste
-  hazardousProduct: HazardousProduct
-  waterConsumption: WaterConsumption
-}
-export interface Classifications {
-  mainCategory: string
-  subCategory: string
-  products: string[]
-}
-export interface SmeCountry {
-  code: string
-  regions?: Array<string>
-  label?: string
-}
-export interface Locations {
-  country: SmeCountry
-}
+
 export interface SmeSaveRequest {
   smeId?: string
   classifications: Classifications[]

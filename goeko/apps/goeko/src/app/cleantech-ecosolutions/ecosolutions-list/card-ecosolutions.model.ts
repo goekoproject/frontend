@@ -14,7 +14,7 @@ export class CardEcosolutions {
     this.mainCategory = dataEcosolutions.classification.mainCategory
     this.products = this._getProductTranslated(dataEcosolutions.classification, translationService)
     this.sustainableDevelopmentGoals = dataEcosolutions.sustainableDevelopmentGoals
-    this.nameTranslations = dataEcosolutions.nameTranslations
+    this.nameTranslations = this.getNameTranslated(dataEcosolutions)
   }
 
   private _getProductTranslated(classification: Classifications, translationService: TranslateService) {
@@ -27,5 +27,13 @@ export class CardEcosolutions {
       }
       return translationService.instant(productDataSelect.keyLang)
     })
+  }
+
+  private getNameTranslated(dataEcosolutions: any) {
+    if (dataEcosolutions.nameTranslations && dataEcosolutions.nameTranslations.length > 0) {
+      return dataEcosolutions.nameTranslations
+    } else {
+      return [{ lang: 'fr', value: dataEcosolutions.solutionName }]
+    }
   }
 }
