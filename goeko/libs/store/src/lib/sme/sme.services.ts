@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, find, from, map, mergeMap, of, reduce } from 'rxjs'
 import { SessionStorageService } from '../session-storage.service'
+import { SmeUser } from '../user/public-api'
 import { TranslateChangeService } from '../util/translate-change'
 import { Recommendation, ResponseRecommendations } from './ecosolution-recomendations.model'
 import {
@@ -75,11 +76,11 @@ export class SmeService extends TranslateChangeService {
     return this._http.get<Recommendation>(`/v1/ecosolutions/${id}`)
   }
 
-  getAllSmesData(): Observable<any> {
-    return this._http.get<any>(`/v1/actor/smes`)
+  getAllSmesData(): Observable<SmeUser[]> {
+    return this._http.get<SmeUser[]>(`/v1/actor/smes`)
   }
 
-  deleteSmeUser(id: number): Observable<any> {
+  deleteSmeUser(id: string): Observable<any> {
     return this._http.delete<any>(`/v1/actor/smes/${id}`)
   }
 }
