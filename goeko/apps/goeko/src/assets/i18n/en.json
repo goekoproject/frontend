@@ -276,9 +276,9 @@
       "topsoil": "Topsoil"
     },
     "selectBuildingOperation": {
-      "greenRoofsWalls": "Green Roofs and Walls",
+      "greenRoofsWalls": "Green roofs and walls",
       "waterManagement": "Solutions for rainwater management",
-      "waterManagementGray": "Solutions for gray water management"
+      "waterManagementGray": "Solutions for graywater management"
     },
     "selectCountry": {
       "france": "France",
@@ -308,19 +308,19 @@
       "glass": "Glass"
     },
     "selectMainActivity": {
-      "cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
+      "cleaningOfSiteAndPeripheryAccesses": "Cleaning of site access and surroundings",
       "cleaningSiteVehicles": "Cleaning site vehicles",
       "paint": "Paint",
-      "pouringConcrete": "Pouring concrete",
+      "pouringConcrete": "Concrete production",
       "siteCleaning": "Site cleaning",
-      "siteHut": "Site hut",
-      "toolCleaning": "Tool cleaning",
-      "wateringForCure": "Watering for Cure",
+      "siteHut": "Construction site life base",
+      "toolCleaning": "Equipment cleaning",
+      "wateringForCure": "Water curing for concrete",
       "wateringPlants": "Watering Plants",
       "constructionSiteWater": "Construction site water"
     },
     "selectMainCategoryNonInert": {
-      "cardboardAndPaper": "Carton and papier",
+      "cardboardAndPaper": "Cardboard and paper",
       "cartridgesWithoutToxicProducts": "Cartridges without toxic products",
       "electricalAndElectronicEquipment": "Electrical and electronic equipment",
       "insulationMaterials": "Insulation materials",
@@ -332,30 +332,30 @@
       "untreatedWood": "Untreated wood"
     },
     "selectMainInternalCombustionEngine": {
-      "aerialBucketTruck": "Aerial bucket truck",
-      "backhoe": "Backhoe",
-      "backhoeLoader": "Backhoe loader",
+      "aerialBucketTruck": "Aerial platform truck",
+      "backhoe": "Planer",
+      "backhoeLoader": "Excavator",
       "bulldozer": "Bulldozer",
-      "compressor": "Compresseur​",
+      "compressor": "Compressor",
       "dumper": "Dumper",
       "equipmentCarrierTruck": "Equipment carrier truck",
-      "generator": "Génératrice​",
+      "generator": "Generator",
       "grader": "Grader",
       "loader": "Loader",
       "materialsCarrierTruck": "Materials carrier truck",
-      "mechanicalPalletTruck": "Transpalette mécanique​",
+      "mechanicalPalletTruck": "Pallet truck​",
       "scraper": "Scraper",
-      "slicer": "Trancheuse",
-      "steamRoller": "Steam roller",
-      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​"
+      "slicer": "Trencher",
+      "steamRoller": "Road roller",
+      "vehicleFortransportingPeople​​": "Passenger transport vehicle​"
     },
     "selectMainMineralProduct": {
-      "aluminum": "Aluminium​",
+      "aluminum": "Aluminum",
       "cement": "Cement",
       "concrete": "Concrete",
-      "copper": "Cuivre",
-      "iron": "Iron",
-      "isolation": "Insulation panels",
+      "copper": "Copper",
+      "iron": "Stainless steel",
+      "isolation": "Thermal insulation",
       "steel": "Steel",
       "zinc": "Zinc"
     },
@@ -402,14 +402,14 @@
     },
     "selectSustainableBuildingOperations": {
       "chargeElectricVehicles": "Charge electric vehicles",
-      "electricMeansOfTransport": "Des moyens de transport électrique​",
+      "electricMeansOfTransport": "Electric transportation means",
       "optimizeEnergyConsumption": "Optimize energy consumption",
       "recoverHeat": "Recover heat",
       "storeEnergy": "Store energy",
-      "useLowConsumptionLighting": "Use low consumption lighting",
+      "useLowConsumptionLighting": "Eco-friendly cooling solutions",
       "useRenewableEnergies": "Use renewable energies",
       "sustainableLightingSystems": "Sustainable lighting systems",
-      "intelligentHeatingSystems": "Intelligent heating systems"
+      "intelligentHeatingSystems": "Smart heating systems"
     }
   },
   "TEXT_SUPPORT": {
