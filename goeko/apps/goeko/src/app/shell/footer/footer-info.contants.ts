@@ -30,11 +30,11 @@ export const FOOTER_INFO = [
       },
       {
         title: 'LEGAL.privacyPolicy',
-        url: 'home/privacy-policy',
+        url: 'privacy-policy',
       },
       {
         title: 'LEGAL.cookiesPolicy',
-        url: 'home/cookies-policy',
+        url: 'cookies-policy',
       },
     ],
   },
