@@ -278,7 +278,9 @@
     "selectBuildingOperation": {
       "greenRoofsWalls": "Green roofs and walls",
       "waterManagement": "Solutions for rainwater management",
-      "waterManagementGray": "Solutions for graywater management"
+      "waterManagementGray": "Solutions for graywater management",
+      "ecoFriendlytaps": "Eco-friendly taps",
+      "ecoFriendlySanitary": "Eco-friendly sanitary"
     },
     "selectCountry": {
       "france": "France",
@@ -317,7 +319,8 @@
       "toolCleaning": "Equipment cleaning",
       "wateringForCure": "Water curing for concrete",
       "wateringPlants": "Watering Plants",
-      "constructionSiteWater": "Construction site water"
+      "constructionSiteWater": "Construction site water",
+      "boiler": "Boiler"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Cardboard and paper",
@@ -409,7 +412,8 @@
       "useLowConsumptionLighting": "Eco-friendly cooling solutions",
       "useRenewableEnergies": "Use renewable energies",
       "sustainableLightingSystems": "Sustainable lighting systems",
-      "intelligentHeatingSystems": "Smart heating systems"
+      "intelligentHeatingSystems": "Smart heating systems",
+      "homeAutomation": "Home automation"
     }
   },
   "TEXT_SUPPORT": {
