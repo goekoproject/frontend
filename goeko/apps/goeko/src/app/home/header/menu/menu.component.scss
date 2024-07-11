@@ -15,7 +15,7 @@ $lineColor: var(--primary--100);
   align-items: center;
   text-align: center;
   justify-content: center;
-  flex-grow: 2;
+  @apply gap-8;
   &-item {
     min-width: 3rem;
   }
@@ -32,7 +32,7 @@ $lineColor: var(--primary--100);
     z-index: 1;
     color: var(--dark, #27272a);
     font: var(--font-menu);
-    padding: 0.5rem; 
+    padding: 0.5rem;
     transition: all 0.3s;
   }
 
