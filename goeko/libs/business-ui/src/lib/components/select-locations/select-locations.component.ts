@@ -219,6 +219,7 @@ export class SelectLocationsComponent implements AfterViewInit {
 
   deleteLocation(index: number): void {
     this.controlLocations.removeAt(index);
+    this.newLocation = false;
   }
   confirmLocation(locationCountryControl: FormGroup | AbstractControl) {
     if (locationCountryControl.get(this.controlNameCountry)?.invalid) {
