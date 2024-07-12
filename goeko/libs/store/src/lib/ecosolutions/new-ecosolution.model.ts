@@ -1,8 +1,8 @@
+import { isDevMode } from '@angular/core'
 import { mapperLocations } from '@goeko/core'
 import { FiledTranslations } from '../model/field-translations.interface'
 import { Picture } from '../model/pictures.interface'
 import { Country } from '../user/public-api'
-
 export function _filterNotNull(items: Array<FiledTranslations>): FiledTranslations[] {
   return items.filter((item) => item.label && item.lang)
 }
@@ -82,6 +82,7 @@ export class NewEcosolutionsBody implements Ecosolutions {
   descriptionTranslations!: FiledTranslations[]
   detailedDescriptionTranslations!: FiledTranslations[]
   priceDescriptionTranslations!: FiledTranslations[]
+  test!: boolean
   constructor(cleanTechId: string, mainCategory: string, formValue: any) {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`)
@@ -119,5 +120,6 @@ export class NewEcosolutionsBody implements Ecosolutions {
     this.descriptionTranslations = _filterNotNull(formValue.descriptionTranslations)
     this.detailedDescriptionTranslations = _filterNotNull(formValue.detailedDescriptionTranslations)
     this.priceDescriptionTranslations = _filterNotNull(formValue.priceDescriptionTranslations)
+    this.test = isDevMode() ? true : false
   }
 }
