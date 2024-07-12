@@ -135,7 +135,7 @@
   "FORM_LABEL": {
     "labelSelectedFormLang": "Selecciona el idioma para completar tu eco-solución.",
     "titleSelectImgEcosolution": "Elija varias imágenes para su EcoSolution",
-    "titleFormAnalysis": "Elija una Categoría y encuentre sus eco-soluciones",
+    "titleFormAnalysis": "Elija una categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
@@ -381,7 +381,7 @@
       "paintVarnish": "Pintura/barniz",
       "productsContainingTar": "Productos que contienen alquitrán",
       "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas",
-      "collects": "Aleaciones"
+      "collects": "Adhesivo"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosoles",
