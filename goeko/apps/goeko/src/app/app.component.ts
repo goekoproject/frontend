@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._messageAfterSignUp()
     this._translate.use('fr')
-    console.log(isDevMode())
+    console.log(`dev ${isDevMode()}`)
   }
 
   private _hanlderCleantechSuscriptions(): void {
