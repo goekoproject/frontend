@@ -138,13 +138,11 @@
             <span class="required-field">{{ 'mandatory' | translate }}</span>
           </legend>
         </div>
-        @if (locationsArrays.length > 0 || !idEcosolution) {
-          <goeko-select-locations
-            [form]="form"
-            [controlLocations]="locationsArrays"
-            [controlNameCountry]="'country'"
-            [controlNameProvince]="'regions'"></goeko-select-locations>
-        }
+        <goeko-select-locations
+          [form]="form"
+          [controlLocations]="locationsArrays"
+          [controlNameCountry]="'country'"
+          [controlNameProvince]="'regions'"></goeko-select-locations> 
       </fieldset>
 
       <fieldset

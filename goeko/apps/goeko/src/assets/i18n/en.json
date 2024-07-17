@@ -133,7 +133,7 @@
   "editSelection": "Modifier selection",
   "dragAndDrop": "Drag and drop",
   "FORM_LABEL": {
-    "labelSelectedFormLang": "Select the language you prefer to complete your eco-solution.",
+    "labelSelectedFormLang": "Select the language to complete your eco-solution.",
     "titleSelectImgEcosolution": "Choose multiple images for your EcoSolution",
     "titleFormAnalysis": "Choose a Category and Find Your Eco-Solutions",
     "additionalInformation": "Additional information",
@@ -170,7 +170,7 @@
     "password": "Password",
     "paybackPeriodYears": "Return on investment time compared to a standard solution",
     "price": "Price",
-    "infoPrice": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
+    "infoPrice": "Information on the price of your eco-solution (example: minimum price)",
     "products": "Products",
     "reductionPercentage": "Reduction Percentage",
     "reductionPercentageCO2": "CO2 Reduction Percentage",
@@ -215,7 +215,7 @@
     "en": "English",
     "es": "Spanish",
     "fr": "French",
-    "gb": "English (UK)"
+    "gb": "English"
   },
   "LEGAL": {
     "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
@@ -236,7 +236,7 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favorites": "Favorites"
+    "favourites": "Favourites"
   },
   "NOTIFICATION": {
     "save_ok": "Saved successfully"
@@ -276,9 +276,11 @@
       "topsoil": "Topsoil"
     },
     "selectBuildingOperation": {
-      "greenRoofsWalls": "Green Roofs and Walls",
+      "greenRoofsWalls": "Green roofs and walls",
       "waterManagement": "Solutions for rainwater management",
-      "waterManagementGray": "Solutions for gray water management"
+      "waterManagementGray": "Solutions for graywater management",
+      "ecoFriendlytaps": "Eco-friendly taps",
+      "ecoFriendlySanitary": "Eco-friendly sanitary"
     },
     "selectCountry": {
       "france": "France",
@@ -308,19 +310,20 @@
       "glass": "Glass"
     },
     "selectMainActivity": {
-      "cleaningOfSiteAndPeripheryAccesses": "Cleaning of Site and Periphery Accesses",
+      "cleaningOfSiteAndPeripheryAccesses": "Cleaning of site access and surroundings",
       "cleaningSiteVehicles": "Cleaning site vehicles",
       "paint": "Paint",
-      "pouringConcrete": "Pouring concrete",
+      "pouringConcrete": "Concrete production",
       "siteCleaning": "Site cleaning",
-      "siteHut": "Site hut",
-      "toolCleaning": "Tool cleaning",
-      "wateringForCure": "Watering for Cure",
+      "siteHut": "Construction site life base",
+      "toolCleaning": "Equipment cleaning",
+      "wateringForCure": "Water curing for concrete",
       "wateringPlants": "Watering Plants",
-      "constructionSiteWater": "Construction site water"
+      "constructionSiteWater": "Construction site water",
+      "boiler": "Boiler"
     },
     "selectMainCategoryNonInert": {
-      "cardboardAndPaper": "Carton and papier",
+      "cardboardAndPaper": "Cardboard and paper",
       "cartridgesWithoutToxicProducts": "Cartridges without toxic products",
       "electricalAndElectronicEquipment": "Electrical and electronic equipment",
       "insulationMaterials": "Insulation materials",
@@ -332,30 +335,30 @@
       "untreatedWood": "Untreated wood"
     },
     "selectMainInternalCombustionEngine": {
-      "aerialBucketTruck": "Aerial bucket truck",
-      "backhoe": "Backhoe",
-      "backhoeLoader": "Backhoe loader",
+      "aerialBucketTruck": "Aerial platform truck",
+      "backhoe": "Planer",
+      "backhoeLoader": "Excavator",
       "bulldozer": "Bulldozer",
-      "compressor": "Compresseur​",
+      "compressor": "Compressor",
       "dumper": "Dumper",
       "equipmentCarrierTruck": "Equipment carrier truck",
-      "generator": "Génératrice​",
+      "generator": "Generator",
       "grader": "Grader",
       "loader": "Loader",
       "materialsCarrierTruck": "Materials carrier truck",
-      "mechanicalPalletTruck": "Transpalette mécanique​",
+      "mechanicalPalletTruck": "Pallet truck​",
       "scraper": "Scraper",
-      "slicer": "Trancheuse",
-      "steamRoller": "Steam roller",
-      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​"
+      "slicer": "Trencher",
+      "steamRoller": "Road roller",
+      "vehicleFortransportingPeople​​": "Passenger transport vehicle​"
     },
     "selectMainMineralProduct": {
-      "aluminum": "Aluminium​",
+      "aluminum": "Aluminum",
       "cement": "Cement",
       "concrete": "Concrete",
-      "copper": "Cuivre",
-      "iron": "Iron",
-      "isolation": "Insulation panels",
+      "copper": "Copper",
+      "iron": "Stainless steel",
+      "isolation": "Thermal insulation",
       "steel": "Steel",
       "zinc": "Zinc"
     },
@@ -402,14 +405,15 @@
     },
     "selectSustainableBuildingOperations": {
       "chargeElectricVehicles": "Charge electric vehicles",
-      "electricMeansOfTransport": "Des moyens de transport électrique​",
+      "electricMeansOfTransport": "Electric transportation means",
       "optimizeEnergyConsumption": "Optimize energy consumption",
       "recoverHeat": "Recover heat",
       "storeEnergy": "Store energy",
-      "useLowConsumptionLighting": "Use low consumption lighting",
+      "useLowConsumptionLighting": "Eco-friendly cooling solutions",
       "useRenewableEnergies": "Use renewable energies",
       "sustainableLightingSystems": "Sustainable lighting systems",
-      "intelligentHeatingSystems": "Intelligent heating systems"
+      "intelligentHeatingSystems": "Smart heating systems",
+      "homeAutomation": "Home automation"
     }
   },
   "TEXT_SUPPORT": {
@@ -433,7 +437,8 @@
     "warningDelete": "Are you sure you want to delete {{item}} ?",
     "saveMessageGeneric": "Do you want to save the data before continuing?",
     "messaggeProfileUncompletedTitle": "Complete your profile",
-    "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools."
+    "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools.",
+    "messageNotification": "Enable email notifications to receive the latest ecosolutions for your questionnaire."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
@@ -496,6 +501,7 @@
   "saveYou": "Save your",
   "selectCategoryEcosolutions": "Select the category for your ecosolution",
   "selected_products": "Selected products",
+  "showMore": "Learn more",
   "showLead": "Show leads",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Connecting businesses to clean technology and financing",

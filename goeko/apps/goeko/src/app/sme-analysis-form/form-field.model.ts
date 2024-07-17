@@ -1,4 +1,5 @@
 import { STATUS_SECTION } from '@goeko/business-ui';
+import { NotificationSearch } from '@goeko/store';
 
 export interface Field {
 	controlName: string;
@@ -18,4 +19,5 @@ export interface Section {
 	controlName: string;
 	showResult: boolean;
 	checked?: boolean;
+  notification?: NotificationSearch;
 }

@@ -30,7 +30,7 @@ const routes: Routes = [
         path: 'request',
         component: SmeFormAnalysisComponent,
       },
-  
+
       {
         path: 'new',
         component: SmeFormAnalysisComponent,
@@ -56,7 +56,7 @@ const routes: Routes = [
         children: [
           { path: '', component: EcosolutionListComponent },
           {
-            path: 'details/:idEcosolution',
+            path: 'details/:ecosolutionId',
             component: ResultDetailEcosolutionComponent,
           },
         ],
@@ -107,7 +107,7 @@ const routes: Routes = [
         children: [
           { path: '', component: EcosolutionListComponent },
           {
-            path: 'details/:idEcosolution',
+            path: 'details/:ecosolutionId',
             component: ResultDetailEcosolutionComponent,
           },
         ],

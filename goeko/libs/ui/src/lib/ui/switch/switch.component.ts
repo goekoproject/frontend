@@ -1,11 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  forwardRef,
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 
 @Component({
   selector: 'go-switch',
@@ -20,34 +14,34 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class SwitchComponent implements ControlValueAccessor {
-  @Input() rightLabel!: string;
-  @Input() leftLabel!: string;
+  @Input() rightLabel: string = 'on'
+  @Input() leftLabel: string = 'off'
 
-  @Output() valueChanged: EventEmitter<boolean> = new EventEmitter();
+  @Output() valueChanged: EventEmitter<boolean> = new EventEmitter()
 
-  isOn = true;
+  isOn = true
 
   // Implementación de ControlValueAccessor
-  onChange = (value: any) => {};
-  onTouched = () => {};
+  onChange = (value: any) => {}
+  onTouched = () => {}
 
   writeValue(value: any): void {
-    this.isOn = value;
-    this.valueChanged.emit(value);
+    this.isOn = value
+    this.valueChanged.emit(value)
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.onChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this.onTouched = fn
   }
 
   toggleSwitch() {
-    this.isOn = !this.isOn;
-    this.onChange(this.isOn);
-    this.valueChanged.emit(this.isOn);
-    this.onTouched();
+    this.isOn = !this.isOn
+    this.onChange(this.isOn)
+    this.valueChanged.emit(this.isOn)
+    this.onTouched()
   }
 }

@@ -131,7 +131,7 @@
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "searchEcosolutions": "Rechercher des éco-solutions",
   "FORM_LABEL": {
-    "labelSelectedFormLang": "Sélectionnez la langue que vous préférez pour compléter votre éco-solution.",
+    "labelSelectedFormLang": "Sélectionnez la langue pour compléter votre éco-solution.",
     "titleSelectImgEcosolution": "Choisissez plusieurs images pour votre EcoSolution",
     "titleFormAnalysis": "Sélectionnez vos catégories pour trouver des éco-solutions",
     "additionalInformation": "Informations supplémentaires",
@@ -234,7 +234,7 @@
   },
   "MENU_USER": {
     "dashboard": "Tableau de bord",
-    "favorites": "Favoris"
+    "favourites": "Favoris"
   },
   "NOTIFICATION": {
     "save_ok": "Enregistré avec succès"
@@ -276,7 +276,9 @@
     "selectBuildingOperation": {
       "greenRoofsWalls": "Toits et murs végétalisés",
       "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
-      "waterManagementGray": "Des solutions pour la gestion de l’eau grise"
+      "waterManagementGray": "Des solutions pour la gestion de l’eau grise",
+      "ecoFriendlytaps": "Robinetterie écologique",
+      "ecoFriendlySanitary": "Sanitaire écologique"
     },
     "selectCountry": {
       "france": "France",
@@ -311,14 +313,15 @@
       "paint": "Peinture",
       "pouringConcrete": "Production du béton",
       "siteCleaning": "Arrosage du chantier",
-      "siteHut": "Base de vie",
+      "siteHut": "Base vie de chantier",
       "toolCleaning": "Nettoyage du matériel",
-      "wateringForCure": "Arrosage pour la cure",
+      "wateringForCure": "Arrosage pour la cure du béton",
       "wateringPlants": "Arrosage des végétaux",
-      "constructionSiteWater": "Eau de chantier"
+      "constructionSiteWater": "Eau de chantier",
+      "boiler": "Chaudière"
     },
     "selectMainCategoryNonInert": {
-      "cardboardAndPaper": "Carton et papier",
+      "cardboardAndPaper": "Carton et papier ",
       "cartridgesWithoutToxicProducts": "Cartouches sans produits toxiques",
       "electricalAndElectronicEquipment": "Equipements électriques et électroniques",
       "insulationMaterials": "Matériaux d'isolation",
@@ -345,7 +348,7 @@
       "scraper": "Scraper",
       "slicer": "Trancheuse",
       "steamRoller": "Rouleau compresseur",
-      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​"
+      "vehicleFortransportingPeople​​": "Véhicule de transport de personnes​"
     },
     "selectMainMineralProduct": {
       "aluminum": "Aluminium​",
@@ -400,14 +403,15 @@
     },
     "selectSustainableBuildingOperations": {
       "chargeElectricVehicles": "Charger des véhicules électriques",
-      "electricMeansOfTransport": "Des moyens de transport électrique​",
+      "electricMeansOfTransport": "Moyens de transport électrique​",
       "optimizeEnergyConsumption": "Optimiser la consommation d’énergie",
       "recoverHeat": "Récupérer la chaleur",
       "storeEnergy": "Stocker l’énergie",
-      "useLowConsumptionLighting": "Des solutions de refroidissement écologiques",
+      "useLowConsumptionLighting": "Solutions de refroidissement écologiques",
       "useRenewableEnergies": "Recourir à des énergies renouvelables",
       "sustainableLightingSystems": "Des systèmes d’éclairage durables",
-      "intelligentHeatingSystems": "Systèmes de chauffage intelligents"
+      "intelligentHeatingSystems": "Systèmes de chauffage intelligent",
+      "homeAutomation": "Domotique"
     }
   },
   "TEXT_SUPPORT": {
@@ -416,7 +420,7 @@
     "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
     "ods": "En lien avec votre éco-solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
-    "selectProducts": "Type d’éco-solution al lugar de Sélectionner des produits",
+    "selectProducts": "Votre éco-solution réduit l'impact du ou des produits toxiques suivants",
     "waste": "Types de déchets",
     "waterConsumption": "Activités liées à la consommation d’eau"
   },
@@ -431,7 +435,8 @@
     "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",
-    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko."
+    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
+    "messageNotification": "Activez les notifications par email pour recevoir les dernières écosolutions pour votre questionnaire."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
@@ -498,6 +503,7 @@
   "saveYou": "Sauvegarder votre",
   "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre écosolution",
   "selected_products": "Produits sélectionnés",
+  "showMore": "Voir plus",
   "showLead": "Afficher les clients potentiels",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "La connexion des entreprises aux technologies propres et au financement",

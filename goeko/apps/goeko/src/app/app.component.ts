@@ -1,61 +1,48 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, effect, signal } from '@angular/core';
-import { VAR_GENERAL } from '@goeko/business-ui';
-import {
-  AuthService,
-  REMOTE_CONFIG_PARAMS,
-  RemoteConfigService,
-} from '@goeko/core';
-import {
-  PaymentSystemService,
-  STATUS_PENDING,
-  USER_TYPE,
-  UserService,
-} from '@goeko/store';
-import { NotificationService } from '@goeko/ui';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../environments/environment';
+import { DOCUMENT } from '@angular/common'
+import { Component, Inject, OnInit, effect, isDevMode, signal } from '@angular/core'
+import { VAR_GENERAL } from '@goeko/business-ui'
+import { AuthService, REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
+import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store'
+import { NotificationService } from '@goeko/ui'
+import { TranslateService } from '@ngx-translate/core'
+import { environment } from '../environments/environment'
 
-const KEY_COOKIES = 'cookie-policy';
+const KEY_COOKIES = 'cookie-policy'
 @Component({
   selector: 'goeko-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public path!: string;
+  public path!: string
 
   get showPopupCookies() {
-    return !localStorage.getItem(KEY_COOKIES);
+    return !localStorage.getItem(KEY_COOKIES)
   }
 
   get isDemo() {
-    return this.path?.includes('demo');
+    return this.path?.includes('demo')
   }
   get isSubscribed() {
     if (!environment.production) {
-      return true;
+      return true
     }
-    return this._paymentService.isSubscription;
+    return this._paymentService.isSubscription
   }
 
   get cleantechUnsubscribed() {
-    return this._cleantechUnsubscribed;
+    return this._cleantechUnsubscribed
   }
 
   set cleantechUnsubscribed(value: boolean) {
-    this._cleantechUnsubscribed = value;
+    this._cleantechUnsubscribed = value
   }
 
-  private _cleantechUnsubscribed!: boolean;
-  private _isSuscriptionNeed = signal(
-    this._remoteConfigService
-      .getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED)
-      .asBoolean(),
-  );
+  private _cleantechUnsubscribed!: boolean
+  private _isSuscriptionNeed = signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
 
-  public isAuthenticated$ = this._authService.isAuthenticated$;
-  public isPrivateZone = signal<boolean>(false);
+  public isAuthenticated$ = this._authService.isAuthenticated$
+  public isPrivateZone = signal<boolean>(false)
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private _paymentService: PaymentSystemService,
@@ -66,24 +53,23 @@ export class AppComponent implements OnInit {
     private readonly _remoteConfigService: RemoteConfigService,
   ) {
     effect(() => {
-      this._hanlderCleantechSuscriptions();
-    });
+      this._hanlderCleantechSuscriptions()
+    })
   }
 
   ngOnInit(): void {
-    this._messageAfterSignUp();
-    this._translate.use('fr');
+    this._messageAfterSignUp()
+    this._translate.use('fr')
+    console.log(`dev ${isDevMode()}`)
   }
 
   private _hanlderCleantechSuscriptions(): void {
     if (!this._isSuscriptionNeed()) {
-      return;
+      return
     }
     if (this.userService.userType() && this.isSubscribed !== STATUS_PENDING) {
-      this.cleantechUnsubscribed =
-        this.userService.userType() === USER_TYPE.CLEANTECH &&
-        !this.isSubscribed;
-      this._showNotificationsCleantechUnsubscribed();
+      this.cleantechUnsubscribed = this.userService.userType() === USER_TYPE.CLEANTECH && !this.isSubscribed
+      this._showNotificationsCleantechUnsubscribed()
     }
   }
 
@@ -93,27 +79,24 @@ export class AppComponent implements OnInit {
         data: {
           texts: [
             'MESSAGE_SUBSCRIPTION_BANNER.messageAlert',
-            this._translate.instant(
-              'MESSAGE_SUBSCRIPTION_BANNER.messageContact',
-              { email: VAR_GENERAL.GOEKO_EMAIL },
-            ),
+            this._translate.instant('MESSAGE_SUBSCRIPTION_BANNER.messageContact', { email: VAR_GENERAL.GOEKO_EMAIL }),
           ],
         },
-      });
+      })
     }
   }
 
   private _messageAfterSignUp() {
     this._authService._auth0.getAccessTokenSilently().subscribe({
       error: (error) => {
-        const urlPageEmailVerify = `${this.doc.location.origin}/verify-email`;
+        const urlPageEmailVerify = `${this.doc.location.origin}/verify-email`
         if (error.error_description.includes('verify your email')) {
-          this._authService.logout(urlPageEmailVerify);
+          this._authService.logout(urlPageEmailVerify)
         }
       },
-    });
+    })
   }
   acceptCookie() {
-    localStorage.setItem(KEY_COOKIES, 'true');
+    localStorage.setItem(KEY_COOKIES, 'true')
   }
 }

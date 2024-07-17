@@ -6,16 +6,8 @@
         <p>{{ 'all' | translate }}</p>
       </li>
       <ng-container *ngFor="let element of formField; let index = index">
-        <li
-          *ngIf="element.showResult"
-          (click)="onCheckboxStateChange(section.checked, index)"
-        >
-          <input
-            type="checkbox"
-            #section
-            [checked]="element.checked && !all.checked"
-            id="{{ element.controlName }}"
-          />
+        <li *ngIf="element.showResult" (click)="onCheckboxStateChange(section.checked, index)">
+          <input type="checkbox" #section [checked]="element.checked && !all.checked" id="{{ element.controlName }}" />
           <p>{{ element.keyLang | translate }}</p>
         </li>
       </ng-container>
@@ -24,9 +16,7 @@
     <fieldset class="ecosolutions-fieldset" class="fieldset-ods">
       <div class="legend--info">
         <legend>
-          {{
-            'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate
-          }}
+          {{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}
         </legend>
 
         <p class="text-support">
@@ -34,26 +24,8 @@
         </p>
       </div>
 
-      <goeko-sdg-icons
-        (valueSelected)="filterBySDG($event)"
-        [size]="'large'"
-      ></goeko-sdg-icons>
+      <goeko-sdg-icons (valueSelected)="filterBySDG($event)" [size]="'large'"></goeko-sdg-icons>
     </fieldset>
-    <!-- <ul class="filter-ods">
-      <li
-        [class.active]="icon.active"
-        *ngFor="let icon of odsIcons; index as index"
-        (click)="filterBySDG(index, icon.active)"
-      >
-        <img
-          class="ods-icon"
-          [src]="
-            'assets/icon-ods/' + currentLangCode + '-Goal-' + icon.code + '.png'
-          "
-          [alt]="icon"
-        />
-      </li>
-    </ul> -->
   </section>
 
   <section class="result">
@@ -64,57 +36,20 @@
       </h1>
     </div>
 
-    <div class="eco-solutions-result go-scroll" *ngIf="smeRecomendation">
-      <div
-        class="eco-solutions"
-        (click)="goToViewDetailEcosolution(ecoSolutions)"
-        *ngFor="let ecoSolutions of smeRecomendation; let index = index"
-        [ngClass]="{
-          'eco-solutions-selected': selectedRecomendationIndex === index,
-        }"
-      >
-        <div class="eco-solutions-header">
-          <div class="eco-solutions-logo">
-            <img
-              src="{{ ecoSolutions?.companyDetail?.logo }}"
-              alt="eco solutions logo"
-            />
-          </div>
-        </div>
-        <div class="eco-solutions-body">
-          <h3 class="eco-solutions-name">{{ ecoSolutions?.solutionName }}</h3>
-          <p class="eco-solutions-desciption">
-            {{ ecoSolutions?.description }}
-          </p>
-          <p class="eco-solutions-company">
-            {{ ecoSolutions?.companyDetail?.name }}
-          </p>
-          <span
-            class="eco-solutions-type   eco-solutions-type-{{
-              ecoSolutions?.classification.mainCategory
-            }}"
-            >{{
-              'CATEGORIES.' + ecoSolutions?.classification.mainCategory
-                | translate
-            }}</span
-          >
-
-          <!--Mas adelante-->
-          <div class="eco-solutions-actions" *ngIf="false">
-            <abbr title="Save"
-              ><span class="material-symbols-rounded"> favorite </span></abbr
-            >
-            <abbr title="{{ ecoSolutions?.companyDetail?.link }}"
-              ><a
-                href="http://{{ ecoSolutions?.companyDetail?.link }}"
-                target="_blank"
-              >
-                <span class="material-symbols-rounded"> link </span>
-              </a></abbr
-            >
-          </div>
-        </div>
+    @if (ecosolutions()) {
+      <div class="go-scroll grid grid-cols-1 gap-6 max-xl:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+        @for (ecosolution of ecosolutions(); track ecosolution.id) {
+          <goeko-card-product
+            [title]="ecosolution.solutionName"
+            [description]="ecosolution.description"
+            [image]="ecosolution.companyDetail.logo"
+            [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
+            [classNameCategoy]="ecosolution.classification.mainCategory"
+            [isFavorite]="ecosolution.favourite"
+            (changeFavorite)="changeFavorite(ecosolution)"
+            (changeShowMore)="goToViewDetailEcosolution(ecosolution)" />
+        }
       </div>
-    </div>
+    }
   </section>
 </div>

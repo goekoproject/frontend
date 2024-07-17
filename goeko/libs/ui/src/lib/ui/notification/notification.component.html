@@ -1,19 +1,14 @@
-@if (notificationData$ | async; as notificationData ) {
-	<i class="ti ti-info-circle notification-icon"></i>
+@if (notificationData$ | async; as notificationData) {
+  <i class="ti ti-info-circle notification-icon"></i>
 
-	<div>
-		@if (notificationData.title) {
-			<h4>{{notificationData.title}}</h4>
-		}
+  <div>
+    @if (notificationData.title) {
+      <h4>{{ notificationData.title }}</h4>
+    }
 
-		@for(text of notificationData.texts; track text) {
-			<p>{{text | translate}}</p>
-
-		}
-
-		
-	
-		<ng-content></ng-content>
-	</div>
+    @for (text of notificationData.texts; track text) {
+      <p>{{ text | translate }}</p>
+    }
+  </div>
 }
-
+<ng-content></ng-content>

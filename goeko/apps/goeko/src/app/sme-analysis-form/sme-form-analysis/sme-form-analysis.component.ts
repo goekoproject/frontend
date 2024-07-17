@@ -121,7 +121,10 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
   private _loadDataCategories(): void {
     this._dataCategories = new SelectionModel(false, this.dataAllCategory())
     this.dataAllCategory().forEach((category) => this._createFormGroup(category))
-    this._dataCategories.select(this.dataAllCategory()[0])
+    const dataCategorySelected = this.dataAllCategory().find(
+      (category) => category.code === this.categorySelected().code,
+    ) as ClassificationCategory
+    this._dataCategories.select(dataCategorySelected || this.dataAllCategory()[0])
     this._setLastAnalysis()
   }
 
@@ -131,6 +134,9 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
       waste: this._fb.group({}),
       waterConsumption: this._fb.group({}),
       hazardousProduct: this._fb.group({}),
+      notification: this._fb.group({
+        onNewEcosolution: this._fb.control(false),
+      }),
     })
   }
   private _createFormGroup(selectedCategory: ClassificationCategory) {
@@ -200,6 +206,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
     const classifications = transformArrayToObj(requestClassifications.classifications)
 
     this._createFormForEdit(classifications)
+    this.form.controls['notification'].get('onNewEcosolution')?.patchValue(requestClassifications.notification.onNewEcosolution)
     this.form.patchValue(classifications, { emitEvent: false, onlySelf: true })
     this._cleanUpForm()
 

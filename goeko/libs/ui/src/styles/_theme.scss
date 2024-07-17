@@ -238,19 +238,15 @@ input[type='radio' i]:focus-visible {
 }
 .co2Emission {
   background: var(--co2-emission);
-  @extend %cancel-bagde;
 }
 .water {
   background: var(--color-water);
-  @extend %cancel-bagde;
 }
 .waste {
   background: var(--waste);
-  @extend %cancel-bagde;
 }
 .hazardousProduct {
   background: var(--hp);
-  @extend %cancel-bagde;
 }
 .go-back {
   position: relative;
