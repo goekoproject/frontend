@@ -1,40 +1,36 @@
-import { Component, OnInit, effect } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from '@goeko/business-ui';
-import {
-  ProjectService,
-  SmeAnalysisStoreService,
-  SmeRequestResponse,
-  UserService,
-} from '@goeko/store';
-import { MESSAGE_TYPE } from '@goeko/ui';
-import { take, toArray } from 'rxjs';
+import { Component, OnInit, effect } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { MessageService } from '@goeko/business-ui'
+import { ProjectService, SmeRequestResponse, UserService } from '@goeko/store'
+import { MESSAGE_TYPE } from '@goeko/ui'
+import { take, toArray } from 'rxjs'
+import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service'
 
 @Component({
   selector: 'goeko-dashboard-sme',
   templateUrl: './dashboard-sme.component.html',
   styleUrls: ['./dashboard-sme.component.scss'],
-  providers: [MessageService],
+  providers: [MessageService, SmeAnalysisService],
 })
 export class DashboardSmeComponent implements OnInit {
-  public userProfile = this._userService.userProfile;
-  public projects!: Array<SmeRequestResponse>;
+  public userProfile = this._userService.userProfile
+  public projects!: Array<SmeRequestResponse>
   constructor(
     private _userService: UserService,
-    private _smeAnalyticsStore: SmeAnalysisStoreService,
+    private _smeAnalysisService: SmeAnalysisService,
     private _projectService: ProjectService,
     private _router: Router,
     private _messageService: MessageService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
   ) {
     effect(() => {
       if (this.userProfile().id) {
-        this._getLastProjectName();
+        this._getLastProjectName()
       }
-    });
+    })
   }
   ngOnInit(): void {
-    this.projects = new Array<SmeRequestResponse>();
+    this.projects = new Array<SmeRequestResponse>()
   }
 
   private _getLastProjectName() {
@@ -43,30 +39,30 @@ export class DashboardSmeComponent implements OnInit {
       .pipe(take(3), toArray())
       .subscribe((projects: SmeRequestResponse[]) => {
         if (projects) {
-          this.projects = projects;
+          this.projects = projects
         }
-      });
+      })
   }
 
   goToProject(projects: SmeRequestResponse) {
-    this._smeAnalyticsStore.setCurrentAnalysis(projects);
-    this._router.navigate(['../sme-analysis/projects/project',this.userProfile().id], {
+    this._router.navigate(['../sme-analysis/projects/project', this.userProfile().id], {
       relativeTo: this.route.parent,
       queryParams: {
-        projectId: projects.id
+        projectId: projects.id,
       },
-    });
+    })
   }
 
   deleteProject(project: SmeRequestResponse) {
     this._messageService
       .deleteMessage(MESSAGE_TYPE.WARNING, project.name)
-      .afterClosed().subscribe((res) => {
+      .afterClosed()
+      .subscribe((res) => {
         if (res) {
           this._projectService.deleteProject(project.id).subscribe((data) => {
-            this._getLastProjectName();
-          });
+            this._getLastProjectName()
+          })
         }
-      });
+      })
   }
 }

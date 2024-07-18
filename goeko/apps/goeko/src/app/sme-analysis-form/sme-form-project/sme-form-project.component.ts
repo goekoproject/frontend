@@ -31,7 +31,6 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
     super.ngOnInit()
     this._initForm()
     this.onChangeLastRecomendation.subscribe((data) => (this.toogleSaveName = !data))
-    this.form.patchValue(this.currentAnalytics())
   }
 
   private _initForm() {
