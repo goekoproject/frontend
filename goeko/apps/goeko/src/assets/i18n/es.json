@@ -133,9 +133,9 @@
   "dragAndDrop": "Arrastar y soltar",
   "editSelection": "Modificar selección",
   "FORM_LABEL": {
-    "labelSelectedFormLang": "Selecciona el idioma que prefieres para completar tu eco-solución.",
+    "labelSelectedFormLang": "Selecciona el idioma para completar tu eco-solución.",
     "titleSelectImgEcosolution": "Elija varias imágenes para su EcoSolution",
-    "titleFormAnalysis": "Elija una Categoría y encuentre sus eco-soluciones",
+    "titleFormAnalysis": "Elija una categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
@@ -276,9 +276,11 @@
     },
     "none": "Ningúno",
     "selectBuildingOperation": {
-      "greenRoofsWalls": "Techos y paredes verdes",
+      "greenRoofsWalls": "Techos y muros verdes",
       "waterManagement": "Soluciones para la gestión del agua de lluvia",
-      "waterManagementGray": "Soluciones para la gestión de aguas grise"
+      "waterManagementGray": "Soluciones para la gestión de aguas grises",
+      "ecoFriendlytaps": "Grifos ecológicos",
+      "ecoFriendlySanitary": "Sanitarios ecológicos"
     },
     "selectCountry": {
       "france": "France",
@@ -308,16 +310,17 @@
       "glass": "Vidrio"
     },
     "selectMainActivity": {
-      "cleaningOfSiteAndPeripheryAccesses": "Limpieza de accesos de obra y periféricos",
-      "cleaningSiteVehicles": "Limpieza de vehículos en el sitio",
+      "cleaningOfSiteAndPeripheryAccesses": "Limpieza de los accesos a la obra y sus alrededores",
+      "cleaningSiteVehicles": "Limpieza de los vehículos de obra",
       "paint": "Pintura",
-      "pouringConcrete": "Vertido de concreto",
+      "pouringConcrete": "Producción de hormingón",
       "siteCleaning": "Limpieza de sitio",
-      "siteHut": "Cabaña de sitio",
-      "toolCleaning": "Limpieza de herramientas",
-      "wateringForCure": "Riego para la cura",
+      "siteHut": "Caseta de obra",
+      "toolCleaning": "Limpieza del equipo",
+      "wateringForCure": "Riego para el curado del hormigón",
       "wateringPlants": "Regando plantas",
-      "constructionSiteWater": "Agua de obra"
+      "constructionSiteWater": "Agua de obra",
+      "boiler": "Caldera"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Cartón y papel",
@@ -332,30 +335,30 @@
       "untreatedWood": "Madera sin tratar"
     },
     "selectMainInternalCombustionEngine": {
-      "aerialBucketTruck": "Camión con plataforma aérea",
-      "backhoe": "Retroexcavadora",
-      "backhoeLoader": "Cargadora retroexcavadora",
+      "aerialBucketTruck": "Camión con plataforma elevadora",
+      "backhoe": "Fresadora",
+      "backhoeLoader": "Excavadora",
       "bulldozer": "Bulldozer",
-      "compressor": "Compresseur​",
+      "compressor": "Compresor​",
       "dumper": "Volquete",
       "equipmentCarrierTruck": "Camión portaequipos",
-      "generator": "Génératrice​",
+      "generator": "Generador",
       "grader": "Niveladora",
       "loader": "Cargadora",
       "materialsCarrierTruck": "Camión portamateriales",
-      "mechanicalPalletTruck": "Transpalette mécanique​",
+      "mechanicalPalletTruck": "Transpaleta mecánica​",
       "scraper": "Raspadora",
-      "slicer": "Trancheuse",
-      "steamRoller": "Rodillo de vapor",
-      "vehicleFortransportingPeople​​": "Véhicule pour transport de personnes​​"
+      "slicer": "Zanjadora",
+      "steamRoller": "Rodillo compactador",
+      "vehicleFortransportingPeople​​": "Vehículo de transporte de personas"
     },
     "selectMainMineralProduct": {
-      "aluminum": "Aluminium​",
+      "aluminum": "Aluminio​",
       "cement": "Cemento",
       "concrete": "Concreto",
-      "copper": "Cuivre",
-      "iron": "Hierro",
-      "isolation": "Paneles de aislamiento",
+      "copper": "Cobre",
+      "iron": "Acero inoxidable",
+      "isolation": "Aislamiento térmico",
       "steel": "Acero",
       "zinc": "Zinc"
     },
@@ -378,7 +381,7 @@
       "paintVarnish": "Pintura/barniz",
       "productsContainingTar": "Productos que contienen alquitrán",
       "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas",
-      "collects": "Aleaciones"
+      "collects": "Adhesivo"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosoles",
@@ -402,14 +405,15 @@
     },
     "selectSustainableBuildingOperations": {
       "chargeElectricVehicles": "Cargar vehículos eléctricos",
-      "electricMeansOfTransport": "Des moyens de transport électrique​",
+      "electricMeansOfTransport": "Medios de transporte eléctrico​",
       "optimizeEnergyConsumption": "Optimizar el consumo de energía",
       "recoverHeat": "Recuperar calor",
       "storeEnergy": "Almacenar energía",
-      "useLowConsumptionLighting": "Usar iluminación de bajo consumo",
+      "useLowConsumptionLighting": "Soluciones de enfriamiento ecológicas",
       "useRenewableEnergies": "Utilizar energías renovables",
       "sustainableLightingSystems": "Sistemas de iluminación sostenibles",
-      "intelligentHeatingSystems": "Sistemas de calefacción inteligentes"
+      "intelligentHeatingSystems": "Sistemas de calefacción inteligente",
+      "homeAutomation": "Domótica"
     }
   },
   "TEXT_SUPPORT": {

@@ -2,12 +2,34 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
-import { EcosolutionsTaggingService, SmeUser, UserService } from '@goeko/store'
+import { EcosolutionsTaggingService, SmeUser, TaggingResponse, UserService } from '@goeko/store'
 import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
 import { FavouritesComponent } from './favourites.component'
 
+const mockFavorite = [
+  {
+    ecosolution: {
+      solutionName: 'Solution 1',
+      description: 'Description 1',
+      companyDetail: { logo: 'logo1.png' },
+      classification: { mainCategory: 'Category1' },
+    },
+    tag: 'FAVOURITES',
+    id: 'eco1',
+  },
+  {
+    ecosolution: {
+      solutionName: 'Solution 2',
+      description: 'Description 2',
+      companyDetail: { logo: 'logo2.png' },
+      classification: { mainCategory: 'Category2' },
+    },
+    tag: 'FAVOURITES',
+    id: 'eco2',
+  },
+] as TaggingResponse[]
 describe('FavouritesComponent', () => {
   let component: FavouritesComponent
   let fixture: ComponentFixture<FavouritesComponent>
@@ -40,6 +62,7 @@ describe('FavouritesComponent', () => {
           },
         ]),
       ),
+      removeFavorite: jest.fn().mockReturnValue(of({ status: 'ok' })),
     }
 
     await TestBed.configureTestingModule({
@@ -68,7 +91,7 @@ describe('FavouritesComponent', () => {
   it('should fetch favourite ecosolutions on component initialization', async () => {
     const favorites = [
       {
-        id: 'd3f9d2a8-57a4-4748-9bc2-c5e9ade52832',
+        id: 'eco123',
         ecosolution: {
           ecosolutionId: 'b5b7cdf1-0035-42b6-9f67-70ad219a0bd2',
           companyDetail: {
@@ -95,35 +118,13 @@ describe('FavouritesComponent', () => {
   })
 
   it('should create goeko-card-product components', () => {
-    const favorites = [
-      {
-        ecosolution: {
-          solutionName: 'Solution 1',
-          description: 'Description 1',
-          companyDetail: { logo: 'logo1.png' },
-          classification: { mainCategory: 'Category1' },
-        },
-        tag: 'FAVOURITES',
-        id: 1,
-      },
-      {
-        ecosolution: {
-          solutionName: 'Solution 2',
-          description: 'Description 2',
-          companyDetail: { logo: 'logo2.png' },
-          classification: { mainCategory: 'Category2' },
-        },
-        tag: 'FAVOURITES',
-        id: 2,
-      },
-    ]
     const cardComponents = fixture.debugElement.queryAll(By.directive(CardProductComponent))
 
-    jest.spyOn(mockEcosolutionsTaggingService, 'getEcosolutionFavourites').mockReturnValue(of(favorites))
+    jest.spyOn(mockEcosolutionsTaggingService, 'getEcosolutionFavourites').mockReturnValue(of(mockFavorite))
 
     fixture.detectChanges()
     component.ecosolutionFavorites$.subscribe((data) => {
-      expect(data).toEqual(favorites)
+      expect(data).toEqual(mockFavorite)
       fixture.detectChanges()
       expect(cardComponents.length).toBe(2)
       const firstCardComponent = cardComponents[0].componentInstance as CardProductComponent
@@ -133,5 +134,11 @@ describe('FavouritesComponent', () => {
       expect(firstCardComponent.category).toBe('CATEGORIES.Category1')
       expect(firstCardComponent.isFavorite).toBe(true)
     })
+  })
+
+  xit('should remove a favorite item when a valid ecosolutionId is provided', () => {
+    const spyRemoveService = jest.spyOn(mockEcosolutionsTaggingService, 'removeFavorite').mockReturnValue(of())
+    component.removeFavorite('eco1')
+    expect(spyRemoveService).toHaveBeenCalled()
   })
 })

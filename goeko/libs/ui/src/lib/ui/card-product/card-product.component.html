@@ -1,11 +1,11 @@
-<div class="relative min-h-96 h-full cursor-pointer rounded-2xl bg-white p-5 transition-all hover:-translate-y-2">
+<div class="relative h-full min-h-96 cursor-pointer rounded-2xl bg-white p-5 transition-all hover:-translate-y-2">
   <div
     class="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary-50 hover:bg-primary-200"
     (click)="doFavorite()">
     @if (isFavorite) {
-      <i class="ti ti-heart-filled text-base text-primary-400"></i>
+      <i class="ti ti-heart-filled text-xl text-primary-400"></i>
     } @else {
-      <i class="ti ti-heart text-base text-primary-400"></i>
+      <i class="ti ti-heart text-xl text-primary-400"></i>
     }
   </div>
 
@@ -18,8 +18,9 @@
       category
     }}</span>
     <h3 class="mb-3 mt-4 text-xl font-semibold text-primary-950 xl:text-2xl">{{ title }}</h3>
-    <p class="mb-4 text-base font-light line-clamp-3">{{ description }}</p>
-    <span (click)="showMore()"
+    <p class="mb-4 line-clamp-3 text-base font-light">{{ description }}</p>
+    <span
+      (click)="showMore()"
       class="inline-block cursor-pointer select-none rounded-full border bg-primary-900 px-2 py-1 text-center align-middle text-sm font-semibold leading-normal text-white no-underline shadow-sm hover:bg-primary-800"
       >{{ 'showMore' | translate }}
       <i class="ti ti-arrow-right"></i>

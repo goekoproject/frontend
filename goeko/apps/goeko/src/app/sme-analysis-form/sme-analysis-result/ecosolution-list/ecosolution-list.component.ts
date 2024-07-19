@@ -145,10 +145,10 @@ export class EcosolutionListComponent implements OnInit {
 
   changeFavorite(ecosolution: EcosolutionSearchResponse) {
     if (ecosolution.favourite) {
-      this._taggingService.removeFavorite(ecosolution.id).subscribe(() => {})
+      this._taggingService.removeFavorite(this._smeId, ecosolution.id).subscribe(() => this.getResults())
       return
     }
-    this._taggingService.addFavorite(this._smeId, ecosolution.id).subscribe(() => {})
+    this._taggingService.addFavorite(this._smeId, ecosolution.id).subscribe(() => this.getResults())
   }
 
   onCheckboxStateChange(checked: any, index: number) {

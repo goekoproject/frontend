@@ -121,7 +121,10 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
   private _loadDataCategories(): void {
     this._dataCategories = new SelectionModel(false, this.dataAllCategory())
     this.dataAllCategory().forEach((category) => this._createFormGroup(category))
-    this._dataCategories.select(this.dataAllCategory()[0])
+    const dataCategorySelected = this.dataAllCategory().find(
+      (category) => category.code === this.categorySelected().code,
+    ) as ClassificationCategory
+    this._dataCategories.select(dataCategorySelected || this.dataAllCategory()[0])
     this._setLastAnalysis()
   }
 

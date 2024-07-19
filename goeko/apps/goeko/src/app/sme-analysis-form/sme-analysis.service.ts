@@ -70,7 +70,7 @@ export class SmeAnalysisService {
   constructor(
     private classificationCategoryService: ClassificationCategoryService
   ) {
-   
+
   }
 
   private _getAllCategories$() {
@@ -107,7 +107,7 @@ export class SmeAnalysisService {
 
 
   getAllDataCategories() {
-    const allCategories$ = this.categories().map((category:CategorySection) => this._getClassificationForCategory$(category.code)) ;
+    const allCategories$ = this.categories().map((category:CategorySection) => this._getClassificationForCategory$(category.code));
     forkJoin(allCategories$).subscribe((dataCategories) => this.dataAllCategory.set(dataCategories as ClassificationCategory[]));
   }
 }

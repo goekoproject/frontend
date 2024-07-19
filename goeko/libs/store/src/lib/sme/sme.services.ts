@@ -4,6 +4,7 @@ import { Observable, find, from, map, mergeMap, reduce } from 'rxjs'
 import { EcosolutionSearchRequest } from '../ecosolutions/ecosolution-search.request.model'
 import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
 import { EcosolutionsService } from '../ecosolutions/ecosolutions.service'
+import { SmeUser } from '../user/public-api'
 import { TranslateChangeService } from '../util/translate-change'
 import { Requests, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 
@@ -60,7 +61,12 @@ export class SmeService extends TranslateChangeService {
   deleteRequests(id: string): Observable<any> {
     return this._http.delete<Requests>(`/v1/ecosolution/search/requests/smes/${id}`)
   }
-  getAllSmesData(): Observable<any> {
-    return this._http.get<any>(`/v1/actor/smes`)
+
+  getAllSmesData(): Observable<SmeUser[]> {
+    return this._http.get<SmeUser[]>(`/v1/actor/smes`)
+  }
+
+  deleteSmeUser(id: string): Observable<any> {
+    return this._http.delete<any>(`/v1/actor/smes/${id}`)
   }
 }
