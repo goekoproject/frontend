@@ -1,13 +1,15 @@
-@for (item of menu(); track item.id) {
-  @switch (item.code) {
-    @case ('contact') {
-      <ng-container *ngTemplateOutlet="contactSubmenu; context: { item: item }"></ng-container>
-    }
-    @default {
-      <ng-container *ngTemplateOutlet="menuSimple; context: { item: item }"></ng-container>
+<div class="relative hidden lg:flex lg:gap-x-12">
+  @for (item of menu(); track item.id) {
+    @switch (item.code) {
+      @case ('contact') {
+        <ng-container *ngTemplateOutlet="contactSubmenu; context: { item: item }"></ng-container>
+      }
+      @default {
+        <ng-container *ngTemplateOutlet="menuSimple; context: { item: item }"></ng-container>
+      }
     }
   }
-}
+</div>
 
 <ng-template #menuSimple let-item="item">
   <a href="#" class="text-sm font-semibold leading-6 text-gray-900">{{ item.keyLang | translate }}</a>
@@ -15,8 +17,12 @@
 
 <!--Submenu-->
 <ng-template #contactSubmenu let-item="item">
-  <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false">
-    {{item.keyLang | translate}}
+  <button
+    type="button"
+    (click)="submenuOpenToggle()"
+    class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+    aria-expanded="false">
+    {{ item.keyLang | translate }}
     <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path
         fill-rule="evenodd"
@@ -24,7 +30,7 @@
         clip-rule="evenodd" />
     </svg>
   </button>
-  <div class="submenu">
+  <div class="submenu" [ngClass]="{ flex: submenuOpen(), hidden: !submenuOpen() }">
     @for (item of item.submenu; track item) {
       <div>
         <span class="submenu-subtitle">{{ item.contactsName }}</span>

@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, catchError, of } from 'rxjs'
+import { Document } from '../model/document.interface'
+import { CleantechsUser } from '../user/public-api'
 
 @Injectable()
 export class CleanTechService {
@@ -34,14 +36,14 @@ export class CleanTechService {
     )
   }
 
-  getDocuments(id: string) {
-    return this._http.get<any>(`/v1/actor/cleantechs/${id}/documentation`)
+  getDocuments(id: string): Observable<Document[]> {
+    return this._http.get<Document[]>(`/v1/actor/cleantechs/${id}/documentation`)
   }
   getAllCleantechData(): Observable<CleantechsUser[]> {
     return this._http.get<CleantechsUser[]>(`/v1/actor/cleantechs`)
   }
 
-  deleteCleantechUser(id: string): Observable<any> {
-    return this._http.delete<any>(`/v1/actor/cleantechs/${id}`)
+  deleteCleantechUser(id: string): Observable<unknown> {
+    return this._http.delete(`/v1/actor/cleantechs/${id}`)
   }
 }

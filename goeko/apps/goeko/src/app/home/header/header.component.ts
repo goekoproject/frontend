@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
 
   langs = LANGS
   defaultLang!: any
-
   mobileMenuOpen = signal(false)
   constructor(
     private _renderer: Renderer2,
@@ -49,7 +48,7 @@ export class HeaderComponent implements OnInit {
     this._router.navigate(['/login-universal'])
   }
 
-  setMobileMenuOpen(open: boolean) {
-    this.mobileMenuOpen.set(open)
+  setMobileMenuOpen() {
+    this.mobileMenuOpen.update((value) => !value)
   }
 }

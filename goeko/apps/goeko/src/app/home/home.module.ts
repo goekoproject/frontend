@@ -18,6 +18,7 @@ import { ContentComponent } from './content/content.component'
 import { OrderByPipe } from './content/order-by.pipe'
 import { DocumentLegalComponent } from './document-legal/document-legal.component'
 import { HeaderComponent } from './header/header.component'
+import { MenuMobileComponent } from './header/menu/menu-mobile.component'
 import { MenuComponent } from './header/menu/menu.component'
 import { LandingComponent } from './landing/landing.component'
 import { TeamComponent } from './team/team.component'
@@ -51,6 +52,7 @@ import { TeamComponent } from './team/team.component'
     TitlePageComponent,
     SelectI18nComponent,
     UiBreadcrumbsModule,
+    MenuMobileComponent,
   ],
 })
 export class HomeModule {}
