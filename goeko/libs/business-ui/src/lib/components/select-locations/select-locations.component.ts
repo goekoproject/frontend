@@ -1,138 +1,109 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, Input, inject, signal } from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { LocationRegions } from '@goeko/store';
-import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui';
-import { TranslateModule } from '@ngx-translate/core';
-import {
-  Subject,
-  Subscription,
-  distinctUntilChanged,
-  filter,
-  map,
-  merge,
-  mergeMap,
-  takeUntil,
-} from 'rxjs';
-import { SelectLocationsService } from './select-locations.service';
+import { CommonModule } from '@angular/common'
+import { AfterViewInit, Component, Input, inject, signal } from '@angular/core'
+import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { LocationRegions } from '@goeko/store'
+import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
+import { TranslateModule } from '@ngx-translate/core'
+import { Subject, Subscription, distinctUntilChanged, filter, map, merge, mergeMap, take, takeUntil } from 'rxjs'
+import { SelectLocationsService } from './select-locations.service'
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
   if (o1 && o2 && typeof o2 !== 'object') {
-    return o1.code.toString() === o2;
+    return o1.code.toString() === o2
   }
 
   if (o1 && o2 && typeof o2 === 'object') {
-    return o1.code?.toString() === o2.code?.toString();
+    return o1.code?.toString() === o2.code?.toString()
   }
 
   if (o1.isAll) {
-    return true;
+    return true
   }
 
-  return null;
-};
+  return null
+}
 @AutoUnsubscribe()
 @Component({
   selector: 'goeko-select-locations',
   standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    UiSuperSelectModule,
-    ReactiveFormsModule,
-    SwitchModule,
-  ],
+  imports: [CommonModule, TranslateModule, UiSuperSelectModule, ReactiveFormsModule, SwitchModule],
   providers: [SelectLocationsService],
   templateUrl: './select-locations.component.html',
   styleUrl: './select-locations.component.scss',
 })
 export class SelectLocationsComponent implements AfterViewInit {
-  public defaultSetSuperSelect = defaultSetSuperSelect as (
-    o1: any,
-    o2: any,
-  ) => boolean;
+  public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
 
   public compareSelectedCountry = (o1: any, o2: any) => {
-    return o1 === o2;
-  };
-  private destroy$ = new Subject<void>();
+    return o1 === o2
+  }
+  private destroy$ = new Subject<void>()
 
   public optionAllProvince = {
     code: null,
     label: 'FORM_LABEL.allProvinces',
     isAll: true,
-  };
-  @Input() controlNameCountry!: string;
-  @Input() controlNameProvince!: string;
+  }
+  @Input() controlNameCountry!: string
+  @Input() controlNameProvince!: string
   @Input()
   public get controlLocations(): FormArray {
-    return this._controlLocations;
+    return this._controlLocations
   }
   public set controlLocations(value: FormArray) {
-    this._controlLocations = value;
+    this._controlLocations = value
   }
-  private _controlLocations!: FormArray;
+  private _controlLocations!: FormArray
 
-  @Input() form!: FormGroup;
+  @Input() form!: FormGroup
 
-  private _selectLocationsService = inject(SelectLocationsService);
-  private _selectedCodeLang = this._selectLocationsService.selectedCodeLang;
-  public countries = this._selectLocationsService.countries;
-  public regions = this._selectLocationsService.regions;
-  public toogleEdit = false;
-  public newLocation = false;
-  public disabledRegions = false;
+  private _selectLocationsService = inject(SelectLocationsService)
+  public countries = this._selectLocationsService.countries
+  public regions = this._selectLocationsService.regions
+  public toogleEdit = false
+  public newLocation = false
+  public disabledRegions = false
+
   public get lastLocations() {
-    return this.controlLocations.value?.length - 1;
+    return this.controlLocations.value?.length - 1
   }
   public get controlCountryCodeByIndex() {
     return (
-      (
-        (this.form?.get('locations') as FormGroup)?.controls[
-          this.selectedLocationsIndex()
-        ] as FormGroup
-      )?.controls['country'] as FormGroup
-    )?.controls['code'];
+      ((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup
+    )?.controls['code']
   }
   public get controlCountryRegionsByIndex() {
     return (
-      (
-        (this.form?.get('locations') as FormGroup)?.controls[
-          this.selectedLocationsIndex()
-        ] as FormGroup
-      )?.controls['country'] as FormGroup
-    )?.controls['regions'];
+      ((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup
+    )?.controls['regions']
   }
 
-  public dataSourceSelect: Map<string, LocationRegions[]> = new Map();
-  public selectedLocationsIndex = signal<number>(0);
-  formArraySubscription!: Subscription;
+  public dataSourceSelect: Map<string, LocationRegions[]> = new Map()
+  public selectedLocationsIndex = signal<number>(0)
+  formArraySubscription!: Subscription
   public getOnlyRegions() {
-    return this.controlCountryRegionsByIndex?.value?.filter(
-      (region: LocationRegions) => region.code !== this.optionAllProvince.code,
-    );
+    return this.controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code !== this.optionAllProvince.code)
   }
   public getAllReggions() {
-    return this.controlCountryRegionsByIndex?.value?.filter(
-      (region: LocationRegions) => region.code === this.optionAllProvince.code,
-    );
+    return this.controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code === this.optionAllProvince.code)
   }
 
   public loadRegions(regions: LocationRegions[]) {
-    return regions.every((region) => region.code);
+    return regions.every((region) => region.code)
   }
 
   constructor() {}
 
   ngAfterViewInit(): void {
-    this.subscribeToFormArrayAndItemChanges();
+    this.controlLocations.valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(() => this.controlLocations.controls.length > 0),
+        take(1),
+      )
+      .subscribe(() => {
+        this.subscribeToFormArrayAndItemChanges()
+      })
   }
 
   private subscribeToFormArrayAndItemChanges(): void {
@@ -141,9 +112,7 @@ export class SelectLocationsComponent implements AfterViewInit {
         control.valueChanges.pipe(
           map((value) => ({ index, value })),
           filter((change) => change.index >= 0), // only index positive
-          distinctUntilChanged(
-            (prev, curr) => prev.value.country.code === curr.value.country.code,
-          ),
+          distinctUntilChanged((prev, curr) => prev.value.country.code === curr.value.country.code),
           map((change) => change.value.country.code.code), // Transforma el cambio en el código de país
           takeUntil(this.destroy$),
         ),
@@ -157,45 +126,42 @@ export class SelectLocationsComponent implements AfterViewInit {
         ),
       )
       .subscribe(({ countryCode, regiones }) => {
-        this.addRegionsForCodeCountry(countryCode, [
-          this.optionAllProvince,
-          ...regiones,
-        ]);
-      });
+        this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince, ...regiones])
+      })
   }
 
   private addRegionsForCodeCountry = (clave: string, valor: any): void => {
     if (this.dataSourceSelect.has(clave)) {
-      this.dataSourceSelect.get(clave)?.push(valor);
+      this.dataSourceSelect.get(clave)?.push(valor)
     } else {
-      this.dataSourceSelect.set(clave, valor);
+      this.dataSourceSelect.set(clave, valor)
     }
-  };
+  }
 
   selectALL() {
-    const allRegions = this.getAllReggions();
+    const allRegions = this.getAllReggions()
     if (allRegions) {
       this.controlCountryRegionsByIndex.patchValue(allRegions, {
         emitEvent: false,
-      });
+      })
     }
   }
 
   deselectAll() {
-    const regions = this.getOnlyRegions();
+    const regions = this.getOnlyRegions()
     if (regions) {
       this.controlCountryRegionsByIndex.patchValue(regions, {
         emitEvent: false,
-      });
+      })
     }
   }
 
   addLocation() {
-    this.controlLocations.push(this._createLocations());
-    this.newLocation = true;
-    this.toogleEdit = true;
-    this.selectedLocationsIndex.set(this.lastLocations);
-    this.subscribeToFormArrayAndItemChanges();
+    this.controlLocations.push(this._createLocations())
+    this.newLocation = true
+    this.toogleEdit = true
+    this.selectedLocationsIndex.set(this.lastLocations)
+    this.subscribeToFormArrayAndItemChanges()
   }
 
   private _createLocations(): FormGroup {
@@ -204,31 +170,31 @@ export class SelectLocationsComponent implements AfterViewInit {
         code: new FormControl('', Validators.required),
         regions: new FormControl<any[]>(['']),
       }),
-    });
+    })
   }
 
   editLocation(location: AbstractControl, index: number): void {
-    this.toogleEdit = !this.toogleEdit;
-    this.selectedLocationsIndex.set(index);
+    this.toogleEdit = !this.toogleEdit
+    this.selectedLocationsIndex.set(index)
   }
 
   closeForm() {
-    this.toogleEdit = false;
-    this.controlLocations.removeAt(this.selectedLocationsIndex());
+    this.toogleEdit = false
+    this.controlLocations.removeAt(this.selectedLocationsIndex())
   }
 
   deleteLocation(index: number): void {
-    this.controlLocations.removeAt(index);
-    this.newLocation = false;
+    this.controlLocations.removeAt(index)
+    this.newLocation = false
   }
   confirmLocation(locationCountryControl: FormGroup | AbstractControl) {
     if (locationCountryControl.get(this.controlNameCountry)?.invalid) {
-      return;
+      return
     }
-    this.toogleEdit = false;
+    this.toogleEdit = false
   }
   closeFormLocation(index: number) {
-    this.deleteLocation(index);
-    this.toogleEdit = false;
+    this.deleteLocation(index)
+    this.toogleEdit = false
   }
 }
