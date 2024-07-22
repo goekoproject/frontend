@@ -2,8 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
-import { DataSelect, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, ODS_CODE } from '@goeko/store'
+import { DataSelect, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, ODS_CODE, UpdatedEcosolutionBody } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
+import { EcosolutionsBody } from 'libs/store/src/lib/ecosolutions/ecosolution-base.model'
 import { forkJoin, last, of, switchMap, tap } from 'rxjs'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import {
@@ -69,8 +70,10 @@ export class EcosolutionsFormComponent implements OnInit {
     return (this.nameTranslations.controls[this.selectedFormLang().index] as FormGroup).controls['translation']
   }
 
-  public get bodyRequestEcosolution(): NewEcosolutionsBody {
-    return new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value)
+  public get bodyRequestEcosolution(): EcosolutionsBody {
+    return this.idEcosolution
+      ? new UpdatedEcosolutionBody(this._cleantechId, this.mainCategory, this.form.value)
+      : new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value)
   }
   constructor(
     private _route: ActivatedRoute,
@@ -91,7 +94,6 @@ export class EcosolutionsFormComponent implements OnInit {
       this.getEcosolution()
     }
   }
-
 
   private _getParamsUrl() {
     this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string
@@ -277,15 +279,9 @@ export class EcosolutionsFormComponent implements OnInit {
   private _uploadPicture(ecosolution: any) {
     if (this._fileEcosolution && ecosolution) {
       const createOrUpdatePicture = this.idEcosolution
-        ? this._ecosolutionsService.updatePicture(
-            ecosolution?.id,
-            this._fileEcosolution,
-          )
-        : this._ecosolutionsService.uploadPicture(
-            ecosolution?.id,
-            this._fileEcosolution,
-          );
-      return createOrUpdatePicture;
+        ? this._ecosolutionsService.updatePicture(ecosolution?.id, this._fileEcosolution)
+        : this._ecosolutionsService.uploadPicture(ecosolution?.id, this._fileEcosolution)
+      return createOrUpdatePicture
     }
     return of(null)
   }
