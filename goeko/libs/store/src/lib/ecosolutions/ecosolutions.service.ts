@@ -4,7 +4,7 @@ import { Observable, catchError, map, of } from 'rxjs'
 import { TranslateChangeService } from '../util/translate-change'
 import { EcosolutionSearchRequest } from './ecosolution-search.request.model'
 import { EcosolutionSearchResponse } from './ecosolution-search.response.interface'
-import { Ecosolutions } from './new-ecosolution.model'
+import { Ecosolutions } from './ecosolution.interface'
 
 @Injectable({
   providedIn: 'root',

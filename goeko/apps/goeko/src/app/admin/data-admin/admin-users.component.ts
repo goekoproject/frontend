@@ -78,6 +78,7 @@ export class AdminUserComponent {
 
   changeUserType(type: USER_TYPE): void {
     this.selectedUserType = type
+    this.dataSources = this._dataSourcesByUserType[type as keyof DataSourcesByUserType] as Observable<SmeUser[] | CleantechsUser[]>
   }
   deleteUser(id: string): void {
     this.MessageService.deleteMessage(MESSAGE_TYPE.WARNING, `${id}`)
