@@ -20,7 +20,7 @@
   </ul>
 </section>
 
-<section #articleEl>
+<section #articleEl class="flex flex-col gap-8">
   @for (article of articles | orderBy: 'order'; track article.id; let i = $index; let odd = $odd) {
     @defer (on viewport) {
       <article [id]="article.id" class="content" [ngClass]="{ 'row-reverse-content': odd }">
@@ -35,7 +35,7 @@
             <h1 id="name" class="info-actors-title" [ngClass]="{ 'title-reverse-content': !odd }">
               {{ article?.name }}
             </h1>
-            <h3 class="info-actors-description" id="descriptions">
+            <h3 class="info-actors-description text-3xl md:text-5xl" id="descriptions">
               {{ article?.descriptions }}
             </h3>
           </div>

@@ -1,12 +1,9 @@
-<go-banner></go-banner>
-@defer (on viewport) {
-  <go-content></go-content>
-} @placeholder {
-  <div>loading...</div>
-}
-
-@defer (on viewport) {
-  <goeko-team></goeko-team>
-} @placeholder {
-  <div>loading...</div>
-}
+<div class="flex flex-col gap-4">
+  <go-banner></go-banner>
+  @defer (on viewport) {
+    <go-content></go-content>
+    <goeko-team></goeko-team>
+  } @placeholder {
+    <div>loading...</div>
+  }
+</div>

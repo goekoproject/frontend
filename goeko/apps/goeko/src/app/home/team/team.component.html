@@ -8,7 +8,8 @@
 
   @for (item of dataTeams; track item.employedName) {
     @defer (on viewport) {
-      <div class="our-team-body">
+      <div class="our-team-body border-purple-900">
+        <img class="aspect-auto w-full rounded-md md:mr-auto md:w-1/3 lg:w-1/4" [src]="item.photoProfile" />
         <div class="our-team-content">
           <div class="our-team-heading">
             <go-title-page size="large"> {{ item?.employedName }}</go-title-page>
@@ -20,8 +21,6 @@
             {{ info }}
           </p>
         </div>
-
-        <img class="member-photo" [src]="item.photoProfile" />
       </div>
     } @placeholder {
       <div>loading...</div>

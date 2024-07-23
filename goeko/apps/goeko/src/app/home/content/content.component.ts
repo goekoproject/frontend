@@ -18,6 +18,10 @@ enum ENTRYS_ID {
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: {
+    class: 'flex flex-col items-center gap-16',
+  },
 })
 export class ContentComponent implements OnInit, AfterViewInit {
   @ViewChildren('content') articlesRef!: QueryList<ElementRef>

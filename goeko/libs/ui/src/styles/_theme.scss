@@ -37,7 +37,6 @@ body {
   height: 100%;
   max-width: 1920px;
   align-items: center;
-  @apply p-4
 }
 body:has(div.is-platform) {
   background: var(--primary--50);

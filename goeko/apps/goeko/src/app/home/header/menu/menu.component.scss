@@ -11,11 +11,11 @@ $lineColor: var(--primary--100);
   ul {
     list-style: none;
   }
-  display: flex;
+  display: none;
   align-items: center;
   text-align: center;
   justify-content: center;
-  @apply gap-8;
+  @apply gap-8 lg:flex;
   &-item {
     min-width: 3rem;
   }
