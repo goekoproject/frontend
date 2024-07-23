@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, model, OnInit, output, signal } from '@angular/core'
+import { RouterModule } from '@angular/router'
 import { ContentFulService } from '@goeko/store'
 import { TranslateModule } from '@ngx-translate/core'
 import { map } from 'rxjs'
@@ -10,7 +11,7 @@ import { _buildSubmenu } from './menu.util'
 @Component({
   selector: 'goeko-menu-mobile',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, RouterModule],
   template: `
     @if (mobileMenuOpen()) {
       <div role="dialog" aria-modal="true" class="lg:hidden">
@@ -48,7 +49,7 @@ import { _buildSubmenu } from './menu.util'
                   <ng-template #contactSubmenu let-item="item">
                     <button
                       type="button"
-                      class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      class="flex w-full items-center justify-between rounded-lg py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       aria-controls="disclosure-1"
                       aria-expanded="false"
                       (click)="submenuOpenToggle()">
@@ -65,6 +66,7 @@ import { _buildSubmenu } from './menu.util'
                     <div class="mt-2 flex-col space-y-2" id="disclosure-1" [ngClass]="{ flex: submenuOpen(), hidden: !submenuOpen() }">
                       @for (item of item.submenu; track item) {
                         <a
+                          (click)="closeMenu()"
                           href="mailto:{{ item.email }}"
                           class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >{{ item.email }}</a
@@ -77,9 +79,12 @@ import { _buildSubmenu } from './menu.util'
                   </ng-template>
 
                   <ng-template #menuSimple let-item="item">
-                    <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{
-                      item.keyLang | translate
-                    }}</a>
+                    <a
+                      [routerLink]="item.url"
+                      (click)="closeMenu()"
+                      class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      >{{ item.keyLang | translate }}</a
+                    >
                   </ng-template>
                 </div>
               </div>

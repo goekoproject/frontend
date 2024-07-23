@@ -12,7 +12,7 @@
 </div>
 
 <ng-template #menuSimple let-item="item">
-  <a href="#" class="text-sm font-semibold leading-6 text-gray-900">{{ item.keyLang | translate }}</a>
+  <a [routerLink]="item.url" class="text-sm font-semibold leading-6 text-gray-900">{{ item.keyLang | translate }}</a>
 </ng-template>
 
 <!--Submenu-->
