@@ -423,7 +423,7 @@
     "co2Emission": "Area where your eco-solution reduces CO2 emissions",
     "ods": "Linked to your eco-solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
-    "selectProducts": "Type of toxic products does your eco-solution replace or improve",
+    "selectProducts": "Type of toxic products that your eco-solution replaces or improves",
     "waste": "Types of waste",
     "waterConsumption": "Activities related to water consumption"
   },
