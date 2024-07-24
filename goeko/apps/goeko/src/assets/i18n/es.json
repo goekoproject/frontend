@@ -219,7 +219,8 @@
   "LEGAL": {
     "cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
     "cookiesPolicy": "Politica de cookies",
-    "privacyPolicy": "Politica de privacidad"
+    "privacyPolicy": "Politica de privacidad",
+    "legal": "Legal"
   },
   "LOGIN": {
     "msglogin": "Inicia sesión en tu cuenta",
@@ -518,5 +519,6 @@
   "years": "años",
   "yes": "Si",
   "regions": "Comunidades Autónomas",
-  "titleBannerLead": "Seguimiento de Leads Calificados"
+  "titleBannerLead": "Seguimiento de Leads Calificados",
+  "followUs": "Síguenos"
 }

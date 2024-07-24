@@ -218,7 +218,8 @@
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
     "cookiesPolicy": "Politique de cookies",
-    "privacyPolicy": "Politique de confidentialité"
+    "privacyPolicy": "Politique de confidentialité",
+    "legal": "Légal"
   },
   "LOGIN": {
     "msglogin": "Connectez-vous à votre compte",
@@ -522,5 +523,6 @@
   "yes": "Oui",
   "your_ecosolutions": "Vos Eco-solutions",
   "regions": "Régions",
-  "titleBannerLead": "Suivi des leads qualifiés"
+  "titleBannerLead": "Suivi des leads qualifiés",
+  "followUs": "Suivez-nous"
 }
