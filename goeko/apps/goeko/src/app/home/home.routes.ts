@@ -5,6 +5,7 @@ import { DocumentLegalComponent } from './document-legal/document-legal.componen
 import { LandingComponent } from './landing/landing.component';
 import { AboutComponent } from './about/about/about.component';
 import { BlogComponent } from './blog/blog.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 
 const ENTRY_ID_COOKIES_POLICY = '6Cby4WysXPnj3OJQBSj4pB';
 const ENTRY_ID_PRIVACY_POLICY = '6pwHwtZC1ILfXS0awq85Oy';
@@ -43,7 +44,11 @@ export const routes: Routes = [
       {
         path: 'blog',
         component: BlogComponent,
-      }
+      },
+      {
+        path: 'blog-detail',
+        component: BlogDetailComponent,
+      },
     ],
   },
 ];
