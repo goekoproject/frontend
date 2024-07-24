@@ -439,7 +439,7 @@
     "saveMessageGeneric": "Do you want to save the data before continuing?",
     "messaggeProfileUncompletedTitle": "Complete your profile",
     "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools.",
-    "messageNotification": "Enable email notifications to receive the latest ecosolutions for your questionnaire."
+    "messageNotification": "Activate email notifications to receive the latest eco-solutions matching your needs."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
