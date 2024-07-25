@@ -27,7 +27,6 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './header/menu/menu.component';
 import { LandingComponent } from './landing/landing.component';
 import { TeamComponent } from './team/team.component';
-import { BlogComponent } from './blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { BlogComponent } from './blog/blog.component';
     FooterComponent,
     HeaderComponent,
     MenuComponent,
-    BlogComponent,
   ],
   imports: [
     CommonModule,
