@@ -1,5 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { FOOTER_INFO, FooterInfo } from './footer-info.contants';
+import { Component, ViewEncapsulation } from '@angular/core'
 
 @Component({
   selector: 'goeko-footer',
@@ -12,5 +11,6 @@ import { FOOTER_INFO, FooterInfo } from './footer-info.contants';
   },
 })
 export class FooterComponent {
-  public footerInfo: FooterInfo[] = FOOTER_INFO;
+  public currentYear = new Date().getFullYear();
+
 }

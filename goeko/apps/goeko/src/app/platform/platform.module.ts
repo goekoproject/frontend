@@ -1,9 +1,24 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { SelectI18nComponent } from '@goeko/business-ui'
-import { GoShowUserTypeDirective, ShowForRolesDirective, ToastComponent } from '@goeko/store'
-import { BadgeModule, DialogMessageModule, DialogService, NotificationModule, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui'
+import { LoadDataUser, SelectI18nComponent } from '@goeko/business-ui'
+import {
+  GoShowUserTypeDirective,
+  isSubscribedCleantech,
+  LocationsService,
+  ShowForRolesDirective,
+  ToastComponent,
+  UserService,
+} from '@goeko/store'
+import {
+  BadgeModule,
+  DialogMessageModule,
+  DialogService,
+  NotificationModule,
+  NotificationService,
+  SideDialogModule,
+  UiBreadcrumbsModule,
+} from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { HeaderUserComponent } from '../shell/header-user/header-user.component'
 import { MenuUserComponent } from '../shell/menu-user/menu-user.component'
@@ -26,6 +41,6 @@ import { PlatformComponent } from './platform.component'
     GoShowUserTypeDirective,
     ToastComponent,
   ],
-  providers: [DialogService],
+  providers: [DialogService,  LoadDataUser, isSubscribedCleantech, NotificationService, LocationsService],
 })
 export class PlatformModule {}

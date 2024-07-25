@@ -218,7 +218,8 @@
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
     "cookiesPolicy": "Politique de cookies",
-    "privacyPolicy": "Politique de confidentialité"
+    "privacyPolicy": "Politique de confidentialité",
+    "legal": "Légal"
   },
   "LOGIN": {
     "msglogin": "Connectez-vous à votre compte",
@@ -379,7 +380,7 @@
       "paintVarnish": "Solvants à peintures/ vernis",
       "productsContainingTar": "Produits contenant du goudron",
       "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses",
-      "collects": "Colles"
+      "collects": "Adhésif"
     },
     "selectSpecialWaste": {
       "aerosols": "Aérosols",
@@ -403,11 +404,11 @@
     },
     "selectSustainableBuildingOperations": {
       "chargeElectricVehicles": "Charger des véhicules électriques",
-      "electricMeansOfTransport": "Des moyens de transport électrique​",
+      "electricMeansOfTransport": "Moyens de transport électrique​",
       "optimizeEnergyConsumption": "Optimiser la consommation d’énergie",
       "recoverHeat": "Récupérer la chaleur",
       "storeEnergy": "Stocker l’énergie",
-      "useLowConsumptionLighting": "Des solutions de refroidissement écologiques",
+      "useLowConsumptionLighting": "Solutions de refroidissement écologiques",
       "useRenewableEnergies": "Recourir à des énergies renouvelables",
       "sustainableLightingSystems": "Des systèmes d’éclairage durables",
       "intelligentHeatingSystems": "Systèmes de chauffage intelligent",
@@ -436,7 +437,7 @@
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",
     "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
-    "messageNotification": "Activez les notifications par email pour recevoir les dernières écosolutions pour votre questionnaire."
+    "messageNotification": "Activez les notifications par email pour recevoir les dernières éco-solutions correspondant à vos besoins."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
@@ -522,5 +523,6 @@
   "yes": "Oui",
   "your_ecosolutions": "Vos Eco-solutions",
   "regions": "Régions",
-  "titleBannerLead": "Suivi des leads qualifiés"
+  "titleBannerLead": "Suivi des leads qualifiés",
+  "followUs": "Suivez-nous"
 }

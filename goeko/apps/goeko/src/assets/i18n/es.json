@@ -135,7 +135,7 @@
   "FORM_LABEL": {
     "labelSelectedFormLang": "Selecciona el idioma para completar tu eco-solución.",
     "titleSelectImgEcosolution": "Elija varias imágenes para su EcoSolution",
-    "titleFormAnalysis": "Elija una Categoría y encuentre sus eco-soluciones",
+    "titleFormAnalysis": "Elija una categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
     "advantages": "Ventajas",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
@@ -219,7 +219,8 @@
   "LEGAL": {
     "cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
     "cookiesPolicy": "Politica de cookies",
-    "privacyPolicy": "Politica de privacidad"
+    "privacyPolicy": "Politica de privacidad",
+    "legal": "Legal"
   },
   "LOGIN": {
     "msglogin": "Inicia sesión en tu cuenta",
@@ -381,7 +382,7 @@
       "paintVarnish": "Pintura/barniz",
       "productsContainingTar": "Productos que contienen alquitrán",
       "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas",
-      "collects": "Aleaciones"
+      "collects": "Adhesivo"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosoles",
@@ -422,7 +423,7 @@
     "co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO2",
     "ods": "Vinculado a su solución ecológica",
     "paybackPeriodYears": "Número de años para rentabilizar la inversión respecto a una solución tradicional",
-    "selectProducts": "Tipos de productos tóxicos reemplaza o mejora su solución ecológica",
+    "selectProducts": "Tipos de productos tóxicos que reemplaza o mejora su solución ecológica",
     "waste": "Tipos de residuos",
     "waterConsumption": "Actividades relacionadas con el consumo de agua"
   },
@@ -438,7 +439,7 @@
     "saveMessageGeneric": "¿Deseas guardar los datos antes de continuar?",
     "messaggeProfileUncompletedTitle": "Completa tu perfil",
     "messaggeProfileUncompletedBody": "Actualiza tu perfil para acceder a todas las herramientas de Goeko.",
-    "messageNotification": "Activa las notificaciones por email para recibir las últimas ecosoluciones para tu cuestionario."
+    "messageNotification": "Activa las notificaciones por email para recibir las últimas ecosoluciones que se adapten a tus necesidades."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbete para acceso completo! Descubre más.",
@@ -518,5 +519,6 @@
   "years": "años",
   "yes": "Si",
   "regions": "Comunidades Autónomas",
-  "titleBannerLead": "Seguimiento de Leads Calificados"
+  "titleBannerLead": "Seguimiento de Leads Calificados",
+  "followUs": "Síguenos"
 }
