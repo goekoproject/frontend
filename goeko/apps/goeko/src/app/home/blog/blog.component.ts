@@ -1,17 +1,13 @@
-import { Component } from '@angular/core';
-import { BaseDataContentFulComponent, ContentFulService } from '@goeko/store';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
+import { Component } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   standalone: true,
   selector: 'goeko-blog',
   imports: [TranslateModule, RouterModule, CommonModule],
-  templateUrl: './blog.component.html',
+  template: `<router-outlet></router-outlet>`,
   styleUrls: ['./blog.component.scss'],
 })
-
-export class BlogComponent {
-
-}
+export class BlogComponent {}
