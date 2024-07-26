@@ -77,7 +77,12 @@
                   [controlNameProvince]="'regions'"></goeko-select-locations>
               }
               @default {
-                <go-input [formControlName]="itemForm.controlName" type="{{ itemForm.type }}" class="{{ itemForm.className }}">
+                <go-input
+                  [formControlName]="itemForm.controlName"
+                  name="{{ itemForm.type }}"
+                  type="{{ itemForm.type }}"
+                  [placeholder]="itemForm.placeholder || ''"
+                  class="{{ itemForm.className }}">
                   <p slot="label">{{ itemForm.label | translate }}</p>
                   @if (itemForm.required) {
                     <p class="required-field" slot="required">{{ 'mandatory' | translate }}</p>

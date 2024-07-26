@@ -26,6 +26,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         controlName: 'website',
         label: 'FORM_LABEL.website',
         type: 'url',
+        placeholder: 'www.example.com',
       },
     ],
   },

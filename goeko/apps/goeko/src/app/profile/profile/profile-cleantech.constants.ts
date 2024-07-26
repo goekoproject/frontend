@@ -1,4 +1,4 @@
-import { ProfileFieldset } from './profile-fieldset.interface';
+import { ProfileFieldset } from './profile-fieldset.interface'
 
 export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
   {
@@ -31,6 +31,7 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         controlName: 'link',
         label: 'FORM_LABEL.website',
         type: 'url',
+        placeholder: 'www.example.com',
       },
       {
         controlName: 'logo',
@@ -40,4 +41,4 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
       },
     ],
   },
-];
+]
