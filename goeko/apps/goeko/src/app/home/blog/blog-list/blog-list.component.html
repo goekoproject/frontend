@@ -10,8 +10,8 @@
         <article
           class="group w-full transform rounded-2xl border border-gray-300 shadow-lg transition-transform hover:scale-105 sm:max-w-sm max-md:max-w-lg lg:w-1/2 xl:w-1/2 2xl:w-1/2">
           <div class="flex h-64 items-center justify-center rounded-t-2xl bg-gray-200">
-            <img src="post.fields['image']['en-US'].url" alt="Image" class="h-full w-full rounded-t-2xl object-cover" />
-            <span class="text-gray-400"></span>
+            <img src="" alt="Image" class="h-full w-full rounded-t-2xl object-cover" />
+            <span class="text-gray-400">{{ post.fields['image'] }}</span>
           </div>
           <div class="rounded-b-2xl p-4 transition-all duration-300 group-hover:bg-gray-50 lg:p-6">
             <div class="mb-3 flex justify-between">
@@ -21,7 +21,7 @@
             <h2 class="mb-5 text-xl font-medium leading-8 text-gray-900" id="post-title-1">{{ post.fields['title'] }}</h2>
             <p class="mb-10 leading-6 text-gray-500" id="post-text-1">{{ post.fields['content'] }}</p>
             <a [routerLink]="['../blog/' + post.sys['id']]" class="cursor-pointer text-lg font-semibold text-green-500 hover:underline"
-              >Read more...</a
+              >{{ 'readMore' | translate }}</a
             >
           </div>
         </article>
