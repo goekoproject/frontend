@@ -3,28 +3,25 @@
     <header class="mb-4 lg:mb-6 not-format">
         <address class="flex items-center mb-6 not-italic">
             <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-black">
-                <div class="flex items-center bg-gray-200 justify-center mr-4 w-20 h-20 rounded-full">
-                  <img src="" alt="Placeholder Image">
-                </div>
+                <!--<div class="flex items-center bg-gray-200 justify-center mr-4 w-20 h-20 rounded-full">
+                  <img [src]="blogPost.fields['image']" alt="Placeholder Image">
+                </div>-->
                 <div>
-                    <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-black">Daniel Ezkenazi</a>
-                    <p class="text-primary-400 font-medium">CMO, Cofondateur de GoEko</p>
+                    <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-black">{{ blogPost.fields['author'] }}</a>
+                    <p class="text-primary-400 font-medium">{{ blogPost.fields['occupation'] }}</p>
                     <p class="text-primary-400 font-medium">
-                      <time pubdate datetime="2022-02-08" title="February 8th, 2022">Jul. 25, 2024</time>
+                      <span>{{ blogPost.fields['creationDate'] | goDateFormat }}</span>
                     </p>
                 </div>
             </div>
         </address>
-        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-black">Put your title here</h1>
+        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-black">{{ blogPost.fields['title'] }}</h1>
     </header>
     <div class="mb-8 mt-8 flex items-center bg-gray-200 h-64 justify-center rounded-2xl">
-      <img src="" alt="Placeholder Image">
+      <img [src]="blogPost.fields['image']" alt="Placeholder Image">
     </div>
     <section class="prose dark:prose-dark">
-      <p class="mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet architecto, debitis natus libero harum odio ducimus officia expedita minus dolor praesentium placeat velit, recusandae, nulla ex dolorem iusto deserunt.
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      </p>
+      <p class="mb-8">{{ blogPost.fields['content'] }}</p>
     </section>
   </article>
 </div>
