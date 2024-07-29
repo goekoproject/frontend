@@ -4,7 +4,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule
 import { LocationRegions } from '@goeko/store'
 import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { Subject, Subscription, distinctUntilChanged, filter, map, merge, mergeMap, take, takeUntil } from 'rxjs'
+import { Subject, Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -60,6 +60,7 @@ export class SelectLocationsComponent implements AfterViewInit {
   private _selectLocationsService = inject(SelectLocationsService)
   public countries = this._selectLocationsService.countries
   public regions = this._selectLocationsService.regions
+  @Input()
   public toogleEdit = false
   public newLocation = false
   public disabledRegions = false
@@ -78,7 +79,8 @@ export class SelectLocationsComponent implements AfterViewInit {
     )?.controls['regions']
   }
 
-  public dataSourceSelect: Map<string, LocationRegions[]> = new Map()
+  public dataSourceSelect = new Map<string, any>()
+  public test = ''
   public selectedLocationsIndex = signal<number>(0)
   formArraySubscription!: Subscription
   public getOnlyRegions() {
@@ -95,15 +97,7 @@ export class SelectLocationsComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
-    this.controlLocations.valueChanges
-      .pipe(
-        takeUntil(this.destroy$),
-        filter(() => this.controlLocations.controls.length > 0),
-        take(1),
-      )
-      .subscribe(() => {
-        this.subscribeToFormArrayAndItemChanges()
-      })
+    this.subscribeToFormArrayAndItemChanges()
   }
 
   private subscribeToFormArrayAndItemChanges(): void {
@@ -113,8 +107,7 @@ export class SelectLocationsComponent implements AfterViewInit {
           map((value) => ({ index, value })),
           filter((change) => change.index >= 0), // only index positive
           distinctUntilChanged((prev, curr) => prev.value.country.code === curr.value.country.code),
-          map((change) => change.value.country.code.code), // Transforma el cambio en el código de país
-          takeUntil(this.destroy$),
+          map((newValue) => newValue.value.country.code.code || newValue.value.country.code), // Transforma el cambio en el código de país
         ),
       ),
     )
@@ -127,6 +120,7 @@ export class SelectLocationsComponent implements AfterViewInit {
       )
       .subscribe(({ countryCode, regiones }) => {
         this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince, ...regiones])
+        this.test = '2'
       })
   }
 
@@ -136,6 +130,8 @@ export class SelectLocationsComponent implements AfterViewInit {
     } else {
       this.dataSourceSelect.set(clave, valor)
     }
+
+    this.test = '1'
   }
 
   selectALL() {
