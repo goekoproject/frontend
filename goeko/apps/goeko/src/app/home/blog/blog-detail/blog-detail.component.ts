@@ -2,12 +2,9 @@ import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { ContentFulService, ContentFulModule } from '@goeko/store'
-import { map } from 'rxjs'
 import { GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { RouterModule } from '@angular/router'
-import { switchMap } from 'rxjs'
-import { from } from 'rxjs'
 
 
 @Component({
