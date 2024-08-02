@@ -26,7 +26,7 @@
         alt="blogPost.fields['image'].fields.title" />
     </div>
     <section class="prose dark:prose-dark">
-      <div class="mb-8 flex flex-col gap-4 [&>p>a]:text-blue-400" [innerHTML]="blogPost.fields['content'] | mdToHtml"></div>
+      <div class="mb-8 flex flex-col gap-4 [&>p>a]:text-blue-400 [&>p]:text-pretty" [innerHTML]="blogPost.fields['content'] | mdToHtml"></div>
     </section>
   </article>
 </div>

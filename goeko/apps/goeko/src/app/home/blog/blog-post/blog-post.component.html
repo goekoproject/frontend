@@ -12,7 +12,7 @@
       <span class="font-medium text-primary-400">{{ post.fields['author'] }}</span>
     </div>
     <h2 class="mb-5 text-xl font-medium leading-8 text-gray-900" id="post-title-1">{{ post.fields['title'] }}</h2>
-    <p class="mb-10 line-clamp-2 leading-6 text-gray-500" id="post-text-1">{{ post.fields['content'] }}</p>
+    <p class="mb-10 line-clamp-2 leading-6 text-gray-500" id="post-text-1">{{ post.fields['summary'] }}</p>
     <a [routerLink]="['../blog/' + post.sys['id']]" class="cursor-pointer text-lg font-semibold text-green-500 hover:underline">
       {{ 'readMore' | translate }}</a
     >
