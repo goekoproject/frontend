@@ -70,7 +70,7 @@ export class ContentFulService {
     );
   }
 
-  getAssets(id: string) {
+  getAssetsById(id: string) {
     from(this._client.getAsset(id));
   }
 }
