@@ -58,7 +58,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
     this._onChangeLang()
   }
   ngAfterViewInit(): void {
-    this._getContentDataActors(this.article)
+    this._getContentDataActors()
   }
 
   private _effectActors() {
@@ -74,7 +74,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
 
   private _onChangeLang() {
     this._translate.onLangChange.subscribe((res) => {
-      this._getContentDataActors(this.article)
+      this._getContentDataActors()
       this._getContentActors()
       this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY)
       this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
@@ -83,7 +83,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
   }
 
   @OnViewportChange()
-  private _getContentDataActors(artivleRef: ElementRef<any>) {
+  private _getContentDataActors() {
     this._homeService.getContentType(CONTENT_TYPE_DATA.ACTORS).subscribe((res) => {
       this.articles = res.map((actor: any) => ({
         ...actor,
