@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { AuthGuard } from '@auth0/auth0-angular'
 import { AppComponent } from './app.component'
 
 const ROUTES: Routes = [
@@ -8,8 +9,17 @@ const ROUTES: Routes = [
     component: AppComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
         path: 'login-universal',
         loadComponent: () => import('./access/login-universal.component').then((m) => m.LoginUniversalComponent),
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./access/access.module').then((m) => m.AccessModule),
       },
       {
         path: 'home',
@@ -18,6 +28,7 @@ const ROUTES: Routes = [
       {
         path: 'platform',
         loadChildren: () => import('./platform/platform.module').then((m) => m.PlatformModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'verify-email',
@@ -27,11 +38,11 @@ const ROUTES: Routes = [
         path: 'autenticate',
         loadComponent: () => import('@goeko/business-ui').then((m) => m.AutenticateComponent),
       },
-      {
+      /*       {
         path: '**',
         redirectTo: 'home',
         pathMatch: 'full',
-      },
+      }, */
     ],
   },
 ]

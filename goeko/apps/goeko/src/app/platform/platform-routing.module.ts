@@ -10,10 +10,6 @@ const routes: Routes = [
     component: PlatformComponent,
     children: [
       {
-        path: 'autenticate',
-        loadComponent: () => import('@goeko/business-ui').then((m) => m.AutenticateComponent),
-      },
-      {
         path: 'dashboard',
         canActivate: [AuthGuard],
         loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),

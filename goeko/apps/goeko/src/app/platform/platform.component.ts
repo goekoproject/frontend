@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common'
 import { Component, effect, Inject, OnInit, signal } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 import { VAR_GENERAL } from '@goeko/business-ui'
 import { AuthService, REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
 import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store'
@@ -31,11 +32,13 @@ export class PlatformComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private _authService: AuthService,
-    private readonly userService: UserService,
+    private readonly _userService: UserService,
     private _notificationService: NotificationService,
     private readonly _remoteConfigService: RemoteConfigService,
     private _paymentService: PaymentSystemService,
     private _translate: TranslateService,
+    private _router: Router,
+    private _activateddRoute: ActivatedRoute,
   ) {
     effect(() => {
       this._hanlderCleantechSuscriptions()
@@ -43,7 +46,16 @@ export class PlatformComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._loadAuhtUser()
     this._messageAfterSignUp()
+  }
+
+  private _loadAuhtUser() {
+    this._authService.userAuth$.subscribe((user) => {
+      if (user) {
+        this._userService.setUserData(user)
+      }
+    })
   }
   private _messageAfterSignUp() {
     this._authService._auth0.getAccessTokenSilently().subscribe({
@@ -59,8 +71,8 @@ export class PlatformComponent implements OnInit {
     if (!this._isSuscriptionNeed()) {
       return
     }
-    if (this.userService.userType() && this.isSubscribed !== STATUS_PENDING) {
-      this.cleantechUnsubscribed = this.userService.userType() === USER_TYPE.CLEANTECH && !this.isSubscribed
+    if (this._userService.userType() && this.isSubscribed !== STATUS_PENDING) {
+      this.cleantechUnsubscribed = this._userService.userType() === USER_TYPE.CLEANTECH && !this.isSubscribed
       this._showNotificationsCleantechUnsubscribed()
     }
   }

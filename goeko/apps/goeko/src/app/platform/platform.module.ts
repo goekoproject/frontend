@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { LoadDataUser, SelectI18nComponent } from '@goeko/business-ui'
+import { SelectI18nComponent } from '@goeko/business-ui'
 import {
   GoShowUserTypeDirective,
   isSubscribedCleantech,
@@ -41,6 +41,6 @@ import { PlatformComponent } from './platform.component'
     GoShowUserTypeDirective,
     ToastComponent,
   ],
-  providers: [DialogService,  LoadDataUser, isSubscribedCleantech, NotificationService, LocationsService],
+  providers: [DialogService, UserService, isSubscribedCleantech, NotificationService, LocationsService],
 })
 export class PlatformModule {}

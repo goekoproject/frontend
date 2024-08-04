@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit(): void {
 		this._createFormLogin();
-		console.log(this.formSignup);
 	}
 
 	private _createFormLogin() {

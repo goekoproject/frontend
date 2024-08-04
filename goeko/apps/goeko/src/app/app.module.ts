@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -7,9 +7,9 @@ import { AppComponent } from './app.component'
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { handlerHttpInterceptor, LoadDataUser, loadDataUserFactory, PopupModule, SelectI18nComponent } from '@goeko/business-ui'
+import { handlerHttpInterceptor, PopupModule, SelectI18nComponent } from '@goeko/business-ui'
 import { ConfigModule, GoRemoteConfigModule } from '@goeko/core'
-import { ContentFulModule, UserService } from '@goeko/store'
+import { ContentFulModule } from '@goeko/store'
 import { ButtonModule, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
@@ -50,13 +50,6 @@ export const httpLoaderFactory = (http: HttpClient) => {
     }),
   ],
   providers: [
-    UserService,
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: loadDataUserFactory,
-      deps: [LoadDataUser],
-    },
     provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],

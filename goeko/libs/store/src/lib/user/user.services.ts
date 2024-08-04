@@ -5,8 +5,10 @@ import { User } from '@auth0/auth0-angular'
 import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
+import { Router } from '@angular/router'
 import { Picture } from '../model/pictures.interface'
 import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api'
+import { UserData } from './user-data.interface'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
 
 @Injectable()
@@ -24,7 +26,14 @@ export class UserService {
   public userType$ = toObservable<UserType>(this.userAuthData()['userType'])
 
   public completeLoadUser = new BehaviorSubject<boolean>(false)
-  constructor(public _http: HttpClient) {
+
+  public setUserData(user: User) {
+    this.userAuthData.set(user)
+  }
+  constructor(
+    public _http: HttpClient,
+    private _router: Router,
+  ) {
     effect(() => {
       if (this.userAuthData().sub) {
         this._getDataProfile()
@@ -45,20 +54,34 @@ export class UserService {
       .subscribe((data) => {
         if (data) {
           this.propagateDataUser(data)
+          this._redirectWhenLoadUser()
         }
-        this.fechAuthUser.next(true)
       })
   }
-  private _getByIdExternal(): Observable<any> {
+  private _getByIdExternal(): Observable<UserData> {
     const _id = this.externalId()
     const params = new HttpParams().set('id', _id)
-    return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/external`, {
+    return this._http.get<UserData>(`/v1/actor/${this.actorsEndpoint()}/external`, {
       params,
     })
   }
 
-  getById(id: string): Observable<any> {
-    return this._http.get<any>(`/v1/actor/${this.actorsEndpoint()}/` + id)
+  private _redirectWhenLoadUser() {
+    if (this.userProfile().id) {
+      this._redirectDashboard()
+    } else {
+      this._redirectProfile()
+    }
+  }
+  private _redirectDashboard() {
+    this._router.navigate([`platform/dashboard/${this.userType()}`])
+  }
+  private _redirectProfile() {
+    this._router.navigate([`platform/profile/${this.externalId()}`])
+  }
+
+  getById(id: string): Observable<UserData> {
+    return this._http.get<UserData>(`/v1/actor/${this.actorsEndpoint()}/` + id)
   }
   fetchUser() {
     this.getById(this.userProfile().id).subscribe((data) => this.propagateDataUser(data))
@@ -82,7 +105,7 @@ export class UserService {
     return of(null)
   }
 
-  private propagateDataUser(data: any) {
+  private propagateDataUser(data: UserData) {
     const user = UserFactory.createUserProfileBuilder(this.userAuthData()['userType']).init(data).build()
     this.userProfile.set(user)
     this.completeLoadUser.next(true)

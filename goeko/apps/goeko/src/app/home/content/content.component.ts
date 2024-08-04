@@ -84,7 +84,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
 
   @OnViewportChange()
   private _getContentDataActors(artivleRef: ElementRef<any>) {
-    console.log(artivleRef)
     this._homeService.getContentType(CONTENT_TYPE_DATA.ACTORS).subscribe((res) => {
       this.articles = res.map((actor: any) => ({
         ...actor,

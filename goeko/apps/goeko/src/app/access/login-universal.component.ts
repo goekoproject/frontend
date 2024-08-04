@@ -1,15 +1,12 @@
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER, Component } from '@angular/core'
-import { LoadDataUser, loadDataUserFactory } from '@goeko/business-ui'
+import { Component } from '@angular/core'
 import { AuthService } from '@goeko/core'
 
 @Component({
   selector: 'goeko-login-universal',
   standalone: true,
   imports: [CommonModule],
-  providers: [
-
-  ],
+  providers: [],
   templateUrl: './login-universal.component.html',
   styleUrl: './login-universal.component.scss',
 })
