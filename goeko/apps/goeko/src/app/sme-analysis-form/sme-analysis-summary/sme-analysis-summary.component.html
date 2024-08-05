@@ -1,12 +1,11 @@
 <div class="summary">
-  <go-notification [type]="'info'">
-    <go-toggle-switch
-      (checkedChange)="getEnableNotificationEmail($event)"
-      [checked]="currentAnalytics()?.notification?.onNewEcosolution"></go-toggle-switch>
-    <p>{{ 'DIALOG.messageNotification' | translate }}</p>
-  </go-notification>
-
   @if (isProject) {
+    <go-notification [type]="'info'">
+      <go-toggle-switch
+        (checkedChange)="getEnableNotificationEmail($event)"
+        [checked]="currentAnalytics()?.notification?.onNewEcosolution"></go-toggle-switch>
+      <p>{{ 'DIALOG.messageNotification' | translate }}</p>
+    </go-notification>
     <section class="search-name-section">
       <go-input [value]="currentAnalytics()?.searchName" id="searchName" type="text" (valueChange)="changeSearchName($event)">
         <span slot="label">{{ 'FORM_LABEL.name_project' | translate }}</span>
