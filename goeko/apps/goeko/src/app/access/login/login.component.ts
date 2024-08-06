@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   formSignup!: FormGroup
   public signUpOk!: boolean
   public isErrorPolicyPassword!: boolean
+  showPassword = false
 
   constructor(
     private _fb: FormBuilder,
@@ -62,5 +63,8 @@ export class LoginComponent implements OnInit {
         },
       )
     }
+  }
+  tooglePassword() {
+    this.showPassword = !this.showPassword
   }
 }
