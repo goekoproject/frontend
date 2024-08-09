@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { redirectIsAuthenticated } from '@goeko/core'
 import { AccessComponent } from './access.component'
 import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
-import { redirectIsAuthenticated } from '@goeko/core'
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
       {
         path: '',
         component: LoginComponent,
-        canActivate: [redirectIsAuthenticated]
+        canActivate: [redirectIsAuthenticated],
       },
       {
         path: 'signup',
