@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { AfterViewInit, Component, Input, inject, signal } from '@angular/core'
 import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions } from '@goeko/store'
-import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
+import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
@@ -22,7 +22,6 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
 
   return null
 }
-@AutoUnsubscribe()
 @Component({
   selector: 'goeko-select-locations',
   standalone: true,
