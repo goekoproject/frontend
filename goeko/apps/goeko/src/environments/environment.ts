@@ -2,6 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { connect } from "http2";
+
 export const environment = {
   production: false,
   baseUrl: 'https://platform.goeko-api.com',
@@ -10,6 +12,7 @@ export const environment = {
   audience: 'goeko-backend',
   accessToken: 'https://soft-glitter-5713.eu.auth0.com/oauth/token',
   domainAuth0: 'soft-glitter-5713.eu.auth0.com',
+  connection:'goeko-users',
   firebaseApp: {
     apiKey: 'AIzaSyBoLASPKVeKXwrV4Do6MTm1pLHbRk2RUdI',
     authDomain: 'goeko-c8a23.firebaseapp.com',

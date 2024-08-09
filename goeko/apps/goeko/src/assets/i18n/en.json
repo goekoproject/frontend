@@ -227,7 +227,8 @@
     "msglogin": "Log in in your account",
     "msglogin2": "Already have account?",
     "msgsignup": "Do not have any account?",
-    "msgsignup2": "Create your account"
+    "msgsignup2": "Create your account",
+    "forgotPassword": "Forgot  password?"
   },
   "SIGNUP": {
     "acceptedConditions": "I have read and accept the",

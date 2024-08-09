@@ -50,6 +50,7 @@ import { PlatformComponent } from './platform.component'
       clientId: environment.clientId,
       domainAuth0: environment.domainAuth0,
       audience: environment.audience,
+      connection: environment.connection,
     }),
   ],
   providers: [

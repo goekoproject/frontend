@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, OnInit, signal, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AccessService } from '../access.services'
 
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   formLogin!: FormGroup
   public signUpOk!: boolean
   showPassword = false
-
+  changePassword =signal<boolean>(false)
   constructor(
     private _fb: FormBuilder,
     private _accessService: AccessService,
@@ -42,5 +42,11 @@ export class LoginComponent implements OnInit {
 
   tooglePassword() {
     this.showPassword = !this.showPassword
+  }
+
+  public resetPassword() {
+    this._accessService.changePassword(this.formLogin.value.email).subscribe((res) => {
+      console.log(res)
+    })
   }
 }

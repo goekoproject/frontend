@@ -49,7 +49,7 @@ export class AuthService extends Auth0Connected {
     @Inject(DOCUMENT) private doc: Document,
     private readonly _translate: TranslateService,
   ) {
-    super(_config.domainAuth0, _config.clientId, AUTH_CONNECT.REDIRECT_URI)
+    super(_config,AUTH_CONNECT.REDIRECT_URI)
     this._clientId = this._config.clientId
   }
 
@@ -69,7 +69,7 @@ export class AuthService extends Auth0Connected {
     const body = {
       email: newBody.email,
       password: newBody.password,
-      connection: newBody.connection,
+      connection: this._config.connection,
       userMetadata: newBody.user_metadata,
     }
     return new Observable((observer) => {
@@ -119,6 +119,6 @@ export class AuthService extends Auth0Connected {
   }
 
   changePassword(email: string) {
-    this.changePasswordAuth0(email)
+    return this.changePasswordAuth0(email)
   }
 }

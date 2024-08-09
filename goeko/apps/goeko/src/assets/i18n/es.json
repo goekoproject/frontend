@@ -226,7 +226,8 @@
     "msglogin": "Inicia sesión en tu cuenta",
     "msglogin2": "¿Ya tienes una cuenta?",
     "msgsignup": "¿No tienes una cuenta todavía ?",
-    "msgsignup2": "Cree su cuenta"
+    "msgsignup2": "Cree su cuenta",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
   },
   "SIGNUP": {
     "acceptedConditions": "He leído y aceptado",

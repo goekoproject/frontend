@@ -225,7 +225,8 @@
     "msglogin": "Connectez-vous à votre compte",
     "msglogin2": "Déjà un compte ?",
     "msgsignup": "Vous n'avez pas de compte ?",
-    "msgsignup2": "Créez votre compte"
+    "msgsignup2": "Créez votre compte",
+    "forgotPassword": "Mot de passe oublié ?"
   },
   "SIGNUP": {
     "acceptedConditions": "J’ai lu et accepté",

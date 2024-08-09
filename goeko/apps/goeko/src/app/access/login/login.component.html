@@ -4,20 +4,27 @@
   <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
     <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
   </go-input>
-  <go-input
-    [formControlName]="'password'"
-    [type]="showPassword ? 'text' : 'password'"
-    minlength="8"
-    id="current-password"
-    name="current-password">
-    <p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
-    @if (showPassword) {
-      <i class="ti ti-eye absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
-    } @else {
-      <i class="ti ti-eye-closed absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
-    }
-  </go-input>
-  <button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
+  @if (!changePassword()) {
+    <go-input
+      [formControlName]="'password'"
+      [type]="showPassword ? 'text' : 'password'"
+      minlength="8"
+      id="current-password"
+      name="current-password">
+      <p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
+      @if (showPassword) {
+        <i class="ti ti-eye absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
+      } @else {
+        <i class="ti ti-eye-closed absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
+      }
+    </go-input>
+  }
+
+  <a (click)="changePassword.set(true)" class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500">{{
+    'LOGIN.forgotPassword' | translate
+  }}</a>
+
+  <button type="submit" go-button appearance="primary" (click)="!changePassword() ? submit() : resetPassword()">
     {{ 'Login' | translate }}
   </button>
   <p>

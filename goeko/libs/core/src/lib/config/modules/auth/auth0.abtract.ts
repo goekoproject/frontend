@@ -3,11 +3,13 @@ import { Router } from '@angular/router'
 import { ROLES } from '@goeko/store'
 import { Auth0UserProfile, WebAuth } from 'auth0-js'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { Options } from '../../models/options.interface'
 import { SessionStorageService } from '../../services/session-storage.service'
 import { EXPIRES_AT, SESSIONID } from './auth.constants'
 export const ACCESS_TOKEN = 'accessToken'
 export const SS_JWTDATA = 'jwtData'
 const namespace = 'https://goeko'
+
 const getUserRole = (userData: any) => {
   if (!userData) return [ROLES.PUBLIC]
   const roles = userData[`${namespace}/roles`]
@@ -35,6 +37,7 @@ export interface AuthResponse {
 export abstract class Auth0Connected {
   public webAuth!: WebAuth
   public expiresIn!: number
+  private _connection: string
   private _domain: string
   private _clientID: string
   private _redirectUri: string
@@ -64,10 +67,12 @@ export abstract class Auth0Connected {
   _router = inject(Router)
   sessionStorage = inject(SessionStorageService)
 
-  constructor(domain: string, clientId: string, redirectUri: string) {
-    this._domain = domain
+  constructor(config: Options, redirectUri: string) {
+    const { domainAuth0, clientId, connection } = config
+    this._domain = domainAuth0
     this._clientID = clientId
     this._redirectUri = redirectUri
+    this._connection = connection
     this._connectAuth0()
   }
 
@@ -114,15 +119,21 @@ export abstract class Auth0Connected {
   }
 
   changePasswordAuth0(email: string) {
-    this.webAuth.changePassword(
-      {
-        connection: 'Username-Password-Authentication',
-        email,
-      },
-      (error, result) => {
-        console.log(result)
-        console.log(error)
-      },
-    )
+    return new Observable<any>((observer) => {
+      this.webAuth.changePassword(
+        {
+          connection: this._connection,
+          email,
+        },
+        (error, result) => {
+          if (error) {
+            observer.error(error)
+          } else {
+            observer.next(result)
+            observer.complete()
+          }
+        },
+      )
+    })
   }
 }

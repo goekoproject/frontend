@@ -1,5 +1,4 @@
 import { DOCUMENT } from '@angular/common'
-import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { AuthService } from '@goeko/core'
 import { SignUp } from './singup.model'
@@ -24,7 +23,11 @@ export class AccessService {
   public afterSignUp() {
     this._authService.logout(this._urlPageEmailVerify)
   }
-  public login(body: any) {
+  public login(body: { email: string; password: string }) {
     this._authService.isLoggedIn({ username: body.email, password: body.password })
+  }
+
+  public changePassword(email: string) {
+    return this._authService.changePassword(email)
   }
 }
