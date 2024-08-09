@@ -2,14 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
 import { LoadDataUser, SelectI18nComponent } from '@goeko/business-ui'
-import {
-  GoShowUserTypeDirective,
-  isSubscribedCleantech,
-  LocationsService,
-  ShowForRolesDirective,
-  ToastComponent,
-  UserService,
-} from '@goeko/store'
+import { GoShowUserTypeDirective, isSubscribedCleantech, LocationsService, ShowForRolesDirective, ToastComponent } from '@goeko/store'
 import {
   BadgeModule,
   DialogMessageModule,
@@ -41,6 +34,6 @@ import { PlatformComponent } from './platform.component'
     GoShowUserTypeDirective,
     ToastComponent,
   ],
-  providers: [DialogService,  LoadDataUser, isSubscribedCleantech, NotificationService, LocationsService],
+  providers: [DialogService, LoadDataUser, isSubscribedCleantech, NotificationService, LocationsService],
 })
 export class PlatformModule {}

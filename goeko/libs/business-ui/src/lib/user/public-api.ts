@@ -1,1 +1,1 @@
-export * from './load-user-data.service';
+export * from './load-user-data.service'

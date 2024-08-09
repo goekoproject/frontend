@@ -4,7 +4,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule
 import { LocationRegions } from '@goeko/store'
 import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { Subject, Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
+import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -37,8 +37,6 @@ export class SelectLocationsComponent implements AfterViewInit {
   public compareSelectedCountry = (o1: any, o2: any) => {
     return o1 === o2
   }
-  private destroy$ = new Subject<void>()
-
   public optionAllProvince = {
     code: null,
     label: 'FORM_LABEL.allProvinces',
@@ -80,7 +78,6 @@ export class SelectLocationsComponent implements AfterViewInit {
   }
 
   public dataSourceSelect = new Map<string, any>()
-  public test = ''
   public selectedLocationsIndex = signal<number>(0)
   formArraySubscription!: Subscription
   public getOnlyRegions() {
@@ -88,10 +85,6 @@ export class SelectLocationsComponent implements AfterViewInit {
   }
   public getAllReggions() {
     return this.controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code === this.optionAllProvince.code)
-  }
-
-  public loadRegions(regions: LocationRegions[]) {
-    return regions.every((region) => region.code)
   }
 
   constructor() {}
@@ -120,7 +113,6 @@ export class SelectLocationsComponent implements AfterViewInit {
       )
       .subscribe(({ countryCode, regiones }) => {
         this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince, ...regiones])
-        this.test = '2'
       })
   }
 
@@ -130,8 +122,6 @@ export class SelectLocationsComponent implements AfterViewInit {
     } else {
       this.dataSourceSelect.set(clave, valor)
     }
-
-    this.test = '1'
   }
 
   selectALL() {
