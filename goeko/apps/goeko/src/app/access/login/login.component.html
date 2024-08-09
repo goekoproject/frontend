@@ -1,63 +1,26 @@
-<div class="access">
-  <div class="hidden md:block md:w-1/2"></div>
-  <div class="login-singup">
-    <div class="flex flex-col">
-      <img alt="logo-access" src="assets/logo.png" #logo [routerLink]="['/']" class="w-1/6" />
-      <h1 class="text-2xl font-bold">{{ 'LOGIN.msglogin' | translate }}</h1>
-    </div>
+<h1 class="text-2xl font-bold">{{ 'LOGIN.msglogin' | translate }}</h1>
 
-    <ng-container *ngTemplateOutlet="typeForm ? login : signup"></ng-container>
-    <button class="arrow-back" [routerLink]="['/home']">
-      <span class="material-symbols-rounded"> arrow_back_ios </span>
-    </button>
-  </div>
-</div>
-
-<ng-template #login>
-  <form class="login" [formGroup]="formLogin">
-    <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
-      <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
-    </go-input>
-    <go-input
-      [formControlName]="'password'"
-      [type]="showPassword ? 'text' : 'password'"
-      minlength="8"
-      id="current-password"
-      name="current-password">
-      <p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
-      @if (showPassword) {
-        <i class="ti ti-eye absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
-      } @else {
-        <i class="ti ti-eye-closed absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
-      }
-    </go-input>
-    <button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
-      {{ 'Login' | translate }}
-    </button>
-    <p>
-      {{ 'LOGIN.msgsignup' | translate }} <a (click)="createFormSignup(false)">{{ 'Sign up' | translate }}</a>
-    </p>
-  </form>
-</ng-template>
-
-<ng-template #signup>
-  <span>{{ 'LOGIN.msgsignup2' | translate }}</span>
-
-  <form>
-    <div *ngIf="signUpOk" class="signup-ok">
-      <go-loader-check></go-loader-check>
-      <button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
-        {{ 'Login' | translate }}
-      </button>
-    </div>
-    <goeko-signup
-      *ngIf="!signUpOk"
-      [formSignup]="formSignup"
-      [isErrorPolicyPassword]="isErrorPolicyPassword"
-      (gotToLogin$)="createFormSignup($event)">
-      <button type="button" go-button appearance="primary" (click)="submitSignUp()" [disabled]="formSignup.invalid">
-        {{ 'Sign up' | translate }}
-      </button>
-    </goeko-signup>
-  </form>
-</ng-template>
+<form [formGroup]="formLogin" class="flex flex-col gap-4">
+  <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
+    <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+  </go-input>
+  <go-input
+    [formControlName]="'password'"
+    [type]="showPassword ? 'text' : 'password'"
+    minlength="8"
+    id="current-password"
+    name="current-password">
+    <p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
+    @if (showPassword) {
+      <i class="ti ti-eye absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
+    } @else {
+      <i class="ti ti-eye-closed absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="tooglePassword()"></i>
+    }
+  </go-input>
+  <button type="submit" go-button appearance="primary" (click)="submit()" [disabled]="formLogin.invalid">
+    {{ 'Login' | translate }}
+  </button>
+  <p>
+    {{ 'LOGIN.msgsignup' | translate }} <a [routerLink]="['signup']">{{ 'Sign up' | translate }}</a>
+  </p>
+</form>

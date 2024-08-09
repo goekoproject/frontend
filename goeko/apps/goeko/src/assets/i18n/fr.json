@@ -227,6 +227,10 @@
     "msgsignup": "Vous n'avez pas de compte ?",
     "msgsignup2": "Créez votre compte"
   },
+  "SIGNUP": {
+    "acceptedConditions": "J’ai lu et accepté",
+    "acceptedConditions2": "les conditions générales"
+  },
   "MENU": {
     "aboutGoEKo": "A propos de GoEko",
     "blog": "Blog",

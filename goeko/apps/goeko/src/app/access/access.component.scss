@@ -1,7 +1,9 @@
-.login {
-  @apply flex w-full max-w-96 flex-col items-center gap-8 [&>*]:w-full [&>form>button]:max-w-full;
+.access {
+  @apply relative flex h-screen w-screen bg-[url('/assets/photo-login.jpg')] bg-cover bg-center;
 }
-
+.login-singup {
+  @apply relative m-auto flex h-screen w-full flex-col flex-wrap items-center justify-center gap-8 self-center rounded-l-3xl bg-white p-4;
+}
 .arrow-back {
   box-shadow:
     rgba(0, 0, 0, 0.07) 0px 1px 2px,

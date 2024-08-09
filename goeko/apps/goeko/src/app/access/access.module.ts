@@ -2,14 +2,27 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { ButtonModule, GoInputModule, LoaderCheckComponent, NotificationModule, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
+import { ConfigModule } from '@goeko/core'
+import {
+  ButtonModule,
+  DialogMessageModule,
+  DialogService,
+  GoInputModule,
+  LoaderCheckComponent,
+  NotificationModule,
+  SwitchModule,
+  UiSuperSelectModule,
+} from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { environment } from '../../environments/environment'
 import { AccessRoutingModule } from './access-routing.module'
+import { AccessComponent } from './access.component'
+import { AccessService } from './access.services'
 import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent],
+  declarations: [LoginComponent, SignupComponent, AccessComponent],
   imports: [
     CommonModule,
     AccessRoutingModule,
@@ -22,6 +35,16 @@ import { SignupComponent } from './signup/signup.component'
     UiSuperSelectModule,
     NotificationModule,
     LoaderCheckComponent,
+    DialogMessageModule,
+    ConfigModule.forRoot({
+      endopoint: environment.baseUrl,
+      tokenAccess: environment.accessToken,
+      clientSecret: environment.clientSecret,
+      clientId: environment.clientId,
+      domainAuth0: environment.domainAuth0,
+      audience: environment.audience,
+    }),
   ],
+  providers: [DialogService, AccessService],
 })
 export class AccessModule {}

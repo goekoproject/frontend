@@ -1,28 +1,29 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
-import { Router } from '@angular/router'
-import { AuthService } from '@auth0/auth0-angular'
 import { Observable, catchError, throwError } from 'rxjs'
-import { CONFIGURATION } from '../../config.module'
+import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
+import { SessionStorageService } from '../../services/session-storage.service'
 import { SESSIONID } from './auth.constants'
+import { AuthService } from './auth.service'
 
 const isPlatformGoeko = (request: HttpRequest<unknown>) => request.url.includes('assets')
 
 /**
  * Inteceptor for authenticating a user
  */
-@Injectable({ providedIn: 'platform' })
-export class AuthInterceptor implements HttpInterceptor {
+@Injectable({ providedIn: 'root' })
+export class AuthHttpInterceptor implements HttpInterceptor {
+  private get _accessToken() {
+    return this.sessionStorage.getItem(SESSIONID)
+  }
   constructor(
-    private _route: Router,
-    private _auth: AuthService,
     @Inject(CONFIGURATION) public configuration: Options,
+    private sessionStorage: SessionStorageService,
+    private _auth: AuthService,
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const accessToken = sessionStorage.getItem(SESSIONID)
-
     if (!isPlatformGoeko(request)) {
       request = this.requestGoekoBakend(request)
     }
@@ -32,8 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private _handleError(error: HttpErrorResponse) {
     if (error && error.status === 401) {
-      /*       this._auth.killSessions();
-       */
+      this._auth.killSessions()
     }
     return throwError(() => error)
   }
@@ -41,9 +41,9 @@ export class AuthInterceptor implements HttpInterceptor {
   private requestGoekoBakend(request: HttpRequest<unknown>) {
     return request.clone({
       url: `${this.configuration.endopoint}${request.url}`,
-      /*  setHeaders: {
-        Authorization: `Bearer ${accessToken}`,
-      }, */
+      setHeaders: {
+        Authorization: `Bearer ${this._accessToken}`,
+      },
     })
   }
 }

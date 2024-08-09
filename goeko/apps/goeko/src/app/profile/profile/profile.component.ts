@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, effect, OnInit } from '@angular/core'
 import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
 import { CountrySelectOption, DataSelect, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
-import { Subject, forkJoin, map, switchMap, takeUntil } from 'rxjs'
+import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
 import { ProfileFormFactory } from './profile-form.factory'
@@ -75,7 +75,14 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   constructor(
     private _profieService: ProfileService,
     public route: ActivatedRoute,
-  ) {}
+  ) {
+    effect(() => {
+      if (this.userType()) {
+        this._createFormForUserType()
+        this._loadDataProfile()
+      }
+    })
+  }
 
   canDeactivate() {
     return !!this.dataProfile().id
@@ -83,8 +90,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit() {
     this._profieService.fetchUser()
-    this._createFormForUserType()
-    this._loadDataProfile()
   }
 
   private _createFormForUserType() {

@@ -228,6 +228,10 @@
     "msgsignup": "¿No tienes una cuenta todavía ?",
     "msgsignup2": "Cree su cuenta"
   },
+  "SIGNUP": {
+    "acceptedConditions": "He leído y aceptado",
+    "acceptedConditions2": "los términos y condiciones"
+  },
   "MENU": {
     "aboutGoEKo": "Sobre GoEko",
     "blog": "Blog",

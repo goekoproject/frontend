@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { handlerHttpInterceptor, PopupModule, SelectI18nComponent } from '@goeko/business-ui'
-import { ConfigModule, GoRemoteConfigModule } from '@goeko/core'
+import { PopupModule, SelectI18nComponent } from '@goeko/business-ui'
+import { GoRemoteConfigModule } from '@goeko/core'
 import { ContentFulModule } from '@goeko/store'
 import { ButtonModule, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
@@ -30,14 +30,6 @@ export const httpLoaderFactory = (http: HttpClient) => {
     SelectI18nComponent,
     UiBreadcrumbsModule,
     SideDialogModule,
-    ConfigModule.forRoot({
-      endopoint: environment.baseUrl,
-      tokenAccess: environment.accessToken,
-      clientSecret: environment.clientSecret,
-      clientId: environment.clientId,
-      domainAuth0: environment.domainAuth0,
-      audience: environment.audience,
-    }),
     GoRemoteConfigModule,
 
     TranslateModule.forRoot({
@@ -49,10 +41,7 @@ export const httpLoaderFactory = (http: HttpClient) => {
       },
     }),
   ],
-  providers: [
-    provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
-    provideHttpClient(withInterceptors([handlerHttpInterceptor])),
-  ],
+  providers: [provideFirebaseApp(() => initializeApp(environment.firebaseApp))],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

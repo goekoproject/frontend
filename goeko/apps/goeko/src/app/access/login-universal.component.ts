@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
-import { AuthService } from '@goeko/core'
 
 @Component({
   selector: 'goeko-login-universal',
@@ -11,7 +10,5 @@ import { AuthService } from '@goeko/core'
   styleUrl: './login-universal.component.scss',
 })
 export class LoginUniversalComponent {
-  constructor(private _authService: AuthService) {
-    this._authService.universalLogin()
-  }
+  constructor() {}
 }

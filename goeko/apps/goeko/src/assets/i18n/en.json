@@ -229,6 +229,10 @@
     "msgsignup": "Do not have any account?",
     "msgsignup2": "Create your account"
   },
+  "SIGNUP": {
+    "acceptedConditions": "I have read and accept the",
+    "acceptedConditions2": "terms and conditions"
+  },
   "MENU": {
     "aboutGoEKo": "About GoEko",
     "blog": "Blog",

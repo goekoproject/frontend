@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable, computed, effect, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
-import { User } from '@auth0/auth0-angular'
 import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
@@ -13,7 +12,7 @@ export const SS_COMPANY_DETAIL = 'SS_COMPANY'
 
 @Injectable()
 export class UserService {
-  public userAuthData = signal<User>({})
+  public userAuthData = signal<any>({})
   public userProfile = signal<SmeUser | CleantechsUser>(USER_DEFAULT)
 
   public fechAuthUser = new Subject()
@@ -27,7 +26,7 @@ export class UserService {
 
   public completeLoadUser = new BehaviorSubject<boolean>(false)
 
-  public setUserData(user: User) {
+  public setUserData(user: any) {
     this.userAuthData.set(user)
   }
   constructor(
@@ -54,7 +53,9 @@ export class UserService {
       .subscribe((data) => {
         if (data) {
           this.propagateDataUser(data)
-          this._redirectWhenLoadUser()
+          this._redirectDashboard()
+        } else {
+          this._redirectProfile()
         }
       })
   }
@@ -66,13 +67,6 @@ export class UserService {
     })
   }
 
-  private _redirectWhenLoadUser() {
-    if (this.userProfile().id) {
-      this._redirectDashboard()
-    } else {
-      this._redirectProfile()
-    }
-  }
   private _redirectDashboard() {
     this._router.navigate([`platform/dashboard/${this.userType()}`])
   }

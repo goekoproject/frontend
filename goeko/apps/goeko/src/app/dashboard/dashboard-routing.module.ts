@@ -12,7 +12,6 @@ const routes: Routes = [
       hidden: true,
       onBack: false,
     },
-    pathMatch: 'full',
   },
   {
     path: 'cleantech',

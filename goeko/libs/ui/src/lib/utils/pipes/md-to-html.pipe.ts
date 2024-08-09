@@ -6,7 +6,10 @@ import { marked } from 'marked'
   standalone: true,
 })
 export class MdToHtmlPipe implements PipeTransform {
-  transform(value: string): string | Promise<string> {
-    return marked(value)
+  transform(value: string | number | boolean | null | any): string | Promise<string> {
+    if (!value) {
+      return ''
+    }
+    return marked(value as string)
   }
 }

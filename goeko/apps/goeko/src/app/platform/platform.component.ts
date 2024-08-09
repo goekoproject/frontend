@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common'
 import { Component, effect, Inject, OnInit, signal } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
 import { VAR_GENERAL } from '@goeko/business-ui'
 import { AuthService, REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
 import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store'
 import { NotificationService } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
+import { Auth0UserProfile } from 'auth0-js'
 import { environment } from '../../environments/environment'
 
 @Component({
@@ -30,15 +30,13 @@ export class PlatformComponent implements OnInit {
   private _isSuscriptionNeed = signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
 
   constructor(
-    @Inject(DOCUMENT) private doc: Document,
     private _authService: AuthService,
     private readonly _userService: UserService,
     private _notificationService: NotificationService,
     private readonly _remoteConfigService: RemoteConfigService,
     private _paymentService: PaymentSystemService,
     private _translate: TranslateService,
-    private _router: Router,
-    private _activateddRoute: ActivatedRoute,
+    @Inject(DOCUMENT) private doc: Document,
   ) {
     effect(() => {
       this._hanlderCleantechSuscriptions()
@@ -47,26 +45,22 @@ export class PlatformComponent implements OnInit {
 
   ngOnInit(): void {
     this._loadAuhtUser()
-    this._messageAfterSignUp()
   }
 
   private _loadAuhtUser() {
-    this._authService.userAuth$.subscribe((user) => {
-      if (user) {
-        this._userService.setUserData(user)
-      }
+    this._authService.userInfo$.subscribe((userInfo) => {
+      this._userService.setUserData(userInfo)
+      this._checkEmailVerified(userInfo)
     })
   }
-  private _messageAfterSignUp() {
-    this._authService._auth0.getAccessTokenSilently().subscribe({
-      error: (error) => {
-        const urlPageEmailVerify = `${this.doc.location.origin}/verify-email`
-        if (error.error_description.includes('verify your email')) {
-          this._authService.logout(urlPageEmailVerify)
-        }
-      },
-    })
+
+  private _checkEmailVerified(userInfo: Auth0UserProfile) {
+    if (!userInfo.email_verified) {
+      const urlPageEmailVerify = `${this.doc.location.origin}/verify-email`
+      this._authService.logout(urlPageEmailVerify)
+    }
   }
+
   private _hanlderCleantechSuscriptions(): void {
     if (!this._isSuscriptionNeed()) {
       return

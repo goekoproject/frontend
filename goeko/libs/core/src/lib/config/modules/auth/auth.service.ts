@@ -1,84 +1,59 @@
 import { DOCUMENT } from '@angular/common'
 import { Inject, Injectable, signal } from '@angular/core'
-import { AppState, AuthService as Auth0, User } from '@auth0/auth0-angular'
-import { LangOfLocalecontentFul, ROLES } from '@goeko/store'
+/* import { AuthService as Auth0, User } from '@auth0/auth0-angular'
+ */ import { LangOfLocalecontentFul } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
-import { Observable, concat, first, from, map, of } from 'rxjs'
-import { CONFIGURATION } from '../../config.module'
+import { Auth0UserProfile } from 'auth0-js'
+import { Observable, tap } from 'rxjs'
+import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
 import { AuthRequest } from './auth-request.interface'
-import { AUTH_CONNECT, SS_JWTDATA } from './auth.constants'
-import { Auth0Connected, AuthResponse } from './auth0.abtract'
+import { AUTH_CONNECT, EXPIRES_AT, SESSIONID } from './auth.constants'
+import { Auth0Connected } from './auth0.abtract'
 import { SignUp } from './signup.interface'
-const namespace = 'https://goeko'
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
   private _clientId: string
+
+  public get accessToken() {
+    return this.sessionStorage.getItem(SESSIONID)
+  }
+  public authenticated = signal<boolean>(false)
+
   get currentLang() {
     const codeLang = this._translate.currentLang || this._translate.defaultLang
     const currentLang = LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul]
     return signal(currentLang)
   }
   private _dataAuthConect = ({ username = '', password = '' }) => {
-    console.log(this.userData)
     return {
       realm: AUTH_CONNECT.REALM,
-      clientID: this._clientId,
-      redirectUri: AUTH_CONNECT.REDIRECT_URI,
       audience: AUTH_CONNECT.AUDIENCE,
       username,
       password,
     }
   }
 
-  get isAuthenticated$(): Observable<boolean> {
-    return this._auth0.isAuthenticated$
+  get isAuthenticated(): boolean {
+    const expiresAt = this.sessionStorage.getItem(EXPIRES_AT) as number
+    return new Date().getTime() < expiresAt
   }
-  get appState$(): Observable<AppState> {
-    return this._auth0.appState$
+
+  get userInfo$(): Observable<Auth0UserProfile> {
+    return this._userInfo$
   }
-  get error$(): Observable<Error> {
-    return this._auth0.error$
-  }
-  get userAuth$(): Observable<User | null | undefined> {
-    const getUserRole = (userData: User) => {
-      if(!userData) return [ROLES.PUBLIC]
-      const roles = userData[`${namespace}/roles`]
-      return [ROLES.PUBLIC, ...roles]
-    }
-    return this._auth0.user$.pipe(
-      map((userData: any) => {
-        return {
-          ...userData,
-          externalId: userData?.sub?.replace('auth0|', ''),
-          roles: getUserRole(userData),
-        }
-      }),
-      first(),
-    )
-  }
+
   constructor(
     @Inject(CONFIGURATION) private _config: Options,
     @Inject(DOCUMENT) private doc: Document,
-    public readonly _auth0: Auth0,
     private readonly _translate: TranslateService,
   ) {
-    super(_config.domainAuth0, _config.clientId)
+    super(_config.domainAuth0, _config.clientId, AUTH_CONNECT.REDIRECT_URI)
     this._clientId = this._config.clientId
   }
 
-  universalLogin(): Observable<any> {
-    return this._auth0.loginWithRedirect({
-      authorizationParams: {
-        ui_locales: this.currentLang(),
-        appState: { target: '/platfrom/autenticate' },
-      },
-    })
-  }
-
   /**
-   * @deprecated Use universalLogin
    *  Manages the access token
    * @param body
    * @returns
@@ -97,13 +72,19 @@ export class AuthService extends Auth0Connected {
       connection: newBody.connection,
       userMetadata: newBody.user_metadata,
     }
-    return this.webAuth.signupAndAuthorize(body, (r, result) => {
-      console.log(result)
+    return new Observable((observer) => {
+      this.webAuth.signup(body, (err, result) => {
+        if (err) {
+          observer.error(err)
+        } else {
+          observer.next(result)
+          observer.complete()
+        }
+      })
     })
   }
 
   /**
-   * @deprecated
    *
    * @param body
    */
@@ -112,42 +93,32 @@ export class AuthService extends Auth0Connected {
       username: body.username,
       password: body.password,
     })
-    this.webAuth.login(auth0Params, (error: any, result: any) => {
-      console.log(result)
-      console.log(error)
-    })
-  }
-  /**
-   * @deprecated
-   * @param hash
-   * @returns
-   */
-  public handlerAuthtentication(hash: string): Observable<any> {
-    const proccessHashPromise = from(this.decodeHash(hash))
-    return concat(of(true), proccessHashPromise)
-  }
-  private decodeHash(accessToken: string) {
-    return this.proccesHash(accessToken).then((result: AuthResponse) => {
-      if (result) {
-      }
+
+    this.webAuth.login(auth0Params, function (err) {
+      console.error(err)
     })
   }
 
-  /**
-   * @deprecated Use isAuthenticated$()
-   * @returns
-   */
-  isAuthenticated(): boolean {
-    const accessToken = sessionStorage.getItem(SS_JWTDATA)
-    return !!accessToken
+  public parseHashAuth0() {
+    return this._parseHashAuth0().pipe(
+      tap((user) => {
+        if (user) {
+          this.authenticated.set(this.isAuthenticated)
+        }
+      }),
+    )
   }
 
-  logout(returnTo = this.doc.location.origin) {
+  logout(returnTo = `${this.doc.location.origin}/login`) {
     sessionStorage.clear()
-    this._auth0.logout({ logoutParams: { returnTo: returnTo } })
+    this.webAuth.logout({ returnTo: returnTo, clientID: this._clientId })
   }
 
   killSessions(): void {
     this.logout()
+  }
+
+  changePassword(email: string) {
+    this.changePasswordAuth0(email)
   }
 }
