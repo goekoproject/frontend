@@ -50,8 +50,13 @@ describe('LoginComponent', () => {
       password: '123456',
     })
 
-    component.submit();
+    component.submit()
     expect(component.formLogin.valid).toBeTruthy()
     expect(accessServiceMock.login).toHaveBeenCalled()
+  })
+  it('should toggle showPassword from false to true', () => {
+    component.showPassword = false
+    component.tooglePassword()
+    expect(component.showPassword).toBe(true)
   })
 })

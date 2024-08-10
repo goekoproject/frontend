@@ -12,7 +12,8 @@
     "lint": "nx lint",
     "prestart": "node prestart.js",
     "test:profile": "nx test goeko --codeCoverage=true --test-file profile.component.spec.ts",
-    "test:login": "nx test goeko --codeCoverage=true --test-file login.component.spec.ts"
+    "test:login": "nx test goeko --codeCoverage=true --test-file login.component.spec.ts",
+    "test": "nx test goeko --codeCoverage=true --test-file"
   },
   "private": true,
   "dependencies": {
