@@ -19,10 +19,11 @@ import { AccessRoutingModule } from './access-routing.module'
 import { AccessComponent } from './access.component'
 import { AccessService } from './access.services'
 import { LoginComponent } from './login/login.component'
+import { ResetPasswordComponent } from './reset-password/reset-password.component'
 import { SignupComponent } from './signup/signup.component'
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent, AccessComponent],
+  declarations: [LoginComponent, SignupComponent, AccessComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     AccessRoutingModule,

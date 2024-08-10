@@ -4,6 +4,7 @@ import { redirectIsAuthenticated } from '@goeko/core'
 import { AccessComponent } from './access.component'
 import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
+import { ResetPasswordComponent } from './reset-password/reset-password.component'
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
         path: 'signup',
         component: SignupComponent,
       },
+      {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
+      }
     ],
   },
 ]

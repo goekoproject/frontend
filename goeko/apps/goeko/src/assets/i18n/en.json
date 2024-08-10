@@ -234,6 +234,12 @@
     "acceptedConditions": "I have read and accept the",
     "acceptedConditions2": "terms and conditions"
   },
+  "RESET_PASSWORD": {
+    "msgResetPassword": "Reset your password",
+    "msgResetPassword2": "Enter your email address and we will send you a link to reset your password.",
+    "sendEmail": "Send email",
+    "msgSuccessResetPassword": "We have sent you an email to {{email}} with instructions to reset your password."
+  },
   "MENU": {
     "aboutGoEKo": "About GoEko",
     "blog": "Blog",

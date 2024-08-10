@@ -44,9 +44,5 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword
   }
 
-  public resetPassword() {
-    this._accessService.changePassword(this.formLogin.value.email).subscribe((res) => {
-      console.log(res)
-    })
-  }
+
 }

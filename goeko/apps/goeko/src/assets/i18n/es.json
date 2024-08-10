@@ -233,6 +233,12 @@
     "acceptedConditions": "He leído y aceptado",
     "acceptedConditions2": "los términos y condiciones"
   },
+  "RESET_PASSWORD": {
+    "msgResetPassword": "Restablecer la contraseña",
+    "msgResetPassword2": "Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.",
+    "sendEmail": "Enviar email",
+    "msgSuccessResetPassword": "¡Listo! Hemos enviado un enlace a {{email}} para restablecer tu contraseña."
+  },
   "MENU": {
     "aboutGoEKo": "Sobre GoEko",
     "blog": "Blog",

@@ -20,11 +20,11 @@
     </go-input>
   }
 
-  <a (click)="changePassword.set(true)" class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500">{{
+  <a [routerLink]="'reset-password'" class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500">{{
     'LOGIN.forgotPassword' | translate
   }}</a>
 
-  <button type="submit" go-button appearance="primary" (click)="!changePassword() ? submit() : resetPassword()">
+  <button type="submit" go-button appearance="primary" (click)="submit()">
     {{ 'Login' | translate }}
   </button>
   <p>
