@@ -5,7 +5,7 @@ name: Deploy in environment DEV
 on:
   push:
     branches:
-      - feature/new-login
+      - develop
 jobs:
   build:
     name: Build
