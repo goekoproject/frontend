@@ -17,7 +17,6 @@ export class DashboardSmeComponent implements OnInit {
   public projects!: Array<SmeRequestResponse>
   constructor(
     private _userService: UserService,
-    private _smeAnalysisService: SmeAnalysisService,
     private _projectService: ProjectService,
     private _router: Router,
     private _messageService: MessageService,

@@ -11,7 +11,9 @@
     "start-tailwind:build": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --minify",
     "lint": "nx lint",
     "prestart": "node prestart.js",
-    "test:profile": "nx test goeko --codeCoverage=true --test-file profile.component.spec.ts"
+    "test:profile": "nx test goeko --codeCoverage=true --test-file profile.component.spec.ts",
+    "test:dashboard-sme": "nx test goeko --codeCoverage=true --test-file dashboard-sme.component.spec.ts",
+    "test:dashboard-cleantech": "nx test goeko --codeCoverage=true --test-file dashboard-cleantech.component.spec.ts"
   },
   "private": true,
   "dependencies": {
