@@ -49,11 +49,12 @@
               "with": "apps/goeko/src/assets/module-federation.manifest.pro.json"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "optimization": true
         },
         "development": {
           "buildOptimizer": false,
-          "optimization": false,
+          "optimization": true,
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
@@ -68,6 +69,14 @@
               "with": "apps/goeko/src/assets/module-federation.manifest.pro.json"
             }
           ]
+        },
+        "local": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
@@ -80,9 +89,12 @@
         },
         "development": {
           "buildTarget": "goeko:build:development"
+        },
+        "local": {
+          "browserTarget": "goeko:build:local"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "local"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

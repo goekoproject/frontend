@@ -1,6 +1,5 @@
 import { ViewportScroller } from '@angular/common'
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation, effect } from '@angular/core'
-import { OnViewportChange } from '@goeko/business-ui'
 import { TranslateService } from '@ngx-translate/core'
 import { HomeService } from '../home.service'
 import { CONTENT } from './content.contants'
@@ -58,7 +57,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
     this._onChangeLang()
   }
   ngAfterViewInit(): void {
-    this._getContentDataActors(this.article)
+    this._getContentDataActors()
   }
 
   private _effectActors() {
@@ -74,7 +73,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
 
   private _onChangeLang() {
     this._translate.onLangChange.subscribe((res) => {
-      this._getContentDataActors(this.article)
+      this._getContentDataActors()
       this._getContentActors()
       this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY)
       this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
@@ -82,9 +81,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
     })
   }
 
-  @OnViewportChange()
-  private _getContentDataActors(artivleRef: ElementRef<any>) {
-    console.log(artivleRef)
+  private _getContentDataActors() {
     this._homeService.getContentType(CONTENT_TYPE_DATA.ACTORS).subscribe((res) => {
       this.articles = res.map((actor: any) => ({
         ...actor,

@@ -12,8 +12,10 @@
     "lint": "nx lint",
     "prestart": "node prestart.js",
     "test:profile": "nx test goeko --codeCoverage=true --test-file profile.component.spec.ts",
-    "test:dashboard-sme": "nx test goeko --codeCoverage=true --test-file dashboard-sme.component.spec.ts",
-    "test:dashboard-cleantech": "nx test goeko --codeCoverage=true --test-file dashboard-cleantech.component.spec.ts"
+    "test:login": "nx test goeko --codeCoverage=true --test-file login.component.spec.ts",
+    "test": "nx test goeko --codeCoverage=true --test-file",
+    "lighthouse": "npx unlighthouse --site https://www.goeko.ch/",
+    "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/"
   },
   "private": true,
   "dependencies": {
@@ -101,6 +103,7 @@
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.1.1",
     "ts-node": "10.9.1",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

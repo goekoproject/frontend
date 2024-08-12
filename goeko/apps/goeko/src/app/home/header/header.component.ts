@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
     this.translate.use(selectedCodeLand)
   }
   goTologin() {
-    this._router.navigate(['/login-universal'])
+    this._router.navigate(['/login'])
   }
 
   setMobileMenuOpen() {

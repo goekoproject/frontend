@@ -8,8 +8,13 @@ const ROUTES: Routes = [
     component: AppComponent,
     children: [
       {
-        path: 'login-universal',
-        loadComponent: () => import('./access/login-universal.component').then((m) => m.LoginUniversalComponent),
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./access/access.module').then((m) => m.AccessModule),
       },
       {
         path: 'home',
@@ -27,11 +32,11 @@ const ROUTES: Routes = [
         path: 'autenticate',
         loadComponent: () => import('@goeko/business-ui').then((m) => m.AutenticateComponent),
       },
-      {
+      /*       {
         path: '**',
         redirectTo: 'home',
         pathMatch: 'full',
-      },
+      }, */
     ],
   },
 ]

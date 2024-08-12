@@ -1,22 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SignUp } from './singup.model';
-import { AuthService } from '@goeko/core';
+import { DOCUMENT } from '@angular/common'
+import { Inject, Injectable } from '@angular/core'
+import { AuthService } from '@goeko/core'
+import { SignUp } from './singup.model'
 
-const URL_SIGNUP = 'https://soft-glitter-5713.eu.auth0.com/dbconnections/signup';
+const URL_SIGNUP = 'https://soft-glitter-5713.eu.auth0.com/dbconnections/signup'
 
 @Injectable({ providedIn: 'root' })
 export class AccessService {
-	constructor(private httpClient: HttpClient, private _authService: AuthService) {}
+  public auth$ = this._authService.userAuth$
+  private _urlPageEmailVerify = `${this.doc.location.origin}/verify-email`
 
-	public signUp(body: SignUp) {
-		return this.httpClient.post(URL_SIGNUP, body);
-	}
-	public signUpAndAccess(body: SignUp) {
-		return this._authService.signUpAndLogin(body);
-	}
+  public isAutenticated = this._authService.isAuthenticated
+  constructor(
+    private _authService: AuthService,
+    @Inject(DOCUMENT) private doc: Document,
+  ) {}
 
-	public login(body: any) {
-		this._authService.isLoggedIn({ username: body.email, password: body.password });
-	}
+  public signUpAndAccess(body: SignUp) {
+    return this._authService.signUpAndLogin(body)
+  }
+
+  public afterSignUp() {
+    this._authService.logout(this._urlPageEmailVerify)
+  }
+  public login(body: { email: string; password: string }) {
+    this._authService.isLoggedIn({ username: body.email, password: body.password })
+  }
+
+  public changePassword(email: string) {
+    return this._authService.changePassword(email)
+  }
 }

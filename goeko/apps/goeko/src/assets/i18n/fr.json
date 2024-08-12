@@ -225,7 +225,18 @@
     "msglogin": "Connectez-vous à votre compte",
     "msglogin2": "Déjà un compte ?",
     "msgsignup": "Vous n'avez pas de compte ?",
-    "msgsignup2": "Créez votre compte"
+    "msgsignup2": "Créez votre compte",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "SIGNUP": {
+    "acceptedConditions": "J’ai lu et accepté",
+    "acceptedConditions2": "les conditions générales"
+  },
+  "RESET_PASSWORD": {
+    "msgResetPassword": "Réinitialisez votre mot de passe",
+    "msgResetPassword2": "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.",
+    "sendEmail": "Envoyer un e-mail de réinitialisation",
+    "msgSuccessResetPassword": "Terminé! Nous avons envoyé un lien à {{email}} pour réinitialiser votre mot de passe."
   },
   "MENU": {
     "aboutGoEKo": "A propos de GoEko",
