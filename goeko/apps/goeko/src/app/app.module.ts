@@ -6,11 +6,10 @@ import { AppComponent } from './app.component'
 
 import { HttpClient } from '@angular/common/http'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { PopupModule, SelectI18nComponent } from '@goeko/business-ui'
 import { GoRemoteConfigModule } from '@goeko/core'
 import { ContentFulModule } from '@goeko/store'
-import { ButtonModule, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui'
+import { SideDialogModule } from '@goeko/ui'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { environment } from '../environments/environment'
@@ -22,13 +21,10 @@ export const httpLoaderFactory = (http: HttpClient) => {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    ButtonModule,
     ContentFulModule.forRoot(ContentConfig),
     PopupModule,
     SelectI18nComponent,
-    UiBreadcrumbsModule,
     SideDialogModule,
     GoRemoteConfigModule,
 
