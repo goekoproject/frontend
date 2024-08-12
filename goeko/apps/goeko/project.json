@@ -49,11 +49,12 @@
               "with": "apps/goeko/src/assets/module-federation.manifest.pro.json"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "optimization": true
         },
         "development": {
           "buildOptimizer": false,
-          "optimization": false,
+          "optimization": true,
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
