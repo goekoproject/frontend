@@ -13,7 +13,9 @@
     "prestart": "node prestart.js",
     "test:profile": "nx test goeko --codeCoverage=true --test-file profile.component.spec.ts",
     "test:login": "nx test goeko --codeCoverage=true --test-file login.component.spec.ts",
-    "test": "nx test goeko --codeCoverage=true --test-file"
+    "test": "nx test goeko --codeCoverage=true --test-file",
+    "lighthouse": "npx unlighthouse --site https://www.goeko.ch/",
+    "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/"
   },
   "private": true,
   "dependencies": {

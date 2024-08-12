@@ -1,6 +1,5 @@
 import { ViewportScroller } from '@angular/common'
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation, effect } from '@angular/core'
-import { OnViewportChange } from '@goeko/business-ui'
 import { TranslateService } from '@ngx-translate/core'
 import { HomeService } from '../home.service'
 import { CONTENT } from './content.contants'
@@ -82,7 +81,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
     })
   }
 
-  @OnViewportChange()
   private _getContentDataActors() {
     this._homeService.getContentType(CONTENT_TYPE_DATA.ACTORS).subscribe((res) => {
       this.articles = res.map((actor: any) => ({
