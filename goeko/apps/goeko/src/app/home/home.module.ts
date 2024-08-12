@@ -10,7 +10,6 @@ import { SelectI18nComponent } from '@goeko/business-ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { FooterComponent } from '../shell/footer/footer.component'
 import { AboutComponent } from './about/about/about.component'
-import { ModelComponent } from './banner/model/model.component'
 import { ContentComponent } from './content/content.component'
 import { OrderByPipe } from './content/order-by.pipe'
 import { DocumentLegalComponent } from './document-legal/document-legal.component'
@@ -25,7 +24,6 @@ import { TeamComponent } from './team/team.component'
     HomeComponent,
     BannerComponent,
     ContentComponent,
-    ModelComponent,
     OrderByPipe,
     TeamComponent,
     DocumentLegalComponent,
