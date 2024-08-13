@@ -5,6 +5,7 @@ import { DialogService, MdToHtmlPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { map } from 'rxjs'
 
+const entryId = '67WiiwKgVdgTqphrs0hZLl'
 @Component({
   selector: 'goeko-terms-of-services',
   standalone: true,
@@ -15,7 +16,7 @@ import { map } from 'rxjs'
 export class TermsOfServicesComponent {
   public contentFulServices = inject(ContentFulService)
   private _dialogService = inject(DialogService)
-  public termsOfServices$ = this.contentFulServices.getEntryId('67WiiwKgVdgTqphrs0hZLl').pipe(map((content) => content.fields))
+  public termsOfServices$ = this.contentFulServices.getEntryId(entryId).pipe(map((content) => content.fields))
 
   closeDialog(isAccepted: boolean = false) {
     this._dialogService.close(isAccepted)
