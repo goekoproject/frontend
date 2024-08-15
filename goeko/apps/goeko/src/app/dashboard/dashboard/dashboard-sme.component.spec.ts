@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { signal } from '@angular/core'
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture,TestBed } from '@angular/core/testing'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { MessageService } from '@goeko/business-ui'
 import { ProjectService, SmeRequestResponse, SmeUser, UserService } from '@goeko/store'
@@ -35,7 +35,7 @@ describe('DashboardSmeComponent', () => {
       deleteProject: jest.fn().mockReturnValue(of({})),
     }
     mockMessageService = {
-      deleteMessage: jest.fn().mockReturnValue({ afterClosed: jest.fn().mockReturnValue(of(true)) }),
+      deleteMessage: jest.fn().mockReturnValue(of(true))
     }
 
     await TestBed.configureTestingModule({
