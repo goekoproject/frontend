@@ -288,7 +288,7 @@
     "selectBuildingOperation": {
       "greenRoofsWalls": "Toits et murs végétalisés",
       "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
-      "waterManagementGray": "Des solutions pour la gestion de l’eau grise",
+      "waterManagementWastewater": "Des solutions pour la gestion de l’eau usée",
       "ecoFriendlytaps": "Robinetterie écologique",
       "ecoFriendlySanitary": "Sanitaire écologique"
     },
@@ -370,7 +370,8 @@
       "iron": "Inox",
       "isolation": "Isolation thermique​",
       "steel": "Acier",
-      "zinc": "Zinc"
+      "zinc": "Zinc",
+      "sealingStrip": "Lès d’étanchéité"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Panneaux d'isolation"
