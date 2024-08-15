@@ -95,7 +95,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
     this._homeService.getContentTypeSignal(CONTENT_TYPE_DATA.LANDING_PAGE)
   }
 
-  goTologin() {
+  goToLogin() {
     this._homeService.goTologin()
   }
 }
