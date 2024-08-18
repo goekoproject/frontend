@@ -5,7 +5,7 @@ import { Classifications } from '../model/classificaciones.interface'
  */
 export interface EcosolutionResult {
   id: string
-  classification: Classifications // filter for cattegory
+  classification: Classifications // filter for category
   companyDetail: EcosolutinResultCompanyDetail
   description: string
   favourite: boolean
