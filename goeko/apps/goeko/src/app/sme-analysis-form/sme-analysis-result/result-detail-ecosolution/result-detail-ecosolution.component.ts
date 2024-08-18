@@ -27,7 +27,6 @@ export class ResultDetailEcosolutionComponent implements OnInit {
 
   constructor(
     private _smeServices: SmeService,
-
     private _router: Router,
     private _route: ActivatedRoute,
     private _dialogService: DialogService,
