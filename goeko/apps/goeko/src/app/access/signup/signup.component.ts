@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ERROR_TYPE, USER_TYPE } from '@goeko/core'
+import { ERROR_TYPE } from '@goeko/core'
 import { DialogService } from '@goeko/ui'
 import { AccessService } from '../access.services'
 import { SignUp } from '../singup.model'
 import { TermsOfServicesComponent } from './terms-of-services.component'
+import { USER_TYPE } from '@goeko/store'
 
 const POLICY_PASSWORD = ['passwordPolicy1', 'passwordPolicy2', 'passwordPolicy3', 'passwordPolicy4']
 @Component({
@@ -38,7 +39,7 @@ export class SignupComponent implements OnInit {
     this.formSignup = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      userType: ['sme', Validators.required],
+      userType: [USER_TYPE.SME, Validators.required],
     })
   }
 
