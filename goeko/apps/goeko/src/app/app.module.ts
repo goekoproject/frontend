@@ -1,23 +1,15 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import {
-  LoadDataUser,
-  PopupModule,
-  SelectI18nComponent,
-  SideProfileComponent,
-  handlerHttpInterceptor,
-  loadDataUserFactory,
-} from '@goeko/business-ui'
-import { ConfigModule, GoRemoteConfigModule } from '@goeko/core'
-import { CleantechModule, ContentFulModule, LocationsService, SmeModule, UserService, isSubscribedCleantech } from '@goeko/store'
-import { ButtonModule, DialogMessageModule, NotificationService, SideDialogModule, UiBreadcrumbsModule } from '@goeko/ui'
+import { PopupModule, SelectI18nComponent } from '@goeko/business-ui'
+import { GoRemoteConfigModule } from '@goeko/core'
+import { ContentFulModule } from '@goeko/store'
+import { SideDialogModule } from '@goeko/ui'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { environment } from '../environments/environment'
@@ -28,29 +20,14 @@ export const httpLoaderFactory = (http: HttpClient) => {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    SideProfileComponent,
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    ButtonModule,
     ContentFulModule.forRoot(ContentConfig),
     PopupModule,
-    DialogMessageModule,
     SelectI18nComponent,
-    UiBreadcrumbsModule,
     SideDialogModule,
-    SmeModule,
-    CleantechModule.forRoot({
-      endpoint: environment.baseUrl,
-    }),
-    ConfigModule.forRoot({
-      endopoint: environment.baseUrl,
-      tokenAccess: environment.accessToken,
-      clientSecret: environment.clientSecret,
-      clientId: environment.clientId,
-      domainAuth0: environment.domainAuth0,
-      audience: environment.audience,
-    }),
+    GoRemoteConfigModule,
+
     TranslateModule.forRoot({
       defaultLanguage: 'fr',
       loader: {
@@ -59,24 +36,8 @@ export const httpLoaderFactory = (http: HttpClient) => {
         deps: [HttpClient],
       },
     }),
-    GoRemoteConfigModule,
   ],
-  providers: [
-    provideHttpClient(withInterceptors([handlerHttpInterceptor])),
-    UserService,
-    LoadDataUser,
-    isSubscribedCleantech,
-    NotificationService,
-    provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
-
-    LocationsService,
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: loadDataUserFactory,
-      deps: [LoadDataUser],
-    },
-  ],
+  providers: [provideFirebaseApp(() => initializeApp(environment.firebaseApp))],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

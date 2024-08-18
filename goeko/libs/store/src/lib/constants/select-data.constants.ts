@@ -506,6 +506,12 @@ export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
     id: 1,
     keyLang: 'upTo',
     from: 0,
+    to: 0,
+  },
+  {
+    id: 1,
+    keyLang: 'upTo',
+    from: 0,
     to: 10,
   },
   {
@@ -564,6 +570,12 @@ export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
   },
 ]
 export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] = [
+  {
+    id: 1,
+    keyLang: 'upTo',
+    from: 0,
+    to: 0,
+  },
   {
     id: 1,
     keyLang: 'upTo',

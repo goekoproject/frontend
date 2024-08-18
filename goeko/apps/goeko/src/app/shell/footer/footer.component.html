@@ -1,36 +1,50 @@
-<div class="footer">
-  <img class="footer__logo" src="assets/logo_footer.png" alt="logo_footer" />
-  @for (item of footerInfo; track $index) {
-  <div>
-    <h1 class="title-footer-column">{{ item.title | translate }}</h1>
-
-    @for ( element of item.elements; track $index) { @if (element.url) {
-    <div class="footer__element">
-      <ng-container
-        *ngTemplateOutlet="
-                  element.logo ? withLogo : text;
-                  context: { element: element }
-                "
-      >
-      </ng-container>
+<footer class="bg-white dark:bg-gray-900">
+  <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <div class="md:flex md:justify-between">
+      <div class="mb-6 md:mb-0">
+        <a href="https://flowbite.com/" class="flex items-center">
+          <img loading="lazy"  src="assets/logo_footer.png" class="me-3 h-8" alt="FlowBite Logo" />
+          <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">GoEko</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+        <div>
+          <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">{{ 'FOOTER.contact' | translate }}</h2>
+          <ul class="font-medium text-gray-500 dark:text-gray-400">
+            <li class="mb-4">
+              <a href="mailto:info@goeko.ch" class="hover:underline">info&#64;goeko.ch</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">{{ 'followUs' | translate }}</h2>
+          <ul class="font-medium text-gray-500 dark:text-gray-400">
+            <li class="mb-4">
+              <a href="https://www.linkedin.com/company/goeko" target="_blank" class="hover:underline">LinkedIn</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">{{ 'LEGAL.legal' | translate }}</h2>
+          <ul class="font-medium text-gray-500 dark:text-gray-400">
+            <li class="mb-4">
+              <a routerLink="privacy-policy" class="hover:underline">{{ 'LEGAL.privacyPolicy' | translate }}</a>
+            </li>
+            <li>
+              <a routerLink="cookiesPolicy" class="hover:underline">{{ 'LEGAL.cookiesPolicy' | translate }}</a>
+            </li>
+            <!--       <li>
+              <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
     </div>
-    } }
+    <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
+    <div class="sm:flex sm:items-center sm:justify-between">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+        >© {{ currentYear }} <a href="https://www.goeko.ch" class="hover:underline">GoEko, Swiss Company</a>. All Rights Reserved.
+      </span>
+    </div>
   </div>
-
-  }
-</div>
-<div class="footer__extra-info">
-  <hr />
-  <span>A Swiss Company</span>
-</div>
-
-<!-- template elements-->
-<ng-template #text let-element="element">
-  <h2 class="subtitle-footer-column">
-    <a [routerLink]="element.url">{{ element.title | translate }}</a>
-  </h2>
-</ng-template>
-<ng-template #withLogo let-element="element">
-  <span class="material-symbols-rounded"> {{ element?.logo }} </span>
-  <h2 class="subtitle-footer-column">{{ element.title | translate }}</h2>
-</ng-template>
+</footer>

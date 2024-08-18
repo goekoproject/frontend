@@ -1,24 +1,29 @@
 <article class="our-team">
-	<go-title-page>
-		{{ 'HOME.meetOurTeam' | translate }}
-	<!-- 	<h2 class="our-team-subtitle">
+  <go-title-page>
+    {{ 'HOME.meetOurTeam' | translate }}
+    <!-- 	<h2 class="our-team-subtitle">
 			{{ 'HOME.sloganTeam' | translate }}
 		</h2> -->
-	</go-title-page>
+  </go-title-page>
 
-	<div class="our-team-body" *ngFor="let item of dataTeams">
-		<div class="our-team-content">
-			<div class="our-team-heading">
-				<go-title-page size="large"> {{ item?.employedName }}</go-title-page>
+  @for (item of dataTeams; track item.employedName) {
+    @defer (on viewport) {
+      <div class="our-team-body border-purple-900">
+        <img loading="lazy" class="aspect-auto w-full rounded-md md:mr-auto md:w-1/3 lg:w-1/4" [src]="item.photoProfile" />
+        <div class="our-team-content">
+          <div class="our-team-heading">
+            <go-title-page size="large"> {{ item?.employedName }}</go-title-page>
 
-				<h4 class="our-team-job">{{ item?.job }}</h4>
-			</div>
+            <h4 class="our-team-job">{{ item?.job }}</h4>
+          </div>
 
-			<p *ngFor="let info of item?.info">
-				{{ info }}
-			</p>
-		</div>
-
-		<img class="member-photo" [src]="item.photoProfile" />
-	</div>
+          <p *ngFor="let info of item?.info">
+            {{ info }}
+          </p>
+        </div>
+      </div>
+    } @placeholder {
+      <div>loading...</div>
+    }
+  }
 </article>

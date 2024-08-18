@@ -27,6 +27,17 @@ const CONTROL_VALUE_ACCESSOR: Provider = {
 export class GoInputDirective implements OnInit, AfterContentInit, ControlValueAccessor {
   @Input() readonly = false
   @Output() valueChange = new EventEmitter()
+
+  @Input()
+  public get type(): string {
+    return this._type
+  }
+  public set type(value: string) {
+    this._type = value
+    this.elementRef.nativeElement.type = this._type
+  }
+  private _type: string = 'text'
+
   @HostListener('change', ['$event.detail'])
   onHostChange(value: string) {
     this.value = value

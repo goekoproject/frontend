@@ -156,11 +156,12 @@ export class GoInput extends LitElement {
         .id="${this.id}"
         .name="${this.name}"
         ?maxlength="${this.maxLength}"
-        placeholder="${this.placeholder}"
+        .placeholder="${this.placeholder}"
         ?required="${this.required}"
         autocomplete="${this.autocomplete ? this.autocomplete : this.id}"
         @input="${this.handleInput}"
         @change="${this.handleChange}" />
+      <slot></slot>
     `
   }
   override render() {

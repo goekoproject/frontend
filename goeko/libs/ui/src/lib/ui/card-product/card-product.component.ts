@@ -18,7 +18,7 @@ export class CardProductComponent {
   @Input() isFavorite!: boolean
 
   @Output() changeFavorite = new EventEmitter<boolean>()
- @Output() changeShowMore = new EventEmitter<void>()
+  @Output() changeShowMore = new EventEmitter<void>()
   doFavorite() {
     this.isFavorite = !this.isFavorite
     this.changeFavorite.emit(this.isFavorite)

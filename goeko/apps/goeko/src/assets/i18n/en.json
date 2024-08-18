@@ -135,7 +135,7 @@
   "FORM_LABEL": {
     "labelSelectedFormLang": "Select the language to complete your eco-solution.",
     "titleSelectImgEcosolution": "Choose multiple images for your EcoSolution",
-    "titleFormAnalysis": "Choose a Category and Find Your Eco-Solutions",
+    "titleFormAnalysis": "Choose a category and find your eco-solutions",
     "additionalInformation": "Additional information",
     "advantages": "Advantages",
     "advantagesSupportText": "Advantages compared to a standard solution",
@@ -220,13 +220,25 @@
   "LEGAL": {
     "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
     "cookiesPolicy": "Cookies policy",
-    "privacyPolicy": "Privacy policy"
+    "privacyPolicy": "Privacy policy",
+    "legal": "Legal"
   },
   "LOGIN": {
     "msglogin": "Log in in your account",
     "msglogin2": "Already have account?",
     "msgsignup": "Do not have any account?",
-    "msgsignup2": "Create your account"
+    "msgsignup2": "Create your account",
+    "forgotPassword": "Forgot  password?"
+  },
+  "SIGNUP": {
+    "acceptedConditions": "I have read and accept the",
+    "acceptedConditions2": "terms and conditions"
+  },
+  "RESET_PASSWORD": {
+    "msgResetPassword": "Reset your password",
+    "msgResetPassword2": "Enter your email address and we will send you a link to reset your password.",
+    "sendEmail": "Send email",
+    "msgSuccessResetPassword": "We have sent you an email to {{email}} with instructions to reset your password."
   },
   "MENU": {
     "aboutGoEKo": "About GoEko",
@@ -272,7 +284,7 @@
     "defaultLabel": "Please select from the following options",
     "fiveBetweenTen": "Between 5 and 10 years",
     "greenWaste": {
-      "greenWoodUntreated": "Green Wood (Untreated)",
+      "greenWoodUntreated": "Green wood (untreated)",
       "topsoil": "Topsoil"
     },
     "selectBuildingOperation": {
@@ -294,9 +306,9 @@
       "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Green solution producing the energy for your building or activity needs"
     },
     "selectHazardousWaste": {
-      "oilSeparatorSludge": "Oil Separator Sludge",
-      "productsContainingHeavyMetals": "Products Containing Heavy Metals",
-      "productsContainingTar": "Products Containing Tar",
+      "oilSeparatorSludge": "Oil separator sludge",
+      "productsContainingHeavyMetals": "Products containing heavy metals",
+      "productsContainingTar": "Products containing tar",
       "productsContainingHCB": "Products containing HCB",
       "landsContainingPFAS": "Soils containing PFAS",
       "lead": "Lead"
@@ -318,7 +330,7 @@
       "siteHut": "Construction site life base",
       "toolCleaning": "Equipment cleaning",
       "wateringForCure": "Water curing for concrete",
-      "wateringPlants": "Watering Plants",
+      "wateringPlants": "Watering plants",
       "constructionSiteWater": "Construction site water",
       "boiler": "Boiler"
     },
@@ -369,9 +381,9 @@
       "admixtures": "Admixtures",
       "aerosol": "Aerosol",
       "batteries": "Batteries and accumulators containing hazardous substances",
-      "bituminousProductsContainingHAPs": "Bituminous Products Containing HAPs",
+      "bituminousProductsContainingHAPs": "Bituminous products containing PHAs",
       "cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
-      "curingProducts": "Curing Products",
+      "curingProducts": "Curing products",
       "electricalAndElectronicWasteContainingHazardousSubstances": "Electrical and electronic waste containing hazardous substances",
       "energySavingLamps": "Energy-saving lamps",
       "fuel": "Fuel",
@@ -381,7 +393,7 @@
       "paintVarnish": "Paint/varnish",
       "productsContainingTar": "Products containing tar",
       "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances",
-      "collects": "Collects"
+      "collects": "Adhesive"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosols",
@@ -389,19 +401,19 @@
       "agglomeratedConcrete": "Agglomerated concrete",
       "agglomeratedProducts": "Agglomerated Products",
       "asbestos": "Asbestos",
-      "batteriesAndAccumulators": "Batteries and Accumulators",
-      "cartridgesSealantChemicalCaulking": "Cartridges (Sealant, Chemical, Caulking)",
-      "electricalAndElectronicEquipmentPCB": "Electrical and Electronic Equipment",
-      "fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent Tubes, Energy-Saving Bulbs, Neon Tubes",
+      "batteriesAndAccumulators": "Batteries and accumulators",
+      "cartridgesSealantChemicalCaulking": "Cartridges (sealant, chemical, caulking)",
+      "electricalAndElectronicEquipmentPCB": "Electrical and electronic equipment",
+      "fluorescentTubesEnergySavingBulbsNeonTubes": "Fluorescent tubes, energy-saving bulbs, neon tubes",
       "lead": "Lead",
-      "paintsAndSolvents": "Paints and Solvents",
+      "paintsAndSolvents": "Paints and solvents",
       "particleboardPanels": "Particleboard panels",
       "polyurethaneFoams": "Polyurethane foams",
       "pouredAsphalt": "Poured asphalt",
       "rubberProducts": "Rubber products",
       "solventsForInsulation": "Solvents for insulation",
-      "treatedWood": "Treated Wood",
-      "usedOils": "Used Oils"
+      "treatedWood": "Treated wood",
+      "usedOils": "Used oils"
     },
     "selectSustainableBuildingOperations": {
       "chargeElectricVehicles": "Charge electric vehicles",
@@ -422,7 +434,7 @@
     "co2Emission": "Area where your eco-solution reduces CO2 emissions",
     "ods": "Linked to your eco-solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
-    "selectProducts": "Type of toxic products does your eco-solution replace or improve",
+    "selectProducts": "Type of toxic products that your eco-solution replaces or improves",
     "waste": "Types of waste",
     "waterConsumption": "Activities related to water consumption"
   },
@@ -438,7 +450,7 @@
     "saveMessageGeneric": "Do you want to save the data before continuing?",
     "messaggeProfileUncompletedTitle": "Complete your profile",
     "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools.",
-    "messageNotification": "Enable email notifications to receive the latest ecosolutions for your questionnaire."
+    "messageNotification": "Activate email notifications to receive the latest eco-solutions matching your needs."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",
@@ -495,6 +507,7 @@
   "ods_title": "Sustainable Development Goals (SDG)",
   "profile": "Profile",
   "projectManagement": "Project Management",
+  "readMore": "Read More...",
   "result": "Result",
   "save": "Save",
   "notSave": "Close without saving",
@@ -520,5 +533,6 @@
   "yes": "Yes",
   "your_ecosolutions": "Your Eco-solutions",
   "regions": "Provinces",
-  "titleBannerLead": " Qualified Leads Tracking"
+  "titleBannerLead": " Qualified Leads Tracking",
+  "followUs": "Follow us"
 }

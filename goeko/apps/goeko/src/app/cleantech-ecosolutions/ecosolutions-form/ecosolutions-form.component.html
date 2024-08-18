@@ -138,11 +138,20 @@
             <span class="required-field">{{ 'mandatory' | translate }}</span>
           </legend>
         </div>
-        <goeko-select-locations
-          [form]="form"
-          [controlLocations]="locationsArrays"
-          [controlNameCountry]="'country'"
-          [controlNameProvince]="'regions'"></goeko-select-locations> 
+
+        @defer (when firstLoad) {
+          <goeko-select-locations
+            [form]="form"
+            [controlLocations]="locationsArrays"
+            [controlNameCountry]="'country'"
+            [controlNameProvince]="'regions'"></goeko-select-locations>
+        } @placeholder {
+          <goeko-select-locations
+            [form]="form"
+            [controlLocations]="locationsArrays"
+            [controlNameCountry]="'country'"
+            [controlNameProvince]="'regions'"></goeko-select-locations>
+        }
       </fieldset>
 
       <fieldset

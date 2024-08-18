@@ -1,41 +1,30 @@
-<div class="banner">
+<div class="banner p-4">
   <div class="banner-content">
     <div>
       <span class="fi fi-ch"></span>
       <span class="banner-info">{{ 'BANNER.swissCompany' | translate }}</span>
-      <h1 class="banner-slogan">
+      <h1 class="banner-slogan text-4xl md:text-5xl lg:text-6xl">
         {{ 'BANNER.the' | translate }}
-        <span class="banner-slogan--green">{{
-          'BANNER.green' | translate
-        }}</span>
+        <span class="banner-slogan--green">{{ 'BANNER.green' | translate }}</span>
         {{ 'BANNER.transition' | translate }}
       </h1>
-      <div class="banner-support-text">
-        <span class="word animate__animated">{{
-          'BANNER.fast' | translate
-        }}</span>
+      <div class="banner-support-text justify-center">
+        <span class="word animate__animated">{{ 'BANNER.fast' | translate }}</span>
         |
-        <span class="word animate__animated">{{
-          'BANNER.easy' | translate
-        }}</span>
+        <span class="word animate__animated">{{ 'BANNER.easy' | translate }}</span>
         |
-        <span class="word animate__animated">{{
-          'BANNER.affordable' | translate
-        }}</span>
+        <span class="word animate__animated">{{ 'BANNER.affordable' | translate }}</span>
       </div>
     </div>
-
   </div>
 
   <div class="banner-video">
-    
     <button go-button appearance="flat" (click)="watchVideo()" class="button-play">
-      <i class="ti ti-player-play-filled"></i>      <p>{{ 'watchVideo' | translate }}</p>
+      <i class="ti ti-player-play-filled"></i>
+      <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    <video autoplay loop class="banner-video-sme" #marketingVideo>
-      <source
-        type="video/mp4"
-      />
+    <video autoplay loop class="banner-video-sme" preload="metadata" #marketingVideo>
+      <source type="video/mp4" />
     </video>
 
     <div class="bkg-video">
@@ -43,14 +32,5 @@
       <span class="layer"></span>
       <span class="layer"></span>
     </div>
-  </div>
-
-  <div class="ods" *ngIf="false">
-    <img
-      *ngFor="let icon of odsIcon"
-      class="ods-icon"
-      [src]="'assets/icon-ods/S-WEB-Goal-' + icon + '.png'"
-      [alt]="icon"
-    />
   </div>
 </div>

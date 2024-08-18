@@ -1,37 +1,49 @@
-<div class="menu-wrapper">
-  <div class="menu-item" *ngFor="let item of menu()">
-    <a class="menu-item--link" [routerLink]="item.url">{{
-      item.keyLang | translate
-    }}</a>
-
-    <!-- Submenu-->
-    @switch (item.code) { @case ('contact') {
-    <ng-container
-      *ngTemplateOutlet="contactSubmenu; context: { submenu: item.submenu }"
-    ></ng-container>
-
-    } }
-  </div>
+<div class="relative hidden lg:flex lg:gap-x-12">
+  @for (item of menu(); track item.id) {
+    @switch (item.code) {
+      @case ('contact') {
+        <ng-container *ngTemplateOutlet="contactSubmenu; context: { item: item }"></ng-container>
+      }
+      @default {
+        <ng-container *ngTemplateOutlet="menuSimple; context: { item: item }"></ng-container>
+      }
+    }
+  }
 </div>
 
-<ng-template #contactSubmenu let-submenu="submenu">
-  @if (submenu) {
-  <div class="submenu">
-    @for ( item of submenu; track item) {
+<ng-template #menuSimple let-item="item">
+  <a [routerLink]="item.url" class="text-sm font-semibold leading-6 text-gray-900">{{ item.keyLang | translate }}</a>
+</ng-template>
 
-    <div>
-      <span class="submenu-subtitle">{{ item.contactsName }}</span>
-      <p class="submenu-element">
-        <i class="ti ti-mail-filled"></i>
-        <a href="mailto:{{item.email}}">{{ item.email }}</a></p>
-      <p class="submenu-element">
-        <i class="ti ti-phone-call"></i>
-        {{ item.phoneNumber }}</p>
-    </div>
+<!--Submenu-->
+<ng-template #contactSubmenu let-item="item">
+  <button
+    type="button"
+    (click)="submenuOpenToggle()"
+    class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+    aria-expanded="false">
+    {{ item.keyLang | translate }}
+    <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path
+        fill-rule="evenodd"
+        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+        clip-rule="evenodd" />
+    </svg>
+  </button>
+  <div class="submenu" [ngClass]="{ flex: submenuOpen(), hidden: !submenuOpen() }">
+    @for (item of item.submenu; track item) {
+      <div>
+        <span class="submenu-subtitle">{{ item.contactsName }}</span>
+        <p class="submenu-element">
+          <i class="ti ti-mail-filled"></i>
+          <a href="mailto:{{ item.email }}">{{ item.email }}</a>
+        </p>
+        <p class="submenu-element">
+          <i class="ti ti-phone-call"></i>
+          {{ item.phoneNumber }}
+        </p>
+      </div>
     }
-    <img  class="icon-contact" src="assets/connection.svg"  alt="connection"/>
-
+    <img loading="lazy"  class="icon-contact" src="assets/connection.svg" alt="connection" />
   </div>
-
-  }
 </ng-template>

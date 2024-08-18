@@ -1,23 +1,18 @@
-import { AfterContentInit, Component, ContentChild, ContentChildren, Input, Query, QueryList } from '@angular/core';
-import { GoCellRefDirective, GoElementActionDirective, GoHeaderRefDirective } from './go-table-ref.directive';
+import { Component, ContentChild, ContentChildren, Input, QueryList } from '@angular/core'
+import { GoCellRefDirective, GoElementActionDirective, GoHeaderRefDirective } from './go-table-ref.directive'
 
 @Component({
   selector: 'goeko-go-table',
   templateUrl: './go-table.component.html',
   styleUrl: './go-table.component.scss',
 })
-export class GoTableComponent implements AfterContentInit {
-
+export class GoTableComponent {
   @ContentChild(GoHeaderRefDirective) headers!: GoHeaderRefDirective
 
   @ContentChildren(GoCellRefDirective) cells!: QueryList<GoCellRefDirective>
   @ContentChildren(GoElementActionDirective) elementActions!: QueryList<GoElementActionDirective>
 
-  @Input() dataSources!: Array<any>;
+  @Input() dataSources!: Array<any>
 
-  @Input() displayColumns!: Array<string | unknown>;
-
-  ngAfterContentInit(): void {
-      console.log(this.headers);
-  }
+  @Input() displayColumns!: Array<string | unknown>
 }

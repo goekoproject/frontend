@@ -1,10 +1,9 @@
 export interface UserMetadata {
-	userType: string;
+  userType: string
 }
 
 export interface SignUp {
-	email: string;
-	password: string;
-	user_metadata: UserMetadata;
-	connection: string;
+  email: string
+  password: string
+  user_metadata: UserMetadata
 }

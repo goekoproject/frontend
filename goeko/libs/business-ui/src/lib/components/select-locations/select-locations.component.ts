@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common'
 import { AfterViewInit, Component, Input, inject, signal } from '@angular/core'
 import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions } from '@goeko/store'
-import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
+import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { Subject, Subscription, distinctUntilChanged, filter, map, merge, mergeMap, take, takeUntil } from 'rxjs'
+import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -22,7 +22,6 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
 
   return null
 }
-@AutoUnsubscribe()
 @Component({
   selector: 'goeko-select-locations',
   standalone: true,
@@ -37,8 +36,6 @@ export class SelectLocationsComponent implements AfterViewInit {
   public compareSelectedCountry = (o1: any, o2: any) => {
     return o1 === o2
   }
-  private destroy$ = new Subject<void>()
-
   public optionAllProvince = {
     code: null,
     label: 'FORM_LABEL.allProvinces',
@@ -60,6 +57,7 @@ export class SelectLocationsComponent implements AfterViewInit {
   private _selectLocationsService = inject(SelectLocationsService)
   public countries = this._selectLocationsService.countries
   public regions = this._selectLocationsService.regions
+  @Input()
   public toogleEdit = false
   public newLocation = false
   public disabledRegions = false
@@ -78,7 +76,7 @@ export class SelectLocationsComponent implements AfterViewInit {
     )?.controls['regions']
   }
 
-  public dataSourceSelect: Map<string, LocationRegions[]> = new Map()
+  public dataSourceSelect = new Map<string, any>()
   public selectedLocationsIndex = signal<number>(0)
   formArraySubscription!: Subscription
   public getOnlyRegions() {
@@ -88,22 +86,10 @@ export class SelectLocationsComponent implements AfterViewInit {
     return this.controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code === this.optionAllProvince.code)
   }
 
-  public loadRegions(regions: LocationRegions[]) {
-    return regions.every((region) => region.code)
-  }
-
   constructor() {}
 
   ngAfterViewInit(): void {
-    this.controlLocations.valueChanges
-      .pipe(
-        takeUntil(this.destroy$),
-        filter(() => this.controlLocations.controls.length > 0),
-        take(1),
-      )
-      .subscribe(() => {
-        this.subscribeToFormArrayAndItemChanges()
-      })
+    this.subscribeToFormArrayAndItemChanges()
   }
 
   private subscribeToFormArrayAndItemChanges(): void {
@@ -113,8 +99,7 @@ export class SelectLocationsComponent implements AfterViewInit {
           map((value) => ({ index, value })),
           filter((change) => change.index >= 0), // only index positive
           distinctUntilChanged((prev, curr) => prev.value.country.code === curr.value.country.code),
-          map((change) => change.value.country.code.code), // Transforma el cambio en el código de país
-          takeUntil(this.destroy$),
+          map((newValue) => newValue.value.country.code.code || newValue.value.country.code), // Transforma el cambio en el código de país
         ),
       ),
     )

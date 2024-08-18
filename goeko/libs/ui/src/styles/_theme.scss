@@ -50,6 +50,9 @@ body:has(div.is-platform) {
 a {
   text-decoration: none;
   color: inherit;
+  color: var(--primary--500);
+  font-weight: bold;
+  cursor: pointer;
   &:hover {
     color: var(--primary--700);
   }

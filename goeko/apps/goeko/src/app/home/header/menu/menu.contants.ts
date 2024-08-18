@@ -12,7 +12,7 @@ export const MENU: IMenu[] = [
     id: window.crypto.randomUUID(),
     code: 'blog',
     keyLang: 'MENU.blog',
-    url: 'administration',
+    url: 'blog',
     type: 'text',
   },
   {

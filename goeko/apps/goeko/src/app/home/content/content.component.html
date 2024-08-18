@@ -1,97 +1,90 @@
 <section class="select-actors">
   @if (entryDataConnecting && entryDataSustainability) {
-  <div class="select-actors-heading">
-    <h3 class="select-actors-title">{{ entryDataConnecting.text }}</h3>
-  </div>
-  <h4 class="select-actors-description">
-    {{ entryDataSustainability.text }}
-  </h4>
+    <div class="select-actors-heading">
+      <h3 class="select-actors-title text-2xl font-bold lg:text-5xl">{{ entryDataConnecting.text }}</h3>
+    </div>
+    <h4 class="select-actors-description">
+      {{ entryDataSustainability.text }}
+    </h4>
   }
   <ul class="platform-actors">
     @for (actor of actors; track actor.title) {
-    <li class="actors-detail" (click)="navigateToActors(actor.id)">
-      <i class="ti {{ actor.icon }} actors-detail-icon"></i>
-      <h3 class="actors-detail-name">{{ actor.title }}</h3>
-      <p class="actors-detail-description">
-        {{ actor.body }}
-      </p>
-    </li>
+      <li class="actors-detail" (click)="navigateToActors(actor.id)">
+        <i class="ti {{ actor.icon }} actors-detail-icon"></i>
+        <h3 class="actors-detail-name">{{ actor.title }}</h3>
+        <p class="actors-detail-description">
+          {{ actor.body }}
+        </p>
+      </li>
     }
   </ul>
 </section>
 
-<article
-  [id]="article.id"
-  class="content"
-  [ngClass]="{ 'row-reverse-content': odd }"
-  *ngFor="
-    let article of articles | orderBy : 'order';
-    let i = index;
-    let odd = odd
-  "
->
-  <img class="content__actor-photo" [src]="article.image" [alt]="article.name" />
+<section #articleEl class="flex flex-col gap-8">
+  @for (article of articles | orderBy: 'order'; track article.id; let i = $index; let odd = $odd) {
+    @defer (on viewport) {
+      <article [id]="article.id" class="content" [ngClass]="{ 'row-reverse-content': odd }">
+        <img class="content__actor-photo" [src]="article?.image" [alt]="article.name" />
 
-  <div class="ods-info" *ngIf="false">
-    <img width="100%" [src]="'assets/icon-ods/ods-logo-wheel.png'" [alt]="currentLang" />
-    <h1>{{ 'ods_title' | translate }}</h1>
-  </div>
-  <section class="info-actors">
-    <div>
-      <h1 id="name" class="info-actors-title" [ngClass]="{ 'title-reverse-content': !odd }">
-        {{ article?.name }}
-      </h1>
-      <h3 class="info-actors-description" id="descriptions">
-        {{ article?.descriptions }}
-      </h3>
-    </div>
+        <div class="ods-info" *ngIf="false">
+          <img width="100%" [src]="'assets/icon-ods/ods-logo-wheel.png'" [alt]="currentLang" />
+          <h1>{{ 'ods_title' | translate }}</h1>
+        </div>
+        <section class="info-actors">
+          <div>
+            <h1 id="name" class="info-actors-title" [ngClass]="{ 'title-reverse-content': !odd }">
+              {{ article?.name }}
+            </h1>
+            <h3 class="info-actors-description text-3xl md:text-5xl" id="descriptions">
+              {{ article?.descriptions }}
+            </h3>
+          </div>
 
-    <div class="info-actors-feature" *ngIf="article?.benefits && article?.benefits.length > 0">
-      <p class="info-actors-feature-description" id="descriptions2">
-        {{ article?.descriptions2 }}
-      </p>
-      <ul class="info-actors-benefis">
-        @for (item of article?.benefits; track item._id) {
-        <li class="info-actors-benefis-element" id="{{ item?.icon }}">
-          <i class="ti {{ item?.icon }} info-actors-benefis-icon"></i>
+          <div class="info-actors-feature" *ngIf="article?.benefits && article?.benefits.length > 0">
+            <p class="info-actors-feature-description" id="descriptions2">
+              {{ article?.descriptions2 }}
+            </p>
+            <ul class="info-actors-benefis">
+              @for (item of article?.benefits; track item._id) {
+                <li class="info-actors-benefis-element" id="{{ item?.icon }}">
+                  <i class="ti {{ item?.icon }} info-actors-benefis-icon"></i>
 
-          <p class="info-actors-benefis-label" id="text">{{ item?.text }}</p>
-        </li>
-        }
-      </ul>
-    </div>
+                  <p class="info-actors-benefis-label" id="text">{{ item?.text }}</p>
+                </li>
+              }
+            </ul>
+          </div>
 
-     @if (article?.id === 'bank') {
-      <ng-container [ngTemplateOutlet]="bank" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
-
-     }
-     @if (article?.id === 'cleantech') {
-      <ng-container [ngTemplateOutlet]="cleantech" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
-
-     }
-     @if (article?.id === 'sme') {
-      <ng-container [ngTemplateOutlet]="sme" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
-     }
-
-
-
-  </section>
-</article>
+          @if (article?.id === 'bank') {
+            <ng-container [ngTemplateOutlet]="bank" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
+          }
+          @if (article?.id === 'cleantech') {
+            <ng-container [ngTemplateOutlet]="cleantech" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
+          }
+          @if (article?.id === 'sme') {
+            <ng-container [ngTemplateOutlet]="sme" [ngTemplateOutletContext]="{ id: article.id }"> </ng-container>
+          }
+        </section>
+      </article>
+    } @placeholder {
+      <div>loading...</div>
+    }
+  }
+</section>
 
 <ng-template #sme let-id="id">
-  <button go-button (click)="goTologin()">
+  <button go-button (click)="goToLogin()">
     {{ 'HOME.sloganCallActionsBtnSME' | translate }}
     <span class="material-symbols-rounded"> arrow_forward_ios </span>
   </button>
 </ng-template>
 
 <ng-template #cleantech let-id="id">
-  <button go-button (click)="goTologin()">
+  <button go-button (click)="goToLogin()">
     {{ 'HOME.btnCleantech' | translate }}
     <span class="material-symbols-rounded"> arrow_forward_ios </span>
   </button>
 </ng-template>
-
 
 <ng-template #bank let-id="id">
   <button go-button appearance="white">

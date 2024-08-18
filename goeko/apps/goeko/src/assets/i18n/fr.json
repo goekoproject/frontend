@@ -218,13 +218,25 @@
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
     "cookiesPolicy": "Politique de cookies",
-    "privacyPolicy": "Politique de confidentialité"
+    "privacyPolicy": "Politique de confidentialité",
+    "legal": "Légal"
   },
   "LOGIN": {
     "msglogin": "Connectez-vous à votre compte",
     "msglogin2": "Déjà un compte ?",
     "msgsignup": "Vous n'avez pas de compte ?",
-    "msgsignup2": "Créez votre compte"
+    "msgsignup2": "Créez votre compte",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "SIGNUP": {
+    "acceptedConditions": "J’ai lu et accepté",
+    "acceptedConditions2": "les conditions générales"
+  },
+  "RESET_PASSWORD": {
+    "msgResetPassword": "Réinitialisez votre mot de passe",
+    "msgResetPassword2": "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.",
+    "sendEmail": "Envoyer un e-mail de réinitialisation",
+    "msgSuccessResetPassword": "Terminé! Nous avons envoyé un lien à {{email}} pour réinitialiser votre mot de passe."
   },
   "MENU": {
     "aboutGoEKo": "A propos de GoEko",
@@ -379,7 +391,7 @@
       "paintVarnish": "Solvants à peintures/ vernis",
       "productsContainingTar": "Produits contenant du goudron",
       "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses",
-      "collects": "Colles"
+      "collects": "Adhésif"
     },
     "selectSpecialWaste": {
       "aerosols": "Aérosols",
@@ -436,7 +448,7 @@
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",
     "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
-    "messageNotification": "Activez les notifications par email pour recevoir les dernières écosolutions pour votre questionnaire."
+    "messageNotification": "Activez les notifications par email pour recevoir les dernières éco-solutions correspondant à vos besoins."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
@@ -497,6 +509,7 @@
   "ods_title": "Objectifs de développement durable (ODD)",
   "profile": "Profil",
   "projectManagement": "Gestion de projet",
+  "readMore": "Lire la suite...",
   "result": "Résultat",
   "save": "Sauvegarder",
   "notSave": "Fermer sans sauvegarder",
@@ -522,5 +535,6 @@
   "yes": "Oui",
   "your_ecosolutions": "Vos Eco-solutions",
   "regions": "Régions",
-  "titleBannerLead": "Suivi des leads qualifiés"
+  "titleBannerLead": "Suivi des leads qualifiés",
+  "followUs": "Suivez-nous"
 }

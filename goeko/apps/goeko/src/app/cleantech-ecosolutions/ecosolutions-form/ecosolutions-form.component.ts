@@ -46,6 +46,7 @@ export class EcosolutionsFormComponent implements OnInit {
   private fileCertificate: any
   private _fileEcosolution!: File[]
   public urlPicEcosolution?: string[]
+  public firstLoad = false
   public get isReadOnly(): boolean {
     return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true'
   }
@@ -210,10 +211,12 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   private _patchValueLocationsFormControl(formValue: EcosolutionForm) {
+    this.locationsArrays.clear()
     formValue.locations?.forEach(() => {
       this._addLocations()
     })
     this.form.get('locations')?.patchValue(formValue.locations)
+    this.firstLoad = true
   }
 
   private _createLocations(): FormGroup {

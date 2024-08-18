@@ -1,0 +1,38 @@
+<div class="mt-15 mx-auto flex max-w-screen-xl justify-between px-4">
+  <article class="format format-sm sm:format-base lg:format-lg format-blue dark:format-invert mx-auto mt-8 w-full max-w-2xl">
+    <header class="not-format mb-4 lg:mb-6">
+      <address class="mb-6 flex items-center not-italic">
+        <div class="mr-3 inline-flex items-center text-sm text-gray-900 dark:text-black">
+          <!--<div class="flex items-center bg-gray-200 justify-center mr-4 w-20 h-20 rounded-full">
+                  <img [src]="blogPost.fields['image']" alt="Placeholder Image">
+                </div>-->
+          <div>
+            <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-black">{{ blogPost.fields['author'] }}</a>
+            <p class="font-medium text-primary-400">{{ blogPost.fields['occupation'] }}</p>
+            <p class="font-medium text-primary-400">
+              <span>{{ blogPost.fields['creationDate'] | goDateFormat }}</span>
+            </p>
+          </div>
+        </div>
+      </address>
+      <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-black">
+        {{ blogPost.fields['title'] }}
+      </h1>
+    </header>
+    <div class="mb-8 mt-8 flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-gray-200">
+      <img
+        class="h-full w-full rounded-t-2xl object-cover"
+        [src]="blogPost.fields['image'] | extractAsset"
+        alt="blogPost.fields['image'].fields.title" />
+    </div>
+    <section class="prose dark:prose-dark">
+      <div class="mb-8 flex flex-col gap-4 [&>p>a]:text-blue-400 [&>p]:text-pretty" [innerHTML]="blogPost.fields['content'] | mdToHtml"></div>
+    </section>
+  </article>
+</div>
+<button
+  type="button"
+  (click)="goBack()"
+  class="inline-flex items-center gap-x-2 rounded-full border border-transparent bg-blue-600 px-4 py-3 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+  {{ 'back' | translate }}
+</button>
