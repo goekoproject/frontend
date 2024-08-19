@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { FormBuilder } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ProjectService, SmeService } from '@goeko/store'
+import { TranslateService } from '@ngx-translate/core'
 import { SmeAnalysisService } from '../sme-analysis.service'
 import { SmeFormBaseComponent } from '../sme-form-base/sme-form-base.component'
 
@@ -23,8 +24,9 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
     private projectService: ProjectService,
     private cdf: ChangeDetectorRef,
     private _location: Location,
+    private translateService: TranslateService,
   ) {
-    super(fb, router, smeService, route, smeAnalysisService, projectService, cdf)
+    super(fb, router, smeService, route, smeAnalysisService, projectService, cdf, translateService)
   }
 
   override ngOnInit(): void {
