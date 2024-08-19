@@ -1,13 +1,15 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { signal } from '@angular/core'
-import { ComponentFixture,TestBed } from '@angular/core/testing'
-import { ActivatedRoute, Router, RouterModule } from '@angular/router'
-import { MessageService } from '@goeko/business-ui'
-import { ProjectService, SmeRequestResponse, SmeUser, UserService } from '@goeko/store'
-import { ButtonModule, DialogMessageModule, GoDateFormatPipe, GoInputModule } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
-import { of } from 'rxjs'
-import { DashboardSmeComponent } from './dashboard-sme.component'
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { signal } from '@angular/core';
+import { ComponentFixture,TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { MessageService } from '@goeko/business-ui';
+import { MESSAGE_TYPE, MessageType } from '@goeko/ui';
+import { ProjectService, SmeRequestResponse, SmeUser, UserService } from '@goeko/store';
+import { ButtonModule, DialogMessageModule, GoDateFormatPipe, GoInputModule } from '@goeko/ui';
+import { TranslateModule } from '@ngx-translate/core';
+import { from, of, Subject } from 'rxjs';
+import { DashboardSmeComponent } from './dashboard-sme.component';
 
 describe('DashboardSmeComponent', () => {
   let component: DashboardSmeComponent
@@ -15,8 +17,9 @@ describe('DashboardSmeComponent', () => {
   // Mock Services
   let mockUserService: Partial<UserService>
   let mockProjectService: Partial<ProjectService>
-  let mockMessageService: Partial<MessageService>
-  let mockRouterService: Router
+  let mockMessageService: MessageService
+  //let mockRouterService: Partial<Router>
+  let mockActivatedRoute: Partial<ActivatedRoute>
 
   beforeEach(async () => {
     mockUserService = {
@@ -34,9 +37,28 @@ describe('DashboardSmeComponent', () => {
       ),
       deleteProject: jest.fn().mockReturnValue(of({})),
     }
+
     mockMessageService = {
-      deleteMessage: jest.fn().mockReturnValue(of(true))
-    }
+      deleteMessage: jest.fn().mockReturnValue({
+        afterClosed: jest.fn().mockReturnValue(of(true)),
+      }),
+    } as any;
+
+    /*mockRouterService = {
+      navigate: jest.fn(),
+    };*/
+
+    mockActivatedRoute = {
+      parent: {
+        snapshot: {
+          params: {},
+        },
+      },
+      snapshot: {
+        params: {},
+      },
+    } as any;
+
 
     await TestBed.configureTestingModule({
       declarations: [DashboardSmeComponent],
@@ -45,16 +67,17 @@ describe('DashboardSmeComponent', () => {
         TranslateModule.forRoot(),
         ButtonModule,
         GoInputModule,
-        RouterModule.forRoot([]),
         DialogMessageModule,
         GoDateFormatPipe,
+        //RouterModule.forRoot([]),
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         { provide: UserService, useValue: mockUserService },
         { provide: ProjectService, useValue: mockProjectService },
         { provide: MessageService, useValue: mockMessageService },
-        { provide: RouterModule, useValue: mockRouterService },
-        { provide: ActivatedRoute, useValue: { parent: {} } },
+        //{ provide: Router, useValue: mockRouterService },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
       ],
     }).compileComponents()
 
@@ -68,18 +91,19 @@ describe('DashboardSmeComponent', () => {
     expect(component).toBeTruthy()
   })
 
+  // Prueba para probar el método ngOnInit, verificar que inicializa la propiedad projects como nueva instancia de array vacío
+  it('should initialize projects as an empty array on ngOnInit', () => {
+    component.ngOnInit();
+    expect(component.projects).toEqual([]);
+  });
+
   // Prueba para obtener el proyecto
   it('should fetch projects on initialization', () => {
     expect(mockProjectService.getRecommendationsByProjectById).toHaveBeenCalled()
     expect(component.projects.length).toBeGreaterThan(0)
   })
 
-  // Prueba para probar el método ngOnInit, verificar que inicializa la propiedad projects como nueva instancia de array vacío
-  it('should initialize projects as an empty array on ngOnInit', () => {
-    component.ngOnInit();
 
-    expect(component.projects).toEqual([]);
-  });
 
   //Prueba para verificar que 'projects' se inicializa correctamente con los datos del servicio.
   it('should update projects with the first 3 recommendations from the service', () => {
@@ -89,20 +113,32 @@ describe('DashboardSmeComponent', () => {
       { id: '3', date: '2023-01-03', classifications: [], notification: { onNewEcosolution: true } }
     ];
 
-    jest.spyOn(mockProjectService, 'getRecommendationsByProjectById').mockReturnValue(of(mockProject));
+    jest.spyOn(mockProjectService, 'getRecommendationsByProjectById').mockReturnValue(from(mockProject));
 
     component['_getLastProjectName']();
-    const [projects] = component.projects;
-    expect(projects).toEqual(mockProject);
+    expect(component.projects).toEqual(mockProject);
   });
 
-  // Prueba cuando no se devuelven proyectos: ESTA PRUEBA ES POSIBLE QUE SOBRE PORQUE NO AUMENTA VALORES AL ANÁLISIS
-  it('should set projects to an empty array if no recommendations are returned', () => {
-    jest.spyOn(mockProjectService, 'getRecommendationsByProjectById').mockReturnValue(of([]));
+  // Prueba para goToProject:
+  it('should navigate to the correct project when goToProject is called', () => {
+    const project: SmeRequestResponse = {
+      id: '123',
+      date: '2023-01-01',
+      classifications: [],
+      notification: { onNewEcosolution: true },
+    };
 
-    component['_getLastProjectName']();
-    const [projects] = component.projects;
-    expect(projects).toEqual([]);
+    const navigateSpy = jest.spyOn(TestBed.inject(Router), 'navigate');
+
+    component.goToProject(project);
+
+    expect(navigateSpy).toHaveBeenCalledWith(
+      ['../sme-analysis/projects/project', component.userProfile().id],
+      {
+        relativeTo: component.route.parent,
+        queryParams: { projectId: project.id },
+      }
+    );
   });
 
 })

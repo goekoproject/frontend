@@ -5,7 +5,7 @@ import { DashboardCleantechService } from './dashboard-cleantech.service';
 
 @Component({
   selector: 'goeko-dashboard-cleantech',
-  providers: [DashboardCleantechService, LeadService],
+  //providers: [DashboardCleantechService, LeadService],
   templateUrl: './dashboard-cleantech.component.html',
   styleUrls: ['./dashboard-cleantech.component.scss'],
 })
