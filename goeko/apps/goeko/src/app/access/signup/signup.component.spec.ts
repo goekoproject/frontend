@@ -2,24 +2,32 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
+import { By } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { USER_TYPE } from '@goeko/store'
-import { ButtonModule, DialogMessageModule, GoInputModule } from '@goeko/ui'
+import { ButtonModule, DialogMessageModule, DialogService, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
 import { AccessService } from '../access.services'
 import { SignupComponent } from './signup.component'
+import { TermsOfServicesComponent } from './terms-of-services.component'
 
 describe('SignupComponent', () => {
   let component: SignupComponent
   let fixture: ComponentFixture<SignupComponent>
-
-  const accessServiceMock = {
-    signUp: jest.fn(),
-    signUpAndAccess: jest.fn().mockReturnValue(of({ success: true })),
-    afterSignUp: jest.fn(),
-  }
+  let accessServiceMock: { signUp: jest.Mock; signUpAndAccess: jest.Mock; afterSignUp: jest.Mock }
+  let dialogServiceMock: { open: jest.Mock }
   beforeEach(async () => {
+    accessServiceMock = {
+      signUp: jest.fn(),
+      signUpAndAccess: jest.fn().mockReturnValue(of({ success: true })),
+      afterSignUp: jest.fn(),
+    }
+    dialogServiceMock = {
+      open: jest.fn().mockReturnValue({
+        afterClosed: jest.fn().mockReturnValue(of(true)),
+      }),
+    }
     await TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -35,6 +43,10 @@ describe('SignupComponent', () => {
         {
           provide: AccessService,
           useValue: accessServiceMock,
+        },
+        {
+          provide: DialogService,
+          useValue: dialogServiceMock,
         },
       ],
     }).compileComponents()
@@ -84,5 +96,13 @@ describe('SignupComponent', () => {
     component.getSelectedActor(USER_TYPE.CLEANTECH)
     expect(component.formSignup.value.userType).toEqual(USER_TYPE.CLEANTECH)
     expect(component.selectedActor()).toEqual(USER_TYPE.CLEANTECH)
+  })
+
+  it('should open terms of services dialog', () => {
+    component.openTermsServices()
+    const termsOfServicesComponent = fixture.debugElement.queryAll(By.directive(TermsOfServicesComponent))
+
+    expect(dialogServiceMock.open).toHaveBeenCalled()
+    expect(termsOfServicesComponent).toBeTruthy()
   })
 })
