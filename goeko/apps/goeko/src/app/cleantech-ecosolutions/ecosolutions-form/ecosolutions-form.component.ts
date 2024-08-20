@@ -24,17 +24,18 @@ import { EcosolutionForm } from './ecosolution-form.model'
 })
 export class EcosolutionsFormComponent implements OnInit {
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
-  public form!: FormGroup
-  public ods = ODS_CODE
-  public idEcosolution!: string
-  public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
-  public productsCategories!: any[]
   public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries
   public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
   public defaultSetCurrency = defaultSetCurrency
   public defaultSetReductions = defaultSetReductions
   public defaultSetyearGuarantee = defaultSetyearGuarantee
+  public form!: FormGroup
+  public ods = ODS_CODE
+  public idEcosolution!: string
+  public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
+  public productsCategories!: any[]
+
   public langs = LANGS
   langSignal = signal(this._translateServices.currentLang || this._translateServices.defaultLang)
   public selectedFormLang = signal({ code: this.langSignal(), index: 0 })
@@ -88,7 +89,6 @@ export class EcosolutionsFormComponent implements OnInit {
   ngOnInit(): void {
     this._getParamsUrl()
     this._buildFrom()
-    console.log(this.form)
     this._changeLangCode()
     this._changeValueSubCategory()
     if (this.idEcosolution) {
