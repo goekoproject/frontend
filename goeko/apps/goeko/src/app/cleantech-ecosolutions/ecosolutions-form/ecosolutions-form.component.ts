@@ -185,10 +185,10 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   private _getFormGroupFieldTranslations(code: string, index: number) {
-    if (index === 0) {
+    if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
-        lang: new FormControl(code, Validators.required),
+        lang: new FormControl(code),
       })
     }
     return this._fb.group({

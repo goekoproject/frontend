@@ -25,6 +25,8 @@ export class SignupComponent implements OnInit {
   isErrorPolicyPassword = false
   formSignup!: FormGroup
   selectedActor = signal('sme')
+  changePassword = signal<boolean>(false)
+  showPassword = signal<boolean>(false)
 
   constructor(
     private _fb: FormBuilder,
