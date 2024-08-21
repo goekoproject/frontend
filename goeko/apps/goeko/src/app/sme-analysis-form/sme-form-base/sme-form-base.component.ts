@@ -31,6 +31,7 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() onChangeLastRecomendation: EventEmitter<boolean> = new EventEmitter<any>()
   public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
   public compareWithProducts = compareWithProducts
+  public goToSummary = false
 
   public dateLastRecomendation!: string
   public dataSelect = DataSelect as any
@@ -184,6 +185,7 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   gotToSummary() {
+    this.goToSummary = true
     this.currentAnalytics.set(this.form.value)
     this._router.navigate([`summary`], {
       relativeTo: this._route.parent,
