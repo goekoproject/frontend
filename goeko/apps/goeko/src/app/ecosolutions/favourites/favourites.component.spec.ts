@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
@@ -7,6 +8,7 @@ import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
 import { FavouritesComponent } from './favourites.component'
+import { Router } from '@angular/router'
 
 const mockFavorite = [
   {
@@ -35,6 +37,7 @@ describe('FavouritesComponent', () => {
   let fixture: ComponentFixture<FavouritesComponent>
   let mockUserService: Partial<UserService>
   let mockEcosolutionsTaggingService: Partial<EcosolutionsTaggingService>
+  let router: Router
   beforeEach(async () => {
     mockUserService = {
       userProfile: signal({ id: '123' } as SmeUser),
@@ -64,9 +67,12 @@ describe('FavouritesComponent', () => {
       ),
       removeFavorite: jest.fn().mockReturnValue(of({ status: 'ok' })),
     }
+    /*mockRouter = {
+      navigate: jest.fn(),
+    }*/
 
     await TestBed.configureTestingModule({
-      imports: [FavouritesComponent, HttpClientTestingModule, CardProductComponent, TranslateModule.forRoot()],
+      imports: [FavouritesComponent, HttpClientTestingModule, CardProductComponent, TranslateModule.forRoot(), RouterTestingModule],
       providers: [
         {
           provide: UserService,
@@ -81,6 +87,8 @@ describe('FavouritesComponent', () => {
 
     fixture = TestBed.createComponent(FavouritesComponent)
     component = fixture.componentInstance
+    router = TestBed.inject(Router)
+    jest.spyOn(router, 'navigate')
     fixture.detectChanges()
   })
 
@@ -141,4 +149,12 @@ describe('FavouritesComponent', () => {
     component.removeFavorite('eco1')
     expect(spyRemoveService).toHaveBeenCalled()
   })
+
+  it('should navigate to the correct URL when showMore is called', () => {
+    const ecosolutionId = 'eco1'
+    const userId = '123'
+    component.showMore(ecosolutionId)
+    expect(router.navigate).toHaveBeenCalledWith([`platform/sme-analysis/results/${userId}/details`, ecosolutionId])
+  })
+
 })
