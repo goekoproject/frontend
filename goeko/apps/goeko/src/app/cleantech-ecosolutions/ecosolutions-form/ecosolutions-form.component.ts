@@ -159,32 +159,32 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _addNameTranslations(): void {
     const nameTranslations = this.form.get('nameTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      nameTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      nameTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
   private _addDescriptionTranslations(): void {
     const descriptionTranslations = this.form.get('descriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
 
   private _detailDescriptionTranslations(): void {
     const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
 
   private _priceDescriptionTranslations(): void {
     const priceDescriptionTranslations = this.form.get('priceDescriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
 
-  private _getFormGroupFieldTranslations(code: string, index: number) {
+  private _getFormGroupFieldTranslations(code: string) {
     if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
