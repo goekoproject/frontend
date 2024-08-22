@@ -10,7 +10,7 @@
   <ul class="platform-actors">
     @for (actor of actors; track actor.title) {
       <li class="actors-detail" (click)="navigateToActors(actor.id)">
-        <i class="ti {{ actor.icon }} actors-detail-icon"></i>
+        <!-- <i class="ti {{ actor.icon }} actors-detail-icon"></i> -->
         <h3 class="actors-detail-name">{{ actor.title }}</h3>
         <p class="actors-detail-description">
           {{ actor.body }}

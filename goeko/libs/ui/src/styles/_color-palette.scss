@@ -23,6 +23,14 @@
   --hp: #d00000;
   --water: #00ffff;
   --border-color: #d9dbe9;
+
+  /*Home page*/
+  --home-page-dark-blue: #052639;
+  --home-page-light-blue: #1290D7;
+  --home-page-dark: #000000;
+  --home-page-dark-grey: #515151;
+  --home-page-light-grey: #B7B7B7;
+  --home-page-green: #44AA0E;
 }
 
 @mixin gradient-linear {
