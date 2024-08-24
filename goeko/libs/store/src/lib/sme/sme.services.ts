@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, find, from, map, mergeMap, reduce } from 'rxjs'
+import { EcosolutionResult } from '../ecosolutions/ecosolution-result.interface'
 import { EcosolutionSearchRequest } from '../ecosolutions/ecosolution-search.request.model'
 import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
 import { EcosolutionsService } from '../ecosolutions/ecosolutions.service'
@@ -42,7 +43,7 @@ export class SmeService extends TranslateChangeService {
     )
   }
 
-  ecosolutionSearch(body: EcosolutionSearchRequest): Observable<EcosolutionSearchResponse[] | null> {
+  ecosolutionSearch(body: EcosolutionSearchRequest): Observable<EcosolutionResult[] | null> {
     return this._ecosolutionServices.ecosolutionSearch(body)
   }
 

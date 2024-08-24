@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ClassificationCategory, ClassificationSubcategory, DataSelect, ProjectService, SmeRequestResponse, SmeService } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
+import { TranslateService } from '@ngx-translate/core'
 import { Subject } from 'rxjs'
 import { compareWithProducts } from '../sme-analysis..util'
 import { SmeAnalysisService } from '../sme-analysis.service'
@@ -30,6 +31,7 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() onChangeLastRecomendation: EventEmitter<boolean> = new EventEmitter<any>()
   public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
   public compareWithProducts = compareWithProducts
+  public goToSummary = false
 
   public dateLastRecomendation!: string
   public dataSelect = DataSelect as any
@@ -64,6 +66,7 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     private _smeAnalysisService: SmeAnalysisService,
     private _projectService: ProjectService,
     private _cdf: ChangeDetectorRef,
+    private _translateService: TranslateService,
   ) {
     effect(() => {
       if (this.dataAllCategory().length > 0) {
@@ -74,6 +77,7 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this._smeAnalysisService.getAllDataCategories()
+    this._changeLang()
   }
 
   ngAfterViewInit(): void {
@@ -82,6 +86,12 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._smeAnalysisService.dataAllCategory.set([])
+  }
+
+  private _changeLang() {
+    this._translateService.onLangChange.subscribe(() => {
+      this._smeAnalysisService.getAllDataCategories()
+    })
   }
   private _loadDataCategories(): void {
     this._dataCategories = new SelectionModel(false, this.dataAllCategory())
@@ -175,6 +185,7 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   gotToSummary() {
+    this.goToSummary = true
     this.currentAnalytics.set(this.form.value)
     this._router.navigate([`summary`], {
       relativeTo: this._route.parent,
