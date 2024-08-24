@@ -5,7 +5,6 @@ import { ODS_CODE } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 
 type Size = 'small' | 'medium' | 'large'
-//TODO: To do value accessort
 @Component({
   standalone: true,
   imports: [CommonModule],
