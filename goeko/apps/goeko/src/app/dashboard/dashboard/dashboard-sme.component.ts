@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { MessageService } from '@goeko/business-ui'
 import { ProjectService, SmeRequestResponse, UserService } from '@goeko/store'
 import { MESSAGE_TYPE } from '@goeko/ui'
-import { take, toArray } from 'rxjs'
+import { take, tap, toArray } from 'rxjs'
 import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service'
 
 @Component({
