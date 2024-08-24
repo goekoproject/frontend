@@ -16,8 +16,9 @@ $color-deep-button-active: #e9e9e9f5;
    
   }
   &-description {
-    color: var(--light-accent, #41c4e6);
-    font: var(--text-bold-accent);
+    color: var(--white);
+    font: var(--font-home-semibold);
+    font-size: 40px;
   }
 }
 .platform-actors {
@@ -44,12 +45,14 @@ $color-deep-button-active: #e9e9e9f5;
     color: var(--primary--main);
   }
   &-name {
-    color: var(--soft-dark, #094056);
-    font: var(--font-body-bold);
+    color: var(--home-page-dark);
+    font: var(--font-home-semibold);
+    font-size: 32px;
   }
   &-description {
-    color: var(--dark-accent, #163953);
+    color: var(--home-page-dark-grey);
     text-align: center;
+    padding-top: 13px;
   }
 }
 

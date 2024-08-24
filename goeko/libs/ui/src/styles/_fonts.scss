@@ -1,12 +1,11 @@
 $font-roboto-regular: 'Roboto-Regular';
 $font-roboto-thin: 'Roboto-Thin';
 $font-barlow-semi-bold: 'Barlow-SemiBold';
-
 $font-barlow-la-belle-aurore: 'LaBelleAurore-Regular';
 $font-inter-thin: 'Inter-Thin';
 
 :root {
-  --font-default: var(--font-body);
+  --font-default: var(--font-body-home);
   --font-huge-heading: 60px/3.875rem Epilogue-SemiBold, sans-serif;
   --font-heading: 24px/2rem Epilogue-Bold, sans-serif;
   --font-body: 16px/1.5rem Barlow-Regular, sans-serif;
@@ -18,6 +17,9 @@ $font-inter-thin: 'Inter-Thin';
   --font-marketing-bold: 6vw Barlow-Bold, sans-serif;
   --text-thin-accent: 2rem Roboto-Thin, sans-serif;
   --text-bold-accent: 1.875rem Roboto-Bold, sans-serif;
+  --font-home-semibold: 16px/1.5rem Khand-SemiBold, sans-serif;
+  --font-home-medium: 16px/1.5rem Khand-SemiBold, sans-serif;
+  --font-body-home: 17px/1.5rem Inter-Medium, sans-serif;
 }
 
 /** HEADING **/ /* epilogue-regular - latin */
@@ -89,4 +91,31 @@ $font-inter-thin: 'Inter-Thin';
   font-style: normal;
   font-weight: 400;
   src: url('_fonts/Roboto/Roboto-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* khand-600 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Khand-SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  src: url('_fonts/khand/Khand-SemiBold.woff') format('woff'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* khand-500 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Khand-Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: url('_fonts/Khand/Khand-Medium.woff') format('woff'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* khand-500 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Inter-Medium';
+  font-style: normal;
+  font-weight: 500;
+  src: url('_fonts/inter/Inter-Medium.otf') format('otf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
