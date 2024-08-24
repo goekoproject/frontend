@@ -21,7 +21,7 @@ describe('DashboardSmeComponent', () => {
   // Mock Services
   let mockUserService: Partial<UserService>
   let mockProjectService: Partial<ProjectService>
-  let mockMessageService:  {
+  let mockMessageService: {
     deleteMessage: jest.Mock
   }
   //let mockRouterService: Partial<Router>
@@ -45,6 +45,7 @@ describe('DashboardSmeComponent', () => {
       deleteProject: jest.fn().mockReturnValue(of({})),
     }
 
+    //** TODO:not suscribre */
     mockMessageService = {
       deleteMessage: jest.fn().mockReturnValue({
         afterClosed: jest.fn().mockReturnValue(of(true)),
@@ -157,10 +158,17 @@ describe('DashboardSmeComponent', () => {
       notification: { onNewEcosolution: true },
     }
 
+    mockMessageService
+      .deleteMessage()
+      .afterClosed()
+      .subscribe((res: boolean) => {
+        expect(res).toBeTruthy()
+        expect(mockProjectService.deleteProject).toHaveBeenCalledWith(project.id)
+        expect(mockProjectService.getRecommendationsByProjectById).toHaveBeenCalled()
+      })
+
     component.deleteProject(project)
 
     expect(mockMessageService.deleteMessage).toHaveBeenCalled()
-/*     expect(mockProjectService.deleteProject).toHaveBeenCalledWith(project.id)
-    expect(mockProjectService.getRecommendationsByProjectById).toHaveBeenCalled() */
   })
 })

@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, forwardRef, signal } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ODS_CODE } from '@goeko/store';
-import { TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common'
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, forwardRef, signal } from '@angular/core'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { ODS_CODE } from '@goeko/store'
+import { TranslateService } from '@ngx-translate/core'
 
-type Size = 'small' | 'medium' | 'large';
-//TODO: To do value accessort
+type Size = 'small' | 'medium' | 'large'
 @Component({
   standalone: true,
   imports: [CommonModule],
@@ -23,62 +22,57 @@ type Size = 'small' | 'medium' | 'large';
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     '[attr.readonly]': 'readonly',
-    '[attr.size]': 'size'
-    
-  }
+    '[attr.size]': 'size',
+  },
 })
 export class SdgIconsComponent implements OnInit, ControlValueAccessor {
-  public currentLangCode: string;
-  public odsCode!: number[];
-  private _sdeSelected = new Set<number>();
-  public value = signal<Array<number>>([]);
+  public currentLangCode: string
+  public odsCode!: number[]
+  private _sdeSelected = new Set<number>()
+  public value = signal<Array<number>>([])
 
-  onChange: (value: Array<number>) => void = () => {};
-  onTouched: () => void = () => {};
+  onChange: (value: Array<number>) => void = () => {}
+  onTouched: () => void = () => {}
 
-  @Output() valueSelected = new EventEmitter();
+  @Output() valueSelected = new EventEmitter()
 
   @Input()
   public get selected(): number[] {
-    return this._selected;
+    return this._selected
   }
 
-  @Input() readonly: boolean = false;
+  @Input() readonly: boolean = false
   public set selected(sustainableDevelopmentGoals: number[]) {
     if (sustainableDevelopmentGoals) {
-      this.odsCode = ODS_CODE.filter((code) =>
-        sustainableDevelopmentGoals.includes(code)
-      );
+      this.odsCode = ODS_CODE.filter((code) => sustainableDevelopmentGoals.includes(code))
     }
-    this._selected = sustainableDevelopmentGoals;
+    this._selected = sustainableDevelopmentGoals
   }
-  private _selected!: number[];
+  private _selected!: number[]
 
-  @Input() size: Size = 'small';
+  @Input() size: Size = 'small'
 
   constructor(private _translateServices: TranslateService) {
-    this.currentLangCode = this._translateServices.defaultLang;
-    this.odsCode = ODS_CODE.sort((a, b) => a - b);
+    this.currentLangCode = this._translateServices.defaultLang
+    this.odsCode = ODS_CODE.sort((a, b) => a - b)
   }
 
   ngOnInit(): void {
-    this._changeLangCode();
+    this._changeLangCode()
   }
   private _changeLangCode() {
-    this._translateServices.onLangChange.subscribe(
-      (res) => (this.currentLangCode = res.lang)
-    );
+    this._translateServices.onLangChange.subscribe((res) => (this.currentLangCode = res.lang))
   }
 
   writeValue(value: any): void {
-    this.value.set(value);
-    this.value()?.forEach(value => this._selectedValue(value));
+    this.value.set(value)
+    this.value()?.forEach((value) => this._selectedValue(value))
   }
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.onChange = fn
   }
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this.onTouched = fn
   }
   setDisabledState?(isDisabled: boolean): void {
     /*     throw new Error('Method not implemented.');
@@ -86,19 +80,18 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   }
 
   selectedElement(event: Event, codeSelected: number): void {
-    this._selectedValue(codeSelected);
-    this.value.set(Array.from(this._sdeSelected));
-    this.onTouched();
-    this.onChange(this.value());
-    this.valueSelected.emit(this.value());
-    event.preventDefault();
-
+    this._selectedValue(codeSelected)
+    this.value.set(Array.from(this._sdeSelected))
+    this.onTouched()
+    this.onChange(this.value())
+    this.valueSelected.emit(this.value())
+    event.preventDefault()
   }
   private _selectedValue(value: number): void {
     if (!this._sdeSelected.has(value)) {
-      this._sdeSelected.add(value);
+      this._sdeSelected.add(value)
     } else {
-      this._sdeSelected.delete(value);
+      this._sdeSelected.delete(value)
     }
   }
 }
