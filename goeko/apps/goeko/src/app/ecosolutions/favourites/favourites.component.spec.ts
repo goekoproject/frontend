@@ -1,14 +1,13 @@
-import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
+import { Router, RouterModule } from '@angular/router'
 import { EcosolutionsTaggingService, SmeUser, TaggingResponse, UserService } from '@goeko/store'
 import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
 import { FavouritesComponent } from './favourites.component'
-import { Router } from '@angular/router'
 
 const mockFavorite = [
   {
@@ -36,7 +35,10 @@ describe('FavouritesComponent', () => {
   let component: FavouritesComponent
   let fixture: ComponentFixture<FavouritesComponent>
   let mockUserService: Partial<UserService>
-  let mockEcosolutionsTaggingService: Partial<EcosolutionsTaggingService>
+  let mockEcosolutionsTaggingService: {
+    getEcosolutionFavourites: jest.Mock
+    removeFavorite: jest.Mock
+  }
   let router: Router
   beforeEach(async () => {
     mockUserService = {
@@ -72,7 +74,7 @@ describe('FavouritesComponent', () => {
     }*/
 
     await TestBed.configureTestingModule({
-      imports: [FavouritesComponent, HttpClientTestingModule, CardProductComponent, TranslateModule.forRoot(), RouterTestingModule],
+      imports: [FavouritesComponent, HttpClientTestingModule, CardProductComponent, TranslateModule.forRoot(), RouterModule.forRoot([])],
       providers: [
         {
           provide: UserService,
@@ -144,10 +146,12 @@ describe('FavouritesComponent', () => {
     })
   })
 
-  xit('should remove a favorite item when a valid ecosolutionId is provided', () => {
-    const spyRemoveService = jest.spyOn(mockEcosolutionsTaggingService, 'removeFavorite').mockReturnValue(of())
+  it('should remove a favorite item when a valid ecosolutionId is provided', () => {
+    mockEcosolutionsTaggingService.removeFavorite().subscribe(() => {
+      expect(mockEcosolutionsTaggingService.getEcosolutionFavourites).toHaveBeenCalled()
+    })
     component.removeFavorite('eco1')
-    expect(spyRemoveService).toHaveBeenCalled()
+    expect(mockEcosolutionsTaggingService.removeFavorite).toHaveBeenCalled()
   })
 
   it('should navigate to the correct URL when showMore is called', () => {
@@ -156,5 +160,4 @@ describe('FavouritesComponent', () => {
     component.showMore(ecosolutionId)
     expect(router.navigate).toHaveBeenCalledWith([`platform/sme-analysis/results/${userId}/details`, ecosolutionId])
   })
-
 })
