@@ -5,7 +5,7 @@ export const environment = {
   clientSecret: 'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',
   audience: 'goeko-backend',
   accessToken: 'https://soft-glitter-5713.eu.auth0.com/oauth/token',
-  domainAuth0: 'soft-glitter-5713.eu.auth0.com',
+  domainAuth0: 'login.goeko.ch',
   connection: 'goeko-users',
   firebaseApp: {
     apiKey: 'AIzaSyCj73PUjQH0LJuDXJygViUyja49jTqDbZo',
