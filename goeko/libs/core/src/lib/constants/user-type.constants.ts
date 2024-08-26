@@ -1,7 +1,7 @@
 export const USER_TYPE = [
   {
     id: 1,
-    title: 'Enterprise',
+    title: 'enterprise',
     value: 'sme',
     active: true,
     descriptions: 'Je cherche une éco-solution',
