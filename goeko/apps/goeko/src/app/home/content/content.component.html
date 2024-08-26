@@ -10,7 +10,6 @@
   <ul class="platform-actors">
     @for (actor of actors; track actor.title) {
       <li class="actors-detail" (click)="navigateToActors(actor.id)">
-        <!-- <i class="ti {{ actor.icon }} actors-detail-icon"></i> -->
         <h3 class="actors-detail-name">{{ actor.title }}</h3>
         <p class="actors-detail-description pt-13">
           {{ actor.body }}
@@ -20,7 +19,7 @@
   </ul>
 </section>
 
-<section #articleEl class="flex flex-col gap-8">
+<section #articleEl class="flex flex-col gap-[12rem]">
   @for (article of articles | orderBy: 'order'; track article.id; let i = $index; let odd = $odd) {
     @defer (on viewport) {
       <article [id]="article.id" class="content" [ngClass]="{ 'row-reverse-content': odd }">
@@ -75,20 +74,17 @@
 <ng-template #sme let-id="id">
   <button go-button (click)="goToLogin()">
     {{ 'HOME.sloganCallActionsBtnSME' | translate }}
-    <span class="material-symbols-rounded"> arrow_forward_ios </span>
   </button>
 </ng-template>
 
 <ng-template #cleantech let-id="id">
   <button go-button (click)="goToLogin()">
     {{ 'HOME.btnCleantech' | translate }}
-    <span class="material-symbols-rounded"> arrow_forward_ios </span>
   </button>
 </ng-template>
 
 <ng-template #bank let-id="id">
   <button go-button appearance="white">
     Coming soon
-    <i class="ti ti-clock-filled"></i>
   </button>
 </ng-template>

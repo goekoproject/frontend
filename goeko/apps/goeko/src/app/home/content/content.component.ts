@@ -19,7 +19,7 @@ enum ENTRYS_ID {
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'flex flex-col items-center gap-16',
+    class: 'flex flex-col items-center gap-[10rem]',
   },
 })
 export class ContentComponent implements OnInit, AfterViewInit {
