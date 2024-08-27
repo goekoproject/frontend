@@ -43,7 +43,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Call Deploy Dev Test Workflow
-        uses: ./.github/workflows/deploy-dev-test.yml
+        uses: ./frontend/.github/workflows/deploy-dev-test.yml
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
