@@ -1,10 +1,11 @@
 <article class="our-team">
-  <go-title-page>
+  <div>
+    <h2 class="our-team-title"> {{ 'HOME.meetOurTeam' | translate }}</h2>
+  </div>
+
+  <!-- <go-title-page>
     {{ 'HOME.meetOurTeam' | translate }}
-    <!-- 	<h2 class="our-team-subtitle">
-			{{ 'HOME.sloganTeam' | translate }}
-		</h2> -->
-  </go-title-page>
+  </go-title-page> -->
 
   @for (item of dataTeams; track item.employedName) {
     @defer (on viewport) {
