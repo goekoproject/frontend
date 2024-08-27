@@ -38,9 +38,6 @@ jobs:
   test:
      name: Unit Test
      runs-on: ubuntu-latest
-     defaults:
-      run:
-        working-directory: ./goeko
      needs: build
      steps:
       - name: Checkout code
