@@ -7,6 +7,9 @@ on:
 jobs:
   unit_test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./goeko
     strategy:
       matrix:
         file: ['profile.component.spec.ts'] # Lista de archivos de prueba
