@@ -41,7 +41,7 @@ jobs:
      needs: build
      steps:
       - name: Unit test page
-        uses: ./.github/workflows/deploy-dev-test.yml
+        uses: ./github/workflows/deploy-dev-test.yml
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
