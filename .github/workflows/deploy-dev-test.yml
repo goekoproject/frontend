@@ -8,9 +8,6 @@ jobs:
   unit_test:
     name: Unit Test ${{ matrix.file }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./goeko
     strategy:
       matrix:
         # File list unit tests
