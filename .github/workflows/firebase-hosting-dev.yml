@@ -40,8 +40,10 @@ jobs:
      runs-on: ubuntu-latest
      needs: build
      steps:
-      - name: Unit test page
-        uses: ./github/workflows/deploy-dev-test.yml
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Call Deploy Dev Test Workflow
+        uses: ./.github/workflows/deploy-dev-test.yml
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
