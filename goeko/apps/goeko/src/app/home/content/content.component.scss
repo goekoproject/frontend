@@ -60,16 +60,23 @@ $color-deep-button-active: #e9e9e9f5;
   display: flex;
   gap: 6rem;
   flex-wrap: wrap;
+  position: relative;
+
   &__actor-photo {
-    width: 37%;
+    width: 58%;
     object-fit: contain;
     aspect-ratio: 4/3;
+    margin-right: 36rem;
+    margin-left: 3rem;
   }
 }
 .info-actors {
+  position: absolute;
+  right: 4rem;
+  top: 8rem;
   display: flex;
   flex-direction: column;
-  width: 47%;
+  max-width: 706px;
   gap: 2rem;
   flex-grow: 2;
   padding: 32px 32px;

@@ -9,12 +9,16 @@
   @for (item of dataTeams; track item.employedName) {
     @defer (on viewport) {
       <div class="our-team-body border-purple-900">
-        <img loading="lazy" class="aspect-auto w-full rounded-md md:mr-auto md:w-1/3 lg:w-1/4" [src]="item.photoProfile" />
+        <div>
+          <div class="portrait">
+            <img loading="lazy" [src]="item.photoProfile" />
+          </div>
+        </div>
         <div class="our-team-content">
           <div class="our-team-heading">
             <go-title-page size="large"> {{ item?.employedName }}</go-title-page>
 
-            <h4 class="our-team-job">{{ item?.job }}</h4>
+            <h1 class="our-team-job">{{ item?.job }}</h1>
           </div>
 
           <p *ngFor="let info of item?.info">
