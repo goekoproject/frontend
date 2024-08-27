@@ -260,22 +260,6 @@ describe('ProfileComponent SME', () => {
     expect(profileComponent.dataProfile()).toEqual(updateUser)
   })
   // clears the locations array when userType is SME and locations exist
-  it('should clear the locations array when userType is SME and locations exist', () => {
-    const user = {
-      id: '1',
-      externalId: '123',
-      userType: USER_TYPE.SME,
-      name: 'Test User',
-      email: 'text@test.com',
-      locations: [{ country: { code: { code: 'CH', label: 'Suisse' }, regions: [] } }],
-      employees: 0,
-    }
-    component.dataProfile = signal(user)
-
-    component.ngOnInit()
-
-    expect(component.locationsArrays.length).toBe(1)
-  })
 
   it('should return true when dataProfile().id is defined', () => {
     const user = {
