@@ -13,6 +13,12 @@ jobs:
         # File list unit tests
         file: ['profile.component.spec.ts',dashboard-sme.component.spec.ts','dashboard-cleantech.component.spec.ts','leads.component.spec.ts','ecosolutions-form.component.spec.ts', 'favourites.component.spec.ts','login.component.spect.ts', 'signup.component.spec.ts', 'reset-password.component.spec.ts']
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+         node-version: '18'
       - name: Install dependencies
         run: npm install
       - name: Run unit tests
