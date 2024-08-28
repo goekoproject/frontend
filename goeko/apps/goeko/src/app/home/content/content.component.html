@@ -19,19 +19,22 @@
   </ul>
 </section>
 
-<section #articleEl class="flex flex-col gap-[12rem]">
+<section #articleEl class="flex flex-col gap-[12rem] w-full">
   @for (article of articles | orderBy: 'order'; track article.id; let i = $index; let odd = $odd) {
     @defer (on viewport) {
-      <article [id]="article.id" class="content" [ngClass]="{ 'row-reverse-content': odd }">
+
+      <article [id]="article.id" class="relative" [ngClass]="{ 'row-reverse-content': odd }">
+        <img *ngIf="odd" class="a" [src]="'assets/panel_central.svg'" [alt]="" />
         <img class="content__actor-photo" [src]="article?.image" [alt]="article.name" />
 
         <div class="ods-info" *ngIf="false">
           <img width="100%" [src]="'assets/icon-ods/ods-logo-wheel.png'" [alt]="currentLang" />
           <h1>{{ 'ods_title' | translate }}</h1>
         </div>
-        <section class="info-actors">
+
+        <section class="info-actors" >
           <div>
-            <h1 id="name" class="info-actors-title" [ngClass]="{ 'title-reverse-content': !odd }">
+            <h1 id="name" class="info-actors-title">
               {{ article?.name }}
             </h1>
             <h3 class="info-actors-description text-3xl md:text-5xl" id="descriptions">
@@ -72,7 +75,7 @@
 </section>
 
 <ng-template #sme let-id="id">
-  <button go-button (click)="goToLogin()">
+  <button go-button class="rounded-full" (click)="goToLogin()">
     {{ 'HOME.sloganCallActionsBtnSME' | translate }}
   </button>
 </ng-template>

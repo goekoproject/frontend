@@ -3,7 +3,7 @@
   align-items: center;
   appearance: none;
   background-color: var(--primary--500);
-  border-radius: 1.5rem;
+  border-radius: 0.675rem;
   border-style: none;
   box-sizing: border-box;
   color: var(--white);
@@ -20,7 +20,7 @@
     opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   gap: 0.5rem;
   max-width: max-content;
-  text-wrap: pretty;  
+  text-wrap: pretty;
   width: 100%;
   &:hover {
     background: var(--primary--main);
