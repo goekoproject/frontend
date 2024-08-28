@@ -3,10 +3,6 @@
     <h2 class="our-team-title"> {{ 'HOME.meetOurTeam' | translate }}</h2>
   </div>
 
-  <!-- <go-title-page>
-    {{ 'HOME.meetOurTeam' | translate }}
-  </go-title-page> -->
-
   @for (item of dataTeams; track item.employedName) {
     @defer (on viewport) {
       <div class="our-team-body border-purple-900">
@@ -31,4 +27,6 @@
       <div>loading...</div>
     }
   }
+  <img  class="inter-panel" [src]="'assets/panel_footer.svg'" [alt]="" />
 </article>
+

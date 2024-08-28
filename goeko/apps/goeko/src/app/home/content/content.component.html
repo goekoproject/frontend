@@ -24,7 +24,7 @@
     @defer (on viewport) {
 
       <article [id]="article.id" class="relative" [ngClass]="{ 'row-reverse-content': odd }">
-        <img *ngIf="odd" class="a" [src]="'assets/panel_central.svg'" [alt]="" />
+        <img *ngIf="odd" class="inter-panel" [src]="'assets/panel_central.svg'" [alt]="" />
         <img class="content__actor-photo" [src]="article?.image" [alt]="article.name" />
 
         <div class="ods-info" *ngIf="false">

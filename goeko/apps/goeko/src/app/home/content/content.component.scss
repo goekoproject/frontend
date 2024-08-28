@@ -184,6 +184,12 @@ $color-deep-button-active: #e9e9e9f5;
   .info-actors-benefis {
     gap: 2rem;
   }
+
+  .inter-panel{
+    position: absolute;
+      bottom: 18rem;
+      z-index: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -206,8 +212,3 @@ $color-deep-button-active: #e9e9e9f5;
   cursor: pointer;
 }
 
-.a{
-  position: absolute;
-    bottom: 18rem;
-    z-index: 0;
-}
