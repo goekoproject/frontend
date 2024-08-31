@@ -45,17 +45,6 @@ export class ConfigModule {
           provide: CONFIGURATION,
           useValue: config,
         },
-        /*       provideAuth0({
-          domain: config?.domainAuth0 as string,
-          clientId: config?.clientId,
-          authorizationParams: {
-            redirect_uri: AUTH_CONNECT.REDIRECT_URI,
-            audience: config?.audience,
-          },
-          httpInterceptor: {
-            allowedList: ['https://platform*'],
-          },
-        }), */
       ],
     }
   }
