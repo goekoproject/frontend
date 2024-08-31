@@ -33,6 +33,10 @@ jobs:
         with:
           name: build-project
           path: goeko/dist/apps
+  test:
+     name: Unit Test
+     needs: build
+     uses: ./.github/workflows/deploy-pro-test.yml
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
