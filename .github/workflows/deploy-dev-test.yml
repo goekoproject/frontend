@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         # File list unit tests
-        file: ['profile.component.spec.ts',dashboard-sme.component.spec.ts','dashboard-cleantech.component.spec.ts','leads.component.spec.ts','ecosolutions-form.component.spec.ts', 'favourites.component.spec.ts','login.component.spect.ts', 'signup.component.spec.ts', 'reset-password.component.spec.ts']
+        file: ['profile.component.spec.ts','dashboard-sme.component.spec.ts','dashboard-cleantech.component.spec.ts','leads.component.spec.ts','ecosolutions-form.component.spec.ts', 'favourites.component.spec.ts','login.component.spect.ts', 'signup.component.spec.ts', 'reset-password.component.spec.ts']
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
