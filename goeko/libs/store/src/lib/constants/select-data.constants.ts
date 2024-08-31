@@ -646,6 +646,10 @@ const SelectBuildingOperation: DataSelectOption[] = [
     id: 'ecoFriendlySanitary',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlySanitary',
   },
+  {
+    id: 'wasteWaterManagement',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.wasteWaterManagement',
+  }
 ]
 
 export const DataSelect = {

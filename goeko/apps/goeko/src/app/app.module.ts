@@ -6,6 +6,7 @@ import { AppComponent } from './app.component'
 
 import { HttpClient } from '@angular/common/http'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { PopupModule, SelectI18nComponent } from '@goeko/business-ui'
 import { GoRemoteConfigModule } from '@goeko/core'
 import { ContentFulModule } from '@goeko/store'
@@ -27,7 +28,7 @@ export const httpLoaderFactory = (http: HttpClient) => {
     SelectI18nComponent,
     SideDialogModule,
     GoRemoteConfigModule,
-
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'fr',
       loader: {

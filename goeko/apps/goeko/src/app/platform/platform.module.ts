@@ -59,6 +59,7 @@ import { PlatformComponent } from './platform.component'
     isSubscribedCleantech,
     NotificationService,
     LocationsService,
+
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],
 })
