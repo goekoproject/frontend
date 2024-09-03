@@ -64,6 +64,6 @@ export class HomeService {
       })
   }
   goTologin() {
-    this._router.navigate(['/platform'])
+    this._router.navigate(['/login'])
   }
 }

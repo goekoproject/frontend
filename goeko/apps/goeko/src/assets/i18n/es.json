@@ -292,7 +292,8 @@
       "waterManagement": "Soluciones para la gestión del agua de lluvia",
       "waterManagementWastewater": "Soluciones para la gestión de aguas residuales",
       "ecoFriendlytaps": "Grifos ecológicos",
-      "ecoFriendlySanitary": "Sanitarios ecológicos"
+      "ecoFriendlySanitary": "Sanitarios ecológicos",
+      "wasteWaterManagement": "Soluciones para la gestión de aguas residuales"
     },
     "selectCountry": {
       "france": "France",
@@ -434,6 +435,7 @@
     "buildingOperation_question": "Está buscando una o más soluciones para reducir el consumo de agua como por ejemplo:",
     "co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO2",
     "ods": "Vinculado a su solución ecológica",
+    "odsSme": "Vinculado a la solución ecológica",
     "paybackPeriodYears": "Número de años para rentabilizar la inversión respecto a una solución tradicional",
     "selectProducts": "Tipos de productos tóxicos que reemplaza o mejora su solución ecológica",
     "waste": "Tipos de residuos",
@@ -480,6 +482,7 @@
   "categories": "Categorias",
   "certified": "Certificado",
   "cleantech": "Cleantech",
+  "enterprise": "Empresa",
   "completeToProfileNow": "Completa al perfil ahora!",
   "confirm": "Confirmar",
   "connectNow": "¡Conecta ahora!",

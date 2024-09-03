@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui'
 import {
   ECOSOLUTIONS_CONFIGURATION,
-  EcosolutionSearchResponse,
+  EcosolutionResult,
   EcosolutionsTaggingService,
   ODS_CODE,
   SmeAnalysisStoreService,
@@ -41,7 +41,7 @@ export class EcosolutionListComponent implements OnInit {
 
   formField = FORM_CATEGORIES_QUESTION
   toogleOpenDetails = false
-  ecosolutions = signal<Array<EcosolutionSearchResponse>>([])
+  ecosolutions = signal<Array<EcosolutionResult>>([])
   selectedRecomendation: any
   selectedRecomendationIndex: any
   zoomOutIn = false
@@ -112,7 +112,7 @@ export class EcosolutionListComponent implements OnInit {
     })
   }
 
-  private _handleRecommendations(recommendations: EcosolutionSearchResponse[]) {
+  private _handleRecommendations(recommendations: EcosolutionResult[]) {
     if (recommendations && Array.isArray(recommendations)) {
       const smeRecomendation = this._filterSmeRecomendations(recommendations)
       this.ecosolutions.set(this._buildCountriesAvailability(smeRecomendation))
@@ -120,7 +120,7 @@ export class EcosolutionListComponent implements OnInit {
     }
   }
 
-  private _buildCountriesAvailability(solutions: EcosolutionSearchResponse[]) {
+  private _buildCountriesAvailability(solutions: EcosolutionResult[]) {
     return solutions.map((res: any) => ({
       ...res,
       companyDetail: {
@@ -136,14 +136,14 @@ export class EcosolutionListComponent implements OnInit {
     return ` ${regionNames.of(countries)}`
   }
 
-  goToViewDetailEcosolution(ecosolution: EcosolutionSearchResponse) {
+  goToViewDetailEcosolution(ecosolution: EcosolutionResult) {
     this._smeAnalysisStore.setDetailEcosolutions(ecosolution)
     this._router.navigate(['details', ecosolution.id], {
       relativeTo: this._route,
     })
   }
 
-  changeFavorite(ecosolution: EcosolutionSearchResponse) {
+  changeFavorite(ecosolution: EcosolutionResult) {
     if (ecosolution.favourite) {
       this._taggingService.removeFavorite(this._smeId, ecosolution.id).subscribe(() => this.getResults())
       return
@@ -159,7 +159,7 @@ export class EcosolutionListComponent implements OnInit {
     }
   }
 
-  private _filterSmeRecomendations(smeRecomendation: EcosolutionSearchResponse[]) {
+  private _filterSmeRecomendations(smeRecomendation: EcosolutionResult[]) {
     if (this.checkedAll?.nativeElement?.checked) {
       return smeRecomendation
     }
@@ -168,8 +168,7 @@ export class EcosolutionListComponent implements OnInit {
     const fieldChecked = this.formField.filter((field) => field.checked)
     fieldChecked.forEach((el: any) => {
       const newArray = smeRecomendation.filter(
-        (recomendation: EcosolutionSearchResponse) =>
-          recomendation.classification.mainCategory.toUpperCase() === el.controlName.toUpperCase(),
+        (recomendation: EcosolutionResult) => recomendation.classification.mainCategory.toUpperCase() === el.controlName.toUpperCase(),
       )
       newSmeRecomendation = [...newSmeRecomendation, ...newArray]
     })

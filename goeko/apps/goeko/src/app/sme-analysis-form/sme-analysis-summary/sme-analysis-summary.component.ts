@@ -168,50 +168,53 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
     this.savedAnalysis = true
   }
 
-  saveAnalysisOrProject(route?: string) {
+  saveAnalysisOrProject(route?: string, isDashboard?: boolean) {
     this.savedAnalysis = true
     if (this.isProject) {
-      this._updateOfCreateProject(route)
+      this._updateOfCreateProject(route, isDashboard)
     } else {
-      this._saveAnalysis(route)
+      this._saveAnalysis(route, isDashboard)
     }
   }
 
-  private _updateOfCreateProject(route?: string) {
+  private _updateOfCreateProject(route?: string, isDashboard?: boolean) {
     if (this.projectId) {
-      this._updateProject(route)
+      this._updateProject(route, isDashboard)
     } else {
-      this._saveProject(route)
+      this._saveProject(route, isDashboard)
     }
   }
-  private _saveProject(route?: string) {
+  private _saveProject(route?: string, isDashboard?: boolean) {
     const smeAnalysisRequest = new FormValueToSmeProjectRequest(this.currentAnalytics(), this._smeId)
     this._projectService
       .saveProject(smeAnalysisRequest)
       .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((res) => {
         this.savedAnalysis = true
+        if (isDashboard) this._goToDashboard()
         if (route) this._goToResult(route)
       })
   }
 
-  private _updateProject(route?: string) {
+  private _updateProject(route?: string, isDashboard?: boolean) {
     const smeAnalysisRequest = new FormValueToSmeProjectRequest(this.currentAnalytics())
     this._projectService
       .updateProject(this.projectId, smeAnalysisRequest)
       .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((res) => {
         this.savedAnalysis = true
+        if (isDashboard) this._goToDashboard()
         if (route) this._goToResult(route)
       })
   }
-  private _saveAnalysis(route?: string) {
+  private _saveAnalysis(route?: string, isDashboard?: boolean) {
     const smeAnalysisRequest = new FormValueToSmeAnalysisRequest(this._smeId, this.currentAnalytics())
     this._smeServices
       .saveRecommendations(smeAnalysisRequest)
       .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe(() => {
         this.savedAnalysis = true
+        if (isDashboard) this._goToDashboard()
         if (route) this._goToResult(route)
       })
   }
@@ -219,13 +222,16 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
   cancel() {
     this._dialogInfoMessage.afterClosed().subscribe((saveAnalysis) => {
       if (saveAnalysis) {
-        this._saveAnalysis('../dashboard/sme')
-        this.savedAnalysis = true
+        this.saveAnalysisOrProject(undefined, true)
       } else {
-        this._router.navigate(['../dashboard/sme'], { relativeTo: this._route.parent })
+        this._goToDashboard()
         this.savedAnalysis = true
       }
     })
+  }
+
+  private _goToDashboard() {
+    this._router.navigate(['../dashboard/sme'], { relativeTo: this._route.parent?.parent })
   }
 
   private _goToResult(route?: string) {

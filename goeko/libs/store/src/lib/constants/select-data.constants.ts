@@ -506,6 +506,12 @@ export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
     id: 1,
     keyLang: 'upTo',
     from: 0,
+    to: 0,
+  },
+  {
+    id: 1,
+    keyLang: 'upTo',
+    from: 0,
     to: 10,
   },
   {
@@ -568,6 +574,12 @@ export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] =
     id: 1,
     keyLang: 'upTo',
     from: 0,
+    to: 0,
+  },
+  {
+    id: 1,
+    keyLang: 'upTo',
+    from: 0,
     to: 10,
   },
   {
@@ -623,16 +635,16 @@ const SelectBuildingOperation: DataSelectOption[] = [
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement',
   },
   {
-    id: 'waterManagementGray',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementGray',
-  },
-  {
     id: 'ecoFriendlytaps',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlytaps',
   },
   {
     id: 'ecoFriendlySanitary',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlySanitary',
+  },
+  {
+    id: 'wasteWaterManagement',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.wasteWaterManagement',
   },
 ]
 

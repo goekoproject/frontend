@@ -292,7 +292,8 @@
       "waterManagement": "Solutions for rainwater management",
       "waterManagementWastewater": "Solutions for wastewater management",
       "ecoFriendlytaps": "Eco-friendly taps",
-      "ecoFriendlySanitary": "Eco-friendly sanitary"
+      "ecoFriendlySanitary": "Eco-friendly sanitary",
+      "wasteWaterManagement": "Solutions for waste water management"
     },
     "selectCountry": {
       "france": "France",
@@ -434,6 +435,7 @@
     "buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:",
     "co2Emission": "Area where your eco-solution reduces CO2 emissions",
     "ods": "Linked to your eco-solution",
+    "odsSme":"Linked to the eco-solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
     "selectProducts": "Type of toxic products that your eco-solution replaces or improves",
     "waste": "Types of waste",
@@ -480,6 +482,7 @@
   "categories": "Categories",
   "certified": "Certification",
   "cleantech": "Cleantech",
+  "enterprise": "Enterprise",
   "companyDetails": "Company details",
   "completeToProfileNow": "Complete to profile now!",
   "confirm": "Confirm",

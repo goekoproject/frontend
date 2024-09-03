@@ -5,6 +5,9 @@ import { LocationTranslated } from '../model/location-translated.interface'
 import { Picture } from '../model/pictures.interface'
 import { ImprovementEcosolution } from './improvement-ecosolution.interface'
 
+/**
+ * Ecosolution detail for sme
+ */
 export interface EcosolutionSearchResponse {
   id: string
   approved: boolean

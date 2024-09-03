@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
   selector: 'goeko-leads',
@@ -6,4 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './leads.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LeadsComponent { }
+export class LeadsComponent {}

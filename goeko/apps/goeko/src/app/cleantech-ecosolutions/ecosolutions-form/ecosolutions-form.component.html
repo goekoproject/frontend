@@ -5,13 +5,13 @@
 <ng-template #imageUpload>
   <goeko-input-file
     (fileChange)="uploadImgEcosolutions($event)"
-    [filesUrl]="urlPicEcosolution"
+    [filesUrl]="urlPicEcosolution || ''"
     [multiple]="true"
     [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
 </ng-template>
 <ng-template #heading>
   <div class="mb-10 flex items-center justify-between gap-1 rounded-md bg-primary-100 bg-opacity-65 p-4">
-    @if (form.value.solutionName) {
+    @if (nameTranslations && nameTranslations.controls && nameTranslations.controls.length > 0) {
       <h1 class="text-3xl font-bold text-primary-950">
         {{ nameTranslations.controls[0].value?.label }}
       </h1>
@@ -108,25 +108,27 @@
           <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
         </div>
 
-        <div class="ecosolutions-subcategory">
-          @for (subcategory of questionsCategories().subcategories; track subcategory.code) {
-            <goeko-select-subcategory-product
-              [id]="subcategory.code"
-              [formControlName]="'subCategory'"
-              [subCategory]="subcategory"
-              [readonly]="isReadOnly">
-              <p title>
-                {{ subcategory.label }}
-              </p>
+        @defer (when questionsCategories()) {
+          <div class="ecosolutions-subcategory">
+            @for (subcategory of questionsCategories().subcategories; track subcategory.code) {
+              <goeko-select-subcategory-product
+                [id]="subcategory.code"
+                [formControlName]="'subCategory'"
+                [subCategory]="subcategory"
+                [readonly]="isReadOnly">
+                <p title>
+                  {{ subcategory.label }}
+                </p>
 
-              <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly">
-                @for (product of subcategory.products; track product.code) {
-                  <go-badge [readonly]="isReadOnly" [value]="product.code" [readonly]="isReadOnly">{{ product.label }}</go-badge>
-                }
-              </go-badge-group>
-            </goeko-select-subcategory-product>
-          }
-        </div>
+                <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly">
+                  @for (product of subcategory.products; track product.code) {
+                    <go-badge [readonly]="isReadOnly" [value]="product.code" [readonly]="isReadOnly">{{ product.label }}</go-badge>
+                  }
+                </go-badge-group>
+              </goeko-select-subcategory-product>
+            }
+          </div>
+        }
 
         <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
       </fieldset>

@@ -290,7 +290,8 @@
       "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
       "waterManagementWastewater": "Des solutions pour la gestion de l’eau usée",
       "ecoFriendlytaps": "Robinetterie écologique",
-      "ecoFriendlySanitary": "Sanitaire écologique"
+      "ecoFriendlySanitary": "Sanitaire écologique",
+      "wasteWaterManagement": "Des solutions pour la gestion de l’eau usée"
     },
     "selectCountry": {
       "france": "France",
@@ -432,6 +433,7 @@
     "buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :",
     "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
     "ods": "En lien avec votre éco-solution",
+    "odsSme": "En lien avec l’éco-solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
     "selectProducts": "Votre éco-solution réduit l'impact du ou des produits toxiques suivants",
     "waste": "Types de déchets",
@@ -481,6 +483,7 @@
   "categories": "Catégories",
   "certified": "Certification",
   "cleantech": "Cleantech",
+  "enterprise": "Entreprise",
   "companyDetails": "Détails de l'entreprise",
   "completeToProfileNow": "Complétez votre profil maintenant !",
   "confirm": "Confirmer",

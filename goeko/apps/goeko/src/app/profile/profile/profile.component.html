@@ -58,7 +58,7 @@
                 </div>
               }
               @case ('file-link') {
-                <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo"></goeko-input-file>
+                <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
               }
               @case ('country') {
                 <ng-container
