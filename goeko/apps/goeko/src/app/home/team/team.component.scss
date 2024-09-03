@@ -15,8 +15,8 @@
 	}
 	&-body {
     @apply flex items-center flex-wrap justify-center gap-8 rounded-lg border p-4 md:border-none md:flex-nowrap md:items-start;
-	  padding: 1rem 10rem 1rem 10rem;
-    z-index: 1;
+		padding: 1rem 10rem 1rem 10rem;
+    	z-index: 1;
 	}
 
 	&-job {
