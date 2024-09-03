@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 3rem;
-	margin: 18rem 0;
+	margin-top: 18rem;
 	border-top: 1px solid var(--home-page-light-grey);
 
 	&-subtitle {
@@ -57,8 +57,23 @@
   border: 1px solid white;
 }
 
-.inter-panel{
+.inter-panel {
   position: absolute;
-  top: 251rem;
+  top: 257rem;
   z-index: 0;
+}
+
+.goeko-logo{
+  z-index: 1;
+}
+
+.title {
+  margin-top: 9.5rem;
+  font: var(--font-home-semibold);
+  font-size: 25rem;
+  background: -webkit-linear-gradient(rgb(255, 255, 255), #999999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  opacity: 0.5;
 }
