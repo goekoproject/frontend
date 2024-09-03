@@ -103,6 +103,10 @@ export const SelectMainMineralProduct: DataSelectOption[] = [
     id: 'aluminum',
     keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.aluminum',
   },
+  {
+    id: 'sealingStrip',
+    keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.sealingStrip',
+  }
 ]
 
 export const SelectMainRigidMaterial: DataSelectOption[] = [{ id: 'mainRigidMaterial', keyLang: 'SELECT_DATA_LABEL.insolationPanels' }]
@@ -631,8 +635,8 @@ const SelectBuildingOperation: DataSelectOption[] = [
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.greenRoofsWalls',
   },
   {
-    id: 'waterManagement',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement',
+    id: 'waterManagementWastewater',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementWastewater',
   },
   {
     id: 'ecoFriendlytaps',
@@ -641,10 +645,6 @@ const SelectBuildingOperation: DataSelectOption[] = [
   {
     id: 'ecoFriendlySanitary',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlySanitary',
-  },
-  {
-    id: 'wasteWaterManagement',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.wasteWaterManagement',
   },
 ]
 
