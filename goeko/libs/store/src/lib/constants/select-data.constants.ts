@@ -635,10 +635,6 @@ const SelectBuildingOperation: DataSelectOption[] = [
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement',
   },
   {
-    id: 'waterManagementGray',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementGray',
-  },
-  {
     id: 'ecoFriendlytaps',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlytaps',
   },
@@ -649,7 +645,7 @@ const SelectBuildingOperation: DataSelectOption[] = [
   {
     id: 'wasteWaterManagement',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.wasteWaterManagement',
-  }
+  },
 ]
 
 export const DataSelect = {
