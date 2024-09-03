@@ -7,7 +7,7 @@ import { Component, ViewEncapsulation } from '@angular/core'
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'footer-wrapper',
+    class: 'footer-wrapper mt-44',
   },
 })
 export class FooterComponent {
