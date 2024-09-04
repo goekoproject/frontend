@@ -11,10 +11,12 @@ export enum CODE_LANG {
   GB = 'gb',
 }
 export const LANGS: Lang[] = [
-  /* 		{
-        code: 'es',
-        locale: 'es ',
-    }, */
+
+  {
+    codeContentFul: CODE_LANG.ES,
+    title: 'LANGS.es',
+    code: CODE_LANG.ES,
+  },
   {
     codeContentFul: CODE_LANG.FR,
     title: 'LANGS.fr',
