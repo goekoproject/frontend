@@ -7,7 +7,6 @@ import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
 import { FavouritesComponent } from './favourites.component'
-
 const mockFavorite = [
   {
     ecosolution: {

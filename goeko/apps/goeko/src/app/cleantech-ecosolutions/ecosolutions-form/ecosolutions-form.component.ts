@@ -24,17 +24,18 @@ import { EcosolutionForm } from './ecosolution-form.model'
 })
 export class EcosolutionsFormComponent implements OnInit {
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
-  public form!: FormGroup
-  public ods = ODS_CODE
-  public idEcosolution!: string
-  public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
-  public productsCategories!: any[]
   public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries
   public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
   public defaultSetCurrency = defaultSetCurrency
   public defaultSetReductions = defaultSetReductions
   public defaultSetyearGuarantee = defaultSetyearGuarantee
+  public form!: FormGroup
+  public ods = ODS_CODE
+  public idEcosolution!: string
+  public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
+  public productsCategories!: any[]
+
   public langs = LANGS
   langSignal = signal(this._translateServices.currentLang || this._translateServices.defaultLang)
   public selectedFormLang = signal({ code: this.langSignal(), index: 0 })
@@ -88,7 +89,6 @@ export class EcosolutionsFormComponent implements OnInit {
   ngOnInit(): void {
     this._getParamsUrl()
     this._buildFrom()
-    console.log(this.form)
     this._changeLangCode()
     this._changeValueSubCategory()
     if (this.idEcosolution) {
@@ -159,32 +159,32 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _addNameTranslations(): void {
     const nameTranslations = this.form.get('nameTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      nameTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      nameTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
   private _addDescriptionTranslations(): void {
     const descriptionTranslations = this.form.get('descriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
 
   private _detailDescriptionTranslations(): void {
     const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
 
   private _priceDescriptionTranslations(): void {
     const priceDescriptionTranslations = this.form.get('priceDescriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
+    this.langs.forEach((lang) => {
+      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
     })
   }
 
-  private _getFormGroupFieldTranslations(code: string, index: number) {
+  private _getFormGroupFieldTranslations(code: string) {
     if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),

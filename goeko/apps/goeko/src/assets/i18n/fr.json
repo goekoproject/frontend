@@ -288,7 +288,7 @@
     "selectBuildingOperation": {
       "greenRoofsWalls": "Toits et murs végétalisés",
       "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
-      "waterManagementGray": "Des solutions pour la gestion de l’eau grise",
+      "waterManagementWastewater": "Des solutions pour la gestion de l’eau usée",
       "ecoFriendlytaps": "Robinetterie écologique",
       "ecoFriendlySanitary": "Sanitaire écologique"
     },
@@ -370,7 +370,8 @@
       "iron": "Inox",
       "isolation": "Isolation thermique​",
       "steel": "Acier",
-      "zinc": "Zinc"
+      "zinc": "Zinc",
+      "sealingStrip": "Lès d’étanchéité"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Panneaux d'isolation"
@@ -421,7 +422,7 @@
       "storeEnergy": "Stocker l’énergie",
       "useLowConsumptionLighting": "Solutions de refroidissement écologiques",
       "useRenewableEnergies": "Recourir à des énergies renouvelables",
-      "sustainableLightingSystems": "Des systèmes d’éclairage durables",
+      "sustainableLightingSystems": "Systèmes d’éclairage durables",
       "intelligentHeatingSystems": "Systèmes de chauffage intelligent",
       "homeAutomation": "Domotique"
     }
@@ -431,6 +432,7 @@
     "buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :",
     "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
     "ods": "En lien avec votre éco-solution",
+    "odsSme": "En lien avec l’éco-solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
     "selectProducts": "Votre éco-solution réduit l'impact du ou des produits toxiques suivants",
     "waste": "Types de déchets",

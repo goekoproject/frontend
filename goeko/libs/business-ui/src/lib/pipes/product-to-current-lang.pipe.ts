@@ -15,7 +15,7 @@ export class ProductToCurrentLangPipe implements PipeTransform {
   ) {}
   transform(product: ManageProduct): any {
     const productCurrentLang: Translations | undefined = product?.label?.translations.find(
-      (translation: Translations) => translation.lang === this._getCurrentLang() || CODE_LANG.EN,
+      (translation: Translations) => translation.lang === this._getCurrentLang()
     )
     return productCurrentLang?.label
   }

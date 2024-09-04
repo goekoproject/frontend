@@ -290,7 +290,7 @@
     "selectBuildingOperation": {
       "greenRoofsWalls": "Green roofs and walls",
       "waterManagement": "Solutions for rainwater management",
-      "waterManagementGray": "Solutions for graywater management",
+      "waterManagementWastewater": "Solutions for waste water management",
       "ecoFriendlytaps": "Eco-friendly taps",
       "ecoFriendlySanitary": "Eco-friendly sanitary"
     },
@@ -372,7 +372,8 @@
       "iron": "Stainless steel",
       "isolation": "Thermal insulation",
       "steel": "Steel",
-      "zinc": "Zinc"
+      "zinc": "Zinc",
+      "sealingStrip": "Sealing strip"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Insulation panels"
@@ -433,6 +434,7 @@
     "buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:",
     "co2Emission": "Area where your eco-solution reduces CO2 emissions",
     "ods": "Linked to your eco-solution",
+    "odsSme": "Linked to the eco-solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
     "selectProducts": "Type of toxic products that your eco-solution replaces or improves",
     "waste": "Types of waste",

@@ -1,19 +1,16 @@
 <section class="leads-list">
-    <ul>
-        @for (lead of leads| async; track lead.id) {
-          
-            <li (click)="selectedLead(lead)" class="lead-elements">
-                <h3>{{lead.sme.name}}</h3>
-                <p>{{lead.ecosolution.name}}</p>
-                <span>{{lead.date| goDateFormat}}</span>
-
-            </li>
-        }
-    </ul>
-    @defer (when lead) {
-        <div class="lead-content">
-            <p [innerHTML]="lead?.message"></p>
-        </div>
+  <ul>
+    @for (lead of leads | async; track lead.id) {
+      <li (click)="selectedLead(lead)" class="lead-elements">
+        <h3>{{ lead.sme.name }}</h3>
+        <p>{{ lead.ecosolution.name }}</p>
+        <span>{{ lead.date | goDateFormat }}</span>
+      </li>
     }
+  </ul>
+  @defer (when lead) {
+    <div class="lead-content">
+      <p [innerHTML]="lead?.message"></p>
+    </div>
+  }
 </section>
-

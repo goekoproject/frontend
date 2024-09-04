@@ -37,7 +37,7 @@
         <h4 class="whitespace-nowrap text-xl leading-none tracking-tight">{{ 'userType' | translate }}</h4>
       </div>
       <div class="flex flex-col gap-4">
-        @for (actor of userType; track actor.value) {
+        @for (actor of userType(); track actor.value) {
           @defer (when actor.active) {
             <div
               role="radiogroup"

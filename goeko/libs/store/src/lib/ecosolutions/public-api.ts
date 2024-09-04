@@ -1,3 +1,4 @@
+export * from './ecosolution-result.interface'
 export * from './ecosolution-search.request.model'
 export * from './ecosolution-search.response.interface'
 export * from './ecosolution.interface'
