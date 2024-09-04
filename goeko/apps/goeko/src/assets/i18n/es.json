@@ -394,7 +394,8 @@
       "paintVarnish": "Pintura/barniz",
       "productsContainingTar": "Productos que contienen alquitrán",
       "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas",
-      "collects": "Adhesivo"
+      "collects": "Adhesivo",
+      "paintsAndSolvents": "Pinturas y solventes"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosoles",

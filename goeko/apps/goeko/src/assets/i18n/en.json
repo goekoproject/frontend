@@ -394,7 +394,8 @@
       "paintVarnish": "Paint/varnish",
       "productsContainingTar": "Products containing tar",
       "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances",
-      "collects": "Adhesive"
+      "collects": "Adhesive",
+      "paintsAndSolvents": "Paints and solvents"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosols",
