@@ -9,6 +9,11 @@
   display: block;
   position: relative;
   margin-top: -11rem;
+  h2, a, p {
+    font: var(--font-body-home);
+    font-weight: 600;
+    font-size: 16px;
+  }
 }
 .footer {
   height: 13rem;
@@ -49,5 +54,11 @@
 
 .footer-content {
   background-color: var(--home-page-footer);
-  font: var(--font-body-home);
 }
+
+.footer-gray-text {
+  color: #768797;
+}
+
+// margin-top: 3rem;
+// margin-bottom: 0.5rem;
