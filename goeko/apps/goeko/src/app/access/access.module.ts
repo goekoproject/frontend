@@ -39,7 +39,6 @@ import { SignupComponent } from './signup/signup.component'
     DialogMessageModule,
     ConfigModule.forRoot({
       endopoint: environment.baseUrl,
-      tokenAccess: environment.accessToken,
       clientSecret: environment.clientSecret,
       clientId: environment.clientId,
       domainAuth0: environment.domainAuth0,

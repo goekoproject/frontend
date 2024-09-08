@@ -1,12 +1,11 @@
 export const environment = {
   production: false,
-  baseUrl: 'https://platform.goeko-api.com',
-  clientId: 'ly5mBoJd8sgMxqF8MpWVsE24kkhAZIHW',
-  clientSecret: 'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',
-  accessToken: 'https://soft-glitter-5713.eu.auth0.com/oauth/token',
-  domainAuth0: 'soft-glitter-5713.eu.auth0.com',
-  audience: 'goeko-backend',
-  connection:'goeko-users',
+  baseUrl: 'https://platform-stage.goeko-api.com',
+  clientId: 'dn2YK5CEo5sKZzDTbai9WNWo9R8xHZMg',
+  clientSecret: 'qezNKj8nkgVQktHoK9anf2dZrCvIlsy3ZGYXeM2X4VAHhNxyJ2NSbCHfEP4OWJTX',
+  audience: 'goeko-backend-stage',
+  domainAuth0: 'late-mud-1972.eu.auth0.com',
+  connection: 'goeko-stage-users',
   firebaseApp: {
     apiKey: 'AIzaSyBoLASPKVeKXwrV4Do6MTm1pLHbRk2RUdI',
     authDomain: 'goeko-c8a23.firebaseapp.com',
