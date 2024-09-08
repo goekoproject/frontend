@@ -46,6 +46,9 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._route.snapshot.paramMap.get('id') || this._route.snapshot.queryParamMap.get('smeId') || ''
   }
 
+  private get projectId(): string {
+    return this._route.snapshot.queryParamMap.get('projectId') || ''
+  }
   private get _queryParamsSelected(): { [key: string]: string } {
     return this._route.snapshot.queryParams
   }
@@ -184,8 +187,13 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   saveAnalysis = (): Observable<boolean> => {
-    const newProject = new FormValueToSmeProjectRequest( this.form.value,this._smeId,)
-    return this._projectService.saveProject(newProject).pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+    if (this.projectId) {
+      const updateProject = new FormValueToSmeProjectRequest(this.form.value)
+      return this._projectService.updateProject(this.projectId, updateProject).pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+    } else {
+      const newProject = new FormValueToSmeProjectRequest(this.form.value, this._smeId)
+      return this._projectService.saveProject(newProject).pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+    }
   }
   gotToSummary() {
     this.goToSummary = true
