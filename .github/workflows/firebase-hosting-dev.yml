@@ -54,7 +54,7 @@ jobs:
       - name: Deploy to Firebase
         uses: docker://w9jds/firebase-action:latest
         with:
-          args: deploy --only hosting -P goeko-c8a23
+          args: deploy --only hosting -P goeko-dev
         env:
           FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
           PROJECT_PATH : ./goeko
