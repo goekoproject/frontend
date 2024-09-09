@@ -15,7 +15,8 @@
     "test:login": "nx test goeko --codeCoverage=true --test-file login.component.spec.ts",
     "test": "nx test goeko --codeCoverage=true --test-file",
     "lighthouse": "npx unlighthouse --site https://goeko.ch/",
-    "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/"
+    "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/",
+    "demo": "npm run build:dev && npx firebase hosting:channel:deploy goekodemo --expires 7d"
   },
   "private": true,
   "dependencies": {
