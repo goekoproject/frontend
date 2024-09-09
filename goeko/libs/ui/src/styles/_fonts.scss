@@ -118,7 +118,7 @@ $font-inter-thin: 'Inter-Thin';
   font-family: 'Inter-Medium';
   font-style: normal;
   font-weight: 500;
-  src: url('_fonts/inter/Inter-Medium.otf') format('otf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('_fonts/inter/Inter-Medium.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* Inter-SemiBold - latin */
@@ -126,6 +126,6 @@ $font-inter-thin: 'Inter-Thin';
   font-display: swap;
   font-family: 'Inter-SemiBold';
   font-style: normal;
-  font-weight: 700;
-  src: url('_fonts/inter/Inter-SemiBold.otf') format('otf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-weight: 600;
+  src: url('_fonts/inter/Inter-SemiBold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }

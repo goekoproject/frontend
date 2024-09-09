@@ -1,8 +1,8 @@
 <footer class="dark:bg-gray-900 rounded-3xl footer-content">
-  <div class="ml-8 mr-8 p-4 py-6 lg:py-8">
+  <div class="ml-8 mr-8 p-4 pt-6 pb-5">
     <div class="md:flex md:justify-between">
       <div class="grid grid-cols-2 gap-28 sm:grid-cols-3">
-        <!-- sm:gap-6 quitado temporalmente -->
+
         <div>
           <h2 class="mb-4 text-sm font-semibold footer-gray-text">{{ 'LEGAL.legal' | translate }}</h2>
           <ul class="font-medium text-base">
@@ -26,10 +26,26 @@
 
           </ul>
         </div>
-
+          <div>
+            <div class="flex items-center mt-1">
+                <div class="relative flex h-12 w-full min-w-[200px] max-w-[24rem]">
+                  <button
+                    class="!absolute right-1 top-1 z-1 rounded-[25px] bg-black py-2 px-4 text-center align-middle text-white leading-6"
+                    type="button"
+                  >
+                    Get started
+                  </button>
+                  <input
+                    type="email"
+                    class="h-full w-full rounded-[25px] px-3 py-2.5 pr-20 outline outline-0"
+                    placeholder="Enter your email"
+                  />
+                </div>
+            </div>
+            </div>
       </div>
     </div>
-    <hr class="mb-4 mt-12 border-gray-200 dark:border-gray-700" />
+    <hr class="mb-4 mt-12 opacity-50" />
     <!-- sm:mx-auto lg:my-8 -->
     <div class="sm:flex sm:items-center sm:justify-center">
       <span class="sm:text-center text-base text-black"

@@ -9,9 +9,9 @@
   display: block;
   position: relative;
   margin-top: -11rem;
-  h2, a, p {
-    font: var(--font-body-home);
-    font-weight: 600;
+  h2, a, p, input, button {
+    font: var(--font-body-semibold);
+    //font-weight: 600;
     font-size: 16px;
   }
 }
