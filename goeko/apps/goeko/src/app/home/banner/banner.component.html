@@ -1,19 +1,33 @@
-<div class="banner p-4">
+<div class="banner pt-16 pr-64 pl-64 pb-16">
   <div class="banner-content">
     <div>
-      <span class="fi fi-ch"></span>
-      <span class="banner-info">{{ 'BANNER.swissCompany' | translate }}</span>
-      <h1 class="banner-slogan text-4xl md:text-5xl lg:text-6xl">
+      <!-- <span class="fi fi-ch"></span> -->
+      <!-- <span class="banner-info">{{ 'BANNER.swissCompany' | translate }}</span> -->
+      <!-- <h1 class="banner-slogan text-4xl md:text-5xl lg:text-6xl">
         {{ 'BANNER.the' | translate }}
         <span class="banner-slogan--green">{{ 'BANNER.green' | translate }}</span>
         {{ 'BANNER.transition' | translate }}
-      </h1>
+      </h1> -->
       <div class="banner-support-text justify-center">
-        <span class="word animate__animated">{{ 'BANNER.fast' | translate }}</span>
-        |
-        <span class="word animate__animated">{{ 'BANNER.easy' | translate }}</span>
-        |
-        <span class="word animate__animated">{{ 'BANNER.affordable' | translate }}</span>
+        <div class="text-center">
+          <img class="m-auto mb-4" [src]="'assets/fast.svg'" [alt]="" />
+          <h1 class="word animate__animated mb-4">{{ 'BANNER.fast' | translate }}</h1>
+          <p >
+            Accelerate the path to decarbonization and better air quality for all.
+          </p>
+        </div>
+        <div class="text-center">
+          <img class="m-auto mb-4" [src]="'assets/easy.svg'" [alt]="" />
+          <h1 class="word animate__animated mb-4">{{ 'BANNER.easy' | translate }}</h1>
+          <p>Eliminate outages with clean, reliable, uninterrupted power.</p>
+        </div>
+        <div class="text-center">
+          <img class="m-auto mb-4" [src]="'assets/affordable.svg'" [alt]="" />
+          <h1 class="word animate__animated mb-4">{{ 'BANNER.affordable' | translate }}</h1>
+          <p>
+            Reduce price uncertainty from energy costs with superior power quality.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -26,11 +40,10 @@
     <video autoplay loop class="banner-video-sme" preload="metadata" #marketingVideo>
       <source type="video/mp4" />
     </video>
-
-    <div class="bkg-video">
-      <span class="layer"></span>
-      <span class="layer"></span>
-      <span class="layer"></span>
-    </div>
   </div>
+
+  <div>
+    CARROUSEL
+  </div>
+
 </div>
