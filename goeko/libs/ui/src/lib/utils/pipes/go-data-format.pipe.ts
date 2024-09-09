@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform, signal } from '@angular/core'
+import { format } from '@formkit/tempo'
 import { TranslateService } from '@ngx-translate/core'
-import * as moment from 'moment'
+
 @Pipe({
   name: 'goDateFormat',
   standalone: true,
@@ -12,10 +13,11 @@ export class GoDateFormatPipe implements PipeTransform {
   constructor(private _translateService: TranslateService) {
     this._translateService.onLangChange.pipe().subscribe((current) => this.langSignal.set(current.lang))
   }
-  transform(value: string | Date | null | any): any {
+  transform(value: string | Date | null | any, styleTokens: string = 'DD/MM/YYYY'): string {
     if (value) {
-      return moment.utc(value).local().locale(this.langSignal()).format('LLL')
+      console.log(styleTokens)
+      return format(value, styleTokens, this.langSignal())
     }
-    return
+    return ''
   }
 }
