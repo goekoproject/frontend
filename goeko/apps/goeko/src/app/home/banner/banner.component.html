@@ -42,8 +42,41 @@
     </video>
   </div>
 
-  <div>
-    CARROUSEL
+  <div class="relative">
+      <section>
+        <div class='slider'>
+          <section id="img_1">
+            <div class="flex">
+              <img [src]="'assets/enterprise_1.svg'"/>
+              <img [src]="'assets/enterprise_2.svg'"/>
+              <img [src]="'assets/enterprise_3.svg'"/>
+              <img [src]="'assets/enterprise_4.svg'"/>
+            </div>
+          </section>
+          <section id="img_2">
+            <div class="flex">
+              <img [src]="'assets/enterprise_2.svg'"/>
+              <img [src]="'assets/enterprise_2.svg'"/>
+              <img [src]="'assets/enterprise_2.svg'"/>
+              <img [src]="'assets/enterprise_2.svg'"/>
+            </div>
+          </section>
+          <section id="img_3">
+            <div class="flex">
+              <img [src]="'assets/enterprise_3.svg'"/>
+              <img [src]="'assets/enterprise_3.svg'"/>
+              <img [src]="'assets/enterprise_3.svg'"/>
+              <img [src]="'assets/enterprise_3.svg'"/>
+            </div>
+          </section>
+        </div>
+        <ul class="markers">
+          <li><a routerLink="" fragment="img_1"></a></li>
+          <li><a routerLink="" fragment="img_2"></a></li>
+          <li><a routerLink="" fragment="img_3"></a></li>
+        </ul>
+        </section>
   </div>
 
 </div>
+

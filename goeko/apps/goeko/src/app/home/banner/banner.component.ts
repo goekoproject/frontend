@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'go-banner',
@@ -18,6 +20,15 @@ export class BannerComponent implements AfterViewInit, OnInit {
     }
     return `https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/goeko-info-${this.currentLangCode()}#t=40`
   }
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
+
+  JumpToSection(section:any){
+    if(section) {
+      document.getElementById(section)?.scrollIntoView({behavior: 'smooth'});
+    }
+
+  }
+
   constructor(private _translateServices: TranslateService) {}
 
   ngAfterViewInit(): void {
@@ -29,7 +40,10 @@ export class BannerComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    this._changeLangCode()
+    this._changeLangCode();
+    this.activeRoute.fragment.subscribe((data) => {
+      this.JumpToSection(data);
+  });
   }
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((res) => {
