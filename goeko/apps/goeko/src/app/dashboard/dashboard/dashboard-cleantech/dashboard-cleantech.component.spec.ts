@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { Signal, signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterModule } from '@angular/router'
 import { LeadService, UserService } from '@goeko/store'
@@ -11,12 +12,12 @@ describe('DashboardCleantechComponent', () => {
   let component: DashboardCleantechComponent
   let fixture: ComponentFixture<DashboardCleantechComponent>
   let mockDashboardCleantechService: any
-  let mockLeadService: any
-  let mockUserService: any
+  let mockLeadService: { getLeadByCleantech: jest.Mock }
+  let mockUserService: { userProfile: Signal<any> }
 
   beforeEach(async () => {
     mockUserService = {
-      userProfile: jest.fn().mockReturnValue({ id: 'Cleantech123' }),
+      userProfile: signal({ id: '1' } as any),
     }
     mockLeadService = {
       getLeadByCleantech: jest.fn().mockReturnValue(of([{ id: 1, name: 'Lead 1' }])),
@@ -47,6 +48,11 @@ describe('DashboardCleantechComponent', () => {
 
   // Prueba de inicialización ngOnInit
   it('should call getLeads on DashboardCleantechService and set cleantechLeads$', () => {
-    expect(mockDashboardCleantechService.getLeads).toHaveBeenCalled()
+    component.ngOnInit();
+
+    component.cleantechLeads$.subscribe((leads) => {
+      expect(mockDashboardCleantechService.getLeads).toHaveBeenCalled()
+      expect(leads).toEqual([{ id: 1, name: 'Lead 1' }])
+    })
   })
 })
