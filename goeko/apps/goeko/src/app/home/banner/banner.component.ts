@@ -24,7 +24,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   JumpToSection(section:any){
     if(section) {
-      document.getElementById(section)?.scrollIntoView({behavior: 'smooth'});
+      document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest"});
     }
 
   }

@@ -212,6 +212,97 @@ $default-position-layer3-video: 8.4rem;
 
 
 //carousel
+// section {
+//   timeline-scope: --carousel;
+// }
+
+// .markers li:nth-child(1) {
+//   --i: 1;
+// }
+
+// .markers li:nth-child(2) {
+//   --i: 2;
+// }
+
+// .markers li:nth-child(3) {
+//   --i: 3;
+// }
+
+// .markers li:nth-child(4) {
+//   --i: 4;
+// }
+
+// .slider {
+//   scroll-timeline: --carousel x;
+//   display: flex;
+//   flex-direction: row;
+//   border-radius: 4px;
+//   width: 600px;
+//   //width: 900px;
+//   aspect-ratio: 16/9;
+//   //aspect-ratio: auto;
+
+//   scroll-snap-type: x mandatory;
+//   overscroll-behavior: contain;
+//   scroll-behavior: smooth;
+
+//   overflow-x: hidden;
+//   overflow-y: hidden;
+//   position: relative;
+
+//   box-shadow: 0px 0px 50px 10px rgba(255, 255, 255, .1);
+// }
+
+// .markers a {
+//   display: block;
+//   width: 16px;
+//   aspect-ratio: 1;
+//   background: gray;
+//   opacity: .7;
+//   border-radius: 50%;
+
+//   animation: activate linear;
+//   animation-timeline: --carousel;
+//   animation-range: calc((var(--i) - 1) * 25%) calc(var(--i) * 25% + 1px);
+// }
+
+
+
+// @keyframes activate {
+//   0%,
+//   100% {
+//     background: #09f;
+//     opacity: 1;
+//   }
+// }
+
+// .slider a {
+//   flex: 0 0 100%;
+//   width: 100%;
+//   scroll-snap-align: center;
+// }
+
+// .slider img {
+//   object-fit: cover;
+//   width: 100%;
+//   // width: 160px;
+//   // height: 77px;
+// }
+
+// .markers {
+//   display: flex;
+//   flex-direction: row;
+//   gap: 0.25em;
+//   list-style: none;
+//   font-size: 2em;
+//   position: absolute;
+//   // top: 6rem;
+//   // left: 50%;
+//   bottom: 5rem;
+//   left: 50%;
+//   translate: -50% 0;
+// }
+
 section {
   timeline-scope: --carousel;
 }
@@ -228,17 +319,17 @@ section {
   --i: 3;
 }
 
-.markers li:nth-child(4) {
-  --i: 4;
-}
+// .markers li:nth-child(4) {
+//   --i: 4;
+// }
 
 .slider {
+  position: relative;
   scroll-timeline: --carousel x;
   display: flex;
   flex-direction: row;
   border-radius: 4px;
-  //width: 600px;
-  width: 900px;
+  width: 600px;
   aspect-ratio: 16/9;
 
   scroll-snap-type: x mandatory;
@@ -247,7 +338,6 @@ section {
 
   overflow-x: hidden;
   overflow-y: hidden;
-  position: relative;
 
   box-shadow: 0px 0px 50px 10px rgba(255, 255, 255, .1);
 }
@@ -256,16 +346,14 @@ section {
   display: block;
   width: 16px;
   aspect-ratio: 1;
-  background: gray;
+  background: white;
   opacity: .7;
   border-radius: 50%;
 
   animation: activate linear;
   animation-timeline: --carousel;
-  animation-range: calc((var(--i) - 1) * 25%) calc(var(--i) * 25% + 1px);
+  animation-range: calc((var(--i) - 1) * 33.33%) calc(var(--i) * 33.33% + 1px);
 }
-
-
 
 @keyframes activate {
   0%,
@@ -282,10 +370,8 @@ section {
 }
 
 .slider img {
-  //object-fit: cover;
-  // width: 100%;
-  width: 160px;
-  height: 77px;
+  object-fit: cover;
+  width: 100%;
 }
 
 .markers {
@@ -296,7 +382,7 @@ section {
   font-size: 2em;
   position: absolute;
   bottom: 5rem;
-  left: 25%;
-  top:35%;
+  left: 50%;
   translate: -50% 0;
 }
+
