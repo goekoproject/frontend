@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'go-banner',
@@ -22,7 +21,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
   }
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
 
-  JumpToSection(section:any){
+  scrollToCompany(section:any){
     if(section) {
       document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest"});
     }
@@ -42,7 +41,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this._changeLangCode();
     this.activeRoute.fragment.subscribe((data) => {
-      this.JumpToSection(data);
+      this.scrollToCompany(data);
   });
   }
   private _changeLangCode() {
