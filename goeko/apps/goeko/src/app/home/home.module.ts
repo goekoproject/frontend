@@ -18,12 +18,14 @@ import { MenuMobileComponent } from './header/menu/menu-mobile.component'
 import { MenuComponent } from './header/menu/menu.component'
 import { LandingComponent } from './landing/landing.component'
 import { TeamComponent } from './team/team.component'
+import { FrontMain } from './front-main/front-main.component'
 
 @NgModule({
   declarations: [
     HomeComponent,
     BannerComponent,
     ContentComponent,
+    FrontMain,
     OrderByPipe,
     TeamComponent,
     DocumentLegalComponent,

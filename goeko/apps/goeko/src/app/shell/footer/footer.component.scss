@@ -8,10 +8,9 @@
   //background-color: var(--primary--main);
   display: block;
   position: relative;
-  margin-top: -11rem;
+  margin-top: -10rem;
   h2, a, p, input, button {
     font: var(--font-body-semibold);
-    //font-weight: 600;
     font-size: 16px;
   }
 }
@@ -59,6 +58,3 @@
 .footer-gray-text {
   color: #768797;
 }
-
-// margin-top: 3rem;
-// margin-bottom: 0.5rem;

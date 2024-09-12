@@ -1,0 +1,34 @@
+.main-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font: var(--font-home-semibold);
+  font-size: 6.5rem;
+  color: white;
+  height: 8rem;
+  align-content: center;
+}
+
+.subtitle {
+  font: var(--font-body-home);
+  font-size: 24px;
+  color: white;
+}
+
+.start-button {
+  background-color: var(--home-page-light-blue);
+}
+
+.i-connection {
+  input::placeholder {
+    color: var(--home-page-light-blue);
+    opacity: 1; /* Firefox */
+    position: absolute;
+    left: 1.5rem;
+    top: 0.80rem;
+  }
+
+}
