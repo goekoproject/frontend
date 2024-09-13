@@ -135,7 +135,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
       waterConsumption: this._fb.group({}),
       hazardousProduct: this._fb.group({}),
       notification: this._fb.group({
-        onNewEcosolution: this._fb.control(true),
+        onNewEcosolution: this._fb.control(false),
       }),
     })
   }
@@ -229,7 +229,6 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
 
   gotToSummary() {
     this.goToSummary = true
-    console.log(this.form.value)
     this.currentAnalytics.set(this.form.value)
     this._router.navigate(['summary'], {
       queryParams: {
