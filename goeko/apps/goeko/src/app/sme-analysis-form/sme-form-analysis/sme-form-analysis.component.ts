@@ -135,7 +135,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
       waterConsumption: this._fb.group({}),
       hazardousProduct: this._fb.group({}),
       notification: this._fb.group({
-        onNewEcosolution: this._fb.control(false),
+        onNewEcosolution: this._fb.control(true),
       }),
     })
   }
