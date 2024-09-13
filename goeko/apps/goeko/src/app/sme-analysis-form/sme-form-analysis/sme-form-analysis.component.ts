@@ -229,6 +229,7 @@ export class SmeFormAnalysisComponent implements OnInit, AfterViewInit, OnDestro
 
   gotToSummary() {
     this.goToSummary = true
+    console.log(this.form.value)
     this.currentAnalytics.set(this.form.value)
     this._router.navigate(['summary'], {
       queryParams: {
