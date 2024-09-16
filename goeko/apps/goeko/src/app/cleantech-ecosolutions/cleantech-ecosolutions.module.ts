@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { NgxEditorModule } from 'ngx-editor'
 
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import {
   CardEcosolutionsComponent,
   CategoryModule,
@@ -42,6 +43,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     GoTabGroupModule,
     CardEcosolutionsComponent,
     ReactiveFormsModule,
+    FormsModule,
     GoInputModule,
     TranslateModule,
     ButtonModule,
@@ -55,6 +57,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     SelectLocationsComponent,
     SelectFormLangComponent,
     InputFileComponent,
+    NgxEditorModule,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
     }),
