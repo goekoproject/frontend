@@ -1,4 +1,4 @@
-<div class="relative hidden lg:flex lg:gap-x-12">
+<div class="relative hidden lg:flex lg:gap-x-24 items-center">
   @for (item of menu(); track item.id) {
     @switch (item.code) {
       @case ('contact') {
@@ -12,7 +12,7 @@
 </div>
 
 <ng-template #menuSimple let-item="item">
-  <a [routerLink]="item.url" class="text-sm font-semibold leading-6 text-gray-900">{{ item.keyLang | translate }}</a>
+  <a [routerLink]="item.url" class="text-white">{{ item.keyLang | translate }}</a>
 </ng-template>
 
 <!--Submenu-->
@@ -20,15 +20,9 @@
   <button
     type="button"
     (click)="submenuOpenToggle()"
-    class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
+    class="flex items-center gap-x-1 leading-6 text-white"
     aria-expanded="false">
     {{ item.keyLang | translate }}
-    <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path
-        fill-rule="evenodd"
-        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-        clip-rule="evenodd" />
-    </svg>
   </button>
   <div class="submenu" [ngClass]="{ flex: submenuOpen(), hidden: !submenuOpen() }">
     @for (item of item.submenu; track item) {

@@ -1,10 +1,11 @@
-<header class="bg-white">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:p-8" aria-label="Global">
-    <div class="flex items-center gap-2 lg:flex-1">
+<header>
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:p-8 h-[6.25rem] flex-row" aria-label="Global">
+    <div class="flex items-center gap-2 basis-1/6">
+            <!--lg:flex-1 TODO: mantener temporalmente lg:flex-1 -->
+
       <a href="#" class="-m-1.5 p-1.5">
-        <img alt="logo-main" src="../../../assets/logo.png" #logo [routerLink]="['/']" class="w-1/2 cursor-pointer lg:w-full" />
+        <img alt="logo-main" src="../../../assets/logo.svg" #logo [routerLink]="['/']" class="w-14 h-[3.75rem] cursor-pointer" />
       </a>
-      <h4 class="header-slogan">{{ 'sloganGoeko' | translate }}</h4>
     </div>
     <div class="flex md:hidden">
       <button
@@ -18,11 +19,16 @@
       </button>
     </div>
     <goeko-menu />
-    <div class="hidden items-center md:flex lg:flex-1 lg:justify-end">
-      <button go-button (click)="goTologin()">
+    <div class="hidden items-center md:flex lg:flex-1 lg:justify-center gap-4 basis-2/6">
+      <goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang"> </goeko-select-i18n>
+
+      <button (click)="goTologin()" class="button-header">
         {{ 'MENU.login' | translate }}
       </button>
-      <goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang"> </goeko-select-i18n>
+
+      <button class="button-header">
+        {{ 'MENU.demo' | translate }}
+      </button>
     </div>
   </nav>
   <goeko-menu-mobile [mobileMenuOpen]="mobileMenuOpen()" (login)="goTologin()" />

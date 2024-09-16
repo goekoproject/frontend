@@ -1,6 +1,8 @@
 .goeko-header {
-  background-color: #ffffff;
-position: sticky;
+ // background-color: var(--home-page-dark-blue);
+  background-color:transparent;
+
+  position: sticky;
   top: 0;
   display: block;
   z-index: 10;
@@ -62,4 +64,117 @@ position: sticky;
   .logo {
     margin: 0 auto;
   }
+}
+
+.button-header {
+  align-items: center;
+  appearance: none;
+  background-color: var(--home-page-light-blue);
+  border-radius: 1.675rem;
+  border: 2px solid var(--home-page-light-blue);
+  box-sizing: border-box;
+  color: var(--white);
+  cursor: pointer;
+  display: inline-flex;
+  font: var(--font-menu);
+  height: 2.625rem;
+  line-height: 1.25rem;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: max-content;
+  text-wrap: pretty;
+  width: 100%;
+}
+
+.button-active-header {
+  align-items: center;
+  appearance: none;
+  background-color: var(--white);
+  border-radius: 1.675rem;
+  border: 2px solid var(--home-page-light-blue);
+  box-sizing: border-box;
+  color: var(--home-page-light-blue);
+  cursor: pointer;
+  display: inline-flex;
+  font: var(--font-menu);
+  height: 2.625rem;
+  line-height: 1.25rem;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: max-content;
+  text-wrap: pretty;
+  width: 100%;
+}
+
+.button-header :active {
+  background: var(--primary--900);
+  outline: none;
+}
+
+.button-header:hover {
+  background-color: var(--white);
+  color: var(--home-page-light-blue);
+  border: 2px solid var(--home-page-light-blue);
+}
+
+goeko-menu a:hover {
+  background-color: var(--white);
+  color: var(--home-page-light-blue);
+  border: 2px solid var(--home-page-light-blue);
+  align-items: center;
+  appearance: none;
+  border-radius: 1.675rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  font: var(--font-menu);
+  height: 2.625rem;
+  line-height: 1.25rem;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: max-content;
+  text-wrap: pretty;
+  width: 100%;
+}
+
+goeko-menu a {
+  padding: 0.5rem 1rem;
+  font: var(--font-menu);
+}
+
+goeko-menu button {
+  padding: 0.5rem 1rem;
+  font: var(--font-menu);
+}
+
+goeko-menu button:hover {
+  background-color: var(--white);
+  color: var(--home-page-light-blue);
+  border: 2px solid var(--home-page-light-blue);
+  align-items: center;
+  appearance: none;
+  border-radius: 1.675rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  font: var(--font-menu);
+  height: 2.625rem;
+  line-height: 1.25rem;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: max-content;
+  text-wrap: pretty;
+  width: 100%;
 }

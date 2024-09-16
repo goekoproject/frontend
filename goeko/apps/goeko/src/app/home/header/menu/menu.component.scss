@@ -8,6 +8,7 @@ $lineColor: var(--primary--100);
 }
 
 .menu {
+  flex-basis: 50%;
   ul {
     list-style: none;
   }
