@@ -15,7 +15,7 @@
     "test:login": "nx test goeko --codeCoverage=true --test-file login.component.spec.ts",
     "test": "nx test goeko --codeCoverage=true --test-file",
     "lighthouse": "npx unlighthouse --site https://goeko.ch/",
-    "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/"
+    "lighthouse:dev": "npx unlighthouse --site https://goeko-dev.web.app/"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
     "@angular/router": "~17.3.0",
     "@babylonjs/gui": "^6.35.0",
     "@contentful/rich-text-html-renderer": "^16.3.0",
+    "@formkit/tempo": "^0.1.2",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@nx/angular": "17.2.7",
@@ -45,7 +46,6 @@
     "jsrsasign": "^11.0.0",
     "lit": "^3.1.0",
     "marked": "^13.0.3",
-    "moment": "^2.30.1",
     "ng-circle-progress": "^1.7.1",
     "rxjs": "~7.8.0",
     "rxjs-interop": "^2.0.0",
