@@ -21,11 +21,13 @@ export class HeaderComponent implements OnInit {
   onScroll($event: any) {
     if (!this.header || !this.logo) return
     if (window.scrollY > 0) {
-      this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '6rem')
-      this._renderer.setStyle(this.logo?.nativeElement, 'width', '7%')
+      // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '6rem')
+      // this._renderer.setStyle(this.logo?.nativeElement, 'width', '7%')
+      this._renderer.setStyle(this.header?.nativeElement, 'background-color', '#052639')
     } else {
-      this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '10rem')
-      this._renderer.setStyle(this.logo?.nativeElement, 'width', '12%')
+      // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '10rem')
+      // this._renderer.setStyle(this.logo?.nativeElement, 'width', '12%')
+      this._renderer.setStyle(this.header?.nativeElement, 'background-color', 'transparent')
     }
   }
 

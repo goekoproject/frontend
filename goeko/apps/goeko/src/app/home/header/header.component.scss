@@ -89,14 +89,26 @@
   width: 100%;
 }
 
-.button-active-header {
+
+.button-header :active {
+  background: var(--primary--900);
+  outline: none;
+}
+
+.button-header:hover {
+  background-color: var(--white);
+  color: var(--home-page-light-blue);
+  border: 2px solid var(--home-page-light-blue);
+}
+
+goeko-menu a:hover {
+  background-color: var(--white);
+  color: var(--home-page-light-blue);
+  border: 2px solid var(--home-page-light-blue);
   align-items: center;
   appearance: none;
-  background-color: var(--white);
   border-radius: 1.675rem;
-  border: 2px solid var(--home-page-light-blue);
   box-sizing: border-box;
-  color: var(--home-page-light-blue);
   cursor: pointer;
   display: inline-flex;
   font: var(--font-menu);
@@ -112,18 +124,7 @@
   width: 100%;
 }
 
-.button-header :active {
-  background: var(--primary--900);
-  outline: none;
-}
-
-.button-header:hover {
-  background-color: var(--white);
-  color: var(--home-page-light-blue);
-  border: 2px solid var(--home-page-light-blue);
-}
-
-goeko-menu a:hover {
+goeko-menu a:focus {
   background-color: var(--white);
   color: var(--home-page-light-blue);
   border: 2px solid var(--home-page-light-blue);
