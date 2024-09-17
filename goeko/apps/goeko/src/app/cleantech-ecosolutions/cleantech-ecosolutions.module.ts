@@ -60,7 +60,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     NgxEditorModule,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
-    }),
+    })
   ],
   providers: [CleantechEcosolutionsService, ClassificationCategoryService],
 })
