@@ -16,6 +16,8 @@ import {
   defaultSetyearGuarantee,
 } from './compare-with-select'
 import { EcosolutionForm } from './ecosolution-form.model'
+import { Editor, Toolbar } from 'ngx-editor'
+import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -35,6 +37,10 @@ export class EcosolutionsFormComponent implements OnInit {
   public idEcosolution!: string
   public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
   public productsCategories!: any[]
+  public editor!: Editor
+  public html = '';
+  public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
+
 
   public langs = LANGS
   langSignal = signal(this._translateServices.currentLang || this._translateServices.defaultLang)
@@ -88,12 +94,17 @@ export class EcosolutionsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this._getParamsUrl()
+    this.editor = new Editor()
     this._buildFrom()
     this._changeLangCode()
     this._changeValueSubCategory()
     if (this.idEcosolution) {
       this.getEcosolution()
     }
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy()
   }
 
   private _getParamsUrl() {

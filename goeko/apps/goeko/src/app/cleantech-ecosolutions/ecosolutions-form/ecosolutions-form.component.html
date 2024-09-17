@@ -83,14 +83,10 @@
                   </span>
                 </label>
 
-
-                <textarea
-                  class="go-textarea"
-                  rows="5"
-                  id="detailedDescriptionTranslations"
-                  [formControlName]="'label'"
-                  [readonly]="isReadOnly">
-                </textarea>
+                <div class="go-textarea">
+                  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                  <ngx-editor [editor]="editor" [formControlName]="'label'" [placeholder]="''"></ngx-editor>
+                </div>
               </div>
             }
           }
