@@ -132,16 +132,14 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _buildFrom() {
     this._initForm()
-    if (!this.idEcosolution) {
-      this._seTranslatedProperties()
-    }
+    this._seTranslatedProperties()
   }
 
-  private _seTranslatedProperties(ecosolution?: Ecosolutions) {
-    this._addNameTranslations(ecosolution)
-    this._addDescriptionTranslations(ecosolution)
-    this._detailDescriptionTranslations(ecosolution)
-    this._priceDescriptionTranslations(ecosolution)
+  private _seTranslatedProperties(codeLang: string = this.selectedFormLang().code) {
+    this._addNameTranslations(codeLang)
+    this._addDescriptionTranslations(codeLang)
+    this._detailDescriptionTranslations(codeLang)
+    this._priceDescriptionTranslations(codeLang)
   }
   private _initForm() {
     this.form = this._fb.group({
@@ -184,42 +182,34 @@ export class EcosolutionsFormComponent implements OnInit {
     })
   }
 
-  private _addNameTranslations(ecosolution?: Ecosolutions): void {
+  private _addNameTranslations(codeLang: string): void {
     const nameTranslations = this.form.get('nameTranslations') as FormArray
-    this.langs.forEach((lang) => {
-      if (this._isIncludeTranslation(lang.code, ecosolution?.nameTranslations)) {
-        nameTranslations.push(this._getFormGroupFieldTranslations(lang.code))
-      }
-    })
+    if (!this._isIncludeTranslation(codeLang, nameTranslations.value)) {
+      nameTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
-  private _addDescriptionTranslations(ecosolution?: Ecosolutions): void {
+  private _addDescriptionTranslations(codeLang: string): void {
     const descriptionTranslations = this.form.get('descriptionTranslations') as FormArray
-    this.langs.forEach((lang) => {
-      if (this._isIncludeTranslation(lang.code, ecosolution?.descriptionTranslations)) {
-        descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
-      }
-    })
+    if (!this._isIncludeTranslation(codeLang, descriptionTranslations.value)) {
+      descriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
 
-  private _detailDescriptionTranslations(ecosolution?: Ecosolutions): void {
+  private _detailDescriptionTranslations(codeLang: string): void {
     const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
-    this.langs.forEach((lang) => {
-      if (this._isIncludeTranslation(lang.code, ecosolution?.detailedDescriptionTranslations)) {
-        detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
-      }
-    })
+    if (!this._isIncludeTranslation(codeLang, detailedDescriptionTranslations.value)) {
+      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
 
-  private _priceDescriptionTranslations(ecosolution?: Ecosolutions): void {
+  private _priceDescriptionTranslations(codeLang: string): void {
     const priceDescriptionTranslations = this.form.get('priceDescriptionTranslations') as FormArray
-    this.langs.forEach((lang) => {
-      if (this._isIncludeTranslation(lang.code, ecosolution?.priceDescriptionTranslations)) {
-        priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
-      }
-    })
+    if (!this._isIncludeTranslation(codeLang, priceDescriptionTranslations.value)) {
+      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
 
-  private _getFormGroupFieldTranslations(code: string) {
+  private _getFormGroupFieldTranslations(code?: string) {
     if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
@@ -234,7 +224,6 @@ export class EcosolutionsFormComponent implements OnInit {
   getEcosolution() {
     this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((ecosolution: Ecosolutions) => {
       this._getCertificateEcosolution()
-      this._seTranslatedProperties(ecosolution)
       this.urlPicEcosolution = ecosolution?.pictures?.map((picture) => picture.url)
       this._patchDataToForm(ecosolution)
     })
@@ -244,6 +233,10 @@ export class EcosolutionsFormComponent implements OnInit {
     const formValue = new EcosolutionForm(ecosolution)
     this.form.patchValue(formValue)
     this._patchValueLocationsFormControl(formValue)
+    this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
+    this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
+    this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
+    this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
   }
 
   private _patchValueLocationsFormControl(formValue: EcosolutionForm) {
@@ -263,9 +256,16 @@ export class EcosolutionsFormComponent implements OnInit {
       }),
     })
   }
-
   private _addLocations() {
     this.locationsArrays.push(this._createLocations())
+  }
+
+  private _patchFormArray(formArray: FormArray, values: any[]): void {
+    formArray.clear()
+    values.forEach(() => {
+      formArray.push(this._getFormGroupFieldTranslations())
+    })
+    formArray.patchValue(values)
   }
 
   saveEcosolution() {
@@ -357,6 +357,20 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   selectedFormLangChange($event: any) {
+    this._clearValidationTranslatedProperties()
     this.selectedFormLang.set($event)
+    this._seTranslatedProperties($event.code)
+  }
+  private _clearValidationTranslatedProperties() {
+    this.removeNameTranslationsValidators(this.nameTranslations)
+    this.removeNameTranslationsValidators(this.descriptionTranslations)
+    this.removeNameTranslationsValidators(this.detailedDescriptionTranslations)
+    this.removeNameTranslationsValidators(this.priceDescriptionTranslations)
+  }
+  private removeNameTranslationsValidators(formArray: FormArray): void {
+    formArray.controls.forEach((control) => {
+      control?.get('label')?.clearValidators()
+      control?.get('label')?.updateValueAndValidity()
+    })
   }
 }
