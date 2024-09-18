@@ -191,7 +191,8 @@
     "newProvince": "Nueva provincia",
     "selectProvinces": "Selección provincias",
     "allProvinces": "Todas las provincias",
-    "showProvinces": "Ver provincias"
+    "showProvinces": "Ver provincias",
+    "editorText": "Escriba aquí..."
   },
   "VERIFY_EMAIL": {
     "title": "Revisa tu bandeja de entrada.",
