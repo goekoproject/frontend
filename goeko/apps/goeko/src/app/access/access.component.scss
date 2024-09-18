@@ -2,7 +2,7 @@
   @apply relative flex h-screen w-screen bg-[url('/assets/photo-login.jpg')] bg-cover bg-center;
 }
 .login-singup {
-  @apply relative m-auto flex h-screen w-full flex-col flex-wrap items-center justify-center gap-8 self-center rounded-l-3xl bg-white p-4;
+  @apply relative m-auto flex h-screen w-full flex-col  items-center justify-center gap-8 self-center rounded-l-3xl bg-white p-4;
 }
 .arrow-back {
   box-shadow:

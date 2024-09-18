@@ -4,7 +4,8 @@
     "passwordPolicy2": "Großbuchstaben (A-Z)",
     "passwordPolicy3": "Zahlen (0-9)",
     "passwordPolicy4": "Sonderzeichen (!@# $ %^&*)",
-    "passwordPolicyTitle": "Sie müssen mindestens 3 der folgenden Regeln erfüllen: "
+    "passwordPolicyTitle": "Sie müssen mindestens 3 der folgenden Regeln erfüllen: ",
+    "passwordPolicy": "Das Passwort muss die folgende Richtlinie erfüllen:<br>* Mindestens 8 Zeichen lang<br>* Mindestens 3 der folgenden 4 Zeichentypen enthalten:<br> * Kleinbuchstaben (a-z)<br> * Großbuchstaben (A-Z)<br> * Zahlen (0-9)<br> * Sonderzeichen (z.B. !@#$%^&*)"
   },
   "ERROR_MESSAGES": {
     "500": "Oops, etwas ist schiefgelaufen. Versuchen Sie es später erneut.",
@@ -20,9 +21,10 @@
     "password_dictionary_error": "Passwort ist zu häufig.",
     "password_no_user_info_error": "Passwort basiert auf Benutzerinformationen.",
     "password_strength_error": "Passwort ist nicht stark genug.",
-    "user_exists": "Benutzer existiert bereits.",
     "username_exists": "Benutzername existiert bereits.",
     "social_signup_needs_terms_acception": "Bitte akzeptieren Sie die unten stehenden Nutzungsbedingungen, um fortzufahren.",
+    "invalid_signup_user_exists": "Der Benutzer existiert bereits auf der Plattform. Wenn Sie Ihr Passwort vergessen haben, klicken Sie auf",
+    "password_strength": "Das Passwort entspricht nicht den Passwort-Richtlinien."
   },
   "SUCCESS_MESSAGES": {
     "POST": "Erfolgreich erstellt!",

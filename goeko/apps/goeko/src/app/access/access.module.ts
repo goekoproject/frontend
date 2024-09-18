@@ -12,6 +12,7 @@ import {
   LoaderCheckComponent,
   NotificationModule,
   SwitchModule,
+  TooltipComponent,
   UiSuperSelectModule,
 } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -39,6 +40,7 @@ import { SignupComponent } from './signup/signup.component'
     LoaderCheckComponent,
     DialogMessageModule,
     AlertComponent,
+    TooltipComponent,
     ConfigModule.forRoot({
       endopoint: environment.baseUrl,
       clientSecret: environment.clientSecret,

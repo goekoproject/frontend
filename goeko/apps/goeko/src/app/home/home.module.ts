@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { ContentFulModule } from '@goeko/store'
-import { ButtonModule, GoekoButtonModule, TitlePageComponent, TooltipModule, UiBreadcrumbsModule } from '@goeko/ui'
+import { ButtonModule, GoekoButtonModule, TitlePageComponent, UiBreadcrumbsModule } from '@goeko/ui'
 import { BannerComponent } from './banner/banner.component'
 import { HomeRouteModule } from './home.routes'
 import { HomeComponent } from './home/home.component'
@@ -38,7 +38,6 @@ import { TeamComponent } from './team/team.component'
     HomeRouteModule,
     ButtonModule,
     ContentFulModule,
-    TooltipModule,
     GoekoButtonModule,
     TranslateModule,
     TitlePageComponent,

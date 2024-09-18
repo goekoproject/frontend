@@ -1,9 +1,30 @@
 <h1 class="text-2xl font-bold">{{ 'LOGIN.msgsignup2' | translate }}</h1>
 
 <form [formGroup]="formSignup" class="flex flex-col gap-4">
+  @if (errorMsgSignup()) {
+    <goeko-alert [type]="'danger'">
+      <p>
+        {{ errorMsgSignup() | translate }}
+      </p>
+      @if (!isErrorPolicyPassword()) {
+        <a
+          [routerLink]="'../reset-password'"
+          [queryParams]="{ email: formSignup.value.email }"
+          class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500"
+          >{{ 'LOGIN.forgotPassword' | translate }}</a
+        >
+      }
+    </goeko-alert>
+  }
   <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
     <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
   </go-input>
+
+  @if (isErrorPolicyPassword()) {
+    <go-tooltip>
+      <p [innerHTML]="'ACCESS_ERROR.passwordPolicy' | translate"></p>
+    </go-tooltip>
+  }
 
   <go-input
     [formControlName]="'password'"
@@ -21,16 +42,6 @@
     }
   </go-input>
 
-  <go-notification type="info" *ngIf="isErrorPolicyPassword">
-    <div class="policy-password">
-      <span>{{ 'ACCESS_ERROR.passwordPolicyTitle' | translate }}</span>
-      <ul>
-        <li *ngFor="let item of policyPassword">
-          {{ 'ACCESS_ERROR.' + item | translate }}
-        </li>
-      </ul>
-    </div>
-  </go-notification>
   <div>
     <div class="bg-card text-card-foreground grid w-full max-w-md gap-4 rounded-lg">
       <div class="flex flex-col space-y-1.5">

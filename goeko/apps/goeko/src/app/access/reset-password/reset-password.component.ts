@@ -1,5 +1,6 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
+import { ActivatedRoute } from '@angular/router'
 import { AccessService } from '../access.services'
 
 @Component({
@@ -13,11 +14,14 @@ import { AccessService } from '../access.services'
   },
 })
 export class ResetPasswordComponent {
-  _accessService = inject(AccessService)
-  _fb = inject(FormBuilder)
+  private _accessService = inject(AccessService)
+  private _fb = inject(FormBuilder)
+  private _route = inject(ActivatedRoute)
+
+  private _userEmail = this._route.snapshot.queryParams['email'] || ''
 
   public formResetPassword = this._fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: [this._userEmail, [Validators.required, Validators.email]],
   })
 
   public resetPassword() {

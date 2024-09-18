@@ -4,6 +4,7 @@
     "passwordPolicy2": "Letras mayúsculas (A-Z)",
     "passwordPolicy3": "Números (0-9)",
     "passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
+    "passwordPolicy": "La contraseña debe cumplir con la siguiente política:<br>* Al menos 8 caracteres de longitud<br>* Contener al menos 3 de los siguientes 4 tipos de caracteres:<br> * letras minúsculas (a-z)<br> * letras mayúsculas (A-Z)<br> * números (0-9)<br> * caracteres especiales (por ejemplo, !@#$%^&*)",
     "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
   },
   "ERROR_MESSAGES": {
@@ -20,10 +21,13 @@
     "password_dictionary_error": "La contraseña es demasiado común.",
     "password_no_user_info_error": "La contraseña se basa en la información del usuario.",
     "password_strength_error": "La contraseña no es lo suficientemente fuerte.",
-    "user_exists": "El usuario ya existe.",
     "username_exists": "El nombre de usuario ya existe.",
     "social_signup_needs_terms_acception": "Por favor, acepta los términos del servicio a continuación para continuar.",
-    "password_too_short": "La contraseña no cumple con la política de contraseñas."
+    "password_too_short": "La contraseña no cumple con la política de contraseñas.",
+    "invalid_signup_user_exists": "El usuario ya existe en la plataforma, si olvidó su contraseña, dale click a",
+    "password_strength": "La contraseña no cumple con la política de contraseñas."
+
+
   },
   "SUCCESS_MESSAGES": {
     "POST": "¡Creado con éxito!",

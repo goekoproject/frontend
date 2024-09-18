@@ -2,7 +2,7 @@
 
 @if (errorMsgLogin()) {
   <goeko-alert [type]="'danger'">
-    {{ errorMsgLogin() | translate}}
+    {{ errorMsgLogin() | translate }}
   </goeko-alert>
 }
 
@@ -26,9 +26,12 @@
     </go-input>
   }
 
-  <a [routerLink]="'reset-password'" class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500">{{
-    'LOGIN.forgotPassword' | translate
-  }}</a>
+  <a
+    [routerLink]="'reset-password'"
+    [queryParams]="{ email: formLogin.value.email }"
+    class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500"
+    >{{ 'LOGIN.forgotPassword' | translate }}</a
+  >
 
   <button type="submit" go-button appearance="primary" (click)="submit()">
     {{ 'Login' | translate }}

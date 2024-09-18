@@ -4,7 +4,8 @@
     "passwordPolicy2": "Uppercase letters (A-Z)",
     "passwordPolicy3": "Numbers (0-9)",
     "passwordPolicy4": "Special characters (!@# $ %^&*)",
-    "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
+    "passwordPolicyTitle": "You must meet at least 3 of the following rules: ",
+    "passwordPolicy": "The password must comply with the following policy:<br>* At least 8 characters in length<br>* Contain at least 3 of the following 4 types of characters:<br> * lower case letters (a-z)<br> * upper case letters (A-Z)<br> * numbers (0-9)<br> * special characters (e.g. !@#$%^&*)"
   },
   "ERROR_MESSAGES": {
     "500": "Oops, something went wrong. Try later.",
@@ -20,9 +21,11 @@
     "password_dictionary_error": "Password is too common.",
     "password_no_user_info_error": "Password is based on user information.",
     "password_strength_error": "Password is not strong enough.",
-    "user_exists": "User already exists.",
     "username_exists": "Username already exists.",
-    "social_signup_needs_terms_acception": "Please accept the terms of service below to continue."
+    "social_signup_needs_terms_acception": "Please accept the terms of service below to continue.",
+    "invalid_signup_user_exists": "The user already exists on the platform. If you forgot your password, click on",
+    "password_strength": "The password does not meet the password policy."
+
   },
   "SUCCESS_MESSAGES": {
     "POST": "Created successfully!",
