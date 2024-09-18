@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { NgxEditorModule } from 'ngx-editor'
 
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   CardEcosolutionsComponent,
   CategoryModule,
@@ -60,7 +60,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     NgxEditorModule,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
-    })
+    }),
   ],
   providers: [CleantechEcosolutionsService, ClassificationCategoryService],
 })

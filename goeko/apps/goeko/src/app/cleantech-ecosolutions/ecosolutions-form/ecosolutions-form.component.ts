@@ -2,9 +2,18 @@ import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
-import { DataSelect, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, ODS_CODE, UpdatedEcosolutionBody } from '@goeko/store'
+import {
+  DataSelect,
+  Ecosolutions,
+  EcosolutionsService,
+  NewEcosolutionsBody,
+  ODS_CODE,
+  TranslatedProperties,
+  UpdatedEcosolutionBody,
+} from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { EcosolutionsBody } from 'libs/store/src/lib/ecosolutions/ecosolution-base.model'
+import { Editor, Toolbar } from 'ngx-editor'
 import { forkJoin, last, of, switchMap, tap } from 'rxjs'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import {
@@ -16,7 +25,6 @@ import {
   defaultSetyearGuarantee,
 } from './compare-with-select'
 import { EcosolutionForm } from './ecosolution-form.model'
-import { Editor, Toolbar } from 'ngx-editor'
 import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
 
 @Component({
@@ -38,9 +46,8 @@ export class EcosolutionsFormComponent implements OnInit {
   public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
   public productsCategories!: any[]
   public editor!: Editor
-  public html = '';
+  public html = ''
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
-
 
   public langs = LANGS
   langSignal = signal(this._translateServices.currentLang || this._translateServices.defaultLang)
@@ -83,6 +90,10 @@ export class EcosolutionsFormComponent implements OnInit {
       ? new UpdatedEcosolutionBody(this._cleantechId, this.mainCategory, this.form.value)
       : new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value)
   }
+
+  private _isIncludeTranslation = (codeLang: string, translations?: TranslatedProperties[]) => {
+    return translations?.map((value) => value.lang).includes(codeLang)
+  }
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -121,12 +132,17 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _buildFrom() {
     this._initForm()
-    this._addNameTranslations()
-    this._addDescriptionTranslations()
-    this._detailDescriptionTranslations()
-    this._priceDescriptionTranslations()
+    if (!this.idEcosolution) {
+      this._seTranslatedProperties()
+    }
   }
 
+  private _seTranslatedProperties(ecosolution?: Ecosolutions) {
+    this._addNameTranslations(ecosolution)
+    this._addDescriptionTranslations(ecosolution)
+    this._detailDescriptionTranslations(ecosolution)
+    this._priceDescriptionTranslations(ecosolution)
+  }
   private _initForm() {
     this.form = this._fb.group({
       solutionName: ['deprecated'],
@@ -168,30 +184,38 @@ export class EcosolutionsFormComponent implements OnInit {
     })
   }
 
-  private _addNameTranslations(): void {
+  private _addNameTranslations(ecosolution?: Ecosolutions): void {
     const nameTranslations = this.form.get('nameTranslations') as FormArray
     this.langs.forEach((lang) => {
-      nameTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      if (this._isIncludeTranslation(lang.code, ecosolution?.nameTranslations)) {
+        nameTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      }
     })
   }
-  private _addDescriptionTranslations(): void {
+  private _addDescriptionTranslations(ecosolution?: Ecosolutions): void {
     const descriptionTranslations = this.form.get('descriptionTranslations') as FormArray
     this.langs.forEach((lang) => {
-      descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      if (this._isIncludeTranslation(lang.code, ecosolution?.descriptionTranslations)) {
+        descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      }
     })
   }
 
-  private _detailDescriptionTranslations(): void {
+  private _detailDescriptionTranslations(ecosolution?: Ecosolutions): void {
     const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
     this.langs.forEach((lang) => {
-      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      if (this._isIncludeTranslation(lang.code, ecosolution?.detailedDescriptionTranslations)) {
+        detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      }
     })
   }
 
-  private _priceDescriptionTranslations(): void {
+  private _priceDescriptionTranslations(ecosolution?: Ecosolutions): void {
     const priceDescriptionTranslations = this.form.get('priceDescriptionTranslations') as FormArray
     this.langs.forEach((lang) => {
-      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      if (this._isIncludeTranslation(lang.code, ecosolution?.priceDescriptionTranslations)) {
+        priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code))
+      }
     })
   }
 
@@ -210,6 +234,7 @@ export class EcosolutionsFormComponent implements OnInit {
   getEcosolution() {
     this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((ecosolution: Ecosolutions) => {
       this._getCertificateEcosolution()
+      this._seTranslatedProperties(ecosolution)
       this.urlPicEcosolution = ecosolution?.pictures?.map((picture) => picture.url)
       this._patchDataToForm(ecosolution)
     })

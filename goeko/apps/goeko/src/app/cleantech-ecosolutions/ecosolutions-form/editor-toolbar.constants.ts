@@ -1,7 +1,7 @@
-import { Toolbar } from 'ngx-editor';
+import { Toolbar } from 'ngx-editor'
 
-export const EDITOR_TOOLBAR_ECOSOLUTIONS: Toolbar = [
-  ['bold', 'italic', 'underline'],
-  ['ordered_list', 'bullet_list'],
-  ['text_color', 'background_color'],
-]
+/**
+ *  Doc: https://github.com/sibiraj-s/ngx-editor?tab=readme-ov-file
+ *  Ej : https://ngx-editor.stackblitz.io/
+ */
+export const EDITOR_TOOLBAR_ECOSOLUTIONS: Toolbar = [['bold', 'italic', 'underline']]
