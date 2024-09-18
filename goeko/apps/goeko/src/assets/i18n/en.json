@@ -208,7 +208,8 @@
     "newProvince": "Add a new province",
     "selectProvinces": "Selection of provinces",
     "allProvinces": "All regions",
-    "showProvinces": "Show regions"
+    "showProvinces": "Show regions",
+    "editorText": "Type here..."
   },
   "VERIFY_EMAIL": {
     "title": "Check your inbox",

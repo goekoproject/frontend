@@ -207,7 +207,8 @@
     "newProvince": "Neue Region hinzufügen",
     "selectProvinces": "Auswahl der Regionen",
     "allProvinces": "Alle Regionen",
-    "showProvinces": "Regionen anzeigen"
+    "showProvinces": "Regionen anzeigen",
+    "editorText": "Schreibe hier..."
   },
   "VERIFY_EMAIL": {
     "title": "Überprüfen Sie Ihren Posteingang",

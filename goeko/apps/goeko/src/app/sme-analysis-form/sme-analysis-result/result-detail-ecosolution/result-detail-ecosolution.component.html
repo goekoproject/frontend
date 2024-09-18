@@ -126,7 +126,7 @@
           <goeko-input-file [filesUrl]="detailsEcosolution()['pictures'] | pictureGetUrl" [multiple]="true" [readonly]="true">
           </goeko-input-file>
 
-          <p [innerHTML]="detailsEcosolution().detailedDescription | lineBreak"></p>
+          <p [innerHTML]="sanitizeHtml(detailsEcosolution().detailedDescription)"></p>
         </div>
       </section>
       @if (detailsEcosolution().classification) {

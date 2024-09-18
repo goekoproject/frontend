@@ -205,7 +205,8 @@
     "newProvince": "Ajouter une nouvelle région",
     "selectProvinces": "Sélection de régions",
     "allProvinces": "Toutes les régions",
-    "showProvinces": "Voir les régions"
+    "showProvinces": "Voir les régions",
+    "editorText": "Tapez ici..."
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",
