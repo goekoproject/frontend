@@ -1,5 +1,5 @@
 type ErrorCode =
-  | 'invalid_user_password'
+  | 'access_denied'
   | 'password_change_required'
   | 'password_leaked'
   | 'too_many_attempts'
@@ -19,7 +19,7 @@ export interface ErrorLogin {
 }
 
 const errorMessages: Record<ErrorCode, string> = {
-  invalid_user_password: 'invalid_user_password',
+  access_denied: 'invalid_user_password',
   password_change_required: 'password_change_required',
   password_leaked: 'password_leaked',
   too_many_attempts: 'too_many_attempts',

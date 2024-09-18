@@ -1,5 +1,6 @@
 export * from './lib/core/public-api'
 export * from './lib/ui.module'
+export * from './lib/ui/alert/public-api'
 export * from './lib/ui/animations/public-api'
 export * from './lib/ui/badge/public-api'
 export * from './lib/ui/button/public-api'
