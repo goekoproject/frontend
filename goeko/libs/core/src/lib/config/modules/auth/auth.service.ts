@@ -3,7 +3,7 @@ import { Inject, Injectable, signal } from '@angular/core'
 import { LangOfLocalecontentFul } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { Auth0UserProfile } from 'auth0-js'
-import { Observable, tap } from 'rxjs'
+import { Observable, of, tap } from 'rxjs'
 import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
 import { AuthRequest } from './auth-request.interface'
@@ -59,9 +59,9 @@ export class AuthService extends Auth0Connected {
    */
   isLoggedIn(body: AuthRequest) {
     if (!body) {
-      return
+      return of(null)
     }
-    this._loginAuth0(body)
+    return this._loginAuth0(body)
   }
 
   signUpAndLogin(newBody: SignUp) {
@@ -93,8 +93,15 @@ export class AuthService extends Auth0Connected {
       password: body.password,
     })
 
-    this.webAuth.login(auth0Params, function (err) {
-      console.error(err)
+    return new Observable((observer) => {
+      this.webAuth.login(auth0Params, (err, result) => {
+        if (err) {
+          observer.error(err)
+        } else {
+          observer.next(result)
+          observer.complete()
+        }
+      })
     })
   }
 

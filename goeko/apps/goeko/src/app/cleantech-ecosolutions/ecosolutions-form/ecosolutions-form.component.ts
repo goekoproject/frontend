@@ -2,9 +2,16 @@ import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
-import { DataSelect, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, ODS_CODE, UpdatedEcosolutionBody } from '@goeko/store'
+import {
+  DataSelect,
+  Ecosolutions,
+  EcosolutionsBody,
+  EcosolutionsService,
+  NewEcosolutionsBody,
+  ODS_CODE,
+  UpdatedEcosolutionBody,
+} from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
-import { EcosolutionsBody } from 'libs/store/src/lib/ecosolutions/ecosolution-base.model'
 import { forkJoin, last, of, switchMap, tap } from 'rxjs'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import {

@@ -9,7 +9,20 @@
   "ERROR_MESSAGES": {
     "500": "Oops, something went wrong. Try later.",
     "400": "Check your info and try again.",
-    "404": "Couldn't find that. Check the link."
+    "404": "Couldn't find that. Check the link.",
+    "invalid_user_password": "User or password is incorrect.",
+    "password_change_required": "You need to change your password because this is the first time you are logging in or your password has expired.",
+    "password_leaked": "This login is blocked because your password was leaked on another website. We have sent an email with instructions to unblock it.",
+    "too_many_attempts": "Your account is blocked due to repeated login attempts.",
+    "session_missing": "Cannot complete your authentication request. Please try again after closing all open windows.",
+    "too_many_requests": "Sorry. There are too many requests at the moment. Please reload the page and try again. If this problem persists, please try again later.",
+    "invalid_password": "Password is invalid.",
+    "password_dictionary_error": "Password is too common.",
+    "password_no_user_info_error": "Password is based on user information.",
+    "password_strength_error": "Password is not strong enough.",
+    "user_exists": "User already exists.",
+    "username_exists": "Username already exists.",
+    "social_signup_needs_terms_acception": "Please accept the terms of service below to continue."
   },
   "SUCCESS_MESSAGES": {
     "POST": "Created successfully!",

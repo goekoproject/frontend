@@ -1,5 +1,6 @@
 import { Component, OnInit, signal, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ErrorLogin, errorMessagelogin } from '@goeko/core'
 import { AccessService } from '../access.services'
 
 @Component({
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   formLogin!: FormGroup
   public signUpOk!: boolean
   showPassword = false
-  changePassword =signal<boolean>(false)
+  changePassword = signal<boolean>(false)
   constructor(
     private _fb: FormBuilder,
     private _accessService: AccessService,
@@ -36,13 +37,19 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.formLogin.valid) {
-      this._accessService.login(this.formLogin.value)
+      this._accessService.login(this.formLogin.value).subscribe(
+        (res) => {
+          console.log('res', res)
+        },
+        (error) => {
+          const errorMsg = errorMessagelogin(error as ErrorLogin)
+          console.log('error', errorMsg)
+        },
+      )
     }
   }
 
   tooglePassword() {
     this.showPassword = !this.showPassword
   }
-
-
 }

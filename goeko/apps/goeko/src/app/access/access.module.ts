@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ConfigModule } from '@goeko/core'
+import { ToastComponent, ToastService } from '@goeko/store'
 import {
   ButtonModule,
   DialogMessageModule,
@@ -37,6 +38,7 @@ import { SignupComponent } from './signup/signup.component'
     NotificationModule,
     LoaderCheckComponent,
     DialogMessageModule,
+    ToastComponent,
     ConfigModule.forRoot({
       endopoint: environment.baseUrl,
       clientSecret: environment.clientSecret,
@@ -46,6 +48,6 @@ import { SignupComponent } from './signup/signup.component'
       connection: environment.connection,
     }),
   ],
-  providers: [DialogService, AccessService],
+  providers: [DialogService, AccessService, ToastService],
 })
 export class AccessModule {}

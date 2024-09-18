@@ -9,7 +9,20 @@
   "ERROR_MESSAGES": {
     "500": "Oups, quelque chose a mal tourné. Essayez plus tard.",
     "400": "Vérifiez vos infos et réessayez.",
-    "404": "Impossible de trouver cela. Vérifiez le lien."
+    "404": "Impossible de trouver cela. Vérifiez le lien.",
+    "invalid_user_password": "Nom d'utilisateur ou mot de passe incorrect.",
+    "password_change_required": "Vous devez changer votre mot de passe car c'est la première fois que vous vous connectez ou votre mot de passe a expiré.",
+    "password_leaked": "Cette connexion est bloquée car votre mot de passe a été divulgué sur un autre site. Nous avons envoyé un e-mail avec des instructions pour le débloquer.",
+    "too_many_attempts": "Votre compte est bloqué en raison de tentatives de connexion répétées.",
+    "session_missing": "Impossible de compléter votre demande d'authentification. Veuillez réessayer après avoir fermé toutes les fenêtres ouvertes.",
+    "too_many_requests": "Désolé. Il y a trop de demandes en ce moment. Veuillez recharger la page et réessayer. Si ce problème persiste, veuillez réessayer plus tard.",
+    "invalid_password": "Mot de passe invalide.",
+    "password_dictionary_error": "Le mot de passe est trop commun.",
+    "password_no_user_info_error": "Le mot de passe est basé sur les informations de l'utilisateur.",
+    "password_strength_error": "Le mot de passe n'est pas assez fort.",
+    "user_exists": "L'utilisateur existe déjà.",
+    "username_exists": "Le nom d'utilisateur existe déjà.",
+    "social_signup_needs_terms_acception": "Veuillez accepter les conditions de service ci-dessous pour continuer."
   },
   "SUCCESS_MESSAGES": {
     "POST": "Créé avec succès!",

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject, signal } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, inject, signal } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
 import { Notification, ToastService } from './toast.service'
 
@@ -17,11 +17,13 @@ type RemoveToast = {
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     class: 'goeko-toast',
+    '[attr.static]': 'static',
   },
 })
 export class ToastComponent implements OnInit {
   private _toastService = inject(ToastService)
 
+  @Input() static = false
   public messages = signal<Array<Notification | null>>([])
   public removing: RemoveToast = {}
   public removingAll = false
@@ -51,10 +53,13 @@ export class ToastComponent implements OnInit {
     this.messages.update((message) => message.filter((_, i) => i !== index))
   }
   private _removeAllToast() {
-   this.removingAll = true
+    if (this.static) {
+      return
+    }
+    this.removingAll = true
     setTimeout(() => {
       this.messages().forEach((_, index) => {
-       this._removeToast(index)
+        this._removeToast(index)
       })
     }, 8000)
   }

@@ -1,5 +1,7 @@
 .goeko-toast {
-  @apply absolute top-28 right-0 m-4 flex flex-col items-center max-w-sm w-full
+  @apply absolute right-0 top-28 m-4 flex w-full max-w-sm flex-col items-center;
 }
 
-
+.goeko-toast[static="true"] {
+  @apply relative top-auto;
+}

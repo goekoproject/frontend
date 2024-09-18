@@ -1,3 +1,4 @@
+export * from './ecosolution-base.model'
 export * from './ecosolution-result.interface'
 export * from './ecosolution-search.request.model'
 export * from './ecosolution-search.response.interface'
@@ -9,3 +10,4 @@ export * from './new-ecosolution.model'
 export * from './tagging.enum'
 export * from './tagging.interface'
 export * from './update-ecosolution-body.model'
+

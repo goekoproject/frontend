@@ -9,7 +9,21 @@
   "ERROR_MESSAGES": {
     "500": "Ups, algo salió mal. Prueba luego.",
     "400": "Revisa tu info y prueba otra vez.",
-    "404": "No encontramos eso. Revisa el enlace."
+    "404": "No encontramos eso. Revisa el enlace.",
+    "invalid_user_password": "Usuario o contraseña incorrectos.",
+    "password_change_required": "Necesitas cambiar tu contraseña porque es la primera vez que inicias sesión o tu contraseña ha expirado.",
+    "password_leaked": "Este inicio de sesión está bloqueado porque tu contraseña se filtró en otro sitio web. Hemos enviado un correo electrónico con instrucciones para desbloquearla.",
+    "too_many_attempts": "Tu cuenta está bloqueada debido a intentos repetidos de inicio de sesión.",
+    "session_missing": "No se puede completar tu solicitud de autenticación. Por favor, intenta de nuevo después de cerrar todas las ventanas abiertas.",
+    "too_many_requests": "Lo siento. Hay demasiadas solicitudes en este momento. Por favor, recarga la página e inténtalo de nuevo. Si el problema persiste, inténtalo más tarde.",
+    "invalid_password": "Contraseña inválida.",
+    "password_dictionary_error": "La contraseña es demasiado común.",
+    "password_no_user_info_error": "La contraseña se basa en la información del usuario.",
+    "password_strength_error": "La contraseña no es lo suficientemente fuerte.",
+    "user_exists": "El usuario ya existe.",
+    "username_exists": "El nombre de usuario ya existe.",
+    "social_signup_needs_terms_acception": "Por favor, acepta los términos del servicio a continuación para continuar.",
+    "password_too_short": "La contraseña no cumple con la política de contraseñas."
   },
   "SUCCESS_MESSAGES": {
     "POST": "¡Creado con éxito!",

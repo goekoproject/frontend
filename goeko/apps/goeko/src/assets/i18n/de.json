@@ -9,7 +9,20 @@
   "ERROR_MESSAGES": {
     "500": "Oops, etwas ist schiefgelaufen. Versuchen Sie es später erneut.",
     "400": "Überprüfen Sie Ihre Daten und versuchen Sie es erneut.",
-    "404": "Konnte das nicht finden. Überprüfen Sie den Link."
+    "404": "Konnte das nicht finden. Überprüfen Sie den Link.",
+    "invalid_user_password": "Benutzer oder Passwort ist falsch.",
+    "password_change_required": "Sie müssen Ihr Passwort ändern, da dies das erste Mal ist, dass Sie sich anmelden, oder Ihr Passwort ist abgelaufen.",
+    "password_leaked": "Diese Anmeldung ist blockiert, weil Ihr Passwort auf einer anderen Website geleakt wurde. Wir haben eine E-Mail mit Anweisungen zum Entsperren gesendet.",
+    "too_many_attempts": "Ihr Konto ist aufgrund wiederholter Anmeldeversuche gesperrt.",
+    "session_missing": "Ihre Authentifizierungsanfrage kann nicht abgeschlossen werden. Bitte versuchen Sie es erneut, nachdem Sie alle offenen Fenster geschlossen haben.",
+    "too_many_requests": "Entschuldigung. Es gibt momentan zu viele Anfragen. Bitte laden Sie die Seite neu und versuchen Sie es erneut. Wenn dieses Problem weiterhin besteht, versuchen Sie es später erneut.",
+    "invalid_password": "Passwort ist ungültig.",
+    "password_dictionary_error": "Passwort ist zu häufig.",
+    "password_no_user_info_error": "Passwort basiert auf Benutzerinformationen.",
+    "password_strength_error": "Passwort ist nicht stark genug.",
+    "user_exists": "Benutzer existiert bereits.",
+    "username_exists": "Benutzername existiert bereits.",
+    "social_signup_needs_terms_acception": "Bitte akzeptieren Sie die unten stehenden Nutzungsbedingungen, um fortzufahren.",
   },
   "SUCCESS_MESSAGES": {
     "POST": "Erfolgreich erstellt!",
