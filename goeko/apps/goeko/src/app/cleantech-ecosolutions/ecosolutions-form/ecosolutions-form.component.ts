@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
@@ -32,7 +32,7 @@ import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
 })
-export class EcosolutionsFormComponent implements OnInit {
+export class EcosolutionsFormComponent implements OnInit, OnDestroy {
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries
@@ -115,7 +115,7 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.editor.destroy()
+    this.editor?.destroy()
   }
 
   private _getParamsUrl() {
