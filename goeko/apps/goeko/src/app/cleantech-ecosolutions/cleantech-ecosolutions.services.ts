@@ -1,65 +1,40 @@
-import {
-  Injectable,
-  Injector,
-  Signal,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import {
-  CATEGORY_SECTION,
-  mergeCategoriesSectionWithClassificationCategory,
-} from '@goeko/business-ui';
-import { REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core';
-import {
-  ClassificationCategory,
-  ClassificationCategoryService,
-  NULL_CLASSIFICATION_CATEGORY,
-  PaymentSystemService,
-} from '@goeko/store';
-import { map, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Injectable, Injector, Signal, effect, inject, signal } from '@angular/core'
+import { toSignal } from '@angular/core/rxjs-interop'
+import { CATEGORY_SECTION, mergeCategoriesSectionWithClassificationCategory } from '@goeko/business-ui'
+import { REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
+import { ClassificationCategory, ClassificationCategoryService, NULL_CLASSIFICATION_CATEGORY, PaymentSystemService } from '@goeko/store'
+import { map, tap } from 'rxjs'
+import { environment } from '../../environments/environment'
 
 @Injectable()
 export class CleantechEcosolutionsService {
-  private injector = inject(Injector);
+  private injector = inject(Injector)
 
   subCategorySelected = signal<ClassificationCategory>({
     id: '',
     code: '',
     label: '',
-  });
+  })
 
   categories = toSignal(this._getAllCategories$(), {
     initialValue: CATEGORY_SECTION as any[],
     injector: this.injector,
-  });
+  })
 
-  categorySelected = signal<ClassificationCategory>(
-    NULL_CLASSIFICATION_CATEGORY,
-  );
+  categorySelected = signal<ClassificationCategory>(NULL_CLASSIFICATION_CATEGORY)
 
   public get isSupcriptionNeed(): Signal<boolean> {
-    console.log(
-      this._remoteConfigService
-        .getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED)
-        .asBoolean(),
-    );
-    return signal(
-      this._remoteConfigService
-        .getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED)
-        .asBoolean(),
-    );
+    console.log(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
+    return signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
   }
   get isSubscribed() {
     if (!environment.production) {
-      return true;
+      return true
     }
     if (!this.isSupcriptionNeed()) {
-      return true;
+      return true
     }
-    return this._paymentsService.isSubscription;
+    return this._paymentsService.isSubscription
   }
 
   constructor(
@@ -69,27 +44,21 @@ export class CleantechEcosolutionsService {
   ) {
     effect(() => {
       if (this.categorySelected().id !== '') {
-        this.getSubcategorySelected(this.categorySelected().code);
+        this.getSubcategorySelected(this.categorySelected().code)
       }
-    });
+    })
   }
   private _getAllCategories$() {
     return this.classificationCategoryService.getClassificationsCategory().pipe(
-      map((classificationCategory) =>
-        mergeCategoriesSectionWithClassificationCategory(
-          classificationCategory,
-        ),
-      ),
+      map((classificationCategory) => mergeCategoriesSectionWithClassificationCategory(classificationCategory)),
       tap((categories) => this.categorySelected.set(categories[0])),
-    );
+    )
   }
   public getSubcategorySelected(code: string) {
-    this.classificationCategoryService
-      .getClassificationForCategoryTranslated(code)
-      .subscribe((subcategorySelected) => {
-        if (subcategorySelected) {
-          this.subCategorySelected.set(subcategorySelected);
-        }
-      });
+    this.classificationCategoryService.getClassificationForCategoryTranslated(code).subscribe((subcategorySelected) => {
+      if (subcategorySelected) {
+        this.subCategorySelected.set(subcategorySelected)
+      }
+    })
   }
 }

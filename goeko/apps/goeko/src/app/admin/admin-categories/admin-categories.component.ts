@@ -12,7 +12,14 @@ import {
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { CategoryModule, Product, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
-import { ClassificationCategory, ManageCategory, ManageSubcategory, ProductSelectToManageProduct, Translations } from '@goeko/store'
+import {
+  ClassificationCategory,
+  ClassificationCategoryService,
+  ManageCategory,
+  ManageSubcategory,
+  ProductSelectToManageProduct,
+  Translations,
+} from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
@@ -40,7 +47,7 @@ import { AdminCategoriesService } from './admin-categories.services'
     ProductToCurrentLangPipe,
     SwitchModule,
   ],
-  providers: [AdminCategoriesService],
+  providers: [AdminCategoriesService, ClassificationCategoryService],
   templateUrl: './admin-categories.component.html',
   styleUrl: './admin-categories.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

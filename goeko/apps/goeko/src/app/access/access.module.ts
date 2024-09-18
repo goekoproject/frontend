@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ConfigModule } from '@goeko/core'
 import {
+  AlertComponent,
   ButtonModule,
   DialogMessageModule,
   DialogService,
@@ -11,6 +12,7 @@ import {
   LoaderCheckComponent,
   NotificationModule,
   SwitchModule,
+  TooltipComponent,
   UiSuperSelectModule,
 } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -37,9 +39,10 @@ import { SignupComponent } from './signup/signup.component'
     NotificationModule,
     LoaderCheckComponent,
     DialogMessageModule,
+    AlertComponent,
+    TooltipComponent,
     ConfigModule.forRoot({
       endopoint: environment.baseUrl,
-      tokenAccess: environment.accessToken,
       clientSecret: environment.clientSecret,
       clientId: environment.clientId,
       domainAuth0: environment.domainAuth0,

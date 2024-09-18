@@ -9,7 +9,7 @@ export enum USER_TYPE {
 export const USER_TYPE_DESCRIPTION = [
   {
     id: 1,
-    title: 'Enterprise',
+    title: 'enterprise',
     value: USER_TYPE.SME,
     active: true,
     descriptions: 'Je cherche une éco-solution',

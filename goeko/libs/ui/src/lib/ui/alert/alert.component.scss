@@ -1,0 +1,12 @@
+.info {
+  @apply bg-blue-50 p-4 text-sm text-blue-800;
+}
+.danger {
+  @apply bg-red-50 p-4 text-sm text-red-800;
+}
+.success {
+  @apply bg-green-50 p-4 text-sm text-green-800;
+}
+.warning {
+  @apply bg-yellow-50 p-4 text-sm text-yellow-800;
+}

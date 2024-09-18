@@ -4,9 +4,6 @@ export interface Options {
    */
   endopoint: string
   domainAuth0: string
-
-  tokenAccess: string
-
   isConsumer?: true
   connection: string
   clientSecret: string

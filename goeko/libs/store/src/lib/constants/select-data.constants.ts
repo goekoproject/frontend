@@ -103,6 +103,10 @@ export const SelectMainMineralProduct: DataSelectOption[] = [
     id: 'aluminum',
     keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.aluminum',
   },
+  {
+    id: 'sealingStrip',
+    keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.sealingStrip',
+  }
 ]
 
 export const SelectMainRigidMaterial: DataSelectOption[] = [{ id: 'mainRigidMaterial', keyLang: 'SELECT_DATA_LABEL.insolationPanels' }]
@@ -185,8 +189,7 @@ export const SelectProducts: DataSelectOption[] = [
     id: 'productsContainingTar',
     keyLang: 'SELECT_DATA_LABEL.selectProducts.productsContainingTar',
   },
-  /* 	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectProducts.batteries' },
-   */
+
   {
     id: 'woodTreatedWithHazardousSubstances',
     keyLang: 'SELECT_DATA_LABEL.selectProducts.woodTreatedWithHazardousSubstances',
@@ -195,11 +198,6 @@ export const SelectProducts: DataSelectOption[] = [
     id: 'collects',
     keyLang: 'SELECT_DATA_LABEL.selectProducts.collects',
   },
-  /* 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectProducts.packagingSoiledWithDangerousSubstances' },
- { id: 5, keyLang: 'SELECT_DATA_LABEL.selectProducts.oilSeparatorSludge' },
-	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectProducts.cartridgesContainingDangerousSubstances' },
-	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectProducts.energySavingLamps' },
-	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectProducts.electricalAndElectronicWasteContainingHazardousSubstances' }*/
   {
     id: 'paintVarnish',
     keyLang: 'SELECT_DATA_LABEL.selectProducts.paintVarnish',
@@ -215,6 +213,10 @@ export const SelectProducts: DataSelectOption[] = [
     id: 'bituminousProductsContainingHAPs',
     keyLang: 'SELECT_DATA_LABEL.selectProducts.bituminousProductsContainingHAPs',
   },
+  {
+    id: 'paintsAndSolvents',
+    keyLang: 'SELECT_DATA_LABEL.selectProducts.paintsAndSolvents',
+  }
 ]
 export const SelectEnergySource: DataSelectOption[] = [
   {
@@ -631,12 +633,8 @@ const SelectBuildingOperation: DataSelectOption[] = [
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.greenRoofsWalls',
   },
   {
-    id: 'waterManagement',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement',
-  },
-  {
-    id: 'waterManagementGray',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementGray',
+    id: 'waterManagementWastewater',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementWastewater',
   },
   {
     id: 'ecoFriendlytaps',

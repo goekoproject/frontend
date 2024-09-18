@@ -4,12 +4,27 @@
     "passwordPolicy2": "Lettres majuscules (A-Z)",
     "passwordPolicy3": "Chiffres (0-9)",
     "passwordPolicy4": "Caractères spéciaux (!@# $ %^&*)",
-    "passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :"
+    "passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :",
+    "passwordPolicy": "Le mot de passe doit respecter la politique suivante:<br>* Au moins 8 caractères de longueur<br>* Contenir au moins 3 des 4 types de caractères suivants:<br> * lettres minuscules (a-z)<br> * lettres majuscules (A-Z)<br> * chiffres (0-9)<br> * caractères spéciaux (par exemple, !@#$%^&*)"
   },
   "ERROR_MESSAGES": {
     "500": "Oups, quelque chose a mal tourné. Essayez plus tard.",
     "400": "Vérifiez vos infos et réessayez.",
-    "404": "Impossible de trouver cela. Vérifiez le lien."
+    "404": "Impossible de trouver cela. Vérifiez le lien.",
+    "invalid_user_password": "Nom d'utilisateur ou mot de passe incorrect.",
+    "password_change_required": "Vous devez changer votre mot de passe car c'est la première fois que vous vous connectez ou votre mot de passe a expiré.",
+    "password_leaked": "Cette connexion est bloquée car votre mot de passe a été divulgué sur un autre site. Nous avons envoyé un e-mail avec des instructions pour le débloquer.",
+    "too_many_attempts": "Votre compte est bloqué en raison de tentatives de connexion répétées.",
+    "session_missing": "Impossible de compléter votre demande d'authentification. Veuillez réessayer après avoir fermé toutes les fenêtres ouvertes.",
+    "too_many_requests": "Désolé. Il y a trop de demandes en ce moment. Veuillez recharger la page et réessayer. Si ce problème persiste, veuillez réessayer plus tard.",
+    "invalid_password": "Mot de passe invalide.",
+    "password_dictionary_error": "Le mot de passe est trop commun.",
+    "password_no_user_info_error": "Le mot de passe est basé sur les informations de l'utilisateur.",
+    "password_strength_error": "Le mot de passe n'est pas assez fort.",
+    "username_exists": "Le nom d'utilisateur existe déjà.",
+    "social_signup_needs_terms_acception": "Veuillez accepter les conditions de service ci-dessous pour continuer.",
+    "invalid_signup_user_exists": "L'utilisateur existe déjà sur la plateforme. Si vous avez oublié votre mot de passe, cliquez sur",
+    "password_strength": "Le mot de passe ne respecte pas la politique de mot de passe."
   },
   "SUCCESS_MESSAGES": {
     "POST": "Créé avec succès!",
@@ -190,7 +205,8 @@
     "newProvince": "Ajouter une nouvelle région",
     "selectProvinces": "Sélection de régions",
     "allProvinces": "Toutes les régions",
-    "showProvinces": "Voir les régions"
+    "showProvinces": "Voir les régions",
+    "editorText": "Tapez ici..."
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",
@@ -289,7 +305,7 @@
     "selectBuildingOperation": {
       "greenRoofsWalls": "Toits et murs végétalisés",
       "waterManagement": "Des solutions pour la gestion de l’eau de pluie",
-      "waterManagementGray": "Des solutions pour la gestion de l’eau grise",
+      "waterManagementWastewater": "Des solutions pour la gestion de l’eau usée",
       "ecoFriendlytaps": "Robinetterie écologique",
       "ecoFriendlySanitary": "Sanitaire écologique"
     },
@@ -371,7 +387,8 @@
       "iron": "Inox",
       "isolation": "Isolation thermique​",
       "steel": "Acier",
-      "zinc": "Zinc"
+      "zinc": "Zinc",
+      "sealingStrip": "Lés d’étanchéité"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Panneaux d'isolation"
@@ -392,7 +409,8 @@
       "paintVarnish": "Solvants à peintures/ vernis",
       "productsContainingTar": "Produits contenant du goudron",
       "woodTreatedWithHazardousSubstances": "Bois traité avec des substances dangereuses",
-      "collects": "Adhésif"
+      "collects": "Adhésif",
+      "paintsAndSolvents": "Peintures et solvants"
     },
     "selectSpecialWaste": {
       "aerosols": "Aérosols",
@@ -422,7 +440,7 @@
       "storeEnergy": "Stocker l’énergie",
       "useLowConsumptionLighting": "Solutions de refroidissement écologiques",
       "useRenewableEnergies": "Recourir à des énergies renouvelables",
-      "sustainableLightingSystems": "Des systèmes d’éclairage durables",
+      "sustainableLightingSystems": "Systèmes d’éclairage durables",
       "intelligentHeatingSystems": "Systèmes de chauffage intelligent",
       "homeAutomation": "Domotique"
     }
@@ -432,6 +450,7 @@
     "buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :",
     "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
     "ods": "En lien avec votre éco-solution",
+    "odsSme": "En lien avec l’éco-solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
     "selectProducts": "Votre éco-solution réduit l'impact du ou des produits toxiques suivants",
     "waste": "Types de déchets",
@@ -481,6 +500,7 @@
   "categories": "Catégories",
   "certified": "Certification",
   "cleantech": "Cleantech",
+  "enterprise": "Entreprise",
   "companyDetails": "Détails de l'entreprise",
   "completeToProfileNow": "Complétez votre profil maintenant !",
   "confirm": "Confirmer",

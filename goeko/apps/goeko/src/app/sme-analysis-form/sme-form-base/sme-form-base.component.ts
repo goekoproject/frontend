@@ -1,14 +1,14 @@
 import { SelectionModel } from '@angular/cdk/collections'
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, computed, effect } from '@angular/core'
+import { AfterViewInit, ChangeDetectorRef, Component, computed, effect, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ClassificationCategory, ClassificationSubcategory, DataSelect, ProjectService, SmeRequestResponse, SmeService } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
-import { Subject } from 'rxjs'
+import { distinctUntilChanged, Observable, Subject, takeUntil } from 'rxjs'
 import { compareWithProducts } from '../sme-analysis..util'
 import { SmeAnalysisService } from '../sme-analysis.service'
-import { transformArrayToObj } from '../sme-form-analysis/sme-analysis.request'
+import { FormValueToSmeProjectRequest, transformArrayToObj } from '../sme-form-analysis/sme-analysis.request'
 const defaultSetSuperSelect = (o1: any, o2: any) => {
   if (o1 && o2 && typeof o2 !== 'object') {
     return o1.id.toString() === o2
@@ -46,6 +46,9 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._route.snapshot.paramMap.get('id') || this._route.snapshot.queryParamMap.get('smeId') || ''
   }
 
+  private get projectId(): string {
+    return this._route.snapshot.queryParamMap.get('projectId') || ''
+  }
   private get _queryParamsSelected(): { [key: string]: string } {
     return this._route.snapshot.queryParams
   }
@@ -183,7 +186,15 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-
+  saveAnalysis = (): Observable<boolean> => {
+    if (this.projectId) {
+      const updateProject = new FormValueToSmeProjectRequest(this.form.value)
+      return this._projectService.updateProject(this.projectId, updateProject).pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+    } else {
+      const newProject = new FormValueToSmeProjectRequest(this.form.value, this._smeId)
+      return this._projectService.saveProject(newProject).pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+    }
+  }
   gotToSummary() {
     this.goToSummary = true
     this.currentAnalytics.set(this.form.value)

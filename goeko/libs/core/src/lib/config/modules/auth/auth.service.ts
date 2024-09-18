@@ -1,10 +1,9 @@
 import { DOCUMENT } from '@angular/common'
 import { Inject, Injectable, signal } from '@angular/core'
-/* import { AuthService as Auth0, User } from '@auth0/auth0-angular'
- */ import { LangOfLocalecontentFul } from '@goeko/store'
+import { LangOfLocalecontentFul } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { Auth0UserProfile } from 'auth0-js'
-import { Observable, tap } from 'rxjs'
+import { Observable, of, tap } from 'rxjs'
 import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
 import { AuthRequest } from './auth-request.interface'
@@ -28,8 +27,8 @@ export class AuthService extends Auth0Connected {
   }
   private _dataAuthConect = ({ username = '', password = '' }) => {
     return {
-      realm: AUTH_CONNECT.REALM,
-      audience: AUTH_CONNECT.AUDIENCE,
+      realm: this._config.connection,
+      audience: this._config.audience,
       username,
       password,
     }
@@ -49,7 +48,7 @@ export class AuthService extends Auth0Connected {
     @Inject(DOCUMENT) private doc: Document,
     private readonly _translate: TranslateService,
   ) {
-    super(_config,AUTH_CONNECT.REDIRECT_URI)
+    super(_config, AUTH_CONNECT.REDIRECT_URI)
     this._clientId = this._config.clientId
   }
 
@@ -60,9 +59,9 @@ export class AuthService extends Auth0Connected {
    */
   isLoggedIn(body: AuthRequest) {
     if (!body) {
-      return
+      return of(null)
     }
-    this._loginAuth0(body)
+    return this._loginAuth0(body)
   }
 
   signUpAndLogin(newBody: SignUp) {
@@ -94,8 +93,15 @@ export class AuthService extends Auth0Connected {
       password: body.password,
     })
 
-    this.webAuth.login(auth0Params, function (err) {
-      console.error(err)
+    return new Observable((observer) => {
+      this.webAuth.login(auth0Params, (err, result) => {
+        if (err) {
+          observer.error(err)
+        } else {
+          observer.next(result)
+          observer.complete()
+        }
+      })
     })
   }
 

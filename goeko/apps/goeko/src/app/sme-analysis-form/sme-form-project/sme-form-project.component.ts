@@ -53,7 +53,7 @@ export class SmeFormProjectComponent extends SmeFormBaseComponent implements OnI
       waterConsumption: this.fb.group({}),
       hazardousProduct: this.fb.group({}),
       notification: this.fb.group({
-        onNewEcosolution: this.fb.control(false),
+        onNewEcosolution: this.fb.control(true),
       }),
     })
   }

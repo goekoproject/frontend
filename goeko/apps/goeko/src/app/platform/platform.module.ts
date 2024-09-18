@@ -45,7 +45,6 @@ import { PlatformComponent } from './platform.component'
     ToastComponent,
     ConfigModule.forRoot({
       endopoint: environment.baseUrl,
-      tokenAccess: environment.accessToken,
       clientSecret: environment.clientSecret,
       clientId: environment.clientId,
       domainAuth0: environment.domainAuth0,
@@ -59,6 +58,7 @@ import { PlatformComponent } from './platform.component'
     isSubscribedCleantech,
     NotificationService,
     LocationsService,
+
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],
 })

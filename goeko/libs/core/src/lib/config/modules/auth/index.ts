@@ -1,3 +1,5 @@
+export * from './auth-error.login'
+export * from './auth-error.signup'
 export * from './auth-request.interface'
 export * from './auth-response.interface'
 export * from './auth.constants'

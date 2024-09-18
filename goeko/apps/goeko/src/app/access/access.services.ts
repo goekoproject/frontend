@@ -3,8 +3,6 @@ import { Inject, Injectable } from '@angular/core'
 import { AuthService } from '@goeko/core'
 import { SignUp } from './singup.model'
 
-const URL_SIGNUP = 'https://soft-glitter-5713.eu.auth0.com/dbconnections/signup'
-
 @Injectable({ providedIn: 'root' })
 export class AccessService {
   public auth$ = this._authService.userAuth$
@@ -24,7 +22,7 @@ export class AccessService {
     this._authService.logout(this._urlPageEmailVerify)
   }
   public login(body: { email: string; password: string }) {
-    this._authService.isLoggedIn({ username: body.email, password: body.password })
+    return this._authService.isLoggedIn({ username: body.email, password: body.password })
   }
 
   public changePassword(email: string) {

@@ -1,4 +1,4 @@
-import { Classifications, DataSelect, FiledTranslations } from '@goeko/store'
+import { Classifications, DataSelect, TranslatedProperties } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 
 export class CardEcosolutions {
@@ -7,7 +7,7 @@ export class CardEcosolutions {
   mainCategory: string
   products: string[]
   sustainableDevelopmentGoals: number[]
-  nameTranslations!: FiledTranslations[]
+  nameTranslations!: TranslatedProperties[]
   constructor(dataEcosolutions: any, translationService: TranslateService) {
     this.id = dataEcosolutions.id
     this.solutionName = dataEcosolutions.solutionName

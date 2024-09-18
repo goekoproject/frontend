@@ -4,12 +4,28 @@
     "passwordPolicy2": "Uppercase letters (A-Z)",
     "passwordPolicy3": "Numbers (0-9)",
     "passwordPolicy4": "Special characters (!@# $ %^&*)",
-    "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
+    "passwordPolicyTitle": "You must meet at least 3 of the following rules: ",
+    "passwordPolicy": "The password must comply with the following policy:<br>* At least 8 characters in length<br>* Contain at least 3 of the following 4 types of characters:<br> * lower case letters (a-z)<br> * upper case letters (A-Z)<br> * numbers (0-9)<br> * special characters (e.g. !@#$%^&*)"
   },
   "ERROR_MESSAGES": {
     "500": "Oops, something went wrong. Try later.",
     "400": "Check your info and try again.",
-    "404": "Couldn't find that. Check the link."
+    "404": "Couldn't find that. Check the link.",
+    "invalid_user_password": "User or password is incorrect.",
+    "password_change_required": "You need to change your password because this is the first time you are logging in or your password has expired.",
+    "password_leaked": "This login is blocked because your password was leaked on another website. We have sent an email with instructions to unblock it.",
+    "too_many_attempts": "Your account is blocked due to repeated login attempts.",
+    "session_missing": "Cannot complete your authentication request. Please try again after closing all open windows.",
+    "too_many_requests": "Sorry. There are too many requests at the moment. Please reload the page and try again. If this problem persists, please try again later.",
+    "invalid_password": "Password is invalid.",
+    "password_dictionary_error": "Password is too common.",
+    "password_no_user_info_error": "Password is based on user information.",
+    "password_strength_error": "Password is not strong enough.",
+    "username_exists": "Username already exists.",
+    "social_signup_needs_terms_acception": "Please accept the terms of service below to continue.",
+    "invalid_signup_user_exists": "The user already exists on the platform. If you forgot your password, click on",
+    "password_strength": "The password does not meet the password policy."
+
   },
   "SUCCESS_MESSAGES": {
     "POST": "Created successfully!",
@@ -192,7 +208,8 @@
     "newProvince": "Add a new province",
     "selectProvinces": "Selection of provinces",
     "allProvinces": "All regions",
-    "showProvinces": "Show regions"
+    "showProvinces": "Show regions",
+    "editorText": "Type here..."
   },
   "VERIFY_EMAIL": {
     "title": "Check your inbox",
@@ -215,7 +232,8 @@
     "en": "English",
     "es": "Spanish",
     "fr": "French",
-    "gb": "English"
+    "gb": "English",
+    "de": "German"
   },
   "LEGAL": {
     "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
@@ -291,7 +309,7 @@
     "selectBuildingOperation": {
       "greenRoofsWalls": "Green roofs and walls",
       "waterManagement": "Solutions for rainwater management",
-      "waterManagementGray": "Solutions for graywater management",
+      "waterManagementWastewater": "Solutions for waste water management",
       "ecoFriendlytaps": "Eco-friendly taps",
       "ecoFriendlySanitary": "Eco-friendly sanitary"
     },
@@ -373,7 +391,8 @@
       "iron": "Stainless steel",
       "isolation": "Thermal insulation",
       "steel": "Steel",
-      "zinc": "Zinc"
+      "zinc": "Zinc",
+      "sealingStrip": "Sealing strip"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Insulation panels"
@@ -394,7 +413,8 @@
       "paintVarnish": "Paint/varnish",
       "productsContainingTar": "Products containing tar",
       "woodTreatedWithHazardousSubstances": "Wood treated with hazardous substances",
-      "collects": "Adhesive"
+      "collects": "Adhesive",
+      "paintsAndSolvents": "Paints and solvents"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosols",
@@ -434,6 +454,7 @@
     "buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:",
     "co2Emission": "Area where your eco-solution reduces CO2 emissions",
     "ods": "Linked to your eco-solution",
+    "odsSme": "Linked to the eco-solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
     "selectProducts": "Type of toxic products that your eco-solution replaces or improves",
     "waste": "Types of waste",
@@ -480,6 +501,7 @@
   "categories": "Categories",
   "certified": "Certification",
   "cleantech": "Cleantech",
+  "enterprise": "Enterprise",
   "companyDetails": "Company details",
   "completeToProfileNow": "Complete to profile now!",
   "confirm": "Confirm",
