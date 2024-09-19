@@ -1,17 +1,21 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { Injectable, computed, effect, signal } from '@angular/core'
+import { Injectable, computed, effect, inject, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
 import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
 import { Router } from '@angular/router'
 import { Picture } from '../model/pictures.interface'
+import { SessionStorageService } from '../session-storage.service'
 import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api'
 import { UserData } from './user-data.interface'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
+export const SS_LOAD_USER = 'SS_LOAD_USER'
 
 @Injectable()
 export class UserService {
+  sessionStorage = inject(SessionStorageService)
+
   public userAuthData = signal<any>({})
   public userProfile = signal<SmeUser | CleantechsUser>(USER_DEFAULT)
 
@@ -26,6 +30,9 @@ export class UserService {
 
   public completeLoadUser = new BehaviorSubject<boolean>(false)
 
+  get isLoadUser() {
+    return this.sessionStorage.getItem(SS_LOAD_USER)
+  }
   public setUserData(user: any) {
     this.userAuthData.set(user)
   }
@@ -53,7 +60,9 @@ export class UserService {
       .subscribe((data) => {
         if (data) {
           this.propagateDataUser(data)
-          this._redirectDashboard()
+          if (!this.isLoadUser) {
+            this._redirectDashboard()
+          }
         } else {
           this._redirectProfile()
         }
@@ -102,6 +111,7 @@ export class UserService {
   private propagateDataUser(data: UserData) {
     const user = UserFactory.createUserProfileBuilder(this.userAuthData()['userType']).init(data).build()
     this.userProfile.set(user)
+    this.sessionStorage.setItem(SS_LOAD_USER, true)
     this.completeLoadUser.next(true)
     this.completeLoadUser.complete()
   }

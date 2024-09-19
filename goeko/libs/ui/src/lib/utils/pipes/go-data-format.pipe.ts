@@ -24,7 +24,6 @@ export class GoDateFormatPipe implements PipeTransform {
    */
   transform(value: string | Date | null | any, styleTokens: string = 'DD/MM/YYYY'): string {
     if (value) {
-      console.log(styleTokens)
       return format(value, styleTokens, this.langSignal())
     }
     return ''

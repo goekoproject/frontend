@@ -26,6 +26,7 @@ export class PlatformComponent implements OnInit {
   set cleantechUnsubscribed(value: boolean) {
     this._cleantechUnsubscribed = value
   }
+
   private _cleantechUnsubscribed!: boolean
   private _isSuscriptionNeed = signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
 
