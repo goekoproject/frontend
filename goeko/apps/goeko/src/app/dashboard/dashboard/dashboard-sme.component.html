@@ -1,5 +1,5 @@
 <div class="dashboard-option">
-  <div class="options-for-analysis">
+  <!--<div class="options-for-analysis">
     <button
       go-button
       type="button"
@@ -40,7 +40,7 @@
         <span class="title-tag-small"></span>
         <h3>{{ 'last_project' | translate }}</h3>
       </span>
-  
+
       <button
         go-button
         type="button"
@@ -56,7 +56,7 @@
         {{ 'new_project' | translate }}
       </button>
     </div>
-   
+
 
     <ul class="list-project">
       <li *ngFor="let project of projects">
@@ -76,5 +76,21 @@
         </div>
       </li>
     </ul>
+  </div>-->
+  <div class="container p-10">
+    <div class="max-w-sm p-6 h-96 rounded-lg shadow-xl dark:bg-white flex flex-col items-center justify-center">
+
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-neutral-700">Start your first analysis</h5>
+
+      <p class="mb-7 font-normal text-neutral-700">We'll find the best eco-solution for you</p>
+      <img src="assets/Group 65.svg" class="mb-11"/>
+      <button
+          type="button"
+          go-button
+          appearance="primary">Search eco-solution
+      </button>
+    </div>
   </div>
 </div>
+
+
