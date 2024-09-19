@@ -462,7 +462,7 @@
   },
   "DIALOG": {
     "messageSendOk": "Votre message a été envoyé avec succès !",
-    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
+"messageLeadDuplicated": "Vous avez déjà contacté cette écosolution, s'il ne répond toujours pas, veuillez contacter {{email}}",    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
     "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",
