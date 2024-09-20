@@ -1,93 +1,15 @@
+
 <div class="dashboard-option">
-  <!--<div class="options-for-analysis">
-    <button
-      go-button
-      type="button"
-      [routerLink]="['../sme-analysis/new']" [relativeTo]="route.parent"
-      [queryParams]="{ smeId: userProfile().id, isProject: false }"
-      [queryParamsHandling]="'merge'"
-      routerLinkActive="router-link-active"
-      [disabled]="!userProfile()"
-      appearance="white"
-      size="huge"
-    >
-      <i class="ti ti-sphere-plus"></i>
-      <h4>{{ 'new_analysis' | translate }}</h4>
-    </button>
-
-    <button
-      go-button
-      type="button"
-      [routerLink]="['../sme-analysis', userProfile().id]"
-      [relativeTo]="route.parent"
-      [queryParams]="{ isLast: true }"
-      [queryParamsHandling]="'merge'"
-      routerLinkActive="router-link-active"
-      [disabled]="!userProfile()"
-      appearance="white"
-      size="huge"
-    >
-      <i class="ti ti-restore"></i>
-      <h4>{{ 'last_analysis' | translate }}</h4>
-    </button>
-  </div>
-  <div class="options-for-company">
-
-    <div class="options-for-company-header">
-      <span class="title-section">
-        <span class="title-tag"></span>
-        <h2>{{ 'projectManagement' | translate }}</h2>
-        <span class="title-tag-small"></span>
-        <h3>{{ 'last_project' | translate }}</h3>
-      </span>
-
-      <button
-        go-button
-        type="button"
-        [routerLink]="['../sme-analysis/projects/new']"
-        [relativeTo]="route.parent"
-        [queryParams]="{ smeId: userProfile().id }"
-        [queryParamsHandling]="'merge'"
-        routerLinkActive="router-link-active"
-        [disabled]="!userProfile()"
-        appearance="secondary"
-      >
-        <i class="ti ti-device-desktop-plus"></i>
-        {{ 'new_project' | translate }}
-      </button>
-    </div>
-
-
-    <ul class="list-project">
-      <li *ngFor="let project of projects">
-        <div class="project-col project-title">
-          <i class="ti ti-folder-heart"></i>
-          <h4>{{ project.name }}</h4>
-        </div>
-        <div class="project-col project-date">
-          <i class="ti ti-calendar-time"></i>
-          <p>{{ project.date | goDateFormat  }}</p>
-        </div>
-        <div class="project-actions" (click)="deleteProject(project)">
-          <i class="ti ti-trash"></i>
-        </div>
-        <div class="project-actions" (click)="goToProject(project)">
-          <i class="ti ti-circle-arrow-right"></i>
-        </div>
-      </li>
-    </ul>
-  </div>-->
   <div class="container p-10">
-    <div class="max-w-sm p-6 h-96 rounded-lg shadow-xl dark:bg-white flex flex-col items-center justify-center">
+    <div class="w-full max-w-sm p-12 min-h-96 rounded-lg shadow-lg shadow-gray-300  dark:bg-white flex flex-col items-center justify-center">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700 text-center">{{ "MENU_USER_SME.titleCard" | translate}}</h5>
 
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-neutral-700">Start your first analysis</h5>
-
-      <p class="mb-7 font-normal text-neutral-700">We'll find the best eco-solution for you</p>
+      <p class="mb-7 font-normal text-gray-700 text-center">{{ "MENU_USER_SME.subtitleCard" | translate}}</p>
       <img src="assets/Group 65.svg" class="mb-11"/>
       <button
           type="button"
           go-button
-          appearance="primary">Search eco-solution
+          appearance="primary">{{ "MENU_USER_SME.buttonSearch" | translate }}
       </button>
     </div>
   </div>

@@ -269,6 +269,11 @@
     "dashboard": "Dashboard",
     "favourites": "Favoritos"
   },
+  "MENU_USER_SME": {
+    "titleCard":"Comience su primer análisis",
+    "subtitleCard": "Encontraremos la mejor eco-solución para usted",
+    "buttonSearch": "Buscar eco-solución"
+  },
   "NOTIFICATION": {
     "save_ok": "Se ha guardado correctamente"
   },

@@ -268,6 +268,11 @@
     "dashboard": "Dashboard",
     "favourites": "Favourites"
   },
+  "MENU_USER_SME": {
+    "titleCard":"Start your first analysis",
+    "subtitleCard": "We'll find the best eco-solution for you",
+    "buttonSearch": "Search eco-solution"
+  },
   "NOTIFICATION": {
     "save_ok": "Saved successfully"
   },

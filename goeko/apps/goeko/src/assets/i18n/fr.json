@@ -264,6 +264,11 @@
     "dashboard": "Tableau de bord",
     "favourites": "Favoris"
   },
+  "MENU_USER_SME": {
+    "titleCard":"Commencez votre première analyse",
+    "subtitleCard": "Nous trouverons la meilleure éco-solution pour vous",
+    "buttonSearch": "Rechercher éco-solution"
+  },
   "NOTIFICATION": {
     "save_ok": "Enregistré avec succès"
   },
