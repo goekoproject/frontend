@@ -4,7 +4,7 @@ import { AuthService } from './auth.service'
 
 export const checkSessionUserData: CanActivateFn = () => {
   const authService = inject(AuthService)
-  return !authService.isAuthenticated ? authService.parseHashAuth0() : authService.userInfo$
+  return !authService.isAuthenticated ? authService.parseHashAuth0() : authService.checkSession$
 }
 
 export const AuthGuard: CanActivateFn = () => {

@@ -8,6 +8,7 @@ export interface Country {
 export class SmeUser extends Actor {
   override userType = USER_TYPE.SME
   website?: string
+  grouping?: string
   locations!: Array<Country>
   employees!: number
   constructor() {

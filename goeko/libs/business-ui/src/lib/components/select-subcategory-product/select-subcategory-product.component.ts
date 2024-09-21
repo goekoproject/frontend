@@ -75,7 +75,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
     this._value = value
   }
 
-  private _open = false
+  private _open = true
   public get open() {
     return this._open
   }
@@ -237,6 +237,6 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
     event.stopPropagation()
   }
   deSelectAll() {
-    this.badgeGroup.selectAll()
+    this.badgeGroup.clearAll()
   }
 }

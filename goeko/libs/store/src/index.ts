@@ -1,4 +1,5 @@
 export * from './lib/admin-categories/public-api'
+export * from './lib/classificactions/public-api'
 export * from './lib/cleantech/public-api'
 export * from './lib/components/public-api'
 export * from './lib/constants/public-api'

@@ -1,4 +1,9 @@
-<span class="badge {{ className }}">
+<span
+  class="badge  {{ className }}"
+  [ngClass]="{
+    'bg-primary-blueDark text-white': selected,
+    'text-primary-blueDark bg-white': !selected,
+  }">
   <ng-content select="avatar"></ng-content>
 
   <span #labelElement class="label-element">
@@ -6,7 +11,5 @@
   </span>
   @if (!readonly && selected) {
     <i class="ti ti-x"></i>
-
   }
-
 </span>

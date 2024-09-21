@@ -11,6 +11,11 @@ const routes: Routes = [
     canActivate: [checkSessionUserData],
     children: [
       {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
         canActivate: [AuthGuard],
@@ -28,7 +33,7 @@ const routes: Routes = [
         loadChildren: () => import('../sme-analysis-form/sme-analysis-form.module').then((m) => m.SmeAnalysisFormModule),
       },
       {
-        path: 'project-form/:id',
+        path: 'project-form/:smeId/:projectId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadComponent: () => import('../projects/project-form.component').then((m) => m.ProjectFormComponent),

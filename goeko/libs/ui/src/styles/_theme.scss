@@ -39,7 +39,7 @@ body {
   align-items: center;
 }
 body:has(div.is-platform) {
-  background: var(--primary--50);
+  background: var(--white);
   align-items: stretch;
 }
 :root {

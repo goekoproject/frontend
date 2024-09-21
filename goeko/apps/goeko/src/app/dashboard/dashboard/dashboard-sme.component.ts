@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { MessageService } from '@goeko/business-ui'
 import { ProjectService, SmeRequestResponse, UserService } from '@goeko/store'
 import { MESSAGE_TYPE } from '@goeko/ui'
-import { take, tap, toArray } from 'rxjs'
+import { take, toArray } from 'rxjs'
 import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service'
 
 @Component({
@@ -44,7 +44,7 @@ export class DashboardSmeComponent implements OnInit {
   }
 
   goToProject(projects: SmeRequestResponse) {
-    this._router.navigate(['../sme-analysis/projects/project', this.userProfile().id], {
+    this._router.navigate(['../project-form', this.userProfile().id, projects.id], {
       relativeTo: this.route.parent,
       queryParams: {
         projectId: projects.id,

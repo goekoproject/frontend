@@ -1,4 +1,4 @@
-<div class="subcategory transition-colors duration-150 hover:border-primary-500" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
+<div class="subcategory bg-primary-gray transition-colors duration-150" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
   <div class="subcategory-element" (click)="toogle(subCategory)">
     <label class="subcategory-control" for="{{ subCategory.code }}">
       @if (!this.multiple) {
@@ -17,8 +17,8 @@
       </div>
       <span class="subcategory-product-selected" *ngIf="!readonly">{{ numSelected }} {{ 'selected_products' | translate }}</span>
     </label>
-    <span class="material-symbols-rounded subcategory-expand"> expand_more </span>
-  </div>
+<!--     <span class="material-symbols-rounded subcategory-expand"> expand_more </span>
+ -->  </div>
 
   <div class="subcategory-product w-full flex-col flex-wrap items-start">
     @if (isSelectedAll) {
@@ -33,8 +33,4 @@
 
     <ng-content></ng-content>
   </div>
-  <span class="alert-select-product" *ngIf="open">
-    <i class="ti ti-info-triangle-filled"></i>
-    <p>{{ 'alertSelectedProduct' | translate }}</p>
-  </span>
 </div>

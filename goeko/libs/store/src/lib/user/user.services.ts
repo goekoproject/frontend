@@ -77,6 +77,7 @@ export class UserService {
   }
 
   private _redirectDashboard() {
+    this.sessionStorage.setItem(SS_LOAD_USER, true)
     this._router.navigate([`platform/dashboard/${this.userType()}`])
   }
   private _redirectProfile() {
@@ -111,7 +112,6 @@ export class UserService {
   private propagateDataUser(data: UserData) {
     const user = UserFactory.createUserProfileBuilder(this.userAuthData()['userType']).init(data).build()
     this.userProfile.set(user)
-    this.sessionStorage.setItem(SS_LOAD_USER, true)
     this.completeLoadUser.next(true)
     this.completeLoadUser.complete()
   }

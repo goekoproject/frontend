@@ -1,3 +1,4 @@
+export * from './project.interface'
 export * from './project.services'
 export * from './sme-analysis.store'
 export * from './sme-request.model'

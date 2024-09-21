@@ -1,1 +1,34 @@
-<p>project-form works!</p>
+@defer (when project()) {
+  <h1 class="text-2xl font-bold">{{ project()?.name }}</h1>
+  <p>{{ 'alertSelectedProduct' | translate }}</p>
+
+  <!-- CATEGORY -->
+  <div class="relative flex h-full flex-col items-center">
+    <goeko-category [categories]="groupingForm() || []" (onSelectCategory)="selectCategory($event)"> </goeko-category>
+
+    @for (category of groupingForm(); track category.id) {
+      <section class="w-full">
+        @if (categorySelected()?.code === category.code) {
+          @for (subCategory of category.subcategories; track subCategory.code) {
+            <goeko-select-subcategory-product
+              [id]="subCategory.code"
+              [subCategory]="subCategory"
+              [typeTitle]="'question'"
+              [multiple]="true">
+              <p title>{{ subCategory.question }}</p>
+              <go-badge-group [id]="subCategory.code">
+                @for (product of subCategory.products; track product.code) {
+                  @if (!product.disabled) {
+                    <go-badge [value]="product">{{ product.label }}</go-badge>
+                  }
+                }
+              </go-badge-group>
+            </goeko-select-subcategory-product>
+          }
+        }
+      </section>
+    }
+  </div>
+} @placeholder {
+  <div>loading...</div>
+}
