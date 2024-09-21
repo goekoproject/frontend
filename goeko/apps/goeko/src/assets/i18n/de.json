@@ -270,7 +270,13 @@
   "MENU_USER_SME": {
     "titleCard":"Beginnen Sie Ihre erste Analyse",
     "subtitleCard": "Wir werden die beste Eco-Solution für Sie finden",
-    "buttonSearch": "Eco-Solution suchen"
+    "buttonSearch": "Eco-Solution suchen",
+    "dialogNewProject": "Benennen Sie Ihr Projekt",
+    "dialogNameProject": "Name",
+    "dialogLocationProject": "Provinz und Land",
+    "dialogNameRequired":"Projektname ist erforderlich",
+    "dialogLocationRequired": "Standort ist erforderlich",
+    "dialogButtonNext": "Weiter"
   },
   "NOTIFICATION": {
     "save_ok": "Erfolgreich gespeichert"

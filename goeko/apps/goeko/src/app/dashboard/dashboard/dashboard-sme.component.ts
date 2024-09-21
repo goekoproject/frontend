@@ -5,6 +5,8 @@ import { ProjectService, SmeRequestResponse, UserService } from '@goeko/store'
 import { MESSAGE_TYPE } from '@goeko/ui'
 import { take, tap, toArray } from 'rxjs'
 import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service'
+import { DialogMessageModule, DialogService, DialogMessageComponent } from '@goeko/ui'
+import { DialogNewProjectComponent } from '@goeko/business-ui'
 
 @Component({
   selector: 'goeko-dashboard-sme',
@@ -21,6 +23,7 @@ export class DashboardSmeComponent implements OnInit {
     private _router: Router,
     private _messageService: MessageService,
     public route: ActivatedRoute,
+    private _dialogService: DialogService
   ) {
     effect(() => {
       if (this.userProfile().id) {
@@ -63,5 +66,9 @@ export class DashboardSmeComponent implements OnInit {
           })
         }
       })
+  }
+
+  openNewProjectDialog() {
+    this._dialogService.open(DialogNewProjectComponent);
   }
 }
