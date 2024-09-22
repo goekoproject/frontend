@@ -6,19 +6,16 @@
           #inputElement
           type="{{ type }}"
           name="subCategory"
-          [checked]="checked || numSelected > 0"
+          [checked]="checked"
           id="{{ subCategory.code }}"
           (change)="assignValue(subCategory.code)" />
       }
 
       <div class="subcategory-title">
         <ng-content select="[title]"></ng-content>
-        <span class="subcategory-title-products" *ngIf="!readonly">{{ labelSelected }}</span>
       </div>
-      <span class="subcategory-product-selected" *ngIf="!readonly">{{ numSelected }} {{ 'selected_products' | translate }}</span>
     </label>
-<!--     <span class="material-symbols-rounded subcategory-expand"> expand_more </span>
- -->  </div>
+  </div>
 
   <div class="subcategory-product w-full flex-col flex-wrap items-start">
     @if (isSelectedAll) {

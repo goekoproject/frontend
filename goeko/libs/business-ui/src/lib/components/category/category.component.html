@@ -1,7 +1,7 @@
 @for (category of categories(); track category.id; let first = $first) {
   <div
     (click)="onSelect(category)"
-    class="border-primary-default flex h-12 w-48 items-center justify-center border first:rounded-l-full last:rounded-r-full"
+    class="border-primary-default flex h-12 w-48 items-center justify-center gap-1 border first:rounded-l-full last:rounded-r-full"
     [ngClass]="{
       'bg-primary-default text-white': selectedCategory().code === category.code,
       'text-primary-default bg-white': selectedCategory().code !== category.code,
@@ -10,8 +10,6 @@
       {{ category.label }}
     </p>
 
-    <!--  <div class="text-sm text-primary-900 opacity-80">
     <ng-content select="[dataExtra]"></ng-content>
-  </div> -->
   </div>
 }

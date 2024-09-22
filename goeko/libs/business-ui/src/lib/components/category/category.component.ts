@@ -1,4 +1,4 @@
-import { Component, effect, input, output, signal, ViewEncapsulation } from '@angular/core'
+import { Component, effect, Input, input, output, signal, ViewEncapsulation } from '@angular/core'
 import { Category } from '@goeko/store'
 
 @Component({
@@ -14,6 +14,17 @@ import { Category } from '@goeko/store'
 })
 export class CategoryComponent {
   public categories = input<Category[]>([] as Category[])
+
+  @Input()
+  public get indexSelected() {
+    return this._indexSelected
+  }
+  public set indexSelected(value) {
+    this._indexSelected = value
+    this.selectedCategory = signal<Category>(this.categories().at(value) ?? ({} as Category))
+
+  }
+  private _indexSelected = 0
 
   public selectedCategory = signal<Category>({} as Category)
   public onSelectCategory = output<Category>()

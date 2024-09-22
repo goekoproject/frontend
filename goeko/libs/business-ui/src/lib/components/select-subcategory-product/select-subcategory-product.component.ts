@@ -95,12 +95,6 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
     return this.selected?.map((select) => select.label)?.toString()
   }
 
-  private _numSelected = 0
-  get numSelected(): number {
-    this._cdf.markForCheck()
-    return this.badgeGroup.badge.filter((badge) => badge.selected)?.length || 0
-  }
-
   @Input()
   public get checked() {
     this._cdf.markForCheck()
@@ -182,7 +176,6 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
     this.mutationObserver.observe(this._el.nativeElement, { attributes: true })
   }
   private _handleCheckSubcategoryWhenProductSelected() {
-    this._numSelected = this.selected?.length
     this._cdf.markForCheck()
   }
   onRestValue(): void {
@@ -219,7 +212,6 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
     }
     if (!this.open && !this.multiple) {
       this.badgeGroup._selectionModel.clear()
-      this._numSelected = 0
       this.value = ''
     }
   }

@@ -3,11 +3,16 @@
   <p>{{ 'alertSelectedProduct' | translate }}</p>
 
   <!-- CATEGORY -->
-  <div class="relative flex h-full flex-col items-center">
-    <goeko-category [categories]="groupingForm() || []" (onSelectCategory)="selectCategory($event)"> </goeko-category>
+  <div class="relative flex h-auto flex-col items-center">
+    <goeko-category
+      [categories]="groupingForm() || []"
+      (onSelectCategory)="selectCategory($event)"
+      [indexSelected]="indexCategorySelected()">
+      <span dataExtra> (10) </span>
+    </goeko-category>
 
     @for (category of groupingForm(); track category.id) {
-      <section class="w-full">
+      <section class="w-full overflow-hidden rounded-lg">
         @if (categorySelected()?.code === category.code) {
           @for (subCategory of category.subcategories; track subCategory.code) {
             <goeko-select-subcategory-product
@@ -27,6 +32,18 @@
           }
         }
       </section>
+    }
+  </div>
+
+  <div class="my-4 flex items-center justify-between">
+    @if (indexCategorySelected() > 0) {
+      <button go-button appearance="white" (click)="prevCategory()">{{ 'back' | translate }}</button>
+    }
+
+    @if (indexCategorySelected() < (groupingForm()?.length ?? 0) - 1) {
+      <button class="ml-auto" go-button (click)="nextCategory()">{{ 'next' | translate }}</button>
+    } @else {
+      <button class="ml-auto" go-button (click)="nextCategory()">{{ 'search' | translate }}</button>
     }
   </div>
 } @placeholder {
