@@ -1,36 +1,43 @@
-import { GoekoButtonComponent } from './../../../../../ui/src/lib/ui/goeko-button/goeko-button/goeko-button.component';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogMessageModule, DialogService, DialogMessageComponent } from '@goeko/ui';
-import { Form, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule, GoekoButtonModule} from '@goeko/ui';
+import { DialogService, DialogMessageModule } from '@goeko/ui';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
+import { ButtonModule } from '@goeko/ui';
 import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'goeko-dialog-new-project',
   templateUrl: './dialog-new-project.component.html',
   styleUrls: ['./dialog-new-project.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule, ButtonModule]
+  imports: [ReactiveFormsModule, CommonModule, TranslateModule, ButtonModule, DialogMessageModule]
 })
-export class DialogNewProjectComponent {
-  formProject: FormGroup;
+export class DialogNewProjectComponent implements OnInit {
+  public formProject!: FormGroup;
 
-  constructor(private _dialogService: DialogService, private fb: FormBuilder) {
-    this.formProject = this.fb.group({
-      name: ['', [Validators.required]],
-      locations: ['', Validators.required]
-    })
+  constructor(
+    private _dialogService: DialogService,
+    private fb: FormBuilder) {
+
   }
 
+  ngOnInit(): void {
+    this._createFormProject()
+  }
+  private _createFormProject() {
+    this.formProject = this.fb.group({
+      name: ['', [Validators.required]],
+      locations: new FormArray([], Validators.required)
+    })
+  }
   close() {
     this._dialogService.close();
   }
 
-  onSubmit() {
+  onSubmitProject() {
     if (this.formProject.valid) {
-      console.log('Formulario válido:', this.formProject.value);
+      console.log('Valid form', this.formProject.value);
     } else {
-      console.log('Formulario inválido');
+      console.log('Invalid form');
     }
   }
 }

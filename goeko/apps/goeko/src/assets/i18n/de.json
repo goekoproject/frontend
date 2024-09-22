@@ -276,7 +276,9 @@
     "dialogLocationProject": "Provinz und Land",
     "dialogNameRequired":"Projektname ist erforderlich",
     "dialogLocationRequired": "Standort ist erforderlich",
-    "dialogButtonNext": "Weiter"
+    "dialogButtonNext": "Weiter",
+    "dialogPlaceholderName": "PO Juni, 2024",
+    "dialogPlaceholderLocation": "Madrid, Spanien"
   },
   "NOTIFICATION": {
     "save_ok": "Erfolgreich gespeichert"
