@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform, signal } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
-/* import * as moment from 'moment'
- */ @Pipe({
+import * as moment from 'moment'
+@Pipe({
   name: 'goDateFormat',
   standalone: true,
   pure: false,
@@ -14,8 +14,7 @@ export class GoDateFormatPipe implements PipeTransform {
   }
   transform(value: string | Date | null | any): any {
     if (value) {
-      /*       return moment.utc(value).local().locale(this.langSignal()).format('LLL')
-       */
+      return moment.utc(value).local().locale(this.langSignal()).format('LLL')
     }
     return
   }
