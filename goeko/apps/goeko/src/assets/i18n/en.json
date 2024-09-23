@@ -25,7 +25,6 @@
     "social_signup_needs_terms_acception": "Please accept the terms of service below to continue.",
     "invalid_signup_user_exists": "The user already exists on the platform. If you forgot your password, click on",
     "password_strength": "The password does not meet the password policy."
-
   },
   "SUCCESS_MESSAGES": {
     "POST": "Created successfully!",
@@ -466,6 +465,7 @@
   },
   "DIALOG": {
     "messageSendOk": "Your message has been sent successfully!",
+    "messageLeadDuplicated": "You have already contacted this ecosolution, if they still do not respond, please contact {{email}}",
     "messageBodyLead": "A Goeko representative will be happy to assist you with any questions you have.",
     "warningDelete": "Are you sure you want to delete {{item}} ?",
     "saveMessageGeneric": "Do you want to save the data before continuing?",
