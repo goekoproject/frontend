@@ -84,6 +84,14 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
     }
     return o1 === o2
   }
+  @Input()
+  get value(): any {
+    return this._value
+  }
+  set value(newValue: any) {
+    this._assignValue(newValue)
+  }
+  private _value!: any
 
   onChange = (value: any) => {}
   onTouched = () => {}
@@ -156,6 +164,7 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
   private _propagateValue() {
     const valuesBadge = this._selectionModel.selected.map((badge) => badge.value)
     this.valueChangedBadge$.emit(valuesBadge)
+    this.value = valuesBadge
     this.onChange(valuesBadge)
     this.onTouched()
     this.valueSelected.emit(valuesBadge)

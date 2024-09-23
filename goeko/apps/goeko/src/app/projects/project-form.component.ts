@@ -1,23 +1,38 @@
 import { CommonModule } from '@angular/common'
 import { Component, computed, effect, inject, signal } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
-import { Category, ProjectService } from '@goeko/store'
+import { CATEGORIES, CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
+import { Category, Product, ProjectService } from '@goeko/store'
 import { BadgeModule, ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { tap } from 'rxjs'
-
+import { ProjectForm } from './project-form.model'
+import { CountProductsPipe } from './count-products.pipe'
+const compareWithProducts = (product: Product, productCodeSelected: Product | string | any) => {
+  return product.code === productCodeSelected?.code || product.code === productCodeSelected
+}
 @Component({
   selector: 'goeko-project-form',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TranslateModule, CategoryModule, BadgeModule, SelectSubcategoryProductComponent],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    TranslateModule,
+    CategoryModule,
+    BadgeModule,
+    SelectSubcategoryProductComponent,
+    ReactiveFormsModule,
+    CountProductsPipe
+  ],
   providers: [ProjectService],
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.scss',
 })
 export class ProjectFormComponent {
+  compareWithProducts = compareWithProducts
+
   private _router = inject(ActivatedRoute)
   private _projectService = inject(ProjectService)
   private _fb = inject(FormBuilder)
@@ -27,7 +42,8 @@ export class ProjectFormComponent {
     if (this.project()) {
       this._initForm2()
       if (this.form) {
-        this.form.patchValue(this.project()?.classifications as any)
+        const projectFormValue = ProjectForm.transform(this.project()?.classifications || [])
+        this.form.patchValue(projectFormValue)
         console.log(this.form)
       }
     }
@@ -63,6 +79,17 @@ export class ProjectFormComponent {
     return this.groupingForm()?.findIndex((category) => category?.code === this.categorySelected()?.code) || 0
   })
   public form!: FormGroup
+
+  public getSubcategoryProducts(code: string) {
+    const categoryCode = this.categorySelected()?.code
+    if (categoryCode) {
+      const categoryControl = this.form.get(categoryCode)
+      if (categoryControl) {
+        return categoryControl.get(code) as FormGroup
+      }
+    }
+    return null
+  }
   private _initForm() {
     this.form = this._fb.group({
       co2Emission: this._fb.group({}),
@@ -80,18 +107,10 @@ export class ProjectFormComponent {
       (acc, category) => {
         const subcategoryGroups = category.subcategories.reduce(
           (subAcc, subcategory) => {
-            const productControls = subcategory.products.reduce(
-              (prodAcc, product) => {
-                prodAcc[product.code] = new FormControl(false)
-                return prodAcc
-              },
-              {} as { [key: string]: FormControl },
-            )
-
-            subAcc[subcategory.code] = this._fb.group(productControls)
+            subAcc[subcategory.code] = this._fb.control([])
             return subAcc
           },
-          {} as { [key: string]: FormGroup },
+          {} as { [key: string]: FormControl },
         )
 
         acc[category.code] = this._fb.group(subcategoryGroups)
@@ -118,6 +137,16 @@ export class ProjectFormComponent {
     const prevCategory = this.groupingForm()?.at(prevIndex)
     if (prevCategory) {
       this.selectCategory(prevCategory)
+    }
+  }
+
+  addProduct(subcategoryCode: string, products: Product[]) {
+    const categoryCode = this.categorySelected()?.code || CATEGORIES.CO2_EMISSION
+    const productCode = products.map((p) => p.code)
+    this.form.get(categoryCode)?.get(subcategoryCode)?.patchValue(productCode)
+
+    if (categoryCode) {
+      console.log(this.form.value[categoryCode][subcategoryCode])
     }
   }
 }

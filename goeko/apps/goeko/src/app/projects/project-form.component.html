@@ -1,39 +1,46 @@
-@defer (when project()) {
+@defer (when project() && form) {
   <h1 class="text-2xl font-bold">{{ project()?.name }}</h1>
   <p>{{ 'alertSelectedProduct' | translate }}</p>
 
-  <!-- CATEGORY -->
-  <div class="relative flex h-auto flex-col items-center">
+  <form [formGroup]="form" class="relative flex h-auto flex-col items-center">
+    <!-- CATEGORY -->
     <goeko-category
       [categories]="groupingForm() || []"
       (onSelectCategory)="selectCategory($event)"
+      [formValue]="form.value"
       [indexSelected]="indexCategorySelected()">
-      <span dataExtra> (10) </span>
     </goeko-category>
 
+    <!--GROUPING FORM CATEGORY -->
     @for (category of groupingForm(); track category.id) {
       <section class="w-full overflow-hidden rounded-lg">
         @if (categorySelected()?.code === category.code) {
-          @for (subCategory of category.subcategories; track subCategory.code) {
-            <goeko-select-subcategory-product
-              [id]="subCategory.code"
-              [subCategory]="subCategory"
-              [typeTitle]="'question'"
-              [multiple]="true">
-              <p title>{{ subCategory.question }}</p>
-              <go-badge-group [id]="subCategory.code">
-                @for (product of subCategory.products; track product.code) {
-                  @if (!product.disabled) {
-                    <go-badge [value]="product">{{ product.label }}</go-badge>
+          <div [formGroupName]="category.code">
+            @for (subCategory of category.subcategories; track subCategory.code) {
+              <goeko-select-subcategory-product
+                [id]="subCategory.code"
+                [subCategory]="subCategory"
+                [typeTitle]="'question'"
+                [multiple]="true">
+                <p title>{{ subCategory.question }}</p>
+                <go-badge-group
+                  [id]="subCategory.code"
+                  [formControlName]="subCategory.code"
+                  [compareWith]="compareWithProducts"
+                  (valueSelected)="addProduct(subCategory.code, $event)">
+                  @for (product of subCategory.products; track product.code; let i = $index) {
+                    @if (!product.disabled) {
+                      <go-badge [value]="product">{{ product.label }}</go-badge>
+                    }
                   }
-                }
-              </go-badge-group>
-            </goeko-select-subcategory-product>
-          }
+                </go-badge-group>
+              </goeko-select-subcategory-product>
+            }
+          </div>
         }
       </section>
     }
-  </div>
+  </form>
 
   <div class="my-4 flex items-center justify-between">
     @if (indexCategorySelected() > 0) {

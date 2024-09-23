@@ -15,6 +15,7 @@ import { Category } from '@goeko/store'
 export class CategoryComponent {
   public categories = input<Category[]>([] as Category[])
 
+  public formValue = input<any>()
   @Input()
   public get indexSelected() {
     return this._indexSelected

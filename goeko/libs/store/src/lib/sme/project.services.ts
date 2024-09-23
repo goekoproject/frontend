@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http'
 import { inject, Injectable } from '@angular/core'
-import { find, from, map, mergeMap, Observable, ObservableInput, reduce } from 'rxjs'
+import { from, map, mergeMap, Observable, ObservableInput, reduce } from 'rxjs'
+import { Category } from '../classificactions/classifications.interface'
 import { ClassificationsService } from '../classificactions/classifications.service'
 import { Project } from './project.interface'
 import { Projects, SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
-import { Category } from '../classificactions/classifications.interface'
 
 @Injectable()
 export class ProjectService {
@@ -34,12 +34,8 @@ export class ProjectService {
     )
   }
 
-  getProjectId({ smeId = '', projectId = '' }): Observable<SmeRequestResponse | undefined | Project> {
-    return this.getProject(smeId).pipe(
-      map((recommendation) => recommendation.projects),
-      mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuale
-      find((project) => project.id === projectId), //
-    )
+  getProjectId({ smeId = '', projectId = '' }): Observable<SmeRequestResponse | Project> {
+    return this._http.get<SmeRequestResponse | Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
   }
 
   getRecommendationsByProjectById(id: string): Observable<any> {
