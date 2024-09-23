@@ -243,7 +243,8 @@
     "aboutGoEKo": "Sobre GoEko",
     "blog": "Blog",
     "contacttUs": "Contáctenos",
-    "login": "Accesso"
+    "login": "Incia sesión",
+    "signup": "Registrarse"
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
