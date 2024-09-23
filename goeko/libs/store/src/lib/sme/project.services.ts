@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { inject, Injectable } from '@angular/core'
+import { inject, Injectable, signal } from '@angular/core'
 import { from, map, mergeMap, Observable, ObservableInput, reduce } from 'rxjs'
 import { Category } from '../classificactions/classifications.interface'
 import { ClassificationsService } from '../classificactions/classifications.service'
@@ -9,6 +9,9 @@ import { Projects, SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRec
 @Injectable()
 export class ProjectService {
   private _classificationsServices = inject(ClassificationsService)
+
+  public queryProject = signal<Project | null>(null)
+
   constructor(private _http: HttpClient) {}
 
   getProject(id: string): Observable<Projects> {
@@ -48,7 +51,6 @@ export class ProjectService {
   deleteProject(id: string): Observable<any> {
     return this._http.delete<any>(`/v1/ecosolution/search/projects/smes/${id}`)
   }
-
   getGroupingFormCategories(grouping: string = 'construction'): Observable<Category[]> {
     return this._classificationsServices.groupingFormCategories(grouping)
   }

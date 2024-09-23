@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, effect, inject, signal } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CATEGORIES, CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
 import { Category, Product, ProjectService } from '@goeko/store'
 import { BadgeModule, ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { tap } from 'rxjs'
-import { ProjectForm } from './project-form.model'
-import { CountProductsPipe } from './count-products.pipe'
+import { CountProductsPipe } from '../count-products.pipe'
+import { ProjectForm } from '../project-form.model'
 const compareWithProducts = (product: Product, productCodeSelected: Product | string | any) => {
   return product.code === productCodeSelected?.code || product.code === productCodeSelected
 }
@@ -24,7 +24,7 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
     BadgeModule,
     SelectSubcategoryProductComponent,
     ReactiveFormsModule,
-    CountProductsPipe
+    CountProductsPipe,
   ],
   providers: [ProjectService],
   templateUrl: './project-form.component.html',
@@ -33,11 +33,12 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
 export class ProjectFormComponent {
   compareWithProducts = compareWithProducts
 
-  private _router = inject(ActivatedRoute)
+  private _route = inject(ActivatedRoute)
+  private _router = inject(Router)
   private _projectService = inject(ProjectService)
   private _fb = inject(FormBuilder)
-  private _projectId = signal(this._router.snapshot.params['projectId'])
-  private _smeId = signal(this._router.snapshot.params['smeId'])
+  private _projectId = signal(this._route.snapshot.params['projectId'])
+  private _smeId = signal(this._route.snapshot.params['smeId'])
   private loadFormEffect = effect(() => {
     if (this.project()) {
       this._initForm2()
@@ -90,17 +91,6 @@ export class ProjectFormComponent {
     }
     return null
   }
-  private _initForm() {
-    this.form = this._fb.group({
-      co2Emission: this._fb.group({}),
-      waste: this._fb.group({}),
-      waterConsumption: this._fb.group({}),
-      hazardousProduct: this._fb.group({}),
-      notification: this._fb.group({
-        onNewEcosolution: this._fb.control(false),
-      }),
-    })
-  }
 
   private _initForm2() {
     const categoryGroups = this.groupingForm()?.reduce(
@@ -144,9 +134,10 @@ export class ProjectFormComponent {
     const categoryCode = this.categorySelected()?.code || CATEGORIES.CO2_EMISSION
     const productCode = products.map((p) => p.code)
     this.form.get(categoryCode)?.get(subcategoryCode)?.patchValue(productCode)
+  }
 
-    if (categoryCode) {
-      console.log(this.form.value[categoryCode][subcategoryCode])
-    }
+  searchEcosolutions() {
+    this._projectService.queryProject.set(this.form.value)
+    this._router.navigate(['search'], { relativeTo: this._route })
   }
 }

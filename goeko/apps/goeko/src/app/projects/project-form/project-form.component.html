@@ -50,7 +50,7 @@
     @if (indexCategorySelected() < (groupingForm()?.length ?? 0) - 1) {
       <button class="ml-auto" go-button (click)="nextCategory()">{{ 'next' | translate }}</button>
     } @else {
-      <button class="ml-auto" go-button (click)="nextCategory()">{{ 'search' | translate }}</button>
+      <button class="ml-auto" go-button (click)="searchEcosolutions()">{{ 'search' | translate }}</button>
     }
   </div>
 } @placeholder {

@@ -36,7 +36,16 @@ const routes: Routes = [
         path: 'project-form/:smeId/:projectId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
-        loadComponent: () => import('../projects/project-form.component').then((m) => m.ProjectFormComponent),
+        loadComponent: () => import('../projects/project-form/project-form.component').then((m) => m.ProjectFormComponent),
+      },
+      {
+        path: 'project-form/:smeId/:projectId/search',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        loadComponent: () =>
+          import('../projects/project-ecosolutions-catalog/project-ecosolutions-catalog.component').then(
+            (m) => m.ProjectEcosolutionCatalogComponent,
+          ),
       },
       {
         path: 'cleantech-ecosolutions',

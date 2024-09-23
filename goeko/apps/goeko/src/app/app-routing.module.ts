@@ -32,10 +32,6 @@ const ROUTES: Routes = [
         path: 'autenticate',
         loadComponent: () => import('@goeko/business-ui').then((m) => m.AutenticateComponent),
       },
-      {
-        path: 'project-form/:id',
-        loadComponent: () => import('../app/projects/project-form.component').then((m) => m.ProjectFormComponent),
-      },
       /*       {
         path: '**',
         redirectTo: 'home',
