@@ -30,7 +30,7 @@ $color-deep-button-active: #e9e9e9f5;
   display: flex;
   width: 297px;
   height: 162px;
-  padding: 28px 24px;
+  padding: 26px 22px;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
@@ -53,6 +53,11 @@ $color-deep-button-active: #e9e9e9f5;
     text-align: center;
     padding-top: 13px;
   }
+}
+
+.actors-detail:hover {
+  background: #E4F4FC;
+  border: 1px solid #1290D7;
 }
 
 .content__actor-photo {
