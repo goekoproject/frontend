@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, signal } from '@angular/core'
-import { toSignal } from '@angular/core/rxjs-interop'
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CATEGORIES, CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
-import { Category, Product, ProjectService } from '@goeko/store'
+import { Category, Product, Project, ProjectService } from '@goeko/store'
 import { BadgeModule, ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { tap } from 'rxjs'
 import { CountProductsPipe } from '../count-products.pipe'
 import { ProjectForm } from '../project-form.model'
 const compareWithProducts = (product: Product, productCodeSelected: Product | string | any) => {
@@ -26,73 +24,39 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
     ReactiveFormsModule,
     CountProductsPipe,
   ],
-  providers: [ProjectService],
+  providers: [],
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.scss',
 })
-export class ProjectFormComponent {
+export class ProjectFormComponent implements OnInit {
   compareWithProducts = compareWithProducts
 
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
   private _projectService = inject(ProjectService)
   private _fb = inject(FormBuilder)
-  private _projectId = signal(this._route.snapshot.params['projectId'])
-  private _smeId = signal(this._route.snapshot.params['smeId'])
-  private loadFormEffect = effect(() => {
-    if (this.project()) {
-      this._initForm2()
-      if (this.form) {
-        const projectFormValue = ProjectForm.transform(this.project()?.classifications || [])
-        this.form.patchValue(projectFormValue)
-        console.log(this.form)
-      }
-    }
-  })
-  public project = toSignal(
-    this._projectService.getProjectId({ smeId: this._smeId(), projectId: this._projectId() }).pipe(
-      tap((project) => {
-        if (project) {
-          this.loadFormEffect
-        }
-      }),
-    ),
-    {
-      initialValue: null,
-    },
-  )
 
-  public groupingForm = toSignal<Category[]>(
-    this._projectService.getGroupingFormCategories().pipe(
-      tap((categories) => {
-        if (categories.length > 0) {
-          this.categorySelected.set(categories[0])
-        }
-      }),
-    ),
-    {
-      initialValue: null,
-    },
-  )
-
+  project = input.required<Project>()
+  groupingForm = input.required<Category[]>()
   public categorySelected = signal<Category | undefined>(undefined)
   public indexCategorySelected = computed(() => {
     return this.groupingForm()?.findIndex((category) => category?.code === this.categorySelected()?.code) || 0
   })
   public form!: FormGroup
-
-  public getSubcategoryProducts(code: string) {
-    const categoryCode = this.categorySelected()?.code
-    if (categoryCode) {
-      const categoryControl = this.form.get(categoryCode)
-      if (categoryControl) {
-        return categoryControl.get(code) as FormGroup
-      }
-    }
-    return null
+  ngOnInit(): void {
+    this._initForm()
+    this.categorySelected.set(this.groupingForm()[0])
+    this._setDataForm()
   }
 
-  private _initForm2() {
+  private _setDataForm() {
+    if (this.project()) {
+      const projectFormValue = ProjectForm.transform(this.project().classifications || [])
+      this.form.patchValue(projectFormValue)
+    }
+  }
+
+  private _initForm() {
     const categoryGroups = this.groupingForm()?.reduce(
       (acc, category) => {
         const subcategoryGroups = category.subcategories.reduce(
@@ -137,7 +101,7 @@ export class ProjectFormComponent {
   }
 
   searchEcosolutions() {
-    this._projectService.queryProject.set(this.form.value)
+    this._projectService.projectQuery.set(this.form.value)
     this._router.navigate(['search'], { relativeTo: this._route })
   }
 }

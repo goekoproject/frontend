@@ -1,5 +1,5 @@
 @defer (when project() && form) {
-  <h1 class="text-2xl font-bold">{{ project()?.name }}</h1>
+  <h1 class="text-2xl font-bold">{{ project().name }}</h1>
   <p>{{ 'alertSelectedProduct' | translate }}</p>
 
   <form [formGroup]="form" class="relative flex h-auto flex-col items-center">
@@ -47,7 +47,7 @@
       <button go-button appearance="white" (click)="prevCategory()">{{ 'back' | translate }}</button>
     }
 
-    @if (indexCategorySelected() < (groupingForm()?.length ?? 0) - 1) {
+    @if (indexCategorySelected() < groupingForm().length - 1) {
       <button class="ml-auto" go-button (click)="nextCategory()">{{ 'next' | translate }}</button>
     } @else {
       <button class="ml-auto" go-button (click)="searchEcosolutions()">{{ 'search' | translate }}</button>

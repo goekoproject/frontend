@@ -8,6 +8,7 @@ import {
   GoShowUserTypeDirective,
   isSubscribedCleantech,
   LocationsService,
+  ProjectService,
   ShowForRolesDirective,
   ToastComponent,
   UserService,
@@ -58,7 +59,7 @@ import { PlatformComponent } from './platform.component'
     isSubscribedCleantech,
     NotificationService,
     LocationsService,
-
+    ProjectService,
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],
 })

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { AuthGuard, checkSessionUserData } from '@goeko/core'
-import { ROLES, hasRole } from '@goeko/store'
+import { ROLES, groupingFormCategoriesResolver, hasRole, projectResolver } from '@goeko/store'
 import { PlatformComponent } from './platform.component'
 
 const routes: Routes = [
@@ -36,6 +36,7 @@ const routes: Routes = [
         path: 'project-form/:smeId/:projectId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
+        resolve: { project: projectResolver, groupingForm: groupingFormCategoriesResolver },
         loadComponent: () => import('../projects/project-form/project-form.component').then((m) => m.ProjectFormComponent),
       },
       {

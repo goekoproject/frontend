@@ -10,8 +10,7 @@ import { Projects, SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRec
 export class ProjectService {
   private _classificationsServices = inject(ClassificationsService)
 
-  public queryProject = signal<Project | null>(null)
-
+  projectQuery = signal<Project | null>(null)
   constructor(private _http: HttpClient) {}
 
   getProject(id: string): Observable<Projects> {
