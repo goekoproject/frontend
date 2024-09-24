@@ -22,11 +22,11 @@
     <div class="hidden items-center md:flex lg:flex-1 lg:justify-center gap-4 basis-2/6">
       <goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang"> </goeko-select-i18n>
 
-      <button (click)="goTologin()" class="button-header">
+      <button (click)="goTologin()" class="login-button">
         {{ 'MENU.login' | translate }}
       </button>
 
-      <button class="button-header">
+      <button class="request-button">
         {{ 'MENU.demo' | translate }}
       </button>
     </div>

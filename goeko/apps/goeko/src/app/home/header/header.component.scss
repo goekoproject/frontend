@@ -66,12 +66,11 @@
   }
 }
 
-.button-header {
+.request-button {
   align-items: center;
   appearance: none;
   background-color: var(--home-page-light-blue);
   border-radius: 1.675rem;
-  border: 2px solid var(--home-page-light-blue);
   box-sizing: border-box;
   color: var(--white);
   cursor: pointer;
@@ -89,22 +88,50 @@
   width: 100%;
 }
 
-
-.button-header :active {
-  background: var(--primary--900);
-  outline: none;
+.request-button:hover {
+  background-color: #0C689C;
 }
 
-.button-header:hover {
+.request-button:active {
+  background-color: #032D45;
+}
+
+
+.login-button {
   background-color: var(--white);
   color: var(--home-page-light-blue);
   border: 2px solid var(--home-page-light-blue);
+  align-items: center;
+  appearance: none;
+  border-radius: 1.675rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  font: var(--font-menu);
+  height: 2.625rem;
+  line-height: 1.25rem;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: max-content;
+  text-wrap: pretty;
+  width: 100%;
+}
+
+.login-button:hover {
+  background-color: #E4F4FC;
+}
+
+.login-button:active {
+  color: #0C689C;
+  border: 2px solid #0C689C;
 }
 
 goeko-menu a:hover {
-  background-color: var(--white);
+  background-color: #E4F4FC;
   color: var(--home-page-light-blue);
-  border: 2px solid var(--home-page-light-blue);
   align-items: center;
   appearance: none;
   border-radius: 1.675rem;
@@ -124,27 +151,8 @@ goeko-menu a:hover {
   width: 100%;
 }
 
-goeko-menu a:focus {
-  background-color: var(--white);
-  color: var(--home-page-light-blue);
-  border: 2px solid var(--home-page-light-blue);
-  align-items: center;
-  appearance: none;
-  border-radius: 1.675rem;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: inline-flex;
-  font: var(--font-menu);
-  height: 2.625rem;
-  line-height: 1.25rem;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  position: relative;
-  text-align: center;
-  gap: 0.5rem;
-  max-width: max-content;
-  text-wrap: pretty;
-  width: 100%;
+goeko-menu a:active {
+  color: #0C689C;
 }
 
 goeko-menu a {
@@ -158,9 +166,8 @@ goeko-menu button {
 }
 
 goeko-menu button:hover {
-  background-color: var(--white);
+  background-color: #E4F4FC;
   color: var(--home-page-light-blue);
-  border: 2px solid var(--home-page-light-blue);
   align-items: center;
   appearance: none;
   border-radius: 1.675rem;
@@ -178,4 +185,8 @@ goeko-menu button:hover {
   max-width: max-content;
   text-wrap: pretty;
   width: 100%;
+}
+
+goeko-menu button:active {
+  color: #0C689C;
 }

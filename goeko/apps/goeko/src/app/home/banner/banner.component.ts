@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { ContentFulService } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
+
+const CONTENT_TYPE_GOEKO_ADVANTAGES = 'advantagesGoeko';
 
 @Component({
   selector: 'go-banner',
@@ -8,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core'
   styleUrls: ['./banner.component.scss'],
 })
 export class BannerComponent implements AfterViewInit, OnInit {
+  private _contentFulService = inject(ContentFulService)
   public currentLangCode = signal(this._translateServices.defaultLang)
   @ViewChild('marketingVideo') marketingVideo!: ElementRef<HTMLMediaElement>
 
@@ -30,6 +34,17 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   constructor(private _translateServices: TranslateService) {}
 
+
+  ngOnInit(): void {
+    this._changeLangCode();
+    this.activeRoute.fragment.subscribe((data) => {
+      this.scrollToCompany(data);
+    });
+    this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   ngAfterViewInit(): void {
     if (!this.marketingVideo) {
       return
@@ -38,12 +53,6 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this.marketingVideo.nativeElement.src = this.urlSrcVideo
   }
 
-  ngOnInit(): void {
-    this._changeLangCode();
-    this.activeRoute.fragment.subscribe((data) => {
-      this.scrollToCompany(data);
-  });
-  }
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
