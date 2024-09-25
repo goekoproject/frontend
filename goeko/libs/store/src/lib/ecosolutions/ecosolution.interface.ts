@@ -1,4 +1,4 @@
-import { FiledTranslations } from '../model/field-translations.interface'
+import { TranslatedProperties } from '../model/field-translations.interface'
 import { Picture } from '../model/pictures.interface'
 import { Country } from '../user/public-api'
 
@@ -48,8 +48,8 @@ export interface Ecosolutions {
   detailedDescription?: string
   locations: Array<Country>
   pictures?: Picture[]
-  nameTranslations: FiledTranslations[]
-  descriptionTranslations: FiledTranslations[]
-  detailedDescriptionTranslations: FiledTranslations[]
-  priceDescriptionTranslations: FiledTranslations[]
+  nameTranslations: TranslatedProperties[]
+  descriptionTranslations: TranslatedProperties[]
+  detailedDescriptionTranslations: TranslatedProperties[]
+  priceDescriptionTranslations: TranslatedProperties[]
 }

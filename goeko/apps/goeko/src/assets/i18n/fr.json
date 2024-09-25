@@ -4,12 +4,27 @@
     "passwordPolicy2": "Lettres majuscules (A-Z)",
     "passwordPolicy3": "Chiffres (0-9)",
     "passwordPolicy4": "Caractères spéciaux (!@# $ %^&*)",
-    "passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :"
+    "passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :",
+    "passwordPolicy": "Le mot de passe doit respecter la politique suivante:<br>* Au moins 8 caractères de longueur<br>* Contenir au moins 3 des 4 types de caractères suivants:<br> * lettres minuscules (a-z)<br> * lettres majuscules (A-Z)<br> * chiffres (0-9)<br> * caractères spéciaux (par exemple, !@#$%^&*)"
   },
   "ERROR_MESSAGES": {
     "500": "Oups, quelque chose a mal tourné. Essayez plus tard.",
     "400": "Vérifiez vos infos et réessayez.",
-    "404": "Impossible de trouver cela. Vérifiez le lien."
+    "404": "Impossible de trouver cela. Vérifiez le lien.",
+    "invalid_user_password": "Nom d'utilisateur ou mot de passe incorrect.",
+    "password_change_required": "Vous devez changer votre mot de passe car c'est la première fois que vous vous connectez ou votre mot de passe a expiré.",
+    "password_leaked": "Cette connexion est bloquée car votre mot de passe a été divulgué sur un autre site. Nous avons envoyé un e-mail avec des instructions pour le débloquer.",
+    "too_many_attempts": "Votre compte est bloqué en raison de tentatives de connexion répétées.",
+    "session_missing": "Impossible de compléter votre demande d'authentification. Veuillez réessayer après avoir fermé toutes les fenêtres ouvertes.",
+    "too_many_requests": "Désolé. Il y a trop de demandes en ce moment. Veuillez recharger la page et réessayer. Si ce problème persiste, veuillez réessayer plus tard.",
+    "invalid_password": "Mot de passe invalide.",
+    "password_dictionary_error": "Le mot de passe est trop commun.",
+    "password_no_user_info_error": "Le mot de passe est basé sur les informations de l'utilisateur.",
+    "password_strength_error": "Le mot de passe n'est pas assez fort.",
+    "username_exists": "Le nom d'utilisateur existe déjà.",
+    "social_signup_needs_terms_acception": "Veuillez accepter les conditions de service ci-dessous pour continuer.",
+    "invalid_signup_user_exists": "L'utilisateur existe déjà sur la plateforme. Si vous avez oublié votre mot de passe, cliquez sur",
+    "password_strength": "Le mot de passe ne respecte pas la politique de mot de passe."
   },
   "SUCCESS_MESSAGES": {
     "POST": "Créé avec succès!",
@@ -190,7 +205,8 @@
     "newProvince": "Ajouter une nouvelle région",
     "selectProvinces": "Sélection de régions",
     "allProvinces": "Toutes les régions",
-    "showProvinces": "Voir les régions"
+    "showProvinces": "Voir les régions",
+    "editorText": "Tapez ici..."
   },
   "VERIFY_EMAIL": {
     "title": "Consultez votre boîte de réception.",
@@ -447,7 +463,7 @@
   },
   "DIALOG": {
     "messageSendOk": "Votre message a été envoyé avec succès !",
-    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
+"messageLeadDuplicated": "Vous avez déjà contacté cette écosolution, s'il ne répond toujours pas, veuillez contacter {{email}}",    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
     "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
     "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",

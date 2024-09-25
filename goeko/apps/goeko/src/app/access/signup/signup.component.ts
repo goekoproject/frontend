@@ -1,13 +1,12 @@
 import { Component, ElementRef, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ERROR_TYPE } from '@goeko/core'
+import { errorMessageSignUp, ErrorSignUp, TypeErrorCode } from '@goeko/core'
 import { USER_TYPE, USER_TYPE_DESCRIPTION } from '@goeko/store'
 import { DialogService } from '@goeko/ui'
 import { AccessService } from '../access.services'
 import { SignUp } from '../singup.model'
 import { TermsOfServicesComponent } from './terms-of-services.component'
 
-const POLICY_PASSWORD = ['passwordPolicy1', 'passwordPolicy2', 'passwordPolicy3', 'passwordPolicy4']
 @Component({
   selector: 'goeko-signup',
   templateUrl: './signup.component.html',
@@ -21,13 +20,12 @@ const POLICY_PASSWORD = ['passwordPolicy1', 'passwordPolicy2', 'passwordPolicy3'
 export class SignupComponent implements OnInit {
   @ViewChild('inputAcceptConditions') inputAcceptConditions!: ElementRef<HTMLInputElement>
   public userType = signal(USER_TYPE_DESCRIPTION)
-  public policyPassword = POLICY_PASSWORD
-  isErrorPolicyPassword = false
-  formSignup!: FormGroup
-  selectedActor = signal('sme')
-  changePassword = signal<boolean>(false)
-  showPassword = signal<boolean>(false)
-
+  public formSignup!: FormGroup
+  public selectedActor = signal('sme')
+  public changePassword = signal<boolean>(false)
+  public showPassword = signal<boolean>(false)
+  public errorMsgSignup = signal<string>('')
+  public isErrorPolicyPassword = signal<boolean>(false)
   constructor(
     private _fb: FormBuilder,
     private _accessService: AccessService,
@@ -53,7 +51,10 @@ export class SignupComponent implements OnInit {
           this._accessService.afterSignUp()
         },
         (error) => {
-          this.isErrorPolicyPassword = !!ERROR_TYPE[error.error.code as keyof typeof ERROR_TYPE]
+          this.isErrorPolicyPassword.set(error.name === TypeErrorCode.PASSSWORD_STRENGTH_ERROR)
+          const errorMsg = errorMessageSignUp(error as ErrorSignUp)
+          console.log('error', errorMsg)
+          this.errorMsgSignup.set(errorMsg)
         },
       )
     }

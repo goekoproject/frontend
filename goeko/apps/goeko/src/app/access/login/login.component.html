@@ -1,5 +1,11 @@
 <h1 class="text-2xl font-bold">{{ 'LOGIN.msglogin' | translate }}</h1>
 
+@if (errorMsgLogin()) {
+  <goeko-alert [type]="'danger'">
+    {{ errorMsgLogin() | translate }}
+  </goeko-alert>
+}
+
 <form [formGroup]="formLogin" class="flex flex-col gap-4">
   <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
     <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
@@ -20,9 +26,12 @@
     </go-input>
   }
 
-  <a [routerLink]="'reset-password'" class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500">{{
-    'LOGIN.forgotPassword' | translate
-  }}</a>
+  <a
+    [routerLink]="'reset-password'"
+    [queryParams]="{ email: formLogin.value.email }"
+    class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500"
+    >{{ 'LOGIN.forgotPassword' | translate }}</a
+  >
 
   <button type="submit" go-button appearance="primary" (click)="submit()">
     {{ 'MENU.login' | translate }}
