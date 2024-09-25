@@ -261,7 +261,8 @@
     "aboutGoEKo": "About GoEko",
     "blog": "Blog",
     "contacttUs": "Contact",
-    "login": "Login"
+    "login": "Login",
+    "signup": "Sign up"
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
