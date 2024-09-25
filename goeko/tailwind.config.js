@@ -33,6 +33,9 @@ module.exports = {
         water: '#02d8e0',
         waterConsumption: '#02d8e0',
         borderColor: '#d9dbe9',
+        lightGray: 'var(--light-gray)',
+        pastelGreen: 'var(--pastel-green)',
+        limeGreen: 'var(--lime-green)',
       },
     },
     animation: {

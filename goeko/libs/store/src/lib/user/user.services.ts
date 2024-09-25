@@ -5,9 +5,10 @@ import { BehaviorSubject, Observable, Subject, of, shareReplay, switchMap } from
 import { UserFactory } from './user.factory'
 
 import { Router } from '@angular/router'
+import { CacheProperty } from '@goeko/coretools'
 import { Picture } from '../model/pictures.interface'
 import { SessionStorageService } from '../session-storage.service'
-import { CleantechsUser, ROLES, SmeUser, USER_DEFAULT, UserType } from './public-api'
+import { CleantechsUser, ROLES, SmeUser, UserType } from './public-api'
 import { UserData } from './user-data.interface'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
 export const SS_LOAD_USER = 'SS_LOAD_USER'
@@ -17,7 +18,10 @@ export class UserService {
   sessionStorage = inject(SessionStorageService)
 
   public userAuthData = signal<any>({})
-  public userProfile = signal<SmeUser | CleantechsUser>(USER_DEFAULT)
+
+  @CacheProperty('_rawUser')
+  private _rawUser!: SmeUser | CleantechsUser
+  public userProfile = signal<SmeUser | CleantechsUser>(this._rawUser)
 
   public fechAuthUser = new Subject()
   private actorsEndpoint = computed(() => this.userAuthData()['userType'] + 's')
@@ -112,7 +116,9 @@ export class UserService {
 
   private propagateDataUser(data: UserData) {
     const user = UserFactory.createUserProfileBuilder(this.userAuthData()['userType']).init(data).build()
-    this.userProfile.set(user)
+    this._rawUser = user
+
+    this.userProfile.set(this._rawUser)
     this.completeLoadUser.next(true)
     this.completeLoadUser.complete()
   }

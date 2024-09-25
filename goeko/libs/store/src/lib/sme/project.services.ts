@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { inject, Injectable } from '@angular/core'
+import { CacheProperty } from '@goeko/coretools'
 import { from, map, mergeMap, Observable, ObservableInput, reduce } from 'rxjs'
 import { Category } from '../classificactions/classifications.interface'
 import { ClassificationsService } from '../classificactions/classifications.service'
@@ -10,6 +11,7 @@ import { Projects, SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRec
 export class ProjectService {
   private _classificationsServices = inject(ClassificationsService)
 
+  @CacheProperty('projectQuery')
   projectQuery!: Project
 
   setProjectQuery(project: Project) {

@@ -1,13 +1,21 @@
-{{ queryEcosolutions() | json }}
-
-<div>
-  @for (ecosolution of ecosolutionsListForProject(); track ecosolution.id) {
-    <goeko-card-product
-      [title]="ecosolution.solutionName"
-      [description]="ecosolution.description"
-      [image]="ecosolution.companyDetail.logo"
-      [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
-      [classNameCategoy]="ecosolution.classification.mainCategory"
-      [isFavorite]="ecosolution.favourite" />
-  }
+<div class="flex gap-4">
+  <goeko-project-ecosolutions-filters class="mt-3" [filtersVisible]="showFilter()"></goeko-project-ecosolutions-filters>
+  <div class="flex flex-col gap-4">
+    <h1 class="text-2xl font-semibold">
+      Best eco-solutions for <span class="text-limeGreen">{{ projectData().name }}</span>
+      <p class="text-base font-normal">{{ ecosolutionsListForProject()?.length }} results</p>
+    </h1>
+    <div>
+      <button class="go2-button" (click)="toogleFilters()">Filter</button>
+    </div>
+    @for (ecosolution of ecosolutionsListForProject(); track ecosolution.id) {
+      <goeko-card-product
+        [title]="ecosolution.solutionName"
+        [description]="ecosolution.description"
+        [image]="ecosolution.companyDetail.logo"
+        [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
+        [classNameCategoy]="ecosolution.classification.mainCategory"
+        [isFavorite]="ecosolution.favourite" />
+    }
+  </div>
 </div>

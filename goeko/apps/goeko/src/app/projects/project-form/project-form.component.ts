@@ -101,7 +101,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   searchEcosolutions() {
-    this._projectService.setProjectQuery(this.form.value)
+    this._projectService.setProjectQuery({ ...this.form.value, ...this.project() })
     this._router.navigate(['search'], { relativeTo: this._route })
   }
 }
