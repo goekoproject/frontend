@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { inject, Injectable, signal } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { from, map, mergeMap, Observable, ObservableInput, reduce } from 'rxjs'
 import { Category } from '../classificactions/classifications.interface'
 import { ClassificationsService } from '../classificactions/classifications.service'
@@ -10,7 +10,11 @@ import { Projects, SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRec
 export class ProjectService {
   private _classificationsServices = inject(ClassificationsService)
 
-  projectQuery = signal<Project | null>(null)
+  projectQuery!: Project
+
+  setProjectQuery(project: Project) {
+    this.projectQuery = project
+  }
   constructor(private _http: HttpClient) {}
 
   getProject(id: string): Observable<Projects> {

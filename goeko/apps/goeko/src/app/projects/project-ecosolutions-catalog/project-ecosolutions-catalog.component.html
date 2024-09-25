@@ -1,1 +1,13 @@
-{{ ecosolutionsListForProject() | json }}
+{{ queryEcosolutions() | json }}
+
+<div>
+  @for (ecosolution of ecosolutionsListForProject(); track ecosolution.id) {
+    <goeko-card-product
+      [title]="ecosolution.solutionName"
+      [description]="ecosolution.description"
+      [image]="ecosolution.companyDetail.logo"
+      [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
+      [classNameCategoy]="ecosolution.classification.mainCategory"
+      [isFavorite]="ecosolution.favourite" />
+  }
+</div>

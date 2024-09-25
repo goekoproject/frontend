@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, catchError, map, of } from 'rxjs'
+import { Observable, catchError, map, of, shareReplay } from 'rxjs'
 import { TranslateChangeService } from '../util/translate-change'
 import { EcosolutionResult } from './ecosolution-result.interface'
 import { EcosolutionSearchRequest } from './ecosolution-search.request.model'
@@ -91,7 +91,7 @@ export class EcosolutionsService extends TranslateChangeService {
     }
     return this._http
       .post<{ ecosolutions: EcosolutionResult[] }>(`/v1/ecosolution/search?lang=${this.lang()}`, body)
-      .pipe(map((request: { ecosolutions: EcosolutionResult[] }) => request.ecosolutions))
+      .pipe(map((request: { ecosolutions: EcosolutionResult[] }) => request.ecosolutions), shareReplay(1))
   }
 
   getEcosolutionSearchById(id: string, smeId: string): Observable<EcosolutionSearchResponse> {

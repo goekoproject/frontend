@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable, computed, effect, inject, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
-import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, of, shareReplay, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
 import { Router } from '@angular/router'
@@ -56,6 +56,7 @@ export class UserService {
           }
           return of(null)
         }),
+        shareReplay(1),
       )
       .subscribe((data) => {
         if (data) {
