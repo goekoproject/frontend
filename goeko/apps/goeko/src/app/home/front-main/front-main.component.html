@@ -6,12 +6,14 @@
         <img [src]="'assets/header_photo.svg'"/>
       </div>
       <div class="absolute mt-72 text-center">
-        <h1 class="title">
-          {{ 'BANNER.the' | translate }}
-          <span class="banner-slogan--green">{{ 'BANNER.green' | translate }}</span>
-          {{ 'BANNER.transition' | translate }}
-        </h1>
-          @if (entryDataConnecting && entryDataSustainability) {
+
+        @if (entryDataMain) {
+          <h1 class="title">
+            {{ entryDataMain.text }}
+          </h1>
+        }
+
+          @if (entryDataConnecting) {
               <h3 class="subtitle">{{ entryDataConnecting.text }}</h3>
           }
           <div class="grid place-items-center m-auto">

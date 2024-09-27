@@ -13,6 +13,8 @@ export class HomeService {
   dataContentTypeSignal = signal<unknown | null>(null)
   entryDataConnecting = signal<any | null>(null)
   entryDataSustainability = signal<any | null>(null)
+  entryDataMain = signal<any | null>(null)
+
 
   constructor(
     private _contentFul: ContentFulService,
@@ -42,6 +44,15 @@ export class HomeService {
       .subscribe((entryData: any) => {
         if (entryData) {
           this.entryDataSustainability.set(entryData)
+        }
+      })
+  }
+  getSloganMain(entryId: string) {
+    this.getEntry(entryId)
+      .pipe(map((res) => res.fields))
+      .subscribe((entryData: any) => {
+        if (entryData) {
+          this.entryDataMain.set(entryData)
         }
       })
   }

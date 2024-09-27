@@ -23,6 +23,10 @@
   background-color: var(--home-page-light-blue);
 }
 
+.start-button:hover {
+  background-color: #073F5F;
+}
+
 .i-connection {
   input::placeholder {
     color: var(--home-page-light-blue);

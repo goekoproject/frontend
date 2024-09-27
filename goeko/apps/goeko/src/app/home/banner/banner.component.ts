@@ -1,7 +1,9 @@
+import { Advantages } from './advantages.model';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { ContentFulService } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
+import { map } from 'rxjs';
 
 const CONTENT_TYPE_GOEKO_ADVANTAGES = 'advantagesGoeko';
 
@@ -13,6 +15,10 @@ const CONTENT_TYPE_GOEKO_ADVANTAGES = 'advantagesGoeko';
 export class BannerComponent implements AfterViewInit, OnInit {
   private _contentFulService = inject(ContentFulService)
   public currentLangCode = signal(this._translateServices.defaultLang)
+
+  public advantages$ = this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).pipe(map((items) => items.items));
+  advantages!: Advantages[];
+
   @ViewChild('marketingVideo') marketingVideo!: ElementRef<HTMLMediaElement>
 
   public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15]
@@ -29,7 +35,6 @@ export class BannerComponent implements AfterViewInit, OnInit {
     if(section) {
       document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest"});
     }
-
   }
 
   constructor(private _translateServices: TranslateService) {}
@@ -40,9 +45,13 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this.activeRoute.fragment.subscribe((data) => {
       this.scrollToCompany(data);
     });
-    this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).subscribe(res => {
-      console.log(res);
+   this.advantages$.subscribe((items:any) => {
+    this.advantages = [];
+    items.forEach((element: any) => {
+      this.advantages.push(new Advantages(element));
     });
+   });
+
   }
 
   ngAfterViewInit(): void {
