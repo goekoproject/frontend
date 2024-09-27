@@ -59,6 +59,9 @@ export class ProjectEcosolutionCatalogComponent {
   toogleFilters = () => {
     this.showFilter.update((value) => !value)
   }
+  removeFilterCategory(code: string) {
+    this.appliedCategoryFilters.update((filters) => (filters ?? []).filter((category) => category.code !== code))
+  }
 
   applyFilters = () => {
     return this._ecosolutionsSearchSignal()?.filter((ecosolution) => {
