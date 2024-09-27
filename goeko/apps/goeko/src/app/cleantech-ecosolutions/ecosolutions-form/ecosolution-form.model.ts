@@ -1,4 +1,4 @@
-import { Country, Ecosolutions, FromTO, ReductionPercentage, TranslatedProperties } from '@goeko/store'
+import { Ecosolutions, FromTO, LocationsCountry, ReductionPercentage, TranslatedProperties } from '@goeko/store'
 export interface GoalChecked {
   value: string
   checked: boolean
@@ -22,7 +22,7 @@ export class EcosolutionForm {
   yearGuarantee?: number
   priceDescription?: string
   detailedDescription?: string
-  locations?: Array<Country>
+  locations?: Array<LocationsCountry>
   nameTranslations!: TranslatedProperties[]
   detailedDescriptionTranslations!: TranslatedProperties[]
   descriptionTranslations!: TranslatedProperties[]

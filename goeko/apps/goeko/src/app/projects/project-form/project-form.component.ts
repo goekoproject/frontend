@@ -57,7 +57,17 @@ export class ProjectFormComponent implements OnInit {
   }
 
   private _initForm() {
-    const categoryGroups = this.groupingForm()?.reduce(
+    const categoryGroups = this._buildFormGroupsCategories()
+    const locations = this._fb.array([])
+
+    if (categoryGroups) {
+      this.form = this._fb.group(categoryGroups)
+    }
+    this.form.addControl('locations', locations)
+  }
+
+  private _buildFormGroupsCategories() {
+    return this.groupingForm()?.reduce(
       (acc, category) => {
         const subcategoryGroups = category.subcategories.reduce(
           (subAcc, subcategory) => {
@@ -72,9 +82,6 @@ export class ProjectFormComponent implements OnInit {
       },
       {} as { [key: string]: FormGroup },
     )
-    if (categoryGroups) {
-      this.form = this._fb.group(categoryGroups)
-    }
   }
   selectCategory(category: Category) {
     this.categorySelected.set(category)

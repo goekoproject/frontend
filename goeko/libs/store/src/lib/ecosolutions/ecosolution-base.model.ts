@@ -1,7 +1,7 @@
 import { mapperLocations } from '@goeko/core'
 import { Classifications } from '../model/classificaciones.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
-import { Country } from '../user/public-api'
+import { LocationsCountry } from '../model/locations.country'
 import { Ecosolutions, Improvement, Price } from './ecosolution.interface'
 export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedProperties[] {
   return items.filter((item) => item.label && item.lang)
@@ -25,7 +25,7 @@ export class EcosolutionsBody implements Ecosolutions {
   unit?: string
   currency?: string
   priceDescription?: string
-  locations: Array<Country>
+  locations: Array<LocationsCountry>
   nameTranslations!: TranslatedProperties[]
   descriptionTranslations!: TranslatedProperties[]
   detailedDescriptionTranslations!: TranslatedProperties[]

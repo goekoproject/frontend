@@ -5,6 +5,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { handlerHttpInterceptor, SelectI18nComponent } from '@goeko/business-ui'
 import { ConfigModule } from '@goeko/core'
 import {
+  ClassificationsService,
   GoShowUserTypeDirective,
   isSubscribedCleantech,
   LocationsService,
@@ -60,6 +61,7 @@ import { PlatformComponent } from './platform.component'
     NotificationService,
     LocationsService,
     ProjectService,
+    ClassificationsService,
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],
 })

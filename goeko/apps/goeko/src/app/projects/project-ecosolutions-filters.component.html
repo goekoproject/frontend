@@ -1,21 +1,14 @@
-<!-- <button (click)="toggleFilters()" class="flex w-full items-center justify-between text-sm font-semibold text-gray-700 focus:outline-none">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="h-8 w-8 transform transition-transform z-10 ml-auto"
-    [ngClass]="{ 'rotate-90': filtersVisible(), '-rotate-90': !filtersVisible() }"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-  </svg>
-</button -->
 <div
-  class="max-w-xs rounded-lg bg-blue-50 p-4"
+  class="absolute top-0 z-10 max-w-sm rounded-lg bg-blue-50 p-4 sm:relative sm:w-full"
   [ngClass]="{
     'collapse-enter': !filtersVisible(),
     'collapse-enter-active': filtersVisible(),
     'collapse-leave-active': !filtersVisible(),
   }">
+  <i
+    class="ti ti-circle-x absolute right-0 top-0 m-4 cursor-pointer text-3xl text-primary-default hover:text-primary-blueDark"
+    (click)="closeFilter()"></i>
+
   <div class="mt-4 space-y-4 overflow-hidden">
     <!-- Filtros -->
     <div>
@@ -33,47 +26,38 @@
       <h4 class="text-sm font-bold text-gray-700">Categories</h4>
       <div class="mt-2 space-y-2">
         <label class="flex items-center space-x-2 text-sm">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" />
+          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCategories()" />
           <span>All</span>
         </label>
-        <label class="flex items-center space-x-2 text-sm">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" />
-          <span>CO2 Emissions</span>
-        </label>
-        <div class="ml-4">
-          <label class="flex items-center space-x-2 text-sm text-blue-600">
-            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
-            <span>Combustion engines</span>
+        @for (classification of classificationsFilters(); track classification.id) {
+          <label class="flex items-center space-x-2 text-sm">
+            <input
+              (input)="applyFiltersForCategories()"
+              type="checkbox"
+              name="categories"
+              [id]="classification.code"
+              [value]="classification | json"
+              class="form-checkbox h-4 w-4 text-blue-500"
+              #categories />
+            <span>{{ classification.label }}</span>
           </label>
-        </div>
-        <label class="flex items-center space-x-2 text-sm">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" />
-          <span>Metal and minerals</span>
-        </label>
-        <label class="flex items-center space-x-2 text-sm">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" />
-          <span>Building operation</span>
-        </label>
+
+          @defer (when false) {
+            @for (subcategory of classification.subcategories; track subcategory.id) {
+              <div class="ml-4">
+                <label class="flex items-center space-x-2 text-sm text-blue-600">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
+                  <span>{{ subcategory.label }}</span>
+                </label>
+              </div>
+            }
+          }
+        }
       </div>
     </div>
 
     <!-- Sustainable Development Goals -->
-    <div>
-      <h4 class="text-sm font-bold text-gray-700">Sustainable Development Goals (SDGs)</h4>
-      <div class="mt-2 space-y-2">
-        <div class="flex items-center space-x-2 rounded-lg bg-blue-100 p-2">
-          <span class="rounded-full bg-blue-500 p-1 text-white">6</span>
-          <span class="text-sm">Clean water and sanitation</span>
-        </div>
-        <div class="flex items-center space-x-2 rounded-lg bg-yellow-100 p-2">
-          <span class="rounded-full bg-yellow-500 p-1 text-white">7</span>
-          <span class="text-sm">Affordable and clean energy</span>
-        </div>
-        <div class="flex items-center space-x-2 rounded-lg bg-red-100 p-2">
-          <span class="rounded-full bg-red-500 p-1 text-white">9</span>
-          <span class="text-sm">Industry, innovation and infrastructure</span>
-        </div>
-      </div>
-    </div>
+    <h4 class="text-sm font-bold text-gray-700">{{ 'TEXT_SUPPORT.odsSme' | translate }}</h4>
+    <goeko-sdg-icons (valueSelected)="applyFiltersSDG($event)"></goeko-sdg-icons>
   </div>
 </div>

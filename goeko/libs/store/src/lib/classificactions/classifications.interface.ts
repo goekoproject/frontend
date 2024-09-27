@@ -10,6 +10,7 @@ export interface Subcategory {
   question: string
   products: Product[]
   disabled?: boolean
+  id: string
 }
 
 export interface Category {

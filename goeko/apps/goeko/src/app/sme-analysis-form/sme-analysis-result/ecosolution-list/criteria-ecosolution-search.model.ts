@@ -1,14 +1,14 @@
-import { Classifications, Country, SmeUser } from '@goeko/store'
+import { Classifications, LocationsCountry, SmeUser } from '@goeko/store'
 import { formToClassificationsMapper } from '../../sme-form-analysis/sme-analysis.request'
 
 export class CriteriaEcosolutionSearch {
   classifications: Array<Classifications>
-  locations: Array<Country>
+  locations: Array<LocationsCountry>
   smeId: string
 
-  constructor(currentAnalytics: any, userProfile: SmeUser) {
-    this.classifications = formToClassificationsMapper(currentAnalytics)
-    this.locations = userProfile.locations
+  constructor(projectData: any, userProfile: SmeUser) {
+    this.classifications = formToClassificationsMapper(projectData)
+    this.locations = projectData.locations
     this.smeId = userProfile.id
   }
 }
