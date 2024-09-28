@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, effect } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { HomeService } from '../home.service'
+import { DialogService } from '@goeko/ui'
+import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
 
 enum ENTRYS_ID {
   MAIN = '6kOjxhcZv8tluQqyVzMglp',
@@ -26,6 +28,7 @@ export class FrontMain implements OnInit {
   constructor(
     private _homeService: HomeService,
     private _translate: TranslateService,
+    private _dialogService: DialogService,
   ) {
     this._effectActors()
   }
@@ -60,4 +63,11 @@ export class FrontMain implements OnInit {
     })
   }
 
+  openRequestDemoDialog() {
+    this._dialogService
+      .open(RequestDemoDialogComponent)
+      .afterClosed()
+      .subscribe((isAccepted) => {
+      })
+  }
 }

@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core'
+import { DialogService } from '@goeko/ui';
+import { RequestDemoDialogComponent } from '../../home/request-demo-dialog/request-demo-dialog.component';
 
 @Component({
   selector: 'goeko-footer',
@@ -12,5 +14,19 @@ import { Component, ViewEncapsulation } from '@angular/core'
 })
 export class FooterComponent {
   public currentYear = new Date().getFullYear();
+
+  constructor(
+    private _dialogService: DialogService,
+  ) {
+  }
+
+
+  openRequestDemoDialog() {
+    this._dialogService
+      .open(RequestDemoDialogComponent)
+      .afterClosed()
+      .subscribe((isAccepted) => {
+      })
+  }
 
 }
