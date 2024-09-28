@@ -21,6 +21,8 @@ $font-inter-thin: 'Inter-Thin';
   --font-home-medium: 16px/1.5rem Khand-Medium, sans-serif;
   --font-body-home: 17px/1.5rem Inter-Medium, sans-serif;
   --font-body-semibold: 16px/1.5rem Inter-SemiBold, sans-serif;
+  --font-home-dialog: 17px/1.5rem Inter-Regular, sans-serif;
+
 }
 
 /** HEADING **/ /* epilogue-regular - latin */
@@ -128,4 +130,13 @@ $font-inter-thin: 'Inter-Thin';
   font-style: normal;
   font-weight: 600;
   src: url('_fonts/inter/Inter-SemiBold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* Inter-Regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Inter-Regular';
+  font-style: normal;
+  font-weight: 600;
+  src: url('_fonts/inter/Inter-Regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }

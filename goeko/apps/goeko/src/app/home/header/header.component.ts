@@ -1,7 +1,10 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
+import { DialogService } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
+import { TermsOfServicesComponent } from '../../access/signup/terms-of-services.component'
+import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
 
 @Component({
   selector: 'goeko-header',
@@ -38,6 +41,7 @@ export class HeaderComponent implements OnInit {
     private _renderer: Renderer2,
     private translate: TranslateService,
     private _router: Router,
+    private _dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
@@ -52,5 +56,13 @@ export class HeaderComponent implements OnInit {
 
   setMobileMenuOpen() {
     this.mobileMenuOpen.update((value) => !value)
+  }
+
+  openRequestDemoDialog() {
+    this._dialogService
+      .open(RequestDemoDialogComponent)
+      .afterClosed()
+      .subscribe((isAccepted) => {
+      })
   }
 }

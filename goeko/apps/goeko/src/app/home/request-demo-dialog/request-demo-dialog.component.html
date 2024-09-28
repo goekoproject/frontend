@@ -1,0 +1,107 @@
+<!-- Main modal -->
+<div
+  id="default-modal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="fixed left-0 right-0 top-0 z-50 h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0">
+  <div class="relative m-auto max-h-full w-[779px] p-4">
+    <!-- Modal content -->
+    <div class="relative rounded-3xl bg-white shadow">
+
+        <div class="flex items-center justify-between rounded-t pt-4 pl-4 pr-4">
+          <button
+            type="button"
+            class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-black"
+            data-modal-hide="default-modal"
+            (click)="closeDialog(true)">
+            <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="flex flex-col text-center items-center rounded-t p-4 gap-4">
+            <div>
+              <p class="title-demo">Request a demo</p>
+              <p class="body-demo">Our team will contact you as soon as posible</p>
+            </div>
+            <div>
+              <div class="w-full max-w-sm min-w-[340px]">
+                <label class="block mb-1 text-sm text-black text-justify body-demo">
+                  Empresa
+                </label>
+                <input class="w-full bg-transparent text-sm border border-black rounded-md px-3 py-3 focus:outline-none label-input">
+              </div>
+            </div>
+
+          <div>
+            <div class="w-full max-w-sm min-w-[340px]">
+              <label class="block mb-1 text-sm text-black text-justify body-demo">
+                Sector
+              </label>
+              <div class="relative">
+                <select
+                    class="w-full bg-transparent text-black text-sm border-black rounded pl-3 pr-8 py-3 transition duration-300 ease focus:outline-none appearance-none cursor-pointer h-12 label-input focus:shadow-none">
+                    <option value="brazil">Construcción</option>
+                    <option value="bucharest">Empresa 1</option>
+                    <option value="london">Empresa 2</option>
+                    <option value="washington">Empresa 3</option>
+                </select>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-black">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="w-full max-w-sm min-w-[340px]">
+              <label class="block mb-1 text-sm text-black text-justify body-demo">
+                Pais
+              </label>
+              <div class="relative">
+                <select
+                    class="w-full bg-transparent text-black text-sm border-black rounded pl-3 pr-8 py-3 transition duration-300 ease focus:outline-none appearance-none cursor-pointer h-12 label-input focus:shadow-none">
+                    <option value="brazil">España</option>
+                    <option value="bucharest">Francia</option>
+                    <option value="london">Reino unido</option>
+                    <option value="washington">Suiza</option>
+                </select>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-black">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="w-full max-w-sm min-w-[340px]">
+              <label class="block mb-1 text-sm text-black text-justify body-demo">
+                Email
+              </label>
+              <input class="w-full bg-transparent text-sm border border-black rounded-md px-3 py-3 focus:outline-none label-input">
+            </div>
+          </div>
+         <!-- Modal footer -->
+        <div class="flex items-center rounded-b border-gray-200 p-4 mt-16">
+          <button
+            (click)="closeDialog(true)"
+            data-modal-hide="default-modal"
+            type="button"
+            class="request-button min-w-[288px]"
+            >
+            <!-- {{ 'accept' | translate }} -->
+              Contact now
+          </button>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
