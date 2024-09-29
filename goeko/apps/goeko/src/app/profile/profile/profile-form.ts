@@ -2,8 +2,36 @@ import {
   FormArray,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
+  ValidationErrors,
+  AbstractControl
 } from '@angular/forms';
+
+function validateCompanyId(): (control: AbstractControl) => ValidationErrors | null {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const country = control.parent?.get('companyCountry')?.value;
+    const id = control.value;
+    let regex;
+
+    switch (country) {
+      case 'España':
+        regex = /^[A-Z0-9]{9}$/;
+        break;
+      case 'Francia':
+        regex = /^[0-9A-Z]{14}$/;
+        break;
+      case 'Suiza':
+        regex = /^[0-9]{6}$/;
+        break;
+      case 'Alemania':
+        regex = /^[0-9]{8,10}$/;
+        break;
+      default:
+        return null;
+    }
+    return regex && !regex.test(id) ? { invalidCompanyId: true } : null;
+  };
+}
 
 export const smeFormGroup = new FormGroup({
   name: new FormControl('',Validators.required),
@@ -12,6 +40,8 @@ export const smeFormGroup = new FormGroup({
   website: new FormControl(),
   employees: new FormControl('',[Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
+  companyCountry: new FormControl('', Validators.required),
+  companyId: new FormControl('', [Validators.required, validateCompanyId()])
 });
 
 export const cleanTechFormGroup = new FormGroup({
@@ -23,3 +53,5 @@ export const cleanTechFormGroup = new FormGroup({
   city: new FormControl(),
   externalId: new FormControl(),
 });
+
+

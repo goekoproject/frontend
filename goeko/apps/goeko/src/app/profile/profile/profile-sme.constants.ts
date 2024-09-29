@@ -17,6 +17,19 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         required: true,
       },
       {
+        controlName: 'companyCountry',
+        label: 'FORM_LABEL.companyCountry',
+        type: 'select',
+        dataSelectKey: 'countries',
+        required: true,
+      },
+      {
+        controlName: 'companyId',
+        label: 'FORM_LABEL.companyId',
+        type: 'text',
+        required: true,
+      },
+      {
         controlName: 'employees',
         label: 'FORM_LABEL.numEmployees',
         type: 'number',
