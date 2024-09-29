@@ -474,7 +474,8 @@
     "saveMessageGeneric": "¿Desea guardar los datos antes de continuar?",
     "messaggeProfileUncompletedTitle": "Complete su perfil",
     "messaggeProfileUncompletedBody": "Actualice su perfil para acceder a todas las herramientas de Goeko.",
-    "messageNotification": "Active las notificaciones por email para recibir las últimas ecosoluciones que se adapten a sus necesidades."
+    "messageNotification": "Active las notificaciones por email para recibir las últimas ecosoluciones que se adapten a sus necesidades.",
+    "messageErrorDeleteCleantech": "No puede eliminar este usuario debido a que tiene ecosoluciones creadas"
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",

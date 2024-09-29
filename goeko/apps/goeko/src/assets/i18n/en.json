@@ -471,7 +471,8 @@
     "saveMessageGeneric": "Do you want to save the data before continuing?",
     "messaggeProfileUncompletedTitle": "Complete your profile",
     "messaggeProfileUncompletedBody": "Update your profile to access all of Goeko's tools.",
-    "messageNotification": "Activate email notifications to receive the latest eco-solutions matching your needs."
+    "messageNotification": "Activate email notifications to receive the latest eco-solutions matching your needs.",
+    "messageErrorDeleteCleantech": "You cannot delete this user because they have created ecosolutions."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Subscribe for full access! Discover more.",

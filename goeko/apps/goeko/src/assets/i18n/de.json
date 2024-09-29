@@ -470,7 +470,8 @@
     "saveMessageGeneric": "Möchten Sie die Daten vor dem Fortfahren speichern?",
     "messaggeProfileUncompletedTitle": "Vervollständigen Sie Ihr Profil",
     "messaggeProfileUncompletedBody": "Aktualisieren Sie Ihr Profil, um auf alle Goeko-Tools zugreifen zu können.",
-    "messageNotification": "Aktivieren Sie E-Mail-Benachrichtigungen, um die neuesten eco-solutions zu erhalten, die Ihren Bedürfnissen entsprechen."
+    "messageNotification": "Aktivieren Sie E-Mail-Benachrichtigungen, um die neuesten eco-solutions zu erhalten, die Ihren Bedürfnissen entsprechen.",
+    "messageErrorDeleteCleantech": "Sie können diesen Benutzer nicht löschen, da er Ecosolutions erstellt hat."
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnieren Sie für vollen Zugriff! Entdecken Sie mehr.",
