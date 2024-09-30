@@ -26,6 +26,9 @@ function validateCompanyId(): (control: AbstractControl) => ValidationErrors | n
       case 'DE':
         regex = /^[0-9]{8,10}$/;
         break;
+      case 'IT':
+        regex = /^[0-9]{11}$/;
+        break;
       default:
         return null;
     }
