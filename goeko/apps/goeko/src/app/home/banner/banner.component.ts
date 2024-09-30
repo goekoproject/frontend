@@ -15,9 +15,12 @@ const CONTENT_TYPE_GOEKO_ADVANTAGES = 'advantagesGoeko';
 export class BannerComponent implements AfterViewInit, OnInit {
   private _contentFulService = inject(ContentFulService)
   public currentLangCode = signal(this._translateServices.defaultLang)
+  slideIndex = 0;
 
   public advantages$ = this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).pipe(map((items) => items.items));
   advantages!: Advantages[];
+
+  fragments: any[] = ['fragment_1','fragment_2','fragment_3'];
 
   @ViewChild('marketingVideo') marketingVideo!: ElementRef<HTMLMediaElement>
 
@@ -39,7 +42,6 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   constructor(private _translateServices: TranslateService) {}
 
-
   ngOnInit(): void {
     this._changeLangCode();
     this.activeRoute.fragment.subscribe((data) => {
@@ -51,15 +53,25 @@ export class BannerComponent implements AfterViewInit, OnInit {
       this.advantages.push(new Advantages(element));
     });
    });
-
   }
 
   ngAfterViewInit(): void {
+
+    this._showNextSlide()
     if (!this.marketingVideo) {
       return
     }
     this.marketingVideo.nativeElement.muted = true
     this.marketingVideo.nativeElement.src = this.urlSrcVideo
+  }
+
+  _showNextSlide(): void {
+    this.scrollToCompany(this.fragments[this.slideIndex]);
+    this.slideIndex++;
+    if (this.slideIndex > this.fragments.length) {this.slideIndex = 0}
+     setTimeout(() => {
+      this._showNextSlide();
+     }, 4000);
   }
 
   private _changeLangCode() {
