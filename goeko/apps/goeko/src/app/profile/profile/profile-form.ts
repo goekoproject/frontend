@@ -14,16 +14,16 @@ function validateCompanyId(): (control: AbstractControl) => ValidationErrors | n
     let regex;
 
     switch (country) {
-      case 'España':
+      case 'ES':
         regex = /^[A-Z0-9]{9}$/;
         break;
-      case 'Francia':
+      case 'FR':
         regex = /^[0-9A-Z]{14}$/;
         break;
-      case 'Suiza':
+      case 'CH':
         regex = /^[0-9]{6}$/;
         break;
-      case 'Alemania':
+      case 'DE':
         regex = /^[0-9]{8,10}$/;
         break;
       default:
