@@ -28,6 +28,19 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         type: 'text',
       },
       {
+        controlName: 'companyCountry',
+        label: 'FORM_LABEL.companyCountry',
+        type: 'select',
+        dataSelectKey: 'countries',
+        required: true,
+      },
+      {
+        controlName: 'companyId',
+        label: 'FORM_LABEL.companyId',
+        type: 'text',
+        required: true,
+      },
+      {
         controlName: 'link',
         label: 'FORM_LABEL.website',
         type: 'url',

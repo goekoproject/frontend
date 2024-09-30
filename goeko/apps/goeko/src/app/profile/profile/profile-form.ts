@@ -52,6 +52,8 @@ export const cleanTechFormGroup = new FormGroup({
   logo: new FormControl(),
   city: new FormControl(),
   externalId: new FormControl(),
+  companyCountry: new FormControl('', Validators.required),
+  companyId: new FormControl('', [Validators.required, validateCompanyId()])
 });
 
 
