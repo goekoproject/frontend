@@ -1,0 +1,69 @@
+  <div class="relative h-32">
+      <section class="flex flex-row">
+        <div class="content-center hover:cursor-pointer" (click)="_previous()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+          </svg>
+        </div>
+        <div class='slidder'>
+          <section id="fragment_1">
+            <div class="companies-group">
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_1.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_2.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_3.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_4.svg'"/>
+              </div>
+            </div>
+          </section>
+          <section id="fragment_2">
+            <div class="companies-group">
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_2.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_2.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_2.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_2.svg'"/>
+              </div>
+            </div>
+          </section>
+          <section id="fragment_3">
+            <div class="companies-group">
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_3.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_3.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_3.svg'"/>
+              </div>
+              <div class="company-box content-center">
+                <img [src]="'assets/enterprise_3.svg'"/>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="content-center hover:cursor-pointer" (click)="_next()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+          </svg>
+        </div>
+        <ul class="markers">
+          <li><a routerLink="" fragment="fragment_1"></a></li>
+          <li><a routerLink="" fragment="fragment_2"></a></li>
+          <li><a routerLink="" fragment="fragment_3"></a></li>
+        </ul>
+        </section>
+  </div>

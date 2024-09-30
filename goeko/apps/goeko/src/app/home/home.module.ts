@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { ContentFulModule } from '@goeko/store'
-import { ButtonModule, DialogService, GoekoButtonModule, GoInputModule, TitlePageComponent, UiBreadcrumbsModule } from '@goeko/ui'
+import { ButtonModule, CarouselComponent, DialogService, GoekoButtonModule, GoInputModule, TitlePageComponent, UiBreadcrumbsModule } from '@goeko/ui'
 import { BannerComponent } from './banner/banner.component'
 import { HomeRouteModule } from './home.routes'
 import { HomeComponent } from './home/home.component'
@@ -20,11 +20,13 @@ import { LandingComponent } from './landing/landing.component'
 import { TeamComponent } from './team/team.component'
 import { FrontMain } from './front-main/front-main.component'
 import { OverlayRefService } from 'libs/ui/src/lib/ui/dialog-message/overlay-ref.service'
+import { SliderComponent } from './banner/slider/slider.component'
 
 @NgModule({
   declarations: [
     HomeComponent,
     BannerComponent,
+    SliderComponent,
     ContentComponent,
     FrontMain,
     OrderByPipe,
