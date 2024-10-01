@@ -18,11 +18,22 @@
       </button>
 
       @if (appliedCategoryFilters()) {
-        <div class="flex flex-wrap items-center gap-2 rounded-lg p-4">
+        <div class="hidden md:flex flex-wrap items-center gap-2 rounded-lg p-4">
           @for (filterCategories of appliedCategoryFilters(); track filterCategories.id) {
             <span class="flex items-center gap-1 rounded-md bg-white px-2 text-sm">
               <p>{{ filterCategories.label }}</p>
               <i class="ti ti-x cursor-pointer text-base" (click)="removeFilterCategory(filterCategories.code)"></i>
+            </span>
+          }
+        </div>
+      }
+
+      @if(appliedSdgFilters()) {
+        <div class="hidden md:flex flex-wrap items-center gap-2 rounded-lg p-4">
+          @for (filterSdg of appliedSdgFilters(); track filterSdg.code) {
+            <span class="flex items-center gap-1 rounded-md bg-white px-2 text-sm">
+              <p>{{ filterSdg.code }}</p>
+              <i class="ti ti-x cursor-pointer text-base" (click)="removeFilerSdg(filterSdg.code)"></i>
             </span>
           }
         </div>

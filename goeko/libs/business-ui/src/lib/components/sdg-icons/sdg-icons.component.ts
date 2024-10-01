@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common'
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, forwardRef, signal } from '@angular/core'
+import { Component, computed, forwardRef, Input, model, OnInit, signal, ViewEncapsulation } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
-import { ODS_CODE } from '@goeko/store'
-import { TranslateService } from '@ngx-translate/core'
+import { OrderByPipe } from '@goeko/core'
+import { SDG_LABEL, SDGLabel } from '@goeko/store'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 
 type Size = 'small' | 'medium' | 'large'
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule, OrderByPipe],
   selector: 'goeko-sdg-icons',
   templateUrl: './sdg-icons.component.html',
   styleUrls: ['./sdg-icons.component.scss'],
@@ -27,15 +28,13 @@ type Size = 'small' | 'medium' | 'large'
 })
 export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   public currentLangCode: string
-  public odsCode!: number[]
-  private _sdeSelected = new Set<number>()
-  public value = signal<Array<number>>([])
+  public sdgs = signal<SDGLabel[]>(SDG_LABEL)
 
-  onChange: (value: Array<number>) => void = () => {}
+  public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg.code))
+  onChange: (value: Array<SDGLabel>) => void = () => {}
   onTouched: () => void = () => {}
 
-  @Output() valueSelected = new EventEmitter()
-
+  value = model<Array<SDGLabel>>([])
   @Input()
   public get selected(): number[] {
     return this._selected
@@ -44,7 +43,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   @Input() readonly: boolean = false
   public set selected(sustainableDevelopmentGoals: number[]) {
     if (sustainableDevelopmentGoals) {
-      this.odsCode = ODS_CODE.filter((code) => sustainableDevelopmentGoals.includes(code))
+      this.sdgs.set(SDG_LABEL.filter((sdg) => sustainableDevelopmentGoals.includes(sdg.code)))
     }
     this._selected = sustainableDevelopmentGoals
   }
@@ -54,7 +53,6 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
 
   constructor(private _translateServices: TranslateService) {
     this.currentLangCode = this._translateServices.defaultLang
-    this.odsCode = ODS_CODE.sort((a, b) => a - b)
   }
 
   ngOnInit(): void {
@@ -65,8 +63,20 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    this.value.set(value)
-    this.value()?.forEach((value) => this._selectedValue(value))
+    this._assignValue(value)
+  }
+  private _assignValue(newValue: SDGLabel) {
+    this.value.update((value) => {
+      // Verificar si el elemento ya existe en el array
+      const exists = value.some((sdg: SDGLabel) => sdg.code === newValue.code)
+      if (exists) {
+        // Si existe, eliminarlo
+        return value.filter((sdg: SDGLabel) => sdg.code !== newValue.code)
+      } else {
+        // Si no existe, agregarlo
+        return [...value, newValue]
+      }
+    })
   }
   registerOnChange(fn: any): void {
     this.onChange = fn
@@ -75,23 +85,13 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn
   }
   setDisabledState?(isDisabled: boolean): void {
-    /*     throw new Error('Method not implemented.');
-     */
+    throw new Error('Method not implemented.')
   }
 
-  selectedElement(event: Event, codeSelected: number): void {
-    this._selectedValue(codeSelected)
-    this.value.set(Array.from(this._sdeSelected))
+  selectedElement(event: Event, sdgSelected: SDGLabel): void {
+    this._assignValue(sdgSelected)
     this.onTouched()
     this.onChange(this.value())
-    this.valueSelected.emit(this.value())
     event.preventDefault()
-  }
-  private _selectedValue(value: number): void {
-    if (!this._sdeSelected.has(value)) {
-      this._sdeSelected.add(value)
-    } else {
-      this._sdeSelected.delete(value)
-    }
   }
 }

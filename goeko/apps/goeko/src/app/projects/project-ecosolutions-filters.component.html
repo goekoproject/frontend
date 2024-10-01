@@ -58,6 +58,6 @@
 
     <!-- Sustainable Development Goals -->
     <h4 class="text-sm font-bold text-gray-700">{{ 'TEXT_SUPPORT.odsSme' | translate }}</h4>
-    <goeko-sdg-icons (valueSelected)="applyFiltersSDG($event)"></goeko-sdg-icons>
+    <goeko-sdg-icons [(value)]="filterSdg"></goeko-sdg-icons>
   </div>
 </div>

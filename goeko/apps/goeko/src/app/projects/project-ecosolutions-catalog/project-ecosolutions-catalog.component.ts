@@ -46,13 +46,12 @@ export class ProjectEcosolutionCatalogComponent {
 
   public showFilter = signal<boolean>(true)
   public appliedCategoryFilters = signal<Category[] | null>(null)
-  public appliedSdgFilters = signal<number[] | null>(null)
+  public appliedSdgFilters = computed(() => this.filtersRef().filterSdg())
   constructor() {
     this._selectLocationsService.selectedCodeLang.set(this.projectData().locations[0].country.code)
     effect(() => {
       this.filtersRef().onApplyFilters.subscribe((filters) => {
         this.appliedCategoryFilters.set(filters.categories)
-        this.appliedSdgFilters.set(filters.sdg)
       })
     })
   }
@@ -60,7 +59,10 @@ export class ProjectEcosolutionCatalogComponent {
     this.showFilter.update((value) => !value)
   }
   removeFilterCategory(code: string) {
-    this.appliedCategoryFilters.update((filters) => (filters ?? []).filter((category) => category.code !== code))
+    this.filtersRef().removeFilterCategory(code)
+  }
+  removeFilerSdg(code: number) {
+    this.filtersRef().removeFilerSdg(code)
   }
 
   applyFilters = () => {
@@ -79,9 +81,9 @@ export class ProjectEcosolutionCatalogComponent {
   }
 
   private _filterBySdg = (ecosolution: EcosolutionResult) => {
-    if (this.appliedSdgFilters() === null || this.appliedCategoryFilters()?.length === 0) {
+    if (this.appliedSdgFilters() === null || this.appliedSdgFilters()?.length === 0) {
       return true
     }
-    return this.appliedSdgFilters()?.some((sdg) => ecosolution.sustainableDevelopmentGoals.includes(sdg))
+    return this.appliedSdgFilters()?.some((sdg) => ecosolution.sustainableDevelopmentGoals.includes(sdg.code))
   }
 }
