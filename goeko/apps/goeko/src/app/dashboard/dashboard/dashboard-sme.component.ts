@@ -1,8 +1,8 @@
 import { Component, OnInit, effect } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { MessageService } from '@goeko/business-ui'
+import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
 import { ProjectService, SmeRequestResponse, UserService } from '@goeko/store'
-import { MESSAGE_TYPE } from '@goeko/ui'
+import { DialogService, MESSAGE_TYPE } from '@goeko/ui'
 import { take, toArray } from 'rxjs'
 import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service'
 
@@ -21,6 +21,7 @@ export class DashboardSmeComponent implements OnInit {
     private _router: Router,
     private _messageService: MessageService,
     public route: ActivatedRoute,
+    private _dialogService: DialogService,
   ) {
     effect(() => {
       if (this.userProfile().id) {
@@ -62,6 +63,15 @@ export class DashboardSmeComponent implements OnInit {
             this._getLastProjectName()
           })
         }
+      })
+  }
+
+  openNewProjectDialog() {
+    this._dialogService
+      .open(DialogNewProjectComponent)
+      .afterClosed()
+      .subscribe((res) => {
+        console.log('DialogNewProjectComponent', res)
       })
   }
 }

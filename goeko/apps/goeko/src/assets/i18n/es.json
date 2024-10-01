@@ -257,6 +257,19 @@
     "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",
     "messageContact": "Póngase en contacto con nosotros en {{email}}"
   },
+  "MENU_USER_SME": {
+    "titleCard":"Comience su primer análisis",
+    "subtitleCard": "Encontraremos la mejor eco-solución para usted",
+    "buttonSearch": "Buscar eco-solución",
+    "dialogNewProject": "Nombre su proyecto",
+    "dialogNameProject": "Nombre",
+    "dialogLocationProject": "Provincia y país",
+    "dialogNameRequired":"El nombre del proyecto es obligatorio",
+    "dialogLocationRequired": "La ubicación es obligatoria",
+    "dialogButtonNext": "Siguiente",
+    "dialogPlaceholderName": "PO Junio, 2024",
+    "dialogPlaceholderLocation": "Madrid, España"
+  },
   "NOTIFICATION": {
     "save_ok": "Se ha guardado correctamente"
   },
