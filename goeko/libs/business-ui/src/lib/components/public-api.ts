@@ -13,3 +13,4 @@ export * from './select-i18n/public-api';
 export * from './select-locations/public-api';
 export * from './select-subcategory-product/public-api';
 export * from './side-profile/public-api';
+export * from './project/public-api';
