@@ -41,7 +41,7 @@
                 @for (header of headers; track header.key) {
                   <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
                     <span *ngIf="header.key === 'creationDate'">
-                      {{ dataUser[header.key] | goDateFormat}}
+                      {{ dataUser[header.key] | goDateFormat: 'MMM D, YYYY HH:mm:ss' }}
                     </span>
                     <span *ngIf="header.key !== 'creationDate'">
                       {{ dataUser[header.key] }}
