@@ -258,13 +258,13 @@
     "messageContact": "Kontaktieren Sie uns unter {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard":"Beginnen Sie Ihre erste Analyse",
+    "titleCard": "Beginnen Sie Ihre erste Analyse",
     "subtitleCard": "Wir werden die beste Eco-Solution für Sie finden",
     "buttonSearch": "Eco-Solution suchen",
     "dialogNewProject": "Benennen Sie Ihr Projekt",
     "dialogNameProject": "Name",
     "dialogLocationProject": "Provinz und Land",
-    "dialogNameRequired":"Projektname ist erforderlich",
+    "dialogNameRequired": "Projektname ist erforderlich",
     "dialogLocationRequired": "Standort ist erforderlich",
     "dialogButtonNext": "Weiter",
     "dialogPlaceholderName": "PO Juni, 2024",
@@ -317,7 +317,7 @@
   },
   "SELECT_DATA_LABEL": {
     "currency": "€",
-    "defaultLabel": "Bitte wählen Sie aus den folgenden Optionen",
+    "defaultLabel": "Wählen Sie eine Option",
     "fiveBetweenTen": "Zwischen 5 und 10 Jahren",
     "greenWaste": {
       "greenWoodUntreated": "Grünes Holz (unbehandelt)",

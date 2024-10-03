@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, Input, inject, signal } from '@angular/core'
+import { AfterViewInit, Component, Input, inject, input, signal } from '@angular/core'
 import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
@@ -62,6 +62,8 @@ export class SelectLocationsComponent implements AfterViewInit {
   public newLocation = false
   public disabledRegions = false
 
+  public singleSelect = input<boolean>(false)
+
   public get lastLocations() {
     return this.controlLocations.value?.length - 1
   }
@@ -90,6 +92,7 @@ export class SelectLocationsComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges()
+    this.addLocation()
   }
 
   private subscribeToFormArrayAndItemChanges(): void {

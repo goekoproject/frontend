@@ -1,11 +1,13 @@
 <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
-@if (!newLocation || !toogleEdit) {
-  <div
-    (click)="addLocation()"
-    class="flex h-16 cursor-pointer items-center justify-center rounded-md border border-dashed border-primary-500 text-4xl text-primary-500">
-    <i class="ti ti-plus text-primary-900"></i>
-    <p class="text-base text-primary-900">{{ 'FORM_LABEL.newProvince' | translate }}</p>
-  </div>
+@if ((singleSelect() && controlLocations.controls.length < 1) || (!singleSelect() && controlLocations.controls.length >= 0)) {
+  @if (!toogleEdit) {
+    <div
+      (click)="addLocation()"
+      class="flex h-16 cursor-pointer items-center justify-center rounded-md border border-dashed border-primary-500 text-4xl text-primary-500">
+      <i class="ti ti-plus text-primary-900"></i>
+      <p class="text-base text-primary-900">{{ 'FORM_LABEL.newProvince' | translate }}</p>
+    </div>
+  }
 }
 
 <ng-template #formSelectLocation>
@@ -22,10 +24,11 @@
           [formGroupName]="i"
           [class.hidden-selected]="!(toogleEdit && i === selectedLocationsIndex())"
           class="locations-selected border-primary-500">
-          <div [formGroupName]="controlNameCountry" class="w-full">
+          <div [formGroupName]="controlNameCountry" class="flex w-full gap-4">
             @if (controlCountryCodeByIndex) {
               <ui-super-select
-                [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                class="w-40"
+                [placeholder]="'FORM_LABEL.country' | translate"
                 [formControlName]="'code'"
                 [id]="controlNameCountry"
                 [compareWith]="defaultSetSuperSelect">
@@ -41,8 +44,8 @@
             }
             @if (location.value.country.code.code; as codeCountry) {
               <div class="flex items-center gap-4">
-                <ui-super-select
-                  [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                <ui-super-select class="w-48"
+                  [placeholder]="'regions' | translate"
                   [formControlName]="'regions'"
                   [id]="controlNameProvince"
                   [multiple]="true"

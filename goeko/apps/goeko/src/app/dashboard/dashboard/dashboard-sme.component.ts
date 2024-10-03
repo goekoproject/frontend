@@ -44,15 +44,6 @@ export class DashboardSmeComponent implements OnInit {
       })
   }
 
-  goToProject(projects: SmeRequestResponse) {
-    this._router.navigate(['../project-form', this.userProfile().id, projects.id], {
-      relativeTo: this.route.parent,
-      queryParams: {
-        projectId: projects.id,
-      },
-    })
-  }
-
   deleteProject(project: SmeRequestResponse) {
     this._messageService
       .deleteMessage(MESSAGE_TYPE.WARNING, project.name)
@@ -70,8 +61,16 @@ export class DashboardSmeComponent implements OnInit {
     this._dialogService
       .open(DialogNewProjectComponent)
       .afterClosed()
-      .subscribe((res) => {
-        console.log('DialogNewProjectComponent', res)
+      .subscribe((newProject) => {
+        this._goToProject(newProject)
       })
+  }
+  private _goToProject(projects: SmeRequestResponse) {
+    this._router.navigate(['../project-form', this.userProfile().id, projects.id], {
+      relativeTo: this.route.parent,
+      queryParams: {
+        projectId: projects.id,
+      },
+    })
   }
 }
