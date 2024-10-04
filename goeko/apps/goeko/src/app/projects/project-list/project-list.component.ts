@@ -3,13 +3,13 @@ import { Component, effect, inject, input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DialogNewProjectComponent, GoTableModule, SplitCategoriesPipe } from '@goeko/business-ui'
 import { NotificationSearch, Project, ProjectService } from '@goeko/store'
-import { DialogService, GoDateFormatPipe } from '@goeko/ui'
+import { ButtonModule, DialogService, GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
   selector: 'goeko-project-list',
   standalone: true,
-  imports: [CommonModule, GoTableModule, GoDateFormatPipe, TranslateModule, SplitCategoriesPipe],
+  imports: [CommonModule, GoTableModule, GoDateFormatPipe, TranslateModule, SplitCategoriesPipe, ButtonModule],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.scss',
 })
