@@ -7,7 +7,7 @@ export class CriteriaEcosolutionSearch {
   smeId: string
 
   constructor(projectData: any, userProfile: SmeUser) {
-    this.classifications = formToClassificationsMapper(projectData)
+    this.classifications = projectData['classifications'] ? projectData.classifications :   formToClassificationsMapper(projectData)
     this.locations = projectData.locations
     this.smeId = userProfile.id
   }

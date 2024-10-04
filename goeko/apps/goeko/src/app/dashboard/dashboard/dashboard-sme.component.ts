@@ -1,9 +1,8 @@
-import { Component, OnInit, effect } from '@angular/core'
+import { Component, effect } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
-import { ProjectService, SmeRequestResponse, UserService } from '@goeko/store'
-import { DialogService, MESSAGE_TYPE } from '@goeko/ui'
-import { take, toArray } from 'rxjs'
+import { SmeRequestResponse, UserService } from '@goeko/store'
+import { DialogService } from '@goeko/ui'
 import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service'
 
 @Component({
@@ -12,49 +11,15 @@ import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service
   styleUrls: ['./dashboard-sme.component.scss'],
   providers: [MessageService, SmeAnalysisService],
 })
-export class DashboardSmeComponent implements OnInit {
+export class DashboardSmeComponent {
   public userProfile = this._userService.userProfile
-  public projects!: Array<SmeRequestResponse>
   constructor(
     private _userService: UserService,
-    private _projectService: ProjectService,
     private _router: Router,
-    private _messageService: MessageService,
     public route: ActivatedRoute,
     private _dialogService: DialogService,
   ) {
-    effect(() => {
-      if (this.userProfile().id) {
-        this._getLastProjectName()
-      }
-    })
-  }
-  ngOnInit(): void {
-    this.projects = new Array<SmeRequestResponse>()
-  }
-
-  private _getLastProjectName() {
-    this._projectService
-      .getRecommendationsByProjectById(this.userProfile().id)
-      .pipe(take(3), toArray())
-      .subscribe((projects: SmeRequestResponse[]) => {
-        if (projects) {
-          this.projects = projects
-        }
-      })
-  }
-
-  deleteProject(project: SmeRequestResponse) {
-    this._messageService
-      .deleteMessage(MESSAGE_TYPE.WARNING, project.name)
-      .afterClosed()
-      .subscribe((res) => {
-        if (res) {
-          this._projectService.deleteProject(project.id).subscribe((data) => {
-            this._getLastProjectName()
-          })
-        }
-      })
+    effect(() => {})
   }
 
   openNewProjectDialog() {

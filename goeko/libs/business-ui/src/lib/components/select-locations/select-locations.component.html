@@ -23,11 +23,11 @@
         <div
           [formGroupName]="i"
           [class.hidden-selected]="!(toogleEdit && i === selectedLocationsIndex())"
-          class="locations-selected border-primary-500">
-          <div [formGroupName]="controlNameCountry" class="flex w-full gap-4">
+          class="locations-selected">
+          <div [formGroupName]="controlNameCountry" class="flex w-full flex-col gap-4">
             @if (controlCountryCodeByIndex) {
               <ui-super-select
-                class="w-40"
+                class="w-full"
                 [placeholder]="'FORM_LABEL.country' | translate"
                 [formControlName]="'code'"
                 [id]="controlNameCountry"
@@ -35,8 +35,8 @@
                 <label title for="{{ controlNameCountry }}">
                   {{ 'FORM_LABEL.country' | translate }}
                 </label>
-                @for (option of countries(); track option.code) {
-                  <super-option [value]="option">
+                @for (option of countries(); track option.code; let first = $first) {
+                  <super-option [value]="option" [valueSelected]="first">
                     {{ option.label | translate }}
                   </super-option>
                 }
@@ -44,7 +44,8 @@
             }
             @if (location.value.country.code.code; as codeCountry) {
               <div class="flex items-center gap-4">
-                <ui-super-select class="w-48"
+                <ui-super-select
+                  class="w-full"
                   [placeholder]="'regions' | translate"
                   [formControlName]="'regions'"
                   [id]="controlNameProvince"
@@ -69,13 +70,15 @@
               </div>
             }
           </div>
-          <div class="m-auto mr-0 flex gap-2">
-            <i
-              [attr.disabled]="location.get(controlNameCountry)?.invalid"
-              class="ti ti-circle-check-filled cursor-pointer text-4xl text-primary-500"
-              (click)="confirmLocation(location)"></i>
-            <i class="ti ti-circle-x m-auto cursor-pointer text-4xl text-darkAccent" (click)="closeFormLocation(i)"> </i>
-          </div>
+          @if (!singleSelect()) {
+            <div class="m-auto mr-0 flex gap-2">
+              <i
+                [attr.disabled]="location.get(controlNameCountry)?.invalid"
+                class="ti ti-circle-check-filled cursor-pointer text-4xl text-primary-500"
+                (click)="confirmLocation(location)"></i>
+              <i class="ti ti-circle-x m-auto cursor-pointer text-4xl text-darkAccent" (click)="closeFormLocation(i)"> </i>
+            </div>
+          }
         </div>
       }
     </div>

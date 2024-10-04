@@ -36,6 +36,7 @@ module.exports = {
         lightGray: 'var(--light-gray)',
         pastelGreen: 'var(--pastel-green)',
         limeGreen: 'var(--lime-green)',
+        lightPastelBlue: 'var(--light-pastel-blue)',
       },
     },
     animation: {

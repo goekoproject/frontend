@@ -8,58 +8,19 @@
       <p class="text-base font-normal">{{ totalEcosolutions() }} results</p>
     </h1>
     <!--APPLIED FILTERS-->
-    <div class="flex w-full items-center gap-2 divide-x rounded-lg bg-gray-100 p-2">
+    <div class="w-full">
       <button
-        class="border-light flex h-12 w-24 min-w-max max-w-max basis-24 flex-wrap items-center gap-2 rounded-full border bg-white px-4 py-2"
+        class="sm:hidden border-light flex h-12 w-24 min-w-max max-w-max basis-24 flex-wrap items-center gap-2 rounded-full border bg-white px-4 py-2"
         (click)="toogleFilters()">
         <i class="ti ti-adjustments-alt"></i>
 
         <span class="hidden sm:block">Filters</span>
       </button>
 
-      @if (appliedCategoryFilters()) {
-        <div class="hidden md:flex flex-wrap items-center gap-2 rounded-lg p-4">
-          @for (filterCategories of appliedCategoryFilters(); track filterCategories.id) {
-            <span class="flex items-center gap-1 rounded-md bg-white px-2 text-sm">
-              <p>{{ filterCategories.label }}</p>
-              <i class="ti ti-x cursor-pointer text-base" (click)="removeFilterCategory(filterCategories.code)"></i>
-            </span>
-          }
-        </div>
-      }
-
-      @if(appliedSdgFilters()) {
-        <div class="hidden md:flex flex-wrap items-center gap-2 rounded-lg p-4">
-          @for (filterSdg of appliedSdgFilters(); track filterSdg.code) {
-            <span class="flex items-center gap-1 rounded-md bg-white px-2 text-sm">
-              <p>{{ filterSdg.code }}</p>
-              <i class="ti ti-x cursor-pointer text-base" (click)="removeFilerSdg(filterSdg.code)"></i>
-            </span>
-          }
-        </div>
-      }
-
       <div class="ml-auto flex max-w-48 gap-1 p-2 text-sm text-primary-default">
         <span>{{ country()?.label }}</span>
         <span>·</span>
         <abbr title="{{ regions() }}" class="truncate no-underline hover:text-clip">{{ regions() }}</abbr>
-
-        <!--         <ui-super-select [placeholder]="'FORM_LABEL.country' | translate" id="country" [compareWith]="compareWithCountry">
-          @for (option of countries(); track option.code) {
-            <super-option [value]="option" [valueSelected]="projectData().locations[0]">
-              {{ option.label | translate }}
-            </super-option>
-          }
-        </ui-super-select>
-        @defer (when regions() && (projectData().locations[0].country.regions ?? []).length > 0) {
-          <ui-super-select [placeholder]="'FORM_LABEL.province' | translate" id="province" [multiple]="true">
-            @for (option of regions(); track option.code) {
-              <super-option [value]="option" [valueSelected]="projectData().locations[0].country.regions">
-                {{ option.label | translate }}
-              </super-option>
-            }
-          </ui-super-select>
-        } -->
       </div>
     </div>
     <!--LIST ECOSOLUTIONS-->

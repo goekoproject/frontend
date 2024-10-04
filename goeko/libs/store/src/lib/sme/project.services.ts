@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http'
-import { inject, Injectable } from '@angular/core'
+import { inject, Injectable, signal } from '@angular/core'
 import { CacheProperty } from '@goeko/coretools'
-import { from, map, mergeMap, Observable, ObservableInput, reduce } from 'rxjs'
+import { map, Observable } from 'rxjs'
 import { Category } from '../classificactions/classifications.interface'
 import { ClassificationsService } from '../classificactions/classifications.service'
 import { Project } from './project.interface'
-import { Projects, SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
+import { SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 
 @Injectable()
 export class ProjectService {
   private _classificationsServices = inject(ClassificationsService)
 
+  public projects = signal<Project[]>([])
   @CacheProperty('projectQuery')
   projectQuery!: Project
 
@@ -21,7 +22,7 @@ export class ProjectService {
         {
           country: {
             code: 'CH',
-            regions: ['CH-FR','CH-GE', 'CH-GR' ,'CH-BS'],
+            regions: ['CH-FR', 'CH-GE', 'CH-GR', 'CH-BS'],
           },
         },
       ],
@@ -29,8 +30,13 @@ export class ProjectService {
   }
   constructor(private _http: HttpClient) {}
 
-  getProject(id: string): Observable<Projects> {
-    return this._http.get<Projects>(`/v1/ecosolution/search/projects/smes/${id}`)
+  getProjects(id: string) {
+    this._http
+      .get(`/v1/ecosolution/search/projects/smes/${id}`)
+      .pipe(map((res: any) => res['projects']))
+      .subscribe((projects) => {
+        this.projects.set(projects)
+      })
   }
 
   createProject(body: SmeCreateRecomendationRequest): Observable<any> {
@@ -44,23 +50,9 @@ export class ProjectService {
   updateProject(id: string, body: SmeSaveRecomendationRequest): Observable<any> {
     return this._http.put<any>(`/v1/ecosolution/search/projects/smes/${id}`, body)
   }
-  getLastProjectBySmeId(id: string): Observable<SmeRequestResponse> {
-    return this.getProject(id).pipe(
-      map((recommendation: { projects: SmeRequestResponse[] }) => recommendation.projects),
-      mergeMap((data: unknown) => from(data as ObservableInput<any>)), // Convierte el array en un Observable de elementos individuales
-      reduce((maxItem: any, currentItem: any) => (new Date(currentItem.date) > new Date(maxItem.date) ? currentItem : maxItem)),
-    )
-  }
 
   getProjectId({ smeId = '', projectId = '' }): Observable<SmeRequestResponse | Project> {
     return this._http.get<SmeRequestResponse | Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
-  }
-
-  getRecommendationsByProjectById(id: string): Observable<any> {
-    return this.getProject(id).pipe(
-      map((recommendation) => recommendation.projects),
-      mergeMap((data) => from(data)), // Convierte el array en un Observable de elementos individuale */
-    )
   }
 
   deleteProject(id: string): Observable<any> {

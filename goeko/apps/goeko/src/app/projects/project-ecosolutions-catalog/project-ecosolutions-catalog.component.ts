@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, Signal, signal, viewChild } from '@angular/core'
+import { Component, computed, inject, Signal, signal, viewChild } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { SelectLocationsService } from '@goeko/business-ui'
-import { Category, EcosolutionResult, EcosolutionsService, ProjectService, SmeUser, TAGGING, UserService } from '@goeko/store'
+import { EcosolutionResult, EcosolutionsService, ProjectService, SmeUser, TAGGING, UserService } from '@goeko/store'
 import { CardProductComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { CriteriaEcosolutionSearch } from '../../sme-analysis-form/sme-analysis-result/ecosolution-list/criteria-ecosolution-search.model'
@@ -42,48 +42,37 @@ export class ProjectEcosolutionCatalogComponent {
   public queryEcosolutions = signal(new CriteriaEcosolutionSearch(this.projectData(), this._userService.userProfile() as SmeUser))
   private _ecosolutionsSearchSignal = toSignal(this._ecosolutionServices.ecosolutionSearch(this.queryEcosolutions()))
 
-  public ecosolutionsListForProject = computed(() => this.applyFilters())
+  public ecosolutionsListForProject = computed(() => this._applyFilters())
 
   public showFilter = signal<boolean>(true)
-  public appliedCategoryFilters = signal<Category[] | null>(null)
-  public appliedSdgFilters = computed(() => this.filtersRef().filterSdg())
   constructor() {
     this._selectLocationsService.selectedCodeLang.set(this.projectData().locations[0].country.code)
-    effect(() => {
-      this.filtersRef().onApplyFilters.subscribe((filters) => {
-        this.appliedCategoryFilters.set(filters.categories)
-      })
-    })
   }
   toogleFilters = () => {
     this.showFilter.update((value) => !value)
   }
-  removeFilterCategory(code: string) {
-    this.filtersRef().removeFilterCategory(code)
-  }
-  removeFilerSdg(code: number) {
-    this.filtersRef().removeFilerSdg(code)
-  }
 
-  applyFilters = () => {
+  private _applyFilters = () => {
     return this._ecosolutionsSearchSignal()?.filter((ecosolution) => {
-      return this._filterByCategory(ecosolution) && this._filterBySdg(ecosolution)
+      return this._filterByCategory(ecosolution) && this._filterBySdg(ecosolution) && this._getFavoriteEcosolutions(ecosolution)
     })
   }
 
   private _filterByCategory = (ecosolution: EcosolutionResult) => {
-    if (this.appliedCategoryFilters() === null || this.appliedCategoryFilters()?.length === 0) {
+    const appliedCategoryFilters = this.filtersRef().filterCategories()
+    if (appliedCategoryFilters === null || appliedCategoryFilters?.length === 0) {
       return true
     }
-    return this.appliedCategoryFilters()
-      ?.map((category) => category.code)
-      .includes(ecosolution.classification.mainCategory)
+    return appliedCategoryFilters?.map((category) => category.code).includes(ecosolution.classification.mainCategory)
   }
-
   private _filterBySdg = (ecosolution: EcosolutionResult) => {
-    if (this.appliedSdgFilters() === null || this.appliedSdgFilters()?.length === 0) {
+    const appliedSdgFilters = this.filtersRef().filterSdg()
+    if (appliedSdgFilters === null || appliedSdgFilters?.length === 0) {
       return true
     }
-    return this.appliedSdgFilters()?.some((sdg) => ecosolution.sustainableDevelopmentGoals.includes(sdg.code))
+    return appliedSdgFilters?.some((sdg) => ecosolution.sustainableDevelopmentGoals.includes(sdg.code))
+  }
+  private _getFavoriteEcosolutions = (ecosolution: EcosolutionResult) => {
+    return this.filtersRef().checkFavourite() ? ecosolution.favourite : ecosolution
   }
 }

@@ -18,7 +18,7 @@
   --primary--900: #0b4b6f;
   --primary--950: #07304a;
   --primary: #1290d7;
-  --text-gray: #787878; /*Color category*/
+  --text-gray: #787878;
   --co2-emission: #969696;
   --waste: #00a039;
   --hp: #d00000;
@@ -27,6 +27,7 @@
   --light-gray: #e4e4e4;
   --pastel-green: #e5f3dd;
   --lime-green: #44aa0e;
+  --light-pastel-blue: #e4f5fe;
 }
 
 @mixin gradient-linear {

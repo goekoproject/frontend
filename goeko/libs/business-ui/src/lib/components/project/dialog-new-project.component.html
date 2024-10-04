@@ -1,5 +1,5 @@
 <div id="authentication-modal" tabindex="-1" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-  <div class="relative w-full max-w-2xl rounded-lg bg-white px-8 py-5 shadow-lg">
+  <div class="relative flex w-full max-w-2xl flex-col items-center gap-2 rounded-lg bg-white px-8 py-5 shadow-lg">
     <button type="button" class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-lg" (click)="close()">
       <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -13,14 +13,14 @@
       </h3>
     </div>
 
-    <form class="flex flex-col gap-4 p-6 md:p-8" [formGroup]="formProject" (ngSubmit)="onSubmitProject()">
+    <form class="flex max-w-80 flex-col gap-4" [formGroup]="formProject" (ngSubmit)="onSubmitProject()">
       <div>
         <label for="name" class="mb-1 block text-sm font-medium text-black">{{ 'MENU_USER_SME.dialogNameProject' | translate }}</label>
         <input
           type="text"
           id="name"
           formControlName="name"
-          class="block rounded-lg border border-gray-300 bg-white p-4 text-sm text-gray-500"
+          class="block w-full rounded-lg border border-gray-300 bg-white p-4 text-sm text-gray-500"
           [placeholder]="'MENU_USER_SME.dialogPlaceholderName' | translate"
           size="40"
           required />

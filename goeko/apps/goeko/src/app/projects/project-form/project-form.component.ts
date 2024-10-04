@@ -33,11 +33,13 @@ export class ProjectFormComponent implements OnInit {
 
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
-  private _projectService = inject(ProjectService)
+  private _projectServices = inject(ProjectService)
   private _fb = inject(FormBuilder)
 
+  public smeId = input<string>('')
   project = input.required<Project>()
   groupingForm = input.required<Category[]>()
+
   public categorySelected = signal<Category | undefined>(undefined)
   public indexCategorySelected = computed(() => {
     return this.groupingForm()?.findIndex((category) => category?.code === this.categorySelected()?.code) || 0
@@ -108,7 +110,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   searchEcosolutions() {
-    this._projectService.setProjectQuery({ ...this.form.value, locations :this.project().locations })
-    this._router.navigate(['search'], { relativeTo: this._route })
+    this._projectServices.setProjectQuery({ ...this.form.value, locations: this.project().locations })
+    this._router.navigate(['search', this.smeId(), this.project().id], { relativeTo: this._route.parent })
   }
 }

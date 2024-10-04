@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, ElementRef, inject, model, output, signal, viewChildren } from '@angular/core'
+import { Component, ElementRef, inject, model, signal, viewChildren } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { SdgIconsComponent } from '@goeko/business-ui'
 import { Category, ProjectService, SDGLabel } from '@goeko/store'
@@ -17,19 +17,14 @@ export interface Filters {
 })
 export class ProjectEcosolutionsFiltersComponent {
   filtersVisible = model<boolean>(true)
-  onApplyFilters = output<any>()
-  public classificationsFilters = toSignal(inject(ProjectService).getGroupingFormCategories())
-
-  public filters = computed(() => {
-    return {
-      categories: this._filterCategories(),
-      sdg: this.filterSdg(),
-    }
-  })
+  protected classificationsFilters = toSignal(inject(ProjectService).getGroupingFormCategories())
 
   private _categoriesCheckbox = viewChildren<ElementRef<HTMLInputElement>>('categories')
-  private _filterCategories = signal<Category[] | null>(null)
+  //Filters
+  public filterCategories = signal<Category[] | null>(null)
+  public checkFavourite = signal<boolean>(false)
   public filterSdg = signal<SDGLabel[]>([])
+
   private get _checkedCategories() {
     return this._categoriesCheckbox()
       .filter((checkbox) => checkbox.nativeElement.checked)
@@ -37,36 +32,16 @@ export class ProjectEcosolutionsFiltersComponent {
         return JSON.parse(checkbox.nativeElement.value) as unknown as Category
       })
   }
-  private get _inputElementCategories() {
-    return this._categoriesCheckbox().map((checkbox) => {
-      return checkbox.nativeElement
-    }) as HTMLInputElement[]
-  }
-  constructor() {
-    effect(() => {})
-  }
-
   applyFiltersForCategories() {
-    this._filterCategories.set(this._checkedCategories)
-    this.onApplyFilters.emit(this.filters())
+    this.filterCategories.set(this._checkedCategories)
   }
   applyAllCategories() {
-    this._filterCategories.set(null)
+    this.filterCategories.set(null)
   }
-
+  applyFavourites() {
+    this.checkFavourite.update((value) => !value)
+  }
   closeFilter = () => {
     this.filtersVisible.set(false)
-  }
-
-  removeFilterCategory(code: string) {
-    const categoryInput = this._inputElementCategories.find((input) => (JSON.parse(input.value) as unknown as Category).code === code)
-    if (categoryInput) {
-      categoryInput.checked = false
-    }
-    this.applyFiltersForCategories()
-  }
-  removeFilerSdg(code: number) {
-    this.filterSdg.update((sdg) => (sdg ?? []).filter((sdg) => sdg.code !== code))
-    this.onApplyFilters.emit(this.filters())
   }
 }

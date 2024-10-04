@@ -13,4 +13,12 @@ export const projectResolver = (route: ActivatedRouteSnapshot) => {
   return inject(ProjectService).getProjectId({ smeId: _smeId, projectId: _projectId })
 }
 
+export const projectListResolver = (route: ActivatedRouteSnapshot) => {
+  const _smeId = route.paramMap.get('smeId') as string
+  if (!_smeId) {
+    return of(undefined)
+  }
+
+  return inject(ProjectService).getProjects(_smeId)
+}
 

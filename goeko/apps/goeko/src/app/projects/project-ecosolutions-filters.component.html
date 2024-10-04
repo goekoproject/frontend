@@ -1,12 +1,12 @@
 <div
-  class="absolute top-0 z-10 max-w-sm rounded-lg bg-blue-50 p-4 sm:relative sm:w-full"
+  class="bg-lightPastelBlue absolute top-0 z-10 max-w-72 rounded-lg p-4 sm:relative sm:w-full"
   [ngClass]="{
     'collapse-enter': !filtersVisible(),
     'collapse-enter-active': filtersVisible(),
     'collapse-leave-active': !filtersVisible(),
   }">
   <i
-    class="ti ti-circle-x absolute right-0 top-0 m-4 cursor-pointer text-3xl text-primary-default hover:text-primary-blueDark"
+    class="ti ti-circle-x sm:hidden text-primary-default hover:text-primary-blueDark absolute right-0 top-0 m-4 cursor-pointer text-3xl"
     (click)="closeFilter()"></i>
 
   <div class="mt-4 space-y-4 overflow-hidden">
@@ -15,7 +15,7 @@
       <h4 class="text-sm font-bold text-gray-700">Filters</h4>
       <div class="mt-2">
         <label class="flex items-center space-x-2 text-sm">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" />
+          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyFavourites()" />
           <span>Favourites</span>
         </label>
       </div>
@@ -23,7 +23,7 @@
 
     <!-- Categorías -->
     <div>
-      <h4 class="text-sm font-bold text-gray-700">Categories</h4>
+      <h4 class="text-sm font-bold text-gray-700">classificationsFilters</h4>
       <div class="mt-2 space-y-2">
         <label class="flex items-center space-x-2 text-sm">
           <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCategories()" />

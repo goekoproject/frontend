@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, Input, inject, input, signal } from '@angular/core'
+import { AfterViewInit, Component, Input, Signal, effect, inject, input, signal } from '@angular/core'
 import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { LocationRegions } from '@goeko/store'
+import { LocationCountry, LocationRegions } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
@@ -55,7 +55,7 @@ export class SelectLocationsComponent implements AfterViewInit {
   @Input() form!: FormGroup
 
   private _selectLocationsService = inject(SelectLocationsService)
-  public countries = this._selectLocationsService.countries
+  public countries = this._selectLocationsService.countries as Signal<LocationCountry[]>
   public regions = this._selectLocationsService.regions
   @Input()
   public toogleEdit = false
@@ -88,13 +88,23 @@ export class SelectLocationsComponent implements AfterViewInit {
     return this.controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code === this.optionAllProvince.code)
   }
 
-  constructor() {}
+  constructor() {
+    effect(() => {
+      this._selectDefaultCountry()
+    })
+  }
 
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges()
     this.addLocation()
   }
 
+  private _selectDefaultCountry() {
+    if (this.countries() && this.countries().length > 0) {
+      const countrySelected = { country: { code: this.countries()[0].code, regions: [] } }
+      this._controlLocations.controls[0].patchValue(countrySelected)
+    }
+  }
   private subscribeToFormArrayAndItemChanges(): void {
     merge(
       ...this.controlLocations.controls.map((control, index) =>
