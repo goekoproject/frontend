@@ -240,7 +240,9 @@
     "cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
     "cookiesPolicy": "Política de cookies",
     "privacyPolicy": "Política de privacidad",
-    "legal": "Legal"
+    "legal": "Legal",
+    "contact": "Contacto",
+    "info": "¿Necesitas más información?"
   },
   "LOGIN": {
     "msglogin": "Inicie sesión en su cuenta",
@@ -260,6 +262,7 @@
     "msgSuccessResetPassword": "¡Listo! Hemos enviado un enlace a {{email}} para restablecer tu contraseña."
   },
   "MENU": {
+    "services": "Servicios",
     "aboutGoEKo": "Sobre GoEko",
     "blog": "Blog",
     "contacttUs": "Contáctenos",

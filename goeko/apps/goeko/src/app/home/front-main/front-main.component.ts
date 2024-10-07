@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { HomeService } from '../home.service'
 import { DialogService } from '@goeko/ui'
 import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
+import { Router } from '@angular/router'
 
 enum ENTRYS_ID {
   MAIN = '6kOjxhcZv8tluQqyVzMglp',
@@ -29,6 +30,7 @@ export class FrontMain implements OnInit {
     private _homeService: HomeService,
     private _translate: TranslateService,
     private _dialogService: DialogService,
+    private _router: Router
   ) {
     this._effectActors()
   }
@@ -69,5 +71,9 @@ export class FrontMain implements OnInit {
       .afterClosed()
       .subscribe((isAccepted) => {
       })
+  }
+
+  goTologin() {
+    this._router.navigate(['/login/signup'])
   }
 }

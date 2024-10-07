@@ -238,7 +238,9 @@
     "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
     "cookiesPolicy": "Cookies policy",
     "privacyPolicy": "Privacy policy",
-    "legal": "Resources"
+    "legal": "Resources",
+    "contact": "Contact",
+    "info": "Do you need more information?"
   },
   "LOGIN": {
     "msglogin": "Log in in your account",
@@ -258,6 +260,7 @@
     "msgSuccessResetPassword": "We have sent you an email to {{email}} with instructions to reset your password."
   },
   "MENU": {
+    "services": "Services",
     "aboutGoEKo": "About GoEko",
     "blog": "Blog",
     "contacttUs": "Contact",

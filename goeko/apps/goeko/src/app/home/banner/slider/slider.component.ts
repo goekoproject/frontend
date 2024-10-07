@@ -30,7 +30,7 @@ export class SliderComponent implements OnInit {
      });
   }
 
-  private _loadCarousel(items: any) {
+  _loadCarousel(items: any) {
     let mapCompanies:any = [];
     items[0].fields.companies.forEach((element: any) => {
       mapCompanies.push(element.fields.file.url);
