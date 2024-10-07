@@ -1,52 +1,50 @@
-import { AfterViewInit, Component, OnInit, inject } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import { TranslateService } from '@ngx-translate/core'
+import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild} from '@angular/core'
+import { ContentFulService } from '@goeko/store';
+import { map } from 'rxjs';
+
+
+const CONTENT_TYPE_CAROUSEL = 'carousel';
+
 
 @Component({
   selector: 'go-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
 })
-export class SliderComponent implements AfterViewInit, OnInit {
+export class SliderComponent implements OnInit {
 
-  slideIndex = 0;
-  fragments: any[] = ['fragment_1','fragment_2','fragment_3'];
-  activeRoute: ActivatedRoute = inject(ActivatedRoute);
 
-  scrollToCompany(section:any){
-    if(section) {
-      document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest"});
-    }
-  }
 
-  constructor() {}
+  @ViewChild('sliderTrack', { static: true }) slider!: ElementRef;
+  private _contentFulService = inject(ContentFulService)
+  public carousel$ = this._contentFulService.getContentType(CONTENT_TYPE_CAROUSEL).pipe(map((items) => items.items));
+  carousel!: any;;
+
+  constructor(private _renderer: Renderer2,
+  ) {}
+
 
   ngOnInit(): void {
-    this.activeRoute.fragment.subscribe((data) => {
-      this.scrollToCompany(data);
+    this.carousel$.subscribe((items:any) => {
+      this._loadCarousel(items);
+     });
+  }
+
+  private _loadCarousel(items: any) {
+    let mapCompanies:any = [];
+    items[0].fields.companies.forEach((element: any) => {
+      mapCompanies.push(element.fields.file.url);
     });
-  }
-
-  ngAfterViewInit(): void {
-    this._showNextSlide()
-  }
-
-  _showNextSlide(): void {
-    this.scrollToCompany(this.fragments[this.slideIndex]);
-    this.slideIndex++;
-    if (this.slideIndex > this.fragments.length) {this.slideIndex = 0}
-     setTimeout(() => {
-      this._showNextSlide();
-     }, 4000);
-  }
-
-  _previous(): void{
-      this.scrollToCompany(this.fragments[this.slideIndex--]);
-  }
-
-  _next(): void{
-    if((this.slideIndex) < this.fragments.length){
-      this.scrollToCompany(this.fragments[this.slideIndex++]);
+    this.carousel = {
+      numberCompanies: mapCompanies.length,
+      timming: items[0].fields.timeSeconds,
+      companies: mapCompanies
     }
+    let bannerRepeat: number = this.carousel.nCompanies * 2;
+    let widthCalc:number= 250 * bannerRepeat;
+    this._renderer.setStyle(this.slider?.nativeElement, 'width', `${widthCalc}px`);
+    document.documentElement.style.setProperty('--home-slider-baner-companies', this.carousel.numberCompanies.toString());
+    document.documentElement.style.setProperty('--home-slider-baner-time', this.carousel.timming + 's');
   }
+
 }

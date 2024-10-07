@@ -1,86 +1,59 @@
-//carousel
-section {
-  timeline-scope: --carousel;
+
+
+
+@mixin white-gradient {
+	background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
 }
 
-.markers li:nth-child(1) {
-  --i: 1;
+$animationSpeed: 25s;
+
+// Animation
+@keyframes scroll {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(calc(-250px * var(--home-slider-baner-companies)))}
 }
 
-.markers li:nth-child(2) {
-  --i: 2;
-}
 
-.markers li:nth-child(3) {
-  --i: 3;
-}
+// Styling
+.slider {
+	background: white;
+	height: 100px;
+	margin: auto;
+	overflow:hidden;
+	position: relative;
+	width: 960px;
 
-.slidder {
-  position: relative;
-  scroll-timeline: --carousel x;
-  display: flex;
-  flex-direction: row;
-  border-radius: 4px;
-  width: 900px;
+	&::before,
+	&::after {
+		@include white-gradient;
+		content: "";
+		// height: 100px;
+		position: absolute;
+		width: 200px;
+		z-index: 2;
+	}
 
-  scroll-snap-type: x mandatory;
-  overscroll-behavior: contain;
-  scroll-behavior: smooth;
+	&::after {
+		right: 0;
+		top: 0;
+		transform: rotateZ(180deg);
+	}
 
-  overflow-x: hidden;
-  overflow-y: hidden;
+	&::before {
+		left: 0;
+		top: 0;
+	}
 
-  box-shadow: 0px 0px 50px 10px rgba(255, 255, 255, .1);
-}
+	.slide-track {
+		// animation: scroll $animationSpeed linear infinite;
+    animation: scroll var(--home-slider-baner-time) linear infinite;
 
-.markers a {
-  display: block;
-  width: 16px;
-  aspect-ratio: 1;
-  background: #D5D5D5;
-  opacity: .7;
-  border-radius: 50%;
+		display: flex;
+		width: calc(250px * 8);
+	}
 
-  animation: activate linear;
-  animation-timeline: --carousel;
-  animation-range: calc((var(--i) - 1) * 33.33%) calc(var(--i) * 33.33% + 1px);
-}
-
-@keyframes activate {
-  0%,
-  100% {
-    background: #09f;
-    opacity: 1;
-  }
-}
-
-.slidder section {
-  flex: 0 0 100%;
-  width: 100%;
-  scroll-snap-align: center;
-}
-
-.markers {
-  display: flex;
-  flex-direction: row;
-  gap: 0.25em;
-  list-style: none;
-  font-size: 2em;
-  position: absolute;
-  top: 8rem;
-  left: 50%;
-  translate: -50% 0;
-}
-
-.companies-group {
-  display: flex;
-  gap: 3rem;
-}
-
-.company-box {
-  width: 225px;
-  height: 100px;
-  display: grid;
-  place-items: center;
-  margin: auto;
+	.slide {
+		height: 100px;
+		width: 250px;
+	}
 }
