@@ -6,6 +6,7 @@ import { handlerHttpInterceptor, SelectI18nComponent } from '@goeko/business-ui'
 import { ConfigModule } from '@goeko/core'
 import {
   ClassificationsService,
+  EcosolutionsSearchService,
   GoShowUserTypeDirective,
   isSubscribedCleantech,
   LocationsService,
@@ -62,6 +63,7 @@ import { PlatformComponent } from './platform.component'
     LocationsService,
     ProjectService,
     ClassificationsService,
+    EcosolutionsSearchService,
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],
 })

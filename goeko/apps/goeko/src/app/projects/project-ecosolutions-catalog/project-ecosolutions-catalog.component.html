@@ -10,17 +10,17 @@
     <!--APPLIED FILTERS-->
     <div class="w-full">
       <button
-        class="sm:hidden border-light flex h-12 w-24 min-w-max max-w-max basis-24 flex-wrap items-center gap-2 rounded-full border bg-white px-4 py-2"
+        class="border-light flex h-12 w-24 min-w-max max-w-max basis-24 flex-wrap items-center gap-2 rounded-full border bg-white px-4 py-2 sm:hidden"
         (click)="toogleFilters()">
         <i class="ti ti-adjustments-alt"></i>
 
         <span class="hidden sm:block">Filters</span>
       </button>
 
-      <div class="ml-auto flex max-w-48 gap-1 p-2 text-sm text-primary-default">
+      <div class="flex w-full gap-1 p-2 text-sm text-primary-default">
         <span>{{ country()?.label }}</span>
         <span>·</span>
-        <abbr title="{{ regions() }}" class="truncate no-underline hover:text-clip">{{ regions() }}</abbr>
+        <abbr title="{{ regions() }}" class="no-underline hover:text-clip">{{ regions() }}</abbr>
       </div>
     </div>
     <!--LIST ECOSOLUTIONS-->
@@ -32,7 +32,8 @@
         [image]="ecosolution.companyDetail.logo"
         [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
         [classNameCategoy]="ecosolution.classification.mainCategory"
-        [isFavorite]="ecosolution.favourite" />
+        [isFavorite]="ecosolution.favourite"
+        (changeFavorite)="toogleFavourite(ecosolution)" />
     }
   </div>
 </div>
