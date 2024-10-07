@@ -19,7 +19,7 @@
         {{ blogPost.fields['title'] }}
       </h1>
     </header>
-    <div class="mb-8 mt-8 flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-gray-200">
+    <div class="mb-8 mt-8 flex h-auto items-center justify-center overflow-hidden rounded-2xl bg-gray-200">
       <img
         class="h-full w-full rounded-t-2xl object-cover"
         [src]="blogPost.fields['image'] | extractAsset"

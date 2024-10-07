@@ -469,6 +469,7 @@
   },
   "DIALOG": {
     "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
+    "messageLeadDuplicated": "Ya has contactado con esta ecosolución, si aún no responde, ponte en contacto con {{email}}",
     "messageBodyLead": "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
     "warningDelete": "¿Está seguro de que deseas eliminar {{item}}?",
     "saveMessageGeneric": "¿Desea guardar los datos antes de continuar?",

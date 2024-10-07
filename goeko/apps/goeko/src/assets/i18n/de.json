@@ -464,6 +464,7 @@
   },
   "DIALOG": {
     "messageSendOk": "Ihre Nachricht wurde erfolgreich gesendet!",
+    "messageLeadDuplicated": "Sie haben diese Ecosolution bereits kontaktiert, wenn sie immer noch nicht antwortet, kontaktieren Sie bitte {{email}}",
     "messageBodyLead": "Ein Goeko-Vertreter steht Ihnen gerne für alle Fragen zur Verfügung.",
     "warningDelete": "Sind Sie sicher, dass Sie {{item}} löschen möchten?",
     "saveMessageGeneric": "Möchten Sie die Daten vor dem Fortfahren speichern?",
