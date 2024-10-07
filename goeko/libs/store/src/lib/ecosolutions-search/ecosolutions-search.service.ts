@@ -6,6 +6,7 @@ import { EcosolutionSearchRequest } from '../ecosolutions/ecosolution-search.req
 import { Project } from '../sme/project.interface'
 import { SmeRequestResponse, SmeSaveRecomendationRequest } from '../sme/sme-request.model'
 import { TranslateChangeService } from '../util/translate-change'
+import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -52,5 +53,14 @@ export class EcosolutionsSearchService extends TranslateChangeService {
         shareReplay(1),
       )
       .subscribe((ecosolutiosn) => this.ecosolutionsSearch.set(ecosolutiosn))
+  }
+
+  getEcosolutionSearchById(id: string, smeId: string): Observable<EcosolutionSearchResponse> {
+    const params = {
+      lang: this.lang(),
+      smeId,
+    }
+
+    return this._http.get<EcosolutionSearchResponse>(`/v1/ecosolution/search/detail/${id}`, { params })
   }
 }

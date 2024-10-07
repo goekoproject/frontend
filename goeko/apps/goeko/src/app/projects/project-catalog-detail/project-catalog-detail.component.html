@@ -1,0 +1,88 @@
+<div class="border-stoneGray flex flex-col gap-5 rounded-lg border bg-white p-4">
+  <!-- Header -->
+  <div class="mb-4 flex items-center justify-between">
+    <div class="flex items-start gap-4">
+      <img
+        class="size-28 rounded-xl border border-lightGray"
+        [src]="ecosolutionSearchDetail().companyDetail.logo"
+        [alt]="ecosolutionSearchDetail().companyDetail.id" />
+      <div class="flex flex-col gap-3">
+        <h2 class="text-2xl font-semibold">
+          {{ ecosolutionSearchDetail().solutionName }}
+        </h2>
+        <span class="rounded-full bg-pastelGreen px-3 py-1.5 text-sm font-semibold text-limeGreen">
+          {{ 'CATEGORIES.' + ecosolutionSearchDetail().classification.mainCategory | translate }}
+        </span>
+        <p class="text-sm font-semibold text-limeGreen">
+          {{ ecosolutionSearchDetail().companyDetail.name }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Classification -->
+
+  @if (ecosolutionSearchDetail().classification) {
+    <section class="fieldset">
+      <p class="text-charcoalGray w-full text-sm font-semibold">
+        {{ 'CATEGORIES_LABEL.' + ecosolutionSearchDetail().classification.subCategory + '.label' | translate }}
+      </p>
+      <div class="flex flex-wrap gap-2">
+        @for (option of dataSelect[ecosolutionSearchDetail().classification.subCategory]; track option.id) {
+          @if (ecosolutionSearchDetail().classification.products.includes(option.id)) {
+            <div class="inline-block rounded-full border border-mediumGray px-3 py-1.5 text-sm font-semibold text-darkGray">
+              {{ option.keyLang | translate }}
+            </div>
+          }
+        }
+      </div>
+    </section>
+  }
+  <!-- Countries of Distribution -->
+  <div class="fieldset">
+    <h3 class="font-semibold text-gray-700">Countries of distribution</h3>
+    <div class="flex gap-2">
+      @for (location of ecosolutionSearchDetail().locations; track location?.country?.code) {
+        <div class="flex gap-2 rounded-full border border-mediumGray px-3 py-1.5 text-sm font-semibold text-darkGray">
+          <span class="fi fi-{{ location.country.code | lowercase }}"></span>
+          <p>{{ location.country.label }}</p>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Sustainable Development Goals -->
+  <div class="fieldset">
+    <h3 class="font-semibold text-gray-700">{{ 'ods_title' | translate }}</h3>
+    <goeko-sdg-icons
+      [readonly]="true"
+      [onlyIcon]="true"
+      [selected]="ecosolutionSearchDetail().sustainableDevelopmentGoals"></goeko-sdg-icons>
+  </div>
+
+  <!-- Warranty -->
+  <div class="mb-4">
+    <h3 class="font-semibold text-gray-700">Warranty</h3>
+    <span class="mt-1 inline-block rounded bg-gray-200 px-3 py-1 text-sm text-gray-700">5 years</span>
+  </div>
+
+  <!-- Description Section -->
+  <div>
+    <h3 class="font-semibold text-gray-700">Description</h3>
+    <div class="mt-2">
+      <!-- Image Carousel -->
+      <div class="flex space-x-2 overflow-x-auto">
+        <img src="assets/charging-station-1.jpg" alt="Charging Station" class="h-24 w-24 rounded object-cover" />
+        <img src="assets/charging-station-2.jpg" alt="Charging Station" class="h-24 w-24 rounded object-cover" />
+        <img src="assets/charging-station-3.jpg" alt="Charging Station" class="h-24 w-24 rounded object-cover" />
+      </div>
+    </div>
+    <!-- Text Description -->
+    <p class="mt-4 text-sm leading-relaxed text-gray-600">
+      At AMP IT, our commitment is to provide you with the most efficient charging solution for collective buildings, to facilitate the
+      integration of electromobility into your daily life. We distinguish ourselves by our independent approach towards charging stations
+      suppliers, selecting the best product for each specific project. Our charging station installations are equipped with Type 2 sockets,
+      compliant with European standards, and offer a maximum power of 22 kW...
+    </p>
+  </div>
+</div>

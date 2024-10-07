@@ -1,21 +1,27 @@
-<div class="ods">
-  @for (sdg of sdgs() | orderBy; track sdg.code; let i = $index) {
-    <label
-      class="relative flex max-h-16 cursor-pointer gap-2 rounded-md bg-white p-2 shadow-sm hover:bg-slate-100"
-      [ngClass]="{ 'border-2 border-primary-default': sdgCodeSelected() && sdgCodeSelected().includes(sdg.code) }">
-      <input
-        class="absolute opacity-0"
-        type="checkbox"
-        [id]="i"
-        [value]="sdg.code"
-        [checked]="sdgCodeSelected() && sdgCodeSelected().includes(sdg.code)"
-        (change)="selectedElement($event, sdg)" />
-      <img class="z-10 size-12 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
-      <span class="ecosolution-unchecked" (click)="selectedElement($event, sdg.code)">
-        <i class="ti ti-trash icon-delete"></i>
-      </span>
+<div class="ods" [ngClass]="{ 'flex-row': onlyIcon(), 'flex-col': !onlyIcon() }">
+  @defer (when !onlyIcon()) {
+    @for (sdg of sdgs() | orderBy; track sdg.code; let i = $index) {
+      <label
+        class="relative flex max-h-16 cursor-pointer gap-2 rounded-md bg-white p-2 shadow-sm hover:bg-slate-100"
+        [ngClass]="{ 'border-2 border-primary-default': sdgCodeSelected() && sdgCodeSelected().includes(sdg.code) }">
+        <input
+          class="absolute opacity-0"
+          type="checkbox"
+          [id]="i"
+          [value]="sdg.code"
+          [checked]="sdgCodeSelected() && sdgCodeSelected().includes(sdg.code)"
+          (change)="selectedElement($event, sdg)" />
+        <img class="z-10 size-12 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
+        <span class="ecosolution-unchecked" (click)="selectedElement($event, sdg.code)">
+          <i class="ti ti-trash icon-delete"></i>
+        </span>
 
-      <p class="text-sm">{{ sdg.label | translate }}</p>
-    </label>
+        <p class="text-sm">{{ sdg.label | translate }}</p>
+      </label>
+    }
+  } @placeholder {
+    @for (sdg of sdgs() | orderBy; track sdg.code; let i = $index) {
+      <img class="size-24 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
+    }
   }
 </div>

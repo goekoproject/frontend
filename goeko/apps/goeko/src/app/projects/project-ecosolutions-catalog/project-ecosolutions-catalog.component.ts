@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { CriteriaEcosolutionSearch } from '../../sme-analysis-form/sme-analysis-result/ecosolution-list/criteria-ecosolution-search.model'
 import { ProjectEcosolutionsFiltersComponent } from '../project-ecosolutions-filters.component'
 import { ProjectManagmentService } from '../project-managment.service'
+import { ActivatedRoute, Router } from '@angular/router'
 @Component({
   selector: 'goeko-project-ecosolution-catalog',
   standalone: true,
@@ -18,6 +19,8 @@ import { ProjectManagmentService } from '../project-managment.service'
 export class ProjectEcosolutionCatalogComponent implements OnInit {
   private _projectManagmentService = inject(ProjectManagmentService)
   private _userService = inject(UserService)
+  private _router  = inject(Router)
+  private _route  = inject(ActivatedRoute)
 
   public filtersRef: Signal<ProjectEcosolutionsFiltersComponent> = viewChild.required(ProjectEcosolutionsFiltersComponent)
   public smeId = input<string>('')
@@ -51,6 +54,12 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
       if (response) {
         this._fetchEcosolutionsCatalog()
       }
+    })
+  }
+
+  viewEcosolutionDetail = (ecosolution: EcosolutionResult) => {
+    this._router.navigate(['ecosolutions-detail', this.smeId(), ecosolution.id], {
+      relativeTo: this._route.parent,
     })
   }
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { AuthGuard, checkSessionUserData } from '@goeko/core'
-import { ROLES, groupingFormCategoriesResolver, hasRole, projectListResolver, projectResolver } from '@goeko/store'
+import { ROLES, ecosolutionSearchDetailResolver, groupingFormCategoriesResolver, hasRole, projectResolver } from '@goeko/store'
 import { PlatformComponent } from './platform.component'
 
 const routes: Routes = [
@@ -49,10 +49,17 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'ecosolutions-detail/:smeId/:ecosolutionId',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        resolve: { ecosolutionSearchDetail: ecosolutionSearchDetailResolver },
+        loadComponent: () =>
+          import('../projects/project-catalog-detail/project-catalog-detail.component').then((m) => m.ProjectCatalogDetailComponent),
+      },
+      {
         path: 'projects-list/:smeId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
-        resolve: { projects: projectListResolver },
         loadComponent: () => import('../projects/project-list/project-list.component').then((m) => m.ProjectListComponent),
       },
       {

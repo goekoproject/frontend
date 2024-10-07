@@ -33,7 +33,8 @@
         [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
         [classNameCategoy]="ecosolution.classification.mainCategory"
         [isFavorite]="ecosolution.favourite"
-        (changeFavorite)="toogleFavourite(ecosolution)" />
+        (changeFavorite)="toogleFavourite(ecosolution)"
+        (changeShowMore)="viewEcosolutionDetail(ecosolution)" />
     }
   </div>
 </div>

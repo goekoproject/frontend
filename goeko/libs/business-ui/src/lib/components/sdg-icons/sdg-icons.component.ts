@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, forwardRef, Input, model, OnInit, signal, ViewEncapsulation } from '@angular/core'
+import { Component, computed, forwardRef, input, Input, model, OnInit, signal, ViewEncapsulation } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { OrderByPipe } from '@goeko/core'
 import { SDG_LABEL, SDGLabel } from '@goeko/store'
@@ -24,12 +24,13 @@ type Size = 'small' | 'medium' | 'large'
   host: {
     '[attr.readonly]': 'readonly',
     '[attr.size]': 'size',
+    '[attr.onlyIcon]': 'onlyIcon',
   },
 })
 export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   public currentLangCode: string
   public sdgs = signal<SDGLabel[]>(SDG_LABEL)
-
+  public onlyIcon = input<boolean>(false)
   public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg.code))
   onChange: (value: Array<SDGLabel>) => void = () => {}
   onTouched: () => void = () => {}

@@ -1,8 +1,8 @@
 <span
-  class="badge  {{ className }}"
+  class="badge border-mediumGray text-darkGray {{ className }}"
   [ngClass]="{
     'bg-primary-blueDark text-white': selected,
-    'text-primary-blueDark bg-white': !selected,
+    'bg-white text-primary-blueDark': !selected,
   }">
   <ng-content select="avatar"></ng-content>
 
