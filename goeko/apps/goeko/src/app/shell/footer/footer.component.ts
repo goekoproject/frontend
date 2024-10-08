@@ -9,7 +9,7 @@ import { RequestDemoDialogComponent } from '../../home/request-demo-dialog/reque
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'footer-wrapper',
+    class: 'footer-wrapper px-6 lg:p-8',
   },
 })
 export class FooterComponent {

@@ -13,7 +13,7 @@ import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'goeko-header',
+    class: 'goeko-header lg:max-w-screen-2xl w-[96%]',
   },
 })
 export class HeaderComponent implements OnInit {

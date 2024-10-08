@@ -1,10 +1,22 @@
 <front-main></front-main>
-<div class="flex flex-col gap-24">
-  <go-banner class="z-[1]"></go-banner>
-  @defer (on viewport) {
-    <go-content></go-content>
-    <goeko-team></goeko-team>
-  } @placeholder {
-    <div>loading...</div>
-  }
+<div class="px-6 lg:p-8">
+  <div class="flex flex-col gap-24">
+    <go-banner class="z-[1] mb-12"></go-banner>
+    @defer (on viewport) {
+      <go-content></go-content>
+      <!-- <goeko-team></goeko-team> -->
+    } @placeholder {
+      <div>loading...</div>
+    }
+  </div>
 </div>
+
+  <div class="flex flex-col gap-24">
+    @defer (on viewport) {
+      <goeko-team></goeko-team>
+    } @placeholder {
+      <div>loading...</div>
+    }
+  </div>
+
+
