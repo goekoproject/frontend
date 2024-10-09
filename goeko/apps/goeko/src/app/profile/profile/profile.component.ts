@@ -80,6 +80,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       if (this.userType()) {
         this._createFormForUserType()
         this._loadDataProfile()
+        console.log(this.form)
       }
     })
   }
