@@ -149,7 +149,7 @@
   },
   "FORM_LABEL": {
     "additionalInformation": "Additional information",
-    "advantages": "Advantages",
+    "advantages": "Benefits",
     "advantagesEcosolutions": "Advantages of your eco-solution",
     "advantagesSupportText": "Advantages compared to a standard solution",
     "allProvinces": "All regions",
@@ -258,13 +258,13 @@
     "messageContact": "Contact us at {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard":"Start your first analysis",
+    "titleCard": "Start your first analysis",
     "subtitleCard": "We'll find the best eco-solution for you",
     "buttonSearch": "Search eco-solution",
     "dialogNewProject": "Name your project",
     "dialogNameProject": "Name",
     "dialogLocationProject": "Province and country",
-    "dialogNameRequired":"Project name is required",
+    "dialogNameRequired": "Project name is required",
     "dialogLocationRequired": "Location is required",
     "dialogButtonNext": "Next",
     "dialogPlaceholderName": "PO June, 2024",
