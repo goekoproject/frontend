@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { AfterViewInit, Component, Input, Signal, effect, inject, input, signal } from '@angular/core'
-import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationCountry, LocationRegions } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -97,6 +97,7 @@ export class SelectLocationsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges()
     this.addLocation()
+    console.log(this._controlLocations)
   }
 
   private _selectDefaultCountry() {
@@ -169,30 +170,5 @@ export class SelectLocationsComponent implements AfterViewInit {
         regions: new FormControl<any[]>(['']),
       }),
     })
-  }
-
-  editLocation(location: AbstractControl, index: number): void {
-    this.toogleEdit = !this.toogleEdit
-    this.selectedLocationsIndex.set(index)
-  }
-
-  closeForm() {
-    this.toogleEdit = false
-    this.controlLocations.removeAt(this.selectedLocationsIndex())
-  }
-
-  deleteLocation(index: number): void {
-    this.controlLocations.removeAt(index)
-    this.newLocation = false
-  }
-  confirmLocation(locationCountryControl: FormGroup | AbstractControl) {
-    if (locationCountryControl.get(this.controlNameCountry)?.invalid) {
-      return
-    }
-    this.toogleEdit = false
-  }
-  closeFormLocation(index: number) {
-    this.deleteLocation(index)
-    this.toogleEdit = false
   }
 }

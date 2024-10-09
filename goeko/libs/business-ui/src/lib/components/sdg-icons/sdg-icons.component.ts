@@ -31,7 +31,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   public currentLangCode: string
   public sdgs = signal<SDGLabel[]>(SDG_LABEL)
   public onlyIcon = input<boolean>(false)
-  public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg.code))
+  public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg?.code))
   onChange: (value: Array<SDGLabel>) => void = () => {}
   onTouched: () => void = () => {}
 
@@ -69,10 +69,10 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   private _assignValue(newValue: SDGLabel) {
     this.value.update((value) => {
       // Verificar si el elemento ya existe en el array
-      const exists = value.some((sdg: SDGLabel) => sdg.code === newValue.code)
+      const exists = value.some((sdg: SDGLabel) => sdg?.code === newValue?.code)
       if (exists) {
         // Si existe, eliminarlo
-        return value.filter((sdg: SDGLabel) => sdg.code !== newValue.code)
+        return value.filter((sdg: SDGLabel) => sdg.code !== newValue?.code)
       } else {
         // Si no existe, agregarlo
         return [...value, newValue]
