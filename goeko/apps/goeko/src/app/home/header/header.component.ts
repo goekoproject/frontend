@@ -20,19 +20,19 @@ export class HeaderComponent implements OnInit {
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll($event: any) {
-    if (!this.header || !this.logo) return
-    if (window.scrollY > 0) {
-      // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '6rem')
-      // this._renderer.setStyle(this.logo?.nativeElement, 'width', '7%')
-      this._renderer.setStyle(this.header?.nativeElement, 'background-color', '#052639')
-    } else {
-      // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '10rem')
-      // this._renderer.setStyle(this.logo?.nativeElement, 'width', '12%')
-      this._renderer.setStyle(this.header?.nativeElement, 'background-color', 'transparent')
-    }
-  }
+  // @HostListener('window:scroll', ['$event'])
+  // onScroll($event: any) {
+  //   if (!this.header || !this.logo) return
+  //   if (window.scrollY > 0) {
+  //     // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '6rem')
+  //     // this._renderer.setStyle(this.logo?.nativeElement, 'width', '7%')
+  //     this._renderer.setStyle(this.header?.nativeElement, 'background-color', '#052639')
+  //   } else {
+  //     // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '10rem')
+  //     // this._renderer.setStyle(this.logo?.nativeElement, 'width', '12%')
+  //     this._renderer.setStyle(this.header?.nativeElement, 'background-color', 'transparent')
+  //   }
+  // }
 
   langs = LANGS
   defaultLang!: any

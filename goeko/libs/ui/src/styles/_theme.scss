@@ -39,10 +39,20 @@ body {
   max-width: 1920px;
   align-items: center;
 }
+
 body:has(div.is-platform) {
   background: var(--primary--50);
   align-items: stretch;
 }
+
+body:has(div.is-lighthome) {
+  background: var(--white);
+}
+
+div.is-lighthome ~ .goeko-header   {
+  background-color: var(--home-page-dark-blue);
+}
+
 :root {
   --center-container: 90%;
   --medium-width-field: 24rem;
