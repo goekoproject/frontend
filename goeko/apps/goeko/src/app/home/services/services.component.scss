@@ -1,7 +1,16 @@
-.main-front {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 0;
+
+.title {
+  color: var(--home-page-light-grey);
+  font: var(--font-home-medium);
+  font-size: 2rem;
 }
 
+.subtitle {
+  font: var(--font-home-semibold);
+  font-size: 2.5rem;
+}
+
+.description {
+  font: var(--font-body-home);
+  font-size: 1rem;
+}
