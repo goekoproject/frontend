@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, input, OnInit, Signal, signal, viewChild } from '@angular/core'
+import { Component, computed, effect, inject, input, OnInit, Signal, signal, viewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SelectLocationsService } from '@goeko/business-ui'
 import { EcosolutionResult, EcosolutionsService, EcosolutionsTaggingService, Project, SmeUser, TAGGING, UserService } from '@goeko/store'
@@ -24,20 +24,26 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
 
   public filtersRef: Signal<ProjectEcosolutionsFiltersComponent> = viewChild.required(ProjectEcosolutionsFiltersComponent)
   public smeId = input<string>('')
-  public project = input<Project>
+  public project = input<Project>()
   public country = this._projectManagmentService.country
   public regions = this._projectManagmentService.regions
   public totalEcosolutions = computed(() => this.ecosolutionsListForProject()?.length)
   public TAGGING = TAGGING
 
-  public projectData = signal(this._projectManagmentService.projectQuery)
-  public queryEcosolutions = signal(new CriteriaEcosolutionSearch(this.project(), this._userService.userProfile() as SmeUser))
+  public queryEcosolutions = signal<CriteriaEcosolutionSearch>({} as CriteriaEcosolutionSearch)
   private _ecosolutionsSearchSignal = this._projectManagmentService.ecosolutionsSearch
 
   public ecosolutionsListForProject = computed(() => this._applyFilters())
 
   public showFilter = signal<boolean>(true)
-  constructor() {}
+  constructor() {
+    effect(() => {
+      if (this.project()) {
+        this._projectManagmentService.setProjectQuery(this.project() as Project)
+        this.queryEcosolutions.set(new CriteriaEcosolutionSearch(this.project(), this._userService.userProfile() as SmeUser))
+      }
+    })
+  }
   ngOnInit(): void {
     this._fetchEcosolutionsCatalog()
   }
@@ -63,11 +69,11 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
     })
   }
   turnOnNotification = () => {
-      this._projectManagmentService.turnOnNotification(true).subscribe((response) => {
-        if (response) {
-         this._router.navigate(['/projects-list', this.smeId()])
-        }
-      })
+    this._projectManagmentService.turnOnNotification(true).subscribe((response) => {
+      if (response) {
+        this._router.navigate(['/projects-list', this.smeId()])
+      }
+    })
   }
 
   private _applyFilters = () => {

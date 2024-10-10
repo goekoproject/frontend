@@ -46,7 +46,6 @@ export class ProjectListComponent {
       })
   }
   goToDetail(project: Project) {
-    this._projectServices.setProjectQuery(project)
     this._router.navigate(['search', this.smeId(), project.id], { relativeTo: this._route.parent })
   }
 

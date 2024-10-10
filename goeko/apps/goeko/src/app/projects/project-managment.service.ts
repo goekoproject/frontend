@@ -1,4 +1,4 @@
-import { computed, inject, Injectable } from '@angular/core'
+import { computed, effect, inject, Injectable } from '@angular/core'
 import { SelectLocationsService } from '@goeko/business-ui'
 import { CacheProperty } from '@goeko/coretools'
 import {
@@ -21,28 +21,32 @@ export class ProjectManagmentService {
   private _taggingServices = inject(EcosolutionsTaggingService)
   private _selectLocationsService = inject(SelectLocationsService)
   private _userServices = inject(UserService)
+
   @CacheProperty('projectQuery')
   projectQuery!: Project
 
+  private get _firstCountry() {
+    return this.projectQuery?.locations ? this.projectQuery?.locations[0]?.country : null
+  }
   public projects = this._ecosolutionsSearchService.projects
   public ecosolutionsSearch = this._ecosolutionsSearchService.ecosolutionsSearch
   public userProfle = this._userServices.userProfile()
 
-  public country = computed(() =>
-    this._selectLocationsService.countries()?.find((country) => country.code === this.projectQuery.locations[0].country.code),
-  )
+  public country = computed(() => this._selectLocationsService.countries()?.find((country) => country.code === this._firstCountry?.code))
   public regions = computed(() =>
     this._selectLocationsService
       .regions()
-      ?.filter((region) => this.projectQuery.locations[0].country.regions?.includes(region.code))
+      ?.filter((region) => this._firstCountry?.regions?.includes(region.code))
       .map((region) => region.label)
       .toString(),
   )
 
   constructor() {
-    if (this.projectQuery.locations) {
-      this._selectLocationsService.selectedCodeLang.set(this.projectQuery.locations[0].country.code)
-    }
+    effect(() => {
+      if (this._firstCountry?.code) {
+        this._selectLocationsService.selectedCodeLang.set(this._firstCountry?.code)
+      }
+    })
   }
   setProjectQuery(project: Project) {
     this.projectQuery = project
