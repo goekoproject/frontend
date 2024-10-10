@@ -1,30 +1,25 @@
 
-<div class="h-[1000px] is-lighthome pt-16 pr-32 pl-32 pb-16 flex flex-col">
+<div class="h-[1000px] pt-16 pr-32 pl-32 pb-16 flex flex-col is-lighthome">
   <div class="flex flex-row gap-20">
-    <div class="w-2/4">
-      <h3 class="mb-6 title">
-        Services
-      </h3>
-      <h1 class="mb-10 text-black subtitle">
-        How it works
-      </h1>
-      <p class="mb-4 description">
-        Contenido de introducción sobre la plataforma de manera generica,
-        hablando de las principales funcionalidades. Contenido de introducción
-        sobre la plataforma de manera generica, hablando de las principales
-        funcionalidades.
-      </p>
-      <p class="description">
-        Contenido de introducción sobre la plataforma de manera generica,
-        hablando de las principales funcionalidades. Contenido de introducción
-        sobre la plataforma de manera generica, hablando de las principales
-        funcionalidades.
-      </p>
-    </div>
-
-    <div class="w-2/4 flex justify-end p-8">
-      <img [src]="'assets/howitworks.svg'" [alt]="" />
-    </div>
+      @if (services) {
+        <div class="w-2/4">
+          <h3 class="mb-6 title">
+            {{ services.section }}
+          </h3>
+          <h1 class="mb-10 text-black subtitle">
+            {{ services.title }}
+          </h1>
+           @for (description of services.paragraphs; track services) {
+            <p class="mb-4 description">
+              {{ description }}
+            </p>
+          }
+        </div>
+        <div class="w-2/4 flex justify-end p-8">
+          <img [src]="services.photo" [alt]="" />
+        </div>
+      }
   </div>
+
 
 

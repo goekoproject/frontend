@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseDataContentFulComponent, ContentFulService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
+import { map } from 'rxjs';
+
+const CONTENT_TYPE_SERVICES = 'services';
 
 @Component({
 	selector: 'goeko-services',
@@ -9,23 +12,46 @@ import { TranslateService } from '@ngx-translate/core';
 	styleUrls: ['./services.component.scss'],
 })
 export class ServicesComponent implements OnInit {
+
+  private _contentFulService = inject(ContentFulService)
+  public services$ = this._contentFulService.getContentType(CONTENT_TYPE_SERVICES).pipe(map((items) => items.items));
 	public title!: string;
 	public text!: string;
+  public services!: any;;
 
 	constructor(
-		public contentFulService: ContentFulService,
 		public translate: TranslateService,
 		public route: ActivatedRoute
 	) {
 	}
 
 	ngOnInit(): void {
+    this._setTopScroll();
+    this._loadContentFulServices();
+	}
 
+  _setTopScroll() {
     window.scroll({
       top: 0,
       left: 0,
       behavior: 'smooth'
     });
-	}
+   }
+
+  _loadContentFulServices() {
+    this.services$.subscribe((items:any) => {
+      console.log(items);
+      let paragraphDesc:any = [];
+      items[0].fields.description.content.forEach((element: any) => {
+        paragraphDesc.push(element.content[0].value);
+      });
+      this.services = {
+        title: items[0].fields.title,
+        section: items[0].fields.section,
+        paragraphs: paragraphDesc,
+        photo: items[0].fields.photo.fields.file.url
+      }
+    });
+  }
 
 }

@@ -35,7 +35,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this._changeLangCode();;
-   this.advantages$.subscribe((items:any) => {
+    this.advantages$.subscribe((items:any) => {
     this.advantages = [];
     items.forEach((element: any) => {
       this.advantages.push(new Advantages(element));
