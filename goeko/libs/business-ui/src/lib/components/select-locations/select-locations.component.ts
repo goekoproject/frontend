@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, Input, Signal, effect, inject, input, signal } from '@angular/core'
+import { AfterViewInit, Component, Input, Signal, inject, input, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationCountry, LocationRegions } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
@@ -88,24 +88,11 @@ export class SelectLocationsComponent implements AfterViewInit {
     return this.controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code === this.optionAllProvince.code)
   }
 
-  constructor() {
-    effect(() => {
-      this._selectDefaultCountry()
-    })
-  }
-
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges()
     this.addLocation()
-    console.log(this._controlLocations)
   }
 
-  private _selectDefaultCountry() {
-    if (this.countries() && this.countries().length > 0) {
-      const countrySelected = { country: { code: this.countries()[0].code, regions: [] } }
-      this._controlLocations.controls[0].patchValue(countrySelected)
-    }
-  }
   private subscribeToFormArrayAndItemChanges(): void {
     merge(
       ...this.controlLocations.controls.map((control, index) =>

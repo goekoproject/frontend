@@ -1,5 +1,5 @@
-<div class="subcategory bg-primary-gray transition-colors duration-150" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
-  <div class="subcategory-element" (click)="toogle(subCategory)">
+<div class="subcategory bg-primary-gray transition-colors duration-150 rounded-2xl" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
+  <div class="subcategory-element">
     <label class="subcategory-control" for="{{ subCategory.code }}">
       @if (!this.multiple) {
         <input

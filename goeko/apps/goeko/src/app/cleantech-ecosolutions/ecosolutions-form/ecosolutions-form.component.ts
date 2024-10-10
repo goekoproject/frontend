@@ -238,26 +238,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy {
     this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
   }
 
-  private _patchValueLocationsFormControl(formValue: EcosolutionForm) {
-    this.locationsArrays.clear()
-    formValue.locations?.forEach(() => {
-      this._addLocations()
-    })
-    this.form.get('locations')?.patchValue(formValue.locations)
-    this.firstLoad = true
-  }
-
-  private _createLocations(): FormGroup {
-    return new FormGroup({
-      country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl(),
-      }),
-    })
-  }
-  private _addLocations() {
-    this.locationsArrays.push(this._createLocations())
-  }
 
   private _patchFormArray(formArray: FormArray, values: any[]): void {
     formArray.clear()

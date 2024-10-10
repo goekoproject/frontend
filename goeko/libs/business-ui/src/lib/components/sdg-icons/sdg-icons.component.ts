@@ -24,13 +24,13 @@ type Size = 'small' | 'medium' | 'large'
   host: {
     '[attr.readonly]': 'readonly',
     '[attr.size]': 'size',
-    '[attr.onlyIcon]': 'onlyIcon',
+    '[attr.justIcon]': 'justIcon',
   },
 })
 export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   public currentLangCode: string
   public sdgs = signal<SDGLabel[]>(SDG_LABEL)
-  public onlyIcon = input<boolean>(false)
+  public justIcon = input<boolean>(false)
   public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg?.code))
   onChange: (value: Array<SDGLabel>) => void = () => {}
   onTouched: () => void = () => {}
@@ -64,21 +64,34 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    this._assignValue(value)
+    if (!value || value.length === 0) {
+      return
+    }
+    const _newValues = this._getValueArrayNumOrObj(value)
+    this.value.set(_newValues)
+  }
+
+  private _getValueArrayNumOrObj = (value: number[] | any[]): any => {
+    const newValue = value.map((val) => val.code)
+    if (!newValue) {
+      return this.sdgs().filter((sdg: SDGLabel) => value.includes(sdg.code))
+    }
+    return this.sdgs().filter((sdg: SDGLabel) => newValue.includes(sdg.code))
   }
   private _assignValue(newValue: SDGLabel) {
     this.value.update((value) => {
       // Verificar si el elemento ya existe en el array
-      const exists = value.some((sdg: SDGLabel) => sdg?.code === newValue?.code)
+      const exists = value?.some((sdg: SDGLabel) => sdg?.code === newValue?.code)
       if (exists) {
         // Si existe, eliminarlo
-        return value.filter((sdg: SDGLabel) => sdg.code !== newValue?.code)
+        return value?.filter((sdg: SDGLabel) => sdg?.code !== newValue?.code)
       } else {
         // Si no existe, agregarlo
         return [...value, newValue]
       }
     })
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn
   }
@@ -86,7 +99,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn
   }
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.')
+    console.log('Method not implemented.')
   }
 
   selectedElement(event: Event, sdgSelected: SDGLabel): void {

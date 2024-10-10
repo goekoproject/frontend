@@ -14,7 +14,7 @@ export class EcosolutionsBody implements Ecosolutions {
   classification: Classifications
   price?: Price
   improvement?: Improvement
-  sustainableDevelopmentGoals?: number[]
+  sustainableDevelopmentGoals?: any[]
   countries?: string[]
   paybackPeriodYears?: number
   marketReady?: boolean
@@ -50,10 +50,10 @@ export class EcosolutionsBody implements Ecosolutions {
         to: formValue?.operationalCostReductionPercentage?.to,
       },
     }
-    this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals
+    this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals?.map((goal: any) => goal.code)
     this.classification = {
       mainCategory: mainCategory,
-      subCategory: formValue.subCategory?.code,
+      subCategory: formValue.subCategory?.code ?? formValue.subCategory,
       products: formValue.products,
     }
     this.countries = undefined
