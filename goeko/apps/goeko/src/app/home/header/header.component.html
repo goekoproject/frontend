@@ -1,8 +1,8 @@
-<header #header>
+<header #header [ngClass]="isDark === true ? 'dark-header' : 'light-header'">
   <nav  class="mx-auto flex items-center justify-between px-6 py-3 lg:p-8 h-[6.25rem] flex-row" aria-label="Global">
     <div class="flex justify-center	gap-2 basis-1/6">
 
-      <a href="#" class="-m-1.5 p-1.5">
+      <a class="-m-1.5 p-1.5">
         <img alt="logo-main" src="../../../assets/logo.svg" #logo [routerLink]="['/']" class="w-14 h-[3.75rem] cursor-pointer" />
       </a>
     </div>

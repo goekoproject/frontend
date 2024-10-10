@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BaseDataContentFulComponent, ContentFulService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
+import { HeaderService } from '../header/header.services';
 
 const CONTENT_TYPE_SERVICES = 'services';
 
@@ -21,14 +22,20 @@ export class ServicesComponent implements OnInit {
 
 	constructor(
 		public translate: TranslateService,
-		public route: ActivatedRoute
+		public route: ActivatedRoute,
+    private _headerService: HeaderService
 	) {
 	}
 
 	ngOnInit(): void {
     this._setTopScroll();
     this._loadContentFulServices();
+    this._setHeaderTheme();
 	}
+
+  private _setHeaderTheme() {
+    this._headerService.isDarkTheme.next(true);
+  }
 
   _setTopScroll() {
     window.scroll({

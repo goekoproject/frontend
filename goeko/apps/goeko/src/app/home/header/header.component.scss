@@ -1,13 +1,31 @@
 .goeko-header {
-  background-color: var(--home-page-dark-blue);
+ // background-color: var(--home-page-dark-blue);
   //background-color:transparent;
+  //position: sticky;
+  // top: 0;
+  // display: block;
+  // z-index: 10;
+  // margin: 0 auto;
+}
 
+.dark-header {
+  background-color: var(--home-page-dark-blue);
+  position: static;
+  top: 0;
+  display: block;
+  z-index: 10;
+  margin: 0 auto;
+}
+
+.light-header {
+  background-color: transparent;
   position: sticky;
   top: 0;
   display: block;
   z-index: 10;
   margin: 0 auto;
 }
+
 
 .header {
   display: flex;

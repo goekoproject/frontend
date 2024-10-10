@@ -5,6 +5,7 @@ import { DialogService } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
 import { TermsOfServicesComponent } from '../../access/signup/terms-of-services.component'
 import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
+import { HeaderService } from './header.services'
 
 @Component({
   selector: 'goeko-header',
@@ -19,7 +20,7 @@ import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-
 export class HeaderComponent implements OnInit {
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
-
+  isDark!: any;
   // @HostListener('window:scroll', ['$event'])
   // onScroll($event: any) {
   //   if (!this.header || !this.logo) return
@@ -42,11 +43,20 @@ export class HeaderComponent implements OnInit {
     private translate: TranslateService,
     private _router: Router,
     private _dialogService: DialogService,
+    private _headerService: HeaderService,
   ) {}
 
   ngOnInit(): void {
     this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang())
+    this._getHeaderTheme();
   }
+
+  _getHeaderTheme() {
+    this._headerService.isDarkTheme.subscribe(res => {
+      this.isDark = res;
+    });
+  }
+
   onChangeLangs(selectedCodeLand: string) {
     this.translate.use(selectedCodeLand)
   }
