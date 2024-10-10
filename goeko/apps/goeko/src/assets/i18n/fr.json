@@ -579,5 +579,9 @@
   "years": "années",
   "yes": "Oui",
   "your": "Votre",
-  "your_ecosolutions": "Vos Eco-solutions"
+  "your_ecosolutions": "Vos Eco-solutions",
+  "msg_empty_ecosolutions_notification": "Votre meilleure éco-solution est encore à venir. Nous vous informerons lorsqu'elle arrivera.",
+  "msg_empty_ecosolutions": "Votre meilleure éco-solution est encore à venir",
+  "turnOnNotifications": "Activez les notifications",
+  "exploreNow": "Explorer maintenant"
 }

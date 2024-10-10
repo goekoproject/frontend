@@ -2,7 +2,7 @@
   <goeko-project-ecosolutions-filters class="mt-3 w-max" [(filtersVisible)]="showFilter"></goeko-project-ecosolutions-filters>
 
   <!--CONTENT-->
-  <div class="flex w-4/6 flex-grow flex-col gap-4">
+  <div class="flex h-screen w-4/6 flex-grow flex-col gap-4">
     <h1 class="text-2xl font-semibold">
       Best eco-solutions for <span class="text-limeGreen">{{ projectData().name }}</span>
       <p class="text-base font-normal">{{ totalEcosolutions() }} results</p>
@@ -23,18 +23,55 @@
         <abbr title="{{ regions() }}" class="no-underline hover:text-clip">{{ regions() }}</abbr>
       </div>
     </div>
-    <!--LIST ECOSOLUTIONS-->
-
-    @for (ecosolution of ecosolutionsListForProject(); track ecosolution.id) {
-      <goeko-card-product
-        [title]="ecosolution.solutionName"
-        [description]="ecosolution.description"
-        [image]="ecosolution.companyDetail.logo"
-        [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
-        [classNameCategoy]="ecosolution.classification.mainCategory"
-        [isFavorite]="ecosolution.favourite"
-        (changeFavorite)="toogleFavourite(ecosolution)"
-        (changeShowMore)="viewEcosolutionDetail(ecosolution)" />
+    @if (ecosolutionsListForProject().length !== 0) {
+      <ng-container *ngTemplateOutlet="ecosolutionsCatalog"></ng-container>
+    } @else {
+      <ng-container *ngTemplateOutlet="notResultData"></ng-container>
     }
   </div>
 </div>
+
+<!--Ecosolutions Catalog-->
+<ng-template #ecosolutionsCatalog>
+  @for (ecosolution of ecosolutionsListForProject(); track ecosolution.id) {
+    <goeko-card-product
+      [title]="ecosolution.solutionName"
+      [description]="ecosolution.description"
+      [image]="ecosolution.companyDetail.logo"
+      [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
+      [classNameCategoy]="ecosolution.classification.mainCategory"
+      [isFavorite]="ecosolution.favourite"
+      (changeFavorite)="toogleFavourite(ecosolution)"
+      (changeShowMore)="viewEcosolutionDetail(ecosolution)" />
+  }
+</ng-template>
+
+<ng-template #notResultData>
+  @if (!projectData().notification.onNewEcosolution) {
+    <ng-container *ngTemplateOutlet="msgTurnNotification"></ng-container>
+  } @else {
+    <ng-container *ngTemplateOutlet="refreshData"></ng-container>
+  }
+</ng-template>
+
+<!--Message Turn Notification-->
+<ng-template #msgTurnNotification>
+  <div class="m-auto flex w-3/5 flex-col items-center justify-center gap-4 text-center">
+    <i class="ti ti-bell-ringing text-fogGray text-8xl"></i>
+    <p>{{ 'msg_empty_ecosolutions_notification' | translate }}</p>
+    <button go-button (click)="turnOnNotification()">
+      {{ 'turnOnNotifications' | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<!--Refresh data-->
+<ng-template #refreshData>
+  <div class="m-auto flex w-3/5 flex-col items-center justify-center gap-4 text-center">
+    <i class="ti ti-bell-ringing text-fogGray text-8xl"></i>
+    <p>{{ 'msg_empty_ecosolutions_notification' | translate }}</p>
+    <button go-button>
+      {{ 'exploreNow' | translate }}
+    </button>
+  </div>
+</ng-template>

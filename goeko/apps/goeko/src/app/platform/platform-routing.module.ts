@@ -43,6 +43,7 @@ const routes: Routes = [
         path: 'search/:smeId/:projectId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
+        resolve: { project: projectResolver },
         loadComponent: () =>
           import('../projects/project-ecosolutions-catalog/project-ecosolutions-catalog.component').then(
             (m) => m.ProjectEcosolutionCatalogComponent,

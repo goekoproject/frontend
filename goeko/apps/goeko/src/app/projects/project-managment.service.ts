@@ -8,8 +8,9 @@ import {
   EcosolutionsSearchService,
   EcosolutionsTaggingService,
   Project,
+  UserService,
 } from '@goeko/store'
-import { Observable } from 'rxjs'
+import { Observable, switchMap } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +20,13 @@ export class ProjectManagmentService {
   private _classificationsServices = inject(ClassificationsService)
   private _taggingServices = inject(EcosolutionsTaggingService)
   private _selectLocationsService = inject(SelectLocationsService)
-
+  private _userServices = inject(UserService)
   @CacheProperty('projectQuery')
   projectQuery!: Project
 
   public projects = this._ecosolutionsSearchService.projects
   public ecosolutionsSearch = this._ecosolutionsSearchService.ecosolutionsSearch
+  public userProfle = this._userServices.userProfile()
 
   public country = computed(() =>
     this._selectLocationsService.countries()?.find((country) => country.code === this.projectQuery.locations[0].country.code),
@@ -38,20 +40,12 @@ export class ProjectManagmentService {
   )
 
   constructor() {
-    this._selectLocationsService.selectedCodeLang.set(this.projectQuery.locations[0].country.code)
+    if (this.projectQuery.locations) {
+      this._selectLocationsService.selectedCodeLang.set(this.projectQuery.locations[0].country.code)
+    }
   }
   setProjectQuery(project: Project) {
-    this.projectQuery = {
-      ...project,
-      locations: [
-        {
-          country: {
-            code: 'CH',
-            regions: ['CH-FR', 'CH-GE', 'CH-GR', 'CH-BS'],
-          },
-        },
-      ],
-    }
+    this.projectQuery = project
   }
 
   getEcosolutionsByProjects(body: EcosolutionSearchRequest) {
@@ -60,6 +54,9 @@ export class ProjectManagmentService {
   getProjects(id: string) {
     this._ecosolutionsSearchService.getSearchEcosolutionsByProjects(id)
   }
+  getProjectId({ smeId = '', projectId = '' }): Observable<Project> {
+    return this._ecosolutionsSearchService.getSearchProjectId({ smeId, projectId }) as any
+  }
 
   createProject(body: any) {
     return this._ecosolutionsSearchService.createSearchProject(body)
@@ -67,6 +64,14 @@ export class ProjectManagmentService {
 
   updateProject(id: string, body: any) {
     return this._ecosolutionsSearchService.updateSearchProject(id, body)
+  }
+  turnOnNotification(onNotification: boolean) {
+    return this.getProjectId({ smeId: this.userProfle.id, projectId: this.projectQuery.id }).pipe(
+      switchMap((project: Project) => {
+        project.notification.onNewEcosolution = onNotification
+        return this.updateProject(this.projectQuery.id, project)
+      }),
+    )
   }
   deleteProject(id: string) {
     return this._ecosolutionsSearchService.deleteSearchProjectById(id)

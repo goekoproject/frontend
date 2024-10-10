@@ -29,6 +29,10 @@ export class EcosolutionsSearchService extends TranslateChangeService {
       })
   }
 
+  getSearchProjectId({ smeId = '', projectId = '' }): Observable<SmeRequestResponse | Project> {
+    return this._http.get<SmeRequestResponse | Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
+  }
+
   createSearchProject(body: SmeSaveRecomendationRequest): Observable<any> {
     return this._http.post<any>(`/v1/ecosolution/search/projects/smes`, body)
   }

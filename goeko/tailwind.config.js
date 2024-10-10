@@ -41,6 +41,7 @@ module.exports = {
         darkGray: 'var(--dark-gray)',
         stoneGray: 'var(--stone-gray)',
         charcoalGray: 'var(--charcoal-gray)',
+        fogGray: 'var(--fog-gray)',
       },
     },
     animation: {

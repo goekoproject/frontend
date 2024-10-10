@@ -579,5 +579,9 @@
   "years": "Jahre",
   "yes": "Ja",
   "your": "Ihr",
-  "your_ecosolutions": "Ihre Eco-solutions"
+  "your_ecosolutions": "Ihre Eco-solutions",
+  "msg_empty_ecosolutions_notification": "Keine Eco-solutions gefunden, die Ihren Kriterien entsprechen. Ändern Sie Ihre Filter, um mehr Optionen zu sehen.",
+  "msg_empty_ecosolutions": "Keine Eco-solutions gefunden",
+  "turnOnNotifications": "Benachrichtigungen aktivieren",
+  "exploreNow": "Jetzt erkunden"
 }

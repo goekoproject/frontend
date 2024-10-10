@@ -2,19 +2,21 @@ import { CommonModule } from '@angular/common'
 import { Component, effect, inject, input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DialogNewProjectComponent, GoTableModule, SplitCategoriesPipe } from '@goeko/business-ui'
-import { NotificationSearch, Project, ProjectService } from '@goeko/store'
+import { NotificationSearch, Project } from '@goeko/store'
 import { ButtonModule, DialogService, GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { ProjectManagmentService } from '../project-managment.service'
 
 @Component({
   selector: 'goeko-project-list',
   standalone: true,
   imports: [CommonModule, GoTableModule, GoDateFormatPipe, TranslateModule, SplitCategoriesPipe, ButtonModule],
+  providers: [ProjectManagmentService],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.scss',
 })
 export class ProjectListComponent {
-  private _projectServices = inject(ProjectService)
+  private _projectServices = inject(ProjectManagmentService)
   private _dialogService = inject(DialogService)
 
   private _router = inject(Router)

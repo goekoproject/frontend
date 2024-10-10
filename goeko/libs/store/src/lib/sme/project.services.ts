@@ -16,17 +16,7 @@ export class ProjectService {
   projectQuery!: Project
 
   setProjectQuery(project: Project) {
-    this.projectQuery = {
-      ...project,
-      locations: [
-        {
-          country: {
-            code: 'CH',
-            regions: ['CH-FR', 'CH-GE', 'CH-GR', 'CH-BS'],
-          },
-        },
-      ],
-    }
+    this.projectQuery = project
   }
   constructor(private _http: HttpClient) {}
 

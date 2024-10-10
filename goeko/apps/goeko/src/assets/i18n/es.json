@@ -497,7 +497,7 @@
     "title": "Revisa tu bandeja de entrada."
   },
   "a": "a",
-  "yourEcosolution":"Tu Ecosolucion",
+  "yourEcosolution": "Tu Ecosolucion",
   "accept": "Aceptar",
   "add": "Añadir",
   "alertSelectedProduct": "Seleccione una o más soluciones",
@@ -579,5 +579,9 @@
   "year": "año",
   "years": "años",
   "yes": "Sí",
-  "your": "tu"
+  "your": "tu",
+  "msg_empty_ecosolutions_notification": "Tu mejor solución ecológica está por llegar. Te notificaremos cuando llegue.",
+  "msg_empty_ecosolutions": "Tu mejor solución ecológica está por llegar.",
+  "turnOnNotifications": "Activa las notificaciones",
+  "exploreNow": "Explora ahora"
 }
