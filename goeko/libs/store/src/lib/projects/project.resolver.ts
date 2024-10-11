@@ -1,6 +1,7 @@
 import { inject } from '@angular/core'
 import { ActivatedRouteSnapshot } from '@angular/router'
-import { of } from 'rxjs'
+import { of, shareReplay } from 'rxjs'
+import { EcosolutionsSearchService } from '../ecosolutions-search/ecosolutions-search.service'
 import { ProjectService } from '../sme/project.services'
 
 export const projectResolver = (route: ActivatedRouteSnapshot) => {
@@ -10,7 +11,7 @@ export const projectResolver = (route: ActivatedRouteSnapshot) => {
     return of(undefined)
   }
 
-  return inject(ProjectService).getProjectId({ smeId: _smeId, projectId: _projectId })
+  return inject(EcosolutionsSearchService).getSearchProjectById({ smeId: _smeId, projectId: _projectId }).pipe(shareReplay(1))
 }
 
 export const projectListResolver = (route: ActivatedRouteSnapshot) => {
@@ -21,4 +22,3 @@ export const projectListResolver = (route: ActivatedRouteSnapshot) => {
 
   return inject(ProjectService).getProjects(_smeId)
 }
-

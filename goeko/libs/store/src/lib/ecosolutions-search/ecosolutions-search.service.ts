@@ -3,10 +3,10 @@ import { inject, Injectable, signal } from '@angular/core'
 import { map, Observable, shareReplay } from 'rxjs'
 import { EcosolutionResult } from '../ecosolutions/ecosolution-result.interface'
 import { EcosolutionSearchRequest } from '../ecosolutions/ecosolution-search.request.model'
+import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
 import { Project } from '../sme/project.interface'
 import { SmeRequestResponse, SmeSaveRecomendationRequest } from '../sme/sme-request.model'
 import { TranslateChangeService } from '../util/translate-change'
-import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -22,15 +22,15 @@ export class EcosolutionsSearchService extends TranslateChangeService {
 
   getSearchEcosolutionsByProjects(id: string) {
     this._http
-      .get(`/v1/ecosolution/search/projects/smes/${id}`)
-      .pipe(map((res: any) => res['projects']))
+      .get<{ projects: Project[] }>(`/v1/ecosolution/search/projects/smes/${id}`)
+      .pipe(map((res) => res.projects))
       .subscribe((projects) => {
         this.projects.set(projects)
       })
   }
 
-  getSearchProjectId({ smeId = '', projectId = '' }): Observable<SmeRequestResponse | Project> {
-    return this._http.get<SmeRequestResponse | Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
+  getSearchProjectId({ smeId = '', projectId = '' }): Observable<Project> {
+    return this._http.get<Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
   }
 
   createSearchProject(body: SmeSaveRecomendationRequest): Observable<any> {
@@ -41,8 +41,8 @@ export class EcosolutionsSearchService extends TranslateChangeService {
     return this._http.put<any>(`/v1/ecosolution/search/projects/smes/${id}`, body)
   }
 
-  getSearchProjectById({ smeId = '', projectId = '' }): Observable<SmeRequestResponse | Project> {
-    return this._http.get<SmeRequestResponse | Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
+  getSearchProjectById({ smeId = '', projectId = '' }): Observable<Project> {
+    return this._http.get<Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
   }
 
   deleteSearchProjectById(id: string): Observable<any> {

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, input, OnInit, Signal, signal, viewChild } from '@angular/core'
+import { Component, computed, inject, input, OnInit, Signal, signal, viewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SelectLocationsService } from '@goeko/business-ui'
-import { EcosolutionResult, EcosolutionsService, EcosolutionsTaggingService, Project, SmeUser, TAGGING, UserService } from '@goeko/store'
+import { EcosolutionResult, EcosolutionsService, EcosolutionsTaggingService, Project, TAGGING } from '@goeko/store'
 import { ButtonModule, CardProductComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { CriteriaEcosolutionSearch } from '../../sme-analysis-form/sme-analysis-result/ecosolution-list/criteria-ecosolution-search.model'
 import { ProjectEcosolutionsFiltersComponent } from '../project-ecosolutions-filters.component'
+import { ProjectEcosolutionsQuery } from '../project-ecosolutions-query.model'
 import { ProjectManagmentService } from '../project-managment.service'
 @Component({
   selector: 'goeko-project-ecosolution-catalog',
@@ -18,33 +18,34 @@ import { ProjectManagmentService } from '../project-managment.service'
 })
 export class ProjectEcosolutionCatalogComponent implements OnInit {
   private _projectManagmentService = inject(ProjectManagmentService)
-  private _userService = inject(UserService)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
 
   public filtersRef: Signal<ProjectEcosolutionsFiltersComponent> = viewChild.required(ProjectEcosolutionsFiltersComponent)
   public smeId = input<string>('')
-  public project = input<Project>()
-  public country = this._projectManagmentService.country
-  public regions = this._projectManagmentService.regions
+  public project = input<Project>({} as Project)
+  public country = computed(() => (this.project()?.locations ? this.project()?.locations[0]?.country.label : ''))
+  public regions = computed(() =>
+    this.project()?.locations
+      ? this.project()
+          ?.locations[0]?.country?.regions?.map((region) => region.label)
+          .join(', ')
+      : '',
+  )
   public totalEcosolutions = computed(() => this.ecosolutionsListForProject()?.length)
   public TAGGING = TAGGING
 
-  public queryEcosolutions = signal<CriteriaEcosolutionSearch>({} as CriteriaEcosolutionSearch)
+  public queryEcosolutions = signal<ProjectEcosolutionsQuery>({} as ProjectEcosolutionsQuery)
   private _ecosolutionsSearchSignal = this._projectManagmentService.ecosolutionsSearch
 
   public ecosolutionsListForProject = computed(() => this._applyFilters())
 
   public showFilter = signal<boolean>(true)
-  constructor() {
-    effect(() => {
-      if (this.project()) {
-        this._projectManagmentService.setProjectQuery(this.project() as Project)
-        this.queryEcosolutions.set(new CriteriaEcosolutionSearch(this.project(), this._userService.userProfile() as SmeUser))
-      }
-    })
-  }
+
   ngOnInit(): void {
+    const projectEcosolutionQuery = new ProjectEcosolutionsQuery(this.project(), this.smeId())
+    this.queryEcosolutions.set(projectEcosolutionQuery)
+    this._projectManagmentService.project.set(this.project())
     this._fetchEcosolutionsCatalog()
   }
   toogleFilters = () => {

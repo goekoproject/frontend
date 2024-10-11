@@ -1,5 +1,5 @@
 import { Classifications } from '../model/classificaciones.interface'
-import { LocationsCountry } from '../model/locations.country'
+import { LocationTranslated } from '../model/location-translated.interface'
 import { NotificationSearch } from './sme-request.model'
 
 export interface Project {
@@ -8,5 +8,5 @@ export interface Project {
   date: string
   name: string
   notification: NotificationSearch
-  locations: Array<LocationsCountry>
+  locations: Array<LocationTranslated>
 }

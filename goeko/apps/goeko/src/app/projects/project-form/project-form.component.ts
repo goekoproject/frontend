@@ -3,11 +3,13 @@ import { Component, computed, inject, input, OnInit, signal } from '@angular/cor
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CATEGORIES, CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
-import { Category, Product, Project, ProjectService } from '@goeko/store'
+import { Category, Product, Project } from '@goeko/store'
 import { BadgeModule, ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { CountProductsPipe } from '../count-products.pipe'
+import { ProjectEcosolutionParams } from '../project-ecosolutions-query.model'
 import { ProjectForm } from '../project-form.model'
+import { ProjectManagmentService } from '../project-managment.service'
 const compareWithProducts = (product: Product, productCodeSelected: Product | string | any) => {
   return product.code === productCodeSelected?.code || product.code === productCodeSelected
 }
@@ -24,7 +26,7 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
     ReactiveFormsModule,
     CountProductsPipe,
   ],
-  providers: [],
+  providers: [ProjectManagmentService],
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.scss',
 })
@@ -33,9 +35,9 @@ export class ProjectFormComponent implements OnInit {
 
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
-  private _projectServices = inject(ProjectService)
   private _fb = inject(FormBuilder)
 
+  private _projectManagmentServices = inject(ProjectManagmentService)
   public smeId = input<string>('')
   project = input.required<Project>()
   groupingForm = input.required<Category[]>()
@@ -110,7 +112,21 @@ export class ProjectFormComponent implements OnInit {
   }
 
   searchEcosolutions() {
-    this._projectServices.setProjectQuery({ ...this.form.value, locations: this.project().locations })
-    this._router.navigate(['search', this.smeId(), this.project().id], { relativeTo: this._route.parent })
+    this._saveProjects().subscribe((res) => {
+      if (res) {
+        this._router.navigate(['search', this.smeId(), this.project().id], { relativeTo: this._route.parent })
+      }
+    })
+  }
+
+  private _saveProjects() {
+    const payload = new ProjectEcosolutionParams({
+      ...this.form.value,
+      name: this.project().name,
+      locations: this.project().locations,
+      notification: this.project().notification,
+    })
+
+    return this._projectManagmentServices.updateProject(this.project().id, payload)
   }
 }

@@ -2,7 +2,7 @@ import { mapperLocations } from '@goeko/core'
 import { Classifications } from '../model/classificaciones.interface'
 import { Locations } from '../model/locations.interface'
 
-export class ProjectPayload {
+export class ProjectSearchPayload {
   name!: string
   smeId?: string
   classifications!: Classifications[]

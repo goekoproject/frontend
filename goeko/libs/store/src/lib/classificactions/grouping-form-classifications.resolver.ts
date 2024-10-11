@@ -1,6 +1,6 @@
 import { inject } from '@angular/core'
-import { ProjectService } from '../sme/project.services'
+import { ClassificationsService } from './classifications.service'
 
 export const groupingFormCategoriesResolver = () => {
-  return inject(ProjectService).getGroupingFormCategories()
+  return inject(ClassificationsService).getAllDataCategories()
 }

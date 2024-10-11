@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { ProjectPayload, ProjectService, UserService } from '@goeko/store'
+import { ProjectSearchPayload, ProjectService, UserService } from '@goeko/store'
 import { ButtonModule, DialogMessageModule, DialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { SelectLocationsComponent } from '../select-locations/select-locations.component'
@@ -51,7 +51,7 @@ export class DialogNewProjectComponent implements OnInit {
 
   private _createProject() {
     const payload = { ...this.formProject.value, smeId: this._smeId }
-    this._projectService.saveProject(new ProjectPayload(payload)).subscribe((res) => {
+    this._projectService.saveProject(new ProjectSearchPayload(payload)).subscribe((res) => {
       if (res) {
         this._dialogService.close(res)
       }

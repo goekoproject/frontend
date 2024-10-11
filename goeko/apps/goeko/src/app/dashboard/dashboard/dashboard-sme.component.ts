@@ -33,9 +33,6 @@ export class DashboardSmeComponent {
   private _goToProject(projects: SmeRequestResponse) {
     this._router.navigate(['../project-form', this.userProfile().id, projects.id], {
       relativeTo: this.route.parent,
-      queryParams: {
-        projectId: projects.id,
-      },
     })
   }
 }
