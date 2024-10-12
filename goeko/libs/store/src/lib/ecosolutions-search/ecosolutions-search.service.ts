@@ -5,7 +5,7 @@ import { EcosolutionResult } from '../ecosolutions/ecosolution-result.interface'
 import { EcosolutionSearchRequest } from '../ecosolutions/ecosolution-search.request.model'
 import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.response.interface'
 import { Project } from '../sme/project.interface'
-import { SmeRequestResponse, SmeSaveRecomendationRequest } from '../sme/sme-request.model'
+import { SmeSaveRecomendationRequest } from '../sme/sme-request.model'
 import { TranslateChangeService } from '../util/translate-change'
 
 @Injectable({
@@ -22,7 +22,7 @@ export class EcosolutionsSearchService extends TranslateChangeService {
 
   getSearchEcosolutionsByProjects(id: string) {
     this._http
-      .get<{ projects: Project[] }>(`/v1/ecosolution/search/projects/smes/${id}`)
+      .get<{ projects: Project[] }>(`/v1/ecosolution/search/projects/smes/${id}?lang=en`)
       .pipe(map((res) => res.projects))
       .subscribe((projects) => {
         this.projects.set(projects)

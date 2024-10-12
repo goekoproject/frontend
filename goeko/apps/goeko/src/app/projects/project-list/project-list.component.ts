@@ -22,7 +22,7 @@ export class ProjectListComponent {
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
   public smeId = input<string>('')
-  public displayColumns = ['name', 'date', 'classifications']
+  public displayColumns = ['name', 'date', 'categories', '']
 
   public projects = this._projectServices.projects
 

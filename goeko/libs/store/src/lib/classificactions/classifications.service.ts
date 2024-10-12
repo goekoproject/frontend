@@ -29,7 +29,7 @@ export class ClassificationsService {
   getClassificationsCategory(): Observable<any[]> {
     return this._http
       .get<Category[]>('/v1/classifications/category')
-      .pipe(map((classificationCategory) => mergeCategoriesSectionWithClassificationCategory(classificationCategory)))
+      .pipe(map((classificationCategory) => mergeCategoriesSectionWithClassificationCategory(classificationCategory as any)))
   }
   getClassificationForCategoryTranslated(category: string): Observable<any> {
     return this._http.get<any>(`/v1/classifications/category/translated/${category}?lang=${this.langSignal()}`)

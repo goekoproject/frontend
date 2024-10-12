@@ -12,7 +12,12 @@
     </ng-template>
 
     <ng-template goCellRef let-element>
-      {{ element['classifications'] | splitCategories }}
+      <div class="flex flex-wrap gap-2 p-2">
+        @for (category of element['classifications'] | splitCategories; track category) {
+          <span class="text-greenLime bg-greenPastel rounded-full px-3 py-1.5 text-sm font-semibold"> {{ category }}</span>
+        }
+      </div>
+
     </ng-template>
 
     <ng-template goElementAction let-element>

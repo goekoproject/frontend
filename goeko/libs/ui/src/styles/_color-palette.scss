@@ -24,15 +24,17 @@
   --hp: #d00000;
   --water: #00ffff;
   --border-color: #d9dbe9;
-  --light-gray: #e4e4e4;
-  --pastel-green: #e5f3dd;
-  --lime-green: #44aa0e;
-  --light-pastel-blue: #e4f5fe;
-  --medium-gray: #acacac;
-  --dark-gray: #202020;
-  --stone-gray: #d6d6d6;
-  --charcoal-gray: #4e4e4e;
-  --fog-gray: #d4d4d4;
+  --gray-light: #e4e4e4;
+  --green-pastel: #e5f3dd;
+  --green-lime: #44aa0e;
+  --blue-light-pastel: #e4f5fe;
+  --gray-medium: #acacac;
+  --gray-dark: #202020;
+  --gray-stone: #d6d6d6;
+  --gray-charcoal: #4e4e4e;
+  --gray-fog: #d4d4d4;
+  --gray-smoke: #f5f5f5;
+  --gray-ash: #9D9D9D;
 }
 
 @mixin gradient-linear {

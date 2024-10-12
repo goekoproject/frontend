@@ -15,5 +15,5 @@ export const mergeCategoriesSectionWithClassificationCategory = (classificationC
     return {
       ...category,
       ...findCategoryData,
-    } as MergeWithCategorySection
+    } as any
   })
