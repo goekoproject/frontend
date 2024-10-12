@@ -76,7 +76,7 @@
       }
     }
     @if (id === selectedSlideMain()) {
-      <img [src]="url" [alt]="id" class="rounded-2xl" />
+      <img [src]="url" loading="lazy" [alt]="id" class="aspect-square w-4/6 rounded-2xl" />
     }
   </div>
 </ng-template>
