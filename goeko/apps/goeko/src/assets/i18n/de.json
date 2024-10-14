@@ -584,5 +584,6 @@
   "msg_empty_ecosolutions_notification": "Keine Eco-solutions gefunden, die Ihren Kriterien entsprechen. Ändern Sie Ihre Filter, um mehr Optionen zu sehen.",
   "msg_empty_ecosolutions": "Keine Eco-solutions gefunden",
   "turnOnNotifications": "Benachrichtigungen aktivieren",
-  "exploreNow": "Jetzt erkunden"
+  "exploreNow": "Jetzt erkunden",
+  "msgSearchEcosolutions": "Suchen Sie nach Eco-solutions, die Ihren Bedürfnissen entsprechen"
 }

@@ -20,6 +20,7 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
   private _projectManagmentService = inject(ProjectManagmentService)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
+  public isLoading = signal(false)
 
   public filtersRef: Signal<ProjectEcosolutionsFiltersComponent> = viewChild.required(ProjectEcosolutionsFiltersComponent)
   public smeId = input<string>('')
@@ -46,20 +47,24 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
     const projectEcosolutionQuery = new ProjectEcosolutionsQuery(this.project(), this.smeId())
     this.queryEcosolutions.set(projectEcosolutionQuery)
     this._projectManagmentService.project.set(this.project())
-    this._fetchEcosolutionsCatalog()
+    this.fetchEcosolutionsCatalog()
   }
   toogleFilters = () => {
     this.showFilter.update((value) => !value)
   }
 
-  private _fetchEcosolutionsCatalog = () => {
+  fetchEcosolutionsCatalog = () => {
+    this.isLoading.set(true)
     this._projectManagmentService.getEcosolutionsByProjects(this.queryEcosolutions())
+    setTimeout(() => {
+      this.isLoading.set(false)
+    }, 1000)
   }
 
   toogleFavourite = (ecosolution: EcosolutionResult) => {
     this._projectManagmentService.toogleFavourite(this.smeId(), ecosolution).subscribe((response) => {
       if (response) {
-        this._fetchEcosolutionsCatalog()
+        this.fetchEcosolutionsCatalog()
       }
     })
   }
@@ -84,20 +89,20 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
   }
 
   private _filterByCategory = (ecosolution: EcosolutionResult) => {
-    const appliedCategoryFilters = this.filtersRef().filterCategories()
+    const appliedCategoryFilters = this.filtersRef()?.filterCategories()
     if (appliedCategoryFilters === null || appliedCategoryFilters?.length === 0) {
       return true
     }
     return appliedCategoryFilters?.map((category) => category.code).includes(ecosolution.classification.mainCategory)
   }
   private _filterBySdg = (ecosolution: EcosolutionResult) => {
-    const appliedSdgFilters = this.filtersRef().filterSdg()
+    const appliedSdgFilters = this.filtersRef()?.filterSdg()
     if (appliedSdgFilters === null || appliedSdgFilters?.length === 0) {
       return true
     }
     return appliedSdgFilters?.some((sdg) => ecosolution.sustainableDevelopmentGoals.includes(sdg.code))
   }
   private _getFavoriteEcosolutions = (ecosolution: EcosolutionResult) => {
-    return this.filtersRef().checkFavourite() ? ecosolution.favourite : ecosolution
+    return this.filtersRef()?.checkFavourite() ? ecosolution.favourite : ecosolution
   }
 }

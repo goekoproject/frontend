@@ -585,5 +585,6 @@
   "msg_empty_ecosolutions_notification": "Your best eco-solution is yet to come. We’ll notify you when it comes",
   "msg_empty_ecosolutions": "Your best eco-solution is yet to come",
   "turnOnNotifications": "Turn on notifications",
-  "exploreNow": "Explore now"
+  "exploreNow": "Explore now",
+  "msgSearchEcosolutions": "Searching the best eco-solutions for you"
 }
