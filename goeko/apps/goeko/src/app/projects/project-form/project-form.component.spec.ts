@@ -1,79 +1,148 @@
-import { HttpClientModule } from '@angular/common/http'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { ActivatedRoute } from '@angular/router'
-import { ProjectService, SmeRequestResponse } from '@goeko/store'
+import { ReactiveFormsModule } from '@angular/forms'
+import { ActivatedRoute, provideRouter, Router, RouterModule } from '@angular/router'
+import { CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
+import { Category, EcosolutionsSearchService, Product, UserService } from '@goeko/store'
+import { BadgeModule, ButtonModule } from '@goeko/ui'
+import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
+import { CountProductsPipe } from '../count-products.pipe'
+import { MOCK_GROUPING } from '../mock-grouping.constant'
+import { MOCK_PROJECT } from '../mock-project.constant'
+import { ProjectManagmentService } from '../project-managment.service'
 import { ProjectFormComponent } from './project-form.component'
-const mockSmeRequest = {
-  classifications: [
-    {
-      mainCategory: 'test',
-      subCategory: 'test',
-      products: ['test'],
-    },
-  ],
-  id: '12345',
-  date: '2023-10-01',
-  searchName: 'Sample Search',
-  name: 'Sample Name',
-  notification: {
-    onNewEcosolution: true,
-  },
-} as SmeRequestResponse
 
 describe('ProjectFormComponent', () => {
   let component: ProjectFormComponent
   let fixture: ComponentFixture<ProjectFormComponent>
+  let projectManagmentService: ProjectManagmentService
+  let projectManagmentServiceMock: { updateProject: jest.Mock }
+  const groupingMock = MOCK_GROUPING
+  const mockProject = MOCK_PROJECT
+  let router: Router
 
-  let activatedRouteMock: any
-  let projectServiceMock = {
-    getProjectId: jest.fn(),
-  }
-  let projectService: ProjectService
   beforeEach(async () => {
-    projectServiceMock = {
-      getProjectId: jest.fn().mockReturnValue(of({ id: 'dfa763f0-c81f-410b-859f-eb32365e3cbc', name: 'Test Project' })),
-    }
-
-    activatedRouteMock = {
-      snapshot: {
-        params: {
-          smeId: 'dfa763f0-c81f-410b-859f-eb32365e',
-          projectId: 'dfa763f0-c81f-410b-859f-eb32365e3cbc',
-        },
-      },
+    projectManagmentServiceMock = {
+      updateProject: jest.fn().mockReturnValue(of(true)),
     }
 
     await TestBed.configureTestingModule({
-      imports: [ProjectFormComponent, HttpClientModule],
+      imports: [
+        ButtonModule,
+        TranslateModule.forRoot(),
+        CategoryModule,
+        BadgeModule,
+        SelectSubcategoryProductComponent,
+        ReactiveFormsModule,
+        CountProductsPipe,
+        RouterModule,
+        ProjectFormComponent,
+      ],
       providers: [
-        { provide: ProjectService, useValue: projectServiceMock },
-        { provide: ActivatedRoute, useValue: activatedRouteMock },
+        provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        UserService,
+        EcosolutionsSearchService,
+        { provide: ProjectManagmentService, useValue: projectManagmentServiceMock },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            parent: { snapshot: { params: { id: '123' } } },
+          },
+        },
+        { provide: Router, useValue: { navigate: jest.fn() } },
       ],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ProjectFormComponent)
     component = fixture.componentInstance
-    projectService = TestBed.inject(ProjectService)
+    projectManagmentService = TestBed.inject(ProjectManagmentService)
+
+    fixture.componentRef.setInput('smeId', '123')
+    fixture.componentRef.setInput('groupingForm', groupingMock)
+    fixture.componentRef.setInput('project', mockProject)
+    router = TestBed.inject(Router)
   })
 
   it('should create', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should have the correct project id', () => {
-    expect(component.project()?.id).toBe('dfa763f0-c81f-410b-859f-eb32365e3cbc')
+  it('should initialize form on ngOnInit', () => {
+    component.ngOnInit()
+    expect(component.form).toBeDefined()
+    expect(component.categorySelected()).toEqual(component.groupingForm()[0])
   })
 
-  it('should fetch the project details', () => {
-    jest.spyOn(projectService, 'getProjectId').mockReturnValue(of(mockSmeRequest))
+  it('should set data form if project exists', () => {
+    expect(component.form.value).toBeDefined()
+    expect(component.form.value['co2Emission']['mainInternalCombustionEngine'].length).toBeGreaterThan(0)
+  })
 
-    projectService
-      .getProjectId({ smeId: 'dfa763f0-c81f-410b-859f-eb32365e', projectId: 'dfa763f0-c81f-410b-859f-eb32365e3cbc' })
-      .subscribe((res) => {
-        expect(component.project()?.id).toBe('dfa763f0-c81f-410b-859f-eb32365e3cbc')
-      })
+  it('should select next category', () => {
+    component.nextCategory()
+    expect(component.categorySelected()).toEqual(MOCK_GROUPING[1])
+  })
 
-    expect(projectServiceMock.getProjectId).toHaveBeenCalled()
+  it('should select previous category', () => {
+    component.categorySelected.set(MOCK_GROUPING[1] as Category)
+    component.prevCategory()
+    expect(component.categorySelected()).toEqual(MOCK_GROUPING[0])
+  })
+
+  it('should add product to form by co2Emission', () => {
+    const categoryCode = component.categorySelected()?.code as string
+    const subcategoryCode = 'mainInternalCombustionEngine'
+    const newProduct = [
+      {
+        code: 'equipmentCarrierTruck',
+        label: 'Camion de transport d’équipements',
+        disabled: false,
+      },
+    ] as Product[]
+    const codeProducts = newProduct.map((p) => p.code)
+    component.addProduct(subcategoryCode, newProduct)
+
+    projectManagmentService.updateProject('123', component.form.value).subscribe((res) => {
+      console.log(res)
+    })
+    expect(component.form.get(categoryCode)?.get(subcategoryCode)?.value).toEqual(codeProducts)
+  })
+
+  it('should add product to form by waste', () => {
+    component.categorySelected.set(MOCK_GROUPING[1])
+    const categoryCode = component.categorySelected()?.code as string
+    const subcategoryCode = 'mainCategoryNonInert'
+    const newProduct = [
+      {
+        code: 'metalsAndAlloys',
+        label: 'Métaux et alliages',
+        disabled: false,
+      },
+    ] as Product[]
+    const codeProducts = newProduct.map((p) => p.code)
+    component.addProduct(subcategoryCode, newProduct)
+
+    expect(component.form.get(categoryCode)?.get(subcategoryCode)?.value).toEqual(codeProducts)
+  })
+
+  it('should save projects', () => {
+    const navigateSpy = jest.spyOn(router, 'navigate')
+
+    const service = projectManagmentServiceMock.updateProject.mockReturnValue(of(true))
+    service().subscribe((res: any) => {
+      expect(res).toBeTruthy()
+      expect(navigateSpy).toHaveBeenCalledWith(['search', '123', '456'])
+    })
+
+    component.ngOnInit()
+    const spy = jest.spyOn(projectManagmentService, 'updateProject').mockReturnValue(of(true))
+
+    component.searchEcosolutions()
+    fixture.detectChanges()
+    expect(spy).toHaveBeenCalled()
   })
 })

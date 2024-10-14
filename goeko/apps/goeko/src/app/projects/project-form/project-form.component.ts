@@ -33,14 +33,15 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
 export class ProjectFormComponent implements OnInit {
   compareWithProducts = compareWithProducts
 
+  res: any
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
   private _fb = inject(FormBuilder)
 
   private _projectManagmentServices = inject(ProjectManagmentService)
-  public smeId = input<string>('')
-  project = input.required<Project>()
-  groupingForm = input.required<Category[]>()
+  public smeId = input<string>()
+  public project = input.required<Project>()
+  public groupingForm = input.required<Category[]>()
 
   public categorySelected = signal<Category | undefined>(undefined)
   public indexCategorySelected = computed(() => {
@@ -92,15 +93,15 @@ export class ProjectFormComponent implements OnInit {
   }
   nextCategory() {
     const nextIndex = this.indexCategorySelected() + 1
-    const nextCategory = this.groupingForm()?.at(nextIndex)
-    if (nextCategory) {
+    if (nextIndex >= 0 && nextIndex < this.groupingForm().length) {
+      const nextCategory = this.groupingForm()?.at(nextIndex) as Category
       this.selectCategory(nextCategory)
     }
   }
   prevCategory() {
     const prevIndex = this.indexCategorySelected() - 1
-    const prevCategory = this.groupingForm()?.at(prevIndex)
-    if (prevCategory) {
+    if (prevIndex >= 0 && prevIndex < this.groupingForm().length) {
+      const prevCategory = this.groupingForm()?.at(prevIndex) as Category
       this.selectCategory(prevCategory)
     }
   }
@@ -114,6 +115,7 @@ export class ProjectFormComponent implements OnInit {
   searchEcosolutions() {
     this._saveProjects().subscribe((res) => {
       if (res) {
+        this.res = res
         this._router.navigate(['search', this.smeId(), this.project().id], { relativeTo: this._route.parent })
       }
     })
