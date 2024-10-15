@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, inject, model, signal, viewChildren } from '@angular/core'
+import { Component, ElementRef, inject, model, OnInit, signal, viewChildren } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { SdgIconsComponent } from '@goeko/business-ui'
-import { Category, ProjectService, SDGLabel } from '@goeko/store'
-import { TranslateModule } from '@ngx-translate/core'
+import { Category, SDGLabel } from '@goeko/store'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { ProjectManagmentService } from './project-managment.service'
 
 export interface Filters {
   categories: Category[]
@@ -15,9 +16,11 @@ export interface Filters {
   templateUrl: './project-ecosolutions-filters.component.html',
   styleUrl: './project-ecosolutions-filters.component.scss',
 })
-export class ProjectEcosolutionsFiltersComponent {
+export class ProjectEcosolutionsFiltersComponent implements OnInit {
+  private _projectManagmenetService = inject(ProjectManagmentService)
   filtersVisible = model<boolean>(true)
-  protected classificationsFilters = toSignal(inject(ProjectService).getGroupingFormCategories())
+  protected classificationsFilters = toSignal(this._projectManagmenetService.getGroupingFormCategories(), { initialValue: [] })
+  private _translateService = inject(TranslateService)
 
   private _categoriesCheckbox = viewChildren<ElementRef<HTMLInputElement>>('categories')
   //Filters
@@ -31,6 +34,14 @@ export class ProjectEcosolutionsFiltersComponent {
       .map((checkbox) => {
         return JSON.parse(checkbox.nativeElement.value) as unknown as Category
       })
+  }
+
+  ngOnInit(): void {
+    this._translateService.onLangChange.subscribe((res) => {
+      this._projectManagmenetService.getGroupingFormCategories().subscribe((categories) => {
+        this.classificationsFilters = signal(categories)
+      })
+    })
   }
   applyFiltersForCategories() {
     this.filterCategories.set(this._checkedCategories)

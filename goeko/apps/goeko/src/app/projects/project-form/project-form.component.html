@@ -48,9 +48,9 @@
     }
 
     @if (indexCategorySelected() < groupingForm().length - 1) {
-      <button class="ml-auto" go-button (click)="nextCategory()">{{ 'next' | translate }}</button>
+      <button class="ml-auto" go-button (click)="nextCategory()">{{ 'MENU_USER_SME.dialogButtonNext' | translate }}</button>
     } @else {
-      <button class="ml-auto" go-button (click)="searchEcosolutions()">{{ 'search' | translate }}</button>
+      <button class="ml-auto" go-button (click)="searchEcosolutions()">{{ 'searchEcosolutions' | translate }}</button>
     }
   </div>
 } @placeholder {
