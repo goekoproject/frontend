@@ -1,15 +1,16 @@
-<div class="relative flex gap-4">
-  @if (ecosolutionsListForProject().length !== 0) {
-    <goeko-project-ecosolutions-filters class="mt-3 w-max" [(filtersVisible)]="showFilter"></goeko-project-ecosolutions-filters>
-  }
+<div class="flex gap-4">
+  <goeko-project-ecosolutions-filters
+    class="mt-3 w-max"
+    [ngClass]="{ visible: ecosolutionsListForProject().length !== 0 }"
+    [(filtersVisible)]="showFilter"></goeko-project-ecosolutions-filters>
 
   <!--CONTENT-->
-  <div class="flex h-screen w-4/6 flex-grow flex-col gap-4">
+  <div class="relative flex h-screen w-4/6 flex-grow flex-col gap-4">
     <h1 class="text-2xl font-semibold">
-      Best eco-solutions for <span class="text-greenLime">{{ project().name }}</span>
-      <p class="text-base font-normal">{{ totalEcosolutions() }} results</p>
+      {{ 'subtitlePageCatalog' | translate }} <span class="text-greenLime">{{ project().name }}</span>
+      <p class="text-base font-normal">{{ totalEcosolutions() }} {{ 'results' | translate }}</p>
     </h1>
-    <button go-button appearance="white" class="absolute right-0 top-0">
+    <button go-button appearance="white" class="absolute right-0 top-0" (click)="goToProjectForm()">
       {{ 'edit' | translate }}
     </button>
     <!--APPLIED FILTERS-->

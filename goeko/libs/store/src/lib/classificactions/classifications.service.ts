@@ -16,14 +16,20 @@ export class ClassificationsService {
   langSignal = signal(this._translateService.currentLang || this._translateService.defaultLang)
 
   private categories = toSignal(this.getClassificationsCategory(), { initialValue: [] })
+
   groupingFormCategories(grouping: string = 'construction'): Observable<Category[]> {
-    return this._http.get<Category[]>(`/v1/classifications/grouping/form/code/${grouping}/depth/translated?lang=fr`).pipe(shareReplay(1))
+    return this._http
+      .get<Category[]>(`/v1/classifications/grouping/form/code/${grouping}/depth/translated?lang=${this.langSignal()}`)
+      .pipe(shareReplay(1))
   }
 
   constructor() {
     this._translateService.onLangChange
       .pipe()
-      .subscribe((current) => this.langSignal.set(current.lang === CODE_LANG.EN ? CODE_LANG.GB : current.lang))
+      .subscribe((current) =>
+        this.langSignal.set(current.lang === CODE_LANG.EN ? CODE_LANG.GB : current.lang)
+
+    )
   }
 
   getClassificationsCategory(): Observable<any[]> {

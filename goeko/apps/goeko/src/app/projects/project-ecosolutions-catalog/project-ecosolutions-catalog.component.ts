@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, input, OnInit, Signal, signal, viewChild } from '@angular/core'
+import { Component, computed, inject, input, OnDestroy, OnInit, Signal, signal, viewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SelectLocationsService } from '@goeko/business-ui'
 import { EcosolutionResult, EcosolutionsService, EcosolutionsTaggingService, Project, TAGGING } from '@goeko/store'
 import { ButtonModule, CardProductComponent, UiSuperSelectModule } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { ProjectEcosolutionsFiltersComponent } from '../project-ecosolutions-filters.component'
 import { ProjectEcosolutionsQuery } from '../project-ecosolutions-query.model'
 import { ProjectManagmentService } from '../project-managment.service'
@@ -16,13 +16,15 @@ import { ProjectManagmentService } from '../project-managment.service'
   templateUrl: './project-ecosolutions-catalog.component.html',
   styleUrl: './project-ecosolutions-catalog.component.scss',
 })
-export class ProjectEcosolutionCatalogComponent implements OnInit {
+export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
   private _projectManagmentService = inject(ProjectManagmentService)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
+  private _translateService = inject(TranslateService)
+
   public isLoading = signal(false)
 
-  public filtersRef: Signal<ProjectEcosolutionsFiltersComponent> = viewChild.required(ProjectEcosolutionsFiltersComponent)
+  private _filtersRef: Signal<ProjectEcosolutionsFiltersComponent | undefined> = viewChild(ProjectEcosolutionsFiltersComponent)
   public smeId = input<string>('')
   public project = input<Project>({} as Project)
   public country = computed(() => (this.project()?.locations ? this.project()?.locations[0]?.country.label : ''))
@@ -48,6 +50,20 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
     this.queryEcosolutions.set(projectEcosolutionQuery)
     this._projectManagmentService.project.set(this.project())
     this.fetchEcosolutionsCatalog()
+    this._translateService.onLangChange.subscribe((res) => {
+      this._fetchData(res.lang)
+    })
+  }
+
+  ngOnDestroy(): void {
+    this._ecosolutionsSearchSignal.set([])
+  }
+
+  private _fetchData(lang: string) {
+    this._router.navigate([], {
+      relativeTo: this._router.routerState.root,
+      queryParams: { lang: lang },
+    })
   }
   toogleFilters = () => {
     this.showFilter.update((value) => !value)
@@ -55,8 +71,9 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
 
   fetchEcosolutionsCatalog = () => {
     this.isLoading.set(true)
-    this._projectManagmentService.getEcosolutionsByProjects(this.queryEcosolutions())
     setTimeout(() => {
+      this._projectManagmentService.getEcosolutionsByProjects(this.queryEcosolutions())
+
       this.isLoading.set(false)
     }, 1000)
   }
@@ -89,20 +106,26 @@ export class ProjectEcosolutionCatalogComponent implements OnInit {
   }
 
   private _filterByCategory = (ecosolution: EcosolutionResult) => {
-    const appliedCategoryFilters = this.filtersRef()?.filterCategories()
-    if (appliedCategoryFilters === null || appliedCategoryFilters?.length === 0) {
+    const appliedCategoryFilters = this._filtersRef()?.filterCategories()
+    if (!appliedCategoryFilters || appliedCategoryFilters?.length === 0) {
       return true
     }
     return appliedCategoryFilters?.map((category) => category.code).includes(ecosolution.classification.mainCategory)
   }
   private _filterBySdg = (ecosolution: EcosolutionResult) => {
-    const appliedSdgFilters = this.filtersRef()?.filterSdg()
-    if (appliedSdgFilters === null || appliedSdgFilters?.length === 0) {
+    const appliedSdgFilters = this._filtersRef()?.filterSdg()
+    if (!appliedSdgFilters || appliedSdgFilters?.length === 0) {
       return true
     }
-    return appliedSdgFilters?.some((sdg) => ecosolution.sustainableDevelopmentGoals.includes(sdg.code))
+    return appliedSdgFilters?.some((sdg) => ecosolution.sustainableDevelopmentGoals?.includes(sdg.code))
   }
   private _getFavoriteEcosolutions = (ecosolution: EcosolutionResult) => {
-    return this.filtersRef()?.checkFavourite() ? ecosolution.favourite : ecosolution
+    return this._filtersRef()?.checkFavourite() ? ecosolution.favourite : ecosolution
+  }
+
+  goToProjectForm = () => {
+    this._router.navigate(['project-form', this.smeId(), this.project().id], {
+      relativeTo: this._route.parent,
+    })
   }
 }

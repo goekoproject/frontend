@@ -63,4 +63,8 @@ export class ProjectManagmentService {
     }
     return this._taggingServices.addFavorite(smeId, ecosolution.id)
   }
+
+  getAllDataCategories() {
+    return this._classificationsServices.getAllDataCategories()
+  }
 }

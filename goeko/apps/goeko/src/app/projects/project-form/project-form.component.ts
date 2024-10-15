@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CATEGORIES, CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
 import { Category, Product, Project } from '@goeko/store'
 import { BadgeModule, ButtonModule } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { CountProductsPipe } from '../count-products.pipe'
 import { ProjectEcosolutionParams } from '../project-ecosolutions-query.model'
 import { ProjectForm } from '../project-form.model'
@@ -33,11 +33,10 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
 export class ProjectFormComponent implements OnInit {
   compareWithProducts = compareWithProducts
 
-  res: any
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
   private _fb = inject(FormBuilder)
-
+  private _translateService = inject(TranslateService)
   private _projectManagmentServices = inject(ProjectManagmentService)
   public smeId = input<string>()
   public project = input.required<Project>()
@@ -52,8 +51,17 @@ export class ProjectFormComponent implements OnInit {
     this._initForm()
     this.categorySelected.set(this.groupingForm()[0])
     this._setDataForm()
+    this._translateService.onLangChange.subscribe((res) => {
+      this._fetchData(res.lang)
+    })
   }
 
+  private _fetchData(lang: string) {
+    this._router.navigate([], {
+      relativeTo: this._router.routerState.root,
+      queryParams: { lang: lang },
+    })
+  }
   private _setDataForm() {
     if (this.project()) {
       const projectFormValue = ProjectForm.transform(this.project().classifications || [])
@@ -115,7 +123,6 @@ export class ProjectFormComponent implements OnInit {
   searchEcosolutions() {
     this._saveProjects().subscribe((res) => {
       if (res) {
-        this.res = res
         this._router.navigate(['search', this.smeId(), this.project().id], { relativeTo: this._route.parent })
       }
     })

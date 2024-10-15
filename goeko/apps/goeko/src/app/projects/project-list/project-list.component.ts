@@ -52,9 +52,6 @@ export class ProjectListComponent {
   goToEdit(project: Project) {
     this._router.navigate(['project-form', this.smeId(), project.id], {
       relativeTo: this._route.parent,
-      queryParams: {
-        projectId: project.id,
-      },
     })
   }
   deleteProject(project: Project) {

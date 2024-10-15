@@ -585,5 +585,7 @@
   "msg_empty_ecosolutions": "Tu mejor solución ecológica está por llegar.",
   "turnOnNotifications": "Activa las notificaciones",
   "exploreNow": "Explora ahora",
-  "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti"
+  "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
+  "subtitlePageCatalog": "La mejor eco-solución para ",
+  "results":"Resultados"
 }

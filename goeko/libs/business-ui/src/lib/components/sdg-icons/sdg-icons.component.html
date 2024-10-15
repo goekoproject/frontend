@@ -2,7 +2,7 @@
   @defer (when !justIcon()) {
     @for (sdg of sdgs() | orderBy; track sdg.code; let i = $index) {
       <label
-        class="relative flex max-h-16 cursor-pointer gap-2 rounded-md bg-white p-2 shadow-sm hover:bg-slate-100"
+        class="relative flex max-h-16 cursor-pointer items-center gap-2 rounded-md bg-white p-2 shadow-sm hover:bg-slate-100"
         [ngClass]="{ 'border-2 border-primary-default': sdgCodeSelected() && sdgCodeSelected().includes(sdg.code) }">
         <input
           class="absolute opacity-0"

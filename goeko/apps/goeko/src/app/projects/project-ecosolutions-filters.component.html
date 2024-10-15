@@ -1,5 +1,5 @@
 <div
-  class="bg-blueLightPastel absolute top-0 z-10 max-w-64 rounded-lg p-4 sm:relative sm:w-full"
+  class="bg-blueLightPastel absolute top-0 z-10 max-w-72 rounded-lg p-4 sm:relative sm:w-full"
   [ngClass]="{
     'collapse-enter': !filtersVisible(),
     'collapse-enter-active': filtersVisible(),
@@ -16,7 +16,7 @@
       <div class="mt-2">
         <label class="flex cursor-pointer items-center space-x-2 text-sm">
           <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyFavourites()" />
-          <span>Favourites</span>
+          <span>{{'MENU_USER.favourites' | translate}}</span>
         </label>
       </div>
     </div>
