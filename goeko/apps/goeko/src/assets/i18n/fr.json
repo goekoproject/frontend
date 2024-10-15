@@ -114,15 +114,6 @@
     "CHF": "Franc suisse",
     "EU": "Euro"
   },
-  "DIALOG": {
-    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
-    "messageNotification": "Activez les notifications par email pour recevoir les dernières éco-solutions correspondant à vos besoins.",
-    "messageSendOk": "Votre message a été envoyé avec succès !",
-    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
-    "messaggeProfileUncompletedTitle": "Complétez votre profil",
-    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
-    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?"
-  },
   "ERROR_MESSAGES": {
     "400": "Vérifiez vos infos et réessayez.",
     "404": "Impossible de trouver cela. Vérifiez le lien.",
@@ -494,6 +485,16 @@
     "body": "Nous sommes ravis que vous soyez des nôtres ! Nous vous avons envoyé un lien de vérification à votre adresse e-mail.",
     "title": "Consultez votre boîte de réception."
   },
+  "DIALOG": {
+    "messageSendOk": "Votre message a été envoyé avec succès !",
+    "messageLeadDuplicated": "Vous avez déjà contacté cette écosolution, s'il ne répond toujours pas, veuillez contacter {{email}}",
+    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
+    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
+    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
+    "messaggeProfileUncompletedTitle": "Complétez votre profil",
+    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
+    "messageNotification": "Activez les notifications par email pour recevoir les dernières éco-solutions correspondant à vos besoins."
+  },
   "a": "à",
   "yourEcosolution": "Votre éco-solution",
   "accept": "Accepter",
@@ -587,5 +588,5 @@
   "exploreNow": "Explorer maintenant",
   "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
   "subtitlePageCatalog": "Trouvez des éco-solutions pour votre entreprise",
-"results": "résultats"
+  "results": "résultats"
 }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { LeadCreate, LeadService, UserService } from '@goeko/store'
 import { ButtonModule, DialogConfig, DialogMessageService, GoInputModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { VAR_GENERAL } from '../../utils/var-general.constants'
 
 interface LeadForm {
   message: any
@@ -52,7 +53,7 @@ export class LeadFormComponent implements OnInit {
       cleantechId: this.cleantechId,
       smeId: this._userService.userProfile().id,
       ecosolutionId: this.ecosolutionId,
-      message: ''
+      message: '',
     }
   }
   private _initForm() {
@@ -67,9 +68,17 @@ export class LeadFormComponent implements OnInit {
     }
 
     this._buildMessage()
-    this._leadService.create(this.dataLead).subscribe(() => {
-      this._dialogCreateLead()
-    })
+    this._leadService.create(this.dataLead).subscribe(
+      (next) => {
+        this._dialogCreateLead()
+      },
+      (error) => {
+        console.error(error)
+        if (error.status === 400) {
+          this._dialogMessage.open(this._getDataDialogDuplicadedLead())
+        }
+      },
+    )
   }
 
   private _buildMessage() {
@@ -82,13 +91,21 @@ export class LeadFormComponent implements OnInit {
   }
 
   private _dialogCreateLead() {
-    const dataDialog = this._getDataDialog()
+    const dataDialog = this._getDataDialogOK()
     this._dialogMessage.open(dataDialog)
   }
-  private _getDataDialog(): DialogConfig {
+  private _getDataDialogOK(): DialogConfig {
     return {
       title: this._translateService.instant('DIALOG.messageSendOk'),
       body: this._translateService.instant('DIALOG.messageBodyLead'),
+      buttonPrimary: this._translateService.instant('accept'),
+    }
+  }
+  private _getDataDialogDuplicadedLead(): DialogConfig {
+    return {
+      body: this._translateService.instant('DIALOG.messageLeadDuplicated', {
+        email: VAR_GENERAL.GOEKO_EMAIL,
+      }),
       buttonPrimary: this._translateService.instant('accept'),
     }
   }

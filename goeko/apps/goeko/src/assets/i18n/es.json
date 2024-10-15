@@ -114,15 +114,6 @@
     "CHF": "Franco Suizo",
     "EU": "Euro"
   },
-  "DIALOG": {
-    "messageBodyLead": "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
-    "messageNotification": "Active las notificaciones por email para recibir las últimas ecosoluciones que se adapten a sus necesidades.",
-    "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
-    "messaggeProfileUncompletedBody": "Actualice su perfil para acceder a todas las herramientas de Goeko.",
-    "messaggeProfileUncompletedTitle": "Complete su perfil",
-    "saveMessageGeneric": "¿Desea guardar los datos antes de continuar?",
-    "warningDelete": "¿Está seguro de que deseas eliminar {{item}}?"
-  },
   "ERROR_MESSAGES": {
     "400": "Revisa tu info y prueba otra vez.",
     "404": "No encontramos eso. Revisa el enlace.",
@@ -496,6 +487,16 @@
     "body": "¡Nos alegra que estés con nosotros! Te hemos enviado un enlace de verificación a tu dirección de correo electrónico.",
     "title": "Revisa tu bandeja de entrada."
   },
+  "DIALOG": {
+    "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
+    "messageLeadDuplicated": "Ya has contactado con esta ecosolución, si aún no responde, ponte en contacto con {{email}}",
+    "messageBodyLead": "Un representante de Goeko estará encantado de atender cualquier consulta que tenga.",
+    "warningDelete": "¿Está seguro de que deseas eliminar {{item}}?",
+    "saveMessageGeneric": "¿Desea guardar los datos antes de continuar?",
+    "messaggeProfileUncompletedTitle": "Complete su perfil",
+    "messaggeProfileUncompletedBody": "Actualice su perfil para acceder a todas las herramientas de Goeko.",
+    "messageNotification": "Active las notificaciones por email para recibir las últimas ecosoluciones que se adapten a sus necesidades."
+  },
   "a": "a",
   "yourEcosolution": "Tu Ecosolucion",
   "accept": "Aceptar",
@@ -587,5 +588,5 @@
   "exploreNow": "Explora ahora",
   "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
   "subtitlePageCatalog": "La mejor eco-solución para ",
-  "results":"Resultados"
+  "results": "Resultados"
 }

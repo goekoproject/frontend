@@ -5,6 +5,7 @@ import { CleanTechService, CleantechsUser, SmeService, SmeUser, USER_TYPE, UserS
 import { MESSAGE_TYPE } from '@goeko/ui'
 import { Observable } from 'rxjs'
 import { DATA_ACTOR_SWITCH } from '../data-actors-switch.constants'
+import { GoDateFormatPipe } from '@goeko/ui'
 
 interface User {
   id: number
@@ -12,6 +13,7 @@ interface User {
   country: string
   email: string
   website: string
+  creationDate: string
 }
 type DataSourcesByUserType = {
   [key in UserType]: Observable<unknown>
@@ -19,7 +21,7 @@ type DataSourcesByUserType = {
 @Component({
   selector: 'goeko-data-admin',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GoDateFormatPipe],
   providers: [SmeService, CleanTechService, MessageService],
   templateUrl: './admin-users.component.html',
   styleUrl: './admin-users.component.scss',
@@ -50,6 +52,10 @@ export class AdminUserComponent {
     {
       title: 'WEBSITE',
       key: 'website',
+    },
+    {
+      title: 'CREATION DATE',
+      key: 'creationDate',
     },
   ]
 

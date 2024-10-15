@@ -114,15 +114,6 @@
     "CHF": "Schweizer Franken",
     "EU": "Euro"
   },
-  "DIALOG": {
-    "messageBodyLead": "Ein Goeko-Vertreter steht Ihnen gerne für alle Fragen zur Verfügung.",
-    "messageNotification": "Aktivieren Sie E-Mail-Benachrichtigungen, um die neuesten eco-solutions zu erhalten, die Ihren Bedürfnissen entsprechen.",
-    "messageSendOk": "Ihre Nachricht wurde erfolgreich gesendet!",
-    "messaggeProfileUncompletedBody": "Aktualisieren Sie Ihr Profil, um auf alle Goeko-Tools zugreifen zu können.",
-    "messaggeProfileUncompletedTitle": "Vervollständigen Sie Ihr Profil",
-    "saveMessageGeneric": "Möchten Sie die Daten vor dem Fortfahren speichern?",
-    "warningDelete": "Sind Sie sicher, dass Sie {{item}} löschen möchten?"
-  },
   "ERROR_MESSAGES": {
     "400": "Überprüfen Sie Ihre Daten und versuchen Sie es erneut.",
     "404": "Konnte das nicht finden. Überprüfen Sie den Link.",
@@ -493,6 +484,16 @@
   "VERIFY_EMAIL": {
     "body": "Wir freuen uns, dass Sie bei uns sind! Wir haben Ihnen einen Bestätigungslink an Ihre E-Mail-Adresse gesendet.",
     "title": "Überprüfen Sie Ihren Posteingang"
+  },
+  "DIALOG": {
+    "messageSendOk": "Ihre Nachricht wurde erfolgreich gesendet!",
+    "messageLeadDuplicated": "Sie haben diese Ecosolution bereits kontaktiert, wenn sie immer noch nicht antwortet, kontaktieren Sie bitte {{email}}",
+    "messageBodyLead": "Ein Goeko-Vertreter steht Ihnen gerne für alle Fragen zur Verfügung.",
+    "warningDelete": "Sind Sie sicher, dass Sie {{item}} löschen möchten?",
+    "saveMessageGeneric": "Möchten Sie die Daten vor dem Fortfahren speichern?",
+    "messaggeProfileUncompletedTitle": "Vervollständigen Sie Ihr Profil",
+    "messaggeProfileUncompletedBody": "Aktualisieren Sie Ihr Profil, um auf alle Goeko-Tools zugreifen zu können.",
+    "messageNotification": "Aktivieren Sie E-Mail-Benachrichtigungen, um die neuesten eco-solutions zu erhalten, die Ihren Bedürfnissen entsprechen."
   },
   "a": "zu",
   "yourEcosolution": "Ihre Ökolösung",
