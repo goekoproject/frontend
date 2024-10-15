@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core'
+import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
 import { SmeRequestResponse, UserService } from '@goeko/store'
@@ -18,9 +18,7 @@ export class DashboardSmeComponent {
     private _router: Router,
     public route: ActivatedRoute,
     private _dialogService: DialogService,
-  ) {
-    effect(() => {})
-  }
+  ) {}
 
   openNewProjectDialog() {
     this._dialogService
