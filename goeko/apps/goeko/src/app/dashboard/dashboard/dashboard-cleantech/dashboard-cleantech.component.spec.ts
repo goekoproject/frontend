@@ -33,8 +33,8 @@ describe('DashboardCleantechComponent', () => {
       declarations: [DashboardCleantechComponent],
       imports: [TranslateModule.forRoot(), RouterModule.forRoot([]), ButtonModule],
       providers: [
-        provideHttpClientTesting(),
         provideHttpClient(withInterceptors([handlerHttpInterceptor])),
+        provideHttpClientTesting(),
         { provide: DashboardCleantechService, useValue: mockDashboardCleantechService },
         { provide: LeadService, useValue: mockLeadService },
         { provide: UserService, useValue: mockUserService },

@@ -13,55 +13,57 @@
 <ng-template #formSelectLocation>
   <div class="select-profile" [formGroup]="form">
     <div formArrayName="locations" class="flex flex-col gap-4 divide-y">
-      @for (location of controlLocations.controls; track location; let i = $index) {
-        <div [formGroupName]="i" class="locations-selected">
-          <div [formGroupName]="controlNameCountry" class="flex w-full flex-col gap-4">
-            @if (controlCountryCodeByIndex) {
-              <ui-super-select
-                class="w-full"
-                [placeholder]="'FORM_LABEL.country' | translate"
-                [formControlName]="'code'"
-                [id]="controlNameCountry"
-                [compareWith]="defaultSetSuperSelect">
-                <label title for="{{ controlNameCountry }}">
-                  {{ 'FORM_LABEL.country' | translate }}
-                </label>
-                @for (option of countries(); track option.code; let first = $first) {
-                  <super-option [value]="option" [valueSelected]="first">
-                    {{ option.label | translate }}
-                  </super-option>
-                }
-              </ui-super-select>
-            }
-            @if (dataSourceSelect.has(location.value.country.code.code)) {
-              <div class="flex items-center gap-4">
+      @defer (when controlLocations.controls) {
+        @for (location of controlLocations.controls; track location; let i = $index) {
+          <div [formGroupName]="i" class="locations-selected">
+            <div [formGroupName]="controlNameCountry" class="flex w-full flex-col gap-4">
+              @if (controlCountryCodeByIndex) {
                 <ui-super-select
                   class="w-full"
-                  [placeholder]="'regions' | translate"
-                  [formControlName]="'regions'"
-                  [id]="controlNameProvince"
-                  [multiple]="true"
+                  [placeholder]="'FORM_LABEL.country' | translate"
+                  [formControlName]="'code'"
+                  [id]="controlNameCountry"
                   [compareWith]="defaultSetSuperSelect">
-                  <label title for="{{ controlNameProvince }}">
-                    {{ 'FORM_LABEL.province' | translate }}
+                  <label title for="{{ controlNameCountry }}">
+                    {{ 'FORM_LABEL.country' | translate }}
                   </label>
-
-                  @for (option of this.dataSourceSelect.get(location.value.country.code.code); track option) {
-                    @if (option.code === optionAllProvince.code) {
-                      <super-option [value]="option" (click)="selectALL()">
-                        {{ option.label | translate }}
-                      </super-option>
-                    } @else {
-                      <super-option [value]="option" (click)="deselectAll()">
-                        {{ option.label | translate }}
-                      </super-option>
-                    }
+                  @for (option of countries(); track option.code; let first = $first) {
+                    <super-option [value]="option" [valueSelected]="first">
+                      {{ option.label | translate }}
+                    </super-option>
                   }
                 </ui-super-select>
-              </div>
-            }
+              }
+              @if (dataSourceSelect.has(location.value.country.code.code)) {
+                <div class="flex items-center gap-4">
+                  <ui-super-select
+                    class="w-full"
+                    [placeholder]="'regions' | translate"
+                    [formControlName]="'regions'"
+                    [id]="controlNameProvince"
+                    [multiple]="true"
+                    [compareWith]="defaultSetSuperSelect">
+                    <label title for="{{ controlNameProvince }}">
+                      {{ 'FORM_LABEL.province' | translate }}
+                    </label>
+
+                    @for (option of this.dataSourceSelect.get(location.value.country.code.code); track option) {
+                      @if (option.code === optionAllProvince.code) {
+                        <super-option [value]="option" (click)="selectALL()">
+                          {{ option.label | translate }}
+                        </super-option>
+                      } @else {
+                        <super-option [value]="option" (click)="deselectAll()">
+                          {{ option.label | translate }}
+                        </super-option>
+                      }
+                    }
+                  </ui-super-select>
+                </div>
+              }
+            </div>
           </div>
-        </div>
+        }
       }
     </div>
   </div>

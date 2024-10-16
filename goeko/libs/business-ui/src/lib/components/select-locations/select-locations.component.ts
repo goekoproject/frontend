@@ -69,8 +69,9 @@ export class SelectLocationsComponent implements AfterViewInit {
   }
   public get controlCountryCodeByIndex() {
     return (
-      ((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup
-    )?.controls['code']
+      (((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup)
+        ?.controls['code'] || 0
+    )
   }
   public get controlCountryRegionsByIndex() {
     return (
