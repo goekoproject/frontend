@@ -35,7 +35,7 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         required: true,
       },
       {
-        controlName: 'companyId',
+        controlName: 'identifier',
         label: 'FORM_LABEL.companyId',
         type: 'text',
         required: true,

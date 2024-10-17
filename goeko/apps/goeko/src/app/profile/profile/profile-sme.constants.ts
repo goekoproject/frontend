@@ -24,7 +24,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         required: true,
       },
       {
-        controlName: 'companyId',
+        controlName: 'identifier',
         label: 'FORM_LABEL.companyId',
         type: 'text',
         required: true,

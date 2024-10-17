@@ -27,7 +27,7 @@ export const smeFormGroup = new FormGroup({
   employees: new FormControl('', [Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
   companyCountry: new FormControl('', Validators.required),
-  companyId: new FormControl('', [Validators.required, validateCompanyId()]),
+  identifier: new FormControl('', [Validators.required, validateCompanyId()]),
 })
 
 export const cleanTechFormGroup = new FormGroup({
@@ -39,5 +39,5 @@ export const cleanTechFormGroup = new FormGroup({
   city: new FormControl(),
   externalId: new FormControl(),
   companyCountry: new FormControl('', Validators.required),
-  companyId: new FormControl('', [Validators.required, validateCompanyId()]),
+  identifier: new FormControl('', [Validators.required, validateCompanyId()]),
 })

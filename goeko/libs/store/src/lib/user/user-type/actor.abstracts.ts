@@ -9,5 +9,6 @@ export abstract class Actor {
     country?: string;
     city?: string;
     logo?: string;
+    identifier!: string;
 
 }
