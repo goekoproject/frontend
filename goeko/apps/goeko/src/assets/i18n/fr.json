@@ -237,7 +237,8 @@
     "aboutGoEKo": "A propos de GoEko",
     "blog": "Blog",
     "contacttUs": "Contact",
-    "login": "Login "
+    "login": "Se connecter",
+    "signup": "S'inscrire"
   },
   "MENU_USER": {
     "dashboard": "Tableau de bord",

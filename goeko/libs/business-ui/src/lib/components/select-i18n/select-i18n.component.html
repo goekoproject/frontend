@@ -1,5 +1,5 @@
 <button go-button appearance="flat" class="select-langs" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="toggle()">
-  <span class="fi fi-{{ selectedLand() }}"></span>
+  <span class="fi fi-{{ selectedLand() === 'en' ? 'gb' : selectedLand() }}"></span>
   <span class="material-symbols-rounded"> expand_more </span>
 </button>
 <ng-template
