@@ -26,6 +26,10 @@ export class UserCleantechPayload {
     this.logo = dataForm.logo
     this.externalId = dataForm.externalId
     this.phoneNumber = dataForm.phoneNumber
-    this.notification = dataForm.notification
+    this.notification = {
+      email: dataForm.email,
+      phoneNumber: dataForm.phoneNumber,
+      lang: dataForm.comunicationLanguage
+    }
   }
 }

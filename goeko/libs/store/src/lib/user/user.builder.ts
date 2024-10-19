@@ -24,6 +24,7 @@ export class SmeBuilder implements IUserBuilder<SmeUser> {
     this.smeUser.locations = data?.locations
     this.smeUser.employees = data?.employees
     this.smeUser.identifier = data?.identifier
+    this.smeUser.notification = data?.notification
     return this
   }
   build() {
@@ -47,6 +48,7 @@ export class CleantechBuilder implements IUserBuilder<CleantechsUser> {
     this.cleantechUser.logo = data?.logo
     this.cleantechUser.externalId = data?.externalId
     this.cleantechUser.identifier = data?.identifier
+    this.cleantechUser.notification = data?.notification
     return this
   }
   build() {

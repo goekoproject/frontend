@@ -17,8 +17,8 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         required: true,
       },
       {
-        controlName: 'companyCountry',
-        label: 'FORM_LABEL.companyCountry',
+        controlName: 'comunicationLanguage',
+        label: 'FORM_LABEL.comunicationLanguage',
         type: 'select',
         dataSelectKey: 'countries',
         required: true,
@@ -40,6 +40,11 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         label: 'FORM_LABEL.website',
         type: 'url',
         placeholder: 'www.example.com',
+      },
+      {
+        controlName: 'phoneNumber',
+        label: 'FORM_LABEL.phoneNumber',
+        type: 'text',
       },
     ],
   },

@@ -1,4 +1,5 @@
 import { USER_TYPE } from "../user-type.constants";
+import { NotificationProfile } from "./user-payload.model";
 
 export abstract class Actor {
     id!: string;
@@ -10,5 +11,7 @@ export abstract class Actor {
     city?: string;
     logo?: string;
     identifier!: string;
+    notification!: NotificationProfile;
+
 
 }

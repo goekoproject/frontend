@@ -91,6 +91,18 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit() {
     this._profieService.fetchUser()
+
+    if (this.userType() === USER_TYPE.SME) {
+      this.form.get('locations')?.valueChanges.subscribe(() => {
+        this.form.get('identifier')?.updateValueAndValidity();
+      });
+    }
+
+    if (this.userType() === USER_TYPE.CLEANTECH) {
+      this.form.get('country')?.valueChanges.subscribe(() => {
+        this.form.get('identifier')?.updateValueAndValidity();
+      });
+    }
   }
 
   private _createFormForUserType() {
@@ -100,6 +112,8 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   private _loadDataProfile() {
     this.form.patchValue(this.dataProfile())
+    this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification.lang)
+    this.form.get('phoneNumber')?.patchValue(this.dataProfile().notification.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
     this._setLocaltionInFormForSme()
   }

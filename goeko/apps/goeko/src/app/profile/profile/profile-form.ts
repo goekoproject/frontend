@@ -1,33 +1,52 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms'
 const IdentifierRegexs = {
-  ES: /^[A-Z0-9]{9}$/,
-  FR: /^[0-9A-Z]{14}$/,
-  CH: /^[0-9]{6}$/,
-  DE: /^[0-9]{8,10}$/,
+  ES: /^[A-Z][0-9]{7}[0-9A-Z]$/,
+  FR: /^[0-9]{9}\s?[0-9]{5}$/,
+  CH: /^CHE-[0-9]{3}\.[0-9]{3}\.[0-9]{3}$/,
+  DE: /^DE[0-9]{9}$|^DE[0-9]{10}$/,
   IT: /^[0-9]{11}$/,
 }
-export function validateCompanyId(): (control: AbstractControl) => ValidationErrors | null {
+export function validateSmeIdentifier(): (control: AbstractControl) => ValidationErrors | null {
   return (control: AbstractControl): ValidationErrors | null => {
-    const country = control.parent?.get('companyCountry')?.value
-    if (!country) {
-      return null
-    }
-    const id = control.value
-    const regex = IdentifierRegexs[country as keyof typeof IdentifierRegexs]
+    const firstLocation = control.parent?.get('locations')?.value?.[0]?.country?.code;
 
-    return regex && !regex.test(id) ? { invalidCompanyId: true } : null
-  }
+    if (!firstLocation) {
+      return null;
+    }
+
+    const id = control.value;
+    const regex = IdentifierRegexs[firstLocation as keyof typeof IdentifierRegexs];
+
+    return regex && !regex.test(id) ? { invalidSmeIdentifier: true } : null;
+  };
 }
+
+export function validateCleanTechIdentifier(): (control: AbstractControl) => ValidationErrors | null {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const country = control.parent?.get('country')?.value;
+
+    if (!country) {
+      return null;
+    }
+
+    const id = control.value;
+    const regex = IdentifierRegexs[country as keyof typeof IdentifierRegexs];
+
+    return regex && !regex.test(id) ? { invalidCleantechIdentifier: true } : null;
+  };
+}
+
 
 export const smeFormGroup = new FormGroup({
   name: new FormControl('', Validators.required),
   email: new FormControl('', [Validators.required, Validators.email]),
-  locations: new FormArray([]),
+  locations: new FormArray([], Validators.required),
   website: new FormControl(),
   employees: new FormControl('', [Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
-  companyCountry: new FormControl('', Validators.required),
-  identifier: new FormControl('', [Validators.required, validateCompanyId()]),
+  comunicationLanguage: new FormControl('', Validators.required),
+  identifier: new FormControl('', [Validators.required, validateSmeIdentifier()]),
+  phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)])
 })
 
 export const cleanTechFormGroup = new FormGroup({
@@ -38,6 +57,7 @@ export const cleanTechFormGroup = new FormGroup({
   logo: new FormControl(),
   city: new FormControl(),
   externalId: new FormControl(),
-  companyCountry: new FormControl('', Validators.required),
-  identifier: new FormControl('', [Validators.required, validateCompanyId()]),
+  comunicationLanguage: new FormControl('', Validators.required),
+  identifier: new FormControl('', [Validators.required, validateCleanTechIdentifier()]),
+  phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)])
 })
