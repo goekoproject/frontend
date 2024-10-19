@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core'
 export class HeaderUserComponent implements OnInit {
   langs = LANGS
   defaultLang!: Lang
-  userProfile = computed(() => (this._userService.userProfile().id ? this._userService.userProfile() : this._userService.userAuthData()))
+  userProfile = computed(() => (this._userService.userProfile()?.id ? this._userService.userProfile() : this._userService.userAuthData()))
   constructor(
     private _userService: UserService,
     private _translate: TranslateService,
