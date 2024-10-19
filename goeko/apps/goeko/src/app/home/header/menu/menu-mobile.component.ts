@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, model, OnInit, output, signal } from '@angular/core'
+import { Component, computed, inject, model, OnInit, output, signal } from '@angular/core'
 import { RouterModule } from '@angular/router'
+import { SelectI18nComponent } from '@goeko/business-ui'
+import { LANGS } from '@goeko/core'
 import { ContentFulService } from '@goeko/store'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { map } from 'rxjs'
 import { MENU } from './menu.contants'
 import { IMenu } from './menu.interface'
@@ -11,7 +13,7 @@ import { _buildSubmenu } from './menu.util'
 @Component({
   selector: 'goeko-menu-mobile',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterModule],
+  imports: [CommonModule, TranslateModule, RouterModule, SelectI18nComponent],
   template: `
     @if (mobileMenuOpen()) {
       <div role="dialog" aria-modal="true" class="md:hidden">
@@ -95,6 +97,8 @@ import { _buildSubmenu } from './menu.util'
                   {{ 'MENU.login' | translate }}
                 </button>
               </div>
+              <goeko-select-i18n class="block sm:hidden" [langs]="langs()" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang()">
+              </goeko-select-i18n>
             </div>
           </div>
         </div>
@@ -104,10 +108,14 @@ import { _buildSubmenu } from './menu.util'
 })
 export class MenuMobileComponent implements OnInit {
   private _contentFulService = inject(ContentFulService)
+  private _translate = inject(TranslateService)
   mobileMenuOpen = model(false)
   login = output()
   menu = signal<IMenu[]>(MENU)
   submenuOpen = signal(false)
+  langs = signal(LANGS)
+  defaultLang = computed(() => this.langs().find((lang) => lang.code === this._translate.getDefaultLang()))
+
   closeMenu = () => this.mobileMenuOpen.set(false)
   goToLogin = () => this.login.emit()
   submenuOpenToggle = () => this.submenuOpen.update((value) => !value)
@@ -122,5 +130,9 @@ export class MenuMobileComponent implements OnInit {
       .subscribe((data) => {
         this.menu.update((dataMenu) => [..._buildSubmenu(dataMenu, 'contact', data)])
       })
+  }
+
+  onChangeLangs(selectedCodeLand: string) {
+    this._translate.use(selectedCodeLand)
   }
 }
