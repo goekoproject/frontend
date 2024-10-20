@@ -19,6 +19,7 @@ export class ServicesComponent implements OnInit {
 	public title!: string;
 	public text!: string;
   public services!: any;;
+  step : any = 'step1';
 
 	constructor(
 		public translate: TranslateService,

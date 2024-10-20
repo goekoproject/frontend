@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, effect } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, effect } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { HomeService } from '../home.service'
 import { DialogService } from '@goeko/ui'
@@ -20,6 +20,8 @@ enum ENTRYS_ID {
 })
 export class FrontMain implements OnInit {
 
+  @ViewChild('goekoText') goekoText!: ElementRef;
+
   public entryDataConnecting!: { text: string }
   //public entryDataSustainability!: { text: string }
   public entryDataMain!: { text: string }
@@ -35,6 +37,7 @@ export class FrontMain implements OnInit {
     this._effectActors()
   }
 
+
   ngOnInit(): void {
     this.currentLang = this._translate.defaultLang
 
@@ -49,18 +52,16 @@ export class FrontMain implements OnInit {
   private _effectActors() {
     effect(() => {
       this.entryDataConnecting = this._homeService.entryDataConnecting()
-     // this.entryDataSustainability = this._homeService.entryDataSustainability()
       this.entryDataMain = this._homeService.entryDataMain()
+      this._hideAnimation();
     })
   }
 
 
   private _onChangeLang() {
     this._translate.onLangChange.subscribe((res) => {
-      //this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY)
       this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
       this._homeService.getSloganMain(ENTRYS_ID.MAIN)
-
       this.currentLang = res.lang
     })
   }
@@ -76,4 +77,11 @@ export class FrontMain implements OnInit {
   goTologin() {
     this._router.navigate(['/login/signup'])
   }
+
+  _hideAnimation(): void{
+    this.goekoText.nativeElement.addEventListener('animationend', () => {
+       this.goekoText.nativeElement.style.visibility = 'hidden';
+   });
+  }
+
 }

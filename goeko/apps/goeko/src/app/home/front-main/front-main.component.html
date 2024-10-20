@@ -5,9 +5,13 @@
       <div class="relative">
         <img [src]="'assets/header_photo.svg'"/>
       </div>
-      <div class="absolute mt-72 text-center">
+      <div class="absolute mt-60 text-center">
+
 
         @if (entryDataMain) {
+          <h1 #goekoText class="title-transition">
+            GoEko
+          </h1>
           <h1 class="title">
             {{ entryDataMain.text }}
           </h1>

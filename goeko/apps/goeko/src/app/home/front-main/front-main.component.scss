@@ -13,6 +13,40 @@
   align-content: center;
 }
 
+.title-transition {
+  font: var(--font-home-semibold);
+  font-size: 10rem;
+  background: -webkit-linear-gradient(rgb(255, 255, 255), #999999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: -5.5rem;
+  line-height: 1;
+  opacity: 0.6;
+  animation: mymove 3s backwards;
+  animation-fill-mode: backwards;
+}
+
+
+@keyframes mymove {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(8);
+  }
+}
+
+
 .subtitle {
   font: var(--font-body-home);
   font-size: 24px;

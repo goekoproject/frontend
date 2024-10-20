@@ -8,9 +8,71 @@
 .subtitle {
   font: var(--font-home-semibold);
   font-size: 2.5rem;
+  line-height: 1.2;
 }
 
 .description {
   font: var(--font-body-home);
   font-size: 1rem;
 }
+
+.active {
+  font: var(--font-home-semibold)!important;
+  font-size: 2rem!important;
+  color: var(--home-page-light-blue)!important;
+  text-decoration: underline;
+  text-underline-offset: 1.45rem;
+  text-decoration-thickness: 3px;
+  z-index: 1;
+}
+
+
+.header-tab {
+  font: var(--font-home-medium);
+  color: #A3A3A3;
+  font-size: 2rem;
+}
+
+.rate {
+  background-color: #F9F9F9;
+}
+
+.pricing {
+  border: 1px solid #1290D7;
+  border-radius: 0.4rem;
+  padding: 1.25rem;;
+  height: 17rem;
+  width: 13.5rem;
+  background-color: #FFFFFF;
+}
+
+.pricing-advance {
+  border: 1px solid #FFB40A;
+  border-radius: 0.4rem;
+  padding: 1.25rem;;
+  height: 17rem;
+  width: 13.5rem;
+  background-color: #FEF6E4;
+}
+
+
+
+.services-list {
+  font: var(--font-home-dialog);
+  list-style: inside;
+  padding: 1.25rem 0.5rem 1rem 0.5rem;
+  font-size: 0.875rem;
+
+}
+
+.price-type {
+  font: var(--font-body-bold);
+  font-size: 18px;
+  line-height: 0.5;
+}
+
+.price-amount {
+  font: var(--font-home-dialog);
+  font-size: 12px;
+}
+
