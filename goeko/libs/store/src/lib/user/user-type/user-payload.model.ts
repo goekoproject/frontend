@@ -7,7 +7,7 @@ export interface NotificationProfile {
 export class UserCleantechPayload {
   name: string
   identifier: string
-  countries: string[]
+  country: string
   city: string
   email: string
   link: string
@@ -19,7 +19,7 @@ export class UserCleantechPayload {
   constructor(dataForm: any) {
     this.name = dataForm.name
     this.identifier = dataForm.identifier
-    this.countries = dataForm.countries
+    this.country = dataForm.country
     this.city = dataForm.city
     this.email = dataForm.email
     this.link = dataForm.link
@@ -29,7 +29,7 @@ export class UserCleantechPayload {
     this.notification = {
       email: dataForm.email,
       phoneNumber: dataForm.phoneNumber,
-      lang: dataForm.comunicationLanguage
+      lang: dataForm.comunicationLanguage,
     }
   }
 }

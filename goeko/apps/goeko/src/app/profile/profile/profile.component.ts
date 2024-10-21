@@ -99,7 +99,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     }
 
     if (this.userType() === USER_TYPE.CLEANTECH) {
-      this.form.get('country')?.valueChanges.subscribe(() => {
+      this.form?.get('country')?.valueChanges.subscribe(() => {
         this.form.get('identifier')?.updateValueAndValidity();
       });
     }
@@ -112,7 +112,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   private _loadDataProfile() {
     this.form.patchValue(this.dataProfile())
-    this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification.lang)
+    this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification?.lang)
     this.form.get('phoneNumber')?.patchValue(this.dataProfile().notification.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
     this._setLocaltionInFormForSme()

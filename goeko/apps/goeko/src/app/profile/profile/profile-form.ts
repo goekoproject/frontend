@@ -8,34 +8,33 @@ const IdentifierRegexs = {
 }
 export function validateSmeIdentifier(): (control: AbstractControl) => ValidationErrors | null {
   return (control: AbstractControl): ValidationErrors | null => {
-    const firstLocation = control.parent?.get('locations')?.value?.[0]?.country?.code;
+    const firstLocation = control.parent?.get('locations')?.value?.[0]?.country?.code
 
     if (!firstLocation) {
-      return null;
+      return null
     }
 
-    const id = control.value;
-    const regex = IdentifierRegexs[firstLocation as keyof typeof IdentifierRegexs];
+    const id = control.value
+    const regex = IdentifierRegexs[firstLocation as keyof typeof IdentifierRegexs]
 
-    return regex && !regex.test(id) ? { invalidSmeIdentifier: true } : null;
-  };
+    return regex && !regex.test(id) ? { invalidSmeIdentifier: true } : null
+  }
 }
 
 export function validateCleanTechIdentifier(): (control: AbstractControl) => ValidationErrors | null {
   return (control: AbstractControl): ValidationErrors | null => {
-    const country = control.parent?.get('country')?.value;
+    const country = control.parent?.get('country')?.value
 
     if (!country) {
-      return null;
+      return null
     }
 
-    const id = control.value;
-    const regex = IdentifierRegexs[country as keyof typeof IdentifierRegexs];
+    const id = control.value
+    const regex = IdentifierRegexs[country as keyof typeof IdentifierRegexs]
 
-    return regex && !regex.test(id) ? { invalidCleantechIdentifier: true } : null;
-  };
+    return regex && !regex.test(id) ? { invalidCleantechIdentifier: true } : null
+  }
 }
-
 
 export const smeFormGroup = new FormGroup({
   name: new FormControl('', Validators.required),
@@ -44,9 +43,9 @@ export const smeFormGroup = new FormGroup({
   website: new FormControl(),
   employees: new FormControl('', [Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
-  comunicationLanguage: new FormControl('', Validators.required),
+  comunicationLanguage: new FormControl(''),
   identifier: new FormControl('', [Validators.required, validateSmeIdentifier()]),
-  phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)])
+  phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
 })
 
 export const cleanTechFormGroup = new FormGroup({
@@ -57,7 +56,7 @@ export const cleanTechFormGroup = new FormGroup({
   logo: new FormControl(),
   city: new FormControl(),
   externalId: new FormControl(),
-  comunicationLanguage: new FormControl('', Validators.required),
-  identifier: new FormControl('', [Validators.required, validateCleanTechIdentifier()]),
-  phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)])
+  comunicationLanguage: new FormControl(''),
+  identifier: new FormControl('', [validateCleanTechIdentifier()]),
+  phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
 })
