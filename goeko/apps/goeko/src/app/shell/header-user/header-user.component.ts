@@ -7,7 +7,6 @@ import { UserService } from '@goeko/store'
   styleUrls: ['./header-user.component.scss'],
 })
 export class HeaderUserComponent {
-  userProfile = computed(() =>
-    inject(UserService).userProfile().id ? inject(UserService).userProfile() : inject(UserService).userAuthData(),
-  )
+  private _userService = inject(UserService)
+  userProfile = computed(() => (this._userService.userProfile().id ? this._userService.userProfile() : this._userService.userAuthData()))
 }

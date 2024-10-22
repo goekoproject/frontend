@@ -2,7 +2,7 @@ export const MOCK_GROUPING: any[] = [
   {
     id: 'f842b710-c343-4ecc-80e6-c9848db07418',
     code: 'co2Emission',
-    label: 'Emissions de Co2',
+    label: 'Emissions de CO2',
     subcategories: [
       {
         code: 'mainInternalCombustionEngine',
