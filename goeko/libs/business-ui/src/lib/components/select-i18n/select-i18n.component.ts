@@ -15,10 +15,11 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
 })
 export class SelectI18nComponent {
   private _translateServices = inject(TranslateService)
+  private _currentCodeLang = this._translateServices.currentLang ?? this._translateServices.defaultLang
   public langs = LANGS
 
   public isOpen = false
-  public selectedLand = signal<Lang | null>(this.langs.find((lang) => lang.code === this._translateServices.defaultLang) || null)
+  public selectedLand = signal<Lang | null>(this.langs.find((lang) => lang.code === this._currentCodeLang) || this.langs[0])
   toggle() {
     this.isOpen = !this.isOpen
   }
