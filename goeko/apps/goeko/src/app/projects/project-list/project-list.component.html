@@ -8,6 +8,15 @@
     </ng-template>
 
     <ng-template goCellRef let-element>
+      <div class="flex max-w-40 gap-1">
+        <p>{{ element['locations'][0]?.country?.label }}</p>
+        <abbr class="truncate no-underline font-normal" title="{{ element['locations'][0]?.country.regions | displayRegions }}">{{
+          element['locations'][0]?.country.regions | displayRegions
+        }}</abbr>
+      </div>
+    </ng-template>
+
+    <ng-template goCellRef let-element>
       {{ element['date'] | goDateFormat }}
     </ng-template>
 
@@ -17,7 +26,6 @@
           <span class="text-greenLime bg-greenPastel rounded-full px-3 py-1.5 text-sm font-semibold"> {{ category }}</span>
         }
       </div>
-
     </ng-template>
 
     <ng-template goElementAction let-element>

@@ -6,11 +6,12 @@ import { NotificationSearch, Project } from '@goeko/store'
 import { ButtonModule, DialogService, GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { ProjectManagmentService } from '../project-managment.service'
+import { DisplayRegionsPipe } from './display-regions.pipe'
 
 @Component({
   selector: 'goeko-project-list',
   standalone: true,
-  imports: [CommonModule, GoTableModule, GoDateFormatPipe, TranslateModule, SplitCategoriesPipe, ButtonModule],
+  imports: [CommonModule, GoTableModule, GoDateFormatPipe, DisplayRegionsPipe, TranslateModule, SplitCategoriesPipe, ButtonModule],
   providers: [ProjectManagmentService],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.scss',
@@ -22,7 +23,7 @@ export class ProjectListComponent {
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
   public smeId = input<string>('')
-  public displayColumns = ['name', 'date', 'categories', '']
+  public displayColumns = ['name', 'locations', 'date', 'categories', '']
 
   public projects = this._projectServices.projects
 
