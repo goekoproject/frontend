@@ -126,23 +126,21 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
       .forEach((badgeSelected) => this._selectionModel.select(badgeSelected))
   }
 
-  private _selectAll() {
-    this.badge.forEach((badge) => {
-      if (this._selectionModel.isSelected(badge)) {
-        return
-      }
-      this._selectionModel.select(badge)
-      this._selectedAndPropagateValue(badge)
-    })
+  private async _selectAll() {
+    await this.badge
+      .filter((element) => !element.selected)
+      .forEach((badge) => {
+        this._selectionModel.select(badge)
+        badge.onSelected(badge.selected)
+      })
+    this._propagateValue()
   }
-  private _deselectAll() {
-    this.badge.forEach((badge) => {
-      if (!this._selectionModel.isSelected(badge)) {
-        return
-      }
+  private async _deselectAll() {
+    await this.badge.forEach((badge) => {
       this._selectionModel.deselect(badge)
-      this._selectedAndPropagateValue(badge)
+      badge.clear()
     })
+    this._propagateValue()
   }
   private _selectOption(option: BadgeComponent) {
     if (this._selectionModel.isSelected(option)) {
@@ -162,7 +160,7 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
   }
 
   private _propagateValue() {
-    const valuesBadge = this._selectionModel.selected.map((badge) => badge.value)
+    const valuesBadge = this._selectionModel.selected.filter((element) => element.selected).map((badge) => badge.value)
     this.valueChangedBadge$.emit(valuesBadge)
     this.value = valuesBadge
     this.onChange(valuesBadge)
