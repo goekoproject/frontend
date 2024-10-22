@@ -6,7 +6,7 @@
     'collapse-leave-active': !filtersVisible(),
   }">
   <i
-    class="ti ti-circle-x absolute right-0 top-0 m-4 cursor-pointer text-3xl text-primary-default hover:text-primary-blueDark sm:hidden"
+    class="ti ti-circle-x text-primary-default hover:text-primary-blueDark absolute right-0 top-0 m-4 cursor-pointer text-3xl sm:hidden"
     (click)="closeFilter()"></i>
 
   <div class="mt-4 space-y-4 overflow-hidden">
@@ -16,14 +16,14 @@
       <div class="mt-2">
         <label class="flex cursor-pointer items-center space-x-2 text-sm">
           <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyFavourites()" />
-          <span>{{'MENU_USER.favourites' | translate}}</span>
+          <span>{{ 'MENU_USER.favourites' | translate }}</span>
         </label>
       </div>
     </div>
 
     <!-- Categorías -->
     <div>
-      <h4 class="text-sm font-bold text-gray-700">classificationsFilters</h4>
+      <h4 class="text-sm font-bold text-gray-700">{{ 'CATEGORIES.categories' | translate }}</h4>
       <div class="mt-2 space-y-2">
         <label class="flex cursor-pointer items-center space-x-2 text-sm">
           <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCategories()" />

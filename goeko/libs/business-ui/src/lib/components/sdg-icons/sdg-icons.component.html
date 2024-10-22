@@ -21,7 +21,7 @@
     }
   } @placeholder {
     @for (sdg of sdgs() | orderBy; track sdg.code; let i = $index) {
-      <img class="size-24 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
+      <img class="size-16 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
     }
   }
 </div>
