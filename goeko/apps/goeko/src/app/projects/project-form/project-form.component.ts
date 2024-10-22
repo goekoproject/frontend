@@ -38,6 +38,7 @@ export class ProjectFormComponent implements OnInit {
   private _fb = inject(FormBuilder)
   private _translateService = inject(TranslateService)
   private _projectManagmentServices = inject(ProjectManagmentService)
+  private _categoryCodeQueryParams = this._route.snapshot.queryParams['categorySelectedCode']
   public smeId = input<string>()
   public project = input.required<Project>()
   public groupingForm = input.required<Category[]>()
@@ -51,17 +52,20 @@ export class ProjectFormComponent implements OnInit {
     this._initForm()
     this.categorySelected.set(this.groupingForm()[0])
     this._setDataForm()
+    this._changeLang()
+  }
+  private _changeLang() {
     this._translateService.onLangChange.subscribe((res) => {
       this._fetchData(res.lang)
     })
   }
-
   private _fetchData(lang: string) {
     this._router.navigate([], {
       relativeTo: this._router.routerState.root,
       queryParams: { lang: lang },
     })
   }
+
   private _setDataForm() {
     if (this.project()) {
       const projectFormValue = ProjectForm.transform(this.project().classifications || [])

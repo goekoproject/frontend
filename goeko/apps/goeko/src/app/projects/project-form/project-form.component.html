@@ -14,7 +14,7 @@
     <!--GROUPING FORM CATEGORY -->
     @for (category of groupingForm(); track category.id) {
       <section class="w-full overflow-hidden rounded-lg">
-        @if (categorySelected()?.code === category.code) {
+        @if (category.code === categorySelected()?.code) {
           <div [formGroupName]="category.code">
             @for (subCategory of category.subcategories; track subCategory.code) {
               <goeko-select-subcategory-product

@@ -23,7 +23,6 @@ export class CategoryComponent {
   public set indexSelected(value) {
     this._indexSelected = value
     this.selectedCategory = signal<Category>(this.categories().at(value) ?? ({} as Category))
-
   }
   private _indexSelected = 0
 
@@ -32,7 +31,7 @@ export class CategoryComponent {
 
   constructor() {
     effect(() => {
-      if (this.categories().length > 0) {
+      if (this.categories().length > 0 && !this.selectedCategory()) {
         this.selectedCategory = signal<Category>(this.categories().at(0) ?? ({} as Category))
       }
     })
