@@ -27,87 +27,95 @@
       }
   </div>
 
-
-
   <div class="flex flex-row gap-20 border-t-[3px]" *ngIf="step==='step2'">
-
-    <div class="w-2/4 pt-16">
-      <h3 class="mb-4 title">
-          Services
+    @if (CTservices) {
+      <div class="w-2/4 pt-16">
+        <h3 class="mb-4 title">
+          {{ CTservices.section }}
         </h3>
         <h1 class="mb-6 text-black subtitle">
-          You are a clentech lookings for qualified leads
+          {{ CTservices.title }}
         </h1>
-
+         @for (description of CTservices.paragraphs; track CTservices) {
           <p class="mb-4 description">
-            Contenido de introducción sobre la plataforma de manera generica, hablando de las principales funcionalidades. Contenido de introducción sobre la plataforma de manera generica, hablando de las principales funcionalidades
-            Contenido de introducción sobre la plataforma de manera generica, hablando de las principales funcionalidades. Contenido de introducción sobre la plataforma de manera generica, hablando de las principales funcionalidades
+            {{ description }}
           </p>
+        }
       </div>
       <div class="w-2/4 flex justify-end pt-16">
-        <img [src]="'assets/cleantechdesc.svg'" [alt]="" />
+        <img [src]="CTservices.photo" [alt]="" />
       </div>
+    }
+</div>
 
-  </div>
+
+
+
+  <div class="h-[700px] pr-32 pl-32 pb-16 flex flex-col is-lighthome rate">
+    <div class="w-full pt-16">
+      <h1 class="mb-6 text-black subtitle text-center">
+      Tarifas
+      </h1>
+    </div>
+
+    <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step1'">
+      @if (services) {
+        @for (rate of services.rates; track services; let last = $last) {
+      <div class="pricing" [ngClass]="{ 'pricing-advance': last }">
+        <div class="flex justify-between">
+          @for (icon of rate.icons; track icon) {
+            <img [src]="icon" class="mb-5" />
+          }
+        </div>
+        <h1 class="price-type">
+          {{ rate.title }}
+        </h1>
+        <span class="text-xs price-amount">
+          {{ rate.price }}
+        </span>
+        <ul class="services-list">
+          @for (service of rate.rateServices; track service) {
+            <li> {{ service }}</li>
+          }
+        </ul>
+      </div>
+        }
+      }
+    </div>
+
+    <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step2'">
+      @if (CTservices) {
+        @for (rate of CTservices.rates; track CTservices; let last = $last) {
+      <div class="pricing" [ngClass]="{ 'pricing-advance': last }">
+        <div class="flex justify-between">
+          @for (icon of rate.icons; track icon) {
+            <img [src]="icon" class="mb-5" />
+          }
+        </div>
+        <h1 class="price-type">
+          {{ rate.title }}
+        </h1>
+        <span class="text-xs price-amount">
+          {{ rate.price }}
+        </span>
+        <ul class="services-list">
+          @for (service of rate.rateServices; track service) {
+            <li> {{ service }}</li>
+          }
+        </ul>
+      </div>
+        }
+      }
+    </div>
+
+
+
 
 </div>
 
-<div class="h-[700px] pr-32 pl-32 pb-16 flex flex-col is-lighthome rate">
-  <div class="w-full pt-16">
-    <h1 class="mb-6 text-black subtitle text-center">
-     Tarifas
-    </h1>
-  </div>
 
-  <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step1'">
-    <div class="pricing">
-      <img src="assets/starter.svg" class="mb-5" />
-      <h1 class="price-type">
-        Starter
-      </h1>
-      <span class="text-xs price-amount">
-      Free
-      </span>
-      <ul class="services-list">
-        <li>4 projects</li>
-        <li>Cancel anytime</li>
-      </ul>
-    </div>
 
-    <div class="pricing">
-      <img src="assets/medium.svg" class="mb-5" />
-      <h1 class="price-type">
-        Medium
-      </h1>
-      <span class="text-xs price-amount">
-        19,99€ al mes
-      </span>
-      <ul class="services-list">
-        <li>12 projects</li>
-        <li>Cancel anytime</li>
-      </ul>
-    </div>
-
-    <div class="pricing-advance">
-      <div class="flex justify-between">
-        <img src="assets/advance.svg" class="mb-5" />
-        <img src="assets/diamond.svg" class="mb-5" />
-      </div>
-      <h1 class="price-type">
-        Advance
-      </h1>
-      <span class="text-xs price-amount">
-        28,99€ al mes
-      </span>
-      <ul class="services-list">
-        <li>Unlimited projects</li>
-        <li>Cancel anytime</li>
-        <li>Personal assistance</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step2'">
+  <!-- <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step2'">
     <div class="pricing">
       <img src="assets/starter.svg" class="mb-5" />
       <h1 class="price-type">
@@ -153,7 +161,7 @@
         <li>Personal assistance</li>
       </ul>
     </div>
-  </div>
+  </div> -->
 
 </div>
 
