@@ -1,7 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, HostListener, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
-import { TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'goeko-header',
@@ -13,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core'
     class: 'goeko-header',
   },
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
 
@@ -34,16 +33,9 @@ export class HeaderComponent implements OnInit {
   mobileMenuOpen = signal(false)
   constructor(
     private _renderer: Renderer2,
-    private translate: TranslateService,
     private _router: Router,
   ) {}
 
-  ngOnInit(): void {
-    this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang())
-  }
-  onChangeLangs(selectedCodeLand: string) {
-    this.translate.use(selectedCodeLand)
-  }
   goTologin() {
     this._router.navigate(['/login'])
   }

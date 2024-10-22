@@ -1,8 +1,8 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayModule } from '@angular/cdk/overlay'
 import { CommonModule } from '@angular/common'
-import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core'
-import { Lang } from '@goeko/core'
+import { Component, inject, signal } from '@angular/core'
+import { Lang, LANGS } from '@goeko/core'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 
@@ -15,22 +15,18 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
 })
 export class SelectI18nComponent {
   private _translateServices = inject(TranslateService)
-  @Input() langs!: Lang[]
-  @Input() defaultLang!: any
-
-  @Output() onSelect: EventEmitter<any> = new EventEmitter()
+  public langs = LANGS
 
   public isOpen = false
-  public selectedLand = signal<string | null>(inject(TranslateService).defaultLang)
-
+  public selectedLand = signal<Lang | null>(this.langs.find((lang) => lang.code === this._translateServices.defaultLang) || null)
   toggle() {
     this.isOpen = !this.isOpen
   }
 
   selectedLang(lang: Lang) {
-    this.onSelect.emit(lang.code)
+    this.selectedLand.set(lang)
+    this._translateServices.use(lang.code)
     sessionStorage.setItem('lang', lang.code)
-    this.selectedLand.set(lang.codeContentFul)
     this.isOpen = false
   }
 }
