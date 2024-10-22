@@ -30,6 +30,7 @@ module.exports = {
         water: '#02d8e0',
         waterConsumption: '#02d8e0',
         borderColor: '#d9dbe9',
+        blueLightPastel: 'var(--blue-light-pastel)',
       },
     },
     animation: {

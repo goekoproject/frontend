@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, model, OnInit, output, signal } from '@angular/core'
+import { Component, inject, model, OnInit, output, signal } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { SelectI18nComponent } from '@goeko/business-ui'
-import { LANGS } from '@goeko/core'
 import { ContentFulService } from '@goeko/store'
-import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { TranslateModule } from '@ngx-translate/core'
 import { map } from 'rxjs'
 import { MENU } from './menu.contants'
 import { IMenu } from './menu.interface'
@@ -16,7 +15,7 @@ import { _buildSubmenu } from './menu.util'
   imports: [CommonModule, TranslateModule, RouterModule, SelectI18nComponent],
   template: `
     @if (mobileMenuOpen()) {
-      <div role="dialog" aria-modal="true" class="md:hidden">
+      <div role="dialog" aria-modal="true" class="relative z-10 h-svh md:hidden">
         <!-- Background backdrop, show/hide based on slide-over state. -->
         <div class="fixed inset-0 z-10"></div>
         <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -34,6 +33,7 @@ import { _buildSubmenu } from './menu.util'
           </div>
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
+              <goeko-select-i18n class="ml-auto block w-14 sm:hidden" />
               <div class="space-y-2 py-6">
                 <div class="-mx-3">
                   @for (item of menu(); track item.id) {
@@ -97,8 +97,6 @@ import { _buildSubmenu } from './menu.util'
                   {{ 'MENU.login' | translate }}
                 </button>
               </div>
-              <goeko-select-i18n class="block sm:hidden" [langs]="langs()" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang()">
-              </goeko-select-i18n>
             </div>
           </div>
         </div>
@@ -108,13 +106,10 @@ import { _buildSubmenu } from './menu.util'
 })
 export class MenuMobileComponent implements OnInit {
   private _contentFulService = inject(ContentFulService)
-  private _translate = inject(TranslateService)
   mobileMenuOpen = model(false)
   login = output()
   menu = signal<IMenu[]>(MENU)
   submenuOpen = signal(false)
-  langs = signal(LANGS)
-  defaultLang = computed(() => this.langs().find((lang) => lang.code === this._translate.getDefaultLang()))
 
   closeMenu = () => this.mobileMenuOpen.set(false)
   goToLogin = () => this.login.emit()
@@ -130,9 +125,5 @@ export class MenuMobileComponent implements OnInit {
       .subscribe((data) => {
         this.menu.update((dataMenu) => [..._buildSubmenu(dataMenu, 'contact', data)])
       })
-  }
-
-  onChangeLangs(selectedCodeLand: string) {
-    this._translate.use(selectedCodeLand)
   }
 }

@@ -1,7 +1,9 @@
 <div class="access">
   <div class="hidden md:block md:w-1/2"></div>
-  <div class="login-singup">
-    <img alt="logo-access" src="assets/logo.png" #logo [routerLink]="['/']" class="w-1/12" />
+  <div class="access-forms">
+    <img alt="logo-access" src="assets/logo.png" #logo [routerLink]="['/']" class="size-20" />
+    <goeko-select-i18n class="absolute right-0 top-0 mx-4 ml-auto block w-14 sm:hidden" />
+
     <router-outlet></router-outlet>
 
     <button class="arrow-back" [routerLink]="['/home']">
