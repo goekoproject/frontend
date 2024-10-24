@@ -114,7 +114,17 @@ export class SelectLocationsComponent implements AfterViewInit {
       )
       .subscribe(({ countryCode, regiones }) => {
         this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince, ...regiones])
+        this._setAllOptionWhenEmptyRegions()
       })
+  }
+
+  private _setAllOptionWhenEmptyRegions() {
+    this._controlLocations.controls.forEach((control) => {
+      const _controlRegionsCountry = control.get('country')?.get('regions')
+      if (_controlRegionsCountry?.value && _controlRegionsCountry.value.length === 0) {
+        _controlRegionsCountry?.patchValue([''])
+      }
+    })
   }
 
   private addRegionsForCodeCountry = (clave: string, valor: any): void => {

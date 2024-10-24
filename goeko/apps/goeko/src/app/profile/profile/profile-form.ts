@@ -44,7 +44,7 @@ export const smeFormGroup = new FormGroup({
   employees: new FormControl('', [Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
   comunicationLanguage: new FormControl(''),
-  identifier: new FormControl('', [Validators.required, validateSmeIdentifier()]),
+  identifier: new FormControl('', [validateSmeIdentifier()]),
   phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
 })
 
