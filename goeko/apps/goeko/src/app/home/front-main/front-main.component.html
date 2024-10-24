@@ -1,14 +1,12 @@
 
+@if(mainPhoto){
 <div class="flex flex-col mb-[-5.5rem] mt-[-8.25rem]">
   <article class="main-front">
-    <div class="flex flex-col items-center">
-      <div class="relative">
-        <img [src]="'assets/header_photo.svg'"/>
+    <div class="flex flex-col items-center w-full">
+
+      <div class="relative w-full">
+          <img [src]="mainPhoto" class="w-full"/>
       </div>
-
-
-
-
       <h1 #goekoText class="title-transition">
         GoEko
       </h1>
@@ -16,11 +14,11 @@
 
 
 
-          <h1 class="title text-transition" *ngIf="showMainSlogan">
+          <h1 class="title text-transition" *ngIf="entryDataMain && showMainSlogan">
             {{ entryDataMain.text }}
           </h1>
 
-          <h3 class="subtitle text-transition" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
+          <h3 class="subtitle text-transition" *ngIf="entryDataConnecting && showMainSlogan">{{ entryDataConnecting.text }}</h3>
 
           <div class="grid place-items-center m-auto text-transition" *ngIf="showMainSlogan">
             <div class="flex items-center mt-12">
@@ -45,5 +43,6 @@
     </div>
   </article>
 </div>
+}
 
 
