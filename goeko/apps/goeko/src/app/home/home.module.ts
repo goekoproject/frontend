@@ -18,7 +18,6 @@ import { MenuMobileComponent } from './header/menu/menu-mobile.component'
 import { MenuComponent } from './header/menu/menu.component'
 import { LandingComponent } from './landing/landing.component'
 import { TeamComponent } from './team/team.component'
-import { FrontMain } from './front-main/front-main.component'
 import { OverlayRefService } from 'libs/ui/src/lib/ui/dialog-message/overlay-ref.service'
 import { SliderComponent } from './banner/slider/slider.component'
 import { ServicesComponent } from './services/services.component'
@@ -29,7 +28,6 @@ import { ServicesComponent } from './services/services.component'
     BannerComponent,
     SliderComponent,
     ContentComponent,
-    FrontMain,
     OrderByPipe,
     TeamComponent,
     DocumentLegalComponent,

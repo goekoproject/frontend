@@ -89,7 +89,6 @@ export class ServicesComponent implements OnInit {
         photo: items[0].fields.photo.fields.file.url,
         rates: rates
       }
-      console.log(this.services);
     });
   }
 
@@ -128,7 +127,6 @@ export class ServicesComponent implements OnInit {
         photo: items[0].fields.photo.fields.file.url,
         rates: rates
       }
-      console.log(this.CTservices);
     });
   }
 

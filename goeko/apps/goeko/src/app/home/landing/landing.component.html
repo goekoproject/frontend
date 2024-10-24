@@ -1,21 +1,65 @@
-<front-main></front-main>
-<div class="px-6 lg:p-8">
-  <div class="flex flex-col gap-24">
-    <go-banner class="z-[1] mb-12"></go-banner>
-    @defer (on viewport) {
-      <go-content></go-content>
-    } @placeholder {
-      <div>loading...</div>
-    }
-  </div>
-</div>
+@if(mainPhoto){
+  <div class="flex flex-col mb-[-5.5rem] mt-[-8.25rem]">
+    <article class="main-front">
+      <div class="flex flex-col items-center w-full">
 
-  <div class="flex flex-col gap-24">
-    @defer (on viewport) {
-      <goeko-team></goeko-team>
-    } @placeholder {
-      <div>loading...</div>
-    }
+        <div class="relative w-full">
+            <img [src]="mainPhoto" class="w-full"/>
+        </div>
+        <h1 #goekoText class="title-transition">
+          GoEko
+        </h1>
+        <div class="absolute text-center top-[17rem]">
+            <h1 class="title text-transition" *ngIf="showMainSlogan">
+              {{ entryDataMain.text }}
+            </h1>
+            <h3 class="subtitle text-transition" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
+
+            <div class="grid place-items-center m-auto text-transition" *ngIf="showMainSlogan">
+              <div class="flex items-center mt-12">
+                  <div class="relative flex h-12 w-full min-w-[200px] max-w-[14rem] i-connection">
+                    <button
+                      class="!absolute right-1 top-1 z-1 rounded-[25px] start-button py-2 px-3 text-center align-middle text-white leading-6"
+                      type="button"
+                      (click)="goTologin()"
+                    >
+                      ->
+                    </button>
+                    <input
+                      type="email"
+                      class="h-full w-full rounded-[25px] px-3 py-2.5 pr-20 outline outline-0 disabled:bg-white"
+                      placeholder="Start connection"
+                      disabled
+                    />
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
+
+  <div class="px-6 lg:p-8">
+    <div class="flex flex-col gap-24">
+      <go-banner class="z-[1] mb-12"></go-banner>
+      @defer (on viewport) {
+        <go-content></go-content>
+      } @placeholder {
+        <div>loading...</div>
+      }
+    </div>
+  </div>
+
+    <div class="flex flex-col gap-24">
+      @defer (on viewport) {
+        <goeko-team></goeko-team>
+      } @placeholder {
+        <div>loading...</div>
+      }
+    </div>
+
+  }
+
+
 
 
