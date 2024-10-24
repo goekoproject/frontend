@@ -29,7 +29,7 @@ export class UserCleantechPayload {
     this.notification = {
       email: dataForm.email,
       phoneNumber: dataForm.phoneNumber,
-      lang: dataForm.comunicationLanguage,
+      lang: dataForm.comunicationLanguage?.code,
     }
   }
 }

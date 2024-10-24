@@ -91,18 +91,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit() {
     this._profieService.fetchUser()
-
-  /*   if (this.userType() === USER_TYPE.SME) {
-      this.form.get('locations')?.valueChanges.subscribe(() => {
-        this.form.get('identifier')?.updateValueAndValidity();
-      });
-    }
-
-    if (this.userType() === USER_TYPE.CLEANTECH) {
-      this.form?.get('country')?.valueChanges.subscribe(() => {
-        this.form.get('identifier')?.updateValueAndValidity();
-      });
-    } */
   }
 
   private _createFormForUserType() {

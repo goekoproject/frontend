@@ -20,13 +20,14 @@ export abstract class UserFactory {
       case USER_TYPE.SME:
         return {
           ...userProfileForm,
+          comunicationLanguage: undefined,
           country: userProfileForm.locations[0].country.code.code,
           locations: mapperLocations(userProfileForm.locations),
           notification: {
             email: userProfileForm.email,
             phoneNumber: userProfileForm.phoneNumber,
-            lang: userProfileForm.comunicationLanguage
-          }
+            lang: userProfileForm.comunicationLanguage?.code,
+          },
         }
       default:
         return new UserCleantechPayload(userProfileForm)

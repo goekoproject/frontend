@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, Input, Signal, inject, input, signal } from '@angular/core'
+import { AfterViewInit, Component, Input, OnDestroy, Signal, inject, input, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationCountry, LocationRegions } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
@@ -30,7 +30,7 @@ const defaultSetSuperSelect = (o1: any, o2: any) => {
   templateUrl: './select-locations.component.html',
   styleUrl: './select-locations.component.scss',
 })
-export class SelectLocationsComponent implements AfterViewInit {
+export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
 
   public compareSelectedCountry = (o1: any, o2: any) => {
@@ -92,6 +92,9 @@ export class SelectLocationsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges()
     this.addLocation()
+  }
+  ngOnDestroy(): void {
+    this._controlLocations.clear()
   }
 
   private subscribeToFormArrayAndItemChanges(): void {
