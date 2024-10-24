@@ -69,6 +69,8 @@ export class UserService {
             this._redirectDashboard()
           }
         } else {
+          this.userProfile.set({} as SmeUser | CleantechsUser)
+          this._rawUser = {} as SmeUser | CleantechsUser
           this._redirectProfile()
         }
       })
