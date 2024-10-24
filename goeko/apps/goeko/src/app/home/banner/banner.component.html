@@ -23,13 +23,9 @@
       <i class="ti ti-player-play-filled"></i>
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    @defer (on viewport) {
-      <video autoplay loop class="banner-video-sme" preload="metadata" #marketingVideo>
-        <source type="video/mp4" />
-      </video>
-    } @placeholder {
-      <div>Loading...</div>
-    }
+    <video autoplay loop class="banner-video-sme" preload="metadata" #marketingVideo>
+      <source type="video/mp4" />
+    </video>
 
     <div class="bkg-video">
       <span class="layer"></span>

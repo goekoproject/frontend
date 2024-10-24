@@ -35,7 +35,10 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
       this.marketingVideo.nativeElement.src = this.urlSrcVideo
-      this.marketingVideo.nativeElement.pause()
+
+      if (this.isMobileOrTablet()) {
+        this.marketingVideo.nativeElement.pause()
+      }
     })
   }
   watchVideo() {
@@ -43,5 +46,10 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this.marketingVideo.nativeElement.requestFullscreen()
     this.marketingVideo.nativeElement.controls = this.marketingVideo.nativeElement.controls = true
     this.marketingVideo.nativeElement.play()
+  }
+
+  private isMobileOrTablet(): boolean {
+    const userAgent = navigator.userAgent
+    return /android|iPad|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
   }
 }
