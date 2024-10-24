@@ -1,5 +1,5 @@
 <div
-  class="bg-blueLightPastel absolute top-0 z-10 max-w-72 rounded-lg p-4 sm:relative sm:w-full"
+  class="absolute top-0 z-10 max-w-72 rounded-lg bg-blueLightPastel p-4 sm:relative sm:w-full"
   [ngClass]="{
     'collapse-enter': !filtersVisible(),
     'collapse-enter-active': filtersVisible(),
@@ -23,7 +23,7 @@
 
     <!-- Categorías -->
     <div>
-      <h4 class="text-sm font-bold text-gray-700">{{ 'CATEGORIES.categories' | translate }}</h4>
+      <h4 class="text-sm font-bold text-gray-700">{{ 'categories' | translate }}</h4>
       <div class="mt-2 space-y-2">
         <label class="flex cursor-pointer items-center space-x-2 text-sm">
           <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCategories()" />

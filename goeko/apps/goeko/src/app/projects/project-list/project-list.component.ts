@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, effect, inject, input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { DialogNewProjectComponent, GoTableModule, SplitCategoriesPipe } from '@goeko/business-ui'
+import { DialogNewProjectComponent, GoTableModule, MessageService, SplitCategoriesPipe } from '@goeko/business-ui'
 import { NotificationSearch, Project } from '@goeko/store'
 import { ButtonModule, DialogService, GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -12,14 +12,14 @@ import { DisplayRegionsPipe } from './display-regions.pipe'
   selector: 'goeko-project-list',
   standalone: true,
   imports: [CommonModule, GoTableModule, GoDateFormatPipe, DisplayRegionsPipe, TranslateModule, SplitCategoriesPipe, ButtonModule],
-  providers: [ProjectManagmentService],
+  providers: [ProjectManagmentService, MessageService],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.scss',
 })
 export class ProjectListComponent {
   private _projectServices = inject(ProjectManagmentService)
   private _dialogService = inject(DialogService)
-
+  private _messageService = inject(MessageService)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
   public smeId = input<string>('')
@@ -55,11 +55,6 @@ export class ProjectListComponent {
       relativeTo: this._route.parent,
     })
   }
-  deleteProject(project: Project) {
-    this._projectServices.deleteProject(project.id).subscribe(() => {
-      this._fechProjects()
-    })
-  }
 
   updateRecivedNotification(project: Project) {
     const notification: NotificationSearch = {
@@ -68,5 +63,17 @@ export class ProjectListComponent {
     this._projectServices.updateProject(project.id, { ...project, notification }).subscribe(() => {
       this._fechProjects()
     })
+  }
+  deleteProject(project: Project) {
+    this._messageService
+      .deleteMessage(project.name)
+      .afterClosed()
+      .subscribe((isDelete) => {
+        if (isDelete) {
+          this._projectServices.deleteProject(project.id).subscribe(() => {
+            this._fechProjects()
+          })
+        }
+      })
   }
 }
