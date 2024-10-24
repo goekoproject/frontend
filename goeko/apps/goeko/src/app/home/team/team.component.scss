@@ -68,13 +68,9 @@
 }
 
 .title {
-  height: 100%;
-  margin-top: 11rem;
+  height: 0;
+  margin-top: 35rem;
   font: var(--font-home-semibold);
-  font-size: 25rem;
-  background: -webkit-linear-gradient(rgb(255, 255, 255), #999999);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1;
+  font-size: 27rem;
   opacity: 0.5;
 }

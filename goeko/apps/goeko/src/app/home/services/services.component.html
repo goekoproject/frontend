@@ -3,7 +3,7 @@
 
   <div class="flex flex-row justify-evenly pb-5">
     <a class="header-tab" [ngClass]="{'active': step==='step1'}" (click)="step='step1'">Enterprise</a>
-    <a class="header-tab" [ngClass]="{'active': step==='step2'}" (click)="step='step2'">CleanTech</a>
+    <a class="header-tab" [ngClass]="{'active': step==='step2'}" (click)="step='step2'">Cleantech</a>
   </div>
 
   <div class="flex flex-row gap-20 border-t-[3px]" *ngIf="step==='step1'">
@@ -48,120 +48,64 @@
     }
 </div>
 
-
-
-
-  <div class="h-[700px] pr-32 pl-32 pb-16 flex flex-col is-lighthome rate">
-    <div class="w-full pt-16">
-      <h1 class="mb-6 text-black subtitle text-center">
-      Tarifas
-      </h1>
-    </div>
-
-    <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step1'">
-      @if (services) {
-        @for (rate of services.rates; track services; let last = $last) {
-      <div class="pricing" [ngClass]="{ 'pricing-advance': last }">
-        <div class="flex justify-between">
-          @for (icon of rate.icons; track icon) {
-            <img [src]="icon" class="mb-5" />
-          }
-        </div>
-        <h1 class="price-type">
-          {{ rate.title }}
-        </h1>
-        <span class="text-xs price-amount">
-          {{ rate.price }}
-        </span>
-        <ul class="services-list">
-          @for (service of rate.rateServices; track service) {
-            <li> {{ service }}</li>
-          }
-        </ul>
-      </div>
-        }
-      }
-    </div>
-
-    <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step2'">
-      @if (CTservices) {
-        @for (rate of CTservices.rates; track CTservices; let last = $last) {
-      <div class="pricing" [ngClass]="{ 'pricing-advance': last }">
-        <div class="flex justify-between">
-          @for (icon of rate.icons; track icon) {
-            <img [src]="icon" class="mb-5" />
-          }
-        </div>
-        <h1 class="price-type">
-          {{ rate.title }}
-        </h1>
-        <span class="text-xs price-amount">
-          {{ rate.price }}
-        </span>
-        <ul class="services-list">
-          @for (service of rate.rateServices; track service) {
-            <li> {{ service }}</li>
-          }
-        </ul>
-      </div>
-        }
-      }
-    </div>
-
-
-
-
 </div>
 
+<div class=" pr-32 pl-32 pb-16 flex flex-col is-lighthome rate">
+  <div class="w-full pt-16">
+    <h1 class="mb-6 text-black subtitle text-center">
+    Tarifas
+    </h1>
+  </div>
 
-
-  <!-- <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step2'">
-    <div class="pricing">
-      <img src="assets/starter.svg" class="mb-5" />
-      <h1 class="price-type">
-        Starter 2
-      </h1>
-      <span class="text-xs price-amount">
-      Free
-      </span>
-      <ul class="services-list">
-        <li>4 projects</li>
-        <li>Cancel anytime</li>
-      </ul>
-    </div>
-
-    <div class="pricing">
-      <img src="assets/medium.svg" class="mb-5" />
-      <h1 class="price-type">
-        Medium 2
-      </h1>
-      <span class="text-xs price-amount">
-        19,99€ al mes
-      </span>
-      <ul class="services-list">
-        <li>12 projects</li>
-        <li>Cancel anytime</li>
-      </ul>
-    </div>
-
-    <div class="pricing-advance">
+  <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step1'">
+    @if (services) {
+      @for (rate of services.rates; track services; let last = $last) {
+    <div class="pricing" [ngClass]="{ 'pricing-advance': rate.title === 'Advance' }">
       <div class="flex justify-between">
-        <img src="assets/advance.svg" class="mb-5" />
-        <img src="assets/diamond.svg" class="mb-5" />
+        @for (icon of rate.icons; track icon) {
+          <img [src]="icon" class="mb-5" />
+        }
       </div>
       <h1 class="price-type">
-        Advance 2
+        {{ rate.title }}
       </h1>
       <span class="text-xs price-amount">
-        28,99€ al mes
+        {{ rate.price }}
       </span>
       <ul class="services-list">
-        <li>Unlimited projects</li>
-        <li>Cancel anytime</li>
-        <li>Personal assistance</li>
+        @for (service of rate.rateServices; track service) {
+          <li> {{ service }}</li>
+        }
       </ul>
     </div>
-  </div> -->
+      }
+    }
+  </div>
+
+  <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step2'">
+    @if (CTservices) {
+      @for (rate of CTservices.rates; track CTservices; let last = $last) {
+      <div class="pricing" [ngClass]="{ 'pricing-advance': rate.title === 'Advance' }">
+          <div class="flex justify-between">
+        @for (icon of rate.icons; track icon) {
+          <img [src]="icon" class="mb-5"/>
+        }
+      </div>
+      <h1 class="price-type">
+        {{ rate.title }}
+      </h1>
+      <span class="text-xs price-amount">
+        {{ rate.price }}
+      </span>
+      <ul class="services-list">
+        @for (service of rate.rateServices; track service) {
+          <li> {{ service }}</li>
+        }
+      </ul>
+    </div>
+      }
+    }
+  </div>
 
 </div>
 

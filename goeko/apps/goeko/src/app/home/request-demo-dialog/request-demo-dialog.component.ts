@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule }  from '@angu
 import { DialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Validators } from 'ngx-editor';
+import { COUNTRIES_EU } from './country.contants';
 
 @Component({
   selector: 'goeko-request-demo-dialog',
@@ -17,6 +18,8 @@ export class RequestDemoDialogComponent implements OnInit{
 
   private _dialogService = inject(DialogService)
   newSector: boolean= false;
+  countries: any;
+
   constructor(
     private _fb: FormBuilder,
   ) {}
@@ -39,6 +42,7 @@ export class RequestDemoDialogComponent implements OnInit{
           this.newSector = false;
         }
     })
+    this.countries = COUNTRIES_EU;
   }
 
 

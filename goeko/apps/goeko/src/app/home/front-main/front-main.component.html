@@ -5,22 +5,24 @@
       <div class="relative">
         <img [src]="'assets/header_photo.svg'"/>
       </div>
-      <div class="absolute mt-60 text-center">
 
 
-        @if (entryDataMain) {
-          <h1 #goekoText class="title-transition">
-            GoEko
-          </h1>
-          <h1 class="title">
+
+
+      <h1 #goekoText class="title-transition">
+        GoEko
+      </h1>
+      <div class="absolute text-center top-[17rem]">
+
+
+
+          <h1 class="title text-transition" *ngIf="showMainSlogan">
             {{ entryDataMain.text }}
           </h1>
-        }
 
-          @if (entryDataConnecting) {
-              <h3 class="subtitle">{{ entryDataConnecting.text }}</h3>
-          }
-          <div class="grid place-items-center m-auto">
+          <h3 class="subtitle text-transition" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
+
+          <div class="grid place-items-center m-auto text-transition" *ngIf="showMainSlogan">
             <div class="flex items-center mt-12">
                 <div class="relative flex h-12 w-full min-w-[200px] max-w-[14rem] i-connection">
                   <button
