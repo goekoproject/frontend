@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
+import { CODE_LANG } from '@goeko/core'
 import { TranslateService } from '@ngx-translate/core'
 
 @Component({
@@ -13,7 +14,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
   public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15]
 
   private get urlSrcVideo() {
-    if (this.currentLangCode() === 'fr') {
+    if (this.currentLangCode() === CODE_LANG.FR) {
       return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/cuunnjgjchyenhrrfovf'
     }
     return `https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/goeko-info-${this.currentLangCode()}#t=40`
