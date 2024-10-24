@@ -22,8 +22,9 @@
       <button go-button (click)="goTologin()">
         {{ 'MENU.login' | translate }}
       </button>
-      <goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang"> </goeko-select-i18n>
+      <goeko-select-i18n  />
     </div>
   </nav>
+
   <goeko-menu-mobile [mobileMenuOpen]="mobileMenuOpen()" (login)="goTologin()" />
 </header>

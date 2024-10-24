@@ -1,4 +1,4 @@
-import { Country, Ecosolutions, FromTO, ReductionPercentage, TranslatedProperties } from '@goeko/store'
+import { Ecosolutions, FromTO, LocationsCountry, ReductionPercentage, SDG_LABEL, TranslatedProperties } from '@goeko/store'
 export interface GoalChecked {
   value: string
   checked: boolean
@@ -22,7 +22,7 @@ export class EcosolutionForm {
   yearGuarantee?: number
   priceDescription?: string
   detailedDescription?: string
-  locations?: Array<Country>
+  locations?: Array<LocationsCountry>
   nameTranslations!: TranslatedProperties[]
   detailedDescriptionTranslations!: TranslatedProperties[]
   descriptionTranslations!: TranslatedProperties[]
@@ -35,7 +35,7 @@ export class EcosolutionForm {
     this.products = ecosolution.classification.products
     this.reductionPercentage = ecosolution.improvement?.reductionPercentage
     this.operationalCostReductionPercentage = ecosolution.improvement?.operationalCostReductionPercentage
-    this.sustainableDevelopmentGoals = ecosolution.sustainableDevelopmentGoals
+    this.sustainableDevelopmentGoals = SDG_LABEL.filter((sdg) => ecosolution.sustainableDevelopmentGoals?.includes(sdg.code))
     this.price = ecosolution.price?.amount
     this.currency = ecosolution.price?.currency
     this.deliverCountries = ecosolution.countries

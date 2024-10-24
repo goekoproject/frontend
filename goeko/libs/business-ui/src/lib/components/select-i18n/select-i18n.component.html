@@ -1,5 +1,5 @@
 <button go-button appearance="flat" class="select-langs" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="toggle()">
-  <span class="fi fi-{{ selectedLand() }}"></span>
+  <span class="fi fi-{{ selectedLand()?.iconFlag }}"></span>
   <span class="material-symbols-rounded"> expand_more </span>
 </button>
 <ng-template
@@ -11,7 +11,7 @@
     <li
       *ngFor="let option of langs"
       [value]="option"
-      [ngClass]="{ 'langs-selected': option.code === selectedLand() }"
+      [ngClass]="{ 'langs-selected': option.code === selectedLand()?.code }"
       (click)="selectedLang(option)">
       <span class="fi fi-{{ option.code === 'en' ? 'gb' : option.code }}"></span>
       <p>{{ option.title | translate }}</p>

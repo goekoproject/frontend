@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { AuthGuard, checkSessionUserData } from '@goeko/core'
-import { ROLES, hasRole } from '@goeko/store'
+import { ROLES, ecosolutionSearchDetailResolver, groupingFormCategoriesResolver, hasRole, projectResolver } from '@goeko/store'
 import { PlatformComponent } from './platform.component'
 
 const routes: Routes = [
@@ -28,25 +28,58 @@ const routes: Routes = [
       },
       {
         path: 'sme-analysis',
-        canActivate: [hasRole(ROLES.PUBLIC),AuthGuard],
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadChildren: () => import('../sme-analysis-form/sme-analysis-form.module').then((m) => m.SmeAnalysisFormModule),
       },
       {
+        path: 'project-form/:smeId/:projectId',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        runGuardsAndResolvers: 'always',
+        resolve: { project: projectResolver, groupingForm: groupingFormCategoriesResolver },
+        loadComponent: () => import('../projects/project-form/project-form.component').then((m) => m.ProjectFormComponent),
+      },
+      {
+        path: 'search/:smeId/:projectId',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        resolve: { project: projectResolver },
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        loadComponent: () =>
+          import('../projects/project-ecosolutions-catalog/project-ecosolutions-catalog.component').then(
+            (m) => m.ProjectEcosolutionCatalogComponent,
+          ),
+      },
+      {
+        path: 'ecosolutions-detail/:smeId/:ecosolutionId',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        resolve: { ecosolutionSearchDetail: ecosolutionSearchDetailResolver },
+        loadComponent: () =>
+          import('../projects/project-catalog-detail/project-catalog-detail.component').then((m) => m.ProjectCatalogDetailComponent),
+      },
+      {
+        path: 'projects-list/:smeId',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        loadComponent: () => import('../projects/project-list/project-list.component').then((m) => m.ProjectListComponent),
+      },
+      {
         path: 'cleantech-ecosolutions',
-        canActivate: [hasRole(ROLES.PUBLIC),AuthGuard],
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadChildren: () => import('../cleantech-ecosolutions/cleantech-ecosolutions.module').then((m) => m.CleantechEcosolutionsModule),
       },
       {
         path: 'leads',
-        canActivate: [hasRole(ROLES.PUBLIC),AuthGuard],
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadChildren: () => import('../leads/leads.module').then((m) => m.LeadsModule),
       },
       {
         path: 'favourites',
-        canActivate: [hasRole(ROLES.PUBLIC),AuthGuard],
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadComponent: () => import('../ecosolutions/favourites/favourites.component').then((m) => m.FavouritesComponent),
         data: {
@@ -57,7 +90,7 @@ const routes: Routes = [
       },
       {
         path: 'admin',
-        canActivate: [hasRole(ROLES.ADMIN),AuthGuard],
+        canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
         canMatch: [hasRole(ROLES.ADMIN)],
         loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
       },

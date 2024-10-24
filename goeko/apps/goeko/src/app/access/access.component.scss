@@ -1,8 +1,8 @@
 .access {
   @apply relative flex h-screen w-screen bg-[url('/assets/photo-login.jpg')] bg-cover bg-center;
 }
-.login-singup {
-  @apply relative m-auto flex h-screen w-full flex-col  items-center justify-center gap-8 self-center rounded-l-3xl bg-white p-4;
+.access-forms {
+  @apply relative m-auto flex min-h-full w-full flex-col items-center justify-center gap-8 self-center rounded-l-3xl bg-white p-4 pt-24 sm:h-screen sm:p-0;
 }
 .arrow-back {
   box-shadow:

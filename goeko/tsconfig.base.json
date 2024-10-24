@@ -17,6 +17,7 @@
     "paths": {
       "@goeko/business-ui": ["libs/business-ui/src/index.ts"],
       "@goeko/core": ["libs/core/src/index.ts"],
+      "@goeko/coretools": ["libs/coretools/src/index.ts"],
       "@goeko/store": ["libs/store/src/index.ts"],
       "@goeko/ui": ["libs/ui/src/index.ts"]
     }

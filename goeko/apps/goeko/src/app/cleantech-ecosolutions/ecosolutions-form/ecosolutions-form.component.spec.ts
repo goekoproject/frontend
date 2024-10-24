@@ -289,15 +289,17 @@ describe('EcosolutionsFormComponent', () => {
       uploadDocumentation: jest.fn().mockReturnValue(of({})),
       updatePicture: jest.fn().mockReturnValue(of({})),
       getEcosolutionById: jest.fn().mockReturnValue(of(mockGetEcosolutionById)),
-      updateEcosolution: jest.fn().mockReturnValue(of({
-        ...mockGetEcosolutionById,
-        nameTranslations: [
-          {
-            label: 'Adios',
-            lang: 'fr',
-          },
-        ]
-      })),
+      updateEcosolution: jest.fn().mockReturnValue(
+        of({
+          ...mockGetEcosolutionById,
+          nameTranslations: [
+            {
+              label: 'Adios',
+              lang: 'fr',
+            },
+          ],
+        }),
+      ),
       createEcosolutions: jest.fn().mockReturnValue(of({ success: true })),
     }
     await TestBed.configureTestingModule({
@@ -355,13 +357,8 @@ describe('EcosolutionsFormComponent', () => {
   })
 
   it('should create a ecosolution with the data mandatory', () => {
-    // Mock de datos mínimos requeridos
-    // Establecer valores en el formulario
-
     component.form.patchValue(mockFormData)
-    ;(component as any)._patchValueLocationsFormControl(mockFormData)
     component.saveEcosolution()
-
     expect(component.form.valid).toBeTruthy()
   })
 

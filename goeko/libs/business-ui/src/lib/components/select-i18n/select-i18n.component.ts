@@ -1,10 +1,10 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayModule } from '@angular/cdk/overlay'
 import { CommonModule } from '@angular/common'
-import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core'
-import { Lang } from '@goeko/core'
+import { Component, inject, signal } from '@angular/core'
+import { Lang, LANGS } from '@goeko/core'
 import { ButtonModule } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'goeko-select-i18n',
@@ -13,26 +13,21 @@ import { TranslateModule } from '@ngx-translate/core'
   standalone: true,
   imports: [CommonModule, ButtonModule, TranslateModule, OverlayModule],
 })
-export class SelectI18nComponent implements OnInit {
-  @Input() langs!: Lang[]
-  @Input() defaultLang!: any
-
-  @Output() onSelect: EventEmitter<any> = new EventEmitter()
+export class SelectI18nComponent {
+  private _translateServices = inject(TranslateService)
+  private _currentCodeLang = this._translateServices.currentLang ?? this._translateServices.defaultLang
+  public langs = LANGS
 
   public isOpen = false
-  public selectedLand = signal<string | null>(null)
-
-  ngOnInit(): void {
-    this.selectedLand.set(this.defaultLang.codeContentFul)
-  }
-
+  public selectedLand = signal<Lang | null>(this.langs.find((lang) => lang.code === this._currentCodeLang) || this.langs[0])
   toggle() {
     this.isOpen = !this.isOpen
   }
 
   selectedLang(lang: Lang) {
-    this.onSelect.emit(lang.code)
-    this.selectedLand.set(lang.codeContentFul)
+    this.selectedLand.set(lang)
+    this._translateServices.use(lang.code)
+    sessionStorage.setItem('lang', lang.code)
     this.isOpen = false
   }
 }

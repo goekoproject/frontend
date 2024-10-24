@@ -1,4 +1,4 @@
-<div class="banner p-4">
+<div class="banner justify-center p-4 lg:justify-between">
   <div class="banner-content">
     <div>
       <span class="fi fi-ch"></span>
@@ -8,7 +8,7 @@
         <span class="banner-slogan--green">{{ 'BANNER.green' | translate }}</span>
         {{ 'BANNER.transition' | translate }}
       </h1>
-      <div class="banner-support-text justify-center">
+      <div class="banner-support-text justify-center md:justify-start">
         <span class="word animate__animated">{{ 'BANNER.fast' | translate }}</span>
         |
         <span class="word animate__animated">{{ 'BANNER.easy' | translate }}</span>
@@ -23,9 +23,13 @@
       <i class="ti ti-player-play-filled"></i>
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    <video autoplay loop class="banner-video-sme" preload="metadata" #marketingVideo>
-      <source type="video/mp4" />
-    </video>
+    @defer (on viewport) {
+      <video autoplay loop class="banner-video-sme" preload="metadata" #marketingVideo>
+        <source type="video/mp4" />
+      </video>
+    } @placeholder {
+      <div>Loading...</div>
+    }
 
     <div class="bkg-video">
       <span class="layer"></span>

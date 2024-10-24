@@ -1,9 +1,8 @@
-import { Component, OnInit, effect } from '@angular/core'
+import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { MessageService } from '@goeko/business-ui'
-import { ProjectService, SmeRequestResponse, UserService } from '@goeko/store'
-import { MESSAGE_TYPE } from '@goeko/ui'
-import { take, tap, toArray } from 'rxjs'
+import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
+import { SmeRequestResponse, UserService } from '@goeko/store'
+import { DialogService } from '@goeko/ui'
 import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service'
 
 @Component({
@@ -12,56 +11,26 @@ import { SmeAnalysisService } from '../../sme-analysis-form/sme-analysis.service
   styleUrls: ['./dashboard-sme.component.scss'],
   providers: [MessageService, SmeAnalysisService],
 })
-export class DashboardSmeComponent implements OnInit {
+export class DashboardSmeComponent {
   public userProfile = this._userService.userProfile
-  public projects!: Array<SmeRequestResponse>
   constructor(
     private _userService: UserService,
-    private _projectService: ProjectService,
     private _router: Router,
-    private _messageService: MessageService,
     public route: ActivatedRoute,
-  ) {
-    effect(() => {
-      if (this.userProfile().id) {
-        this._getLastProjectName()
-      }
-    })
-  }
-  ngOnInit(): void {
-    this.projects = new Array<SmeRequestResponse>()
-  }
+    private _dialogService: DialogService,
+  ) {}
 
-  private _getLastProjectName() {
-    this._projectService
-      .getRecommendationsByProjectById(this.userProfile().id)
-      .pipe(take(3), toArray())
-      .subscribe((projects: SmeRequestResponse[]) => {
-        if (projects) {
-          this.projects = projects
-        }
-      })
-  }
-
-  goToProject(projects: SmeRequestResponse) {
-    this._router.navigate(['../sme-analysis/projects/project', this.userProfile().id], {
-      relativeTo: this.route.parent,
-      queryParams: {
-        projectId: projects.id,
-      },
-    })
-  }
-
-  deleteProject(project: SmeRequestResponse) {
-    this._messageService
-      .deleteMessage(MESSAGE_TYPE.WARNING, project.name)
+  openNewProjectDialog() {
+    this._dialogService
+      .open(DialogNewProjectComponent)
       .afterClosed()
-      .subscribe((res) => {
-        if (res) {
-          this._projectService.deleteProject(project.id).subscribe((data) => {
-            this._getLastProjectName()
-          })
-        }
+      .subscribe((newProject) => {
+        this._goToProject(newProject)
       })
+  }
+  private _goToProject(projects: SmeRequestResponse) {
+    this._router.navigate(['../project-form', this.userProfile().id, projects.id], {
+      relativeTo: this.route.parent,
+    })
   }
 }

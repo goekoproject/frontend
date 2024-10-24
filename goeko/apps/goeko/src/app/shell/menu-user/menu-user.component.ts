@@ -36,13 +36,12 @@ export class MenuUserComponent implements OnInit {
 
   goToSubmenu(route: string) {
     this._router.navigate([`platform/${route}`])
-
-
   }
 
   private _managerNavigate(route: string) {
     switch (route) {
       case 'profile':
+      case 'projects-list':
       case 'sme-analysis/list':
         // eslint-disable-next-line no-case-declarations
         this._navigateWithCompanyId(route)

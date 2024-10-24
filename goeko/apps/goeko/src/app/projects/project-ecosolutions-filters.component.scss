@@ -1,0 +1,14 @@
+.collapse-enter-active,
+.collapse-leave-active {
+  @apply transition-all duration-500 ease-out;
+}
+
+.collapse-enter,
+.collapse-leave-to {
+  @apply max-w-0 overflow-hidden opacity-0;
+}
+
+.collapse-enter-to,
+.collapse-leave {
+  @apply max-w-[500px] opacity-100;
+}

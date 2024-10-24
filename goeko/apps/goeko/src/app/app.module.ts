@@ -30,7 +30,7 @@ export const httpLoaderFactory = (http: HttpClient) => {
     GoRemoteConfigModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
-      defaultLanguage: CODE_LANG.FR,
+      defaultLanguage: sessionStorage.getItem('lang') ?? CODE_LANG.FR,
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
