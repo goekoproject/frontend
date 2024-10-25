@@ -18,6 +18,7 @@ import { MenuMobileComponent } from './header/menu/menu-mobile.component'
 import { MenuComponent } from './header/menu/menu.component'
 import { LandingComponent } from './landing/landing.component'
 import { TeamComponent } from './team/team.component'
+import { CloudinaryModule } from '@cloudinary/ng'
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TeamComponent } from './team/team.component'
     SelectI18nComponent,
     UiBreadcrumbsModule,
     MenuMobileComponent,
+    CloudinaryModule
   ],
 })
 export class HomeModule {}

@@ -15,7 +15,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   private get urlSrcVideo() {
     if (this.currentLangCode() === CODE_LANG.FR) {
-      return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/cuunnjgjchyenhrrfovf'
+      return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/info-fr'
     }
     return `https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/goeko-info-${this.currentLangCode()}#t=40`
   }
