@@ -275,33 +275,33 @@
     "save_ok": "Saved successfully"
   },
   "ODS": {
-    "ods_1": "No Poverty",
-    "ods_10": "Reduced Inequality",
-    "ods_11": "Sustainable Cities and Communities",
-    "ods_12": "Responsible Consumption and Production",
-    "ods_13": "Climate Action",
-    "ods_14": "Life Below Water",
-    "ods_15": "Life on Land",
-    "ods_16": "Peace, Justice, and Strong Institutions",
-    "ods_17": "Partnerships for the Goals",
-    "ods_2": "Zero Hunger",
-    "ods_3": "Good Health and Well-being",
-    "ods_4": "Quality Education",
-    "ods_5": "Gender Equality",
-    "ods_6": "Clean Water and Sanitation",
-    "ods_7": "Affordable and Clean Energy",
-    "ods_8": "Decent Work and Economic Growth",
-    "ods_9": "Industry, Innovation, and Infrastructure"
+    "ods_1": "No poverty",
+    "ods_10": "Reduced inequality",
+    "ods_11": "Sustainable cities and communities",
+    "ods_12": "Responsible consumption and production",
+    "ods_13": "Climate action",
+    "ods_14": "Life below water",
+    "ods_15": "Life on land",
+    "ods_16": "Peace, justice, and strong institutions",
+    "ods_17": "Partnerships for the goals",
+    "ods_2": "Zero hunger",
+    "ods_3": "Good health and well-being",
+    "ods_4": "Quality education",
+    "ods_5": "Gender equality",
+    "ods_6": "Clean water and sanitation",
+    "ods_7": "Affordable and clean energy",
+    "ods_8": "Decent work and economic growth",
+    "ods_9": "Industry, innovation, and infrastructure"
   },
   "SDG_TITLES": {
-    "6": "Clean Water and Sanitation",
-    "7": "Affordable and Clean Energy",
-    "9": "Industry, Innovation and Infrastructure",
-    "11": "Sustainable Cities and Communities",
-    "12": "Responsible Consumption and Production",
-    "13": "Climate Action",
-    "14": "Life Below Water",
-    "15": "Life on Land"
+    "6": "Clean water and sanitation",
+    "7": "Affordable and clean Energy",
+    "9": "Industry, innovation and infrastructure",
+    "11": "Sustainable cities and communities",
+    "12": "Responsible consumption and production",
+    "13": "Climate action",
+    "14": "Life below water",
+    "15": "Life on land"
   },
   "PRODUCT_ACTIONS": {
     "addProduct": "Update"
@@ -589,7 +589,5 @@
   "exploreNow": "Explore now",
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
   "subtitlePageCatalog": "Best eco-solutions for",
-  "results":"results"
-
-
+  "results": "results"
 }
