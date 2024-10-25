@@ -50,19 +50,16 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
     this.queryEcosolutions.set(projectEcosolutionQuery)
     this._projectManagmentService.project.set(this.project())
     this.fetchEcosolutionsCatalog()
-    this._translateService.onLangChange.subscribe((res) => {
-      this._fetchData(res.lang)
-    })
+    this._changeLang()
   }
 
   ngOnDestroy(): void {
     this._ecosolutionsSearchSignal.set([])
   }
 
-  private _fetchData(lang: string) {
-    this._router.navigate([], {
-      relativeTo: this._router.routerState.root,
-      queryParams: { lang: lang },
+  private _changeLang() {
+    this._translateService.onLangChange.subscribe(() => {
+      this.fetchEcosolutionsCatalog()
     })
   }
   toogleFilters = () => {
@@ -71,9 +68,9 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
 
   fetchEcosolutionsCatalog = () => {
     this.isLoading.set(true)
+    this._ecosolutionsSearchSignal.set([])
     setTimeout(() => {
       this._projectManagmentService.getEcosolutionsByProjects(this.queryEcosolutions())
-
       this.isLoading.set(false)
     }, 1000)
   }

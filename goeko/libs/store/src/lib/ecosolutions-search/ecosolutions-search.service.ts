@@ -22,7 +22,7 @@ export class EcosolutionsSearchService extends TranslateChangeService {
 
   getSearchEcosolutionsByProjects(id: string) {
     this._http
-      .get<{ projects: Project[] }>(`/v1/ecosolution/search/projects/smes/${id}?lang=en`)
+      .get<{ projects: Project[] }>(`/v1/ecosolution/search/projects/smes/${id}?lang=${this.lang()}`)
       .pipe(map((res) => res.projects))
       .subscribe((projects) => {
         this.projects.set(projects)
