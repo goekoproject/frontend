@@ -13,6 +13,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15]
 
+  public srcVideo = signal(this.urlSrcVideo)
   private get urlSrcVideo() {
     if (this.currentLangCode() === CODE_LANG.FR) {
       return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/info-fr'
@@ -26,7 +27,6 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return
     }
     this.marketingVideo.nativeElement.muted = true
-    this.marketingVideo.nativeElement.src = this.urlSrcVideo
   }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
-      this.marketingVideo.nativeElement.src = this.urlSrcVideo
+      this.srcVideo.set(this.urlSrcVideo)
 
       if (this.isMobileOrTablet()) {
         this.marketingVideo.nativeElement.pause()
