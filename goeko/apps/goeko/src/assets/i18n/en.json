@@ -296,7 +296,7 @@
   },
   "SDG_TITLES": {
     "6": "Clean water and sanitation",
-    "7": "Affordable and clean Energy",
+    "7": "Affordable and clean energy",
     "9": "Industry, innovation and infrastructure",
     "11": "Sustainable cities and communities",
     "12": "Responsible consumption and production",
@@ -482,7 +482,7 @@
     "buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:",
     "co2Emission": "Area where your eco-solution reduces CO2 emissions",
     "ods": "Linked to your eco-solution",
-    "odsSme": "Linked to the eco-solution",
+    "odsSme": "SDGs linked to solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
     "selectProducts": "Type of toxic products that your eco-solution replaces or improves",
     "waste": "Types of waste",

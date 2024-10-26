@@ -282,7 +282,7 @@
     "ods_6": "Eau propre et assainissement",
     "ods_7": "Énergie propre et d'un coût abordable",
     "ods_8": "Travail décent et croissance économique",
-    "ods_9": "Industrie, Innovation et Infrastructure"
+    "ods_9": "Industrie, innovation et infrastructure"
   },
   "SDG_TITLES": {
     "6": "Eau propre et assainissement",
@@ -472,7 +472,7 @@
     "buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :",
     "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
     "ods": "En lien avec votre éco-solution",
-    "odsSme": "En lien avec l’éco-solution",
+    "odsSme": "ODD en lien avec la solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
     "selectProducts": "Votre éco-solution réduit l'impact du ou des produits toxiques suivants",
     "waste": "Types de déchets",
