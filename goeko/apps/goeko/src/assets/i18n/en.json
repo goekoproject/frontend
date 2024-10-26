@@ -162,6 +162,7 @@
     "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
     "currency": "Currency",
+    "date": "Date",
     "deliverCountries": "Countries where your eco-solution is approved",
     "ecosolution_classification": "Select questions and choose products for your eco-solution",
     "ecosolutions_products": "Select Products",
@@ -259,9 +260,9 @@
     "messageContact": "Contact us at {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard": "Start your first analysis",
-    "subtitleCard": "We'll find the best eco-solution for you",
-    "buttonSearch": "Search eco-solution",
+    "titleCard": "Create a project",
+    "subtitleCard": "We will find the most adapted cleantech solutions",
+    "buttonSearch": "Add new project",
     "dialogNewProject": "Name your project",
     "dialogNameProject": "Name",
     "dialogLocationProject": "Province and country",
@@ -588,6 +589,6 @@
   "turnOnNotifications": "Turn on notifications",
   "exploreNow": "Explore now",
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
-  "subtitlePageCatalog": "Best eco-solutions for",
+  "subtitlePageCatalog": "Best solutions for your",
   "results": "results"
 }

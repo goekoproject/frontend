@@ -154,6 +154,7 @@
     "countriesProvincesAvailable": "Países y regiones de distribución",
     "country": "País",
     "currency": "Moneda",
+    "date": "Fecha",
     "deliverCountries ": "Países donde está aprobada su solución ecológica",
     "ecosolution_classification": "Seleccione las preguntas y elija los productos para su ecosolución",
     "ecosolutions_products": "Selecciona los productos",
@@ -250,9 +251,9 @@
     "messageContact": "Póngase en contacto con nosotros en {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard": "Comience su primer análisis",
-    "subtitleCard": "Encontraremos la mejor eco-solución para usted",
-    "buttonSearch": "Buscar eco-solución",
+    "titleCard": "Crea un proyecto",
+    "subtitleCard": "Encontraremos las soluciones cleantech más adecuadas",
+    "buttonSearch": "Añade un nuevo proyecto",
     "dialogNewProject": "Nombre su proyecto",
     "dialogNameProject": "Nombre",
     "dialogLocationProject": "Provincia y país",
@@ -588,6 +589,6 @@
   "turnOnNotifications": "Activa las notificaciones",
   "exploreNow": "Explora ahora",
   "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
-  "subtitlePageCatalog": "La mejor eco-solución para ",
+  "subtitlePageCatalog": "Mejores souciones para ",
   "results": "Resultados"
 }
