@@ -22,7 +22,7 @@
     "view_ecosolutions": "Détails de votre écosolution"
   },
   "CATEGORIES": {
-    "co2Emission": "Emissions de CO2",
+    "co2Emission": "Emissions de CO₂",
     "hazardousProduct": "Produits toxiques",
     "waste": "Déchets",
     "water": "Eau",
@@ -182,7 +182,7 @@
     "products": "Produits",
     "province": "Région",
     "reductionPercentage": "Pourcentage de réduction",
-    "reductionPercentageCO2": "Pourcentage de réduction de CO2",
+    "reductionPercentageCO2": "Pourcentage de réduction de CO₂",
     "reductionPercentageHP": "Pourcentage de réduction des produits dangereux",
     "reductionPercentageWaste": "Pourcentage de réduction des déchets",
     "reductionPercentageWater": "Pourcentage de réduction de la consommation d'eau",
@@ -470,7 +470,7 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Avantages de votre éco-solution par rapport à une solution traditionnelle",
     "buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :",
-    "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
+    "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO₂",
     "ods": "En lien avec votre éco-solution",
     "odsSme": "ODD en lien avec la solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
@@ -530,6 +530,7 @@
   "editSelection": "Modifier sélection",
   "enterprise": "Entreprise",
   "exit": "Sortir",
+  "filters": "Filtres",
   "followUs": "Suivez-nous",
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "lastLead": "Dernier prospect",
@@ -590,5 +591,6 @@
   "exploreNow": "Explorer maintenant",
   "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
   "subtitlePageCatalog": "Meilleures solutions pour",
-  "results": "résultats"
+  "results": "résultats",
+  "resultSolution": "résultat"
 }

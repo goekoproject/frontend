@@ -22,7 +22,7 @@
     "view_ecosolutions": "Detail of your ecosolution"
   },
   "CATEGORIES": {
-    "co2Emission": "CO2 emissions",
+    "co2Emission": "CO₂ emissions",
     "hazardousProduct": "Hazardous Products",
     "waste": "Waste",
     "water": "Water",
@@ -191,7 +191,7 @@
     "products": "Products",
     "province": "Province",
     "reductionPercentage": "Reduction Percentage",
-    "reductionPercentageCO2": "CO2 Reduction Percentage",
+    "reductionPercentageCO2": "CO₂ Reduction Percentage",
     "reductionPercentageHP": "Hazardous Products Reduction Percentage",
     "reductionPercentageWaste": "Waste Reduction Percentage",
     "reductionPercentageWater": "Water Consumption Reduction Percentage",
@@ -480,7 +480,7 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Advantages of your eco-solution compared to a traditional solution",
     "buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:",
-    "co2Emission": "Area where your eco-solution reduces CO2 emissions",
+    "co2Emission": "Area where your eco-solution reduces CO₂ emissions",
     "ods": "Linked to your eco-solution",
     "odsSme": "SDGs linked to solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
@@ -530,6 +530,7 @@
   "editSelection": "Modifier selection",
   "enterprise": "Enterprise",
   "exit": "Exit",
+  "filters": "Filters",
   "followUs": "Follow us",
   "infoSaveMessages": "You have the option to save your data now, ensuring it's available for future reference, providing you with confidence in accessing it when needed.",
   "lastLead": "Latest lead",
@@ -590,5 +591,6 @@
   "exploreNow": "Explore now",
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
   "subtitlePageCatalog": "Best solutions for your",
-  "results": "results"
+  "results": "results",
+  "resultSolution": "result"
 }

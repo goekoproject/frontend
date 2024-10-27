@@ -22,7 +22,7 @@
     "view_ecosolutions": "Detalle de tu ecosolución"
   },
   "CATEGORIES": {
-    "co2Emission": "Emisiones CO2",
+    "co2Emission": "Emisiones CO₂",
     "hazardousProduct": "Productos tóxicos",
     "waste": "Residuos",
     "water": "Agua",
@@ -182,7 +182,7 @@
     "price": "Precio",
     "products": "Productos",
     "province": "Provincia",
-    "reductionPercentageCO2": "Porcentaje de reducción de CO2",
+    "reductionPercentageCO2": "Porcentaje de reducción de CO₂",
     "reductionPercentageHP": "Porcentaje de reducción de productos peligrosos",
     "reductionPercentageWaste": "Porcentaje de reducción de desechos",
     "reductionPercentageWater": "Porcentaje de reducción de consumo de agua",
@@ -472,7 +472,7 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Ventajas de su ecosolución en comparación a una solución tradicional",
     "buildingOperation_question": "¿Está buscando una o más soluciones para reducir el consumo de agua, como por ejemplo:",
-    "co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO2",
+    "co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO₂",
     "ods": "Vinculado a su solución ecológica",
     "odsSme": "ODS relacionados con la solución",
     "paybackPeriodYears": "Número de años para rentabilizar la inversión respecto a una solución tradicional",
@@ -531,6 +531,7 @@
   "editSelection": "Modificar selección",
   "enterprise": "Empresa",
   "exit": "Salir",
+  "filters": "Filtros",
   "followUs": "Síguenos",
   "infoSaveMessages": "Tienes la opción de guardar tus datos en este momento, lo cual asegurará que estén disponibles para futuras consultas, brindándote la certeza de contar con ellos cuando los necesites.",
   "lastLead": "Último cliente potencial",
@@ -590,5 +591,6 @@
   "exploreNow": "Explora ahora",
   "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
   "subtitlePageCatalog": "Mejores souciones para ",
-  "results": "Resultados"
+  "results": "resultados",
+  "resultSolution": "resultado"
 }

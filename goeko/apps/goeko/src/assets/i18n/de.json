@@ -22,7 +22,7 @@
     "view_ecosolutions": "Details Ihrer Ökolösung ecosolution"
   },
   "CATEGORIES": {
-    "co2Emission": "CO2-Emissionen",
+    "co2Emission": "CO₂-Emissionen",
     "hazardousProduct": "Gefährliche Produkte",
     "waste": "Abfall",
     "water": "Wasser",
@@ -182,7 +182,7 @@
     "products": "Produkte",
     "province": "Region",
     "reductionPercentage": "Prozentuale Reduzierung",
-    "reductionPercentageCO2": "CO2-Reduzierungsprozentsatz",
+    "reductionPercentageCO2": "CO₂-Reduzierungsprozentsatz",
     "reductionPercentageHP": "Prozentsatz der Reduzierung gefährlicher Produkte",
     "reductionPercentageWaste": "Abfallreduzierung in Prozent",
     "reductionPercentageWater": "Prozentsatz der Reduzierung des Wasserverbrauchs",
@@ -469,7 +469,7 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Vorteile Ihrer eco-solution im Vergleich zu einer traditionellen Lösung",
     "buildingOperation_question": "Suchen Sie nach einer oder mehreren Lösungen, um den Wasserverbrauch zu reduzieren, wie zum Beispiel:",
-    "co2Emission": "Bereich, in dem Ihre eco-solution die CO2-Emissionen reduziert",
+    "co2Emission": "Bereich, in dem Ihre eco-solution die CO₂-Emissionen reduziert",
     "ods": "Mit Ihrer eco-solution verknüpft",
     "odsSme": "Mit der Lösung verbundene SDGs",
     "paybackPeriodYears": "Anzahl der Jahre, um die Investition im Vergleich zu einer traditionellen Lösung rentabel zu machen",
@@ -529,6 +529,7 @@
   "editSelection": "Auswahl ändern",
   "enterprise": "Unternehmen",
   "exit": "Beenden",
+  "filters": "Filter",
   "followUs": "Folgen Sie uns",
   "infoSaveMessages": "Sie haben die Möglichkeit, Ihre Daten jetzt zu speichern, um sicherzustellen, dass sie für zukünftige Referenzen verfügbar sind. Dies gibt Ihnen die Sicherheit, bei Bedarf darauf zugreifen zu können.",
   "lastLead": "Neuester Lead",
@@ -589,5 +590,6 @@
   "exploreNow": "Jetzt erkunden",
   "msgSearchEcosolutions": "Suchen Sie nach Eco-solutions, die Ihren Bedürfnissen entsprechen",
   "subtitlePageCatalog": "Beste Lösungen für",
-  "results": "ergebnisse"
+  "results": "ergebnisse",
+  "resultSolution": "Ergebnis"
 }
