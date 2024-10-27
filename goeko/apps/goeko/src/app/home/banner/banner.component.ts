@@ -34,6 +34,9 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return
     }
     this.marketingVideo.nativeElement.muted = true
+    if (!this.isSmailScreen().matches) {
+      this.marketingVideo.nativeElement.autoplay = true
+    }
   }
 
   ngOnInit(): void {
