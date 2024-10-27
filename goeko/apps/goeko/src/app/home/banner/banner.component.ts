@@ -1,3 +1,4 @@
+import { MediaMatcher } from '@angular/cdk/layout'
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
 import { CODE_LANG } from '@goeko/core'
 import { TranslateService } from '@ngx-translate/core'
@@ -14,13 +15,19 @@ export class BannerComponent implements AfterViewInit, OnInit {
   public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15]
 
   public srcVideo = signal(this.urlSrcVideo)
+  public isSmailScreen = signal(this._mediaMatcher.matchMedia('(max-width: 599.98px)'))
+
   private get urlSrcVideo() {
     if (this.currentLangCode() === CODE_LANG.FR) {
       return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/info-fr'
     }
     return `https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/goeko-info-${this.currentLangCode()}#t=40`
   }
-  constructor(private _translateServices: TranslateService) {}
+
+  constructor(
+    private _translateServices: TranslateService,
+    private _mediaMatcher: MediaMatcher,
+  ) {}
 
   ngAfterViewInit(): void {
     if (!this.marketingVideo) {
@@ -36,8 +43,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
       this.srcVideo.set(this.urlSrcVideo)
-
-      if (this.isMobileOrTablet()) {
+      if (this.isSmailScreen().matches) {
         this.marketingVideo.nativeElement.pause()
       }
     })
@@ -47,10 +53,5 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this.marketingVideo.nativeElement.requestFullscreen()
     this.marketingVideo.nativeElement.controls = this.marketingVideo.nativeElement.controls = true
     this.marketingVideo.nativeElement.play()
-  }
-
-  private isMobileOrTablet(): boolean {
-    const userAgent = navigator.userAgent
-    return /android|iPad|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
   }
 }
