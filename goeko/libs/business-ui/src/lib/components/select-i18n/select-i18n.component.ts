@@ -3,7 +3,7 @@ import { OverlayModule } from '@angular/cdk/overlay'
 import { CommonModule } from '@angular/common'
 import { Component, inject, signal } from '@angular/core'
 import { Lang, LANGS } from '@goeko/core'
-import { ButtonModule } from '@goeko/ui'
+import { ButtonModule, IArrowDownComponent } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 
 @Component({
@@ -11,7 +11,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
   templateUrl: './select-i18n.component.html',
   styleUrls: ['./select-i18n.component.scss'],
   standalone: true,
-  imports: [CommonModule, ButtonModule, TranslateModule, OverlayModule],
+  imports: [CommonModule, ButtonModule, TranslateModule, OverlayModule,IArrowDownComponent],
 })
 export class SelectI18nComponent {
   private _translateServices = inject(TranslateService)
