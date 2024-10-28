@@ -3,17 +3,17 @@
     <article class="main-front">
       <div class="flex flex-col items-center lg:w-full">
 
-        <div class="relative lg:w-full sm:w-[400px] sm:h[700px]">
-            <img [src]="mainPhoto" class="lg:w-full"/>
+        <div class="relative lg:w-full">
+            <img [src]="mainPhoto" class="lg:w-full object-cover h-[43rem] lg:h-full"/>
         </div>
         <h1 #goekoText class="title-transition">
           GoEko
         </h1>
         <div class="absolute text-center top-[17rem]">
-            <h1 class="title text-transition" *ngIf="showMainSlogan">
+            <h1 class="title text-transition text-6xl leading-none md:h-32 md:text-8xl" *ngIf="showMainSlogan">
               {{ entryDataMain.text }}
             </h1>
-            <h3 class="subtitle text-transition" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
+            <h3 class="subtitle text-transition sm:text-lg" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
 
             <div class="grid place-items-center m-auto text-transition" *ngIf="showMainSlogan">
               <div class="flex items-center mt-12">
