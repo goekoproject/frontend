@@ -56,6 +56,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
+  public USER_TYPE = USER_TYPE
   private _externalId = this._profieService.externalId
   private destroy$ = new Subject<void>()
 
@@ -95,6 +96,10 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   private _createFormForUserType() {
     this.form = ProfileFormFactory.createProfileForm(this.userType())
     this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
+
+    if (this.userType() === USER_TYPE.SME) {
+      this.form.addControl('generalNotifications', new FormControl(false))
+    }
   }
 
   private _loadDataProfile() {

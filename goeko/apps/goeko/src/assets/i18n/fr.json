@@ -259,7 +259,8 @@
     "dialogLocationRequired": "L'emplacement est requis",
     "dialogButtonNext": "Suivant",
     "dialogPlaceholderName": "PO Juin, 2024",
-    "dialogPlaceholderLocation": "Madrid, Espagne"
+    "dialogPlaceholderLocation": "Madrid, Espagne",
+    "notificationProfile": "J'accepte de recevoir des notifications concernant de nouvelles cleantech solutions liées à mes projets"
   },
   "NOTIFICATION": {
     "save_ok": "Enregistré avec succès"
