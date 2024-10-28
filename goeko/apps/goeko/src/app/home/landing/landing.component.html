@@ -6,14 +6,14 @@
         <div class="relative lg:w-full">
             <img [src]="mainPhoto" class="lg:w-full object-cover h-[43rem] lg:h-full"/>
         </div>
-        <h1 #goekoText class="title-transition">
+        <h1 #goekoText class="title-transition text-[5rem] lg:text-[10rem]">
           GoEko
         </h1>
-        <div class="absolute text-center top-[17rem]">
+        <div class="absolute text-center top-[12rem] lg:top-[17rem]">
             <h1 class="title text-transition text-6xl leading-none md:h-32 md:text-8xl" *ngIf="showMainSlogan">
               {{ entryDataMain.text }}
             </h1>
-            <h3 class="subtitle text-transition sm:text-lg" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
+            <h3 class="subtitle text-transition sm:text-lg p-4 lg:p-0" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
 
             <div class="grid place-items-center m-auto text-transition" *ngIf="showMainSlogan">
               <div class="flex items-center mt-12">
@@ -39,24 +39,24 @@
     </article>
   </div>
 
-  <!-- <div class="px-6 lg:p-8">
+ <div class="px-6 lg:p-8">
     <div class="flex flex-col gap-24">
       <go-banner class="z-[1] mb-12"></go-banner>
       @defer (on viewport) {
-        <go-content></go-content>
+        <!-- <go-content></go-content> -->
       } @placeholder {
         <div>loading...</div>
       }
     </div>
   </div>
 
-    <div class="flex flex-col gap-24">
+    <!-- <div class="flex flex-col gap-24">
       @defer (on viewport) {
         <goeko-team></goeko-team>
       } @placeholder {
         <div>loading...</div>
       }
-    </div> -->
+    </div>  -->
 
   }
 

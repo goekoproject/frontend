@@ -6,23 +6,18 @@
 }
 
 .title {
-  font: var(--font-home-semibold);
-  // font-size: 6.5rem;
+  font-family: Khand-SemiBold, sans-serif;
   color: white;
-  // height: 8rem;
   align-content: center;
-
-  // font-size: 3.5rem;
-
-  //   line-height: 1;
-
 }
 
 .title-transition {
   position: absolute;
   top: 16rem;
-  font: var(--font-home-semibold);
-  font-size: 10rem;
+
+  font-family: Khand-SemiBold, sans-serif;
+
+  // font-size: 10rem;
   background: -webkit-linear-gradient(rgb(255, 255, 255), #999999);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
