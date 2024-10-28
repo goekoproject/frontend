@@ -1,6 +1,13 @@
 :root {
   --font-default: var(--font-body);
   --font-body: 16px/1.5rem Inter, sans-serif;
+
+  --font-home-semibold: 16px/1.5rem Khand-SemiBold, sans-serif;
+  --font-home-medium: 16px/1.5rem Khand-Medium, sans-serif;
+  --font-body-home: 17px/1.5rem Inter-Medium, sans-serif;
+  --font-body-semibold: 16px/1.5rem Inter-SemiBold, sans-serif;
+  --font-body-bold: 16px/1.5rem Inter-Bold, sans-serif;
+  --font-home-dialog: 17px/1.5rem Inter-Regular, sans-serif;
 }
 
 /* inter-latin-wght-normal */
