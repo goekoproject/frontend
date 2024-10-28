@@ -16,14 +16,14 @@
       @if (controlLocations.controls) {
         @for (location of controlLocations.controls; track location; let i = $index) {
           <div [formGroupName]="i" class="locations-selected">
-            <div [formGroupName]="controlNameCountry" class="flex w-full flex-col gap-4">
+            <div formGroupName="country" class="flex w-full flex-col gap-4">
               <ui-super-select
                 class="w-full"
                 [placeholder]="'FORM_LABEL.country' | translate"
                 [formControlName]="'code'"
-                [id]="controlNameCountry"
+                id="country"
                 [compareWith]="defaultSetSuperSelect">
-                <label title for="{{ controlNameCountry }}">
+                <label title for=" country ">
                   {{ 'FORM_LABEL.country' | translate }}
                 </label>
                 @for (option of countries(); track option.code; let first = $first) {
@@ -38,11 +38,11 @@
                   <ui-super-select
                     class="w-full"
                     [placeholder]="'regions' | translate"
-                    [formControlName]="'regions'"
-                    [id]="controlNameProvince"
+                    formControlName="regions"
+                    id="regions"
                     [multiple]="true"
                     [compareWith]="defaultSetSuperSelect">
-                    <label title for="{{ controlNameProvince }}">
+                    <label title for="regions">
                       {{ 'FORM_LABEL.province' | translate }}
                     </label>
 
