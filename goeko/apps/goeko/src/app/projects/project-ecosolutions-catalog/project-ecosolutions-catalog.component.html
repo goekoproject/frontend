@@ -1,0 +1,96 @@
+<div class="flex gap-4">
+  <goeko-project-ecosolutions-filters
+    class="mt-3 w-max"
+    [ngClass]="{ visible: ecosolutionsListForProject().length !== 0 }"
+    [(filtersVisible)]="showFilter"></goeko-project-ecosolutions-filters>
+
+  <!--CONTENT-->
+  <div class="relative flex h-screen w-4/6 flex-grow flex-col gap-4">
+    <h1 class="text-2xl font-semibold">
+      {{ 'subtitlePageCatalog' | translate }} <span class="text-greenLime">{{ project().name }}</span>
+      <p class="text-base font-normal">{{ totalEcosolutions() }} {{ 'results' | translate }}</p>
+    </h1>
+    <button go-button appearance="white" class="absolute right-0 top-0" (click)="goToProjectForm()">
+      {{ 'edit' | translate }}
+    </button>
+    <!--APPLIED FILTERS-->
+
+    <div class="w-full">
+      <button
+        class="border-light flex h-12 w-24 min-w-max max-w-max basis-24 flex-wrap items-center gap-2 rounded-full border bg-white px-4 py-2 sm:hidden"
+        (click)="toogleFilters()">
+        <i class="ti ti-adjustments-alt"></i>
+
+        <span class="hidden sm:block">Filters</span>
+      </button>
+
+      <div class="flex w-full gap-1 p-2 text-sm text-primary-default">
+        <span>{{ country() }}</span>
+        @if (regions()) {
+          <abbr title="{{ regions() }}" class="no-underline hover:text-clip">· {{ regions() }}</abbr>
+        }
+      </div>
+    </div>
+
+    @if (ecosolutionsListForProject().length !== 0) {
+      <div class="flex flex-wrap gap-8">
+        <ng-container *ngTemplateOutlet="ecosolutionsCatalog"></ng-container>
+      </div>
+    } @else {
+      <ng-container *ngTemplateOutlet="notResultData"></ng-container>
+    }
+  </div>
+</div>
+
+<!--Ecosolutions Catalog-->
+<ng-template #ecosolutionsCatalog>
+  @for (ecosolution of ecosolutionsListForProject(); track ecosolution.id) {
+    <goeko-card-product
+      class="basis-80"
+      [title]="ecosolution.solutionName"
+      [description]="ecosolution.description"
+      [image]="ecosolution.companyDetail.logo"
+      [category]="'CATEGORIES.' + ecosolution.classification.mainCategory | translate"
+      [classNameCategoy]="ecosolution.classification.mainCategory"
+      [isFavorite]="ecosolution.favourite"
+      (changeFavorite)="toogleFavourite(ecosolution)"
+      (changeShowMore)="viewEcosolutionDetail(ecosolution)" />
+  }
+</ng-template>
+
+<ng-template #notResultData>
+  @if (this.project().notification && !this.project().notification['onNewEcosolution']) {
+    <ng-container *ngTemplateOutlet="msgTurnNotification"></ng-container>
+  } @else {
+    <ng-container *ngTemplateOutlet="refreshData"></ng-container>
+  }
+</ng-template>
+
+<!--Message Turn Notification-->
+<ng-template #msgTurnNotification>
+  <div class="m-auto flex w-3/5 flex-col items-center justify-center gap-4 text-center">
+    <i class="ti ti-bell-ringing text-8xl text-grayFog"></i>
+    <p>{{ 'msg_empty_ecosolutions_notification' | translate }}</p>
+    <button go-button (click)="turnOnNotification()">
+      {{ 'turnOnNotifications' | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<!--Refresh data-->
+<ng-template #refreshData>
+  @if (isLoading()) {
+    <div class="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2">
+      <object data="assets/loading-catalog.svg" width="100" height="100"></object>
+      <span>{{ 'msgSearchEcosolutions' | translate }}</span>
+    </div>
+  } @else {
+    <div class="absolute inset-0 m-auto flex w-3/5 flex-col items-center justify-center gap-4 text-center">
+      <i class="ti ti-bell-ringing text-8xl text-grayFog"></i>
+      <p>{{ 'msg_empty_ecosolutions_notification' | translate }}</p>
+      <button go-button (click)="fetchEcosolutionsCatalog()">
+        {{ 'exploreNow' | translate }}
+      </button>
+    </div>
+  }
+</ng-template>

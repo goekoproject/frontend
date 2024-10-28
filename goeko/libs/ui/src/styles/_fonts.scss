@@ -1,100 +1,17 @@
-$font-roboto-regular: 'Roboto-Regular';
-$font-roboto-thin: 'Roboto-Thin';
-$font-barlow-semi-bold: 'Barlow-SemiBold';
-$font-barlow-la-belle-aurore: 'LaBelleAurore-Regular';
-$font-inter-thin: 'Inter-Thin';
-
 :root {
-  --font-default: var(--font-body-home);
-  --font-huge-heading: 60px/3.875rem Epilogue-SemiBold, sans-serif;
-  --font-heading: 24px/2rem Epilogue-Bold, sans-serif;
-  --font-body: 16px/1.5rem Barlow-Regular, sans-serif;
-  --font-body-semibold: 16px Barlow-SemiBold, sans-serif;
-  --font-body-bold: 20px/1.5rem Barlow-Bold, sans-serif;
-  --font-menu: 16px Barlow-Medium, sans-serif;
-  --font-label: 14px Barlow-Medium, sans-serif;
-  --font-label-semibold: 12px Barlow-SemiBold, sans-serif;
-  --font-marketing-bold: 6vw Barlow-Bold, sans-serif;
-  --text-thin-accent: 2rem Roboto-Thin, sans-serif;
-  --text-bold-accent: 1.875rem Roboto-Bold, sans-serif;
-  --font-home-semibold: 16px/1.5rem Khand-SemiBold, sans-serif;
-  --font-home-medium: 16px/1.5rem Khand-Medium, sans-serif;
-  --font-body-home: 17px/1.5rem Inter-Medium, sans-serif;
-  --font-body-semibold: 16px/1.5rem Inter-SemiBold, sans-serif;
-  --font-body-bold: 16px/1.5rem Inter-Bold, sans-serif;
-  --font-home-dialog: 17px/1.5rem Inter-Regular, sans-serif;
-
+  --font-default: var(--font-body);
+  --font-body: 16px/1.5rem Inter, sans-serif;
 }
 
-/** HEADING **/ /* epilogue-regular - latin */
-/** fonts woff -->  https://gwfh.mranftl.com/fonts  */
-/* epilogue-600 - latin */
+/* inter-latin-wght-normal */
 @font-face {
+  font-family: 'Inter';
+  font-style: normal;
   font-display: swap;
-  font-family: 'Epilogue-SemiBold';
-  font-style: normal;
-  font-weight: 600;
-  src: url('_fonts/epilogue/Epilogue-SemiBold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* epilogue-700 - latin */
-@font-face {
-  font-display: swap;
-  font-family: 'Epilogue-Bold';
-  font-style: normal;
-  font-weight: 700;
-  src: url('_fonts/epilogue/Epilogue-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/** BODY **/
-/* barlow-regular - latin */
-@font-face {
-  font-display: swap;
-  font-family: 'Barlow-Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: url('_fonts/barlow/Barlow-Regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* barlow-500 - latin */
-@font-face {
-  font-display: swap;
-  font-family: 'Barlow-Medium';
-  font-style: normal;
-  font-weight: 500;
-  src: url('_fonts/barlow/Barlow-Medium.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* barlow-600 - latin */
-@font-face {
-  font-display: swap;
-  font-family: 'Barlow-SemiBold';
-  font-style: normal;
-  font-weight: 600;
-  src: url('_fonts/barlow/Barlow-SemiBold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* barlow-700 - latin */
-@font-face {
-  font-display: swap;
-  font-family: 'Barlow-Bold';
-  font-style: normal;
-  font-weight: 700;
-  src: url('_fonts/barlow/Barlow-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* roboto-100 - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Roboto-Thin';
-  font-style: normal;
-  font-weight: 100;
-  src: url('_fonts/Roboto/Roboto-Thin.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* roboto-regular - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Roboto-Bold';
-  font-style: normal;
-  font-weight: 400;
-  src: url('_fonts/Roboto/Roboto-Bold.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-weight: 100 900;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/inter:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* khand-600 - latin */

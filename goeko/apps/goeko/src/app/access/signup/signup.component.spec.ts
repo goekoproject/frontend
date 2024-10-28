@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { provideHttpClient, withInterceptors } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
+import { handlerHttpInterceptor } from '@goeko/business-ui'
 import { USER_TYPE } from '@goeko/store'
 import { ButtonModule, DialogMessageModule, DialogService, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -29,17 +31,12 @@ describe('SignupComponent', () => {
       }),
     }
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterModule.forRoot([]),
-        ReactiveFormsModule,
-        ButtonModule,
-        GoInputModule,
-        TranslateModule.forRoot(),
-        DialogMessageModule,
-      ],
+      imports: [RouterModule.forRoot([]), ReactiveFormsModule, ButtonModule, GoInputModule, TranslateModule.forRoot(), DialogMessageModule],
       declarations: [SignupComponent],
       providers: [
+        provideHttpClient(withInterceptors([handlerHttpInterceptor])),
+        provideHttpClientTesting(),
+
         {
           provide: AccessService,
           useValue: accessServiceMock,

@@ -42,6 +42,15 @@ export class AuthService extends Auth0Connected {
   get userInfo$(): Observable<Auth0UserProfile> {
     return this._userInfo$
   }
+  get checkSession$(): Observable<any> {
+    return this._checkSession$.pipe(
+      tap((user) => {
+        if (user) {
+          this.authenticated.set(this.isAuthenticated)
+        }
+      }),
+    )
+  }
 
   constructor(
     @Inject(CONFIGURATION) private _config: Options,
@@ -116,7 +125,7 @@ export class AuthService extends Auth0Connected {
   }
 
   logout(returnTo = `${this.doc.location.origin}/login`) {
-    sessionStorage.clear()
+    this.sessionStorage.clearItems()
     this.webAuth.logout({ returnTo: returnTo, clientID: this._clientId })
   }
 

@@ -1,7 +1,7 @@
 import { Classifications, NotificationSearch, SmeSaveRecomendationProjectRequest, SmeSaveRecomendationRequest } from '@goeko/store'
 import { Section } from '../form-field.model'
 
-export const formToClassificationsMapper = (formValue: Section) => {
+export const formToClassificationsMapper = (formValue: any) => {
   const classifications: Classifications[] = []
   if (!formValue) {
     return classifications
@@ -30,7 +30,7 @@ export const formToClassificationsMapper = (formValue: Section) => {
             }
           })
 
-          if (!products) {
+          if (!products || products.length === 0) {
             return
           }
           categoryClassification = {

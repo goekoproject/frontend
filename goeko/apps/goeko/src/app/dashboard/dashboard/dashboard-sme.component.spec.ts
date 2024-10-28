@@ -3,11 +3,11 @@ import { provideLocationMocks } from '@angular/common/testing'
 import { Component, signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
-import { MessageService } from '@goeko/business-ui'
-import { ProjectService, SmeRequestResponse, SmeUser, UserService } from '@goeko/store'
-import { ButtonModule, DialogMessageModule, GoDateFormatPipe, GoInputModule } from '@goeko/ui'
+import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
+import { ProjectService, SmeUser, UserService } from '@goeko/store'
+import { ButtonModule, DialogMessageModule, DialogService, GoDateFormatPipe, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { from, of } from 'rxjs'
+import { of } from 'rxjs'
 import { DashboardSmeComponent } from './dashboard-sme.component'
 
 @Component({
@@ -15,6 +15,7 @@ import { DashboardSmeComponent } from './dashboard-sme.component'
   template: '',
 })
 class TestProjectComponent {}
+
 describe('DashboardSmeComponent', () => {
   let component: DashboardSmeComponent
   let fixture: ComponentFixture<DashboardSmeComponent>
@@ -24,7 +25,9 @@ describe('DashboardSmeComponent', () => {
   let mockMessageService: {
     deleteMessage: jest.Mock
   }
-  //let mockRouterService: Partial<Router>
+  let mockDialogService: {
+    open: jest.Mock
+  }
   let mockActivatedRoute: Partial<ActivatedRoute>
 
   let router: Router
@@ -32,29 +35,18 @@ describe('DashboardSmeComponent', () => {
     mockUserService = {
       userProfile: signal({ id: '1' } as SmeUser),
     }
-    mockProjectService = {
-      getRecommendationsByProjectById: jest.fn().mockReturnValue(
-        of([
-          {
-            id: '1',
-            name: 'project',
-            date: new Date(),
-          },
-        ]),
-      ),
-      deleteProject: jest.fn().mockReturnValue(of({})),
-    }
 
-    //** TODO:not suscribre */
     mockMessageService = {
       deleteMessage: jest.fn().mockReturnValue({
         afterClosed: jest.fn().mockReturnValue(of(true)),
       }),
     }
 
-    /*mockRouterService = {
-      navigate: jest.fn(),
-    };*/
+    mockDialogService = {
+      open: jest.fn().mockReturnValue({
+        afterClosed: jest.fn().mockReturnValue(of({ id: '123' })),
+      }),
+    }
 
     mockActivatedRoute = {
       parent: {
@@ -88,7 +80,7 @@ describe('DashboardSmeComponent', () => {
         { provide: UserService, useValue: mockUserService },
         { provide: ProjectService, useValue: mockProjectService },
         { provide: MessageService, useValue: mockMessageService },
-        //{ provide: Router, useValue: mockRouterService },
+        { provide: DialogService, useValue: mockDialogService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         provideLocationMocks(),
       ],
@@ -105,70 +97,11 @@ describe('DashboardSmeComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  // Prueba para probar el método ngOnInit, verificar que inicializa la propiedad projects como nueva instancia de array vacío
-  it('should initialize projects as an empty array on ngOnInit', () => {
-    component.ngOnInit()
-    expect(component.projects).toEqual([])
-  })
-
-  // Prueba para obtener el proyecto
-  it('should fetch projects on initialization', () => {
-    expect(mockProjectService.getRecommendationsByProjectById).toHaveBeenCalled()
-    expect(component.projects.length).toBeGreaterThan(0)
-  })
-
-  //Prueba para verificar que 'projects' se inicializa correctamente con los datos del servicio.
-  it('should update projects with the first 3 recommendations from the service', () => {
-    const mockProject: SmeRequestResponse[] = [
-      { id: '1', date: '2023-01-01', classifications: [], notification: { onNewEcosolution: true } },
-      { id: '2', date: '2023-01-02', classifications: [], notification: { onNewEcosolution: false } },
-      { id: '3', date: '2023-01-03', classifications: [], notification: { onNewEcosolution: true } },
-    ]
-
-    jest.spyOn(mockProjectService, 'getRecommendationsByProjectById').mockReturnValue(from(mockProject))
-
-    component['_getLastProjectName']()
-    expect(component.projects).toEqual(mockProject)
-  })
-
-  // Prueba para goToProject:
-  it('should navigate to the correct project when goToProject is called', () => {
-    const project: SmeRequestResponse = {
-      id: '123',
-      date: '2023-01-01',
-      classifications: [],
-      notification: { onNewEcosolution: true },
-    }
-
+  // Test for openNewProjectDialog method
+  it('should open new project dialog and navigate to project', () => {
     const navigateSpy = jest.spyOn(router, 'navigate')
-
-    component.goToProject(project)
-
-    expect(navigateSpy).toHaveBeenCalledWith(['../sme-analysis/projects/project', component.userProfile().id], {
-      relativeTo: component.route.parent,
-      queryParams: { projectId: project.id },
-    })
-  })
-
-  it('should delete the project when deleteProject is called', () => {
-    const project: SmeRequestResponse = {
-      id: '123',
-      date: '2023-01-01',
-      classifications: [],
-      notification: { onNewEcosolution: true },
-    }
-
-    mockMessageService
-      .deleteMessage()
-      .afterClosed()
-      .subscribe((res: boolean) => {
-        expect(res).toBeTruthy()
-        expect(mockProjectService.deleteProject).toHaveBeenCalledWith(project.id)
-        expect(mockProjectService.getRecommendationsByProjectById).toHaveBeenCalled()
-      })
-
-    component.deleteProject(project)
-
-    expect(mockMessageService.deleteMessage).toHaveBeenCalled()
+    component.openNewProjectDialog()
+    expect(mockDialogService.open).toHaveBeenCalledWith(DialogNewProjectComponent)
+    expect(navigateSpy).toHaveBeenCalledWith(['../project-form', '1', '123'], { relativeTo: mockActivatedRoute.parent })
   })
 })

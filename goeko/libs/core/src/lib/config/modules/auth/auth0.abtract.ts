@@ -34,6 +34,19 @@ export interface AuthResponse {
   userType: string
 }
 
+const setItemSessionStorage = (name: string, obj: any, code?: boolean) => {
+  if (code) {
+    sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)))
+    return
+  }
+  sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)))
+}
+const setSession = (authResult: any) => {
+  const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
+  setItemSessionStorage(SESSIONID, authResult.accessToken)
+  setItemSessionStorage(EXPIRES_AT, expiresAt)
+}
+
 export abstract class Auth0Connected {
   public webAuth!: WebAuth
   public expiresIn!: number
@@ -41,7 +54,9 @@ export abstract class Auth0Connected {
   private _domain: string
   private _clientID: string
   private _redirectUri: string
+  private _audience: string
   private _userAuth = new BehaviorSubject<any>(null)
+
   get userAuth$(): Observable<any | null | undefined> {
     return this._userAuth.asObservable()
   }
@@ -64,15 +79,40 @@ export abstract class Auth0Connected {
       })
     })
   }
+
+  get _checkSession$() {
+    return new Observable((observer) => {
+      this.webAuth.checkSession(
+        {
+          domain: this._domain,
+          clientID: this._clientID,
+          redirectUri: this._redirectUri,
+          responseType: 'token id_token',
+          scope: 'openid profile email',
+          audience: this._audience,
+        },
+        (err, authResult) => {
+          if (err) {
+            observer.error(err)
+          } else {
+            setSession(authResult)
+            observer.next(true)
+            observer.complete()
+          }
+        },
+      )
+    })
+  }
   _router = inject(Router)
   sessionStorage = inject(SessionStorageService)
 
   constructor(config: Options, redirectUri: string) {
-    const { domainAuth0, clientId, connection } = config
+    const { domainAuth0, clientId, connection, audience } = config
     this._domain = domainAuth0
     this._clientID = clientId
     this._redirectUri = redirectUri
     this._connection = connection
+    this._audience = audience
     this._connectAuth0()
   }
 
@@ -93,12 +133,6 @@ export abstract class Auth0Connected {
   }
 
   public _parseHashAuth0() {
-    const sessionStorage = this.sessionStorage
-    const setSession = (authResult: any) => {
-      const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
-      sessionStorage.setItem(SESSIONID, authResult.accessToken)
-      sessionStorage.setItem(EXPIRES_AT, expiresAt)
-    }
     return new Observable<any>((observer) => {
       this.webAuth.parseHash({ hash: window.location.hash }, function (err, authResult) {
         if (err) {

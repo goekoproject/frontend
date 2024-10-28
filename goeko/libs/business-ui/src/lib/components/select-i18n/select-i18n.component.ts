@@ -1,38 +1,50 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayModule } from '@angular/cdk/overlay'
 import { CommonModule } from '@angular/common'
-import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core'
-import { Lang } from '@goeko/core'
+import { Component, inject, OnInit, signal } from '@angular/core'
+import { Router, RouterModule } from '@angular/router'
+import { Lang, LANGS } from '@goeko/core'
 import { ButtonModule } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'goeko-select-i18n',
   templateUrl: './select-i18n.component.html',
   styleUrls: ['./select-i18n.component.scss'],
   standalone: true,
-  imports: [CommonModule, ButtonModule, TranslateModule, OverlayModule],
+  imports: [CommonModule, ButtonModule, TranslateModule, OverlayModule, RouterModule],
 })
 export class SelectI18nComponent implements OnInit {
-  @Input() langs!: Lang[]
-  @Input() defaultLang!: any
-
-  @Output() onSelect: EventEmitter<any> = new EventEmitter()
+  private _translateServices = inject(TranslateService)
+  private _router = inject(Router)
+  private _currentCodeLang = this._translateServices.currentLang ?? this._translateServices.defaultLang
+  public langs = LANGS
 
   public isOpen = false
-  public selectedLand = signal<string | null>(null)
-
-  ngOnInit(): void {
-    this.selectedLand.set(this.defaultLang.codeContentFul)
-  }
-
+  public selectedLand = signal<Lang | null>(this.langs.find((lang) => lang.code === this._currentCodeLang) || this.langs[0])
   toggle() {
     this.isOpen = !this.isOpen
   }
+  ngOnInit(): void {
+    this._changeLang()
+  }
 
   selectedLang(lang: Lang) {
-    this.onSelect.emit(lang.code)
-    this.selectedLand.set(lang.codeContentFul)
+    this.selectedLand.set(lang)
+    this._translateServices.use(lang.code)
+    sessionStorage.setItem('lang', lang.code)
     this.isOpen = false
+  }
+
+  private _changeLang() {
+    this._translateServices.onLangChange.subscribe((res) => {
+      this._fetchData(res.lang)
+    })
+  }
+  private _fetchData(lang: string) {
+    this._router.navigate([], {
+      relativeTo: this._router.routerState.root,
+      queryParams: { lang: lang },
+    })
   }
 }

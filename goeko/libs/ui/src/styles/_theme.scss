@@ -41,7 +41,7 @@ body {
 }
 
 body:has(div.is-platform) {
-  background: var(--primary--50);
+  background: var(--white);
   align-items: stretch;
 }
 
@@ -191,11 +191,7 @@ fieldset {
   border: none;
   @apply flex flex-col gap-8;
 }
-label {
-  color: var(--primary--950);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
+
 legend {
   font-size: 1.25rem;
   color: var(--soft-dark);
@@ -287,4 +283,9 @@ input[type='radio' i]:focus-visible {
 .required-field {
   font-size: 12px;
   font-weight: 100;
+}
+.go-badge-category {
+  @apply w-max rounded-full px-3 py-2 text-xs font-semibold;
+  background-color: var(--pastel-green); /* Color pastel verde */
+  color: var(--lime-green); /* Color verde lima */
 }

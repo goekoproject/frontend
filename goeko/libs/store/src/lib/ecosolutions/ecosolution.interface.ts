@@ -1,6 +1,6 @@
 import { TranslatedProperties } from '../model/field-translations.interface'
+import { LocationsCountry } from '../model/locations.country'
 import { Picture } from '../model/pictures.interface'
-import { Country } from '../user/public-api'
 
 export interface Price {
   amount: number
@@ -46,7 +46,7 @@ export interface Ecosolutions {
   guaranteeInYears?: number
   priceDescription?: string
   detailedDescription?: string
-  locations: Array<Country>
+  locations: Array<LocationsCountry>
   pictures?: Picture[]
   nameTranslations: TranslatedProperties[]
   descriptionTranslations: TranslatedProperties[]

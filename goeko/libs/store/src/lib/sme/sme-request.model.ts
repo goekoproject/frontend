@@ -66,6 +66,6 @@ export interface SmeRequestResponse {
 export interface Requests {
   requests: SmeRequestResponse[]
 }
-export interface Projetcs {
+export interface Projects {
   projects: SmeRequestResponse[]
 }

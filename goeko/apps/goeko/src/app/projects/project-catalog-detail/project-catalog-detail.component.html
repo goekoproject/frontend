@@ -1,0 +1,170 @@
+<h2 class="mb-6 text-xl font-semibold">
+  {{ 'yourEcosolution' | translate }}
+</h2>
+
+<div class="flex flex-wrap gap-8">
+  <div class="flex basis-7/12 flex-col gap-4">
+    <div class="section border-grayStone divide-y">
+      <div class="flex flex-col gap-8">
+        <!-- Header: Data comany and solution name -->
+        <div class="mb-4 flex items-center justify-between">
+          <div class="flex items-start gap-4">
+            <img
+              class="border-grayLight size-28 rounded-xl border"
+              [src]="ecosolutionSearchDetail().companyDetail.logo"
+              [alt]="ecosolutionSearchDetail().companyDetail.id" />
+            <div class="flex flex-col gap-3">
+              <h2 class="text-2xl font-semibold">
+                {{ ecosolutionSearchDetail().solutionName }}
+              </h2>
+              <span class="text-greenLime bg-greenPastel rounded-full px-3 py-1.5 text-sm font-semibold">
+                {{ 'CATEGORIES.' + ecosolutionSearchDetail().classification.mainCategory | translate }}
+              </span>
+              <p class="text-greenLime text-sm font-semibold">
+                {{ ecosolutionSearchDetail().companyDetail.name }}
+              </p>
+            </div>
+          </div>
+          <div class="self-start">
+            <a
+              href="https://{{ ecosolutionSearchDetail().companyDetail.link }}"
+              target="_blank"
+              class="flex items-center gap-1"
+              id="website_{{ ecosolutionSearchDetail().companyDetail.name }}">
+              <p>{{ 'FORM_LABEL.website' | translate }}</p>
+              <i class="ti ti-window-maximize"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Classification -->
+        @if (ecosolutionSearchDetail().classification) {
+          <section class="fieldset">
+            <p class="text-grayCharcoal w-full text-sm font-semibold">
+              {{ 'CATEGORIES_LABEL.' + ecosolutionSearchDetail().classification.subCategory + '.label' | translate }}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              @for (option of dataSelect[ecosolutionSearchDetail().classification.subCategory]; track option.id) {
+                @if (ecosolutionSearchDetail().classification.products.includes(option.id)) {
+                  <div class="border-grayMedium text-grayDark inline-block rounded-full border px-3 py-1.5 text-sm font-semibold">
+                    {{ option.keyLang | translate }}
+                  </div>
+                }
+              }
+            </div>
+          </section>
+        }
+        <!-- Countries of Distribution -->
+        <div class="fieldset">
+          <h3 class="font-semibold text-gray-700">Countries of distribution</h3>
+          <div class="flex gap-2">
+            @for (location of ecosolutionSearchDetail().locations; track location?.country?.code) {
+              <div class="border-grayMedium text-grayDark flex gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold">
+                <span class="fi fi-{{ location.country.code | lowercase }}"></span>
+                <p>{{ location.country.label }}</p>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Sustainable Development Goals -->
+        <div class="fieldset">
+          <h3 class="font-semibold text-gray-700">{{ 'ods_title' | translate }}</h3>
+          <goeko-sdg-icons
+            [readonly]="true"
+            [justIcon]="true"
+            [selected]="ecosolutionSearchDetail().sustainableDevelopmentGoals"></goeko-sdg-icons>
+        </div>
+
+        <!-- Warranty -->
+        @defer (when ecosolutionSearchDetail()['guaranteeInYears']) {
+          <div class="fieldset">
+            <h3 class="font-semibold text-gray-700">{{ 'FORM_LABEL.guarantee' | translate }}</h3>
+            <span class="mt-1 inline-block rounded bg-gray-200 px-3 py-1 text-sm text-gray-700">
+              {{ ecosolutionSearchDetail()['guaranteeInYears'] | number: '1.0-0' }}
+              {{ 'years' | translate }}
+            </span>
+          </div>
+        }
+
+        <!-- Payback Period years -->
+        @defer (when ecosolutionSearchDetail()['paybackPeriodYears']) {
+          <div class="fieldset">
+            <h3 class="font-semibold text-gray-700">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</h3>
+            <span class="mt-1 inline-block rounded bg-gray-200 px-3 py-1 text-sm text-gray-700">
+              {{ ecosolutionSearchDetail()['paybackPeriodYears'] | number: '1.0-0' }}
+              {{ 'years' | translate }}
+            </span>
+          </div>
+        }
+      </div>
+      <!-- Description & Images -->
+      <div class="pt-4">
+        <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.technicalDescription' | translate }}</h3>
+        <div class="mt-2">
+          <!-- Image Carousel -->
+          <goeko-input-file [filesUrl]="ecosolutionSearchDetail()['pictures'] | pictureGetUrl" [multiple]="true" [readonly]="true">
+          </goeko-input-file>
+        </div>
+        <!-- Text Description -->
+        <p class="text-sm leading-relaxed text-gray-600" [innerHTML]="ecosolutionSearchDetail().detailedDescription | safe: 'html'"></p>
+      </div>
+
+      <!-- Description Section -->
+    </div>
+
+    <!-- Benefis -->
+    <div class="section border-grayStone">
+      <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.advantages' | translate }}</h3>
+
+      <div class="flex gap-4">
+        <ng-container
+          [ngTemplateOutlet]="percentageReductionTpl"
+          [ngTemplateOutletContext]="{
+            $implicit: ecosolutionSearchDetail().classification.mainCategory,
+          }"></ng-container>
+
+        <go-percentage-card
+          [label]="'FORM_LABEL.operationalCostReductionPercentage'"
+          [isUpto]="true"
+          [percentage]="ecosolutionSearchDetail().improvement.operationalCostReductionPercentage.to || 0"></go-percentage-card>
+      </div>
+    </div>
+  </div>
+  <goeko-lead-form class="basis-1/3"></goeko-lead-form>
+</div>
+
+<ng-template #percentageReductionTpl let-mainCategory>
+  @switch (mainCategory) {
+    @case (CATEGORIES().WASTE) {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageWaste'"
+        [isUpto]="true"
+        [percentage]="ecosolutionSearchDetail().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+
+    @case (CATEGORIES().WATER) {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageWater'"
+        [isUpto]="true"
+        [percentage]="ecosolutionSearchDetail().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+    @case (CATEGORIES().HAZARDOUS_PRODUCT) {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageHP'"
+        [isUpto]="true"
+        [percentage]="ecosolutionSearchDetail().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+
+    @default {
+      <go-percentage-card
+        [label]="'FORM_LABEL.reductionPercentageCO2'"
+        [isUpto]="true"
+        [percentage]="ecosolutionSearchDetail().improvement.reductionPercentage.to || 0">
+      </go-percentage-card>
+    }
+  }
+</ng-template>

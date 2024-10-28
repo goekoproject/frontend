@@ -55,6 +55,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
       this.marketingVideo.nativeElement.src = this.urlSrcVideo
+      this.marketingVideo.nativeElement.pause()
     })
   }
   watchVideo() {

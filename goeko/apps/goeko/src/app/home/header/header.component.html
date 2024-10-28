@@ -1,9 +1,8 @@
 <header #header [ngClass]="isDark === true ? 'dark-header' : 'light-header'">
-  <nav  class="mx-auto flex items-center justify-between px-6 py-3 lg:p-8 h-[6.25rem] flex-row" aria-label="Global">
-    <div class="flex justify-center	gap-2 basis-1/6">
-
+  <nav class="mx-auto flex h-[6.25rem] flex-row items-center justify-between px-6 py-3 lg:p-8" aria-label="Global">
+    <div class="flex basis-1/6 justify-center gap-2">
       <a class="-m-1.5 p-1.5">
-        <img alt="logo-main" src="../../../assets/logo.svg" #logo [routerLink]="['/']" class="w-20 h-[4.25rem] cursor-pointer" />
+        <img alt="logo-main" src="../../../assets/logo.svg" #logo [routerLink]="['/']" class="h-[4.25rem] w-20 cursor-pointer" />
       </a>
     </div>
     <div class="flex md:hidden">
@@ -18,8 +17,8 @@
       </button>
     </div>
     <goeko-menu />
-    <div class="hidden items-center md:flex lg:flex-1 lg:justify-center gap-4 basis-2/6">
-      <goeko-select-i18n [langs]="langs" (onSelect)="onChangeLangs($event)" [defaultLang]="defaultLang"> </goeko-select-i18n>
+    <div class="hidden basis-2/6 items-center gap-4 md:flex lg:flex-1 lg:justify-center">
+      <goeko-select-i18n />
 
       <button (click)="goTologin()" class="login-button">
         {{ 'MENU.login' | translate }}
@@ -30,5 +29,6 @@
       </button>
     </div>
   </nav>
+
   <goeko-menu-mobile [mobileMenuOpen]="mobileMenuOpen()" (login)="goTologin()" />
 </header>
