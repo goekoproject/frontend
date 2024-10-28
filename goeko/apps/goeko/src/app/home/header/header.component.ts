@@ -14,26 +14,13 @@ import { HeaderService } from './header.services'
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'goeko-header lg:max-w-screen-2xl w-[96%]',
+    class: 'goeko-header lg:max-w-screen-2xl sm:max-w-sm max-w-screen-2xlw-[96%]',
   },
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
   isDark!: any;
-  // @HostListener('window:scroll', ['$event'])
-  // onScroll($event: any) {
-  //   if (!this.header || !this.logo) return
-  //   if (window.scrollY > 0) {
-  //     // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '6rem')
-  //     // this._renderer.setStyle(this.logo?.nativeElement, 'width', '7%')
-  //     this._renderer.setStyle(this.header?.nativeElement, 'background-color', '#052639')
-  //   } else {
-  //     // this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '10rem')
-  //     // this._renderer.setStyle(this.logo?.nativeElement, 'width', '12%')
-  //     this._renderer.setStyle(this.header?.nativeElement, 'background-color', 'transparent')
-  //   }
-  // }
 
   langs = LANGS
   defaultLang!: any
