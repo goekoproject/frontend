@@ -9,7 +9,7 @@
   (overlayOutsideClick)="isOpen = false">
   <ul class="langs">
     <li
-      *ngFor="let option of langs"
+      *ngFor="let option of langs()"
       [value]="option"
       [ngClass]="{ 'langs-selected': option.code === selectedLand()?.code }"
       (click)="selectedLang(option)">
