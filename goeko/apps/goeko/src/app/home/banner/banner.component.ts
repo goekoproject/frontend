@@ -1,11 +1,10 @@
-import { Advantages } from './advantages.model';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
 import { ContentFulService } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
-import { map } from 'rxjs';
+import { map } from 'rxjs'
+import { Advantages } from './advantages.model'
 
-const CONTENT_TYPE_GOEKO_ADVANTAGES = 'advantagesGoeko';
+const CONTENT_TYPE_GOEKO_ADVANTAGES = 'advantagesGoeko'
 
 @Component({
   selector: 'go-banner',
@@ -16,8 +15,8 @@ export class BannerComponent implements AfterViewInit, OnInit {
   private _contentFulService = inject(ContentFulService)
   public currentLangCode = signal(this._translateServices.defaultLang)
 
-  public advantages$ = this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).pipe(map((items) => items.items));
-  advantages!: Advantages[];
+  public advantages$ = this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).pipe(map((items) => items.items))
+  advantages!: Advantages[]
 
   @ViewChild('marketingVideo') marketingVideo!: ElementRef<HTMLMediaElement>
 
@@ -25,22 +24,21 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   private get urlSrcVideo() {
     if (this.currentLangCode() === 'fr') {
-      return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/cuunnjgjchyenhrrfovf'
+      return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/info-fr'
     }
     return `https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/goeko-info-${this.currentLangCode()}#t=40`
   }
 
-
   constructor(private _translateServices: TranslateService) {}
 
   ngOnInit(): void {
-    this._changeLangCode();;
-    this.advantages$.subscribe((items:any) => {
-    this.advantages = [];
-    items.forEach((element: any) => {
-      this.advantages.push(new Advantages(element));
-    });
-   });
+    this._changeLangCode()
+    this.advantages$.subscribe((items: any) => {
+      this.advantages = []
+      items.forEach((element: any) => {
+        this.advantages.push(new Advantages(element))
+      })
+    })
   }
 
   ngAfterViewInit(): void {
