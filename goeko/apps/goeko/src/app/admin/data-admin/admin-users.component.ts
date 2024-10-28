@@ -2,10 +2,9 @@ import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
 import { MessageService } from '@goeko/business-ui'
 import { CleanTechService, CleantechsUser, SmeService, SmeUser, USER_TYPE, UserService, UserType } from '@goeko/store'
-import { MESSAGE_TYPE } from '@goeko/ui'
+import { GoDateFormatPipe } from '@goeko/ui'
 import { Observable } from 'rxjs'
 import { DATA_ACTOR_SWITCH } from '../data-actors-switch.constants'
-import { GoDateFormatPipe } from '@goeko/ui'
 
 interface User {
   id: number
@@ -87,7 +86,7 @@ export class AdminUserComponent {
     this.dataSources = this._dataSourcesByUserType[type as keyof DataSourcesByUserType] as Observable<SmeUser[] | CleantechsUser[]>
   }
   deleteUser(id: string): void {
-    this.MessageService.deleteMessage(MESSAGE_TYPE.WARNING, `${id}`)
+    this.MessageService.deleteMessage(`${id}`)
       .afterClosed()
       .subscribe((isConfirmed) => {
         if (isConfirmed) {

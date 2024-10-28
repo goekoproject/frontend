@@ -1,5 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core'
-import { TranslateService } from '@ngx-translate/core'
+import { Component, signal } from '@angular/core'
 
 const KEY_COOKIES = 'cookie-policy'
 @Component({
@@ -7,7 +6,7 @@ const KEY_COOKIES = 'cookie-policy'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public path!: string
 
   get showPopupCookies() {
@@ -19,11 +18,6 @@ export class AppComponent implements OnInit {
   }
 
   public isPrivateZone = signal<boolean>(false)
-  constructor(private _translate: TranslateService) {}
-
-  ngOnInit(): void {
-    this._translate.use('fr')
-  }
 
   acceptCookie() {
     localStorage.setItem(KEY_COOKIES, 'true')

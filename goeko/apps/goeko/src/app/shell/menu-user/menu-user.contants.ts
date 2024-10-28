@@ -55,8 +55,8 @@ export const MENU_USER: MenuUser[] = [
   },
   {
     id: window.crypto.randomUUID(),
-    title: 'analysis',
-    url: 'sme-analysis/list',
+    title: 'projects',
+    url: 'projects-list',
     active: true,
     icon: 'ti ti-analyze-filled',
     userType: [USER_TYPE.SME],

@@ -1,5 +1,4 @@
 .lead-form {
-  background: var(--white);
   padding: 1rem;
   width: 100%;
   min-width: 25rem;
@@ -9,14 +8,9 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  
-  >* {
-    flex-grow: 2;
-    width: 100%;
-  }
-  &-title {
-    color: var(--dark-accent, #163953);
-    font: var(--font-heading);
+  @apply sticky top-[20%] flex w-full min-w-[25rem] flex-col gap-8 rounded-3xl p-4;
+
+  > * {
+    @apply w-full flex-grow;
   }
 }
-

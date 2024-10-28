@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { SelectI18nComponent } from '@goeko/business-ui'
 import { ConfigModule } from '@goeko/core'
 import {
   AlertComponent,
@@ -39,6 +40,7 @@ import { SignupComponent } from './signup/signup.component'
     NotificationModule,
     LoaderCheckComponent,
     DialogMessageModule,
+    SelectI18nComponent,
     AlertComponent,
     TooltipComponent,
     ConfigModule.forRoot({

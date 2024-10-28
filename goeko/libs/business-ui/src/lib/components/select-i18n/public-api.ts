@@ -1,2 +1,1 @@
-export * from './select-i18n.module';
-export * from './select-i18n.component';
+export * from './select-i18n.component'

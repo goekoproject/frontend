@@ -1,9 +1,8 @@
-import { Component, ElementRef, HostListener, OnInit, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, inject, OnInit, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
 import { DialogService } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
-import { TermsOfServicesComponent } from '../../access/signup/terms-of-services.component'
 import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
 import { HeaderService } from './header.services'
 
@@ -18,6 +17,7 @@ import { HeaderService } from './header.services'
   },
 })
 export class HeaderComponent implements OnInit {
+  private _translate = inject(TranslateService)
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
   isDark!: any;
@@ -27,26 +27,22 @@ export class HeaderComponent implements OnInit {
   mobileMenuOpen = signal(false)
   constructor(
     private _renderer: Renderer2,
-    private translate: TranslateService,
     private _router: Router,
     private _dialogService: DialogService,
     private _headerService: HeaderService,
   ) {}
 
   ngOnInit(): void {
-    this.defaultLang = this.langs.find((lang) => lang.code === this.translate.getDefaultLang())
-    this._getHeaderTheme();
+    this.defaultLang = this.langs.find((lang) => lang.code === this._translate.getDefaultLang())
+    this._getHeaderTheme()
   }
 
   _getHeaderTheme() {
-    this._headerService.isDarkTheme.subscribe(res => {
-      this.isDark = res;
-    });
+    this._headerService.isDarkTheme.subscribe((res) => {
+      this.isDark = res
+    })
   }
 
-  onChangeLangs(selectedCodeLand: string) {
-    this.translate.use(selectedCodeLand)
-  }
   goTologin() {
     this._router.navigate(['/login'])
   }
@@ -59,7 +55,6 @@ export class HeaderComponent implements OnInit {
     this._dialogService
       .open(RequestDemoDialogComponent)
       .afterClosed()
-      .subscribe((isAccepted) => {
-      })
+      .subscribe((isAccepted) => {})
   }
 }

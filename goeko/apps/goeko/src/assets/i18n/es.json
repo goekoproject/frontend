@@ -1,38 +1,11 @@
 {
   "ACCESS_ERROR": {
+    "passwordPolicy": "La contraseña debe cumplir con la siguiente política:<br>* Al menos 8 caracteres de longitud<br>* Contener al menos 3 de los siguientes 4 tipos de caracteres:<br> * letras minúsculas (a-z)<br> * letras mayúsculas (A-Z)<br> * números (0-9)<br> * caracteres especiales (por ejemplo, !@#$%^&*)",
     "passwordPolicy1": "Letras minúsculas (a-z)",
     "passwordPolicy2": "Letras mayúsculas (A-Z)",
     "passwordPolicy3": "Números (0-9)",
     "passwordPolicy4": "Caracteres especiales ( !@# $ %^&*)",
-    "passwordPolicy": "La contraseña debe cumplir con la siguiente política:<br>* Al menos 8 caracteres de longitud<br>* Contener al menos 3 de los siguientes 4 tipos de caracteres:<br> * letras minúsculas (a-z)<br> * letras mayúsculas (A-Z)<br> * números (0-9)<br> * caracteres especiales (por ejemplo, !@#$%^&*)",
     "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
-  },
-  "ERROR_MESSAGES": {
-    "500": "Ups, algo salió mal. Prueba luego.",
-    "400": "Revisa tu info y prueba otra vez.",
-    "404": "No encontramos eso. Revisa el enlace.",
-    "invalid_user_password": "Usuario o contraseña incorrectos.",
-    "password_change_required": "Necesitas cambiar tu contraseña porque es la primera vez que inicias sesión o tu contraseña ha expirado.",
-    "password_leaked": "Este inicio de sesión está bloqueado porque tu contraseña se filtró en otro sitio web. Hemos enviado un correo electrónico con instrucciones para desbloquearla.",
-    "too_many_attempts": "Tu cuenta está bloqueada debido a intentos repetidos de inicio de sesión.",
-    "session_missing": "No se puede completar tu solicitud de autenticación. Por favor, intenta de nuevo después de cerrar todas las ventanas abiertas.",
-    "too_many_requests": "Lo siento. Hay demasiadas solicitudes en este momento. Por favor, recarga la página e inténtalo de nuevo. Si el problema persiste, inténtalo más tarde.",
-    "invalid_password": "Contraseña inválida.",
-    "password_dictionary_error": "La contraseña es demasiado común.",
-    "password_no_user_info_error": "La contraseña se basa en la información del usuario.",
-    "password_strength_error": "La contraseña no es lo suficientemente fuerte.",
-    "username_exists": "El nombre de usuario ya existe.",
-    "social_signup_needs_terms_acception": "Por favor, acepta los términos del servicio a continuación para continuar.",
-    "password_too_short": "La contraseña no cumple con la política de contraseñas.",
-    "invalid_signup_user_exists": "El usuario ya existe en la plataforma, si olvidó su contraseña, dale click a",
-    "password_strength": "La contraseña no cumple con la política de contraseñas."
-
-
-  },
-  "SUCCESS_MESSAGES": {
-    "POST": "¡Creado con éxito!",
-    "PUT": "Actualizado con éxito.",
-    "DELETE": "Eliminado con éxito."
   },
   "BANNER": {
     "affordable": "Asequible",
@@ -55,8 +28,6 @@
     "water": "Agua",
     "waterConsumption": "Agua"
   },
-  "infoSaveMessages": "Tienes la opción de guardar tus datos en este momento, lo cual asegurará que estén disponibles para futuras consultas, brindándote la certeza de contar con ellos cuando los necesites.",
-  "searchEcosolutions": "Buscar ecosoluciones",
   "CATEGORIES_FIELD": {
     "amount": "Consumo de agua (2022)",
     "energySource": "¿Le gustaría a su empresa utilizar menos energía intensiva en carbono gracias a:",
@@ -143,21 +114,37 @@
     "CHF": "Franco Suizo",
     "EU": "Euro"
   },
+  "ERROR_MESSAGES": {
+    "400": "Revisa tu info y prueba otra vez.",
+    "404": "No encontramos eso. Revisa el enlace.",
+    "500": "Ups, algo salió mal. Prueba luego.",
+    "invalid_password": "Contraseña inválida.",
+    "invalid_signup_user_exists": "El usuario ya existe en la plataforma, si olvidó su contraseña, dale click a",
+    "invalid_user_password": "Usuario o contraseña incorrectos.",
+    "password_change_required": "Necesitas cambiar tu contraseña porque es la primera vez que inicias sesión o tu contraseña ha expirado.",
+    "password_dictionary_error": "La contraseña es demasiado común.",
+    "password_leaked": "Este inicio de sesión está bloqueado porque tu contraseña se filtró en otro sitio web. Hemos enviado un correo electrónico con instrucciones para desbloquearla.",
+    "password_no_user_info_error": "La contraseña se basa en la información del usuario.",
+    "password_strength": "La contraseña no cumple con la política de contraseñas.",
+    "password_strength_error": "La contraseña no es lo suficientemente fuerte.",
+    "password_too_short": "La contraseña no cumple con la política de contraseñas.",
+    "session_missing": "No se puede completar tu solicitud de autenticación. Por favor, intenta de nuevo después de cerrar todas las ventanas abiertas.",
+    "social_signup_needs_terms_acception": "Por favor, acepta los términos del servicio a continuación para continuar.",
+    "too_many_attempts": "Tu cuenta está bloqueada debido a intentos repetidos de inicio de sesión.",
+    "too_many_requests": "Lo siento. Hay demasiadas solicitudes en este momento. Por favor, recarga la página e inténtalo de nuevo. Si el problema persiste, inténtalo más tarde.",
+    "username_exists": "El nombre de usuario ya existe."
+  },
   "FOOTER": {
     "contact": "Contactar",
     "resources": "Recursos",
     "service": "Servicios"
   },
-  "dragAndDrop": "Arrastrar y soltar",
-  "editSelection": "Modificar selección",
   "FORM_LABEL": {
-    "labelSelectedFormLang": "Selecciona el idioma para completar tu eco-solución.",
-    "titleSelectImgEcosolution": "Elija varias imágenes para su EcoSolution",
-    "titleFormAnalysis": "Elija una categoría y encuentre sus eco-soluciones",
     "additionalInformation": "Información adicional",
-    "advantages": "Ventajas",
-    "advantagesSupportText": "Ventajas en comparación con una solución estándar",
+    "advantages": "Beneficios",
     "advantagesEcosolutions": "Ventajas de su eco-solución",
+    "advantagesSupportText": "Ventajas en comparación con una solución estándar",
+    "allProvinces": "Todas las provincias",
     "approvedSwiss": "Aprobada para el mercado suizo",
     "basicInformation": "Información básica",
     "certified": "Certificado",
@@ -172,56 +159,54 @@
     "ecosolutions_products": "Selecciona los productos",
     "ecosolutions_subCategory": "Seleccione las preguntas",
     "ecosolutions_sustainableDevelopmentGoals": "Selecciona los Objetivos de Desarrollo Sostenible(ODS)",
+    "editorText": "Escriba aquí...",
     "email": "Correo electrónico",
     "emailSalesManager": "Correo electrónico del responsable comercial",
     "furtherInformation": "Información adicional",
     "guarantee": "Garantía",
     "improvement": "Mejoras",
+    "infoPrice": "Información sobre el precio de tu eco-solución (ejemplo: precio mínimo)",
+    "labelSelectedFormLang": "Selecciona el idioma para completar tu eco-solución.",
     "location": "Ubicación",
     "logo": "Link de tu logo",
     "marketReady": "¿Su ecosolución está lista para el mercado?",
     "messageLead": "Escribe tu mensaje",
     "name": "Nombre",
     "name_project": "Nombre del proyecto",
+    "newProvince": "Nueva provincia",
     "numEmployees": "Número de empleados",
     "operationalCostReductionPercentage": "Porcentaje de reducción de costos operativos",
     "password": "Contraseña",
     "paybackPeriodYears": "Tiempo de retorno de inversión en comparación con solución estándar",
     "price": "Precio",
-    "infoPrice": "Información sobre el precio de tu eco-solución (ejemplo: precio mínimo)",
     "products": "Productos",
+    "province": "Provincia",
     "reductionPercentageCO2": "Porcentaje de reducción de CO2",
     "reductionPercentageHP": "Porcentaje de reducción de productos peligrosos",
     "reductionPercentageWaste": "Porcentaje de reducción de desechos",
     "reductionPercentageWater": "Porcentaje de reducción de consumo de agua",
     "selectProducts": "Seleccionar productos",
+    "selectProvinces": "Selección provincias",
+    "showProvinces": "Ver provincias",
     "solutionDescription": "Descripción de tu eco-solución",
     "solutionName": "Nombre de tu ecosolución",
     "subcategoryForLangCleantech": "Subcategoría por idiomas para las Cleantech",
     "subcategoryForLangSME": "Subcategoría por idiomas para las pymes",
     "technicalDescription": "Descripción detallada",
+    "titleFormAnalysis": "Elija una categoría y encuentre sus eco-soluciones",
+    "titleSelectImgEcosolution": "Elija varias imágenes para su EcoSolution",
     "typeOfEcolutions": "Tipo de eco-solución",
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sitio web",
     "yourLocation": "Seleccione el país y la provincia",
-    "yourLocationTextSupport": "Los datos de su ubicación serán utilizados para personalizar las recomendaciones de soluciones ecológicas.",
-    "province": "Provincia",
-    "newProvince": "Nueva provincia",
-    "selectProvinces": "Selección provincias",
-    "allProvinces": "Todas las provincias",
-    "showProvinces": "Ver provincias",
-    "editorText": "Escriba aquí..."
-  },
-  "VERIFY_EMAIL": {
-    "title": "Revisa tu bandeja de entrada.",
-    "body": "¡Nos alegra que estés con nosotros! Te hemos enviado un enlace de verificación a tu dirección de correo electrónico."
+    "yourLocationTextSupport": "Los datos de su ubicación serán utilizados para personalizar las recomendaciones de soluciones ecológicas."
   },
   "HOME": {
+    "btnCleantech": "Encontrar leads",
     "meetOurTeam": "Conoce a Nuestro Equipo",
     "sloganCallActionsBtn": "Prueba gratuita para conectarse con clientes potenciales calificados",
     "sloganCallActionsBtnSME": "Comience su transición verde aquí",
-    "sloganTeam": "Permítenos presentarte al talentoso grupo de individuos que lidera nuestra misión de impulsar un futuro más limpio y sostenible.",
-    "btnCleantech": "Encontrar leads"
+    "sloganTeam": "Permítenos presentarte al talentoso grupo de individuos que lidera nuestra misión de impulsar un futuro más limpio y sostenible."
   },
   "INPUT_FILE": {
     "certified": "Seleccione su certificado",
@@ -230,11 +215,11 @@
     "image3": "Añadir imagen"
   },
   "LANGS": {
+    "de": "Alemán",
     "en": "Ingles",
     "es": "Español",
     "fr": "Frances",
-    "gb": "Ingles",
-    "de": "Alemán"
+    "gb": "Ingles"
   },
   "LEGAL": {
     "cookiesNotice": "Este sitio web utiliza cookies para brindarte la mejor experiencia de usuario. Al continuar navegando en nuestro sitio, aceptas nuestro uso de cookies de acuerdo con nuestra",
@@ -245,21 +230,11 @@
     "info": "¿Necesitas más información?"
   },
   "LOGIN": {
+    "forgotPassword": "¿Olvidó su contraseña?",
     "msglogin": "Inicie sesión en su cuenta",
     "msglogin2": "¿Ya tiene una cuenta?",
     "msgsignup": "¿No tiene una cuenta todavía ?",
-    "msgsignup2": "Cree su cuenta",
-    "forgotPassword": "¿Olvidó su contraseña?"
-  },
-  "SIGNUP": {
-    "acceptedConditions": "He leído y aceptado",
-    "acceptedConditions2": "los términos y condiciones"
-  },
-  "RESET_PASSWORD": {
-    "msgResetPassword": "Restablecer la contraseña",
-    "msgResetPassword2": "Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.",
-    "sendEmail": "Enviar correo electrónico",
-    "msgSuccessResetPassword": "¡Listo! Hemos enviado un enlace a {{email}} para restablecer tu contraseña."
+    "msgsignup2": "Cree su cuenta"
   },
   "MENU": {
     "services": "Servicios",
@@ -267,11 +242,29 @@
     "blog": "Blog",
     "contacttUs": "Contáctenos",
     "demo": "Solicitar demo",
-    "login": "Acceso"
+    "login": "Acceso",
+    "signup": "Registrarse"
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
     "favourites": "Favoritos"
+  },
+  "MESSAGE_SUBSCRIPTION_BANNER": {
+    "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",
+    "messageContact": "Póngase en contacto con nosotros en {{email}}"
+  },
+  "MENU_USER_SME": {
+    "titleCard": "Comience su primer análisis",
+    "subtitleCard": "Encontraremos la mejor eco-solución para usted",
+    "buttonSearch": "Buscar eco-solución",
+    "dialogNewProject": "Nombre su proyecto",
+    "dialogNameProject": "Nombre",
+    "dialogLocationProject": "Provincia y país",
+    "dialogNameRequired": "El nombre del proyecto es obligatorio",
+    "dialogLocationRequired": "La ubicación es obligatoria",
+    "dialogButtonNext": "Siguiente",
+    "dialogPlaceholderName": "PO Junio, 2024",
+    "dialogPlaceholderLocation": "Madrid, España"
   },
   "NOTIFICATION": {
     "save_ok": "Se ha guardado correctamente"
@@ -295,8 +288,24 @@
     "ods_8": "Trabajo Decente y Crecimiento Económico",
     "ods_9": "Industria, Innovación e Infraestructura"
   },
+  "SDG_TITLES": {
+    "6": "Agua limpia y saneamiento",
+    "7": "Energía asequible y no contaminante",
+    "9": "Industria, innovación e infraestructura",
+    "11": "Ciudades y comunidades sostenibles",
+    "12": "Producción y consumo responsables",
+    "13": "Acción por el clima",
+    "14": "Vida submarina",
+    "15": "Vida de ecosistemas terrestres"
+  },
   "PRODUCT_ACTIONS": {
     "addProduct": "Actualizar"
+  },
+  "RESET_PASSWORD": {
+    "msgResetPassword": "Restablecer la contraseña",
+    "msgResetPassword2": "Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.",
+    "msgSuccessResetPassword": "¡Listo! Hemos enviado un enlace a {{email}} para restablecer tu contraseña.",
+    "sendEmail": "Enviar correo electrónico"
   },
   "SCENES": {
     "slogan_text1": "Conectando a las PYMES con tecnologías limpias y financiamiento",
@@ -304,7 +313,7 @@
   },
   "SELECT_DATA_LABEL": {
     "currency": "€",
-    "defaultLabel": "Por favor seleccione entre las siguientes opciones",
+    "defaultLabel": "Seleccione una opción",
     "fiveBetweenTen": "Entre 5 y 10 años",
     "greenWaste": {
       "greenWoodUntreated": "Madera verde (no tratada)",
@@ -312,11 +321,11 @@
     },
     "none": "Ningúno",
     "selectBuildingOperation": {
+      "ecoFriendlySanitary": "Sanitarios ecológicos",
+      "ecoFriendlytaps": "Grifos ecológicos",
       "greenRoofsWalls": "Techos y muros verdes",
       "waterManagement": "Soluciones para la gestión del agua de lluvia",
-      "waterManagementWastewater": "Soluciones para la gestión de aguas residuales",
-      "ecoFriendlytaps": "Grifos ecológicos",
-      "ecoFriendlySanitary": "Sanitarios ecológicos"
+      "waterManagementWastewater": "Soluciones para la gestión de aguas residuales"
     },
     "selectCountry": {
       "france": "France",
@@ -330,33 +339,33 @@
       "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Solución ecológica que produce la energía para las necesidades de tu edificio o actividad"
     },
     "selectHazardousWaste": {
-      "oilSeparatorSludge": "Lodo del separador de aceite",
-      "productsContainingHeavyMetals": "Productos que contienen metales pesados",
-      "productsContainingTar": "Productos que contienen alquitrán",
-      "productsContainingHCB": "Productos que contienen HCB",
       "landsContainingPFAS": "Tierras que contienen PFAS",
-      "lead": "Plomo"
+      "lead": "Plomo",
+      "oilSeparatorSludge": "Lodo del separador de aceite",
+      "productsContainingHCB": "Productos que contienen HCB",
+      "productsContainingHeavyMetals": "Productos que contienen metales pesados",
+      "productsContainingTar": "Productos que contienen alquitrán"
     },
     "selectInertOrMineralWaste": {
       "brick": "Ladrillo",
       "ceramic": "Cerámica",
       "concrete": "Hormigón",
+      "glass": "Vidrio",
       "soil": "Tierra",
-      "stone": "Piedra",
-      "glass": "Vidrio"
+      "stone": "Piedra"
     },
     "selectMainActivity": {
+      "boiler": "Caldera",
       "cleaningOfSiteAndPeripheryAccesses": "Limpieza de los accesos a la obra y sus alrededores",
       "cleaningSiteVehicles": "Limpieza de los vehículos de obra",
+      "constructionSiteWater": "Agua de obra",
       "paint": "Pintura",
       "pouringConcrete": "Producción de hormigón",
       "siteCleaning": "Limpieza de sitio",
       "siteHut": "Caseta de obra",
       "toolCleaning": "Limpieza del equipo",
       "wateringForCure": "Riego para el curado del hormigón",
-      "wateringPlants": "Riego de plantas",
-      "constructionSiteWater": "Agua de obra",
-      "boiler": "Caldera"
+      "wateringPlants": "Riego de plantas"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Cartón y papel",
@@ -395,9 +404,9 @@
       "copper": "Cobre",
       "iron": "Acero inoxidable",
       "isolation": "Aislamiento térmico",
+      "sealingStrip": "Bandas de sellado",
       "steel": "Acero",
-      "zinc": "Zinc",
-      "sealingStrip": "Bandas de sellado"
+      "zinc": "Zinc"
     },
     "selectMainRigidMaterial": {
       "insolationPanels": "Paneles de aislamiento"
@@ -408,6 +417,7 @@
       "batteries": "Acumuladores y baterías que contienen sustancias peligrosas",
       "bituminousProductsContainingHAPs": "Productos bituminosos que contienen HAP",
       "cartridgesContainingDangerousSubstances": "Cartuchos que contienen sustancias peligrosas",
+      "collects": "Adhesivo",
       "curingProducts": "Productos de curado",
       "electricalAndElectronicWasteContainingHazardousSubstances": "Residuos eléctricos y electrónicos que contienen sustancias peligrosas",
       "energySavingLamps": "Lámparas de bajo consumo",
@@ -416,10 +426,9 @@
       "oils": "Aceites",
       "packagingSoiledWithDangerousSubstances": "Envases ensuciados con sustancias peligrosas",
       "paintVarnish": "Pintura/barniz",
+      "paintsAndSolvents": "Pinturas y solventes",
       "productsContainingTar": "Productos que contienen alquitrán",
-      "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas",
-      "collects": "Adhesivo",
-      "paintsAndSolvents": "Pinturas y solventes"
+      "woodTreatedWithHazardousSubstances": "Madera tratada con sustancias peligrosas"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosoles",
@@ -444,15 +453,24 @@
     "selectSustainableBuildingOperations": {
       "chargeElectricVehicles": "Cargar vehículos eléctricos",
       "electricMeansOfTransport": "Medios de transporte eléctrico​",
+      "homeAutomation": "Domótica",
+      "intelligentHeatingSystems": "Sistemas de calefacción inteligente",
       "optimizeEnergyConsumption": "Optimizar el consumo de energía",
       "recoverHeat": "Recuperar calor",
       "storeEnergy": "Almacenar energía",
-      "useLowConsumptionLighting": "Soluciones de enfriamiento ecológicas",
-      "useRenewableEnergies": "Utilizar energías renovables",
       "sustainableLightingSystems": "Sistemas de iluminación sostenibles",
-      "intelligentHeatingSystems": "Sistemas de calefacción inteligente",
-      "homeAutomation": "Domótica"
+      "useLowConsumptionLighting": "Soluciones de enfriamiento ecológicas",
+      "useRenewableEnergies": "Utilizar energías renovables"
     }
+  },
+  "SIGNUP": {
+    "acceptedConditions": "He leído y aceptado",
+    "acceptedConditions2": "los términos y condiciones"
+  },
+  "SUCCESS_MESSAGES": {
+    "DELETE": "Eliminado con éxito.",
+    "POST": "¡Creado con éxito!",
+    "PUT": "Actualizado con éxito."
   },
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Ventajas de su ecosolución en comparación a una solución tradicional",
@@ -470,6 +488,10 @@
     "cleanTech": "Cleantech",
     "sme": "PYME"
   },
+  "VERIFY_EMAIL": {
+    "body": "¡Nos alegra que estés con nosotros! Te hemos enviado un enlace de verificación a tu dirección de correo electrónico.",
+    "title": "Revisa tu bandeja de entrada."
+  },
   "DIALOG": {
     "messageSendOk": "¡Su mensaje ha sido enviado con éxito!",
     "messageLeadDuplicated": "Ya has contactado con esta ecosolución, si aún no responde, ponte en contacto con {{email}}",
@@ -480,21 +502,8 @@
     "messaggeProfileUncompletedBody": "Actualice su perfil para acceder a todas las herramientas de Goeko.",
     "messageNotification": "Active las notificaciones por email para recibir las últimas ecosoluciones que se adapten a sus necesidades."
   },
-  "MESSAGE_SUBSCRIPTION_BANNER": {
-    "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",
-    "messageContact": "Póngase en contacto con nosotros en {{email}}"
-  },
-  "selectAll": "Seleccionar todo",
-  "deSelectAll": "Deseleccionar todo",
-  "questionsAnswered": "Preguntas contestadas",
-  "selectedProducts": " Productos seleccionados",
-  "selectedProduct": "Producto seleccionado",
-  "notAvailable": "No disponible",
-  "mandatory": "Obligatorio",
-  "exit": "Salir",
-  "logout": "Cerrar sesión",
-  "your": "tu",
   "a": "a",
+  "yourEcosolution": "Tu Ecosolucion",
   "accept": "Aceptar",
   "add": "Añadir",
   "alertSelectedProduct": "Seleccione una o más soluciones",
@@ -507,7 +516,7 @@
   "categories": "Categorías",
   "certified": "Certificado",
   "cleantech": "Cleantech",
-  "enterprise": "Empresa",
+  "cleantechLeadDefault": "Realice un seguimiento de las conexiones con sus clientes potenciales calificados.",
   "completeToProfileNow": "Complete el perfil ahora!",
   "confirm": "Confirmar",
   "connectNow": "¡Conecte ahora!",
@@ -516,39 +525,57 @@
   "costReduction": "Costos operativos",
   "creationDate": "Fecha de creación",
   "dashboard": "Dashboard",
+  "deSelectAll": "Deseleccionar todo",
   "decline": "Rechazar",
   "defaultMessageLead": "Hola, estoy interesado en su solución ecológica. Por favor contácteme a la siguiente dirección de correo electrónico:",
-  "cleantechLeadDefault": "Realice un seguimiento de las conexiones con sus clientes potenciales calificados.",
   "details": "Detalles",
+  "dragAndDrop": "Arrastrar y soltar",
   "edit": "Editar",
+  "editSelection": "Modificar selección",
+  "enterprise": "Empresa",
+  "exit": "Salir",
+  "followUs": "Síguenos",
+  "infoSaveMessages": "Tienes la opción de guardar tus datos en este momento, lo cual asegurará que estén disponibles para futuras consultas, brindándote la certeza de contar con ellos cuando los necesites.",
   "lastLead": "Último cliente potencial",
   "last_analysis": "Último análisis",
   "last_project": "3 últimos proyectos",
-  "leadFormTitle": "¡Ponte en contacto con la cleantech con tan solo un clic para mejorar tu impacto ambiental!",
+  "leadFormTitle": "Contactar con esta cleantech",
+  "leadFormSubtitle": "A un clic de la eficiencia sostenible",
   "leads": "Clientes potenciales",
+  "logout": "Cerrar sesión",
+  "mandatory": "Obligatorio",
   "my_company": "Mi empresa",
   "new_analysis": "Nuevo análisis",
   "new_project": "Nuevo proyecto",
+  "projects": "Proyectos",
   "no": "No",
+  "notAvailable": "No disponible",
+  "notSave": "Cerrar sin guardar",
   "ods_msg_card_result": "Impacto positivo en los ODS",
   "ods_title": "Objetivos de Desarrollo Sostenible",
   "our_ecosolutions": "Tus Eco-soluciones",
   "profile": "Perfil",
   "projectManagement": "Gestión de proyectos",
+  "questionsAnswered": "Preguntas contestadas",
   "readMore": "Leer más...",
+  "regions": "Comunidades Autónomas",
   "result": "Resultados",
   "save": "Guardar",
-  "notSave": "Cerrar sin guardar",
   "saveYou": "Guardar tu",
+  "searchEcosolutions": "Buscar ecosoluciones",
+  "selectAll": "Seleccionar todo",
   "selectCategoryEcosolutions": "Selecciona la categoría para tu ecosolución",
+  "selectedProduct": "Producto seleccionado",
+  "selectedProducts": " Productos seleccionados",
   "selected_products": "Productos seleccionados",
-  "showMore": "Ver más",
   "showLead": "Mostrar clientes potenciales",
+  "showMore": "Ver más",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Conectando empresas con tecnología limpia y financiación",
   "sme": "PYMES",
   "start": "Empezar",
   "summary": "Resumen",
+  "titleBannerLead": "Seguimiento de Leads Calificados",
   "titleResult": "Las soluciones ecológicas más adaptadas para",
   "upTo": "Hasta",
   "upgrade": "Mejora",
@@ -559,7 +586,12 @@
   "year": "año",
   "years": "años",
   "yes": "Sí",
-  "regions": "Comunidades Autónomas",
-  "titleBannerLead": "Seguimiento de Leads Calificados",
-  "followUs": "Síguenos"
+  "your": "tu",
+  "msg_empty_ecosolutions_notification": "Tu mejor solución ecológica está por llegar. Te notificaremos cuando llegue.",
+  "msg_empty_ecosolutions": "Tu mejor solución ecológica está por llegar.",
+  "turnOnNotifications": "Activa las notificaciones",
+  "exploreNow": "Explora ahora",
+  "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
+  "subtitlePageCatalog": "La mejor eco-solución para ",
+  "results": "Resultados"
 }

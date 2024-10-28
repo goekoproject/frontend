@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, Input, inject, signal } from '@angular/core'
-import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { LocationRegions } from '@goeko/store'
+import { AfterViewInit, Component, Input, Signal, inject, input, signal } from '@angular/core'
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { LocationCountry, LocationRegions } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
@@ -55,20 +55,23 @@ export class SelectLocationsComponent implements AfterViewInit {
   @Input() form!: FormGroup
 
   private _selectLocationsService = inject(SelectLocationsService)
-  public countries = this._selectLocationsService.countries
+  public countries = this._selectLocationsService.countries as Signal<LocationCountry[]>
   public regions = this._selectLocationsService.regions
   @Input()
   public toogleEdit = false
   public newLocation = false
   public disabledRegions = false
 
+  public singleSelect = input<boolean>(false)
+
   public get lastLocations() {
     return this.controlLocations.value?.length - 1
   }
   public get controlCountryCodeByIndex() {
     return (
-      ((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup
-    )?.controls['code']
+      (((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup)
+        ?.controls['code'] || 0
+    )
   }
   public get controlCountryRegionsByIndex() {
     return (
@@ -86,10 +89,9 @@ export class SelectLocationsComponent implements AfterViewInit {
     return this.controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code === this.optionAllProvince.code)
   }
 
-  constructor() {}
-
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges()
+    this.addLocation()
   }
 
   private subscribeToFormArrayAndItemChanges(): void {
@@ -156,30 +158,5 @@ export class SelectLocationsComponent implements AfterViewInit {
         regions: new FormControl<any[]>(['']),
       }),
     })
-  }
-
-  editLocation(location: AbstractControl, index: number): void {
-    this.toogleEdit = !this.toogleEdit
-    this.selectedLocationsIndex.set(index)
-  }
-
-  closeForm() {
-    this.toogleEdit = false
-    this.controlLocations.removeAt(this.selectedLocationsIndex())
-  }
-
-  deleteLocation(index: number): void {
-    this.controlLocations.removeAt(index)
-    this.newLocation = false
-  }
-  confirmLocation(locationCountryControl: FormGroup | AbstractControl) {
-    if (locationCountryControl.get(this.controlNameCountry)?.invalid) {
-      return
-    }
-    this.toogleEdit = false
-  }
-  closeFormLocation(index: number) {
-    this.deleteLocation(index)
-    this.toogleEdit = false
   }
 }

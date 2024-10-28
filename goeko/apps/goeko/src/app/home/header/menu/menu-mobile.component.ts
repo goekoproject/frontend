@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, model, OnInit, output, signal } from '@angular/core'
 import { RouterModule } from '@angular/router'
+import { SelectI18nComponent } from '@goeko/business-ui'
 import { ContentFulService } from '@goeko/store'
 import { TranslateModule } from '@ngx-translate/core'
 import { map } from 'rxjs'
@@ -11,10 +12,10 @@ import { _buildSubmenu } from './menu.util'
 @Component({
   selector: 'goeko-menu-mobile',
   standalone: true,
-  imports: [CommonModule, TranslateModule, RouterModule],
+  imports: [CommonModule, TranslateModule, RouterModule, SelectI18nComponent],
   template: `
     @if (mobileMenuOpen()) {
-      <div role="dialog" aria-modal="true" class="md:hidden">
+      <div role="dialog" aria-modal="true" class="relative z-10 h-svh md:hidden">
         <!-- Background backdrop, show/hide based on slide-over state. -->
         <div class="fixed inset-0 z-10"></div>
         <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -32,6 +33,7 @@ import { _buildSubmenu } from './menu.util'
           </div>
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
+              <goeko-select-i18n class="ml-auto block w-14 sm:hidden" />
               <div class="space-y-2 py-6">
                 <div class="-mx-3">
                   @for (item of menu(); track item.id) {
@@ -108,6 +110,7 @@ export class MenuMobileComponent implements OnInit {
   login = output()
   menu = signal<IMenu[]>(MENU)
   submenuOpen = signal(false)
+
   closeMenu = () => this.mobileMenuOpen.set(false)
   goToLogin = () => this.login.emit()
   submenuOpenToggle = () => this.submenuOpen.update((value) => !value)

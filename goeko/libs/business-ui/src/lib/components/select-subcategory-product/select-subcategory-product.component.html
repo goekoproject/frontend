@@ -1,23 +1,20 @@
-<div class="subcategory transition-colors duration-150 hover:border-primary-500" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
-  <div class="subcategory-element" (click)="toogle(subCategory)">
+<div class="subcategory bg-primary-gray transition-colors duration-150 rounded-2xl" goekoSelectSubcategoryProduct *ngIf="checked || !readonly">
+  <div class="subcategory-element">
     <label class="subcategory-control" for="{{ subCategory.code }}">
       @if (!this.multiple) {
         <input
           #inputElement
           type="{{ type }}"
           name="subCategory"
-          [checked]="checked || numSelected > 0"
+          [checked]="checked"
           id="{{ subCategory.code }}"
           (change)="assignValue(subCategory.code)" />
       }
 
       <div class="subcategory-title">
         <ng-content select="[title]"></ng-content>
-        <span class="subcategory-title-products" *ngIf="!readonly">{{ labelSelected }}</span>
       </div>
-      <span class="subcategory-product-selected" *ngIf="!readonly">{{ numSelected }} {{ 'selected_products' | translate }}</span>
     </label>
-    <span class="material-symbols-rounded subcategory-expand"> expand_more </span>
   </div>
 
   <div class="subcategory-product w-full flex-col flex-wrap items-start">
@@ -33,8 +30,4 @@
 
     <ng-content></ng-content>
   </div>
-  <span class="alert-select-product" *ngIf="open">
-    <i class="ti ti-info-triangle-filled"></i>
-    <p>{{ 'alertSelectedProduct' | translate }}</p>
-  </span>
 </div>

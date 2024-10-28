@@ -1,7 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
+import { handlerHttpInterceptor } from '@goeko/business-ui'
 import { ButtonModule, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -18,16 +19,10 @@ describe('ResetPasswordComponent', () => {
       changePassword: jest.fn().mockReturnValue(of({ success: true })),
     }
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterModule.forRoot([]),
-        ReactiveFormsModule,
-        ButtonModule,
-        GoInputModule,
-        TranslateModule.forRoot(),
-      ],
+      imports: [RouterModule.forRoot([]), ReactiveFormsModule, ButtonModule, GoInputModule, TranslateModule.forRoot()],
       declarations: [ResetPasswordComponent],
       providers: [
+        provideHttpClient(withInterceptors([handlerHttpInterceptor])),
         {
           provide: AccessService,
           useValue: accessServiceMock,

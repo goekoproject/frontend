@@ -166,7 +166,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy {
       yearGuarantee: [],
       certified: [false],
       approved: [false],
-      locations: new FormArray([], Validators.required),
+      locations: this._fb.array([], Validators.required),
     })
   }
 
@@ -232,33 +232,12 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy {
   private _patchDataToForm(ecosolution: any): void {
     const formValue = new EcosolutionForm(ecosolution)
     this.form.patchValue(formValue)
-    this._patchValueLocationsFormControl(formValue)
     this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
     this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
     this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
     this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
   }
 
-  private _patchValueLocationsFormControl(formValue: EcosolutionForm) {
-    this.locationsArrays.clear()
-    formValue.locations?.forEach(() => {
-      this._addLocations()
-    })
-    this.form.get('locations')?.patchValue(formValue.locations)
-    this.firstLoad = true
-  }
-
-  private _createLocations(): FormGroup {
-    return new FormGroup({
-      country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl(),
-      }),
-    })
-  }
-  private _addLocations() {
-    this.locationsArrays.push(this._createLocations())
-  }
 
   private _patchFormArray(formArray: FormArray, values: any[]): void {
     formArray.clear()
