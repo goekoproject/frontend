@@ -2,7 +2,7 @@ import { Component, effect, OnInit } from '@angular/core'
 import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
-import { CountrySelectOption, DataSelect, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
+import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
 import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     public route: ActivatedRoute,
   ) {
     effect(() => {
-      if (this.userType()) {
+      if (this.userType() && !this.form) {
         this._createFormForUserType()
         this._loadDataProfile()
         console.log(this.form)
@@ -109,20 +109,19 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   private _setLocaltionInFormForSme() {
     if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
       this.locationsArrays.clear()
-      ;(this.dataProfile() as SmeUser).locations.forEach(() => {
-        this._addLocations()
+      ;(this.dataProfile() as SmeUser).locations.forEach((location: LocationsCountry) => {
+        this._addLocations(location)
       })
-      this.form.get('locations')?.patchValue((this.dataProfile() as SmeUser).locations)
     }
   }
-  private _addLocations() {
-    this.locationsArrays.push(this._createLocations())
+  private _addLocations(location: LocationsCountry) {
+    this.locationsArrays.push(this._createLocations(location))
   }
-  private _createLocations(): FormGroup {
+  private _createLocations(location: LocationsCountry): FormGroup {
     return new FormGroup({
       country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl([]),
+        code: new FormControl(location.country.code),
+        regions: new FormControl(location.country.regions),
       }),
     })
   }

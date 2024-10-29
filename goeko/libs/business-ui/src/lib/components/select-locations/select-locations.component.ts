@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { AfterViewInit, Component, Input, OnDestroy, Signal, inject, input, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { LocationCountry, LocationRegions } from '@goeko/store'
+import { LocationCountry, LocationRegions, LocationsCountry } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
@@ -91,7 +91,22 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.subscribeToFormArrayAndItemChanges()
-    this.addLocation()
+    if (this.controlLocations.length === 0) {
+      this.addLocation()
+    } else {
+      this.controlLocations.value.forEach((location: LocationsCountry) => {
+        const countryCode = location.country.code
+        this._selectLocationsService
+          .getRegions$(countryCode)
+          .pipe(
+            map((regiones) => ({ countryCode, regiones })), // Mapea las regiones junto con el countryCode
+          )
+          .subscribe(({ countryCode, regiones }) => {
+            this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince, ...regiones])
+            this._setAllOptionWhenEmptyRegions()
+          })
+      })
+    }
   }
   ngOnDestroy(): void {
     this._controlLocations.clear()
