@@ -86,17 +86,20 @@ export class EcosolutionsService extends TranslateChangeService {
   }
 
   ecosolutionSearch(body: EcosolutionSearchRequest): Observable<EcosolutionResult[] | null> {
+    const _lang = this.lang() === 'gb' ? 'en' : this.lang()
+
     if (!body || body.classifications.length <= 0) {
       return of(null)
     }
-    return this._http
-      .post<{ ecosolutions: EcosolutionResult[] }>(`/v1/ecosolution/search?lang=${this.lang()}`, body)
-      .pipe(map((request: { ecosolutions: EcosolutionResult[] }) => request.ecosolutions), shareReplay(1))
+    return this._http.post<{ ecosolutions: EcosolutionResult[] }>(`/v1/ecosolution/search?lang=${_lang}`, body).pipe(
+      map((request: { ecosolutions: EcosolutionResult[] }) => request.ecosolutions),
+      shareReplay(1),
+    )
   }
 
   getEcosolutionSearchById(id: string, smeId: string): Observable<EcosolutionSearchResponse> {
     const params = {
-      lang: this.lang(),
+      lang: this.lang() === 'gb' ? 'en' : this.lang(),
       smeId,
     }
 

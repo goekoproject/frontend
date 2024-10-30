@@ -36,7 +36,7 @@ const routes: Routes = [
         path: 'project-form/:smeId/:projectId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
-        runGuardsAndResolvers: 'always',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         resolve: { project: projectResolver, groupingForm: groupingFormCategoriesResolver },
         loadComponent: () => import('../projects/project-form/project-form.component').then((m) => m.ProjectFormComponent),
       },
@@ -45,7 +45,6 @@ const routes: Routes = [
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         resolve: { project: projectResolver },
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () =>
           import('../projects/project-ecosolutions-catalog/project-ecosolutions-catalog.component').then(
             (m) => m.ProjectEcosolutionCatalogComponent,
@@ -56,6 +55,7 @@ const routes: Routes = [
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         resolve: { ecosolutionSearchDetail: ecosolutionSearchDetailResolver },
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () =>
           import('../projects/project-catalog-detail/project-catalog-detail.component').then((m) => m.ProjectCatalogDetailComponent),
       },
