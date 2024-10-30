@@ -1,5 +1,7 @@
 <div class="flex flex-col gap-4">
-  <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
+  @defer (when countries() && dataSourceSelect.size > 0) {
+    <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
+  }
   @if ((singleSelect() && controlLocations.controls.length < 1) || (!singleSelect() && controlLocations.controls.length >= 0)) {
     <div
       (click)="addLocation()"
@@ -22,18 +24,18 @@
                 [placeholder]="'FORM_LABEL.country' | translate"
                 [formControlName]="'code'"
                 id="country"
-                [compareWith]="defaultSetSuperSelect">
+                [compareWith]="countryCompareWith">
                 <label title for=" country ">
                   {{ 'FORM_LABEL.country' | translate }}
                 </label>
                 @for (option of countries(); track option.code; let first = $first) {
-                  <super-option [value]="option" [valueSelected]="first">
+                  <super-option [value]="option.code" [valueSelected]="first">
                     {{ option.label | translate }}
                   </super-option>
                 }
               </ui-super-select>
 
-              @if (dataSourceSelect.has(location.value.country.code.code)) {
+              @if (dataSourceSelect.has(location.value.country.code)) {
                 <div class="flex items-center gap-4">
                   <ui-super-select
                     class="w-full"
@@ -41,12 +43,12 @@
                     formControlName="regions"
                     id="regions"
                     [multiple]="true"
-                    [compareWith]="defaultSetSuperSelect">
+                    [compareWith]="regionsCompareWith">
                     <label title for="regions">
                       {{ 'FORM_LABEL.province' | translate }}
                     </label>
 
-                    @for (option of this.dataSourceSelect.get(location.value.country.code.code); track option) {
+                    @for (option of this.dataSourceSelect.get(location.value.country.code); track option) {
                       <super-option [value]="option" (click)="option.code === optionAllProvince.code ? selectALL() : deselectAll()">
                         {{ option.label | translate }}
                       </super-option>
