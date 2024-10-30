@@ -63,15 +63,15 @@
     },
     "greenWaste": {
       "label": "¿En qué categoría(s) de residuos verdes está mejorando la gestión su empresa?",
-      "question": "¿Con qué tipos de residuos verdes se enfrenta principalmente su empresa?"
+      "question": "Residuos verdes"
     },
     "hazardousWaste": {
       "label": "¿En qué categoría(s) de residuos peligrosos está mejorando la gestión su empresa?",
-      "question": "¿Con qué tipos de residuos peligrosos se enfrenta principalmente su empresa?"
+      "question": "Residuos peligrosos"
     },
     "inertOrMineralWaste": {
       "label": "¿En qué categoría(s) de residuos inertes o minerales está mejorando la gestión su eco-solución?",
-      "question": "¿Con qué tipos de residuos inertes o minerales se enfrenta principalmente su empresa?"
+      "question": "Residuos minerales o inertes"
     },
     "lastYearInvoice": {
       "label": "",
@@ -83,15 +83,15 @@
     },
     "mainCategoryNonInert": {
       "label": "¿En qué categoría(s) de residuos no inertes está mejorando la gestión su eco-solución?",
-      "question": "¿Con qué tipos de residuos no inertes se enfrenta principalmente su empresa?"
+      "question": "Residuos no inertes"
     },
     "mainInternalCombustionEngine": {
       "label": "Motores y vehículos",
-      "question": "Equipos principales con motor de combustión interna"
+      "question": "Equipos y vehículos"
     },
     "mainMineralProduct": {
       "label": "Productos minerales y metálicos",
-      "question": "Principales productos minerales y metálicos"
+      "question": "Productos minerales y metales"
     },
     "mainRigidMaterial": {
       "label": "",
@@ -103,11 +103,11 @@
     },
     "specialWaste": {
       "label": "¿En qué categoría(s) de residuos especiales está mejorando la gestión su eco-solución?",
-      "question": "¿Con qué tipos de residuos especiales se enfrenta principalmente su empresa?"
+      "question": "Residuos especiales"
     },
     "sustainableBuildingOperations": {
       "label": "Para la explotación de edificios o movilidad sostenible, su eco-solución permite:",
-      "question": "Para el funcionamiento del edificio y la movilidad sostenible, le interesaría:"
+      "question": "Soluciones para las operaciones de edificios y la movilidad suave"
     }
   },
   "CURRENCY": {
@@ -503,7 +503,7 @@
   "yourEcosolution": "Tu Ecosolucion",
   "accept": "Aceptar",
   "add": "Añadir",
-  "alertSelectedProduct": "Seleccione una o más soluciones",
+  "alertSelectedProduct": "Selecciona las categorías y productos correspondientes a tu proyecto",
   "all": "Todo",
   "analysis": "Análisis",
   "availability": "Disponible",

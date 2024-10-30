@@ -63,15 +63,15 @@
     },
     "greenWaste": {
       "label": "In which category(ies) of green waste is your company improving management?",
-      "question": "With what types of green waste is your company primarily dealing?"
+      "question": "Green waste"
     },
     "hazardousWaste": {
       "label": "In which category(ies) of hazardous waste is your company improving management?",
-      "question": "With what types of hazardous waste is your company primarily dealing?"
+      "question": "Hazardous waste"
     },
     "inertOrMineralWaste": {
       "label": "In which category(ies) of inert or mineral waste is your eco-solution improving management?",
-      "question": "With what types of inert or mineral waste is your company primarily dealing?"
+      "question": "Mineral or inert waste"
     },
     "lastYearInvoice": {
       "label": "",
@@ -83,15 +83,15 @@
     },
     "mainCategoryNonInert": {
       "label": "In which category(ies) of non-inert waste is your eco-solution improving management?",
-      "question": "With what types of non-inert waste is your company primarily dealing?"
+      "question": "Non-inert waste"
     },
     "mainInternalCombustionEngine": {
       "label": "Engines and vehicles",
-      "question": "Main engine-powered equipment"
+      "question": "Equipment and vehicles"
     },
     "mainMineralProduct": {
       "label": "Mineral and metal products",
-      "question": "Main mineral and metal products"
+      "question": "Mineral products and metals"
     },
     "mainRigidMaterial": {
       "label": "",
@@ -103,11 +103,11 @@
     },
     "specialWaste": {
       "label": "In which category(ies) of special waste is your eco-solution improving management?",
-      "question": "With what types of special waste is your company primarily dealing?"
+      "question": "Special waste"
     },
     "sustainableBuildingOperations": {
       "label": "For the exploitation of buildings or sustainable mobility, your eco-solution allows:",
-      "question": "For building operation and sustainable mobility, would you be interested in"
+      "question": "Solutions for building management and soft mobility"
     }
   },
   "CURRENCY": {
@@ -501,7 +501,7 @@
   "yourEcosolution": "Your Eco-solution",
   "accept": "Accept",
   "add": "Add",
-  "alertSelectedProduct": "Select one or more solutions",
+  "alertSelectedProduct": "Select the categories and products corresponding to your project",
   "all": "All",
   "analysis": "Analysis",
   "availability": "Availability",

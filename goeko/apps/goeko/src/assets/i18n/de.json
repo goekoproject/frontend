@@ -63,15 +63,15 @@
     },
     "greenWaste": {
       "label": "In welcher(n) Kategorie(n) von Grünabfällen verbessert Ihr Unternehmen das Management?",
-      "question": "Mit welchen Arten von Grünabfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Grünabfall"
     },
     "hazardousWaste": {
       "label": "In welcher(n) Kategorie(n) von gefährlichen Abfällen verbessert Ihr Unternehmen das Management?",
-      "question": "Mit welchen Arten von gefährlichen Abfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Gefährliche Abfälle"
     },
     "inertOrMineralWaste": {
       "label": "In welcher(n) Kategorie(n) von inerten oder mineralischen Abfällen verbessert Ihre Ökolösung das Management?",
-      "question": "Mit welchen Arten von inerten oder mineralischen Abfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Mineralische oder inerte Abfälle"
     },
     "lastYearInvoice": {
       "label": "",
@@ -83,15 +83,15 @@
     },
     "mainCategoryNonInert": {
       "label": "In welcher(n) Kategorie(n) von nicht-inerten Abfällen verbessert Ihre Ökolösung das Management?",
-      "question": "Mit welchen Arten von nicht-inerten Abfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Nicht-inerte Abfälle"
     },
     "mainInternalCombustionEngine": {
       "label": "Motoren und Fahrzeuge",
-      "question": "Hauptgeräte mit Verbrennungsmotor"
+      "question": "Motoren und Fahrzeuge"
     },
     "mainMineralProduct": {
       "label": "Mineral- und Metallprodukte",
-      "question": "Hauptmineral- und Metallprodukte"
+      "question": "Mineralprodukte und Metalle"
     },
     "mainRigidMaterial": {
       "label": "",
@@ -103,11 +103,11 @@
     },
     "specialWaste": {
       "label": "In welcher(n) Kategorie(n) von Sonderabfällen verbessert Ihre eco-solution das Management?",
-      "question": "Mit welchen Arten von Sonderabfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Sonderabfälle"
     },
     "sustainableBuildingOperations": {
       "label": "Für den Betrieb von Gebäuden oder nachhaltige Mobilität ermöglicht Ihre eco-solution:",
-      "question": "Für den Betrieb des Gebäudes und nachhaltige Mobilität wären Sie interessiert an:"
+      "question": "Lösungen für den Gebäudebetrieb und sanfte Mobilität"
     }
   },
   "CURRENCY": {
@@ -500,7 +500,7 @@
   "yourEcosolution": "Ihre Ökolösung",
   "accept": "Akzeptieren",
   "add": "Hinzufügen",
-  "alertSelectedProduct": "Wählen Sie eine oder mehrere Lösungen aus",
+  "alertSelectedProduct": "Wählen Sie die Kategorien und Produkte aus, die zu Ihrem Projekt passen",
   "all": "Alle",
   "analysis": "Analyse",
   "availability": "Verfügbarkeit",
