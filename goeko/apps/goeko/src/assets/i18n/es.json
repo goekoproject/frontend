@@ -22,8 +22,8 @@
     "view_ecosolutions": "Detalle de tu ecosolución"
   },
   "CATEGORIES": {
-    "co2Emission": "Emisiones CO2",
-    "hazardousProduct": "Producto peligroso",
+    "co2Emission": "Emisiones CO₂",
+    "hazardousProduct": "Productos tóxicos",
     "waste": "Residuos",
     "water": "Agua",
     "waterConsumption": "Agua"
@@ -63,15 +63,15 @@
     },
     "greenWaste": {
       "label": "¿En qué categoría(s) de residuos verdes está mejorando la gestión su empresa?",
-      "question": "¿Con qué tipos de residuos verdes se enfrenta principalmente su empresa?"
+      "question": "Residuos verdes"
     },
     "hazardousWaste": {
       "label": "¿En qué categoría(s) de residuos peligrosos está mejorando la gestión su empresa?",
-      "question": "¿Con qué tipos de residuos peligrosos se enfrenta principalmente su empresa?"
+      "question": "Residuos peligrosos"
     },
     "inertOrMineralWaste": {
       "label": "¿En qué categoría(s) de residuos inertes o minerales está mejorando la gestión su eco-solución?",
-      "question": "¿Con qué tipos de residuos inertes o minerales se enfrenta principalmente su empresa?"
+      "question": "Residuos minerales o inertes"
     },
     "lastYearInvoice": {
       "label": "",
@@ -83,15 +83,15 @@
     },
     "mainCategoryNonInert": {
       "label": "¿En qué categoría(s) de residuos no inertes está mejorando la gestión su eco-solución?",
-      "question": "¿Con qué tipos de residuos no inertes se enfrenta principalmente su empresa?"
+      "question": "Residuos no inertes"
     },
     "mainInternalCombustionEngine": {
       "label": "Motores y vehículos",
-      "question": "Equipos principales con motor de combustión interna"
+      "question": "Equipos y vehículos"
     },
     "mainMineralProduct": {
       "label": "Productos minerales y metálicos",
-      "question": "Principales productos minerales y metálicos"
+      "question": "Productos minerales y metales"
     },
     "mainRigidMaterial": {
       "label": "",
@@ -103,11 +103,11 @@
     },
     "specialWaste": {
       "label": "¿En qué categoría(s) de residuos especiales está mejorando la gestión su eco-solución?",
-      "question": "¿Con qué tipos de residuos especiales se enfrenta principalmente su empresa?"
+      "question": "Residuos especiales"
     },
     "sustainableBuildingOperations": {
       "label": "Para la explotación de edificios o movilidad sostenible, su eco-solución permite:",
-      "question": "Para el funcionamiento del edificio y la movilidad sostenible, le interesaría:"
+      "question": "Soluciones para las operaciones de edificios y la movilidad suave"
     }
   },
   "CURRENCY": {
@@ -156,6 +156,7 @@
     "country": "País",
     "companyId": "Código de Identificación Fiscal (CIF)",
     "currency": "Moneda",
+    "date": "Fecha",
     "deliverCountries ": "Países donde está aprobada su solución ecológica",
     "ecosolution_classification": "Seleccione las preguntas y elija los productos para su ecosolución",
     "ecosolutions_products": "Selecciona los productos",
@@ -184,7 +185,7 @@
     "price": "Precio",
     "products": "Productos",
     "province": "Provincia",
-    "reductionPercentageCO2": "Porcentaje de reducción de CO2",
+    "reductionPercentageCO2": "Porcentaje de reducción de CO₂",
     "reductionPercentageHP": "Porcentaje de reducción de productos peligrosos",
     "reductionPercentageWaste": "Porcentaje de reducción de desechos",
     "reductionPercentageWater": "Porcentaje de reducción de consumo de agua",
@@ -253,9 +254,9 @@
     "messageContact": "Póngase en contacto con nosotros en {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard": "Comience su primer análisis",
-    "subtitleCard": "Encontraremos la mejor eco-solución para usted",
-    "buttonSearch": "Buscar eco-solución",
+    "titleCard": "Crea un proyecto",
+    "subtitleCard": "Encontraremos las soluciones cleantech más adecuadas",
+    "buttonSearch": "Añade un nuevo proyecto",
     "dialogNewProject": "Nombre su proyecto",
     "dialogNameProject": "Nombre",
     "dialogLocationProject": "Provincia y país",
@@ -269,23 +270,23 @@
     "save_ok": "Se ha guardado correctamente"
   },
   "ODS": {
-    "ods_1": "Sin Pobreza",
-    "ods_10": "Reducción de las Desigualdades",
-    "ods_11": "Ciudades y Comunidades Sostenibles",
-    "ods_12": "Producción y Consumo Responsables",
-    "ods_13": "Acción por el Clima",
-    "ods_14": "Vida Submarina",
-    "ods_15": "Vida de Ecosistemas Terrestres",
-    "ods_16": "Paz, Justicia e Instituciones Sólidas",
-    "ods_17": "Alianzas para lograr los Objetivos",
-    "ods_2": "Hambre Cero",
-    "ods_3": "Salud y Bienestar",
-    "ods_4": "Educación de Calidad",
-    "ods_5": "Igualdad de Género",
-    "ods_6": "Agua Limpia y Saneamiento",
+    "ods_1": "Sin pobreza",
+    "ods_10": "Reducción de las desigualdades",
+    "ods_11": "Ciudades y comunidades sostenibles",
+    "ods_12": "Producción y consumo responsables",
+    "ods_13": "Acción por el clima",
+    "ods_14": "Vida submarina",
+    "ods_15": "Vida de ecosistemas terrestres",
+    "ods_16": "Paz, justicia e instituciones sólidas",
+    "ods_17": "Alianzas para lograr los objetivos",
+    "ods_2": "Hambre cero",
+    "ods_3": "Salud y bienestar",
+    "ods_4": "Educación de calidad",
+    "ods_5": "Igualdad de género",
+    "ods_6": "Agua limpia y saneamiento",
     "ods_7": "Energía asequible y no contaminante",
-    "ods_8": "Trabajo Decente y Crecimiento Económico",
-    "ods_9": "Industria, Innovación e Infraestructura"
+    "ods_8": "Trabajo decente y crecimiento económico",
+    "ods_9": "Industria, innovación e infraestructura"
   },
   "SDG_TITLES": {
     "6": "Agua limpia y saneamiento",
@@ -474,9 +475,9 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Ventajas de su ecosolución en comparación a una solución tradicional",
     "buildingOperation_question": "¿Está buscando una o más soluciones para reducir el consumo de agua, como por ejemplo:",
-    "co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO2",
+    "co2Emission": "Zona donde tu ecosolución reduce las emisiones de CO₂",
     "ods": "Vinculado a su solución ecológica",
-    "odsSme": "Vinculado a la solución ecológica",
+    "odsSme": "ODS relacionados con la solución",
     "paybackPeriodYears": "Número de años para rentabilizar la inversión respecto a una solución tradicional",
     "selectProducts": "Tipos de productos tóxicos que reemplaza o mejora su solución ecológica",
     "waste": "Tipos de residuos",
@@ -505,7 +506,7 @@
   "yourEcosolution": "Tu Ecosolucion",
   "accept": "Aceptar",
   "add": "Añadir",
-  "alertSelectedProduct": "Seleccione una o más soluciones",
+  "alertSelectedProduct": "Selecciona las categorías y productos correspondientes a tu proyecto",
   "all": "Todo",
   "analysis": "Análisis",
   "availability": "Disponible",
@@ -533,6 +534,7 @@
   "editSelection": "Modificar selección",
   "enterprise": "Empresa",
   "exit": "Salir",
+  "filters": "Filtros",
   "followUs": "Síguenos",
   "infoSaveMessages": "Tienes la opción de guardar tus datos en este momento, lo cual asegurará que estén disponibles para futuras consultas, brindándote la certeza de contar con ellos cuando los necesites.",
   "lastLead": "Último cliente potencial",
@@ -591,6 +593,7 @@
   "turnOnNotifications": "Activa las notificaciones",
   "exploreNow": "Explora ahora",
   "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
-  "subtitlePageCatalog": "La mejor eco-solución para ",
-  "results": "Resultados"
+  "subtitlePageCatalog": "Mejores souciones para ",
+  "results": "resultados",
+  "resultSolution": "resultado"
 }
