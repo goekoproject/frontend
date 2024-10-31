@@ -70,11 +70,7 @@
                   }"></ng-container>
               }
               @case ('select-locations') {
-                <goeko-select-locations
-                  [form]="form"
-                  [controlLocations]="locationsArrays"
-                  [controlNameCountry]="'country'"
-                  [controlNameProvince]="'regions'"></goeko-select-locations>
+                <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
               }
               @default {
                 <go-input

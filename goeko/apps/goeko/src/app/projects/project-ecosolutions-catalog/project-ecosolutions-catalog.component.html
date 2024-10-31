@@ -8,10 +8,12 @@
   <div class="relative flex h-screen w-4/6 flex-grow flex-col gap-4">
     <h1 class="text-2xl font-semibold">
       {{ 'subtitlePageCatalog' | translate }} <span class="text-greenLime">{{ project().name }}</span>
-      <p class="text-base font-normal">{{ totalEcosolutions() }} {{ 'results' | translate }}</p>
+      <p class="text-base font-normal">
+        {{ totalEcosolutions() }} {{ totalEcosolutions() === 1 ? ('resultSolution' | translate) : ('results' | translate) }}
+      </p>
     </h1>
     <button go-button appearance="white" class="absolute right-0 top-0" (click)="goToProjectForm()">
-      {{ 'edit' | translate }}
+      {{ 'editProject' | translate }}
     </button>
     <!--APPLIED FILTERS-->
 

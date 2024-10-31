@@ -22,7 +22,7 @@
     "view_ecosolutions": "Détails de votre écosolution"
   },
   "CATEGORIES": {
-    "co2Emission": "Emissions de CO2",
+    "co2Emission": "Emissions de CO₂",
     "hazardousProduct": "Produits toxiques",
     "waste": "Déchets",
     "water": "Eau",
@@ -63,15 +63,15 @@
     },
     "greenWaste": {
       "label": "Dans quelle(s) catégorie(s) de déchets verts votre entreprise améliore-t-elle la gestion?",
-      "question": "Avec quels types de déchets verts votre entreprise est-elle principalement confrontée?"
+      "question": "Déchets verts"
     },
     "hazardousWaste": {
       "label": "Dans quelle(s) catégorie(s) de déchets dangereux votre entreprise améliore-t-elle la gestion?",
-      "question": "Avec quels types de déchets dangereux votre entreprise est-elle principalement confrontée?"
+      "question": "Déchets dangereux"
     },
     "inertOrMineralWaste": {
       "label": "Dans quelle(s) catégorie(s) de déchets minéraux ou inertes votre éco-solution améliore-t-elle la gestion?",
-      "question": "Avec quels types de déchets minéraux ou inertes votre entreprise est-elle principalement confrontée?"
+      "question": "Déchets minéraux ou inertes"
     },
     "lastYearInvoice": {
       "label": "",
@@ -83,15 +83,15 @@
     },
     "mainCategoryNonInert": {
       "label": "Dans quelle(s) catégorie(s) de déchets non inertes votre éco-solution améliore-t-elle la gestion?",
-      "question": "Avec quels types de déchets non inertes votre entreprise est-elle principalement confrontée?"
+      "question": "Déchets non inertes"
     },
     "mainInternalCombustionEngine": {
       "label": "Engins et véhicules",
-      "question": "Principaux engins à moteur thermique utilisés par votre entreprise"
+      "question": "Engins et véhicules"
     },
     "mainMineralProduct": {
       "label": "Produits minéraux et métaux",
-      "question": "Principaux produits minéraux et métaux utilisés par votre entreprise"
+      "question": "Produits minéraux et métaux"
     },
     "mainRigidMaterial": {
       "label": "",
@@ -103,11 +103,11 @@
     },
     "specialWaste": {
       "label": "Dans quelle(s) catégorie(s) de déchets spéciaux votre éco-solution améliore-t-elle la gestion?",
-      "question": "Avec quels types de déchets spéciaux votre entreprise est-elle principalement confrontée?"
+      "question": "Déchets spéciaux"
     },
     "sustainableBuildingOperations": {
       "label": "Pour l’exploitation de bâtiments ou la mobilité durable,  votre éco-solution permet de:",
-      "question": "Pour l'exploitation du bâtiment et la mobilité durable, seriez-vous intéressé par"
+      "question": "Solutions pour l'exploitation du bâtiment et la mobilité douce"
     }
   },
   "CURRENCY": {
@@ -149,10 +149,13 @@
     "certified": "Certifiée",
     "city": "Ville",
     "companyName": "Nom de l'entreprise",
+    "comunicationLanguage": "Langue choisie pour la communication",
     "countriesAvailable": "Pays disponibles",
     "countriesProvincesAvailable": "Pays et régions de distribution",
     "country": "Pays",
+    "companyId": "Numéro de TVA (Taxe sur la Valeur Ajoutée)",
     "currency": "Devise",
+    "date": "Date",
     "deliverCountries": "Pays où votre éco-solution est livrable",
     "ecosolution_classification": "Sélectionnez des questions et choisissez des produits pour votre éco-solution.",
     "ecosolutions_products": "Sélectionnez les produits",
@@ -177,11 +180,12 @@
     "operationalCostReductionPercentage": "Pourcentage de réduction des coûts opérationnels",
     "password": "Mot de passe",
     "paybackPeriodYears": "Temps de retour sur investissement par rapport à une solution standard",
+    "phoneNumber": "Numéro de téléphone",
     "price": "Prix",
     "products": "Produits",
     "province": "Région",
     "reductionPercentage": "Pourcentage de réduction",
-    "reductionPercentageCO2": "Pourcentage de réduction de CO2",
+    "reductionPercentageCO2": "Pourcentage de réduction de CO₂",
     "reductionPercentageHP": "Pourcentage de réduction des produits dangereux",
     "reductionPercentageWaste": "Pourcentage de réduction des déchets",
     "reductionPercentageWater": "Pourcentage de réduction de la consommation d'eau",
@@ -249,9 +253,9 @@
     "messageContact": "Contactez-nous à {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard": "Commencez votre première analyse",
-    "subtitleCard": "Nous trouverons la meilleure éco-solution pour vous",
-    "buttonSearch": "Rechercher éco-solution",
+    "titleCard": "Créez un projet",
+    "subtitleCard": "Nous trouverons les solutions cleantech les plus adaptées",
+    "buttonSearch": "Ajoutez un nouveau projet",
     "dialogNewProject": "Nommez votre projet",
     "dialogNameProject": "Nom",
     "dialogLocationProject": "Province et pays",
@@ -282,7 +286,7 @@
     "ods_6": "Eau propre et assainissement",
     "ods_7": "Énergie propre et d'un coût abordable",
     "ods_8": "Travail décent et croissance économique",
-    "ods_9": "Industrie, Innovation et Infrastructure"
+    "ods_9": "Industrie, innovation et infrastructure"
   },
   "SDG_TITLES": {
     "6": "Eau propre et assainissement",
@@ -470,9 +474,9 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Avantages de votre éco-solution par rapport à une solution traditionnelle",
     "buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :",
-    "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO2",
+    "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO₂",
     "ods": "En lien avec votre éco-solution",
-    "odsSme": "En lien avec l’éco-solution",
+    "odsSme": "ODD en lien avec la solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
     "selectProducts": "Votre éco-solution réduit l'impact du ou des produits toxiques suivants",
     "waste": "Types de déchets",
@@ -501,7 +505,7 @@
   "yourEcosolution": "Votre éco-solution",
   "accept": "Accepter",
   "add": "Ajouter",
-  "alertSelectedProduct": "Sélectionnez un ou plusieurs produits",
+  "alertSelectedProduct": "Sélectionnez les catégories et les produits correspondant à votre projet",
   "all": "Tout",
   "analysis": "Analyse",
   "availability": "Disponibilité:",
@@ -527,9 +531,11 @@
   "details": "Détails",
   "dragAndDrop": "Glisser déposer",
   "edit": "Modifier",
+  "editProject": "Modifier votre projet",
   "editSelection": "Modifier sélection",
   "enterprise": "Entreprise",
   "exit": "Sortir",
+  "filters": "Filtres",
   "followUs": "Suivez-nous",
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "lastLead": "Dernier prospect",
@@ -589,6 +595,7 @@
   "turnOnNotifications": "Activez les notifications",
   "exploreNow": "Explorer maintenant",
   "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
-  "subtitlePageCatalog": "Trouvez des éco-solutions pour votre entreprise",
-  "results": "résultats"
+  "subtitlePageCatalog": "Meilleures solutions pour",
+  "results": "résultats",
+  "resultSolution": "résultat"
 }

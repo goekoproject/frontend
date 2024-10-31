@@ -22,7 +22,7 @@
     "view_ecosolutions": "Details Ihrer Ökolösung ecosolution"
   },
   "CATEGORIES": {
-    "co2Emission": "CO2-Emissionen",
+    "co2Emission": "CO₂-Emissionen",
     "hazardousProduct": "Gefährliche Produkte",
     "waste": "Abfall",
     "water": "Wasser",
@@ -63,15 +63,15 @@
     },
     "greenWaste": {
       "label": "In welcher(n) Kategorie(n) von Grünabfällen verbessert Ihr Unternehmen das Management?",
-      "question": "Mit welchen Arten von Grünabfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Grünabfall"
     },
     "hazardousWaste": {
       "label": "In welcher(n) Kategorie(n) von gefährlichen Abfällen verbessert Ihr Unternehmen das Management?",
-      "question": "Mit welchen Arten von gefährlichen Abfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Gefährliche Abfälle"
     },
     "inertOrMineralWaste": {
       "label": "In welcher(n) Kategorie(n) von inerten oder mineralischen Abfällen verbessert Ihre Ökolösung das Management?",
-      "question": "Mit welchen Arten von inerten oder mineralischen Abfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Mineralische oder inerte Abfälle"
     },
     "lastYearInvoice": {
       "label": "",
@@ -83,15 +83,15 @@
     },
     "mainCategoryNonInert": {
       "label": "In welcher(n) Kategorie(n) von nicht-inerten Abfällen verbessert Ihre Ökolösung das Management?",
-      "question": "Mit welchen Arten von nicht-inerten Abfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Nicht-inerte Abfälle"
     },
     "mainInternalCombustionEngine": {
       "label": "Motoren und Fahrzeuge",
-      "question": "Hauptgeräte mit Verbrennungsmotor"
+      "question": "Motoren und Fahrzeuge"
     },
     "mainMineralProduct": {
       "label": "Mineral- und Metallprodukte",
-      "question": "Hauptmineral- und Metallprodukte"
+      "question": "Mineralprodukte und Metalle"
     },
     "mainRigidMaterial": {
       "label": "",
@@ -103,11 +103,11 @@
     },
     "specialWaste": {
       "label": "In welcher(n) Kategorie(n) von Sonderabfällen verbessert Ihre eco-solution das Management?",
-      "question": "Mit welchen Arten von Sonderabfällen hat Ihr Unternehmen hauptsächlich zu tun?"
+      "question": "Sonderabfälle"
     },
     "sustainableBuildingOperations": {
       "label": "Für den Betrieb von Gebäuden oder nachhaltige Mobilität ermöglicht Ihre eco-solution:",
-      "question": "Für den Betrieb des Gebäudes und nachhaltige Mobilität wären Sie interessiert an:"
+      "question": "Lösungen für den Gebäudebetrieb und sanfte Mobilität"
     }
   },
   "CURRENCY": {
@@ -149,10 +149,13 @@
     "certified": "Zertifiziert",
     "city": "Stadt",
     "companyName": "Firmenname",
+    "comunicationLanguage": "Gewählte Sprache für die Kommunikation",
     "countriesAvailable": "Verfügbare Länder",
     "countriesProvincesAvailable": "Länder und Regionen der Verteilung",
     "country": "Land",
+    "companyId": "Umsatzsteuer-Identifikationsnummer (USt-IdNr)",
     "currency": "Währung",
+    "date": "Datum",
     "deliverCountries": "Länder, in denen Ihre eco-solution zugelassen ist",
     "ecosolution_classification": "Wählen Sie Fragen aus und wählen Sie Produkte für Ihre eco-solution",
     "ecosolutions_products": "Produkte auswählen",
@@ -177,11 +180,12 @@
     "operationalCostReductionPercentage": "Prozentsatz der Betriebskostenreduzierung",
     "password": "Passwort",
     "paybackPeriodYears": "Amortisationszeit im Vergleich zu einer Standardlösung",
+    "phoneNumber": "Telefonnummer",
     "price": "Preis",
     "products": "Produkte",
     "province": "Region",
     "reductionPercentage": "Prozentuale Reduzierung",
-    "reductionPercentageCO2": "CO2-Reduzierungsprozentsatz",
+    "reductionPercentageCO2": "CO₂-Reduzierungsprozentsatz",
     "reductionPercentageHP": "Prozentsatz der Reduzierung gefährlicher Produkte",
     "reductionPercentageWaste": "Abfallreduzierung in Prozent",
     "reductionPercentageWater": "Prozentsatz der Reduzierung des Wasserverbrauchs",
@@ -249,9 +253,9 @@
     "messageContact": "Kontaktieren Sie uns unter {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard": "Beginnen Sie Ihre erste Analyse",
-    "subtitleCard": "Wir werden die beste Eco-Solution für Sie finden",
-    "buttonSearch": "Eco-Solution suchen",
+    "titleCard": "Erstellen Sie ein Projekt",
+    "subtitleCard": "Wir werden die am besten geeigneten Cleantech-Lösungen finden",
+    "buttonSearch": "Fügen Sie ein neues Projekt hinzu",
     "dialogNewProject": "Benennen Sie Ihr Projekt",
     "dialogNameProject": "Name",
     "dialogLocationProject": "Provinz und Land",
@@ -469,9 +473,9 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Vorteile Ihrer eco-solution im Vergleich zu einer traditionellen Lösung",
     "buildingOperation_question": "Suchen Sie nach einer oder mehreren Lösungen, um den Wasserverbrauch zu reduzieren, wie zum Beispiel:",
-    "co2Emission": "Bereich, in dem Ihre eco-solution die CO2-Emissionen reduziert",
+    "co2Emission": "Bereich, in dem Ihre eco-solution die CO₂-Emissionen reduziert",
     "ods": "Mit Ihrer eco-solution verknüpft",
-    "odsSme": "Mit der eco-solution verknüpft",
+    "odsSme": "Mit der Lösung verbundene SDGs",
     "paybackPeriodYears": "Anzahl der Jahre, um die Investition im Vergleich zu einer traditionellen Lösung rentabel zu machen",
     "selectProducts": "Art der giftigen Produkte, die Ihre eco-solution ersetzt oder verbessert",
     "waste": "Arten von Abfällen",
@@ -500,7 +504,7 @@
   "yourEcosolution": "Ihre Ökolösung",
   "accept": "Akzeptieren",
   "add": "Hinzufügen",
-  "alertSelectedProduct": "Wählen Sie eine oder mehrere Lösungen aus",
+  "alertSelectedProduct": "Wählen Sie die Kategorien und Produkte aus, die zu Ihrem Projekt passen",
   "all": "Alle",
   "analysis": "Analyse",
   "availability": "Verfügbarkeit",
@@ -526,9 +530,11 @@
   "details": "Details",
   "dragAndDrop": "Drag and drop",
   "edit": "Bearbeiten",
+  "editProject": "Projekt bearbeiten",
   "editSelection": "Auswahl ändern",
   "enterprise": "Unternehmen",
   "exit": "Beenden",
+  "filters": "Filter",
   "followUs": "Folgen Sie uns",
   "infoSaveMessages": "Sie haben die Möglichkeit, Ihre Daten jetzt zu speichern, um sicherzustellen, dass sie für zukünftige Referenzen verfügbar sind. Dies gibt Ihnen die Sicherheit, bei Bedarf darauf zugreifen zu können.",
   "lastLead": "Neuester Lead",
@@ -588,6 +594,7 @@
   "turnOnNotifications": "Benachrichtigungen aktivieren",
   "exploreNow": "Jetzt erkunden",
   "msgSearchEcosolutions": "Suchen Sie nach Eco-solutions, die Ihren Bedürfnissen entsprechen",
-  "subtitlePageCatalog": "Finden Sie die besten Eco-solutions für Ihr Unternehmen",
-  "results": "ergebnisse"
+  "subtitlePageCatalog": "Beste Lösungen für",
+  "results": "ergebnisse",
+  "resultSolution": "Ergebnis"
 }
