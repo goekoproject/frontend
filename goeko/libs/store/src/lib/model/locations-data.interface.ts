@@ -6,7 +6,7 @@ interface LocationParmas {
 }
 
 export interface LocationRegions extends LocationParmas {
-  isAll: boolean
+  isAll?: boolean
 }
 
 export interface LocationCountry extends LocationParmas {}
