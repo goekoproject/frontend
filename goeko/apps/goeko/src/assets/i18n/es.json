@@ -51,7 +51,7 @@
     },
     "buildingOperation": {
       "label": "Funcionamiento del edificio",
-      "question": "Para el funcionamiento del edificio, estaría interesado en:"
+      "question": "Soluciones para la gestión de edificios"
     },
     "energySource": {
       "label": "",
@@ -79,7 +79,7 @@
     },
     "mainActivity": {
       "label": "¿Para qué actividad(es) relacionada(s) con el agua su eco-solución reduce el consumo o mejora la calidad?",
-      "question": "Actividades de su empresa que consumen más agua"
+      "question": "Actividades que consumen agua"
     },
     "mainCategoryNonInert": {
       "label": "¿En qué categoría(s) de residuos no inertes está mejorando la gestión su eco-solución?",
@@ -99,7 +99,7 @@
     },
     "products": {
       "label": "Tipos de productos tóxicos",
-      "question": "Tipos de productos tóxicos"
+      "question": "Productos tóxicos"
     },
     "specialWaste": {
       "label": "¿En qué categoría(s) de residuos especiales está mejorando la gestión su eco-solución?",
@@ -560,7 +560,7 @@
   "result": "Resultados",
   "save": "Guardar",
   "saveYou": "Guardar tu",
-  "searchEcosolutions": "Buscar ecosoluciones",
+  "searchEcosolutions": "Busca soluciones cleantech",
   "selectAll": "Seleccionar todo",
   "selectCategoryEcosolutions": "Selecciona la categoría para tu ecosolución",
   "selectedProduct": "Producto seleccionado",
