@@ -1,6 +1,6 @@
-import { Component, ElementRef, inject, OnInit, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, inject, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
-import { LANGS } from '@goeko/core'
+import { CODE_LANG, LANGS } from '@goeko/core'
 import { DialogService } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
 import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
@@ -20,20 +20,17 @@ export class HeaderComponent implements OnInit {
   private _translate = inject(TranslateService)
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
-  isDark!: any;
-
-  langs = LANGS
-  defaultLang!: any
+  isDark!: any
+  langs = LANGS.filter((lang) => lang.code !== CODE_LANG.ES)
   mobileMenuOpen = signal(false)
+
   constructor(
-    private _renderer: Renderer2,
     private _router: Router,
     private _dialogService: DialogService,
     private _headerService: HeaderService,
   ) {}
 
   ngOnInit(): void {
-    this.defaultLang = this.langs.find((lang) => lang.code === this._translate.getDefaultLang())
     this._getHeaderTheme()
   }
 
