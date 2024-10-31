@@ -2,6 +2,7 @@ export interface NotificationProfile {
   email: string
   phoneNumber: string
   lang: string
+  enabled: boolean
 }
 
 export class ProfilePayload {

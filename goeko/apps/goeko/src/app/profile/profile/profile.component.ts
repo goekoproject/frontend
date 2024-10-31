@@ -108,6 +108,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification?.lang)
     this.form.get('phoneNumber')?.patchValue(this.dataProfile()?.notification.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
+    this.form.get('generalNotifications')?.setValue(this.dataProfile().notification.enabled)
     this._setLocaltionInFormForSme()
   }
 
@@ -134,6 +135,14 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.profileImg = file
   }
   saveProfile() {
+    const notificationData = {
+      ...this.form.value,
+      notification: {
+        ...this.form.value.notification,
+        enabled: this.form.get('generalNotifications')?.value,
+      }
+    }
+
     this._profieService
       .createUserProfile(this.form.value)
       .pipe(
@@ -157,6 +166,14 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   }
 
   updateProfile() {
+    const notificationData = {
+      ...this.form.value,
+      notification: {
+        ...this.form.value.notification,
+        enabled: this.form.get('generalNotifications')?.value,
+      }
+    }
+
     const profileUpdate$ = this._profieService.updateUserProfile(this.dataProfile().id, this.form.value)
 
     forkJoin({ profileUpdate: profileUpdate$, imageUpdate: this._uploadImg$() })

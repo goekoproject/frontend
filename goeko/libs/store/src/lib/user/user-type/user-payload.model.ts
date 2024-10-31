@@ -2,6 +2,7 @@ export interface NotificationProfile {
   email: string
   phoneNumber: string
   lang: string
+  enabled: boolean
 }
 
 export class UserCleantechPayload {
@@ -30,6 +31,7 @@ export class UserCleantechPayload {
       email: dataForm.email,
       phoneNumber: dataForm.phoneNumber,
       lang: dataForm.comunicationLanguage?.code,
+      enabled: dataForm.comunicationLanguage
     }
   }
 }
