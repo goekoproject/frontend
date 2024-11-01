@@ -18,8 +18,18 @@ const CODE_DEFAULT_COUNTRY = 'CH'
 })
 export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   public countryCompareWith = (o1: string, o2: string) => o1 === o2
-  public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1.code === (o2.code || o2) || o2.isAll
+  public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1?.code === (o2?.code || o2) || o2?.isAll
 
+  test = [
+    {
+      code: 'CH',
+      label: 'Switzerland',
+    },
+    {
+      code: 'DE',
+      label: 'Germany',
+    },
+  ]
   public optionAllProvince: LocationRegions = {
     code: '',
     label: 'FORM_LABEL.allProvinces',
@@ -71,9 +81,9 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.subscribeToFormArrayAndItemChanges()
     if (this.controlLocations.length === 0) {
       this.addLocation()
+      this.subscribeToFormArrayAndItemChanges()
     } else {
       this._patchLocationsValue()
     }
@@ -101,7 +111,7 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
       ...this.controlLocations.controls.map((control, index) =>
         control.valueChanges.pipe(
           map((value) => ({ index, value })),
-          filter((change) => change.index >= 0), // only index positive
+          filter((change) => change.index >= 0),
           distinctUntilChanged((prev, curr) => prev.value.country.code === curr.value.country.code),
           map((newValue) => newValue.value.country.code.code || newValue.value.country.code), // Transforma el cambio en el código de país
         ),
@@ -123,7 +133,7 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   private _setAllOptionWhenEmptyRegions() {
     this._controlLocations.controls.forEach((control) => {
       const _controlRegionsCountry = control.get('country')?.get('regions')
-      if (_controlRegionsCountry?.value && _controlRegionsCountry.value.length === 0) {
+      if (!_controlRegionsCountry?.value) {
         _controlRegionsCountry?.patchValue([''])
         this.toogleAllRegions(true)
       }
@@ -160,6 +170,7 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
 
   addLocation() {
     this.controlLocations.push(this._createLocations())
+    this.controlLocations.patchValue([{ country: { code: CODE_DEFAULT_COUNTRY, regions: [''] } }])
     this.selectedLocationsIndex.set(this.lastLocations)
     this._patchLocationsValue()
   }
@@ -167,7 +178,7 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   private _createLocations(): FormGroup {
     return new FormGroup({
       country: new FormGroup({
-        code: new FormControl(CODE_DEFAULT_COUNTRY, Validators.required),
+        code: new FormControl('', Validators.required),
         regions: new FormControl<string[]>(['']),
       }),
     })

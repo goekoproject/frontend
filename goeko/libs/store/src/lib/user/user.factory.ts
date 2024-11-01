@@ -21,7 +21,7 @@ export abstract class UserFactory {
         return {
           ...userProfileForm,
           comunicationLanguage: undefined,
-          country: userProfileForm.locations[0].country.code.code,
+          country: userProfileForm.locations[0].country.code,
           locations: mapperLocations(userProfileForm.locations),
           notification: {
             email: userProfileForm.email,
