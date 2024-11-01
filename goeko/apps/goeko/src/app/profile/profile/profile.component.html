@@ -72,6 +72,19 @@
               @case ('select-locations') {
                 <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
               }
+              @case ('checkbox') {
+                <div class="flex items-center my-4">
+                  <input
+                    id="{{ itemForm.controlName }}"
+                    type="checkbox"
+                    [formControlName]="itemForm.controlName"
+                    class="h-4 w-4"
+                  />
+                  <label for="{{ itemForm.controlName }}" class="ml-2 text-sm text-gray-600 font-bold">
+                    {{ itemForm.label | translate }}
+                  </label>
+                </div>
+              }
               @default {
                 <go-input
                   [formControlName]="itemForm.controlName"
@@ -89,18 +102,6 @@
           }
         </fieldset>
       }
-
-      <div *ngIf="userType() === USER_TYPE.SME" class="flex items-center my-4">
-        <input
-          id="general-notifications"
-          type="checkbox"
-          formControlName="generalNotifications"
-          class="h-4 w-4 text-blue-400 border-blue-400 rounded focus:ring-blue-400"
-        />
-        <label for="general-notifications" class="ml-2 text-sm text-gray-600 font-bold">
-        {{ 'MENU_USER_SME.notificationProfile' | translate}}
-        </label>
-      </div>
       <div class="profile-actions">
         <button type="button" go-button appearance="white" [routerLink]="['../dashboard', userType()]" [relativeTo]="route.parent">
           {{ 'cancel' | translate }}

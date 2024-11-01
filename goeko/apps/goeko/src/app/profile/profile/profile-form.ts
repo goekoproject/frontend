@@ -46,6 +46,7 @@ export const smeFormGroup = new FormGroup({
   comunicationLanguage: new FormControl(''),
   identifier: new FormControl('', [validateSmeIdentifier()]),
   phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
+  generalNotifications: new FormControl(false)
 })
 
 export const cleanTechFormGroup = new FormGroup({

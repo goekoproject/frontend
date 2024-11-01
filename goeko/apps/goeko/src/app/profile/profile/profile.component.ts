@@ -10,6 +10,7 @@ import { ProfileFieldset } from './profile-fieldset.interface'
 import { ProfileFormFactory } from './profile-form.factory'
 import { PROFILE_SME } from './profile-sme.constants'
 import { ProfileService } from './profile.service'
+import { NotificationProfile } from './profile-payload.model'
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -56,7 +57,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
-  public USER_TYPE = USER_TYPE
   private _externalId = this._profieService.externalId
   private destroy$ = new Subject<void>()
 
@@ -98,9 +98,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.form = ProfileFormFactory.createProfileForm(this.userType())
     this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
 
-    if (this.userType() === USER_TYPE.SME) {
-      this.form.addControl('generalNotifications', new FormControl(false))
-    }
+
   }
 
   private _loadDataProfile() {
@@ -108,7 +106,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification?.lang)
     this.form.get('phoneNumber')?.patchValue(this.dataProfile()?.notification.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
-    this.form.get('generalNotifications')?.setValue(this.dataProfile().notification.enabled)
+    this.form.get('generalNotifications')?.patchValue((this.dataProfile().notification as NotificationProfile).enabled)
     this._setLocaltionInFormForSme()
   }
 
@@ -135,13 +133,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.profileImg = file
   }
   saveProfile() {
-    const notificationData = {
-      ...this.form.value,
-      notification: {
-        ...this.form.value.notification,
-        enabled: this.form.get('generalNotifications')?.value,
-      }
-    }
+    const notificationData = { ...this.form.value, notification: { ...this.form.value.notification, enabled: this.form.value.generalNotifications } }
 
     this._profieService
       .createUserProfile(this.form.value)
@@ -166,14 +158,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   }
 
   updateProfile() {
-    const notificationData = {
-      ...this.form.value,
-      notification: {
-        ...this.form.value.notification,
-        enabled: this.form.get('generalNotifications')?.value,
-      }
-    }
-
+    const notificationData = { ...this.form.value, notification: { ...this.form.value.notification, enabled: this.form.value.generalNotifications } }
     const profileUpdate$ = this._profieService.updateUserProfile(this.dataProfile().id, this.form.value)
 
     forkJoin({ profileUpdate: profileUpdate$, imageUpdate: this._uploadImg$() })
