@@ -51,7 +51,7 @@
     },
     "buildingOperation": {
       "label": "Betrieb des Gebäudes",
-      "question": "Für den Betrieb des Gebäudes wären Sie interessiert an:"
+      "question": "Lösungen für den Gebäudebetrieb"
     },
     "energySource": {
       "label": "",
@@ -79,7 +79,7 @@
     },
     "mainActivity": {
       "label": "Für welche(n) wasserbezogene(n) Aktivität(en) reduziert Ihre eco-solution den Verbrauch oder verbessert die Qualität?",
-      "question": "Aktivitäten Ihres Unternehmens, die am meisten Wasser verbrauchen"
+      "question": "Wasserverbrauchende Aktivitäten"
     },
     "mainCategoryNonInert": {
       "label": "In welcher(n) Kategorie(n) von nicht-inerten Abfällen verbessert Ihre Ökolösung das Management?",
@@ -99,7 +99,7 @@
     },
     "products": {
       "label": "Arten von giftigen Produkten",
-      "question": "Arten von giftigen Produkten"
+      "question": "Giftige Produkte"
     },
     "specialWaste": {
       "label": "In welcher(n) Kategorie(n) von Sonderabfällen verbessert Ihre eco-solution das Management?",
@@ -562,7 +562,7 @@
   "result": "Ergebnis",
   "save": "Speichern",
   "saveYou": "Speichern Sie Ihr",
-  "searchEcosolutions": "Eco-solutions suchen",
+  "searchEcosolutions": "Suchen Sie nach Cleantech-Lösungen",
   "selectAll": "Alles auswählen",
   "selectCategoryEcosolutions": "Wählen Sie die Kategorie für Ihre eco-solution aus",
   "selectedProduct": "Ausgewähltes Produkt",

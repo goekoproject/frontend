@@ -51,7 +51,7 @@
     },
     "buildingOperation": {
       "label": "For the operation of the building, would you be interested in",
-      "question": "For the operation of the building, would you be interested in"
+      "question": "Solutions for building management"
     },
     "energySource": {
       "label": "",
@@ -79,7 +79,7 @@
     },
     "mainActivity": {
       "label": "For which water-related activity(ies) does your eco-solution reduce consumption or improve quality?",
-      "question": "Activities of your company that consume the most water"
+      "question": "Water-consuming activities"
     },
     "mainCategoryNonInert": {
       "label": "In which category(ies) of non-inert waste is your eco-solution improving management?",
@@ -99,7 +99,7 @@
     },
     "products": {
       "label": "Types of toxic products",
-      "question": "Types of toxic products"
+      "question": "Toxic products"
     },
     "specialWaste": {
       "label": "In which category(ies) of special waste is your eco-solution improving management?",
@@ -563,7 +563,7 @@
   "result": "Result",
   "save": "Save",
   "saveYou": "Save your",
-  "searchEcosolutions": "Search eco-solutions",
+  "searchEcosolutions": "Search cleantech solutions",
   "selectAll": "Select All",
   "selectCategoryEcosolutions": "Select the category for your ecosolution",
   "selectedProduct": "Selected product",
