@@ -1,7 +1,7 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms'
 const IdentifierRegexs = {
   ES: /^[A-Z][0-9]{7}[0-9A-Z]$/,
-  FR: /^[0-9]{9}\s?[0-9]{5}$/,
+  FR: /^[0-9]{9}$/,
   CH: /^CHE-[0-9]{3}\.[0-9]{3}\.[0-9]{3}$/,
   DE: /^DE[0-9]{9}$|^DE[0-9]{10}$/,
   IT: /^[0-9]{11}$/,
