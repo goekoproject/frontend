@@ -23,12 +23,12 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         dataSelectKey: 'countries',
         required: true,
       },
-      {
+      /*      {
         controlName: 'identifier',
         label: 'FORM_LABEL.companyId',
         type: 'text',
         required: true,
-      },
+      }, */
       {
         controlName: 'employees',
         label: 'FORM_LABEL.numEmployees',
