@@ -15,9 +15,9 @@
             </h1>
             <h3 class="subtitle text-transition sm:text-lg p-4 lg:p-0" *ngIf="showMainSlogan">{{ entryDataConnecting.text }}</h3>
 
-            <div class="grid place-items-center m-auto text-transition" *ngIf="showMainSlogan">
+            <div class="grid place-items-center m-auto text-transition" *ngIf="connection">
               <div class="flex items-center mt-12">
-                  <div class="relative flex h-12 w-full min-w-[200px] max-w-[14rem] i-connection">
+                  <div class="relative flex h-12 min-w-[200px] max-w-[16rem] i-connection">
                     <button
                       class="!absolute right-1 top-1 z-1 rounded-[25px] start-button py-2 px-3 text-center align-middle text-white leading-6"
                       type="button"
@@ -28,7 +28,7 @@
                     <input
                       type="email"
                       class="h-full w-full rounded-[25px] px-3 py-2.5 pr-20 outline outline-0 disabled:bg-white"
-                      placeholder="Start connection"
+                      [placeholder]="connection.text"
                       disabled
                     />
                   </div>

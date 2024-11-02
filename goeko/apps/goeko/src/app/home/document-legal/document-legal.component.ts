@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContentFulService } from '@goeko/store';
 import { TranslateService } from '@ngx-translate/core';
+import { HeaderService } from '../header/header.services';
 
 @Component({
   selector: 'goeko-document-legal',
@@ -16,14 +17,22 @@ export class DocumentLegalComponent implements OnInit {
   constructor(
     private contentFulService: ContentFulService,
     private _translate: TranslateService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _headerService: HeaderService
   ) {}
 
   ngOnInit(): void {
+    this._setHeaderTheme();
+    this._setTopScroll();
     this._entryId = this.route.snapshot.data['entryId'];
     this._currentLang = this._translate.defaultLang;
     this._getDocumentLegal();
     this._changeLang();
+  }
+
+
+  private _setHeaderTheme() {
+    this._headerService.isDarkTheme.next(true);
   }
 
   private _changeLang() {
@@ -41,4 +50,13 @@ export class DocumentLegalComponent implements OnInit {
         this.textLegal = res.text;
       });
   }
+
+  _setTopScroll() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+   }
+
 }

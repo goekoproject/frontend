@@ -15,7 +15,8 @@ export class BannerComponent implements AfterViewInit, OnInit {
   private _contentFulService = inject(ContentFulService)
   public currentLangCode = signal(this._translateServices.defaultLang)
 
-  public advantages$ = this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).pipe(map((items) => items.items))
+  public advantages$!:any;
+
   advantages!: Advantages[]
 
   @ViewChild('marketingVideo') marketingVideo!: ElementRef<HTMLMediaElement>
@@ -33,13 +34,18 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this._changeLangCode()
+    this.loadAdvantages();
+  }
+
+  loadAdvantages() {
+    this.advantages$ = this._contentFulService.getContentType(CONTENT_TYPE_GOEKO_ADVANTAGES).pipe(map((items) => items.items))
+
     this.advantages$.subscribe((items: any) => {
       this.advantages = []
       items.forEach((element: any) => {
         this.advantages.push(new Advantages(element))
       })
-    })
-  }
+    })  }
 
   ngAfterViewInit(): void {
     if (!this.marketingVideo) {
@@ -54,6 +60,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
       this.currentLangCode.set(res.lang)
       this.marketingVideo.nativeElement.src = this.urlSrcVideo
       this.marketingVideo.nativeElement.pause()
+      this.loadAdvantages();
     })
   }
   watchVideo() {

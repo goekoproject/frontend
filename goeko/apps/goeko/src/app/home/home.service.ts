@@ -14,7 +14,7 @@ export class HomeService {
   entryDataConnecting = signal<any | null>(null)
   entryDataSustainability = signal<any | null>(null)
   entryDataMain = signal<any | null>(null)
-
+  connection = signal<any | null>(null)
 
   constructor(
     private _contentFul: ContentFulService,
@@ -56,6 +56,17 @@ export class HomeService {
         }
       })
   }
+
+  geConnection(entryId: string) {
+    this.getEntry(entryId)
+      .pipe(map((res) => res.fields))
+      .subscribe((entryData: any) => {
+        if (entryData) {
+          this.connection.set(entryData)
+        }
+      })
+  }
+
   getContentType(contentType: string) {
     return this._contentFul.getContentType(contentType).pipe(map((res) => res.items.map((item) => item.fields)))
   }

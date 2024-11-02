@@ -19,7 +19,7 @@
   </ul>
 </section>
 
-<section #articleEl class="flex flex-col gap-[12rem] w-full">
+<section #articleEl class="flex flex-col gap-[15rem] w-full">
   @for (article of articles | orderBy: 'order'; track article.id; let i = $index; let odd = $odd) {
     @defer (on viewport) {
 

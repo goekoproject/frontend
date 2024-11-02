@@ -44,6 +44,7 @@
     "embla-carousel-angular": "^14.1.0",
     "jsrsasign": "^11.0.0",
     "lit": "^3.1.0",
+    "mailgun.js": "^10.2.3",
     "marked": "^13.0.3",
     "ng-circle-progress": "^1.7.1",
     "ngx-editor": "^17.3.0",

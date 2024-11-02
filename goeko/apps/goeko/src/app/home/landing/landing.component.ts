@@ -13,6 +13,7 @@ enum ENTRYS_ID {
   MAIN = '6kOjxhcZv8tluQqyVzMglp',
   CONNECTING = '5K722xUKUczzRHt5COUgLp',
   SUSTAINABILITY = '2hwIsU3aiyyd2RhzFIgvw0',
+  CONECCTION = '6E6IPYBP6rNkudS5oigmIF'
 }
 const CONTENT_TYPE_MAIN_PHOTO = 'mainPhoto';
 
@@ -42,6 +43,8 @@ export class LandingComponent implements OnInit{
 
   public entryDataConnecting!: { text: string }
   public entryDataMain!: { text: string }
+  public connection!: { text: string }
+
 
   currentLang!: string;
   slogan!: { text: string }
@@ -68,6 +71,7 @@ export class LandingComponent implements OnInit{
     this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY)
     this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
     this._homeService.getSloganMain(ENTRYS_ID.MAIN)
+    this._homeService.geConnection(ENTRYS_ID.CONECCTION)
     this._onChangeLang()
   }
 
@@ -75,6 +79,7 @@ export class LandingComponent implements OnInit{
     effect(() => {
       this.entryDataConnecting = this._homeService.entryDataConnecting()
       this.entryDataMain = this._homeService.entryDataMain()
+      this.connection = this._homeService.connection()
     })
   }
 
@@ -88,6 +93,7 @@ export class LandingComponent implements OnInit{
     this._translate.onLangChange.subscribe((res) => {
       this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
       this._homeService.getSloganMain(ENTRYS_ID.MAIN)
+      this._homeService.geConnection(ENTRYS_ID.CONECCTION)
       this.currentLang = res.lang
     })
   }
