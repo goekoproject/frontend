@@ -1,10 +1,13 @@
 
 <div class="pt-16 pr-32 pl-32 flex flex-col is-lighthome pb-8">
 
+  @if (services && CTservices) {
+
   <div class="flex flex-row justify-evenly pb-5">
-    <a class="header-tab" [ngClass]="{'active': step==='step1'}" (click)="step='step1'">Enterprise</a>
-    <a class="header-tab" [ngClass]="{'active': step==='step2'}" (click)="step='step2'">Cleantech</a>
+    <a class="header-tab" [ngClass]="{'active': step==='step1'}" (click)="step='step1'">{{services.actorType}}</a>
+    <a class="header-tab" [ngClass]="{'active': step==='step2'}" (click)="step='step2'">{{CTservices.actorType}}</a>
   </div>
+}
 
   <div class="flex flex-row gap-20 border-t-[3px]" *ngIf="step==='step1'">
       @if (services) {
@@ -26,6 +29,7 @@
         </div>
       }
   </div>
+
 
   <div class="flex flex-row gap-20 border-t-[3px]" *ngIf="step==='step2'">
     @if (CTservices) {
@@ -53,7 +57,7 @@
 <div class=" pr-32 pl-32 pb-16 flex flex-col is-lighthome rate">
   <div class="w-full pt-16">
     <h1 class="mb-6 text-black subtitle text-center">
-    Tarifas
+    {{ services.rateTitle }}
     </h1>
   </div>
 
