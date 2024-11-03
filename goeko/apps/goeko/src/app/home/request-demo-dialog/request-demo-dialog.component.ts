@@ -5,6 +5,13 @@ import { DialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Validators } from 'ngx-editor';
 import { COUNTRIES_EU } from './country.contants';
+import { environment } from 'apps/goeko/src/environments/environment';
+
+import Mailgun from 'mailgun.js';
+import * as FormData from 'form-data';
+
+const mailgun = new Mailgun(FormData);
+const mg = mailgun.client({username: 'api', key: environment.mailGunApiKey || 'key-yourkeyhere'});
 
 @Component({
   selector: 'goeko-request-demo-dialog',
@@ -52,6 +59,17 @@ export class RequestDemoDialogComponent implements OnInit{
 
   send(): void {
     console.log(this.formRequestDemo.value);
+    mg.messages.create('email.goeko.ch', {
+      from: "Excited User <goeko@email.goeko.ch>",
+      to: [this.formRequestDemo.controls['email'].value],
+      subject: "Request a demo",
+      text: "Testing some Mailgun awesomness!",
+      html: "<h1>Testing some Mailgun awesomness!</h1>"
+    })
+    .then(msg => console.log(msg)) // logs response data
+    .catch(err => console.error(err)); // logs any error
+    this._dialogService.close()
+
   }
 
   // getSectorValue(): void {
