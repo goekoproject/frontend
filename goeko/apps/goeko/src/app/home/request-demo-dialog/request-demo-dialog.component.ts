@@ -11,7 +11,13 @@ import Mailgun from 'mailgun.js';
 import * as FormData from 'form-data';
 
 const mailgun = new Mailgun(FormData);
-const mg = mailgun.client({username: 'api', key: environment.mailGunApiKey || 'key-yourkeyhere'});
+const mg = mailgun.client(
+  {
+   url: 'https://api.eu.mailgun.net',
+   username: 'api',
+   key: environment.mailGunApiKey
+  }
+);
 
 @Component({
   selector: 'goeko-request-demo-dialog',
