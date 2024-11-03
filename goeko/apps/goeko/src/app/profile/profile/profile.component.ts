@@ -133,8 +133,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.profileImg = file
   }
   saveProfile() {
-    const notificationData = { ...this.form.value, notification: { ...this.form.value.notification, enabled: this.form.value.generalNotifications } }
-
     this._profieService
       .createUserProfile(this.form.value)
       .pipe(
@@ -158,7 +156,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   }
 
   updateProfile() {
-    const notificationData = { ...this.form.value, notification: { ...this.form.value.notification, enabled: this.form.value.generalNotifications } }
     const profileUpdate$ = this._profieService.updateUserProfile(this.dataProfile().id, this.form.value)
 
     forkJoin({ profileUpdate: profileUpdate$, imageUpdate: this._uploadImg$() })

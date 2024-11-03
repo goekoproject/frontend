@@ -15,4 +15,5 @@ export interface UserProfileForm {
   phoneNumber: string;
   comunicationLanguage: any;
   locations: any[];
+  generalNotifications: boolean;
 }
