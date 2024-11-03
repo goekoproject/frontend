@@ -59,12 +59,18 @@ export class RequestDemoDialogComponent implements OnInit{
 
   send(): void {
     console.log(this.formRequestDemo.value);
+    const message =
+    'Company: ' + this.formRequestDemo.controls['company'].value + '\n' +
+    'Sector: ' + this.formRequestDemo.controls['sector'].value + '\n' +
+    'Other: ' + this.formRequestDemo.controls['otherSector'].value + '\n' +
+    'Company: ' + this.formRequestDemo.controls['company'].value + '\n' +
+    'Country: ' + this.formRequestDemo.controls['country'].value;
+
     mg.messages.create('email.goeko.ch', {
       from: "Excited User <goeko@email.goeko.ch>",
       to: [this.formRequestDemo.controls['email'].value],
       subject: "Request a demo",
-      text: "Testing some Mailgun awesomness!",
-      html: "<h1>Testing some Mailgun awesomness!</h1>"
+      text: message,
     })
     .then(msg => console.log(msg)) // logs response data
     .catch(err => console.error(err)); // logs any error
