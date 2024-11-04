@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, HostListener, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, HostListener, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { Router } from '@angular/router'
 import { ContentFulService } from '@goeko/store'
@@ -62,11 +62,7 @@ export class LandingComponent implements OnInit {
     private _dialogService: DialogService,
     private _router: Router,
     private _headerService: HeaderService,
-  ) {
-    effect(() => {
-      console.log(this.mainPhoto())
-    })
-  }
+  ) {}
 
   ngOnInit(): void {
     this._setTopScroll()

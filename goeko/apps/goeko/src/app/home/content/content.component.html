@@ -1,14 +1,11 @@
 <section class="select-actors">
-  @if (entryDataConnecting && entryDataSustainability) {
-    <!-- <div class="select-actors-heading">
-      <h3 class="select-actors-title text-2xl font-bold lg:text-5xl">{{ entryDataConnecting.text }}</h3>
-    </div> -->
+  @if (entryDataConnecting() && entryDataSustainability()) {
     <h4 class="select-actors-description">
-      {{ entryDataSustainability.text }}
+      {{ entryDataSustainability()?.text }}
     </h4>
   }
   <ul class="platform-actors">
-    @for (actor of actors; track actor.title) {
+    @for (actor of actors(); track actor.title) {
       <li class="actors-detail" (click)="navigateToActors(actor.id)">
         <h3 class="actors-detail-name">{{ actor.title }}</h3>
         <p class="actors-detail-description gap-4">

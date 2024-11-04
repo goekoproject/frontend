@@ -32,7 +32,11 @@
 
 @defer (on viewport) {
   <go-banner class="relative"></go-banner>
-  <go-content></go-content>
+} @placeholder {
+  <div>loading...</div>
+}
+@defer (on viewport) {
+  <go-content />
 } @placeholder {
   <div>loading...</div>
 }

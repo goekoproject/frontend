@@ -10,7 +10,7 @@ const compareFn = (a: any, b: any) => {
 }
 @Injectable({ providedIn: 'root' })
 export class HomeService {
-  dataContentTypeSignal = signal<unknown | null>(null)
+  dataContentTypeSignal = signal<any[]>([])
   entryDataConnecting = signal<any | null>(null)
   entryDataSustainability = signal<any | null>(null)
   entryDataMain = signal<any | null>(null)
