@@ -80,7 +80,7 @@ export class RequestDemoDialogComponent implements OnInit {
 
     mg.messages
       .create('email-stage.goeko.ch', {
-        from: `Demo Goeko Platform ${this.formRequestDemo.controls['email'].value}`,
+        from: `${this.formRequestDemo.controls['company'].value} ${this.formRequestDemo.controls['email'].value}`,
         to: VAR_GENERAL.GOEKO_EMAIL,
         subject: 'Request a Demo',
         text: message,
