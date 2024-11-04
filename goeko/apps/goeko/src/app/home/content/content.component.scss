@@ -3,7 +3,6 @@ $color-deep-button: #f3f6f7;
 $color-deep-button-active: #e9e9e9f5;
 
 .select-actors {
-
   @apply flex flex-col items-center gap-16;
 
   &-heading {
@@ -12,7 +11,6 @@ $color-deep-button-active: #e9e9e9f5;
   }
   &-title {
     color: var(--soft-dark, #094056);
-
   }
   &-description {
     color: var(--white);
@@ -56,32 +54,20 @@ $color-deep-button-active: #e9e9e9f5;
 }
 
 .actors-detail:hover {
-  background: #E4F4FC;
-  border: 1px solid #1290D7;
+  background: #e4f4fc;
+  border: 1px solid #1290d7;
 }
 
 .content__actor-photo {
-  width: 58%;
   height: 34rem;
-  object-fit: fill;
-  border-radius: 1.5rem;
-  aspect-ratio: 4/3;
   z-index: 2;
+  @apply w-full rounded-t-lg object-fill lg:w-7/12 lg:rounded-3xl;
 }
 
 .info-actors {
-  position: absolute;
-  right: 4rem;
-  top: 8rem;
-  display: flex;
-  flex-direction: column;
   max-width: 805px;
-  gap: 2rem;
-  flex-grow: 2;
-  padding: 32px 32px;
-  border-radius: 1.5rem;
   background: var(--white);
-  z-index: 3;
+  @apply static right-16 top-32 z-10 flex flex-grow flex-col gap-8 rounded-3xl p-8 lg:absolute;
 
   &-title {
     color: var(--home-page-light-grey);
@@ -181,8 +167,7 @@ $color-deep-button-active: #e9e9e9f5;
 }
 
 .row-reverse-content {
-
-  @apply flex justify-end top-20;
+  @apply lg:top-20 lg:flex lg:justify-end;
   .info-actors {
     left: 4rem;
     top: -4rem;
@@ -192,7 +177,7 @@ $color-deep-button-active: #e9e9e9f5;
     gap: 2rem;
   }
 
-  .inter-panel{
+  .inter-panel {
     position: absolute;
     bottom: 21rem;
     z-index: 0;
@@ -201,7 +186,6 @@ $color-deep-button-active: #e9e9e9f5;
   .content__actor-photo {
     margin-right: 5rem; //TODO: revisar si esta bien
   }
-
 }
 
 @media (max-width: 768px) {
@@ -224,10 +208,9 @@ $color-deep-button-active: #e9e9e9f5;
   cursor: pointer;
 }
 
-#bank{
+#bank {
   button {
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     color: #747474;
   }
 }
-

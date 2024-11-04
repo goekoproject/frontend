@@ -1,11 +1,11 @@
 .goeko-header {
- // background-color: var(--home-page-dark-blue);
-  //background-color:transparent;
-  //position: sticky;
-  // top: 0;
-  // display: block;
-  // z-index: 10;
-  // margin: 0 auto;
+  @apply sticky z-10 block w-full;
+  background-color: var(--home-page-dark-blue);
+}
+
+.goeko-header:has(+ * > goeko-landing) {
+  // Styles to apply when goeko-header has a sibling with a child node goeko-landing
+  @apply bg-transparent;
 }
 
 .dark-header {
@@ -15,7 +15,6 @@
   display: block;
   z-index: 10;
   margin: 0 auto;
-  width: 96%;
 }
 
 .light-header {
@@ -27,7 +26,6 @@
   margin: 0 auto;
   width: 96%;
 }
-
 
 .header {
   display: flex;
@@ -45,7 +43,8 @@
   }
   &-slogan {
     color: var(--dark-accent, #163953);
-    text-shadow: 3px 3px 20px var(--primary--200),
+    text-shadow:
+      3px 3px 20px var(--primary--200),
       -2px 1px 30px var(--primary--main);
   }
   &-info {
@@ -109,13 +108,12 @@
 }
 
 .request-button:hover {
-  background-color: #0C689C;
+  background-color: #0c689c;
 }
 
 .request-button:active {
-  background-color: #032D45;
+  background-color: #032d45;
 }
-
 
 .login-button {
   background-color: var(--white);
@@ -141,16 +139,16 @@
 }
 
 .login-button:hover {
-  background-color: #E4F4FC;
+  background-color: #e4f4fc;
 }
 
 .login-button:active {
-  color: #0C689C;
-  border: 2px solid #0C689C;
+  color: #0c689c;
+  border: 2px solid #0c689c;
 }
 
 goeko-menu a:hover {
-  background-color: #E4F4FC;
+  background-color: #e4f4fc;
   color: var(--home-page-light-blue);
   align-items: center;
   appearance: none;
@@ -172,7 +170,7 @@ goeko-menu a:hover {
 }
 
 goeko-menu a:active {
-  color: #0C689C;
+  color: #0c689c;
 }
 
 goeko-menu a {
@@ -186,7 +184,7 @@ goeko-menu button {
 }
 
 goeko-menu button:hover {
-  background-color: #E4F4FC;
+  background-color: #e4f4fc;
   color: var(--home-page-light-blue);
   align-items: center;
   appearance: none;
@@ -208,5 +206,5 @@ goeko-menu button:hover {
 }
 
 goeko-menu button:active {
-  color: #0C689C;
+  color: #0c689c;
 }

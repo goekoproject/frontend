@@ -1,8 +1,7 @@
-import { Component, ElementRef, inject, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
 import { CODE_LANG, LANGS } from '@goeko/core'
 import { DialogService } from '@goeko/ui'
-import { TranslateService } from '@ngx-translate/core'
 import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
 import { HeaderService } from './header.services'
 
@@ -13,14 +12,13 @@ import { HeaderService } from './header.services'
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'goeko-header lg:max-w-screen-2xl sm:max-w-sm max-w-screen-2xlw-[96%]',
+    class: 'goeko-header',
   },
 })
 export class HeaderComponent implements OnInit {
-  private _translate = inject(TranslateService)
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
-  isDark!: any
+  isDark!: boolean
   langs = LANGS.filter((lang) => lang.code !== CODE_LANG.ES)
   mobileMenuOpen = signal(false)
 
@@ -35,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   _getHeaderTheme() {
-    this._headerService.isDarkTheme.subscribe((res) => {
+    this._headerService.isDarkTheme.subscribe((res: boolean) => {
       this.isDark = res
     })
   }

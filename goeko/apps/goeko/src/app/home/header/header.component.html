@@ -1,31 +1,28 @@
-<header #header [ngClass]="isDark === true ? 'dark-header' : 'light-header'">
-  <nav class="mx-auto flex h-[6.25rem] flex-row items-center justify-between px-6 py-3 lg:p-8" aria-label="Global">
-    <div class="flex basis-1/6 justify-center gap-2">
-      <a class="-m-1.5 p-1.5">
-        <img alt="logo-main" src="../../../assets/logo.svg" #logo [routerLink]="['/']" class="h-[4.25rem] w-20 cursor-pointer" />
-      </a>
+<header #header class="mx-auto lg:max-w-screen-2xl">
+  <nav class=" mx-auto flex h-[6.25rem] flex-row px-6" aria-label="Global">
+    <div class="flex flex-grow basis-3/5 items-center justify-between gap-4 lg:basis-full">
+      <img alt="logo-main" src="../../../assets/logo.svg" #logo [routerLink]="['/']" class="h-[4.25rem] w-20 cursor-pointer" />
+      <goeko-menu />
+
+      <div class="hidden items-center gap-4 md:flex lg:flex-1 lg:basis-2/6 lg:justify-end">
+        <goeko-select-i18n [langs]="langs" />
+
+        <button (click)="goTologin()" class="login-button">
+          {{ 'MENU.login' | translate }}
+        </button>
+
+        <button (click)="openRequestDemoDialog()" class="request-button">
+          {{ 'MENU.demo' | translate }}
+        </button>
+      </div>
     </div>
-    <div class="flex md:hidden">
-      <button
-        type="button"
-        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
-        (click)="setMobileMenuOpen()">
+
+    <div class="flex lg:hidden">
+      <button type="button" class="px-4 text-white" (click)="setMobileMenuOpen()">
         <span class="sr-only">Open main menu</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <svg class="size-10" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
-      </button>
-    </div>
-    <goeko-menu />
-    <div class="hidden lg:basis-2/6 items-center gap-4 md:flex lg:flex-1 lg:justify-center">
-      <goeko-select-i18n [langs]="langs" />
-
-      <button (click)="goTologin()" class="login-button">
-        {{ 'MENU.login' | translate }}
-      </button>
-
-      <button (click)="openRequestDemoDialog()" class="request-button">
-        {{ 'MENU.demo' | translate }}
       </button>
     </div>
   </nav>

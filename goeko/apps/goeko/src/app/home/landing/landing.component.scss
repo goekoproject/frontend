@@ -1,8 +1,8 @@
+.goeko-landing {
+  @apply mx-auto flex flex-col gap-24 lg:w-11/12;
+}
 .main-front {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 0;
+  @apply flex flex-col items-center py-28;
 }
 
 .title {
@@ -23,12 +23,10 @@
   line-height: 1;
   opacity: 0.7;
   animation: goekoMove 3s backwards;
-  animation-fill-mode: backwards;
 }
 
 .text-transition {
-  animation: greenTransitionMove 4s backwards;
-  animation-fill-mode: backwards;
+  animation: greenTransitionMove 4s forwards;
 }
 
 @keyframes greenTransitionMove {
@@ -39,35 +37,6 @@
     opacity: 1;
   }
 }
-
-// @keyframes greenTransitionMove {
-//   0% {
-//     opacity: 0;
-//   }
-//   20% {
-//     opacity: 1;
-//   }
-// }
-
-
-// @keyframes goekoMove {
-//   0% {
-//     opacity: 0.7;
-//     transform: scale(1);
-//   }
-//   25% {
-//     opacity: 0.7;
-//     transform: scale(1);
-//   }
-//   50% {
-//     opacity: 0.55;
-//     transform: scale(5);
-//   }
-//   100% {
-//     opacity: 0;
-//     transform: scale(8);
-//   }
-// }
 
 @keyframes goekoMove {
   0% {
@@ -80,11 +49,10 @@
   }
 }
 
-
 .subtitle {
   font: var(--font-body-home);
-  font-size: 24px;
   color: white;
+  @apply mx-auto w-5/6 text-lg lg:text-2xl;
 }
 
 .start-button {
@@ -92,7 +60,7 @@
 }
 
 .start-button:hover {
-  background-color: #073F5F;
+  background-color: #073f5f;
 }
 
 .i-connection {
@@ -101,7 +69,6 @@
     opacity: 1; /* Firefox */
     position: absolute;
     left: 1.5rem;
-    top: 0.80rem;
+    top: 0.8rem;
   }
-
 }

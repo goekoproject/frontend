@@ -1,4 +1,4 @@
-<div class="relative hidden lg:flex lg:gap-x-16 items-center">
+<div class="relative hidden items-center lg:flex lg:gap-x-14">
   @for (item of menu(); track item.id) {
     @switch (item.code) {
       @case ('contact') {
@@ -17,11 +17,7 @@
 
 <!--Submenu-->
 <ng-template #contactSubmenu let-item="item">
-  <button
-    type="button"
-    (click)="submenuOpenToggle()"
-    class="flex items-center gap-x-1 leading-6 text-white"
-    aria-expanded="false">
+  <button type="button" (click)="submenuOpenToggle()" class="flex items-center gap-x-1 leading-6 text-white" aria-expanded="false">
     {{ item.keyLang | translate }}
   </button>
   <div class="submenu" [ngClass]="{ flex: submenuOpen(), hidden: !submenuOpen() }">
@@ -38,6 +34,6 @@
         </p>
       </div>
     }
-    <img loading="lazy"  class="icon-contact" src="assets/connection.svg" alt="connection" />
+    <img loading="lazy" class="icon-contact" src="assets/connection.svg" alt="connection" />
   </div>
 </ng-template>
