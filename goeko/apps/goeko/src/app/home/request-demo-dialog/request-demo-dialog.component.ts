@@ -7,6 +7,7 @@ import { environment } from 'apps/goeko/src/environments/environment'
 import { Validators } from 'ngx-editor'
 import { COUNTRIES_EU } from './country.contants'
 
+import { VAR_GENERAL } from '@goeko/business-ui'
 import * as FormData from 'form-data'
 import Mailgun from 'mailgun.js'
 
@@ -72,13 +73,16 @@ export class RequestDemoDialogComponent implements OnInit {
       this.formRequestDemo.controls['company'].value +
       '\n' +
       'Country: ' +
-      this.formRequestDemo.controls['country'].value
+      this.formRequestDemo.controls['country'].value +
+      '\n' +
+      'Email: ' +
+      this.formRequestDemo.controls['email'].value
 
     mg.messages
-      .create('email.goeko.ch', {
-        from: 'Excited User <goeko@email.goeko.ch>',
-        to: [this.formRequestDemo.controls['email'].value],
-        subject: 'Request a demo',
+      .create('email-stage.goeko.ch', {
+        from: `Demo Goeko Platform ${this.formRequestDemo.controls['email'].value}`,
+        to: VAR_GENERAL.GOEKO_EMAIL,
+        subject: 'Request a Demo',
         text: message,
       })
       .then((msg) => console.log(msg)) // logs response data
