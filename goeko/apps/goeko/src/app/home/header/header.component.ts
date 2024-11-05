@@ -39,7 +39,8 @@ export class HeaderComponent implements OnInit {
   }
 
   goTologin() {
-    this._router.navigate(['/login'])
+    window.open('https:www.goeko.ch/login', '_self')
+    // this._router.navigate(['/login'])
   }
 
   setMobileMenuOpen() {
