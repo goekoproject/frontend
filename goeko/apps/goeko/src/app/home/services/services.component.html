@@ -56,9 +56,11 @@
 
 <div class=" pr-32 pl-32 pb-16 flex flex-col is-lighthome rate">
   <div class="w-full pt-16">
-    <h1 class="mb-6 text-black subtitle text-center">
-    {{ services.rateTitle }}
-    </h1>
+    @if(services) {
+      <h1 class="mb-6 text-black subtitle text-center">
+        {{ services.rateTitle }}
+        </h1>
+    }
   </div>
 
   <div class="flex flex-row gap-6 justify-center" *ngIf="step==='step1'">

@@ -40,11 +40,16 @@ export class SliderComponent implements OnInit {
       timming: items[0].fields.timeSeconds,
       companies: mapCompanies
     }
-    let bannerRepeat: number = this.carousel.nCompanies * 2;
+    let bannerRepeat: number = this.carousel.numberCompanies * 2;
     let widthCalc:number= 250 * bannerRepeat;
     this._renderer.setStyle(this.slider?.nativeElement, 'width', `${widthCalc}px`);
     document.documentElement.style.setProperty('--home-slider-baner-companies', this.carousel.numberCompanies.toString());
     document.documentElement.style.setProperty('--home-slider-baner-time', this.carousel.timming + 's');
+    console.log(this.carousel);
+    console.log(bannerRepeat);
+    console.log(widthCalc);
+
+
   }
 
 }
