@@ -1,0 +1,11 @@
+{
+  "/emails": {
+    "target": "https://api.resend.com/emails",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api-keys": "/emails"
+    }
+  }
+}

@@ -3,31 +3,31 @@ import { Component, inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { DialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { environment } from 'apps/goeko/src/environments/environment'
 import { Validators } from 'ngx-editor'
 import { COUNTRIES_EU } from './country.contants'
 
-import { VAR_GENERAL } from '@goeko/business-ui'
-import * as FormData from 'form-data'
-import Mailgun from 'mailgun.js'
-
-const mailgun = new Mailgun(FormData)
-const mg = mailgun.client({
-  url: 'https://api.eu.mailgun.net',
-  username: 'api',
-  key: environment.mailGunApiKey,
-})
+import { RESEND_APIKEY, ResendApiService } from '@goeko/store'
+import { CreateEmailOptions } from 'resend'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'goeko-request-demo-dialog',
   standalone: true,
   imports: [CommonModule, TranslateModule, FormsModule, ReactiveFormsModule],
+  providers: [
+    ResendApiService,
+    {
+      provide: RESEND_APIKEY,
+      useValue: environment.resendApiKey,
+    },
+  ],
   templateUrl: './request-demo-dialog.component.html',
   styleUrl: './request-demo-dialog.component.scss',
 })
 export class RequestDemoDialogComponent implements OnInit {
   private _dialogService = inject(DialogService)
-  newSector: boolean = false
+  private _emailServices = inject(ResendApiService)
+  newSector = false
   countries: any
 
   constructor(private _fb: FormBuilder) {}
@@ -58,43 +58,67 @@ export class RequestDemoDialogComponent implements OnInit {
   }
 
   send(): void {
-    console.log(this.formRequestDemo.value)
-    const message =
-      'Company: ' +
-      this.formRequestDemo.controls['company'].value +
-      '\n' +
-      'Sector: ' +
-      this.formRequestDemo.controls['sector'].value +
-      '\n' +
-      'Other: ' +
-      this.formRequestDemo.controls['otherSector'].value +
-      '\n' +
-      'Company: ' +
-      this.formRequestDemo.controls['company'].value +
-      '\n' +
-      'Country: ' +
-      this.formRequestDemo.controls['country'].value +
-      '\n' +
-      'Email: ' +
-      this.formRequestDemo.controls['email'].value
-
-    mg.messages
-      .create('email-stage.goeko.ch', {
-        from: `${this.formRequestDemo.controls['company'].value} ${this.formRequestDemo.controls['email'].value}`,
-        to: VAR_GENERAL.GOEKO_EMAIL,
-        subject: 'Request a Demo',
-        text: message,
+    const message = this._buildHtmlMessage()
+    this._emailServices
+      .sendEmail({
+        from: this.formRequestDemo.controls['email'].value,
+        html: message,
+        subject: 'Request Demo',
+      } as CreateEmailOptions)
+      .subscribe((res) => {
+        if (res) {
+          this._dialogService.close()
+        }
       })
-      .then((msg) => console.log(msg)) // logs response data
-      .catch((err) => console.error(err)) // logs any error
-    this._dialogService.close()
   }
 
-  // getSectorValue(): void {
-  //   if(this.formRequestDemo.controls['sector'].value === 'other'){
-  //     this.newSector = true;
-  //   } else {
-  //     this.newSector = false;
-  //   }
-  // }
+  private _buildHtmlMessage() {
+    return `<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333333; /* Color principal */
+      background-color: #f9f9f9; /* Color de fondo */
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: #ffffff; /* Color de fondo del contenido */
+      border: 1px solid #dddddd;
+    }
+    .header {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #0056b3; /* Segundo color */
+    }
+    .content {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .label {
+      font-weight: bold;
+      color: #0056b3; /* Segundo color */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      Your Information
+    </div>
+    <div class="content">
+      <p><span class="label">Company:</span> ${this.formRequestDemo.controls['company'].value}</p>
+      <p><span class="label">Sector:</span> ${this.formRequestDemo.controls['sector'].value}</p>
+      <p><span class="label">Other:</span> ${this.formRequestDemo.controls['otherSector'].value}</p>
+      <p><span class="label">Country:</span> ${this.formRequestDemo.controls['country'].value}</p>
+      <p><span class="label">Email:</span> ${this.formRequestDemo.controls['email'].value}</p>
+    </div>
+  </div>
+</body>
+</html>
+`
+  }
 }
