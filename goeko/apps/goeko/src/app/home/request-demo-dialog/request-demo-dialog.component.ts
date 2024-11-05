@@ -6,9 +6,14 @@ import { TranslateModule } from '@ngx-translate/core'
 import { Validators } from 'ngx-editor'
 import { COUNTRIES_EU } from './country.contants'
 
-import { RESEND_APIKEY, ResendApiService } from '@goeko/store'
+import { ContentFulService, RESEND_APIKEY, ResendApiService } from '@goeko/store'
 import { CreateEmailOptions } from 'resend'
 import { environment } from '../../../environments/environment'
+import { map } from 'rxjs'
+
+
+const CONTENT_TYPE_REQUEST_DEMO = 'requestDemo';
+
 
 @Component({
   selector: 'goeko-request-demo-dialog',
@@ -27,14 +32,21 @@ import { environment } from '../../../environments/environment'
 export class RequestDemoDialogComponent implements OnInit {
   private _dialogService = inject(DialogService)
   private _emailServices = inject(ResendApiService)
+  private _contentFulService = inject(ContentFulService)
   newSector = false
   countries: any
+  requestDemoData$:any;
+  requestDemoData: any;
+
 
   constructor(private _fb: FormBuilder) {}
 
   public formRequestDemo!: FormGroup
 
   ngOnInit(): void {
+
+    this._loadContentFulRequestDemo();
+
     this.formRequestDemo = this._fb.group({
       company: ['', [Validators.required]],
       sector: ['', [Validators.required]],
@@ -44,13 +56,32 @@ export class RequestDemoDialogComponent implements OnInit {
     })
 
     this.formRequestDemo.controls['sector'].valueChanges.subscribe((res) => {
-      if (res === 'Other') {
+      if (res === this.requestDemoData.otherSectorTitle) {
         this.newSector = true
       } else {
         this.newSector = false
       }
     })
     this.countries = COUNTRIES_EU
+  }
+
+  private _loadContentFulRequestDemo() {
+      this.requestDemoData$ = this._contentFulService.getContentType(CONTENT_TYPE_REQUEST_DEMO).pipe(map((items) => items.items));
+      this.requestDemoData$.subscribe((items:any) => {
+        this.requestDemoData = {
+          requestDemotitle: items[0].fields.requestDemo,
+          description: items[0].fields.description,
+          companyTitle: items[0].fields.company,
+          sectorTitle: items[0].fields.sector,
+          otherSectorTitle: items[0].fields.otherSectorTitle,
+          countryTitle: items[0].fields.countryTitle,
+          emailTitle: items[0].fields.emailTitle,
+          sendTitle: items[0].fields.sendTitle,
+          countryValues: items[0].fields.countryValues,
+          sectorValues: items[0].fields.sectorValues,
+        };
+        console.log(this.requestDemoData);
+      });
   }
 
   closeDialog(isAccepted: boolean = false) {

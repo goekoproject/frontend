@@ -6,7 +6,8 @@
   class="fixed left-0 right-0 top-12 z-50 h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-4">
   <div class="relative m-auto max-h-full w-[779px] p-4">
     <!-- Modal content -->
-    <div class="relative rounded-3xl bg-white shadow">
+     @if(requestDemoData){
+      <div class="relative rounded-3xl bg-white shadow">
 
         <div class="flex items-center justify-between rounded-t pt-4 pl-4 pr-4">
           <button
@@ -29,15 +30,15 @@
         <!-- Modal body -->
         <div class="flex flex-col text-center items-center rounded-t p-4 gap-4">
             <div>
-              <p class="title-demo">Request a demo</p>
-              <p class="body-demo">Our team will contact you as soon as possible</p>
+              <p class="title-demo">{{ requestDemoData.requestDemotitle }}</p>
+              <p class="body-demo">{{ requestDemoData.description }}</p>
             </div>
             <form [formGroup]="formRequestDemo" (ngSubmit)="send()">
 
             <div>
               <div class="w-full max-w-sm min-w-[340px]">
                 <label class="block mb-1 text-sm text-black text-justify body-demo">
-                  Company
+                  {{ requestDemoData.companyTitle }}
                 </label>
                 <input class="w-full bg-transparent text-sm border border-black rounded-md px-3 py-3 focus:outline-none label-input"
                 formControlName="company" id="company">
@@ -47,20 +48,16 @@
           <div>
             <div class="w-full max-w-sm min-w-[340px]">
               <label class="block mb-1 text-sm text-black text-justify body-demo">
-                Sector
+                {{ requestDemoData.sectorTitle }}
               </label>
               <div class="relative">
                 <select
                     class="w-full bg-transparent text-black text-sm border-black rounded pl-3 pr-8 py-3 transition duration-300 ease focus:outline-none appearance-none cursor-pointer h-12 label-input focus:shadow-none"
                     formControlName="sector" id="sector"
                     >
-
-                    <!-- <option value="brazil">construction</option> -->
-                    <option>Construction</option>
-                    <option>Real estate</option>
-                    <option>Cleantech</option>
-                    <option>Finance</option>
-                    <option>Other</option>
+                    @for (sector of requestDemoData.sectorValues; track sector) {
+                      <option [value]="sector"> {{ sector }}</option>
+                    }
                 </select>
                 <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 ml-1 absolute top-4 right-2.5 text-black">
                   <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -72,7 +69,7 @@
           <div *ngIf="newSector">
             <div class="w-full max-w-sm min-w-[340px]">
               <label class="block mb-1 text-sm text-black text-justify body-demo">
-                Other sector
+                {{ requestDemoData.otherSectorTitle }}
               </label>
               <input class="w-full bg-transparent text-sm border border-black rounded-md px-3 py-3 focus:outline-none label-input"
               formControlName="otherSector" id="otherSector">
@@ -82,18 +79,16 @@
           <div>
             <div class="w-full max-w-sm min-w-[340px]">
               <label class="block mb-1 text-sm text-black text-justify body-demo">
-                Country
+                {{ requestDemoData.countryTitle }}
               </label>
               <div class="relative">
                 <select
                     class="w-full bg-transparent text-black text-sm border-black rounded pl-3 pr-8 py-3 transition duration-300 ease focus:outline-none appearance-none cursor-pointer h-12 label-input focus:shadow-none"
                     formControlName="country" id="country">
                     >
-                    @if(countries){
-                      @for (country of countries; track country) {
+                      @for (country of requestDemoData.countryValues; track country) {
                         <option [value]="country"> {{ country }}</option>
                       }
-                    }
                 </select>
                 <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5 ml-1 absolute top-4 right-2.5 text-black">
                   <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -105,7 +100,7 @@
           <div>
             <div class="w-full max-w-sm min-w-[340px]">
               <label class="block mb-1 text-sm text-black text-justify body-demo">
-                Email
+                {{ requestDemoData.emailTitle }}
               </label>
               <input
               class="w-full bg-transparent text-sm border border-black rounded-md px-3 py-3 focus:outline-none label-input"
@@ -121,11 +116,13 @@
             class="request-button min-w-[288px]"
             >
             <!-- {{ 'accept' | translate }} -->
-              Contact now
+            {{ requestDemoData.sendTitle }}
           </button>
         </div>
        </form>
         </div>
     </div>
+     }
+
   </div>
 </div>
