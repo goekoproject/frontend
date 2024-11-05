@@ -57,6 +57,12 @@ export class ContentComponent implements OnInit, AfterViewInit {
     this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
     this._onChangeLang()
   }
+
+  applyStyles(value:string): string {
+    const newValue = value.replaceAll('[','<span class="fill-colour">').replaceAll(']','</span>');
+    return  newValue;
+  }
+
   ngAfterViewInit(): void {
     this._getContentDataActors()
   }
