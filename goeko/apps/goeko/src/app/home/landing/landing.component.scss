@@ -1,8 +1,8 @@
 .goeko-landing {
-  @apply mx-auto flex flex-col gap-24 lg:w-11/12;
+  @apply mx-auto flex flex-col gap-24 lg:w-full lg:px-6;
 }
 .main-front {
-  @apply flex flex-col items-center py-28;
+  @apply flex flex-col items-center pt-28;
 }
 
 .title {

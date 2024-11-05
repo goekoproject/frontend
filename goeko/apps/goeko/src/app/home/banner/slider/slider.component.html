@@ -1,21 +1,17 @@
-  <div class="relative">
-        <div class="slider">
-          <div #sliderTrack class="slide-track">
-
-            @if (carousel) {
-            @for (company of carousel.companies; track carousel) {
-              <div class="slide grid place-items-center">
-                <img [src]="company" alt=""/>
-              </div>
-            }
-
-            @for (company of carousel.companies; track carousel) {
-              <div class="slide grid place-items-center">
-                <img [src]="company" alt=""/>
-              </div>
-            }
-          }
-          </div>
+<div class="relative py-8">
+  <div class="slider">
+    <div #sliderTrack class="slide-track">
+      @for (company of carousel()?.companies; track carousel) {
+        <div class="slide grid place-items-center">
+          <img [src]="company?.file.url" class="object-contain" [alt]="company.title" />
         </div>
-  </div>
+      }
 
+      @for (company of carousel()?.companies; track carousel) {
+        <div class="slide grid place-items-center">
+          <img [src]="company.file.url" [alt]="company.title" />
+        </div>
+      }
+    </div>
+  </div>
+</div>

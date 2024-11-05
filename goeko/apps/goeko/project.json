@@ -91,7 +91,7 @@
           "buildTarget": "goeko:build:development"
         },
         "local": {
-          "browserTarget": "goeko:build:local"
+          "buildTarget": "goeko:build:local"
         }
       },
       "defaultConfiguration": "local"

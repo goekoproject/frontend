@@ -21,7 +21,7 @@ $default-position-layer3-video: 8.4rem;
   gap: 5rem;
   flex-direction: column;
   align-items: center;
-
+  @apply z-10 overflow-hidden;
   &-content {
     display: flex;
     flex-direction: column;
@@ -38,7 +38,7 @@ $default-position-layer3-video: 8.4rem;
     font-size: clamp(1rem, 1.2rem, 2rem);
     display: flex;
     gap: 4rem;
-    @apply p-16 lg:px-64 lg:py-16;
+    @apply flex-wrap p-16 sm:flex-nowrap lg:px-64 lg:py-16;
   }
 
   .word:nth-child(1) {
