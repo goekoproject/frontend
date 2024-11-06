@@ -55,7 +55,7 @@
     "save-dev": "^0.0.1-security",
     "three": "^0.170.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.0"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.7",
