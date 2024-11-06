@@ -22,13 +22,14 @@ export abstract class UserFactory {
           ...userProfileForm,
           comunicationLanguage: undefined,
           generalNotifications: undefined,
-          country: userProfileForm.locations[0].country.code.code,
+          phoneNumber: undefined,
+          country: userProfileForm.locations[0].country.code,
           locations: mapperLocations(userProfileForm.locations),
           notification: {
             email: userProfileForm.email,
             phoneNumber: userProfileForm.phoneNumber,
             lang: userProfileForm.comunicationLanguage?.code,
-            enabled: userProfileForm.generalNotifications
+            enabled: userProfileForm.generalNotifications,
           },
         }
       default:
