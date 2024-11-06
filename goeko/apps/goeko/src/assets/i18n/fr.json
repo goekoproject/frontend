@@ -153,7 +153,7 @@
     "countriesAvailable": "Pays disponibles",
     "countriesProvincesAvailable": "Pays et régions de distribution",
     "country": "Pays",
-    "companyId": "Numéro de TVA (Taxe sur la Valeur Ajoutée)",
+    "companyId": "Numéro d'identification des entreprises",
     "currency": "Devise",
     "date": "Date",
     "deliverCountries": "Pays où votre éco-solution est livrable",
@@ -263,7 +263,8 @@
     "dialogLocationRequired": "L'emplacement est requis",
     "dialogButtonNext": "Suivant",
     "dialogPlaceholderName": "PO Juin, 2024",
-    "dialogPlaceholderLocation": "Madrid, Espagne"
+    "dialogPlaceholderLocation": "Madrid, Espagne",
+    "notificationProfile": "J'accepte de recevoir des notifications concernant de nouvelles cleantech solutions liées à mes projets"
   },
   "NOTIFICATION": {
     "save_ok": "Enregistré avec succès"

@@ -10,6 +10,7 @@ import { ProfileFieldset } from './profile-fieldset.interface'
 import { ProfileFormFactory } from './profile-form.factory'
 import { PROFILE_SME } from './profile-sme.constants'
 import { ProfileService } from './profile.service'
+import { NotificationProfile } from './profile-payload.model'
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -96,6 +97,8 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   private _createFormForUserType() {
     this.form = ProfileFormFactory.createProfileForm(this.userType())
     this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
+
+
   }
 
   private _loadDataProfile() {
@@ -103,6 +106,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification?.lang)
     this.form.get('phoneNumber')?.patchValue(this.dataProfile()?.notification?.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
+    this.form.get('generalNotifications')?.patchValue((this.dataProfile().notification as NotificationProfile).enabled)
     this._setLocaltionInFormForSme()
   }
 

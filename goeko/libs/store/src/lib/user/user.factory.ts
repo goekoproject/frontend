@@ -15,18 +15,22 @@ export abstract class UserFactory {
     return USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE]
   }
 
+  //TODO: fix code smell
   static createProfileDto(userProfileForm: UserProfileForm, userType: UserType) {
     switch (userType) {
       case USER_TYPE.SME:
         return {
           ...userProfileForm,
           comunicationLanguage: undefined,
+          generalNotifications: undefined,
+          phoneNumber: undefined,
           country: userProfileForm.locations[0].country.code,
           locations: mapperLocations(userProfileForm.locations),
           notification: {
             email: userProfileForm.email,
             phoneNumber: userProfileForm.phoneNumber,
             lang: userProfileForm.comunicationLanguage?.code,
+            enabled: userProfileForm.generalNotifications,
           },
         }
       default:

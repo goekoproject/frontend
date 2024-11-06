@@ -61,4 +61,14 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
       },
     ],
   },
+  {
+    fields: [
+      {
+        controlName: 'generalNotifications',
+        label: 'MENU_USER_SME.notificationProfile',
+        type: 'checkbox',
+        required: false,
+      },
+    ],
+  },
 ]

@@ -153,7 +153,7 @@
     "countriesAvailable": "Verfügbare Länder",
     "countriesProvincesAvailable": "Länder und Regionen der Verteilung",
     "country": "Land",
-    "companyId": "Umsatzsteuer-Identifikationsnummer (USt-IdNr)",
+    "companyId": "Unternehmens-Identifikationsnummer",
     "currency": "Währung",
     "date": "Datum",
     "deliverCountries": "Länder, in denen Ihre eco-solution zugelassen ist",
@@ -263,7 +263,8 @@
     "dialogLocationRequired": "Standort ist erforderlich",
     "dialogButtonNext": "Weiter",
     "dialogPlaceholderName": "PO Juni, 2024",
-    "dialogPlaceholderLocation": "Madrid, Spanien"
+    "dialogPlaceholderLocation": "Madrid, Spanien",
+    "notificationProfile": "Ich bin damit einverstanden, Benachrichtigungen über neue Cleantech-Lösungen zu meinen Projekten zu erhalten"
   },
   "NOTIFICATION": {
     "save_ok": "Erfolgreich gespeichert"
