@@ -19,7 +19,10 @@
 <section #articleEl class="flex w-full flex-col gap-16 lg:gap-60">
   @for (article of articles | orderBy: 'order'; track article.id; let i = $index; let odd = $odd) {
     @defer (on viewport) {
-      <article [id]="article.id" class="relative flex flex-col lg:flex-row lg:flex-nowrap" [ngClass]="{ 'row-reverse-content': odd }">
+      <article
+        [id]="article.id"
+        class="relative flex flex-col items-center lg:flex-row lg:flex-nowrap"
+        [ngClass]="{ 'row-reverse-content': odd }">
         <img *ngIf="odd" class="inter-panel" [src]="'assets/panel_central.svg'" [alt]="" />
         <img class="content__actor-photo" [src]="article?.image" [alt]="article.name" />
 
@@ -61,7 +64,7 @@
           }
         </section>
         <!--NEED TO DESGIN-->
-        <div class="hidden w-2/5 lg:block"></div>
+        <div class="hidden w-2/5 xl:block"></div>
       </article>
     } @placeholder {
       <div>loading...</div>
