@@ -97,8 +97,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   private _createFormForUserType() {
     this.form = ProfileFormFactory.createProfileForm(this.userType())
     this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
-
-
   }
 
   private _loadDataProfile() {
