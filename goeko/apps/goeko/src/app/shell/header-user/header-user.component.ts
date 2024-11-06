@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core'
+import { Component, computed, inject } from '@angular/core'
 import { UserService } from '@goeko/store'
 
 @Component({
@@ -7,6 +7,6 @@ import { UserService } from '@goeko/store'
   styleUrls: ['./header-user.component.scss'],
 })
 export class HeaderUserComponent {
+  private _userService = inject(UserService)
   userProfile = computed(() => (this._userService.userProfile().id ? this._userService.userProfile() : this._userService.userAuthData()))
-  constructor(private _userService: UserService) {}
 }

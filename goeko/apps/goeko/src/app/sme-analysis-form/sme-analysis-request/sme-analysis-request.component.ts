@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MessageService } from '@goeko/business-ui'
 import { SmeRequestResponse, SmeService } from '@goeko/store'
-import { MESSAGE_TYPE } from '@goeko/ui'
 import { DISPLAY_COLUMNS } from './display-columns.contants'
 
 @Component({
@@ -55,7 +54,7 @@ export class SmeRequestAnalisysComponent implements OnInit {
 
   deleteRequest(request: SmeRequestResponse) {
     this._messageService
-      .deleteMessage(MESSAGE_TYPE.WARNING, request.searchName)
+      .deleteMessage(request.searchName)
       .afterClosed()
       .subscribe((isDelete) => {
         if (isDelete) {

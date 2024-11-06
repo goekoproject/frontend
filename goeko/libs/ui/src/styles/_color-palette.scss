@@ -5,6 +5,7 @@
   --secondary-accent: #21a650;
   --dark: #27272a;
   --white: #ffffff;
+  --blue-dark: #052639;
   --primary--50: #f0f9ff;
   --primary--100: #e0f2fe;
   --primary--200: #b9e7fe;
@@ -16,14 +17,24 @@
   --primary--800: #065b86;
   --primary--900: #0b4b6f;
   --primary--950: #07304a;
-
-  /*Color category*/
+  --primary: #1290d7;
+  --text-gray: #787878;
   --co2-emission: #969696;
   --waste: #00a039;
   --hp: #d00000;
   --water: #00ffff;
   --border-color: #d9dbe9;
+  --gray-light: #e4e4e4;
+  --green-pastel: #e5f3dd;
+  --green-lime: #44aa0e;
   --blue-light-pastel: #e4f5fe;
+  --gray-medium: #acacac;
+  --gray-dark: #202020;
+  --gray-stone: #d6d6d6;
+  --gray-charcoal: #4e4e4e;
+  --gray-fog: #d4d4d4;
+  --gray-smoke: #f5f5f5;
+  --gray-ash: #9d9d9d;
 }
 
 @mixin gradient-linear {

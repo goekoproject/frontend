@@ -5,11 +5,11 @@
     </div>
 
     <div class="mt-7 overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
-        <thead>
+      <table class="w-full overflow-hidden whitespace-nowrap rounded-t-xl">
+        <thead class="bg-graySmoke">
           <tr scope="col">
             @for (title of headers.goHeaderRef; track title) {
-              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700 dark:text-gray-400">
+              <th class="text-grayAsh px-4 py-2 text-start text-lg font-semibold capitalize">
                 {{ title | translate }}
               </th>
             }

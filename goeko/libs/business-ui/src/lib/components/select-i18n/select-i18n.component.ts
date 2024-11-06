@@ -1,7 +1,8 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayModule } from '@angular/cdk/overlay'
 import { CommonModule } from '@angular/common'
-import { Component, inject, signal } from '@angular/core'
+import { Component, inject, OnInit, signal } from '@angular/core'
+import { Router, RouterModule } from '@angular/router'
 import { Lang, LANGS } from '@goeko/core'
 import { ButtonModule, IArrowDownComponent } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
@@ -11,10 +12,11 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
   templateUrl: './select-i18n.component.html',
   styleUrls: ['./select-i18n.component.scss'],
   standalone: true,
-  imports: [CommonModule, ButtonModule, TranslateModule, OverlayModule,IArrowDownComponent],
+  imports: [CommonModule, ButtonModule, TranslateModule, OverlayModule, RouterModule],
 })
-export class SelectI18nComponent {
+export class SelectI18nComponent implements OnInit {
   private _translateServices = inject(TranslateService)
+  private _router = inject(Router)
   private _currentCodeLang = this._translateServices.currentLang ?? this._translateServices.defaultLang
   public langs = LANGS
 
@@ -23,11 +25,26 @@ export class SelectI18nComponent {
   toggle() {
     this.isOpen = !this.isOpen
   }
+  ngOnInit(): void {
+    this._changeLang()
+  }
 
   selectedLang(lang: Lang) {
     this.selectedLand.set(lang)
     this._translateServices.use(lang.code)
     sessionStorage.setItem('lang', lang.code)
     this.isOpen = false
+  }
+
+  private _changeLang() {
+    this._translateServices.onLangChange.subscribe((res) => {
+      this._fetchData(res.lang)
+    })
+  }
+  private _fetchData(lang: string) {
+    this._router.navigate([], {
+      relativeTo: this._router.routerState.root,
+      queryParams: { lang: lang },
+    })
   }
 }

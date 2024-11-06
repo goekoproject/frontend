@@ -12,7 +12,7 @@ export class GoTableComponent {
   @ContentChildren(GoCellRefDirective) cells!: QueryList<GoCellRefDirective>
   @ContentChildren(GoElementActionDirective) elementActions!: QueryList<GoElementActionDirective>
 
-  @Input() dataSources!: Array<any>
+  @Input() dataSources!: any
 
   @Input() displayColumns!: Array<string | unknown>
 }

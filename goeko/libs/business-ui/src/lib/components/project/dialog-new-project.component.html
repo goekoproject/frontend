@@ -1,0 +1,41 @@
+<div id="authentication-modal" tabindex="-1" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="relative flex w-full max-w-2xl flex-col items-center gap-2 rounded-lg bg-white px-8 py-5 shadow-lg">
+    <button type="button" class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-lg" (click)="close()">
+      <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+      </svg>
+      <span class="sr-only">Close modal</span>
+    </button>
+
+    <div class="flex items-center justify-center rounded-t px-8 py-5">
+      <h3 class="text-center text-2xl font-semibold text-black">
+        {{ 'MENU_USER_SME.dialogNewProject' | translate }}
+      </h3>
+    </div>
+
+    <form class="flex max-w-80 flex-col gap-4" [formGroup]="formProject" (ngSubmit)="onSubmitProject()">
+      <div>
+        <label for="name" class="mb-1 block text-sm font-medium text-black">{{ 'MENU_USER_SME.dialogNameProject' | translate }}</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="block w-full rounded-lg border border-gray-300 bg-white p-4 text-sm text-gray-500"
+          [placeholder]="'MENU_USER_SME.dialogPlaceholderName' | translate"
+          size="40"
+          required />
+        <div *ngIf="formProject.get('name')?.invalid && formProject.get('name')?.touched" class="text-sm text-red-500">
+          {{ 'MENU_USER_SME.dialogNameRequired' | translate }}
+        </div>
+      </div>
+
+      <goeko-select-locations [form]="formProject" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+
+      <div class="flex justify-center">
+        <button type="submit" go-button appearance="primary" [disabled]="formProject.invalid">
+          {{ 'MENU_USER_SME.dialogButtonNext' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

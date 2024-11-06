@@ -190,6 +190,7 @@ describe('ProfileComponent SME', () => {
       email: 'text@test.com',
       locations: [],
       employees: 0,
+      identifier: 'A1111111',
     }
 
     profileComponent.ngOnInit()
@@ -246,6 +247,12 @@ describe('ProfileComponent SME', () => {
       email: 'test@test.com',
       locations: [],
       employees: 0,
+      identifier: 'A1111111',
+      notificacion: {
+        email: 'tes@test.com',
+        phoneNumber: '123456789',
+        lang: 'en',
+      },
     }
     jest.spyOn(profileServiceMock, 'userProfile').mockReturnValue(user)
 

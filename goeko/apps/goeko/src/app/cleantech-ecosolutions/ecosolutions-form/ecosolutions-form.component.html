@@ -85,7 +85,10 @@
 
                 <div class="go-textarea">
                   <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-                  <ngx-editor [editor]="editor" [formControlName]="'label'" [placeholder]="'FORM_LABEL.editorText' | translate" ></ngx-editor>
+                  <ngx-editor
+                    [editor]="editor"
+                    [formControlName]="'label'"
+                    [placeholder]="'FORM_LABEL.editorText' | translate"></ngx-editor>
                 </div>
               </div>
             }
@@ -140,17 +143,9 @@
         </div>
 
         @defer (when firstLoad) {
-          <goeko-select-locations
-            [form]="form"
-            [controlLocations]="locationsArrays"
-            [controlNameCountry]="'country'"
-            [controlNameProvince]="'regions'"></goeko-select-locations>
+          <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
         } @placeholder {
-          <goeko-select-locations
-            [form]="form"
-            [controlLocations]="locationsArrays"
-            [controlNameCountry]="'country'"
-            [controlNameProvince]="'regions'"></goeko-select-locations>
+          <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
         }
       </fieldset>
 

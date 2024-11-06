@@ -145,12 +145,12 @@ export class SmeFormBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   private _getLastAnalysis() {
-    this._projectService.getLastProjectBySmeId(this._smeId).subscribe((requestClassifications) => {
+    /* this._projectService.getLastProjectBySmeId(this._smeId).subscribe((requestClassifications) => {
       if (requestClassifications) {
         this.dateLastRecomendation = requestClassifications.date
         this._fillForm(requestClassifications)
       }
-    })
+    }) */
   }
 
   private _getProjectSelected() {

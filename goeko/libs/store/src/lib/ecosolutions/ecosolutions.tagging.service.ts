@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { TranslateChangeService } from '../util/translate-change'
-import { EcosolutionsOptions } from './ecosolutions-options'
-import { ECOSOLUTIONS_CONFIGURATION } from './ecosolutions.module'
 import { Tagging, TaggingFactory } from './tagging'
 import { TaggingEnum } from './tagging.enum'
 import { TaggingResponse } from './tagging.interface'
@@ -12,11 +10,7 @@ import { TaggingResponse } from './tagging.interface'
   providedIn: 'root',
 })
 export class EcosolutionsTaggingService extends TranslateChangeService {
-  constructor(
-    private _http: HttpClient,
-    @Inject(ECOSOLUTIONS_CONFIGURATION)
-    public configuration: EcosolutionsOptions,
-  ) {
+  constructor(private _http: HttpClient) {
     super()
     this.changeLang()
   }
