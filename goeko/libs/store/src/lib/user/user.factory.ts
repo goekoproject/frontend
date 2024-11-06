@@ -15,6 +15,7 @@ export abstract class UserFactory {
     return USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE]
   }
 
+  //TODO: fix code smell
   static createProfileDto(userProfileForm: UserProfileForm, userType: UserType) {
     switch (userType) {
       case USER_TYPE.SME:
