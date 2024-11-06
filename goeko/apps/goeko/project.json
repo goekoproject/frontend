@@ -88,7 +88,8 @@
           "buildTarget": "goeko:build:production"
         },
         "development": {
-          "buildTarget": "goeko:build:development"
+          "buildTarget": "goeko:build:development",
+          "proxyConfig": "proxy.conf.json"
         },
         "local": {
           "buildTarget": "goeko:build:local",

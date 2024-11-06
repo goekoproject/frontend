@@ -1,11 +1,8 @@
 {
-  "/emails": {
-    "target": "https://api.resend.com",
+  "/send-email": {
+    "target": "https://goeko-dev--goekohome-u4y5xxxh.web.app/send-email",
     "secure": true,
     "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": {
-      "^/emails": "/emails"
-    }
+    "logLevel": "debug"
   }
 }
