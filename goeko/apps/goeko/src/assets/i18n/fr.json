@@ -51,7 +51,7 @@
     },
     "buildingOperation": {
       "label": "Exploitation du bâtiment",
-      "question": "Pour l'exploitation du bâtiment, seriez-vous intéressé par"
+      "question": "Solutions pour l'exploitation du bâtiment"
     },
     "energySource": {
       "label": "",
@@ -79,7 +79,7 @@
     },
     "mainActivity": {
       "label": "Pour quelle(s) activité(s) en rapport avec l’eau votre éco-solution permet-elle de réduire sa consommation ou d'améliorer sa qualité ?",
-      "question": "Activités de votre entreprise qui consomment le plus d’eau"
+      "question": "Activités consommant de l'eau"
     },
     "mainCategoryNonInert": {
       "label": "Dans quelle(s) catégorie(s) de déchets non inertes votre éco-solution améliore-t-elle la gestion?",
@@ -99,7 +99,7 @@
     },
     "products": {
       "label": "Types de produits toxiques",
-      "question": "Types de produits toxiques"
+      "question": "Produits toxiques"
     },
     "specialWaste": {
       "label": "Dans quelle(s) catégorie(s) de déchets spéciaux votre éco-solution améliore-t-elle la gestion?",
@@ -564,7 +564,7 @@
   "result": "Résultat",
   "save": "Sauvegarder",
   "saveYou": "Sauvegarder votre",
-  "searchEcosolutions": "Rechercher des éco-solutions",
+  "searchEcosolutions": "Recherchez des solutions cleantech",
   "selectAll": "Tout sélectionner",
   "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre écosolution",
   "selectedProduct": "Produit sélectionné",

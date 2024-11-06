@@ -48,7 +48,7 @@
                       {{ 'FORM_LABEL.province' | translate }}
                     </label>
 
-                    @for (option of this.dataSourceSelect.get(location.value.country.code); track option) {
+                    @for (option of dataSourceSelect.get(location.value.country.code); track option.code) {
                       <super-option [value]="option" (click)="option.code === optionAllProvince.code ? selectALL() : deselectAll()">
                         {{ option.label | translate }}
                       </super-option>

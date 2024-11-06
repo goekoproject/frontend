@@ -120,3 +120,8 @@
 .wrapper-textarea {
   @apply relative flex w-full max-w-[24rem] flex-col gap-2;
 }
+.ngx-editor-content b,
+.ngx-editor-content strong {
+    font-weight: 700;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
