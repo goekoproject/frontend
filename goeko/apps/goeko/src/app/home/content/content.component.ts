@@ -4,6 +4,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { HomeService } from '../home.service'
 import { CONTENT } from './content.contants'
 import { OrderByPipe } from './order-by.pipe'
+import { ButtonModule } from '@goeko/ui'
 
 enum CONTENT_TYPE_DATA {
   ACTORS = 'actores',
@@ -19,7 +20,7 @@ enum ENTRYS_ID {
   styleUrls: ['./content.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [TranslateModule, CommonModule, OrderByPipe],
+  imports: [TranslateModule, CommonModule, OrderByPipe, ButtonModule],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     class: 'flex flex-col items-center gap-[10rem]',
