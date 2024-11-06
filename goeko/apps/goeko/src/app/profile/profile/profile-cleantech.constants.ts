@@ -34,12 +34,12 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         dataSelectKey: 'countries',
         required: true,
       },
-      {
+/*       {
         controlName: 'identifier',
         label: 'FORM_LABEL.companyId',
         type: 'text',
         required: true,
-      },
+      }, */
       {
         controlName: 'link',
         label: 'FORM_LABEL.website',
