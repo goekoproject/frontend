@@ -38,7 +38,7 @@ $default-position-layer3-video: 8.4rem;
     font-size: clamp(1rem, 1.2rem, 2rem);
     display: flex;
     gap: 4rem;
-    @apply flex-wrap p-16 sm:flex-nowrap lg:px-64 lg:py-16;
+    @apply flex-wrap p-16 sm:flex-nowrap xl:px-64 xl:py-16;
   }
 
   .word:nth-child(1) {
