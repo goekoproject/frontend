@@ -89,18 +89,27 @@ export class RequestDemoDialogComponent implements OnInit {
   }
 
   send(): void {
-    const message = this._buildHtmlMessage()
-    this._emailServices
-      .sendEmail({
-        from: this.formRequestDemo.controls['email'].value,
-        html: message,
-        subject: 'Request Demo',
-      } as CreateEmailOptions)
-      .subscribe((res) => {
-        if (res) {
-          this._dialogService.close()
-        }
-      })
+    const messageHtml = this._buildHtmlMessage()
+    // this._emailServices
+    //   .sendEmail({
+    //     from: this.formRequestDemo.controls['email'].value,
+    //     html: message,
+    //     subject: 'Request Demo',
+    //   } as CreateEmailOptions)
+    //   .subscribe((res) => {
+    //     if (res) {
+    //       this._dialogService.close()
+    //     }
+    //   })
+    const message = {
+      subject: `A company with email ${this.formRequestDemo.controls['email'].value} is requesting a demo`,
+      body: messageHtml
+    }
+    this._emailServices.sendEmailV2(message).subscribe((res) => {
+      if (res) {
+        this._dialogService.close()
+      }
+    })
   }
 
   private _buildHtmlMessage() {

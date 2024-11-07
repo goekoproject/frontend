@@ -2,11 +2,15 @@ import { Inject, Injectable } from '@angular/core'
 import { CreateEmailOptions, Resend } from 'resend'
 import { Observable } from 'rxjs'
 import { RESEND_APIKEY } from './resend-token.constants'
+import { HttpClient } from '@angular/common/http'
 
 @Injectable()
 export class ResendApiService {
   private _resend: Resend
-  constructor(@Inject(RESEND_APIKEY) private apiKey: string) {
+  constructor(
+    @Inject(RESEND_APIKEY) private apiKey: string,
+    public _http: HttpClient
+  ) {
     this._resend = new Resend(apiKey)
   }
 
@@ -23,4 +27,9 @@ export class ResendApiService {
         })
     })
   }
+
+  sendEmailV2(data: any) : Observable<any> {
+      return this._http.post<any>(`https://platform.goeko-api.com/v1/temp/request/email`, data)
+  }
+
 }
