@@ -151,14 +151,20 @@ export class RequestDemoDialogComponent implements OnInit {
     </div>
     <div class="content">
       <p><span class="label">Company:</span> ${this.formRequestDemo.controls['company'].value}</p>
-      <p><span class="label">Sector:</span> ${this.formRequestDemo.controls['sector'].value}</p>
-      <p><span class="label">Other:</span> ${this.formRequestDemo.controls['otherSector'].value}</p>
-      <p><span class="label">Country:</span> ${this.formRequestDemo.controls['country'].value}</p>
+      <p><span class="label">Sector:</span> ${this.formRequestDemo.controls['sector'].value}</p>`
+      +
+      this._getOtherSector()
+      +
+      `<p><span class="label">Country:</span> ${this.formRequestDemo.controls['country'].value}</p>
       <p><span class="label">Email:</span> ${this.formRequestDemo.controls['email'].value}</p>
     </div>
   </div>
 </body>
 </html>
 `
+  }
+
+  private _getOtherSector(): string {
+    return  this.newSector ? `<p><span class="label">Other:</span> ${this.formRequestDemo.controls['otherSector'].value}</p>`: '';
   }
 }
