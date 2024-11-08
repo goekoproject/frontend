@@ -25,18 +25,10 @@ export class AboutComponent extends BaseDataContentFulComponent implements OnIni
 	ngOnInit(): void {
 		this.content$.subscribe((content) => ((this.title = content.title), (this.text = content.text)));
     this._setHeaderTheme();
-    this._setTopScroll();
 	}
 
   private _setHeaderTheme() {
     this._headerService.isDarkTheme.next(true);
   }
 
-  _setTopScroll() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-   }
 }

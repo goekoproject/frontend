@@ -27,7 +27,8 @@ $animationSpeed: 25s;
   &::after {
     @include white-gradient;
     content: '';
-    // height: 100px;
+    //comentar o descomentar altura para tener efecto niebla
+    height: 100px;
     position: absolute;
     width: 200px;
     z-index: 2;

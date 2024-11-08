@@ -65,7 +65,6 @@ export class LandingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._setTopScroll()
     this._setHeaderTheme()
     this.currentLang = this._translate.defaultLang
     this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY)
@@ -93,14 +92,6 @@ export class LandingComponent implements OnInit {
 
   goTologin() {
     this._router.navigate(['/login/signup'])
-  }
-
-  private _setTopScroll() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    })
   }
 
   private _setHeaderTheme() {

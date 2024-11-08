@@ -62,7 +62,6 @@ export class RequestDemoDialogComponent implements OnInit {
         this.newSector = false
       }
     })
-    // this.countries = COUNTRIES_EU
   }
 
   private _loadContentFulRequestDemo() {
@@ -90,17 +89,6 @@ export class RequestDemoDialogComponent implements OnInit {
 
   send(): void {
     const messageHtml = this._buildHtmlMessage()
-    // this._emailServices
-    //   .sendEmail({
-    //     from: this.formRequestDemo.controls['email'].value,
-    //     html: message,
-    //     subject: 'Request Demo',
-    //   } as CreateEmailOptions)
-    //   .subscribe((res) => {
-    //     if (res) {
-    //       this._dialogService.close()
-    //     }
-    //   })
     const subject = `A company with email ${this.formRequestDemo.controls['email'].value} is requesting a demo`;
     const message = new EmailMessage(subject, messageHtml)
     this._emailServices.sendEmailV2(message).subscribe((res) => {

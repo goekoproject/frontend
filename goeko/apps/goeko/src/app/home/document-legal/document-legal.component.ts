@@ -23,7 +23,6 @@ export class DocumentLegalComponent implements OnInit {
 
   ngOnInit(): void {
     this._setHeaderTheme();
-    this._setTopScroll();
     this._entryId = this.route.snapshot.data['entryId'];
     this._currentLang = this._translate.defaultLang;
     this._getDocumentLegal();
@@ -50,13 +49,5 @@ export class DocumentLegalComponent implements OnInit {
         this.textLegal = res.text;
       });
   }
-
-  _setTopScroll() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-   }
 
 }
