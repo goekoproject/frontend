@@ -1,49 +1,49 @@
 <div class="is-lighthome flex flex-col pb-8 pl-32 pr-32 pt-16">
-  @if (services && CTservices) {
+  @if (enterpriseServices && cleanTechServices) {
     <div class="flex flex-row justify-evenly pb-5">
-      <a class="header-tab" [ngClass]="{ active: step === 'step1' }" (click)="step = 'step1'">{{ services.actorType }}</a>
-      <a class="header-tab" [ngClass]="{ active: step === 'step2' }" (click)="step = 'step2'">{{ CTservices.actorType }}</a>
+      <a class="header-tab" [ngClass]="{ active: step === 'step1' }" (click)="step = 'step1'">{{ enterpriseServices.actorType }}</a>
+      <a class="header-tab" [ngClass]="{ active: step === 'step2' }" (click)="step = 'step2'">{{ cleanTechServices.actorType }}</a>
     </div>
   }
 
   <div class="flex flex-row flex-wrap justify-center border-t-[3px] lg:justify-normal lg:gap-20" *ngIf="step === 'step1'">
-    @if (services) {
+    @if (enterpriseServices) {
       <div class="pt-16 lg:w-2/4">
         <h3 class="title mb-4">
-          {{ services.section }}
+          {{ enterpriseServices.section }}
         </h3>
         <h1 class="subtitle mb-6 text-black">
-          {{ services.title }}
+          {{ enterpriseServices.title }}
         </h1>
-        @for (description of services.paragraphs; track services) {
+        @for (description of enterpriseServices.paragraphs; track enterpriseServices) {
           <p class="description mb-4">
             {{ description }}
           </p>
         }
       </div>
       <div class="flex w-2/4 justify-end pt-16">
-        <img [src]="services.photo" [alt]="" />
+        <img [src]="enterpriseServices.photo" [alt]="" />
       </div>
     }
   </div>
 
   <div class="flex flex-row gap-20 border-t-[3px]" *ngIf="step === 'step2'">
-    @if (CTservices) {
+    @if (cleanTechServices) {
       <div class="w-2/4 pt-16">
         <h3 class="title mb-4">
-          {{ CTservices.section }}
+          {{ cleanTechServices.section }}
         </h3>
         <h1 class="subtitle mb-6 text-black">
-          {{ CTservices.title }}
+          {{ cleanTechServices.title }}
         </h1>
-        @for (description of CTservices.paragraphs; track CTservices) {
+        @for (description of cleanTechServices.paragraphs; track cleanTechServices) {
           <p class="description mb-4">
             {{ description }}
           </p>
         }
       </div>
       <div class="flex w-2/4 justify-end pt-16">
-        <img [src]="CTservices.photo" [alt]="" />
+        <img [src]="cleanTechServices.photo" [alt]="" />
       </div>
     }
   </div>
@@ -51,16 +51,16 @@
 
 <div class="is-lighthome rate flex flex-col pb-16 pl-32 pr-32">
   <div class="w-full pt-16">
-    @if (services) {
+    @if (enterpriseServices) {
       <h1 class="subtitle mb-6 text-center text-black">
-        {{ services.rateTitle }}
+        {{ enterpriseServices.rateTitle }}
       </h1>
     }
   </div>
 
   <div class="flex flex-row flex-wrap justify-center gap-6" *ngIf="step === 'step1'">
-    @if (services) {
-      @for (rate of services.rates; track services; let last = $last) {
+    @if (enterpriseServices) {
+      @for (rate of enterpriseServices.rates; track enterpriseServices; let last = $last) {
         <div class="pricing" [ngClass]="{ 'pricing-advance': rate.title === 'Advance' }">
           <div class="flex justify-between">
             @for (icon of rate.icons; track icon) {
@@ -84,8 +84,8 @@
   </div>
 
   <div class="flex flex-row justify-center gap-6" *ngIf="step === 'step2'">
-    @if (CTservices) {
-      @for (rate of CTservices.rates; track CTservices; let last = $last) {
+    @if (cleanTechServices) {
+      @for (rate of cleanTechServices.rates; track cleanTechServices; let last = $last) {
         <div class="pricing" [ngClass]="{ 'pricing-advance': rate.title === 'Advance' }">
           <div class="flex justify-between">
             @for (icon of rate.icons; track icon) {
