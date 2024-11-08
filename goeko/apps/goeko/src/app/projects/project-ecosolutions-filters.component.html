@@ -6,7 +6,7 @@
     'collapse-leave-active': !filtersVisible(),
   }">
   <i
-    class="ti ti-circle-x text-primary-default hover:text-primary-blueDark absolute right-0 top-0 m-4 cursor-pointer text-3xl sm:hidden"
+    class="ti ti-circle-x absolute right-0 top-0 m-4 cursor-pointer text-3xl text-primary-default hover:text-primary-blueDark sm:hidden"
     (click)="closeFilter()"></i>
 
   <div class="mt-4 space-y-4 overflow-hidden">
@@ -27,7 +27,7 @@
       <div class="mt-2 space-y-2">
         <label class="flex cursor-pointer items-center space-x-2 text-sm">
           <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCategories()" />
-          <span>All</span>
+          <span>{{ 'all' | translate }}</span>
         </label>
         @for (classification of classificationsFilters(); track classification.id) {
           <label class="flex cursor-pointer items-center space-x-2 text-sm">
