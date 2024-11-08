@@ -4,12 +4,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { DialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Validators } from 'ngx-editor'
-import { COUNTRIES_EU } from './country.contants'
 
 import { ContentFulService, RESEND_APIKEY, ResendApiService } from '@goeko/store'
-import { CreateEmailOptions } from 'resend'
 import { environment } from '../../../environments/environment'
 import { map } from 'rxjs'
+import { MailgunApiService } from './mailgun-api.services'
+import { EmailMessage } from './email-message.model'
 
 
 const CONTENT_TYPE_REQUEST_DEMO = 'requestDemo';
@@ -20,7 +20,7 @@ const CONTENT_TYPE_REQUEST_DEMO = 'requestDemo';
   standalone: true,
   imports: [CommonModule, TranslateModule, FormsModule, ReactiveFormsModule],
   providers: [
-    ResendApiService,
+    MailgunApiService,
     {
       provide: RESEND_APIKEY,
       useValue: environment.resendApiKey,
@@ -31,7 +31,7 @@ const CONTENT_TYPE_REQUEST_DEMO = 'requestDemo';
 })
 export class RequestDemoDialogComponent implements OnInit {
   private _dialogService = inject(DialogService)
-  private _emailServices = inject(ResendApiService)
+  private _emailServices = inject(MailgunApiService)
   private _contentFulService = inject(ContentFulService)
   newSector = false
   countries: any
@@ -62,7 +62,7 @@ export class RequestDemoDialogComponent implements OnInit {
         this.newSector = false
       }
     })
-    this.countries = COUNTRIES_EU
+    // this.countries = COUNTRIES_EU
   }
 
   private _loadContentFulRequestDemo() {
@@ -101,10 +101,8 @@ export class RequestDemoDialogComponent implements OnInit {
     //       this._dialogService.close()
     //     }
     //   })
-    const message = {
-      subject: `A company with email ${this.formRequestDemo.controls['email'].value} is requesting a demo`,
-      body: messageHtml
-    }
+    const subject = `A company with email ${this.formRequestDemo.controls['email'].value} is requesting a demo`;
+    const message = new EmailMessage(subject, messageHtml)
     this._emailServices.sendEmailV2(message).subscribe((res) => {
       if (res) {
         this._dialogService.close()

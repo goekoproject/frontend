@@ -28,8 +28,4 @@ export class ResendApiService {
     })
   }
 
-  sendEmailV2(data: any) : Observable<any> {
-      return this._http.post<any>(`https://platform.goeko-api.com/v1/temp/request/email`, data)
-  }
-
 }

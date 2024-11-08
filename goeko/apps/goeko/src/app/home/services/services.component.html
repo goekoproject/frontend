@@ -6,9 +6,9 @@
     </div>
   }
 
-  <div class="flex flex-row flex-wrap justify-center border-t-[3px] lg:justify-normal lg:gap-20" *ngIf="step === 'step1'">
+  <div class="flex flex-row flex-wrap justify-center border-t-[3px] lg:justify-normal lg:gap-28" *ngIf="step === 'step1'">
     @if (enterpriseServices) {
-      <div class="pt-16 lg:w-2/4">
+      <div class="pt-16 lg:w-[45%]">
         <h3 class="title mb-4">
           {{ enterpriseServices.section }}
         </h3>
@@ -21,15 +21,17 @@
           </p>
         }
       </div>
-      <div class="flex w-2/4 justify-end pt-16">
-        <img [src]="enterpriseServices.photo" [alt]="" />
+      <div class="flex lg:w-[45%] justify-end pt-16">
+        <img [src]="enterpriseServices.photo" [alt]="" class="object-contain"/>
       </div>
     }
   </div>
 
-  <div class="flex flex-row gap-20 border-t-[3px]" *ngIf="step === 'step2'">
+  <!-- <div class="flex flex-row gap-20 border-t-[3px]" *ngIf="step === 'step2'"> -->
+    <div class="flex flex-row flex-wrap justify-center border-t-[3px] lg:justify-normal lg:gap-28" *ngIf="step === 'step2'">
+
     @if (cleanTechServices) {
-      <div class="w-2/4 pt-16">
+      <div class="pt-16 lg:w-[45%]">
         <h3 class="title mb-4">
           {{ cleanTechServices.section }}
         </h3>
@@ -42,8 +44,8 @@
           </p>
         }
       </div>
-      <div class="flex w-2/4 justify-end pt-16">
-        <img [src]="cleanTechServices.photo" [alt]="" />
+      <div class="flex lg:w-[45%] justify-end pt-16">
+        <img [src]="cleanTechServices.photo" [alt]="" class="object-contain"/>
       </div>
     }
   </div>

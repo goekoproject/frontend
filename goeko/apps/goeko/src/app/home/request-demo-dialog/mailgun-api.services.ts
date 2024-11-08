@@ -1,16 +1,23 @@
+import { HttpClient } from '@angular/common/http'
 import { VAR_GENERAL } from '@goeko/business-ui'
-import { environment } from 'apps/goeko/src/environments/environment'
 import * as FormData from 'form-data'
 import Mailgun from 'mailgun.js'
 import { IMailgunClient } from 'mailgun.js/Interfaces'
 import { Observable } from 'rxjs'
+import { EmailMessage } from './email-message.model'
+import { Injectable } from '@angular/core'
+import { environment } from 'apps/goeko/src/environments/environment.prod'
 
 const DOMAIN = 'email-stage.goeko.ch'
 const URL = 'https://api.eu.mailgun.net'
+
+@Injectable()
 export class MailgunApiService {
   private _mg!: IMailgunClient
 
-  constructor() {
+  constructor(
+    public _http: HttpClient
+  ) {
     const mailgun = new Mailgun(FormData)
     this._mg = mailgun.client({
       url: URL,
@@ -31,5 +38,9 @@ export class MailgunApiService {
           observer.error(err)
         })
     })
+  }
+
+  sendEmailV2(message: EmailMessage) : Observable<any> {
+    return this._http.post<any>(environment.baseUrl + `/v1/temp/request/email`, message)
   }
 }

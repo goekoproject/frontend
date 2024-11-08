@@ -1,3 +1,4 @@
+import { CloudinaryModule } from '@cloudinary/ng';
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { ContentFulModule } from '@goeko/store'
@@ -21,7 +22,6 @@ import { MenuComponent } from './header/menu/menu.component'
 import { LandingComponent } from './landing/landing.component'
 import { ServicesComponent } from './services/services.component'
 import { TeamComponent } from './team/team.component'
-import { CloudinaryModule } from '@cloudinary/ng'
 
 @NgModule({
   declarations: [
