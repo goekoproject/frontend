@@ -29,31 +29,7 @@
         </div>
       </div>
 
-      <goeko-select-locations
-        [form]="formProject"
-        [controlLocations]="locationsArrays"
-        [controlNameCountry]="'country'"
-        [singleSelect]="true"
-        [controlNameProvince]="'regions'"></goeko-select-locations>
-      <!--   <div formArrayName="locations" class="w-full">
-            <div *ngFor="let location of locationsProject.controls; let i = index" [formGroupName]="i" class="mb-2">
-              <label for="location-{{i}}" class="block text-sm font-medium text-black mb-1">{{"MENU_USER_SME.dialogLocationProject" | translate}}</label>
-              <input
-                type="text"
-                id="location-{{i}}"
-                formControlName="location"
-                class="border border-gray-300 text-sm rounded-lg block p-4 bg-white text-gray-500 mb-16"
-                [placeholder]="'MENU_USER_SME.dialogPlaceholderLocation' | translate "
-                size="40"
-                required
-              />
-
-
-              <div *ngIf="location.get('location')?.invalid && location.get('location')?.touched" class="text-red-500 text-sm">
-                {{"MENU_USER_SME.dialogLocationRequired" | translate}}
-              </div>
-            </div>
-          </div> -->
+      <goeko-select-locations [form]="formProject" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
 
       <div class="flex justify-center">
         <button type="submit" go-button appearance="primary" [disabled]="formProject.invalid">

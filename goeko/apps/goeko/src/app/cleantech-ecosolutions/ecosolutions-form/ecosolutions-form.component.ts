@@ -7,6 +7,7 @@ import {
   Ecosolutions,
   EcosolutionsBody,
   EcosolutionsService,
+  LocationsCountry,
   NewEcosolutionsBody,
   ODS_CODE,
   TranslatedProperties,
@@ -232,12 +233,33 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy {
   private _patchDataToForm(ecosolution: any): void {
     const formValue = new EcosolutionForm(ecosolution)
     this.form.patchValue(formValue)
+    this._setLocaltion(ecosolution.locations)
     this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
     this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
     this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
     this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
   }
 
+  private _setLocaltion(locations: Array<LocationsCountry>) {
+    if (locations) {
+      this.locationsArrays.clear()
+      locations.forEach((location: LocationsCountry) => {
+        this._addLocations(location)
+      })
+    }
+  }
+
+  private _addLocations(location: LocationsCountry) {
+    this.locationsArrays.push(this._createLocations(location))
+  }
+  private _createLocations(location: LocationsCountry): FormGroup {
+    return new FormGroup({
+      country: new FormGroup({
+        code: new FormControl(location.country.code),
+        regions: new FormControl(location.country.regions),
+      }),
+    })
+  }
 
   private _patchFormArray(formArray: FormArray, values: any[]): void {
     formArray.clear()

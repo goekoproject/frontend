@@ -1,8 +1,10 @@
+import { MediaMatcher } from '@angular/cdk/layout'
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
-import { ContentFulService } from '@goeko/store'
+import { CODE_LANG } from '@goeko/core'
 import { TranslateService } from '@ngx-translate/core'
 import { map } from 'rxjs'
 import { Advantages } from './advantages.model'
+import { ContentFulService } from '@goeko/store'
 
 const CONTENT_TYPE_GOEKO_ADVANTAGES = 'advantagesGoeko'
 
@@ -23,14 +25,20 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15]
 
+  public srcVideo = signal(this.urlSrcVideo)
+  public isSmailScreen = signal(this._mediaMatcher.matchMedia('(max-width: 599.98px)'))
+
   private get urlSrcVideo() {
-    if (this.currentLangCode() === 'fr') {
+    if (this.currentLangCode() === CODE_LANG.FR) {
       return 'https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/info-fr'
     }
     return `https://res.cloudinary.com/hqsjddtpo/video/upload/f_auto:video,q_auto/v1/landing-page/goeko-info-${this.currentLangCode()}#t=40`
   }
 
-  constructor(private _translateServices: TranslateService) {}
+  constructor(
+    private _translateServices: TranslateService,
+    private _mediaMatcher: MediaMatcher,
+  ) {}
 
   ngOnInit(): void {
     this._changeLangCode()
@@ -52,14 +60,18 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return
     }
     this.marketingVideo.nativeElement.muted = true
-    this.marketingVideo.nativeElement.src = this.urlSrcVideo
+    if (!this.isSmailScreen().matches) {
+      this.marketingVideo.nativeElement.autoplay = true
+    }
   }
 
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
-      this.marketingVideo.nativeElement.src = this.urlSrcVideo
-      this.marketingVideo.nativeElement.pause()
+      this.srcVideo.set(this.urlSrcVideo)
+      if (this.isSmailScreen().matches) {
+        this.marketingVideo.nativeElement.pause()
+      }
       this.loadAdvantages();
     })
   }

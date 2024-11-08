@@ -20,7 +20,7 @@
       <i class="ti ti-player-play-filled"></i>
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    <video autoplay loop class="banner-video-sme" preload="metadata" #marketingVideo>
+    <video loop class="banner-video-sme" preload="metadata" [src]="srcVideo()" #marketingVideo>
       <source type="video/mp4" />
     </video>
   </div>

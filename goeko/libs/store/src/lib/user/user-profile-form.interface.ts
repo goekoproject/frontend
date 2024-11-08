@@ -13,5 +13,7 @@ export interface UserProfileForm {
   externalId: string;
   employees: number;
   phoneNumber: string;
+  comunicationLanguage: any;
   locations: any[];
+  generalNotifications: boolean;
 }

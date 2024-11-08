@@ -17,7 +17,7 @@ export function mapperLocations(locations: LocationProvider[]): any[] {
   return locations.map((location: LocationProvider | any) => ({
     ...location,
     country: {
-      code: location?.country?.code.code,
+      code: location?.country?.code,
       regions:
         location?.country?.regions &&
         location?.country?.regions.length > 0 &&

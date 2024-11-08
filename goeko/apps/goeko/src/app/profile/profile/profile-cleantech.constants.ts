@@ -28,10 +28,29 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         type: 'text',
       },
       {
+        controlName: 'comunicationLanguage',
+        label: 'FORM_LABEL.comunicationLanguage',
+        type: 'select',
+        dataSelectKey: 'countries',
+        required: true,
+      },
+/*       {
+        controlName: 'identifier',
+        label: 'FORM_LABEL.companyId',
+        type: 'text',
+        required: true,
+      }, */
+      {
         controlName: 'link',
         label: 'FORM_LABEL.website',
         type: 'url',
         placeholder: 'www.example.com',
+      },
+      {
+        controlName: 'phoneNumber',
+        label: 'FORM_LABEL.phoneNumber',
+        type: 'text',
+        //required: true,
       },
       {
         controlName: 'logo',

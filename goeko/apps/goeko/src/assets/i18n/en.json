@@ -22,7 +22,7 @@
     "view_ecosolutions": "Detail of your ecosolution"
   },
   "CATEGORIES": {
-    "co2Emission": "CO2 emissions",
+    "co2Emission": "CO₂ emissions",
     "hazardousProduct": "Hazardous Products",
     "waste": "Waste",
     "water": "Water",
@@ -51,7 +51,7 @@
     },
     "buildingOperation": {
       "label": "For the operation of the building, would you be interested in",
-      "question": "For the operation of the building, would you be interested in"
+      "question": "Solutions for building management"
     },
     "energySource": {
       "label": "",
@@ -63,15 +63,15 @@
     },
     "greenWaste": {
       "label": "In which category(ies) of green waste is your company improving management?",
-      "question": "With what types of green waste is your company primarily dealing?"
+      "question": "Green waste"
     },
     "hazardousWaste": {
       "label": "In which category(ies) of hazardous waste is your company improving management?",
-      "question": "With what types of hazardous waste is your company primarily dealing?"
+      "question": "Hazardous waste"
     },
     "inertOrMineralWaste": {
       "label": "In which category(ies) of inert or mineral waste is your eco-solution improving management?",
-      "question": "With what types of inert or mineral waste is your company primarily dealing?"
+      "question": "Mineral or inert waste"
     },
     "lastYearInvoice": {
       "label": "",
@@ -79,19 +79,19 @@
     },
     "mainActivity": {
       "label": "For which water-related activity(ies) does your eco-solution reduce consumption or improve quality?",
-      "question": "Activities of your company that consume the most water"
+      "question": "Water-consuming activities"
     },
     "mainCategoryNonInert": {
       "label": "In which category(ies) of non-inert waste is your eco-solution improving management?",
-      "question": "With what types of non-inert waste is your company primarily dealing?"
+      "question": "Non-inert waste"
     },
     "mainInternalCombustionEngine": {
       "label": "Engines and vehicles",
-      "question": "Main engine-powered equipment"
+      "question": "Equipment and vehicles"
     },
     "mainMineralProduct": {
       "label": "Mineral and metal products",
-      "question": "Main mineral and metal products"
+      "question": "Mineral products and metals"
     },
     "mainRigidMaterial": {
       "label": "",
@@ -99,15 +99,15 @@
     },
     "products": {
       "label": "Types of toxic products",
-      "question": "Types of toxic products"
+      "question": "Toxic products"
     },
     "specialWaste": {
       "label": "In which category(ies) of special waste is your eco-solution improving management?",
-      "question": "With what types of special waste is your company primarily dealing?"
+      "question": "Special waste"
     },
     "sustainableBuildingOperations": {
       "label": "For the exploitation of buildings or sustainable mobility, your eco-solution allows:",
-      "question": "For building operation and sustainable mobility, would you be interested in"
+      "question": "Solutions for building management and soft mobility"
     }
   },
   "CURRENCY": {
@@ -158,10 +158,13 @@
     "certified": "Certified",
     "city": "City",
     "companyName": "Company name",
+    "comunicationLanguage": "Chosen language for communication",
     "countriesAvailable": "Countries Available",
     "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
+    "companyId": "Enterprise identification number",
     "currency": "Currency",
+    "date": "Date",
     "deliverCountries": "Countries where your eco-solution is approved",
     "ecosolution_classification": "Select questions and choose products for your eco-solution",
     "ecosolutions_products": "Select Products",
@@ -186,11 +189,12 @@
     "operationalCostReductionPercentage": "Percentage of operational cost reduction",
     "password": "Password",
     "paybackPeriodYears": "Return on investment time compared to a standard solution",
+    "phoneNumber": "Phone number",
     "price": "Price",
     "products": "Products",
     "province": "Province",
     "reductionPercentage": "Reduction Percentage",
-    "reductionPercentageCO2": "CO2 Reduction Percentage",
+    "reductionPercentageCO2": "CO₂ Reduction Percentage",
     "reductionPercentageHP": "Hazardous Products Reduction Percentage",
     "reductionPercentageWaste": "Waste Reduction Percentage",
     "reductionPercentageWater": "Water Consumption Reduction Percentage",
@@ -263,9 +267,9 @@
     "messageContact": "Contact us at {{email}}"
   },
   "MENU_USER_SME": {
-    "titleCard": "Start your first analysis",
-    "subtitleCard": "We'll find the best eco-solution for you",
-    "buttonSearch": "Search eco-solution",
+    "titleCard": "Create a project",
+    "subtitleCard": "We will find the most adapted cleantech solutions",
+    "buttonSearch": "Add new project",
     "dialogNewProject": "Name your project",
     "dialogNameProject": "Name",
     "dialogLocationProject": "Province and country",
@@ -273,7 +277,8 @@
     "dialogLocationRequired": "Location is required",
     "dialogButtonNext": "Next",
     "dialogPlaceholderName": "PO June, 2024",
-    "dialogPlaceholderLocation": "Madrid, Spain"
+    "dialogPlaceholderLocation": "Madrid, Spain",
+    "notificationProfile": "I agree to receive notifications about new cleantech solutions related to my projects"
   },
   "NOTIFICATION": {
     "save_ok": "Saved successfully"
@@ -299,7 +304,7 @@
   },
   "SDG_TITLES": {
     "6": "Clean water and sanitation",
-    "7": "Affordable and clean Energy",
+    "7": "Affordable and clean energy",
     "9": "Industry, innovation and infrastructure",
     "11": "Sustainable cities and communities",
     "12": "Responsible consumption and production",
@@ -483,9 +488,9 @@
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Advantages of your eco-solution compared to a traditional solution",
     "buildingOperation_question": "Are you looking for one or more solutions to reduce water consumption such as:",
-    "co2Emission": "Area where your eco-solution reduces CO2 emissions",
+    "co2Emission": "Area where your eco-solution reduces CO₂ emissions",
     "ods": "Linked to your eco-solution",
-    "odsSme": "Linked to the eco-solution",
+    "odsSme": "SDGs linked to solution",
     "paybackPeriodYears": "Number of years to make the investment profitable compared to a traditional solution",
     "selectProducts": "Type of toxic products that your eco-solution replaces or improves",
     "waste": "Types of waste",
@@ -504,7 +509,7 @@
   "yourEcosolution": "Your Eco-solution",
   "accept": "Accept",
   "add": "Add",
-  "alertSelectedProduct": "Select one or more solutions",
+  "alertSelectedProduct": "Select the categories and products corresponding to your project",
   "all": "All",
   "analysis": "Analysis",
   "availability": "Availability",
@@ -530,9 +535,11 @@
   "details": "Details",
   "dragAndDrop": "Drag and drop",
   "edit": "Edit",
+  "editProject": "Edit project",
   "editSelection": "Modifier selection",
   "enterprise": "Enterprise",
   "exit": "Exit",
+  "filters": "Filters",
   "followUs": "Follow us",
   "infoSaveMessages": "You have the option to save your data now, ensuring it's available for future reference, providing you with confidence in accessing it when needed.",
   "lastLead": "Latest lead",
@@ -561,7 +568,7 @@
   "result": "Result",
   "save": "Save",
   "saveYou": "Save your",
-  "searchEcosolutions": "Search eco-solutions",
+  "searchEcosolutions": "Search cleantech solutions",
   "selectAll": "Select All",
   "selectCategoryEcosolutions": "Select the category for your ecosolution",
   "selectedProduct": "Selected product",
@@ -592,6 +599,7 @@
   "turnOnNotifications": "Turn on notifications",
   "exploreNow": "Explore now",
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
-  "subtitlePageCatalog": "Best eco-solutions for",
-  "results": "results"
+  "subtitlePageCatalog": "Best solutions for your",
+  "results": "results",
+  "resultSolution": "result"
 }

@@ -285,7 +285,7 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
   get compareWith() {
     return this._compareWith
   }
-  set compareWith(fn: (o1: any, o2: any) => boolean) {
+  set compareWith(fn: (o1: any, o2: any) => boolean | any) {
     if (typeof fn !== 'function' && isDevMode()) {
       throw Error('`compareWith` must be a function.')
     }
