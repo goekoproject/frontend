@@ -55,12 +55,9 @@ export class ServicesComponent implements OnInit {
    _loadContent(contentTypeService: any) {
     this.services$ = this._contentFulService.getContentType(contentTypeService).pipe(map((items) => items.items));
     this.services$.subscribe((items:any) => {
-      // const rates: any = [];
 
       const paragraphDesc = this._getParagraphDescription(items[0].fields.description.content);
-
       const rates = this._getRates(items[0].fields.rates.content);
-
 
 
       contentTypeService === CONTENT_TYPE_ENTERPRISE_SERVICES ?
@@ -86,6 +83,7 @@ export class ServicesComponent implements OnInit {
 
     });
   }
+
   private _getRates(content: any): any[] {
     const rates: any= [];
     content.forEach((element: any) => {
