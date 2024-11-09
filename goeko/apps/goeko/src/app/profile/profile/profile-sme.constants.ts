@@ -20,7 +20,6 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         controlName: 'comunicationLanguage',
         label: 'FORM_LABEL.comunicationLanguage',
         type: 'lang',
-        dataLangKey: 'languages',
         required: true,
       },
       /*      {

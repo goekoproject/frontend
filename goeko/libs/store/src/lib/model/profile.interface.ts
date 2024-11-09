@@ -1,4 +1,3 @@
-import { LANG_PROFILE } from './../../../../../apps/goeko/src/app/profile/profile/profile-form';
 import { DataSelect } from '../constants/select-data.constants'
 
 type FieldForm =
@@ -21,7 +20,6 @@ export interface Profile<T = 'cleantech' | 'sme' | 'bank'> {
   label: string
   type: FieldForm
   dataSelectKey?: keyof typeof DataSelect
-  dataLangKey?: keyof typeof LANG_PROFILE
   className?: string
   required?: boolean
   placeholder?: string

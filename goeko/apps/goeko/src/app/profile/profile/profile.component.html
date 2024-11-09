@@ -67,11 +67,11 @@
                     <label title for="{{ itemForm.controlName }}">
                       {{ itemForm.label | translate }}
                     </label>
-                    <ng-container *ngIf="itemForm.dataLangKey">
-                      <super-option *ngFor="let option of dataLang[itemForm.dataLangKey]" [value]="option.code">
-                        {{ option.keyLang | translate }}
+                    @for (lang of dataLang; track lang.code) {
+                      <super-option [value]="lang.code">
+                        {{ lang.keyLang | translate }}
                       </super-option>
-                    </ng-container>
+                    }
                   </ui-super-select>
                 </div>
               }
@@ -91,14 +91,9 @@
                 <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
               }
               @case ('checkbox') {
-                <div class="flex items-center my-4">
-                  <input
-                    id="{{ itemForm.controlName }}"
-                    type="checkbox"
-                    [formControlName]="itemForm.controlName"
-                    class="h-4 w-4"
-                  />
-                  <label for="{{ itemForm.controlName }}" class="ml-2 text-sm text-gray-600 font-bold">
+                <div class="my-4 flex items-center">
+                  <input id="{{ itemForm.controlName }}" type="checkbox" [formControlName]="itemForm.controlName" class="h-4 w-4" />
+                  <label for="{{ itemForm.controlName }}" class="ml-2 text-sm font-bold text-gray-600">
                     {{ itemForm.label | translate }}
                   </label>
                 </div>
