@@ -1,7 +1,7 @@
 import { Component, effect, inject, input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
-import { EcosolutionsTaggingService, SmeRequestResponse, TAGGING, UserService } from '@goeko/store'
+import { EcosolutionsTaggingService, SmeRequestResponse, TAGGING } from '@goeko/store'
 import { DialogService } from '@goeko/ui'
 import { DashboardSmeService } from './dashboard-sme.service'
 
@@ -13,7 +13,6 @@ import { DashboardSmeService } from './dashboard-sme.service'
 })
 export class DashboardSmeComponent {
   private _dashboardSmeService = inject(DashboardSmeService)
-  private _userService = inject(UserService)
   private _router = inject(Router)
   public route = inject(ActivatedRoute)
   private _dialogService = inject(DialogService)
@@ -21,7 +20,6 @@ export class DashboardSmeComponent {
   public TAGGING = TAGGING
   public id = input<string>('')
 
-  public userProfile = this._userService.userProfile
   public summary = this._dashboardSmeService.summary
   public ecosolutionFavourites = this._dashboardSmeService.ecosolutionFavourites
   constructor() {
@@ -41,11 +39,11 @@ export class DashboardSmeComponent {
       })
   }
   private _goToProject(projects: SmeRequestResponse) {
-    this._router.navigate(['../project-form', this.userProfile().id, projects.id], {
+    this._router.navigate(['../project-form', this.id(), projects.id], {
       relativeTo: this.route.parent,
     })
   }
   showMore(ecosolutionId: string) {
-    this._router.navigate([`platform/ecosolutions-detail/${this.userProfile().id}/${ecosolutionId}`])
+    this._router.navigate([`platform/ecosolutions-detail/${this.id()}/${ecosolutionId}`])
   }
 }
