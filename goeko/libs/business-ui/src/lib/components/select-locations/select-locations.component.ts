@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, Input, OnDestroy, Signal, inject, input, signal } from '@angular/core'
+import { AfterViewInit, Component, Input, OnDestroy, inject, input, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { LocationCountry, LocationRegions, LocationsCountry } from '@goeko/store'
+import { LocationRegions, LocationsCountry } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
 
@@ -17,19 +17,10 @@ const CODE_DEFAULT_COUNTRY = 'CH'
   styleUrl: './select-locations.component.scss',
 })
 export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
+  private _translateService = inject(TranslateService)
   public countryCompareWith = (o1: string, o2: string) => o1 === o2
   public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1?.code === (o2?.code || o2) || o2?.isAll
 
-  test = [
-    {
-      code: 'CH',
-      label: 'Switzerland',
-    },
-    {
-      code: 'DE',
-      label: 'Germany',
-    },
-  ]
   public optionAllProvince: LocationRegions = {
     code: '',
     label: 'FORM_LABEL.allProvinces',
@@ -49,7 +40,7 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   @Input() form!: FormGroup
   public singleSelect = input<boolean>(false)
 
-  public countries = this._selectLocationsService.countries as Signal<LocationCountry[]>
+  public countries = this._selectLocationsService.countries
 
   public disabledRegions = false
 
@@ -81,17 +72,25 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this._selectLocationsService.setUpCountries()
     if (this.controlLocations.length === 0) {
       this.addLocation()
     } else {
       this._patchLocationsValue()
     }
     this.subscribeToFormArrayAndItemChanges()
+    this._changeLang()
   }
   ngOnDestroy(): void {
     this._controlLocations.clear()
   }
 
+  private _changeLang() {
+    this._translateService.onLangChange.subscribe(() => {
+      this._patchLocationsValue()
+      this._selectLocationsService.setUpCountries()
+    })
+  }
   private _patchLocationsValue() {
     this.controlLocations.value.forEach((location: LocationsCountry) => {
       const { code } = location.country
