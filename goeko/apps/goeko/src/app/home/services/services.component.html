@@ -16,7 +16,7 @@
           {{ enterprise.title }}
         </h1>
         @for (description of enterprise.paragraphs; track enterprise) {
-          <p class="description mb-4">
+          <p class="description mb-4 text-justify">
             {{ description }}
           </p>
         }
@@ -38,7 +38,7 @@
           {{ cleanTech.title }}
         </h1>
         @for (description of cleanTech.paragraphs; track cleanTech) {
-          <p class="description mb-4">
+          <p class="description mb-4 text-justify">
             {{ description }}
           </p>
         }
@@ -108,4 +108,8 @@
       }
     }
   </div>
+  <button go-button routerLink="/home" (click)="_setTopScroll()">
+    <i class="ti ti-square-rounded-arrow-left"></i>
+    {{ 'home' | translate }}
+  </button>
 </div>

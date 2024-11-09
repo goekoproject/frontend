@@ -59,4 +59,12 @@ export class ServicesComponent implements OnInit {
     })
   }
 
+  _setTopScroll() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+   }
+
 }
