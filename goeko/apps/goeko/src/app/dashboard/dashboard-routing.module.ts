@@ -5,7 +5,7 @@ import { DashboardSmeComponent } from './dashboard/dashboard-sme.component'
 
 const routes: Routes = [
   {
-    path: 'sme',
+    path: 'sme/:id',
     component: DashboardSmeComponent,
     data: {
       breadcrumb: 'dashboard',
@@ -14,7 +14,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'cleantech',
+    path: 'cleantech/:id',
     component: DashboardCleantechComponent,
     data: {
       breadcrumb: 'dashboard',

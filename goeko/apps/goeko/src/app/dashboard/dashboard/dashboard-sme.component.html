@@ -1,18 +1,17 @@
-
 <div class="dashboard-option">
   <div class="container p-10">
-    <div class="w-full max-w-sm p-12 min-h-96 rounded-lg shadow-lg shadow-gray-300  dark:bg-white flex flex-col items-center justify-center">
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-700 text-center">{{ "MENU_USER_SME.titleCard" | translate}}</h5>
+    <div class="flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-lg shadow-gray-300 dark:bg-white">
+      <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_SME.titleCard' | translate }}</h5>
 
-      <p class="mb-7 font-normal text-gray-700 text-center">{{ "MENU_USER_SME.subtitleCard" | translate}}</p>
-      <img src="assets/Group 65.svg" class="mb-11"/>
-      <button
-          type="button"
-          go-button
-          appearance="primary" (click)="openNewProjectDialog()">{{ "MENU_USER_SME.buttonSearch" | translate }}
+      <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_SME.subtitleCard' | translate }}</p>
+      <img src="assets/Group 65.svg" class="mb-11" />
+      <button type="button" go-button appearance="primary" (click)="openNewProjectDialog()">
+        {{ 'MENU_USER_SME.buttonSearch' | translate }}
       </button>
     </div>
   </div>
 </div>
 
-
+@defer (when summary()) {
+  {{ summary() | json }}
+}
