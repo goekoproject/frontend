@@ -83,10 +83,10 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     if (this.controlLocations.length === 0) {
       this.addLocation()
-      this.subscribeToFormArrayAndItemChanges()
     } else {
       this._patchLocationsValue()
     }
+    this.subscribeToFormArrayAndItemChanges()
   }
   ngOnDestroy(): void {
     this._controlLocations.clear()

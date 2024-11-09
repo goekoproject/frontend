@@ -88,7 +88,7 @@
                   }"></ng-container>
               }
               @case ('select-locations') {
-                <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
+                <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
               }
               @case ('checkbox') {
                 <div class="my-4 flex items-center">
