@@ -36,6 +36,7 @@
     "@formkit/tempo": "^0.1.2",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@nrwl/nx-cloud": "^19.1.0",
     "@nx/angular": "17.3.1",
     "angular-svg-icon": "^17.0.0",
     "auth0-js": "^9.24.0",
