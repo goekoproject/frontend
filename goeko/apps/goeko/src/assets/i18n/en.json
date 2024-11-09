@@ -158,10 +158,11 @@
     "certified": "Certified",
     "city": "City",
     "companyName": "Company name",
-    "comunicationLanguage": "Chosen language for communication",
+    "comunicationLanguage": "Communication language",
     "countriesAvailable": "Countries Available",
     "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
+    "countriesDistribution": "Countries of distribution",
     "companyId": "Enterprise identification number",
     "currency": "Currency",
     "date": "Date",
@@ -193,6 +194,7 @@
     "price": "Price",
     "products": "Products",
     "province": "Province",
+    "cleantechContacted": "Cleantech contacted",
     "reductionPercentage": "Reduction Percentage",
     "reductionPercentageCO2": "CO₂ Reduction Percentage",
     "reductionPercentageHP": "Hazardous Products Reduction Percentage",
@@ -211,8 +213,7 @@
     "typeOfEcolutions": "Type of eco-solution",
     "unit": "Unit of measurement (m2, m3, y, kg)",
     "website": "Website",
-    "yourLocation": "Select country and province",
-    "yourLocationTextSupport": "Your location data will be used to personalize recommendations for eco-friendly solutions."
+    "yourLocation": "Select country and province"
   },
   "HOME": {
     "btnCleantech": "Find leads",
@@ -278,7 +279,7 @@
     "dialogButtonNext": "Next",
     "dialogPlaceholderName": "PO June, 2024",
     "dialogPlaceholderLocation": "Madrid, Spain",
-    "notificationProfile": "I agree to receive notifications about new cleantech solutions related to my projects"
+    "notificationProfile": "I agree to receive notifications about new cleantech solutions"
   },
   "NOTIFICATION": {
     "save_ok": "Saved successfully"
@@ -576,6 +577,7 @@
   "selected_products": "Selected products",
   "showLead": "Show leads",
   "showMore": "View more",
+  "showAll": "Show all",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Connecting businesses to clean technology and financing",
   "sme": "Sme",
@@ -601,5 +603,7 @@
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
   "subtitlePageCatalog": "Best solutions for your",
   "results": "results",
-  "resultSolution": "result"
+  "resultSolution": "result",
+  "yourProjects": "Your projects",
+  "backToResults": "Back to results"
 }

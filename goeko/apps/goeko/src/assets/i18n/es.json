@@ -150,10 +150,11 @@
     "certified": "Certificado",
     "city": "Ciudad",
     "companyName": "Nombre de la Compañía",
-    "comunicationLanguage": "Idioma elegido para la comunicación",
+    "comunicationLanguage": "Idioma para la comunicación",
     "countriesAvailable": "Países disponibles",
     "countriesProvincesAvailable": "Países y regiones de distribución",
     "country": "País",
+    "countriesDistribution": "Países de distribución",
     "companyId": "Número de identificación fiscal",
     "currency": "Moneda",
     "date": "Fecha",
@@ -202,8 +203,7 @@
     "typeOfEcolutions": "Tipo de eco-solución",
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sitio web",
-    "yourLocation": "Seleccione el país y la provincia",
-    "yourLocationTextSupport": "Los datos de su ubicación serán utilizados para personalizar las recomendaciones de soluciones ecológicas."
+    "yourLocation": "Seleccione el país y la provincia"
   },
   "HOME": {
     "btnCleantech": "Encontrar leads",
@@ -269,7 +269,7 @@
     "dialogButtonNext": "Siguiente",
     "dialogPlaceholderName": "PO Junio, 2024",
     "dialogPlaceholderLocation": "Madrid, España",
-    "notificationProfile": "Acepto recibir notificaciones sobre nuevas soluciones cleantech relacionadas con mis proyectos"
+    "notificationProfile": "Acepto recibir notificaciones sobre nuevas soluciones cleantech"
   },
   "NOTIFICATION": {
     "save_ok": "Se ha guardado correctamente"
@@ -517,6 +517,8 @@
   "availability": "Disponible",
   "back": "Volver",
   "bank": "Banco",
+  "cleantechContacted": "Cleantech contactadas",
+
   "cancel": "Cancelar",
   "categories": "Categorías",
   "certified": "Certificado",
@@ -577,6 +579,7 @@
   "selected_products": "Productos seleccionados",
   "showLead": "Mostrar clientes potenciales",
   "showMore": "Ver más",
+  "showAll": "Ver todo",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Conectando empresas con tecnología limpia y financiación",
   "sme": "PYMES",
@@ -601,5 +604,7 @@
   "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
   "subtitlePageCatalog": "Mejores soluciones para ",
   "results": "resultados",
-  "resultSolution": "resultado"
+  "resultSolution": "resultado",
+  "yourProjects": "Tus proyectos",
+  "backToResults": "Volver a los resultados"
 }

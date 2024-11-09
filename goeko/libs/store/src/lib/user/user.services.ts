@@ -85,7 +85,7 @@ export class UserService {
 
   private _redirectDashboard() {
     this.sessionStorage.setItem(SS_LOAD_USER, true)
-    this._router.navigate([`platform/dashboard/${this.userType()}`])
+    this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`])
   }
   private _redirectProfile() {
     this._router.navigate([`platform/profile/${this.externalId()}`])

@@ -149,10 +149,11 @@
     "certified": "Certifiée",
     "city": "Ville",
     "companyName": "Nom de l'entreprise",
-    "comunicationLanguage": "Langue choisie pour la communication",
+    "comunicationLanguage": "Langue pour la communication",
     "countriesAvailable": "Pays disponibles",
     "countriesProvincesAvailable": "Pays et régions de distribution",
     "country": "Pays",
+    "countriesDistribution": "Territoires de distribution",
     "companyId": "Numéro d'identification des entreprises",
     "currency": "Devise",
     "date": "Date",
@@ -202,8 +203,7 @@
     "typeOfEcolutions": "Type d'éco-solution",
     "unit": "Unité",
     "website": "Site web",
-    "yourLocation": "Sélectionnez le pays et la region",
-    "yourLocationTextSupport": "Vos données de localisation seront utilisées pour personnaliser les recommandations de solutions écologiques."
+    "yourLocation": "Sélectionnez le pays et la région"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
@@ -268,7 +268,7 @@
     "dialogButtonNext": "Suivant",
     "dialogPlaceholderName": "PO Juin, 2024",
     "dialogPlaceholderLocation": "Madrid, Espagne",
-    "notificationProfile": "J'accepte de recevoir des notifications concernant de nouvelles cleantech solutions liées à mes projets"
+    "notificationProfile": "J'accepte de recevoir des notifications concernant de nouvelles solutions cleantech"
   },
   "NOTIFICATION": {
     "save_ok": "Enregistré avec succès"
@@ -534,6 +534,7 @@
   "defaultMessageLead": "Bonjour, votre éco-solution m’intéresse. Merci de bien vouloir me contacter par e-mail.",
   "details": "Détails",
   "dragAndDrop": "Glisser déposer",
+  "cleantechContacted": "Cleantech contacté",
   "edit": "Modifier",
   "editProject": "Modifier votre projet",
   "editSelection": "Modifier sélection",
@@ -576,6 +577,7 @@
   "selected_products": "Produits sélectionnés",
   "showLead": "Afficher les clients potentiels",
   "showMore": "Voir plus",
+  "showAll": "Voir tout",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "La connexion des entreprises aux technologies propres et au financement",
   "sme": "pme",
@@ -601,5 +603,7 @@
   "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
   "subtitlePageCatalog": "Meilleures solutions pour",
   "results": "résultats",
-  "resultSolution": "résultat"
+  "resultSolution": "résultat",
+  "yourProjects": "Vos projets",
+  "backToResults": "Retour aux résultats"
 }

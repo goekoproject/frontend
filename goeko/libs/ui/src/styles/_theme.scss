@@ -286,6 +286,6 @@ input[type='radio' i]:focus-visible {
 }
 .go-badge-category {
   @apply w-max rounded-full px-3 py-2 text-xs font-semibold;
-  background-color: var(--pastel-green); /* Color pastel verde */
-  color: var(--lime-green); /* Color verde lima */
+  background-color: var(--green-pastel);
+  color: var(--green-lime);
 }
