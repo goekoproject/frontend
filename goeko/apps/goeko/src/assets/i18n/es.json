@@ -150,7 +150,7 @@
     "certified": "Certificado",
     "city": "Ciudad",
     "companyName": "Nombre de la Compañía",
-    "comunicationLanguage": "Idioma elegido para la comunicación",
+    "comunicationLanguage": "Idioma para la comunicación",
     "countriesAvailable": "Países disponibles",
     "countriesProvincesAvailable": "Países y regiones de distribución",
     "country": "País",
@@ -265,7 +265,7 @@
     "dialogButtonNext": "Siguiente",
     "dialogPlaceholderName": "PO Junio, 2024",
     "dialogPlaceholderLocation": "Madrid, España",
-    "notificationProfile": "Acepto recibir notificaciones sobre nuevas soluciones cleantech relacionadas con mis proyectos"
+    "notificationProfile": "Acepto recibir notificaciones sobre nuevas soluciones cleantech"
   },
   "NOTIFICATION": {
     "save_ok": "Se ha guardado correctamente"
