@@ -153,6 +153,7 @@
     "countriesAvailable": "Verfügbare Länder",
     "countriesProvincesAvailable": "Länder und Regionen der Verteilung",
     "country": "Land",
+    "countriesDistribution": "Vertriebsländer",
     "companyId": "Unternehmens-Identifikationsnummer",
     "currency": "Währung",
     "date": "Datum",
@@ -202,8 +203,7 @@
     "typeOfEcolutions": "Art der eco-solution",
     "unit": "Maßeinheit (m2, m3, y, kg)",
     "website": "Webseite",
-    "yourLocation": "Wählen Sie Land und Region",
-    "yourLocationTextSupport": "Ihre Standortdaten werden verwendet, um Empfehlungen für umweltfreundliche Lösungen zu personalisieren."
+    "yourLocation": "Wählen Sie Land und Region"
   },
   "HOME": {
     "btnCleantech": "Leads finden",

@@ -11,6 +11,7 @@ import { ProfileFormFactory } from './profile-form.factory'
 import { PROFILE_SME } from './profile-sme.constants'
 import { ProfileService } from './profile.service'
 import { NotificationProfile } from './profile-payload.model'
+import { LANG_PROFILE } from './profile-form'
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
+  public dataLang = LANG_PROFILE
   private _externalId = this._profieService.externalId
   private destroy$ = new Subject<void>()
 

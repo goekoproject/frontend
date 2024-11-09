@@ -162,6 +162,7 @@
     "countriesAvailable": "Countries Available",
     "countriesProvincesAvailable": "Countries and regions of distribution",
     "country": "Country",
+    "countriesDistribution": "Countries of distribution",
     "companyId": "Enterprise identification number",
     "currency": "Currency",
     "date": "Date",
@@ -212,8 +213,7 @@
     "typeOfEcolutions": "Type of eco-solution",
     "unit": "Unit of measurement (m2, m3, y, kg)",
     "website": "Website",
-    "yourLocation": "Select country and province",
-    "yourLocationTextSupport": "Your location data will be used to personalize recommendations for eco-friendly solutions."
+    "yourLocation": "Select country and province"
   },
   "HOME": {
     "btnCleantech": "Find leads",

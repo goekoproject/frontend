@@ -46,7 +46,7 @@
         }
         <!-- Countries of Distribution -->
         <div class="fieldset">
-          <h3 class="font-semibold text-gray-700">Countries of distribution</h3>
+          <h3 class="font-semibold text-gray-700">{{ 'FORM_LABEL.countriesDistribution' | translate }}</h3>
           <div class="flex gap-2">
             @for (location of ecosolutionSearchDetail().locations; track location?.country?.code) {
               <div class="flex gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
