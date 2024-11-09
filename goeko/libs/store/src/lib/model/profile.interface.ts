@@ -12,6 +12,8 @@ type FieldForm =
   | 'number'
   | 'select-locations'
   | 'checkbox'
+  | 'lang'
+
 export interface Profile<T = 'cleantech' | 'sme' | 'bank'> {
   userType?: T
   controlName: string

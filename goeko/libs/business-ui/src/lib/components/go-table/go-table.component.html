@@ -1,5 +1,5 @@
-<div class="w-full sm:px-6">
-  <div class="bg-white px-4 py-4 md:px-8 md:py-7 xl:px-10">
+<div class="w-full">
+  <div class="bg-white py-4 md:py-7 xl:px-10">
     <div class="inline-flex w-full justify-end">
       <ng-content select="[header-action]"></ng-content>
     </div>
@@ -9,7 +9,7 @@
         <thead class="bg-graySmoke">
           <tr scope="col">
             @for (title of headers.goHeaderRef; track title) {
-              <th class="text-grayAsh px-4 py-2 text-start text-lg font-semibold capitalize">
+              <th class="px-4 py-2 text-start text-lg font-semibold capitalize text-grayAsh">
                 {{ title | translate }}
               </th>
             }

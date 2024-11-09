@@ -7,10 +7,11 @@ import { AutoUnsubscribe } from '@goeko/ui'
 import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
+import { LANG_PROFILE } from './profile-form'
 import { ProfileFormFactory } from './profile-form.factory'
+import { NotificationProfile } from './profile-payload.model'
 import { PROFILE_SME } from './profile-sme.constants'
 import { ProfileService } from './profile.service'
-import { NotificationProfile } from './profile-payload.model'
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
+  public dataLang = LANG_PROFILE
   private _externalId = this._profieService.externalId
   private destroy$ = new Subject<void>()
 
@@ -81,7 +83,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       if (this.userType() && !this.form) {
         this._createFormForUserType()
         this._loadDataProfile()
-        console.log(this.form)
       }
     })
   }
@@ -111,9 +112,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   private _setLocaltionInFormForSme() {
     if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
       this.locationsArrays.clear()
-      ;(this.dataProfile() as SmeUser).locations.forEach((location: LocationsCountry) => {
-        this._addLocations(location)
-      })
+      this._addLocations((this.dataProfile() as SmeUser).locations[0])
     }
   }
   private _addLocations(location: LocationsCountry) {

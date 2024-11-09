@@ -1,6 +1,7 @@
 export * from './project.interface'
 export * from './project.services'
 export * from './sme-analysis.store'
+export * from './sme-dashboard.interface'
 export * from './sme-request.model'
 export * from './sme.module'
 export * from './sme.services'

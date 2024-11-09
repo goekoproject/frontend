@@ -19,8 +19,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
       {
         controlName: 'comunicationLanguage',
         label: 'FORM_LABEL.comunicationLanguage',
-        type: 'country',
-        dataSelectKey: 'countries',
+        type: 'lang',
         required: true,
       },
       /*      {
@@ -50,7 +49,6 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
   },
   {
     legend: 'FORM_LABEL.yourLocation',
-    textSupport: 'FORM_LABEL.yourLocationTextSupport',
     fields: [
       {
         controlName: 'country',
