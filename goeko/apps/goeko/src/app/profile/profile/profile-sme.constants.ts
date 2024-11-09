@@ -19,8 +19,8 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
       {
         controlName: 'comunicationLanguage',
         label: 'FORM_LABEL.comunicationLanguage',
-        type: 'country',
-        dataSelectKey: 'countries',
+        type: 'lang',
+        dataLangKey: 'languages',
         required: true,
       },
       /*      {

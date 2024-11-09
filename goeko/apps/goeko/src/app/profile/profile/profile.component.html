@@ -57,6 +57,24 @@
                   </ui-super-select>
                 </div>
               }
+              @case ('lang') {
+                <div class="select-profile">
+                  <ui-super-select
+                    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                    [formControlName]="itemForm.controlName"
+                    [id]="itemForm.controlName"
+                    [name]="itemForm.controlName">
+                    <label title for="{{ itemForm.controlName }}">
+                      {{ itemForm.label | translate }}
+                    </label>
+                    <ng-container *ngIf="itemForm.dataLangKey">
+                      <super-option *ngFor="let option of dataLang[itemForm.dataLangKey]" [value]="option.code">
+                        {{ option.keyLang | translate }}
+                      </super-option>
+                    </ng-container>
+                  </ui-super-select>
+                </div>
+              }
               @case ('file-link') {
                 <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
               }

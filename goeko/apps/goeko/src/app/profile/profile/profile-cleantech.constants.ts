@@ -30,8 +30,8 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
       {
         controlName: 'comunicationLanguage',
         label: 'FORM_LABEL.comunicationLanguage',
-        type: 'select',
-        dataSelectKey: 'countries',
+        type: 'lang',
+        dataLangKey: 'languages',
         required: true,
       },
 /*       {

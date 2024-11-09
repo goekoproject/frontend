@@ -1,4 +1,13 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+
+export const LANG_PROFILE = {
+  languages: [
+    { code: 'en', keyLang: 'LANGS.en' },
+    { code: 'es', keyLang: 'LANGS.es' },
+    { code: 'fr', keyLang: 'LANGS.fr' },
+  ]
+}
+
 const IdentifierRegexs = {
   ES: /^[A-Z][0-9]{7}[0-9A-Z]$/,
   FR: /^[0-9]{9}$/,
