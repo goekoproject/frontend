@@ -7,8 +7,8 @@ import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.re
 import { EcosolutionsService } from '../ecosolutions/ecosolutions.service'
 import { SmeUser } from '../user/public-api'
 import { TranslateChangeService } from '../util/translate-change'
-import { Requests, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 import { SmeDashboard } from './sme-dashboard.interface'
+import { Requests, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 
 @Injectable()
 export class SmeService extends TranslateChangeService {
