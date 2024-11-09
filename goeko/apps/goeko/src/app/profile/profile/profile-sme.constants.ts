@@ -50,7 +50,6 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
   },
   {
     legend: 'FORM_LABEL.yourLocation',
-    textSupport: 'FORM_LABEL.yourLocationTextSupport',
     fields: [
       {
         controlName: 'country',

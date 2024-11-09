@@ -202,8 +202,7 @@
     "typeOfEcolutions": "Type d'éco-solution",
     "unit": "Unité",
     "website": "Site web",
-    "yourLocation": "Sélectionnez le pays et la region",
-    "yourLocationTextSupport": "Vos données de localisation seront utilisées pour personnaliser les recommandations de solutions écologiques."
+    "yourLocation": "Sélectionnez le pays et la région"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
