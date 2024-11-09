@@ -513,6 +513,8 @@
   "availability": "Disponible",
   "back": "Volver",
   "bank": "Banco",
+  "cleantechContacted": "Cleantech contactadas",
+
   "cancel": "Cancelar",
   "categories": "Categorías",
   "certified": "Certificado",
@@ -573,6 +575,7 @@
   "selected_products": "Productos seleccionados",
   "showLead": "Mostrar clientes potenciales",
   "showMore": "Ver más",
+  "showAll": "Ver todo",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Conectando empresas con tecnología limpia y financiación",
   "sme": "PYMES",
@@ -597,5 +600,6 @@
   "msgSearchEcosolutions": "Encuentra la mejor solución ecológica para ti",
   "subtitlePageCatalog": "Mejores soluciones para ",
   "results": "resultados",
-  "resultSolution": "resultado"
+  "resultSolution": "resultado",
+  "yourProjects": "Tus proyectos"
 }

@@ -544,6 +544,7 @@
   "leadFormSubtitle": "Nur einen Klick entfernt von nachhaltiger Effizienz",
   "leads": "Leads",
   "logout": "Abmelden",
+  "cleantechContacted": "Cleantech kontaktiert",
   "mandatory": "Verpflichtend",
   "my_company": "Mein Unternehmen",
   "new_analysis": "Neue Analyse",
@@ -571,6 +572,7 @@
   "selected_products": "Ausgewählte Produkte",
   "showLead": "Leads anzeigen",
   "showMore": "Mehr erfahren",
+  "showAll": "Alle anzeigen",
   "sloganGoeko": "Die Verbindung zur Effizienz",
   "sloganMainBanner": "Verbindung von Unternehmen mit sauberer Technologie und Finanzierung",
   "sme": "KMU",
@@ -596,5 +598,6 @@
   "msgSearchEcosolutions": "Suchen Sie nach Eco-solutions, die Ihren Bedürfnissen entsprechen",
   "subtitlePageCatalog": "Beste Lösungen für",
   "results": "ergebnisse",
-  "resultSolution": "Ergebnis"
+  "resultSolution": "Ergebnis",
+  "yourProjects": "Ihre Projekte"
 }

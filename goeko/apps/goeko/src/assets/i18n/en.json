@@ -193,6 +193,7 @@
     "price": "Price",
     "products": "Products",
     "province": "Province",
+    "cleantechContacted": "Cleantech contacted",
     "reductionPercentage": "Reduction Percentage",
     "reductionPercentageCO2": "CO₂ Reduction Percentage",
     "reductionPercentageHP": "Hazardous Products Reduction Percentage",
@@ -572,6 +573,7 @@
   "selected_products": "Selected products",
   "showLead": "Show leads",
   "showMore": "View more",
+  "showAll": "Show all",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Connecting businesses to clean technology and financing",
   "sme": "Sme",
@@ -597,5 +599,6 @@
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
   "subtitlePageCatalog": "Best solutions for your",
   "results": "results",
-  "resultSolution": "result"
+  "resultSolution": "result",
+  "yourProjects": "Your projects"
 }

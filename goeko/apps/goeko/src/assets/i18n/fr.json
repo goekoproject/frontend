@@ -530,6 +530,7 @@
   "defaultMessageLead": "Bonjour, votre éco-solution m’intéresse. Merci de bien vouloir me contacter par e-mail.",
   "details": "Détails",
   "dragAndDrop": "Glisser déposer",
+  "cleantechContacted": "Cleantech contacté",
   "edit": "Modifier",
   "editProject": "Modifier votre projet",
   "editSelection": "Modifier sélection",
@@ -572,6 +573,7 @@
   "selected_products": "Produits sélectionnés",
   "showLead": "Afficher les clients potentiels",
   "showMore": "Voir plus",
+  "showAll": "Voir tout",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "La connexion des entreprises aux technologies propres et au financement",
   "sme": "pme",
@@ -597,5 +599,6 @@
   "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
   "subtitlePageCatalog": "Meilleures solutions pour",
   "results": "résultats",
-  "resultSolution": "résultat"
+  "resultSolution": "résultat",
+  "yourProjects": "Vos projets"
 }
