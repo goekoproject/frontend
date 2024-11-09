@@ -5,27 +5,18 @@ import { DialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { Validators } from 'ngx-editor'
 
-import { ContentFulService, RESEND_APIKEY, ResendApiService } from '@goeko/store'
-import { environment } from '../../../environments/environment'
+import { ContentFulService } from '@goeko/store'
 import { map } from 'rxjs'
-import { MailgunApiService } from './mailgun-api.services'
 import { EmailMessage } from './email-message.model'
+import { MailgunApiService } from './mailgun-api.services'
 
-
-const CONTENT_TYPE_REQUEST_DEMO = 'requestDemo';
-
+const CONTENT_TYPE_REQUEST_DEMO = 'requestDemo'
 
 @Component({
   selector: 'goeko-request-demo-dialog',
   standalone: true,
   imports: [CommonModule, TranslateModule, FormsModule, ReactiveFormsModule],
-  providers: [
-    MailgunApiService,
-    {
-      provide: RESEND_APIKEY,
-      useValue: environment.resendApiKey,
-    },
-  ],
+  providers: [MailgunApiService],
   templateUrl: './request-demo-dialog.component.html',
   styleUrl: './request-demo-dialog.component.scss',
 })
@@ -35,17 +26,15 @@ export class RequestDemoDialogComponent implements OnInit {
   private _contentFulService = inject(ContentFulService)
   newSector = false
   countries: any
-  requestDemoData$:any;
-  requestDemoData: any;
-
+  requestDemoData$: any
+  requestDemoData: any
 
   constructor(private _fb: FormBuilder) {}
 
   public formRequestDemo!: FormGroup
 
   ngOnInit(): void {
-
-    this._loadContentFulRequestDemo();
+    this._loadContentFulRequestDemo()
 
     this.formRequestDemo = this._fb.group({
       company: ['', [Validators.required]],
@@ -65,22 +54,22 @@ export class RequestDemoDialogComponent implements OnInit {
   }
 
   private _loadContentFulRequestDemo() {
-      this.requestDemoData$ = this._contentFulService.getContentType(CONTENT_TYPE_REQUEST_DEMO).pipe(map((items) => items.items));
-      this.requestDemoData$.subscribe((items:any) => {
-        this.requestDemoData = {
-          requestDemotitle: items[0].fields.requestDemo,
-          description: items[0].fields.description,
-          companyTitle: items[0].fields.company,
-          sectorTitle: items[0].fields.sector,
-          otherSectorTitle: items[0].fields.otherSectorTitle,
-          countryTitle: items[0].fields.countryTitle,
-          emailTitle: items[0].fields.emailTitle,
-          sendTitle: items[0].fields.sendTitle,
-          countryValues: items[0].fields.countryValues,
-          sectorValues: items[0].fields.sectorValues,
-        };
-        console.log(this.requestDemoData);
-      });
+    this.requestDemoData$ = this._contentFulService.getContentType(CONTENT_TYPE_REQUEST_DEMO).pipe(map((items) => items.items))
+    this.requestDemoData$.subscribe((items: any) => {
+      this.requestDemoData = {
+        requestDemotitle: items[0].fields.requestDemo,
+        description: items[0].fields.description,
+        companyTitle: items[0].fields.company,
+        sectorTitle: items[0].fields.sector,
+        otherSectorTitle: items[0].fields.otherSectorTitle,
+        countryTitle: items[0].fields.countryTitle,
+        emailTitle: items[0].fields.emailTitle,
+        sendTitle: items[0].fields.sendTitle,
+        countryValues: items[0].fields.countryValues,
+        sectorValues: items[0].fields.sectorValues,
+      }
+      console.log(this.requestDemoData)
+    })
   }
 
   closeDialog(isAccepted: boolean = false) {
@@ -89,7 +78,7 @@ export class RequestDemoDialogComponent implements OnInit {
 
   send(): void {
     const messageHtml = this._buildHtmlMessage()
-    const subject = `A company with email ${this.formRequestDemo.controls['email'].value} is requesting a demo`;
+    const subject = `A company with email ${this.formRequestDemo.controls['email'].value} is requesting a demo`
     const message = new EmailMessage(subject, messageHtml)
     this._emailServices.sendEmailV2(message).subscribe((res) => {
       if (res) {
@@ -99,7 +88,8 @@ export class RequestDemoDialogComponent implements OnInit {
   }
 
   private _buildHtmlMessage() {
-    return `<!DOCTYPE html>
+    return (
+      `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -137,10 +127,8 @@ export class RequestDemoDialogComponent implements OnInit {
     </div>
     <div class="content">
       <p><span class="label">Company:</span> ${this.formRequestDemo.controls['company'].value}</p>
-      <p><span class="label">Sector:</span> ${this.formRequestDemo.controls['sector'].value}</p>`
-      +
-      this._getOtherSector()
-      +
+      <p><span class="label">Sector:</span> ${this.formRequestDemo.controls['sector'].value}</p>` +
+      this._getOtherSector() +
       `<p><span class="label">Country:</span> ${this.formRequestDemo.controls['country'].value}</p>
       <p><span class="label">Email:</span> ${this.formRequestDemo.controls['email'].value}</p>
     </div>
@@ -148,9 +136,10 @@ export class RequestDemoDialogComponent implements OnInit {
 </body>
 </html>
 `
+    )
   }
 
   private _getOtherSector(): string {
-    return  this.newSector ? `<p><span class="label">Other:</span> ${this.formRequestDemo.controls['otherSector'].value}</p>`: '';
+    return this.newSector ? `<p><span class="label">Other:</span> ${this.formRequestDemo.controls['otherSector'].value}</p>` : ''
   }
 }
