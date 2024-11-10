@@ -1,6 +1,9 @@
-import { Component, ElementRef, HostListener, Renderer2, signal, ViewChild, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { Router } from '@angular/router'
-import { LANGS } from '@goeko/core'
+import { CODE_LANG, LANGS } from '@goeko/core'
+import { DialogService } from '@goeko/ui'
+import { RequestDemoDialogComponent } from '../request-demo-dialog/request-demo-dialog.component'
+import { HeaderService } from './header.services'
 
 @Component({
   selector: 'goeko-header',
@@ -12,35 +15,42 @@ import { LANGS } from '@goeko/core'
     class: 'goeko-header',
   },
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
-
-  @HostListener('window:scroll', ['$event'])
-  onScroll($event: any) {
-    if (!this.header || !this.logo) return
-    if (window.scrollY > 0) {
-      this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '6rem')
-      this._renderer.setStyle(this.logo?.nativeElement, 'width', '7%')
-    } else {
-      this._renderer.setStyle(this.header?.nativeElement, 'maxHeight', '10rem')
-      this._renderer.setStyle(this.logo?.nativeElement, 'width', '12%')
-    }
-  }
-
-  langs = LANGS
-  defaultLang!: any
+  isDark!: boolean
+  langs = LANGS.filter((lang) => lang.code !== CODE_LANG.ES)
   mobileMenuOpen = signal(false)
+
   constructor(
-    private _renderer: Renderer2,
     private _router: Router,
+    private _dialogService: DialogService,
+    private _headerService: HeaderService,
   ) {}
 
+  ngOnInit(): void {
+    this._getHeaderTheme()
+  }
+
+  _getHeaderTheme() {
+    this._headerService.isDarkTheme.subscribe((res: boolean) => {
+      this.isDark = res
+    })
+  }
+
   goTologin() {
-    this._router.navigate(['/login'])
+    window.open('https://www.goeko.ch/login', '_self')
+    // this._router.navigate(['/login'])
   }
 
   setMobileMenuOpen() {
     this.mobileMenuOpen.update((value) => !value)
+  }
+
+  openRequestDemoDialog() {
+    this._dialogService
+      .open(RequestDemoDialogComponent)
+      .afterClosed()
+      .subscribe((isAccepted) => {})
   }
 }

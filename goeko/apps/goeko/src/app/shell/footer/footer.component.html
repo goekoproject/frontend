@@ -1,49 +1,53 @@
-<footer class="bg-white dark:bg-gray-900">
-  <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-    <div class="md:flex md:justify-between">
-      <div class="mb-6 md:mb-0">
-        <a href="https://flowbite.com/" class="flex items-center">
-          <img loading="lazy" src="assets/logo_footer.png" class="me-3 h-8" alt="FlowBite Logo" />
-          <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">GoEko</span>
-        </a>
-      </div>
-      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+<footer class="dark:bg-gray-900 rounded-3xl footer-content">
+  <div class="ml-8 mr-8 p-4 pt-6 pb-5">
+    <div class="md:flex gap-20">
         <div>
-          <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">{{ 'FOOTER.contact' | translate }}</h2>
-          <ul class="font-medium text-gray-500 dark:text-gray-400">
-            <li class="mb-4">
-              <a href="mailto:info@goeko.ch" class="hover:underline">info&#64;goeko.ch</a>
+          <h2 class="mb-4 text-sm font-semibold footer-gray-text">{{ 'LEGAL.legal' | translate }}</h2>
+          <ul class="font-medium text-base">
+            <li class="mb-2">
+              <a routerLink="privacy-policy" class="hover:underline text-black">{{ 'LEGAL.privacyPolicy' | translate }}</a>
+            </li>
+            <li class="mb-2">
+              <a routerLink="cookies-policy" class="hover:underline text-black">{{ 'LEGAL.cookiesPolicy' | translate }}</a>
             </li>
           </ul>
         </div>
         <div>
-          <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">{{ 'followUs' | translate }}</h2>
-          <ul class="font-medium text-gray-500 dark:text-gray-400">
-            <li class="mb-4">
-              <a href="https://www.linkedin.com/company/goeko" target="_blank" class="hover:underline">LinkedIn</a>
+          <h2 class="mb-4 text-sm font-semibold footer-gray-text">{{ 'FOOTER.contact' | translate }}</h2>
+          <ul class="font-medium text-base text-black">
+            <li class="mb-2">
+              <a href="mailto:info@goeko.ch" class="hover:underline text-black">info&#64;goeko.ch</a>
             </li>
+            <li class="mb-2">
+              <a class="text-black">
+                <span class="fi fi-ch"></span>
+                <span class="banner-info"> {{ 'BANNER.swissCompany' | translate }}</span>
+              </a>
+            </li>
+
           </ul>
         </div>
-        <div>
-          <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">{{ 'LEGAL.legal' | translate }}</h2>
-          <ul class="font-medium text-gray-500 dark:text-gray-400">
-            <li class="mb-4">
-              <a routerLink="privacy-policy" class="hover:underline">{{ 'LEGAL.privacyPolicy' | translate }}</a>
-            </li>
-            <li>
-              <a routerLink="cookiesPolicy" class="hover:underline">{{ 'LEGAL.cookiesPolicy' | translate }}</a>
-            </li>
-            <!--       <li>
-              <a href="#" class="hover:underline">Terms &amp; Conditions</a>
-            </li> -->
-          </ul>
+        <div class="ml-auto">
+          <div class="flex flex-row gap-4">
+            <div class="content-center">
+              <span>
+                {{ 'LEGAL.info' | translate }}
+              </span>
+            </div>
+            <div class="flex items-center mt-1">
+                <button (click)="openRequestDemoDialog()" class="request-button">
+                  {{ 'LEGAL.contact' | translate }}
+                </button>
+            </div>
+          </div>
+
         </div>
-      </div>
     </div>
-    <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
-    <div class="sm:flex sm:items-center sm:justify-between">
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-        >© {{ currentYear }} <a href="https://www.goeko.ch" class="hover:underline">GoEko, Swiss Company</a>. All Rights Reserved.
+    <hr class="mb-4 mt-12 opacity-50" />
+    <!-- sm:mx-auto lg:my-8 -->
+    <div class="sm:flex sm:items-center sm:justify-center">
+      <span class="sm:text-center text-base text-black">
+          <p>GoEko Sàrl, 33 ch. des Courbes, 1247 Anières, Geneva, Swizerland</p>
       </span>
     </div>
   </div>

@@ -17,9 +17,11 @@ $default-position-layer3-video: 8.4rem;
 .banner {
   display: flex;
   border-radius: 1.5rem;
-  background: radial-gradient(141.88% 100.98% at 21.55% 0%, rgba(185, 231, 254, 0) 1.04%, #e0f2fe 54.28%, #b9e7fe 54.58%);
-  gap: 2rem;
-  flex-wrap: wrap;
+  background: #ffffff;
+  gap: 5rem;
+  flex-direction: column;
+  align-items: center;
+  @apply z-10 overflow-hidden;
   &-content {
     display: flex;
     flex-direction: column;
@@ -35,7 +37,8 @@ $default-position-layer3-video: 8.4rem;
     font: var(--text-thin-accent);
     font-size: clamp(1rem, 1.2rem, 2rem);
     display: flex;
-    gap: 1rem;
+    gap: 4rem;
+    @apply flex-wrap p-16 sm:flex-nowrap xl:px-64 xl:py-16;
   }
 
   .word:nth-child(1) {
@@ -72,6 +75,15 @@ $default-position-layer3-video: 8.4rem;
     gap: 2rem;
     width: 100%;
   }
+
+  h1 {
+    font: var(--font-home-semibold);
+    font-size: 28px;
+  }
+  p {
+    font: var(--font-body-home);
+    font-size: 16px;
+  }
 }
 .banner-actions > button {
   max-width: 16.25rem;
@@ -84,7 +96,7 @@ $default-position-layer3-video: 8.4rem;
 }
 .banner-video {
   position: relative;
-  width: 56%;
+  width: clamp(530px, 100%, 649px);
   .banner-video-sme {
     z-index: 1;
     position: relative;

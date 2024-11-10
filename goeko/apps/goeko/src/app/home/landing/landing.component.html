@@ -1,7 +1,49 @@
-<div class="flex flex-col gap-4">
-  <go-banner></go-banner>
+<article class="main-front">
+  <img [src]="mainPhoto()" class="absolute top-0 z-auto aspect-square object-cover xl:aspect-auto xl:w-svw" />
+  <div class="gradient bottom-[8.5rem] lg:bottom-[-8rem]"></div>
+
+  <div class="flex flex-col items-center lg:w-full">
+    <h1 #goekoText class="title-transition text-7xl">GoEko</h1>
+    <div class="text-center lg:mt-12 lg:w-[64rem]">
+      <h1 class="title text-transition text-6xl leading-none lg:text-7xl" *ngIf="showMainSlogan">
+        {{ entryDataMain()?.text }}
+      </h1>
+      <h3 class="subtitle text-transition" *ngIf="showMainSlogan">{{ entryDataConnecting()?.text }}</h3>
+
+      <div class="text-transition m-auto grid place-items-center" *ngIf="connection">
+        <div class="mt-12 flex items-center">
+          <div class="i-connection relative flex h-12 min-w-[200px] max-w-[16rem]">
+            <button
+              class="z-1 start-button !absolute right-1 top-1 rounded-[25px] px-3 py-2 text-center align-middle leading-6 text-white"
+              type="button"
+              (click)="goTologin()">
+              ->
+            </button>
+            <input
+              type="email"
+              class="h-full w-full rounded-[25px] px-3 py-2.5 pr-20 outline outline-0 disabled:bg-white"
+              [placeholder]="connection()?.text"
+              disabled />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+@defer (on viewport) {
+  <go-banner class="relative"></go-banner>
+} @placeholder {
+  <div>loading...</div>
+}
+@defer (on viewport) {
+  <go-content />
+} @placeholder {
+  <div>loading...</div>
+}
+
+<div class="flex flex-col gap-24">
   @defer (on viewport) {
-    <go-content></go-content>
     <goeko-team></goeko-team>
   } @placeholder {
     <div>loading...</div>

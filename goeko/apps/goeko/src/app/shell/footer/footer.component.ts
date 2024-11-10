@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core'
+import { DialogService } from '@goeko/ui';
+import { RequestDemoDialogComponent } from '../../home/request-demo-dialog/request-demo-dialog.component';
 
 @Component({
   selector: 'goeko-footer',
@@ -7,10 +9,24 @@ import { Component, ViewEncapsulation } from '@angular/core'
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'footer-wrapper',
+    class: 'footer-wrapper px-6 lg:p-8',
   },
 })
 export class FooterComponent {
   public currentYear = new Date().getFullYear();
+
+  constructor(
+    private _dialogService: DialogService,
+  ) {
+  }
+
+
+  openRequestDemoDialog() {
+    this._dialogService
+      .open(RequestDemoDialogComponent)
+      .afterClosed()
+      .subscribe((isAccepted) => {
+      })
+  }
 
 }

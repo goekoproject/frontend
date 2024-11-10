@@ -11,10 +11,10 @@
     "affordable": "Affordable",
     "easy": "Easy",
     "fast": "Fast",
-    "green": "Green",
+    "green": "green",
     "swissCompany": "A Swiss Company",
     "the": "The",
-    "transition": "Transition"
+    "transition": "transition"
   },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Edit your ecosolution",
@@ -218,7 +218,7 @@
     "btnCleantech": "Find leads",
     "meetOurTeam": "Meet Our Team",
     "sloganCallActionsBtn": "Free trial to connect with qualified leads",
-    "sloganCallActionsBtnSME": "Start your green transition here",
+    "sloganCallActionsBtnSME": "Start transition",
     "sloganTeam": "Allow us to introduce you to the talented group of individuals leading our mission to drive a cleaner and more sustainable future."
   },
   "INPUT_FILE": {
@@ -237,8 +237,10 @@
   "LEGAL": {
     "cookiesNotice": "This website uses cookies to provide you with the best user experience. By continuing to browse our site, you agree to our use of cookies in accordance with our ",
     "cookiesPolicy": "Cookies policy",
-    "legal": "Legal",
-    "privacyPolicy": "Privacy policy"
+    "privacyPolicy": "Privacy policy",
+    "legal": "Resources",
+    "contact": "Contact",
+    "info": "Do you need more information?"
   },
   "LOGIN": {
     "forgotPassword": "Forgot  password?",
@@ -248,10 +250,12 @@
     "msgsignup2": "Create your account"
   },
   "MENU": {
+    "services": "Services",
     "aboutGoEKo": "About GoEko",
     "blog": "Blog",
     "contacttUs": "Contact",
     "login": "Login",
+    "demo": "Request a demo",
     "signup": "Sign up"
   },
   "MENU_USER": {

@@ -13,7 +13,7 @@
     "fast": "Rapide",
     "green": "Transition",
     "swissCompany": "A Swiss Company",
-    "the": "LA",
+    "the": "La",
     "transition": "verte"
   },
   "BREADCRUMBS": {
@@ -237,8 +237,10 @@
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
     "cookiesPolicy": "Politique de cookies",
+    "privacyPolicy": "Politique de confidentialité",
     "legal": "Légal",
-    "privacyPolicy": "Politique de confidentialité"
+    "contact": "Contact",
+    "info": "Avez-vous besoin de plus d'informations?"
   },
   "LOGIN": {
     "forgotPassword": "Mot de passe oublié ?",
@@ -248,9 +250,11 @@
     "msgsignup2": "Créez votre compte"
   },
   "MENU": {
+    "services": "Services",
     "aboutGoEKo": "A propos de GoEko",
     "blog": "Blog",
     "contacttUs": "Contact",
+    "demo": "Demander une démo",
     "login": "Se connecter",
     "signup": "S'inscrire"
   },

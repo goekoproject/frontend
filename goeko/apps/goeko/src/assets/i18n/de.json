@@ -228,6 +228,8 @@
   "LEGAL": {
     "cookiesNotice": "Diese Website verwendet Cookies, um Ihnen das beste Benutzererlebnis zu bieten. Indem Sie weiter auf unserer Seite surfen, stimmen Sie der Verwendung von Cookies gemäß unserer ",
     "cookiesPolicy": "Cookie-Richtlinie",
+    "contact": "Kontakt",
+    "info": "Benötigen Sie weitere Informationen?",
     "legal": "Rechtliches",
     "privacyPolicy": "Datenschutzrichtlinie"
   },
@@ -239,6 +241,7 @@
     "msgsignup2": "Erstellen Sie Ihr Konto"
   },
   "MENU": {
+    "services": "Dienstleistungen",
     "aboutGoEKo": "Über GoEko",
     "blog": "Blog",
     "contacttUs": "Kontakt",

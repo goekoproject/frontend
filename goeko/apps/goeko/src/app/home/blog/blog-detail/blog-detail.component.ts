@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router'
 import { AssetsContentFulPipe, ContentFulModule, ContentFulService } from '@goeko/store'
 import { GoDateFormatPipe, MdToHtmlPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { HeaderService } from '../../header/header.services'
 
 @Component({
   selector: 'goeko-blog-detail',
@@ -21,11 +22,14 @@ export class BlogDetailComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _contentFulService: ContentFulService,
+    private _headerService: HeaderService
   ) {
     console.log('post', this._blogId)
   }
 
   ngOnInit(): void {
+    this._setHeaderTheme();
+
     const blogId = this._blogId
     if (blogId) {
       this._contentFulService.getEntryId(blogId).subscribe((post) => {
@@ -35,5 +39,9 @@ export class BlogDetailComponent implements OnInit {
   }
   goBack() {
     window.history.back()
+  }
+
+  private _setHeaderTheme() {
+    this._headerService.isDarkTheme.next(true);
   }
 }
