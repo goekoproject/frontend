@@ -1,6 +1,6 @@
-<div class="is-lighthome flex flex-col pb-8 pl-32 pr-32 pt-16">
+<div class="is-lighthome flex flex-col p-4 lg:pb-8 lg:pl-32 lg:pr-32 lg:pt-16">
   @if (enterprise && cleanTech) {
-    <div class="flex flex-row justify-evenly pb-5">
+    <div class="flex flex-row justify-evenly pb-5 mt-4 lg:mt-0">
       <a class="header-tab" [ngClass]="{ active: step === 'step1' }" (click)="step = 'step1'">{{ enterprise.actorType }}</a>
       <a class="header-tab" [ngClass]="{ active: step === 'step2' }" (click)="step = 'step2'">{{ cleanTech.actorType }}</a>
     </div>
@@ -50,7 +50,7 @@
   </div>
 </div>
 
-<div class="is-lighthome rate flex flex-col pb-16 pl-32 pr-32">
+<div class="is-lighthome rate flex flex-col p-4 lg:pb-16 lg:pl-32 lg:pr-32">
   <div class="w-full pt-16">
     @if (enterprise) {
       <h1 class="subtitle mb-6 text-center text-black">
@@ -108,8 +108,11 @@
       }
     }
   </div>
-  <button go-button routerLink="/home" (click)="_setTopScroll()">
-    <i class="ti ti-square-rounded-arrow-left"></i>
-    {{ 'home' | translate }}
-  </button>
+  <div class="lg:text-start text-center p-4">
+    <button go-button routerLink="/home" (click)="_setTopScroll()">
+      <i class="ti ti-square-rounded-arrow-left"></i>
+      {{ 'home' | translate }}
+    </button>
+  </div>
+
 </div>
