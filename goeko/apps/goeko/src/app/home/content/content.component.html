@@ -1,7 +1,7 @@
 <section class="select-actors">
   @if (entryDataConnecting() && entryDataSustainability()) {
     <h4 class="select-actors-description">
-      <div [innerHTML]="applyStyles(entryDataSustainability()?.text)"></div>
+      <div class="leading-none" [innerHTML]="applyStyles(entryDataSustainability()?.text)"></div>
     </h4>
   }
   <ul class="platform-actors">
@@ -39,7 +39,7 @@
           </div>
 
           <div class="info-actors-feature" *ngIf="article?.benefits && article?.benefits.length > 0">
-            <p class="info-actors-feature-description" id="descriptions2">
+            <p class="info-actors-feature-description text-justify" id="descriptions2">
               {{ article?.descriptions2 }}
             </p>
             <ul class="info-actors-benefis">

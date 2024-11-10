@@ -18,7 +18,7 @@ $default-position-layer3-video: 8.4rem;
   display: flex;
   border-radius: 1.5rem;
   background: #ffffff;
-  gap: 5rem;
+  // gap: 5rem;
   flex-direction: column;
   align-items: center;
   @apply z-10 overflow-hidden;
@@ -96,7 +96,7 @@ $default-position-layer3-video: 8.4rem;
 }
 .banner-video {
   position: relative;
-  width: clamp(530px, 100%, 649px);
+  //width: clamp(530px, 100%, 649px);
   .banner-video-sme {
     z-index: 1;
     position: relative;

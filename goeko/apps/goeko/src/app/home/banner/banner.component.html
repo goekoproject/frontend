@@ -1,4 +1,4 @@
-<div class="banner">
+<div class="banner lg:gap-20">
   @if (advantages) {
     <div class="banner-content">
       <div class="banner-support-text justify-center">
@@ -15,7 +15,7 @@
     </div>
   }
 
-  <div class="banner-video">
+  <div class="banner-video w-[19rem] lg:w-[40rem]">
     <button go-button appearance="flat" (click)="watchVideo()" class="button-play">
       <i class="ti ti-player-play-filled"></i>
       <p>{{ 'watchVideo' | translate }}</p>
