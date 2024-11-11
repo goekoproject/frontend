@@ -84,7 +84,5 @@ export class BannerComponent implements AfterViewInit, OnInit {
   watchVideo() {
     this.marketingVideo.nativeElement.currentTime = 0.0
     this.marketingVideo.nativeElement.requestFullscreen()
-    this.marketingVideo.nativeElement.controls = true
-    this.marketingVideo.nativeElement.play()
   }
 }
