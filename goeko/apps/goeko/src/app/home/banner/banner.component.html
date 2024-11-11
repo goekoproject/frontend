@@ -20,7 +20,7 @@
       <i class="ti ti-player-play-filled"></i>
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    <video loop class="banner-video-sme" preload="metadata" [src]="srcVideo()" #marketingVideo>
+    <video autoplay loop class="banner-video-sme" preload="metadata" [src]="srcVideo()" #marketingVideo webkit-playsinline playsinline>
       @defer (when srcVideo()) {
         <source [src]="srcVideo()" type="video/mp4" />
       }

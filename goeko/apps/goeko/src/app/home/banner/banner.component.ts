@@ -61,11 +61,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return
     }
     this.srcVideo.set(this._urlSrcVideo())
-
     this.marketingVideo.nativeElement.muted = true
-    if (!this.isSmallScreen().matches) {
-      this.marketingVideo.nativeElement.autoplay = true
-    }
   }
 
   private _changeLangCode() {
