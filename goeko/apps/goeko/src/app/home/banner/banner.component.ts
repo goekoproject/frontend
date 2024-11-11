@@ -63,6 +63,8 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this.srcVideo.set(this._urlSrcVideo())
 
     this.marketingVideo.nativeElement.muted = true
+    this.marketingVideo.nativeElement.controls = true
+
     if (!this.isSmallScreen().matches) {
       this.marketingVideo.nativeElement.autoplay = true
     }
@@ -84,7 +86,5 @@ export class BannerComponent implements AfterViewInit, OnInit {
     this.marketingVideo.nativeElement.requestFullscreen()
     this.marketingVideo.nativeElement.controls = true
     this.marketingVideo.nativeElement.play()
-    this.marketingVideo.nativeElement.removeAttribute('playsinline')
-    this.marketingVideo.nativeElement.removeAttribute('webkit-playsinline')
   }
 }
