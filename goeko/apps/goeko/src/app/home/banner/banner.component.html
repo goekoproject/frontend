@@ -15,12 +15,22 @@
     </div>
   }
 
-  <div class="banner-video p-6 lg:w-[40rem]">
+  <div class="banner-video overflow-hidden p-6 lg:w-[40rem]">
     <button go-button appearance="flat" (click)="watchVideo()" class="button-play">
       <i class="ti ti-player-play-filled"></i>
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    <video autoplay webkit-playsinline playsinline loop class="banner-video-sme" preload="metadata" [src]="srcVideo()" #marketingVideo>
+    <video
+      autoplay
+      webkit-playsinline
+      playsinline
+      loop
+      [muted]="true"
+      controls
+      class="banner-video-sme rounded-xl"
+      preload="metadata"
+      [src]="srcVideo()"
+      #marketingVideo>
       @defer (when srcVideo(); on viewport) {
         <source [src]="srcVideo()" type="video/mp4" />
       } @placeholder {

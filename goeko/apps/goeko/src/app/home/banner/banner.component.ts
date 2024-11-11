@@ -61,23 +61,12 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return
     }
     this.srcVideo.set(this._urlSrcVideo())
-
-    this.marketingVideo.nativeElement.muted = true
-    this.marketingVideo.nativeElement.controls = true
-
-    if (!this.isSmallScreen().matches) {
-      this.marketingVideo.nativeElement.autoplay = true
-    }
   }
 
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
       this.srcVideo.set(this._urlSrcVideo())
-      if (this.isSmallScreen().matches) {
-        this.marketingVideo.nativeElement.setAttribute('playsinline', '')
-        this.marketingVideo.nativeElement.setAttribute('webkit-playsinline', '')
-      }
       this.loadAdvantages()
     })
   }
