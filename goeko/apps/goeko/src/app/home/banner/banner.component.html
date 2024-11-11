@@ -21,8 +21,10 @@
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
     <video autoplay webkit-playsinline playsinline loop class="banner-video-sme" preload="metadata" [src]="srcVideo()" #marketingVideo>
-      @defer (when srcVideo()) {
+      @defer (when srcVideo(); on viewport) {
         <source [src]="srcVideo()" type="video/mp4" />
+      } @placeholder {
+        <div>Loading...</div>
       }
     </video>
   </div>

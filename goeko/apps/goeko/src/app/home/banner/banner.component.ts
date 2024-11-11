@@ -73,7 +73,8 @@ export class BannerComponent implements AfterViewInit, OnInit {
       this.currentLangCode.set(res.lang)
       this.srcVideo.set(this._urlSrcVideo())
       if (this.isSmallScreen().matches) {
-        this.marketingVideo.nativeElement.pause()
+        this.marketingVideo.nativeElement.setAttribute('playsinline', '')
+        this.marketingVideo.nativeElement.setAttribute('webkit-playsinline', '')
       }
       this.loadAdvantages()
     })
@@ -81,7 +82,9 @@ export class BannerComponent implements AfterViewInit, OnInit {
   watchVideo() {
     this.marketingVideo.nativeElement.currentTime = 0.0
     this.marketingVideo.nativeElement.requestFullscreen()
-    this.marketingVideo.nativeElement.controls = this.marketingVideo.nativeElement.controls = true
+    this.marketingVideo.nativeElement.controls = true
     this.marketingVideo.nativeElement.play()
+    this.marketingVideo.nativeElement.removeAttribute('playsinline')
+    this.marketingVideo.nativeElement.removeAttribute('webkit-playsinline')
   }
 }
