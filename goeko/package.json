@@ -58,7 +58,7 @@
     "save-dev": "^0.0.1-security",
     "three": "^0.170.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.0"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.0.0",
@@ -108,7 +108,7 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.2.5",
-    "ts-node": "10.9.1",
+    "ts-node": "10.9.2",
     "typescript": "5.6.3",
     "webpack-bundle-analyzer": "^4.10.2"
   }
