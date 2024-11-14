@@ -2,7 +2,7 @@
   @apply mx-auto flex flex-col gap-24 px-4 lg:w-full lg:px-6;
 }
 .main-front {
-  @apply flex flex-col items-center pt-28;
+  @apply flex flex-col items-center pt-4 lg:pt-12;
 }
 
 .title {

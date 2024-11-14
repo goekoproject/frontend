@@ -1,4 +1,4 @@
-<div class="banner">
+<div class="banner lg:gap-20">
   @if (advantages) {
     <div class="banner-content">
       <div class="banner-support-text justify-center">
@@ -15,13 +15,27 @@
     </div>
   }
 
-  <div class="banner-video">
+  <div class="banner-video overflow-hidden p-6 lg:w-[40rem]">
     <button go-button appearance="flat" (click)="watchVideo()" class="button-play">
       <i class="ti ti-player-play-filled"></i>
       <p>{{ 'watchVideo' | translate }}</p>
     </button>
-    <video loop class="banner-video-sme" preload="metadata" [src]="srcVideo()" #marketingVideo>
-      <source type="video/mp4" />
+    <video
+      autoplay
+      webkit-playsinline
+      playsinline
+      loop
+      [muted]="true"
+      controls
+      class="banner-video-sme rounded-xl"
+      preload="metadata"
+      [src]="srcVideo()"
+      #marketingVideo>
+      @defer (when srcVideo(); on viewport) {
+        <source [src]="srcVideo()" type="video/mp4" />
+      } @placeholder {
+        <div>Loading...</div>
+      }
     </video>
   </div>
 
