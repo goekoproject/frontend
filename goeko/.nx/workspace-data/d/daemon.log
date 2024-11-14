@@ -1293,3 +1293,25 @@ UnhandledPromiseRejection: This error originated either by throwing inside of an
 }
 
 Node.js v20.15.0
+[NX Daemon Server] - 2024-11-14T19:02:57.544Z - Started listening on: \\.\pipe\nx\C:\Users\oswal\AppData\Local\Temp\0183278f42d89007ff06\d.sock
+[NX Daemon Server] - 2024-11-14T19:02:57.551Z - [WATCHER]: Subscribed to changes within: D:\frontend\goeko (native)
+[NX Daemon Server] - 2024-11-14T19:02:57.555Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-14T19:02:57.557Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-11-14T19:02:57.560Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-14T19:02:57.563Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-11-14T19:02:57.565Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-11-14T19:02:57.565Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2024-11-14T19:02:57.566Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-14T19:02:57.566Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (sources)
+[NX Daemon Server] - 2024-11-14T19:02:57.566Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (outputs)
+[NX Daemon Server] - 2024-11-14T19:21:24.265Z - Started listening on: \\.\pipe\nx\C:\Users\oswal\AppData\Local\Temp\0183278f42d89007ff06\d.sock
+[NX Daemon Server] - 2024-11-14T19:21:24.270Z - [WATCHER]: Subscribed to changes within: D:\frontend\goeko (native)
+[NX Daemon Server] - 2024-11-14T19:21:24.278Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-14T19:21:24.280Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-14T19:21:24.281Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-14T19:21:24.284Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-11-14T19:21:24.286Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-11-14T19:21:24.287Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 3.
+[NX Daemon Server] - 2024-11-14T19:21:24.287Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-14T19:21:24.287Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (sources)
+[NX Daemon Server] - 2024-11-14T19:21:24.287Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (outputs)
