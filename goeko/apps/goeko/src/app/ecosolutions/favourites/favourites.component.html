@@ -1,0 +1,18 @@
+<div class="mx-auto p-4 sm:max-w-full lg:max-w-7xl">
+  <div class="grid grid-cols-1 gap-6 max-xl:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    @if (ecosolutionFavorites$ | async; as ecosolutionFavorites) {
+      @for (ecosolutionFavorite of ecosolutionFavorites; track ecosolutionFavorite.id) {
+        <goeko-card-product
+          [title]="ecosolutionFavorite.ecosolution.solutionName"
+          [description]="ecosolutionFavorite.ecosolution.description"
+          [image]="ecosolutionFavorite.ecosolution.companyDetail.logo"
+          [category]="'CATEGORIES.' + ecosolutionFavorite.ecosolution.classification.mainCategory | translate"
+          [classNameCategoy]="ecosolutionFavorite.ecosolution.classification.mainCategory"
+          [isFavorite]="ecosolutionFavorite.tag === TAGGING.FAVOURITES"
+          (changeFavorite)="removeFavorite(ecosolutionFavorite.ecosolution.ecosolutionId)"
+          (changeShowMore)="showMore(ecosolutionFavorite.ecosolution.ecosolutionId)"
+          />
+      }
+    }
+  </div>
+</div>

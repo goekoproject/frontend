@@ -1,0 +1,28 @@
+<div class="relative flex h-80 w-full max-w-80 flex-col justify-around rounded-2xl bg-white px-4 shadow-lg">
+  <div class="flex flex-col gap-2">
+    <div class="border-grayLight size-20 rounded-lg border-2">
+      <img src="{{ image || 'assets/environment-bro.svg' }}" alt="Product 1" class="h-full w-full object-contain" />
+    </div>
+
+    <div class="">
+      <h3 class="text-lg font-semibold text-primary-950 xl:text-2xl">{{ title }}</h3>
+      <p class="line-clamp-3 text-sm">{{ description }}</p>
+    </div>
+    <span class="go-badge-category">{{ category }}</span>
+  </div>
+  <div class="flex justify-between">
+    <button class="go2-button" (click)="showMore()">
+      {{ 'showMore' | translate }}
+    </button>
+
+    <div
+      class="right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary-50 hover:bg-primary-200"
+      (click)="doFavorite()">
+      @if (isFavorite) {
+        <i class="ti ti-heart-filled text-xl text-primary-400"></i>
+      } @else {
+        <i class="ti ti-heart text-xl text-primary-400"></i>
+      }
+    </div>
+  </div>
+</div>

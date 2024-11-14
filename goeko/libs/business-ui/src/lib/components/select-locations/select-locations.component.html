@@ -1,146 +1,65 @@
-<ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
-
-@if(!newLocation || !toogleEdit) {
-<div
-  (click)="addLocation()"
-  class="flex items-center justify-center h-16 border rounded-md border-dashed  border-primary-500 text-primary-500 text-4xl cursor-pointer"
->
-  <i class="ti ti-plus"></i>
-  <p class="text-base">{{ 'FORM_LABEL.newProvince' | translate }}</p>
+<div class="flex flex-col gap-4">
+  @defer (when countries() && dataSourceSelect.size > 0) {
+    <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
+  }
+  @if ((singleSelect() && controlLocations.controls.length < 1) || (!singleSelect() && controlLocations.controls.length >= 0)) {
+    <div
+      (click)="addLocation()"
+      class="flex h-16 cursor-pointer items-center justify-center rounded-md border border-dashed border-primary-500 text-4xl text-primary-500">
+      <i class="ti ti-plus text-primary-900"></i>
+      <p class="text-base text-primary-900">{{ 'FORM_LABEL.newProvince' | translate }}</p>
+    </div>
+  }
 </div>
-}
 
 <ng-template #formSelectLocation>
   <div class="select-profile" [formGroup]="form">
-    <div formArrayName="locations" class="flex flex-col gap-1">
-      @for(location of controlLocations.controls; track location; let i=$index){
-      @if (location) {
-      <div
-        class="h-28"
-        [class.hidden-selected]="toogleEdit && i === selectedLocationsIndex()"
-      >
-        <ng-container
-          [ngTemplateOutlet]="readonly"
-          [ngTemplateOutletContext]="{ location: location, index: i }"
-        ></ng-container>
-      </div>
-      }
+    <div formArrayName="locations" class="flex flex-col gap-4 divide-y">
+      @if (controlLocations.controls && controlLocations.controls.length) {
+        @for (location of controlLocations.controls; track location; let i = $index) {
+          <div [formGroupName]="i" class="locations-selected">
+            <div [formGroupName]="'country'" class="flex w-full flex-col gap-4">
+              <ui-super-select
+                class="w-full"
+                [placeholder]="'FORM_LABEL.country' | translate"
+                [formControlName]="'code'"
+                id="country"
+                [compareWith]="countryCompareWith">
+                <label title for=" country ">
+                  {{ 'FORM_LABEL.country' | translate }}
+                </label>
+                @for (option of countries(); track option.code; let first = $first) {
+                  <super-option [value]="option.code" [valueSelected]="first">
+                    {{ option.label | translate }}
+                  </super-option>
+                }
+              </ui-super-select>
 
-      <div
-        [formGroupName]="i"
-        [class.hidden-selected]="
-          !(toogleEdit && i === selectedLocationsIndex())
-        "
-        class="locations-selected border-primary-500"
-      >
-        <div [formGroupName]="controlNameCountry">
-          <ui-super-select
-            [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-            [formControlName]="'code'"
-            [id]="controlNameCountry"
-            [compareWith]="defaultSetSuperSelect"
-            (valueChange)="onCodeChange($event.value)"
-            [loadInit]="true"
-          >
-            <label title for="{{ controlNameCountry }}">
-              {{ 'FORM_LABEL.country' | translate }}
-            </label>
-            <super-option *ngFor="let option of countries()" [value]="option">
-              {{ option.label | translate }}
-            </super-option>
-          </ui-super-select>
+              @if (dataSourceSelect.has(location.value.country.code)) {
+                <div class="flex items-center gap-4">
+                  <ui-super-select
+                    class="w-full"
+                    [placeholder]="'regions' | translate"
+                    formControlName="regions"
+                    id="regions"
+                    [multiple]="true"
+                    [compareWith]="regionsCompareWith">
+                    <label title for="regions">
+                      {{ 'FORM_LABEL.province' | translate }}
+                    </label>
 
-          <div class="flex gap-4 items-center">
-            <ui-super-select
-              [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-              [formControlName]="'regions'"
-              [id]="controlNameProvince"
-              [multiple]="true"
-              [compareWith]="defaultSetSuperSelect"
-              [loadInit]="true"
-              [disabled]="isAllProvince"
-            >
-              <label title for="{{ controlNameProvince }}">
-                {{ 'FORM_LABEL.province' | translate }}
-              </label>
-              <super-option *ngFor="let option of regions()" [value]="option">
-                {{ option.label | translate }}
-              </super-option>
-            </ui-super-select>
-
-            <div class="flex gap-1 items-center cursor-pointer">
-              <input
-                type="checkbox"
-                id="allProvinces"
-                name="allProvinces"
-                [checked]="isAllProvince"
-                (change)="getIsProvince($event.target)"
-              />
-              <label for="allProvinces">{{
-                'FORM_LABEL.allProvinces' | translate
-              }}</label>
+                    @for (option of dataSourceSelect.get(location.value.country.code); track option.code) {
+                      <super-option [value]="option" (click)="option.code === optionAllProvince.code ? selectALL() : deselectAll()">
+                        {{ option.label | translate }}
+                      </super-option>
+                    }
+                  </ui-super-select>
+                </div>
+              }
             </div>
           </div>
-        </div>
-        <div class="m-auto flex gap-2 mr-0">
-          <i
-            [attr.disabled]="location.get(controlNameCountry)?.invalid"
-            class="ti ti-circle-check-filled text-4xl cursor-pointer text-primary-500"
-            (click)="confirmLocation(location)"
-          ></i>
-          <i
-            class="ti ti-circle-x text-4xl cursor-pointer m-auto text-darkAccent"
-            (click)="closeFormLocation(i)"
-          >
-          </i>
-        </div>
-      </div>
+        }
       }
     </div>
   </div>
-</ng-template>
-<ng-template #readonly let-location="location" let-index="index">
-  @if(location) {
-  <article
-    class="locations-selected border-primary-500 text-primary-500 justify-around"
-  >
-    <section class="selected-element">
-      <span class="title-elements">
-        {{ 'FORM_LABEL.country' | translate }}</span
-      >
-      <p class="country">
-        {{ location.get(controlNameCountry)?.value.code?.label }}
-      </p>
-    </section>
-
-    <section class="selected-element basis-full">
-      <span class="title-elements">
-        {{ 'FORM_LABEL.province' | translate }}</span
-      >
-
-      <div class="selected-provinces">
-        @if(location.get(controlNameCountry)?.value.regions) { @for ( provinces
-        of location.get(controlNameCountry)?.value.regions; track
-        provinces.code) {
-        <p class="provinces bg-primary-300 text-darkAccent">
-          {{ provinces.label }}
-        </p>
-        } } @else {
-        <p class="provinces bg-primary-300 text-darkAccent">
-          {{ 'FORM_LABEL.allProvinces' | translate }}
-        </p>
-        }
-      </div>
-    </section>
-    <i
-      class="ti ti-edit text-4xl m-auto cursor-pointer"
-      (click)="editLocation(location, index)"
-    ></i>
-    <i
-      class="ti ti-circle-x text-4xl cursor-pointer m-auto text-hp"
-      (click)="deleteLocation(index)"
-    >
-    </i>
-  </article>
-  }
 </ng-template>

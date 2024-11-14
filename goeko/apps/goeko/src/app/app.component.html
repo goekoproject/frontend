@@ -1,22 +1,17 @@
-
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
-
-
-@if(showPopupCookies) {
-<go-popup
-  [title]="'LEGAL.cookiesPolicy' | translate"
-  [textMainButton]="'accept' | translate"
-  [textSecondaryButton]="'decline' | translate"
-  (onClickOK)="acceptCookie()"
->
-  <i class="ti ti-cookie" icon></i>
-  <p description>
-    {{ 'LEGAL.cookiesNotice' | translate }}
-    <a [routerLink]="'/home/cookies-policy'">
-      {{ 'LEGAL.cookiesPolicy' | translate }}</a
-    >
-  </p>
-</go-popup>
+<router-outlet></router-outlet>
+@if (showPopupCookies) {
+  <go-popup
+    [title]="'LEGAL.cookiesPolicy' | translate"
+    [textMainButton]="'accept' | translate"
+    [textSecondaryButton]="'decline' | translate"
+    (onClickOK)="acceptCookie()"
+  >
+    <i class="ti ti-cookie" icon></i>
+    <p description>
+      {{ 'LEGAL.cookiesNotice' | translate }}
+      <a [routerLink]="'/home/cookies-policy'">
+        {{ 'LEGAL.cookiesPolicy' | translate }}</a
+      >
+    </p>
+  </go-popup>
 }

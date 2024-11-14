@@ -1,0 +1,17 @@
+<div class="flex gap-2 items-start py-4 flex-col">
+  <label class="text-darkAccent text-opacity-50">{{ label | translate }}</label>
+  <div class="flex gap-2">
+    @for (lang of langs; track lang.code; let i = $index) {
+      <button
+        class="border-2 border-lightAccent px-2 pb-1 rounded-md hover:bg-lightAccent hover:text-darkAccent transition-colors active:bg-white active:text-lightAccent"
+        [ngClass]="{
+          'bg-lightAccent': lang.code === selectedCodeLang(),
+          'text-white': lang.code === selectedCodeLang(),
+        }"
+        (click)="selectLang(lang, i)"
+      >
+        {{ lang.title | translate }}
+      </button>
+    }
+  </div>
+</div>

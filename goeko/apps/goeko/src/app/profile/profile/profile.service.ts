@@ -1,6 +1,12 @@
 import { Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { LocationRegions, LocationsService, UserFactory, UserProfileForm, UserService } from '@goeko/store';
+import {
+  LocationRegions,
+  LocationsService,
+  UserFactory,
+  UserProfileForm,
+  UserService,
+} from '@goeko/store';
 
 @Injectable()
 export class ProfileService {
@@ -12,41 +18,34 @@ export class ProfileService {
 
   public userProfile = this._userService.userProfile;
   public userType = this._userService.userType;
-  public externalId = this._userService.externalId;  
-  public username = this._userService.username;  
+  public externalId = this._userService.externalId;
+  public username = this._userService.username;
   constructor(
     private _locationsService: LocationsService,
     private _userService: UserService,
-  ) {
-  }
+  ) {}
 
-  getRegions() {
-    this._locationsService.getRegions(this.selectedCodeLang().code).subscribe(regions => {
-      if(regions) {
-        this.regions.set(regions)
-      }
-    })
-
-  }
-  
 
 
   fetchUser() {
     this._userService.fetchUser();
   }
   createUserProfile(formValue: UserProfileForm) {
-    const userFactory = UserFactory.createSmeUserProfileDto(formValue);
+    const userFactory = UserFactory.createProfileDto(
+      formValue,
+      this.userType(),
+    );
     return this._userService.createUserProfile(userFactory);
   }
   updateUserProfile(id: string, formValue: UserProfileForm) {
-    const userFactory = UserFactory.createSmeUserProfileDto(formValue);
-    return this._userService.updateUserProfile(id,userFactory);
-  }
-  
-  uploadImgProfile(id: string, img: string | File | undefined){
-    return this._userService.uploadImgProfile(id,img);
+    const userFactory = UserFactory.createProfileDto(
+      formValue,
+      this.userType(),
+    );
+    return this._userService.updateUserProfile(id, userFactory);
   }
 
- 
-
+  uploadImgProfile(id: string, img: File[]) {
+    return this._userService.uploadImgProfile(id, img);
+  }
 }

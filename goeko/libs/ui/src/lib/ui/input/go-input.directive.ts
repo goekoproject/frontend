@@ -1,107 +1,115 @@
 import {
-	AfterContentInit,
-	Directive,
-	ElementRef,
-	EventEmitter,
-	HostListener,
-	Inject,
-	Injector,
-	Input,
-	OnInit,
-	Output,
-	Provider,
-	Renderer2,
-	forwardRef
-} from '@angular/core';
-import {
-	ControlValueAccessor,
-	FormControlName,
-	FormGroupDirective,
-	NG_VALUE_ACCESSOR,
-	NgControl,
-	Validators,
-} from '@angular/forms';
+  AfterContentInit,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Inject,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+  Provider,
+  Renderer2,
+  forwardRef,
+} from '@angular/core'
+import { ControlValueAccessor, FormControlName, FormGroupDirective, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms'
 
 const CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => GoInputDirective),
   multi: true,
-};
+}
 @Directive({
   selector: 'go-input',
   providers: [CONTROL_VALUE_ACCESSOR],
 })
-export class GoInputDirective
-  implements OnInit, AfterContentInit, ControlValueAccessor
-{
-  @Input() readonly = false;
-  @Output() valueChange = new EventEmitter();
+export class GoInputDirective implements OnInit, AfterContentInit, ControlValueAccessor {
+  @Input() readonly = false
+  @Output() valueChange = new EventEmitter()
+
+  @Input()
+  public get type(): string {
+    return this._type
+  }
+  public set type(value: string) {
+    this._type = value
+    this.elementRef.nativeElement.type = this._type
+  }
+  private _type: string = 'text'
+
   @HostListener('change', ['$event.detail'])
   onHostChange(value: string) {
-    this.value = value;
-    this.valueChange.emit(value);
+    this.value = value
+    this.valueChange.emit(value)
   }
 
-  _onChange: (value: any) => void = () => {};
-  _onTouched: (value?: any) => void = () => {};
+  _onChange: (value: any) => void = () => {}
+  _onTouched: (value?: any) => void = () => {}
 
   set value(value: string) {
-    this._value = value;
-    this.elementRef.nativeElement.value = this.value;
+    this._value = value
+    this.elementRef.nativeElement.value = this.value
 
-    this._onChange(value);
-    this._onTouched(value);
+    this._onChange(value)
+    this._onTouched(value)
   }
   get value() {
-    return this._value;
+    return this._value
   }
 
-  private _value!: any;
-  private _ngControl!: any;
+  private _value!: any
+  private _ngControl!: any
   private get required() {
-	return this._ngControl?.hasValidator(Validators.required)
+    return this._ngControl?.hasValidator(Validators.required)
   }
   private get inputElementRef() {
-    return this.elementRef.nativeElement.renderRoot.querySelectorAll(
-      'input'
-    )[0] as HTMLInputElement;
+    return (this.elementRef.nativeElement?.renderRoot?.querySelectorAll('input')[0] as HTMLInputElement) || this.elementRef.nativeElement
   }
   constructor(
     @Inject(Injector) private injector: Injector,
     private _renderer: Renderer2,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
   ) {}
 
   ngOnInit(): void {
-	const injectedControl = this.injector.get(NgControl);
-    this._ngControl =  this.injector.get(FormGroupDirective).getControl(injectedControl as FormControlName);
+    const injectedControl = this.injector.get(NgControl)
+    this._ngControl = this.injector.get(FormGroupDirective).getControl(injectedControl as FormControlName)
   }
   ngAfterContentInit(): void {
-	this._setAttributeRequired();
+    this._setAttributeRequired()
     if (!this.inputElementRef) {
-      return;
+      return
     }
-    this.inputElementRef.readOnly = this.readonly;
+    this.inputElementRef.readOnly = this.readonly
   }
   writeValue(value: any) {
-    this._value = value;
-    this.elementRef.nativeElement.value = value || '';
-    this._renderer.setProperty(this.elementRef.nativeElement, 'value', value || '');
+    this._value = this._assingValue(value)
+    this.elementRef.nativeElement.value = this._value || ''
+    this._renderer.setProperty(this.elementRef.nativeElement, 'value', this._value || '')
+  }
+
+  private _assingValue(newValue: any) {
+    if (typeof newValue === 'object') {
+      return newValue?.label
+    } else {
+      return newValue
+    }
   }
 
   registerOnChange(fn: any) {
-    this._onChange = fn;
+    this._onChange = fn
   }
 
   registerOnTouched(fn: any) {
-    this._onTouched = fn;
+    this._onTouched = fn
   }
 
   setDisabledState(isDisabled: boolean) {
-    this.elementRef.nativeElement.disabled = isDisabled;
+    this.elementRef.nativeElement.disabled = isDisabled
   }
 
   private _setAttributeRequired() {
-	this._renderer.setProperty(this.elementRef.nativeElement, 'required', this.required);
+    this._renderer.setProperty(this.elementRef.nativeElement, 'required', this.required)
   }
 }

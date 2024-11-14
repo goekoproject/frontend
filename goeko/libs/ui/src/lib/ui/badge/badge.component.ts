@@ -8,8 +8,8 @@ import {
   Input,
   Output,
   ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+  ViewEncapsulation,
+} from '@angular/core'
 
 @Component({
   selector: 'go-badge',
@@ -23,66 +23,67 @@ import {
     '[attr.selected]': 'selected',
     '[attr.readonly]': 'readonly',
     '[attr.fill]': 'fill',
-
   },
 })
 export class BadgeComponent implements AfterContentInit {
-  @ViewChild('labelElement', { static: false }) labelElement!: ElementRef<any>;
+  @ViewChild('labelElement', { static: false }) labelElement!: ElementRef<any>
 
   @Input()
   public get value(): any {
-    return this._value;
+    return this._value
   }
   public set value(value: any) {
-    this._value = value;
-    this._cdf.markForCheck();
+    this._value = value
+    this._cdf.markForCheck()
   }
-  private _value!: any;
+  private _value!: any
 
-  @Input() fill!: any;
+  @Input() fill!: any
   @Input()
   public get readonly() {
-    return this._readonly;
+    return this._readonly
   }
   public set readonly(value) {
-    this._readonly = value;
-    this._cdf.markForCheck();
+    this._readonly = value
+    this._cdf.markForCheck()
   }
-  private _readonly = false;
+  private _readonly = false
 
-  @Input() className!: string |undefined;
+  @Input() className!: string | undefined
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  @Output() onSelected$ = new EventEmitter();
+  @Output() onSelected$ = new EventEmitter()
   @Input()
   public get selected() {
-    this._cdf.markForCheck();
-    return this._selected;
+    this._cdf.markForCheck()
+    return this._selected
   }
   public set selected(value) {
-    this._selected = value;
-    this._cdf.markForCheck();
+    this._selected = value
+    this._cdf.markForCheck()
   }
-  private _selected!: boolean;
+  private _selected!: boolean
 
   get label() {
-    return this.labelElement?.nativeElement.textContent;
+    return this.labelElement?.nativeElement.textContent
   }
 
   constructor(private _cdf: ChangeDetectorRef) {}
 
   ngAfterContentInit(): void {
-    this._cdf.markForCheck();
+    this._cdf.markForCheck()
   }
   onSelect() {
-    this.onSelected$.emit(this);
-    this._cdf.markForCheck();
+    this.onSelected$.emit(this)
+    this._cdf.markForCheck()
   }
 
   onSelected(selected: boolean) {
-    this.selected = !selected;
+    this.selected = !selected
   }
-  clear()  {
-    this.selected = false;
+  clear() {
+    this.selected = false
   }
-  
+  selectAll() {
+    this.selected = true
+  }
 }

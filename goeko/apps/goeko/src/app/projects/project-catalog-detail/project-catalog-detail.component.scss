@@ -1,0 +1,15 @@
+@mixin section-data {
+  @apply flex gap-5 rounded-3xl border bg-white p-8;
+}
+.fieldset {
+  @apply flex flex-col gap-3;
+}
+.section {
+  @include section-data;
+  @apply flex-col;
+}
+
+.section-row {
+  @include section-data;
+  @apply flex-row;
+}

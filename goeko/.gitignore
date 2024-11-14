@@ -40,6 +40,11 @@ Thumbs.db
 
 .nx/cache
 .angular
+.firebase/
 
 # Project
-apps/goeko/src/tailwind-styles.scss
+*.unlighthouse
+
+
+
+.nx/workspace-data

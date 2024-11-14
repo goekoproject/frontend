@@ -30,9 +30,7 @@ import { DemoRoutingModule } from './demo-routing.module';
 		OverlayModule,
 		TranslateModule,
 		GoInputModule,
-		SmeModule.forRoot({
-			endpoint: environment.baseUrl,
-		}),
+		SmeModule,
 		ButtonModule,
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

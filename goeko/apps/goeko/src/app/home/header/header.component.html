@@ -1,25 +1,31 @@
-<header class="header" #header>
-  <div class="header-wrapper">
-    <img
-      alt="logo-main"
-      src="../../../assets/logo.png"
-      #logo
-      [routerLink]="['/']"
-      class="link"
-    />
+<header #header class="mx-auto lg:max-w-screen-2xl">
+  <nav class=" mx-auto flex h-[6.25rem] flex-row px-6" aria-label="Global">
+    <div class="flex flex-grow basis-3/5 items-center justify-between gap-4 lg:basis-full">
+      <img alt="logo-main" src="../../../assets/logo.svg" #logo [routerLink]="['/']" class="h-[4.25rem] w-20 cursor-pointer" />
+      <goeko-menu />
 
-    <h4 class="header-slogan">{{ 'sloganGoeko' | translate }}</h4>
-  </div>
-  <goeko-menu></goeko-menu>
-  <div class="header-actions">
-    <button go-button (click)="goTologin()">
-      {{ 'MENU.login' | translate }}
-    </button>
-    <goeko-select-i18n
-      [langs]="langs"
-      (onSelect)="onChangeLangs($event)"
-      [defaultLang]="defaultLang"
-    >
-    </goeko-select-i18n>
-  </div>
+      <div class="hidden items-center gap-4 md:flex lg:flex-1 lg:basis-2/6 lg:justify-end">
+        <goeko-select-i18n [langs]="langs" />
+
+        <button (click)="goTologin()" class="login-button">
+          {{ 'MENU.login' | translate }}
+        </button>
+
+        <button (click)="openRequestDemoDialog()" class="request-button">
+          {{ 'MENU.demo' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="flex lg:hidden">
+      <button type="button" class="px-4 text-white" (click)="setMobileMenuOpen()">
+        <span class="sr-only">Open main menu</span>
+        <svg class="size-10" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <goeko-menu-mobile [mobileMenuOpen]="mobileMenuOpen()" (login)="goTologin()" />
 </header>

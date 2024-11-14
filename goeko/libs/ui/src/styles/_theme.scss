@@ -1,5 +1,3 @@
-
-
 *,
 *::before,
 *::after {
@@ -14,7 +12,7 @@
  */
 @import './media.scss';
 @import './input.scss';
-@import  './dialog.scss';
+@import './dialog.scss';
 *,
 *::before,
 *::after {
@@ -29,8 +27,8 @@ html {
 }
 
 body {
-  background-color: var(--color-background-white);
-  margin: 0 auto;
+  background-color: var(--home-page-dark-blue);
+
   font: var(--font-default);
   position: relative;
   overflow-x: hidden;
@@ -39,18 +37,33 @@ body {
   flex-direction: column;
   height: 100%;
   max-width: 1920px;
+  align-items: center;
 }
+
 body:has(div.is-platform) {
-  background: var(--primary--50);
+  background: var(--white);
+  align-items: stretch;
 }
+
+body:has(div.is-lighthome) {
+  background: var(--white);
+}
+
+div.is-lighthome ~ .goeko-header   {
+  background-color: var(--home-page-dark-blue);
+}
+
 :root {
   --center-container: 90%;
-  --medium-width-field: 24.875rem;
+  --medium-width-field: 24rem;
   --medium-height-field: 4.625rem;
 }
 a {
   text-decoration: none;
   color: inherit;
+  color: var(--primary--500);
+  font-weight: bold;
+  cursor: pointer;
   &:hover {
     color: var(--primary--700);
   }
@@ -63,6 +76,9 @@ canvas:focus {
 }
 ul {
   list-style: none;
+}
+p {
+  word-break: break-word;
 }
 
 select {
@@ -173,14 +189,9 @@ fieldset {
   padding: 1.5rem 0.5rem;
   font-size: 18px;
   border: none;
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-8;
+}
 
-}
-label {
-  color: rgb(43, 43, 43);
-  font-size: 0.875rem;
-  font-weight: 600;
-}
 legend {
   font-size: 1.25rem;
   color: var(--soft-dark);
@@ -194,12 +205,11 @@ fieldset:not(:has(legend)) {
   margin-bottom: 1rem;
 }
 
-
 input[type='radio' i]:focus-visible {
   outline: none;
 }
 .text-support {
-  color: #75808a;
+  color: #525960;
   font-size: 0.85rem;
 }
 [disabled='true'] {
@@ -238,19 +248,15 @@ input[type='radio' i]:focus-visible {
 }
 .co2Emission {
   background: var(--co2-emission);
-  @extend %cancel-bagde;
 }
 .water {
   background: var(--color-water);
-  @extend %cancel-bagde;
 }
 .waste {
   background: var(--waste);
-  @extend %cancel-bagde;
 }
 .hazardousProduct {
   background: var(--hp);
-  @extend %cancel-bagde;
 }
 .go-back {
   position: relative;
@@ -277,4 +283,9 @@ input[type='radio' i]:focus-visible {
 .required-field {
   font-size: 12px;
   font-weight: 100;
+}
+.go-badge-category {
+  @apply w-max rounded-full px-3 py-2 text-xs font-semibold;
+  background-color: var(--green-pastel);
+  color: var(--green-lime);
 }

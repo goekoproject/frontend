@@ -1,8 +1,8 @@
-import { SUPER_SELECT_TOKEN } from './../super-select-token';
-import { takeUntil } from 'rxjs';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { BaseSelectComponent } from './base-select.component';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { takeUntil } from 'rxjs';
+import { SUPER_SELECT_TOKEN } from './../super-select-token';
+import { BaseSelectComponent } from './base-select.component';
 
 @Component({
 	selector: 'ui-super-select',

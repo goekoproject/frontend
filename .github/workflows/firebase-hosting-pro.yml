@@ -27,12 +27,16 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Build
-        run: npm run build:pro goeko --production
+        run: npm run build:pro
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-project
           path: goeko/dist/apps
+  test:
+     name: Unit Test
+     needs: build
+     uses: ./.github/workflows/deploy-pro-test.yml
   deploy:
     name: Deploy
     runs-on: ubuntu-latest

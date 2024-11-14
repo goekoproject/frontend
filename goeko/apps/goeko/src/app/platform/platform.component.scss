@@ -1,10 +1,3 @@
 .is-platform {
-    margin: 0 2rem;
-    padding-top: 1.4rem;
-    flex-direction: column;
-    gap: 1.2rem;
-    height: 100vh;
-    min-height: 100%;
-    width: 86vw;
-    display: flex;
-  }
+  @apply flex w-full flex-col gap-4 p-4;
+}

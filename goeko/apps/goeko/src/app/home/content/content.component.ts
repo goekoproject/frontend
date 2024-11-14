@@ -1,17 +1,10 @@
-import { ViewportScroller } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  QueryList,
-  ViewChildren,
-  ViewEncapsulation,
-  effect,
-} from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs';
-import { HomeService } from '../home.service';
-import { CONTENT } from './content.contants';
+import { CommonModule, ViewportScroller } from '@angular/common'
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { HomeService } from '../home.service'
+import { CONTENT } from './content.contants'
+import { OrderByPipe } from './order-by.pipe'
+import { ButtonModule } from '@goeko/ui'
 
 enum CONTENT_TYPE_DATA {
   ACTORS = 'actores',
@@ -26,102 +19,84 @@ enum ENTRYS_ID {
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [TranslateModule, CommonModule, OrderByPipe, ButtonModule],
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: {
+    class: 'flex flex-col items-center gap-[10rem]',
+  },
 })
-export class ContentComponent implements OnInit {
-  @ViewChildren('content') articlesRef!: QueryList<ElementRef>;
-  /* article: any; */
-  articles!: Array<any>;
-  otherContent = false;
-  badStuffIcons = ['bolt', 'compost', 'unknown_document'];
-  actorsImg = ['sme.jpg', 'cleantech.jpg', 'bank.jpg'];
+export class ContentComponent implements OnInit, AfterViewInit {
+  @ViewChildren('content') articlesRef!: QueryList<ElementRef>
+  @ViewChild('articleEl', { static: true }) article!: ElementRef
 
-  public content = CONTENT;
+  articles!: Array<any>
 
-  currentLang!: string;
-  private _searchEntry$ = (entryId: any) => {
-    console.log(entryId);
-    return this._homeService
-      .getEntry(entryId)
-      .pipe(map((benefits: any) => this._buildBenefis(benefits)));
-  };
+  public content = CONTENT
 
-  private _buildBenefis = (benefit: any) => {
-    return {
-      ...benefit.fields,
-      media: benefit.fields.media.fields.file,
-    };
-  };
+  currentLang!: string
 
   private _buildDataLandingPage = (data?: any): Array<any> => {
-    return data.content
-      .filter((b: any) => b.data.target?.fields)
-      .map((benefits: any) => benefits.data.target.fields);
-  };
-  link: any;
+    return data.content.filter((b: any) => b.data.target?.fields).map((benefits: any) => benefits.data.target.fields)
+  }
 
-  public actors!: any;
-  public entryDataConnecting!: { text: string };
-  public entryDataSustainability!: { text: string };
+  public actors = this._homeService.dataContentTypeSignal
+  public entryDataConnecting = this._homeService.entryDataConnecting
+  public entryDataSustainability = this._homeService.entryDataSustainability
 
   constructor(
     private _homeService: HomeService,
     private _translate: TranslateService,
-    private _viewportScroller: ViewportScroller
-  ) {
-    this._effectActors();
-  }
+    private _viewportScroller: ViewportScroller,
+  ) {}
 
   ngOnInit(): void {
-    this.currentLang = this._translate.defaultLang;
+    this.currentLang = this._translate.defaultLang
 
-    this._getContentActors();
-    this._getContentDataActors();
-    this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY);
-    this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING);
-    this._onChangeLang();
-
+    this._getContentActors()
+    this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY)
+    this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
+    this._onChangeLang()
   }
 
-  private _effectActors() {
-    effect(() => {
-      this.actors = this._homeService.dataContentTypeSignal();
-      this.entryDataConnecting = this._homeService.entryDataConnecting();
-      this.entryDataSustainability =
-        this._homeService.entryDataSustainability();
-    });
+  applyStyles(value:string): string {
+    const newValue = value.replaceAll('[','<span class="fill-colour">').replaceAll(']','</span>');
+    return  newValue;
   }
+
+  ngAfterViewInit(): void {
+    this._getContentDataActors()
+  }
+
   navigateToActors(actor: string) {
-    this._viewportScroller.scrollToAnchor(actor);
+    this._viewportScroller.scrollToAnchor(actor)
   }
 
   private _onChangeLang() {
     this._translate.onLangChange.subscribe((res) => {
-      this._getContentDataActors();
-      this._getContentActors();
-      this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY);
-      this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING);
-      this.currentLang = res.lang;
-    });
+      this._getContentDataActors()
+      this._getContentActors()
+      this._homeService.getSloganSustainability(ENTRYS_ID.SUSTAINABILITY)
+      this._homeService.getSloganConnecting(ENTRYS_ID.CONNECTING)
+      this.currentLang = res.lang
+    })
   }
 
   private _getContentDataActors() {
-    this._homeService
-      .getContentType(CONTENT_TYPE_DATA.ACTORS)
-      .subscribe((res) => {
-        this.articles = res.map((actor: any) => ({
-          ...actor,
-          benefits: this._buildDataLandingPage(actor.benefits),
-          image: actor.image?.fields?.file?.url,
-        }));
-      });
+    this._homeService.getContentType(CONTENT_TYPE_DATA.ACTORS).subscribe((res) => {
+      this.articles = res.map((actor: any) => ({
+        ...actor,
+        benefits: this._buildDataLandingPage(actor.benefits),
+        image: actor.image?.fields?.file?.url,
+      }))
+    })
   }
 
   private _getContentActors() {
-    this._homeService.getContentTypeSignal(CONTENT_TYPE_DATA.LANDING_PAGE);
+    this._homeService.getContentTypeSignal(CONTENT_TYPE_DATA.LANDING_PAGE)
   }
 
-  goTologin() {
-    this._homeService.goTologin();
-
+  goToLogin() {
+    this._homeService.goTologin()
   }
 }

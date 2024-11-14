@@ -1,72 +1,49 @@
-import { Component, OnInit, effect } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from '@goeko/business-ui';
-import {
-  ProjectService,
-  SmeAnalysisStoreService,
-  SmeRequestResponse,
-  UserService,
-} from '@goeko/store';
-import { MESSAGE_TYPE } from '@goeko/ui';
-import { take, toArray } from 'rxjs';
+import { Component, effect, inject, input } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
+import { EcosolutionsTaggingService, SmeRequestResponse, TAGGING } from '@goeko/store'
+import { DialogService } from '@goeko/ui'
+import { DashboardSmeService } from './dashboard-sme.service'
 
 @Component({
   selector: 'goeko-dashboard-sme',
   templateUrl: './dashboard-sme.component.html',
   styleUrls: ['./dashboard-sme.component.scss'],
-  providers: [MessageService],
+  providers: [MessageService, DashboardSmeService, EcosolutionsTaggingService],
 })
-export class DashboardSmeComponent implements OnInit {
-  public userProfile = this._userService.userProfile;
-  public projects!: Array<SmeRequestResponse>;
-  constructor(
-    private _userService: UserService,
-    private _smeAnalyticsStore: SmeAnalysisStoreService,
-    private _projectService: ProjectService,
-    private _router: Router,
-    private _messageService: MessageService,
-    public route: ActivatedRoute
-  ) {
+export class DashboardSmeComponent {
+  private _dashboardSmeService = inject(DashboardSmeService)
+  private _router = inject(Router)
+  public route = inject(ActivatedRoute)
+  private _dialogService = inject(DialogService)
+
+  public TAGGING = TAGGING
+  public id = input<string>('')
+
+  public summary = this._dashboardSmeService.summary
+  public ecosolutionFavourites = this._dashboardSmeService.ecosolutionFavourites
+  constructor() {
     effect(() => {
-      if (this.userProfile().id) {
-        this._getLastProjectName();
+      if (this.id()) {
+        this._dashboardSmeService.getDashboardData(this.id())
+        this._dashboardSmeService.getEcosolutionFavourites(this.id())
       }
-    });
+    })
   }
-  ngOnInit(): void {
-    this.projects = new Array<SmeRequestResponse>();
+  openNewProjectDialog() {
+    this._dialogService
+      .open(DialogNewProjectComponent)
+      .afterClosed()
+      .subscribe((newProject) => {
+        this._goToProject(newProject)
+      })
   }
-
-  private _getLastProjectName() {
-    this._projectService
-      .getRecommendationsByProjectById(this.userProfile().id)
-      .pipe(take(3), toArray())
-      .subscribe((projects: SmeRequestResponse[]) => {
-        if (projects) {
-          this.projects = projects;
-        }
-      });
-  }
-
-  goToProject(projects: SmeRequestResponse) {
-    this._smeAnalyticsStore.setCurrentAnalysis(projects);
-    this._router.navigate(['../sme-analysis/projects/project',this.userProfile().id], {
+  private _goToProject(projects: SmeRequestResponse) {
+    this._router.navigate(['../project-form', this.id(), projects.id], {
       relativeTo: this.route.parent,
-      queryParams: {
-        projectId: projects.id
-      },
-    });
+    })
   }
-
-  deleteProject(project: SmeRequestResponse) {
-    this._messageService
-      .deleteMessage(MESSAGE_TYPE.WARNING, project.name)
-      .afterClosed().subscribe((res) => {
-        if (res) {
-          this._projectService.deleteProject(project.id).subscribe((data) => {
-            this._getLastProjectName();
-          });
-        }
-      });
+  showMore(ecosolutionId: string) {
+    this._router.navigate([`platform/ecosolutions-detail/${this.id()}/${ecosolutionId}`])
   }
 }

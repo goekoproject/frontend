@@ -1,200 +1,175 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { CanComponentDeactivate } from '@goeko/business-ui';
-import {
-  CountrySelectOption,
-  DataSelect,
-  SmeUser,
-  USER_TYPE,
-  UserModal,
-  UserSwitch
-} from '@goeko/store';
-import { AutoUnsubscribe, SideDialogService } from '@goeko/ui';
-import { Subject, distinctUntilChanged, forkJoin, of, takeUntil } from 'rxjs';
-import { PROFILE_CLEANTECH } from './profile-cleantech.constants';
-import { ProfileFieldset } from './profile-fieldset.interface';
-import { ProfileFormFactory } from './profile-form.factory';
-import { PROFILE_SME } from './profile-sme.constants';
-import { ProfileService } from './profile.service';
+import { Component, effect, OnInit } from '@angular/core'
+import { FormArray, FormControl, FormGroup } from '@angular/forms'
+import { ActivatedRoute } from '@angular/router'
+import { CanComponentDeactivate } from '@goeko/business-ui'
+import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
+import { AutoUnsubscribe } from '@goeko/ui'
+import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
+import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
+import { ProfileFieldset } from './profile-fieldset.interface'
+import { LANG_PROFILE } from './profile-form'
+import { ProfileFormFactory } from './profile-form.factory'
+import { NotificationProfile } from './profile-payload.model'
+import { PROFILE_SME } from './profile-sme.constants'
+import { ProfileService } from './profile.service'
 
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
   sme: PROFILE_SME,
-};
+}
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
   if (o1 && o2 && typeof o2 !== 'object') {
-    return o1.code.toString() === o2;
+    return o1.code.toString() === o2
   }
 
   if (o1 && o2 && typeof o2 === 'object') {
-    return o1.code?.toString() === o2.code?.toString();
+    return o1.code?.toString() === o2.code?.toString()
   }
 
-  return null;
-};
+  return null
+}
 
 const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
   if (o1 && o2) {
-    return o1.code === o2;
+    return o1.code === o2
   }
 
-  return null;
-};
+  return null
+}
 
-const TYPE_FORM_FOR_USERTYPE: UserSwitch<
-  Array<ProfileFieldset<'sme' | 'cleantech'>>
-> = {
+const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantech'>>> = {
   sme: PROFILE_SME,
   cleantech: PROFILE_CLEANTECH,
-};
+}
 
 @AutoUnsubscribe()
 @Component({
   selector: 'goeko-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  providers: []
-
+  providers: [],
 })
-export class ProfileComponent implements OnInit,CanComponentDeactivate {
-  form!: FormGroup;
-  savedProfileOK!: boolean;
-  public dataSelect = DataSelect as any;
+export class ProfileComponent implements OnInit, CanComponentDeactivate {
+  form!: FormGroup
+  savedProfileOK!: boolean
+  public dataSelect = DataSelect as any
 
-  public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>;
-  public dataProfile = this._profieService.userProfile;
-  public userType = this._profieService.userType;
-  private _externalId = this._profieService.externalId;
-  private destroy$ = new Subject<void>();
+  public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
+  public dataProfile = this._profieService.userProfile
+  public userType = this._profieService.userType
+  public dataLang = LANG_PROFILE
+  private _externalId = this._profieService.externalId
+  private destroy$ = new Subject<void>()
 
-  private _selectedCodeLang = this._profieService.selectedCodeLang;
-  public profileImg!: File | string | undefined;
-  public countries = this._profieService.countries;
-  public regions = this._profieService.regions;
-  public username = this._profieService.username;
-  public fileProfile: any;
-  public defaultSetSuperSelect = defaultSetSuperSelect as (
-    o1: any,
-    o2: any
-  ) => boolean;
-  public defaultSetCountriesSme = defaultSetCountriesSme as (
-    o1: CountrySelectOption,
-    o2: string
-  ) => boolean;
+  public profileImg!: File[]
+  public countries = this._profieService.countries
+  public username = this._profieService.username
+  public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
+  public defaultSetCountriesSme = defaultSetCountriesSme as (o1: CountrySelectOption, o2: string) => boolean
 
-  private _uploadImg$ = () =>
-    this._profieService.uploadImgProfile(this.dataProfile().id, this.profileImg);
+  private _uploadImg$ = (id = this.dataProfile()?.id) => {
+    return this._profieService.uploadImgProfile(id, this.profileImg)
+  }
 
-  public  get locationsArrays(): FormArray {
-    return this.form.get('locations') as FormArray;
+  public get locationsArrays(): FormArray {
+    return this.form.get('locations') as FormArray
   }
   constructor(
-    private _sideDialogService: SideDialogService,
     private _profieService: ProfileService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
   ) {
+    effect(() => {
+      if (this.userType() && !this.form) {
+        this._createFormForUserType()
+        this._loadDataProfile()
+      }
+    })
   }
-  canDeactivate () { 
+
+  canDeactivate() {
     return !!this.dataProfile().id
   }
-  
 
   ngOnInit() {
-    this._sideDialogService.closeDialog();
-    this._profieService.fetchUser();
-    this._createFormForUserType();
-    this._loadDataProfile();
-    this._countryChanges();
+    this._profieService.fetchUser()
   }
+
   private _createFormForUserType() {
-    if (this.dataProfile()) {
-      this.form = ProfileFormFactory.createProfileForm(this.userType());
-      this.formSection =
-        TYPE_FORM_FOR_USERTYPE[
-          this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE
-        ];
-    }
+    this.form = ProfileFormFactory.createProfileForm(this.userType())
+    this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE]
   }
 
   private _loadDataProfile() {
-    this.form.patchValue(this.dataProfile());
-    this.form.get('externalId')?.patchValue(this._externalId());
-    this._setLocaltionInFormForSme();
+    this.form.patchValue(this.dataProfile())
+    this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification?.lang)
+    this.form.get('phoneNumber')?.patchValue(this.dataProfile()?.notification?.phoneNumber)
+    this.form.get('externalId')?.patchValue(this._externalId())
+    this.form.get('generalNotifications')?.patchValue((this.dataProfile().notification as NotificationProfile).enabled)
+    this._setLocaltionInFormForSme()
   }
-
-  private _createLocations():FormGroup {
-    return new FormGroup({
-      country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl()
-      }),
-    });
-  }
-
-  private _addLocations() {
-    this.locationsArrays.push(this._createLocations());
-  }
-
 
   private _setLocaltionInFormForSme() {
-    if(this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
-      this.locationsArrays.clear();
-   
-      (this.dataProfile() as SmeUser).locations.forEach(()=> {
-        this._addLocations();
-        
-      })
-      this.form.get('locations')?.patchValue((this.dataProfile() as SmeUser).locations);
+    if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
+      this.locationsArrays.clear()
+      this._addLocations((this.dataProfile() as SmeUser).locations[0])
     }
   }
-  private _countryChanges() {
-    this.form?.get('country')?.valueChanges.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((country) => {
-      this._selectedCodeLang.set(country);
-      this._profieService.getRegions();
-    });
+  private _addLocations(location: LocationsCountry) {
+    this.locationsArrays.push(this._createLocations(location))
   }
-
+  private _createLocations(location: LocationsCountry): FormGroup {
+    return new FormGroup({
+      country: new FormGroup({
+        code: new FormControl(location.country.code),
+        regions: new FormControl(location.country.regions),
+      }),
+    })
+  }
+  fileChange(file: File[]) {
+    this.profileImg = file
+  }
   saveProfile() {
     this._profieService
       .createUserProfile(this.form.value)
-      .subscribe((dataProfile) => {
-        if (dataProfile) {
-          this._changeDataProfile(dataProfile);
-          this._saveProfileImg();
-        }
-      });
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((dataProfile) => {
+          if (dataProfile && this.profileImg) {
+            return this._uploadImg$(dataProfile.id).pipe(map((uploadResult) => ({ dataProfile, uploadResult })))
+          } else {
+            return [{ dataProfile }]
+          }
+        }),
+      )
+      .subscribe({
+        next: ({ dataProfile }) => {
+          this._propageDataUser(dataProfile)
+        },
+        error: (error) => {
+          console.error('Error al crear el perfil', error)
+        },
+      })
   }
 
   updateProfile() {
-    const dataForUpdated = {
-      uploadImg: this.profileImg ? this._uploadImg$() : of(null),
-      profile: this._profieService.updateUserProfile(
-        this.dataProfile().id,
-        this.form.value
-      ),
-    };
-    forkJoin(dataForUpdated).subscribe((dataProfile: any) => {
-      this._changeDataProfile(dataProfile.profile);
-    });
+    const profileUpdate$ = this._profieService.updateUserProfile(this.dataProfile().id, this.form.value)
+
+    forkJoin({ profileUpdate: profileUpdate$, imageUpdate: this._uploadImg$() })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (dataProfile) => {
+          if (dataProfile) {
+            this._propageDataUser(dataProfile.profileUpdate)
+          }
+        },
+        error: (error) => {
+          console.error('Error al actualizar el perfil', error)
+        },
+      })
   }
 
-  private _changeDataProfile(dataProfile: UserModal) {
-    this.savedProfileOK = true;
-    this.dataProfile.set(dataProfile);
-    setTimeout(() => {
-      this.savedProfileOK = false;
-    }, 3000);
+  private _propageDataUser(dataProfile: UserModal) {
+    this.dataProfile.set(dataProfile)
   }
-
-  private _saveProfileImg() {
-    return this._uploadImg$().subscribe(() => {});
-  }
-
-  fileChange(file: File) {
-    this.profileImg = file;
-  }
-
-
 }

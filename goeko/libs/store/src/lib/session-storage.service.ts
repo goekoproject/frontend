@@ -18,7 +18,7 @@ export class SessionStorageService {
 		const stringifiedObj = sessionStorage.getItem(name);
 
 		if (stringifiedObj && stringifiedObj !== 'undefined') {
-			const decode = window.atob(stringifiedObj);
+			const decode = decodeURIComponent(window.atob(stringifiedObj));
 			return JSON.parse(decode) as T;
 
 			/* 			return JSON.parse(atob(stringifiedObj)) as T;

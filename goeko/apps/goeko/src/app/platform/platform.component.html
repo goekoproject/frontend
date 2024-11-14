@@ -1,11 +1,13 @@
-
-<goeko-menu-user></goeko-menu-user>
-<div class="container is-platform">
-  <goeko-header-user>
-    <go-breadcrumbs></go-breadcrumbs>
-    <go-notification></go-notification>
-  </goeko-header-user>
-  <router-outlet></router-outlet>
+<div class="flex gap-4">
+  <goeko-menu-user></goeko-menu-user>
+  <div class="is-platform">
+    <goeko-header-user>
+      <go-breadcrumbs></go-breadcrumbs>
+      <go-notification></go-notification>
+    </goeko-header-user>
+    <router-outlet></router-outlet>
+  </div>
+  <goeko-side-dialog></goeko-side-dialog>
+  <goeko-dialog-message></goeko-dialog-message>
+  <goeko-toast></goeko-toast>
 </div>
-<goeko-side-dialog></goeko-side-dialog>
-<goeko-dialog-message></goeko-dialog-message>

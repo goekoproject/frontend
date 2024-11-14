@@ -79,7 +79,8 @@
   flex-shrink: 0;
   border-radius: 18px;
   background: #fff;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+  box-shadow:
+    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   transition: all 0.5s ease;
   cursor: pointer;
@@ -230,8 +231,8 @@
   &-co2Emission {
     background: var(--co2-emission);
   }
-  &-water {
-    background: var(--color-water);
+  &-waterConsumption {
+    background: var(--water);
   }
   &-waste {
     background: var(--waste);
@@ -267,11 +268,7 @@
   flex-wrap: wrap;
   border-radius: 1.4rem;
   border: 3px solid #fff;
-  background: linear-gradient(
-    124deg,
-    rgba(0, 144, 214, 0.1) 14.92%,
-    rgba(0, 144, 214, 0.02) 70.28%
-  );
+  background: linear-gradient(124deg, rgba(0, 144, 214, 0.1) 14.92%, rgba(0, 144, 214, 0.02) 70.28%);
   box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(20px);
   width: 94%;

@@ -2,8 +2,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 4rem;
-	margin: 2rem 0;
+	gap: 3rem;
+	// margin-top: 18rem;
+	border-top: 1px solid var(--home-page-light-grey);
 
 	&-subtitle {
 		color: #455065;
@@ -13,26 +14,34 @@
 		text-align: center;
 	}
 	&-body {
-		display: flex;
-		gap: 6rem;
-		align-items: center;
-		flex-wrap: wrap;
-		justify-content: center;
-		img {
-			border-radius: 10rem
-		}
+    @apply flex items-center flex-wrap justify-center gap-8 rounded-lg border p-4 md:border-none md:flex-nowrap md:items-start;
+		// padding: 1rem 10rem 1rem 10rem;
+    z-index: 1;
+	}
+
+	&-job {
+		color: var(--white);
+		font: var(--font-home-semibold);
+		font-size: 24px;
+	}
+
+	&-title {
+		color: var(--white);
+		font: var(--font-home-semibold);
+		font-size: 40px;
+		margin-top: 4rem;
 	}
 }
 
 .our-team-content {
-	gap: 2rem;
+	gap: 1.5rem;
 	display: flex;
 	flex-direction: column;
-	width: 63%;
 	p {
-		font-size: 15px;
+		font-size: 16px !important;
 		font-weight: 300;
-		color: #455065;
+		color:var(--white);
+		font: var(--font-body-home);
 	}
 }
 .our-team-heading {
@@ -40,7 +49,26 @@
 	flex-direction: column;
 }
 
-.member-photo {
-	width: 9%;
-	aspect-ratio: 3/4;
+.portrait {
+	width: 130px;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+// .inter-panel {
+//   position: absolute;
+//   top: -27rem;
+//   z-index: 0;
+// }
+
+.goeko-logo{
+  z-index: 0;
+}
+
+.title {
+  font-family: Khand-SemiBold, sans-serif;
+  opacity: 0.5;
+  color: rgb(255, 255, 255);
 }

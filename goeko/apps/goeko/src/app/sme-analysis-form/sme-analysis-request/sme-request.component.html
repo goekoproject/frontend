@@ -1,29 +1,29 @@
 <goeko-go-table [dataSources]="analysisRequests">
   <button go-button header-action (click)="newRequest()">
-        {{'new_analysis' | translate}}
+    {{ 'new_analysis' | translate }}
   </button>
   <ng-template goCellRef let-element>
-    {{element['classifications'] | categoryRequest }}
+    {{ element['classifications'] | categoryRequest }}
   </ng-template>
 
   <ng-template goCellRef let-element>
-    {{element['date'] | goDateFormat  }}
+    {{ element['date'] | goDateFormat }}
   </ng-template>
-
 
   <ng-template goElementAction let-element>
-    <i class="ti ti-trash text-2xl cursor-pointer" (click)="deleteRequest(element)"></i>
-    <button go-button appearance="flat" (click)="goToDetails(element)">
-      {{'details' | translate}}
-      <i class="ti ti-arrow-right" ></i>
-  </button>
-  </ng-template>
-  
-  
-  <ng-template [goHeaderRef]="displayColumns"> </ng-template>
-  
-  
- 
+    <div class="ml-auto mr-4 flex items-center justify-end gap-4">
+      <button go-button appearance="flat" (click)="goToDetails(element)">
+        {{ 'details' | translate }}
+      </button>
+      @if (element?.notification?.onNewEcosolution) {
+        <i class="ti ti-bell-filled text-2xl text-primary-500" (click)="deleteRequest(element)"></i>
+      } @else {
+        <i class="ti ti-bell text-2xl text-primary-500/30" (click)="deleteRequest(element)"></i>
+      }
 
-  
+      <i class="ti ti-trash cursor-pointer text-2xl text-red-600"></i>
+    </div>
+  </ng-template>
+
+  <ng-template [goHeaderRef]="displayColumns"> </ng-template>
 </goeko-go-table>

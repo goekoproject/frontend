@@ -1,121 +1,185 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, inject, signal } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AutoUnsubscribe, SwitchModule, UiSuperSelectModule } from '@goeko/ui';
-import { TranslateModule } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
-import { SelectLocationsService } from './select-locations.service';
+import { CommonModule } from '@angular/common'
+import { AfterViewInit, Component, Input, OnDestroy, inject, input, signal } from '@angular/core'
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { LocationRegions, LocationsCountry } from '@goeko/store'
+import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
+import { SelectLocationsService } from './select-locations.service'
 
-const defaultSetSuperSelect = (o1: any, o2: any) => {
-  if (o1 && o2 && typeof o2 !== 'object') {
-    return o1.code.toString() === o2;
-  }
-
-  if (o1 && o2 && typeof o2 === 'object') {
-    return o1.code?.toString() === o2.code?.toString();
-  }
-
-  return null;
-};
-@AutoUnsubscribe()
+const CODE_DEFAULT_COUNTRY = 'CH'
 @Component({
   selector: 'goeko-select-locations',
   standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    UiSuperSelectModule,
-    ReactiveFormsModule,
-    SwitchModule
-  ],
+  imports: [CommonModule, TranslateModule, UiSuperSelectModule, ReactiveFormsModule, SwitchModule],
   providers: [SelectLocationsService],
   templateUrl: './select-locations.component.html',
   styleUrl: './select-locations.component.scss',
 })
-export class SelectLocationsComponent {
-  public defaultSetSuperSelect = defaultSetSuperSelect as (
-    o1: any,
-    o2: any
-  ) => boolean;
-  private destroy$ = new Subject<void>();
+export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
+  private _translateService = inject(TranslateService)
+  public countryCompareWith = (o1: string, o2: string) => o1 === o2
+  public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1?.code === (o2?.code || o2) || o2?.isAll
 
-  @Input() controlNameCountry!: string;
-  @Input() controlNameProvince!: string;
-  @Input() controlLocations!: FormArray;
+  public optionAllProvince: LocationRegions = {
+    code: '',
+    label: 'FORM_LABEL.allProvinces',
+    isAll: true,
+  }
+  private _selectLocationsService = inject(SelectLocationsService)
 
-  @Input() form!: FormGroup;
+  @Input()
+  public get controlLocations(): FormArray {
+    return this._controlLocations
+  }
+  public set controlLocations(value: FormArray) {
+    this._controlLocations = value
+  }
+  private _controlLocations!: FormArray
 
-  private _selectLocationsService = inject(SelectLocationsService);
-  private _selectedCodeLang = this._selectLocationsService.selectedCodeLang;
-  public countries = this._selectLocationsService.countries;
-  public regions = this._selectLocationsService.regions;
-  public toogleEdit = false;
-  public newLocation = false;
-  public isAllProvince = false;
+  @Input() form!: FormGroup
+  public singleSelect = input<boolean>(false)
+
+  public countries = this._selectLocationsService.countries
+
+  public disabledRegions = false
+
   public get lastLocations() {
-    return this.controlLocations.value?.length -1;
+    return this.controlLocations.value?.length - 1
   }
-  public get hiddenLocationElement() {
-    return this.toogleEdit && this.newLocation
+
+  private get _controlCountryRegionsByIndex() {
+    return (
+      ((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup
+    )?.controls['regions']
   }
-  public get controlCountryCode() {
-    return (((this.form?.get('locations') as FormGroup)?.controls[this.selectedLocationsIndex()] as FormGroup)?.controls['country'] as FormGroup)?.controls['code'];
-  }
+
+  public dataSourceSelect = new Map<string, any>()
   public selectedLocationsIndex = signal<number>(0)
-
-  // Suscribirse a los cambios de cada FormGroup dentro del FormArray
- onCodeChange(country:{code: string, label: string}) {
-    this._getRegionsForCodeCountry(country.code);
- 
+  formArraySubscription!: Subscription
+  public getOnlyRegions() {
+    return this._controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code !== this.optionAllProvince.code)
+  }
+  public getAllReggions() {
+    return this._controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code === this.optionAllProvince.code)
   }
 
-  private _getRegionsForCodeCountry(code:string) {
-    this._selectedCodeLang.set(code)
-    this._selectLocationsService.getRegions();
+  private toogleAllRegions = (isAll: boolean) => {
+    const allRegions = this._controlCountryRegionsByIndex.value.find((region: LocationRegions) => region.isAll)
+    if (allRegions) {
+      this._controlCountryRegionsByIndex.value.find((region: LocationRegions) => region.isAll).isAll = isAll
+    }
   }
 
-  addLocation(){
-    this.controlLocations.push(this._createLocations());
-    this.newLocation = true;
-    this.toogleEdit = true;
-    this.selectedLocationsIndex.set(this.lastLocations);
+  ngAfterViewInit(): void {
+    this._selectLocationsService.setUpCountries()
+    if (this.controlLocations.length === 0) {
+      this.addLocation()
+    } else {
+      this._patchLocationsValue()
+    }
+    this.subscribeToFormArrayAndItemChanges()
+    this._changeLang()
+  }
+  ngOnDestroy(): void {
+    this._controlLocations.clear()
   }
 
-  private _createLocations():FormGroup {
+  private _changeLang() {
+    this._translateService.onLangChange.subscribe(() => {
+      this._patchLocationsValue()
+      this._selectLocationsService.setUpCountries()
+    })
+  }
+  private _patchLocationsValue() {
+    this.controlLocations.value.forEach((location: LocationsCountry) => {
+      const { code } = location.country
+      this._selectLocationsService
+        .getRegions$(code)
+        .pipe(
+          map((regiones) => ({ code, regiones })), // Mapea las regiones junto con el countryCode
+        )
+        .subscribe(({ code, regiones }) => {
+          this.addRegionsForCodeCountry(code, [this.optionAllProvince, ...regiones])
+          this._setAllOptionWhenEmptyRegions()
+        })
+    })
+  }
+  private subscribeToFormArrayAndItemChanges(): void {
+    merge(
+      ...this.controlLocations.controls.map((control, index) =>
+        control.valueChanges.pipe(
+          map((value) => ({ index, value })),
+          filter((change) => change.index >= 0),
+          distinctUntilChanged((prev, curr) => prev.value.country.code === curr.value.country.code),
+          map((newValue) => newValue.value.country.code.code || newValue.value.country.code), // Transforma el cambio en el código de país
+        ),
+      ),
+    )
+      .pipe(
+        mergeMap((countryCode) =>
+          this._selectLocationsService.getRegions$(countryCode).pipe(
+            map((regiones) => ({ countryCode, regiones })), // Mapea las regiones junto con el countryCode
+          ),
+        ),
+      )
+      .subscribe(({ countryCode, regiones }) => {
+        this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince, ...regiones])
+        this._setAllOptionWhenEmptyRegions()
+      })
+  }
+
+  private _setAllOptionWhenEmptyRegions() {
+    this._controlLocations.controls.forEach((control) => {
+      const _controlRegionsCountry = control.get('country')?.get('regions')
+      if (!_controlRegionsCountry?.value) {
+        _controlRegionsCountry?.patchValue([''])
+        this.toogleAllRegions(true)
+      }
+    })
+  }
+
+  private addRegionsForCodeCountry = (clave: string, valor: any): void => {
+    if (this.dataSourceSelect.has(clave)) {
+      this.dataSourceSelect.get(clave)?.push(valor)
+    } else {
+      this.dataSourceSelect.set(clave, valor)
+    }
+  }
+
+  selectALL() {
+    this.toogleAllRegions(true)
+    const allRegions = this.getAllReggions()
+    if (allRegions) {
+      this._controlCountryRegionsByIndex.patchValue(allRegions, {
+        emitEvent: false,
+      })
+    }
+  }
+
+  deselectAll() {
+    this.toogleAllRegions(false)
+    const regions = this.getOnlyRegions()
+    if (regions) {
+      this._controlCountryRegionsByIndex.patchValue(regions, {
+        emitEvent: false,
+      })
+    }
+  }
+
+  addLocation() {
+    this.controlLocations.push(this._createLocations())
+    this.controlLocations.patchValue([{ country: { code: CODE_DEFAULT_COUNTRY, regions: [''] } }])
+    this.selectedLocationsIndex.set(this.lastLocations)
+    this._patchLocationsValue()
+  }
+
+  private _createLocations(): FormGroup {
     return new FormGroup({
       country: new FormGroup({
         code: new FormControl('', Validators.required),
-        regions: new FormControl('')
+        regions: new FormControl<string[]>(['']),
       }),
-    });
+    })
   }
-  editLocation(location: AbstractControl, index: number): void {
-    this.toogleEdit =!this.toogleEdit;
-    this.selectedLocationsIndex.set(index);
-  }
-
-  closeForm(){
-    this.toogleEdit = false;
-    this.controlLocations.removeAt(this.selectedLocationsIndex());
-  }
-
-  deleteLocation(index:number):void {
-    this.controlLocations.removeAt(index);
-
-  }
-  confirmLocation(locationCountryControl: FormGroup | AbstractControl) {
-    if(locationCountryControl.get(this.controlNameCountry)?.invalid) {
-      return;
-    }
-    this.toogleEdit = false
-  }
-  closeFormLocation(index: number) {
-    this.deleteLocation(index);
-    this.toogleEdit = false
-  }
-
-  getIsProvince(event: EventTarget | null) {
-    this.isAllProvince = (event as HTMLInputElement).checked
-  }
-  
 }

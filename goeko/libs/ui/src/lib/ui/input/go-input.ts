@@ -1,5 +1,5 @@
-import { LitElement, PropertyValues, css, html, nothing } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { LitElement, PropertyValues, css, html, nothing } from 'lit'
+import { customElement, property, query } from 'lit/decorators.js'
 
 @customElement('go-input')
 export class GoInput extends LitElement {
@@ -58,10 +58,9 @@ export class GoInput extends LitElement {
         color: #6a6d8c;
       }
       label {
-        color: #2b2b2b;
+        color: var(--primary--950);
         font-weight: 500;
         font-size: 0.875rem;
-        font-weight: 600;
       }
 
       input[type='checkbox'] {
@@ -86,38 +85,36 @@ export class GoInput extends LitElement {
         align-items: center;
       }
       .optional {
-        font-size:12px;
- 
+        font-size: 12px;
       }
-    `;
+    `
   }
-  @property({ type: String }) type = 'text';
-  @property({ type: Boolean }) readonly = false;
-  @property({ type: String }) value = '';
-  @property({ type: String }) name = '';
-  @property({ type: String }) placeholder = '';
-  @property({ type: Boolean }) required = false;
-  @property({ type: Boolean }) disabled = false;
-  @property({ type: String }) minLength = 0;
-  @property({ type: String }) maxLength = Infinity;
-  @property({ type: Boolean }) pattern = Infinity;
-  @property({ type: String }) autocomplete = '';
-  @property({ type: String }) heightWrapper = '';
-  @property({ type: String }) textHelp = '';
-  @property({ type: String }) textSupport = '';
-  @query('input') input!: HTMLInputElement;
-
+  @property({ type: String }) type = 'text'
+  @property({ type: Boolean }) readonly = false
+  @property({ type: String }) value = ''
+  @property({ type: String }) name = ''
+  @property({ type: String }) placeholder = ''
+  @property({ type: Boolean }) required = false
+  @property({ type: Boolean }) disabled = false
+  @property({ type: String }) minLength = 0
+  @property({ type: String }) maxLength = Infinity
+  @property({ type: Boolean }) pattern = Infinity
+  @property({ type: String }) autocomplete = ''
+  @property({ type: String }) heightWrapper = ''
+  @property({ type: String }) textHelp = ''
+  @property({ type: String }) textSupport = ''
+  @query('input') input!: HTMLInputElement
   constructor() {
-    super();
+    super()
   }
   protected override firstUpdated(changedProperties: PropertyValues) {
-    super.firstUpdated(changedProperties);
-    this.input.value = this.value;
+    super.firstUpdated(changedProperties)
+    this.input.value = this.value
   }
 
   handleInput() {
-    this.value = this.input.value;
-    this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
+    this.value = this.input.value
+    this.dispatchEvent(new CustomEvent('input', { detail: this.value }))
   }
 
   handleChange() {
@@ -125,15 +122,15 @@ export class GoInput extends LitElement {
       detail: this.value,
       bubbles: true,
       composed: true,
-    };
-    this.dispatchEvent(new CustomEvent('change', options));
+    }
+    this.dispatchEvent(new CustomEvent('change', options))
   }
   private _templateFileWithLinks() {
     return html`
       <div class="box-file">
         <img .src="${this.value}" alt="Logo" class="file-img" />
       </div>
-    `;
+    `
   }
   private _templateTypeInput() {
     if (this.type === 'textarea') {
@@ -159,28 +156,25 @@ export class GoInput extends LitElement {
         .id="${this.id}"
         .name="${this.name}"
         ?maxlength="${this.maxLength}"
-        placeholder="${this.placeholder}"
+        .placeholder="${this.placeholder}"
         ?required="${this.required}"
         autocomplete="${this.autocomplete ? this.autocomplete : this.id}"
         @input="${this.handleInput}"
-        @change="${this.handleChange}"
-      />
-    `;
+        @change="${this.handleChange}" />
+      <slot></slot>
+    `
   }
   override render() {
-    this.heightWrapper = this.type === 'file-link' ? '12' : 'auto';
+    this.heightWrapper = this.type === 'file-link' ? '12' : 'auto'
 
     return html`
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
-      />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
       <div class="content-label">
-      <label for="${this.id}"> <slot name="label"></slot> </label>      
-      ${this.required ? html`<span class="optional">(Obligatoire)</span>` : ''}
+        <label for="${this.id}"> <slot name="label"></slot> </label>
+        <span class="optional">
+          <slot name="required"> </slot>
+        </span>
       </div>
-   
-
 
       ${this._templateTypeInput()}
       ${this.textHelp
@@ -191,6 +185,6 @@ export class GoInput extends LitElement {
           </section>`
         : nothing}
       ${this.type === 'file-link' ? this._templateFileWithLinks() : nothing}
-    `;
+    `
   }
 }

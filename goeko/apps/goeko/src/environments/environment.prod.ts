@@ -2,11 +2,10 @@ export const environment = {
   production: true,
   baseUrl: 'https://platform.goeko-api.com',
   clientId: 'ly5mBoJd8sgMxqF8MpWVsE24kkhAZIHW',
-  clientSecret:
-  'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',
+  clientSecret: 'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',
+  domainAuth0: 'login.goeko.ch',
   audience: 'goeko-backend',
-  accessToken: 'https://soft-glitter-5713.eu.auth0.com/oauth/token',
-  domainAuth0: 'soft-glitter-5713.eu.auth0.com',
+  connection: 'goeko-users',
   firebaseApp: {
     apiKey: 'AIzaSyCj73PUjQH0LJuDXJygViUyja49jTqDbZo',
     authDomain: 'goeko-pro.firebaseapp.com',
@@ -16,4 +15,6 @@ export const environment = {
     appId: '1:917495184913:web:16a0423942179bedccbbb0',
     measurementId: 'G-70QSDK7YCQ',
   },
-};
+  mailGunApiKey: 'f11940c67a8022c437c9ed1a04140f11-f6fe91d3-d0447893',
+  resendApiKey: 're_6qJg34GT_GtNw7nub1uGzzJ8LJnEYe77F',
+}

@@ -20,7 +20,7 @@
         "styles": [
           "apps/goeko/src/styles.scss",
           "apps/goeko/src/tailwind.scss",
-          "apps/goeko/src/tailwind-styles.scss",
+          "dist/tailwind-styles.scss",
           "./libs/ui/src/styles/_theme.scss"
         ],
         "scripts": []
@@ -31,12 +31,12 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "6kb"
+              "maximumWarning": "5kb",
+              "maximumError": "10kb"
             }
           ],
           "fileReplacements": [
@@ -49,11 +49,12 @@
               "with": "apps/goeko/src/assets/module-federation.manifest.pro.json"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "optimization": true
         },
         "development": {
           "buildOptimizer": false,
-          "optimization": false,
+          "optimization": true,
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
@@ -68,6 +69,14 @@
               "with": "apps/goeko/src/assets/module-federation.manifest.pro.json"
             }
           ]
+        },
+        "local": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
@@ -80,9 +89,13 @@
         },
         "development": {
           "buildTarget": "goeko:build:development"
+        },
+        "local": {
+          "buildTarget": "goeko:build:local",
+          "proxyConfig": "proxy.conf.json"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "local"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

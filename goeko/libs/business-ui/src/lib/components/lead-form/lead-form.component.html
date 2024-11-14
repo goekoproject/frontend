@@ -1,14 +1,18 @@
-<form class="lead-form" [formGroup]="leadForm">
-  <h3 class="lead-form-title">{{ 'leadFormTitle' | translate}}</h3>
- <go-input formControlName="email" >
+<form class="lead-form bg-blueLightPastel border border-primary-default" [formGroup]="leadForm">
+  <div class="text-center">
+    <h3 class="text-xl font-semibold">{{ 'leadFormTitle' | translate }}</h3>
+    <p class="text-sm">{{ 'leadFormSubtitle' | translate }}</p>
+  </div>
+
+  <go-input formControlName="email">
     <span slot="label"> {{ 'your' | translate }} {{ 'FORM_LABEL.email' | translate }}</span>
-  </go-input> 
+  </go-input>
 
   <div class="form-col ml-auto">
     <label for="solutionDescription">
       {{ 'FORM_LABEL.messageLead' | translate }}
     </label>
-    <textarea class="go-textarea" rows="3" formControlName="message" id="solutionDescription"> </textarea>
+    <textarea class="go-textarea" rows="10" formControlName="message" id="solutionDescription"> </textarea>
   </div>
 
   <button go-button type="button" [disabled]="this.leadForm.invalid" (click)="createLead()">

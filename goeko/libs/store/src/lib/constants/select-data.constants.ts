@@ -1,26 +1,24 @@
 export interface DataSelectOption {
-  id: string | number;
-  keyLang: string;
+  id: string | number
+  keyLang: string
 }
 
 export interface CountrySelectOption extends DataSelectOption {
-  code: string;
+  code: string
 }
 
 export interface ReductionPercentageSelectOption extends DataSelectOption {
-  from: number;
-  to: number | string;
+  from: number
+  to: number | string
 }
 export const SelectMainInternalCombustionEngine: DataSelectOption[] = [
   {
     id: 'equipmentCarrierTruck',
-    keyLang:
-      'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.equipmentCarrierTruck',
+    keyLang: 'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.equipmentCarrierTruck',
   },
   {
     id: 'materialsCarrierTruck',
-    keyLang:
-      'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.materialsCarrierTruck',
+    keyLang: 'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.materialsCarrierTruck',
   },
   {
     id: 'loader',
@@ -32,13 +30,11 @@ export const SelectMainInternalCombustionEngine: DataSelectOption[] = [
   },
   {
     id: 'backhoeLoader',
-    keyLang:
-      'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.backhoeLoader',
+    keyLang: 'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.backhoeLoader',
   },
   {
     id: 'aerialBucketTruck',
-    keyLang:
-      'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.aerialBucketTruck',
+    keyLang: 'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.aerialBucketTruck',
   },
   {
     id: 'bulldozer',
@@ -71,19 +67,17 @@ export const SelectMainInternalCombustionEngine: DataSelectOption[] = [
   },
   {
     id: 'mechanicalPalletTruck',
-    keyLang:
-      'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.mechanicalPalletTruck',
+    keyLang: 'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.mechanicalPalletTruck',
   },
   {
     id: 'vehicleFortransportingPeople​​',
-    keyLang:
-      'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.vehicleFortransportingPeople​​',
+    keyLang: 'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.vehicleFortransportingPeople​​',
   },
   {
     id: 'generator',
     keyLang: 'SELECT_DATA_LABEL.selectMainInternalCombustionEngine.generator',
   },
-];
+]
 export const SelectMainMineralProduct: DataSelectOption[] = [
   {
     id: 'cement',
@@ -109,11 +103,13 @@ export const SelectMainMineralProduct: DataSelectOption[] = [
     id: 'aluminum',
     keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.aluminum',
   },
-];
+  {
+    id: 'sealingStrip',
+    keyLang: 'SELECT_DATA_LABEL.selectMainMineralProduct.sealingStrip',
+  }
+]
 
-export const SelectMainRigidMaterial: DataSelectOption[] = [
-  { id: 'mainRigidMaterial', keyLang: 'SELECT_DATA_LABEL.insolationPanels' },
-];
+export const SelectMainRigidMaterial: DataSelectOption[] = [{ id: 'mainRigidMaterial', keyLang: 'SELECT_DATA_LABEL.insolationPanels' }]
 
 export const SelectMainCategoryNonInert: DataSelectOption[] = [
   {
@@ -146,7 +142,7 @@ export const SelectMainCategoryNonInert: DataSelectOption[] = [
   /* 	{ id: 7, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.cartridgesWithoutToxicProducts' },
 	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.electricalAndElectronicEquipment' }, */
   /* 	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectMainCategoryNonInert.plaster' }, */
-];
+]
 export const SelectMainActivity: DataSelectOption[] = [
   {
     id: 'siteCleaning',
@@ -172,8 +168,7 @@ export const SelectMainActivity: DataSelectOption[] = [
   },
   {
     id: 'cleaningOfSiteAndPeripheryAccesses',
-    keyLang:
-      'SELECT_DATA_LABEL.selectMainActivity.cleaningOfSiteAndPeripheryAccesses',
+    keyLang: 'SELECT_DATA_LABEL.selectMainActivity.cleaningOfSiteAndPeripheryAccesses',
   },
   {
     id: 'wateringPlants',
@@ -183,30 +178,26 @@ export const SelectMainActivity: DataSelectOption[] = [
     id: 'constructionSiteWater',
     keyLang: 'SELECT_DATA_LABEL.selectMainActivity.constructionSiteWater',
   },
-];
+  {
+    id: 'boiler',
+    keyLang: 'SELECT_DATA_LABEL.selectMainActivity.boiler',
+  },
+]
 export const SelectProducts: DataSelectOption[] = [
   { id: 'aerosol', keyLang: 'SELECT_DATA_LABEL.selectProducts.aerosol' },
   {
     id: 'productsContainingTar',
     keyLang: 'SELECT_DATA_LABEL.selectProducts.productsContainingTar',
   },
-  /* 	{ id: 2, keyLang: 'SELECT_DATA_LABEL.selectProducts.batteries' },
-   */
+
   {
     id: 'woodTreatedWithHazardousSubstances',
-    keyLang:
-      'SELECT_DATA_LABEL.selectProducts.woodTreatedWithHazardousSubstances',
+    keyLang: 'SELECT_DATA_LABEL.selectProducts.woodTreatedWithHazardousSubstances',
   },
   {
     id: 'collects',
-    keyLang:
-      'SELECT_DATA_LABEL.selectProducts.collects',
+    keyLang: 'SELECT_DATA_LABEL.selectProducts.collects',
   },
-  /* 	{ id: 4, keyLang: 'SELECT_DATA_LABEL.selectProducts.packagingSoiledWithDangerousSubstances' },
- { id: 5, keyLang: 'SELECT_DATA_LABEL.selectProducts.oilSeparatorSludge' },	
-	{ id: 6, keyLang: 'SELECT_DATA_LABEL.selectProducts.cartridgesContainingDangerousSubstances' },
-	{ id: 8, keyLang: 'SELECT_DATA_LABEL.selectProducts.energySavingLamps' },
-	{ id: 9, keyLang: 'SELECT_DATA_LABEL.selectProducts.electricalAndElectronicWasteContainingHazardousSubstances' }*/
   {
     id: 'paintVarnish',
     keyLang: 'SELECT_DATA_LABEL.selectProducts.paintVarnish',
@@ -220,23 +211,24 @@ export const SelectProducts: DataSelectOption[] = [
   { id: 'admixtures', keyLang: 'SELECT_DATA_LABEL.selectProducts.admixtures' },
   {
     id: 'bituminousProductsContainingHAPs',
-    keyLang:
-      'SELECT_DATA_LABEL.selectProducts.bituminousProductsContainingHAPs',
+    keyLang: 'SELECT_DATA_LABEL.selectProducts.bituminousProductsContainingHAPs',
   },
-];
+  {
+    id: 'paintsAndSolvents',
+    keyLang: 'SELECT_DATA_LABEL.selectProducts.paintsAndSolvents',
+  }
+]
 export const SelectEnergySource: DataSelectOption[] = [
   {
     id: 'aSmartManagementSystemOptimisingEnergyConsumption',
-    keyLang:
-      'SELECT_DATA_LABEL.selectEnergySource.aSmartManagementSystemOptimisingEnergyConsumption',
+    keyLang: 'SELECT_DATA_LABEL.selectEnergySource.aSmartManagementSystemOptimisingEnergyConsumption',
   },
   {
     id: 'greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds',
-    keyLang:
-      'SELECT_DATA_LABEL.selectEnergySource.greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds',
+    keyLang: 'SELECT_DATA_LABEL.selectEnergySource.greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds',
   },
   { id: 'energySource-none', keyLang: 'none' },
-];
+]
 
 export const SelectCountry: CountrySelectOption[] = [
   {
@@ -256,7 +248,7 @@ export const SelectCountry: CountrySelectOption[] = [
     keyLang: 'SELECT_DATA_LABEL.selectCountry.switzerland',
     code: 'CH',
   },
-];
+]
 
 // Resultado de la constante SelectInertOrMineralWaste
 export const SelectInertOrMineralWaste: DataSelectOption[] = [
@@ -275,7 +267,7 @@ export const SelectInertOrMineralWaste: DataSelectOption[] = [
     id: 'glass',
     keyLang: 'SELECT_DATA_LABEL.selectInertOrMineralWaste.glass',
   },
-];
+]
 
 // Resultado de la constante GreenWaste
 export const SelectGreenWaste: DataSelectOption[] = [
@@ -284,7 +276,7 @@ export const SelectGreenWaste: DataSelectOption[] = [
     keyLang: 'SELECT_DATA_LABEL.greenWaste.greenWoodUntreated',
   },
   { id: 'topsoil', keyLang: 'SELECT_DATA_LABEL.greenWaste.topsoil' },
-];
+]
 
 // Resultado de la constante SelectSpecialWaste
 export const SelectSpecialWaste: DataSelectOption[] = [
@@ -299,19 +291,16 @@ export const SelectSpecialWaste: DataSelectOption[] = [
   },
   {
     id: 'fluorescentTubesEnergySavingBulbsNeonTubes',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSpecialWaste.fluorescentTubesEnergySavingBulbsNeonTubes',
+    keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.fluorescentTubesEnergySavingBulbsNeonTubes',
   },
   /* 	{ id: 'aerosols', keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.aerosols' },
    */ {
     id: 'electricalAndElectronicEquipmentPCB',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSpecialWaste.electricalAndElectronicEquipmentPCB',
+    keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.electricalAndElectronicEquipmentPCB',
   },
   {
     id: 'cartridgesSealantChemicalCaulking',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSpecialWaste.cartridgesSealantChemicalCaulking',
+    keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.cartridgesSealantChemicalCaulking',
   },
 
   {
@@ -339,14 +328,13 @@ export const SelectSpecialWaste: DataSelectOption[] = [
     id: 'rubberProducts',
     keyLang: 'SELECT_DATA_LABEL.selectSpecialWaste.rubberProducts',
   },
-];
+]
 
 // Resultado de la constante SelectHazardousWaste
 export const SelectHazardousWaste: DataSelectOption[] = [
   {
     id: 'productsContainingHeavyMetals',
-    keyLang:
-      'SELECT_DATA_LABEL.selectHazardousWaste.productsContainingHeavyMetals',
+    keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.productsContainingHeavyMetals',
   },
   {
     id: 'productsContainingTar',
@@ -364,7 +352,11 @@ export const SelectHazardousWaste: DataSelectOption[] = [
     id: 'landsContainingPFAS',
     keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.landsContainingPFAS',
   },
-];
+  {
+    id: 'lead',
+    keyLang: 'SELECT_DATA_LABEL.selectHazardousWaste.lead',
+  },
+]
 export const SelectPaybackPeriodYears: DataSelectOption[] = [
   {
     id: 1,
@@ -390,7 +382,7 @@ export const SelectPaybackPeriodYears: DataSelectOption[] = [
     id: '',
     keyLang: 'SELECT_DATA_LABEL.fiveBetweenTen',
   },
-];
+]
 
 export const SelectYearGuarantee: DataSelectOption[] = [
   {
@@ -437,7 +429,7 @@ export const SelectYearGuarantee: DataSelectOption[] = [
     id: '+10',
     keyLang: 'years',
   },
-];
+]
 
 const SelectOdsDescription: DataSelectOption[] = [
   { id: 'ods_1', keyLang: 'ODS.ods_1' },
@@ -457,49 +449,49 @@ const SelectOdsDescription: DataSelectOption[] = [
   { id: 'ods_15', keyLang: 'ODS.ods_15' },
   { id: 'ods_16', keyLang: 'ODS.ods_16' },
   { id: 'ods_17', keyLang: 'ODS.ods_17' },
-];
+]
 const SelectSustainableBuildingOperations: DataSelectOption[] = [
   {
     id: 'useRenewableEnergies',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useRenewableEnergies',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useRenewableEnergies',
   },
   {
     id: 'recoverHeat',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.recoverHeat',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.recoverHeat',
   },
   {
     id: 'useLowConsumptionLighting',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useLowConsumptionLighting',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.useLowConsumptionLighting',
   },
   {
     id: 'sustainableLightingSystems',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.sustainableLightingSystems',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.sustainableLightingSystems',
   },
   {
     id: 'storeEnergy',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.storeEnergy',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.storeEnergy',
   },
   {
     id: 'optimizeEnergyConsumption',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.optimizeEnergyConsumption',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.optimizeEnergyConsumption',
   },
   {
     id: 'chargeElectricVehicles',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.chargeElectricVehicles',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.chargeElectricVehicles',
   },
   {
     id: 'electricMeansOfTransport',
-    keyLang:
-      'SELECT_DATA_LABEL.selectSustainableBuildingOperations.electricMeansOfTransport',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.electricMeansOfTransport',
   },
-];
+  {
+    id: 'intelligentHeatingSystems',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.intelligentHeatingSystems',
+  },
+  {
+    id: 'homeAutomation',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.homeAutomation',
+  },
+]
 export const SelectCurrency: DataSelectOption[] = [
   {
     id: 'EUR',
@@ -509,9 +501,15 @@ export const SelectCurrency: DataSelectOption[] = [
     id: 'CHF',
     keyLang: 'CHF',
   },
-];
+]
 
 export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
+  {
+    id: 1,
+    keyLang: 'upTo',
+    from: 0,
+    to: 0,
+  },
   {
     id: 1,
     keyLang: 'upTo',
@@ -572,72 +570,81 @@ export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
     from: 0,
     to: 100,
   },
-];
-export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] =
-  [
-    {
-      id: 1,
-      keyLang: 'upTo',
-      from: 0,
-      to: 10,
-    },
-    {
-      id: 2,
-      keyLang: 'upTo',
-      from: 0,
-      to: 20,
-    },
-    {
-      id: 3,
-      keyLang: 'upTo',
-      from: 0,
-      to: 30,
-    },
-    {
-      id: 4,
-      keyLang: 'upTo',
-      from: 0,
-      to: 40,
-    },
-    {
-      id: 4,
-      keyLang: 'upTo',
-      from: 0,
-      to: 50,
-    },
-    {
-      id: 4,
-      keyLang: 'upTo',
-      from: 0,
-      to: 60,
-    },
-    {
-      id: 4,
-      keyLang: 'upTo',
-      from: 0,
-      to: 70,
-    },
-    {
-      id: 4,
-      keyLang: '+',
-      from: 0,
-      to: 70,
-    },
-  ];
+]
+export const SelectOperationalCostReduction: ReductionPercentageSelectOption[] = [
+  {
+    id: 1,
+    keyLang: 'upTo',
+    from: 0,
+    to: 0,
+  },
+  {
+    id: 1,
+    keyLang: 'upTo',
+    from: 0,
+    to: 10,
+  },
+  {
+    id: 2,
+    keyLang: 'upTo',
+    from: 0,
+    to: 20,
+  },
+  {
+    id: 3,
+    keyLang: 'upTo',
+    from: 0,
+    to: 30,
+  },
+  {
+    id: 4,
+    keyLang: 'upTo',
+    from: 0,
+    to: 40,
+  },
+  {
+    id: 4,
+    keyLang: 'upTo',
+    from: 0,
+    to: 50,
+  },
+  {
+    id: 4,
+    keyLang: 'upTo',
+    from: 0,
+    to: 60,
+  },
+  {
+    id: 4,
+    keyLang: 'upTo',
+    from: 0,
+    to: 70,
+  },
+  {
+    id: 4,
+    keyLang: '+',
+    from: 0,
+    to: 70,
+  },
+]
 const SelectBuildingOperation: DataSelectOption[] = [
   {
     id: 'greenRoofsWalls',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.greenRoofsWalls',
   },
   {
-    id: 'waterManagement',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement',
+    id: 'waterManagementWastewater',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementWastewater',
   },
   {
-    id: 'waterManagementGray',
-    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagementGray',
+    id: 'ecoFriendlytaps',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlytaps',
   },
-];
+  {
+    id: 'ecoFriendlySanitary',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlySanitary',
+  },
+]
 
 export const DataSelect = {
   mainInternalCombustionEngine: SelectMainInternalCombustionEngine,
@@ -660,4 +667,4 @@ export const DataSelect = {
   reductionPercentage: SelectreductionPercentage,
   operationalCostReduction: SelectOperationalCostReduction,
   buildingOperation: SelectBuildingOperation,
-};
+}
