@@ -5,13 +5,13 @@
 <ng-template #imageUpload>
   <goeko-input-file
     (fileChange)="uploadImgEcosolutions($event)"
-    [filesUrl]="urlPicEcosolution"
+    [filesUrl]="urlPicEcosolution || ''"
     [multiple]="true"
     [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
 </ng-template>
 <ng-template #heading>
   <div class="mb-10 flex items-center justify-between gap-1 rounded-md bg-primary-100 bg-opacity-65 p-4">
-    @if (form.value.solutionName) {
+    @if (nameTranslations && nameTranslations.controls && nameTranslations.controls.length > 0) {
       <h1 class="text-3xl font-bold text-primary-950">
         {{ nameTranslations.controls[0].value?.label }}
       </h1>
@@ -82,13 +82,14 @@
                     {{ translation.value.lang | translate }}
                   </span>
                 </label>
-                <textarea
-                  class="go-textarea"
-                  rows="5"
-                  id="detailedDescriptionTranslations"
-                  [formControlName]="'label'"
-                  [readonly]="isReadOnly">
-                </textarea>
+
+                <div class="go-textarea">
+                  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                  <ngx-editor
+                    [editor]="editor"
+                    [formControlName]="'label'"
+                    [placeholder]="'FORM_LABEL.editorText' | translate"></ngx-editor>
+                </div>
               </div>
             }
           }
@@ -108,25 +109,27 @@
           <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
         </div>
 
-        <div class="ecosolutions-subcategory">
-          @for (subcategory of questionsCategories().subcategories; track subcategory.code) {
-            <goeko-select-subcategory-product
-              [id]="subcategory.code"
-              [formControlName]="'subCategory'"
-              [subCategory]="subcategory"
-              [readonly]="isReadOnly">
-              <p title>
-                {{ subcategory.label }}
-              </p>
+        @defer (when questionsCategories()) {
+          <div class="ecosolutions-subcategory">
+            @for (subcategory of questionsCategories().subcategories; track subcategory.code) {
+              <goeko-select-subcategory-product
+                [id]="subcategory.code"
+                [formControlName]="'subCategory'"
+                [subCategory]="subcategory"
+                [readonly]="isReadOnly">
+                <p title>
+                  {{ subcategory.label }}
+                </p>
 
-              <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly">
-                @for (product of subcategory.products; track product.code) {
-                  <go-badge [readonly]="isReadOnly" [value]="product.code" [readonly]="isReadOnly">{{ product.label }}</go-badge>
-                }
-              </go-badge-group>
-            </goeko-select-subcategory-product>
-          }
-        </div>
+                <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly">
+                  @for (product of subcategory.products; track product.code) {
+                    <go-badge [readonly]="isReadOnly" [value]="product.code" [readonly]="isReadOnly">{{ product.label }}</go-badge>
+                  }
+                </go-badge-group>
+              </goeko-select-subcategory-product>
+            }
+          </div>
+        }
 
         <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
       </fieldset>
@@ -138,11 +141,12 @@
             <span class="required-field">{{ 'mandatory' | translate }}</span>
           </legend>
         </div>
-        <goeko-select-locations
-          [form]="form"
-          [controlLocations]="locationsArrays"
-          [controlNameCountry]="'country'"
-          [controlNameProvince]="'regions'"></goeko-select-locations> 
+
+        @defer (when firstLoad) {
+          <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
+        } @placeholder {
+          <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
+        }
       </fieldset>
 
       <fieldset

@@ -16,12 +16,12 @@ $default-position-layer3-video: 8.4rem;
 
 .banner {
   display: flex;
-  justify-content: space-between;
   border-radius: 1.5rem;
-  background: radial-gradient(141.88% 100.98% at 21.55% 0%, rgba(185, 231, 254, 0) 1.04%, #e0f2fe 54.28%, #b9e7fe 54.58%);
-  gap: 2rem;
-  padding: 4rem 2rem;
-  flex-wrap: wrap;
+  background: #ffffff;
+  // gap: 5rem;
+  flex-direction: column;
+  align-items: center;
+  @apply overflow-hidden;
   &-content {
     display: flex;
     flex-direction: column;
@@ -30,14 +30,15 @@ $default-position-layer3-video: 8.4rem;
   &-slogan {
     text-transform: uppercase;
     font: var(--font-huge-heading);
-    font-size: clamp(2.4rem, 3rem, 3.75rem);
+    font-size: clamp(2rem, 2.3rem, 3.75rem);
     color: var(--soft-dark, #094056);
   }
   &-support-text {
     font: var(--text-thin-accent);
     font-size: clamp(1rem, 1.2rem, 2rem);
     display: flex;
-    gap: 1rem;
+    gap: 4rem;
+    @apply flex-wrap p-16 sm:flex-nowrap xl:px-64 xl:py-16;
   }
 
   .word:nth-child(1) {
@@ -74,6 +75,15 @@ $default-position-layer3-video: 8.4rem;
     gap: 2rem;
     width: 100%;
   }
+
+  h1 {
+    font: var(--font-home-semibold);
+    font-size: 28px;
+  }
+  p {
+    font: var(--font-body-home);
+    font-size: 16px;
+  }
 }
 .banner-actions > button {
   max-width: 16.25rem;
@@ -86,11 +96,10 @@ $default-position-layer3-video: 8.4rem;
 }
 .banner-video {
   position: relative;
-  width: clamp(430px, 100%, 549px);
+  //width: clamp(530px, 100%, 649px);
   .banner-video-sme {
     z-index: 1;
     position: relative;
-    border-radius: 33px;
     background: #fff;
     box-shadow: -4px 7px 19px 0px rgba(0, 0, 0, 0.09);
     width: 100%;
@@ -100,12 +109,12 @@ $default-position-layer3-video: 8.4rem;
   position: absolute;
   display: flex;
   flex-direction: column;
-  right: -11px;
-  bottom: 50%;
-  top: 10%;
+  right: 0;
+  top: 0;
   z-index: 2;
   width: 100%;
   align-items: center;
+  @apply mx-8 my-12;
   filter: drop-shadow(4px 6px 8px white);
   opacity: 0.8;
   gap: 0;
@@ -170,11 +179,6 @@ $default-position-layer3-video: 8.4rem;
   }
 }
 @media (max-width: 1024px) {
-  .banner {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
   .banner-content {
     align-items: center;
   }
@@ -187,11 +191,6 @@ $default-position-layer3-video: 8.4rem;
 }
 
 @media (max-width: 768px) {
-  .banner {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
   .banner-content {
     align-items: center;
   }

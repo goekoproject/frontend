@@ -1,13 +1,14 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { provideHttpClient, withInterceptors } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
+import { handlerHttpInterceptor } from '@goeko/business-ui'
 import { EcosolutionsTaggingService, SmeUser, TaggingResponse, UserService } from '@goeko/store'
 import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
 import { FavouritesComponent } from './favourites.component'
-
 const mockFavorite = [
   {
     ecosolution: {
@@ -66,8 +67,10 @@ describe('FavouritesComponent', () => {
     }
 
     await TestBed.configureTestingModule({
-      imports: [FavouritesComponent, HttpClientTestingModule, CardProductComponent, TranslateModule.forRoot()],
+      imports: [FavouritesComponent, CardProductComponent, TranslateModule.forRoot()],
       providers: [
+        provideHttpClientTesting(),
+        provideHttpClient(withInterceptors([handlerHttpInterceptor])),
         {
           provide: UserService,
           useValue: mockUserService,

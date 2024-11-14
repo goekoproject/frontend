@@ -4,6 +4,10 @@ import { HomeComponent } from './home/home.component';
 import { DocumentLegalComponent } from './document-legal/document-legal.component';
 import { LandingComponent } from './landing/landing.component';
 import { AboutComponent } from './about/about/about.component';
+import { BlogComponent } from './blog/blog.component';
+import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
+import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { ServicesComponent } from './services/services.component';
 
 const ENTRY_ID_COOKIES_POLICY = '6Cby4WysXPnj3OJQBSj4pB';
 const ENTRY_ID_PRIVACY_POLICY = '6pwHwtZC1ILfXS0awq85Oy';
@@ -33,11 +37,29 @@ export const routes: Routes = [
         },
       },
       {
+        path: 'services',
+        component: ServicesComponent
+      },
+      {
         path: 'about',
         component: AboutComponent,
         data: {
           entryId: ENTRY_ID_ABOUT,
         },
+      },
+      {
+        path: 'blog',
+        loadComponent: () => import('./blog/blog.component').then(c => c.BlogComponent),
+        children: [
+          {
+            path: '',
+            component: BlogListComponent,
+          },
+          {
+            path: ':blogId',
+            component: BlogDetailComponent,
+          },
+        ]
       },
     ],
   },

@@ -1,16 +1,15 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+// The list of file replacements can be found in `project.json`.
 
 export const environment = {
   production: false,
   baseUrl: 'https://platform-stage.goeko-api.com',
-  clientId: 'ly5mBoJd8sgMxqF8MpWVsE24kkhAZIHW',
-  clientSecret:
-  'fpUa1WRuheWfewKLfpinS7jHmZzFzwW8vt4yWEaHGpB5rUOKqjCqmpD7sdYbUP9V',
-  audience: 'goeko-backend',
-  accessToken: 'https://soft-glitter-5713.eu.auth0.com/oauth/token',
-  domainAuth0: 'soft-glitter-5713.eu.auth0.com',
+  clientId: 'dn2YK5CEo5sKZzDTbai9WNWo9R8xHZMg',
+  clientSecret: 'qezNKj8nkgVQktHoK9anf2dZrCvIlsy3ZGYXeM2X4VAHhNxyJ2NSbCHfEP4OWJTX',
+  audience: 'goeko-backend-stage',
+  domainAuth0: 'late-mud-1972.eu.auth0.com',
+  connection: 'goeko-stage-users',
   firebaseApp: {
     apiKey: 'AIzaSyBoLASPKVeKXwrV4Do6MTm1pLHbRk2RUdI',
     authDomain: 'goeko-c8a23.firebaseapp.com',
@@ -20,7 +19,9 @@ export const environment = {
     appId: '1:487315241841:web:cb0d1a07252282ac9314d0',
     measurementId: 'G-QMCRE3THKL',
   },
-};
+  mailGunApiKey: 'f11940c67a8022c437c9ed1a04140f11-f6fe91d3-d0447893',
+  resendApiKey: 're_Tc4oL2Eo_9gvGUXDPan57RCDRvZ7VdJ1W',
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

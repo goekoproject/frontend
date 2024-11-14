@@ -8,14 +8,15 @@ $lineColor: var(--primary--100);
 }
 
 .menu {
+  flex-basis: 50%;
   ul {
     list-style: none;
   }
-  display: flex;
+  display: none;
   align-items: center;
   text-align: center;
   justify-content: center;
-  flex-grow: 2;
+  @apply gap-8 lg:flex;
   &-item {
     min-width: 3rem;
   }
@@ -32,23 +33,20 @@ $lineColor: var(--primary--100);
     z-index: 1;
     color: var(--dark, #27272a);
     font: var(--font-menu);
-    padding: 0.5rem; 
+    padding: 0.5rem;
     transition: all 0.3s;
   }
-
 }
 
-
 .menu-item:hover:has(.submenu:not(:empty)) {
- .menu-item--link {
-  background: var(--primary--400);
-  color: var(--primary--50);
-  border-radius: 0.5rem;
- }
+  .menu-item--link {
+    background: var(--primary--400);
+    color: var(--primary--50);
+    border-radius: 0.5rem;
+  }
 }
 
 .submenu {
-  display: none;
   position: fixed;
   left: 0;
   right: 0;
@@ -77,7 +75,6 @@ $lineColor: var(--primary--100);
   &-element {
     font: var(--font-default);
     color: var(--soft-dark);
-
   }
 }
 .menu-item:hover .submenu:not(:empty) {
@@ -91,7 +88,6 @@ $lineColor: var(--primary--100);
   top: -21px;
   opacity: 0.7;
 }
-
 
 @media (max-width: 768px) {
   .menu {

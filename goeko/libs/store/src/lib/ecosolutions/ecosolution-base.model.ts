@@ -1,9 +1,9 @@
 import { mapperLocations } from '@goeko/core'
 import { Classifications } from '../model/classificaciones.interface'
-import { FiledTranslations } from '../model/field-translations.interface'
-import { Country } from '../user/public-api'
+import { TranslatedProperties } from '../model/field-translations.interface'
+import { LocationsCountry } from '../model/locations.country'
 import { Ecosolutions, Improvement, Price } from './ecosolution.interface'
-export function _filterNotNull(items: Array<FiledTranslations>): FiledTranslations[] {
+export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedProperties[] {
   return items.filter((item) => item.label && item.lang)
 }
 export class EcosolutionsBody implements Ecosolutions {
@@ -14,7 +14,7 @@ export class EcosolutionsBody implements Ecosolutions {
   classification: Classifications
   price?: Price
   improvement?: Improvement
-  sustainableDevelopmentGoals?: number[]
+  sustainableDevelopmentGoals?: any[]
   countries?: string[]
   paybackPeriodYears?: number
   marketReady?: boolean
@@ -25,11 +25,11 @@ export class EcosolutionsBody implements Ecosolutions {
   unit?: string
   currency?: string
   priceDescription?: string
-  locations: Array<Country>
-  nameTranslations!: FiledTranslations[]
-  descriptionTranslations!: FiledTranslations[]
-  detailedDescriptionTranslations!: FiledTranslations[]
-  priceDescriptionTranslations!: FiledTranslations[]
+  locations: Array<LocationsCountry>
+  nameTranslations!: TranslatedProperties[]
+  descriptionTranslations!: TranslatedProperties[]
+  detailedDescriptionTranslations!: TranslatedProperties[]
+  priceDescriptionTranslations!: TranslatedProperties[]
   constructor(cleanTechId: string, mainCategory: string, formValue: any) {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`)
@@ -50,10 +50,10 @@ export class EcosolutionsBody implements Ecosolutions {
         to: formValue?.operationalCostReductionPercentage?.to,
       },
     }
-    this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals
+    this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals?.map((goal: any) => goal.code)
     this.classification = {
       mainCategory: mainCategory,
-      subCategory: formValue.subCategory?.code,
+      subCategory: formValue.subCategory?.code ?? formValue.subCategory,
       products: formValue.products,
     }
     this.countries = undefined

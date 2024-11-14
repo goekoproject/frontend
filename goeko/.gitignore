@@ -40,6 +40,11 @@ Thumbs.db
 
 .nx/cache
 .angular
+.firebase/
 
 # Project
+*.unlighthouse
 
+
+
+.nx/workspace-data

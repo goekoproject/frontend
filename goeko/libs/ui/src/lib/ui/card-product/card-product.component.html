@@ -1,29 +1,28 @@
-<div class="relative h-full min-h-96 cursor-pointer rounded-2xl bg-white p-5 transition-all hover:-translate-y-2">
-  <div
-    class="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary-50 hover:bg-primary-200"
-    (click)="doFavorite()">
-    @if (isFavorite) {
-      <i class="ti ti-heart-filled text-xl text-primary-400"></i>
-    } @else {
-      <i class="ti ti-heart text-xl text-primary-400"></i>
-    }
-  </div>
+<div class="relative flex h-80 w-full max-w-80 flex-col justify-around rounded-2xl bg-white px-4 shadow-lg">
+  <div class="flex flex-col gap-2">
+    <div class="border-grayLight size-20 rounded-lg border-2">
+      <img src="{{ image || 'assets/environment-bro.svg' }}" alt="Product 1" class="h-full w-full object-contain" />
+    </div>
 
-  <div class="aspect-w-16 aspect-h-8 mx-auto mb-4 h-[210px] w-5/6 overflow-hidden md:mb-2">
-    <img src="{{ image }}" alt="Product 1" class="h-full w-full object-contain" />
+    <div class="">
+      <h3 class="text-lg font-semibold text-primary-950 xl:text-2xl">{{ title }}</h3>
+      <p class="line-clamp-3 text-sm">{{ description }}</p>
+    </div>
+    <span class="go-badge-category">{{ category }}</span>
   </div>
+  <div class="flex justify-between">
+    <button class="go2-button" (click)="showMore()">
+      {{ 'showMore' | translate }}
+    </button>
 
-  <div clas="flex-auto px-6 py-5">
-    <span class="me-2 rounded-full bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-50 {{ classNameCategoy }}">{{
-      category
-    }}</span>
-    <h3 class="mb-3 mt-4 text-xl font-semibold text-primary-950 xl:text-2xl">{{ title }}</h3>
-    <p class="mb-4 line-clamp-3 text-base font-light">{{ description }}</p>
-    <span
-      (click)="showMore()"
-      class="inline-block cursor-pointer select-none rounded-full border bg-primary-900 px-2 py-1 text-center align-middle text-sm font-semibold leading-normal text-white no-underline shadow-sm hover:bg-primary-800"
-      >{{ 'showMore' | translate }}
-      <i class="ti ti-arrow-right"></i>
-    </span>
+    <div
+      class="right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary-50 hover:bg-primary-200"
+      (click)="doFavorite()">
+      @if (isFavorite) {
+        <i class="ti ti-heart-filled text-xl text-primary-400"></i>
+      } @else {
+        <i class="ti ti-heart text-xl text-primary-400"></i>
+      }
+    </div>
   </div>
 </div>

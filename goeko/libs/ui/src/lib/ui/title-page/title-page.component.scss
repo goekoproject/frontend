@@ -1,5 +1,5 @@
 .go-title-page {
-  color: #252525;
+  color: var(--white);
   position: relative;
   width: max-content;
   flex-direction: column;
@@ -9,6 +9,8 @@
     z-index: 1;
     position: relative;
     line-height: 1.5;
+    font: var(--font-home-semibold);
+    font-size: 24px; // meter con tailwind
   }
   span {
     width: 100%;
@@ -22,6 +24,7 @@
 
   .wrapper {
     position: relative;
+
   }
 }
 [size='huge'] {

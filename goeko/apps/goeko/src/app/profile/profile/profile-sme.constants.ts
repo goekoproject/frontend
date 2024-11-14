@@ -17,6 +17,18 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         required: true,
       },
       {
+        controlName: 'comunicationLanguage',
+        label: 'FORM_LABEL.comunicationLanguage',
+        type: 'lang',
+        required: true,
+      },
+      /*      {
+        controlName: 'identifier',
+        label: 'FORM_LABEL.companyId',
+        type: 'text',
+        required: true,
+      }, */
+      {
         controlName: 'employees',
         label: 'FORM_LABEL.numEmployees',
         type: 'number',
@@ -26,12 +38,17 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         controlName: 'website',
         label: 'FORM_LABEL.website',
         type: 'url',
+        placeholder: 'www.example.com',
+      },
+      {
+        controlName: 'phoneNumber',
+        label: 'FORM_LABEL.phoneNumber',
+        type: 'text',
       },
     ],
   },
   {
     legend: 'FORM_LABEL.yourLocation',
-    textSupport: 'FORM_LABEL.yourLocationTextSupport',
     fields: [
       {
         controlName: 'country',
@@ -39,6 +56,16 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         type: 'select-locations',
         dataSelectKey: 'countries',
         required: true,
+      },
+    ],
+  },
+  {
+    fields: [
+      {
+        controlName: 'generalNotifications',
+        label: 'MENU_USER_SME.notificationProfile',
+        type: 'checkbox',
+        required: false,
       },
     ],
   },

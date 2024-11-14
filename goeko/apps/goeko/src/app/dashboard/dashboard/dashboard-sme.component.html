@@ -1,80 +1,60 @@
-<div class="dashboard-option">
-  <div class="options-for-analysis">
-    <button
-      go-button
-      type="button"
-      [routerLink]="['../sme-analysis/new']" [relativeTo]="route.parent"
-      [queryParams]="{ smeId: userProfile().id, isProject: false }"
-      [queryParamsHandling]="'merge'"
-      routerLinkActive="router-link-active"
-      [disabled]="!userProfile()"
-      appearance="white"
-      size="huge"
-    >
-      <i class="ti ti-sphere-plus"></i>
-      <h4>{{ 'new_analysis' | translate }}</h4>
-    </button>
+<!-- <h1 class="text-2xl font-semibold">{{ 'MENU_USER.dashboard' | translate }}</h1>
+ -->
+@defer (when summary()) {
+  @if ((summary()?.projects ?? 0) > 0) {
+    <div class="flex flex-col gap-8">
+      <div class="flex w-6/12 gap-8 divide-x">
+        <div class="flex-grow px-6 py-2 font-semibold leading-10 text-primary-default">
+          <span class="text-5xl">{{ summary()?.projects }}</span>
+          <a class="text-lg underline" [routerLink]="'../projects-list/' + this.id()" [relativeTo]="route.parent">
+            <p>{{ 'projects' | translate }}</p></a
+          >
+        </div>
+        <div class="flex-grow px-6 py-2 leading-10">
+          <span class="text-5xl">{{ summary()?.contacts }}</span>
+          <p class="text-lg">{{ 'cleantechContacted' | translate }}</p>
+        </div>
+      </div>
 
-    <button
-      go-button
-      type="button"
-      [routerLink]="['../sme-analysis', userProfile().id]"
-      [relativeTo]="route.parent"
-      [queryParams]="{ isLast: true }"
-      [queryParamsHandling]="'merge'"
-      routerLinkActive="router-link-active"
-      [disabled]="!userProfile()"
-      appearance="white"
-      size="huge"
-    >
-      <i class="ti ti-restore"></i>
-      <h4>{{ 'last_analysis' | translate }}</h4>
-    </button>
-  </div>
-  <div class="options-for-company">
+      <div class="flex flex-col gap-4 p-4 sm:max-w-full lg:max-w-7xl">
+        <div class="flex justify-between">
+          <h1 class="text-2xl font-semibold">{{ 'MENU_USER.favourites' | translate }}</h1>
+          <a [routerLink]="'../favourites'" [relativeTo]="route.parent" class="text-primary-default">{{ 'showAll' | translate }}</a>
+        </div>
 
-    <div class="options-for-company-header">
-      <span class="title-section">
-        <span class="title-tag"></span>
-        <h2>{{ 'projectManagement' | translate }}</h2>
-        <span class="title-tag-small"></span>
-        <h3>{{ 'last_project' | translate }}</h3>
-      </span>
-  
-      <button
-        go-button
-        type="button"
-        [routerLink]="['../sme-analysis/projects/new']"
-        [relativeTo]="route.parent"
-        [queryParams]="{ smeId: userProfile().id }"
-        [queryParamsHandling]="'merge'"
-        routerLinkActive="router-link-active"
-        [disabled]="!userProfile()"
-        appearance="secondary"
-      >
-        <i class="ti ti-device-desktop-plus"></i>
-        {{ 'new_project' | translate }}
-      </button>
+        <div class="flex gap-4">
+          @for (ecosolutionFavorite of ecosolutionFavourites(); track ecosolutionFavorite.id) {
+            <goeko-card-product
+              class="flex-grow"
+              [title]="ecosolutionFavorite.ecosolution.solutionName"
+              [description]="ecosolutionFavorite.ecosolution.description"
+              [image]="ecosolutionFavorite.ecosolution.companyDetail.logo"
+              [category]="'CATEGORIES.' + ecosolutionFavorite.ecosolution.classification.mainCategory | translate"
+              [classNameCategoy]="ecosolutionFavorite.ecosolution.classification.mainCategory"
+              [isFavorite]="ecosolutionFavorite.tag === TAGGING.FAVOURITES"
+              (changeShowMore)="showMore(ecosolutionFavorite.ecosolution.ecosolutionId)" />
+          }
+        </div>
+      </div>
     </div>
-   
+  } @else {
+    <ng-container [ngTemplateOutlet]="emptyProjects"></ng-container>
+  }
+}
 
-    <ul class="list-project">
-      <li *ngFor="let project of projects">
-        <div class="project-col project-title">
-          <i class="ti ti-folder-heart"></i>
-          <h4>{{ project.name }}</h4>
-        </div>
-        <div class="project-col project-date">
-          <i class="ti ti-calendar-time"></i>
-          <p>{{ project.date | goDateFormat  }}</p>
-        </div>
-        <div class="project-actions" (click)="deleteProject(project)">
-          <i class="ti ti-trash"></i>
-        </div>
-        <div class="project-actions" (click)="goToProject(project)">
-          <i class="ti ti-circle-arrow-right"></i>
-        </div>
-      </li>
-    </ul>
+<ng-template #emptyProjects>
+  <div class="dashboard-option">
+    <div class="container p-10">
+      <div
+        class="flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-lg shadow-gray-300 dark:bg-white">
+        <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_SME.titleCard' | translate }}</h5>
+
+        <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_SME.subtitleCard' | translate }}</p>
+        <img src="assets/Group 65.svg" class="mb-11" />
+        <button type="button" go-button appearance="primary" (click)="openNewProjectDialog()">
+          {{ 'MENU_USER_SME.buttonSearch' | translate }}
+        </button>
+      </div>
+    </div>
   </div>
-</div>
+</ng-template>

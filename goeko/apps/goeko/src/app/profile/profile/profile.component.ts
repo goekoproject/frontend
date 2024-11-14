@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, effect, OnInit } from '@angular/core'
 import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
-import { CountrySelectOption, DataSelect, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
+import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
-import { Subject, forkJoin, map, switchMap, takeUntil } from 'rxjs'
+import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
+import { LANG_PROFILE } from './profile-form'
 import { ProfileFormFactory } from './profile-form.factory'
+import { NotificationProfile } from './profile-payload.model'
 import { PROFILE_SME } from './profile-sme.constants'
 import { ProfileService } from './profile.service'
 
@@ -56,6 +58,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
+  public dataLang = LANG_PROFILE
   private _externalId = this._profieService.externalId
   private destroy$ = new Subject<void>()
 
@@ -75,7 +78,14 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   constructor(
     private _profieService: ProfileService,
     public route: ActivatedRoute,
-  ) {}
+  ) {
+    effect(() => {
+      if (this.userType() && !this.form) {
+        this._createFormForUserType()
+        this._loadDataProfile()
+      }
+    })
+  }
 
   canDeactivate() {
     return !!this.dataProfile().id
@@ -83,8 +93,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit() {
     this._profieService.fetchUser()
-    this._createFormForUserType()
-    this._loadDataProfile()
   }
 
   private _createFormForUserType() {
@@ -94,27 +102,27 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
 
   private _loadDataProfile() {
     this.form.patchValue(this.dataProfile())
+    this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification?.lang)
+    this.form.get('phoneNumber')?.patchValue(this.dataProfile()?.notification?.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
+    this.form.get('generalNotifications')?.patchValue((this.dataProfile().notification as NotificationProfile).enabled)
     this._setLocaltionInFormForSme()
   }
 
   private _setLocaltionInFormForSme() {
     if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
       this.locationsArrays.clear()
-      ;(this.dataProfile() as SmeUser).locations.forEach(() => {
-        this._addLocations()
-      })
-      this.form.get('locations')?.patchValue((this.dataProfile() as SmeUser).locations)
+      this._addLocations((this.dataProfile() as SmeUser).locations[0])
     }
   }
-  private _addLocations() {
-    this.locationsArrays.push(this._createLocations())
+  private _addLocations(location: LocationsCountry) {
+    this.locationsArrays.push(this._createLocations(location))
   }
-  private _createLocations(): FormGroup {
+  private _createLocations(location: LocationsCountry): FormGroup {
     return new FormGroup({
       country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl([]),
+        code: new FormControl(location.country.code),
+        regions: new FormControl(location.country.regions),
       }),
     })
   }

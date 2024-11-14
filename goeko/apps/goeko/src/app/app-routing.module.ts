@@ -8,12 +8,17 @@ const ROUTES: Routes = [
     component: AppComponent,
     children: [
       {
-        path: 'home',
-        loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
       },
       {
-        path: 'demo',
-        loadChildren: () => import('./demo/demo.module').then((m) => m.DemoModule),
+        path: 'login',
+        loadChildren: () => import('./access/access.module').then((m) => m.AccessModule),
+      },
+      {
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'platform',
@@ -27,20 +32,17 @@ const ROUTES: Routes = [
         path: 'autenticate',
         loadComponent: () => import('@goeko/business-ui').then((m) => m.AutenticateComponent),
       },
-      {
+      /*       {
         path: '**',
         redirectTo: 'home',
         pathMatch: 'full',
-      },
+      }, */
     ],
   },
 ]
 @NgModule({
   imports: [
     RouterModule.forRoot(ROUTES, {
-      scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled',
-      scrollOffset: [0, 100], // [x, y]
       bindToComponentInputs: true,
     }),
   ],

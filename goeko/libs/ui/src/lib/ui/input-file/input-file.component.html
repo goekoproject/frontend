@@ -4,7 +4,7 @@
 
 <div
   [ngClass]="{ flex: this.multiple, 'flex-col-reverse': this.multiple }"
-  class="relative w-full rounded-lg border-2 border-dashed border-gray-300 p-6 transition-all"
+  class="relative w-full max-w-96 rounded-lg border-2 border-dashed border-gray-300 p-6 transition-all"
   [ngClass]="{ 'input-readonly': readonly }"
   id="dropzone"
   #dropzone
@@ -35,7 +35,7 @@
     </div>
   }
 
-  @if (multiple && filesUrl) {
+  @if (multiple && filesUrl && filesUrl.length > 0) {
     <div class="embla w-full" emblaCarousel>
       <div class="embla__container">
         @for (file of filesUrl; track file; let i = $index) {
@@ -43,7 +43,6 @@
         }
       </div>
     </div>
-
     <div class="thumb py-4" thumb>
       <div class="embla__container mt-4 flex shrink-0 grow-0 basis-24 gap-3 rounded-2xl">
         @for (file of filesUrl; track file; let i = $index) {
@@ -58,14 +57,11 @@
         }
       </div>
     </div>
-
-    @if (filesUrl.length > 0) {
-      <div class="flex self-end text-4xl text-primary-900">
-        <i class="ti ti-circle-arrow-left cursor-pointer" (click)="prev()"></i>
-        <i class="ti ti-circle-arrow-right cursor-pointer" (click)="next()"></i>
-      </div>
-    }
-  } @else if (filesUrl && filesUrl.length > 0) {
+    <div class="flex self-end text-4xl text-primary-900">
+      <i class="ti ti-circle-arrow-left cursor-pointer" (click)="prev()"></i>
+      <i class="ti ti-circle-arrow-right cursor-pointer" (click)="next()"></i>
+    </div>
+  } @else if (filesUrl && filesUrl.length === 1) {
     <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ id: 0, url: filesUrl[0] }"></ng-container>
   }
 </div>
@@ -80,7 +76,7 @@
       }
     }
     @if (id === selectedSlideMain()) {
-      <img [src]="url" [alt]="id" class="rounded-2xl" />
+      <img [src]="url" loading="lazy" [alt]="id" class="aspect-square w-4/6 rounded-2xl" />
     }
   </div>
 </ng-template>

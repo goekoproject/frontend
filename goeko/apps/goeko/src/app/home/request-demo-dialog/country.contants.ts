@@ -1,0 +1,31 @@
+
+export const COUNTRIES_EU: any = [
+  "Bélgica",
+  "Bulgaria",
+  "Chequia",
+  "Dinamarca",
+  "Alemania",
+  "Estonia",
+  "Irlanda",
+  "Grecia",
+  "España",
+  "Francia",
+  "Croacia",
+  "Italia",
+  "Chipre",
+  "Letonia",
+  "Lituania",
+  "Luxemburgo",
+  "Hungría",
+  "Malta",
+  "Países Bajos",
+  "Austria",
+  "Polonia",
+  "Portugal",
+  "Rumanía",
+  "Eslovenia",
+  "Eslovaquia",
+  "Finlandia",
+  "Suecia"
+];
+

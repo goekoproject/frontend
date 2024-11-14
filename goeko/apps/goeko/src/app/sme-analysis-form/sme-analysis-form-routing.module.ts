@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { unSavedChangesGuard } from '@goeko/business-ui';
-import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component';
-import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component';
-import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component';
-import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component';
-import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component';
-import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component';
-import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component';
-import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component';
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { unSavedChangesGuard } from '@goeko/business-ui'
+import { SmeRequestAnalisysComponent } from './sme-analysis-request/sme-analysis-request.component'
+import { EcosolutionListComponent } from './sme-analysis-result/ecosolution-list/ecosolution-list.component'
+import { ResultDetailEcosolutionComponent } from './sme-analysis-result/result-detail-ecosolution/result-detail-ecosolution.component'
+import { SmeAnalysisResultComponent } from './sme-analysis-result/sme-analysis-result.component'
+import { SmeAnalysisSummaryComponent } from './sme-analysis-summary/sme-analysis-summary.component'
+import { SmeAnalysisComponent } from './sme-analysis/sme-analysis.component'
+import { SmeFormAnalysisComponent } from './sme-form-analysis/sme-form-analysis.component'
+import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.component'
 
 const routes: Routes = [
   {
@@ -82,10 +82,12 @@ const routes: Routes = [
       {
         path: 'new',
         component: SmeFormProjectComponent,
+        canDeactivate: [unSavedChangesGuard],
       },
       {
         path: 'project/:id',
         component: SmeFormProjectComponent,
+        canDeactivate: [unSavedChangesGuard],
         data: {
           breadcrumb: 'last_project',
           hidden: true,
@@ -94,6 +96,7 @@ const routes: Routes = [
       {
         path: 'summary',
         component: SmeAnalysisSummaryComponent,
+        canDeactivate: [unSavedChangesGuard],
         data: {
           breadcrumb: 'summary',
         },
@@ -114,7 +117,7 @@ const routes: Routes = [
       },
     ],
   },
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

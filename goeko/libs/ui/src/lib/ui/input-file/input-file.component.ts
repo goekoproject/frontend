@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, signal } from '@angular/core'
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, signal } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
-import { EmblaCarouselDirective, EmblaCarouselType } from 'embla-carousel-angular'
+import { EmblaCarouselDirective } from 'embla-carousel-angular'
 import { ThumbCarrouselDirective } from './thumb-carrousel.directive'
 @Component({
   selector: 'goeko-input-file',
@@ -10,11 +10,15 @@ import { ThumbCarrouselDirective } from './thumb-carrousel.directive'
   templateUrl: './input-file.component.html',
   styleUrl: './input-file.component.scss',
 })
-export class InputFileComponent implements AfterViewInit {
+export class InputFileComponent {
   @ViewChild(EmblaCarouselDirective) emblaRef!: EmblaCarouselDirective
   @ViewChild(ThumbCarrouselDirective) thumbRef!: ThumbCarrouselDirective
-  private emblaApi?: EmblaCarouselType
-  private thumbApi?: EmblaCarouselType
+  private get emblaApi() {
+    return this.emblaRef?.emblaApi
+  }
+  private get thumbApi() {
+    return this.thumbRef?.emblaApiThumb
+  }
 
   @ViewChild('dropzone') dropzone!: ElementRef
   @Output() fileChange = new EventEmitter()
@@ -25,21 +29,20 @@ export class InputFileComponent implements AfterViewInit {
   public set acceptedFileTypes(value: string) {
     this._acceptedFileTypes = value
   }
-  private _acceptedFileTypes: string = 'application/jpeg'
+  private _acceptedFileTypes: string = 'application/png, application/jpeg, application/jpg'
 
   @Input() readonly = false
 
   @Input()
-  public get filesUrl(): Array<string> | string | undefined {
+  public get filesUrl(): Array<string> | string {
     return this._filesUrl
   }
-  public set filesUrl(value: Array<string> | string | undefined) {
-    if (!value) {
-      return
+  public set filesUrl(value: Array<string> | string) {
+    if (value) {
+      this._processFilesUrl(value)
     }
-    this._processFilesUrl(value)
   }
-  private _filesUrl?: Array<string> | string | undefined = []
+  private _filesUrl: Array<string> | string = []
 
   @Input()
   public id!: string
@@ -86,14 +89,6 @@ export class InputFileComponent implements AfterViewInit {
   }
   constructor(private _renderer: Renderer2) {}
 
-  ngAfterViewInit() {
-    if (this.multiple) {
-      const { emblaApi } = this.emblaRef
-      const { emblaApiThumb } = this.thumbRef
-      this.emblaApi = emblaApi
-      this.thumbApi = emblaApiThumb
-    }
-  }
   uploadFile(event: Event) {
     const file = this._loadFile(event.target) as File[]
     this._readFile(file)
@@ -124,17 +119,17 @@ export class InputFileComponent implements AfterViewInit {
   }
 
   next() {
-    const next = this._selectedSlideMain + 1
-    this.selectedImg(next)
+    const nextSlider = this._selectedSlideMain + 1
+    this.selectedImg(nextSlider)
   }
   prev() {
-    const prev = this._selectedSlideMain - 1
-    this.selectedImg(prev)
+    const prevSlider = this._selectedSlideMain - 1
+    this.selectedImg(prevSlider)
   }
 
   removeSlide(id: number) {
     ;(this.filesUrl as Array<string>).splice(id, 1)
-    this._fileSetMultiple.splice(id, 1)
+    this._fileSetMultiple?.splice(id, 1)
     this._propagateSelected()
   }
 
@@ -190,6 +185,10 @@ export class InputFileComponent implements AfterViewInit {
   }
   private _addNewFile(urlFile: string) {
     ;(this.filesUrl as Array<string>).push(urlFile)
+    this.next()
+    if (this.filesUrl?.length > 1) {
+      this.selectedSlideMain.update((value) => value + 1)
+    }
   }
 
   private _propagateSelected() {
@@ -198,7 +197,7 @@ export class InputFileComponent implements AfterViewInit {
     }
   }
   async loadFilesFromUrls(fileUrls: string[]) {
-    const filePromises = fileUrls.map(async (url) => {
+    const filePromises = fileUrls?.map(async (url) => {
       const response = await fetch(url)
       const blob = await response.blob()
       const filename = url.split('/').pop() || 'defaultName'
