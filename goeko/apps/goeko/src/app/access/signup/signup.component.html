@@ -1,39 +1,146 @@
-<ng-container [formGroup]="formSignup">
-	<go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
-		<p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
-	</go-input>
+<h1 class="text-2xl font-bold">{{ 'LOGIN.msgsignup2' | translate }}</h1>
 
-	<go-input
-		[formControlName]="'password'"
-		type="password"
-		minlength="8"
-		id="current-password"
-		name="current-password"
-	>
-		<p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
-	</go-input>
+<form [formGroup]="formSignup" class="flex flex-col gap-4 overflow-auto">
+  @if (errorMsgSignup()) {
+    <goeko-alert [type]="'danger'">
+      <p>
+        {{ errorMsgSignup() | translate }}
+      </p>
+      @if (!isErrorPolicyPassword()) {
+        <a
+          [routerLink]="'../reset-password'"
+          [queryParams]="{ email: formSignup.value.email }"
+          class="text-primary-600 text-sm font-medium hover:underline dark:text-primary-500"
+          >{{ 'LOGIN.forgotPassword' | translate }}</a
+        >
+      }
+    </goeko-alert>
+  }
+  <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
+    <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+  </go-input>
 
-	<go-notification type="info" *ngIf="isErrorPolicyPassword">
-		<div class="policy-password">
-			<span>{{ 'ACCESS_ERROR.passwordPolicyTitle' | translate }}</span>
-			<ul>
-				<li *ngFor="let item of policyPassword">
-					{{ 'ACCESS_ERROR.' + item | translate }}
-				</li>
-			</ul>
-		</div>
-	</go-notification>
-	<ui-super-select [placeholder]="'userType' | translate" [formControlName]="'userType'">
-		<ng-container *ngFor="let option of userType">
-			<super-option *ngIf="option.active" [value]="option.value">
-				{{ option.title | translate }}
-			</super-option>
-		</ng-container>
-	</ui-super-select>
+  @if (isErrorPolicyPassword()) {
+    <go-tooltip>
+      <p [innerHTML]="'ACCESS_ERROR.passwordPolicy' | translate"></p>
+    </go-tooltip>
+  }
 
-	<ng-content></ng-content>
+  <go-input
+    [formControlName]="'password'"
+    [type]="showPassword() ? 'text' : 'password'"
+    minlength="8"
+    id="current-password"
+    name="current-password">
+    <p slot="label">{{ 'FORM_LABEL.password' | translate }}</p>
+    @if (showPassword()) {
+      <i class="ti ti-eye absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500" (click)="showPassword.set(false)"></i>
+    } @else {
+      <i
+        class="ti ti-eye-closed absolute bottom-1 right-2.5 z-10 cursor-pointer text-2xl text-blue-500"
+        (click)="showPassword.set(true)"></i>
+    }
+  </go-input>
 
-	<p>
-		{{ 'LOGIN.msglogin2' | translate }}. <a (click)="goToLoginForm()">{{ 'Log in' | translate }}</a>
-	</p>
-</ng-container>
+  <div>
+    <div class="bg-card text-card-foreground grid w-full max-w-md gap-4 rounded-lg">
+      <div class="flex flex-col space-y-1.5">
+        <h4 class="whitespace-nowrap text-xl leading-none tracking-tight">{{ 'userType' | translate }}</h4>
+      </div>
+      <div class="flex flex-col gap-4">
+        @for (actor of userType(); track actor.value) {
+          @defer (when actor.active) {
+            <div
+              role="radiogroup"
+              aria-required="false"
+              dir="ltr"
+              class="grid gap-4"
+              (click)="getSelectedActor(actor.value)"
+              tabindex="0"
+              style="outline: none">
+              <label
+                [ngClass]="{ 'bg-blueLightPastel border-blue-400': actor.value === selectedActor() }"
+                class="border-muted bg-popover flex cursor-pointer items-center gap-4 rounded-md border p-4 text-sm font-medium leading-none transition-transform hover:scale-105 hover:bg-gray-100"
+                for="enterprise">
+                <button
+                  type="button"
+                  role="radio"
+                  value="enterprise"
+                  class="border-primary text-primary sr-only aspect-square h-4 w-4 rounded-full border focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50"
+                  id="{{ actor.value }}"
+                  tabindex="-1"
+                  data-radix-collection-item="">
+                  <span data-state="checked" class="flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-circle h-2.5 w-2.5 fill-current text-current">
+                      <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                  </span>
+                </button>
+                <div class="flex items-center justify-center rounded-md p-3">
+                  @if (actor.value === 'sme') {
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="text-muted-foreground h-6 w-6">
+                      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                      <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                    </svg>
+                  } @else {
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="text-muted-foreground h-6 w-6">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                    </svg>
+                  }
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold">{{ actor.title | translate }}</h4>
+                  <p class="text-muted-foreground">{{ actor.descriptions }}</p>
+                </div>
+              </label>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </div>
+
+  <label class="flex gap-1">
+    <input #inputAcceptConditions type="checkbox" name="acceptConditions" id="inputAcceptConditions" required />
+    <p>{{ 'SIGNUP.acceptedConditions' | translate }}</p>
+    <a (click)="openTermsServices()">{{ 'SIGNUP.acceptedConditions2' | translate }}</a>
+  </label>
+
+  <button type="submit" go-button appearance="primary" (click)="submitSignUp()" [disabled]="formSignup.invalid">
+    {{ 'Sign up' }}
+  </button>
+  <p>
+    {{ 'LOGIN.msglogin2' | translate }}. <a [routerLink]="['/login']">{{ 'Log in' | translate }}</a>
+  </p>
+</form>

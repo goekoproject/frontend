@@ -16,12 +16,12 @@
     class="mb-4 flex w-full animate-fadeInRight items-center justify-around rounded-lg border p-4 shadow"
     role="alert"
     [ngClass]="{
-      'animate-fadeOutRight': removing[index],
-      'animate-fadeOutRightLarge': removingAll,
+      'animate-fadeOutRight': !static && removing[index],
+      'animate-fadeOutRightLarge': !static && removingAll,
 
       'border-primary-400 bg-primary-200 text-primary-950': type === 'SUCCESS',
       'border-yellow-500 bg-yellow-50 text-yellow-900': type === 'WARNING',
-      'text-textError border-red-700 bg-red-200': type === 'ERROR',
+      'border-red-700 bg-red-200 text-textError': type === 'ERROR',
     }">
     <div class="flex items-center">
       @switch (type) {

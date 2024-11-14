@@ -1,4 +1,4 @@
-import { ProfileFieldset } from './profile-fieldset.interface';
+import { ProfileFieldset } from './profile-fieldset.interface'
 
 export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
   {
@@ -28,9 +28,28 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         type: 'text',
       },
       {
+        controlName: 'comunicationLanguage',
+        label: 'FORM_LABEL.comunicationLanguage',
+        type: 'lang',
+        required: true,
+      },
+      /*       {
+        controlName: 'identifier',
+        label: 'FORM_LABEL.companyId',
+        type: 'text',
+        required: true,
+      }, */
+      {
         controlName: 'link',
         label: 'FORM_LABEL.website',
         type: 'url',
+        placeholder: 'www.example.com',
+      },
+      {
+        controlName: 'phoneNumber',
+        label: 'FORM_LABEL.phoneNumber',
+        type: 'text',
+        //required: true,
       },
       {
         controlName: 'logo',
@@ -40,4 +59,4 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
       },
     ],
   },
-];
+]

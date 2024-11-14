@@ -1,4 +1,4 @@
-import { Country, Ecosolutions, FiledTranslations, FromTO, ReductionPercentage } from '@goeko/store'
+import { Ecosolutions, FromTO, LocationsCountry, ReductionPercentage, SDG_LABEL, TranslatedProperties } from '@goeko/store'
 export interface GoalChecked {
   value: string
   checked: boolean
@@ -22,11 +22,11 @@ export class EcosolutionForm {
   yearGuarantee?: number
   priceDescription?: string
   detailedDescription?: string
-  locations?: Array<Country>
-  nameTranslations!: FiledTranslations[]
-  detailedDescriptionTranslations!: FiledTranslations[]
-  descriptionTranslations!: FiledTranslations[]
-  priceDescriptionTranslations!: FiledTranslations[]
+  locations?: Array<LocationsCountry>
+  nameTranslations!: TranslatedProperties[]
+  detailedDescriptionTranslations!: TranslatedProperties[]
+  descriptionTranslations!: TranslatedProperties[]
+  priceDescriptionTranslations!: TranslatedProperties[]
 
   constructor(ecosolution: Ecosolutions) {
     this.solutionName = ecosolution.solutionName
@@ -35,7 +35,7 @@ export class EcosolutionForm {
     this.products = ecosolution.classification.products
     this.reductionPercentage = ecosolution.improvement?.reductionPercentage
     this.operationalCostReductionPercentage = ecosolution.improvement?.operationalCostReductionPercentage
-    this.sustainableDevelopmentGoals = ecosolution.sustainableDevelopmentGoals
+    this.sustainableDevelopmentGoals = SDG_LABEL.filter((sdg) => ecosolution.sustainableDevelopmentGoals?.includes(sdg.code))
     this.price = ecosolution.price?.amount
     this.currency = ecosolution.price?.currency
     this.deliverCountries = ecosolution.countries
@@ -48,19 +48,33 @@ export class EcosolutionForm {
     this.priceDescription = ecosolution.priceDescription
     this.detailedDescription = ecosolution.detailedDescription
     this.locations = ecosolution.locations
-    ;(this.nameTranslations = this.getLabelTranslated(ecosolution.nameTranslations, ecosolution.solutionName)),
-      (this.detailedDescriptionTranslations = this.getLabelTranslated(
-        ecosolution.detailedDescriptionTranslations,
-        ecosolution.detailedDescription,
-      ))
-    ;(this.descriptionTranslations = this.getLabelTranslated(ecosolution.descriptionTranslations, ecosolution.solutionDescription)),
-      (this.priceDescriptionTranslations = this.getLabelTranslated(ecosolution.priceDescriptionTranslations, ecosolution.priceDescription))
+    this._setNameTranslated(ecosolution)
+    this._setDetailedDescriptionTranslations(ecosolution)
+    this._setDescriptionTranslations(ecosolution)
+    this._setPriceDescriptionTranslations(ecosolution)
   }
-  private getLabelTranslated(labelTranslate: FiledTranslations[], preValue: string | undefined) {
+
+  private _setNameTranslated(ecosolution: Ecosolutions) {
+    this.nameTranslations = this.getLabelTranslated(ecosolution.nameTranslations, ecosolution.solutionName)
+  }
+  private _setDetailedDescriptionTranslations(ecosolution: Ecosolutions) {
+    this.detailedDescriptionTranslations = this.getLabelTranslated(
+      ecosolution.detailedDescriptionTranslations,
+      ecosolution.detailedDescription,
+    )
+  }
+  private _setDescriptionTranslations(ecosolution: Ecosolutions) {
+    this.descriptionTranslations = this.getLabelTranslated(ecosolution.descriptionTranslations, ecosolution.solutionDescription)
+  }
+
+  private _setPriceDescriptionTranslations(ecosolution: Ecosolutions) {
+    this.priceDescriptionTranslations = this.getLabelTranslated(ecosolution.priceDescriptionTranslations, ecosolution.priceDescription)
+  }
+  private getLabelTranslated(labelTranslate: TranslatedProperties[], preValue: string | undefined) {
     if (labelTranslate && labelTranslate.length > 0) {
       return labelTranslate
     } else {
-      return [{ lang: 'fr', label: preValue } as FiledTranslations]
+      return [{ lang: 'fr', label: preValue } as TranslatedProperties]
     }
   }
 }

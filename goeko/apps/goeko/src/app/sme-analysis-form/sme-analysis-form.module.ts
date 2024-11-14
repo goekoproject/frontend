@@ -15,7 +15,7 @@ import {
   SdgIconsComponent,
   SelectSubcategoryProductComponent,
 } from '@goeko/business-ui'
-import { SmeModule } from '@goeko/store'
+import { ClassificationCategoryService, EcosolutionsService, SmeModule } from '@goeko/store'
 import {
   BadgeModule,
   ButtonModule,
@@ -94,7 +94,7 @@ import { SmeFormProjectComponent } from './sme-form-project/sme-form-project.com
     NotificationModule,
     CardProductComponent,
   ],
-  providers: [SmeAnalysisService, MessageService],
+  providers: [SmeAnalysisService, MessageService, ClassificationCategoryService, EcosolutionsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SmeAnalysisFormModule {}

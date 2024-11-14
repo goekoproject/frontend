@@ -12,7 +12,7 @@ import {
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { CategoryModule, Product, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
-import { ClassificationCategory, ManageCategory, ManageSubcategory, ProductSelectToManageProduct, Translations } from '@goeko/store'
+import { ClassificationCategoryService, ManageCategory, ManageSubcategory, ProductSelectToManageProduct, Translations } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
@@ -40,7 +40,7 @@ import { AdminCategoriesService } from './admin-categories.services'
     ProductToCurrentLangPipe,
     SwitchModule,
   ],
-  providers: [AdminCategoriesService],
+  providers: [AdminCategoriesService, ClassificationCategoryService],
   templateUrl: './admin-categories.component.html',
   styleUrl: './admin-categories.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,7 +50,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
   //Signal
-  categories = this._adminCategories.categories
+  categories = this._adminCategories.categories as any
   categorySelected = this._adminCategories.categorySelected
   subCategorySelected = this._adminCategories.subCategorySelected
   subCategorySelectedIndex = this._adminCategories.subCategorySelectedIndex
@@ -128,7 +128,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
     AdminCategoriesDynamicForm.buildForm({ fb: this._fb, group, formGroup })
   }
 
-  selectCategory(categorySelected: ClassificationCategory): void {
+  selectCategory(categorySelected: any): void {
     this._closeAllDetail()
     this._cdf.markForCheck()
     this.categorySelected.set(categorySelected)

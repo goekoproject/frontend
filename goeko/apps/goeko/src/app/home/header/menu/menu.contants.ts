@@ -3,6 +3,13 @@ import { IMenu } from './menu.interface';
 export const MENU: IMenu[] = [
   {
     id: window.crypto.randomUUID(),
+    code: 'services',
+    keyLang: 'MENU.services',
+    url: 'services',
+    type: 'text',
+  },
+  {
+    id: window.crypto.randomUUID(),
     code: 'about',
     keyLang: 'MENU.aboutGoEKo',
     url: 'about',
@@ -12,7 +19,7 @@ export const MENU: IMenu[] = [
     id: window.crypto.randomUUID(),
     code: 'blog',
     keyLang: 'MENU.blog',
-    url: 'administration',
+    url: 'blog',
     type: 'text',
   },
   {

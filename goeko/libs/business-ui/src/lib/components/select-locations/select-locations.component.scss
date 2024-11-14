@@ -1,5 +1,5 @@
 .locations-selected {
-    @apply flex gap-8 border rounded-md p-4;
+    @apply flex gap-8;
 }
 
 .selected-element {
@@ -21,4 +21,4 @@
 }
 .hidden-selected{
 	@apply invisible h-0 p-0 m-0;
-} 
+}

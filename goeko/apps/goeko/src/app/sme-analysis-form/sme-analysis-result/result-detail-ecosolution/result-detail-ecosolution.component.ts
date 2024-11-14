@@ -5,6 +5,8 @@ import { DataSelect, EcosolutionSearchResponse, LocationCountryTranslated, Locat
 import { AutoUnsubscribe, DialogService } from '@goeko/ui'
 import { Subject, takeUntil } from 'rxjs'
 import { SECTION_FEATURE_DETAIL_ECOSOLUTION } from './detail-feature.constants'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 
 @AutoUnsubscribe()
 @Component({
@@ -27,10 +29,10 @@ export class ResultDetailEcosolutionComponent implements OnInit {
 
   constructor(
     private _smeServices: SmeService,
-
     private _router: Router,
     private _route: ActivatedRoute,
     private _dialogService: DialogService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class ResultDetailEcosolutionComponent implements OnInit {
       .ecosolutionSearchById(this.ecosolutionId, this._smeId)
       .pipe(takeUntil(this.destroy$))
       .subscribe((detailsEcosolution: EcosolutionSearchResponse) => {
+        console.log('detailedDescription:', detailsEcosolution.detailedDescription);
         this.detailsEcosolution.set(detailsEcosolution)
       })
   }
@@ -66,4 +69,9 @@ export class ResultDetailEcosolutionComponent implements OnInit {
       window.open(certified.url, '_blank')
     }
   }
+
+  public sanitizeHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
 }

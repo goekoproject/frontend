@@ -1,3 +1,43 @@
-<go-banner></go-banner>
-<go-content></go-content>
-<goeko-team></goeko-team>
+<article class="main-front">
+  <img [src]="mainPhoto()" class="absolute top-0 z-auto aspect-square object-cover xl:aspect-auto xl:w-svw" />
+  <div class="gradient bottom-[8.5rem] lg:bottom-[-8rem]"></div>
+
+  <div class="flex flex-col items-center gap-8 lg:w-full">
+    <h1 #goekoText class="title-transition text-7xl">GoEko</h1>
+    <div class="text-center lg:mt-12 lg:w-[64rem]">
+      <h1 class="title text-transition text-6xl leading-none lg:text-7xl" *ngIf="showMainSlogan">
+        {{ entryDataMain()?.text }}
+      </h1>
+      <h3 class="subtitle text-transition" *ngIf="showMainSlogan">{{ entryDataConnecting()?.text }}</h3>
+    </div>
+    <button class="z-10 flex items-center rounded-full bg-white py-1 pl-6 pr-1 font-bold text-primary-default" (click)="goTologin()">
+      <span class="mr-2 text-lg"> {{ connection()?.text | translate }} </span>
+      <svg
+        class="size-12 rounded-full bg-primary-default stroke-white p-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </button>
+  </div>
+</article>
+
+@defer (on viewport) {
+  <go-banner class="relative"></go-banner>
+} @placeholder {
+  <div>loading...</div>
+}
+@defer (on viewport) {
+  <go-content />
+} @placeholder {
+  <div>loading...</div>
+}
+
+<div class="flex flex-col gap-24">
+  @defer (on viewport) {
+    <goeko-team></goeko-team>
+  } @placeholder {
+    <div>loading...</div>
+  }
+</div>

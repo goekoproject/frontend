@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, catchError, map, of } from 'rxjs'
+import { Observable, catchError, map, of, shareReplay } from 'rxjs'
 import { TranslateChangeService } from '../util/translate-change'
+import { EcosolutionResult } from './ecosolution-result.interface'
 import { EcosolutionSearchRequest } from './ecosolution-search.request.model'
 import { EcosolutionSearchResponse } from './ecosolution-search.response.interface'
 import { Ecosolutions } from './ecosolution.interface'
@@ -84,18 +85,21 @@ export class EcosolutionsService extends TranslateChangeService {
     return this._http.post<Observable<any>>(`/v1/ecosolutions`, body)
   }
 
-  ecosolutionSearch(body: EcosolutionSearchRequest): Observable<EcosolutionSearchResponse[] | null> {
+  ecosolutionSearch(body: EcosolutionSearchRequest): Observable<EcosolutionResult[] | null> {
+    const _lang = this.lang() === 'gb' ? 'en' : this.lang()
+
     if (!body || body.classifications.length <= 0) {
       return of(null)
     }
-    return this._http
-      .post<{ ecosolutions: EcosolutionSearchResponse[] }>(`/v1/ecosolution/search?lang=${this.lang()}`, body)
-      .pipe(map((request: { ecosolutions: EcosolutionSearchResponse[] }) => request.ecosolutions))
+    return this._http.post<{ ecosolutions: EcosolutionResult[] }>(`/v1/ecosolution/search?lang=${_lang}`, body).pipe(
+      map((request: { ecosolutions: EcosolutionResult[] }) => request.ecosolutions),
+      shareReplay(1),
+    )
   }
 
   getEcosolutionSearchById(id: string, smeId: string): Observable<EcosolutionSearchResponse> {
     const params = {
-      lang: this.lang(),
+      lang: this.lang() === 'gb' ? 'en' : this.lang(),
       smeId,
     }
 

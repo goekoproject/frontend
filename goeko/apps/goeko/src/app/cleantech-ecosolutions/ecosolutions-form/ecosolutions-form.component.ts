@@ -1,10 +1,20 @@
-import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { LANGS } from '@goeko/core'
-import { DataSelect, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, ODS_CODE, UpdatedEcosolutionBody } from '@goeko/store'
+import {
+  DataSelect,
+  Ecosolutions,
+  EcosolutionsBody,
+  EcosolutionsService,
+  LocationsCountry,
+  NewEcosolutionsBody,
+  ODS_CODE,
+  TranslatedProperties,
+  UpdatedEcosolutionBody,
+} from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
-import { EcosolutionsBody } from 'libs/store/src/lib/ecosolutions/ecosolution-base.model'
+import { Editor, Toolbar } from 'ngx-editor'
 import { forkJoin, last, of, switchMap, tap } from 'rxjs'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import {
@@ -16,25 +26,30 @@ import {
   defaultSetyearGuarantee,
 } from './compare-with-select'
 import { EcosolutionForm } from './ecosolution-form.model'
+import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
 })
-export class EcosolutionsFormComponent implements OnInit {
+export class EcosolutionsFormComponent implements OnInit, OnDestroy {
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
-  public form!: FormGroup
-  public ods = ODS_CODE
-  public idEcosolution!: string
-  public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
-  public productsCategories!: any[]
   public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries
   public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
   public defaultSetCurrency = defaultSetCurrency
   public defaultSetReductions = defaultSetReductions
   public defaultSetyearGuarantee = defaultSetyearGuarantee
+  public form!: FormGroup
+  public ods = ODS_CODE
+  public idEcosolution!: string
+  public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
+  public productsCategories!: any[]
+  public editor!: Editor
+  public html = ''
+  public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
+
   public langs = LANGS
   langSignal = signal(this._translateServices.currentLang || this._translateServices.defaultLang)
   public selectedFormLang = signal({ code: this.langSignal(), index: 0 })
@@ -46,6 +61,7 @@ export class EcosolutionsFormComponent implements OnInit {
   private fileCertificate: any
   private _fileEcosolution!: File[]
   public urlPicEcosolution?: string[]
+  public firstLoad = false
   public get isReadOnly(): boolean {
     return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true'
   }
@@ -75,6 +91,10 @@ export class EcosolutionsFormComponent implements OnInit {
       ? new UpdatedEcosolutionBody(this._cleantechId, this.mainCategory, this.form.value)
       : new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value)
   }
+
+  private _isIncludeTranslation = (codeLang: string, translations?: TranslatedProperties[]) => {
+    return translations?.map((value) => value.lang).includes(codeLang)
+  }
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -86,13 +106,17 @@ export class EcosolutionsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this._getParamsUrl()
+    this.editor = new Editor()
     this._buildFrom()
-    console.log(this.form)
     this._changeLangCode()
     this._changeValueSubCategory()
     if (this.idEcosolution) {
       this.getEcosolution()
     }
+  }
+
+  ngOnDestroy(): void {
+    this.editor?.destroy()
   }
 
   private _getParamsUrl() {
@@ -109,12 +133,15 @@ export class EcosolutionsFormComponent implements OnInit {
 
   private _buildFrom() {
     this._initForm()
-    this._addNameTranslations()
-    this._addDescriptionTranslations()
-    this._detailDescriptionTranslations()
-    this._priceDescriptionTranslations()
+    this._seTranslatedProperties()
   }
 
+  private _seTranslatedProperties(codeLang: string = this.selectedFormLang().code) {
+    this._addNameTranslations(codeLang)
+    this._addDescriptionTranslations(codeLang)
+    this._detailDescriptionTranslations(codeLang)
+    this._priceDescriptionTranslations(codeLang)
+  }
   private _initForm() {
     this.form = this._fb.group({
       solutionName: ['deprecated'],
@@ -140,7 +167,7 @@ export class EcosolutionsFormComponent implements OnInit {
       yearGuarantee: [],
       certified: [false],
       approved: [false],
-      locations: new FormArray([], Validators.required),
+      locations: this._fb.array([], Validators.required),
     })
   }
 
@@ -156,38 +183,38 @@ export class EcosolutionsFormComponent implements OnInit {
     })
   }
 
-  private _addNameTranslations(): void {
+  private _addNameTranslations(codeLang: string): void {
     const nameTranslations = this.form.get('nameTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      nameTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
-    })
+    if (!this._isIncludeTranslation(codeLang, nameTranslations.value)) {
+      nameTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
-  private _addDescriptionTranslations(): void {
+  private _addDescriptionTranslations(codeLang: string): void {
     const descriptionTranslations = this.form.get('descriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      descriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
-    })
+    if (!this._isIncludeTranslation(codeLang, descriptionTranslations.value)) {
+      descriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
 
-  private _detailDescriptionTranslations(): void {
+  private _detailDescriptionTranslations(codeLang: string): void {
     const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
-    })
+    if (!this._isIncludeTranslation(codeLang, detailedDescriptionTranslations.value)) {
+      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
 
-  private _priceDescriptionTranslations(): void {
+  private _priceDescriptionTranslations(codeLang: string): void {
     const priceDescriptionTranslations = this.form.get('priceDescriptionTranslations') as FormArray
-    this.langs.forEach((lang, index) => {
-      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(lang.code, index))
-    })
+    if (!this._isIncludeTranslation(codeLang, priceDescriptionTranslations.value)) {
+      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+    }
   }
 
-  private _getFormGroupFieldTranslations(code: string, index: number) {
-    if (index === 0) {
+  private _getFormGroupFieldTranslations(code?: string) {
+    if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
-        lang: new FormControl(code, Validators.required),
+        lang: new FormControl(code),
       })
     }
     return this._fb.group({
@@ -206,27 +233,40 @@ export class EcosolutionsFormComponent implements OnInit {
   private _patchDataToForm(ecosolution: any): void {
     const formValue = new EcosolutionForm(ecosolution)
     this.form.patchValue(formValue)
-    this._patchValueLocationsFormControl(formValue)
+    this._setLocaltion(ecosolution.locations)
+    this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
+    this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
+    this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
+    this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
   }
 
-  private _patchValueLocationsFormControl(formValue: EcosolutionForm) {
-    formValue.locations?.forEach(() => {
-      this._addLocations()
-    })
-    this.form.get('locations')?.patchValue(formValue.locations)
+  private _setLocaltion(locations: Array<LocationsCountry>) {
+    if (locations) {
+      this.locationsArrays.clear()
+      locations.forEach((location: LocationsCountry) => {
+        this._addLocations(location)
+      })
+    }
   }
 
-  private _createLocations(): FormGroup {
+  private _addLocations(location: LocationsCountry) {
+    this.locationsArrays.push(this._createLocations(location))
+  }
+  private _createLocations(location: LocationsCountry): FormGroup {
     return new FormGroup({
       country: new FormGroup({
-        code: new FormControl(),
-        regions: new FormControl(),
+        code: new FormControl(location.country.code),
+        regions: new FormControl(location.country.regions),
       }),
     })
   }
 
-  private _addLocations() {
-    this.locationsArrays.push(this._createLocations())
+  private _patchFormArray(formArray: FormArray, values: any[]): void {
+    formArray.clear()
+    values.forEach(() => {
+      formArray.push(this._getFormGroupFieldTranslations())
+    })
+    formArray.patchValue(values)
   }
 
   saveEcosolution() {
@@ -318,6 +358,20 @@ export class EcosolutionsFormComponent implements OnInit {
   }
 
   selectedFormLangChange($event: any) {
+    this._clearValidationTranslatedProperties()
     this.selectedFormLang.set($event)
+    this._seTranslatedProperties($event.code)
+  }
+  private _clearValidationTranslatedProperties() {
+    this.removeNameTranslationsValidators(this.nameTranslations)
+    this.removeNameTranslationsValidators(this.descriptionTranslations)
+    this.removeNameTranslationsValidators(this.detailedDescriptionTranslations)
+    this.removeNameTranslationsValidators(this.priceDescriptionTranslations)
+  }
+  private removeNameTranslationsValidators(formArray: FormArray): void {
+    formArray.controls.forEach((control) => {
+      control?.get('label')?.clearValidators()
+      control?.get('label')?.updateValueAndValidity()
+    })
   }
 }

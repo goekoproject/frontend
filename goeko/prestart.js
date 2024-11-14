@@ -13,5 +13,10 @@ console.log(`
 console.log(currentYear);
 
 console.log(
-  '¡El éxito es la suma de pequeños esfuerzos repetidos día tras día!',
+  `¡Precaución llegarón los PERROS  SALVAJES!
+─────▄█▄█─────────────
+────█████▄▄▄──────────
+──────███████▄────────
+░░░░░░█▀█▀█████░░░░░░░
+░░░░░▄█▄█░▄████▄▄▀░░░░`,
 );

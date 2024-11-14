@@ -21,5 +21,9 @@ export const HEADERS: { title: string; key: keyof User }[] = [
     title: 'WEBSITE',
     key: 'website',
   },
+  {
+    title: 'CREATION DATE',
+    key: 'creationDate',
+  },
 ];*/
 
