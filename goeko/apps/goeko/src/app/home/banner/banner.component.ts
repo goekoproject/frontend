@@ -61,23 +61,17 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return
     }
     this.srcVideo.set(this._urlSrcVideo())
-    this.marketingVideo.nativeElement.muted = true
   }
 
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((res) => {
       this.currentLangCode.set(res.lang)
       this.srcVideo.set(this._urlSrcVideo())
-      if (this.isSmallScreen().matches) {
-        this.marketingVideo.nativeElement.pause()
-      }
       this.loadAdvantages()
     })
   }
   watchVideo() {
     this.marketingVideo.nativeElement.currentTime = 0.0
     this.marketingVideo.nativeElement.requestFullscreen()
-    this.marketingVideo.nativeElement.controls = this.marketingVideo.nativeElement.controls = true
-    this.marketingVideo.nativeElement.play()
   }
 }
