@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayModule } from '@angular/cdk/overlay'
 import { CommonModule } from '@angular/common'
-import { Component, inject, OnInit, signal } from '@angular/core'
+import { Component, inject, input, OnInit, signal } from '@angular/core'
 import { Router } from '@angular/router'
 import { Lang, LANGS } from '@goeko/core'
 import { ButtonModule, IArrowDownComponent } from '@goeko/ui'
@@ -18,10 +18,10 @@ export class SelectI18nComponent implements OnInit {
   private _translateServices = inject(TranslateService)
   private _router = inject(Router)
   private _currentCodeLang = this._translateServices.currentLang ?? this._translateServices.defaultLang
-  public langs = LANGS
+  public langs = input(LANGS)
 
   public isOpen = false
-  public selectedLand = signal<Lang | null>(this.langs.find((lang) => lang.code === this._currentCodeLang) || this.langs[0])
+  public selectedLand = signal<Lang | null>(this.langs().find((lang) => lang.code === this._currentCodeLang) || this.langs()[0])
   toggle() {
     this.isOpen = !this.isOpen
   }

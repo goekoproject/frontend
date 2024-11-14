@@ -7,6 +7,7 @@ import { AboutComponent } from './about/about/about.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { ServicesComponent } from './services/services.component';
 
 const ENTRY_ID_COOKIES_POLICY = '6Cby4WysXPnj3OJQBSj4pB';
 const ENTRY_ID_PRIVACY_POLICY = '6pwHwtZC1ILfXS0awq85Oy';
@@ -34,6 +35,10 @@ export const routes: Routes = [
         data: {
           entryId: ENTRY_ID_PRIVACY_POLICY,
         },
+      },
+      {
+        path: 'services',
+        component: ServicesComponent
       },
       {
         path: 'about',

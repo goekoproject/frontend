@@ -10,9 +10,11 @@ const compareFn = (a: any, b: any) => {
 }
 @Injectable({ providedIn: 'root' })
 export class HomeService {
-  dataContentTypeSignal = signal<unknown | null>(null)
+  dataContentTypeSignal = signal<any[]>([])
   entryDataConnecting = signal<any | null>(null)
   entryDataSustainability = signal<any | null>(null)
+  entryDataMain = signal<any | null>(null)
+  connection = signal<any | null>(null)
 
   constructor(
     private _contentFul: ContentFulService,
@@ -45,6 +47,26 @@ export class HomeService {
         }
       })
   }
+  getSloganMain(entryId: string) {
+    this.getEntry(entryId)
+      .pipe(map((res) => res.fields))
+      .subscribe((entryData: any) => {
+        if (entryData) {
+          this.entryDataMain.set(entryData)
+        }
+      })
+  }
+
+  geConnection(entryId: string) {
+    this.getEntry(entryId)
+      .pipe(map((res) => res.fields))
+      .subscribe((entryData: any) => {
+        if (entryData) {
+          this.connection.set(entryData)
+        }
+      })
+  }
+
   getContentType(contentType: string) {
     return this._contentFul.getContentType(contentType).pipe(map((res) => res.items.map((item) => item.fields)))
   }

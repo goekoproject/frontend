@@ -5,8 +5,14 @@
 .footer-wrapper {
   width: 100%;
   height: auto;
-  background-color: var(--primary--main);
+  //background-color: var(--primary--main);
   display: block;
+  position: relative;
+  //margin-top: -12rem;
+  h2, a, p, input, button {
+    font: var(--font-body-semibold);
+    font-size: 16px;
+  }
 }
 .footer {
   height: 13rem;
@@ -43,4 +49,12 @@
   color: #ffffff;
   font-size: 1.5rem;
   padding: 2rem;
+}
+
+.footer-content {
+  background-color: var(--home-page-footer);
+}
+
+.footer-gray-text {
+  color: #768797;
 }

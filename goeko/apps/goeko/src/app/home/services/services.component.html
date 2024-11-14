@@ -1,0 +1,118 @@
+<div class="is-lighthome flex flex-col p-4 lg:pb-8 lg:pl-32 lg:pr-32 lg:pt-16">
+  @if (enterprise && cleanTech) {
+    <div class="flex flex-row justify-evenly pb-5 mt-4 lg:mt-0">
+      <a class="header-tab" [ngClass]="{ active: step === 'step1' }" (click)="step = 'step1'">{{ enterprise.actorType }}</a>
+      <a class="header-tab" [ngClass]="{ active: step === 'step2' }" (click)="step = 'step2'">{{ cleanTech.actorType }}</a>
+    </div>
+  }
+
+  <div class="flex flex-row flex-wrap justify-center border-t-[3px] lg:justify-normal lg:gap-16" *ngIf="step === 'step1'">
+    @if (enterprise) {
+      <div class="pt-16 lg:w-[45%]">
+        <h3 class="title mb-4">
+          {{ enterprise.section }}
+        </h3>
+        <h1 class="subtitle mb-6 text-black">
+          {{ enterprise.title }}
+        </h1>
+        @for (description of enterprise.paragraphs; track enterprise) {
+          <p class="description mb-4 text-justify">
+            {{ description }}
+          </p>
+        }
+      </div>
+      <div class="flex lg:w-[45%] justify-end pt-16">
+        <img [src]="enterprise.photo" [alt]="" class="object-contain"/>
+      </div>
+    }
+  </div>
+
+    <div class="flex flex-row flex-wrap justify-center border-t-[3px] lg:justify-normal lg:gap-16" *ngIf="step === 'step2'">
+
+    @if (cleanTech) {
+      <div class="pt-16 lg:w-[45%]">
+        <h3 class="title mb-4">
+          {{ cleanTech.section }}
+        </h3>
+        <h1 class="subtitle mb-6 text-black">
+          {{ cleanTech.title }}
+        </h1>
+        @for (description of cleanTech.paragraphs; track cleanTech) {
+          <p class="description mb-4 text-justify">
+            {{ description }}
+          </p>
+        }
+      </div>
+      <div class="flex lg:w-[45%] justify-end pt-16">
+        <img [src]="cleanTech.photo" [alt]="" class="object-contain"/>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="is-lighthome rate flex flex-col p-4 lg:pb-16 lg:pl-32 lg:pr-32">
+  <div class="w-full pt-16">
+    @if (enterprise) {
+      <h1 class="subtitle mb-6 text-center text-black">
+        {{ enterprise.rateTitle }}
+      </h1>
+    }
+  </div>
+
+  <div class="flex flex-row flex-wrap justify-center gap-6" *ngIf="step === 'step1'">
+    @if (enterprise) {
+      @for (rate of enterprise.rates; track enterprise; let last = $last) {
+        <div class="pricing" [ngClass]="{ 'pricing-advance': rate.title === 'Advance' }">
+          <div class="flex justify-between">
+            @for (icon of rate.icons; track icon) {
+              <img [src]="icon" class="mb-5" />
+            }
+          </div>
+          <h1 class="price-type">
+            {{ rate.title }}
+          </h1>
+          <span class="price-amount text-xs">
+            {{ rate.price }}
+          </span>
+          <ul class="services-list">
+            @for (service of rate.rateServices; track service) {
+              <li>{{ service }}</li>
+            }
+          </ul>
+        </div>
+      }
+    }
+  </div>
+
+  <div class="flex flex-row justify-center gap-6" *ngIf="step === 'step2'">
+    @if (cleanTech) {
+      @for (rate of cleanTech.rates; track cleanTech; let last = $last) {
+        <div class="pricing" [ngClass]="{ 'pricing-advance': rate.title === 'Advance' }">
+          <div class="flex justify-between">
+            @for (icon of rate.icons; track icon) {
+              <img [src]="icon" class="mb-5" />
+            }
+          </div>
+          <h1 class="price-type">
+            {{ rate.title }}
+          </h1>
+          <span class="price-amount text-xs">
+            {{ rate.price }}
+          </span>
+          <ul class="services-list">
+            @for (service of rate.rateServices; track service) {
+              <li>{{ service }}</li>
+            }
+          </ul>
+        </div>
+      }
+    }
+  </div>
+  <div class="lg:text-start text-center p-4">
+    <button go-button routerLink="/home" (click)="_setTopScroll()">
+      <i class="ti ti-square-rounded-arrow-left"></i>
+      {{ 'home' | translate }}
+    </button>
+  </div>
+
+</div>

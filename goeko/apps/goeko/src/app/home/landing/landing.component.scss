@@ -1,0 +1,82 @@
+.goeko-landing {
+  @apply mx-auto flex flex-col gap-24 px-4 lg:w-full lg:px-6;
+}
+.main-front {
+  @apply flex flex-col items-center pt-4 lg:pt-12;
+}
+
+.title {
+  font-family: Khand-SemiBold, sans-serif;
+  color: white;
+  align-content: center;
+}
+
+.title-transition {
+  position: absolute;
+  top: 16rem;
+
+  font-family: Khand-SemiBold, sans-serif;
+
+  background: -webkit-linear-gradient(rgb(255, 255, 255), #999999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  opacity: 0.7;
+  animation: goekoMove 3s backwards;
+}
+
+.text-transition {
+  animation: greenTransitionMove 4s forwards;
+}
+
+@keyframes greenTransitionMove {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes goekoMove {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(8);
+  }
+}
+
+.subtitle {
+  font: var(--font-body-home);
+  color: white;
+  @apply mx-auto w-5/6 text-lg lg:text-2xl;
+}
+
+.start-button {
+  background-color: var(--home-page-light-blue);
+}
+
+.start-button:hover {
+  background-color: #073f5f;
+}
+
+.i-connection {
+  input::placeholder {
+    color: var(--home-page-light-blue);
+    opacity: 1; /* Firefox */
+    position: absolute;
+    left: 1.5rem;
+    top: 0.8rem;
+  }
+}
+
+.gradient {
+  // bottom: -8rem;
+  position: absolute;
+  background: linear-gradient(#080B0B 0%, #052639 100%);
+  width: 100%;
+  height: 10rem;
+}

@@ -1,13 +1,10 @@
 import { Injectable, effect, signal } from '@angular/core'
-import { toSignal } from '@angular/core/rxjs-interop'
-import { LocationRegions, LocationsService } from '@goeko/store'
+import { LocationCountry, LocationRegions, LocationsService } from '@goeko/store'
 
 @Injectable({ providedIn: 'root' })
 export class SelectLocationsService {
   selectedCodeLang = signal('')
-  private _getCountries$ = this._locationsService.getCountrys()
-
-  countries = toSignal(this._getCountries$, { initialValue: null })
+  countries = signal<Array<LocationCountry> | null>(null)
   regions = signal<Array<LocationRegions> | null>(null)
   constructor(private _locationsService: LocationsService) {
     effect(() => {
@@ -27,5 +24,13 @@ export class SelectLocationsService {
 
   getRegions$(code: string) {
     return this._locationsService.getRegions(code)
+  }
+
+  setUpCountries() {
+    this._locationsService.getCountrys().subscribe((countries) => {
+      if (countries) {
+        this.countries.set(countries)
+      }
+    })
   }
 }

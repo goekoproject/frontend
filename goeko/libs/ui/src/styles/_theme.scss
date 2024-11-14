@@ -27,7 +27,8 @@ html {
 }
 
 body {
-  background-color: var(--color-background-white);
+  background-color: var(--home-page-dark-blue);
+
   font: var(--font-default);
   position: relative;
   overflow-x: hidden;
@@ -38,10 +39,20 @@ body {
   max-width: 1920px;
   align-items: center;
 }
+
 body:has(div.is-platform) {
   background: var(--white);
   align-items: stretch;
 }
+
+body:has(div.is-lighthome) {
+  background: var(--white);
+}
+
+div.is-lighthome ~ .goeko-header   {
+  background-color: var(--home-page-dark-blue);
+}
+
 :root {
   --center-container: 90%;
   --medium-width-field: 24rem;
@@ -275,6 +286,6 @@ input[type='radio' i]:focus-visible {
 }
 .go-badge-category {
   @apply w-max rounded-full px-3 py-2 text-xs font-semibold;
-  background-color: var(--pastel-green); /* Color pastel verde */
-  color: var(--lime-green); /* Color verde lima */
+  background-color: var(--green-pastel);
+  color: var(--green-lime);
 }

@@ -43,7 +43,9 @@ export class ProjectListComponent {
       .open(DialogNewProjectComponent)
       .afterClosed()
       .subscribe((newProject) => {
-        this.goToEdit(newProject)
+        if (newProject) {
+          this.goToEdit(newProject)
+        }
       })
   }
   goToDetail(project: Project) {
