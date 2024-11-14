@@ -1,3 +1,4 @@
+<h1 class="text-2xl font-semibold">{{ 'yourProjects' | translate }}</h1>
 @defer (when projects()) {
   <goeko-go-table [dataSources]="projects()">
     <button go-button header-action (click)="newProject()">
@@ -10,7 +11,7 @@
     <ng-template goCellRef let-element>
       <div class="flex max-w-40 gap-1">
         <p>{{ element['locations'][0]?.country?.label }}</p>
-        <abbr class="truncate no-underline font-normal" title="{{ element['locations'][0]?.country.regions | displayRegions }}">{{
+        <abbr class="truncate font-normal no-underline" title="{{ element['locations'][0]?.country.regions | displayRegions }}">{{
           element['locations'][0]?.country.regions | displayRegions
         }}</abbr>
       </div>
@@ -23,7 +24,7 @@
     <ng-template goCellRef let-element>
       <div class="flex flex-wrap gap-2 p-2">
         @for (category of element['classifications'] | splitCategories; track category) {
-          <span class="text-greenLime bg-greenPastel rounded-full px-3 py-1.5 text-sm font-semibold"> {{ category }}</span>
+          <span class="rounded-full bg-greenPastel px-3 py-1.5 text-sm font-semibold text-greenLime"> {{ category }}</span>
         }
       </div>
     </ng-template>

@@ -7,6 +7,7 @@ import { EcosolutionSearchResponse } from '../ecosolutions/ecosolution-search.re
 import { EcosolutionsService } from '../ecosolutions/ecosolutions.service'
 import { SmeUser } from '../user/public-api'
 import { TranslateChangeService } from '../util/translate-change'
+import { SmeDashboard } from './sme-dashboard.interface'
 import { Requests, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 
 @Injectable()
@@ -69,5 +70,8 @@ export class SmeService extends TranslateChangeService {
 
   deleteSmeUser(id: string): Observable<any> {
     return this._http.delete<any>(`/v1/actor/smes/${id}`)
+  }
+  getDashboardData(id: string): Observable<SmeDashboard> {
+    return this._http.get<SmeDashboard>(`/v1/actor/smes/${id}/dashboard`)
   }
 }

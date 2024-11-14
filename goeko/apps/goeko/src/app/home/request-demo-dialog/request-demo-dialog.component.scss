@@ -1,0 +1,38 @@
+.title-demo {
+  font: var(--font-home-semibold);
+  font-size: 24px;
+  color:black;
+}
+
+.body-demo {
+  font: var(--font-home-dialog);
+  font-size: 14px;
+}
+
+.label-input {
+  font: var(--font-home-dialog);
+  font-size: 16px;
+}
+
+.request-button {
+  font: var(--font-body-semibold);
+  font-size: 16px;
+  align-items: center;
+  appearance: none;
+  background-color: var(--home-page-light-blue);
+  border-radius: 1.675rem;
+  box-sizing: border-box;
+  color: var(--white);
+  cursor: pointer;
+  display: inline-flex;
+  height: 2.625rem;
+  line-height: 1.25rem;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: max-content;
+  text-wrap: pretty;
+  width: 100%;
+}

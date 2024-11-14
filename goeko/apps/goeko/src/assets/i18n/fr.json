@@ -13,7 +13,7 @@
     "fast": "Rapide",
     "green": "Transition",
     "swissCompany": "A Swiss Company",
-    "the": "LA",
+    "the": "La",
     "transition": "verte"
   },
   "BREADCRUMBS": {
@@ -114,6 +114,16 @@
     "CHF": "Franc suisse",
     "EU": "Euro"
   },
+  "DIALOG": {
+    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
+    "messageLeadDuplicated": "Vous avez déjà contacté cette écosolution, s'il ne répond toujours pas, veuillez contacter {{email}}",
+    "messageNotification": "Activez les notifications par email pour recevoir les dernières éco-solutions correspondant à vos besoins.",
+    "messageSendOk": "Votre message a été envoyé avec succès !",
+    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
+    "messaggeProfileUncompletedTitle": "Complétez votre profil",
+    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
+    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?"
+  },
   "ERROR_MESSAGES": {
     "400": "Vérifiez vos infos et réessayez.",
     "404": "Impossible de trouver cela. Vérifiez le lien.",
@@ -148,12 +158,13 @@
     "basicInformation": "Informations de base",
     "certified": "Certifiée",
     "city": "Ville",
+    "companyId": "Numéro d'identification des entreprises",
     "companyName": "Nom de l'entreprise",
-    "comunicationLanguage": "Langue choisie pour la communication",
+    "comunicationLanguage": "Langue pour la communication",
     "countriesAvailable": "Pays disponibles",
+    "countriesDistribution": "Territoires de distribution",
     "countriesProvincesAvailable": "Pays et régions de distribution",
     "country": "Pays",
-    "companyId": "Numéro d'identification des entreprises",
     "currency": "Devise",
     "date": "Date",
     "deliverCountries": "Pays où votre éco-solution est livrable",
@@ -202,8 +213,7 @@
     "typeOfEcolutions": "Type d'éco-solution",
     "unit": "Unité",
     "website": "Site web",
-    "yourLocation": "Sélectionnez le pays et la region",
-    "yourLocationTextSupport": "Vos données de localisation seront utilisées pour personnaliser les recommandations de solutions écologiques."
+    "yourLocation": "Sélectionnez le pays et la région"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
@@ -227,8 +237,10 @@
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
     "cookiesPolicy": "Politique de cookies",
+    "privacyPolicy": "Politique de confidentialité",
     "legal": "Légal",
-    "privacyPolicy": "Politique de confidentialité"
+    "contact": "Contact",
+    "info": "Avez-vous besoin de plus d'informations?"
   },
   "LOGIN": {
     "forgotPassword": "Mot de passe oublié ?",
@@ -238,9 +250,11 @@
     "msgsignup2": "Créez votre compte"
   },
   "MENU": {
+    "services": "Services",
     "aboutGoEKo": "A propos de GoEko",
     "blog": "Blog",
     "contacttUs": "Contact",
+    "demo": "Demander une démo",
     "login": "Se connecter",
     "signup": "S'inscrire"
   },
@@ -248,23 +262,23 @@
     "dashboard": "Tableau de bord",
     "favourites": "Favoris"
   },
+  "MENU_USER_SME": {
+    "buttonSearch": "Ajoutez un nouveau projet",
+    "dialogButtonNext": "Suivant",
+    "dialogLocationProject": "Province et pays",
+    "dialogLocationRequired": "L'emplacement est requis",
+    "dialogNameProject": "Nom",
+    "dialogNameRequired": "Le nom du projet est requis",
+    "dialogNewProject": "Nommez votre projet",
+    "dialogPlaceholderLocation": "Madrid, Espagne",
+    "dialogPlaceholderName": "PO Juin, 2024",
+    "notificationProfile": "J'accepte de recevoir des notifications concernant de nouvelles solutions cleantech",
+    "subtitleCard": "Nous trouverons les solutions cleantech les plus adaptées",
+    "titleCard": "Créez un projet"
+  },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à {{email}}"
-  },
-  "MENU_USER_SME": {
-    "titleCard": "Créez un projet",
-    "subtitleCard": "Nous trouverons les solutions cleantech les plus adaptées",
-    "buttonSearch": "Ajoutez un nouveau projet",
-    "dialogNewProject": "Nommez votre projet",
-    "dialogNameProject": "Nom",
-    "dialogLocationProject": "Province et pays",
-    "dialogNameRequired": "Le nom du projet est requis",
-    "dialogLocationRequired": "L'emplacement est requis",
-    "dialogButtonNext": "Suivant",
-    "dialogPlaceholderName": "PO Juin, 2024",
-    "dialogPlaceholderLocation": "Madrid, Espagne",
-    "notificationProfile": "J'accepte de recevoir des notifications concernant de nouvelles cleantech solutions liées à mes projets"
   },
   "NOTIFICATION": {
     "save_ok": "Enregistré avec succès"
@@ -288,16 +302,6 @@
     "ods_8": "Travail décent et croissance économique",
     "ods_9": "Industrie, innovation et infrastructure"
   },
-  "SDG_TITLES": {
-    "6": "Eau propre et assainissement",
-    "7": "Énergie propre et d'un coût abordable",
-    "9": "Industrie, innovation et infrastructure",
-    "11": "Villes et communautés durables",
-    "12": "Consommation et production responsables",
-    "13": "Mesures relatives à la lutte contre les changements climatiques",
-    "14": "Vie aquatique",
-    "15": "Vie terrestre"
-  },
   "PRODUCT_ACTIONS": {
     "addProduct": "Actualiser"
   },
@@ -310,6 +314,16 @@
   "SCENES": {
     "slogan_text1": "Connexion des PME aux technologies propres et au financement",
     "slogan_text2": "Est-ce que tu veux?"
+  },
+  "SDG_TITLES": {
+    "6": "Eau propre et assainissement",
+    "7": "Énergie propre et d'un coût abordable",
+    "9": "Industrie, innovation et infrastructure",
+    "11": "Villes et communautés durables",
+    "12": "Consommation et production responsables",
+    "13": "Mesures relatives à la lutte contre les changements climatiques",
+    "14": "Vie aquatique",
+    "15": "Vie terrestre"
   },
   "SELECT_DATA_LABEL": {
     "currency": "€",
@@ -491,18 +505,7 @@
     "body": "Nous sommes ravis que vous soyez des nôtres ! Nous vous avons envoyé un lien de vérification à votre adresse e-mail.",
     "title": "Consultez votre boîte de réception."
   },
-  "DIALOG": {
-    "messageSendOk": "Votre message a été envoyé avec succès !",
-    "messageLeadDuplicated": "Vous avez déjà contacté cette écosolution, s'il ne répond toujours pas, veuillez contacter {{email}}",
-    "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
-    "warningDelete": "Êtes-vous sûr de vouloir supprimer {{item}} ?",
-    "saveMessageGeneric": "Voulez-vous sauvegarder les données avant de continuer ?",
-    "messaggeProfileUncompletedTitle": "Complétez votre profil",
-    "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
-    "messageNotification": "Activez les notifications par email pour recevoir les dernières éco-solutions correspondant à vos besoins."
-  },
   "a": "à",
-  "yourEcosolution": "Votre éco-solution",
   "accept": "Accepter",
   "add": "Ajouter",
   "alertSelectedProduct": "Sélectionnez les catégories et les produits correspondant à votre projet",
@@ -510,11 +513,13 @@
   "analysis": "Analyse",
   "availability": "Disponibilité:",
   "back": "Retour",
+  "backToResults": "Retour aux résultats",
   "bank": "Banque",
   "cancel": "Annuler",
   "categories": "Catégories",
   "certified": "Certification",
   "cleantech": "Cleantech",
+  "cleantechContacted": "Cleantech contacté",
   "cleantechLeadDefault": "Suivez les connexions avec vos leads qualifiés.",
   "companyDetails": "Détails de l'entreprise",
   "completeToProfileNow": "Complétez votre profil maintenant !",
@@ -535,21 +540,24 @@
   "editSelection": "Modifier sélection",
   "enterprise": "Entreprise",
   "exit": "Sortir",
+  "exploreNow": "Explorer maintenant",
   "filters": "Filtres",
   "followUs": "Suivez-nous",
   "infoSaveMessages": "Vous avez la possibilité de sauvegarder vos données maintenant, assurant ainsi leur disponibilité pour les consultations futures.",
   "lastLead": "Dernier prospect",
   "last_analysis": "Dernière analyse",
   "last_project": "Derniers projets",
-  "leadFormTitle": "Contacter cette cleantech",
   "leadFormSubtitle": "À un clic de l'efficacité durable",
+  "leadFormTitle": "Contacter cette cleantech",
   "leads": "Prospects",
   "logout": "Log out",
   "mandatory": "Obligatoire",
+  "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
+  "msg_empty_ecosolutions": "Votre meilleure éco-solution est encore à venir",
+  "msg_empty_ecosolutions_notification": "Votre meilleure éco-solution est encore à venir. Nous vous informerons lorsqu'elle arrivera.",
   "my_company": "Mon entreprise",
   "new_analysis": "Nouvelle analyse",
   "new_project": "Nouveau projet",
-  "projects": "Projets",
   "no": "Non",
   "none": "Aucun",
   "notAvailable": "Pas disponible",
@@ -558,10 +566,13 @@
   "ods_title": "Objectifs de développement durable (ODD)",
   "profile": "Profil",
   "projectManagement": "Gestion de projet",
+  "projects": "Projets",
   "questionsAnswered": "Questions répondues",
   "readMore": "Lire la suite...",
   "regions": "Régions",
   "result": "Résultat",
+  "resultSolution": "résultat",
+  "results": "résultats",
   "save": "Sauvegarder",
   "saveYou": "Sauvegarder votre",
   "searchEcosolutions": "Recherchez des solutions cleantech",
@@ -570,15 +581,18 @@
   "selectedProduct": "Produit sélectionné",
   "selectedProducts": " Produits sélectionnés",
   "selected_products": "Produits sélectionnés",
+  "showAll": "Voir tout",
   "showLead": "Afficher les clients potentiels",
   "showMore": "Voir plus",
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "La connexion des entreprises aux technologies propres et au financement",
   "sme": "pme",
   "start": "Commencer",
+  "subtitlePageCatalog": "Meilleures solutions pour",
   "summary": "Résumé",
   "titleBannerLead": "Suivi des leads qualifiés",
   "titleResult": "Les éco-solutions les plus adaptées pour",
+  "turnOnNotifications": "Activez les notifications",
   "upTo": "Jusqu'à",
   "upgrade": "Mise à niveau",
   "user": "Utilisateur",
@@ -589,13 +603,7 @@
   "years": "années",
   "yes": "Oui",
   "your": "Votre",
-  "your_ecosolutions": "Vos Eco-solutions",
-  "msg_empty_ecosolutions_notification": "Votre meilleure éco-solution est encore à venir. Nous vous informerons lorsqu'elle arrivera.",
-  "msg_empty_ecosolutions": "Votre meilleure éco-solution est encore à venir",
-  "turnOnNotifications": "Activez les notifications",
-  "exploreNow": "Explorer maintenant",
-  "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
-  "subtitlePageCatalog": "Meilleures solutions pour",
-  "results": "résultats",
-  "resultSolution": "résultat"
+  "yourEcosolution": "Votre éco-solution",
+  "yourProjects": "Vos projets",
+  "your_ecosolutions": "Vos Eco-solutions"
 }

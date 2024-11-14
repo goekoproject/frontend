@@ -1,10 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { provideLocationMocks } from '@angular/common/testing'
-import { Component, signal } from '@angular/core'
+import { Component } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
-import { ProjectService, SmeUser, UserService } from '@goeko/store'
+import { EcosolutionsTaggingService, SmeService } from '@goeko/store'
 import { ButtonModule, DialogMessageModule, DialogService, GoDateFormatPipe, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -20,8 +20,8 @@ describe('DashboardSmeComponent', () => {
   let component: DashboardSmeComponent
   let fixture: ComponentFixture<DashboardSmeComponent>
   // Mock Services
-  let mockUserService: Partial<UserService>
-  let mockProjectService: Partial<ProjectService>
+  let mockSmeService: Partial<SmeService>
+  let mockEcosolutionsTaggingService: Partial<EcosolutionsTaggingService>
   let mockMessageService: {
     deleteMessage: jest.Mock
   }
@@ -32,8 +32,11 @@ describe('DashboardSmeComponent', () => {
 
   let router: Router
   beforeEach(async () => {
-    mockUserService = {
-      userProfile: signal({ id: '1' } as SmeUser),
+    mockSmeService = {
+      getDashboardData: jest.fn().mockReturnValue(of({ summary: {} })),
+    }
+    mockEcosolutionsTaggingService = {
+      getEcosolutionFavourites: jest.fn().mockReturnValue(of([])),
     }
 
     mockMessageService = {
@@ -77,11 +80,11 @@ describe('DashboardSmeComponent', () => {
         ]),
       ],
       providers: [
-        { provide: UserService, useValue: mockUserService },
-        { provide: ProjectService, useValue: mockProjectService },
         { provide: MessageService, useValue: mockMessageService },
         { provide: DialogService, useValue: mockDialogService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        { provide: SmeService, useValue: mockSmeService },
+        { provide: EcosolutionsTaggingService, useValue: mockEcosolutionsTaggingService },
         provideLocationMocks(),
       ],
     }).compileComponents()
@@ -89,6 +92,7 @@ describe('DashboardSmeComponent', () => {
     fixture = TestBed.createComponent(DashboardSmeComponent)
     component = fixture.componentInstance
     router = TestBed.inject(Router)
+    fixture.componentRef.setInput('id', '1')
     fixture.detectChanges()
   })
 

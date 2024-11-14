@@ -42,21 +42,14 @@ export class MenuUserComponent implements OnInit {
     switch (route) {
       case 'profile':
       case 'projects-list':
-      case 'sme-analysis/list':
-        // eslint-disable-next-line no-case-declarations
+      case 'dashboard/sme':
+      case 'dashboard/cleantech':
         this._navigateWithCompanyId(route)
         return
 
       case 'cleantech-ecosolutions':
         // eslint-disable-next-line no-case-declarations
         this._navigateWithCompanyId(route)
-        return
-
-      case 'sme-analysis/new':
-        // eslint-disable-next-line no-case-declarations
-        this._navigateWithCompanyIdInQueryParams(route, {
-          smeId: this.user().id,
-        })
         return
 
       default:
@@ -68,11 +61,6 @@ export class MenuUserComponent implements OnInit {
   private _navigateWithCompanyId(route: string) {
     const _id = this.user().id || this.userAuth()['externalId']
     this._router.navigate([route, _id], { relativeTo: this._route.parent })
-  }
-  private _navigateWithCompanyIdInQueryParams(route: string, queryParams: any) {
-    this._router.navigate([route], {
-      queryParams: queryParams,
-    })
   }
 
   openSubmenu(index: number) {

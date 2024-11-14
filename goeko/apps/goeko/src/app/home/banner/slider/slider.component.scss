@@ -1,0 +1,64 @@
+@mixin white-gradient {
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+$animationSpeed: 25s;
+
+// Animation
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * var(--home-slider-baner-companies)));
+  }
+}
+
+// Styling
+.slider {
+  background: white;
+  height: 100px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 960px;
+
+  &::before,
+  &::after {
+    @include white-gradient;
+    content: '';
+    //comentar o descomentar altura para tener efecto niebla
+    height: 100px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+  }
+
+  &::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  &::before {
+    left: 0;
+    top: 0;
+  }
+
+  .slide-track {
+    // animation: scroll $animationSpeed linear infinite;
+    animation: scroll var(--home-slider-baner-time) linear infinite;
+
+    display: flex;
+    gap: 4rem;
+    width: calc(250px * 8);
+  }
+
+  .slide {
+    height: 100px;
+    width: 250px;
+    img {
+      height: inherit;
+    }
+  }
+}

@@ -38,7 +38,6 @@ export class ProjectFormComponent implements OnInit {
   private _fb = inject(FormBuilder)
   private _translateService = inject(TranslateService)
   private _projectManagmentServices = inject(ProjectManagmentService)
-  private _categoryCodeQueryParams = this._route.snapshot.queryParams['categorySelectedCode']
   public smeId = input<string>()
   public project = input.required<Project>()
   public groupingForm = input.required<Category[]>()

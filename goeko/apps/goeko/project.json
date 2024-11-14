@@ -31,12 +31,12 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "8kb"
+              "maximumWarning": "5kb",
+              "maximumError": "10kb"
             }
           ],
           "fileReplacements": [
@@ -91,7 +91,8 @@
           "buildTarget": "goeko:build:development"
         },
         "local": {
-          "browserTarget": "goeko:build:local"
+          "buildTarget": "goeko:build:local",
+          "proxyConfig": "proxy.conf.json"
         }
       },
       "defaultConfiguration": "local"

@@ -1,4 +1,11 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+
+export const LANG_PROFILE = [
+  { code: 'en', keyLang: 'LANGS.en' },
+  { code: 'es', keyLang: 'LANGS.es' },
+  { code: 'fr', keyLang: 'LANGS.fr' },
+]
+
 const IdentifierRegexs = {
   ES: /^[A-Z][0-9]{7}[0-9A-Z]$/,
   FR: /^[0-9]{9}$/,
@@ -46,7 +53,7 @@ export const smeFormGroup = new FormGroup({
   comunicationLanguage: new FormControl(''),
   identifier: new FormControl('', []),
   phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
-  generalNotifications: new FormControl(false)
+  generalNotifications: new FormControl(false),
 })
 
 export const cleanTechFormGroup = new FormGroup({
