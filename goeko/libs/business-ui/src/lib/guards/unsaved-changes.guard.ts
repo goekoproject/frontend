@@ -10,7 +10,7 @@ export const unSavedChangesGuard : CanDeactivateFn<CanAnalysisDeactivate> = (
 ) => {
     const  dialogMessageService = inject(DialogMessageService);
     const translateService = inject(TranslateService);
-   if(component?.canDeactivate()) { 
+   if(component?.canDeactivate()) {
      return true
    } else {
     return dialogMessageService.open( {
@@ -20,7 +20,7 @@ export const unSavedChangesGuard : CanDeactivateFn<CanAnalysisDeactivate> = (
         buttonSecondary: translateService.instant('notSave'),
       }).afterClosed().pipe(switchMap( saveForm => {
         if(saveForm) {
-          return component.saveAnalysis();
+          return component?.saveAnalysis ? component.saveAnalysis() : of(true);
         } else {
           return of(true)
         }

@@ -2,11 +2,17 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { CATEGORIES, CategoryModule, SelectSubcategoryProductComponent } from '@goeko/business-ui'
+import {
+  CanComponentDeactivate,
+  canDeactivateForm,
+  CATEGORIES,
+  CategoryModule,
+  SelectSubcategoryProductComponent,
+} from '@goeko/business-ui'
 import { Category, Product, Project } from '@goeko/store'
-import { BadgeModule, ButtonModule } from '@goeko/ui'
+import { BadgeModule, ButtonModule, DialogMessageModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { CountProductsPipe } from '../count-products.pipe'
+import { Observable } from 'rxjs'
 import { ProjectEcosolutionParams } from '../project-ecosolutions-query.model'
 import { ProjectForm } from '../project-form.model'
 import { ProjectManagmentService } from '../project-managment.service'
@@ -24,13 +30,17 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
     BadgeModule,
     SelectSubcategoryProductComponent,
     ReactiveFormsModule,
-    CountProductsPipe,
+    DialogMessageModule,
   ],
   providers: [ProjectManagmentService],
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.scss',
 })
-export class ProjectFormComponent implements OnInit {
+export class ProjectFormComponent implements OnInit, CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
+    return canDeactivateForm(this._saveProjects)
+  }
+
   compareWithProducts = compareWithProducts
 
   private _route = inject(ActivatedRoute)
@@ -131,7 +141,7 @@ export class ProjectFormComponent implements OnInit {
     })
   }
 
-  private _saveProjects() {
+  protected _saveProjects = () => {
     const payload = new ProjectEcosolutionParams({
       ...this.form.value,
       name: this.project().name,

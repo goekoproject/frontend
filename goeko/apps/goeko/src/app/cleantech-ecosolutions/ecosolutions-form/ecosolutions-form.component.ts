@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, signal } from '@angular/core'
+import { Component, ElementRef, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { CanComponentDeactivate, canDeactivateForm } from '@goeko/business-ui'
 import { LANGS } from '@goeko/core'
 import {
   DataSelect,
@@ -15,7 +16,7 @@ import {
 } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { Editor, Toolbar } from 'ngx-editor'
-import { forkJoin, last, of, switchMap, tap } from 'rxjs'
+import { forkJoin, last, Observable, of, switchMap, tap } from 'rxjs'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import {
   defaultSetCurrency,
@@ -33,7 +34,14 @@ import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
 })
-export class EcosolutionsFormComponent implements OnInit, OnDestroy {
+export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
+    const callback = () =>
+      this.idEcosolution
+        ? this._ecosolutionsService.updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
+        : this._ecosolutionsService.createEcosolutions(this.bodyRequestEcosolution)
+    return canDeactivateForm(callback)
+  }
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries

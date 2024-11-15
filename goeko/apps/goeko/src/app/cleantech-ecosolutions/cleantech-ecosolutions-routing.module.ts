@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { canDeactivateGuard } from '@goeko/business-ui'
 import { EcosolutionsFormComponent } from './ecosolutions-form/ecosolutions-form.component'
 import { EcosolutionsListComponent } from './ecosolutions-list/ecosolutions-list.component'
 import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main.component'
@@ -34,6 +35,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: EcosolutionsFormComponent,
+        canDeactivate: [canDeactivateGuard],
         data: {
           breadcrumb: 'BREADCRUMBS.edit_ecosolutions',
         },

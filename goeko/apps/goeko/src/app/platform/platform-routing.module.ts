@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+import { canDeactivateGuard } from '@goeko/business-ui'
 import { AuthGuard, checkSessionUserData } from '@goeko/core'
 import { ROLES, ecosolutionSearchDetailResolver, groupingFormCategoriesResolver, hasRole, projectResolver } from '@goeko/store'
 import { PlatformComponent } from './platform.component'
@@ -36,6 +37,7 @@ const routes: Routes = [
         path: 'project-form/:smeId/:projectId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
+        canDeactivate: [canDeactivateGuard],
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         resolve: { project: projectResolver, groupingForm: groupingFormCategoriesResolver },
         loadComponent: () => import('../projects/project-form/project-form.component').then((m) => m.ProjectFormComponent),
