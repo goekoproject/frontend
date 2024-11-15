@@ -38,9 +38,13 @@ testem.log
 .DS_Store
 Thumbs.db
 
-.nx/cache
+.nx/
 .angular
 .firebase/
 
 # Project
 *.unlighthouse
+
+
+
+.nx/workspace-data
