@@ -1,8 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "defaultBase": "master",
+  "nxCloudId": "65870b55ffe0b226ad66444d",
   "targetDefaults": {
     "build": {
       "cache": true,
@@ -62,5 +61,8 @@
     "@nx/angular:component": {
       "style": "scss"
     }
-  }
+  },
+  "nxCloudAccessToken": "ZmJiMDQ3MjMtMmZiOS00YmU5LWJmZDEtOTZmYzkzZGVhYmY4fHJlYWQtd3JpdGU=",
+  "useInferencePlugins": false,
+  "useLegacyCache": true
 }
