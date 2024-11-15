@@ -1315,3 +1315,34 @@ Node.js v20.15.0
 [NX Daemon Server] - 2024-11-14T19:21:24.287Z - Closed a connection. Number of open connections: 0
 [NX Daemon Server] - 2024-11-14T19:21:24.287Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (sources)
 [NX Daemon Server] - 2024-11-14T19:21:24.287Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (outputs)
+[NX Daemon Server] - 2024-11-15T09:02:39.162Z - Started listening on: \\.\pipe\nx\C:\Users\oswal\AppData\Local\Temp\0183278f42d89007ff06\d.sock
+[NX Daemon Server] - 2024-11-15T09:02:39.171Z - [WATCHER]: Subscribed to changes within: d:\frontend\goeko (native)
+[NX Daemon Server] - 2024-11-15T09:02:39.174Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T09:02:39.175Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-11-15T09:02:39.177Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T09:02:39.181Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-11-15T09:02:39.183Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-11-15T09:02:39.183Z - Handled FORCE_SHUTDOWN. Handling time: 1. Response time: 2.
+[NX Daemon Server] - 2024-11-15T09:02:39.183Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-15T09:02:39.183Z - [WATCHER]: Stopping the watcher for d:\frontend\goeko (sources)
+[NX Daemon Server] - 2024-11-15T09:02:39.183Z - [WATCHER]: Stopping the watcher for d:\frontend\goeko (outputs)
+[NX Daemon Server] - 2024-11-15T09:02:50.204Z - Started listening on: \\.\pipe\nx\C:\Users\oswal\AppData\Local\Temp\0183278f42d89007ff06\d.sock
+[NX Daemon Server] - 2024-11-15T09:02:50.210Z - [WATCHER]: Subscribed to changes within: d:\frontend\goeko (native)
+[NX Daemon Server] - 2024-11-15T09:02:50.218Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T09:02:50.220Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-15T09:02:50.220Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T09:02:50.222Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-11-15T09:02:50.629Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-11-15T09:02:50.629Z - [REQUEST]: 
+[NX Daemon Server] - 2024-11-15T09:02:50.629Z - [REQUEST]: 
+[NX Daemon Server] - 2024-11-15T09:02:50.640Z - Time taken for 'loadNxPlugins' 403.25699999999995ms
+[NX Daemon Server] - 2024-11-15T09:02:50.675Z - Time taken for 'build-project-configs' 12.375100000000089ms
+[NX Daemon Server] - 2024-11-15T09:02:50.683Z - [SYNC]: collect registered sync generators
+[NX Daemon Server] - 2024-11-15T09:02:50.685Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-11-15T09:02:50.685Z - Time taken for 'total for creating and serializing project graph' 462.5876999999999ms
+[NX Daemon Server] - 2024-11-15T09:02:50.685Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-11-15T09:02:50.685Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 463. Response time: 0.
+[NX Daemon Server] - 2024-11-15T09:02:50.690Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-11-15T09:02:50.691Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-11-15T09:02:50.691Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 2. Response time: 1.
+[NX Daemon Server] - 2024-11-15T09:02:50.697Z - Closed a connection. Number of open connections: 0

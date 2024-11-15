@@ -28,6 +28,8 @@ jobs:
       #Init dependencies
       - name: Install Dependencies
         run: npm install
+      - name: NX Reset
+        run: nx reset
       - name: Build
         run: npm run build:dev
       - name: Archive Production Artifact
