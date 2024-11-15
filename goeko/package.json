@@ -6,7 +6,7 @@
     "ng": "nx",
     "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run start-tailwind\"",
     "build:dev": "concurrently  -c \"blue,green\" \"npx nx run-many --target=build --projects=goeko --configuration=development \" \"npm run start-tailwind:build\"",
-    "build:pro": "concurrently  -c \"blue,green\"  \"nx run goeko:build:production  --verbose\" \"npm run start-tailwind:build\"",
+    "build:pro": "concurrently  -c \"blue,green\"  \"npx nx run-many --target=build --projects=goeko --configuration=production\" \"npm run start-tailwind:build\"",
     "start-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --watch",
     "start-tailwind:build": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --minify",
     "lint": "nx lint",
