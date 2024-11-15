@@ -1,6 +1,6 @@
-import { CloudinaryModule } from '@cloudinary/ng';
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { CloudinaryModule } from '@cloudinary/ng'
 import { ContentFulModule } from '@goeko/store'
 import { ButtonModule, DialogService, GoekoButtonModule, TitlePageComponent, UiBreadcrumbsModule } from '@goeko/ui'
 import { BannerComponent } from './banner/banner.component'
@@ -22,7 +22,6 @@ import { MenuComponent } from './header/menu/menu.component'
 import { LandingComponent } from './landing/landing.component'
 import { ServicesComponent } from './services/services.component'
 import { TeamComponent } from './team/team.component'
-import { CloudinaryModule } from '@cloudinary/ng'
 
 @NgModule({
   declarations: [
@@ -50,7 +49,8 @@ import { CloudinaryModule } from '@cloudinary/ng'
     SelectI18nComponent,
     UiBreadcrumbsModule,
     MenuMobileComponent,
-    CloudinaryModule
+    CloudinaryModule,
+    ContentComponent,
   ],
   providers: [DialogService, OverlayRefService],
 })
