@@ -1,11 +1,47 @@
-[NX Daemon Server] - 2024-10-13T13:43:46.960Z - Started listening on: \\.\pipe\nx\C:\Users\oswal\AppData\Local\Temp\0183278f42d89007ff06\d.sock
-[NX Daemon Server] - 2024-10-13T13:43:46.967Z - [WATCHER]: Subscribed to changes within: D:\frontend\goeko (native)
-[NX Daemon Server] - 2024-10-13T13:43:46.970Z - Established a connection. Number of open connections: 1
-[NX Daemon Server] - 2024-10-13T13:43:46.972Z - Established a connection. Number of open connections: 2
-[NX Daemon Server] - 2024-10-13T13:43:46.975Z - Closed a connection. Number of open connections: 1
-[NX Daemon Server] - 2024-10-13T13:43:46.979Z - [REQUEST]: Responding to the client. Shutdown initiated
-[NX Daemon Server] - 2024-10-13T13:43:46.981Z - Done responding to the client Shutdown initiated
-[NX Daemon Server] - 2024-10-13T13:43:46.981Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 3.
-[NX Daemon Server] - 2024-10-13T13:43:46.981Z - Closed a connection. Number of open connections: 0
-[NX Daemon Server] - 2024-10-13T13:43:46.982Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (sources)
-[NX Daemon Server] - 2024-10-13T13:43:46.982Z - [WATCHER]: Stopping the watcher for D:\frontend\goeko (outputs)
+[NX Daemon Server] - 2024-11-15T11:23:03.441Z - Started listening on: \\.\pipe\nx\C:\Users\oswal\AppData\Local\Temp\0183278f42d89007ff06\d.sock
+[NX Daemon Server] - 2024-11-15T11:23:03.447Z - [WATCHER]: Subscribed to changes within: d:\frontend\goeko (native)
+[NX Daemon Server] - 2024-11-15T11:23:03.450Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T11:23:03.452Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-11-15T11:23:03.459Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T11:23:03.464Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-11-15T11:23:03.713Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-11-15T11:23:03.713Z - [REQUEST]: 
+[NX Daemon Server] - 2024-11-15T11:23:03.713Z - [REQUEST]: 
+[NX Daemon Server] - 2024-11-15T11:23:03.718Z - Time taken for 'loadNxPlugins' 246.35590000000002ms
+[NX Daemon Server] - 2024-11-15T11:23:03.734Z - Time taken for 'build-project-configs' 6.327099999999973ms
+[NX Daemon Server] - 2024-11-15T11:23:04.341Z - [SYNC]: collect registered sync generators
+[NX Daemon Server] - 2024-11-15T11:23:04.343Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-11-15T11:23:04.343Z - Time taken for 'total for creating and serializing project graph' 879.2659000000001ms
+[NX Daemon Server] - 2024-11-15T11:23:04.343Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-11-15T11:23:04.343Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 880. Response time: 0.
+[NX Daemon Server] - 2024-11-15T11:23:04.347Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-11-15T11:23:04.347Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-11-15T11:23:04.347Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 2. Response time: 0.
+[NX Daemon Server] - 2024-11-15T11:23:04.350Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-15T11:23:04.416Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T11:23:04.416Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-15T11:23:04.417Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T11:23:04.419Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-11-15T11:23:04.420Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-11-15T11:23:04.420Z - Time taken for 'total for creating and serializing project graph' 0.4377999999999247ms
+[NX Daemon Server] - 2024-11-15T11:23:04.420Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-11-15T11:23:04.420Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-11-15T11:23:04.589Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX Daemon Server] - 2024-11-15T11:23:04.590Z - Done responding to the client handleHashTasks
+[NX Daemon Server] - 2024-11-15T11:23:04.590Z - Handled HASH_TASKS. Handling time: 3. Response time: 1.
+[NX Daemon Server] - 2024-11-15T11:23:04.829Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2024-11-15T11:23:04.830Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX Daemon Server] - 2024-11-15T11:23:04.830Z - Handled GET_ESTIMATED_TASK_TIMINGS. Handling time: 3. Response time: 1.
+[NX Daemon Server] - 2024-11-15T11:23:05.716Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-11-15T11:23:05.717Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T11:23:05.717Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-11-15T11:23:05.720Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-11-15T11:23:05.720Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-11-15T11:23:05.721Z - Time taken for 'total for creating and serializing project graph' 0.5342999999998028ms
+[NX Daemon Server] - 2024-11-15T11:23:05.721Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-11-15T11:23:05.721Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-11-15T11:23:17.889Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-11-15T11:23:17.889Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-11-15T11:23:17.889Z - [WATCHER]: Stopping the watcher for d:\frontend\goeko (sources)
+[NX Daemon Server] - 2024-11-15T11:23:17.889Z - [WATCHER]: Stopping the watcher for d:\frontend\goeko (outputs)
+[NX Daemon Server] - 2024-11-15T11:23:17.890Z - Server stopped because: "this process is no longer the current daemon (native)"
