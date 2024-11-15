@@ -4,8 +4,6 @@
 name: Deploy Dev Test
 on:
   workflow_call:
-env:
-  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 jobs:
   unit_test:
     name: Unit Test ${{ matrix.file }}
