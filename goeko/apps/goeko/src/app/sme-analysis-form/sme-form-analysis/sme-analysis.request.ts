@@ -1,7 +1,7 @@
 import { Classifications, NotificationSearch, SmeSaveRecomendationProjectRequest, SmeSaveRecomendationRequest } from '@goeko/store'
 import { Section } from '../form-field.model'
 
-export const formToClassificationsMapper = (formValue: any) => {
+export const formToClassificationsMapper = (formValue: unknown) => {
   const classifications: Classifications[] = []
   if (!formValue) {
     return classifications
@@ -12,17 +12,17 @@ export const formToClassificationsMapper = (formValue: any) => {
     let mainCategory!: string
     let categoryClassification
 
-    value.forEach((category: any) => {
+    value.forEach((category) => {
       if (isObject(category)) {
         Object.keys(category).forEach((index) => {
           const subCategory = index
-          if (!category[index] && !Array.isArray(category)) {
+          if (!category[index as keyof typeof category] && !Array.isArray(category)) {
             return
           }
-          if (!Array.isArray(category[index])) {
+          if (!Array.isArray(category[index as keyof typeof category])) {
             return
           }
-          const products = category[index].map((res: any) => {
+          const products = (category[index as keyof typeof category] as Array<any>).map((res: any) => {
             if (typeof res === 'object') {
               return res?.code?.toString()
             } else {

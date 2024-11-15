@@ -1,7 +1,9 @@
 import { MediaMatcher } from '@angular/cdk/layout'
+
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
 import { CODE_LANG } from '@goeko/core'
 import { ContentFulService } from '@goeko/store'
+
 import { TranslateService } from '@ngx-translate/core'
 import { map } from 'rxjs'
 import { Advantages } from './advantages.model'
@@ -32,6 +34,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
 
   public odsIcon = [6, 7, 9, 11, 12, 13, 14, 15]
 
+
   public srcVideo = signal('')
   public isSmallScreen = signal(this._mediaMatcher.matchMedia('(max-width: 599.98px)'))
 
@@ -61,7 +64,7 @@ export class BannerComponent implements AfterViewInit, OnInit {
       return
     }
     this.srcVideo.set(this._urlSrcVideo())
-  }
+}
 
   private _changeLangCode() {
     this._translateServices.onLangChange.subscribe((res) => {
