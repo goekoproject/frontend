@@ -1,13 +1,13 @@
-<div class="relative pt-16 lg:pt-8 pb-16">
+<div class="relative pb-16 pt-16 lg:pt-8">
   <div class="slider">
     <div #sliderTrack class="slide-track">
-      @for (company of carousel()?.companies; track carousel) {
+      @for (company of carousel()?.companies; track company.id) {
         <div class="slide grid place-items-center">
           <img [src]="company?.file.url" class="object-contain" [alt]="company.title" />
         </div>
       }
 
-      @for (company of carousel()?.companies; track carousel) {
+      @for (company of carousel()?.companies; track company.title) {
         <div class="slide grid place-items-center">
           <img [src]="company.file.url" [alt]="company.title" />
         </div>

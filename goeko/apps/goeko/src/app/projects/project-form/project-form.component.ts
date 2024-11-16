@@ -12,7 +12,7 @@ import {
 import { Category, Product, Project } from '@goeko/store'
 import { BadgeModule, ButtonModule, DialogMessageModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { ProjectEcosolutionParams } from '../project-ecosolutions-query.model'
 import { ProjectForm } from '../project-form.model'
 import { ProjectManagmentService } from '../project-managment.service'
@@ -38,11 +38,11 @@ const compareWithProducts = (product: Product, productCodeSelected: Product | st
 })
 export class ProjectFormComponent implements OnInit, CanComponentDeactivate {
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
-    return canDeactivateForm(this._saveProjects)
+    return this._submitter() ? of(true) : canDeactivateForm(this._saveProjects)
   }
 
   compareWithProducts = compareWithProducts
-
+  private _submitter = signal(false)
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
   private _fb = inject(FormBuilder)
@@ -135,6 +135,7 @@ export class ProjectFormComponent implements OnInit, CanComponentDeactivate {
 
   searchEcosolutions() {
     this._saveProjects().subscribe((res) => {
+      this._submitter.set(res)
       if (res) {
         this._router.navigate(['search', this.smeId(), this.project().id], { relativeTo: this._route.parent })
       }

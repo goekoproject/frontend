@@ -40,9 +40,10 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       this.idEcosolution
         ? this._ecosolutionsService.updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
         : this._ecosolutionsService.createEcosolutions(this.bodyRequestEcosolution)
-    return canDeactivateForm(callback)
+    return this._submitter() ? of(true) : canDeactivateForm(callback)
   }
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
+  private _submitter = signal(false)
   public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries
   public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
@@ -291,6 +292,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
           const uploadCertificate$ = this._uploadCertificate(ecosolution)
           return forkJoin([uploadPicture$, uploadCertificate$])
         }),
+        tap(() => this._submitter.set(true)),
         tap(() => this.goToListEcosolution()),
       )
       .subscribe({
@@ -312,6 +314,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
           const uploadCertificate$ = this._uploadCertificate(ecosolution)
           return forkJoin([uploadPicture$, uploadCertificate$])
         }),
+        tap(() => this._submitter.set(true)),
         tap(() => this.goToListEcosolution()),
       )
       .subscribe({
