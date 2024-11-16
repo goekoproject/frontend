@@ -69,6 +69,7 @@ export class ProjectFormComponent implements OnInit, CanComponentDeactivate {
     })
   }
   private _fetchData(lang: string) {
+    this._submitter.set(true)
     this._router.navigate([], {
       relativeTo: this._router.routerState.root,
       queryParams: { lang: lang },
@@ -79,6 +80,7 @@ export class ProjectFormComponent implements OnInit, CanComponentDeactivate {
     if (this.project()) {
       const projectFormValue = ProjectForm.transform(this.project().classifications || [])
       this.form.patchValue(projectFormValue)
+      this.form.markAsUntouched()
     }
   }
 
