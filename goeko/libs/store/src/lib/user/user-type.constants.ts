@@ -12,19 +12,20 @@ export const USER_TYPE_DESCRIPTION = [
     title: 'enterprise',
     value: USER_TYPE.SME,
     active: true,
-    descriptions: 'Je cherche une éco-solution',
+    descriptions: 'SIGNUP.enterpriseDescription',
   },
   {
     id: 2,
     title: 'USER_TYPE.cleanTech',
     value: USER_TYPE.CLEANTECH,
     active: true,
-    descriptions: 'Je propose une éco-solution',
+    descriptions: 'SIGNUP.cleantechDescription',
   },
   {
     id: 1,
     title: 'USER_TYPE.bank',
     value: USER_TYPE.Bank,
     active: false,
+    descriptions: '',
   },
 ]

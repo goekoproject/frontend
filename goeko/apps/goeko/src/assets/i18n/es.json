@@ -470,7 +470,9 @@
   },
   "SIGNUP": {
     "acceptedConditions": "He leído y aceptado",
-    "acceptedConditions2": "los términos y condiciones"
+    "acceptedConditions2": "los términos y condiciones",
+    "cleantechDescription": "Propongo una solución cleantech",
+    "enterpriseDescription": "Estoy buscando una solución cleantech"
   },
   "SUCCESS_MESSAGES": {
     "DELETE": "Eliminado con éxito.",

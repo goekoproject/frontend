@@ -1,6 +1,6 @@
 <h1 class="text-2xl font-bold">{{ 'LOGIN.msgsignup2' | translate }}</h1>
 
-<form [formGroup]="formSignup" class="flex flex-col gap-4 overflow-auto">
+<form [formGroup]="formSignup" class="flex flex-col gap-4 overflow-auto sm:overflow-hidden">
   @if (errorMsgSignup()) {
     <goeko-alert [type]="'danger'">
       <p>
@@ -59,7 +59,7 @@
               tabindex="0"
               style="outline: none">
               <label
-                [ngClass]="{ 'bg-blueLightPastel border-blue-400': actor.value === selectedActor() }"
+                [ngClass]="{ 'border-blue-400 bg-blueLightPastel': actor.value === selectedActor() }"
                 class="border-muted bg-popover flex cursor-pointer items-center gap-4 rounded-md border p-4 text-sm font-medium leading-none transition-transform hover:scale-105 hover:bg-gray-100"
                 for="enterprise">
                 <button
@@ -121,7 +121,7 @@
                 </div>
                 <div>
                   <h4 class="text-lg font-semibold">{{ actor.title | translate }}</h4>
-                  <p class="text-muted-foreground">{{ actor.descriptions }}</p>
+                  <p class="text-muted-foreground">{{ actor.descriptions | translate }}</p>
                 </div>
               </label>
             </div>
@@ -141,6 +141,6 @@
     {{ 'Sign up' }}
   </button>
   <p>
-    {{ 'LOGIN.msglogin2' | translate }}. <a [routerLink]="['/login']">{{ 'Log in' | translate }}</a>
+    {{ 'LOGIN.msglogin2' | translate }} <a [routerLink]="['/login']">{{ 'Log in' | translate }}</a>
   </p>
 </form>

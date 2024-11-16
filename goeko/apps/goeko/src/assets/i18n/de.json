@@ -466,7 +466,9 @@
   },
   "SIGNUP": {
     "acceptedConditions": "Ich habe die",
-    "acceptedConditions2": "Allgemeinen Geschäftsbedingungen gelesen und akzeptiere sie"
+    "acceptedConditions2": "Allgemeinen Geschäftsbedingungen gelesen und akzeptiere sie",
+    "cleantechDescription": "Ich schlage eine Cleantech-Lösung vor",
+    "enterpriseDescription": "Ich suche eine Cleantech-Lösung"
   },
   "SUCCESS_MESSAGES": {
     "DELETE": "Erfolgreich gelöscht.",
