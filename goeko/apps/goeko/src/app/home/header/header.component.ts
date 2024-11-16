@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('header', { static: true }) header!: ElementRef
   @ViewChild('logo', { static: true }) logo!: ElementRef
   isDark!: boolean
-  langs = LANGS.filter((lang) => lang.code !== CODE_LANG.ES)
+  langs = LANGS.filter((lang) => lang.code !== CODE_LANG.ES && lang.code !== CODE_LANG.DE)
   mobileMenuOpen = signal(false)
 
   constructor(

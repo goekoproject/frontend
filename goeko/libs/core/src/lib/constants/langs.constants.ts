@@ -10,13 +10,13 @@ export enum CODE_LANG {
   FR = 'fr',
   EN = 'en',
   GB = 'gb',
-  //DE = 'de'
+  DE = 'de',
 }
 export enum ICON_FLAG {
   ES = 'es',
   FR = 'fr',
   GB = 'gb',
-  //DE = 'de'
+  DE = 'de',
 }
 export const LANGS: Lang[] = [
   {
@@ -37,10 +37,10 @@ export const LANGS: Lang[] = [
     code: CODE_LANG.EN,
     iconFlag: ICON_FLAG.GB,
   },
-  /*{
+  {
     codeContentFul: CODE_LANG.DE,
     title: 'LANGS.de',
     code: CODE_LANG.DE,
-    iconFlag:ICON_FLAG.DE
-  },*/
+    iconFlag: ICON_FLAG.DE,
+  },
 ]
