@@ -2,35 +2,24 @@
   <img [src]="mainPhoto()" class="absolute top-0 z-auto aspect-square object-cover xl:aspect-auto xl:w-svw" />
   <div class="gradient bottom-[8.5rem] lg:bottom-[-8rem]"></div>
 
-  <div class="flex flex-col items-center lg:w-full">
+  <div class="flex flex-col items-center gap-8 lg:w-full">
     <h1 #goekoText class="title-transition text-7xl">GoEko</h1>
     <div class="text-center lg:mt-12 lg:w-[64rem]">
       <h1 class="title text-transition text-6xl leading-none lg:text-7xl" *ngIf="showMainSlogan">
         {{ entryDataMain()?.text }}
       </h1>
       <h3 class="subtitle text-transition" *ngIf="showMainSlogan">{{ entryDataConnecting()?.text }}</h3>
-
-      <div class="text-transition m-auto grid place-items-center" *ngIf="connection">
-        <div class="mt-12 flex items-center">
-          <div class="i-connection relative flex h-12 min-w-[200px] max-w-[16rem]">
-            <button
-              class="z-1 start-button !absolute right-1 top-1 rounded-[25px] px-3 py-2 text-center align-middle leading-6 text-white"
-              type="button"
-              (click)="goTologin()">
-              ->
-            </button>
-            <input
-              type="email"
-              class="h-full w-full rounded-[25px] px-3 py-2.5 pr-20 outline outline-0 disabled:bg-white"
-              disabled />
-              <span class="!absolute top-[0.675rem] left-[1.6rem] opacity-100 i-connection">
-                {{ connection()?.text }}
-              </span>
-              <!-- [placeholder]="connection()?.text" -->
-          </div>
-        </div>
-      </div>
     </div>
+    <button class="z-10 flex items-center rounded-full bg-white py-1 pl-6 pr-1 font-bold text-primary-default" (click)="goTologin()">
+      <span class="mr-2 text-lg"> {{ connection()?.text | translate }} </span>
+      <svg
+        class="size-12 rounded-full bg-primary-default stroke-white p-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </button>
   </div>
 </article>
 

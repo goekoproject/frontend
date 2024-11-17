@@ -1,8 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "defaultBase": "master",
+  "nxCloudId": "65870b55ffe0b226ad66444d",
   "targetDefaults": {
     "build": {
       "cache": true,
@@ -10,7 +9,7 @@
       "inputs": ["production", "^production"]
     },
     "lint": {
-      "cache": true,  
+      "cache": true,
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore", "{workspaceRoot}/eslint.config.js"]
     },
     "@nx/jest:jest": {
@@ -63,5 +62,7 @@
       "style": "scss"
     }
   },
-  "nxCloudAccessToken": "NGU4YmJjYWItZjI5YS00YTQwLWI4Y2EtZjZhNjdhZTJlM2I4fHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "ZmJiMDQ3MjMtMmZiOS00YmU5LWJmZDEtOTZmYzkzZGVhYmY4fHJlYWQtd3JpdGU=",
+  "useInferencePlugins": false,
+  "useLegacyCache": true
 }
