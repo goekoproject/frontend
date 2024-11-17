@@ -64,13 +64,14 @@
 }
 
 .i-connection {
-  input::placeholder {
-    color: var(--home-page-light-blue);
-    opacity: 1; /* Firefox */
-    position: absolute;
-    left: 1.5rem;
-    top: 0.8rem;
-  }
+  color: var(--home-page-light-blue);
+  // input::placeholder {
+  //   color: var(--home-page-light-blue);
+  //   opacity: 1; /* Firefox */
+  //   position: absolute;
+  //   left: 1.5rem;
+  //   top: 0.8rem;
+  // }
 }
 
 .gradient {

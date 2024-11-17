@@ -22,8 +22,11 @@
             <input
               type="email"
               class="h-full w-full rounded-[25px] px-3 py-2.5 pr-20 outline outline-0 disabled:bg-white"
-              [placeholder]="connection()?.text"
               disabled />
+              <span class="!absolute top-[0.675rem] left-[1.6rem] opacity-100 i-connection">
+                {{ connection()?.text }}
+              </span>
+              <!-- [placeholder]="connection()?.text" -->
           </div>
         </div>
       </div>
