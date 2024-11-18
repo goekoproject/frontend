@@ -7,12 +7,22 @@ import {
   ElementRef,
   QueryList,
   ViewChildren,
+  computed,
   effect,
+  input,
   signal,
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { CategoryModule, Product, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
-import { ClassificationCategoryService, ManageCategory, ManageSubcategory, ProductSelectToManageProduct, Translations } from '@goeko/store'
+import { CODE_LANG } from '@goeko/core'
+import {
+  ClassificationCategoryService,
+  GroupingByClassifications,
+  ManageCategory,
+  ManageSubcategory,
+  ProductSelectToManageProduct,
+  Translations,
+} from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
@@ -50,11 +60,17 @@ export class AdminCategoriesComponent implements AfterContentInit {
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
   //Signal
-  categories = this._adminCategories.categories as any
   categorySelected = this._adminCategories.categorySelected
   subCategorySelected = this._adminCategories.subCategorySelected
   subCategorySelectedIndex = this._adminCategories.subCategorySelectedIndex
 
+  classifications = input.required<GroupingByClassifications>()
+  categories = computed(() =>
+    this.classifications().classification.map((classification) => ({
+      ...classification,
+      label: classification.label.translations.find((translation) => translation.lang === CODE_LANG.EN)?.label,
+    })),
+  )
   public form!: FormGroup
 
   private _closeDetailByIndex = (index: number) => {
@@ -97,6 +113,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
     effect(() => {
       this._createFormGroup()
       this._cdf.markForCheck()
+      console.log(this.categories())
     })
     this._getTranslationsForLang()
   }

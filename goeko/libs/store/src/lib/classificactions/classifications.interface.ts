@@ -1,21 +1,38 @@
-export interface Product {
-  code: string
+interface Translation {
   label: string
-  disabled: boolean
+  lang: string
+}
+
+interface Label {
+  translations: Translation[]
+}
+
+interface Question {
+  translations: Translation[]
+}
+
+export interface Product {
+  id: string
+  code: string
+  label: Label
+  enabled: boolean
 }
 
 export interface Subcategory {
-  code: string
-  label: string
-  question: string
-  products: Product[]
-  disabled?: boolean
   id: string
+  code: string
+  label: Label
+  question: Question
+  products: Product[]
+  enabled: boolean
+  order: number
 }
 
 export interface Category {
   id: string
   code: string
-  label: string
+  label: Label
   subcategories: Subcategory[]
+  enabled: boolean
+  order: number
 }

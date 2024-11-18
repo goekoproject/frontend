@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { forkJoin, map, Observable, shareReplay } from 'rxjs'
 import { CLASSIFICATION_CATEGORIES_CODE } from './classification-categories-code.constant'
 import { Category } from './classifications.interface'
+import { Grouping, GroupingByClassifications } from './grouping.interface'
 import { mergeCategoriesSectionWithClassificationCategory } from './transform.util'
 
 const sortCategories = (categories: Category[]): Category[] => {
@@ -27,15 +28,21 @@ export class ClassificationsService {
 
   private categories = toSignal(this.getClassificationsCategory(), { initialValue: [] })
 
+  constructor() {
+    this._translateService.onLangChange.pipe().subscribe((current) => this.langSignal.set(current.lang))
+  }
+
+  getGroupingAll(): Observable<Grouping[]> {
+    return this._http.get<Grouping[]>('/v1/classifications/grouping/form').pipe(shareReplay(1))
+  }
+  getGroupingById(id: string): Observable<GroupingByClassifications> {
+    return this._http.get<GroupingByClassifications>(`/v1/classifications/grouping/form/${id}`)
+  }
   groupingFormCategories(grouping = 'construction'): Observable<Category[]> {
     return this._http.get<Category[]>(`/v1/classifications/grouping/form/code/${grouping}/depth/translated?lang=${this.langSignal()}`).pipe(
       map((categories) => sortCategories(categories)),
       shareReplay(1),
     )
-  }
-
-  constructor() {
-    this._translateService.onLangChange.pipe().subscribe((current) => this.langSignal.set(current.lang))
   }
 
   getClassificationsCategory(): Observable<any[]> {
@@ -47,6 +54,7 @@ export class ClassificationsService {
     return this._http.get<any>(`/v1/classifications/category/translated/${category}?lang=${this.currentLang()}`)
   }
 
+  /** @deprecated */
   getAllDataCategories() {
     const allCategories$ = this.categories().map((category: any) => this.getClassificationForCategoryTranslated(category.code))
     return forkJoin(allCategories$)

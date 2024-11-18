@@ -1,0 +1,12 @@
+<div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-3">
+  @for (grouping of groupingForm(); track grouping.id) {
+    <div class="cursor-pointer rounded-lg bg-white p-6 text-start shadow-md transition-all duration-300 hover:bg-blue-50 hover:shadow-lg">
+      <h3 class="mb-2 text-xl font-bold">{{ grouping.name }}</h3>
+      <p class="text-gray-600">{{ grouping.description }}</p>
+      <div class="mt-6 flex gap-2 py-2">
+        <button go-button [routerLink]="'../classifications/' + grouping.id">{{ 'edit' | translate }}</button>
+        <button go-button appearance="white">{{ 'Delete' | translate }}</button>
+      </div>
+    </div>
+  }
+</div>

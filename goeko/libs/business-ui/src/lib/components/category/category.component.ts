@@ -13,7 +13,7 @@ import { Category } from '@goeko/store'
   },
 })
 export class CategoryComponent {
-  public categories = input<Category[]>([] as Category[])
+  public categories = input<any[]>([] as Category[])
 
   public formValue = input<any>()
   @Input()

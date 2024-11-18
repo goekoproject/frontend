@@ -81,7 +81,7 @@ export const MENU_USER: MenuUser[] = [
       {
         id: window.crypto.randomUUID(),
         title: 'Category',
-        url: 'admin/admin-category',
+        url: 'admin/grouping',
         active: true,
         userType: [USER_TYPE.SME],
       },
