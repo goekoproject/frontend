@@ -66,19 +66,16 @@
   text-align: right;
   width: 27%;
 }
+
 .subcategory-product {
-  display: none;
+  display: flex;
+  padding: 0 1rem;
 }
-[open='true'] {
-  .subcategory-product {
-    display: flex;
-    padding: 0 1rem;
-  }
-  .subcategory-expand {
-    transition: 0.3s;
-    transform: rotateX(180deg);
-  }
+.subcategory-expand {
+  transition: 0.3s;
+  transform: rotateX(180deg);
 }
+
 goeko-select-subcategory-product[readonly='true'] {
   .subcategory {
     align-items: flex-start;

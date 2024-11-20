@@ -7,6 +7,7 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  HostListener,
   Input,
   OnDestroy,
   Provider,
@@ -40,7 +41,6 @@ export enum TYPE_FIELD {
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    '[attr.open]': 'open',
     '[attr.checked]': 'checked',
     '[attr.readonly]': 'readonly',
     '[attr.id]': 'id',
@@ -50,6 +50,14 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   @ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent
   @ViewChild('inputElement') inputElement!: ElementRef
 
+  @HostListener('change', ['$event'])
+  onRadioChange(event: Event): void {
+    const target = event.target as HTMLInputElement
+
+    if (target.type === 'radio') {
+      console.log(`Radio ${target.value} is now ${target.checked ? 'checked' : 'unchecked'}`)
+    }
+  }
   @Input() id!: string
   @Input() readonly = false
   @Input() subCategory: any
@@ -120,8 +128,11 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   ) {}
 
   ngAfterContentInit(): void {
-    this.badgeGroup.valueChangedBadge$.subscribe((badge) => {
+    this.badgeGroup.valueChangedBadge$.subscribe((badge: string[]) => {
       this._handleCheckSubcategoryWhenProductSelected()
+      if (badge?.length > 0) {
+        this.assignValue(this.subCategory.code)
+      }
     })
   }
 
@@ -136,6 +147,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
       this.mutationObserver.disconnect()
     }
   }
+
   writeValue(value: any): void {
     if (!value) {
       return
@@ -162,10 +174,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
         if (mutation.type === 'attributes' && mutation.attributeName === 'checked') {
           const isChecked = this._el.nativeElement.getAttribute('checked') === 'true'
           if (!isChecked) {
-            this.open = false
             this.badgeGroup.clearAll()
-          } else {
-            this.open = true
           }
           this._cdf.markForCheck()
         }
