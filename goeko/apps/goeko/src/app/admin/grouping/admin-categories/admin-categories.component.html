@@ -1,10 +1,14 @@
 <section class="section-step">
   <!-- CATEGORY -->
-  <goeko-category [categories]="categories()" (onSelectCategory)="selectCategory($event)"> </goeko-category>
+  <goeko-category [categories]="categories()" [indexSelected]="0" (onSelectCategory)="selectCategory($event)"> </goeko-category>
 </section>
-@defer (when categorySelected().code === subCategorySelected().code) {
-  <section class="section-subcategories" [formGroup]="form" [@listAnimation]="subCategorySelected().subcategories.length">
-    @for (subcategory of subCategorySelected().subcategories; track subcategory.code; let index = $index) {
+
+<button go-button appearance="white" class="ml-auto" (click)="addSubcategory()">
+  {{ 'Add' | translate }}
+</button>
+@defer (when form) {
+  <section class="section-subcategories" [formGroup]="form" [@listAnimation]="subCategorySelected()?.subcategories?.length">
+    @for (subcategory of subCategorySelected()?.subcategories; track subcategory.code; let index = $index) {
       <details [@fadeAnimation] class="subcategories" formGroupName="{{ subcategory.code }}" #detailCategory>
         <summary class="subcategories-summary" (click)="toogleSubcategory($event, index)">
           <p>

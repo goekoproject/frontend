@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common'
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnInit,
   QueryList,
   ViewChildren,
   computed,
@@ -16,15 +16,16 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular
 import { CategoryModule, Product, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
 import { CODE_LANG } from '@goeko/core'
 import {
+  Category,
   ClassificationCategoryService,
   GroupingByClassifications,
-  ManageCategory,
   ManageSubcategory,
   ProductSelectToManageProduct,
   Translations,
 } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.component'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
 
@@ -56,22 +57,23 @@ import { AdminCategoriesService } from './admin-categories.services'
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeAnimation, listAnimation],
 })
-export class AdminCategoriesComponent implements AfterContentInit {
+export class AdminCategoriesComponent implements OnInit {
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
-  //Signal
-  categorySelected = this._adminCategories.categorySelected
-  subCategorySelected = this._adminCategories.subCategorySelected
-  subCategorySelectedIndex = this._adminCategories.subCategorySelectedIndex
-
   classifications = input.required<GroupingByClassifications>()
+
+  //Signal
+  categorySelected = signal<Category>({} as Category)
+  subCategorySelected = computed(() =>
+    this.classifications().classification.find((classification) => classification.code === this.categorySelected().code),
+  )
+
   categories = computed(() =>
     this.classifications().classification.map((classification) => ({
       ...classification,
       label: classification.label.translations.find((translation) => translation.lang === CODE_LANG.EN)?.label,
     })),
   )
-  public form!: FormGroup
 
   private _closeDetailByIndex = (index: number) => {
     const elementDetail = this.detailCategory.get(index)?.nativeElement
@@ -103,6 +105,8 @@ export class AdminCategoriesComponent implements AfterContentInit {
 
   private _translationsForLang: any = {}
   toggleActor = signal<boolean>(false)
+  public form!: FormGroup
+
   constructor(
     private _adminCategories: AdminCategoriesService,
     private _fb: FormBuilder,
@@ -112,15 +116,14 @@ export class AdminCategoriesComponent implements AfterContentInit {
   ) {
     effect(() => {
       this._createFormGroup()
-      this._cdf.markForCheck()
-      console.log(this.categories())
+      this._getTranslationsForLang()
     })
-    this._getTranslationsForLang()
   }
 
-  ngAfterContentInit(): void {
-    this._cdf.markForCheck()
+  ngOnInit(): void {
+    this.categorySelected.set(this.classifications().classification[0])
   }
+
   hanldertoggleActor(toggleActor: boolean): void {
     this.toggleActor.set(toggleActor)
   }
@@ -133,10 +136,11 @@ export class AdminCategoriesComponent implements AfterContentInit {
   }
   private _createFormGroup() {
     this.form = this._fb.group({})
-    this.subCategorySelected()?.subcategories.forEach((group: ManageSubcategory) => {
+    this.subCategorySelected()?.subcategories.forEach((group: any) => {
       if (group) {
         const formGroup = this._fb.group({})
         this._buildFormFormsubcategorySelected(group, formGroup)
+        this._cdf.markForCheck()
         this.form.addControl(group.code, formGroup)
       }
     })
@@ -147,7 +151,6 @@ export class AdminCategoriesComponent implements AfterContentInit {
 
   selectCategory(categorySelected: any): void {
     this._closeAllDetail()
-    this._cdf.markForCheck()
     this.categorySelected.set(categorySelected)
     this.toggleActor.set(true)
   }
@@ -162,7 +165,7 @@ export class AdminCategoriesComponent implements AfterContentInit {
 
   //TODO: create object for mapping
   saveSubcategory() {
-    const updateCategory: ManageCategory = {
+    const updateCategory: any = {
       ...this.subCategorySelected(),
       id: undefined,
       subcategories: Object.values(this.form.value).map((subcategory: any) => ({
@@ -172,6 +175,12 @@ export class AdminCategoriesComponent implements AfterContentInit {
       })),
     }
     this._adminCategories.updateSubcategorySelected(updateCategory)
+  }
+
+  addSubcategory() {
+    this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent, {}).subscribe((res) => {
+      console.log(res)
+    })
   }
 
   addProducts(subcategoryCode: string) {
