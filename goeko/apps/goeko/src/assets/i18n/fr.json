@@ -224,9 +224,10 @@
   },
   "INPUT_FILE": {
     "certified": "Sélectionnez votre certificat",
-    "image": "Glissez une image ou cliquez",
+    "image": "Glissez-déposez ou cliquez pour",
     "image2": "Sélectionner une image",
-    "image3": "Ajouter une image"
+    "image3": "Ajouter une image",
+    "selectLogo": "Sélectionnez le logo"
   },
   "LANGS": {
     "en": "Anglais",
@@ -605,5 +606,6 @@
   "your": "Votre",
   "yourEcosolution": "Votre éco-solution",
   "yourProjects": "Vos projets",
-  "your_ecosolutions": "Vos Eco-solutions"
+  "your_ecosolutions": "Vos Eco-solutions",
+  "characters": "{{num}} caractères"
 }

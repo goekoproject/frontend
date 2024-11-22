@@ -53,6 +53,7 @@ const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantec
 export class ProfileComponent implements OnInit, CanComponentDeactivate {
   form!: FormGroup
   savedProfileOK!: boolean
+  public USERTYPE = USER_TYPE
   public dataSelect = DataSelect as any
 
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>

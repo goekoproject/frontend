@@ -216,7 +216,8 @@
     "certified": "Wählen Sie Ihr Zertifikat aus",
     "image": "Ziehen Sie die Datei hierher oder klicken Sie, um",
     "image2": "Bild auswählen",
-    "image3": "Bild hinzufügen"
+    "image3": "Bild hinzufügen",
+    "selectLogo": "Wählen Sie Ihr Logo aus"
   },
   "LANGS": {
     "de": "Deutsch",
@@ -603,5 +604,6 @@
   "results": "ergebnisse",
   "resultSolution": "Ergebnis",
   "yourProjects": "Ihre Projekte",
-  "backToResults": "Zurück zu den Ergebnissen"
+  "backToResults": "Zurück zu den Ergebnissen",
+  "characters": "{{num}} Zechen"
 }
