@@ -1,4 +1,31 @@
-<div class="mb-4">
-  <label for="en" class="mb-1 block font-medium text-gray-700">EN</label>
-  <input type="text" id="en" placeholder="English" class="input-dialog" />
-</div>
+@defer (when form) {
+  <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col">
+    <button type="submit" class="ml-auto block" go-button>{{ 'confirm' | translate }}</button>
+
+    <h3 class="my-4 text-2xl text-primary-default">{{ 'USER_TYPE.sme' | translate }}</h3>
+    @for (lang of LANGS; track lang.code) {
+      <div class="mb-4" [formGroupName]="'sme'">
+        <label for="{{ lang.code }}" class="mb-1 block font-medium text-gray-700">{{ lang.title | translate }}</label>
+        <input
+          type="text"
+          id="{{ lang.code }}"
+          placeholder="{{ lang.title | translate }}"
+          class="input-dialog"
+          [formControlName]="lang.code" />
+      </div>
+    }
+
+    <h3 class="my-4 text-2xl text-primary-default">{{ 'USER_TYPE.cleanTech' | translate }}</h3>
+    @for (lang of LANGS; track lang.code) {
+      <div class="mb-4" [formGroupName]="'cleantech'">
+        <label for="{{ lang.code }}" class="mb-1 block font-medium text-gray-700">{{ lang.title | translate }}</label>
+        <input
+          type="text"
+          id="{{ lang.code }}"
+          placeholder="{{ lang.title | translate }}"
+          class="input-dialog"
+          [formControlName]="lang.code" />
+      </div>
+    }
+  </form>
+}
