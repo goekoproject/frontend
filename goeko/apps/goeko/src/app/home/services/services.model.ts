@@ -3,7 +3,7 @@ export class Services {
   title: string
   actorType: string
   section: string
-  paragraphs: any[]
+  description: any;
   photo: string
   rates: any[]
   rateTitle: string
@@ -12,7 +12,8 @@ export class Services {
     this.title = item.fields.title;
     this.actorType = item.fields.actorType;
     this.section = item.fields.section;
-    this.paragraphs = this._buildDescription(item.fields.description.content);
+    // this.paragraphs = this._buildDescription(item.fields.description.content);
+    this.description = item.fields.description;
     this.photo = item.fields.photo.fields.file.url;
     this.rates = this._buildRates(item.fields.rates.content);
     this.rateTitle = item.fields.rateTitle;
@@ -42,11 +43,11 @@ export class Services {
       return rates;
   }
 
-  private _buildDescription(content: any): any[] {
-    const paragraphs: any = [];
-    content.forEach((element: any) => {
-      paragraphs.push(element.content[0].value);
-    });
-    return paragraphs;
-  }
+  // private _buildDescription(content: any): any[] {
+  //   const paragraphs: any = [];
+  //   content.forEach((element: any) => {
+  //     paragraphs.push(element.content[0].value);
+  //   });
+  //   return paragraphs;
+  // }
 }

@@ -25,7 +25,6 @@
         <div class="flex gap-4">
           @for (ecosolutionFavorite of ecosolutionFavourites(); track ecosolutionFavorite.id) {
             <goeko-card-product
-              class="flex-grow"
               [title]="ecosolutionFavorite.ecosolution.solutionName"
               [description]="ecosolutionFavorite.ecosolution.description"
               [image]="ecosolutionFavorite.ecosolution.companyDetail.logo"

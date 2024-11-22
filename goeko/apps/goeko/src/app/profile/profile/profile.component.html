@@ -76,7 +76,14 @@
                 </div>
               }
               @case ('file-link') {
-                <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
+                @if (userType() === USERTYPE.CLEANTECH) {
+                  <goeko-input-file
+                    (fileChange)="fileChange($event)"
+                    [textButton]="'INPUT_FILE.selectLogo' | translate"
+                    [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
+                } @else {
+                  <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
+                }
               }
               @case ('country') {
                 <ng-container

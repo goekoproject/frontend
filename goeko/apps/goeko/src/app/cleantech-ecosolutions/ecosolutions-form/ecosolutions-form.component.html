@@ -64,8 +64,15 @@
                     {{ translation.value.lang | translate }}</span
                   >
                 </label>
-                <textarea class="go-textarea" rows="5" id="descriptionTranslations" [formControlName]="'label'" [readonly]="isReadOnly">
+                <textarea
+                  maxlength="2000"
+                  class="go-textarea"
+                  rows="5"
+                  id="descriptionTranslations"
+                  [formControlName]="'label'"
+                  [readonly]="isReadOnly">
                 </textarea>
+                <span class="text-xs font-medium"> ( {{ 'characters' | translate: { num: 2000 } }})</span>
               </div>
             }
           }
