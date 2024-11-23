@@ -14,12 +14,13 @@ import {
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { CategoryModule, Product, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
-import { CODE_LANG } from '@goeko/core'
+import { CODE_LANG, LANGS } from '@goeko/core'
 import {
   Category,
   ClassificationCategoryService,
   GroupingByClassifications,
   ManageSubcategory,
+  NewSubcategory,
   ProductSelectToManageProduct,
   Translations,
 } from '@goeko/store'
@@ -61,6 +62,8 @@ export class AdminCategoriesComponent implements OnInit {
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
   classifications = input.required<GroupingByClassifications>()
+
+  private LANGS = LANGS
 
   //Signal
   categorySelected = signal<Category>({} as Category)
@@ -128,9 +131,9 @@ export class AdminCategoriesComponent implements OnInit {
     this.toggleActor.set(toggleActor)
   }
   private _getTranslationsForLang() {
-    ;['en', 'fr', 'es'].forEach((lang) => {
-      this._translations.getTranslation(lang).subscribe((translations: any) => {
-        this._translationsForLang[lang] = translations
+    LANGS.forEach((lang) => {
+      this._translations.getTranslation(lang.code).subscribe((translations: any) => {
+        this._translationsForLang[lang.code] = translations
       })
     })
   }
@@ -178,10 +181,24 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   addSubcategory() {
-    this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent, {}).subscribe((res) => {
-      console.log(res)
+    this._openDialgoAddSubcategory().subscribe((res) => {
+      if (res) {
+        this._createSubcategory({ categoryId: this.categorySelected().id, ...res })
+      }
     })
   }
+
+  private _openDialgoAddSubcategory = () => {
+    return this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent)
+  }
+
+  private _createSubcategory(newSubcategory: NewSubcategory) {
+    this._adminCategories.createSubcategory(this.classifications(), newSubcategory).subscribe((grouping) => {
+      console.log('grouping', grouping)
+    })
+  }
+
+  private _updateSubcategory() {}
 
   addProducts(subcategoryCode: string) {
     const dialogResponse = this._openDialogAddProducts(subcategoryCode)

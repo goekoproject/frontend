@@ -25,7 +25,23 @@ export interface Subcategory {
   question: Question
   products: Product[]
   enabled: boolean
-  order: number
+  order?: number
+}
+export interface SubcategoryResponse {
+  categoryCode: string
+  categoryId: string
+  code: string
+  creationDateTime: string
+  enabled: boolean
+  id: string
+  label: Label
+  question: Question
+  updateDateTime: string
+}
+export interface NewSubcategory {
+  categoryId: string
+  label: Label
+  question: Question
 }
 
 export interface Category {
@@ -34,5 +50,16 @@ export interface Category {
   label: Label
   subcategories: Subcategory[]
   enabled: boolean
+  order: number
+}
+
+export interface NewCategoryForGrouping {
+  code: string
+  subcategories: NewSubcategoryForGrouping[]
+  order: number
+}
+
+export interface NewSubcategoryForGrouping {
+  code: string
   order: number
 }

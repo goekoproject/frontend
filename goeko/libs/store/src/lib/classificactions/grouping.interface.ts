@@ -1,4 +1,4 @@
-import { Category } from './classifications.interface'
+import { Category, NewCategoryForGrouping } from './classifications.interface'
 
 export interface Grouping {
   id: string
@@ -7,6 +7,12 @@ export interface Grouping {
   description: string
   creationDateTime: string
   updateDateTime: string
+}
+
+export interface NewUpdateGrouping {
+  name: string
+  description: string
+  classification: NewCategoryForGrouping[]
 }
 
 export interface GroupingByClassifications extends Grouping {

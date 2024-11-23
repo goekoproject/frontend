@@ -23,6 +23,12 @@ interface DataSubcategory {
 })
 export class DialogAddSubcategoryComponent implements OnInit {
   private _sideDialogService = inject(SideDialogService)
+  private get _smeForm() {
+    return this.form.get('sme') as FormGroup
+  }
+  private get _cleantechForm() {
+    return this.form.get('cleantech') as FormGroup
+  }
 
   public LANGS = LANGS
   public form = new FormGroup({
@@ -37,13 +43,18 @@ export class DialogAddSubcategoryComponent implements OnInit {
 
   private buildForm(): void {
     this.LANGS.forEach((lang: any) => {
-      ;(this.form.get('sme') as FormGroup)?.addControl(lang.code, new FormControl(''))
-      ;(this.form.get('cleantech') as FormGroup)?.addControl(lang.code, new FormControl(''))
+      this._smeForm.addControl(lang.code, new FormControl(''))
+      this._cleantechForm.addControl(lang.code, new FormControl(''))
     })
   }
 
   submit() {
-    const data: DataSubcategory = {
+    const data = this._dataSubcategory()
+    this._sideDialogService.closeDialog(data)
+  }
+
+  private _dataSubcategory(): DataSubcategory {
+    return {
       label: {
         translations: this.convertToTranslations(this.form.get('sme') as FormGroup),
       },
@@ -51,7 +62,6 @@ export class DialogAddSubcategoryComponent implements OnInit {
         translations: this.convertToTranslations(this.form.get('cleantech') as FormGroup),
       },
     }
-    this._sideDialogService.closeDialog(data)
   }
 
   private convertToTranslations(formGroup: FormGroup): Translations[] {

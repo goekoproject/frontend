@@ -1,7 +1,15 @@
-import { Injectable, Injector, inject } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { FORM_CATEGORIES_QUESTION } from '@goeko/business-ui'
-import { ClassificationCategoryService, ManageCategory, ManageSubcategory } from '@goeko/store'
-import { of } from 'rxjs'
+import {
+  ClassificationCategoryService,
+  ClassificationsService,
+  GroupingBuilder,
+  GroupingByClassifications,
+  ManageCategory,
+  ManageSubcategory,
+  NewSubcategory,
+} from '@goeko/store'
+import { of, switchMap } from 'rxjs'
 
 export function equalPrimitives(a: any, b: any) {
   return a.id === b.id
@@ -23,9 +31,19 @@ const mapToCategoriesSectionForOrderBy = (classificationCategory: ManageCategory
 }
 @Injectable()
 export class AdminCategoriesService {
-  private injector = inject(Injector)
+  private classificationCategoryService = inject(ClassificationCategoryService)
+  private _classificationService = inject(ClassificationsService)
 
-  constructor(private classificationCategoryService: ClassificationCategoryService) {}
+  createSubcategory(grouping: GroupingByClassifications, subcategory: NewSubcategory) {
+    return this._classificationService.createSubcategory(subcategory).pipe(
+      switchMap((newSubcategory: any) => {
+        console.log('response', newSubcategory)
+        const updateGrouping = GroupingBuilder.create(grouping).addSubcategory(newSubcategory).build()
+        console.log('updateGrouping', updateGrouping)
+        return this._classificationService.updateGrouping(grouping.id, updateGrouping)
+      }),
+    )
+  }
 
   updateSubcategorySelected(subcategorySelected: ManageCategory) {
     return of([])
