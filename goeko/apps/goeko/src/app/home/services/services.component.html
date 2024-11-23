@@ -15,11 +15,10 @@
         <h1 class="subtitle mb-6 text-black">
           {{ enterprise.title }}
         </h1>
-        @for (description of enterprise.paragraphs; track enterprise) {
-          <p class="description mb-4 text-justify">
-            {{ description }}
-          </p>
-        }
+          <!-- <p class="description mb-4 text-justify"> -->
+             <div class="description mb-4 text-justify" *ngIf="enterprise.description" [innerHtml]="_returnHtmlFromRichText(this.enterprise.description)">
+            </div>
+          <!-- </p> -->
       </div>
       <div class="flex lg:w-[45%] justify-end pt-16">
         <img [src]="enterprise.photo" [alt]="" class="object-contain"/>
@@ -37,11 +36,13 @@
         <h1 class="subtitle mb-6 text-black">
           {{ cleanTech.title }}
         </h1>
-        @for (description of cleanTech.paragraphs; track cleanTech) {
+        <!-- @for (description of cleanTech.paragraphs; track cleanTech) {
           <p class="description mb-4 text-justify">
             {{ description }}
           </p>
-        }
+        } -->
+        <div class="description mb-4 text-justify" *ngIf="cleanTech.description" [innerHtml]="_returnHtmlFromRichText(this.cleanTech.description)">
+        </div>
       </div>
       <div class="flex lg:w-[45%] justify-end pt-16">
         <img [src]="cleanTech.photo" [alt]="" class="object-contain"/>

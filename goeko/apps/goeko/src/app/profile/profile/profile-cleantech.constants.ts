@@ -49,6 +49,7 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         controlName: 'phoneNumber',
         label: 'FORM_LABEL.phoneNumber',
         type: 'text',
+        placeholder: '0041770000000',
         //required: true,
       },
       {

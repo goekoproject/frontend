@@ -1,7 +1,8 @@
 <article class="main-front">
-  <img [src]="mainPhoto()" class="absolute top-0 z-auto aspect-square object-cover xl:aspect-auto xl:w-svw" />
-  <div class="gradient bottom-[8.5rem] lg:bottom-[-8rem]"></div>
-
+  <div class="absolute top-0 h-full md:h-full">
+    <img [src]="mainPhoto()" class="z-auto aspect-square object-cover xl:aspect-auto xl:w-svw h-full md:h-full" />
+    <div class="gradient"></div>
+  </div>
   <div class="flex flex-col items-center gap-8 lg:w-full">
     <h1 #goekoText class="title-transition text-7xl">GoEko</h1>
     <div class="text-center lg:mt-12 lg:w-[64rem]">
