@@ -12,6 +12,7 @@ import {
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { CategoryModule, Product, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
+import { LANGS } from '@goeko/core'
 import { ClassificationCategoryService, ManageCategory, ManageSubcategory, ProductSelectToManageProduct, Translations } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
@@ -56,6 +57,8 @@ export class AdminCategoriesComponent implements AfterContentInit {
   subCategorySelectedIndex = this._adminCategories.subCategorySelectedIndex
 
   public form!: FormGroup
+
+  public langs = signal(LANGS)
 
   private _closeDetailByIndex = (index: number) => {
     const elementDetail = this.detailCategory.get(index)?.nativeElement
@@ -108,9 +111,9 @@ export class AdminCategoriesComponent implements AfterContentInit {
     this.toggleActor.set(toggleActor)
   }
   private _getTranslationsForLang() {
-    ;['en', 'fr', 'es'].forEach((lang) => {
-      this._translations.getTranslation(lang).subscribe((translations: any) => {
-        this._translationsForLang[lang] = translations
+    LANGS.forEach((lang) => {
+      this._translations.getTranslation(lang.code).subscribe((translations: any) => {
+        this._translationsForLang[lang.code] = translations
       })
     })
   }

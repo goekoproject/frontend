@@ -1,6 +1,6 @@
 <section class="section-step">
   <!-- CATEGORY -->
-  <goeko-category [categories]="categories()"   (onSelectCategory)="selectCategory($event)"> </goeko-category>
+  <goeko-category [categories]="categories()" (onSelectCategory)="selectCategory($event)"> </goeko-category>
 </section>
 @defer (when categorySelected().code === subCategorySelected().code) {
   <section class="section-subcategories" [formGroup]="form" [@listAnimation]="subCategorySelected().subcategories.length">
@@ -27,16 +27,12 @@
                     {{ 'FORM_LABEL.subcategoryForLangSME' | translate }}
                   </legend>
 
-                  @for (
-                    translation of getTranslations(subcategory.code, 'question').controls;
-                    track translation.value.lang;
-                    let index = $index
-                  ) {
+                  @for (lang of langs(); let i = $index; track lang.code; let index = $index) {
                     <article [formGroupName]="index" class="subcategories-sentence">
                       <go-input [formControlName]="'label'">
                         <p slot="label">
-                          <span class="fi fi-{{ translation.value.lang }}"></span>
-                          {{ translation.value.lang }}
+                          <span class="fi fi-{{ lang.code }}"></span>
+                          {{ lang.title }}
                         </p>
                       </go-input>
                     </article>
@@ -51,16 +47,12 @@
                     {{ 'FORM_LABEL.subcategoryForLangCleantech' | translate }}
                   </legend>
 
-                  @for (
-                    translation of getTranslations(subcategory.code, 'label').controls;
-                    track translation.value.lang;
-                    let index = $index
-                  ) {
+                  @for (lang of langs(); let i = $index; track lang.code; let index = $index) {
                     <article [formGroupName]="index" class="subcategories-sentence">
                       <go-input [formControlName]="'label'">
                         <p slot="label">
-                          <span class="fi fi-{{ translation.value.lang }}"></span>
-                          {{ translation.value.lang }}
+                          <span class="fi fi-{{ lang.code }}"></span>
+                          {{ lang.title }}
                         </p>
                       </go-input>
                     </article>
