@@ -25,7 +25,7 @@ export const USER_TYPE_DESCRIPTION = [
     id: 1,
     title: 'USER_TYPE.bank',
     value: USER_TYPE.Bank,
-    active: false,
+    active: true,
     descriptions: '',
   },
 ]
