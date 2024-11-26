@@ -122,6 +122,7 @@ export class UserService {
     this._rawUser = user
 
     this.userProfile.set(this._rawUser)
+    /** @deprecated */
     this.completeLoadUser.next(true)
     this.completeLoadUser.complete()
   }
