@@ -1,17 +1,17 @@
-import { Component, OnInit, signal } from '@angular/core'
+import { Component, effect, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from '@goeko/core'
 import { UserService } from '@goeko/store'
-import { MENU_USER, MenuUser } from './menu-user.contants'
+import { getMenuByUserType, MenuUser } from './menu-user.contants'
 
 @Component({
   selector: 'goeko-menu-user',
   templateUrl: './menu-user.component.html',
   styleUrls: ['./menu-user.component.scss'],
 })
-export class MenuUserComponent implements OnInit {
+export class MenuUserComponent {
   private user = this._userService.userProfile
-
+  private userTypes = this._userService.userType
   private userAuth = this._userService.userAuthData
   public menuOptions!: MenuUser[]
   public selectedOptionMenu = signal<number | null>(null)
@@ -20,9 +20,12 @@ export class MenuUserComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     public _route: ActivatedRoute,
-  ) {}
-  ngOnInit(): void {
-    this.menuOptions = MENU_USER
+  ) {
+    effect(() => {
+      if (this.userTypes()) {
+        this.menuOptions = getMenuByUserType(this.userTypes())
+      }
+    })
   }
 
   logout() {
