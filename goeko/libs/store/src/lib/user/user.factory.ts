@@ -9,7 +9,6 @@ const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
   sme: new SmeBuilder(),
   cleantech: new CleantechBuilder(),
   bank: new CleantechBuilder(),
-
 }
 
 export abstract class UserFactory {
@@ -24,7 +23,7 @@ export abstract class UserFactory {
   //TODO: fix code smell
   static createProfileDto(userProfileForm: UserProfileForm, userType: UserType) {
     switch (userType) {
-      case USER_TYPE.SME, USER_TYPE.BANK:
+      case USER_TYPE.SME:
         return {
           ...userProfileForm,
           comunicationLanguage: undefined,
@@ -39,6 +38,9 @@ export abstract class UserFactory {
             enabled: userProfileForm.generalNotifications,
           },
         }
+      case USER_TYPE.BANK: {
+        return {}
+      }
       default:
         return new UserCleantechPayload(userProfileForm)
     }
