@@ -12,10 +12,13 @@ import { ProfileFormFactory } from './profile-form.factory'
 import { NotificationProfile } from './profile-payload.model'
 import { PROFILE_SME } from './profile-sme.constants'
 import { ProfileService } from './profile.service'
+import { PROFILE_BANK } from './profile-bank.constants'
 
+//TODO: esto se usa?
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
   sme: PROFILE_SME,
+  bank: PROFILE_BANK
 }
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -38,9 +41,10 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
   return null
 }
 
-const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantech'>>> = {
+const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantech' | 'bank'>>> = {
   sme: PROFILE_SME,
   cleantech: PROFILE_CLEANTECH,
+  bank: PROFILE_BANK
 }
 
 @AutoUnsubscribe()
@@ -56,7 +60,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public USERTYPE = USER_TYPE
   public dataSelect = DataSelect as any
 
-  public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
+  public formSection!: Array<ProfileFieldset<'sme' | 'cleantech' | 'bank'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
   public dataLang = LANG_PROFILE

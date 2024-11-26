@@ -68,3 +68,14 @@ export const cleanTechFormGroup = new FormGroup({
   identifier: new FormControl('', []),
   phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
 })
+
+export const bankFormGroup = new FormGroup({
+  name: new FormControl('', Validators.required),
+  website: new FormControl('', Validators.required),
+  externalId: new FormControl(),
+  locations: new FormArray([], Validators.required),
+  contactPerson: new FormControl('', Validators.required),
+  email: new FormControl('', [Validators.email, Validators.required]),
+  phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
+  comunicationLanguage: new FormControl(''),
+})

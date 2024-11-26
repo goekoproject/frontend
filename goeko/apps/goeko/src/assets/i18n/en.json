@@ -212,7 +212,10 @@
     "typeOfEcolutions": "Type of eco-solution",
     "unit": "Unit of measurement (m2, m3, y, kg)",
     "website": "Website",
-    "yourLocation": "Select country and province"
+    "yourLocation": "Select country and province",
+    "notification": "Contact",
+    "contactPerson": "Contact person",
+    "financialName": "Financial and Institucional name"
   },
   "HOME": {
     "btnCleantech": "Find leads",

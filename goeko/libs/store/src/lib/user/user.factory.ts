@@ -8,6 +8,8 @@ import { CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
 const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
   sme: new SmeBuilder(),
   cleantech: new CleantechBuilder(),
+  bank: new CleantechBuilder(),
+
 }
 
 export abstract class UserFactory {
@@ -18,7 +20,7 @@ export abstract class UserFactory {
   //TODO: fix code smell
   static createProfileDto(userProfileForm: UserProfileForm, userType: UserType) {
     switch (userType) {
-      case USER_TYPE.SME:
+      case USER_TYPE.SME, USER_TYPE.BANK:
         return {
           ...userProfileForm,
           comunicationLanguage: undefined,
