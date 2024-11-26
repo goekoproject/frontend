@@ -12,7 +12,11 @@ const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
 
 export abstract class UserFactory {
   static createUserProfileBuilder(userType: UserType): IUserBuilder<UserModal> {
-    return USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE]
+    const builder = USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE]
+    if (!builder) {
+      throw new Error(`Unsupported user type: ${userType}`)
+    }
+    return builder
   }
 
   //TODO: fix code smell

@@ -1,4 +1,4 @@
-export type UserType = 'sme' | 'cleantech'
+export type UserType = 'sme' | 'cleantech' | 'bank'
 export enum USER_TYPE {
   SME = 'sme',
   CLEANTECH = 'cleantech',
