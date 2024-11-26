@@ -16,7 +16,7 @@ interface User {
   creationDate: string
 }
 type DataSourcesByUserType = {
-  [key in UserType]: Observable<unknown>
+  [key in UserType]?: Observable<unknown>
 }
 
 const emptyUserBank: BankUser[] = [];
