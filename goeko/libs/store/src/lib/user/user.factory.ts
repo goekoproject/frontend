@@ -1,7 +1,7 @@
 import { mapperLocations } from '@goeko/core'
 import { UserProfileForm } from './user-profile-form.interface'
 import { USER_TYPE, UserType } from './user-type.constants'
-import { UserCleantechPayload } from './user-type/user-payload.model'
+import { UserBankPayload, UserCleantechPayload } from './user-type/user-payload.model'
 import { UserModal, UserSwitch } from './user-type/user-switch.type'
 import { CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
 
@@ -39,7 +39,7 @@ export abstract class UserFactory {
           },
         }
       case USER_TYPE.BANK: {
-        return {}
+        return new UserBankPayload(userProfileForm)
       }
       default:
         return new UserCleantechPayload(userProfileForm)

@@ -33,3 +33,25 @@ export class UserCleantechPayload {
     }
   }
 }
+
+export class UserBankPayload {
+  name: string
+  website: string
+  externalId: string
+  country: string
+  contactPerson: string
+  notification: NotificationProfile
+
+  constructor(dataForm: any) {
+    this.name = dataForm.name
+    this.website = dataForm.website
+    this.externalId = dataForm.externalId
+    this.country = dataForm.country
+    this.contactPerson = dataForm.contactPerson
+    this.notification = {
+      email: dataForm.email,
+      phoneNumber: dataForm.phoneNumber,
+      lang: dataForm.comunicationLanguage?.code,
+    }
+  }
+}
