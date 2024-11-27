@@ -3,8 +3,9 @@ import { Component } from '@angular/core'
 import { MessageService } from '@goeko/business-ui'
 import { CleanTechService, CleantechsUser, SmeService, SmeUser, USER_TYPE, UserService, UserType } from '@goeko/store'
 import { GoDateFormatPipe } from '@goeko/ui'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { DATA_ACTOR_SWITCH } from '../data-actors-switch.constants'
+import { BankUser } from 'libs/store/src/lib/user/user-type/bank-user.model'
 
 interface User {
   id: number
@@ -17,6 +18,9 @@ interface User {
 type DataSourcesByUserType = {
   [key in UserType]?: Observable<unknown>
 }
+
+const emptyUserBank: BankUser[] = [];
+
 @Component({
   selector: 'goeko-data-admin',
   standalone: true,
@@ -26,9 +30,11 @@ type DataSourcesByUserType = {
   styleUrl: './admin-users.component.scss',
 })
 export class AdminUserComponent {
+
   private _dataSourcesByUserType: DataSourcesByUserType = {
     sme: this._smeServices.getAllSmesData(),
     cleantech: this._cleantechServices.getAllCleantechData(),
+    bank: of(emptyUserBank)
   }
 
   public headers: { title: string; key: keyof User }[] = [

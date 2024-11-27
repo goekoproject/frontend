@@ -1,13 +1,14 @@
 import { mapperLocations } from '@goeko/core'
 import { UserProfileForm } from './user-profile-form.interface'
 import { USER_TYPE, UserType } from './user-type.constants'
-import { UserCleantechPayload } from './user-type/user-payload.model'
+import { UserBankPayload, UserCleantechPayload } from './user-type/user-payload.model'
 import { UserModal, UserSwitch } from './user-type/user-switch.type'
 import { CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
 
 const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
   sme: new SmeBuilder(),
   cleantech: new CleantechBuilder(),
+  bank: new CleantechBuilder(),
 }
 
 export abstract class UserFactory {
@@ -37,6 +38,9 @@ export abstract class UserFactory {
             enabled: userProfileForm.generalNotifications,
           },
         }
+      case USER_TYPE.BANK: {
+        return new UserBankPayload(userProfileForm)
+      }
       default:
         return new UserCleantechPayload(userProfileForm)
     }

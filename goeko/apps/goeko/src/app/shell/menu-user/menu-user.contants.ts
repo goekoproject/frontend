@@ -102,7 +102,7 @@ const BANK_MENU: MenuUser[] = [
     url: 'dashboard/bank',
     active: true,
     icon: 'home',
-    userType: [USER_TYPE.Bank],
+    userType: [USER_TYPE.BANK],
   },
   {
     id: window.crypto.randomUUID(),
@@ -110,14 +110,14 @@ const BANK_MENU: MenuUser[] = [
     url: 'funding',
     active: true,
     icon: 'ti ti-building-bank',
-    userType: [USER_TYPE.Bank],
+    userType: [USER_TYPE.BANK],
   },
 ]
 
 const MENU_BY_USER_TYPE = {
   sme: SME_MENU,
   cleantech: CLEANTECH_MENU,
-  Bank: BANK_MENU,
+  bank: BANK_MENU,
 }
 export const getMenuByUserType = (userType: UserType): MenuUser[] => {
   return [...COMMON_MENU, ...MENU_BY_USER_TYPE[userType as keyof typeof MENU_BY_USER_TYPE]]

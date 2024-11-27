@@ -1,3 +1,4 @@
+import { BankUser } from './user-type/bank-user.model';
 import { CleantechsUser, SmeUser } from './public-api'
 
 export interface IUserBuilder<T = any> {
@@ -53,5 +54,32 @@ export class CleantechBuilder implements IUserBuilder<CleantechsUser> {
   }
   build() {
     return this.cleantechUser
+  }
+}
+
+//TODO:change pattern to use factory pattern
+export class BankBuilder implements IUserBuilder<BankUser> {
+  private bankUser!: BankUser
+  constructor() {}
+
+  public empty(): any {
+    return new Object()
+  }
+  public init(data: any) {
+    this.bankUser = new BankUser()
+    this.bankUser.id = data?.id
+    this.bankUser.name = data?.name
+    this.bankUser.country = data?.country
+    this.bankUser.email = data?.email
+    this.bankUser.website = data?.website
+    this.bankUser.externalId = data?.externalId
+    this.bankUser.locations = data?.locations
+    this.bankUser.contactPerson = data?.contactPerson
+    this.bankUser.identifier = data?.identifier
+    this.bankUser.notification = data?.notification
+    return this
+  }
+  build() {
+    return this.bankUser
   }
 }

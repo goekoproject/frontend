@@ -5,6 +5,7 @@ import { CanComponentDeactivate } from '@goeko/business-ui'
 import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
 import { AutoUnsubscribe } from '@goeko/ui'
 import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
+import { PROFILE_BANK } from './profile-bank.constants'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
 import { LANG_PROFILE } from './profile-form'
@@ -13,9 +14,11 @@ import { NotificationProfile } from './profile-payload.model'
 import { PROFILE_SME } from './profile-sme.constants'
 import { ProfileService } from './profile.service'
 
+//TODO: esto se usa?
 export const SELECT_PROFILE = {
   cleantechs: PROFILE_CLEANTECH,
   sme: PROFILE_SME,
+  bank: PROFILE_BANK,
 }
 
 const defaultSetSuperSelect = (o1: any, o2: any) => {
@@ -38,10 +41,10 @@ const defaultSetCountriesSme = (o1: CountrySelectOption, o2: string) => {
   return null
 }
 
-const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantech'>>> = {
+const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantech' | 'bank'>>> = {
   sme: PROFILE_SME,
   cleantech: PROFILE_CLEANTECH,
-  bank: PROFILE_SME,
+  bank: PROFILE_BANK,
 }
 
 @AutoUnsubscribe()
@@ -57,7 +60,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   public USERTYPE = USER_TYPE
   public dataSelect = DataSelect as any
 
-  public formSection!: Array<ProfileFieldset<'sme' | 'cleantech'>>
+  public formSection!: Array<ProfileFieldset<'sme' | 'cleantech' | 'bank'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
   public dataLang = LANG_PROFILE
