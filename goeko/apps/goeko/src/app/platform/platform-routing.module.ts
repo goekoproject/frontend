@@ -1,3 +1,4 @@
+import { FundingModule } from './../funding/funding.module';
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { canDeactivateGuard } from '@goeko/business-ui'
@@ -95,6 +96,10 @@ const routes: Routes = [
         canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
         canMatch: [hasRole(ROLES.ADMIN)],
         loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
+      },
+      {
+        path: 'funding',
+        loadChildren: () => import('../funding/funding.module').then((m) => m.FundingModule),
       },
     ],
   },
