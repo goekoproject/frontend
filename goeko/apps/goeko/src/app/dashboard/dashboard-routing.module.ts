@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { DashboardCleantechComponent } from './dashboard/dashboard-cleantech/dashboard-cleantech.component'
 import { DashboardSmeComponent } from './dashboard/dashboard-sme.component'
+import { DashboardBankComponent } from './dashboard/dashboard-bank/dashboard-bank.component'
 
 const routes: Routes = [
   {
@@ -16,6 +17,15 @@ const routes: Routes = [
   {
     path: 'cleantech/:id',
     component: DashboardCleantechComponent,
+    data: {
+      breadcrumb: 'dashboard',
+      hidden: true,
+      onBack: false,
+    },
+  },
+  {
+    path: 'bank/:id',
+    component: DashboardBankComponent,
     data: {
       breadcrumb: 'dashboard',
       hidden: true,
