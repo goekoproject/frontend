@@ -203,7 +203,10 @@
     "typeOfEcolutions": "Tipo de eco-solución",
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sitio web",
-    "yourLocation": "Seleccione el país y la provincia"
+    "yourLocation": "Seleccione el país y la provincia",
+    "notification": "Notificaciones",
+    "financialName": "Nombre financiero",
+    "contactPerson": "Persona de contacto"
   },
   "HOME": {
     "btnCleantech": "Encontrar leads",
