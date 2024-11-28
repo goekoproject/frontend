@@ -215,7 +215,9 @@
     "yourLocation": "Select country and province",
     "notification": "Contact",
     "contactPerson": "Contact person",
-    "financialName": "Financial and Institucional name"
+    "financialName": "Financial and Institucional name",
+    "devise": "Devise",
+    "montanMinimun" : "Montan minimun"
   },
   "HOME": {
     "btnCleantech": "Find leads",
@@ -580,6 +582,7 @@
   "resultSolution": "result",
   "results": "results",
   "save": "Save",
+  "skip": "Skip",
   "saveYou": "Save your",
   "searchEcosolutions": "Search cleantech solutions",
   "selectAll": "Select All",

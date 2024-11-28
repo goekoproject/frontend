@@ -503,6 +503,17 @@ export const SelectCurrency: DataSelectOption[] = [
   },
 ]
 
+export const SelectMontanMinimun: DataSelectOption[] = [
+  {
+    id: 1,
+    keyLang: '100',
+  },
+  {
+    id: 2,
+    keyLang: '200',
+  },
+]
+
 export const SelectreductionPercentage: ReductionPercentageSelectOption[] = [
   {
     id: 1,
@@ -667,4 +678,5 @@ export const DataSelect = {
   reductionPercentage: SelectreductionPercentage,
   operationalCostReduction: SelectOperationalCostReduction,
   buildingOperation: SelectBuildingOperation,
+  montanMinimun: SelectMontanMinimun
 }
