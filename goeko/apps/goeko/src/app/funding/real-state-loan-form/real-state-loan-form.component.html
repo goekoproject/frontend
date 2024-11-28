@@ -19,6 +19,9 @@
 
       <fieldset>
         <legend>Target region</legend>
+
+        <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+
         <span>Owner profile</span>
         <go-badge-group [formControlName]="'ownerProfiles'"  [readonly]="true">
           @for (ownerProfile of ownerProfiles; track ownerProfile.code) {
