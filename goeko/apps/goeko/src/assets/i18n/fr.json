@@ -266,6 +266,11 @@
     "dashboard": "Tableau de bord",
     "favourites": "Favoris"
   },
+  "MENU_USER_BANK": {
+    "buttonSearch": "Présentez vos solutions financières",
+    "titleCard": "Financement",
+    "subtitleCard": "Mettez en avant les solutions financières que votre institution souhaite promouvoir"
+  },
   "MENU_USER_SME": {
     "buttonSearch": "Ajoutez un nouveau projet",
     "dialogButtonNext": "Suivant",
