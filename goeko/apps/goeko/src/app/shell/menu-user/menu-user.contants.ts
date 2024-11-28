@@ -1,4 +1,4 @@
-import { ROLES, USER_TYPE, UserRoles, UserType } from '@goeko/store'
+import { ROLES, UserRoles, UserType } from '@goeko/store'
 
 export interface MenuUser {
   // RANDOMuuid FORMAT `${string}-${string}-${string}-${string}-${string}`
@@ -7,8 +7,8 @@ export interface MenuUser {
   url: string
   active: boolean
   icon?: string
-  userType: UserType[]
   userRoles?: UserRoles[]
+  order: number
   submenu?: MenuUser[]
 }
 
@@ -20,7 +20,7 @@ const COMMON_MENU: MenuUser[] = [
     url: 'profile',
     active: true,
     icon: 'user-square-rounded',
-    userType: [USER_TYPE.SME, USER_TYPE.CLEANTECH],
+    order: 1,
   },
   {
     id: window.crypto.randomUUID(),
@@ -28,22 +28,22 @@ const COMMON_MENU: MenuUser[] = [
     url: 'admin',
     active: true,
     icon: 'settings',
-    userType: [USER_TYPE.SME],
     userRoles: [ROLES.ADMIN],
+    order: 6,
     submenu: [
       {
         id: window.crypto.randomUUID(),
         title: 'Category',
         url: 'admin/admin-category',
         active: true,
-        userType: [USER_TYPE.SME],
+        order: 1,
       },
       {
         id: window.crypto.randomUUID(),
         title: 'User',
         url: 'admin/user-data',
         active: true,
-        userType: [USER_TYPE.SME],
+        order: 2,
       },
     ],
   },
@@ -56,7 +56,7 @@ const SME_MENU: MenuUser[] = [
     url: 'dashboard/sme',
     active: true,
     icon: 'home',
-    userType: [USER_TYPE.SME],
+    order: 0,
   },
   {
     id: window.crypto.randomUUID(),
@@ -64,7 +64,7 @@ const SME_MENU: MenuUser[] = [
     url: 'projects-list',
     active: true,
     icon: 'ti ti-analyze-filled',
-    userType: [USER_TYPE.SME],
+    order: 2,
   },
   {
     id: window.crypto.randomUUID(),
@@ -72,7 +72,7 @@ const SME_MENU: MenuUser[] = [
     url: 'favourites',
     active: false,
     icon: 'heart',
-    userType: [USER_TYPE.SME],
+    order: 3,
   },
 ]
 const CLEANTECH_MENU: MenuUser[] = [
@@ -82,7 +82,7 @@ const CLEANTECH_MENU: MenuUser[] = [
     url: 'cleantech-ecosolutions',
     active: true,
     icon: 'solar-panel-2',
-    userType: [USER_TYPE.CLEANTECH],
+    order: 2,
   },
 
   {
@@ -91,7 +91,7 @@ const CLEANTECH_MENU: MenuUser[] = [
     url: 'leads',
     active: true,
     icon: 'ti ti-access-point',
-    userType: [USER_TYPE.CLEANTECH],
+    order: 3,
   },
 ]
 
@@ -102,7 +102,7 @@ const BANK_MENU: MenuUser[] = [
     url: 'dashboard/bank',
     active: true,
     icon: 'home',
-    userType: [USER_TYPE.BANK],
+    order: 0,
   },
   {
     id: window.crypto.randomUUID(),
@@ -110,7 +110,7 @@ const BANK_MENU: MenuUser[] = [
     url: 'funding',
     active: true,
     icon: 'ti ti-building-bank',
-    userType: [USER_TYPE.BANK],
+    order: 2,
   },
 ]
 

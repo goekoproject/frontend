@@ -213,7 +213,10 @@
     "typeOfEcolutions": "Type d'éco-solution",
     "unit": "Unité",
     "website": "Site web",
-    "yourLocation": "Sélectionnez le pays et la région"
+    "yourLocation": "Sélectionnez le pays et la région",
+    "financialName": "Nom financier",
+    "contactPerson": "Personne de contact",
+    "notification": "Notification"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
