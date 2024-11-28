@@ -1,4 +1,4 @@
-import { Component, effect, OnInit } from '@angular/core'
+import { Component, effect } from '@angular/core'
 import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
@@ -54,7 +54,7 @@ const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantec
   styleUrls: ['./profile.component.scss'],
   providers: [],
 })
-export class ProfileComponent implements OnInit, CanComponentDeactivate {
+export class ProfileComponent implements CanComponentDeactivate {
   form!: FormGroup
   savedProfileOK!: boolean
   public USERTYPE = USER_TYPE
@@ -96,10 +96,6 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     return !!this.dataProfile().id
   }
 
-  ngOnInit() {
-    this._profieService.fetchUser()
-  }
-
   private _createFormForUserType() {
     this.form = ProfileFormFactory.createProfileForm(this.userType())
     this.formSection = TYPE_FORM_FOR_USERTYPE[this.userType() as keyof typeof TYPE_FORM_FOR_USERTYPE] || []
@@ -111,6 +107,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
     this.form.get('phoneNumber')?.patchValue(this.dataProfile()?.notification?.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
     this.form.get('generalNotifications')?.patchValue((this.dataProfile().notification as NotificationProfile).enabled)
+    this.form.get('email')?.patchValue(this.dataProfile().notification?.email)
     this._setLocaltionInFormForSme()
   }
 

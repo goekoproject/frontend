@@ -3,12 +3,12 @@ import { UserProfileForm } from './user-profile-form.interface'
 import { USER_TYPE, UserType } from './user-type.constants'
 import { UserBankPayload, UserCleantechPayload } from './user-type/user-payload.model'
 import { UserModal, UserSwitch } from './user-type/user-switch.type'
-import { CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
+import { BankBuilder, CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
 
 const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
   sme: new SmeBuilder(),
   cleantech: new CleantechBuilder(),
-  bank: new CleantechBuilder(),
+  bank: new BankBuilder(),
 }
 
 export abstract class UserFactory {
