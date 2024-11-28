@@ -9,6 +9,10 @@ const routes: Routes = [
     component: FundingComponent,
     children: [
       {
+        path: '',
+        component: RealStateLoanComponent,
+      },
+      {
         path: 'real-state-loan',
         component: RealStateLoanComponent,
       },
