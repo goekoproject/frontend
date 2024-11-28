@@ -58,9 +58,9 @@ export class RealStateLoanComponent implements OnInit {
 
   private _initForm() {
     this.form = this._fb.group({
-      workTypes: ['', Validators.required],
-      buildingTypes: ['', Validators.required],
-      ownerProfile: ['', Validators.required],
+      workTypes: [''],
+      buildingTypes: [''],
+      ownerProfile: [''],
       locations: this._fb.array([]),
       currency: ['', Validators.required],
       montanMinimun: ['', Validators.required],
