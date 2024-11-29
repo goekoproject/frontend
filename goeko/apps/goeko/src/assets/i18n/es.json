@@ -206,7 +206,9 @@
     "yourLocation": "Seleccione el país y la provincia",
     "notification": "Notificaciones",
     "financialName": "Nombre financiero",
-    "contactPerson": "Persona de contacto"
+    "contactPerson": "Persona de contacto",
+    "devise": "Divisa",
+    "montanMinimun" : "Cantidad mínima"
   },
   "HOME": {
     "btnCleantech": "Encontrar leads",

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { CategoryModule, SelectLocationsComponent } from '@goeko/business-ui'
 import { DataSelect, Product } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'

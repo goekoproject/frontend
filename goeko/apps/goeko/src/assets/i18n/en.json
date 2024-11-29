@@ -216,8 +216,13 @@
     "notification": "Notification",
     "contactPerson": "Contact person",
     "financialName": "Financial and Institucional name",
-    "devise": "Devise",
-    "montanMinimun" : "Montan minimun"
+    "montanMinimun" : "Minimum quantity",
+    "buildingFounding" : "Building founding",
+    "workTypes": "Work types",
+    "buildingTypes" : "Building types",
+    "targetRegion" : "Target region",
+    "ownerProfile": "Owner profile",
+    "contact" : "Contact"
   },
   "HOME": {
     "btnCleantech": "Find leads",

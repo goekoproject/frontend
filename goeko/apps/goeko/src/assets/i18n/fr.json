@@ -214,9 +214,16 @@
     "unit": "Unité",
     "website": "Site web",
     "yourLocation": "Sélectionnez le pays et la région",
-    "financialName": "Nom financier",
+    "financialName": "Nom de l'institution financière",
     "contactPerson": "Personne de contact",
-    "notification": "Notification"
+    "notification": "Notification",
+    "buildingFounding" : "Prêt immobilier",
+    "workTypes": "Types de travaux que vous financez",
+    "buildingTypes" : "Types de bien",
+    "targetRegion" : "Régions cibles",
+    "ownerProfile": "Profil du propriétaire",
+    "contact" : "Contact",
+    "montanMinimun" : "Montant minimum requis"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
@@ -580,6 +587,7 @@
   "resultSolution": "résultat",
   "results": "résultats",
   "save": "Sauvegarder",
+  "skip": "Passer",
   "saveYou": "Sauvegarder votre",
   "searchEcosolutions": "Recherchez des solutions cleantech",
   "selectAll": "Tout sélectionner",
