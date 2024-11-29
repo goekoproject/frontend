@@ -1,14 +1,13 @@
-import { LocationsCountry } from './../../../../../../libs/store/src/lib/model/locations.country';
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { CategoryModule, SelectLocationsComponent } from '@goeko/business-ui'
-import { Country, DataSelect, Product } from '@goeko/store'
+import { DataSelect, Product } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { Validators } from 'ngx-editor'
 import { defaultSetCurrency } from './compare-with-select'
 import { MOCK_WORKTYPES, MOCK_BUILDINGTYPES, MOCK_OWNER_PROFILES } from './mock-values.constant';
+import { Validators } from '@angular/forms'
 
 
 @Component({
@@ -64,8 +63,8 @@ export class RealStateLoanComponent implements OnInit {
       locations: this._fb.array([]),
       currency: ['', Validators.required],
       montanMinimun: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]],
+      phoneNumber: ['', Validators.pattern(/^[0-9]{10,15}$/)],
     })
 
   }
