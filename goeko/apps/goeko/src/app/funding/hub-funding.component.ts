@@ -5,21 +5,21 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from '@goeko/ui';
 
 @Component({
-  selector: 'goeko-dashboard-bank',
+  selector: 'goeko-hub-funding',
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, ButtonModule],
   providers: [
 
   ],
-  templateUrl: './dashboard-bank.component.html',
-  styleUrl: './dashboard-bank.component.scss',
+  templateUrl: './hub-funding.component.html',
+  styleUrl: './hub-funding.component.scss',
 })
-export class DashboardBankComponent implements OnInit {
+export class HubFundingComponent implements OnInit {
 
   constructor() {
-    console.log ('Dashboard Bank')
+    console.log ('Hub Funding')
   }
   ngOnInit(): void {
-    console.log ('Dashboard Bank');
+    console.log ('Hub Funding');
   }
 }
