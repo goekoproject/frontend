@@ -214,15 +214,15 @@
     "website": "Website",
     "yourLocation": "Select country and province",
     "notification": "Notification",
-    "contactPerson": "Contact person",
     "financialName": "Financial and Institucional name",
-    "montanMinimun" : "Minimum quantity",
+    "contactPerson": "Contact person",
     "buildingFounding" : "Building founding",
     "workTypes": "Work types",
     "buildingTypes" : "Building types",
     "targetRegion" : "Target region",
     "ownerProfile": "Owner profile",
-    "contact" : "Contact"
+    "contact" : "Contact",
+    "montanMinimun" : "Minimum quantity"
   },
   "HOME": {
     "btnCleantech": "Find leads",

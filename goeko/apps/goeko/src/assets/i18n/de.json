@@ -205,7 +205,15 @@
     "website": "Webseite",
     "yourLocation": "Wählen Sie Land und Region",
     "financialName": "Finanzierungsname",
-    "notification": "Benachrichtigung"
+    "notification": "Benachrichtigung",
+    "contactPerson": "Kontaktperson",
+    "buildingFounding" : "Gebäudegründung",
+    "workTypes": "Arbeitstypen",
+    "buildingTypes" : "Gebäudetypen",
+    "targetRegion" : "Zielregion",
+    "ownerProfile": "Profil des Eigentümers",
+    "contact" : "Kontakt",
+    "montanMinimun" : "Mindestmenge"
   },
   "HOME": {
     "btnCleantech": "Leads finden",

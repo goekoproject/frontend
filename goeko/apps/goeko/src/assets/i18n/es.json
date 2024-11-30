@@ -207,7 +207,12 @@
     "notification": "Notificaciones",
     "financialName": "Nombre financiero",
     "contactPerson": "Persona de contacto",
-    "devise": "Divisa",
+    "buildingFounding" : "Construcción de edificios",
+    "workTypes": "Tipos de trabajo",
+    "buildingTypes" : "Tipos de construccion",
+    "targetRegion" : "Región de destino",
+    "ownerProfile": "Perfil del propietario",
+    "contact" : "Contacto",
     "montanMinimun" : "Cantidad mínima"
   },
   "HOME": {
