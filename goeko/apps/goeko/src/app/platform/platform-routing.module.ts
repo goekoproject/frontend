@@ -1,4 +1,3 @@
-import { FundingModule } from './../funding/funding.module';
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { canDeactivateGuard } from '@goeko/business-ui'

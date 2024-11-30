@@ -8,24 +8,31 @@ import { SustainbleEquipmentFormComponent } from './sustainble-equipment-form/su
 const routes: Routes = [
   {
     path: '',
+    component: HubFundingComponent,
+    data: {
+      breadcrumb: 'Funding',
+      hidden: true,
+      onBack: false,
+    },
+  },
+  {
+    path: 'fundings',
     component: FundingComponent,
     children: [
       {
         path: '',
-        component: HubFundingComponent,
-        data: {
-          breadcrumb: 'Funding',
-          hidden: true,
-          onBack: false,
-        },
+        component: SustainbleEquipmentFormComponent,
+        title: 'Sustainable equipment',
       },
       {
         path: 'sustainable-equipment',
         component: SustainbleEquipmentFormComponent,
+        title: 'Sustainable equipment',
       },
       {
         path: 'real-state-loan',
         component: RealStateLoanComponent,
+        title: 'Real state loan',
       },
     ],
   },

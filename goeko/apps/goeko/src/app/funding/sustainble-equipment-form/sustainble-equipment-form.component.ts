@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { Component, signal } from '@angular/core'
+import { RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
-import { BadgeModule, GoILeavesComponent, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
+import { BadgeModule, ButtonModule, GoILeavesComponent, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 type Options = {
   label: string
@@ -18,6 +19,8 @@ type Options = {
     GoILeavesComponent,
     UiSuperSelectModule,
     SelectLocationsComponent,
+    ButtonModule,
+    RouterModule
   ],
   templateUrl: './sustainble-equipment-form.component.html',
   styleUrl: './sustainble-equipment-form.component.scss',
