@@ -209,7 +209,14 @@
     "contactPerson": "Persona de contacto",
     "requiredDocumentsFunding": "Documentos requeridos",
     "amountRequiredFunding": "Cantidad requerida para que la solicitud sea tenida en cuenta",
-    "currencyFunding": "Moneda"
+    "currencyFunding": "Moneda",
+    "buildingFounding": "Construcción de edificios",
+    "workTypes": "Tipos de trabajo",
+    "buildingTypes": "Tipos de construccion",
+    "targetRegion": "Región de destino",
+    "ownerProfile": "Perfil del propietario",
+    "contact": "Contacto",
+    "montanMinimun": "Cantidad mínima"
   },
   "HOME": {
     "btnCleantech": "Encontrar leads",
@@ -263,6 +270,11 @@
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",
     "messageContact": "Póngase en contacto con nosotros en {{email}}"
+  },
+  "MENU_USER_BANK": {
+    "buttonSearch": "Presente sus soluciones financieras",
+    "titleCard": "Financiación",
+    "subtitleCard": "Destaque las soluciones financieras que su institución desea promover"
   },
   "MENU_USER_SME": {
     "titleCard": "Crea un proyecto",

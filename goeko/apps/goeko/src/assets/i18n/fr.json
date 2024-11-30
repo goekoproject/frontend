@@ -214,12 +214,19 @@
     "unit": "Unité",
     "website": "Site web",
     "yourLocation": "Sélectionnez le pays et la région",
-    "financialName": "Nom financier",
+    "financialName": "Nom de l'institution financière",
     "contactPerson": "Personne de contact",
     "notification": "Notification",
     "requiredDocumentsFunding": "Documents requis en relation avec l’objet",
     "amountRequiredFunding": "Montant minimum requis pour que la demande soit prise en compte",
-    "currencyFunding": "Devise"
+    "currencyFunding": "Devise",
+    "buildingFounding": "Prêt immobilier",
+    "workTypes": "Types de travaux que vous financez",
+    "buildingTypes": "Types de bien",
+    "targetRegion": "Régions cibles",
+    "ownerProfile": "Profil du propriétaire",
+    "contact": "Contact",
+    "montanMinimun": "Montant minimum requis"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
@@ -268,6 +275,11 @@
   "MENU_USER": {
     "dashboard": "Tableau de bord",
     "favourites": "Favoris"
+  },
+  "MENU_USER_BANK": {
+    "buttonSearch": "Présentez vos solutions financières",
+    "titleCard": "Financement",
+    "subtitleCard": "Mettez en avant les solutions financières que votre institution souhaite promouvoir"
   },
   "MENU_USER_SME": {
     "buttonSearch": "Ajoutez un nouveau projet",
@@ -583,6 +595,7 @@
   "resultSolution": "résultat",
   "results": "résultats",
   "save": "Sauvegarder",
+  "skip": "Passer",
   "saveYou": "Sauvegarder votre",
   "searchEcosolutions": "Recherchez des solutions cleantech",
   "selectAll": "Tout sélectionner",
