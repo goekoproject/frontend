@@ -266,6 +266,11 @@
     "messageAlert": "Abonnieren Sie für vollen Zugriff! Entdecken Sie mehr.",
     "messageContact": "Kontaktieren Sie uns unter {{email}}"
   },
+  "MENU_USER_BANK": {
+    "buttonSearch": "Sie Ihre finanziellen Lösungen",
+    "titleCard": "Finanzierung",
+    "subtitleCard": "Heben Sie die finanziellen Lösungen hervor, die Ihre Institution fördern möchte"
+  },
   "MENU_USER_SME": {
     "titleCard": "Erstellen Sie ein Projekt",
     "subtitleCard": "Wir werden die am besten geeigneten Cleantech-Lösungen finden",
