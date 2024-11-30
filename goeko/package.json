@@ -15,7 +15,7 @@
     "test": "nx test goeko --codeCoverage=true --test-file",
     "lighthouse": "npx unlighthouse --site https://goeko.ch/",
     "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/",
-    "demo": "npm run build:dev && npx firebase hosting:channel:deploy goekohome --expires 7d"
+    "demo": "npm run build:dev && npx firebase hosting:channel:deploy goekdemos --expires 7d"
   },
   "private": true,
   "dependencies": {

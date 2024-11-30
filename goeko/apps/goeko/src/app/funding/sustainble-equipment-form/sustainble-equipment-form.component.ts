@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { Component, signal } from '@angular/core'
-import { RouterModule } from '@angular/router'
+import { Component, inject, signal } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
 import { BadgeModule, ButtonModule, GoILeavesComponent, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, ORIGIN, VEHICLES, YEARS } from './data-fields.constants'
 type Options = {
   label: string
   id: string
@@ -20,109 +22,45 @@ type Options = {
     UiSuperSelectModule,
     SelectLocationsComponent,
     ButtonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './sustainble-equipment-form.component.html',
   styleUrl: './sustainble-equipment-form.component.scss',
 })
 export class SustainbleEquipmentFormComponent {
+  private _fb = inject(FormBuilder)
+  private _router = inject(Router)
+
   // Constante con los elementos del array.
-  vehicles = signal<Options[]>([
-    { label: 'all', id: window.crypto.randomUUID() },
-    { label: 'vehicles.equipmentTransportTruck', id: window.crypto.randomUUID() },
-    { label: 'vehicles.materialTransportTruck', id: window.crypto.randomUUID() },
-    { label: 'vehicles.peopleTransportVehicle', id: window.crypto.randomUUID() },
-  ])
+  vehicles = signal<Options[]>(VEHICLES)
+  machines = signal<Options[]>(MACHINES)
+  years = signal<Options[]>(YEARS)
+  origin = signal<Options[]>(ORIGIN)
+  documents = signal<Options[]>(DOCUMENTS)
+  amount = signal<Options[]>(AMOUNT)
+  currencys = signal<Options[]>(CURRENCY)
 
-  machines = signal<Options[]>([
-    { label: 'all', id: window.crypto.randomUUID() },
-    { label: 'machines.loader', id: window.crypto.randomUUID() },
-    { label: 'machines.planer', id: window.crypto.randomUUID() },
-    { label: 'machines.excavator', id: window.crypto.randomUUID() },
-    { label: 'machines.bucketTruck', id: window.crypto.randomUUID() },
-    { label: 'machines.bulldozer', id: window.crypto.randomUUID() },
-    { label: 'machines.scraper', id: window.crypto.randomUUID() },
-    { label: 'machines.compactor', id: window.crypto.randomUUID() },
-    { label: 'machines.dumper', id: window.crypto.randomUUID() },
-    { label: 'machines.grader', id: window.crypto.randomUUID() },
-    { label: 'machines.trencher', id: window.crypto.randomUUID() },
-    { label: 'machines.compressor', id: window.crypto.randomUUID() },
-    { label: 'machines.generator', id: window.crypto.randomUUID() },
-    { label: 'machines.palletTruck', id: window.crypto.randomUUID() },
-  ])
+  public get locationsArrays(): FormArray {
+    return this.form.get('locations') as FormArray
+  }
+  form: FormGroup = this._fb.group({
+    vehicles: this._fb.control(null),
+    greenBonusVehicle: this._fb.control(false),
 
-  years = signal<Options[]>([
-    {
-      label: '1',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '2',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '3',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '4',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '5',
-      id: window.crypto.randomUUID(),
-    },
-  ])
+    machines: this._fb.control(null),
+    greenBonusMachines: this._fb.control(false),
 
-  origin = signal<Options[]>([
-    { label: 'origin.all', id: window.crypto.randomUUID() },
-    { label: 'origin.switzerland', id: window.crypto.randomUUID() },
-    { label: 'origin.eu', id: window.crypto.randomUUID() },
-    { label: 'origin.america', id: window.crypto.randomUUID() },
-    { label: 'origin.asia', id: window.crypto.randomUUID() },
-  ])
+    years: this._fb.control(null),
+    origin: this._fb.control(null),
+    documents: this._fb.control(null),
+    amount: this._fb.control(null),
+    currencys: this._fb.control(null),
+    locations: this._fb.array([]),
+  })
 
-  documents = signal<Options[]>([
-    { label: 'documents.none', id: window.crypto.randomUUID() },
-    { label: 'documents.quote', id: window.crypto.randomUUID() },
-    { label: 'documents.offer', id: window.crypto.randomUUID() },
-    { label: 'documents.proformaInvoice', id: window.crypto.randomUUID() },
-  ])
-
-  amount = signal<Options[]>([
-    {
-      label: '10.000',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '15.000',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '20.000',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '25.000',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '30.000',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '35.000',
-      id: window.crypto.randomUUID(),
-    },
-    {
-      label: '40.000',
-      id: window.crypto.randomUUID(),
-    },
-  ])
-
-  currencys = signal<Options[]>([
-    { label: 'CHF', id: window.crypto.randomUUID() },
-    { label: 'EUR', id: window.crypto.randomUUID() },
-    { label: 'USD', id: window.crypto.randomUUID() },
-  ])
+  save = () => {
+    console.log(this.form.value)
+    this._router.navigate(['./real-state-loan'])
+  }
 }

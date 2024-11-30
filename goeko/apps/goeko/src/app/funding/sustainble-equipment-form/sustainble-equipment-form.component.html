@@ -1,10 +1,10 @@
-<div class="rounded-lg bg-white p-6 shadow-md">
+<form [formGroup]="form" class="rounded-lg bg-white p-6 shadow-md" (ngSubmit)="save()">
   <!-- Selección de categorías -->
   <div class="mb-6">
     <h2 class="text-lg font-semibold">Select categories and products corresponding to your project</h2>
     <div class="mt-4">
       <label class="mb-2 block font-medium">Vehicles</label>
-      <go-badge-group [id]="'vehicles'" name="vehicles">
+      <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="vehicles">
         @for (vehicle of vehicles(); track vehicle.id) {
           <go-badge [value]="vehicle" [id]="vehicle.id">{{ vehicle.label | translate }} </go-badge>
         }
@@ -19,7 +19,7 @@
 
     <div class="mt-4">
       <label class="mb-2 block font-medium">Machines</label>
-      <go-badge-group [id]="'vehicles'" name="vehicles">
+      <go-badge-group [id]="'machines'" name="machines" formControlName="machines">
         @for (machine of machines(); track machine.id) {
           <go-badge [value]="machine" [id]="machine.id">{{ machine.label | translate }} </go-badge>
         }
@@ -36,22 +36,7 @@
   <!-- Región objetivo -->
   <div class="mb-6">
     <h2 class="text-lg font-semibold">Target region</h2>
-    <div class="mt-4 flex gap-4">
-      <div>
-        <label class="mb-2 block font-medium">Country</label>
-        <select class="w-full rounded border px-3 py-2">
-          <option>Spain</option>
-          <!-- Agrega más opciones si es necesario -->
-        </select>
-      </div>
-      <div>
-        <label class="mb-2 block font-medium">Province</label>
-        <select class="w-full rounded border px-3 py-2">
-          <option>Madrid</option>
-          <!-- Agrega más opciones si es necesario -->
-        </select>
-      </div>
-    </div>
+    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" />
   </div>
 
   <!-- Prospecto de actividad -->
@@ -119,6 +104,6 @@
 
   <!-- Botón guardar -->
   <div class="mt-6">
-    <button go-button routerLink="./real-state-loan">{{ 'save' | translate }}</button>
+    <button go-button type="submit">{{ 'save' | translate }}</button>
   </div>
-</div>
+</form>
