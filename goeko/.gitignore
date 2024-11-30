@@ -40,7 +40,7 @@ Thumbs.db
 
 .nx
 .angular
-.firebase/
+/.firebase
 
 # Project
 *.unlighthouse
