@@ -4,27 +4,32 @@
     <h2 class="text-lg font-semibold">Select categories and products corresponding to your project</h2>
     <div class="mt-4">
       <label class="mb-2 block font-medium">Vehicles</label>
-      <div class="flex flex-wrap gap-2">
-        <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">All</button>
-        <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">Materials carrier truck</button>
-        <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">Location x</button>
-        <!-- Agrega más botones según sea necesario -->
-      </div>
+      <go-badge-group [id]="'vehicles'" name="vehicles">
+        @for (vehicle of vehicles(); track vehicle.id) {
+          <go-badge [value]="vehicle" [id]="vehicle.id">{{ vehicle.label | translate }} </go-badge>
+        }
+      </go-badge-group>
+      <go-toggle-switch>
+        <span class="flex items-center gap-2">
+          <go-i-leaves></go-i-leaves>
+          <p class="font-medium">Green bonus</p>
+        </span>
+      </go-toggle-switch>
     </div>
-    <div class="mt-4">
-      <label class="mb-2 block font-medium">Green bonus</label>
-      <div class="flex items-center">
-        <input type="checkbox" class="toggle-checkbox" checked />
-      </div>
-    </div>
+
     <div class="mt-4">
       <label class="mb-2 block font-medium">Machines</label>
-      <div class="flex flex-wrap gap-2">
-        <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">All</button>
-        <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">Materials carrier truck</button>
-        <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">Location x</button>
-        <!-- Agrega más botones según sea necesario -->
-      </div>
+      <go-badge-group [id]="'vehicles'" name="vehicles">
+        @for (machine of machines(); track machine.id) {
+          <go-badge [value]="machine" [id]="machine.id">{{ machine.label | translate }} </go-badge>
+        }
+      </go-badge-group>
+      <go-toggle-switch>
+        <span class="flex items-center gap-2">
+          <go-i-leaves></go-i-leaves>
+          <p class="font-medium">Green bonus</p>
+        </span>
+      </go-toggle-switch>
     </div>
   </div>
 
@@ -53,35 +58,62 @@
   <div class="mb-6">
     <h2 class="text-lg font-semibold">Activity prospect minimum</h2>
     <div class="mt-4">
-      <label class="mb-2 block font-medium">Years</label>
-      <select class="w-full rounded border px-3 py-2">
-        <option>3</option>
-        <!-- Agrega más opciones si es necesario -->
-      </select>
+      <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
+      <ui-super-select [placeholder]="'years' | translate">
+        @for (year of years(); track year.id) {
+          <super-option [value]="year.label"> {{ year.label }}</super-option>
+        }
+      </ui-super-select>
     </div>
   </div>
 
   <!-- Origen del objeto -->
   <div class="mb-6">
     <h2 class="text-lg font-semibold">Object origin</h2>
-    <div class="mt-4 flex flex-wrap gap-2">
-      <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">EEUU</button>
-      <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">EU</button>
-      <button class="rounded-full bg-gray-100 px-3 py-1 text-gray-700">Location x</button>
-      <!-- Agrega más botones según sea necesario -->
-    </div>
+    <go-badge-group [id]="'vehicles'" name="vehicles">
+      @for (zone of origin(); track zone.id) {
+        <go-badge [value]="zone" [id]="zone.id">{{ zone.label | translate }} </go-badge>
+      }
+    </go-badge-group>
   </div>
 
   <!-- Balance y operación -->
   <div class="mb-6">
-    <h2 class="text-lg font-semibold">Balance sheet and operating account required</h2>
-    <div class="mt-4 flex items-center">
-      <label class="mr-4">Years</label>
-      <select class="w-24 rounded border px-3 py-2">
-        <option>3</option>
-        <!-- Agrega más opciones si es necesario -->
-      </select>
-      <input type="checkbox" class="toggle-checkbox ml-4" checked />
+    <go-toggle-switch>
+      <h2 class="text-lg font-semibold">Balance sheet and operating account required</h2>
+    </go-toggle-switch>
+    <div>
+      <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
+
+      <ui-super-select [placeholder]="'years' | translate">
+        @for (year of years(); track year.id) {
+          <super-option [value]="year.label"> {{ year.label }}</super-option>
+        }
+      </ui-super-select>
+    </div>
+
+    <div>
+      <label class="mb-2 block font-medium">{{ 'FORM_LABEL.requiredDocumentsFunding' | translate }}</label>
+      <ui-super-select [multiple]="true">
+        @for (document of documents(); track document.id) {
+          <super-option [value]="document.label"> {{ document.label | translate }}</super-option>
+        }
+      </ui-super-select>
+
+      <div>
+        <label class="mb-2 block font-medium">{{ 'FORM_LABEL.amountRequiredFunding' | translate }}</label>
+        <ui-super-select>
+          @for (money of amount(); track money.id; let first = $first) {
+            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
+          }
+        </ui-super-select>
+        <label class="mb-2 block font-medium">{{ 'FORM_LABEL.currencyFunding' | translate }}</label>
+        <ui-super-select [multiple]="true">
+          @for (currency of currencys(); track currency.id) {
+            <super-option [value]="currency.label"> {{ currency.label }}</super-option>
+          }
+        </ui-super-select>
+      </div>
     </div>
   </div>
 

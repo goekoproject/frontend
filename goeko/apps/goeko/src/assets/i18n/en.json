@@ -215,7 +215,10 @@
     "yourLocation": "Select country and province",
     "notification": "Notification",
     "contactPerson": "Contact person",
-    "financialName": "Financial and Institucional name"
+    "financialName": "Financial and Institucional name",
+    "requiredDocumentsFunding": "Required document related to the object",
+    "amountRequiredFunding": "Amount required for the request to be considered",
+    "currencyFunding": "Currency"
   },
   "HOME": {
     "btnCleantech": "Find leads",
@@ -612,5 +615,38 @@
   "yourEcosolution": "Your Eco-solution",
   "yourProjects": "Your projects",
   "your_ecosolutions": "Your Eco-solutions",
-  "characters": "{{num}} characters"
+  "characters": "{{num}} characters",
+  "vehicles": {
+    "equipmentTransportTruck": "Equipment Transport Truck",
+    "materialTransportTruck": "Material Transport Truck",
+    "peopleTransportVehicle": "People Transport Vehicle"
+  },
+  "machines": {
+    "loader": "Loader",
+    "planer": "Planer",
+    "excavator": "Excavator",
+    "bucketTruck": "Bucket Truck",
+    "bulldozer": "Bulldozer",
+    "scraper": "Scraper",
+    "compactor": "Compactor",
+    "dumper": "Dumper",
+    "grader": "Grader",
+    "trencher": "Trencher",
+    "compressor": "Compressor",
+    "generator": "Generator",
+    "palletTruck": "Pallet Truck"
+  },
+  "origin": {
+    "all": "All",
+    "switzerland": "Switzerland",
+    "eu": "EU",
+    "america": "America",
+    "asia": "Asia"
+  },
+  "documents": {
+    "none": "None",
+    "quote": "Quote",
+    "offer": "Offer",
+    "proformaInvoice": "Proforma Invoice"
+  }
 }

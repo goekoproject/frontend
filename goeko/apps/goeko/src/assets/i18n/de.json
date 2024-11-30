@@ -205,7 +205,10 @@
     "website": "Webseite",
     "yourLocation": "Wählen Sie Land und Region",
     "financialName": "Finanzierungsname",
-    "notification": "Benachrichtigung"
+    "notification": "Benachrichtigung",
+    "requiredDocumentsFunding": "Erforderliche Dokumente für die Finanzierung",
+    "amountRequiredFunding": "Mindestbetrag erforderlich, damit der Antrag berücksichtigt wird",
+    "currencyFunding": "Währung"
   },
   "HOME": {
     "btnCleantech": "Leads finden",
@@ -609,5 +612,38 @@
   "resultSolution": "Ergebnis",
   "yourProjects": "Ihre Projekte",
   "backToResults": "Zurück zu den Ergebnissen",
-  "characters": "{{num}} Zechen"
+  "characters": "{{num}} Zechen",
+  "vehicles": {
+    "equipmentTransportTruck": "Ausrüstungstransport-LKW",
+    "materialTransportTruck": "Materialtransport-LKW",
+    "peopleTransportVehicle": "Personentransportfahrzeug"
+  },
+  "machines": {
+    "loader": "Lader",
+    "planer": "Hobelmaschine",
+    "excavator": "Bagger",
+    "bucketTruck": "Hubarbeitsbühne",
+    "bulldozer": "Planierraupe",
+    "scraper": "Schaber",
+    "compactor": "Walze",
+    "dumper": "Muldenkipper",
+    "grader": "Motorgrader",
+    "trencher": "Grabenfräse",
+    "compressor": "Kompressor",
+    "generator": "Generator",
+    "palletTruck": "Hubwagen"
+  },
+  "origin": {
+    "all": "Alle",
+    "switzerland": "Schweiz",
+    "eu": "EU",
+    "america": "Amerika",
+    "asia": "Asien"
+  },
+  "documents": {
+    "none": "Keine",
+    "quote": "Angebot",
+    "offer": "Offerte",
+    "proformaInvoice": "Proforma-Rechnung"
+  }
 }
