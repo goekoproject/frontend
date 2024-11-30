@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { DashboardCleantechComponent } from './dashboard/dashboard-cleantech/dashboard-cleantech.component'
 import { DashboardSmeComponent } from './dashboard/dashboard-sme.component'
+//import { DashboardBankComponent } from '../funding/hub-funding.component'
 
 const routes: Routes = [
   {
@@ -22,7 +23,6 @@ const routes: Routes = [
       onBack: false,
     },
   },
-
 ]
 
 @NgModule({

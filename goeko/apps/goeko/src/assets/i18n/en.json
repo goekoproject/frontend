@@ -266,6 +266,11 @@
     "dashboard": "Dashboard",
     "favourites": "Favourites"
   },
+  "MENU_USER_BANK": {
+    "buttonSearch":"Present your financial solutions",
+    "titleCard": "Financing",
+    "subtitleCard": "Highlight the financial solutions that your institution wishes to promote"
+  },
   "MENU_USER_SME": {
     "buttonSearch": "Add new project",
     "dialogButtonNext": "Next",
