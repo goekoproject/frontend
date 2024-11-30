@@ -35,9 +35,9 @@
               [formControlName]="'montanMinimun'"
               id="montanMinimun"
               name="montanMinimun">
-              <super-option *ngFor="let option of dataSelect['montanMinimun']" [value]="option">
-                {{ option.keyLang | translate }}
-              </super-option>
+              @for ( option of dataSelect['montanMinimun']; track option.id; let first = $first) {
+                <super-option [value]="option" [valueSelected]="first"> {{ option.keyLang | translate }}</super-option>
+              }
             </ui-super-select>
           </div>
           <div class="w-full">
