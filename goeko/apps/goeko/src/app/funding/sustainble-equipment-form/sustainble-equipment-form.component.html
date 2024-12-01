@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="rounded-lg bg-white p-6 shadow-md" (ngSubmit)="save()">
+<form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
   <!-- Selección de categorías -->
   <div class="mb-6">
     <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.subtitleForm' | translate }}</h2>
@@ -44,9 +44,9 @@
     <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.activityProspect' | translate }}</h2>
     <div class="mt-4">
       <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
-      <ui-super-select [placeholder]="'years' | translate">
+      <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity">
         @for (year of years(); track year.id) {
-          <super-option [value]="year.label"> {{ year.label }}</super-option>
+          <super-option [value]="year"> {{ year.label }}</super-option>
         }
       </ui-super-select>
     </div>
@@ -55,9 +55,9 @@
   <!-- Origen del objeto -->
   <div class="mb-6">
     <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.originObject' | translate }}</h2>
-    <go-badge-group [id]="'vehicles'" name="vehicles">
-      @for (zone of origin(); track zone.id) {
-        <go-badge [value]="zone" [id]="zone.id">{{ zone.label | translate }} </go-badge>
+    <go-badge-group [id]="'zone'" name="zone" formControlName="origin">
+      @for (zoneOrigin of origin(); track zoneOrigin.id) {
+        <go-badge [value]="zoneOrigin" [id]="zoneOrigin.id">{{ zoneOrigin.label | translate }} </go-badge>
       }
     </go-badge-group>
   </div>
@@ -70,16 +70,16 @@
     <div>
       <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
 
-      <ui-super-select [placeholder]="'years' | translate">
+      <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance">
         @for (year of years(); track year.id) {
-          <super-option [value]="year.label"> {{ year.label }}</super-option>
+          <super-option [value]="year"> {{ year.label }}</super-option>
         }
       </ui-super-select>
     </div>
 
     <div>
       <label class="mb-2 block font-medium">{{ 'FORM_LABEL.requiredDocumentsFunding' | translate }}</label>
-      <ui-super-select [multiple]="true">
+      <ui-super-select [multiple]="true" formControlName="documents" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
         @for (document of documents(); track document.id) {
           <super-option [value]="document.label"> {{ document.label | translate }}</super-option>
         }
@@ -87,13 +87,13 @@
 
       <div>
         <label class="mb-2 block font-medium">{{ 'FORM_LABEL.amountRequiredFunding' | translate }}</label>
-        <ui-super-select>
-          @for (money of amount(); track money.id; let first = $first) {
-            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
+        <ui-super-select formControlName="amount">
+          @for (money of amount(); track money.id) {
+            <super-option [value]="money"> {{ money.label }}</super-option>
           }
         </ui-super-select>
         <label class="mb-2 block font-medium">{{ 'FORM_LABEL.currencyFunding' | translate }}</label>
-        <ui-super-select [multiple]="true">
+        <ui-super-select [multiple]="true" formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
           @for (currency of currencys(); track currency.id) {
             <super-option [value]="currency.label"> {{ currency.label }}</super-option>
           }
@@ -101,9 +101,12 @@
       </div>
     </div>
   </div>
-
-  <!-- Botón guardar -->
-  <div class="mt-6">
-    <button go-button type="submit">{{ 'save' | translate }}</button>
-  </div>
 </form>
+
+<div class="mt-4 flex justify-between">
+  <button go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>
+  <div class="flex items-center gap-2">
+    <button go-button type="submit" (click)="save()">{{ 'save' | translate }}</button>
+    <button go-button (click)="goSkip()" appearance="flat">{{ 'skip' | translate }}</button>
+  </div>
+</div>

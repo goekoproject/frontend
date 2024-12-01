@@ -1,25 +1,27 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'
+import { Component, inject, OnInit } from '@angular/core'
+import { toSignal } from '@angular/core/rxjs-interop'
 import { RouterModule } from '@angular/router'
-import { TranslateModule } from '@ngx-translate/core';
-import { ButtonModule } from '@goeko/ui';
+import { ButtonModule } from '@goeko/ui'
+import { TranslateModule } from '@ngx-translate/core'
+import { FundingService } from './funding.service'
 
 @Component({
   selector: 'goeko-hub-funding',
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, ButtonModule],
-  providers: [
-
-  ],
+  providers: [FundingService],
   templateUrl: './hub-funding.component.html',
   styleUrl: './hub-funding.component.scss',
 })
 export class HubFundingComponent implements OnInit {
+  private _fundingService = inject(FundingService)
 
+  susteinbleEquipment = toSignal(this._fundingService.getAllDataFromStore('sustainble-equipment'))
   constructor() {
-    console.log ('Hub Funding')
+    console.log('Hub Funding')
   }
   ngOnInit(): void {
-    console.log ('Hub Funding');
+    console.log('Hub Funding')
   }
 }

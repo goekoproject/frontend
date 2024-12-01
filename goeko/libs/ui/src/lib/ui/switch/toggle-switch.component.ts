@@ -9,7 +9,7 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
       <input id="switch" type="checkbox" class="peer sr-only" (change)="onToggle()" [checked]="checked" />
       <label for="switch" class="hidden"></label>
       <div
-        class="peer h-6 w-11 rounded-full border bg-white after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-900 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
+        class="peer h-6 w-11 rounded-full border bg-white after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-default peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-green-300"></div>
     </label>
   `,
 })

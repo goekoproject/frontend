@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { Component, inject, OnInit } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryModule, SelectLocationsComponent } from '@goeko/business-ui'
 import { DataSelect, Product } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { STORE_NAME } from '../funding-token.constants'
+import { FundingService } from '../funding.service'
 import { defaultSetCurrency } from './compare-with-select'
-import { MOCK_WORKTYPES, MOCK_BUILDINGTYPES, MOCK_OWNER_PROFILES } from './mock-values.constant';
-import { Validators } from '@angular/forms'
-
+import { MOCK_BUILDINGTYPES, MOCK_OWNER_PROFILES, MOCK_WORKTYPES } from './mock-values.constant'
 
 @Component({
   selector: 'goeko-real-state-loan-form',
@@ -22,12 +23,17 @@ import { Validators } from '@angular/forms'
     ReactiveFormsModule,
     GoInputModule,
     UiSuperSelectModule,
-    SelectLocationsComponent
+    SelectLocationsComponent,
   ],
+  providers: [FundingService, { provide: STORE_NAME, useValue: 'real-state' }],
   templateUrl: './real-state-loan-form.component.html',
   styleUrls: ['./real-state-loan-form.component.scss'],
 })
 export class RealStateLoanComponent implements OnInit {
+  private _fb = inject(FormBuilder)
+  private _router = inject(Router)
+  private _route = inject(ActivatedRoute)
+  private _fundingService = inject(FundingService)
 
   public defaultSetCurrency = defaultSetCurrency
   public dataSelect = DataSelect
@@ -40,14 +46,8 @@ export class RealStateLoanComponent implements OnInit {
     return this.form.get('locations') as FormArray
   }
 
-  constructor(
-    private _fb: FormBuilder,
-  ) {
-  }
-
-
   ngOnInit(): void {
-    this._initMockValues();
+    this._initMockValues()
     this._buildFrom()
   }
 
@@ -66,7 +66,6 @@ export class RealStateLoanComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: ['', Validators.pattern(/^[0-9]{10,15}$/)],
     })
-
   }
 
   private _initMockValues() {
@@ -75,4 +74,21 @@ export class RealStateLoanComponent implements OnInit {
     this.ownerProfiles = MOCK_OWNER_PROFILES
   }
 
+  save = () => {
+    this._fundingService.saveData(this.form.value).subscribe((res) => {
+      console.log(res)
+      this._goHubFundings()
+    })
+  }
+  goBack = () => {
+    window.history.back()
+  }
+
+  goSkip = () => {
+    this._goHubFundings()
+  }
+
+  private _goHubFundings = () => {
+    this._router.navigate(['../funding'], { relativeTo: this._route.parent?.parent })
+  }
 }

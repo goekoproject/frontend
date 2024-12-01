@@ -358,6 +358,8 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Sélectionnez une option",
+    "defaultLabelMulti": "Sélectionnez une ou plusieurs options",
+
     "fiveBetweenTen": "Entre 5 et 10 années",
     "greenWaste": {
       "greenWoodUntreated": "Bois naturel​",
