@@ -1,9 +1,9 @@
 <form [formGroup]="form" class="rounded-lg bg-white p-6 shadow-md" (ngSubmit)="save()">
   <!-- Selección de categorías -->
   <div class="mb-6">
-    <h2 class="text-lg font-semibold">Select categories and products corresponding to your project</h2>
+    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.subtitleForm' | translate }}</h2>
     <div class="mt-4">
-      <label class="mb-2 block font-medium">Vehicles</label>
+      <label class="mb-2 block font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.vehicles' | translate }}</label>
       <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="vehicles">
         @for (vehicle of vehicles(); track vehicle.id) {
           <go-badge [value]="vehicle" [id]="vehicle.id">{{ vehicle.label | translate }} </go-badge>
@@ -12,13 +12,13 @@
       <go-toggle-switch>
         <span class="flex items-center gap-2">
           <go-i-leaves></go-i-leaves>
-          <p class="font-medium">Green bonus</p>
+          <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
         </span>
       </go-toggle-switch>
     </div>
 
     <div class="mt-4">
-      <label class="mb-2 block font-medium">Machines</label>
+      <label class="mb-2 block font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.machines' | translate }}</label>
       <go-badge-group [id]="'machines'" name="machines" formControlName="machines">
         @for (machine of machines(); track machine.id) {
           <go-badge [value]="machine" [id]="machine.id">{{ machine.label | translate }} </go-badge>
@@ -27,7 +27,7 @@
       <go-toggle-switch>
         <span class="flex items-center gap-2">
           <go-i-leaves></go-i-leaves>
-          <p class="font-medium">Green bonus</p>
+          <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
         </span>
       </go-toggle-switch>
     </div>
@@ -35,13 +35,13 @@
 
   <!-- Región objetivo -->
   <div class="mb-6">
-    <h2 class="text-lg font-semibold">Target region</h2>
+    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.targetRegion' | translate }}</h2>
     <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" />
   </div>
 
   <!-- Prospecto de actividad -->
   <div class="mb-6">
-    <h2 class="text-lg font-semibold">Activity prospect minimum</h2>
+    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.activityProspect' | translate }}</h2>
     <div class="mt-4">
       <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
       <ui-super-select [placeholder]="'years' | translate">
@@ -54,7 +54,7 @@
 
   <!-- Origen del objeto -->
   <div class="mb-6">
-    <h2 class="text-lg font-semibold">Object origin</h2>
+    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.originObject' | translate }}</h2>
     <go-badge-group [id]="'vehicles'" name="vehicles">
       @for (zone of origin(); track zone.id) {
         <go-badge [value]="zone" [id]="zone.id">{{ zone.label | translate }} </go-badge>
@@ -65,7 +65,7 @@
   <!-- Balance y operación -->
   <div class="mb-6">
     <go-toggle-switch>
-      <h2 class="text-lg font-semibold">Balance sheet and operating account required</h2>
+      <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheet' | translate }}</h2>
     </go-toggle-switch>
     <div>
       <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>

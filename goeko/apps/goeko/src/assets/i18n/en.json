@@ -227,6 +227,16 @@
     "contact": "Contact",
     "montanMinimun": "Minimum quantity"
   },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Select categories and products corresponding to your project",
+    "vehicles": "Vehicles",
+    "machines": "Machines",
+    "greenBonus": "Green bonus",
+    "targetRegion": "Target region",
+    "activityProspect": "Minimum number of years of activity required for the prospect",
+    "originObject": "Origin of the object",
+    "balanceSheet": "Balance sheet and income statement required"
+  },
   "HOME": {
     "btnCleantech": "Find leads",
     "meetOurTeam": "Meet Our Team",

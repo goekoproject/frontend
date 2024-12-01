@@ -228,6 +228,16 @@
     "contact": "Contact",
     "montanMinimun": "Montant minimum requis"
   },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Sélectionnez les catégories et les produits correspondant à votre projet",
+    "vehicles": "Véhicules",
+    "machines": "Machines",
+    "greenBonus": "Bonus écologique",
+    "targetRegion": "Régions cibles",
+    "activityProspect": "Nombre d'années d'activité minimum requises pour le prospect",
+    "originObject": "Origine de l’objet",
+    "balanceSheet": "Bilan et compte de résultat requis"
+  },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
     "meetOurTeam": "Notre Equipe",
@@ -243,6 +253,7 @@
     "selectLogo": "Sélectionnez le logo"
   },
   "LANGS": {
+    "de": "Allemand",
     "en": "Anglais",
     "es": "Espagnol",
     "fr": "Français",
