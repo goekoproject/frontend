@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, OnInit } from '@angular/core'
+import { Component, inject, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryModule, SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
-import { DataSelect, Product } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { defaultSetCurrency } from './compare-with-select'
-import { MOCK_BUILDINGTYPES, MOCK_OWNER_PROFILES, MOCK_WORKTYPES } from './mock-values.constant'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
 
+type Options = {
+  label: string
+  id: string
+}
 @Component({
   selector: 'goeko-real-state-loan-form',
   standalone: true,
@@ -39,11 +42,13 @@ export class RealStateLoanComponent implements OnInit {
   private _countries = this._selectLocationsService.countries
 
   public defaultSetCurrency = defaultSetCurrency
-  public dataSelect = DataSelect
   public form!: FormGroup
-  public workTypes!: Product[]
-  public buildingTypes!: Product[]
-  public ownerProfiles!: Product[]
+
+  workTypes = signal<Options[]>(WORKTYPES)
+  buildingTypes = signal<Options[]>(BUILDINGTYPES)
+  ownerProfiles = signal<Options[]>(OWNERPROFILES)
+  amount = signal<Options[]>(AMOUNT)
+  currencys = signal<Options[]>(CURRENCY)
 
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
@@ -51,7 +56,6 @@ export class RealStateLoanComponent implements OnInit {
 
   ngOnInit(): void {
     this._selectLocationsService.setUpCountries()
-    this._initMockValues()
     this._buildFrom()
   }
 
@@ -61,21 +65,15 @@ export class RealStateLoanComponent implements OnInit {
 
   private _initForm() {
     this.form = this._fb.group({
-      workTypes: [''],
-      buildingTypes: [''],
-      ownerProfiles: [''],
+      workTypes: this._fb.control(null),
+      buildingTypes: this._fb.control(null),
+      ownerProfiles: this._fb.control(null),
       locations: this._fb.array([]),
       currency: ['', Validators.required],
       montanMinimun: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       phoneNumber: ['', Validators.pattern(/^[0-9]{10,15}$/)],
     })
-  }
-
-  private _initMockValues() {
-    this.workTypes = MOCK_WORKTYPES
-    this.buildingTypes = MOCK_BUILDINGTYPES
-    this.ownerProfiles = MOCK_OWNER_PROFILES
   }
 
   save = () => {

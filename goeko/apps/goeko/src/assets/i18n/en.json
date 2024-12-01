@@ -674,5 +674,25 @@
     "proformaInvoice": "Proforma Invoice"
   },
   "sustainableEquipment": "Sustainable equipment",
-  "realStateLoan": "Real state loan"
+  "realStateLoan": "Real state loan",
+  "worktypes": {
+    "all": "All",
+    "aticInsulation": "Atic insulation",
+    "wallInsulation": "Wall insulation",
+    "backhoe": "Backhoe",
+    "backhoeLoader": "Backhoe loader",
+    "scraper": "Scraper",
+    "dumper": "Dumper",
+    "trancheuse": "Trancheuse"
+  },
+  "buildingtypes": {
+    "commercial": "Commercial",
+    "private": "Private",
+    "excavator": "Excavator",
+    "conceptx": "Concept x"
+  },
+  "ownerprofiles": {
+    "ppe": "Commercial",
+    "conceptx": "concept x"
+  }
 }

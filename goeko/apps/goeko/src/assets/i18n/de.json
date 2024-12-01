@@ -671,5 +671,25 @@
     "proformaInvoice": "Proforma-Rechnung"
   },
   "sustainableEquipment": "Nachhaltige Ausrüstung",
-  "realStateLoan": "Immobilienkredit"
+  "realStateLoan": "Immobilienkredit",
+  "worktypes": {
+    "all": "Alle",
+    "aticInsulation": "Atische Isolierung",
+    "wallInsulation": "Wandisolierung",
+    "backhoe": "Bagger",
+    "backhoeLoader": "Baggerlader",
+    "scraper": "Abstreifer",
+    "dumper": "Dumper",
+    "trancheuse": "Trancheuse"
+  },
+  "buildingtypes": {
+    "commercial": "Kommerziell",
+    "private": "Privat",
+    "excavator": "Excavator",
+    "conceptx": "Konzept x"
+  },
+  "ownerprofiles": {
+    "ppe": "Kommerziell",
+    "conceptx": "Konzept x"
+  }
 }
