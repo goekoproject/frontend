@@ -668,5 +668,25 @@
     "quote": "Angebot",
     "offer": "Offerte",
     "proformaInvoice": "Proforma-Rechnung"
+  },
+  "worktypes": {
+    "all": "Alle",
+    "aticInsulation": "Atische Isolierung",
+    "wallInsulation" : "Wandisolierung",
+    "backhoe" : "Bagger",
+    "backhoeLoader" : "Baggerlader",
+    "scraper": "Abstreifer",
+    "dumper": "Dumper",
+    "trancheuse": "Trancheuse"
+  },
+  "buildingtypes": {
+    "commercial": "Kommerziell",
+    "private": "Privat",
+    "excavator": "Excavator",
+    "conceptx" : "Konzept x"
+  },
+  "ownerprofiles": {
+    "ppe": "Kommerziell",
+    "conceptx": "Konzept x"
   }
 }

@@ -671,5 +671,25 @@
     "quote": "Presupuesto",
     "offer": "Oferta",
     "proformaInvoice": "Factura proforma"
+  },
+  "worktypes": {
+    "all": "Todos",
+    "aticInsulation": "Aislamiento de áticos",
+    "wallInsulation" : "Aislamiento de paredes",
+    "backhoe" : "Retroexcavadora",
+    "backhoeLoader" : "Retroexcavadora cargadora",
+    "scraper": "Rascador",
+    "dumper": "Volquete",
+    "trancheuse": "Trancheuse"
+  },
+  "buildingtypes": {
+    "commercial": "Comercial",
+    "private": "Privado",
+    "excavator": "Excavadora",
+    "conceptx" : "Concepto x"
+  },
+  "ownerprofiles": {
+    "ppe": "Comercial",
+    "conceptx": "concepto x"
   }
 }

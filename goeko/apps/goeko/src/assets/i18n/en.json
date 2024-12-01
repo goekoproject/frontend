@@ -671,5 +671,25 @@
     "quote": "Quote",
     "offer": "Offer",
     "proformaInvoice": "Proforma Invoice"
+  },
+  "worktypes": {
+    "all": "All",
+    "aticInsulation": "Atic insulation",
+    "wallInsulation" : "Wall insulation",
+    "backhoe" : "Backhoe",
+    "backhoeLoader" : "Backhoe loader",
+    "scraper": "Scraper",
+    "dumper": "Dumper",
+    "trancheuse": "Trancheuse"
+  },
+  "buildingtypes": {
+    "commercial": "Commercial",
+    "private": "Private",
+    "excavator": "Excavator",
+    "conceptx" : "Concept x"
+  },
+  "ownerprofiles": {
+    "ppe": "Commercial",
+    "conceptx": "concept x"
   }
 }

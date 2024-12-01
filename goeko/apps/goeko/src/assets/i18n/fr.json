@@ -672,5 +672,25 @@
     "quote": "Devis",
     "offer": "Offre",
     "proformaInvoice": "Facture proforma"
+  },
+  "worktypes": {
+    "all": "Toutes",
+    "aticInsulation": "Isolation de l'atic",
+    "wallInsulation" : "Isolation des murs",
+    "backhoe" : "Pelleteuse",
+    "backhoeLoader" : "Chargeuse-pelleteuse",
+    "scraper": "Grattoir",
+    "dumper": "Dumper",
+    "trancheuse": "Basculeur"
+  },
+  "buildingtypes": {
+    "commercial": "Commercial",
+    "private": "Privé",
+    "excavator": "Excavateur",
+    "conceptx" : "Le concept x"
+  },
+  "ownerprofiles": {
+    "ppe": "Commercial",
+    "conceptx": "Le concept x"
   }
 }

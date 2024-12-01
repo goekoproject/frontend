@@ -3,16 +3,16 @@
       <fieldset>
         <legend>{{ 'FORM_LABEL.buildingFounding' | translate }}</legend>
         <span>{{ 'FORM_LABEL.workTypes' | translate }}</span>
-        <go-badge-group [formControlName]="'workTypes'"  [readonly]="true">
-          @for (worktype of workTypes; track worktype.code) {
-            <go-badge [readonly]="true" [value]="worktype.code" [readonly]="true">{{ worktype.label }}</go-badge>
+        <go-badge-group [formControlName]="'workTypes'" >
+          @for (worktype of workTypes(); track worktype.id) {
+            <go-badge  [value]="worktype.id" >{{ worktype.label | translate }}</go-badge>
           }
         </go-badge-group>
 
         <span>{{ 'FORM_LABEL.buildingTypes' | translate }}</span>
-        <go-badge-group [formControlName]="'buildingTypes'"  [readonly]="true">
-          @for (buildingtype of buildingTypes; track buildingtype.code) {
-            <go-badge [readonly]="true" [value]="buildingtype.code" [readonly]="true">{{ buildingtype.label }}</go-badge>
+        <go-badge-group [formControlName]="'buildingTypes'" >
+          @for (buildingtype of buildingTypes(); track buildingtype.id) {
+            <go-badge [value]="buildingtype.id">{{ buildingtype.label | translate }}</go-badge>
           }
         </go-badge-group>
       </fieldset>
@@ -22,9 +22,9 @@
         <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
         <span>{{ 'FORM_LABEL.ownerProfile' | translate }}</span>
 
-        <go-badge-group [formControlName]="'ownerProfiles'"  [readonly]="true">
-          @for (ownerProfile of ownerProfiles; track ownerProfile.code) {
-            <go-badge [readonly]="true" [value]="ownerProfile.code" [readonly]="true">{{ ownerProfile.label }}</go-badge>
+        <go-badge-group [formControlName]="'ownerProfiles'">
+          @for (ownerProfile of ownerProfiles(); track ownerProfile.id) {
+            <go-badge [value]="ownerProfile.id" >{{ ownerProfile.label | translate }}</go-badge>
           }
         </go-badge-group>
         <div class="flex">
@@ -36,8 +36,8 @@
               [formControlName]="'montanMinimun'"
               id="montanMinimun"
               name="montanMinimun">
-              @for ( option of dataSelect['montanMinimun']; track option.id; let first = $first) {
-                <super-option [value]="option" [valueSelected]="first"> {{ option.keyLang | translate }}</super-option>
+              @for (money of amount(); track money.id; let first = $first) {
+                <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
               }
             </ui-super-select>
           </div>
@@ -50,9 +50,9 @@
               id="currency"
               name="currency"
               [compareWith]="defaultSetCurrency">
-              <super-option *ngFor="let option of dataSelect['currency']" [value]="option">
-                {{ option.keyLang | translate }}
-              </super-option>
+              @for (currency of currencys(); track currency.id) {
+                <super-option [value]="currency.label"> {{ currency.label }}</super-option>
+              }
             </ui-super-select>
           </div>
         </div>
