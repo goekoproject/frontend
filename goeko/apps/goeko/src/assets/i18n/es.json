@@ -207,13 +207,26 @@
     "notification": "Notificaciones",
     "financialName": "Nombre financiero",
     "contactPerson": "Persona de contacto",
-    "buildingFounding" : "Construcción de edificios",
+    "requiredDocumentsFunding": "Documentos requeridos",
+    "amountRequiredFunding": "Cantidad requerida para que la solicitud sea tenida en cuenta",
+    "currencyFunding": "Moneda",
+    "buildingFounding": "Construcción de edificios",
     "workTypes": "Tipos de trabajo",
-    "buildingTypes" : "Tipos de construccion",
-    "targetRegion" : "Región de destino",
+    "buildingTypes": "Tipos de construccion",
+    "targetRegion": "Región de destino",
     "ownerProfile": "Perfil del propietario",
-    "contact" : "Contacto",
-    "montanMinimun" : "Cantidad mínima"
+    "contact": "Contacto",
+    "montanMinimun": "Cantidad mínima"
+  },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Selecciona las categorías y productos correspondientes a tu proyecto",
+    "vehicles": "Vehículos",
+    "machines": "Máquinas",
+    "greenBonus": "Bono verde",
+    "targetRegion": "Regiones objetivo",
+    "activityProspect": "Número mínimo de años de actividad requeridos para el prospecto",
+    "originObject": "Origen del objeto",
+    "balanceSheet": "Balance y cuenta de resultados requeridos"
   },
   "HOME": {
     "btnCleantech": "Encontrar leads",
@@ -625,5 +638,38 @@
   "resultSolution": "resultado",
   "yourProjects": "Tus proyectos",
   "backToResults": "Volver a los resultados",
-  "characters": "{{num}} caracteres"
+  "characters": "{{num}} caracteres",
+  "vehicles": {
+    "equipmentTransportTruck": "Camión de transporte de equipos",
+    "materialTransportTruck": "Camión de transporte de materiales",
+    "peopleTransportVehicle": "Vehículos de transporte de personas"
+  },
+  "machines": {
+    "loader": "Cargadora",
+    "planer": "Cepilladora",
+    "excavator": "Excavadora",
+    "bucketTruck": "Camión cesta",
+    "bulldozer": "Bulldozer",
+    "scraper": "Rascador",
+    "compactor": "Rodillo compactador",
+    "dumper": "Dumper",
+    "grader": "Niveladora",
+    "trencher": "Zanjadora",
+    "compressor": "Compresor",
+    "generator": "Generador",
+    "palletTruck": "Transpaleta"
+  },
+  "origin": {
+    "all": "Todas",
+    "switzerland": "Suiza",
+    "eu": "UE",
+    "america": "América",
+    "asia": "Asia"
+  },
+  "documents": {
+    "none": "Ninguno",
+    "quote": "Presupuesto",
+    "offer": "Oferta",
+    "proformaInvoice": "Factura proforma"
+  }
 }

@@ -206,14 +206,27 @@
     "yourLocation": "Wählen Sie Land und Region",
     "financialName": "Finanzierungsname",
     "notification": "Benachrichtigung",
+    "requiredDocumentsFunding": "Erforderliche Dokumente für die Finanzierung",
+    "amountRequiredFunding": "Mindestbetrag erforderlich, damit der Antrag berücksichtigt wird",
+    "currencyFunding": "Währung",
     "contactPerson": "Kontaktperson",
-    "buildingFounding" : "Gebäudegründung",
+    "buildingFounding": "Gebäudegründung",
     "workTypes": "Arbeitstypen",
-    "buildingTypes" : "Gebäudetypen",
-    "targetRegion" : "Zielregion",
+    "buildingTypes": "Gebäudetypen",
+    "targetRegion": "Zielregion",
     "ownerProfile": "Profil des Eigentümers",
-    "contact" : "Kontakt",
-    "montanMinimun" : "Mindestmenge"
+    "contact": "Kontakt",
+    "montanMinimun": "Mindestmenge"
+  },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Wählen Sie die Kategorien und Produkte aus, die zu Ihrem Projekt passen",
+    "vehicles": "Fahrzeuge",
+    "machines": "Maschinen",
+    "greenBonus": "Umweltbonus",
+    "targetRegion": "Zielregionen",
+    "activityProspect": "Mindestanzahl an Jahren der Tätigkeit, die für den Interessenten erforderlich sind",
+    "originObject": "Herkunft des Objekts",
+    "balanceSheet": "Bilanz und Gewinn- und Verlustrechnung erforderlich"
   },
   "HOME": {
     "btnCleantech": "Leads finden",
@@ -622,5 +635,38 @@
   "resultSolution": "Ergebnis",
   "yourProjects": "Ihre Projekte",
   "backToResults": "Zurück zu den Ergebnissen",
-  "characters": "{{num}} Zechen"
+  "characters": "{{num}} Zechen",
+  "vehicles": {
+    "equipmentTransportTruck": "Ausrüstungstransport-LKW",
+    "materialTransportTruck": "Materialtransport-LKW",
+    "peopleTransportVehicle": "Personentransportfahrzeug"
+  },
+  "machines": {
+    "loader": "Lader",
+    "planer": "Hobelmaschine",
+    "excavator": "Bagger",
+    "bucketTruck": "Hubarbeitsbühne",
+    "bulldozer": "Planierraupe",
+    "scraper": "Schaber",
+    "compactor": "Walze",
+    "dumper": "Muldenkipper",
+    "grader": "Motorgrader",
+    "trencher": "Grabenfräse",
+    "compressor": "Kompressor",
+    "generator": "Generator",
+    "palletTruck": "Hubwagen"
+  },
+  "origin": {
+    "all": "Alle",
+    "switzerland": "Schweiz",
+    "eu": "EU",
+    "america": "Amerika",
+    "asia": "Asien"
+  },
+  "documents": {
+    "none": "Keine",
+    "quote": "Angebot",
+    "offer": "Offerte",
+    "proformaInvoice": "Proforma-Rechnung"
+  }
 }

@@ -1,26 +1,38 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { FundingComponent } from './funding.component'
-import { RealStateLoanComponent } from './real-state-loan-form/real-state-loan-form.component'
 import { HubFundingComponent } from './hub-funding.component'
+import { RealStateLoanComponent } from './real-state-loan-form/real-state-loan-form.component'
+import { SustainbleEquipmentFormComponent } from './sustainble-equipment-form/sustainble-equipment-form.component'
 
 const routes: Routes = [
   {
     path: '',
+    component: HubFundingComponent,
+    data: {
+      breadcrumb: 'Funding',
+      hidden: true,
+      onBack: false,
+    },
+  },
+  {
+    path: 'fundings',
     component: FundingComponent,
     children: [
       {
         path: '',
-        component: HubFundingComponent,
-        data: {
-          breadcrumb: 'Funding',
-          hidden: true,
-          onBack: false,
-        },
+        component: SustainbleEquipmentFormComponent,
+        title: 'Sustainable equipment',
+      },
+      {
+        path: 'sustainable-equipment',
+        component: SustainbleEquipmentFormComponent,
+        title: 'Sustainable equipment',
       },
       {
         path: 'real-state-loan',
         component: RealStateLoanComponent,
+        title: 'Real state loan',
       },
     ],
   },

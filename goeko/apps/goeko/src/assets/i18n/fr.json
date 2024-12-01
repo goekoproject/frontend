@@ -214,16 +214,29 @@
     "unit": "Unité",
     "website": "Site web",
     "yourLocation": "Sélectionnez le pays et la région",
-    "notification": "Notification",
     "financialName": "Nom de l'institution financière",
     "contactPerson": "Personne de contact",
-    "buildingFounding" : "Prêt immobilier",
+    "notification": "Notification",
+    "requiredDocumentsFunding": "Documents requis en relation avec l’objet",
+    "amountRequiredFunding": "Montant minimum requis pour que la demande soit prise en compte",
+    "currencyFunding": "Devise",
+    "buildingFounding": "Prêt immobilier",
     "workTypes": "Types de travaux que vous financez",
-    "buildingTypes" : "Types de bien",
-    "targetRegion" : "Régions cibles",
+    "buildingTypes": "Types de bien",
+    "targetRegion": "Régions cibles",
     "ownerProfile": "Profil du propriétaire",
-    "contact" : "Contact",
-    "montanMinimun" : "Montant minimum requis"
+    "contact": "Contact",
+    "montanMinimun": "Montant minimum requis"
+  },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Sélectionnez les catégories et les produits correspondant à votre projet",
+    "vehicles": "Véhicules",
+    "machines": "Machines",
+    "greenBonus": "Bonus écologique",
+    "targetRegion": "Régions cibles",
+    "activityProspect": "Nombre d'années d'activité minimum requises pour le prospect",
+    "originObject": "Origine de l’objet",
+    "balanceSheet": "Bilan et compte de résultat requis"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
@@ -240,6 +253,7 @@
     "selectLogo": "Sélectionnez le logo"
   },
   "LANGS": {
+    "de": "Allemand",
     "en": "Anglais",
     "es": "Espagnol",
     "fr": "Français",
@@ -625,5 +639,38 @@
   "yourEcosolution": "Votre éco-solution",
   "yourProjects": "Vos projets",
   "your_ecosolutions": "Vos Eco-solutions",
-  "characters": "{{num}} caractères"
+  "characters": "{{num}} caractères",
+  "vehicles": {
+    "equipmentTransportTruck": "Camion de transport d’équipements",
+    "materialTransportTruck": "Camion de transport de matériaux",
+    "peopleTransportVehicle": "Véhicules de transport de personnes"
+  },
+  "machines": {
+    "loader": "Chargeuse",
+    "planer": "Raboteuse",
+    "excavator": "Pelle mécanique",
+    "bucketTruck": "Camion nacelle",
+    "bulldozer": "Bulldozer",
+    "scraper": "Scraper",
+    "compactor": "Rouleau compresseur",
+    "dumper": "Dumper",
+    "grader": "Niveleuse",
+    "trencher": "Trancheuse",
+    "compressor": "Compresseur",
+    "generator": "Génératrice",
+    "palletTruck": "Transpalette mécanique"
+  },
+  "origin": {
+    "all": "Toutes",
+    "switzerland": "Suisse",
+    "eu": "EU",
+    "america": "Amérique",
+    "asia": "Asie"
+  },
+  "documents": {
+    "none": "Aucun",
+    "quote": "Devis",
+    "offer": "Offre",
+    "proformaInvoice": "Facture proforma"
+  }
 }

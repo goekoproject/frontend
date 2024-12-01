@@ -214,15 +214,28 @@
     "website": "Website",
     "yourLocation": "Select country and province",
     "notification": "Notification",
-    "financialName": "Financial and Institucional name",
     "contactPerson": "Contact person",
-    "buildingFounding" : "Building founding",
+    "financialName": "Financial and Institucional name",
+    "requiredDocumentsFunding": "Required document related to the object",
+    "amountRequiredFunding": "Amount required for the request to be considered",
+    "currencyFunding": "Currency",
+    "buildingFounding": "Building founding",
     "workTypes": "Work types",
-    "buildingTypes" : "Building types",
-    "targetRegion" : "Target region",
+    "buildingTypes": "Building types",
+    "targetRegion": "Target region",
     "ownerProfile": "Owner profile",
-    "contact" : "Contact",
-    "montanMinimun" : "Minimum quantity"
+    "contact": "Contact",
+    "montanMinimun": "Minimum quantity"
+  },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Select categories and products corresponding to your project",
+    "vehicles": "Vehicles",
+    "machines": "Machines",
+    "greenBonus": "Green bonus",
+    "targetRegion": "Target region",
+    "activityProspect": "Minimum number of years of activity required for the prospect",
+    "originObject": "Origin of the object",
+    "balanceSheet": "Balance sheet and income statement required"
   },
   "HOME": {
     "btnCleantech": "Find leads",
@@ -274,7 +287,7 @@
     "favourites": "Favourites"
   },
   "MENU_USER_BANK": {
-    "buttonSearch":"Present your financial solutions",
+    "buttonSearch": "Present your financial solutions",
     "titleCard": "Financing",
     "subtitleCard": "Highlight the financial solutions that your institution wishes to promote"
   },
@@ -625,5 +638,38 @@
   "yourEcosolution": "Your Eco-solution",
   "yourProjects": "Your projects",
   "your_ecosolutions": "Your Eco-solutions",
-  "characters": "{{num}} characters"
+  "characters": "{{num}} characters",
+  "vehicles": {
+    "equipmentTransportTruck": "Equipment Transport Truck",
+    "materialTransportTruck": "Material Transport Truck",
+    "peopleTransportVehicle": "People Transport Vehicle"
+  },
+  "machines": {
+    "loader": "Loader",
+    "planer": "Planer",
+    "excavator": "Excavator",
+    "bucketTruck": "Bucket Truck",
+    "bulldozer": "Bulldozer",
+    "scraper": "Scraper",
+    "compactor": "Compactor",
+    "dumper": "Dumper",
+    "grader": "Grader",
+    "trencher": "Trencher",
+    "compressor": "Compressor",
+    "generator": "Generator",
+    "palletTruck": "Pallet Truck"
+  },
+  "origin": {
+    "all": "All",
+    "switzerland": "Switzerland",
+    "eu": "EU",
+    "america": "America",
+    "asia": "Asia"
+  },
+  "documents": {
+    "none": "None",
+    "quote": "Quote",
+    "offer": "Offer",
+    "proformaInvoice": "Proforma Invoice"
+  }
 }
