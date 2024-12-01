@@ -7,6 +7,7 @@ export class FundingService {
   private readonly dbName = 'FundingDB'
   private readonly dbVersion = 1
 
+  private readonly stores = ['sustainble-equipment', 'real-state-loan']
   constructor(@Optional() @Inject(STORE_NAME) private storeName: string) {}
 
   saveData(data: any): Observable<void> {
@@ -19,8 +20,9 @@ export class FundingService {
 
       request.onsuccess = (event: Event) => {
         const db = (event.target as IDBOpenDBRequest).result
-
-        this.addData(db, data, observer)
+        if (data) {
+          this.addData(db, data, observer)
+        }
       }
 
       request.onerror = (event: Event) => {
@@ -31,9 +33,11 @@ export class FundingService {
 
   private initializeDatabase(request: IDBOpenDBRequest): void {
     const db = request.result
-    if (!db.objectStoreNames.contains(this.storeName)) {
-      db.createObjectStore(this.storeName, { keyPath: 'id', autoIncrement: true })
-    }
+    this.stores.forEach((storeName) => {
+      if (!db.objectStoreNames.contains(storeName)) {
+        db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true })
+      }
+    })
   }
 
   private addData(db: IDBDatabase, data: any, observer: any): void {
@@ -51,14 +55,14 @@ export class FundingService {
     }
   }
 
-  getData(id: number): Observable<any> {
+  getData(id: number, storeName: string): Observable<any> {
     return new Observable((observer) => {
       const request = indexedDB.open(this.dbName, this.dbVersion)
 
       request.onsuccess = (event: Event) => {
         const db = (event.target as IDBOpenDBRequest).result
-        const transaction = db.transaction([this.storeName], 'readonly')
-        const store = transaction.objectStore(this.storeName)
+        const transaction = db.transaction([storeName], 'readonly')
+        const store = transaction.objectStore(storeName)
         const getRequest = store.get(id)
 
         getRequest.onsuccess = () => {
@@ -67,32 +71,6 @@ export class FundingService {
         }
 
         getRequest.onerror = (event: Event) => {
-          observer.error((event.target as IDBRequest).error)
-        }
-      }
-
-      request.onerror = (event: Event) => {
-        observer.error((event.target as IDBOpenDBRequest).error)
-      }
-    })
-  }
-
-  getAllData(): Observable<any[]> {
-    return new Observable((observer) => {
-      const request = indexedDB.open(this.dbName, this.dbVersion)
-
-      request.onsuccess = (event: Event) => {
-        const db = (event.target as IDBOpenDBRequest).result
-        const transaction = db.transaction([this.storeName], 'readonly')
-        const store = transaction.objectStore(this.storeName)
-        const getAllRequest = store.getAll()
-
-        getAllRequest.onsuccess = () => {
-          observer.next(getAllRequest.result)
-          observer.complete()
-        }
-
-        getAllRequest.onerror = (event: Event) => {
           observer.error((event.target as IDBRequest).error)
         }
       }

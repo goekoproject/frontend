@@ -672,5 +672,7 @@
     "quote": "Quote",
     "offer": "Offer",
     "proformaInvoice": "Proforma Invoice"
-  }
+  },
+  "sustainableEquipment": "Sustainable equipment",
+  "realStateLoan": "Real state loan"
 }

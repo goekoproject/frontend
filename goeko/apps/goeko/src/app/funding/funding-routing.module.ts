@@ -22,17 +22,17 @@ const routes: Routes = [
       {
         path: '',
         component: SustainbleEquipmentFormComponent,
-        title: 'Sustainable equipment',
+        title: 'sustainableEquipment',
       },
       {
         path: 'sustainable-equipment',
         component: SustainbleEquipmentFormComponent,
-        title: 'Sustainable equipment',
+        title: 'sustainableEquipment',
       },
       {
         path: 'real-state-loan',
         component: RealStateLoanComponent,
-        title: 'Real state loan',
+        title: 'realsStateLoan',
       },
     ],
   },
