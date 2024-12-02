@@ -677,20 +677,25 @@
   "sustainableEquipment": "Equipos sostenibles",
   "realStateLoan": "Préstamo inmobiliario",
   "worktypes": {
-    "all": "Todos",
-    "aticInsulation": "Aislamiento de áticos",
-    "wallInsulation": "Aislamiento de paredes",
-    "backhoe": "Retroexcavadora",
-    "backhoeLoader": "Retroexcavadora cargadora",
-    "scraper": "Rascador",
-    "dumper": "Volquete",
-    "trancheuse": "Trancheuse"
+    "all": "All",
+    "atticInsulation": "Aislamiento del ático",
+    "wallInsulation" : "Aislamiento de paredes",
+    "floorInsulation" : "Aislamiento del suelo",
+    "installationHeatPump" : "Instalación de una bomba de calor",
+    "replacementWindows": "Sustitución de ventanas",
+    "installationShuttersSolarProtection": "Instalación de persianas o protección solar",
+    "replacementBoiler": "Sustitución de la caldera",
+    "solarThermalPanels": "Paneles solares o térmicos",
+    "woodBiomassBoiler": "Caldera de leña o biomasa",
+    "lowenergyLighting": "Iluminación de bajo consumo",
+    "thermodynamicSolarWaterHeater": "Calentador de agua termodinámico o solar",
+    "installationDualflowVentilation": "Instalación de ventilación de doble flujo",
+    "homeAutomationSystems": "Sistemas de domótica"
   },
   "buildingtypes": {
-    "commercial": "Comercial",
-    "private": "Privado",
-    "excavator": "Excavadora",
-    "conceptx": "Concepto x"
+    "residential": "Residencial",
+    "mixed-use": "Uso mixto",
+    "commercial": "Comercial"
   },
   "ownerprofiles": {
     "individual": "Particular",
