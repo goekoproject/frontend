@@ -282,7 +282,8 @@
   "MENU_USER_BANK": {
     "buttonSearch": "Sie Ihre finanziellen Lösungen",
     "titleCard": "Finanzierung",
-    "subtitleCard": "Heben Sie die finanziellen Lösungen hervor, die Ihre Institution fördern möchte"
+    "subtitleCard": "Heben Sie die finanziellen Lösungen hervor, die Ihre Institution fördern möchte",
+    "funding": "Finanzierung"
   },
   "MENU_USER_SME": {
     "titleCard": "Erstellen Sie ein Projekt",
@@ -346,6 +347,7 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Wählen Sie eine Option",
+    "defaultLabelMulti": "Wählen Sie eine oder mehrere Optionen",
     "fiveBetweenTen": "Zwischen 5 und 10 Jahren",
     "greenWaste": {
       "greenWoodUntreated": "Grünes Holz (unbehandelt)",
@@ -669,12 +671,14 @@
     "offer": "Offerte",
     "proformaInvoice": "Proforma-Rechnung"
   },
+  "sustainableEquipment": "Nachhaltige Ausrüstung",
+  "realStateLoan": "Immobilienkredit",
   "worktypes": {
     "all": "All",
     "atticInsulation": "Dachbodenisolierung",
-    "wallInsulation" : "Wandisolierung",
-    "floorInsulation" : "Bodenisolierung",
-    "installationHeatPump" : "Installation einer Wärmepumpe",
+    "wallInsulation": "Wandisolierung",
+    "floorInsulation": "Bodenisolierung",
+    "installationHeatPump": "Installation einer Wärmepumpe",
     "replacementWindows": "Austausch der Fenster",
     "installationShuttersSolarProtection": "Installation von Rollläden oder Sonnenschutz",
     "replacementBoiler": "Austausch des Heizkessels",
@@ -688,7 +692,15 @@
   "buildingtypes": {
     "residential": "Wohngebiet",
     "mixed-use": "Gemischt",
-    "commercial": "Gewerblich"
+    "commercial": "Gewerblich",
+    "all": "Alle",
+    "aticInsulation": "Atische Isolierung",
+    "wallInsulation": "Wandisolierung",
+    "backhoe": "Bagger",
+    "backhoeLoader": "Baggerlader",
+    "scraper": "Abstreifer",
+    "dumper": "Dumper",
+    "trancheuse": "Trancheuse"
   },
   "ownerprofiles": {
     "individual": "Privatperson",

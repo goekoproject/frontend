@@ -284,7 +284,8 @@
   "MENU_USER_BANK": {
     "buttonSearch": "Presente sus soluciones financieras",
     "titleCard": "Financiación",
-    "subtitleCard": "Destaque las soluciones financieras que su institución desea promover"
+    "subtitleCard": "Destaque las soluciones financieras que su institución desea promover",
+    "funding": "Financiación"
   },
   "MENU_USER_SME": {
     "titleCard": "Crea un proyecto",
@@ -348,6 +349,7 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Seleccione una opción",
+    "defaultLabelMulti": "Seleccione una o más opciones",
     "fiveBetweenTen": "Entre 5 y 10 años",
     "greenWaste": {
       "greenWoodUntreated": "Madera verde (no tratada)",
@@ -672,26 +674,23 @@
     "offer": "Oferta",
     "proformaInvoice": "Factura proforma"
   },
+  "sustainableEquipment": "Equipos sostenibles",
+  "realStateLoan": "Préstamo inmobiliario",
   "worktypes": {
-    "all": "All",
-    "atticInsulation": "Aislamiento del ático",
-    "wallInsulation" : "Aislamiento de paredes",
-    "floorInsulation" : "Aislamiento del suelo",
-    "installationHeatPump" : "Instalación de una bomba de calor",
-    "replacementWindows": "Sustitución de ventanas",
-    "installationShuttersSolarProtection": "Instalación de persianas o protección solar",
-    "replacementBoiler": "Sustitución de la caldera",
-    "solarThermalPanels": "Paneles solares o térmicos",
-    "woodBiomassBoiler": "Caldera de leña o biomasa",
-    "lowenergyLighting": "Iluminación de bajo consumo",
-    "thermodynamicSolarWaterHeater": "Calentador de agua termodinámico o solar",
-    "installationDualflowVentilation": "Instalación de ventilación de doble flujo",
-    "homeAutomationSystems": "Sistemas de domótica"
+    "all": "Todos",
+    "aticInsulation": "Aislamiento de áticos",
+    "wallInsulation": "Aislamiento de paredes",
+    "backhoe": "Retroexcavadora",
+    "backhoeLoader": "Retroexcavadora cargadora",
+    "scraper": "Rascador",
+    "dumper": "Volquete",
+    "trancheuse": "Trancheuse"
   },
   "buildingtypes": {
-    "residential": "Residencial",
-    "mixed-use": "Uso mixto",
-    "commercial": "Comercial"
+    "commercial": "Comercial",
+    "private": "Privado",
+    "excavator": "Excavadora",
+    "conceptx": "Concepto x"
   },
   "ownerprofiles": {
     "individual": "Particular",

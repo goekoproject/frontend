@@ -215,7 +215,7 @@
     "yourLocation": "Select country and province",
     "notification": "Notification",
     "contactPerson": "Contact person",
-    "nameSurname" : "Name and surname",
+    "nameSurname": "Name and surname",
     "financialName": "Financial and Institucional name",
     "requiredDocumentsFunding": "Required document related to the object",
     "amountRequiredFunding": "Amount required for the request to be considered",
@@ -290,7 +290,8 @@
   "MENU_USER_BANK": {
     "buttonSearch": "Present your financial solutions",
     "titleCard": "Financing",
-    "subtitleCard": "Highlight the financial solutions that your institution wishes to promote"
+    "subtitleCard": "Highlight the financial solutions that your institution wishes to promote",
+    "funding": "Funding"
   },
   "MENU_USER_SME": {
     "buttonSearch": "Add new project",
@@ -358,6 +359,7 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Select an option",
+    "defaultLabelMulti": "Select one or more options",
     "fiveBetweenTen": "Between 5 and 10 years",
     "greenWaste": {
       "greenWoodUntreated": "Green wood (untreated)",
@@ -673,12 +675,14 @@
     "offer": "Offer",
     "proformaInvoice": "Proforma Invoice"
   },
+  "sustainableEquipment": "Sustainable equipment",
+  "realStateLoan": "Real state loan",
   "worktypes": {
     "all": "All",
     "atticInsulation": "Attic insulation",
-    "wallInsulation" : "Wall insulation",
-    "floorInsulation" : "Floor insulation",
-    "installationHeatPump" : "Installation of a heat pump",
+    "wallInsulation": "Wall insulation",
+    "floorInsulation": "Floor insulation",
+    "installationHeatPump": "Installation of a heat pump",
     "replacementWindows": "Replacement of windows",
     "installationShuttersSolarProtection": "Installation of shutters or solar protection",
     "replacementBoiler": "Replacement of the boiler",
@@ -692,7 +696,14 @@
   "buildingtypes": {
     "residential": "Residential",
     "mixed-use": "Mixed-use",
-    "commercial": "Commercial"
+    "commercial": "Commercial",
+    "aticInsulation": "Atic insulation",
+    "wallInsulation": "Wall insulation",
+    "backhoe": "Backhoe",
+    "backhoeLoader": "Backhoe loader",
+    "scraper": "Scraper",
+    "dumper": "Dumper",
+    "trancheuse": "Trancheuse"
   },
   "ownerprofiles": {
     "individual": "Individual",

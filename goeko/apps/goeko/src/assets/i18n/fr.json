@@ -290,7 +290,8 @@
   "MENU_USER_BANK": {
     "buttonSearch": "Présentez vos solutions financières",
     "titleCard": "Financement",
-    "subtitleCard": "Mettez en avant les solutions financières que votre institution souhaite promouvoir"
+    "subtitleCard": "Mettez en avant les solutions financières que votre institution souhaite promouvoir",
+    "funding": "Financement"
   },
   "MENU_USER_SME": {
     "buttonSearch": "Ajoutez un nouveau projet",
@@ -358,6 +359,8 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Sélectionnez une option",
+    "defaultLabelMulti": "Sélectionnez une ou plusieurs options",
+
     "fiveBetweenTen": "Entre 5 et 10 années",
     "greenWaste": {
       "greenWoodUntreated": "Bois naturel​",
@@ -673,26 +676,23 @@
     "offer": "Offre",
     "proformaInvoice": "Facture proforma"
   },
+  "sustainableEquipment": "Équipement durable",
+  "realStateLoan": "Prêt immobilier",
   "worktypes": {
-    "all": "All",
-    "atticInsulation": "Isolation des combles",
-    "wallInsulation" : "Isolation des murs",
-    "floorInsulation" : "Isolation des sols",
-    "installationHeatPump" : "Installation d’une pompe à chaleur",
-    "replacementWindows": "Remplacement des fenêtres",
-    "installationShuttersSolarProtection": "Installation de volets ou protections solaires",
-    "replacementBoiler": "Remplacement de la chaudière",
-    "solarThermalPanels": "Panneaux solaires ou thermiques",
-    "woodBiomassBoiler": "Chaudière à bois ou biomasse",
-    "lowenergyLighting": "Eclairage basse consommation",
-    "thermodynamicSolarWaterHeater": "Chauffe-eau thermodynamique ou solaire",
-    "installationDualflowVentilation": "Installation d’une ventilation double flux",
-    "homeAutomationSystems": "Systèmes domotiques"
+    "all": "Toutes",
+    "aticInsulation": "Isolation de l'atic",
+    "wallInsulation": "Isolation des murs",
+    "backhoe": "Pelleteuse",
+    "backhoeLoader": "Chargeuse-pelleteuse",
+    "scraper": "Grattoir",
+    "dumper": "Dumper",
+    "trancheuse": "Basculeur"
   },
   "buildingtypes": {
-    "residential": "Résidentiel",
-    "mixed-use": "Mixte",
-    "commercial": "Commercial"
+    "commercial": "Commercial",
+    "private": "Privé",
+    "excavator": "Excavateur",
+    "conceptx": "Le concept x"
   },
   "ownerprofiles": {
     "individual": "Particulier",

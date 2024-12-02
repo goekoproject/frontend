@@ -53,6 +53,7 @@
     "marked": "^13.0.3",
     "ng-circle-progress": "^1.7.1",
     "ngx-editor": "^17.3.0",
+    "ngx-indexed-db": "^19.2.0",
     "resend": "^4.0.1-alpha.0",
     "rxjs": "~7.8.0",
     "rxjs-interop": "^2.0.0",
