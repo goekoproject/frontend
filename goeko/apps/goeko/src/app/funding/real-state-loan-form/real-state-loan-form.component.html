@@ -61,34 +61,21 @@
 
     <div class="flex">
       <div class="w-full">
-        <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
-          <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
-        </go-input>
-      </div>
-
-      <div class="w-full">
-        <go-input [formControlName]="'phoneNumber'" type="text">
-          <span slot="label">
-            {{ 'FORM_LABEL.phoneNumber' | translate }}
-          </span>
-          <p class="required-field" slot="required">{{ 'mandatory' | translate }}</p>
+        <go-input [formControlName]="'contactPerson'" id="contactPerson" type="contactPerson">
+          <p slot="label">{{ 'FORM_LABEL.contactPerson' | translate }}</p>
         </go-input>
       </div>
     </div>
-  </fieldset>
-
-  <fieldset>
-    <legend>{{ 'FORM_LABEL.contact' | translate }}</legend>
 
     <div class="flex">
       <div class="w-full">
-        <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
+        <go-input [formControlName]="'email'" id="email" type="email" placeholder="email@gmail.com">
           <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
         </go-input>
       </div>
 
       <div class="w-full">
-        <go-input [formControlName]="'phoneNumber'" type="text">
+        <go-input [formControlName]="'phoneNumber'" type="text" placeholder="00 000 000 000">
           <span slot="label">
             {{ 'FORM_LABEL.phoneNumber' | translate }}
           </span>
@@ -97,6 +84,7 @@
       </div>
     </div>
   </fieldset>
+
 </form>
 <div class="mt-4 flex justify-between">
   <button go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>
