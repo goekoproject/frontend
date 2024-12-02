@@ -85,7 +85,7 @@ export class FundingService {
     })
   }
 
-  getAllDataFromStore(storeName: string): Observable<any[]> {
+  getAllDataFromStore(storeName: string): Observable<any> {
     return new Observable((observer) => {
       const request = indexedDB.open(this.dbName, this.dbVersion)
 
@@ -102,6 +102,32 @@ export class FundingService {
         }
 
         getAllRequest.onerror = (event: Event) => {
+          observer.error((event.target as IDBRequest).error)
+        }
+      }
+
+      request.onerror = (event: Event) => {
+        observer.error((event.target as IDBOpenDBRequest).error)
+      }
+    })
+  }
+
+  clearStore(storeName: string): Observable<void> {
+    return new Observable((observer) => {
+      const request = indexedDB.open(this.dbName, this.dbVersion)
+
+      request.onsuccess = (event: Event) => {
+        const db = (event.target as IDBOpenDBRequest).result
+        const transaction = db.transaction([storeName], 'readwrite')
+        const store = transaction.objectStore(storeName)
+        const clearRequest = store.clear()
+
+        clearRequest.onsuccess = () => {
+          observer.next()
+          observer.complete()
+        }
+
+        clearRequest.onerror = (event: Event) => {
           observer.error((event.target as IDBRequest).error)
         }
       }

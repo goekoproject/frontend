@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { RouterModule } from '@angular/router'
 import { BadgeModule, ButtonModule, GoILeavesComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { map } from 'rxjs'
+import { BehaviorSubject, map, switchMap } from 'rxjs'
 import { FundingService } from './funding.service'
 
 @Component({
@@ -15,11 +15,28 @@ import { FundingService } from './funding.service'
   templateUrl: './hub-funding.component.html',
   styleUrl: './hub-funding.component.scss',
 })
-export class HubFundingComponent {
+export class HubFundingComponent implements OnInit {
   private _fundingService = inject(FundingService)
 
-  sustainbleEquipment = toSignal(
-    this._fundingService.getAllDataFromStore('sustainble-equipment').pipe(map((data) => data[data.length - 1])),
+  private _refresh$ = new BehaviorSubject<void>(undefined)
+  storeSustainbleEquipmentData$ = this._refresh$.pipe(
+    switchMap(() => this._fundingService.getAllDataFromStore('sustainble-equipment')),
+    map((data) => data[0]),
   )
-  realStateLoan = toSignal(this._fundingService.getAllDataFromStore('real-state-loan').pipe(map((data) => data[data.length - 1])))
+  realStateLoanData$ = this._refresh$.pipe(
+    switchMap(() => this._fundingService.getAllDataFromStore('real-state-loan')),
+    map((data) => data[0]),
+  )
+
+  sustainbleEquipment = toSignal(this.storeSustainbleEquipmentData$)
+  realStateLoan = toSignal(this.realStateLoanData$)
+
+  ngOnInit(): void {
+    this._refresh$.next()
+  }
+  removeStoreData(storeName: string): void {
+    this._fundingService.clearStore(storeName).subscribe((res) => {
+      this._refresh$.next()
+    })
+  }
 }

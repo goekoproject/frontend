@@ -706,6 +706,7 @@
     "individual": "Privatperson",
     "PPE": "PPE",
     "realEstateCompany": "Immobiliengesellschaft",
-    "housingCooperative": "Wohnungsbaugenossenschaft "
-  }
+    "housingCooperative": "Wohnungsbaugenossenschaft"
+  },
+  "delete": "Löschen"
 }

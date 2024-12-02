@@ -710,5 +710,6 @@
     "PPE": "PPE",
     "realEstateCompany": "Real estate company",
     "housingCooperative": "Housing cooperative"
-  }
+  },
+  "delete": "Delete"
 }

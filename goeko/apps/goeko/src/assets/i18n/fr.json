@@ -699,5 +699,6 @@
     "PPE": "PPE",
     "realEstateCompany": "Société immobilière",
     "housingCooperative": "Coopérative de logement"
-  }
+  },
+  "delete": "Supprimer"
 }
