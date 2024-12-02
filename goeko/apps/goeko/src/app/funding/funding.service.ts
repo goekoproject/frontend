@@ -1,22 +1,26 @@
 import { Inject, Injectable, Optional } from '@angular/core'
+import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { Observable } from 'rxjs'
 import { STORE_NAME } from './funding-token.constants'
 
 @Injectable()
 export class FundingService {
+  private dbService = Inject(NgxIndexedDBService)
   private readonly dbName = 'FundingDB'
   private readonly dbVersion = 1
 
   private readonly stores = ['sustainble-equipment', 'real-state-loan']
-  constructor(@Optional() @Inject(STORE_NAME) private storeName: string) {}
+  constructor(@Optional() @Inject(STORE_NAME) private storeName: string) {
+    const request = indexedDB.open(this.dbName, this.dbVersion)
+
+    request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+      this.initializeDatabase(event.target as IDBOpenDBRequest)
+    }
+  }
 
   saveData(data: any): Observable<void> {
     return new Observable((observer) => {
       const request = indexedDB.open(this.dbName, this.dbVersion)
-
-      request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-        this.initializeDatabase(event.target as IDBOpenDBRequest)
-      }
 
       request.onsuccess = (event: Event) => {
         const db = (event.target as IDBOpenDBRequest).result
@@ -90,6 +94,7 @@ export class FundingService {
         const transaction = db.transaction([storeName], 'readonly')
         const store = transaction.objectStore(storeName)
         const getAllRequest = store.getAll()
+        request.result.close()
 
         getAllRequest.onsuccess = () => {
           observer.next(getAllRequest.result)

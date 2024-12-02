@@ -1,95 +1,44 @@
-    <form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
-      <fieldset>
-        <legend>{{ 'FORM_LABEL.buildingFounding' | translate }}</legend>
-        <span>{{ 'FORM_LABEL.workTypes' | translate }}</span>
-        <go-badge-group [formControlName]="'workTypes'" >
-          @for (worktype of workTypes(); track worktype.id) {
-            <go-badge  [value]="worktype.id" >{{ worktype.label | translate }}</go-badge>
+<form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
+  <fieldset>
+    <legend>{{ 'FORM_LABEL.buildingFounding' | translate }}</legend>
+    <span>{{ 'FORM_LABEL.workTypes' | translate }}</span>
+    <go-badge-group [formControlName]="'workTypes'">
+      @for (worktype of workTypes(); track worktype.id) {
+        <go-badge [value]="worktype">{{ worktype.label | translate }}</go-badge>
+      }
+    </go-badge-group>
+
+    <span>{{ 'FORM_LABEL.buildingTypes' | translate }}</span>
+    <go-badge-group [formControlName]="'buildingTypes'">
+      @for (buildingtype of buildingTypes(); track buildingtype.id) {
+        <go-badge [value]="buildingtype">{{ buildingtype.label | translate }}</go-badge>
+      }
+    </go-badge-group>
+  </fieldset>
+
+  <fieldset>
+    <legend>{{ 'FORM_LABEL.targetRegion' | translate }}</legend>
+    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+    <span>{{ 'FORM_LABEL.ownerProfile' | translate }}</span>
+
+    <go-badge-group [formControlName]="'ownerProfiles'">
+      @for (ownerProfile of ownerProfiles(); track ownerProfile.id) {
+        <go-badge [value]="ownerProfile">{{ ownerProfile.label | translate }}</go-badge>
+      }
+    </go-badge-group>
+    <div class="flex">
+      <div class="w-full">
+        <label for="montanMinimun">{{ 'FORM_LABEL.montanMinimun' | translate }}</label>
+        <ui-super-select
+          [readonly]="false"
+          [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+          [formControlName]="'montanMinimun'"
+          id="montanMinimun"
+          name="montanMinimun">
+          @for (money of amount(); track money.id; let first = $first) {
+            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
           }
-        </go-badge-group>
-
-        <span>{{ 'FORM_LABEL.buildingTypes' | translate }}</span>
-        <go-badge-group [formControlName]="'buildingTypes'" >
-          @for (buildingtype of buildingTypes(); track buildingtype.id) {
-            <go-badge [value]="buildingtype.id">{{ buildingtype.label | translate }}</go-badge>
-          }
-        </go-badge-group>
-      </fieldset>
-
-      <fieldset>
-        <legend>{{ 'FORM_LABEL.targetRegion' | translate }}</legend>
-        <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
-        <span>{{ 'FORM_LABEL.ownerProfile' | translate }}</span>
-
-        <go-badge-group [formControlName]="'ownerProfiles'">
-          @for (ownerProfile of ownerProfiles(); track ownerProfile.id) {
-            <go-badge [value]="ownerProfile.id" >{{ ownerProfile.label | translate }}</go-badge>
-          }
-        </go-badge-group>
-        <div class="flex">
-          <div class="w-full">
-            <label for="montanMinimun">{{ 'FORM_LABEL.montanMinimun' | translate }}</label>
-            <ui-super-select
-              [readonly]="false"
-              [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-              [formControlName]="'montanMinimun'"
-              id="montanMinimun"
-              name="montanMinimun">
-              @for (money of amount(); track money.id; let first = $first) {
-                <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
-              }
-            </ui-super-select>
-          </div>
-          <div class="w-full">
-            <label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
-            <ui-super-select
-              [readonly]="false"
-              [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
-              [formControlName]="'currency'"
-              id="currency"
-              name="currency"
-              [compareWith]="defaultSetCurrency">
-              @for (currency of currencys(); track currency.id) {
-                <super-option [value]="currency.label"> {{ currency.label }}</super-option>
-              }
-            </ui-super-select>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>{{ 'FORM_LABEL.contact' | translate }}</legend>
-
-        <div class="flex">
-          <div class="w-full">
-            <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
-              <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
-            </go-input>
-          </div>
-
-          <div class="w-full">
-            <go-input [formControlName]="'phoneNumber'" type="text">
-              <span slot="label">
-                {{ 'FORM_LABEL.phoneNumber' | translate }}
-              </span>
-              <p class="required-field" slot="required">{{ 'mandatory' | translate }}</p>
-            </go-input>
-
-          </div>
-        </div>
-      </fieldset>
-      <div class="actions-button">
-        <button
-          go-button
-          type="submit"
-          [disabled]="form.invalid">
-          {{ 'save' | translate }}
-        </button>
-        <button
-        go-button
-        type="submit"
-        [disabled]="form.invalid">
-        {{ 'skip' | translate }}
-      </button>
+        </ui-super-select>
       </div>
       <div class="w-full">
         <label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
@@ -100,13 +49,34 @@
           id="currency"
           name="currency"
           [compareWith]="defaultSetCurrency">
-          <super-option *ngFor="let option of dataSelect['currency']" [value]="option">
-            {{ option.keyLang | translate }}
-          </super-option>
+          @for (currency of currencys(); track currency.id) {
+            <super-option [value]="currency.label"> {{ currency.label }}</super-option>
+          }
         </ui-super-select>
       </div>
     </div>
   </fieldset>
+  <fieldset>
+    <legend>{{ 'FORM_LABEL.contact' | translate }}</legend>
+
+    <div class="flex">
+      <div class="w-full">
+        <go-input [formControlName]="'email'" id="email" type="email" autocomplete="username" name="email">
+          <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+        </go-input>
+      </div>
+
+      <div class="w-full">
+        <go-input [formControlName]="'phoneNumber'" type="text">
+          <span slot="label">
+            {{ 'FORM_LABEL.phoneNumber' | translate }}
+          </span>
+          <p class="required-field" slot="required">{{ 'mandatory' | translate }}</p>
+        </go-input>
+      </div>
+    </div>
+  </fieldset>
+
   <fieldset>
     <legend>{{ 'FORM_LABEL.contact' | translate }}</legend>
 

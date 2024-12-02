@@ -282,7 +282,8 @@
   "MENU_USER_BANK": {
     "buttonSearch": "Sie Ihre finanziellen Lösungen",
     "titleCard": "Finanzierung",
-    "subtitleCard": "Heben Sie die finanziellen Lösungen hervor, die Ihre Institution fördern möchte"
+    "subtitleCard": "Heben Sie die finanziellen Lösungen hervor, die Ihre Institution fördern möchte",
+    "funding": "Finanzierung"
   },
   "MENU_USER_SME": {
     "titleCard": "Erstellen Sie ein Projekt",

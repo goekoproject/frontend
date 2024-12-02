@@ -18,6 +18,8 @@ import { FundingService } from './funding.service'
 export class HubFundingComponent {
   private _fundingService = inject(FundingService)
 
-  sustainbleEquipment = toSignal(this._fundingService.getAllDataFromStore('sustainble-equipment').pipe(map((data) => data[0])))
-  realStateLoan = toSignal(this._fundingService.getAllDataFromStore('real-state-loan'))
+  sustainbleEquipment = toSignal(
+    this._fundingService.getAllDataFromStore('sustainble-equipment').pipe(map((data) => data[data.length - 1])),
+  )
+  realStateLoan = toSignal(this._fundingService.getAllDataFromStore('real-state-loan').pipe(map((data) => data[data.length - 1])))
 }

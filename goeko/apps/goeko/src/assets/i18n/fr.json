@@ -290,7 +290,8 @@
   "MENU_USER_BANK": {
     "buttonSearch": "Présentez vos solutions financières",
     "titleCard": "Financement",
-    "subtitleCard": "Mettez en avant les solutions financières que votre institution souhaite promouvoir"
+    "subtitleCard": "Mettez en avant les solutions financières que votre institution souhaite promouvoir",
+    "funding": "Financement"
   },
   "MENU_USER_SME": {
     "buttonSearch": "Ajoutez un nouveau projet",

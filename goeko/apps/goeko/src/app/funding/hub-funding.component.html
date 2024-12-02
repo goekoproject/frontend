@@ -1,5 +1,9 @@
 @if (sustainbleEquipment() || realStateLoan()) {
-  <ng-container *ngTemplateOutlet="cardSustainbleEquipment"></ng-container>
+  <div class="flex flex-col gap-4">
+    <ng-container *ngTemplateOutlet="cardSustainbleEquipment"></ng-container>
+
+    <ng-container *ngTemplateOutlet="cardRealStateLoan"></ng-container>
+  </div>
 } @else {
   <div class="dashboard-option">
     <div class="container p-10">
@@ -27,7 +31,7 @@
       </div>
     }
     <div class="flex flex-col gap-4">
-      <h3 class="text-lg font-semibold">{{ 'products' | translate }}</h3>
+      <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.products' | translate }}</h3>
 
       <div class="flex gap-8">
         <div class="flex flex-col gap-4">
@@ -38,7 +42,7 @@
               <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
             </div>
           }
-          <div>
+          <div class="flex gap-2">
             @for (vehicle of sustainbleEquipment()?.vehicles; track vehicle.id) {
               <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
                 <p>{{ vehicle.label | translate }}</p>
@@ -55,7 +59,7 @@
               <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
             </div>
           }
-          <div>
+          <div class="flex gap-2">
             @for (machine of sustainbleEquipment()?.machines; track machine.id) {
               <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
                 <p>{{ machine.label | translate }}</p>
@@ -68,4 +72,29 @@
   </div>
 </ng-template>
 
-{{ realStateLoan() | json }}
+<ng-template #cardRealStateLoan>
+  <div class="flex w-10/12 flex-col gap-6 rounded-2xl p-4 pb-10 shadow-xl">
+    <h2 class="text-2xl font-semibold">{{ 'realStateLoan' | translate }}</h2>
+    @for (location of realStateLoan()?.locations; track location?.country?.code) {
+      <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
+        <span class="fi fi-{{ location.country.code | lowercase }}"></span>
+        <p>{{ location.country.label }}</p>
+      </div>
+    }
+    <div class="flex flex-col gap-4">
+      <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.buildingFounding' | translate }}</h3>
+
+      <div class="flex flex-col gap-8">
+        <span class="text-grayText">{{ 'FORM_LABEL.workTypes' | translate }}</span>
+
+        <div class="flex gap-2">
+          @for (workType of realStateLoan()?.workTypes; track workType.id) {
+            <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
+              <p>{{ workType.label | translate }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

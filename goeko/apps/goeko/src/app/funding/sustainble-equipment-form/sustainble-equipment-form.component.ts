@@ -12,6 +12,7 @@ type Options = {
   label: string
   id: string
 }
+
 @Component({
   selector: 'goeko-sustainble-equipment-form',
   standalone: true,
@@ -83,7 +84,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
         }
       }),
     }
-    this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res) => {
+    this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
       console.log(res)
       this._goRealStateLoan()
     })
