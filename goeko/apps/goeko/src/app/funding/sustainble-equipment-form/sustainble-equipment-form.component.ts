@@ -72,6 +72,14 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   ngOnInit() {
     this._selectLocationsService.setUpCountries()
   }
+
+  toogleGrenBonusVehicle = (newValue: boolean) => {
+    this.form.get('greenBonusVehicle')?.setValue(newValue)
+  }
+  toogleGreenBonusMachine = (newValue: boolean) => {
+    this.form.get('greenBonusMachines')?.setValue(newValue)
+  }
+
   save = () => {
     const sustainbleEquipmentValue = {
       ...this.form.value,

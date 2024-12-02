@@ -9,7 +9,7 @@
           <go-badge [value]="vehicle" [id]="vehicle.id">{{ vehicle.label | translate }} </go-badge>
         }
       </go-badge-group>
-      <go-toggle-switch>
+      <go-toggle-switch (checkedChange)="toogleGrenBonusVehicle($event)">
         <span class="flex items-center gap-2">
           <go-i-leaves></go-i-leaves>
           <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
@@ -24,7 +24,7 @@
           <go-badge [value]="machine" [id]="machine.id">{{ machine.label | translate }} </go-badge>
         }
       </go-badge-group>
-      <go-toggle-switch>
+      <go-toggle-switch (checkedChange)="toogleGreenBonusMachine($event)">
         <span class="flex items-center gap-2">
           <go-i-leaves></go-i-leaves>
           <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
