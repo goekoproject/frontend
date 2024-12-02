@@ -32,7 +32,7 @@ const routes: Routes = [
       {
         path: 'real-state-loan',
         component: RealStateLoanComponent,
-        title: 'realsStateLoan',
+        title: 'realStateLoan',
       },
     ],
   },
