@@ -215,6 +215,7 @@
     "yourLocation": "Select country and province",
     "notification": "Notification",
     "contactPerson": "Contact person",
+    "nameSurname" : "Name and surname",
     "financialName": "Financial and Institucional name",
     "requiredDocumentsFunding": "Required document related to the object",
     "amountRequiredFunding": "Amount required for the request to be considered",
@@ -674,22 +675,29 @@
   },
   "worktypes": {
     "all": "All",
-    "aticInsulation": "Atic insulation",
+    "atticInsulation": "Attic insulation",
     "wallInsulation" : "Wall insulation",
-    "backhoe" : "Backhoe",
-    "backhoeLoader" : "Backhoe loader",
-    "scraper": "Scraper",
-    "dumper": "Dumper",
-    "trancheuse": "Trancheuse"
+    "floorInsulation" : "Floor insulation",
+    "installationHeatPump" : "Installation of a heat pump",
+    "replacementWindows": "Replacement of windows",
+    "installationShuttersSolarProtection": "Installation of shutters or solar protection",
+    "replacementBoiler": "Replacement of the boiler",
+    "solarThermalPanels": "Solar or thermal panels",
+    "woodBiomassBoiler": "Wood or biomass boiler",
+    "lowenergyLighting": "Low-energy lighting",
+    "thermodynamicSolarWaterHeater": "Thermodynamic or solar water heater",
+    "installationDualflowVentilation": "Installation of dual-flow ventilation",
+    "homeAutomationSystems": "Home automation systems"
   },
   "buildingtypes": {
-    "commercial": "Commercial",
-    "private": "Private",
-    "excavator": "Excavator",
-    "conceptx" : "Concept x"
+    "residential": "Residential",
+    "mixed-use": "Mixed-use",
+    "commercial": "Commercial"
   },
   "ownerprofiles": {
-    "ppe": "Commercial",
-    "conceptx": "concept x"
+    "individual": "Individual",
+    "PPE": "PPE",
+    "realEstateCompany": "Real estate company",
+    "housingCooperative": "Housing cooperative"
   }
 }

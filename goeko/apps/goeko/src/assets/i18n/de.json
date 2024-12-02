@@ -670,23 +670,30 @@
     "proformaInvoice": "Proforma-Rechnung"
   },
   "worktypes": {
-    "all": "Alle",
-    "aticInsulation": "Atische Isolierung",
+    "all": "All",
+    "atticInsulation": "Dachbodenisolierung",
     "wallInsulation" : "Wandisolierung",
-    "backhoe" : "Bagger",
-    "backhoeLoader" : "Baggerlader",
-    "scraper": "Abstreifer",
-    "dumper": "Dumper",
-    "trancheuse": "Trancheuse"
+    "floorInsulation" : "Bodenisolierung",
+    "installationHeatPump" : "Installation einer Wärmepumpe",
+    "replacementWindows": "Austausch der Fenster",
+    "installationShuttersSolarProtection": "Installation von Rollläden oder Sonnenschutz",
+    "replacementBoiler": "Austausch des Heizkessels",
+    "solarThermalPanels": "Solar- oder Wärmepaneele",
+    "woodBiomassBoiler": "Holz- oder Biomassekessel",
+    "lowenergyLighting": "Energiesparende Beleuchtung",
+    "thermodynamicSolarWaterHeater": "Thermodynamischer oder solarbetriebener Warmwasserbereiter",
+    "installationDualflowVentilation": "Installation einer doppelten Belüftung",
+    "homeAutomationSystems": "Domotische Systeme"
   },
   "buildingtypes": {
-    "commercial": "Kommerziell",
-    "private": "Privat",
-    "excavator": "Excavator",
-    "conceptx" : "Konzept x"
+    "residential": "Wohngebiet",
+    "mixed-use": "Gemischt",
+    "commercial": "Gewerblich"
   },
   "ownerprofiles": {
-    "ppe": "Kommerziell",
-    "conceptx": "Konzept x"
+    "individual": "Privatperson",
+    "PPE": "PPE",
+    "realEstateCompany": "Immobiliengesellschaft",
+    "housingCooperative": "Wohnungsbaugenossenschaft "
   }
 }

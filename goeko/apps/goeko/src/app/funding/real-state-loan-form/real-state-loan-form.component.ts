@@ -52,7 +52,6 @@ export class RealStateLoanComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this._initMockValues();
     this._buildFrom()
   }
 
@@ -66,18 +65,13 @@ export class RealStateLoanComponent implements OnInit {
       buildingTypes: this._fb.control(null),
       ownerProfiles: this._fb.control(null),
       locations: this._fb.array([]),
-      currency: ['', Validators.required],
-      montanMinimun: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
+      currency: [''],
+      montanMinimun: [''],
+      contactPerson: [''],
+      email: ['', [Validators.email]],
       phoneNumber: ['', Validators.pattern(/^[0-9]{10,15}$/)],
     })
 
-  }
-
-  private _initMockValues() {
-    // this.workTypes = MOCK_WORKTYPES
-    // this.buildingTypes = MOCK_BUILDINGTYPES
-    // this.ownerProfiles = MOCK_OWNER_PROFILES
   }
 
 }

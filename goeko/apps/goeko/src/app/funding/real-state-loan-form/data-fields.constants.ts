@@ -1,32 +1,32 @@
 export const WORKTYPES = [
   { label: 'all', id: window.crypto.randomUUID() },
-  { label: 'worktypes.aticInsulation', id: window.crypto.randomUUID() },
+  { label: 'worktypes.atticInsulation', id: window.crypto.randomUUID() },
   { label: 'worktypes.wallInsulation', id: window.crypto.randomUUID() },
-  { label: 'worktypes.backhoe', id: window.crypto.randomUUID() },
-  { label: 'worktypes.backhoeLoader', id: window.crypto.randomUUID() },
-  { label: 'worktypes.scraper', id: window.crypto.randomUUID() },
-  { label: 'worktypes.backhoeLoader', id: window.crypto.randomUUID() },
-  { label: 'worktypes.scraper', id: window.crypto.randomUUID() },
-  { label: 'worktypes.dumper', id: window.crypto.randomUUID() },
-  { label: 'worktypes.trancheuse', id: window.crypto.randomUUID() },
+  { label: 'worktypes.floorInsulation', id: window.crypto.randomUUID() },
+  { label: 'worktypes.installationHeatPump', id: window.crypto.randomUUID() },
+  { label: 'worktypes.replacementWindows', id: window.crypto.randomUUID() },
+  { label: 'worktypes.installationShuttersSolarProtection', id: window.crypto.randomUUID() },
+  { label: 'worktypes.replacementBoiler', id: window.crypto.randomUUID() },
+  { label: 'worktypes.solarThermalPanels', id: window.crypto.randomUUID() },
+  { label: 'worktypes.woodBiomassBoiler', id: window.crypto.randomUUID() },
+  { label: 'worktypes.lowenergyLighting', id: window.crypto.randomUUID() },
+  { label: 'worktypes.thermodynamicSolarWaterHeater', id: window.crypto.randomUUID() },
+  { label: 'worktypes.installationDualflowVentilation', id: window.crypto.randomUUID() },
+  { label: 'worktypes.homeAutomationSystems', id: window.crypto.randomUUID() },
+
 
 ]
 export const BUILDINGTYPES = [
+  { label: 'buildingtypes.residential', id: window.crypto.randomUUID() },
+  { label: 'buildingtypes.mixed-use', id: window.crypto.randomUUID() },
   { label: 'buildingtypes.commercial', id: window.crypto.randomUUID() },
-  { label: 'buildingtypes.private', id: window.crypto.randomUUID() },
-  { label: 'buildingtypes.excavator', id: window.crypto.randomUUID() },
-  { label: 'buildingtypes.conceptx', id: window.crypto.randomUUID() },
-  { label: 'buildingtypes.conceptx', id: window.crypto.randomUUID() },
-  { label: 'buildingtypes.conceptx', id: window.crypto.randomUUID() },
-  { label: 'buildingtypes.conceptx', id: window.crypto.randomUUID() },
-
 ]
 
 export const OWNERPROFILES = [
-  { label: 'ownerprofiles.ppe', id: window.crypto.randomUUID() },
-  { label: 'ownerprofiles.conceptx', id: window.crypto.randomUUID() },
-  { label: 'ownerprofiles.conceptx', id: window.crypto.randomUUID() },
-  { label: 'ownerprofiles.conceptx', id: window.crypto.randomUUID() },
+  { label: 'ownerprofiles.individual', id: window.crypto.randomUUID() },
+  { label: 'ownerprofiles.PPE', id: window.crypto.randomUUID() },
+  { label: 'ownerprofiles.realEstateCompany', id: window.crypto.randomUUID() },
+  { label: 'ownerprofiles.housingCooperative', id: window.crypto.randomUUID() },
 ]
 
 
