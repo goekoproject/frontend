@@ -28,6 +28,7 @@ export class ProjectCatalogDetailComponent {
   public dataSelect = DataSelect as any
   public CATEGORIES = signal(CATEGORIES)
   ecosolutionSearchDetail = input.required<EcosolutionSearchResponse>()
+  ecosolutionId = input.required<string>()
 
   goBack = () => window.history.back()
 

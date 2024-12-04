@@ -1,0 +1,20 @@
+
+.wrapper-form-bank {
+  @apply flex flex-col;
+}
+
+.bank-form {
+  border-radius: 12px;
+  background: #fff;
+  padding: 2rem;  
+  @apply max-w-[57rem];
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}
+
+
+
