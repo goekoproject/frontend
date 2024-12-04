@@ -302,6 +302,15 @@
     "14": "Leben unter Wasser",
     "15": "Leben an Land"
   },
+  "PASSWORD_POLICY": {
+    "passwordRequirement": "Dein Passwort muss enthalten:",
+    "eightChars": "Mindestens 8 Zeichen",
+    "requirementTypes": "Mindestens 3 der folgenden:",
+    "lowerCase": "Kleinbuchstaben (a-z)",
+    "upperCase": "Großbuchstaben (A-Z)",
+    "numbers": "Zahlen (0-9)",
+    "specialChars": "Sonderzeichen (z. B. !@#$%^&*)"
+  },
   "PRODUCT_ACTIONS": {
     "addProduct": "Aktualisieren"
   },

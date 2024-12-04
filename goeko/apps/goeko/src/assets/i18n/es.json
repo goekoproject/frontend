@@ -304,6 +304,15 @@
     "14": "Vida submarina",
     "15": "Vida de ecosistemas terrestres"
   },
+  "PASSWORD_POLICY": {
+    "passwordRequirement": "Tu contraseña debe contener:",
+    "eightChars": "Al menos 8 caracteres",
+    "requirementTypes": "Al menos 3 de los siguientes:",
+    "lowerCase": "Letras minúsculas (a-z)",
+    "upperCase": "Letras mayúsculas (A-Z)",
+    "numbers": "Números (0-9)",
+    "specialChars": "Caracteres especiales (por ejemplo, !@#$%^&*)"
+  },
   "PRODUCT_ACTIONS": {
     "addProduct": "Actualizar"
   },

@@ -303,6 +303,15 @@
     "ods_8": "Travail décent et croissance économique",
     "ods_9": "Industrie, innovation et infrastructure"
   },
+  "PASSWORD_POLICY": {
+    "passwordRequirement": "Votre mot de passe doit contenir:",
+    "eightChars": "Au moins 8 caractères",
+    "requirementTypes": "Au moins 3 des éléments suivants:",
+    "lowerCase": "Lettres minuscules (a-z)",
+    "upperCase": "Lettres majuscules (A-Z)",
+    "numbers": "Chiffres (0-9)",
+    "specialChars": "Caractères spéciaux (par exemple, !@#$%^&*)"
+  },
   "PRODUCT_ACTIONS": {
     "addProduct": "Actualiser"
   },
