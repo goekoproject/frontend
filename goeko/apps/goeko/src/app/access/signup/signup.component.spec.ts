@@ -11,6 +11,7 @@ import { ButtonModule, DialogMessageModule, DialogService, GoInputModule } from 
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
 import { AccessService } from '../access.services'
+import { PasswordPolicyComponent } from '../password-policy/password-policy.component'
 import { SignupComponent } from './signup.component'
 import { TermsOfServicesComponent } from './terms-of-services.component'
 
@@ -31,7 +32,15 @@ describe('SignupComponent', () => {
       }),
     }
     await TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([]), ReactiveFormsModule, ButtonModule, GoInputModule, TranslateModule.forRoot(), DialogMessageModule],
+      imports: [
+        RouterModule.forRoot([]),
+        ReactiveFormsModule,
+        PasswordPolicyComponent,
+        ButtonModule,
+        GoInputModule,
+        TranslateModule.forRoot(),
+        DialogMessageModule,
+      ],
       declarations: [SignupComponent],
       providers: [
         provideHttpClient(withInterceptors([handlerHttpInterceptor])),
