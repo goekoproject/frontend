@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, Component, Input, OnInit, effect } from '@angular/core'
+import { ChangeDetectionStrategy, Component, OnInit, effect, input } from '@angular/core'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LeadCreate, LeadService, UserService } from '@goeko/store'
 import { ButtonModule, DialogConfig, DialogMessageService, GoInputModule } from '@goeko/ui'
@@ -20,8 +20,8 @@ interface LeadForm {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeadFormComponent implements OnInit {
-  @Input() ecosolutionId!: string
-  @Input() cleantechId!: string
+  ecosolutionId = input.required<string>()
+  cleantechId = input.required<string>()
 
   public leadForm!: FormGroup
   private dataLead!: LeadCreate
@@ -50,9 +50,9 @@ export class LeadFormComponent implements OnInit {
 
   private _buildDataLead() {
     this.dataLead = {
-      cleantechId: this.cleantechId,
+      cleantechId: this.cleantechId(),
       smeId: this._userService.userProfile().id,
-      ecosolutionId: this.ecosolutionId,
+      ecosolutionId: this.ecosolutionId(),
       message: '',
     }
   }
