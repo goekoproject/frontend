@@ -348,7 +348,7 @@
       "ecoFriendlytaps": "Eco-friendly taps",
       "greenRoofsWalls": "Green roofs and walls",
       "waterManagement": "Solutions for rainwater management",
-      "waterManagementWastewater": "Solutions for waste water management"
+      "waterManagementWastewater": "Solutions for gray water management"
     },
     "selectCountry": {
       "france": "France",
@@ -438,7 +438,7 @@
       "admixtures": "Admixtures",
       "aerosol": "Aerosol",
       "batteries": "Batteries and accumulators containing hazardous substances",
-      "bituminousProductsContainingHAPs": "Bituminous products containing PHAs",
+      "bituminousProductsContainingHAPs": "Bituminous products containing HAPs",
       "cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
       "collects": "Adhesive",
       "curingProducts": "Curing products",
