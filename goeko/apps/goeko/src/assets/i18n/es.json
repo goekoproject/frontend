@@ -106,7 +106,7 @@
       "question": "Residuos especiales"
     },
     "sustainableBuildingOperations": {
-      "label": "Para la explotación de edificios o movilidad sostenible, su eco-solución permite:",
+      "label": "Para la explotación de edificios o movilidad sostenible esta solución cleantech permite:",
       "question": "Soluciones para las operaciones de edificios y la movilidad suave"
     }
   },
@@ -216,7 +216,8 @@
     "certified": "Seleccione su certificado",
     "image": "Arrastra y suelta o haz click para",
     "image2": "Selecciona una imagen",
-    "image3": "Añadir imagen"
+    "image3": "Añadir imagen",
+    "selectLogo": "Selecciona su logo"
   },
   "LANGS": {
     "de": "Alemán",
@@ -302,6 +303,15 @@
     "13": "Acción por el clima",
     "14": "Vida submarina",
     "15": "Vida de ecosistemas terrestres"
+  },
+  "PASSWORD_POLICY": {
+    "passwordRequirement": "Tu contraseña debe contener:",
+    "eightChars": "Al menos 8 caracteres",
+    "requirementTypes": "Al menos 3 de los siguientes:",
+    "lowerCase": "Letras minúsculas (a-z)",
+    "upperCase": "Letras mayúsculas (A-Z)",
+    "numbers": "Números (0-9)",
+    "specialChars": "Caracteres especiales (por ejemplo, !@#$%^&*)"
   },
   "PRODUCT_ACTIONS": {
     "addProduct": "Actualizar"
@@ -608,5 +618,6 @@
   "results": "resultados",
   "resultSolution": "resultado",
   "yourProjects": "Tus proyectos",
-  "backToResults": "Volver a los resultados"
+  "backToResults": "Volver a los resultados",
+  "characters": "{{num}} caracteres"
 }

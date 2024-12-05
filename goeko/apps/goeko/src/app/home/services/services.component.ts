@@ -6,6 +6,19 @@ import { map } from 'rxjs';
 import { HeaderService } from '../header/header.services';
 import { Services } from './services.model';
 
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+
+
+
+const options = {
+  renderNode: {
+    [BLOCKS.UL_LIST]: (node:any, next:any) => `<custom-paragraph>${next(node.content)}</custom-paragraph><br>`,
+    [BLOCKS.PARAGRAPH]: (node:any, next:any) => `<custom-paragraph>${next(node.content)}</custom-paragraph><br>`
+  },
+   preserveWhitespace: true
+}
+
 const CONTENT_TYPE_ENTERPRISE = 'services';
 const CONTENT_TYPE_CLEANTECH = 'cleanTechServices';
 
@@ -50,6 +63,13 @@ export class ServicesComponent implements OnInit {
       this.enterprise = new Services(items[0]) : this.cleanTech = new Services(items[0])
     });
   }
+
+  _returnHtmlFromRichText(richText: any) {
+    if (richText === undefined || richText === null || richText.nodeType !== 'document') {
+      return '<p>Error</p>';
+    }
+    return documentToHtmlString(richText, options);
+}
 
   private _onChangeLang() {
     this._translateServices.onLangChange.subscribe((res) => {

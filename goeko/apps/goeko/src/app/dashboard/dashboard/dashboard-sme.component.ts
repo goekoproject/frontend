@@ -10,6 +10,7 @@ import { DashboardSmeService } from './dashboard-sme.service'
   templateUrl: './dashboard-sme.component.html',
   styleUrls: ['./dashboard-sme.component.scss'],
   providers: [MessageService, DashboardSmeService, EcosolutionsTaggingService],
+  
 })
 export class DashboardSmeComponent {
   private _dashboardSmeService = inject(DashboardSmeService)

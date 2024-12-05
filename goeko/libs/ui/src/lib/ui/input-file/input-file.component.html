@@ -22,7 +22,7 @@
           @if (this.multiple) {
             <a>{{ 'INPUT_FILE.image3' | translate }}</a>
           } @else {
-            <a>{{ 'INPUT_FILE.image2' | translate }}</a>
+            <a>{{ textButton() | translate }}</a>
           }
           @if (multiple) {
             <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)" multiple />

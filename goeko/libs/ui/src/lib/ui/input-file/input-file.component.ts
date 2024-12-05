@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, signal } from '@angular/core'
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, input, signal } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
 import { EmblaCarouselDirective } from 'embla-carousel-angular'
 import { ThumbCarrouselDirective } from './thumb-carrousel.directive'
@@ -53,6 +53,7 @@ export class InputFileComponent {
   @Input()
   label!: string
 
+  textButton = input('INPUT_FILE.image2')
   selectedSlideMain = signal<number>(this._selectedSlideMain)
 
   private _processFilesUrl(value: string | string[]) {
