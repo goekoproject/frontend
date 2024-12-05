@@ -475,7 +475,9 @@
       "storeEnergy": "Almacenar energía",
       "sustainableLightingSystems": "Sistemas de iluminación sostenibles",
       "useLowConsumptionLighting": "Soluciones de enfriamiento ecológicas",
-      "useRenewableEnergies": "Utilizar energías renovables"
+      "useRenewableEnergies": "Utilizar energías renovables",
+      "smartParking": "Smart parking",
+      "measureC02": "Medir tu CO2"
     }
   },
   "SIGNUP": {

@@ -471,7 +471,9 @@
       "storeEnergy": "Energie speichern",
       "sustainableLightingSystems": "Nachhaltige Beleuchtungssysteme",
       "useLowConsumptionLighting": "Umweltfreundliche Kühlungslösungen",
-      "useRenewableEnergies": "Erneuerbare Energien nutzen"
+      "useRenewableEnergies": "Erneuerbare Energien nutzen",
+      "smartParking": "Smart parking",
+      "measureC02": "Messen Sie Ihr CO2"
     }
   },
   "SIGNUP": {

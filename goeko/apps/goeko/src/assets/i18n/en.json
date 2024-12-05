@@ -483,7 +483,9 @@
       "storeEnergy": "Store energy",
       "sustainableLightingSystems": "Sustainable lighting systems",
       "useLowConsumptionLighting": "Eco-friendly cooling solutions",
-      "useRenewableEnergies": "Use renewable energies"
+      "useRenewableEnergies": "Use renewable energies",
+      "smartParking": "Smart parking",
+      "measureC02": "Measure your CO2"
     }
   },
   "SIGNUP": {
