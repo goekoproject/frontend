@@ -22,10 +22,13 @@ import {
   ManageSubcategory,
   NewSubcategory,
   ProductSelectToManageProduct,
+  Subcategory,
   Translations,
+  UpdateSubcategory,
 } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
 import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.component'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
@@ -63,8 +66,7 @@ export class AdminCategoriesComponent implements OnInit {
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
   classifications = input.required<GroupingByClassifications>()
 
-  private LANGS = LANGS
-
+  private _refresh$ = new BehaviorSubject<void>(undefined)
   //Signal
   categorySelected = signal<Category>({} as Category)
   subCategorySelected = computed(() =>
@@ -168,20 +170,6 @@ export class AdminCategoriesComponent implements OnInit {
     this._closeDetailByIndex(index)
   }
 
-  //TODO: create object for mapping
-  saveSubcategory() {
-    const updateCategory: any = {
-      ...this.subCategorySelected(),
-      id: undefined,
-      subcategories: Object.values(this.form.value).map((subcategory: any) => ({
-        ...subcategory,
-        lang: undefined,
-        order: undefined,
-      })),
-    }
-    this._adminCategories.updateSubcategorySelected(updateCategory)
-  }
-
   addSubcategory() {
     this._openDialgoAddSubcategory().subscribe((res) => {
       if (res) {
@@ -200,19 +188,33 @@ export class AdminCategoriesComponent implements OnInit {
     })
   }
 
-  private _updateSubcategory() {}
-
-  addProducts(subcategoryCode: string) {
-    const dialogResponse = this._openDialogAddProducts(subcategoryCode)
-    dialogResponse.subscribe((productsSelected: Product[]) => {
-      this._toProductsWithTranslated(productsSelected, subcategoryCode)
+  updateSubcategory(id: string, subcategory: Subcategory) {
+    const _updateSubcategory: UpdateSubcategory = {
+      label: {
+        ...subcategory.label,
+      },
+      question: {
+        ...subcategory.question,
+      },
+      enabled: true,
+    }
+    this._adminCategories.updateSubcategorySelected(id, _updateSubcategory).subscribe((grouping) => {
+      console.log('grouping', grouping)
     })
   }
 
-  private _openDialogAddProducts = (subcategoryCode: string) => {
+  addProducts(subcategory: Subcategory) {
+    const dialogResponse = this._openDialogAddProducts(subcategory)
+    dialogResponse.subscribe((productsSelected: Product[]) => {
+      this._toProductsWithTranslated(productsSelected, subcategory.code)
+    })
+  }
+
+  private _openDialogAddProducts = (subcategory: Subcategory) => {
     return this._sideDialogService.openDialog<ProductsManagementComponent>(ProductsManagementComponent, {
-      productSelected: this.productControl(subcategoryCode)?.value,
-      subcategoryCode: subcategoryCode,
+      productSelected: this.productControl(subcategory.code)?.value,
+      subcategoryCode: subcategory.code,
+      subcategoryId: subcategory.id,
     })
   }
 

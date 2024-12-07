@@ -8,8 +8,9 @@ import {
   ManageCategory,
   ManageSubcategory,
   NewSubcategory,
+  UpdateSubcategory,
 } from '@goeko/store'
-import { of, switchMap } from 'rxjs'
+import { switchMap } from 'rxjs'
 
 export function equalPrimitives(a: any, b: any) {
   return a.id === b.id
@@ -45,7 +46,11 @@ export class AdminCategoriesService {
     )
   }
 
-  updateSubcategorySelected(subcategorySelected: ManageCategory) {
-    return of([])
+  updateSubcategorySelected(id: string, subcategory: UpdateSubcategory) {
+    return this._classificationService.updateSubcategory(id, subcategory)
+  }
+
+  getProductBySubcategoryId(subcategoryId: string) {
+    return this._classificationService.getProductBySubcategoryId(subcategoryId)
   }
 }

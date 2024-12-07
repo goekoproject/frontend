@@ -69,7 +69,7 @@
               <legend class="section-legeng-subcategories">
                 {{ 'FORM_LABEL.products' | translate }}
               </legend>
-              <button go-button appearance="flat" class="button-actions-section" (click)="addProducts(subcategory.code)">
+              <button go-button appearance="flat" class="button-actions-section" (click)="addProducts(subcategory)">
                 <i class="ti ti-plus"></i> {{ 'add' | translate }}
                 {{ 'product' | translate }}
               </button>
@@ -84,7 +84,7 @@
               <button go-button appearance="white" (click)="closeDetailCategory(index)">
                 {{ 'cancel' | translate }}
               </button>
-              <button go-button (click)="saveSubcategory()" [disabled]="!form.dirty">
+              <button go-button (click)="updateSubcategory(subcategory.id, this.form.value[subcategory.code])" [disabled]="!form.dirty">
                 {{ 'save' | translate }}
               </button>
             </div>

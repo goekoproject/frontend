@@ -39,9 +39,15 @@ export interface SubcategoryResponse {
   updateDateTime: string
 }
 export interface NewSubcategory {
-  categoryId: string
+  categoryId?: string
   label: Label
   question: Question
+}
+
+export interface UpdateSubcategory {
+  label: Label
+  question: Question
+  enabled: boolean
 }
 
 export interface Category {
@@ -62,4 +68,9 @@ export interface NewCategoryForGrouping {
 export interface NewSubcategoryForGrouping {
   code: string
   order: number
+}
+
+export interface NewProduct {
+  subcategoryId: string
+  label: Label
 }

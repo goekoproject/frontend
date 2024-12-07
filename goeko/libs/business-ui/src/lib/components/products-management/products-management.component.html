@@ -1,17 +1,10 @@
 <h2>{{ 'FORM_LABEL.products' | translate }}</h2>
 
-<go-badge-group
-  [id]="'products'"
-  name="products"
-  (valueSelected)="valueSelected($event)"
->
-  @for ( product of products(); track product.id) {
-  <go-badge
-    [value]="product"
-    [selected]="codeProductsSeclected().includes(product.id)"
-    >{{ product.keyLang | translate }}
-  </go-badge>
-
+<go-badge-group [id]="'products'" name="products" (valueSelected)="valueSelected($event)">
+  @for (product of products() || []; track product.id) {
+    <go-badge [value]="product" [selected]="codeProductsSeclected().includes(product.id)"
+      >{{ product.label.translations[2].label }}
+    </go-badge>
   }
 </go-badge-group>
 
@@ -19,7 +12,29 @@
   <button go-button appearance="white" (click)="close()">
     {{ 'cancel' | translate }}
   </button>
-  <button go-button (click)="addProducts()">
-    {{ buttonText | translate }} 
+  <button go-button (click)="addNewProduct()">
+    {{ buttonText | translate }}
   </button>
 </div>
+
+@defer (when form) {
+  <form [formGroup]="form">
+    <div formGroupName="label">
+      <div class="mb-4" [formGroupName]="'translations'">
+        @for (elementByLang of labelTranslations.controls; track elementByLang.value.lang; let index = $index) {
+          <div [formGroupName]="index">
+            <label for="{{ elementByLang.value.lang }}" class="mb-1 block font-medium text-gray-700">{{
+              elementByLang.value.lang | translate
+            }}</label>
+            <input
+              type="text"
+              id="{{ elementByLang.value.lang }}"
+              placeholder="{{ elementByLang.value.label | translate }}"
+              class="input-dialog"
+              formControlName="label" />
+          </div>
+        }
+      </div>
+    </div>
+  </form>
+}
