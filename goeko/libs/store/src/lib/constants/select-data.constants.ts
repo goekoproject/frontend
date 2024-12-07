@@ -491,6 +491,14 @@ const SelectSustainableBuildingOperations: DataSelectOption[] = [
     id: 'homeAutomation',
     keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.homeAutomation',
   },
+  {
+    id: 'smartParking',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.smartParking',
+  },
+  {
+    id: 'measureC02',
+    keyLang: 'SELECT_DATA_LABEL.selectSustainableBuildingOperations.measureC02'
+  }
 ]
 export const SelectCurrency: DataSelectOption[] = [
   {
@@ -676,6 +684,10 @@ const SelectBuildingOperation: DataSelectOption[] = [
     id: 'ecoFriendlySanitary',
     keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.ecoFriendlySanitary',
   },
+  {
+    id: 'waterManagement',
+    keyLang: 'SELECT_DATA_LABEL.selectBuildingOperation.waterManagement',
+  }
 ]
 
 export const DataSelect = {

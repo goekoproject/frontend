@@ -32,7 +32,7 @@
     "amount": "Wasserverbrauch (2022)",
     "energySource": "Möchte Ihr Unternehmen dank folgender Maßnahmen weniger kohlenstoffintensive Energie nutzen:",
     "fuelInvoice": "Kraftstoffrechnung",
-    "greenWaste": "Grünabfall",
+    "greenWaste": "Grünabfälle",
     "hazardousWaste": "Gefährlicher Abfall",
     "inertOrMineralWaste": "Mineral- oder Inertabfall",
     "lastYearInvoice": "Wasserrechnung (2022)",
@@ -42,7 +42,7 @@
     "mainMineralProduct": "Hauptmineralprodukte",
     "mainRigidMaterial": "Verwendet Ihr Unternehmen Isolierplatten?",
     "products": "Art der gefährlichen Produkte",
-    "specialWaste": "Sonderabfall"
+    "specialWaste": "Sonderabfälle"
   },
   "CATEGORIES_LABEL": {
     "amount": {
@@ -51,7 +51,7 @@
     },
     "buildingOperation": {
       "label": "Betrieb des Gebäudes",
-      "question": "Lösungen für den Gebäudebetrieb"
+      "question": "Lösungen für Gebäudemanagement"
     },
     "energySource": {
       "label": "",
@@ -63,7 +63,7 @@
     },
     "greenWaste": {
       "label": "In welcher(n) Kategorie(n) von Grünabfällen verbessert Ihr Unternehmen das Management?",
-      "question": "Grünabfall"
+      "question": "Grünabfälle"
     },
     "hazardousWaste": {
       "label": "In welcher(n) Kategorie(n) von gefährlichen Abfällen verbessert Ihr Unternehmen das Management?",
@@ -71,7 +71,7 @@
     },
     "inertOrMineralWaste": {
       "label": "In welcher(n) Kategorie(n) von inerten oder mineralischen Abfällen verbessert Ihre Ökolösung das Management?",
-      "question": "Mineralische oder inerte Abfälle"
+      "question": "Mineral- oder Inertabfälle"
     },
     "lastYearInvoice": {
       "label": "",
@@ -107,7 +107,7 @@
     },
     "sustainableBuildingOperations": {
       "label": "Für den Betrieb von Gebäuden oder nachhaltige Mobilität ermöglicht Ihre eco-solution:",
-      "question": "Lösungen für den Gebäudebetrieb und sanfte Mobilität"
+      "question": "Lösungen für Gebäudemanagement und sanfte Mobilität"
     }
   },
   "CURRENCY": {
@@ -331,6 +331,15 @@
     "14": "Leben unter Wasser",
     "15": "Leben an Land"
   },
+  "PASSWORD_POLICY": {
+    "passwordRequirement": "Dein Passwort muss enthalten:",
+    "eightChars": "Mindestens 8 Zeichen",
+    "requirementTypes": "Mindestens 3 der folgenden:",
+    "lowerCase": "Kleinbuchstaben (a-z)",
+    "upperCase": "Großbuchstaben (A-Z)",
+    "numbers": "Zahlen (0-9)",
+    "specialChars": "Sonderzeichen (z. B. !@#$%^&*)"
+  },
   "PRODUCT_ACTIONS": {
     "addProduct": "Aktualisieren"
   },
@@ -358,7 +367,7 @@
       "ecoFriendlytaps": "Umweltfreundliche Wasserhähne",
       "greenRoofsWalls": "Gründächer und -wände",
       "waterManagement": "Lösungen für das Regenwassermanagement",
-      "waterManagementWastewater": "Lösungen für das Abwassermanagement"
+      "waterManagementWastewater": "Lösungen für das Grauwassermanagement"
     },
     "selectCountry": {
       "france": "Frankreich",
@@ -372,12 +381,12 @@
       "greenSolutionProducingTheEnergyForYourBuildingOrActivityNeeds": "Grüne Lösung zur Erzeugung der Energie für Ihren Gebäude- oder Aktivitätsbedarf"
     },
     "selectHazardousWaste": {
-      "landsContainingPFAS": "Böden, die PFAS enthalten",
+      "landsContainingPFAS": "Böden mit PFAS",
       "lead": "Blei",
       "oilSeparatorSludge": "Ölabscheiderschlamm",
-      "productsContainingHCB": "Produkte, die HCB enthalten",
-      "productsContainingHeavyMetals": "Produkte, die Schwermetalle enthalten",
-      "productsContainingTar": "Produkte, die Teer enthalten"
+      "productsContainingHCB": "Produkte mit HCB",
+      "productsContainingHeavyMetals": "Produkte mit Schwermetallen",
+      "productsContainingTar": "Produkte mit Teer"
     },
     "selectInertOrMineralWaste": {
       "brick": "Ziegel",
@@ -389,22 +398,22 @@
     },
     "selectMainActivity": {
       "boiler": "Kessel",
-      "cleaningOfSiteAndPeripheryAccesses": "Reinigung von Zugängen und Umgebung der Baustelle",
-      "cleaningSiteVehicles": "Reinigung der Baustellenfahrzeuge",
+      "cleaningOfSiteAndPeripheryAccesses": "Reinigung der Baustellenzufahrt und Umgebung",
+      "cleaningSiteVehicles": "Reinigung von Baustellenfahrzeugen",
       "constructionSiteWater": "Baustellenwasser",
       "paint": "Farbe",
       "pouringConcrete": "Betonproduktion",
       "siteCleaning": "Baustellenreinigung",
-      "siteHut": "Baustellenbasis",
-      "toolCleaning": "Reinigung der Geräte",
-      "wateringForCure": "Wässern zur Aushärtung von Beton",
+      "siteHut": "Baustellenunterkunft",
+      "toolCleaning": "Gerätereinigung",
+      "wateringForCure": "Betonnachbehandlung mit Wasser",
       "wateringPlants": "Pflanzenbewässerung"
     },
     "selectMainCategoryNonInert": {
       "cardboardAndPaper": "Karton und Papier",
       "cartridgesWithoutToxicProducts": "Kartuschen ohne giftige Produkte",
       "electricalAndElectronicEquipment": "Elektrische und elektronische Geräte",
-      "insulationMaterials": "Isoliermaterialien",
+      "insulationMaterials": "Dämmmaterialien",
       "metalsAndAlloys": "Metalle und Legierungen",
       "mineralWools": "Mineralwollen",
       "paintVarnishGlue": "Farbe, Lack, Kleber",
@@ -413,45 +422,45 @@
       "untreatedWood": "Unbehandeltes Holz"
     },
     "selectMainInternalCombustionEngine": {
-      "aerialBucketTruck": "LKW mit Hubarbeitsbühne",
-      "backhoe": "Planierraupe",
-      "backhoeLoader": "Baggerlader",
-      "bulldozer": "Bulldozer",
+      "aerialBucketTruck": "Hubarbeitsbühnenfahrzeug",
+      "backhoe": "Fräsmaschine",
+      "backhoeLoader": "Bagger",
+      "bulldozer": "Planierraupe",
       "compressor": "Kompressor",
       "dumper": "Muldenkipper",
-      "equipmentCarrierTruck": "Gerätetransport-LKW",
+      "equipmentCarrierTruck": "Ausrüstungs-Transportfahrzeug",
       "generator": "Generator",
       "grader": "Motorgrader",
       "loader": "Lader",
       "materialsCarrierTruck": "Materialtransport-LKW",
-      "mechanicalPalletTruck": "Gabelhubwagen",
-      "scraper": "Schrapper",
+      "mechanicalPalletTruck": "Hubwagen",
+      "scraper": "Schürfmaschine",
       "slicer": "Grabenfräse",
       "steamRoller": "Straßenwalze",
-      "vehicleFortransportingPeople​​": "Fahrzeug für den Personentransport​"
+      "vehicleFortransportingPeople​​": "Personentransportfahrzeug​"
     },
     "selectMainMineralProduct": {
       "aluminum": "Aluminium",
       "cement": "Zement",
       "concrete": "Beton",
       "copper": "Kupfer",
-      "iron": "Edelstahl",
+      "iron": "Eisen",
       "isolation": "Wärmedämmung",
       "sealingStrip": "Dichtungsstreifen",
       "steel": "Stahl",
       "zinc": "Zink"
     },
     "selectMainRigidMaterial": {
-      "insolationPanels": "Isolierplatten"
+      "insolationPanels": "Dämmplatten"
     },
     "selectProducts": {
-      "admixtures": "Zusatzstoffe",
+      "admixtures": "Zusatzmittel",
       "aerosol": "Aerosol",
       "batteries": "Batterien und Akkumulatoren mit gefährlichen Stoffen",
       "bituminousProductsContainingHAPs": "Bituminöse Produkte mit PAKs",
       "cartridgesContainingDangerousSubstances": "Kartuschen mit gefährlichen Stoffen",
-      "collects": "Klebstoff",
-      "curingProducts": "Aushärtungsprodukte",
+      "collects": "Sammlungen",
+      "curingProducts": "Nachbehandlungsprodukte",
       "electricalAndElectronicWasteContainingHazardousSubstances": "Elektro- und Elektronikschrott mit gefährlichen Stoffen",
       "energySavingLamps": "Energiesparlampen",
       "fuel": "Kraftstoff",
@@ -460,30 +469,30 @@
       "packagingSoiledWithDangerousSubstances": "Verpackungen, die mit gefährlichen Stoffen verschmutzt sind",
       "paintVarnish": "Farbe/Lack",
       "productsContainingTar": "Produkte mit Teer",
-      "woodTreatedWithHazardousSubstances": "Mit gefährlichen Stoffen behandeltes Holz"
+      "woodTreatedWithHazardousSubstances": "Holz, behandelt mit gefährlichen Stoffen"
     },
     "selectSpecialWaste": {
       "aerosols": "Aerosole",
-      "agglomeratedCementPanels": "Zementgebundene Platten",
+      "agglomeratedCementPanels": "Zementplatten aus Agglomerat",
       "agglomeratedConcrete": "Agglomerierter Beton",
       "agglomeratedProducts": "Agglomerierte Produkte",
       "asbestos": "Asbest",
       "batteriesAndAccumulators": "Batterien und Akkumulatoren",
-      "cartridgesSealantChemicalCaulking": "Kartuschen (Dichtstoff, Chemikalien, Abdichtung)",
+      "cartridgesSealantChemicalCaulking": "Kartuschen (Dichtmittel, Chemie, Abdichtung)",
       "electricalAndElectronicEquipmentPCB": "Elektrische und elektronische Geräte",
       "fluorescentTubesEnergySavingBulbsNeonTubes": "Leuchtstoffröhren, Energiesparlampen, Neonröhren",
       "lead": "Blei",
       "paintsAndSolvents": "Farben und Lösungsmittel",
       "particleboardPanels": "Spanplatten",
-      "polyurethaneFoams": "Polyurethanschaumstoffe",
-      "pouredAsphalt": "Gegossener Asphalt",
+      "polyurethaneFoams": "Polyurethanschäume",
+      "pouredAsphalt": "Gussasphalt",
       "rubberProducts": "Gummiprodukte",
       "solventsForInsulation": "Lösungsmittel für Isolierung",
       "treatedWood": "Behandeltes Holz",
       "usedOils": "Gebrauchte Öle"
     },
     "selectSustainableBuildingOperations": {
-      "chargeElectricVehicles": "Elektrofahrzeuge aufladen",
+      "chargeElectricVehicles": "Elektrofahrzeuge laden",
       "electricMeansOfTransport": "Elektrische Verkehrsmittel",
       "homeAutomation": "Hausautomation",
       "intelligentHeatingSystems": "Intelligente Heizsysteme",
@@ -491,8 +500,10 @@
       "recoverHeat": "Wärme zurückgewinnen",
       "storeEnergy": "Energie speichern",
       "sustainableLightingSystems": "Nachhaltige Beleuchtungssysteme",
-      "useLowConsumptionLighting": "Umweltfreundliche Kühltechnologien",
-      "useRenewableEnergies": "Erneuerbare Energien nutzen"
+      "useLowConsumptionLighting": "Umweltfreundliche Kühlungslösungen",
+      "useRenewableEnergies": "Erneuerbare Energien nutzen",
+      "smartParking": "Smart parking",
+      "measureC02": "Messen Sie Ihr CO2"
     }
   },
   "SIGNUP": {

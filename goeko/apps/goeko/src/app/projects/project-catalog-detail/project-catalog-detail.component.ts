@@ -5,11 +5,12 @@ import { SafePipe } from '@goeko/coretools'
 import { DataSelect, Document, EcosolutionSearchResponse } from '@goeko/store'
 import { BadgeModule, ButtonModule, InputFileComponent, PercentageModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-
+import {LineBreakPipe} from '@goeko/business-ui'
 @Component({
   selector: 'goeko-project-catalog-detail',
   standalone: true,
   imports: [
+    LineBreakPipe,
     CommonModule,
     TranslateModule,
     BadgeModule,
@@ -28,6 +29,7 @@ export class ProjectCatalogDetailComponent {
   public dataSelect = DataSelect as any
   public CATEGORIES = signal(CATEGORIES)
   ecosolutionSearchDetail = input.required<EcosolutionSearchResponse>()
+  ecosolutionId = input.required<string>()
 
   goBack = () => window.history.back()
 

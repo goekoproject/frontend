@@ -9,11 +9,15 @@
     </ng-template>
 
     <ng-template goCellRef let-element>
-      <div class="flex max-w-40 gap-1">
-        <p>{{ element['locations'][0]?.country?.label }}</p>
-        <abbr class="truncate font-normal no-underline" title="{{ element['locations'][0]?.country.regions | displayRegions }}">{{
-          element['locations'][0]?.country.regions | displayRegions
-        }}</abbr>
+      <div class="flex w-64 gap-1">
+        @defer (when element['locations'][0]?.country.regions | displayRegions) {
+          <p class="truncate">{{ element['locations'][0]?.country.regions | displayRegions }}</p>
+        } @placeholder {
+          <p>{{ element['locations'][0]?.country?.label }}</p>
+        }
+        <!-- <abbr class="truncate font-normal no-underline" title="{{ element['locations'][0]?.country?.label }}">{{
+          element['locations'][0]?.country?.label
+        }}</abbr> -->
       </div>
     </ng-template>
 

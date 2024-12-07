@@ -8,7 +8,7 @@
       <details [@fadeAnimation] class="subcategories" formGroupName="{{ subcategory.code }}" #detailCategory>
         <summary class="subcategories-summary" (click)="toogleSubcategory($event, index)">
           <p>
-            {{ subcategory.label.translations[0].label }}
+            {{ subcategory.label.translations[2].label }}
           </p>
           <p>( {{ subcategory.code }})</p>
         </summary>
@@ -32,7 +32,7 @@
                       <go-input [formControlName]="'label'">
                         <p slot="label">
                           <span class="fi fi-{{ lang.code }}"></span>
-                          {{ lang.title }}
+                          {{ lang.title | translate }}
                         </p>
                       </go-input>
                     </article>

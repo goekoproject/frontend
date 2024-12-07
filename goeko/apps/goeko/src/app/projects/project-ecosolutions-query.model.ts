@@ -17,7 +17,7 @@ export class ProjectEcosolutionsQuery {
     return {
       country: {
         code: location.country.code,
-        regions: location.country.regions ? location.country.regions.map((region) => region.label) : [],
+        regions: location.country.regions ? location.country.regions.map((region) => region.code) : [],
       },
     }
   }
@@ -39,7 +39,7 @@ export class ProjectEcosolutionParams {
     return {
       country: {
         code: location.country.code,
-        regions: location.country.regions ? location.country.regions.map((region) => region.label) : undefined,
+        regions: location.country.regions ? location.country.regions.map((region) => region.code) : undefined,
       },
     }
   }
