@@ -303,6 +303,15 @@
     "ods_8": "Decent work and economic growth",
     "ods_9": "Industry, innovation, and infrastructure"
   },
+  "PASSWORD_POLICY": {
+    "passwordRequirement": "Your password must contain:",
+    "eightChars": "At least 8 characters",
+    "requirementTypes": "At least 3 of the following:",
+    "lowerCase": "Lower case letters (a-z)",
+    "upperCase": "Upper case letters (A-Z)",
+    "numbers": "Numbers (0-9)",
+    "specialChars": "Special characters (e.g. !@#$%^&*)"
+  },
   "PRODUCT_ACTIONS": {
     "addProduct": "Update"
   },
@@ -339,7 +348,7 @@
       "ecoFriendlytaps": "Eco-friendly taps",
       "greenRoofsWalls": "Green roofs and walls",
       "waterManagement": "Solutions for rainwater management",
-      "waterManagementWastewater": "Solutions for waste water management"
+      "waterManagementWastewater": "Solutions for gray water management"
     },
     "selectCountry": {
       "france": "France",
@@ -429,7 +438,7 @@
       "admixtures": "Admixtures",
       "aerosol": "Aerosol",
       "batteries": "Batteries and accumulators containing hazardous substances",
-      "bituminousProductsContainingHAPs": "Bituminous products containing PHAs",
+      "bituminousProductsContainingHAPs": "Bituminous products containing HAPs",
       "cartridgesContainingDangerousSubstances": "Cartridges containing dangerous substances",
       "collects": "Adhesive",
       "curingProducts": "Curing products",
@@ -474,7 +483,9 @@
       "storeEnergy": "Store energy",
       "sustainableLightingSystems": "Sustainable lighting systems",
       "useLowConsumptionLighting": "Eco-friendly cooling solutions",
-      "useRenewableEnergies": "Use renewable energies"
+      "useRenewableEnergies": "Use renewable energies",
+      "smartParking": "Smart parking",
+      "measureC02": "Measure your CO2"
     }
   },
   "SIGNUP": {

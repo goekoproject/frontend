@@ -12,7 +12,7 @@
       <details [@fadeAnimation] class="subcategories" formGroupName="{{ subcategory.code }}" #detailCategory>
         <summary class="subcategories-summary" (click)="toogleSubcategory($event, index)">
           <p>
-            {{ subcategory.label.translations[0].label }}
+            {{ subcategory.label.translations[2].label }}
           </p>
           <p>( {{ subcategory.code }})</p>
         </summary>
@@ -31,16 +31,12 @@
                     {{ 'FORM_LABEL.subcategoryForLangSME' | translate }}
                   </legend>
 
-                  @for (
-                    translation of getTranslations(subcategory.code, 'question').controls;
-                    track translation.value.lang;
-                    let index = $index
-                  ) {
+                  @for (lang of langs(); track lang.code; let index = $index) {
                     <article [formGroupName]="index" class="subcategories-sentence">
                       <go-input [formControlName]="'label'">
                         <p slot="label">
-                          <span class="fi fi-{{ translation.value.lang }}"></span>
-                          {{ translation.value.lang }}
+                          <span class="fi fi-{{ lang.code }}"></span>
+                          {{ lang.title | translate }}
                         </p>
                       </go-input>
                     </article>
@@ -55,16 +51,12 @@
                     {{ 'FORM_LABEL.subcategoryForLangCleantech' | translate }}
                   </legend>
 
-                  @for (
-                    translation of getTranslations(subcategory.code, 'label').controls;
-                    track translation.value.lang;
-                    let index = $index
-                  ) {
+                  @for (lang of langs(); track lang.code; let index = $index) {
                     <article [formGroupName]="index" class="subcategories-sentence">
                       <go-input [formControlName]="'label'">
                         <p slot="label">
-                          <span class="fi fi-{{ translation.value.lang }}"></span>
-                          {{ translation.value.lang }}
+                          <span class="fi fi-{{ lang.code }}"></span>
+                          {{ lang.title }}
                         </p>
                       </go-input>
                     </article>

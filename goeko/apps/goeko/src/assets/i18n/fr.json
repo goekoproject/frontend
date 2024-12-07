@@ -233,7 +233,8 @@
     "en": "Anglais",
     "es": "Espagnol",
     "fr": "Français",
-    "gb": "Anglais"
+    "gb": "Anglais",
+    "de": "Allemand"
   },
   "LEGAL": {
     "cookiesNotice": "Ce site web utilise des cookies pour vous offrir la meilleure expérience utilisateur possible. En continuant à naviguer sur notre site, vous acceptez notre utilisation de cookies conformément à notre",
@@ -302,6 +303,15 @@
     "ods_7": "Énergie propre et d'un coût abordable",
     "ods_8": "Travail décent et croissance économique",
     "ods_9": "Industrie, innovation et infrastructure"
+  },
+  "PASSWORD_POLICY": {
+    "passwordRequirement": "Votre mot de passe doit contenir:",
+    "eightChars": "Au moins 8 caractères",
+    "requirementTypes": "Au moins 3 des éléments suivants:",
+    "lowerCase": "Lettres minuscules (a-z)",
+    "upperCase": "Lettres majuscules (A-Z)",
+    "numbers": "Chiffres (0-9)",
+    "specialChars": "Caractères spéciaux (par exemple, !@#$%^&*)"
   },
   "PRODUCT_ACTIONS": {
     "addProduct": "Actualiser"
@@ -474,7 +484,9 @@
       "storeEnergy": "Stocker l’énergie",
       "sustainableLightingSystems": "Systèmes d’éclairage durables",
       "useLowConsumptionLighting": "Solutions de refroidissement écologiques",
-      "useRenewableEnergies": "Recourir à des énergies renouvelables"
+      "useRenewableEnergies": "Recourir à des énergies renouvelables",
+      "smartParking": "Smart parking",
+      "measureC02": "Mesurer votre CO2"
     }
   },
   "SIGNUP": {

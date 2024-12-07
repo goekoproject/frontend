@@ -34,6 +34,7 @@
             <p class="w-full text-sm font-semibold text-grayCharcoal">
               {{ 'CATEGORIES_LABEL.' + ecosolutionSearchDetail().classification.subCategory + '.label' | translate }}
             </p>
+            <!-- TODO:Change with admin v2 -->
             <div class="flex flex-wrap gap-2">
               @for (option of dataSelect[ecosolutionSearchDetail().classification.subCategory]; track option.id) {
                 @if (ecosolutionSearchDetail().classification.products.includes(option.id)) {
@@ -56,6 +57,13 @@
               </div>
             }
           </div>
+        </div>
+
+        <div class="fieldset">
+          <h3 class="font-semibold text-gray-700">{{ 'FORM_LABEL.price' | translate }}</h3>
+          <p class="details-article--data" [innerHTML]="ecosolutionSearchDetail().priceDescription | lineBreak"></p>
+
+
         </div>
 
         <!-- Sustainable Development Goals -->
@@ -144,7 +152,10 @@
     }
     <button go-button (click)="goBack()">{{ 'back' | translate }}</button>
   </div>
-  <goeko-lead-form class="basis-1/3"></goeko-lead-form>
+  <goeko-lead-form
+    class="basis-1/3"
+    [cleantechId]="ecosolutionSearchDetail().companyDetail.id"
+    [ecosolutionId]="ecosolutionId()"></goeko-lead-form>
 </div>
 
 <ng-template #percentageReductionTpl let-mainCategory>

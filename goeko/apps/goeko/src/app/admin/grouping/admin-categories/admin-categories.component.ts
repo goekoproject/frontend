@@ -78,6 +78,8 @@ export class AdminCategoriesComponent implements OnInit {
     })),
   )
 
+  public langs = signal(LANGS)
+
   private _closeDetailByIndex = (index: number) => {
     const elementDetail = this.detailCategory.get(index)?.nativeElement
     if (elementDetail) {

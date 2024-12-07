@@ -24,6 +24,7 @@ import { AccessService } from './access.services'
 import { LoginComponent } from './login/login.component'
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
 import { SignupComponent } from './signup/signup.component'
+import { PasswordPolicyComponent } from "./password-policy/password-policy.component";
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent, AccessComponent, ResetPasswordComponent],
@@ -44,14 +45,15 @@ import { SignupComponent } from './signup/signup.component'
     AlertComponent,
     TooltipComponent,
     ConfigModule.forRoot({
-      endopoint: environment.baseUrl,
-      clientSecret: environment.clientSecret,
-      clientId: environment.clientId,
-      domainAuth0: environment.domainAuth0,
-      audience: environment.audience,
-      connection: environment.connection,
+        endopoint: environment.baseUrl,
+        clientSecret: environment.clientSecret,
+        clientId: environment.clientId,
+        domainAuth0: environment.domainAuth0,
+        audience: environment.audience,
+        connection: environment.connection,
     }),
-  ],
+    PasswordPolicyComponent
+],
   providers: [DialogService, AccessService],
 })
 export class AccessModule {}
