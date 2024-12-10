@@ -1,11 +1,12 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { CanAnalysisDeactivate, FORM_CATEGORIES_QUESTION, MessageService, Product, ProductsManagementComponent } from '@goeko/business-ui'
+import { CanAnalysisDeactivate, FORM_CATEGORIES_QUESTION, MessageService, ProductsManagementComponent } from '@goeko/business-ui'
 import {
   ClassificationCategory,
   ClassificationCategoryProduct,
   ClassificationSubcategory,
   DataSelect,
+  Product,
   ProjectService,
   SmeAnalysisStoreService,
   SmeService,

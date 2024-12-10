@@ -1,18 +1,10 @@
 <h2>{{ 'FORM_LABEL.products' | translate }}</h2>
 
-<go-badge-group [id]="'products'" name="products" (valueSelected)="valueSelected($event)">
-  @for (product of products() || []; track product.id) {
-    <go-badge [value]="product" [selected]="codeProductsSeclected().includes(product.id)"
-      >{{ product.label.translations[2].label }}
-    </go-badge>
-  }
-</go-badge-group>
-
 <div class="product-actions">
   <button go-button appearance="white" (click)="close()">
     {{ 'cancel' | translate }}
   </button>
-  <button go-button (click)="addNewProduct()">
+  <button go-button (click)="data.productSelected ? updateProduct() : addNewProduct()">
     {{ buttonText | translate }}
   </button>
 </div>
@@ -23,9 +15,11 @@
       <div class="mb-4" [formGroupName]="'translations'">
         @for (elementByLang of labelTranslations.controls; track elementByLang.value.lang; let index = $index) {
           <div [formGroupName]="index">
-            <label for="{{ elementByLang.value.lang }}" class="mb-1 block font-medium text-gray-700">{{
-              elementByLang.value.lang | translate
-            }}</label>
+            <label for="{{ elementByLang.value.lang }}" class="mb-1 block font-medium text-gray-700">
+              <span class="fi fi-{{ elementByLang.value.lang }}"></span>
+
+              {{ elementByLang.value.lang | translate }}</label
+            >
             <input
               type="text"
               id="{{ elementByLang.value.lang }}"

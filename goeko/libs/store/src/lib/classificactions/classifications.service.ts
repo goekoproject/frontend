@@ -69,6 +69,10 @@ export class ClassificationsService {
     return this._http.post('/v2/classifications/product', product)
   }
 
+  updateProduct(productId: string, product: NewProduct) {
+    return this._http.put(`/v2/classifications/product/${productId}`, product)
+  }
+
   /** @deprecated */
   getClassificationsCategory(): Observable<any[]> {
     return this._http

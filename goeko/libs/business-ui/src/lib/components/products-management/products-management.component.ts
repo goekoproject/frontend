@@ -1,22 +1,17 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, Inject, Optional, signal } from '@angular/core'
-import { toSignal } from '@angular/core/rxjs-interop'
+import { Component, inject, Inject, OnInit, Optional, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { LANGS } from '@goeko/core'
-import { ClassificationsService, DataSelect, ManageProduct, NewProduct } from '@goeko/store'
+import { ClassificationsService, DataSelect, NewProduct, Product } from '@goeko/store'
 import { BadgeModule, ButtonModule, DIALOG_DATA, SideDialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { BehaviorSubject, switchMap } from 'rxjs'
 
 interface DialogData {
-  productSelected: ManageProduct[]
+  productSelected: Product
   subcategoryCode: keyof typeof DataSelect
   subcategoryId: string
 }
-export interface Product {
-  id: string
-  keyLang: string
-}
+
 @Component({
   selector: 'goeko-products-management',
   standalone: true,
@@ -24,34 +19,36 @@ export interface Product {
   templateUrl: './products-management.component.html',
   styleUrl: './products-management.component.scss',
 })
-export class ProductsManagementComponent {
+export class ProductsManagementComponent implements OnInit {
   private _classificationService = inject(ClassificationsService)
-  private _refresh$ = new BehaviorSubject<void>(undefined)
-  private _products$ = this._refresh$.pipe(switchMap(() => this._classificationService.getProductBySubcategoryId(this.data.subcategoryId)))
 
   buttonText = 'PRODUCT_ACTIONS.addProduct'
-  products = toSignal(this._products$, { initialValue: [] })
-  codeProductsSeclected = signal(this.data.productSelected.map((product) => product.code))
   newProduct = signal(false)
 
   public form = new FormGroup({
-    subcategoryId: new FormControl(this.data.subcategoryId),
+    subcategoryId: new FormControl(this.data.productSelected ? null : this.data.subcategoryId),
     label: new FormGroup({
       translations: new FormArray(
         LANGS.map(
           (lang) =>
             new FormGroup({
-              lang: new FormControl(lang.code),
+              lang: new FormControl(lang.code as string),
               label: new FormControl(''),
             }),
         ),
       ),
     }),
+    enabled: new FormControl(true),
   })
   get labelTranslations() {
     return this.form.get('label')?.get('translations') as FormArray
   }
-  private _productSelected!: Product[]
+
+  get formValue() {
+    const formValue = this.form.value as NewProduct
+    formValue.label.translations = formValue.label.translations.filter((translation) => translation.label)
+    return formValue
+  }
   constructor(
     @Optional()
     @Inject(DIALOG_DATA)
@@ -59,14 +56,20 @@ export class ProductsManagementComponent {
     private _sideDialogService: SideDialogService,
   ) {}
 
-  valueSelected(productSelected: Product[]) {
-    this._productSelected = productSelected
+  ngOnInit(): void {
+    console.log('this.data', this.data)
+    this.form.patchValue({ label: this.data.productSelected?.label })
   }
 
   addNewProduct = () => {
-    this._classificationService.createProduct(this.form.value as NewProduct).subscribe((product) => {
-      this._refresh$.next()
+    this._classificationService.createProduct(this.formValue).subscribe((product) => {
       this._refreshForm()
+    })
+  }
+
+  updateProduct = () => {
+    this._classificationService.updateProduct(this.data.productSelected.id, this.formValue).subscribe((product) => {
+      this.close(true)
     })
   }
 
@@ -81,10 +84,8 @@ export class ProductsManagementComponent {
       },
     })
   }
-  addProducts() {
-    this._sideDialogService.closeDialog<Product[]>(this._productSelected)
-  }
-  close() {
-    this._sideDialogService.closeDialog<Product[]>()
+
+  close(data?: unknown) {
+    this._sideDialogService.closeDialog(data)
   }
 }

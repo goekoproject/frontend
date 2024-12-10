@@ -15,6 +15,7 @@ const routes: Routes = [
     path: 'classifications/:groupingId',
     loadComponent: () => import('./grouping/admin-categories/admin-categories.component').then((c) => c.AdminCategoriesComponent),
     resolve: { classifications: groupingByClassificationsResolver },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
 ]
 

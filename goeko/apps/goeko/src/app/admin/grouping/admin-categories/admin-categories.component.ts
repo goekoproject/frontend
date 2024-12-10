@@ -9,11 +9,13 @@ import {
   ViewChildren,
   computed,
   effect,
+  inject,
   input,
   signal,
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
-import { CategoryModule, Product, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
+import { Router } from '@angular/router'
+import { CategoryModule, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
 import { CODE_LANG, LANGS } from '@goeko/core'
 import {
   Category,
@@ -21,14 +23,12 @@ import {
   GroupingByClassifications,
   ManageSubcategory,
   NewSubcategory,
-  ProductSelectToManageProduct,
+  Product,
   Subcategory,
-  Translations,
   UpdateSubcategory,
 } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { BehaviorSubject } from 'rxjs'
 import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.component'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
@@ -66,7 +66,8 @@ export class AdminCategoriesComponent implements OnInit {
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
   classifications = input.required<GroupingByClassifications>()
 
-  private _refresh$ = new BehaviorSubject<void>(undefined)
+  private _router = inject(Router)
+
   //Signal
   categorySelected = signal<Category>({} as Category)
   subCategorySelected = computed(() =>
@@ -80,6 +81,7 @@ export class AdminCategoriesComponent implements OnInit {
     })),
   )
 
+  products = signal([])
   public langs = signal(LANGS)
 
   private _closeDetailByIndex = (index: number) => {
@@ -204,40 +206,28 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   addProducts(subcategory: Subcategory) {
-    const dialogResponse = this._openDialogAddProducts(subcategory)
-    dialogResponse.subscribe((productsSelected: Product[]) => {
-      this._toProductsWithTranslated(productsSelected, subcategory.code)
-    })
+    this._openDialogAddProducts(subcategory)
+  }
+  editProduct(subcategory: Subcategory, product: Product) {
+    this._openDialogAddProducts(subcategory, product)
+  }
+  private _openDialogAddProducts = (subcategory: Subcategory, product?: Product) => {
+    return this._sideDialogService
+      .openDialog<ProductsManagementComponent>(ProductsManagementComponent, {
+        productSelected: product,
+        subcategoryCode: subcategory.code,
+        subcategoryId: subcategory.id,
+      })
+      .subscribe((product) => {
+        if (product) {
+          this._fetchData()
+        }
+      })
   }
 
-  private _openDialogAddProducts = (subcategory: Subcategory) => {
-    return this._sideDialogService.openDialog<ProductsManagementComponent>(ProductsManagementComponent, {
-      productSelected: this.productControl(subcategory.code)?.value,
-      subcategoryCode: subcategory.code,
-      subcategoryId: subcategory.id,
+  private _fetchData = () => {
+    this._router.navigate([], {
+      queryParams: { hash: window.crypto.randomUUID() },
     })
-  }
-
-  private _toProductsWithTranslated(productsSelected: Product[], subcategoryCode: string) {
-    const newProductsValue = productsSelected?.map((product) => {
-      const translations = new Array<Translations>()
-      this._getTranslationsForProduct(product.keyLang, translations)
-      return new ProductSelectToManageProduct(product.id, translations)
-    })
-    this.productControl(subcategoryCode)?.setValue(newProductsValue)
-    this.form.markAllAsTouched()
-    this.form.markAsDirty()
-    this._cdf.markForCheck()
-  }
-
-  //TODO : change product label to en
-  private async _getTranslationsForProduct(keyLang: string, translations: Array<Translations>) {
-    const keys = keyLang.split('.')
-    await Object.keys(this._translationsForLang).forEach((lang) =>
-      translations.push({
-        label: this._translationsForLang[lang][keys[0]][keys[1]][keys[2]],
-        lang: lang === 'en' ? 'gb' : lang,
-      }),
-    )
   }
 }
