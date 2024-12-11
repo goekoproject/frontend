@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop'
 import { TranslateService } from '@ngx-translate/core'
 import { forkJoin, map, Observable, shareReplay } from 'rxjs'
 import { CLASSIFICATION_CATEGORIES_CODE } from './classification-categories-code.constant'
-import { Category, NewProduct, NewSubcategory } from './classifications.interface'
+import { Category, NewProduct, NewSubcategory, NewUpdateCategory } from './classifications.interface'
 import { Grouping, GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
 import { mergeCategoriesSectionWithClassificationCategory } from './transform.util'
 
@@ -49,8 +49,31 @@ export class ClassificationsService {
     )
   }
 
+  createGrouping(grouping: NewUpdateGrouping) {
+    return this._http.post('/v1/classifications/grouping/form', grouping)
+  }
+
   updateGrouping(id: string, grouping: NewUpdateGrouping) {
     return this._http.put(`/v1/classifications/grouping/form/${id}`, grouping)
+  }
+
+  /**	Category */
+
+  getCategoryById(id: string): Observable<Category> {
+    if (!id) return new Observable()
+    return this._http.get<Category>(`/v2/classifications/category/${id}`)
+  }
+
+  updateCategory(id: string, category: NewUpdateCategory) {
+    return this._http.put(`/v2/classifications/category/${id}`, category)
+  }
+
+  createCategory(category: NewUpdateCategory) {
+    return this._http.post('/v2/classifications/category', category)
+  }
+
+  getAllCategories(): Observable<Category[]> {
+    return this._http.get<Category[]>('/v2/classifications/category')
   }
 
   /** Subcategory*/

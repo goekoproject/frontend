@@ -23,6 +23,7 @@ interface DataSubcategory {
 })
 export class DialogAddSubcategoryComponent implements OnInit {
   private _sideDialogService = inject(SideDialogService)
+
   private get _smeForm() {
     return this.form.get('sme') as FormGroup
   }

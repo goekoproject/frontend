@@ -1,5 +1,5 @@
-import { Category, NewCategoryForGrouping, SubcategoryResponse } from './classifications.interface'
-import { GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
+import { Category, SubcategoryResponse } from './classifications.interface'
+import { GroupingByClassifications, NewCategoryForGrouping, NewUpdateGrouping } from './grouping.interface'
 
 export class GroupingBuilder {
   private grouping: GroupingByClassifications
@@ -39,7 +39,7 @@ export class GroupingBuilder {
           order: category.order,
           subcategories: category.subcategories.map((subcategory) => ({
             code: subcategory.code,
-            order: subcategory.order,
+            order: subcategory.order || 0,
           })),
         }) as NewCategoryForGrouping,
     )

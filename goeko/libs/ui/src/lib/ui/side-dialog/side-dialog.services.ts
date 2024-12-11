@@ -51,6 +51,7 @@ export class SideDialogService {
   closeDialog<T>(data?: T) {
     this.dialogData$?.next(data);
     this.dialog.update((dialog) => ({ ...dialog, open: false }));
+    this.dialog().component = {} as ComponentType<any>;
     this.dialogData$?.complete();
   }
 

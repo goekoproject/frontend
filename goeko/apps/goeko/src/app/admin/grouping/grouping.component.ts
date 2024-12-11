@@ -18,4 +18,6 @@ export class GroupingComponent {
   private _groupingFormService = inject(GroupingFormService)
 
   public groupingForm = toSignal(this._groupingFormService.getGroupingAll(), { initialValue: [] })
+
+  newGrouping = () => {}
 }

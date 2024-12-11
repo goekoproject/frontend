@@ -3,7 +3,7 @@ interface Translation {
   lang: string
 }
 
-interface Label {
+export interface Label {
   translations: Translation[]
 }
 
@@ -16,6 +16,10 @@ export interface Product {
   code: string
   label: Label
   enabled: boolean
+}
+export interface NewProduct {
+  subcategoryId: string
+  label: Label
 }
 
 export interface Subcategory {
@@ -59,18 +63,7 @@ export interface Category {
   order: number
 }
 
-export interface NewCategoryForGrouping {
-  code: string
-  subcategories: NewSubcategoryForGrouping[]
-  order: number
-}
-
-export interface NewSubcategoryForGrouping {
-  code: string
-  order: number
-}
-
-export interface NewProduct {
-  subcategoryId: string
+export interface NewUpdateCategory {
   label: Label
+  enabled?: boolean
 }

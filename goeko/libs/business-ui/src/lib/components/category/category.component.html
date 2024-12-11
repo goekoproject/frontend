@@ -1,7 +1,7 @@
 @for (category of categories(); track category.id; let first = $first) {
   <div
     (click)="onSelect(category)"
-    class="flex h-12 w-48 items-center justify-center gap-1 border border-primary-default p-4 first:rounded-l-full last:rounded-r-full"
+    class="flex h-12 w-56 items-center justify-around gap-1 border border-primary-default p-4 first:rounded-l-full last:rounded-r-full"
     [ngClass]="{
       'bg-primary-default text-white': selectedCategory().code === category.code,
       'bg-white text-primary-default': selectedCategory().code !== category.code,
@@ -14,6 +14,12 @@
       <span>
         {{ formValue()[category.code] | countProducts }}
       </span>
+    }
+    @defer (when editMode()) {
+      <i
+        class="ti ti-pencil 1 z-10 cursor-pointer rounded-full border border-white px-2 py-1 text-2xl hover:bg-white hover:text-blue-500"
+        (click)="editCategory(category)"
+        icon></i>
     }
   </div>
 }

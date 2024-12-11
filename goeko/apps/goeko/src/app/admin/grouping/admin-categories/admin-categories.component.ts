@@ -12,6 +12,8 @@ import {
   inject,
   input,
   signal,
+  viewChild,
+  viewChildren,
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { Router } from '@angular/router'
@@ -19,10 +21,13 @@ import { CategoryModule, ProductToCurrentLangPipe, ProductsManagementComponent }
 import { CODE_LANG, LANGS } from '@goeko/core'
 import {
   Category,
+  CategoryMapper,
   ClassificationCategoryService,
   GroupingByClassifications,
   ManageSubcategory,
+  NewCategoryForGrouping,
   NewSubcategory,
+  NewUpdateGrouping,
   Product,
   Subcategory,
   UpdateSubcategory,
@@ -30,6 +35,7 @@ import {
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.component'
+import { DialogManagmentCategoryComponent } from '../dialog-managment-category.component'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
 
@@ -62,27 +68,42 @@ import { AdminCategoriesService } from './admin-categories.services'
   animations: [fadeAnimation, listAnimation],
 })
 export class AdminCategoriesComponent implements OnInit {
+  JSON = JSON
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
-  classifications = input.required<GroupingByClassifications>()
+
+  nameGrouping = viewChild<ElementRef>('nameGroupingRef')
+  descriptionGrouping = viewChild<ElementRef>('descriptionGroupingRef')
+  categoryRef = viewChildren<ElementRef>('categoryRef')
+
+  name = computed(() => this.nameGrouping()?.nativeElement.value)
+  classifications = input<GroupingByClassifications>()
+  get categoriesSelected() {
+    return this.categoryRef()
+      .filter((category) => category.nativeElement.checked)
+      .map((c) => JSON.parse(c.nativeElement.value))
+  }
 
   private _router = inject(Router)
 
   //Signal
   categorySelected = signal<Category>({} as Category)
   subCategorySelected = computed(() =>
-    this.classifications().classification.find((classification) => classification.code === this.categorySelected().code),
+    this.classifications()?.classification.find((classification) => classification.code === this.categorySelected().code),
   )
 
   categories = computed(() =>
-    this.classifications().classification.map((classification) => ({
+    this.classifications()?.classification.map((classification) => ({
       ...classification,
       label: classification.label.translations.find((translation) => translation.lang === CODE_LANG.EN)?.label,
     })),
   )
+  allCategories = signal<Category[]>([])
 
   products = signal([])
   public langs = signal(LANGS)
+  public toogleEditName = signal(false)
+  public toogleEditDescription = signal(false)
 
   private _closeDetailByIndex = (index: number) => {
     const elementDetail = this.detailCategory.get(index)?.nativeElement
@@ -130,7 +151,13 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categorySelected.set(this.classifications().classification[0])
+    const firstCategory = this.classifications()?.classification[0]
+    if (firstCategory) {
+      this.categorySelected.set(firstCategory)
+    }
+    if (!this.classifications()) {
+      this._getAllCategories()
+    }
   }
 
   hanldertoggleActor(toggleActor: boolean): void {
@@ -158,10 +185,88 @@ export class AdminCategoriesComponent implements OnInit {
     AdminCategoriesDynamicForm.buildForm({ fb: this._fb, group, formGroup })
   }
 
+  onBlurName() {
+    this.toogleEditName.set(false)
+    this._updateGrouping()
+  }
+  onBlurDescription() {
+    this.toogleEditDescription.set(false)
+    this._updateGrouping()
+  }
+
+  createGrouping() {
+    console.log('this.classifications', this.categoriesSelected)
+    this._createGrouping()
+  }
+
+  private _createGrouping() {
+    if (!this.categoriesSelected) {
+      return
+    }
+    const body: NewUpdateGrouping = {
+      name: this.nameGrouping()?.nativeElement.value,
+      description: this.descriptionGrouping()?.nativeElement.value,
+      classification: this.categoriesSelected.map((category) =>
+        CategoryMapper.mapCategoryToNewCategoryForGrouping(category),
+      ) as NewCategoryForGrouping[],
+    }
+
+    this._adminCategories.createGrouping(body).subscribe((grouping) => {
+      if (grouping) {
+        this._fetchData()
+      }
+    })
+  }
+  private _updateGrouping() {
+    if (!this.classifications()) {
+      return
+    }
+    const body: NewUpdateGrouping = {
+      name: this.nameGrouping()?.nativeElement.value ?? this.classifications()?.name,
+      description: this.nameGrouping()?.nativeElement.description ?? this.classifications()?.description,
+      classification: this.classifications()?.classification.map((category) =>
+        CategoryMapper.mapCategoryToNewCategoryForGrouping(category),
+      ) as NewCategoryForGrouping[],
+    }
+
+    this._adminCategories.updateGrouping(this.classifications()?.id || '', body).subscribe((grouping) => {
+      if (grouping) {
+        this._fetchData()
+      }
+    })
+  }
+
+  newCategory() {
+    this._openDialogCategory().subscribe((res) => {
+      if (res) {
+        this._fetchData()
+        this._getAllCategories()
+      }
+    })
+  }
+
+  editCategory(category: Category) {
+    this._openDialogCategory(category).subscribe((res) => {
+      if (res) {
+        this._fetchData()
+      }
+    })
+  }
+  private _getAllCategories() {
+    this._adminCategories.getAllCategories().subscribe((categories) => {
+      this.allCategories.set(categories)
+    })
+  }
   selectCategory(categorySelected: any): void {
     this._closeAllDetail()
     this.categorySelected.set(categorySelected)
     this.toggleActor.set(true)
+  }
+
+  private _openDialogCategory(category?: Category) {
+    return this._sideDialogService.openDialog<DialogManagmentCategoryComponent>(DialogManagmentCategoryComponent, {
+      category,
+    })
   }
   toogleSubcategory(event: Event, index: number) {
     this._toogleSubcategory(index)
@@ -172,10 +277,28 @@ export class AdminCategoriesComponent implements OnInit {
     this._closeDetailByIndex(index)
   }
 
+  createNewSubcategoryToCategory(categoryId: string) {
+    this._openDialgoAddSubcategory().subscribe((res) => {
+      if (res) {
+        this._adminCategories
+          .createSubcategory({
+            categoryId,
+            label: res.label,
+            question: res.question,
+          })
+          .subscribe((grouping) => {
+            if (grouping) {
+              this._fetchData()
+            }
+          })
+      }
+    })
+  }
+
   addSubcategory() {
     this._openDialgoAddSubcategory().subscribe((res) => {
       if (res) {
-        this._createSubcategory({ categoryId: this.categorySelected().id, ...res })
+        this._addSubcategoryToGrouping({ categoryId: this.categorySelected().id, ...res })
       }
     })
   }
@@ -184,10 +307,16 @@ export class AdminCategoriesComponent implements OnInit {
     return this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent)
   }
 
-  private _createSubcategory(newSubcategory: NewSubcategory) {
-    this._adminCategories.createSubcategory(this.classifications(), newSubcategory).subscribe((grouping) => {
-      console.log('grouping', grouping)
-    })
+  private _addSubcategoryToGrouping(newSubcategory: NewSubcategory) {
+    if (this.classifications()) {
+      this._adminCategories
+        .addSubcategoryToGrouping(this.classifications() as GroupingByClassifications, newSubcategory)
+        .subscribe((grouping) => {
+          if (grouping) {
+            this._fetchData()
+          }
+        })
+    }
   }
 
   updateSubcategory(id: string, subcategory: Subcategory) {
