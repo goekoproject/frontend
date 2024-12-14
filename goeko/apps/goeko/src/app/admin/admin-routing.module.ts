@@ -13,8 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'classifications/new',
-    loadComponent: () => import('./grouping/admin-categories/admin-categories.component').then((c) => c.AdminCategoriesComponent),
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    loadComponent: () => import('./grouping/new-grouping.component').then((c) => c.NewGroupingComponent),
   },
   {
     path: 'classifications/:groupingId',

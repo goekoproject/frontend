@@ -68,12 +68,15 @@ export class ClassificationsService {
     return this._http.put(`/v2/classifications/category/${id}`, category)
   }
 
-  createCategory(category: NewUpdateCategory) {
-    return this._http.post('/v2/classifications/category', category)
+  createCategory(category: NewUpdateCategory): Observable<Category> {
+    return this._http.post<Category>('/v2/classifications/category', category)
   }
 
   getAllCategories(): Observable<Category[]> {
     return this._http.get<Category[]>('/v2/classifications/category')
+  }
+  delteteCategory(id: string) {
+    return this._http.delete(`/v2/classifications/category/${id}`)
   }
 
   /** Subcategory*/

@@ -12,7 +12,6 @@ import {
   inject,
   input,
   signal,
-  viewChild,
   viewChildren,
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
@@ -34,17 +33,11 @@ import {
 } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { of, switchMap } from 'rxjs'
 import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.component'
 import { DialogManagmentCategoryComponent } from '../dialog-managment-category.component'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
-
-/**
- * merge the categories section and the categories get backend for we have data like icons and preloading data
- * @param categorySection  the category section
- * @param classificationCategory backend categories
- * @returns
- */
 
 @Component({
   selector: 'goeko-admin',
@@ -72,12 +65,10 @@ export class AdminCategoriesComponent implements OnInit {
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
 
-  nameGrouping = viewChild<ElementRef>('nameGroupingRef')
-  descriptionGrouping = viewChild<ElementRef>('descriptionGroupingRef')
   categoryRef = viewChildren<ElementRef>('categoryRef')
 
-  name = computed(() => this.nameGrouping()?.nativeElement.value)
   classifications = input<GroupingByClassifications>()
+
   get categoriesSelected() {
     return this.categoryRef()
       .filter((category) => category.nativeElement.checked)
@@ -86,19 +77,22 @@ export class AdminCategoriesComponent implements OnInit {
 
   private _router = inject(Router)
 
+  private mappingClassificationLabel = (classification: Category[] | undefined) =>
+    classification?.map((classification) => ({
+      ...classification,
+      label: classification.label.translations.find((translation) => translation.lang === CODE_LANG.EN)?.label,
+    }))
+
   //Signal
   categorySelected = signal<Category>({} as Category)
   subCategorySelected = computed(() =>
     this.classifications()?.classification.find((classification) => classification.code === this.categorySelected().code),
   )
 
-  categories = computed(() =>
-    this.classifications()?.classification.map((classification) => ({
-      ...classification,
-      label: classification.label.translations.find((translation) => translation.lang === CODE_LANG.EN)?.label,
-    })),
-  )
+  categories = computed(() => this.mappingClassificationLabel(this.classifications()?.classification))
+
   allCategories = signal<Category[]>([])
+  needAddSubcategory = signal(false)
 
   products = signal([])
   public langs = signal(LANGS)
@@ -196,34 +190,15 @@ export class AdminCategoriesComponent implements OnInit {
 
   createGrouping() {
     console.log('this.classifications', this.categoriesSelected)
-    this._createGrouping()
   }
 
-  private _createGrouping() {
-    if (!this.categoriesSelected) {
-      return
-    }
-    const body: NewUpdateGrouping = {
-      name: this.nameGrouping()?.nativeElement.value,
-      description: this.descriptionGrouping()?.nativeElement.value,
-      classification: this.categoriesSelected.map((category) =>
-        CategoryMapper.mapCategoryToNewCategoryForGrouping(category),
-      ) as NewCategoryForGrouping[],
-    }
-
-    this._adminCategories.createGrouping(body).subscribe((grouping) => {
-      if (grouping) {
-        this._fetchData()
-      }
-    })
-  }
   private _updateGrouping() {
     if (!this.classifications()) {
       return
     }
     const body: NewUpdateGrouping = {
-      name: this.nameGrouping()?.nativeElement.value ?? this.classifications()?.name,
-      description: this.nameGrouping()?.nativeElement.description ?? this.classifications()?.description,
+      name: this.classifications()?.name || '',
+      description: this.classifications()?.description || '',
       classification: this.classifications()?.classification.map((category) =>
         CategoryMapper.mapCategoryToNewCategoryForGrouping(category),
       ) as NewCategoryForGrouping[],
@@ -236,17 +211,21 @@ export class AdminCategoriesComponent implements OnInit {
     })
   }
 
-  newCategory() {
-    this._openDialogCategory().subscribe((res) => {
-      if (res) {
-        this._fetchData()
-        this._getAllCategories()
-      }
+  createNewCategory() {
+    this._openDialogCategory().subscribe((res: Category) => {
+
     })
   }
 
   editCategory(category: Category) {
     this._openDialogCategory(category).subscribe((res) => {
+      if (res) {
+        this._fetchData()
+      }
+    })
+  }
+  deleteCategory(category: Category) {
+    this._adminCategories.deleteCategory(category.id).subscribe((res) => {
       if (res) {
         this._fetchData()
       }
@@ -277,23 +256,7 @@ export class AdminCategoriesComponent implements OnInit {
     this._closeDetailByIndex(index)
   }
 
-  createNewSubcategoryToCategory(categoryId: string) {
-    this._openDialgoAddSubcategory().subscribe((res) => {
-      if (res) {
-        this._adminCategories
-          .createSubcategory({
-            categoryId,
-            label: res.label,
-            question: res.question,
-          })
-          .subscribe((grouping) => {
-            if (grouping) {
-              this._fetchData()
-            }
-          })
-      }
-    })
-  }
+
 
   addSubcategory() {
     this._openDialgoAddSubcategory().subscribe((res) => {

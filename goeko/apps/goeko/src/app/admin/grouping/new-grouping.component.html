@@ -1,0 +1,30 @@
+<ol class="w-full items-center space-y-4 lg:flex lg:space-y-0">
+  <li *ngFor="let step of steps(); let i = index" class="flex-1">
+    <a
+      (click)="selectStep(i)"
+      [ngClass]="{
+        'bg-indigo-50 text-indigo-600': currentStep() === i,
+        'bg-gray-50 text-gray-900': currentStep() !== i,
+      }"
+      class="flex w-full items-center rounded-lg px-4 py-5 font-medium">
+      <span
+        [ngClass]="{
+          'bg-indigo-600 text-white': currentStep() === i,
+          'border border-gray-200 bg-gray-50 text-gray-900': currentStep() !== i,
+        }"
+        class="mr-3 flex h-8 w-8 items-center justify-center rounded-full text-sm lg:h-10 lg:w-10">
+        {{ i + 1 }}
+      </span>
+      <h4>{{ step.title }}</h4>
+    </a>
+  </li>
+</ol>
+
+<div class="mt-8">
+  <!-- Contenedor dinámico de los componentes -->
+  <ng-container #stepContainer></ng-container>
+</div>
+
+<button go-button appearance="white" class="ml-auto" (click)="nextStep()">
+  {{ 'next' | translate }}
+</button>

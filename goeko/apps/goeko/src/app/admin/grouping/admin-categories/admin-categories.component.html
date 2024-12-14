@@ -1,34 +1,17 @@
 <div class="flex flex-col gap-6">
   <section class="flex flex-col gap-4">
-    <div class="flex items-center gap-2">
-      <input
-        class="text-4xl"
-        #nameGroupingRef
-        [ngClass]="{ block: toogleEditName(), hidden: !toogleEditName() }"
-        (blur)="onBlurName()"
-        [value]="classifications()?.name || 'Name Grouping'" />
-      <h1 class="text-4xl" [ngClass]="{ block: !toogleEditName(), hidden: toogleEditName() }">{{ nameGrouping()?.nativeElement.value }}</h1>
-      <i class="ti ti-pencil cursor-pointer border border-white text-2xl hover:text-blue-500" (click)="toogleEditName.set(true)"></i>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <input
-        #descriptionGroupingRef
-        [ngClass]="{ block: toogleEditDescription(), hidden: !toogleEditDescription() }"
-        (blur)="onBlurDescription()"
-        [value]="classifications()?.description || 'Add new Description'" />
-      <p [ngClass]="{ block: !toogleEditDescription(), hidden: toogleEditDescription() }">
-        {{ descriptionGrouping()?.nativeElement.value }}
-      </p>
-      <i class="ti ti-pencil cursor-pointer rounded-full text-2xl hover:text-blue-500" (click)="toogleEditDescription.set(true)"></i>
-    </div>
+    <h1 class="text-4xl">{{ classifications()?.name }}</h1>
+    <p>
+      {{ classifications()?.description }}
+    </p>
   </section>
   @if (!classifications()) {
     <div>
-      <button go-button (click)="newCategory()">
+      <button go-button (click)="createNewCategory()">
         {{ 'newCategory' | translate }}
       </button>
     </div>
+
 
     <ul role="list" class="">
       @for (category of allCategories(); track category.code) {
@@ -52,16 +35,17 @@
                 }
               </div>
             </div>
-            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-              <button go-button appearance="white" (click)="createNewSubcategoryToCategory(category.id)">{{ 'edit' | translate }}</button>
+            <div class="flex items-center gap-2">
+              <button go-button appearance="flat" (click)="deleteCategory(category)">{{ 'delete' | translate }}</button>
+
+             <!--   <button go-button appearance="white" (click)="createNewSubcategoryToCategory(category.id)">
+                <i class="ti ti-arrow-big-right-line"></i>
+              </button> -->
             </div>
           </li>
         </label>
       }
     </ul>
-    <button go-button (click)="createGrouping()">
-      {{ 'Creat Grouping' | translate }}
-    </button>
   } @else {
     <section class="section-step">
       <!-- CATEGORY -->

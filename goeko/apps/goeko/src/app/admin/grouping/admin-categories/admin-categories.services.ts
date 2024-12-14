@@ -18,7 +18,7 @@ export class AdminCategoriesService {
   private _classificationService = inject(ClassificationsService)
 
   addSubcategoryToGrouping(grouping: GroupingByClassifications, subcategory: NewSubcategory) {
-    return this._classificationService.createSubcategory(subcategory).pipe(
+    return this.createSubcategory(subcategory).pipe(
       switchMap((newSubcategory: any) => {
         console.log('response', newSubcategory)
         const updateGrouping = GroupingBuilder.create(grouping).addSubcategory(newSubcategory).build()
@@ -30,6 +30,9 @@ export class AdminCategoriesService {
 
   createSubcategory(subcategory: NewSubcategory) {
     return this._classificationService.createSubcategory(subcategory)
+  }
+  deleteCategory(id: string) {
+    return this._classificationService.delteteCategory(id)
   }
   updateSubcategorySelected(id: string, subcategory: UpdateSubcategory) {
     return this._classificationService.updateSubcategory(id, subcategory)

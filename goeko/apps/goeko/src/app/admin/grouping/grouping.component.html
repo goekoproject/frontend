@@ -1,4 +1,4 @@
-<button go-button (click)="newGrouping()" [routerLink]="'../classifications/new'">{{ 'newGrouping' | translate }}</button>
+<button go-button class="ml-auto" (click)="newGrouping()" [routerLink]="'../classifications/new'">{{ 'newGrouping' | translate }}</button>
 <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-3">
   @defer (when groupingForm().length > 0) {
     @for (grouping of groupingForm(); track grouping.id) {

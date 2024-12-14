@@ -3,9 +3,11 @@ import { Component, computed, effect, inject } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { LANGS } from '@goeko/core'
-import { Category, ClassificationsService, NewUpdateCategory, Translations } from '@goeko/store'
+import { Category, ClassificationsService, NewUpdateCategory } from '@goeko/store'
 import { ButtonModule, DIALOG_DATA, GoInputModule, SideDialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { of, switchMap } from 'rxjs'
+import { DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
 
 interface DialogData {
   category?: Category
@@ -13,7 +15,7 @@ interface DialogData {
 @Component({
   selector: 'goeko-dialog-managment-category',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule, GoInputModule, TranslateModule],
+  imports: [CommonModule, DialogAddSubcategoryComponent, ReactiveFormsModule, ButtonModule, GoInputModule, TranslateModule],
   templateUrl: './dialog-managment-category.component.html',
   styleUrl: './dialog-managment-category.component.scss',
 })
@@ -76,17 +78,36 @@ export class DialogManagmentCategoryComponent {
       enabled: undefined,
     }
     this._classificationService.createCategory(body).subscribe((res) => {
-      this._sideDialogService.closeDialog(this.form.value)
+      this._sideDialogService.closeDialog(res)
     })
   }
 
   private _dataCategory(): Category {
     return {} as Category
   }
-  private convertToTranslations(formGroup: FormGroup): Translations[] {
-    return Object.keys(formGroup.controls).map((lang) => ({
-      label: formGroup.get(lang)?.value,
-      lang: lang,
-    }))
+
+  addSubcategory() {
+    this._createNewSubcategoryToCategory(this.category().id).subscribe((res) => {
+      if (res) {
+        console.log('res', res)
+      }
+    })
+  }
+  private _createNewSubcategoryToCategory(categoryId: string) {
+    return this._openDialgoAddSubcategory().pipe(
+      switchMap((res) => {
+        if (res) {
+          return this._classificationService.createSubcategory({
+            categoryId,
+            label: res.label,
+            question: res.question,
+          })
+        }
+        return of(null)
+      }),
+    )
+  }
+  private _openDialgoAddSubcategory = () => {
+    return this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent)
   }
 }

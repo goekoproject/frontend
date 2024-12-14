@@ -4,7 +4,7 @@ export class CategoryMapper {
   static mapCategoryToNewCategoryForGrouping(category: Category): NewCategoryForGrouping {
     return {
       code: category.code,
-      order: category.order,
+      order: category.order || 0,
       subcategories: category.subcategories?.map(CategoryMapper.mapSubcategory),
     }
   }
