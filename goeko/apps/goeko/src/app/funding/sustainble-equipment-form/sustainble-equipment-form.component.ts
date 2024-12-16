@@ -7,7 +7,7 @@ import { BadgeModule, ButtonModule, GoILeavesComponent, ToggleSwitchComponent, U
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
-import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, ORIGIN, VEHICLES, YEARS } from './data-fields.constants'
+import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, VEHICLES, YEARS } from './data-fields.constants'
 type Options = {
   label: string
   id: string
@@ -44,10 +44,10 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   vehicles = signal<Options[]>(VEHICLES)
   machines = signal<Options[]>(MACHINES)
   years = signal<Options[]>(YEARS)
-  origin = signal<Options[]>(ORIGIN)
   documents = signal<Options[]>(DOCUMENTS)
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
+  //origin = signal<Options[]>(ORIGIN)
 
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
@@ -62,11 +62,11 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     yearsActivity: this._fb.control(this.years()[0]),
     yearsBalance: this._fb.control(this.years()[0]),
 
-    origin: this._fb.control(null),
     documents: this._fb.control(null),
     amount: this._fb.control(this.amount()[0]),
     currencys: this._fb.control(null),
     locations: this._fb.array([]),
+    //origin: this._fb.control(null),
   })
 
   ngOnInit() {
