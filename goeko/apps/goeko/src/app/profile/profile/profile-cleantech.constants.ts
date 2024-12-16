@@ -33,12 +33,12 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         type: 'lang',
         required: true,
       },
-      /*       {
+      {
         controlName: 'identifier',
         label: 'FORM_LABEL.companyId',
         type: 'text',
-        required: true,
-      }, */
+        required: false,
+      },
       {
         controlName: 'link',
         label: 'FORM_LABEL.website',
