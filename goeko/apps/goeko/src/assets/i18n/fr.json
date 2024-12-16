@@ -225,6 +225,7 @@
     "buildingTypes": "Types de bien",
     "targetRegion": "Régions cibles",
     "ownerProfile": "Profil du propriétaire",
+    "objectType": "Type d'objet",
     "contact": "Contact",
     "montanMinimun": "Montant minimum requis"
   },

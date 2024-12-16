@@ -1,47 +1,63 @@
 <form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
-  <fieldset>
-    <legend>{{ 'FORM_LABEL.buildingFounding' | translate }}</legend>
-    <span>{{ 'FORM_LABEL.workTypes' | translate }}</span>
-    <go-badge-group [formControlName]="'workTypes'">
-      @for (worktype of workTypes(); track worktype.id) {
-        <go-badge [value]="worktype">{{ worktype.label | translate }}</go-badge>
-      }
-    </go-badge-group>
+<!-- Selección de tipos de trabajo -->
+<div class="mb-6">
+    <h2 class="text-lg font-semibold">{{ 'FORM_LABEL.buildingFounding' | translate }}</h2>
+    <div class="mt-4">
 
-    <span>{{ 'FORM_LABEL.buildingTypes' | translate }}</span>
-    <go-badge-group [formControlName]="'buildingTypes'">
-      @for (buildingtype of buildingTypes(); track buildingtype.id) {
-        <go-badge [value]="buildingtype">{{ buildingtype.label | translate }}</go-badge>
-      }
-    </go-badge-group>
-  </fieldset>
+    <label class="mb-2 block font-medium">{{ 'FORM_LABEL.workTypes' | translate }}</label>
+    <div class="mb-6">
+      <go-badge-group [formControlName]="'workTypes'">
+        @for (worktype of workTypes(); track worktype.id) {
+          <go-badge [value]="worktype">{{ worktype.label | translate }}</go-badge>
+        }
+      </go-badge-group>
+    </div>
 
-  <fieldset>
-    <legend>{{ 'FORM_LABEL.targetRegion' | translate }}</legend>
-    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
-    <span>{{ 'FORM_LABEL.ownerProfile' | translate }}</span>
-
-    <go-badge-group [formControlName]="'ownerProfiles'">
-      @for (ownerProfile of ownerProfiles(); track ownerProfile.id) {
-        <go-badge [value]="ownerProfile">{{ ownerProfile.label | translate }}</go-badge>
-      }
-    </go-badge-group>
     <div class="flex">
       <div class="w-full">
-        <label for="montanMinimun">{{ 'FORM_LABEL.montanMinimun' | translate }}</label>
         <ui-super-select
-          [readonly]="false"
-          [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-          [formControlName]="'montanMinimun'"
-          id="montanMinimun"
-          name="montanMinimun">
-          @for (money of amount(); track money.id; let first = $first) {
-            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
+          [formControlName]="'ownerProfile'">
+          <label title for=" ownerProfile ">
+            {{ 'FORM_LABEL.ownerProfile' | translate }}
+          </label>
+          @for (profile of ownerProfile(); track profile.id;) {
+            <super-option [value]="profile"> {{ profile.label }}</super-option>
           }
         </ui-super-select>
       </div>
       <div class="w-full">
-        <label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
+        <ui-super-select
+          [formControlName]="'objectType'">
+          <label title for=" objectType ">
+            {{ 'FORM_LABEL.objectType' | translate }}
+          </label>
+          @for (type of objectType(); track type.id) {
+            <super-option [value]="type"> {{ type.label }}</super-option>
+          }
+        </ui-super-select>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Región objetivo -->
+<div class="mb-6">
+  <h2 class="text-lg font-semibold mb-4">{{ 'FORM_LABEL.targetRegion' | translate }}</h2>
+  <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+</div>
+<!-- Selección de cantidad minima -->
+<div class="mb-6">
+  <h2 class="text-lg font-semibold mb-4">{{ 'FORM_LABEL.montanMinimun' | translate }}</h2>
+
+    <div class="flex">
+      <div class="w-full">
+        <ui-super-select
+          [formControlName]="'montanMinimun'">
+          @for (money of amount(); track money.id;) {
+            <super-option [value]="money"> {{ money.label }}</super-option>
+          }
+        </ui-super-select>
+      </div>
+      <div class="w-full">
         <ui-super-select
           [readonly]="false"
           [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
@@ -55,18 +71,10 @@
         </ui-super-select>
       </div>
     </div>
-  </fieldset>
-  <fieldset>
-    <legend>{{ 'FORM_LABEL.contact' | translate }}</legend>
-
-    <div class="flex">
-      <div class="w-full">
-        <go-input [formControlName]="'contactPerson'" id="contactPerson" type="contactPerson">
-          <p slot="label">{{ 'FORM_LABEL.contactPerson' | translate }}</p>
-        </go-input>
-      </div>
-    </div>
-
+</div>
+<!-- Datos de contacto -->
+<div class="mb-6">
+    <h2 class="text-lg font-semibold mb-4">{{ 'FORM_LABEL.contact' | translate }}</h2>
     <div class="flex">
       <div class="w-full">
         <go-input [formControlName]="'email'" id="email" type="email" placeholder="email@gmail.com">
@@ -82,7 +90,7 @@
         </go-input>
       </div>
     </div>
-  </fieldset>
+</div>
 
 </form>
 <div class="mt-4 flex justify-between">

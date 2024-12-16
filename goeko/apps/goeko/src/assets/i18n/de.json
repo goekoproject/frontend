@@ -215,6 +215,7 @@
     "buildingTypes": "Gebäudetypen",
     "targetRegion": "Zielregion",
     "ownerProfile": "Profil des Eigentümers",
+    "objectType": "Objekttyp",
     "contact": "Kontakt",
     "montanMinimun": "Mindestmenge"
   },

@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { defaultSetCurrency } from './compare-with-select'
-import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, OBJECTTYPE, OWNERPROFILE, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
 
 type Options = {
   label: string
@@ -45,10 +45,10 @@ export class RealStateLoanComponent implements OnInit {
   public form!: FormGroup
 
   workTypes = signal<Options[]>(WORKTYPES)
-  buildingTypes = signal<Options[]>(BUILDINGTYPES)
-  ownerProfiles = signal<Options[]>(OWNERPROFILES)
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
+  ownerProfile = signal<Options[]>(OWNERPROFILE)
+  objectType = signal<Options[]>(OBJECTTYPE)
 
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
@@ -66,12 +66,11 @@ export class RealStateLoanComponent implements OnInit {
   private _initForm() {
     this.form = this._fb.group({
       workTypes: this._fb.control(null),
-      buildingTypes: this._fb.control(null),
-      ownerProfiles: this._fb.control(null),
+      ownerProfile: this._fb.control(this.ownerProfile()[0]),
+      objectType: this._fb.control(this.objectType()[0]),
       locations: this._fb.array([]),
-      currency: [''],
-      montanMinimun: [''],
-      contactPerson: [''],
+      montanMinimun: this._fb.control(this.amount()[0]),
+      currency: this._fb.control(null),
       email: ['', [Validators.email]],
       phoneNumber: ['', Validators.pattern(/^[0-9]{10,15}$/)],
     })

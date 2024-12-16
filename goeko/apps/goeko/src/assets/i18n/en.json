@@ -225,8 +225,9 @@
     "buildingTypes": "Building types",
     "targetRegion": "Target region",
     "ownerProfile": "Owner profile",
+    "objectType": "Object Type",
     "contact": "Contact",
-    "montanMinimun": "Minimum quantity"
+    "montanMinimun": "Minimum amount"
   },
   "FUNDING_SUSTAINABLE_EQUIPMENT": {
     "subtitleForm": "Select categories and products corresponding to your project",

@@ -66,3 +66,17 @@ export const AMOUNT = [
     id: window.crypto.randomUUID(),
   },
 ]
+
+export const OWNERPROFILE = [
+  {
+    label: 'Particular',
+    id: window.crypto.randomUUID(),
+  },
+]
+
+export const OBJECTTYPE = [
+  {
+    label: 'Residencial',
+    id: window.crypto.randomUUID(),
+  },
+]
