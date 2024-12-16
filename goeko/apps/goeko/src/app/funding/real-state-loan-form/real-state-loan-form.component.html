@@ -21,18 +21,18 @@
             {{ 'FORM_LABEL.ownerProfile' | translate }}
           </label>
           @for (profile of ownerProfile(); track profile.id;) {
-            <super-option [value]="profile"> {{ profile.label }}</super-option>
+            <super-option [value]="profile"> {{ profile.label | translate }}</super-option>
           }
         </ui-super-select>
       </div>
       <div class="w-full">
         <ui-super-select
-          [formControlName]="'objectType'">
-          <label title for=" objectType ">
-            {{ 'FORM_LABEL.objectType' | translate }}
+          [formControlName]="'buildingTypes'">
+          <label title for=" buildingTypes ">
+            {{ 'FORM_LABEL.buildingTypes' | translate }}
           </label>
-          @for (type of objectType(); track type.id) {
-            <super-option [value]="type"> {{ type.label }}</super-option>
+          @for (type of buildingTypes(); track type.id) {
+            <super-option [value]="type"> {{ type.label | translate }}</super-option>
           }
         </ui-super-select>
       </div>

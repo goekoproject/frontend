@@ -47,9 +47,8 @@ export class RealStateLoanComponent implements OnInit {
   workTypes = signal<Options[]>(WORKTYPES)
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
-  ownerProfile = signal<Options[]>(OWNERPROFILE)
-  objectType = signal<Options[]>(OBJECTTYPE)
-
+  ownerProfile = signal<Options[]>(OWNERPROFILES)
+  buildingTypes = signal<Options[]>(BUILDINGTYPES)
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
   }
@@ -67,7 +66,7 @@ export class RealStateLoanComponent implements OnInit {
     this.form = this._fb.group({
       workTypes: this._fb.control(null),
       ownerProfile: this._fb.control(this.ownerProfile()[0]),
-      objectType: this._fb.control(this.objectType()[0]),
+      buildingTypes: this._fb.control(this.buildingTypes()[0]),
       locations: this._fb.array([]),
       montanMinimun: this._fb.control(this.amount()[0]),
       currency: this._fb.control(null),
