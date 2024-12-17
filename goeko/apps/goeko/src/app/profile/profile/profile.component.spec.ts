@@ -20,7 +20,6 @@ describe('ProfileComponent SME', () => {
   beforeEach(async () => {
     // Mock del ProfileService
     profileServiceMock = {
-      fetchUser: jest.fn(),
       createUserProfile: jest.fn().mockReturnValue({
         pipe: jest.fn().mockReturnValue({
           subscribe: jest.fn().mockImplementation((callbacks) => {
@@ -129,20 +128,11 @@ describe('ProfileComponent SME', () => {
     expect(component).toBeTruthy()
   })
 
-  // Ejemplo de prueba para el método ngOnInit
-  it('ngOnInit should initialize form and fetch user data', () => {
-    // Asumiendo que fetchUser es un método que debe ser llamado en ngOnInit
-    expect(profileServiceMock.fetchUser).toHaveBeenCalled()
-    // Verificar que el formulario se ha inicializado
-    expect(component.form).toBeDefined()
-  })
-
   it('should initialize form based on user type on component initialization', () => {
     // Arrange
     const profileComponent = component
 
     // Act
-    profileComponent.ngOnInit()
 
     // Assert
     expect(profileComponent.form).toBeDefined()
@@ -169,7 +159,6 @@ describe('ProfileComponent SME', () => {
         name: 'test.png',
       },
     ]
-    profileComponent.ngOnInit()
     profileComponent.fileChange([new File([], 'test.png')])
 
     jest.spyOn(profileServiceMock, 'createUserProfile').mockReturnValue(of(newUser))
@@ -193,8 +182,6 @@ describe('ProfileComponent SME', () => {
       identifier: 'A1111111',
     }
 
-    profileComponent.ngOnInit()
-
     jest.spyOn(profileServiceMock, 'createUserProfile').mockReturnValue(of(newUser))
 
     profileComponent.saveProfile()
@@ -217,7 +204,6 @@ describe('ProfileComponent SME', () => {
     }
     jest.spyOn(profileServiceMock, 'userProfile').mockReturnValue(updateUser)
 
-    profileComponent.ngOnInit()
     profileComponent.fileChange([new File([], 'test.png')])
     component.form.patchValue({ name: 'Test User', email: 'test@example.com', employees: 10 })
 
@@ -256,7 +242,6 @@ describe('ProfileComponent SME', () => {
     }
     jest.spyOn(profileServiceMock, 'userProfile').mockReturnValue(user)
 
-    profileComponent.ngOnInit()
     component.form.patchValue({ name: user.name, email: user.email, employees: user.employees })
 
     jest.spyOn(profileServiceMock, 'updateUserProfile').mockReturnValue(of(updateUser))
