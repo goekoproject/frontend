@@ -52,4 +52,8 @@ export class AdminCategoriesService {
   getAllCategories() {
     return this._classificationService.getAllCategories()
   }
+
+  getSubcategoryByCategoryId(categoryId: string) {
+    return this._classificationService.getSubcategoryByCategoryId(categoryId)
+  }
 }

@@ -1,0 +1,13 @@
+<div class="flex items-center">
+  <input
+    [id]="id()"
+    type="radio"
+    [name]="name()"
+    class="hidden checked:border-indigo-500 checked:bg-indigo-100 checked:bg-center checked:bg-no-repeat"
+    [checked]="checked()"
+    [value]="value()" />
+  <label [for]="id()" class="flex cursor-pointer items-center text-sm font-normal text-gray-600">
+    <span class="mr-2 h-4 w-4 rounded-full border border-gray-300"></span>
+    <ng-content></ng-content>
+  </label>
+</div>

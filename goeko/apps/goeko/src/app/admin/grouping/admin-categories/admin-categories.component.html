@@ -12,12 +12,11 @@
       </button>
     </div>
 
-
     <ul role="list" class="">
       @for (category of allCategories(); track category.code) {
         <label [for]="category.code" class="ms-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
           <li class="flex cursor-pointer justify-between gap-x-6 rounded-md border p-4 py-5">
-            <div class="flex min-w-0 gap-x-4">
+            <div class="flex min-w-0 flex-col gap-x-4">
               <input
                 #categoryRef
                 [id]="category.code"
@@ -34,13 +33,42 @@
                   </div>
                 }
               </div>
+
+              @if (subcategories()?[0]?.categoryId === category.id) {
+                <section>
+                  <article>
+                    <goeko-radio-group>
+                      @for (lang of langs(); track lang.code) {
+                        <goeko-radio-input
+                          [value]="lang.code"
+                          [name]="'lang'"
+                          [id]="lang.code"
+                          (click)="selectedLangSubcategory.set(lang.code)">
+                          <span class="fi fi-{{ lang.iconFlag }}"></span>
+                          <p>{{ lang.title | translate }}</p>
+                        </goeko-radio-input>
+                      }
+                    </goeko-radio-group>
+                  </article>
+                  <ul>
+                    @for (subcategory of subcategories(); track subcategory.id) {
+                      <li>
+                        <p>
+                          {{ subcategory.label.translations | labelByCategory: selectedLangSubcategory() }}
+                        </p>
+                      </li>
+                    }
+                  </ul>
+                </section>
+              }
             </div>
             <div class="flex items-center gap-2">
               <button go-button appearance="flat" (click)="deleteCategory(category)">{{ 'delete' | translate }}</button>
+              <button go-button appearance="white" (click)="viewSubcategory(category.id)">{{ 'Show Sub Category' | translate }}</button>
 
-             <!--   <button go-button appearance="white" (click)="createNewSubcategoryToCategory(category.id)">
+              <button go-button appearance="white" (click)="addNewSubcategoryToCategory(category)">
                 <i class="ti ti-arrow-big-right-line"></i>
-              </button> -->
+              </button>
             </div>
           </li>
         </label>

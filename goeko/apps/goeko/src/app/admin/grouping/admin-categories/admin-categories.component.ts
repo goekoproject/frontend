@@ -29,15 +29,25 @@ import {
   NewUpdateGrouping,
   Product,
   Subcategory,
+  SubcategoryResponse,
   UpdateSubcategory,
 } from '@goeko/store'
-import { BadgeModule, ButtonModule, GoInputModule, SideDialogService, SwitchModule, fadeAnimation, listAnimation } from '@goeko/ui'
+import {
+  BadgeModule,
+  ButtonModule,
+  GoInputModule,
+  RadioModule,
+  SideDialogService,
+  SwitchModule,
+  fadeAnimation,
+  listAnimation,
+} from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { of, switchMap } from 'rxjs'
 import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.component'
 import { DialogManagmentCategoryComponent } from '../dialog-managment-category.component'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
+import { LabelByCategoryPipe } from './label-by-category.pipe'
 
 @Component({
   selector: 'goeko-admin',
@@ -53,6 +63,8 @@ import { AdminCategoriesService } from './admin-categories.services'
     ProductsManagementComponent,
     ProductToCurrentLangPipe,
     SwitchModule,
+    RadioModule,
+    LabelByCategoryPipe,
   ],
   providers: [AdminCategoriesService, ClassificationCategoryService],
   templateUrl: './admin-categories.component.html',
@@ -93,7 +105,8 @@ export class AdminCategoriesComponent implements OnInit {
 
   allCategories = signal<Category[]>([])
   needAddSubcategory = signal(false)
-
+  subcategories = signal<SubcategoryResponse[]>([])
+  selectedLangSubcategory = signal<string>(CODE_LANG.EN)
   products = signal([])
   public langs = signal(LANGS)
   public toogleEditName = signal(false)
@@ -212,9 +225,7 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   createNewCategory() {
-    this._openDialogCategory().subscribe((res: Category) => {
-
-    })
+    this._openDialogCategory().subscribe((res: Category) => {})
   }
 
   editCategory(category: Category) {
@@ -256,14 +267,21 @@ export class AdminCategoriesComponent implements OnInit {
     this._closeDetailByIndex(index)
   }
 
-
-
+  viewSubcategory = (categoryId: string) => {
+    this._adminCategories.getSubcategoryByCategoryId(categoryId).subscribe((res) => {
+      this.subcategories.set(res)
+    })
+  }
   addSubcategory() {
     this._openDialgoAddSubcategory().subscribe((res) => {
       if (res) {
         this._addSubcategoryToGrouping({ categoryId: this.categorySelected().id, ...res })
       }
     })
+  }
+
+  addNewSubcategoryToCategory(category: Category) {
+    this._openDialgoAddSubcategory().subscribe((res) => {})
   }
 
   private _openDialgoAddSubcategory = () => {
