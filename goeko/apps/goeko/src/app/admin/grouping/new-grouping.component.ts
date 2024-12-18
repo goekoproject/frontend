@@ -4,14 +4,14 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { NewUpdateGrouping } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { AdminCategoriesComponent } from './admin-categories/admin-categories.component'
+import { AddCategorySubcategoryGroupComponent } from './add-category-subcategory-group.component'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { BasicInfoGroupingComponent } from './basic-info-grouping.component'
 
 @Component({
   selector: 'goeko-new-grouping',
   standalone: true,
-  imports: [CommonModule, BasicInfoGroupingComponent, TranslateModule, ButtonModule, AdminCategoriesComponent],
+  imports: [CommonModule, TranslateModule, ButtonModule],
   templateUrl: './new-grouping.component.html',
   styleUrl: './new-grouping.component.scss',
   providers: [AdminCategoriesService],
@@ -22,10 +22,11 @@ export class NewGroupingComponent implements OnInit {
   stepContainer!: ViewContainerRef
   steps = signal([
     { title: 'Create Name and Description', component: BasicInfoGroupingComponent },
-    { title: 'Category and Subcategory', component: AdminCategoriesComponent },
+    { title: 'Category and Subcategory', component: AddCategorySubcategoryGroupComponent },
     { title: 'Summary', component: undefined },
   ])
   currentStep = signal(0)
+  classification = signal([])
 
   form = new FormGroup({
     name: new FormControl(''),
@@ -49,17 +50,22 @@ export class NewGroupingComponent implements OnInit {
     const componentType = step.component as any
     this._currentComponentRef = this.stepContainer?.createComponent(componentType)
     this._currentComponentRef.instance.form = this.form
+    this._currentComponentRef.instance.beforeNext.subscribe((data: any) => this._beforeNext(data))
   }
 
+  private _beforeNext = (data: any) => {
+    console.log('data', data)
+    this.classification.set(data)
+  }
   nextStep(): void {
     this.selectStep(this.currentStep() + 1)
   }
 
-  private _createGrouping() {
+  createGrouping() {
     const body: NewUpdateGrouping = {
       name: this.form.value.name || '',
       description: this.form.value.description || '',
-      classification: [],
+      classification: this.classification(),
       /*   classification: this.categoriesSelected.map((category) =>
         CategoryMapper.mapCategoryToNewCategoryForGrouping(category),
       ) as NewCategoryForGrouping[], */

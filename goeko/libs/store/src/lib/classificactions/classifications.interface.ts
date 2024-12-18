@@ -7,7 +7,7 @@ export interface Label {
   translations: Translation[]
 }
 
-interface Question {
+export interface Question {
   translations: Translation[]
 }
 
@@ -42,6 +42,7 @@ export interface SubcategoryResponse {
   question: Question
   updateDateTime: string
 }
+
 export interface NewSubcategory {
   categoryId?: string
   label: Label

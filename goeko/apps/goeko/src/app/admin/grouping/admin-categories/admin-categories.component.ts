@@ -12,7 +12,6 @@ import {
   inject,
   input,
   signal,
-  viewChildren,
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { Router } from '@angular/router'
@@ -23,13 +22,14 @@ import {
   CategoryMapper,
   ClassificationCategoryService,
   GroupingByClassifications,
+  Label,
   ManageSubcategory,
   NewCategoryForGrouping,
   NewSubcategory,
   NewUpdateGrouping,
   Product,
+  Question,
   Subcategory,
-  SubcategoryResponse,
   UpdateSubcategory,
 } from '@goeko/store'
 import {
@@ -47,7 +47,6 @@ import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.compone
 import { DialogManagmentCategoryComponent } from '../dialog-managment-category.component'
 import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
-import { LabelByCategoryPipe } from './label-by-category.pipe'
 
 @Component({
   selector: 'goeko-admin',
@@ -64,7 +63,6 @@ import { LabelByCategoryPipe } from './label-by-category.pipe'
     ProductToCurrentLangPipe,
     SwitchModule,
     RadioModule,
-    LabelByCategoryPipe,
   ],
   providers: [AdminCategoriesService, ClassificationCategoryService],
   templateUrl: './admin-categories.component.html',
@@ -73,21 +71,13 @@ import { LabelByCategoryPipe } from './label-by-category.pipe'
   animations: [fadeAnimation, listAnimation],
 })
 export class AdminCategoriesComponent implements OnInit {
+  private _router = inject(Router)
+
   JSON = JSON
   @ViewChildren('detailCategory')
   detailCategory!: QueryList<ElementRef<HTMLDetailsElement>>
 
-  categoryRef = viewChildren<ElementRef>('categoryRef')
-
   classifications = input<GroupingByClassifications>()
-
-  get categoriesSelected() {
-    return this.categoryRef()
-      .filter((category) => category.nativeElement.checked)
-      .map((c) => JSON.parse(c.nativeElement.value))
-  }
-
-  private _router = inject(Router)
 
   private mappingClassificationLabel = (classification: Category[] | undefined) =>
     classification?.map((classification) => ({
@@ -103,14 +93,7 @@ export class AdminCategoriesComponent implements OnInit {
 
   categories = computed(() => this.mappingClassificationLabel(this.classifications()?.classification))
 
-  allCategories = signal<Category[]>([])
-  needAddSubcategory = signal(false)
-  subcategories = signal<SubcategoryResponse[]>([])
-  selectedLangSubcategory = signal<string>(CODE_LANG.EN)
-  products = signal([])
   public langs = signal(LANGS)
-  public toogleEditName = signal(false)
-  public toogleEditDescription = signal(false)
 
   private _closeDetailByIndex = (index: number) => {
     const elementDetail = this.detailCategory.get(index)?.nativeElement
@@ -129,8 +112,6 @@ export class AdminCategoriesComponent implements OnInit {
   private _closeAllDetail = () => {
     this.detailCategory?.forEach((elementDetail, index: number) => this._closeDetailByIndex(index))
   }
-
-  productControl = (subcategoryCode: string): FormGroup => this.form.get(subcategoryCode)?.get('products') as FormGroup
 
   getControlForSubCategory(subcategory: string) {
     return this.form?.get(subcategory)
@@ -162,9 +143,6 @@ export class AdminCategoriesComponent implements OnInit {
     if (firstCategory) {
       this.categorySelected.set(firstCategory)
     }
-    if (!this.classifications()) {
-      this._getAllCategories()
-    }
   }
 
   hanldertoggleActor(toggleActor: boolean): void {
@@ -190,19 +168,6 @@ export class AdminCategoriesComponent implements OnInit {
   }
   private _buildFormFormsubcategorySelected(group: ManageSubcategory, formGroup: FormGroup) {
     AdminCategoriesDynamicForm.buildForm({ fb: this._fb, group, formGroup })
-  }
-
-  onBlurName() {
-    this.toogleEditName.set(false)
-    this._updateGrouping()
-  }
-  onBlurDescription() {
-    this.toogleEditDescription.set(false)
-    this._updateGrouping()
-  }
-
-  createGrouping() {
-    console.log('this.classifications', this.categoriesSelected)
   }
 
   private _updateGrouping() {
@@ -235,18 +200,7 @@ export class AdminCategoriesComponent implements OnInit {
       }
     })
   }
-  deleteCategory(category: Category) {
-    this._adminCategories.deleteCategory(category.id).subscribe((res) => {
-      if (res) {
-        this._fetchData()
-      }
-    })
-  }
-  private _getAllCategories() {
-    this._adminCategories.getAllCategories().subscribe((categories) => {
-      this.allCategories.set(categories)
-    })
-  }
+
   selectCategory(categorySelected: any): void {
     this._closeAllDetail()
     this.categorySelected.set(categorySelected)
@@ -267,11 +221,6 @@ export class AdminCategoriesComponent implements OnInit {
     this._closeDetailByIndex(index)
   }
 
-  viewSubcategory = (categoryId: string) => {
-    this._adminCategories.getSubcategoryByCategoryId(categoryId).subscribe((res) => {
-      this.subcategories.set(res)
-    })
-  }
   addSubcategory() {
     this._openDialgoAddSubcategory().subscribe((res) => {
       if (res) {
@@ -303,10 +252,10 @@ export class AdminCategoriesComponent implements OnInit {
   updateSubcategory(id: string, subcategory: Subcategory) {
     const _updateSubcategory: UpdateSubcategory = {
       label: {
-        ...subcategory.label,
+        ...(subcategory.label as Label),
       },
       question: {
-        ...subcategory.question,
+        ...(subcategory.question as Question),
       },
       enabled: true,
     }
