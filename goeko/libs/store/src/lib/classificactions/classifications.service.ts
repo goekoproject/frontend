@@ -84,11 +84,11 @@ export class ClassificationsService {
   }
 
   /** Subcategory*/
-  createSubcategory(subcategory: NewSubcategory) {
-    return this._http.post('/v2/classifications/subcategory', subcategory)
+  createSubcategory(subcategory: NewSubcategory): Observable<SubcategoryResponse> {
+    return this._http.post<SubcategoryResponse>('/v2/classifications/subcategory', subcategory)
   }
-  updateSubcategory(id: string, subcategory: NewSubcategory) {
-    return this._http.put(`/v2/classifications/subcategory/${id}`, subcategory)
+  updateSubcategory(id: string, subcategory: NewSubcategory): Observable<SubcategoryResponse> {
+    return this._http.put<SubcategoryResponse>(`/v2/classifications/subcategory/${id}`, subcategory)
   }
 
   getProductBySubcategoryId(subcategoryId: string) {

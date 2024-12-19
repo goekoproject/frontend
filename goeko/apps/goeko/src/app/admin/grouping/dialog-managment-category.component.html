@@ -2,8 +2,6 @@
 
 @defer (when form) {
   <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col">
-    <button type="submit" class="ml-auto block" go-button>{{ 'confirm' | translate }}</button>
-
     <ng-container formGroupName="label">
       @for (lang of LANGS; track lang.code; let index = $index) {
         <ng-container formArrayName="translations">
@@ -14,7 +12,6 @@
         </ng-container>
       }
     </ng-container>
+    <button type="submit" class="ml-auto block" go-button>{{ 'confirm' | translate }}</button>
   </form>
 }
-
-<button go-button appearance="white" class="ml-auto" (click)="addSubcategory()">{{ 'Add Subcategory' | translate }}</button>

@@ -6,7 +6,6 @@ import { LANGS } from '@goeko/core'
 import { Category, ClassificationsService, NewUpdateCategory } from '@goeko/store'
 import { ButtonModule, DIALOG_DATA, GoInputModule, SideDialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { of, switchMap } from 'rxjs'
 import { DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
 
 interface DialogData {
@@ -86,28 +85,5 @@ export class DialogManagmentCategoryComponent {
     return {} as Category
   }
 
-  addSubcategory() {
-    this._createNewSubcategoryToCategory(this.category().id).subscribe((res) => {
-      if (res) {
-        console.log('res', res)
-      }
-    })
-  }
-  private _createNewSubcategoryToCategory(categoryId: string) {
-    return this._openDialgoAddSubcategory().pipe(
-      switchMap((res) => {
-        if (res) {
-          return this._classificationService.createSubcategory({
-            categoryId,
-            label: res.label,
-            question: res.question,
-          })
-        }
-        return of(null)
-      }),
-    )
-  }
-  private _openDialgoAddSubcategory = () => {
-    return this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent)
-  }
+ 
 }

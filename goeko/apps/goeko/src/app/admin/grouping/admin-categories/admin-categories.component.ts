@@ -259,7 +259,7 @@ export class AdminCategoriesComponent implements OnInit {
       },
       enabled: true,
     }
-    this._adminCategories.updateSubcategorySelected(id, _updateSubcategory).subscribe((grouping) => {
+    this._adminCategories.updateSubcategory(id, _updateSubcategory).subscribe((grouping) => {
       console.log('grouping', grouping)
     })
   }

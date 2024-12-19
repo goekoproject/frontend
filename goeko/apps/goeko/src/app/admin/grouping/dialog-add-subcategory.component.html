@@ -2,9 +2,9 @@
   <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col">
     <button type="submit" class="ml-auto block" go-button>{{ 'confirm' | translate }}</button>
 
-    <h3 class="my-4 text-2xl text-primary-default">{{ 'USER_TYPE.sme' | translate }}</h3>
+    <h3 class="my-4 text-2xl text-primary-default">{{ 'Label' | translate }}</h3>
     @for (lang of LANGS; track lang.code) {
-      <div class="mb-4" [formGroupName]="'sme'">
+      <div class="mb-4" [formGroupName]="'label'">
         <label for="{{ lang.code }}" class="mb-1 block font-medium text-gray-700">{{ lang.title | translate }}</label>
         <input
           type="text"
@@ -15,9 +15,9 @@
       </div>
     }
 
-    <h3 class="my-4 text-2xl text-primary-default">{{ 'USER_TYPE.cleanTech' | translate }}</h3>
+    <h3 class="my-4 text-2xl text-primary-default">{{ 'Question' | translate }}</h3>
     @for (lang of LANGS; track lang.code) {
-      <div class="mb-4" [formGroupName]="'cleantech'">
+      <div class="mb-4" [formGroupName]="'question'">
         <label for="{{ lang.code }}" class="mb-1 block font-medium text-gray-700">{{ lang.title | translate }}</label>
         <input
           type="text"

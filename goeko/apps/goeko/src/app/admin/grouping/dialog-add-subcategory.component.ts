@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, OnInit } from '@angular/core'
+import { Component, Inject, inject, OnInit, Optional } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { LANGS } from '@goeko/core'
 import { Translations } from '@goeko/store'
-import { ButtonModule, GoInputModule, SideDialogService } from '@goeko/ui'
+import { ButtonModule, DIALOG_DATA, GoInputModule, SideDialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 
-interface DataSubcategory {
+export interface DataSubcategory {
   label: {
     translations: Translations[]
   }
@@ -24,28 +24,45 @@ interface DataSubcategory {
 export class DialogAddSubcategoryComponent implements OnInit {
   private _sideDialogService = inject(SideDialogService)
 
-  private get _smeForm() {
-    return this.form.get('sme') as FormGroup
+  private get _labelForm() {
+    return this.form.get('label') as FormGroup
   }
-  private get _cleantechForm() {
-    return this.form.get('cleantech') as FormGroup
+  private get _quiestionForm() {
+    return this.form.get('question') as FormGroup
   }
 
   public LANGS = LANGS
   public form = new FormGroup({
-    sme: new FormGroup({}),
-    cleantech: new FormGroup({}),
+    label: new FormGroup({}),
+    question: new FormGroup({}),
   })
   public formLabelCleantech!: FormGroup
 
+  constructor(
+    @Optional()
+    @Inject(DIALOG_DATA)
+    public data: DataSubcategory,
+  ) {}
   ngOnInit(): void {
     this.buildForm()
+    if (this.data) {
+      this._pathValueForm()
+    }
   }
 
   private buildForm(): void {
     this.LANGS.forEach((lang: any) => {
-      this._smeForm.addControl(lang.code, new FormControl(''))
-      this._cleantechForm.addControl(lang.code, new FormControl(''))
+      this._labelForm.addControl(lang.code, new FormControl(''))
+      this._quiestionForm.addControl(lang.code, new FormControl(''))
+    })
+  }
+
+  private _pathValueForm(): void {
+    this.data.label.translations.forEach((translation) => {
+      this._labelForm.get(translation.lang)?.patchValue(translation.label)
+    })
+    this.data.question.translations.forEach((translation) => {
+      this._quiestionForm.get(translation.lang)?.patchValue(translation.label)
     })
   }
 
@@ -57,18 +74,20 @@ export class DialogAddSubcategoryComponent implements OnInit {
   private _dataSubcategory(): DataSubcategory {
     return {
       label: {
-        translations: this.convertToTranslations(this.form.get('sme') as FormGroup),
+        translations: this.convertToTranslations(this.form.get('label') as FormGroup),
       },
       question: {
-        translations: this.convertToTranslations(this.form.get('cleantech') as FormGroup),
+        translations: this.convertToTranslations(this.form.get('question') as FormGroup),
       },
     }
   }
 
   private convertToTranslations(formGroup: FormGroup): Translations[] {
-    return Object.keys(formGroup.controls).map((lang) => ({
-      label: formGroup.get(lang)?.value,
-      lang: lang,
-    }))
+    return Object.keys(formGroup.controls)
+      .map((lang) => ({
+        label: formGroup.get(lang)?.value,
+        lang: lang,
+      }))
+      .filter((l) => l.label)
   }
 }

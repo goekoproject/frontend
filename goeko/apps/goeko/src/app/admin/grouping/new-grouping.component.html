@@ -20,15 +20,19 @@
   </li>
 </ol>
 
-<div class="mt-8">
+<div class="py-8">
   <!-- Contenedor dinámico de los componentes -->
   <ng-container #stepContainer></ng-container>
 </div>
 
-<button go-button appearance="white" class="ml-auto" (click)="nextStep()">
-  {{ 'next' | translate }}
-</button>
+<div class="flex items-center space-x-4">
+  <button go-button appearance="white" class="ml-auto" (click)="nextStep()" [disabled]="form.invalid">
+    {{ 'Next' | translate }}
+  </button>
 
-<button go-button  class="ml-auto" (click)="createGrouping()">
-  {{ 'Create Grouping' | translate }}
-</button>
+  @if ((this.classification() || []).length > 0) {
+    <button go-button class="ml-auto" (click)="createGrouping()">
+      {{ 'Create Grouping' | translate }}
+    </button>
+  }
+</div>

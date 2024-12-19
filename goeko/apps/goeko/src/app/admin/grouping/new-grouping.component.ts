@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, ComponentRef, inject, OnInit, signal, ViewChild, ViewContainerRef } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { NewUpdateGrouping } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -23,14 +23,13 @@ export class NewGroupingComponent implements OnInit {
   steps = signal([
     { title: 'Create Name and Description', component: BasicInfoGroupingComponent },
     { title: 'Category and Subcategory', component: AddCategorySubcategoryGroupComponent },
-    { title: 'Summary', component: undefined },
   ])
   currentStep = signal(0)
   classification = signal([])
 
   form = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
   })
   private _currentComponentRef: ComponentRef<any> | undefined = undefined
 
@@ -50,7 +49,7 @@ export class NewGroupingComponent implements OnInit {
     const componentType = step.component as any
     this._currentComponentRef = this.stepContainer?.createComponent(componentType)
     this._currentComponentRef.instance.form = this.form
-    this._currentComponentRef.instance.beforeNext.subscribe((data: any) => this._beforeNext(data))
+    this._currentComponentRef.instance.beforeNext?.subscribe((data: any) => this._beforeNext(data))
   }
 
   private _beforeNext = (data: any) => {
@@ -66,9 +65,6 @@ export class NewGroupingComponent implements OnInit {
       name: this.form.value.name || '',
       description: this.form.value.description || '',
       classification: this.classification(),
-      /*   classification: this.categoriesSelected.map((category) =>
-        CategoryMapper.mapCategoryToNewCategoryForGrouping(category),
-      ) as NewCategoryForGrouping[], */
     }
 
     this._adminCategoriesService.createGrouping(body).subscribe((grouping) => {

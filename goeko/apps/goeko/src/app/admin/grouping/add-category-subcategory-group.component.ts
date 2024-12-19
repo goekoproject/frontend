@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common'
 import { Component, ElementRef, inject, OnInit, output, signal, viewChildren } from '@angular/core'
 import { CODE_LANG, LANGS } from '@goeko/core'
-import { Category, Label, SubcategoryResponse } from '@goeko/store'
+import { Category, Label, NewSubcategory, SubcategoryResponse } from '@goeko/store'
 import { ButtonModule, RadioModule, SideDialogService, ToggleSwitchComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { LabelByCategoryPipe } from './admin-categories/label-by-category.pipe'
-import { DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
+import { DataSubcategory, DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
 import { DialogManagmentCategoryComponent } from './dialog-managment-category.component'
 
 interface AllDataCategories {
-  subcategories?: SubcategoryResponse[]
+  subcategories: SubcategoryResponse[]
   id: string
   code: string
   label: Label
@@ -42,11 +42,8 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
   public langs = signal(LANGS)
   subcategoryElement = viewChildren<ElementRef>('subcategoryElement')
   beforeNext = output<any>()
-  categories = signal<Category[]>([])
-  allDataCategories = signal<AllDataCategories[]>([])
+  categories = signal<AllDataCategories[]>([])
 
-  categorySelected = signal<Category | undefined>(undefined)
-  subcategories = signal<SubcategoryResponse[]>([])
   selectedLangSubcategory = signal<string>(CODE_LANG.EN)
 
   get subcategorySelected() {
@@ -54,69 +51,63 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
       .filter((subcategory) => subcategory.nativeElement.checked)
       .map((c) => JSON.parse(c.nativeElement.value))
   }
+
   private _openDialogCategory = (category?: Category) => {
     return this._sideDialogService.openDialog<DialogManagmentCategoryComponent>(DialogManagmentCategoryComponent, {
       category,
     })
   }
 
-  private _openDialgoAddSubcategory = () => {
-    return this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent)
+  private _openDialgoAddSubcategory = (data?: DataSubcategory) => {
+    return this._sideDialogService.openDialog<DialogAddSubcategoryComponent>(DialogAddSubcategoryComponent, data)
   }
 
-  ngOnInit(): void {
-    this._getAllCategories()
-  }
-
-  private _getAllCategories = () => {
-    this._adminCategoriesService.getAllCategories().subscribe((categories) => {
-      this.categories.set(categories)
-      this.allDataCategories.set(
-        this.categories().map((category) => {
-          return {
-            id: category.id,
-            code: category.code,
-            label: category.label,
-            open: false,
-            subcategories: [],
-          }
-        }),
-      )
-    })
-  }
-  createNewCategory = () => {
-    this._openDialogCategory().subscribe((res: Category) => {})
-  }
-
-  deleteCategory(category: Category) {
-    this._adminCategoriesService.deleteCategory(category.id).subscribe((res) => {
-      if (res) {
-      }
-    })
-  }
-
-  viewSubcategory = (toogleViewSubcategory: boolean, category: any) => {
-    if (toogleViewSubcategory) {
-      this.categorySelected.set(category)
-      this._adminCategoriesService.getSubcategoryByCategoryId(category.id).subscribe((res) => {
-        this.subcategories.set(res)
-        this._toogleDetailCategory(category)
-        this.allDataCategories.update((categories) =>
-          categories.map((c) => {
-            if (c.id === category.id) {
-              return { ...c, subcategories: res }
-            }
-            return c
-          }),
-        )
-      })
-    } else {
-      this.categorySelected.set(undefined)
+  private _categoryToAllDataCategories = (category: Category, subcategories: SubcategoryResponse[] = []): AllDataCategories => {
+    return {
+      id: category.id,
+      code: category.code,
+      label: category.label,
+      open: false,
+      subcategories: subcategories,
     }
   }
 
-  private _toogleDetailCategory = (category: Category) => {
-    this.allDataCategories.update((categories: any[]) => {
+  ngOnInit(): void {
+    this._adminCategoriesService.getAllCategories().subscribe((categories) => {
+      categories.forEach((category) => {
+        this._addCategory(category)
+      })
+    })
+  }
+  private _addCategory = (category: Category) => {
+    const newCategory = this._categoryToAllDataCategories(category)
+    this.categories.set([...this.categories(), newCategory])
+  }
+
+  private _addSubcategory = (subcategory: SubcategoryResponse) => {
+    this.categories.update((categories) => {
+      return categories.map((category) => {
+        if (category.id === subcategory.categoryId) {
+          return { ...category, subcategories: [...category.subcategories, subcategory] }
+        }
+        return category
+      })
+    })
+  }
+
+  private _addAllSubcategory = (categoryId: string, subcategory: SubcategoryResponse[]) => {
+    this.categories.update((categories) => {
+      return categories.map((category) => {
+        if (category.id === categoryId) {
+          return { ...category, subcategories: subcategory }
+        }
+        return category
+      })
+    })
+  }
+
+  private _toogleDetailCategory = (category: AllDataCategories) => {
+    this.categories.update((categories: any[]) => {
       return categories.map((c) => {
         if (c.id === category.id) {
           return { ...c, open: true }
@@ -126,14 +117,72 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
     })
   }
 
-  addNewSubcategoryToCategory = () => {
-    this._openDialgoAddSubcategory().subscribe((res) => {
-      this._getAllCategories()
+  createNewCategory = () => {
+    this._openDialogCategory().subscribe((res: Category) => {
+      if (res) {
+        this._addCategory(res)
+      }
     })
   }
 
+  viewSubcategory = (toogleViewSubcategory: boolean, category: AllDataCategories) => {
+    if (toogleViewSubcategory) {
+      this._fetchData(category)
+    }
+  }
+
+  private _fetchData = (category: AllDataCategories) => {
+    this._adminCategoriesService.getSubcategoryByCategoryId(category.id).subscribe((res) => {
+      this._toogleDetailCategory(category)
+      this._addAllSubcategory(category.id, res)
+    })
+  }
+
+  addNewSubcategoryToCategory = (category: AllDataCategories) => {
+    this._openDialgoAddSubcategory().subscribe((res) => {
+      console.log('res', res)
+      const newSubcategory: NewSubcategory = {
+        categoryId: category.id,
+        ...res,
+      }
+      this._adminCategoriesService.createSubcategory(newSubcategory).subscribe((subcategory) => {
+        this._addSubcategory(subcategory)
+        this._toogleDetailCategory(category)
+      })
+    })
+  }
+  editSubcategory(category: AllDataCategories, subcategory: SubcategoryResponse) {
+    const { label, question } = subcategory
+
+    this._openDialgoAddSubcategory({ label: label, question: question }).subscribe((res) => {
+      const updateSubcategory = {
+        ...res,
+        enabled: subcategory.enabled,
+      }
+      this._adminCategoriesService.updateSubcategory(subcategory.id, updateSubcategory).subscribe((res) => {
+        if (res) {
+          this._fetchData(category)
+        }
+      })
+    })
+  }
+
+  /** @Missing */
+  deleteCategory(category: AllDataCategories) {
+    this._adminCategoriesService.deleteCategory(category.id).subscribe((res) => {})
+  }
+
+  clipboard = (text: string) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log('Texto copiado al portapapeles')
+      })
+      .catch((err) => {
+        console.error('Error al copiar al portapapeles:', err)
+      })
+  }
   selectedElement = () => {
-    console.log('selectedElement', this.subcategoryElement())
     const dataForGrouping: ClassificationGrouping[] = this.subcategorySelected.map((subcategory, index: number) => {
       return {
         code: subcategory.categoryCode,
