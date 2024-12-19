@@ -7,7 +7,7 @@ import { BadgeModule, ButtonModule, GoILeavesComponent, ToggleSwitchComponent, U
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
-import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, ORIGIN, VEHICLES, YEARS } from './data-fields.constants'
+import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, VEHICLES, YEARS } from './data-fields.constants'
 type Options = {
   label: string
   id: string
@@ -44,10 +44,10 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   vehicles = signal<Options[]>(VEHICLES)
   machines = signal<Options[]>(MACHINES)
   years = signal<Options[]>(YEARS)
-  origin = signal<Options[]>(ORIGIN)
   documents = signal<Options[]>(DOCUMENTS)
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
+  //origin = signal<Options[]>(ORIGIN)
 
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
@@ -62,14 +62,15 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     yearsActivity: this._fb.control(this.years()[0]),
     yearsBalance: this._fb.control(this.years()[0]),
 
-    origin: this._fb.control(null),
-    documents: this._fb.control(null),
+    documents: this._fb.array([]),
     amount: this._fb.control(this.amount()[0]),
     currencys: this._fb.control(null),
     locations: this._fb.array([]),
+    //origin: this._fb.control(null),
   })
 
   ngOnInit() {
+    this.setInitialDocuments();
     this._selectLocationsService.setUpCountries()
   }
 
@@ -79,6 +80,36 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   toogleGreenBonusMachine = (newValue: boolean) => {
     this.form.get('greenBonusMachines')?.setValue(newValue)
   }
+
+  private setInitialDocuments() {
+    const documentsArray = this.documents().map(document =>
+      this._fb.control(this.documentSelected(document.id))
+    )
+    this.form.setControl('documents', this._fb.array(documentsArray))
+  }
+
+  documentToggled(documentId: string, event: Event) {
+    const checked = (event.target as HTMLInputElement).checked
+    const documentIndex = this.documents().findIndex(doc => doc.id === documentId)
+
+    if (documentIndex !== -1) {
+      const documentControl = (this.form.get('documents') as FormArray).at(documentIndex)
+      documentControl.setValue(checked)
+    }
+  }
+
+  documentSelected(documentId: string): boolean {
+    const documentIndex = this.documents().findIndex(doc => doc.id === documentId)
+    const control = (this.form.get('documents') as FormArray).at(documentIndex)
+
+    return control ? control.value : false
+  }
+
+  /*get selectedDocuments(): string[] {
+    return (this.form.get('documents') as FormArray).controls
+      .map((control, index) => control.value ? this.documents()[index].id : null)
+      .filter(id => id != null) as string[]
+  }*/
 
   save = () => {
     const sustainbleEquipmentValue = {
