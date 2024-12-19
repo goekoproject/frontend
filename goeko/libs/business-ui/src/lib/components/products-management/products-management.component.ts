@@ -5,6 +5,7 @@ import { LANGS } from '@goeko/core'
 import { ClassificationsService, DataSelect, NewProduct, Product } from '@goeko/store'
 import { BadgeModule, ButtonModule, DIALOG_DATA, SideDialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { ProductToCurrentLangPipe } from '../../pipes/product-to-current-lang.pipe'
 
 interface DialogData {
   productSelected: Product
@@ -15,7 +16,7 @@ interface DialogData {
 @Component({
   selector: 'goeko-products-management',
   standalone: true,
-  imports: [CommonModule, BadgeModule, ReactiveFormsModule, TranslateModule, ButtonModule],
+  imports: [CommonModule, BadgeModule, ReactiveFormsModule, TranslateModule, ButtonModule, ProductToCurrentLangPipe],
   templateUrl: './products-management.component.html',
   styleUrl: './products-management.component.scss',
 })
@@ -24,7 +25,7 @@ export class ProductsManagementComponent implements OnInit {
 
   buttonText = 'PRODUCT_ACTIONS.addProduct'
   newProduct = signal(false)
-
+  products = signal<Product[]>([])
   public form = new FormGroup({
     subcategoryId: new FormControl(this.data.productSelected ? null : this.data.subcategoryId),
     label: new FormGroup({
@@ -57,13 +58,26 @@ export class ProductsManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.data', this.data)
     this.form.patchValue({ label: this.data.productSelected?.label })
+    if (this.data.subcategoryId) {
+      this._getProducts()
+    }
+  }
+
+  private _getProducts = () => {
+    this._classificationService.getProductBySubcategoryId(this.data.subcategoryId).subscribe((products) => {
+      this.products.set(products)
+    })
   }
 
   addNewProduct = () => {
-    this._classificationService.createProduct(this.formValue).subscribe((product) => {
+    const newProduct: NewProduct = {
+      label: this.formValue.label,
+      subcategoryId: this.formValue.subcategoryId,
+    }
+    this._classificationService.createProduct(newProduct).subscribe((product) => {
       this._refreshForm()
+      this._getProducts()
     })
   }
 

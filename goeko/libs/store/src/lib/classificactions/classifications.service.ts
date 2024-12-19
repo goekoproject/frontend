@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop'
 import { TranslateService } from '@ngx-translate/core'
 import { forkJoin, map, Observable, shareReplay } from 'rxjs'
 import { CLASSIFICATION_CATEGORIES_CODE } from './classification-categories-code.constant'
-import { Category, NewProduct, NewSubcategory, NewUpdateCategory, SubcategoryResponse } from './classifications.interface'
+import { Category, NewProduct, NewSubcategory, NewUpdateCategory, Product, SubcategoryResponse } from './classifications.interface'
 import { Grouping, GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
 import { mergeCategoriesSectionWithClassificationCategory } from './transform.util'
 
@@ -91,8 +91,8 @@ export class ClassificationsService {
     return this._http.put<SubcategoryResponse>(`/v2/classifications/subcategory/${id}`, subcategory)
   }
 
-  getProductBySubcategoryId(subcategoryId: string) {
-    return this._http.get(`/v2/classifications/subcategory/${subcategoryId}/products`)
+  getProductBySubcategoryId(subcategoryId: string): Observable<Product[]> {
+    return this._http.get<Product[]>(`/v2/classifications/subcategory/${subcategoryId}/products`)
   }
   /** Product */
   createProduct(product: NewProduct) {

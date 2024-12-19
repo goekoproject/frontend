@@ -32,3 +32,10 @@
     </div>
   </form>
 }
+@defer (when products()) {
+  <go-badge-group [id]="'products'">
+    @for (product of products(); track product.code; let i = $index) {
+      <go-badge [value]="product">{{ product | productToCurrentLang  }}</go-badge>
+    }
+  </go-badge-group>
+}

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { Component, ElementRef, inject, OnInit, output, signal, viewChildren } from '@angular/core'
+import { ProductsManagementComponent } from '@goeko/business-ui'
 import { CODE_LANG, LANGS } from '@goeko/core'
-import { Category, Label, NewSubcategory, SubcategoryResponse } from '@goeko/store'
+import { Category, Label, NewSubcategory, Product, SubcategoryResponse } from '@goeko/store'
 import { ButtonModule, RadioModule, SideDialogService, ToggleSwitchComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
@@ -32,6 +33,7 @@ interface ClassificationGrouping {
     DialogManagmentCategoryComponent,
     RadioModule,
   ],
+  providers: [AdminCategoriesService],
   templateUrl: './add-category-subcategory-group.component.html',
   styleUrl: './add-category-subcategory-group.component.scss',
 })
@@ -170,6 +172,23 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
   /** @Missing */
   deleteCategory(category: AllDataCategories) {
     this._adminCategoriesService.deleteCategory(category.id).subscribe((res) => {})
+  }
+
+  openDialogAddProducts = (category: AllDataCategories, subcategory: SubcategoryResponse, product?: Product) => {
+    this._openDialogAddProducts(category, subcategory, product)
+  }
+  private _openDialogAddProducts = (category: AllDataCategories, subcategory: SubcategoryResponse, product?: Product) => {
+    return this._sideDialogService
+      .openDialog<ProductsManagementComponent>(ProductsManagementComponent, {
+        productSelected: product,
+        subcategoryCode: subcategory.code,
+        subcategoryId: subcategory.id,
+      })
+      .subscribe((product) => {
+        if (product) {
+          this._fetchData(category)
+        }
+      })
   }
 
   clipboard = (text: string) => {

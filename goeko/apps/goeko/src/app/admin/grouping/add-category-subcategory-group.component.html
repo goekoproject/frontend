@@ -40,7 +40,7 @@
                       [value]="JSON.stringify(subcategory)"
                       (input)="selectedElement()" />
 
-                    <label class="flex py-1 h-auto w-full cursor-pointer items-center font-semibold text-blue-500" [for]="subcategory.code">
+                    <label class="flex h-auto w-full cursor-pointer items-center py-1 font-semibold text-blue-500" [for]="subcategory.code">
                       <div class="flex w-full flex-col gap-1">
                         <p>{{ subcategory.label.translations | labelByCategory: selectedLangSubcategory() }}</p>
                         <span class="text-gray-500">
@@ -56,10 +56,17 @@
                         <p>Last Update</p>
                         {{ subcategory.updateDateTime | date: 'short' }}
                       </span>
-                      <button go-button appearance="white" (click)="editSubcategory(category, subcategory)">
-                        <i class="ti ti-pencil"></i>
-                        <p class="w-max">{{ 'Edit' | translate }}</p>
-                      </button>
+                      <div class="flex gap-2">
+                        <button go-button appearance="white" (click)="editSubcategory(category, subcategory)">
+                          <i class="ti ti-pencil"></i>
+                          <p class="w-max">{{ 'Edit' | translate }}</p>
+                        </button>
+                        <button go-button appearance="white" (click)="openDialogAddProducts(category, subcategory)">
+                          <i class="ti ti-library-plus"></i>
+                          <p class="w-max">{{ 'Product' | translate }}</p>
+                        </button>
+                      </div>
+
                     </label>
                   </li>
                 }

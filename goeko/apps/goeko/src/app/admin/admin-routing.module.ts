@@ -16,6 +16,10 @@ const routes: Routes = [
     loadComponent: () => import('./grouping/new-grouping.component').then((c) => c.NewGroupingComponent),
   },
   {
+    path: 'classifications/categories',
+    loadComponent: () => import('./grouping/add-category-subcategory-group.component').then((c) => c.AddCategorySubcategoryGroupComponent),
+  },
+  {
     path: 'classifications/:groupingId',
     loadComponent: () => import('./grouping/admin-categories/admin-categories.component').then((c) => c.AdminCategoriesComponent),
     resolve: { classifications: groupingByClassificationsResolver },
