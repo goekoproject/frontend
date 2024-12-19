@@ -62,7 +62,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     yearsActivity: this._fb.control(this.years()[0]),
     yearsBalance: this._fb.control(this.years()[0]),
 
-    documents: this._fb.control(null),
+    documents: this._fb.array([]),
     amount: this._fb.control(this.amount()[0]),
     currencys: this._fb.control(null),
     locations: this._fb.array([]),
@@ -70,6 +70,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.setInitialDocuments();
     this._selectLocationsService.setUpCountries()
   }
 
@@ -79,6 +80,36 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   toogleGreenBonusMachine = (newValue: boolean) => {
     this.form.get('greenBonusMachines')?.setValue(newValue)
   }
+
+  private setInitialDocuments() {
+    const documentsArray = this.documents().map(document =>
+      this._fb.control(this.documentSelected(document.id))
+    )
+    this.form.setControl('documents', this._fb.array(documentsArray))
+  }
+
+  documentToggled(documentId: string, event: Event) {
+    const checked = (event.target as HTMLInputElement).checked
+    const documentIndex = this.documents().findIndex(doc => doc.id === documentId)
+
+    if (documentIndex !== -1) {
+      const documentControl = (this.form.get('documents') as FormArray).at(documentIndex)
+      documentControl.setValue(checked)
+    }
+  }
+
+  documentSelected(documentId: string): boolean {
+    const documentIndex = this.documents().findIndex(doc => doc.id === documentId)
+    const control = (this.form.get('documents') as FormArray).at(documentIndex)
+
+    return control ? control.value : false
+  }
+
+  /*get selectedDocuments(): string[] {
+    return (this.form.get('documents') as FormArray).controls
+      .map((control, index) => control.value ? this.documents()[index].id : null)
+      .filter(id => id != null) as string[]
+  }*/
 
   save = () => {
     const sustainbleEquipmentValue = {

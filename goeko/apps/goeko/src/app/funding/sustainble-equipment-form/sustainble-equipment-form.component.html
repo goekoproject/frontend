@@ -9,12 +9,13 @@
           <go-badge [value]="vehicle" [id]="vehicle.id">{{ vehicle.label | translate }} </go-badge>
         }
       </go-badge-group>
-      <go-toggle-switch (checkedChange)="toogleGrenBonusVehicle($event)">
+      <div class="flex items-center justify-between p-3 border rounded-lg border-gray-300">
         <span class="flex items-center gap-2">
           <go-i-leaves></go-i-leaves>
           <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
         </span>
-      </go-toggle-switch>
+        <go-toggle-switch (checkedChange)="toogleGrenBonusVehicle($event)" class="ml-2"></go-toggle-switch>
+      </div>
     </div>
 
     <div class="mt-4">
@@ -24,25 +25,26 @@
           <go-badge [value]="machine" [id]="machine.id">{{ machine.label | translate }} </go-badge>
         }
       </go-badge-group>
-      <go-toggle-switch (checkedChange)="toogleGreenBonusMachine($event)">
+      <div class="flex items-center justify-between p-3 border rounded-lg border-gray-300">
         <span class="flex items-center gap-2">
           <go-i-leaves></go-i-leaves>
           <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
         </span>
-      </go-toggle-switch>
+        <go-toggle-switch (checkedChange)="toogleGreenBonusMachine($event)" class="ml-2"></go-toggle-switch>
+      </div>
     </div>
   </div>
 
   <!-- Región objetivo -->
   <div class="mb-6">
     <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.targetRegion' | translate }}</h2>
-    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" />
+    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"/>
   </div>
 
   <!-- Prospecto de actividad -->
   <div class="mb-6">
     <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.activityProspect' | translate }}</h2>
-    <div class="mt-4">
+    <div class="mb-4">
       <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
       <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity">
         @for (year of years(); track year.id) {
@@ -67,7 +69,7 @@
     <go-toggle-switch>
       <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheet' | translate }}</h2>
     </go-toggle-switch>
-    <div>
+    <div class="mb-4">
       <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
 
       <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance">
@@ -77,22 +79,36 @@
       </ui-super-select>
     </div>
 
-    <div>
+    <div class="mb-6">
       <label class="mb-2 block font-medium">{{ 'FORM_LABEL.requiredDocumentsFunding' | translate }}</label>
-      <ui-super-select [multiple]="true" formControlName="documents" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
+      <div class="space-y-2 mb-4 form-group form-check">
         @for (document of documents(); track document.id) {
-          <super-option [value]="document.label"> {{ document.label | translate }}</super-option>
+          <label class="flex items-center gap-2">
+            <input
+              type="checkbox"
+              [value]="document.id"
+              (change)="documentToggled(document.id, $event)"
+              [checked]="documentSelected(document.id)"
+              class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            />
+            <span *ngIf="documentSelected(document.id)" class="font-bold">
+              {{ document.label | translate }}
+            </span>
+            <span *ngIf="!documentSelected(document.id)" class="font-medium">
+              {{ document.label | translate }}
+            </span>
+          </label>
         }
-      </ui-super-select>
+      </div>
 
-      <div>
-        <label class="mb-2 block font-medium">{{ 'FORM_LABEL.amountRequiredFunding' | translate }}</label>
+      <div class="mb-4">
+        <label class="mb-2 mt-2 block font-medium">{{ 'FORM_LABEL.amountRequiredFunding' | translate }}</label>
         <ui-super-select formControlName="amount">
           @for (money of amount(); track money.id) {
             <super-option [value]="money"> {{ money.label }}</super-option>
           }
         </ui-super-select>
-        <label class="mb-2 block font-medium">{{ 'FORM_LABEL.currencyFunding' | translate }}</label>
+        <label class="mb-2 mt-2 block font-medium">{{ 'FORM_LABEL.currencyFunding' | translate }}</label>
         <ui-super-select [multiple]="true" formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
           @for (currency of currencys(); track currency.id) {
             <super-option [value]="currency.label"> {{ currency.label }}</super-option>
