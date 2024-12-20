@@ -100,9 +100,9 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     const sustainbleEquipmentValue = new CreateSustainableEquipment(this.bankId(), this.form.value)
     console.log(sustainbleEquipmentValue)
 
-    /*   this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
+    this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
       this._goRealStateLoan()
-    }) */
+    })
   }
   goBack = () => {
     window.history.back()

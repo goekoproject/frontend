@@ -225,7 +225,7 @@
     "requiredDocumentsFunding": "Required document related to the object",
     "amountRequiredFunding": "Amount required for the request to be considered",
     "currencyFunding": "Currency",
-    "buildingFounding": "Building founding",
+    "buildingFounding": "Building funding",
     "workTypes": "Work types",
     "buildingTypes": "Building types",
     "targetRegion": "Target region",
@@ -236,6 +236,8 @@
   },
   "FUNDING_SUSTAINABLE_EQUIPMENT": {
     "subtitleForm": "Select categories and products corresponding to your project",
+    "subtitleFormBank": "Select products you wnat to financials",
+
     "vehicles": "Vehicles",
     "machines": "Machines",
     "greenBonus": "Green bonus",
