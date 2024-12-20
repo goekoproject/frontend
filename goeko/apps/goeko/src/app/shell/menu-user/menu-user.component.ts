@@ -41,12 +41,14 @@ export class MenuUserComponent {
     this._router.navigate([`platform/${route}`])
   }
 
+  //TODO: change pro property
   private _managerNavigate(route: string) {
     switch (route) {
       case 'profile':
       case 'projects-list':
       case 'dashboard/sme':
       case 'dashboard/cleantech':
+      case 'funding':
         this._navigateWithCompanyId(route)
         return
 

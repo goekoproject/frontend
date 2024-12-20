@@ -22,6 +22,10 @@ export const MACHINES = [
 ]
 export const YEARS = [
   {
+    label: '0',
+    id: window.crypto.randomUUID(),
+  },
+  {
     label: '1',
     id: window.crypto.randomUUID(),
   },
@@ -38,20 +42,20 @@ export const YEARS = [
     id: window.crypto.randomUUID(),
   },
   {
-    label: '5',
+    label: '5+',
     id: window.crypto.randomUUID(),
   },
 ]
-export const ORIGIN = [
+/*export const ORIGIN = [
   { label: 'origin.all', id: window.crypto.randomUUID() },
   { label: 'origin.switzerland', id: window.crypto.randomUUID() },
   { label: 'origin.eu', id: window.crypto.randomUUID() },
   { label: 'origin.america', id: window.crypto.randomUUID() },
   { label: 'origin.asia', id: window.crypto.randomUUID() },
-]
+]*/
 export const DOCUMENTS = [
-  { label: 'documents.none', id: window.crypto.randomUUID() },
-  { label: 'documents.quote', id: window.crypto.randomUUID() },
+  /*   { label: 'documents.none', id: window.crypto.randomUUID() },
+   */ { label: 'documents.quote', id: window.crypto.randomUUID() },
   { label: 'documents.offer', id: window.crypto.randomUUID() },
   { label: 'documents.proformaInvoice', id: window.crypto.randomUUID() },
 ]
