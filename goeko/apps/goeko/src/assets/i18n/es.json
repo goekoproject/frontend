@@ -16,6 +16,11 @@
     "the": "La",
     "transition": "verde"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Soluciones financieras",
+    "description": "Puedes obtener apoyo financiero para tu proyecto sostenible.",
+    "callToAction": "Comenzar"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Editar tu ecosolución",
     "new_ecosolutions": "Nueva ecosolución",
@@ -275,7 +280,8 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favourites": "Favoritos"
+    "favourites": "Favoritos",
+    "funding": "Financiación"
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",
@@ -690,9 +696,9 @@
   "worktypes": {
     "all": "All",
     "atticInsulation": "Aislamiento del ático",
-    "wallInsulation" : "Aislamiento de paredes",
-    "floorInsulation" : "Aislamiento del suelo",
-    "installationHeatPump" : "Instalación de una bomba de calor",
+    "wallInsulation": "Aislamiento de paredes",
+    "floorInsulation": "Aislamiento del suelo",
+    "installationHeatPump": "Instalación de una bomba de calor",
     "replacementWindows": "Sustitución de ventanas",
     "installationShuttersSolarProtection": "Instalación de persianas o protección solar",
     "replacementBoiler": "Sustitución de la caldera",

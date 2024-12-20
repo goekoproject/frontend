@@ -74,6 +74,14 @@ const SME_MENU: MenuUser[] = [
     icon: 'heart',
     order: 3,
   },
+  {
+    id: window.crypto.randomUUID(),
+    title: 'MENU_USER.funding',
+    url: 'funding/matches',
+    active: true,
+    icon: 'ti ti-building-bank',
+    order: 4,
+  },
 ]
 const CLEANTECH_MENU: MenuUser[] = [
   {

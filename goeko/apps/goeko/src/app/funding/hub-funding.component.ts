@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, OnInit } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
-import { RouterModule } from '@angular/router'
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { BadgeModule, ButtonModule, GoILeavesComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { BehaviorSubject, map, switchMap } from 'rxjs'
@@ -17,6 +17,8 @@ import { FundingService } from './funding.service'
 })
 export class HubFundingComponent implements OnInit {
   private _fundingService = inject(FundingService)
+  private _router = inject(Router)
+  private _route = inject(ActivatedRoute)
 
   private _refresh$ = new BehaviorSubject<void>(undefined)
   storeSustainbleEquipmentData$ = this._refresh$.pipe(
@@ -38,5 +40,13 @@ export class HubFundingComponent implements OnInit {
     this._fundingService.clearStore(storeName).subscribe((res) => {
       this._refresh$.next()
     })
+  }
+
+  goSustainbleEquipment = () => {
+    this._router.navigate(['./fundings'], { relativeTo: this._route })
+  }
+
+  goRealStateLoan = () => {
+    this._router.navigate(['./fundings/real-state-loan'], { relativeTo: this._route })
   }
 }

@@ -16,6 +16,11 @@
     "the": "The",
     "transition": "transition"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Financial solutions",
+    "description": "You can secure financial backing for your sustainable project.",
+    "callToAction": "Start"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Edit your ecosolution",
     "new_ecosolutions": "New eco-solution",
@@ -225,8 +230,9 @@
     "buildingTypes": "Building types",
     "targetRegion": "Target region",
     "ownerProfile": "Owner profile",
+    "objectType": "Object Type",
     "contact": "Contact",
-    "montanMinimun": "Minimum quantity"
+    "montanMinimun": "Minimum amount"
   },
   "FUNDING_SUSTAINABLE_EQUIPMENT": {
     "subtitleForm": "Select categories and products corresponding to your project",
@@ -285,7 +291,8 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favourites": "Favourites"
+    "favourites": "Favourites",
+    "funding": "Funding"
   },
   "MENU_USER_BANK": {
     "buttonSearch": "Present your financial solutions",

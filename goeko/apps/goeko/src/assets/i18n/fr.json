@@ -16,6 +16,11 @@
     "the": "La",
     "transition": "verte"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Solutions financières",
+    "description": "Vous pouvez obtenir un soutien financier pour votre projet durable.",
+    "callToAction": "Commencer"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Modifier éco-solution",
     "new_ecosolutions": "Nouvelle éco-solution",
@@ -225,6 +230,7 @@
     "buildingTypes": "Types de bien",
     "targetRegion": "Régions cibles",
     "ownerProfile": "Profil du propriétaire",
+    "objectType": "Type d'objet",
     "contact": "Contact",
     "montanMinimun": "Montant minimum requis"
   },
@@ -286,7 +292,8 @@
   },
   "MENU_USER": {
     "dashboard": "Tableau de bord",
-    "favourites": "Favoris"
+    "favourites": "Favoris",
+    "funding": "Financement"
   },
   "MENU_USER_BANK": {
     "buttonSearch": "Présentez vos solutions financières",
@@ -693,9 +700,9 @@
   "worktypes": {
     "all": "All",
     "atticInsulation": "Isolation des combles",
-    "wallInsulation" : "Isolation des murs",
-    "floorInsulation" : "Isolation des sols",
-    "installationHeatPump" : "Installation d’une pompe à chaleur",
+    "wallInsulation": "Isolation des murs",
+    "floorInsulation": "Isolation des sols",
+    "installationHeatPump": "Installation d’une pompe à chaleur",
     "replacementWindows": "Remplacement des fenêtres",
     "installationShuttersSolarProtection": "Installation de volets ou protections solaires",
     "replacementBoiler": "Remplacement de la chaudière",
