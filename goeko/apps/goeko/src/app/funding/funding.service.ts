@@ -1,16 +1,21 @@
+import { FinancingService } from './../../../../../libs/store/src/lib/financing/financing.service';
 import { Inject, Injectable, Optional } from '@angular/core'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { Observable } from 'rxjs'
 import { STORE_NAME } from './funding-token.constants'
+import { FINANCING_TYPE } from 'libs/store/src/lib/financing/financing-type.enum';
+import { RealStateLoanPayload } from 'libs/store/src/lib/financing/real-state-loan.model';
 
 @Injectable()
 export class FundingService {
   private dbService = Inject(NgxIndexedDBService)
+  // private financingService = Inject(FinancingService)
+
   private readonly dbName = 'FundingDB'
   private readonly dbVersion = 1
 
   private readonly stores = ['sustainble-equipment', 'real-state-loan']
-  constructor(@Optional() @Inject(STORE_NAME) private storeName: string) {
+  constructor(@Optional() @Inject(STORE_NAME) private storeName: string, private financingService:FinancingService ) {
     const request = indexedDB.open(this.dbName, this.dbVersion)
 
     request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
@@ -137,4 +142,18 @@ export class FundingService {
       }
     })
   }
+
+  saveRealStateLoan(data: RealStateLoanPayload) {
+
+    this.financingService.createRealStateLoan(data).subscribe((res:any) => {
+      console.log(res);
+    });
+
+    // this.financingService.getAll(FINANCING_TYPE.RealEstate).subscribe((res:any) => {
+    //   console.log("getAll");
+    //   console.log(res);
+    // });
+
+  }
+
 }

@@ -8,7 +8,9 @@ import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { defaultSetCurrency } from './compare-with-select'
-import { AMOUNT, BUILDINGTYPES, CURRENCY, OBJECTTYPE, OWNERPROFILE, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
+import { FinancingService } from 'libs/store/src/lib/financing/financing.service'
+import { RealStateLoanPayload } from 'libs/store/src/lib/financing/real-state-loan.model'
 
 type Options = {
   label: string
@@ -28,11 +30,12 @@ type Options = {
     UiSuperSelectModule,
     SelectLocationsComponent,
   ],
-  providers: [FundingService, { provide: STORE_NAME, useValue: 'real-state-loan' }, SelectLocationsService],
+  providers: [FundingService,FinancingService , { provide: STORE_NAME, useValue: 'real-state-loan' }, SelectLocationsService],
   templateUrl: './real-state-loan-form.component.html',
   styleUrls: ['./real-state-loan-form.component.scss'],
 })
 export class RealStateLoanComponent implements OnInit {
+
   private _fb = inject(FormBuilder)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
@@ -53,9 +56,22 @@ export class RealStateLoanComponent implements OnInit {
     return this.form.get('locations') as FormArray
   }
 
+    // private _refresh$ = new BehaviorSubject<void>(undefined)
+
+    // realStateLoanData$ = this._refresh$.pipe(
+    //   switchMap(() => this._fundingService.getAllDataFromStore('real-state-loan')),
+    //   map((data) => data[0]),
+    // )
+
+
+
   ngOnInit(): void {
     this._selectLocationsService.setUpCountries()
     this._buildFrom()
+    // this._refresh$.next()
+    // this.realStateLoanData$.subscribe(res => {
+    //   console.log(res);
+    // });
   }
 
   private _buildFrom() {
@@ -90,7 +106,55 @@ export class RealStateLoanComponent implements OnInit {
       console.log(res)
       this._goHubFundings()
     })
+
+    this._fundingService.saveRealStateLoan(this._buildRealStateLoanPayload(this.form.value));
+
   }
+
+  private _buildRealStateLoanPayload(realStateLoanFormValue: any): RealStateLoanPayload {
+
+
+    const workTypesProducts = realStateLoanFormValue.workTypes.map((worktype: any) => {
+      return worktype.label
+    })
+
+    const workTypes = [{
+      mainCategory: 'Building founding',
+      subCategory: 'Work types',
+      products: workTypesProducts
+    }];
+
+    const buildingTypesList = [];
+    buildingTypesList.push(realStateLoanFormValue.buildingTypes.label);
+
+    const ownerProfileList = [];
+    ownerProfileList.push(realStateLoanFormValue.ownerProfile.label);
+
+    const currencyList = [];
+    currencyList.push(realStateLoanFormValue.currency);
+
+    return {
+      bankId: "1",
+      classifications: workTypes,
+      locations: realStateLoanFormValue.locations.map((location: any) => {
+        const country = this._countries()?.find((country) => country.code === location.country.code)
+        return {
+          country: country,
+          ...location.country.regions,
+        }
+      }),
+      buildingTypes: buildingTypesList,
+      ownerProfile: ownerProfileList,
+      minimumQuantity: parseInt(realStateLoanFormValue.montanMinimun.label),
+      currency: currencyList,
+      contact: {
+        name: "prueba",
+        email: realStateLoanFormValue.email,
+        phoneNumber: realStateLoanFormValue.phoneNumber,
+      }
+    }
+  }
+
   goBack = () => {
     window.history.back()
   }

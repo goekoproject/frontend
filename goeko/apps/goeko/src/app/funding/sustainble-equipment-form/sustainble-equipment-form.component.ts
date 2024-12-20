@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, ORIGIN, VEHICLES, YEARS } from './data-fields.constants'
+import { FinancingService } from 'libs/store/src/lib/financing/financing.service'
 type Options = {
   label: string
   id: string
@@ -28,7 +29,7 @@ type Options = {
     RouterModule,
     ReactiveFormsModule,
   ],
-  providers: [FundingService, { provide: STORE_NAME, useValue: 'sustainble-equipment' }, SelectLocationsService],
+  providers: [FundingService, FinancingService, { provide: STORE_NAME, useValue: 'sustainble-equipment' }, SelectLocationsService],
   templateUrl: './sustainble-equipment-form.component.html',
   styleUrl: './sustainble-equipment-form.component.scss',
 })
