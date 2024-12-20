@@ -7,7 +7,7 @@ import { SustainbleEquipmentFormComponent } from './sustainble-equipment-form/su
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':bankId',
     component: HubFundingComponent,
     data: {
       breadcrumb: 'Funding',
@@ -20,7 +20,7 @@ const routes: Routes = [
     loadComponent: () => import('./funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),
   },
   {
-    path: 'fundings',
+    path: 'king-of-funding/:bankId',
     component: FundingComponent,
     children: [
       {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, OnInit } from '@angular/core'
+import { Component, inject, input, OnInit } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { BadgeModule, ButtonModule, GoILeavesComponent } from '@goeko/ui'
@@ -19,7 +19,7 @@ export class HubFundingComponent implements OnInit {
   private _fundingService = inject(FundingService)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
-
+  bankId = input.required<string>()
   private _refresh$ = new BehaviorSubject<void>(undefined)
   storeSustainbleEquipmentData$ = this._refresh$.pipe(
     switchMap(() => this._fundingService.getAllDataFromStore('sustainble-equipment')),

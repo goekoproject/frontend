@@ -14,7 +14,7 @@
 
         <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_BANK.subtitleCard' | translate }}</p>
         <img src="assets/Group 65.svg" class="mb-11" />
-        <button type="button" go-button appearance="primary" routerLink="./fundings">
+        <button type="button" go-button appearance="primary" [routerLink]="['../king-of-funding', bankId()]" queryParamsHandling="preserve">
           {{ 'MENU_USER_BANK.buttonSearch' | translate }}
         </button>
       </div>

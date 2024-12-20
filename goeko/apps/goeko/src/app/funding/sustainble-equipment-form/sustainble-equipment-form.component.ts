@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, OnInit, signal } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { Component, inject, input, OnInit, signal } from '@angular/core'
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
-import { BadgeModule, ButtonModule, GoILeavesComponent, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
+import { LocationTranslated } from '@goeko/store'
+import { BadgeModule, ButtonModule, GoILeavesComponent, GoInputModule, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
+import { CreateSustainableEquipment } from './create-sustainable-equipment.model'
 import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, VEHICLES, YEARS } from './data-fields.constants'
 type Options = {
   label: string
@@ -27,6 +29,7 @@ type Options = {
     ButtonModule,
     RouterModule,
     ReactiveFormsModule,
+    GoInputModule,
   ],
   providers: [FundingService, { provide: STORE_NAME, useValue: 'sustainble-equipment' }, SelectLocationsService],
   templateUrl: './sustainble-equipment-form.component.html',
@@ -39,12 +42,11 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   private _fundingService = inject(FundingService)
   private _selectLocationsService = inject(SelectLocationsService)
 
-  private _countries = this._selectLocationsService.countries
-  // Constante con los elementos del array.
+  bankId = input.required<string>()
   vehicles = signal<Options[]>(VEHICLES)
   machines = signal<Options[]>(MACHINES)
   years = signal<Options[]>(YEARS)
-  documents = signal<Options[]>(DOCUMENTS)
+  requiredDocuments = signal<Options[]>(DOCUMENTS)
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
   //origin = signal<Options[]>(ORIGIN)
@@ -62,16 +64,29 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     yearsActivity: this._fb.control(this.years()[0]),
     yearsBalance: this._fb.control(this.years()[0]),
 
-    documents: this._fb.array([]),
-    amount: this._fb.control(this.amount()[0]),
+    documents: this._fb.array(
+      this.requiredDocuments().map((doc) =>
+        this._fb.group({
+          value: [doc], // Objeto completo como valor
+          checked: [false], // Estado inicial del checkbox
+        }),
+      ),
+    ),
+    minimumQuantity: this._fb.control(this.amount()[0].label),
     currencys: this._fb.control(null),
-    locations: this._fb.array([]),
+    locations: this._fb.array<LocationTranslated>([]),
+    name: this._fb.control(null),
+    email: this._fb.control(null, Validators.email),
+    phoneNumber: this._fb.control(null),
+
     //origin: this._fb.control(null),
   })
 
+  documentsFormArray = this.form.get('documents') as FormArray<FormControl>
+
   ngOnInit() {
-    this.setInitialDocuments();
     this._selectLocationsService.setUpCountries()
+    console.log(this.bankId())
   }
 
   toogleGrenBonusVehicle = (newValue: boolean) => {
@@ -81,52 +96,13 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     this.form.get('greenBonusMachines')?.setValue(newValue)
   }
 
-  private setInitialDocuments() {
-    const documentsArray = this.documents().map(document =>
-      this._fb.control(this.documentSelected(document.id))
-    )
-    this.form.setControl('documents', this._fb.array(documentsArray))
-  }
-
-  documentToggled(documentId: string, event: Event) {
-    const checked = (event.target as HTMLInputElement).checked
-    const documentIndex = this.documents().findIndex(doc => doc.id === documentId)
-
-    if (documentIndex !== -1) {
-      const documentControl = (this.form.get('documents') as FormArray).at(documentIndex)
-      documentControl.setValue(checked)
-    }
-  }
-
-  documentSelected(documentId: string): boolean {
-    const documentIndex = this.documents().findIndex(doc => doc.id === documentId)
-    const control = (this.form.get('documents') as FormArray).at(documentIndex)
-
-    return control ? control.value : false
-  }
-
-  /*get selectedDocuments(): string[] {
-    return (this.form.get('documents') as FormArray).controls
-      .map((control, index) => control.value ? this.documents()[index].id : null)
-      .filter(id => id != null) as string[]
-  }*/
-
   save = () => {
-    const sustainbleEquipmentValue = {
-      ...this.form.value,
-      locations: this.form.value.locations.map((location: any) => {
-        const country = this._countries()?.find((country) => country.code === location.country.code)
+    const sustainbleEquipmentValue = new CreateSustainableEquipment(this.bankId(), this.form.value)
+    console.log(sustainbleEquipmentValue)
 
-        return {
-          country: country,
-          ...location.country.regions,
-        }
-      }),
-    }
-    this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
-      console.log(res)
+    /*   this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
       this._goRealStateLoan()
-    })
+    }) */
   }
   goBack = () => {
     window.history.back()

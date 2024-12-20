@@ -6,7 +6,6 @@ export interface SustainableEquipmentPayload {
   classifications: ClassificationCodeRequest[]
   locations: LocationsCountry[]
   activityProspectMinimum: number
-  objectOrigin: string[]
   balanceSheet?: number
   requiredDocuments: string[]
   minimumQuantity: number
