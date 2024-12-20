@@ -16,6 +16,10 @@ const routes: Routes = [
     },
   },
   {
+    path: 'matches',
+    loadComponent: () => import('./funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),
+  },
+  {
     path: 'fundings',
     component: FundingComponent,
     children: [

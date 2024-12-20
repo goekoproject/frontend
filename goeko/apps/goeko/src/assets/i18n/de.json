@@ -16,6 +16,11 @@
     "the": "Die",
     "transition": "Übergang"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Finanzielle Lösungen",
+    "description": "Sie können finanzielle Unterstützung für Ihr nachhaltiges Projekt erhalten.",
+    "callToAction": "Starten"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Bearbeiten Sie Ihre Ökolösung",
     "new_ecosolutions": "Neue Öko-Lösung",
@@ -274,7 +279,8 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favourites": "Favoriten"
+    "favourites": "Favoriten",
+    "funding": "Finanzierung"
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnieren Sie für vollen Zugriff! Entdecken Sie mehr.",

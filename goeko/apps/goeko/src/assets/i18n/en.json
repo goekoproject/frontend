@@ -16,6 +16,11 @@
     "the": "The",
     "transition": "transition"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Financial solutions",
+    "description": "You can secure financial backing for your sustainable project.",
+    "callToAction": "Start"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Edit your ecosolution",
     "new_ecosolutions": "New eco-solution",
@@ -286,7 +291,8 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favourites": "Favourites"
+    "favourites": "Favourites",
+    "funding": "Funding"
   },
   "MENU_USER_BANK": {
     "buttonSearch": "Present your financial solutions",

@@ -15,7 +15,7 @@
     "test": "nx test goeko --codeCoverage=true --test-file",
     "lighthouse": "npx unlighthouse --site https://goeko.ch/",
     "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/",
-    "demo": "npm run build:dev && npx firebase hosting:channel:deploy goekdemos --expires 7d"
+    "demo": "npm run build:dev && npx firebase hosting:channel:deploy goekohome --expires 7d"
   },
   "private": true,
   "dependencies": {
@@ -53,7 +53,6 @@
     "marked": "^13.0.3",
     "ng-circle-progress": "^1.7.1",
     "ngx-editor": "^17.3.0",
-    "ngx-indexed-db": "^19.2.0",
     "resend": "^4.0.1-alpha.0",
     "rxjs": "~7.8.0",
     "rxjs-interop": "^2.0.0",
