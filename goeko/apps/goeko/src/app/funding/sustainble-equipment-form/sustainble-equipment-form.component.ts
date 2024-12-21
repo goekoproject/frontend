@@ -3,7 +3,7 @@ import { Component, inject, input, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
-import { LocationTranslated } from '@goeko/store'
+import { FINANCING_TYPE, FinancingService, LocationTranslated } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoILeavesComponent, GoInputModule, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
@@ -31,7 +31,7 @@ type Options = {
     ReactiveFormsModule,
     GoInputModule,
   ],
-  providers: [FundingService, { provide: STORE_NAME, useValue: 'sustainble-equipment' }, SelectLocationsService],
+  providers: [FundingService, FinancingService, { provide: STORE_NAME, useValue: 'sustainble-equipment' }, SelectLocationsService],
   templateUrl: './sustainble-equipment-form.component.html',
   styleUrl: './sustainble-equipment-form.component.scss',
 })
@@ -87,6 +87,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   ngOnInit() {
     this._selectLocationsService.setUpCountries()
     console.log(this.bankId())
+   // this._getSustainableEquipmentData();
   }
 
   toogleGrenBonusVehicle = (newValue: boolean) => {
@@ -98,12 +99,22 @@ export class SustainbleEquipmentFormComponent implements OnInit {
 
   save = () => {
     const sustainbleEquipmentValue = new CreateSustainableEquipment(this.bankId(), this.form.value)
-    console.log(sustainbleEquipmentValue)
+    // we save the sustainable object in the service for user later
+    this._fundingService.setSustainableEquipment(sustainbleEquipmentValue);
 
     this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
       this._goRealStateLoan()
     })
   }
+
+  private _getSustainableEquipmentData() {
+    this._fundingService.getAll(FINANCING_TYPE.SustainableEquipment).subscribe((res: any) => {
+      if(res) {
+        //mapear el objeto en el formulario
+      }
+    });
+  }
+
   goBack = () => {
     window.history.back()
   }

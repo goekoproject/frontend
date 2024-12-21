@@ -16,7 +16,8 @@
     <div class="flex">
       <div class="w-full">
         <ui-super-select
-          [formControlName]="'ownerProfile'">
+          [formControlName]="'ownerProfile'"
+          [multiple]="true">
           <label title for=" ownerProfile ">
             {{ 'FORM_LABEL.ownerProfile' | translate }}
           </label>
@@ -27,7 +28,8 @@
       </div>
       <div class="w-full">
         <ui-super-select
-          [formControlName]="'buildingTypes'">
+          [formControlName]="'buildingTypes'"
+          [multiple]="true">
           <label title for=" buildingTypes ">
             {{ 'FORM_LABEL.buildingTypes' | translate }}
           </label>
@@ -59,12 +61,12 @@
       </div>
       <div class="w-full">
         <ui-super-select
+          [multiple]="true"
           [readonly]="false"
           [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
           [formControlName]="'currency'"
           id="currency"
-          name="currency"
-          [compareWith]="defaultSetCurrency">
+          name="currency">
           @for (currency of currencys(); track currency.id) {
             <super-option [value]="currency.label"> {{ currency.label }}</super-option>
           }

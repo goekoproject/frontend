@@ -12,7 +12,7 @@ export type FinancingType = FINANCING_TYPE.SustainableEquipment | FINANCING_TYPE
 export class FinancingService implements OperationSustainableEquipment, OperationRealStateLoan {
   private _http = inject(HttpClient)
 
-  getAll(type: FinancingType) {
+  getAll(type: FinancingType) : Observable<any> {
     return this._http.get(`/v1/financing/${type}`)
   }
 

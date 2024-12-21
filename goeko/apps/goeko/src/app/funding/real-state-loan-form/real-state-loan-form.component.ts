@@ -7,8 +7,9 @@ import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
-import { defaultSetCurrency } from './compare-with-select'
 import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
+import { FINANCING_TYPE, FinancingService } from '@goeko/store'
+import { CreateRealStateLoan } from './create-real-state-loan.model'
 
 type Options = {
   label: string
@@ -28,7 +29,7 @@ type Options = {
     UiSuperSelectModule,
     SelectLocationsComponent,
   ],
-  providers: [FundingService, { provide: STORE_NAME, useValue: 'real-state-loan' }, SelectLocationsService],
+  providers: [FundingService, FinancingService, { provide: STORE_NAME, useValue: 'real-state-loan' }, SelectLocationsService],
   templateUrl: './real-state-loan-form.component.html',
   styleUrls: ['./real-state-loan-form.component.scss'],
 })
@@ -42,7 +43,6 @@ export class RealStateLoanComponent implements OnInit {
 
   private _countries = this._selectLocationsService.countries
 
-  public defaultSetCurrency = defaultSetCurrency
   public form!: FormGroup
 
   workTypes = signal<Options[]>(WORKTYPES)
@@ -63,6 +63,7 @@ export class RealStateLoanComponent implements OnInit {
 
   private _buildFrom() {
     this._initForm()
+    // this._getRealStateLoanData();
   }
 
   private _initForm() {
@@ -79,16 +80,24 @@ export class RealStateLoanComponent implements OnInit {
   }
 
   save = () => {
-    const realStateLoan = {
-      ...this.form.value,
-      locations: this.form.value.locations.map((location: any) => {
-        const country = this._countries()?.find((country) => country.code === location.country.code)
-        return {
-          country: country,
-          ...location.country.regions,
-        }
-      }),
+
+    const realStateLoan = new CreateRealStateLoan('fe6cfe2f-7fa8-461a-9be1-e991613b041a', this.form.value)
+
+    this._fundingService.setRealStateLoan(realStateLoan);
+
+    if(this._fundingService.getSustainableEquipment()){
+      this._fundingService.createSustainableEquipment(this._fundingService.getSustainableEquipment()).subscribe(res => {
+        console.log(res);
+      });
     }
+
+    if(this._fundingService.getRealStateLoan()){
+      this._fundingService.createRealStateLoan(this._fundingService.getRealStateLoan()).subscribe(res => {
+        console.log(res);
+      });
+    }
+
+
     this._fundingService.saveData(realStateLoan).subscribe((res) => {
       console.log(res)
       this._goHubFundings()
@@ -104,6 +113,14 @@ export class RealStateLoanComponent implements OnInit {
 
   private _goHubFundings = () => {
     this._router.navigate([`../funding/${this.bankId()}`], { relativeTo: this._route.parent?.parent })
+  }
+
+  private _getRealStateLoanData() {
+    this._fundingService.getAll(FINANCING_TYPE.RealEstate).subscribe((res: any) => {
+      if(res) {
+        //mapear el objeto en el formulario
+      }
+    });
   }
 }
 

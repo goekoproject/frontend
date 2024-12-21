@@ -6,12 +6,13 @@ import { BadgeModule, ButtonModule, GoILeavesComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { BehaviorSubject, map, switchMap } from 'rxjs'
 import { FundingService } from './funding.service'
+import { FinancingService } from '@goeko/store'
 
 @Component({
   selector: 'goeko-hub-funding',
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, ButtonModule, BadgeModule, GoILeavesComponent],
-  providers: [FundingService],
+  providers: [FundingService ,FinancingService],
   templateUrl: './hub-funding.component.html',
   styleUrl: './hub-funding.component.scss',
 })

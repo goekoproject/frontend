@@ -2,15 +2,22 @@ import { Inject, Injectable, Optional } from '@angular/core'
 import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { Observable } from 'rxjs'
 import { STORE_NAME } from './funding-token.constants'
+import { CreateSustainableEquipment } from './sustainble-equipment-form/create-sustainable-equipment.model'
+import { FinancingService, FinancingType } from '@goeko/store'
+import { CreateRealStateLoan } from './real-state-loan-form/create-real-state-loan.model'
 
 @Injectable()
 export class FundingService {
   private dbService = Inject(NgxIndexedDBService)
+
   private readonly dbName = 'FundingDB'
   private readonly dbVersion = 1
 
+  sustainableEquipment!: CreateSustainableEquipment;
+  realStateLoan!: CreateRealStateLoan;
+
   private readonly stores = ['sustainble-equipment', 'real-state-loan']
-  constructor(@Optional() @Inject(STORE_NAME) private storeName: string) {
+  constructor(@Optional() @Inject(STORE_NAME) private storeName: string, private financingService: FinancingService) {
     const request = indexedDB.open(this.dbName, this.dbVersion)
 
     request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
@@ -137,4 +144,41 @@ export class FundingService {
       }
     })
   }
+
+  setRealStateLoan(realStateLoan: CreateRealStateLoan) {
+    this.realStateLoan = realStateLoan;
+  }
+
+  getRealStateLoan() {
+    return this.realStateLoan;
+  }
+
+  setSustainableEquipment(sustainableEquipment: CreateSustainableEquipment) {
+    this.sustainableEquipment = sustainableEquipment;
+  }
+
+  getSustainableEquipment() {
+    return this.sustainableEquipment;
+  }
+
+  createSustainableEquipment(sustainbleEquipmentValue: CreateSustainableEquipment): Observable<any>{
+    return this.financingService.createSustainableEquipment(sustainbleEquipmentValue);
+  }
+
+  updateSustainableEquipment(id: string, data: CreateSustainableEquipment): Observable<any>{
+    return this.financingService.updateSustainableEquipment(id, data);
+  }
+
+  createRealStateLoan(realStateLoan: CreateRealStateLoan): Observable<any>{
+    return this.financingService.createRealStateLoan(realStateLoan);
+  }
+
+  updateRealStateLoan(id: string, data: CreateRealStateLoan): Observable<any> {
+    return this.financingService.updateRealStateLoan(id, data);
+  }
+
+  getAll(type: FinancingType): Observable<any> {
+    return this.financingService.getAll(type);
+  }
+
 }
