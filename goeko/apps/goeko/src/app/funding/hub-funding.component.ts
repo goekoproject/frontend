@@ -43,10 +43,10 @@ export class HubFundingComponent implements OnInit {
   }
 
   goSustainbleEquipment = () => {
-    this._router.navigate(['./fundings'], { relativeTo: this._route })
+    this._router.navigate([`../king-of-funding/${this.bankId()}`], { relativeTo: this._route })
   }
 
   goRealStateLoan = () => {
-    this._router.navigate(['./fundings/real-state-loan'], { relativeTo: this._route })
+    this._router.navigate([`../king-of-funding/${this.bankId()}/real-state-loan`], { relativeTo: this._route })
   }
 }

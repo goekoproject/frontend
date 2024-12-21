@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, OnInit, signal } from '@angular/core'
+import { Component, inject, input, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryModule, SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { defaultSetCurrency } from './compare-with-select'
-import { AMOUNT, BUILDINGTYPES, CURRENCY, OBJECTTYPE, OWNERPROFILE, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
 
 type Options = {
   label: string
@@ -38,6 +38,7 @@ export class RealStateLoanComponent implements OnInit {
   private _route = inject(ActivatedRoute)
   private _fundingService = inject(FundingService)
   private _selectLocationsService = inject(SelectLocationsService)
+  bankId = input.required<string>()
 
   private _countries = this._selectLocationsService.countries
 
@@ -56,6 +57,8 @@ export class RealStateLoanComponent implements OnInit {
   ngOnInit(): void {
     this._selectLocationsService.setUpCountries()
     this._buildFrom()
+    console.log(this.bankId())
+
   }
 
   private _buildFrom() {
@@ -100,6 +103,8 @@ export class RealStateLoanComponent implements OnInit {
   }
 
   private _goHubFundings = () => {
-    this._router.navigate(['../funding'], { relativeTo: this._route.parent?.parent })
+    this._router.navigate([`../funding/${this.bankId()}`], { relativeTo: this._route.parent?.parent })
   }
 }
+
+
