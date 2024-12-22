@@ -20,14 +20,14 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         controlName: 'comunicationLanguage',
         label: 'FORM_LABEL.comunicationLanguage',
         type: 'lang',
-        required: true,
+        required: false,
       },
-      /*      {
+      {
         controlName: 'identifier',
         label: 'FORM_LABEL.companyId',
         type: 'text',
         required: true,
-      }, */
+      },
       {
         controlName: 'employees',
         label: 'FORM_LABEL.numEmployees',

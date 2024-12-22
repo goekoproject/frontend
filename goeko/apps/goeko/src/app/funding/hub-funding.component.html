@@ -1,0 +1,115 @@
+@if (sustainbleEquipment() || realStateLoan()) {
+  <div class="flex flex-col gap-4">
+    <!--TODO: Create card -->
+    <ng-container *ngTemplateOutlet="cardSustainbleEquipment"></ng-container>
+
+    <ng-container *ngTemplateOutlet="cardRealStateLoan"></ng-container>
+  </div>
+} @else {
+  <div class="dashboard-option">
+    <div class="container p-10">
+      <div
+        class="flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-lg shadow-gray-300 dark:bg-white">
+        <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_BANK.titleCard' | translate }}</h5>
+
+        <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_BANK.subtitleCard' | translate }}</p>
+        <img src="assets/Group 65.svg" class="mb-11" />
+        <button type="button" go-button appearance="primary" [routerLink]="['../king-of-funding', bankId()]" queryParamsHandling="preserve">
+          {{ 'MENU_USER_BANK.buttonSearch' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<ng-template #cardSustainbleEquipment>
+  <div class="flex w-10/12 flex-col gap-6 rounded-2xl p-4 pb-10 shadow-xl">
+    <h2 class="text-2xl font-semibold">{{ 'sustainableEquipment' | translate }}</h2>
+    @for (location of sustainbleEquipment()?.locations; track location?.country?.code) {
+      <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
+        <span class="fi fi-{{ location.country.code | lowercase }}"></span>
+        <p>{{ location.country.label }}</p>
+      </div>
+    }
+    <div class="flex flex-col gap-4">
+      <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.products' | translate }}</h3>
+
+      <div class="flex gap-8">
+        <div class="flex flex-col gap-4">
+          <span class="text-grayText">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.vehicles' | translate }}</span>
+          @if (sustainbleEquipment()?.greenBonusVehicle) {
+            <div class="flex">
+              <go-i-leaves></go-i-leaves>
+              <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
+            </div>
+          }
+          <div class="flex flex-wrap gap-2">
+            @for (vehicle of sustainbleEquipment()?.vehicles; track vehicle.id) {
+              <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
+                <p>{{ vehicle.label | translate }}</p>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <span class="text-grayText">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.machines' | translate }}</span>
+          @if (sustainbleEquipment()?.greenBonusMachines) {
+            <div class="flex">
+              <go-i-leaves></go-i-leaves>
+              <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
+            </div>
+          }
+          <div class="flex gap-2">
+            @for (machine of sustainbleEquipment()?.machines; track machine.id) {
+              <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
+                <p>{{ machine.label | translate }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" go-button appearance="white" class="ml-auto" (click)="goSustainbleEquipment()">
+      {{ 'edit' | translate }}
+    </button>
+    <button type="button" go-button appearance="white" class="ml-auto" (click)="removeStoreData('sustainble-equipment')">
+      {{ 'delete' | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #cardRealStateLoan>
+  @if (realStateLoan()) {
+    <div class="flex w-10/12 flex-col gap-6 rounded-2xl p-4 pb-10 shadow-xl">
+      <h2 class="text-2xl font-semibold">{{ 'realStateLoan' | translate }}</h2>
+      @for (location of realStateLoan()?.locations; track location?.country?.code) {
+        <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
+          <span class="fi fi-{{ location.country.code | lowercase }}"></span>
+          <p>{{ location.country.label }}</p>
+        </div>
+      }
+      <div class="flex flex-col gap-4">
+        <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.buildingFounding' | translate }}</h3>
+
+        <div class="flex flex-col gap-8">
+          <span class="text-grayText">{{ 'FORM_LABEL.workTypes' | translate }}</span>
+
+          <div class="flex flex-wrap gap-2">
+            @for (workType of realStateLoan()?.workTypes; track workType.id) {
+              <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
+                <p>{{ workType.label | translate }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+      <button type="button" go-button appearance="white" class="ml-auto" (click)="goRealStateLoan()">
+        {{ 'edit' | translate }}
+      </button>
+      <button type="button" go-button appearance="white" class="ml-auto" (click)="removeStoreData('real-state-loan')">
+        {{ 'delete' | translate }}
+      </button>
+    </div>
+  }
+</ng-template>

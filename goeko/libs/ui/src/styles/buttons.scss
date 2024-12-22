@@ -9,13 +9,12 @@
   align-items: center;
   appearance: none;
   background-color: var(--primary--500);
-  @apply rounded-full;
+  @apply rounded-full font-semibold;
   border-style: none;
   box-sizing: border-box;
   color: var(--white);
   cursor: pointer;
   display: inline-flex;
-  font: var(--font-menu);
   height: 2.625rem;
   line-height: 1.25rem;
   justify-content: center;
@@ -80,8 +79,8 @@
 }
 .go-button[appearance='white'] {
   background-color: var(--white);
-  color: var(--primary--800);
-  border: 1px solid rgb(209 213 219 /1);
+  color: var(--primary);
+  border: 2px solid var(--primary);
 
   &:hover {
     background: var(--primary--50);
