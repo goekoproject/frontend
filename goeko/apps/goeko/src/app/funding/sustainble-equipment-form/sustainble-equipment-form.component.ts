@@ -87,7 +87,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   ngOnInit() {
     this._selectLocationsService.setUpCountries()
     console.log(this.bankId())
-   // this._getSustainableEquipmentData();
+    // this._getSustainableEquipmentData();
   }
 
   toogleGrenBonusVehicle = (newValue: boolean) => {
@@ -100,7 +100,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   save = () => {
     const sustainbleEquipmentValue = new CreateSustainableEquipment(this.bankId(), this.form.value)
     // we save the sustainable object in the service for user later
-    this._fundingService.setSustainableEquipment(sustainbleEquipmentValue);
+    this._fundingService.setSustainableEquipment(sustainbleEquipmentValue)
 
     this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
       this._goRealStateLoan()
@@ -109,10 +109,10 @@ export class SustainbleEquipmentFormComponent implements OnInit {
 
   private _getSustainableEquipmentData() {
     this._fundingService.getAll(FINANCING_TYPE.SustainableEquipment).subscribe((res: any) => {
-      if(res) {
+      if (res) {
         //mapear el objeto en el formulario
       }
-    });
+    })
   }
 
   goBack = () => {
@@ -124,6 +124,6 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   }
 
   private _goRealStateLoan = () => {
-    this._router.navigate(['./real-state-loan'], { relativeTo: this._route })
+    this._router.navigate(['real-state-loan', this.bankId()], { relativeTo: this._route.parent })
   }
 }

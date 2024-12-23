@@ -20,7 +20,7 @@
           <div [formGroupName]="i" class="locations-selected">
             <div [formGroupName]="'country'" class="flex w-full gap-4">
               <ui-super-select
-                class="w-full"
+                class="w-72"
                 [placeholder]="'FORM_LABEL.country' | translate"
                 [formControlName]="'code'"
                 id="country"
@@ -38,7 +38,7 @@
               @if (dataSourceSelect.has(location.value.country.code)) {
                 <div class="flex items-center gap-4">
                   <ui-super-select
-                    class="w-full"
+                    class="w-72"
                     [placeholder]="'regions' | translate"
                     formControlName="regions"
                     id="regions"

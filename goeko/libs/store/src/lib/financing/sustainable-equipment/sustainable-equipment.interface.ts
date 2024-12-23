@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs'
-import { SustainableEquipmentPayload } from '../sustainable-equipment.model'
+import { SustainableEquipmentPayload } from './sustainable-equipment.model'
 
 export interface OperationSustainableEquipment {
   createSustainableEquipment(data: SustainableEquipmentPayload): Observable<any>

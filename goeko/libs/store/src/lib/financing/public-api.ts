@@ -1,5 +1,7 @@
 export * from './common-request.interface'
 export * from './financing-type.enum'
 export * from './financing.service'
-export * from './real-state-loan.model'
-export * from './sustainable-equipment.model'
+export * from './real-state-loan/real-state-loan-response.interface'
+export * from './real-state-loan/real-state-loan.model'
+export * from './sustainable-equipment/sustainable-equipment.model'
+
