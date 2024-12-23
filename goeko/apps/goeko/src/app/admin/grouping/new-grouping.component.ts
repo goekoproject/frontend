@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, ComponentRef, inject, OnInit, signal, ViewChild, ViewContainerRef } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
 import { NewUpdateGrouping } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -18,6 +19,8 @@ import { BasicInfoGroupingComponent } from './basic-info-grouping.component'
 })
 export class NewGroupingComponent implements OnInit {
   private _adminCategoriesService = inject(AdminCategoriesService)
+  private _router = inject(Router)
+  private _route = inject(ActivatedRoute)
   @ViewChild('stepContainer', { read: ViewContainerRef, static: true })
   stepContainer!: ViewContainerRef
   steps = signal([
@@ -69,8 +72,12 @@ export class NewGroupingComponent implements OnInit {
 
     this._adminCategoriesService.createGrouping(body).subscribe((grouping) => {
       if (grouping) {
-        console.log('Grouping created')
+        console.info('Grouping created')
+        this._goGroupingHub()
       }
     })
+  }
+  private _goGroupingHub() {
+    this._router.navigate(['grouping'], { relativeTo: this._route.parent })
   }
 }

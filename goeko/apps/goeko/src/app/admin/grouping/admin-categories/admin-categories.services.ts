@@ -3,6 +3,7 @@ import {
   ClassificationsService,
   GroupingBuilder,
   GroupingByClassifications,
+  NewProduct,
   NewSubcategory,
   NewUpdateGrouping,
   SubcategoryResponse,
@@ -56,5 +57,9 @@ export class AdminCategoriesService {
 
   getSubcategoryByCategoryId(categoryId: string) {
     return this._classificationService.getSubcategoryByCategoryId(categoryId)
+  }
+
+  createProduct(product: NewProduct) {
+    return this._classificationService.createProduct(product)
   }
 }

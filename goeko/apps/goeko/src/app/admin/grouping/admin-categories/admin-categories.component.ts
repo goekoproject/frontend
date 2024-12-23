@@ -14,7 +14,7 @@ import {
   signal,
 } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryModule, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
 import { CODE_LANG, LANGS } from '@goeko/core'
 import {
@@ -22,15 +22,11 @@ import {
   CategoryMapper,
   ClassificationCategoryService,
   GroupingByClassifications,
-  Label,
-  ManageSubcategory,
   NewCategoryForGrouping,
   NewSubcategory,
   NewUpdateGrouping,
   Product,
-  Question,
   Subcategory,
-  UpdateSubcategory,
 } from '@goeko/store'
 import {
   BadgeModule,
@@ -45,7 +41,6 @@ import {
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { DialogAddSubcategoryComponent } from '../dialog-add-subcategory.component'
 import { DialogManagmentCategoryComponent } from '../dialog-managment-category.component'
-import { AdminCategoriesDynamicForm } from './admin-categories.dynamic-form'
 import { AdminCategoriesService } from './admin-categories.services'
 
 @Component({
@@ -72,6 +67,7 @@ import { AdminCategoriesService } from './admin-categories.services'
 })
 export class AdminCategoriesComponent implements OnInit {
   private _router = inject(Router)
+  private _route = inject(ActivatedRoute)
 
   JSON = JSON
   @ViewChildren('detailCategory')
@@ -93,6 +89,28 @@ export class AdminCategoriesComponent implements OnInit {
 
   categories = computed(() => this.mappingClassificationLabel(this.classifications()?.classification))
 
+  payload = computed(() => {
+    return {
+      name: this.classifications()?.name || '',
+      description: this.classifications()?.description || '',
+      classification: signal(
+        this.classifications()?.classification.map((category) => CategoryMapper.mapCategoryToNewCategoryForGrouping(category)),
+      ),
+    }
+  })
+
+  private _updateProductsPayload = (subcategory: Subcategory, products: Product[]) => {
+    this.payload().classification.update((classification) => {
+      const category = classification?.find((category) => category.code === this.categorySelected().code)
+      if (category) {
+        const subcategorySelected = category.subcategories.find((subcat) => subcat.code === subcategory.code)
+        if (subcategorySelected) {
+          subcategorySelected.products = products.length > 0 ? products.map((product) => product.code) : undefined
+        }
+      }
+      return classification
+    })
+  }
   public langs = signal(LANGS)
 
   private _closeDetailByIndex = (index: number) => {
@@ -133,7 +151,6 @@ export class AdminCategoriesComponent implements OnInit {
     private _cdf: ChangeDetectorRef,
   ) {
     effect(() => {
-      this._createFormGroup()
       this._getTranslationsForLang()
     })
   }
@@ -155,21 +172,6 @@ export class AdminCategoriesComponent implements OnInit {
       })
     })
   }
-  private _createFormGroup() {
-    this.form = this._fb.group({})
-    this.subCategorySelected()?.subcategories.forEach((group: any) => {
-      if (group) {
-        const formGroup = this._fb.group({})
-        this._buildFormFormsubcategorySelected(group, formGroup)
-        this._cdf.markForCheck()
-        this.form.addControl(group.code, formGroup)
-      }
-    })
-  }
-  private _buildFormFormsubcategorySelected(group: ManageSubcategory, formGroup: FormGroup) {
-    AdminCategoriesDynamicForm.buildForm({ fb: this._fb, group, formGroup })
-  }
-
   private _updateGrouping() {
     if (!this.classifications()) {
       return
@@ -177,9 +179,7 @@ export class AdminCategoriesComponent implements OnInit {
     const body: NewUpdateGrouping = {
       name: this.classifications()?.name || '',
       description: this.classifications()?.description || '',
-      classification: this.classifications()?.classification.map((category) =>
-        CategoryMapper.mapCategoryToNewCategoryForGrouping(category),
-      ) as NewCategoryForGrouping[],
+      classification: this.payload().classification() as NewCategoryForGrouping[],
     }
 
     this._adminCategories.updateGrouping(this.classifications()?.id || '', body).subscribe((grouping) => {
@@ -249,37 +249,25 @@ export class AdminCategoriesComponent implements OnInit {
     }
   }
 
-  updateSubcategory(id: string, subcategory: Subcategory) {
-    const _updateSubcategory: UpdateSubcategory = {
-      label: {
-        ...(subcategory.label as Label),
-      },
-      question: {
-        ...(subcategory.question as Question),
-      },
-      enabled: true,
-    }
-    this._adminCategories.updateSubcategory(id, _updateSubcategory).subscribe((grouping) => {
-      console.log('grouping', grouping)
-    })
+  goToSubcategory(subcategory: Subcategory) {
+    this._router.navigate(['../categories', this.categorySelected().code, subcategory.code], { relativeTo: this._route })
   }
 
-  addProducts(subcategory: Subcategory) {
-    this._openDialogAddProducts(subcategory)
-  }
-  editProduct(subcategory: Subcategory, product: Product) {
+  addProductToGrouping(subcategory: Subcategory, product: Product[]) {
     this._openDialogAddProducts(subcategory, product)
   }
-  private _openDialogAddProducts = (subcategory: Subcategory, product?: Product) => {
+  private _openDialogAddProducts = (subcategory: Subcategory, product?: Product[]) => {
     return this._sideDialogService
       .openDialog<ProductsManagementComponent>(ProductsManagementComponent, {
-        productSelected: product,
+        products: product,
         subcategoryCode: subcategory.code,
         subcategoryId: subcategory.id,
+        mode: 'view',
       })
       .subscribe((product) => {
         if (product) {
-          this._fetchData()
+          this._updateProductsPayload(subcategory, product)
+          this._updateGrouping()
         }
       })
   }

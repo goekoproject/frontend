@@ -32,7 +32,8 @@
               <ul class="m-1 flex flex-col gap-2">
                 @for (subcategory of category.subcategories; track subcategory.id) {
                   <li
-                    class="flex items-center gap-2 rounded-lg border px-2 hover:border-2 hover:border-blue-600 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-900 has-[:checked]:ring-indigo-200">
+                    class="flex items-center gap-2 rounded-lg border px-2 hover:border-2 hover:border-blue-600 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-900 has-[:checked]:ring-indigo-200"
+                    [ngClass]="{ 'bg-indigo-50 text-indigo-900 ring-indigo-200': subcategoryCode() === subcategory.code }">
                     <input
                       #subcategoryElement
                       type="checkbox"
@@ -65,8 +66,12 @@
                           <i class="ti ti-library-plus"></i>
                           <p class="w-max">{{ 'Product' | translate }}</p>
                         </button>
-                      </div>
 
+                        <button go-button class="self-center" (click)="addProductsMasive(subcategory)">
+                          <i class="ti ti-plus"></i> {{ 'add' | translate }}
+                          {{ 'product' | translate }}
+                        </button>
+                      </div>
                     </label>
                   </li>
                 }

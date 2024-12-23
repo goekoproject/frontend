@@ -1,15 +1,14 @@
-<h2>{{ 'FORM_LABEL.products' | translate }}</h2>
+<h2 class="text-2xl font-semibold">{{ 'FORM_LABEL.products' | translate }}</h2>
 
-<div class="product-actions">
-  <button go-button appearance="white" (click)="close()">
-    {{ 'cancel' | translate }}
-  </button>
-  <button go-button (click)="data.productSelected ? updateProduct() : addNewProduct()">
-    {{ buttonText | translate }}
-  </button>
-</div>
-
-@defer (when form) {
+@defer (when form && mode() === 'add') {
+  <div class="product-actions">
+    <button go-button appearance="white" (click)="close()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button go-button (click)="data.productSelected ? updateProduct() : addNewProduct()">
+      {{ buttonText | translate }}
+    </button>
+  </div>
   <form [formGroup]="form">
     <div formGroupName="label">
       <div class="mb-4" [formGroupName]="'translations'">
@@ -33,9 +32,15 @@
   </form>
 }
 @defer (when products()) {
-  <go-badge-group [id]="'products'">
+  <go-badge-group [id]="'products'" (valueSelected)="productsSelected($event)" [readonly]="data.mode === 'add'">
     @for (product of products(); track product.code; let i = $index) {
-      <go-badge [value]="product">{{ product | productToCurrentLang }}</go-badge>
+      <go-badge [value]="product" [selected]="idProductsRecevied().includes(product.id)">{{ product | productToCurrentLang }}</go-badge>
     }
   </go-badge-group>
+
+  @if (mode() === 'view') {
+    <button go-button appearance="white" (click)="sendProducts()">
+      {{ 'add' | translate }}
+    </button>
+  }
 }

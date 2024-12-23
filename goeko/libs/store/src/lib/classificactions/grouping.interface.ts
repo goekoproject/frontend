@@ -16,6 +16,7 @@ export interface NewCategoryForGrouping {
 export interface NewSubcategoryForGrouping {
   code: string
   order: number
+  products: string[] | undefined
 }
 
 export interface NewUpdateGrouping {

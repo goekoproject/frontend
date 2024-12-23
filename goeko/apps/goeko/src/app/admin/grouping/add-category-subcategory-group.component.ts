@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, inject, OnInit, output, signal, viewChildren } from '@angular/core'
+import { Component, ElementRef, inject, input, OnInit, output, signal, viewChildren } from '@angular/core'
 import { ProductsManagementComponent } from '@goeko/business-ui'
 import { CODE_LANG, LANGS } from '@goeko/core'
 import { Category, Label, NewSubcategory, Product, SubcategoryResponse } from '@goeko/store'
 import { ButtonModule, RadioModule, SideDialogService, ToggleSwitchComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { forkJoin } from 'rxjs'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { LabelByCategoryPipe } from './admin-categories/label-by-category.pipe'
+import { getProductBySubcategoryId } from './admin-categories/new-product'
 import { DataSubcategory, DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
 import { DialogManagmentCategoryComponent } from './dialog-managment-category.component'
 
@@ -45,7 +47,8 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
   subcategoryElement = viewChildren<ElementRef>('subcategoryElement')
   beforeNext = output<any>()
   categories = signal<AllDataCategories[]>([])
-
+  categoryCode = input<string>()
+  subcategoryCode = input<string>()
   selectedLangSubcategory = signal<string>(CODE_LANG.EN)
 
   get subcategorySelected() {
@@ -79,7 +82,15 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
       categories.forEach((category) => {
         this._addCategory(category)
       })
+      this._navigateToCategoryByCode()
     })
+  }
+
+  private _navigateToCategoryByCode() {
+    if (this.categoryCode() && this.subcategoryCode() && this.categories()) {
+      const AllDataCategories = this.categories().find((category) => category.code === this.categoryCode()) as AllDataCategories
+      this._fetchData(AllDataCategories)
+    }
   }
   private _addCategory = (category: Category) => {
     const newCategory = this._categoryToAllDataCategories(category)
@@ -215,5 +226,15 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
       }
     })
     this.beforeNext.emit(dataForGrouping)
+  }
+
+  addProductsMasive(subcategory: SubcategoryResponse) {
+    const createProductObservables$ = getProductBySubcategoryId(subcategory.id).map((product) =>
+      this._adminCategoriesService.createProduct(product),
+    )
+
+    forkJoin(createProductObservables$).subscribe((res) => {
+      console.log('res', res)
+    })
   }
 }

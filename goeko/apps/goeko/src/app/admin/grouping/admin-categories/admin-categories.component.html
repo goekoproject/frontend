@@ -19,10 +19,10 @@
 <button go-button appearance="white" class="ml-auto" (click)="addSubcategory()">
   {{ 'Add' | translate }}
 </button>
-@defer (when form) {
-  <section class="section-subcategories" [formGroup]="form" [@listAnimation]="subCategorySelected()?.subcategories?.length">
+@defer (when subCategorySelected()) {
+  <section class="section-subcategories" [@listAnimation]="subCategorySelected()?.subcategories?.length">
     @for (subcategory of subCategorySelected()?.subcategories; track subcategory.code; let index = $index) {
-      <details [@fadeAnimation] class="subcategories" formGroupName="{{ subcategory.code }}" #detailCategory>
+      <details [@fadeAnimation] class="subcategories" #detailCategory>
         <summary class="subcategories-summary" (click)="toogleSubcategory($event, index)">
           <p>
             {{ subcategory.label.translations[2].label }}
@@ -35,51 +35,47 @@
               <go-switch
                 class="button-toogle-actors"
                 (valueChanged)="hanldertoggleActor($event)"
-                [leftLabel]="'USER_TYPE.sme' | translate"
-                [rightLabel]="'USER_TYPE.cleanTech' | translate"></go-switch>
+                [leftLabel]="'question' | translate"
+                [rightLabel]="'label' | translate"></go-switch>
               <!--Question for SME's-->
               @if (toggleActor()) {
-                <section formGroupName="question">
-                  <fieldset formArrayName="translations" class="subcategories-translations">
+                <section>
+                  <fieldset class="subcategories-translations">
                     <legend class="section-legeng-subcategories">
-                      {{ 'FORM_LABEL.subcategoryForLangSME' | translate }}
+                      {{ 'Question' | translate }}
                     </legend>
 
                     @for (lang of langs(); track lang.code; let index = $index) {
-                      <article [formGroupName]="index" class="subcategories-sentence">
-                        <go-input [formControlName]="'label'">
-                          <p slot="label">
-                            <span class="fi fi-{{ lang.iconFlag }}"></span>
-                            {{ lang.title | translate }}
-                          </p>
-                        </go-input>
+                      <article class="subcategories-sentence">
+                        <span class="fi fi-{{ lang.iconFlag }}"></span>
+                        <p>
+                          {{ subcategory.question.translations[index].label }}
+                        </p>
                       </article>
                     }
                   </fieldset>
                 </section>
               } @else {
                 <!--  Question for Cleantech-->
-                <section formGroupName="label">
-                  <fieldset formArrayName="translations" class="subcategories-translations">
+                <section>
+                  <fieldset class="subcategories-translations">
                     <legend class="section-legeng-subcategories">
-                      {{ 'FORM_LABEL.subcategoryForLangCleantech' | translate }}
+                      {{ 'Label' | translate }}
                     </legend>
 
                     @for (lang of langs(); track lang.code; let index = $index) {
-                      <article [formGroupName]="index" class="subcategories-sentence">
-                        <go-input [formControlName]="'label'">
-                          <p slot="label">
-                            <span class="fi fi-{{ lang.iconFlag }}"></span>
-                            {{ lang.title }}
-                          </p>
-                        </go-input>
+                      <article class="subcategories-sentence">
+                        <span class="fi fi-{{ lang.iconFlag }}"></span>
+                        <p>
+                          {{ subcategory.label.translations[index].label }}
+                        </p>
                       </article>
                     }
                   </fieldset>
                 </section>
               }
-              <button go-button class="self-end" (click)="updateSubcategory(subcategory.id, this.form.value[subcategory.code])">
-                {{ 'update' | translate }}
+              <button go-button class="self-end" appearance="white" (click)="goToSubcategory(subcategory)">
+                {{ 'Go to Subcategory' | translate }}
               </button>
             </div>
 
@@ -90,15 +86,14 @@
 
               <go-badge-group [id]="'products'" name="products">
                 @for (product of subcategory.products; track product.code) {
-                  <go-badge [value]="product" [@fadeAnimation]>
+                  <go-badge [value]="product" [@fadeAnimation] [readonly]="true">
                     <i
-                      (click)="editProduct(subcategory, product)"
                       class="ti ti-pencil cursor-pointer rounded-full border p-2 text-2xl leading-6 hover:bg-blue-500 hover:text-white"
                       avatar></i>
                     {{ product | productToCurrentLang }}
                   </go-badge>
                 }
-                <button go-button class="self-center" (click)="addProducts(subcategory)">
+                <button go-button class="self-center" (click)="addProductToGrouping(subcategory,subcategory.products)">
                   <i class="ti ti-plus"></i> {{ 'add' | translate }}
                   {{ 'product' | translate }}
                 </button>

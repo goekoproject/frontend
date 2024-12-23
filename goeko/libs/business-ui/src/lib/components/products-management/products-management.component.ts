@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, Inject, OnInit, Optional, signal } from '@angular/core'
+import { Component, computed, inject, Inject, OnInit, Optional, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { LANGS } from '@goeko/core'
 import { ClassificationsService, DataSelect, NewProduct, Product } from '@goeko/store'
@@ -9,8 +9,10 @@ import { ProductToCurrentLangPipe } from '../../pipes/product-to-current-lang.pi
 
 interface DialogData {
   productSelected: Product
+  products: Product[]
   subcategoryCode: keyof typeof DataSelect
   subcategoryId: string
+  mode: 'add' | 'view'
 }
 
 @Component({
@@ -26,6 +28,10 @@ export class ProductsManagementComponent implements OnInit {
   buttonText = 'PRODUCT_ACTIONS.addProduct'
   newProduct = signal(false)
   products = signal<Product[]>([])
+  selectedProducts = signal<Product[]>([])
+
+  mode = computed(() => this.data?.mode || 'add')
+  idProductsRecevied = computed(() => this.data.products.map((product) => product.id))
   public form = new FormGroup({
     subcategoryId: new FormControl(this.data.productSelected ? null : this.data.subcategoryId),
     label: new FormGroup({
@@ -97,6 +103,14 @@ export class ProductsManagementComponent implements OnInit {
         })),
       },
     })
+  }
+
+  productsSelected(products: Product[]) {
+    this.selectedProducts.set(products)
+  }
+
+  sendProducts() {
+    this.close(this.selectedProducts())
   }
 
   close(data?: unknown) {

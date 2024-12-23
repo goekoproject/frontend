@@ -13,6 +13,7 @@ export class CategoryMapper {
     return {
       code: subcategory.code,
       order: subcategory.order || 0,
+      products: subcategory.products?.length > 0 ? subcategory.products.map((product) => product.code) : undefined,
     }
   }
 }

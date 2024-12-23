@@ -52,10 +52,7 @@ summary::-webkit-details-marker {
   @apply relative flex flex-col gap-4 p-8;
 }
 .subcategories-sentence {
-  text-transform: uppercase;
-  go-input {
-    min-width: 100%;
-  }
+  @apply flex items-center gap-4;
 }
 .subcategories-actions {
   display: flex;
