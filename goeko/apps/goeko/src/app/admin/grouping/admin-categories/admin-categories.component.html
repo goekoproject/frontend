@@ -7,21 +7,16 @@
 
 <section class="section-step">
   <!-- CATEGORY -->
-  <goeko-category
-    [editMode]="true"
-    [categories]="categories() || []"
-    [indexSelected]="0"
-    (onSelectCategory)="selectCategory($event)"
-    (onEditCategory)="editCategory($event)">
-  </goeko-category>
+  <goeko-category [categories]="categories() || []" [indexSelected]="0" (onSelectCategory)="selectCategory($event)"> </goeko-category>
 </section>
 
 <button go-button appearance="white" class="ml-auto" (click)="addSubcategory()">
   {{ 'Add' | translate }}
 </button>
+{{ subCategorySelected() | json }}
 @defer (when subCategorySelected()) {
-  <section class="section-subcategories" [@listAnimation]="subCategorySelected()?.subcategories?.length">
-    @for (subcategory of subCategorySelected()?.subcategories; track subcategory.code; let index = $index) {
+  <section class="section-subcategories">
+    @for (subcategory of subCategorySelected() || []; track subcategory.code; let index = $index) {
       <details [@fadeAnimation] class="subcategories" #detailCategory>
         <summary class="subcategories-summary" (click)="toogleSubcategory($event, index)">
           <p>
@@ -85,7 +80,7 @@
               </legend>
 
               <go-badge-group [id]="'products'" name="products">
-                @for (product of subcategory.products; track product.code) {
+                <!--            @for (product of subcategory.products; track product.code) {
                   <go-badge [value]="product" [@fadeAnimation] [readonly]="true">
                     <i
                       class="ti ti-pencil cursor-pointer rounded-full border p-2 text-2xl leading-6 hover:bg-blue-500 hover:text-white"
@@ -93,10 +88,10 @@
                     {{ product | productToCurrentLang }}
                   </go-badge>
                 }
-                <button go-button class="self-center" (click)="addProductToGrouping(subcategory,subcategory.products)">
+                <button go-button class="self-center" (click)="addProductToGrouping(subcategory, subcategory.products)">
                   <i class="ti ti-plus"></i> {{ 'add' | translate }}
                   {{ 'product' | translate }}
-                </button>
+                </button> -->
               </go-badge-group>
             </fieldset>
             <div class="subcategories-actions">
