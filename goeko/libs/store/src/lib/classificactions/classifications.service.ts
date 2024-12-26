@@ -4,7 +4,15 @@ import { toSignal } from '@angular/core/rxjs-interop'
 import { TranslateService } from '@ngx-translate/core'
 import { forkJoin, map, Observable, shareReplay } from 'rxjs'
 import { CLASSIFICATION_CATEGORIES_CODE } from './classification-categories-code.constant'
-import { Category, NewProduct, NewSubcategory, NewUpdateCategory, Product, SubcategoryResponse } from './classifications.interface'
+import {
+  Category,
+  NewProduct,
+  NewSubcategory,
+  NewUpdateCategory,
+  Product,
+  SubcategoryResponse,
+  UpdateProduct,
+} from './classifications.interface'
 import { Grouping, GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
 import { mergeCategoriesSectionWithClassificationCategory } from './transform.util'
 
@@ -79,7 +87,7 @@ export class ClassificationsService {
     return this._http.delete(`/v2/classifications/category/${id}`)
   }
 
-  getSubcategoryByCategoryId(categoryId: string): Observable<SubcategoryResponse[]> {
+  getSubcategoriesCategoryId(categoryId: string): Observable<SubcategoryResponse[]> {
     return this._http.get<SubcategoryResponse[]>(`/v2/classifications/category/${categoryId}/subcategories`)
   }
 
@@ -99,7 +107,7 @@ export class ClassificationsService {
     return this._http.post('/v2/classifications/product', product)
   }
 
-  updateProduct(productId: string, product: NewProduct) {
+  updateProduct(productId: string, product: UpdateProduct) {
     return this._http.put(`/v2/classifications/product/${productId}`, product)
   }
 

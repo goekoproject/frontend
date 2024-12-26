@@ -241,7 +241,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
     }
     this._router.navigate([route, this._smeId], { relativeTo: this._route.parent })
   }
-  getEnableNotificationEmail(onNewEcosolution: boolean) {
+  getEnableNotificationEmail(onNewEcosolution: boolean | undefined) {
     this.currentAnalytics.update((value) => ({
       ...value,
       notification: {

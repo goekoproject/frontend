@@ -17,9 +17,15 @@ export interface Product {
   label: Label
   enabled: boolean
 }
+export interface ProductPayload extends NewProduct, UpdateProduct {}
 export interface NewProduct {
   subcategoryId: string
   label: Label
+}
+
+export interface UpdateProduct {
+  label: Label
+  enabled: boolean
 }
 
 export interface Subcategory {
@@ -27,7 +33,7 @@ export interface Subcategory {
   code: string
   label: Label
   question: Question
-  products: Product[]
+  products: Product[] | undefined
   enabled: boolean
   order?: number
 }

@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, inject, Inject, OnInit, Optional, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { LANGS } from '@goeko/core'
-import { ClassificationsService, DataSelect, NewProduct, Product } from '@goeko/store'
-import { BadgeModule, ButtonModule, DIALOG_DATA, SideDialogService } from '@goeko/ui'
+import { ClassificationsService, DataSelect, NewProduct, Product, ProductPayload, UpdateProduct } from '@goeko/store'
+import { BadgeModule, ButtonModule, DIALOG_DATA, SideDialogService, ToggleSwitchComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { ProductToCurrentLangPipe } from '../../pipes/product-to-current-lang.pipe'
 
@@ -18,7 +18,7 @@ interface DialogData {
 @Component({
   selector: 'goeko-products-management',
   standalone: true,
-  imports: [CommonModule, BadgeModule, ReactiveFormsModule, TranslateModule, ButtonModule, ProductToCurrentLangPipe],
+  imports: [CommonModule, ToggleSwitchComponent, BadgeModule, ReactiveFormsModule, TranslateModule, ButtonModule, ProductToCurrentLangPipe],
   templateUrl: './products-management.component.html',
   styleUrl: './products-management.component.scss',
 })
@@ -30,8 +30,8 @@ export class ProductsManagementComponent implements OnInit {
   products = signal<Product[]>([])
   selectedProducts = signal<Product[]>([])
 
-  mode = computed(() => this.data?.mode || 'add')
-  idProductsRecevied = computed(() => this.data.products.map((product) => product.id))
+  mode = computed(() => this.data?.mode ?? 'add')
+  idProductsRecevied = computed(() => this.data.products?.map((product) => product.id) ?? [])
   public form = new FormGroup({
     subcategoryId: new FormControl(this.data.productSelected ? null : this.data.subcategoryId),
     label: new FormGroup({
@@ -47,12 +47,16 @@ export class ProductsManagementComponent implements OnInit {
     }),
     enabled: new FormControl(true),
   })
+  private _fetchProducts = () => {
+    this._refreshForm()
+    this._getProducts
+  }
   get labelTranslations() {
     return this.form.get('label')?.get('translations') as FormArray
   }
 
   get formValue() {
-    const formValue = this.form.value as NewProduct
+    const formValue = this.form.value as ProductPayload
     formValue.label.translations = formValue.label.translations.filter((translation) => translation.label)
     return formValue
   }
@@ -79,17 +83,20 @@ export class ProductsManagementComponent implements OnInit {
   addNewProduct = () => {
     const newProduct: NewProduct = {
       label: this.formValue.label,
-      subcategoryId: this.formValue.subcategoryId,
+      subcategoryId: this.data.subcategoryId,
     }
     this._classificationService.createProduct(newProduct).subscribe((product) => {
-      this._refreshForm()
-      this._getProducts()
+      this._fetchProducts()
     })
   }
 
   updateProduct = () => {
-    this._classificationService.updateProduct(this.data.productSelected.id, this.formValue).subscribe((product) => {
-      this.close(true)
+    const updateProduct: UpdateProduct = {
+      label: this.formValue.label,
+      enabled: this.formValue.enabled,
+    }
+    this._classificationService.updateProduct(this.data.productSelected.id, updateProduct).subscribe((product) => {
+      this._fetchProducts()
     })
   }
 
@@ -103,14 +110,23 @@ export class ProductsManagementComponent implements OnInit {
         })),
       },
     })
+    this.data.productSelected = {} as Product
   }
 
   productsSelected(products: Product[]) {
     this.selectedProducts.set(products)
   }
+  editProduct = (product: Product) => {
+    this.data.productSelected = product
+    this.form.patchValue({ label: product.label, enabled: product.enabled })
+  }
 
   sendProducts() {
     this.close(this.selectedProducts())
+  }
+
+  toogleStatus = (enabled: boolean) => {
+    this.form.patchValue({ enabled })
   }
 
   close(data?: unknown) {

@@ -17,7 +17,7 @@ export class GroupingBuilder {
     return this
   }
 
-  addSubcategory(newSubcategory: SubcategoryResponse): GroupingBuilder {
+  addSubcategory(newSubcategory: any): GroupingBuilder {
     const category = this.grouping.classification.find((cat) => cat.id === newSubcategory.categoryId)
     if (category) {
       category.subcategories.push({
@@ -26,9 +26,23 @@ export class GroupingBuilder {
         label: newSubcategory.label,
         question: newSubcategory.question,
         enabled: newSubcategory.enabled,
-        products: [],
+        products: newSubcategory.products,
       })
     }
+    return this
+  }
+
+  addSubcategories(newSubcategories: SubcategoryResponse[]): GroupingBuilder {
+    const tes: any = {
+      categoryId: '21dc5c89-15eb-4e4c-bbff-e185bbc31772',
+      code: 'SUBCAT-WZFQ98F9US-202412221605',
+      order: 1,
+      products: ['PROD-5D5BB2PEI9-202412231014'],
+    }
+
+    newSubcategories.push(tes)
+
+    newSubcategories.forEach((newSubcategory) => this.addSubcategory(newSubcategory))
     return this
   }
   build(): NewUpdateGrouping {
@@ -40,6 +54,7 @@ export class GroupingBuilder {
           subcategories: category.subcategories.map((subcategory) => ({
             code: subcategory.code,
             order: subcategory.order || 0,
+            products: subcategory.products ?? ['PROD-IUU6QX6JA5-202412261938'],
           })),
         }) as NewCategoryForGrouping,
     )

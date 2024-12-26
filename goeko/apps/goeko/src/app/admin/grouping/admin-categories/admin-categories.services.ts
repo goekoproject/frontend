@@ -19,15 +19,10 @@ export function equalPrimitives(a: any, b: any) {
 export class AdminCategoriesService {
   private _classificationService = inject(ClassificationsService)
 
-  addSubcategoryToGrouping(grouping: GroupingByClassifications, subcategory: NewSubcategory) {
-    return this.createSubcategory(subcategory).pipe(
-      switchMap((newSubcategory: any) => {
-        console.log('response', newSubcategory)
-        const updateGrouping = GroupingBuilder.create(grouping).addSubcategory(newSubcategory).build()
-        console.log('updateGrouping', updateGrouping)
-        return this._classificationService.updateGrouping(grouping.id, updateGrouping)
-      }),
-    )
+  addSubcategoryToGrouping(grouping: GroupingByClassifications, subcategory: SubcategoryResponse[]) {
+    const updateGrouping = GroupingBuilder.create(grouping).addSubcategories(subcategory).build()
+    console.log('updateGrouping', updateGrouping)
+    return this._classificationService.updateGrouping(grouping.id, updateGrouping)
   }
 
   createSubcategory(subcategory: NewSubcategory): Observable<SubcategoryResponse> {
@@ -55,8 +50,8 @@ export class AdminCategoriesService {
     return this._classificationService.getAllCategories()
   }
 
-  getSubcategoryByCategoryId(categoryId: string) {
-    return this._classificationService.getSubcategoryByCategoryId(categoryId)
+  getSubcategoriesByCategoryId(categoryId: string) {
+    return this._classificationService.getSubcategoriesCategoryId(categoryId)
   }
 
   createProduct(product: NewProduct) {

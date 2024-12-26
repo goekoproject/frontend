@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, inject, input, OnInit, output, signal, viewChildren } from '@angular/core'
-import { ProductsManagementComponent } from '@goeko/business-ui'
+import { Component, inject, input, OnInit, output, signal } from '@angular/core'
 import { CODE_LANG, LANGS } from '@goeko/core'
-import { Category, Label, NewSubcategory, Product, SubcategoryResponse } from '@goeko/store'
+import { Category, Label, NewSubcategory, SubcategoryResponse } from '@goeko/store'
 import { ButtonModule, RadioModule, SideDialogService, ToggleSwitchComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { forkJoin } from 'rxjs'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { LabelByCategoryPipe } from './admin-categories/label-by-category.pipe'
-import { getProductBySubcategoryId } from './admin-categories/new-product'
 import { DataSubcategory, DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
 import { DialogManagmentCategoryComponent } from './dialog-managment-category.component'
+import { ListSubcategoriesComponent } from './list-subcategories.component'
 
 interface AllDataCategories {
   subcategories: SubcategoryResponse[]
@@ -32,8 +30,8 @@ interface ClassificationGrouping {
     ButtonModule,
     ToggleSwitchComponent,
     LabelByCategoryPipe,
-    DialogManagmentCategoryComponent,
     RadioModule,
+    ListSubcategoriesComponent,
   ],
   providers: [AdminCategoriesService],
   templateUrl: './add-category-subcategory-group.component.html',
@@ -42,20 +40,12 @@ interface ClassificationGrouping {
 export class AddCategorySubcategoryGroupComponent implements OnInit {
   private _adminCategoriesService = inject(AdminCategoriesService)
   private _sideDialogService = inject(SideDialogService)
-  JSON = JSON
   public langs = signal(LANGS)
-  subcategoryElement = viewChildren<ElementRef>('subcategoryElement')
   beforeNext = output<any>()
   categories = signal<AllDataCategories[]>([])
   categoryCode = input<string>()
   subcategoryCode = input<string>()
   selectedLangSubcategory = signal<string>(CODE_LANG.EN)
-
-  get subcategorySelected() {
-    return this.subcategoryElement()
-      .filter((subcategory) => subcategory.nativeElement.checked)
-      .map((c) => JSON.parse(c.nativeElement.value))
-  }
 
   private _openDialogCategory = (category?: Category) => {
     return this._sideDialogService.openDialog<DialogManagmentCategoryComponent>(DialogManagmentCategoryComponent, {
@@ -138,17 +128,10 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
     })
   }
 
-  viewSubcategory = (toogleViewSubcategory: boolean, category: AllDataCategories) => {
+  viewSubcategory = (toogleViewSubcategory: boolean | undefined, category: AllDataCategories) => {
     if (toogleViewSubcategory) {
       this._fetchData(category)
     }
-  }
-
-  private _fetchData = (category: AllDataCategories) => {
-    this._adminCategoriesService.getSubcategoryByCategoryId(category.id).subscribe((res) => {
-      this._toogleDetailCategory(category)
-      this._addAllSubcategory(category.id, res)
-    })
   }
 
   addNewSubcategoryToCategory = (category: AllDataCategories) => {
@@ -158,25 +141,14 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
         categoryId: category.id,
         ...res,
       }
-      this._adminCategoriesService.createSubcategory(newSubcategory).subscribe((subcategory) => {
-        this._addSubcategory(subcategory)
-        this._toogleDetailCategory(category)
-      })
+      this._adminCategoriesService.createSubcategory(newSubcategory).subscribe((subcategory) => {})
     })
   }
-  editSubcategory(category: AllDataCategories, subcategory: SubcategoryResponse) {
-    const { label, question } = subcategory
 
-    this._openDialgoAddSubcategory({ label: label, question: question }).subscribe((res) => {
-      const updateSubcategory = {
-        ...res,
-        enabled: subcategory.enabled,
-      }
-      this._adminCategoriesService.updateSubcategory(subcategory.id, updateSubcategory).subscribe((res) => {
-        if (res) {
-          this._fetchData(category)
-        }
-      })
+  private _fetchData = (category: AllDataCategories) => {
+    this._adminCategoriesService.getSubcategoriesByCategoryId(category.id).subscribe((res) => {
+      this._toogleDetailCategory(category)
+      this._addAllSubcategory(category.id, res)
     })
   }
 
@@ -185,56 +157,8 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
     this._adminCategoriesService.deleteCategory(category.id).subscribe((res) => {})
   }
 
-  openDialogAddProducts = (category: AllDataCategories, subcategory: SubcategoryResponse, product?: Product) => {
-    this._openDialogAddProducts(category, subcategory, product)
-  }
-  private _openDialogAddProducts = (category: AllDataCategories, subcategory: SubcategoryResponse, product?: Product) => {
-    return this._sideDialogService
-      .openDialog<ProductsManagementComponent>(ProductsManagementComponent, {
-        productSelected: product,
-        subcategoryCode: subcategory.code,
-        subcategoryId: subcategory.id,
-      })
-      .subscribe((product) => {
-        if (product) {
-          this._fetchData(category)
-        }
-      })
-  }
-
-  clipboard = (text: string) => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        console.log('Texto copiado al portapapeles')
-      })
-      .catch((err) => {
-        console.error('Error al copiar al portapapeles:', err)
-      })
-  }
-  selectedElement = () => {
-    const dataForGrouping: ClassificationGrouping[] = this.subcategorySelected.map((subcategory, index: number) => {
-      return {
-        code: subcategory.categoryCode,
-        subcategories: [
-          {
-            code: subcategory.code,
-            order: index,
-          },
-        ],
-        order: index,
-      }
-    })
-    this.beforeNext.emit(dataForGrouping)
-  }
-
-  addProductsMasive(subcategory: SubcategoryResponse) {
-    const createProductObservables$ = getProductBySubcategoryId(subcategory.id).map((product) =>
-      this._adminCategoriesService.createProduct(product),
-    )
-
-    forkJoin(createProductObservables$).subscribe((res) => {
-      console.log('res', res)
-    })
+  onChangeSubcategories = () => {}
+  getSubcategoriesSelected = (subcategories: ClassificationGrouping) => {
+    this.beforeNext.emit(subcategories)
   }
 }

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common'
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
@@ -13,7 +12,7 @@ import {
   input,
   signal,
 } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryModule, ProductToCurrentLangPipe, ProductsManagementComponent } from '@goeko/business-ui'
 import { CODE_LANG, LANGS } from '@goeko/core'
@@ -23,9 +22,9 @@ import {
   ClassificationCategoryService,
   GroupingByClassifications,
   NewCategoryForGrouping,
-  NewSubcategory,
   NewUpdateGrouping,
   Product,
+  Subcategory,
   SubcategoryResponse,
 } from '@goeko/store'
 import {
@@ -39,7 +38,7 @@ import {
   listAnimation,
 } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { AddCategorySubcategoryGroupComponent } from '../add-category-subcategory-group.component'
+import { ListSubcategoriesComponent } from '../list-subcategories.component'
 import { AdminCategoriesService } from './admin-categories.services'
 
 @Component({
@@ -53,7 +52,6 @@ import { AdminCategoriesService } from './admin-categories.services'
     ReactiveFormsModule,
     ButtonModule,
     BadgeModule,
-    ProductsManagementComponent,
     ProductToCurrentLangPipe,
     SwitchModule,
     RadioModule,
@@ -82,7 +80,9 @@ export class AdminCategoriesComponent implements OnInit {
 
   //Signal
   categorySelected = signal<Category>({} as Category)
-  subCategorySelected = signal<SubcategoryResponse[]>([] as SubcategoryResponse[])
+  subCategorySelected = computed(
+    () => this.classifications()?.classification.find((category) => category.code === this.categorySelected().code)?.subcategories,
+  )
 
   categories = computed(() => this.mappingClassificationLabel(this.classifications()?.classification))
 
@@ -96,7 +96,7 @@ export class AdminCategoriesComponent implements OnInit {
     }
   })
 
-  private _updateProductsPayload = (subcategory: SubcategoryResponse, products: Product[]) => {
+  private _updateProductsPayload = (subcategory: Subcategory, products: Product[]) => {
     this.payload().classification.update((classification) => {
       const category = classification?.find((category) => category.code === this.categorySelected().code)
       if (category) {
@@ -142,10 +142,8 @@ export class AdminCategoriesComponent implements OnInit {
 
   constructor(
     private _adminCategories: AdminCategoriesService,
-    private _fb: FormBuilder,
     private _translations: TranslateService,
     private _sideDialogService: SideDialogService,
-    private _cdf: ChangeDetectorRef,
   ) {
     effect(() => {
       this._getTranslationsForLang()
@@ -204,31 +202,25 @@ export class AdminCategoriesComponent implements OnInit {
     this._closeDetailByIndex(index)
   }
 
-  private _getSubcategoryByCategoryId = (categoryId: string) => {
-    this._adminCategories.getSubcategoryByCategoryId(categoryId).subscribe((subcategories) => {
-      this.subCategorySelected.set(subcategories)
-    })
-  }
   addSubcategory() {
     this._openDialgoAddSubcategory().subscribe((res) => {
       if (res) {
-        this._addSubcategoryToGrouping({ categoryId: this.categorySelected().id, ...res })
+        this._addSubcategoryToGrouping(res)
       }
     })
   }
 
-  addNewSubcategoryToCategory(category: Category) {
-    this._openDialgoAddSubcategory().subscribe((res) => {})
-  }
-
   private _openDialgoAddSubcategory = () => {
-    return this._sideDialogService.openDialog<AddCategorySubcategoryGroupComponent>(AddCategorySubcategoryGroupComponent)
+    return this._sideDialogService.openDialog<ListSubcategoriesComponent>(ListSubcategoriesComponent, {
+      categoryId: this.categorySelected().id,
+      mode: 'isolation',
+    })
   }
 
-  private _addSubcategoryToGrouping(newSubcategory: NewSubcategory) {
+  private _addSubcategoryToGrouping(newSubcategories: SubcategoryResponse[]) {
     if (this.classifications()) {
       this._adminCategories
-        .addSubcategoryToGrouping(this.classifications() as GroupingByClassifications, newSubcategory)
+        .addSubcategoryToGrouping(this.classifications() as GroupingByClassifications, newSubcategories)
         .subscribe((grouping) => {
           if (grouping) {
             this._fetchData()
@@ -237,14 +229,14 @@ export class AdminCategoriesComponent implements OnInit {
     }
   }
 
-  goToSubcategory(subcategory: SubcategoryResponse) {
+  goToSubcategory(subcategory: Subcategory) {
     this._router.navigate(['../categories', this.categorySelected().code, subcategory.code], { relativeTo: this._route })
   }
 
-  addProductToGrouping(subcategory: SubcategoryResponse, product: Product[]) {
+  addProductToGrouping(subcategory: Subcategory, product: Product[] | undefined) {
     this._openDialogAddProducts(subcategory, product)
   }
-  private _openDialogAddProducts = (subcategory: SubcategoryResponse, product?: Product[]) => {
+  private _openDialogAddProducts = (subcategory: Subcategory, product?: Product[]) => {
     return this._sideDialogService
       .openDialog<ProductsManagementComponent>(ProductsManagementComponent, {
         products: product,

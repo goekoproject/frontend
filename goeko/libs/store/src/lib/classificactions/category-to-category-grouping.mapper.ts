@@ -5,7 +5,7 @@ export class CategoryMapper {
     return {
       code: category.code,
       order: category.order || 0,
-      subcategories: category.subcategories?.filter((sub) => sub.products.length > 0).map(CategoryMapper.mapSubcategory),
+      subcategories: category.subcategories?.filter((sub) => sub.products && sub.products.length > 0).map(CategoryMapper.mapSubcategory),
     }
   }
 
@@ -13,7 +13,7 @@ export class CategoryMapper {
     return {
       code: subcategory.code,
       order: subcategory.order || 0,
-      products: subcategory.products?.length > 0 ? subcategory.products.map((product) => product.code) : [],
+      products: subcategory?.products && subcategory.products?.length > 0 ? subcategory?.products?.map((product) => product.code) : [],
     }
   }
 }

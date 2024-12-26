@@ -89,10 +89,10 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     console.log(this.bankId())
   }
 
-  toogleGrenBonusVehicle = (newValue: boolean) => {
+  toogleGrenBonusVehicle = (newValue: boolean | undefined) => {
     this.form.get('greenBonusVehicle')?.setValue(newValue)
   }
-  toogleGreenBonusMachine = (newValue: boolean) => {
+  toogleGreenBonusMachine = (newValue: boolean | undefined) => {
     this.form.get('greenBonusMachines')?.setValue(newValue)
   }
 

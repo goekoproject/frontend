@@ -29,7 +29,11 @@
               {{ category.label.translations | labelByCategory: selectedLangSubcategory() }}
             </h3>
             @if (category.open) {
-              <ul class="m-1 flex flex-col gap-2">
+              <goeko-list-subcategories
+                [subcategories]="category.subcategories"
+                (onSubcategorySelected)="getSubcategoriesSelected($event)"
+                [selectedLangSubcategory]="selectedLangSubcategory()" />
+              <!--    <ul class="m-1 flex flex-col gap-2">
                 @for (subcategory of category.subcategories; track subcategory.id) {
                   <li
                     class="flex items-center gap-2 rounded-lg border px-2 hover:border-2 hover:border-blue-600 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-900 has-[:checked]:ring-indigo-200"
@@ -75,7 +79,7 @@
                     </label>
                   </li>
                 }
-              </ul>
+              </ul> -->
             }
           </div>
 

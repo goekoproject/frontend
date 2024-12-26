@@ -1,21 +1,13 @@
-<h2 class="text-2xl font-semibold">{{ 'FORM_LABEL.products' | translate }}</h2>
+<h2 class="mb-6 text-2xl font-semibold">{{ mode() === 'add' ? 'New-Edit' : '' }} {{ 'FORM_LABEL.products' | translate }}</h2>
 
 @defer (when form && mode() === 'add') {
-  <div class="product-actions">
-    <button go-button appearance="white" (click)="close()">
-      {{ 'cancel' | translate }}
-    </button>
-    <button go-button (click)="data.productSelected ? updateProduct() : addNewProduct()">
-      {{ buttonText | translate }}
-    </button>
-  </div>
   <form [formGroup]="form">
     <div formGroupName="label">
       <div class="mb-4" [formGroupName]="'translations'">
         @for (elementByLang of labelTranslations.controls; track elementByLang.value.lang; let index = $index) {
           <div [formGroupName]="index">
             <label for="{{ elementByLang.value.lang }}" class="mb-1 block font-medium text-gray-700">
-              <span class="fi fi-{{ elementByLang.value.lang }}"></span>
+              <span class="fi fi-{{ elementByLang.value.lang === 'en' ? 'gb' : elementByLang.value.lang }}"></span>
 
               {{ elementByLang.value.lang | translate }}</label
             >
@@ -29,12 +21,32 @@
         }
       </div>
     </div>
+
+    <go-toggle-switch [checked]="form.value.enabled ?? false" (checkedChange)="toogleStatus($event)">
+      <p>
+        {{ form.value.enabled ? 'enabled' : ('disabled' | translate) }}
+      </p>
+    </go-toggle-switch>
   </form>
+  <div class="product-actions">
+    <button go-button appearance="white" (click)="close()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button go-button (click)="data.productSelected ? updateProduct() : addNewProduct()">
+      {{ buttonText | translate }}
+    </button>
+  </div>
 }
 @defer (when products()) {
-  <go-badge-group [id]="'products'" (valueSelected)="productsSelected($event)" [readonly]="data.mode === 'add'">
+  <go-badge-group [id]="'products'" (valueSelected)="productsSelected($event)">
     @for (product of products(); track product.code; let i = $index) {
-      <go-badge [value]="product" [selected]="idProductsRecevied().includes(product.id)">{{ product | productToCurrentLang }}</go-badge>
+      <go-badge [value]="product" [selected]="idProductsRecevied().includes(product.id)" [readonly]="mode() === 'add'">
+        <i
+          class="ti ti-pencil cursor-pointer rounded-full border px-1 text-lg hover:bg-blue-800 hover:text-blue-50 hover:shadow-sm"
+          [ngClass]="{ 'bg-blue-800 text-blue-50': data.productSelected && product.id === data.productSelected.id }"
+          (click)="editProduct(product)"></i>
+        {{ product | productToCurrentLang }}
+      </go-badge>
     }
   </go-badge-group>
 
