@@ -1,5 +1,5 @@
-import { LocationCountry } from '../model/locations-data.interface'
-import { ClassificationCodeRequest, ContactRequest } from './common-request.interface'
+import { LocationCountry } from '../../model/locations-data.interface'
+import { ClassificationCodeRequest, ContactRequest } from '../common-request.interface'
 
 export interface RealStateLoanPayload {
   bankId: string

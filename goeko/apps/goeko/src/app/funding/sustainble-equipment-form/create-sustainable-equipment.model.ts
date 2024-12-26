@@ -11,29 +11,31 @@ export class CreateSustainableEquipment implements SustainableEquipmentPayload {
   minimumQuantity: number
   currency: string[]
   contact: ContactRequest
+  greenBonusVehicles: boolean
+  greenBonusMachines: boolean
+
   constructor(bankId: string, dataForm: any) {
     this.bankId = bankId
     this.classifications = [
       {
-        mainCategory: 'mainCategory',
-        subCategory: 'subCategory',
-        products: ['products'],
-      },
-      {
-        mainCategory: 'mainCategory',
-        subCategory: 'subCategory',
-        products: ['products'],
-      },
+        mainCategory: 'co2Emission',
+        subCategory: 'mainInternalCombustionEngine',
+        products: ['loader','backhoe'],
+      }
     ]
     this.locations = mapperLocations(dataForm.locations)
-    this.activityProspectMinimum = dataForm.yearsActivity
-    this.balanceSheet = dataForm.yearsBalance
-    this.requiredDocuments = dataForm.documents.filter((d: { checked: boolean }) => d.checked).map((doc: { label: string }) => doc.label)
-    this.minimumQuantity = dataForm.minimumQuantity
+    this.activityProspectMinimum = parseInt(dataForm.yearsActivity.label)
+    this.balanceSheet = parseInt(dataForm.yearsBalance.label)
+    this.requiredDocuments = dataForm.documents.filter((d: { checked: boolean }) => d.checked).map((doc: { value : {label: string} }) => doc.value.label)
+    this.greenBonusVehicles = true; // mock
+    this.greenBonusMachines = false; // mock
+
+    this.minimumQuantity = parseInt(dataForm.minimumQuantity)
     this.currency = dataForm.currencys
     this.contact = {
       email: dataForm.email,
-      name: dataForm.name,
+      //name: dataForm.name,
+      name: 'mock',
       phoneNumber: dataForm.phoneNumber,
     }
   }

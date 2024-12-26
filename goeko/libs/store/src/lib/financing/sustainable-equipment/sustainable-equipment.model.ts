@@ -1,5 +1,5 @@
-import { LocationsCountry } from '../model/locations.country'
-import { ClassificationCodeRequest, ContactRequest } from './common-request.interface'
+import { LocationsCountry } from '../../model/locations.country'
+import { ClassificationCodeRequest, ContactRequest } from '../common-request.interface'
 
 export interface SustainableEquipmentPayload {
   bankId: string

@@ -1,25 +1,32 @@
-@if (sustainbleEquipment() || realStateLoan()) {
-  <div class="flex flex-col gap-4">
-    <!--TODO: Create card -->
-    <ng-container *ngTemplateOutlet="cardSustainbleEquipment"></ng-container>
+@defer (when bankId()) {
+  @if (sustainbleEquipment() || realStateLoan()) {
+    <div class="flex flex-col gap-4">
+      <!--TODO: Create card -->
+      <ng-container *ngTemplateOutlet="cardSustainbleEquipment"></ng-container>
 
-    <ng-container *ngTemplateOutlet="cardRealStateLoan"></ng-container>
-  </div>
-} @else {
-  <div class="dashboard-option">
-    <div class="container p-10">
-      <div
-        class="flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-lg shadow-gray-300 dark:bg-white">
-        <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_BANK.titleCard' | translate }}</h5>
+      <ng-container *ngTemplateOutlet="cardRealStateLoan"></ng-container>
+    </div>
+  } @else {
+    <div class="dashboard-option">
+      <div class="container p-10">
+        <div
+          class="flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-lg shadow-gray-300 dark:bg-white">
+          <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_BANK.titleCard' | translate }}</h5>
 
-        <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_BANK.subtitleCard' | translate }}</p>
-        <img src="assets/Group 65.svg" class="mb-11" />
-        <button type="button" go-button appearance="primary" [routerLink]="['../king-of-funding', bankId()]" queryParamsHandling="preserve">
-          {{ 'MENU_USER_BANK.buttonSearch' | translate }}
-        </button>
+          <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_BANK.subtitleCard' | translate }}</p>
+          <img src="assets/Group 65.svg" class="mb-11" />
+          <button
+            type="button"
+            go-button
+            appearance="primary"
+            [routerLink]="['../king-of-funding', bankId()]"
+            queryParamsHandling="preserve">
+            {{ 'MENU_USER_BANK.buttonSearch' | translate }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  }
 }
 
 <ng-template #cardSustainbleEquipment>
@@ -73,9 +80,9 @@
     <button type="button" go-button appearance="white" class="ml-auto" (click)="goSustainbleEquipment()">
       {{ 'edit' | translate }}
     </button>
-    <button type="button" go-button appearance="white" class="ml-auto" (click)="removeStoreData('sustainble-equipment')">
+    <!--  <button type="button" go-button appearance="white" class="ml-auto" (click)="deleteFunding(KIND_OF_FUNDING.SustainableEquipment, sustainbleEquipment()?.id)">
       {{ 'delete' | translate }}
-    </button>
+    </button> -->
   </div>
 </ng-template>
 
@@ -83,10 +90,10 @@
   @if (realStateLoan()) {
     <div class="flex w-10/12 flex-col gap-6 rounded-2xl p-4 pb-10 shadow-xl">
       <h2 class="text-2xl font-semibold">{{ 'realStateLoan' | translate }}</h2>
-      @for (location of realStateLoan()?.locations; track location?.country?.code) {
+      @for (location of realStateLoan().locations; track location?.country?.code) {
         <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
           <span class="fi fi-{{ location.country.code | lowercase }}"></span>
-          <p>{{ location.country.label }}</p>
+          <p>{{ location.country }}</p>
         </div>
       }
       <div class="flex flex-col gap-4">
@@ -96,9 +103,9 @@
           <span class="text-grayText">{{ 'FORM_LABEL.workTypes' | translate }}</span>
 
           <div class="flex flex-wrap gap-2">
-            @for (workType of realStateLoan()?.workTypes; track workType.id) {
+            @for (products of realStateLoan().classifications[0].products; track products) {
               <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
-                <p>{{ workType.label | translate }}</p>
+                <p>{{ products }}</p>
               </div>
             }
           </div>
@@ -107,7 +114,12 @@
       <button type="button" go-button appearance="white" class="ml-auto" (click)="goRealStateLoan()">
         {{ 'edit' | translate }}
       </button>
-      <button type="button" go-button appearance="white" class="ml-auto" (click)="removeStoreData('real-state-loan')">
+      <button
+        type="button"
+        go-button
+        appearance="white"
+        class="ml-auto"
+        (click)="deleteFunding(KIND_OF_FUNDING.RealEstate, realStateLoan().id)">
         {{ 'delete' | translate }}
       </button>
     </div>
