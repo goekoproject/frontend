@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { FinancingService } from '@goeko/store'
+import { groupingFormCategoriesResolver, GroupingType } from '@goeko/store'
 import { FundingComponent } from './funding.component'
-import { FundingService } from './funding.service'
 import { HubFundingComponent } from './hub-funding.component'
 import { getKindOfFunding } from './hub-kind-of-fundind.resolver'
 import { RealStateLoanComponent } from './real-state-loan-form/real-state-loan-form.component'
@@ -34,14 +33,22 @@ const routes: Routes = [
         path: ':bankId',
         component: SustainbleEquipmentFormComponent,
         title: 'sustainableEquipment',
+        resolve: {
+          categories: groupingFormCategoriesResolver,
+        },
         data: {
           step: 1,
+          groupingCode: GroupingType.sustainableEquipment,
         },
       },
       {
         path: 'sustainable-equipment/:bankId',
         component: SustainbleEquipmentFormComponent,
         title: 'sustainableEquipment',
+        resolve: {
+          categories: groupingFormCategoriesResolver,
+          groupingCode: GroupingType.sustainableEquipment,
+        },
         data: {
           step: 1,
         },
@@ -61,6 +68,5 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [FundingService, FinancingService],
 })
 export class FundingRoutingModule {}

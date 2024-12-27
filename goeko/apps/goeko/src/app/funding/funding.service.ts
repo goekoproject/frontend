@@ -1,14 +1,11 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { FinancingService, FinancingType } from '@goeko/store'
-import { NgxIndexedDBService } from 'ngx-indexed-db'
 import { Observable, of } from 'rxjs'
 import { CreateRealStateLoan } from './real-state-loan-form/create-real-state-loan.model'
 import { CreateSustainableEquipment } from './sustainble-equipment-form/create-sustainable-equipment.model'
 
 @Injectable()
 export class FundingService {
-  private dbService = Inject(NgxIndexedDBService)
-
   private readonly dbName = 'FundingDB'
   private readonly dbVersion = 1
   private storeName = 'fundind'

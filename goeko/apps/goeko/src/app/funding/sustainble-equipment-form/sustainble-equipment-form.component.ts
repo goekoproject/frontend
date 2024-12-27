@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, input, OnInit, signal } from '@angular/core'
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
-import { FINANCING_TYPE, FinancingService, LocationTranslated } from '@goeko/store'
+import { CategoryGrouping, ClassificationsService, FINANCING_TYPE, FinancingService, LocationTranslated } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoILeavesComponent, GoInputModule, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { CreateSustainableEquipment } from './create-sustainable-equipment.model'
-import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, VEHICLES, YEARS } from './data-fields.constants'
+import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, YEARS } from './data-fields.constants'
 type Options = {
   label: string
   id: string
@@ -31,7 +31,13 @@ type Options = {
     ReactiveFormsModule,
     GoInputModule,
   ],
-  providers: [FundingService, FinancingService, { provide: STORE_NAME, useValue: 'sustainble-equipment' }, SelectLocationsService],
+  providers: [
+    FundingService,
+    FinancingService,
+    ClassificationsService,
+    { provide: STORE_NAME, useValue: 'sustainble-equipment' },
+    SelectLocationsService,
+  ],
   templateUrl: './sustainble-equipment-form.component.html',
   styleUrl: './sustainble-equipment-form.component.scss',
 })
@@ -41,9 +47,9 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   private _route = inject(ActivatedRoute)
   private _fundingService = inject(FundingService)
   private _selectLocationsService = inject(SelectLocationsService)
-
+  categories = input.required<CategoryGrouping[]>()
   bankId = input.required<string>()
-  vehicles = signal<Options[]>(VEHICLES)
+  vehicles = computed(() => this.categories()[0])
   machines = signal<Options[]>(MACHINES)
   years = signal<Options[]>(YEARS)
   requiredDocuments = signal<Options[]>(DOCUMENTS)

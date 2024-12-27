@@ -3,12 +3,16 @@
   <div class="mb-6">
     <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.subtitleForm' | translate }}</h2>
     <div class="mt-4">
-      <label class="mb-2 block font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.vehicles' | translate }}</label>
-      <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="vehicles">
-        @for (vehicle of vehicles(); track vehicle.id) {
-          <go-badge [value]="vehicle" [id]="vehicle.id">{{ vehicle.label | translate }} </go-badge>
-        }
-      </go-badge-group>
+      <label class="mb-2 block font-medium">{{ vehicles().label }}</label>
+
+      @for (vehicle of vehicles().subcategories; track vehicle.code) {
+        <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="vehicles">
+          @for (product of vehicle.products; track product.code) {
+            <go-badge [value]="product" [id]="product.id">{{ product.label }} </go-badge>
+          }
+        </go-badge-group>
+      }
+
       <div class="flex items-center justify-between rounded-lg border border-gray-300 p-3">
         <span class="flex items-center gap-2">
           <go-i-leaves></go-i-leaves>

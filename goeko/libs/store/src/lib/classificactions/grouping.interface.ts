@@ -28,3 +28,29 @@ export interface NewUpdateGrouping {
 export interface GroupingByClassifications extends Grouping {
   classification: Category[]
 }
+
+export interface CategoryGrouping {
+  id: string
+  code: string
+  label: string
+  subcategories: SubcategoryGrouping[]
+  enabled: boolean
+  order: number
+}
+export interface SubcategoryGrouping {
+  id: string
+  code: string
+  label: string
+  question: string
+  products: ProductGrouping[]
+  enabled: boolean
+  order?: number
+}
+
+export interface ProductGrouping {
+  id: string
+  code: string
+  label: string
+  enabled: boolean
+}
+

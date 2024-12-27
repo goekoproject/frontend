@@ -50,12 +50,12 @@ export class DialogManagmentCategoryComponent {
     })
   }
   patchValueForm(): void {
-    this.category().label.translations.forEach((translation) => {
+    /*     this.category().label.translations.forEach((translation) => {
       const control = this.labelTranslations.controls.find((control) => control.get('lang')?.value === translation.lang)
       if (control) {
         control.get('label')?.patchValue(translation.label)
       }
-    })
+    }) */
   }
   submit() {
     if (this._data.category?.id) {
@@ -84,6 +84,4 @@ export class DialogManagmentCategoryComponent {
   private _dataCategory(): Category {
     return {} as Category
   }
-
- 
 }

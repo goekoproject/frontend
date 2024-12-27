@@ -40,8 +40,6 @@ export class HubFundingComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      if (this.bankId()) {
-      }
       if (this.kindOfFunding()) {
         console.log(this.kindOfFunding())
       }

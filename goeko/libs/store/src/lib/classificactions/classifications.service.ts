@@ -13,10 +13,11 @@ import {
   SubcategoryResponse,
   UpdateProduct,
 } from './classifications.interface'
-import { Grouping, GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
+import { GroupingType } from './grouping-type.enum'
+import { CategoryGrouping, Grouping, GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
 import { mergeCategoriesSectionWithClassificationCategory } from './transform.util'
 
-const sortCategories = (categories: Category[]): Category[] => {
+const sortCategories = (categories: CategoryGrouping[]): CategoryGrouping[] => {
   const order = [
     CLASSIFICATION_CATEGORIES_CODE.CO2_EMISSION,
     CLASSIFICATION_CATEGORIES_CODE.WASTE,
@@ -50,11 +51,13 @@ export class ClassificationsService {
   getGroupingById(id: string): Observable<GroupingByClassifications> {
     return this._http.get<GroupingByClassifications>(`/v1/classifications/grouping/form/${id}`)
   }
-  groupingFormCategories(grouping = 'construction'): Observable<Category[]> {
-    return this._http.get<Category[]>(`/v1/classifications/grouping/form/code/${grouping}/depth/translated?lang=${this.langSignal()}`).pipe(
-      map((categories) => sortCategories(categories)),
-      shareReplay(1),
-    )
+  groupingFormCategories(grouping = GroupingType.construction): Observable<CategoryGrouping[]> {
+    return this._http
+      .get<CategoryGrouping[]>(`/v1/classifications/grouping/form/code/${grouping}/depth/translated?lang=${this.langSignal()}`)
+      .pipe(
+        map((categories) => sortCategories(categories)),
+        shareReplay(1),
+      )
   }
 
   createGrouping(grouping: NewUpdateGrouping) {
