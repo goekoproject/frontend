@@ -1,5 +1,6 @@
-import { Category, SubcategoryResponse } from './classifications.interface'
-import { GroupingByClassifications, NewCategoryForGrouping, NewUpdateGrouping } from './grouping.interface'
+import { ClassificationPayload } from './classifications-payload.model'
+import { Category, Product, SubcategoryResponse } from './classifications.interface'
+import { GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
 
 export class GroupingBuilder {
   private grouping: GroupingByClassifications
@@ -32,37 +33,30 @@ export class GroupingBuilder {
     return this
   }
 
-  addSubcategories(newSubcategories: SubcategoryResponse[]): GroupingBuilder {
-    const tes: any = {
-      categoryId: '21dc5c89-15eb-4e4c-bbff-e185bbc31772',
-      code: 'SUBCAT-WZFQ98F9US-202412221605',
-      order: 1,
-      products: ['PROD-5D5BB2PEI9-202412231014'],
+  removeSubcategory(categoryId: string, subcategoryId: string): GroupingBuilder {
+    const category = this.grouping.classification.find((cat) => cat.id === categoryId)
+    if (category) {
+      category.subcategories = category.subcategories.filter((subcat) => subcat.id !== subcategoryId)
     }
+    return this
+  }
 
-    newSubcategories.push(tes)
-
+  addSubcategories(newSubcategories: SubcategoryResponse[]): GroupingBuilder {
     newSubcategories.forEach((newSubcategory) => this.addSubcategory(newSubcategory))
     return this
   }
-  build(): NewUpdateGrouping {
-    const newCategories: NewCategoryForGrouping[] = this.grouping.classification.map(
-      (category) =>
-        ({
-          code: category.code,
-          order: category.order,
-          subcategories: category.subcategories.map((subcategory) => ({
-            code: subcategory.code,
-            order: subcategory.order || 0,
-            products: subcategory.products ?? ['PROD-IUU6QX6JA5-202412261938'],
-          })),
-        }) as NewCategoryForGrouping,
-    )
 
-    return {
-      name: this.grouping.name,
-      description: this.grouping.description,
-      classification: newCategories,
+  updateProducts(categoryId: string, subcategoryId: string, products: Product[]): GroupingBuilder {
+    const category = this.grouping.classification.find((cat) => cat.id === categoryId)
+    if (category) {
+      const subcategory = category.subcategories.find((subcat) => subcat.id === subcategoryId)
+      if (subcategory) {
+        subcategory.products = subcategory.products && subcategory.products.length > 0 ? [...subcategory.products, ...products] : products
+      }
     }
+    return this
+  }
+  build(): NewUpdateGrouping {
+    return new ClassificationPayload(this.grouping)
   }
 }

@@ -6,10 +6,11 @@ import {
   NewProduct,
   NewSubcategory,
   NewUpdateGrouping,
+  Product,
   SubcategoryResponse,
   UpdateSubcategory,
 } from '@goeko/store'
-import { Observable, switchMap } from 'rxjs'
+import { Observable } from 'rxjs'
 
 export function equalPrimitives(a: any, b: any) {
   return a.id === b.id
@@ -24,10 +25,20 @@ export class AdminCategoriesService {
     console.log('updateGrouping', updateGrouping)
     return this._classificationService.updateGrouping(grouping.id, updateGrouping)
   }
+  removeSubcategoryGrouping(grouping: GroupingByClassifications, categoryId: string, subcategoryId: string) {
+    const updateGrouping = GroupingBuilder.create(grouping).removeSubcategory(categoryId, subcategoryId).build()
+    return this._classificationService.updateGrouping(grouping.id, updateGrouping)
+  }
+
+  updateProductGrouping(grouping: GroupingByClassifications, categoryId: string, subcategoryId: string, products: Product[]) {
+    const updateGrouping = GroupingBuilder.create(grouping).updateProducts(categoryId, subcategoryId, products).build()
+    return this._classificationService.updateGrouping(grouping.id, updateGrouping)
+  }
 
   createSubcategory(subcategory: NewSubcategory): Observable<SubcategoryResponse> {
     return this._classificationService.createSubcategory(subcategory)
   }
+
   deleteCategory(id: string) {
     return this._classificationService.delteteCategory(id)
   }

@@ -21,8 +21,6 @@ import {
   CategoryMapper,
   ClassificationCategoryService,
   GroupingByClassifications,
-  NewCategoryForGrouping,
-  NewUpdateGrouping,
   Product,
   Subcategory,
   SubcategoryResponse,
@@ -38,6 +36,7 @@ import {
   listAnimation,
 } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
+import { switchMap } from 'rxjs'
 import { ListSubcategoriesComponent } from '../list-subcategories.component'
 import { AdminCategoriesService } from './admin-categories.services'
 
@@ -170,22 +169,6 @@ export class AdminCategoriesComponent implements OnInit {
       })
     })
   }
-  private _updateGrouping() {
-    if (!this.classifications()) {
-      return
-    }
-    const body: NewUpdateGrouping = {
-      name: this.classifications()?.name || '',
-      description: this.classifications()?.description || '',
-      classification: this.payload().classification() as NewCategoryForGrouping[],
-    }
-
-    this._adminCategories.updateGrouping(this.classifications()?.id || '', body).subscribe((grouping) => {
-      if (grouping) {
-        this._fetchData()
-      }
-    })
-  }
 
   selectCategory(categorySelected: any): void {
     this._closeAllDetail()
@@ -229,6 +212,15 @@ export class AdminCategoriesComponent implements OnInit {
     }
   }
 
+  removeSubcategoryGrouping(subcategory: Subcategory) {
+    this._adminCategories
+      .removeSubcategoryGrouping(this.classifications() as GroupingByClassifications, this.categorySelected().id, subcategory.id)
+      .subscribe((grouping) => {
+        if (grouping) {
+          this._fetchData()
+        }
+      })
+  }
   goToSubcategory(subcategory: Subcategory) {
     this._router.navigate(['../categories', this.categorySelected().code, subcategory.code], { relativeTo: this._route })
   }
@@ -244,10 +236,19 @@ export class AdminCategoriesComponent implements OnInit {
         subcategoryId: subcategory.id,
         mode: 'view',
       })
+      .pipe(
+        switchMap((products) =>
+          this._adminCategories.updateProductGrouping(
+            this.classifications() as GroupingByClassifications,
+            this.categorySelected().id,
+            subcategory.id,
+            products,
+          ),
+        ),
+      )
       .subscribe((product) => {
         if (product) {
-          this._updateProductsPayload(subcategory, product)
-          this._updateGrouping()
+          this._fetchData()
         }
       })
   }
