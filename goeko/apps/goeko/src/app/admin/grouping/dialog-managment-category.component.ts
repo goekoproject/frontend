@@ -32,7 +32,7 @@ export class DialogManagmentCategoryComponent {
   public category = toSignal(this._classificationService.getCategoryById(this._data.category?.id || ''), {
     initialValue: this._dataCategory(),
   })
-  public nameCategory = computed(() => this._data.category?.label || 'New Category')
+  public nameCategory = computed(() => this._data.category?.label.translations[2].label || 'New Category')
 
   get labelTranslations() {
     return this.form.get('label')?.get('translations') as FormArray
@@ -50,12 +50,12 @@ export class DialogManagmentCategoryComponent {
     })
   }
   patchValueForm(): void {
-    /*     this.category().label.translations.forEach((translation) => {
+    this.category().label.translations.forEach((translation) => {
       const control = this.labelTranslations.controls.find((control) => control.get('lang')?.value === translation.lang)
       if (control) {
         control.get('label')?.patchValue(translation.label)
       }
-    }) */
+    })
   }
   submit() {
     if (this._data.category?.id) {

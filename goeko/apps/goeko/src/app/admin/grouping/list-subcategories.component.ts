@@ -2,13 +2,12 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, ElementRef, inject, input, model, OnInit, output, viewChildren } from '@angular/core'
 import { ProductsManagementComponent } from '@goeko/business-ui'
 import { CODE_LANG } from '@goeko/core'
-import { Product, SubcategoryResponse } from '@goeko/store'
+import { ClassificationCategoryService, ManageCategory, ManageProduct, ManageSubcategory, Product, SubcategoryResponse } from '@goeko/store'
 import { ButtonModule, DIALOG_DATA, SideDialogService } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { forkJoin } from 'rxjs'
+import { forkJoin, of, switchMap } from 'rxjs'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { LabelByCategoryPipe } from './admin-categories/label-by-category.pipe'
-import { getProductBySubcategoryId } from './admin-categories/new-product'
 import { DataSubcategory, DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
 interface DataDialog {
   subcategories: SubcategoryResponse[]
@@ -21,12 +20,14 @@ interface DataDialog {
   imports: [CommonModule, TranslateModule, ButtonModule, LabelByCategoryPipe],
   templateUrl: './list-subcategories.component.html',
   styleUrl: './list-subcategories.component.scss',
-  providers: [AdminCategoriesService],
+  providers: [AdminCategoriesService, ClassificationCategoryService],
 })
 export class ListSubcategoriesComponent implements OnInit {
   JSON = JSON
   private _sideDialogService = inject(SideDialogService)
   private _adminCategoriesService = inject(AdminCategoriesService)
+  private _classificationsService = inject(ClassificationCategoryService)
+
   private _data = inject<DataDialog>(DIALOG_DATA, {
     optional: true,
   })
@@ -34,6 +35,7 @@ export class ListSubcategoriesComponent implements OnInit {
   subcategories = model<SubcategoryResponse[] | undefined>(this._data?.subcategories)
   selectedLangSubcategory = input<string>(CODE_LANG.EN)
 
+  categoryLegacyId = input<string>()
   onSubcategorySelected = output<any>()
   onChangedSubcategory = output<any>()
 
@@ -116,15 +118,35 @@ export class ListSubcategoriesComponent implements OnInit {
   }
 
   addProductsMasive(subcategory: SubcategoryResponse) {
-    const createProductObservables$ = getProductBySubcategoryId(subcategory.id).map((product) =>
-      this._adminCategoriesService.createProduct(product),
-    )
+    this._classificationsService
+      .getClassificationById(this.categoryLegacyId() as string)
+      .pipe(
+        switchMap((res: ManageCategory) => {
+          const subcategories = res.subcategories.find((legacy) => legacy.code === subcategory.code) as ManageSubcategory
 
-    forkJoin(createProductObservables$).subscribe((res) => {
-      console.log('res', res)
-    })
+          const newProducts = this._transformSubcategoriesProducts(subcategory.id, subcategories.products as ManageProduct[])
+          return of(newProducts)
+        }),
+        switchMap((products) => {
+          const createProductObservables$ = products.map((product) => {
+            return this._adminCategoriesService.createProduct(product)
+          })
+          return forkJoin(createProductObservables$)
+        }),
+      )
+      .subscribe((res: any[]) => {
+        console.log('res', res)
+      })
   }
   close() {
     this._sideDialogService.closeDialog(this.subcategorySelected)
+  }
+
+  private _transformSubcategoriesProducts = (subcategoryId: string, legacyProduct: ManageProduct[]) => {
+    return legacyProduct.map((product) => ({
+      subcategoryId: subcategoryId,
+      code: product.code,
+      label: product.label,
+    }))
   }
 }

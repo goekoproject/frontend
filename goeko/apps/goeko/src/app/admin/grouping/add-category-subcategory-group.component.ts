@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, input, OnInit, output, signal } from '@angular/core'
 import { CODE_LANG, LANGS } from '@goeko/core'
-import { Category, Label, NewSubcategory, SubcategoryResponse } from '@goeko/store'
+import { Category, ClassificationCategoryService, Label, NewSubcategory, SubcategoryResponse } from '@goeko/store'
 import { ButtonModule, RadioModule, SideDialogService, ToggleSwitchComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { forkJoin, of, switchMap } from 'rxjs'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { LabelByCategoryPipe } from './admin-categories/label-by-category.pipe'
 import { DataSubcategory, DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
@@ -33,13 +34,14 @@ interface ClassificationGrouping {
     RadioModule,
     ListSubcategoriesComponent,
   ],
-  providers: [AdminCategoriesService],
+  providers: [AdminCategoriesService, ClassificationCategoryService],
   templateUrl: './add-category-subcategory-group.component.html',
   styleUrl: './add-category-subcategory-group.component.scss',
 })
 export class AddCategorySubcategoryGroupComponent implements OnInit {
   private _adminCategoriesService = inject(AdminCategoriesService)
   private _sideDialogService = inject(SideDialogService)
+  private _classificationsService = inject(ClassificationCategoryService)
   public langs = signal(LANGS)
   beforeNext = output<any>()
   categories = signal<AllDataCategories[]>([])
@@ -47,6 +49,7 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
   subcategoryCode = input<string>()
   selectedLangSubcategory = signal<string>(CODE_LANG.EN)
 
+  seletionSubcategories = signal<ClassificationGrouping[] | null>(null)
   private _openDialogCategory = (category?: Category) => {
     return this._sideDialogService.openDialog<DialogManagmentCategoryComponent>(DialogManagmentCategoryComponent, {
       category,
@@ -64,6 +67,17 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
       label: category.label,
       open: false,
       subcategories: subcategories,
+    }
+  }
+
+  private _allDataCategoriesToCategory = (category: AllDataCategories): Category => {
+    return {
+      id: category.id,
+      code: category.code,
+      label: category.label,
+      enabled: true,
+      order: 0,
+      subcategories: [],
     }
   }
 
@@ -85,17 +99,6 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
   private _addCategory = (category: Category) => {
     const newCategory = this._categoryToAllDataCategories(category)
     this.categories.set([...this.categories(), newCategory])
-  }
-
-  private _addSubcategory = (subcategory: SubcategoryResponse) => {
-    this.categories.update((categories) => {
-      return categories.map((category) => {
-        if (category.id === subcategory.categoryId) {
-          return { ...category, subcategories: [...category.subcategories, subcategory] }
-        }
-        return category
-      })
-    })
   }
 
   private _addAllSubcategory = (categoryId: string, subcategory: SubcategoryResponse[]) => {
@@ -133,6 +136,11 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
       this._fetchData(category)
     }
   }
+  editCategory = (category: AllDataCategories) => {
+    this._openDialogCategory(this._allDataCategoriesToCategory(category)).subscribe((res: Category) => {
+      this._fetchData(category)
+    })
+  }
 
   addNewSubcategoryToCategory = (category: AllDataCategories) => {
     this._openDialgoAddSubcategory().subscribe((res) => {
@@ -157,8 +165,40 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
     this._adminCategoriesService.deleteCategory(category.id).subscribe((res) => {})
   }
 
-  onChangeSubcategories = () => {}
-  getSubcategoriesSelected = (subcategories: ClassificationGrouping) => {
-    this.beforeNext.emit(subcategories)
+  getSubcategoriesSelected = (subcategories: ClassificationGrouping[]) => {
+    this.seletionSubcategories.update(sub => sub ? [...sub, ...subcategories] : subcategories)
+    console.log('group', this.seletionSubcategories())
+
+    /*   this.beforeNext.emit(subcategories) */
+  }
+
+  addMasiveSubcategory = (category: AllDataCategories, idLegacy: string) => {
+    console.log('id', idLegacy)
+    this._classificationsService
+      .getClassificationById(idLegacy)
+      .pipe(
+        switchMap((res) => {
+          const subcategories = this.transformSubcategories(category.id, res.subcategories)
+          return of(subcategories)
+        }),
+        switchMap((subcategories) => {
+          const createSubcategoryObservables$ = subcategories.map((subcategory) => {
+            return this._adminCategoriesService.createSubcategory(subcategory)
+          })
+          return forkJoin(createSubcategoryObservables$)
+        }),
+      )
+      .subscribe((res) => {
+        console.log('res', res)
+      })
+  }
+
+  private transformSubcategories(categoryId: string, originalSubcategories: any): NewSubcategory[] {
+    return originalSubcategories.map((subcategory: any) => ({
+      categoryId: categoryId,
+      code: subcategory.code,
+      label: subcategory.label,
+      question: subcategory.question,
+    }))
   }
 }

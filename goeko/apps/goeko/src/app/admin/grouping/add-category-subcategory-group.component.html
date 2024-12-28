@@ -23,7 +23,9 @@
     </section>
     @for (category of categories(); track category.code; let i = $index) {
       <label [for]="category.code" class="ms-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
-        <li class="relative flex cursor-pointer justify-between gap-x-6 rounded-md border p-4 py-5">
+        <li
+          class="relative flex cursor-pointer justify-between gap-x-6 rounded-md border p-4 py-5"
+          [ngClass]="{ 'border-blue-600': category.open }">
           <div class="flex w-full flex-col gap-5">
             <h3 class="text-lg font-semibold text-blue-500">
               {{ category.label.translations | labelByCategory: selectedLangSubcategory() }}
@@ -31,65 +33,29 @@
             @if (category.open) {
               <goeko-list-subcategories
                 [subcategories]="category.subcategories"
+                [categoryLegacyId]="idLegacy.value"
                 (onSubcategorySelected)="getSubcategoriesSelected($event)"
                 [selectedLangSubcategory]="selectedLangSubcategory()" />
-              <!--    <ul class="m-1 flex flex-col gap-2">
-                @for (subcategory of category.subcategories; track subcategory.id) {
-                  <li
-                    class="flex items-center gap-2 rounded-lg border px-2 hover:border-2 hover:border-blue-600 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-900 has-[:checked]:ring-indigo-200"
-                    [ngClass]="{ 'bg-indigo-50 text-indigo-900 ring-indigo-200': subcategoryCode() === subcategory.code }">
-                    <input
-                      #subcategoryElement
-                      type="checkbox"
-                      [id]="subcategory.code"
-                      [value]="JSON.stringify(subcategory)"
-                      (input)="selectedElement()" />
-
-                    <label class="flex h-auto w-full cursor-pointer items-center py-1 font-semibold text-blue-500" [for]="subcategory.code">
-                      <div class="flex w-full flex-col gap-1">
-                        <p>{{ subcategory.label.translations | labelByCategory: selectedLangSubcategory() }}</p>
-                        <span class="text-gray-500">
-                          {{ subcategory.code }}
-                          <i class="ti ti-copy text-xl hover:text-blue-500" (click)="clipboard(subcategory.code)"></i>
-                        </span>
-                      </div>
-                      <span class="w-1/3">
-                        <p>Create Date</p>
-                        {{ subcategory.creationDateTime | date: 'short' }}
-                      </span>
-                      <span class="w-1/3">
-                        <p>Last Update</p>
-                        {{ subcategory.updateDateTime | date: 'short' }}
-                      </span>
-                      <div class="flex gap-2">
-                        <button go-button appearance="white" (click)="editSubcategory(category, subcategory)">
-                          <i class="ti ti-pencil"></i>
-                          <p class="w-max">{{ 'Edit' | translate }}</p>
-                        </button>
-                        <button go-button appearance="white" (click)="openDialogAddProducts(category, subcategory)">
-                          <i class="ti ti-library-plus"></i>
-                          <p class="w-max">{{ 'Product' | translate }}</p>
-                        </button>
-
-                        <button go-button class="self-center" (click)="addProductsMasive(subcategory)">
-                          <i class="ti ti-plus"></i> {{ 'add' | translate }}
-                          {{ 'product' | translate }}
-                        </button>
-                      </div>
-                    </label>
-                  </li>
-                }
-              </ul> -->
             }
           </div>
 
           <div class="absolute right-4 mb-auto flex items-center gap-2">
-            <go-toggle-switch (checkedChange)="viewSubcategory($event, category)" [checked]="category.open" />
+            <go-toggle-switch (checkedChange)="viewSubcategory($event, category)" [(checked)]="category.open" />
 
             <button go-button appearance="white" (click)="addNewSubcategoryToCategory(category)">
               <i class="ti ti-plus"></i>
               <p class="w-max">{{ 'Add Subcategory' | translate }}</p>
             </button>
+            <button go-button (click)="editCategory(category)">
+              <i class="ti ti-pencil"></i>
+              <p class="w-max">{{ 'Edit' | translate }}</p>
+            </button>
+            <div class="hidden gap-2">
+              <input #idLegacy type="text" class="border text-blue-600" />
+              <button go-button (click)="addMasiveSubcategory(category, idLegacy.value)">
+                <p class="w-max">{{ 'Masvie add' | translate }}</p>
+              </button>
+            </div>
           </div>
         </li>
       </label>

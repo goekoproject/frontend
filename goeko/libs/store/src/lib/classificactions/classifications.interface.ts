@@ -51,6 +51,7 @@ export interface SubcategoryResponse {
 
 export interface NewSubcategory {
   categoryId?: string
+  code?:string
   label: Label
   question: Question
 }
