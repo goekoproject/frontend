@@ -92,7 +92,7 @@ export class ListSubcategoriesComponent implements OnInit {
   }
 
   selectedElement = () => {
-    const dataForGrouping = this.subcategorySelected.map((subcategory, index: number) => {
+/*     const dataForGrouping = this.subcategorySelected.map((subcategory, index: number) => {
       return {
         code: subcategory.categoryCode,
         subcategories: [
@@ -103,8 +103,8 @@ export class ListSubcategoriesComponent implements OnInit {
         ],
         order: index,
       }
-    })
-    this.onSubcategorySelected.emit(dataForGrouping)
+    }) */
+    this.onSubcategorySelected.emit(this.subcategorySelected)
   }
   clipboard = (text: string) => {
     navigator.clipboard

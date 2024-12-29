@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections'
 import { CommonModule } from '@angular/common'
 import { Component, inject, input, OnInit, output, signal } from '@angular/core'
 import { CODE_LANG, LANGS } from '@goeko/core'
@@ -49,7 +50,8 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
   subcategoryCode = input<string>()
   selectedLangSubcategory = signal<string>(CODE_LANG.EN)
 
-  seletionSubcategories = signal<ClassificationGrouping[] | null>(null)
+  selectionSubcategories = new SelectionModel<SubcategoryResponse>(true, [], true, (o1, o2) => o1.id === o2.id)
+
   private _openDialogCategory = (category?: Category) => {
     return this._sideDialogService.openDialog<DialogManagmentCategoryComponent>(DialogManagmentCategoryComponent, {
       category,
@@ -165,9 +167,9 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
     this._adminCategoriesService.deleteCategory(category.id).subscribe((res) => {})
   }
 
-  getSubcategoriesSelected = (subcategories: ClassificationGrouping[]) => {
-    this.seletionSubcategories.update(sub => sub ? [...sub, ...subcategories] : subcategories)
-    console.log('group', this.seletionSubcategories())
+  onSelectionSubcategories = (subcategories: SubcategoryResponse[]) => {
+    this.selectionSubcategories.select(...subcategories)
+    console.log('group', this.selectionSubcategories.selected)
 
     /*   this.beforeNext.emit(subcategories) */
   }
