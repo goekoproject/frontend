@@ -82,29 +82,28 @@ export class ListSubcategoriesComponent implements OnInit {
         productSelected: product,
         subcategoryCode: subcategory.code,
         subcategoryId: subcategory.id,
-        mode: 'add',
       })
-      .subscribe((product) => {
+
+      .subscribe((product: Product[]) => {
         if (product) {
           console.log('New product add', product)
+          const subcategoriesProducts = this._addProductsToSubcategory(subcategory, product)
+          this.onSubcategorySelected.emit({ subcategories: subcategoriesProducts, deselect: true })
         }
       })
   }
 
-  selectedElement = () => {
-/*     const dataForGrouping = this.subcategorySelected.map((subcategory, index: number) => {
-      return {
-        code: subcategory.categoryCode,
-        subcategories: [
-          {
-            code: subcategory.code,
-            order: index,
-          },
-        ],
-        order: index,
+  private _addProductsToSubcategory = (subcategory: SubcategoryResponse, products: Product[]) => {
+    return this.subcategorySelected.map((subcategory) => {
+      if (subcategory.id === subcategory.id) {
+        return { ...subcategory, products: products }
       }
-    }) */
-    this.onSubcategorySelected.emit(this.subcategorySelected)
+      return subcategory
+    })
+  }
+
+  selectedElement = () => {
+    this.onSubcategorySelected.emit({ subcategories: this.subcategorySelected })
   }
   clipboard = (text: string) => {
     navigator.clipboard

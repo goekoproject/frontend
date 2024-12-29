@@ -6,6 +6,7 @@ import { NewUpdateGrouping } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AddCategorySubcategoryGroupComponent } from './add-category-subcategory-group.component'
+import { AdminCategoriesComponent } from './admin-categories/admin-categories.component'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { BasicInfoGroupingComponent } from './basic-info-grouping.component'
 
@@ -25,16 +26,27 @@ export class NewGroupingComponent implements OnInit {
   stepContainer!: ViewContainerRef
   steps = signal([
     { title: 'Create Name and Description', component: BasicInfoGroupingComponent },
-    { title: 'Category and Subcategory', component: AddCategorySubcategoryGroupComponent },
+    { title: 'Add Category and Subcategory', component: AddCategorySubcategoryGroupComponent },
   ])
   currentStep = signal(0)
   classification = signal([])
+  groupingClassifications = signal<NewUpdateGrouping | null>(null)
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   })
   private _currentComponentRef: ComponentRef<any> | undefined = undefined
+
+  get _instanceBasicInfoGroupingComponent() {
+    return this._currentComponentRef?.instance as BasicInfoGroupingComponent
+  }
+  get instanceAddCategorySubcategoryGroupComponent() {
+    return this._currentComponentRef?.instance as AddCategorySubcategoryGroupComponent
+  }
+  get instaceAdminCategoriesComponent() {
+    return this._currentComponentRef?.instance as AdminCategoriesComponent
+  }
 
   ngOnInit() {
     this.selectStep(this.currentStep())
@@ -51,12 +63,16 @@ export class NewGroupingComponent implements OnInit {
     const step = this.steps()[this.currentStep()]
     const componentType = step.component as any
     this._currentComponentRef = this.stepContainer?.createComponent(componentType)
-    this._currentComponentRef.instance.form = this.form
-    this._currentComponentRef.instance.beforeNext?.subscribe((data: any) => this._beforeNext(data))
+    this._instanceBasicInfoGroupingComponent.form = this.form
+    this._getClassification()
+  }
+
+  private _getClassification() {
+    if (!this.instanceAddCategorySubcategoryGroupComponent) return
+    this.instanceAddCategorySubcategoryGroupComponent.beforeNext?.subscribe((data: any) => this._beforeNext(data))
   }
 
   private _beforeNext = (data: any) => {
-    console.log('data', data)
     this.classification.set(data)
   }
   nextStep(): void {

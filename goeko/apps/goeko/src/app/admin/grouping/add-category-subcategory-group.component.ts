@@ -2,7 +2,15 @@ import { SelectionModel } from '@angular/cdk/collections'
 import { CommonModule } from '@angular/common'
 import { Component, inject, input, OnInit, output, signal } from '@angular/core'
 import { CODE_LANG, LANGS } from '@goeko/core'
-import { Category, ClassificationCategoryService, Label, NewSubcategory, SubcategoryResponse } from '@goeko/store'
+import {
+  Category,
+  ClassificationCategoryService,
+  Label,
+  NewCategoryForGrouping,
+  NewSubcategory,
+  NewSubcategoryForGrouping,
+  SubcategoryResponse,
+} from '@goeko/store'
 import { ButtonModule, RadioModule, SideDialogService, ToggleSwitchComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { forkJoin, of, switchMap } from 'rxjs'
@@ -22,6 +30,45 @@ interface AllDataCategories {
 interface ClassificationGrouping {
   code: string
   subcategories: Array<{ code: string; order: number }>
+}
+const groupedData: Record<string, { code: string; subcategories: NewSubcategoryForGrouping[] }> = {}
+
+const transformToGroupingClassifications = (data: any[]): NewCategoryForGrouping[] => {
+  // Agrupar por categoryCode
+  data.forEach((item, index) => {
+    const { categoryCode, code, products } = item
+
+    if (!groupedData[categoryCode]) {
+      groupedData[categoryCode] = {
+        code: categoryCode,
+        subcategories: data.map((item, i) => ({
+          code: item.code,
+          order: i,
+          products: [],
+        })),
+      }
+    } else {
+      if (!groupedData[categoryCode].subcategories.some((subcategory) => subcategory.code === code)) {
+        groupedData[categoryCode].subcategories.push({
+          code: code,
+          order: index,
+          products: products,
+        })
+      } else {
+        groupedData[categoryCode].subcategories = data.map((item, i) => ({
+          code: item.code,
+          order: i,
+          products: [],
+        }))
+      }
+    }
+  })
+
+  // Convertir a un array
+  return Object.values(groupedData).map((group, index) => ({
+    ...group,
+    order: index + 1,
+  }))
 }
 @Component({
   selector: 'goeko-add-category-subcategory-group',
@@ -50,7 +97,7 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
   subcategoryCode = input<string>()
   selectedLangSubcategory = signal<string>(CODE_LANG.EN)
 
-  selectionSubcategories = new SelectionModel<SubcategoryResponse>(true, [], true, (o1, o2) => o1.id === o2.id)
+  selectionSubcategories = new SelectionModel<any>(true, [], true, (o1, o2) => o1.id === o2.id)
 
   private _openDialogCategory = (category?: Category) => {
     return this._sideDialogService.openDialog<DialogManagmentCategoryComponent>(DialogManagmentCategoryComponent, {
@@ -167,11 +214,14 @@ export class AddCategorySubcategoryGroupComponent implements OnInit {
     this._adminCategoriesService.deleteCategory(category.id).subscribe((res) => {})
   }
 
-  onSelectionSubcategories = (subcategories: SubcategoryResponse[]) => {
-    this.selectionSubcategories.select(...subcategories)
-    console.log('group', this.selectionSubcategories.selected)
+  onSelectionSubcategories = (datsSubcategories: { subcategories: any[]; deselect: boolean }) => {
+    const { subcategories } = datsSubcategories
 
-    /*   this.beforeNext.emit(subcategories) */
+    this.selectionSubcategories.select(...subcategories)
+    const classificationForGrouping = transformToGroupingClassifications(subcategories)
+    console.log('group', classificationForGrouping)
+
+    this.beforeNext.emit(classificationForGrouping)
   }
 
   addMasiveSubcategory = (category: AllDataCategories, idLegacy: string) => {
