@@ -87,41 +87,5 @@
 </ng-template>
 
 <ng-template #cardRealStateLoan>
-  @if (realStateLoan()) {
-    <div class="flex w-10/12 flex-col gap-6 rounded-2xl p-4 pb-10 shadow-xl">
-      <h2 class="text-2xl font-semibold">{{ 'realStateLoan' | translate }}</h2>
-      @for (location of realStateLoan().locations; track location?.country?.code) {
-        <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
-          <span class="fi fi-{{ location.country.code | lowercase }}"></span>
-          <p>{{ location.country }}</p>
-        </div>
-      }
-      <div class="flex flex-col gap-4">
-        <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.buildingFounding' | translate }}</h3>
-
-        <div class="flex flex-col gap-8">
-          <span class="text-grayText">{{ 'FORM_LABEL.workTypes' | translate }}</span>
-
-          <div class="flex flex-wrap gap-2">
-            @for (products of realStateLoan().classifications[0].products; track products) {
-              <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
-                <p>{{ products }}</p>
-              </div>
-            }
-          </div>
-        </div>
-      </div>
-      <button type="button" go-button appearance="white" class="ml-auto" (click)="goRealStateLoan()">
-        {{ 'edit' | translate }}
-      </button>
-      <button
-        type="button"
-        go-button
-        appearance="white"
-        class="ml-auto"
-        (click)="deleteFunding(KIND_OF_FUNDING.RealEstate, realStateLoan().id)">
-        {{ 'delete' | translate }}
-      </button>
-    </div>
-  }
+  <goeko-card-preview-real-estate-loan [realStateLoan]="realStateLoan()" (onEdit)="goRealStateLoan($event.id)" />
 </ng-template>

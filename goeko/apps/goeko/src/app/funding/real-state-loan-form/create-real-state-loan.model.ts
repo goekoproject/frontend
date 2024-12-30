@@ -2,7 +2,6 @@ import { mapperLocations } from '@goeko/core'
 import { ClassificationCodeRequest, ContactRequest, LocationCountry, RealStateLoanPayload } from '@goeko/store'
 
 export class CreateRealStateLoan implements RealStateLoanPayload {
-
   bankId: string
   classifications: ClassificationCodeRequest[]
   locations: LocationCountry[]
@@ -16,16 +15,16 @@ export class CreateRealStateLoan implements RealStateLoanPayload {
     this.bankId = bankId
     this.classifications = [
       {
-        mainCategory: 'co2Emission',
-        subCategory: 'mainInternalCombustionEngine',
-        products: ['loader','backhoe'],
-      }
+        mainCategory: dataForm.workTypes.categoryCode,
+        subCategory: dataForm.workTypes.subcategoryCode,
+        products: dataForm.workTypes.products.map((p: { code: string }) => p.code),
+      },
     ]
     this.locations = mapperLocations(dataForm.locations)
-    this.buildingTypes = dataForm.buildingTypes.map((buildingType:any) => {
+    this.buildingTypes = dataForm.buildingTypes.map((buildingType: any) => {
       return buildingType.label
     })
-    this.ownerProfile = dataForm.ownerProfile.map((ownerProfile:any) => {
+    this.ownerProfile = dataForm.ownerProfile.map((ownerProfile: any) => {
       return ownerProfile.label
     })
     this.minimumQuantity = parseInt(dataForm.montanMinimun.label)
@@ -37,5 +36,4 @@ export class CreateRealStateLoan implements RealStateLoanPayload {
       phoneNumber: dataForm.phoneNumber,
     }
   }
-
 }

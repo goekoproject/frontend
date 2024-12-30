@@ -21,6 +21,9 @@ export class FinancingService implements OperationSustainableEquipment, Operatio
     return this._http.get<RealStateLoanResponse>(`/v1/financing/${type}/bank/${bankId}`)
   }
 
+  getSustainableEquipmentById(id: string): Observable<any> {
+    return this._http.get(`/v1/financing/${FINANCING_TYPE.SustainableEquipment}/${id}`)
+  }
   createSustainableEquipment(data: SustainableEquipmentPayload): Observable<any> {
     return this._http.post(`/v1/financing/${FINANCING_TYPE.SustainableEquipment}`, data)
   }
@@ -28,6 +31,9 @@ export class FinancingService implements OperationSustainableEquipment, Operatio
     return this._http.put(`/v1/financing/${FINANCING_TYPE.SustainableEquipment}/${id}`, data)
   }
 
+  getRealStateLoanById(id: string): Observable<any> {
+    return this._http.get(`/v1/financing/${FINANCING_TYPE.RealEstate}/${id}`)
+  }
   createRealStateLoan(data: RealStateLoanPayload): Observable<any> {
     return this._http.post(`/v1/financing/${FINANCING_TYPE.RealEstate}`, data)
   }

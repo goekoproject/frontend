@@ -1,65 +1,37 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, input, OnInit } from '@angular/core'
-import { toSignal } from '@angular/core/rxjs-interop'
+import { Component, computed, inject, input } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
-import { FINANCING_TYPE, FinancingService, RealStateLoanResponse } from '@goeko/store'
+import { FINANCING_TYPE, RealStateLoanResponse } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoILeavesComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { BehaviorSubject, map, switchMap } from 'rxjs'
-import { FundingService } from './funding.service'
+import { CardPreviewRealEstateLoanComponent } from './card-preview-real-estate-loan.component'
 
 @Component({
   selector: 'goeko-hub-funding',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, ButtonModule, BadgeModule, GoILeavesComponent],
-  providers: [FundingService, FinancingService],
+  imports: [CommonModule, RouterModule, CardPreviewRealEstateLoanComponent, TranslateModule, ButtonModule, BadgeModule, GoILeavesComponent],
+  providers: [],
   templateUrl: './hub-funding.component.html',
   styleUrl: './hub-funding.component.scss',
 })
-export class HubFundingComponent implements OnInit {
-  private _fundingService = inject(FundingService)
+export class HubFundingComponent {
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
   bankId = input.required<string>()
   kindOfFunding = input.required<{
     realStateLoan: RealStateLoanResponse[]
+    sustainableEquipment: any[]
   }>()
   KIND_OF_FUNDING = FINANCING_TYPE
-  private _refresh$ = new BehaviorSubject<void>(undefined)
-  storeSustainbleEquipmentData$ = this._refresh$.pipe(
-    switchMap(() => this._fundingService.getAllDataFromStore('sustainble-equipment')),
-    map((data) => data[0]),
-  )
-  realStateLoanData$ = this._refresh$.pipe(
-    switchMap(() => this._fundingService.getAllDataFromStore('real-state-loan')),
-    map((data) => data[0]),
-  )
 
-  sustainbleEquipment = toSignal(this.storeSustainbleEquipmentData$)
+  sustainbleEquipment = computed(() => this.kindOfFunding().sustainableEquipment[0] as any)
   realStateLoan = computed(() => this.kindOfFunding().realStateLoan[0])
-
-  constructor() {
-    effect(() => {
-      if (this.kindOfFunding()) {
-        console.log(this.kindOfFunding())
-      }
-    })
-  }
-  ngOnInit(): void {
-    this._refresh$.next()
-  }
-
-  deleteFunding = (financingType: FINANCING_TYPE, id: string) => {
-    this._fundingService.deleteKindOfFinancingById(financingType, id).subscribe((res) => {
-      console.log(res)
-    })
-  }
 
   goSustainbleEquipment = () => {
     this._router.navigate([`sustainable-equipment`, this.bankId()], { relativeTo: this._route })
   }
 
-  goRealStateLoan = () => {
-    this._router.navigate([`real-state-loan`, this.bankId()], { relativeTo: this._route })
+  goRealStateLoan = (id: string) => {
+    this._router.navigate([`king-of-funding/edit/real-state-loan`, this.bankId(), id], { relativeTo: this._route.parent })
   }
 }

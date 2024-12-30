@@ -11,7 +11,19 @@ export const getKindOfFunding = (route: ActivatedRouteSnapshot) => {
     return of(undefined)
   }
   const realStateLoan$ = _fundingService.getKindOfFinancingById(FINANCING_TYPE.RealEstate, _bankId)
+  const sustainableEquipment$ = _fundingService.getKindOfFinancingById(FINANCING_TYPE.SustainableEquipment, _bankId)
+
   return forkJoin({
     realStateLoan: realStateLoan$,
+    sustainableEquipment: sustainableEquipment$,
   }).pipe(shareReplay(1))
+}
+
+export const getDataRealStateLoan = (route: ActivatedRouteSnapshot) => {
+  const _fundingService = inject(FundingService)
+  const _id = route.paramMap.get('id') as string
+  if (!_id) {
+    return of(undefined)
+  }
+  return _fundingService.getRealStateLoanById(_id)
 }

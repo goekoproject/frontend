@@ -18,17 +18,24 @@ export class CreateSustainableEquipment implements SustainableEquipmentPayload {
     this.bankId = bankId
     this.classifications = [
       {
-        mainCategory: 'co2Emission',
-        subCategory: 'mainInternalCombustionEngine',
-        products: ['loader','backhoe'],
-      }
+        mainCategory: dataForm.vehicles.category,
+        subCategory: dataForm.vehicles.subcategory,
+        products: dataForm.vehicles.products.map((p: { code: string }) => p.code),
+      },
+      {
+        mainCategory: dataForm.machines.category,
+        subCategory: dataForm.machines.subcategory,
+        products: dataForm.machines.products.map((p: { code: string }) => p.code),
+      },
     ]
     this.locations = mapperLocations(dataForm.locations)
     this.activityProspectMinimum = parseInt(dataForm.yearsActivity.label)
     this.balanceSheet = parseInt(dataForm.yearsBalance.label)
-    this.requiredDocuments = dataForm.documents.filter((d: { checked: boolean }) => d.checked).map((doc: { value : {label: string} }) => doc.value.label)
-    this.greenBonusVehicles = true; // mock
-    this.greenBonusMachines = false; // mock
+    this.requiredDocuments = dataForm.documents
+      .filter((d: { checked: boolean }) => d.checked)
+      .map((doc: { value: { label: string } }) => doc.value.label)
+    this.greenBonusVehicles = dataForm.greenBonusVehicle
+    this.greenBonusMachines = dataForm.greenBonusMachines
 
     this.minimumQuantity = parseInt(dataForm.minimumQuantity)
     this.currency = dataForm.currencys

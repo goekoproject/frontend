@@ -3,13 +3,13 @@ import { Component, computed, inject, input, OnInit, signal } from '@angular/cor
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
-import { CategoryGrouping, ClassificationsService, FINANCING_TYPE, FinancingService, LocationTranslated } from '@goeko/store'
+import { CategoryGrouping, ClassificationsService, FinancingService, LocationTranslated } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoILeavesComponent, GoInputModule, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { CreateSustainableEquipment } from './create-sustainable-equipment.model'
-import { AMOUNT, CURRENCY, DOCUMENTS, MACHINES, YEARS } from './data-fields.constants'
+import { AMOUNT, CURRENCY, DOCUMENTS, YEARS } from './data-fields.constants'
 type Options = {
   label: string
   id: string
@@ -50,7 +50,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   categories = input.required<CategoryGrouping[]>()
   bankId = input.required<string>()
   vehicles = computed(() => this.categories()[0])
-  machines = signal<Options[]>(MACHINES)
+  machines = computed(() => this.categories()[1])
   years = signal<Options[]>(YEARS)
   requiredDocuments = signal<Options[]>(DOCUMENTS)
   amount = signal<Options[]>(AMOUNT)
@@ -61,10 +61,18 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     return this.form.get('locations') as FormArray
   }
   form: FormGroup = this._fb.group({
-    vehicles: this._fb.control(null),
+    vehicles: this._fb.group({
+      category: this._fb.control(null),
+      subcategory: this._fb.control(null),
+      products: this._fb.control(null),
+    }),
     greenBonusVehicle: this._fb.control(false),
 
-    machines: this._fb.control(null),
+    machines: this._fb.group({
+      category: this._fb.control(null),
+      subcategory: this._fb.control(null),
+      products: this._fb.control(null),
+    }),
     greenBonusMachines: this._fb.control(false),
 
     yearsActivity: this._fb.control(this.years()[0]),
@@ -92,8 +100,15 @@ export class SustainbleEquipmentFormComponent implements OnInit {
 
   ngOnInit() {
     this._selectLocationsService.setUpCountries()
-    console.log(this.bankId())
+    this._setCategoriesAndSubcategories()
     // this._getSustainableEquipmentData();
+  }
+
+  private _setCategoriesAndSubcategories = () => {
+    this.form.get('vehicles.category')?.setValue(this.vehicles().code)
+    this.form.get('vehicles.subcategory')?.setValue(this.vehicles().subcategories[0].code)
+    this.form.get('machines.category')?.setValue(this.vehicles().code)
+    this.form.get('machines.subcategory')?.setValue(this.vehicles().subcategories[0].code)
   }
 
   toogleGrenBonusVehicle = (newValue: boolean | undefined) => {
@@ -107,18 +122,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     const sustainbleEquipmentValue = new CreateSustainableEquipment(this.bankId(), this.form.value)
     // we save the sustainable object in the service for user later
     this._fundingService.setSustainableEquipment(sustainbleEquipmentValue)
-
-    this._fundingService.saveData(sustainbleEquipmentValue).subscribe((res: any) => {
-      this._goRealStateLoan()
-    })
-  }
-
-  private _getSustainableEquipmentData() {
-    this._fundingService.getAll(FINANCING_TYPE.SustainableEquipment).subscribe((res: any) => {
-      if (res) {
-        //mapear el objeto en el formulario
-      }
-    })
+    this._goRealStateLoan()
   }
 
   goBack = () => {

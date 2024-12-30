@@ -3,14 +3,14 @@ import { Component, inject, input, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryModule, SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
-import { FINANCING_TYPE, FinancingService } from '@goeko/store'
+import { CategoryGrouping, FINANCING_TYPE, FinancingService, RealStateLoanResponse } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { forkJoin } from 'rxjs'
 import { STORE_NAME } from '../funding-token.constants'
 import { FundingService } from '../funding.service'
 import { CreateRealStateLoan } from './create-real-state-loan.model'
-import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES, WORKTYPES } from './data-fields.constants'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES } from './data-fields.constants'
 
 type Options = {
   label: string
@@ -41,12 +41,10 @@ export class RealStateLoanComponent implements OnInit {
   private _fundingService = inject(FundingService)
   private _selectLocationsService = inject(SelectLocationsService)
   bankId = input.required<string>()
-
-  private _countries = this._selectLocationsService.countries
-
+  categories = input.required<CategoryGrouping[]>()
+  dataRealEstateLoan = input<RealStateLoanResponse>()
   public form!: FormGroup
 
-  workTypes = signal<Options[]>(WORKTYPES)
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
   ownerProfile = signal<Options[]>(OWNERPROFILES)
@@ -63,12 +61,18 @@ export class RealStateLoanComponent implements OnInit {
 
   private _buildFrom() {
     this._initForm()
+    console.log(this.dataRealEstateLoan())
+    this._setCategoriesAndSubcategories()
     // this._getRealStateLoanData();
   }
 
   private _initForm() {
     this.form = this._fb.group({
-      workTypes: this._fb.control(null),
+      workTypes: this._fb.group({
+        categoryCode: this._fb.control(null),
+        subcategoryCode: this._fb.control(null),
+        products: this._fb.control([]),
+      }),
       ownerProfile: this._fb.control(this.ownerProfile()[0]),
       buildingTypes: this._fb.control([]),
       locations: this._fb.array([]),
@@ -78,7 +82,10 @@ export class RealStateLoanComponent implements OnInit {
       phoneNumber: ['', Validators.pattern(/^[0-9]{10,15}$/)],
     })
   }
-
+  private _setCategoriesAndSubcategories = () => {
+    this.form.get('workTypes.categoryCode')?.setValue(this.categories()[0].code)
+    this.form.get('workTypes.subcategoryCode')?.setValue(this.categories()[0].subcategories[0].code)
+  }
   save = () => {
     const realStateLoan = new CreateRealStateLoan(this.bankId(), this.form.value)
     this._fundingService.setRealStateLoan(realStateLoan)
@@ -92,11 +99,6 @@ export class RealStateLoanComponent implements OnInit {
       console.log(res)
       this._goHubFundings()
     })
-
-    /*    this._fundingService.saveData(realStateLoan).subscribe((res) => {
-      console.log(res)
-      this._goHubFundings()
-    }) */
   }
   goBack = () => {
     window.history.back()

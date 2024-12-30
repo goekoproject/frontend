@@ -1,146 +1,163 @@
-<form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
-  <!-- Selección de categorías -->
-  <div class="mb-6">
-    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.subtitleForm' | translate }}</h2>
-    <div class="mt-4">
-      <label class="mb-2 block font-medium">{{ vehicles().label }}</label>
+@defer (when categories()) {
+  <form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
+    <!-- Selección de categorías -->
+    <div class="mb-6">
+      <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.subtitleForm' | translate }}</h2>
+      <div class="mt-4">
+        <label class="mb-2 block font-medium">{{ vehicles().label }}</label>
 
-      @for (vehicle of vehicles().subcategories; track vehicle.code) {
-        <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="vehicles">
-          @for (product of vehicle.products; track product.code) {
-            <go-badge [value]="product" [id]="product.id">{{ product.label }} </go-badge>
+        <ng-container formGroupName="vehicles">
+          <input id="category" class="invisible absolute h-0" formControlName="category" type="text" />
+
+          @for (vehicle of vehicles().subcategories; track vehicle.code) {
+            <input id="subcategory" class="invisible absolute h-0" formControlName="subcategory" type="text" />
+
+            <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="products">
+              @for (product of vehicle.products; track product.code) {
+                <go-badge [value]="product" [id]="product.id">{{ product.label }} </go-badge>
+              }
+            </go-badge-group>
           }
-        </go-badge-group>
-      }
+        </ng-container>
 
-      <div class="flex items-center justify-between rounded-lg border border-gray-300 p-3">
-        <span class="flex items-center gap-2">
-          <go-i-leaves></go-i-leaves>
-          <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
-        </span>
-        <go-toggle-switch (checkedChange)="toogleGrenBonusVehicle($event)" class="ml-2"></go-toggle-switch>
+        <div class="flex items-center justify-between rounded-lg border border-gray-300 p-3">
+          <span class="flex items-center gap-2">
+            <go-i-leaves></go-i-leaves>
+            <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
+          </span>
+          <go-toggle-switch (checkedChange)="toogleGrenBonusVehicle($event)" class="ml-2"></go-toggle-switch>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <label class="mb-2 block font-medium">{{ machines().label }}</label>
+        <ng-container formGroupName="machines">
+          <input id="category" class="invisible absolute h-0" formControlName="category" type="text" [value]="machines()" />
+
+          @for (machine of machines().subcategories; track machine.id) {
+            <input id="subcategory" class="invisible absolute h-0" formControlName="subcategory" type="text" [value]="machine" />
+
+            <go-badge-group [id]="'machines'" name="machines" formControlName="products">
+              @for (product of machine.products; track product.id) {
+                <go-badge [value]="product" [id]="product.id">{{ product.label }} </go-badge>
+              }
+            </go-badge-group>
+          }
+        </ng-container>
+
+        <div class="flex items-center justify-between rounded-lg border border-gray-300 p-3">
+          <span class="flex items-center gap-2">
+            <go-i-leaves></go-i-leaves>
+            <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
+          </span>
+          <go-toggle-switch (checkedChange)="toogleGreenBonusMachine($event)" class="ml-2"></go-toggle-switch>
+        </div>
       </div>
     </div>
 
-    <div class="mt-4">
-      <label class="mb-2 block font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.machines' | translate }}</label>
-      <go-badge-group [id]="'machines'" name="machines" formControlName="machines">
-        @for (machine of machines(); track machine.id) {
-          <go-badge [value]="machine" [id]="machine.id">{{ machine.label | translate }} </go-badge>
+    <!-- DOCUMENT REQUIRED-->
+    <div class="mb-6">
+      <label class="mb-2 block font-medium">{{ 'FORM_LABEL.requiredDocumentsFunding' | translate }}</label>
+      <div class="form-group form-check mb-4 space-y-2">
+        <ng-container formArrayName="documents">
+          @for (document of documentsFormArray.controls; track document; let index = $index) {
+            <label class="flex items-center gap-2" [formGroupName]="index">
+              <input type="checkbox" formControlName="checked" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+              {{ requiredDocuments()[index].label | translate }}
+            </label>
+          }
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Balance sheet -->
+    <div class="mb-6">
+      <label class="text-lg font-semibold">
+        <input type="checkbox" id="balanceSheet" />
+        {{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheet' | translate }}
+      </label>
+      <div class="mb-4">
+        <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
+
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance">
+          @for (year of years(); track year.id) {
+            <super-option [value]="year"> {{ year.label }}</super-option>
+          }
+        </ui-super-select>
+      </div>
+    </div>
+
+    <!-- Montant minimum -->
+    <div class="mb-4">
+      <label class="mb-2 mt-2 block font-medium">{{ 'FORM_LABEL.amountRequiredFunding' | translate }}</label>
+      <div class="flex items-center gap-4">
+        <ui-super-select formControlName="minimumQuantity" class="basis-1/2">
+          @for (money of amount(); track money.id; let first = $first) {
+            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
+          }
+        </ui-super-select>
+        <ui-super-select [multiple]="true" formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
+          @for (currency of currencys(); track currency.id) {
+            <super-option [value]="currency.label"> {{ currency.label }}</super-option>
+          }
+        </ui-super-select>
+      </div>
+    </div>
+
+    <!-- Prospecto de actividad -->
+    <div class="mb-6">
+      <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.activityProspect' | translate }}</h2>
+      <div class="mb-4">
+        <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity">
+          @for (year of years(); track year.id) {
+            <super-option [value]="year"> {{ year.label }}</super-option>
+          }
+        </ui-super-select>
+      </div>
+    </div>
+    <!-- Región objetivo -->
+    <div class="mb-6">
+      <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.targetRegion' | translate }}</h2>
+      <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true" />
+    </div>
+
+    <!-- Origen del objeto -->
+    <!--<div class="mb-6">
+      <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.originObject' | translate }}</h2>
+      <go-badge-group [id]="'zone'" name="zone" formControlName="origin">
+        @for (zoneOrigin of origin(); track zoneOrigin.id) {
+          <go-badge [value]="zoneOrigin" [id]="zoneOrigin.id">{{ zoneOrigin.label | translate }} </go-badge>
         }
       </go-badge-group>
-      <div class="flex items-center justify-between rounded-lg border border-gray-300 p-3">
-        <span class="flex items-center gap-2">
-          <go-i-leaves></go-i-leaves>
-          <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
-        </span>
-        <go-toggle-switch (checkedChange)="toogleGreenBonusMachine($event)" class="ml-2"></go-toggle-switch>
+    </div>-->
+
+    <!-- CONTACT DATA-->
+    <div class="mb-6">
+      <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.contact' | translate }}</h2>
+      <div class="flex">
+        <!--  <div class="w-full">
+              <go-input formControlName="name" id="name" type="text">
+                <p slot="label">{{ 'FORM_LABEL.name' | translate }}</p>
+              </go-input>
+            </div> -->
+        <div class="w-full">
+          <go-input formControlName="email" id="email" type="email" placeholder="email@gmail.com">
+            <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+          </go-input>
+        </div>
+
+        <div class="w-full">
+          <go-input formControlName="phoneNumber" type="text" placeholder="00 000 000 000">
+            <span slot="label">
+              {{ 'FORM_LABEL.phoneNumber' | translate }}
+            </span>
+          </go-input>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- DOCUMENT REQUIRED-->
-  <div class="mb-6">
-    <label class="mb-2 block font-medium">{{ 'FORM_LABEL.requiredDocumentsFunding' | translate }}</label>
-    <div class="form-group form-check mb-4 space-y-2">
-      <ng-container formArrayName="documents">
-        @for (document of documentsFormArray.controls; track document; let index = $index) {
-          <label class="flex items-center gap-2" [formGroupName]="index">
-            <input type="checkbox" formControlName="checked" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-            {{ requiredDocuments()[index].label | translate }}
-          </label>
-        }
-      </ng-container>
-    </div>
-  </div>
-
-  <!-- Balance sheet -->
-  <div class="mb-6">
-    <label class="text-lg font-semibold">
-      <input type="checkbox" id="balanceSheet" />
-      {{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheet' | translate }}
-    </label>
-    <div class="mb-4">
-      <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
-
-      <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance">
-        @for (year of years(); track year.id) {
-          <super-option [value]="year"> {{ year.label }}</super-option>
-        }
-      </ui-super-select>
-    </div>
-  </div>
-
-  <!-- Montant minimum -->
-  <div class="mb-4">
-    <label class="mb-2 mt-2 block font-medium">{{ 'FORM_LABEL.amountRequiredFunding' | translate }}</label>
-    <div class="flex items-center gap-4">
-      <ui-super-select formControlName="minimumQuantity" class="basis-1/2">
-        @for (money of amount(); track money.id; let first = $first) {
-          <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
-        }
-      </ui-super-select>
-      <ui-super-select [multiple]="true" formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
-        @for (currency of currencys(); track currency.id) {
-          <super-option [value]="currency.label"> {{ currency.label }}</super-option>
-        }
-      </ui-super-select>
-    </div>
-  </div>
-
-  <!-- Prospecto de actividad -->
-  <div class="mb-6">
-    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.activityProspect' | translate }}</h2>
-    <div class="mb-4">
-      <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
-      <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity">
-        @for (year of years(); track year.id) {
-          <super-option [value]="year"> {{ year.label }}</super-option>
-        }
-      </ui-super-select>
-    </div>
-  </div>
-  <!-- Región objetivo -->
-  <div class="mb-6">
-    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.targetRegion' | translate }}</h2>
-    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true" />
-  </div>
-
-  <!-- Origen del objeto -->
-  <!--<div class="mb-6">
-    <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.originObject' | translate }}</h2>
-    <go-badge-group [id]="'zone'" name="zone" formControlName="origin">
-      @for (zoneOrigin of origin(); track zoneOrigin.id) {
-        <go-badge [value]="zoneOrigin" [id]="zoneOrigin.id">{{ zoneOrigin.label | translate }} </go-badge>
-      }
-    </go-badge-group>
-  </div>-->
-
-  <!-- CONTACT DATA-->
-  <div class="mb-6">
-    <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.contact' | translate }}</h2>
-    <div class="flex">
-      <!--  <div class="w-full">
-            <go-input formControlName="name" id="name" type="text">
-              <p slot="label">{{ 'FORM_LABEL.name' | translate }}</p>
-            </go-input>
-          </div> -->
-      <div class="w-full">
-        <go-input formControlName="email" id="email" type="email" placeholder="email@gmail.com">
-          <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
-        </go-input>
-      </div>
-
-      <div class="w-full">
-        <go-input formControlName="phoneNumber" type="text" placeholder="00 000 000 000">
-          <span slot="label">
-            {{ 'FORM_LABEL.phoneNumber' | translate }}
-          </span>
-        </go-input>
-      </div>
-    </div>
-  </div>
-</form>
+  </form>
+}
 
 <div class="mt-4 flex justify-between">
   <button go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>

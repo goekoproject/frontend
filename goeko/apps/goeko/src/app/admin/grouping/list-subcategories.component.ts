@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { forkJoin, of, switchMap } from 'rxjs'
 import { AdminCategoriesService } from './admin-categories/admin-categories.services'
 import { LabelByCategoryPipe } from './admin-categories/label-by-category.pipe'
+import { getProductBySubcategoryId } from './admin-categories/new-massive-product'
 import { DataSubcategory, DialogAddSubcategoryComponent } from './dialog-add-subcategory.component'
 interface DataDialog {
   subcategories: SubcategoryResponse[]
@@ -117,6 +118,14 @@ export class ListSubcategoriesComponent implements OnInit {
   }
 
   addProductsMasive(subcategory: SubcategoryResponse) {
+    const massiveProducts = getProductBySubcategoryId(subcategory.id)
+    const createProductObservables$ = massiveProducts.map((product) => {
+      return this._adminCategoriesService.createProduct(product)
+    })
+    return forkJoin(createProductObservables$).subscribe((res) => {
+      console.log('add', res)
+    })
+
     this._classificationsService
       .getClassificationById(this.categoryLegacyId() as string)
       .pipe(

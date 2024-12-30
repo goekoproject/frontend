@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { groupingFormCategoriesResolver, GroupingType } from '@goeko/store'
 import { FundingComponent } from './funding.component'
 import { HubFundingComponent } from './hub-funding.component'
-import { getKindOfFunding } from './hub-kind-of-fundind.resolver'
+import { getDataRealStateLoan, getKindOfFunding } from './hub-kind-of-fundind.resolver'
 import { RealStateLoanComponent } from './real-state-loan-form/real-state-loan-form.component'
 import { SustainbleEquipmentFormComponent } from './sustainble-equipment-form/sustainble-equipment-form.component'
 
@@ -47,18 +47,35 @@ const routes: Routes = [
         title: 'sustainableEquipment',
         resolve: {
           categories: groupingFormCategoriesResolver,
-          groupingCode: GroupingType.sustainableEquipment,
         },
         data: {
           step: 1,
+          groupingCode: GroupingType.sustainableEquipment,
         },
       },
       {
         path: 'real-state-loan/:bankId',
         component: RealStateLoanComponent,
         title: 'realStateLoan',
+        resolve: {
+          categories: groupingFormCategoriesResolver,
+        },
         data: {
           step: 2,
+          groupingCode: GroupingType.realEstateLoan,
+        },
+      },
+      {
+        path: 'edit/real-state-loan/:bankId/:id',
+        component: RealStateLoanComponent,
+        title: 'realStateLoan',
+        resolve: {
+          categories: groupingFormCategoriesResolver,
+          dataRealEstateLoan: getDataRealStateLoan,
+        },
+        data: {
+          step: 2,
+          groupingCode: GroupingType.realEstateLoan,
         },
       },
     ],
