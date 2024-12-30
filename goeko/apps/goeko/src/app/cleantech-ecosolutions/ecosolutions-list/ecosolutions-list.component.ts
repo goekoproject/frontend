@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, input, OnInit, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MessageService } from '@goeko/business-ui'
-import { ClassificationCategory, EcosolutionsService } from '@goeko/store'
+import { CategoryGrouping, EcosolutionsService } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import { CardEcosolutions } from './card-ecosolutions.model'
@@ -13,8 +13,8 @@ import { CardEcosolutions } from './card-ecosolutions.model'
   providers: [MessageService],
 })
 export class EcosolutionsListComponent implements OnInit {
-  public categorySection = this._cleantechEcosolutionsService.categories()
-  public categorySelected = this._cleantechEcosolutionsService.categorySelected
+  groupingForm = input.required<CategoryGrouping[]>()
+  public categorySelected = signal<CategoryGrouping | undefined>(undefined)
   public isSubscribed = !!this._cleantechEcosolutionsService.isSubscribed
   public ecosolutions!: CardEcosolutions[]
   public cleanTechId!: string
@@ -30,6 +30,8 @@ export class EcosolutionsListComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.cleanTechId = this._route.snapshot.paramMap.get('id') as string
+    this.categorySelected.set(this.groupingForm()[0])
+
     this.getAllEcosolutionsByCleanTech()
   }
 
@@ -40,15 +42,23 @@ export class EcosolutionsListComponent implements OnInit {
   }
 
   viewEcosolution(ecosolution: CardEcosolutions) {
-    this._goToEcosolutionForm('detail', ecosolution.id, {
-      mainCategory: ecosolution.mainCategory,
-      isReadOnly: true,
-    })
+    this._goToEcosolutionForm(
+      'detail',
+      { id: ecosolution.id },
+      {
+        mainCategory: ecosolution.mainCategory,
+        isReadOnly: true,
+      },
+    )
   }
   editEcosolution(ecosolution: CardEcosolutions) {
-    this._goToEcosolutionForm('edit', ecosolution.id, {
-      mainCategory: ecosolution.mainCategory,
-    })
+    this._goToEcosolutionForm(
+      'edit',
+      { id: ecosolution.id, categoryId: this.categorySelected()?.id },
+      {
+        mainCategory: ecosolution.mainCategory,
+      },
+    )
   }
 
   deleteEcosolution(ecosolution: CardEcosolutions) {
@@ -64,14 +74,15 @@ export class EcosolutionsListComponent implements OnInit {
       })
   }
 
-  private _goToEcosolutionForm(path: string, id: string, arg: any) {
-    this._roter.navigate([`./${path}`, id], {
+  private _goToEcosolutionForm(path: string, params: { id: string; categoryId?: string }, arg?: any) {
+    const { id, categoryId } = params
+    this._roter.navigate([`./${path}`, id, categoryId], {
       queryParams: arg,
       relativeTo: this._route,
     })
   }
 
-  selectedTab(category: ClassificationCategory) {
+  selectedTab(category: CategoryGrouping) {
     this.categorySelected.set(category)
   }
 }

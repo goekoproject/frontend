@@ -70,6 +70,10 @@ export class ClassificationsService {
 
   /**	Category */
 
+  getCategoryTranslated() : Observable<Category[]> {
+    return this._http.get<Category[]>(`/v2/classifications/category/translated?lang=${this.currentLang()}`)
+  }
+
   getCategoryById(id: string): Observable<Category> {
     if (!id) return new Observable()
     return this._http.get<Category>(`/v2/classifications/category/${id}`)
