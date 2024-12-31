@@ -658,6 +658,9 @@
   "yourProjects": "Tus proyectos",
   "backToResults": "Volver a los resultados",
   "characters": "{{num}} caracteres",
+  "yourFinancialSolutions": "Tus soluciones financieras",
+  "addRealEstateLoan": "Añadir préstamo inmobiliario",
+  "addSustainableEquipment": "Añadir equipo sostenible",
   "vehicles": {
     "equipmentTransportTruck": "Camión de transporte de equipos",
     "materialTransportTruck": "Camión de transporte de materiales",

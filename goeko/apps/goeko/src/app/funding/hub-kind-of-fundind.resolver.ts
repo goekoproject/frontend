@@ -27,3 +27,12 @@ export const getDataRealStateLoan = (route: ActivatedRouteSnapshot) => {
   }
   return _fundingService.getRealStateLoanById(_id)
 }
+
+export const getSustainableEquipment = (route: ActivatedRouteSnapshot) => {
+  const _fundingService = inject(FundingService)
+  const _id = route.paramMap.get('id') as string
+  if (!_id) {
+    return of(undefined)
+  }
+  return _fundingService.getSustainableEquipmentById(_id)
+}

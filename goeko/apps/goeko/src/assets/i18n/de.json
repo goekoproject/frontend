@@ -656,6 +656,9 @@
   "yourProjects": "Ihre Projekte",
   "backToResults": "Zurück zu den Ergebnissen",
   "characters": "{{num}} Zechen",
+  "yourFinancialSolutions": "Ihre Finanzierungslösungen",
+  "addRealEstateLoan": "Immobilienkredit hinzufügen",
+  "addSustainableEquipment": "Nachhaltige Ausrüstung hinzufügen",
   "vehicles": {
     "equipmentTransportTruck": "Ausrüstungstransport-LKW",
     "materialTransportTruck": "Materialtransport-LKW",

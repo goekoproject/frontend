@@ -662,6 +662,9 @@
   "yourProjects": "Vos projets",
   "your_ecosolutions": "Vos Eco-solutions",
   "characters": "{{num}} caractères",
+  "yourFinancialSolutions": "Vos solutions financières",
+  "addRealEstateLoan": "Ajouter un prêt immobilier",
+  "addSustainableEquipment": "Ajouter un équipement durable",
   "vehicles": {
     "equipmentTransportTruck": "Camion de transport d’équipements",
     "materialTransportTruck": "Camion de transport de matériaux",

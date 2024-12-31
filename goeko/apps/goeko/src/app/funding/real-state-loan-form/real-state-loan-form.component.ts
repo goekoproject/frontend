@@ -111,7 +111,7 @@ export class RealStateLoanComponent implements OnInit {
       phoneNumber: data.contact.phoneNumber,
     })
 
-    data.locations.forEach((location: any) => {
+    data.locations.forEach((location) => {
       this._addLocations(location)
     })
   }
@@ -129,10 +129,7 @@ export class RealStateLoanComponent implements OnInit {
   }
   save = () => {
     const realStateLoan = new CreateRealStateLoan(this.bankId(), this.form.value)
-    const createKindOfFunding$ = forkJoin([
-      this._updateOrCreateSustainableEquipment(this._fundingService.getSustainableEquipment()),
-      this._updateOrCreateRealStateLoan(realStateLoan),
-    ])
+    const createKindOfFunding$ = forkJoin([this._updateOrCreateRealStateLoan(realStateLoan)])
 
     createKindOfFunding$.subscribe((res) => {
       if (res) {

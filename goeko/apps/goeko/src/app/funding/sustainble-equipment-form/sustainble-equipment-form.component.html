@@ -12,7 +12,7 @@
           @for (vehicle of vehicles().subcategories; track vehicle.code) {
             <input id="subcategory" class="invisible absolute h-0" formControlName="subcategory" type="text" />
 
-            <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="products">
+            <go-badge-group [id]="'vehicles'" name="vehicles" formControlName="products" [compareWith]="comparteWithProduct">
               @for (product of vehicle.products; track product.code) {
                 <go-badge [value]="product" [id]="product.id">{{ product.label }} </go-badge>
               }
@@ -25,20 +25,23 @@
             <go-i-leaves></go-i-leaves>
             <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
           </span>
-          <go-toggle-switch (checkedChange)="toogleGrenBonusVehicle($event)" class="ml-2"></go-toggle-switch>
+          <go-toggle-switch
+            [checked]="form.value.greenBonusVehicle"
+            (checkedChange)="toogleGrenBonusVehicle($event)"
+            class="ml-2"></go-toggle-switch>
         </div>
       </div>
 
       <div class="mt-4">
         <label class="mb-2 block font-medium">{{ machines().label }}</label>
         <ng-container formGroupName="machines">
-          <input id="category" class="invisible absolute h-0" formControlName="category" type="text" [value]="machines()" />
+          <input id="category" class="invisible absolute h-0" formControlName="category" type="text" />
 
           @for (machine of machines().subcategories; track machine.id) {
-            <input id="subcategory" class="invisible absolute h-0" formControlName="subcategory" type="text" [value]="machine" />
+            <input id="subcategory" class="invisible absolute h-0" formControlName="subcategory" type="text" />
 
-            <go-badge-group [id]="'machines'" name="machines" formControlName="products">
-              @for (product of machine.products; track product.id) {
+            <go-badge-group [id]="'machines'" name="machines" formControlName="products" [compareWith]="comparteWithProduct">
+              @for (product of machine.products; track product.code) {
                 <go-badge [value]="product" [id]="product.id">{{ product.label }} </go-badge>
               }
             </go-badge-group>
@@ -50,7 +53,10 @@
             <go-i-leaves></go-i-leaves>
             <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
           </span>
-          <go-toggle-switch (checkedChange)="toogleGreenBonusMachine($event)" class="ml-2"></go-toggle-switch>
+          <go-toggle-switch
+            [checked]="form.value.greenBonusMachines"
+            (checkedChange)="toogleGreenBonusMachine($event)"
+            class="ml-2"></go-toggle-switch>
         </div>
       </div>
     </div>
@@ -59,14 +65,19 @@
     <div class="mb-6">
       <label class="mb-2 block font-medium">{{ 'FORM_LABEL.requiredDocumentsFunding' | translate }}</label>
       <div class="form-group form-check mb-4 space-y-2">
-        <ng-container formArrayName="documents">
-          @for (document of documentsFormArray.controls; track document; let index = $index) {
-            <label class="flex items-center gap-2" [formGroupName]="index">
-              <input type="checkbox" formControlName="checked" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-              {{ requiredDocuments()[index].label | translate }}
-            </label>
-          }
-        </ng-container>
+        @if (requiredDocuments()) {
+          <ng-container formArrayName="documents">
+            @for (document of requiredDocuments(); track document; let index = $index) {
+              <label class="flex items-center gap-2" [formGroupName]="index">
+                <input
+                  type="checkbox"
+                  formControlName="checked"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                {{ document.label | translate }}
+              </label>
+            }
+          </ng-container>
+        }
       </div>
     </div>
 
@@ -79,7 +90,7 @@
       <div class="mb-4">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
 
-        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance">
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance" [compareWith]="compareWithOptionsNumber">
           @for (year of years(); track year.id) {
             <super-option [value]="year"> {{ year.label }}</super-option>
           }
@@ -93,7 +104,7 @@
       <div class="flex items-center gap-4">
         <ui-super-select formControlName="minimumQuantity" class="basis-1/2">
           @for (money of amount(); track money.id; let first = $first) {
-            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
+            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label | number }}</super-option>
           }
         </ui-super-select>
         <ui-super-select [multiple]="true" formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
@@ -109,7 +120,7 @@
       <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.activityProspect' | translate }}</h2>
       <div class="mb-4">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
-        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity">
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity" [compareWith]="compareWithOptionsNumber">
           @for (year of years(); track year.id) {
             <super-option [value]="year"> {{ year.label }}</super-option>
           }
@@ -135,7 +146,7 @@
     <!-- CONTACT DATA-->
     <div class="mb-6">
       <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.contact' | translate }}</h2>
-      <div class="flex">
+      <div class="flex gap-2">
         <!--  <div class="w-full">
               <go-input formControlName="name" id="name" type="text">
                 <p slot="label">{{ 'FORM_LABEL.name' | translate }}</p>

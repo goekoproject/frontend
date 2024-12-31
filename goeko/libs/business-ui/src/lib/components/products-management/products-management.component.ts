@@ -49,7 +49,7 @@ export class ProductsManagementComponent implements OnInit {
   })
   private _fetchProducts = () => {
     this._refreshForm()
-    this._getProducts
+    this._getProducts()
   }
   get labelTranslations() {
     return this.form.get('label')?.get('translations') as FormArray
