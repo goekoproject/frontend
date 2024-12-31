@@ -223,10 +223,10 @@
   },
   "INPUT_FILE": {
     "certified": "Select your certificate",
-    "image": "Drag and drop or click to",
+    "image": "Drag and drop or click  ",
     "image2": "Select an image",
     "image3": "Add image",
-    "selectLogo": "Select your logo"
+    "selectLogo": "Select logo"
   },
   "LANGS": {
     "de": "German",

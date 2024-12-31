@@ -65,14 +65,14 @@
                   >
                 </label>
                 <textarea
-                  maxlength="2000"
+                  maxlength="100"
                   class="go-textarea"
                   rows="5"
                   id="descriptionTranslations"
                   [formControlName]="'label'"
                   [readonly]="isReadOnly">
                 </textarea>
-                <span class="text-xs font-medium"> ( {{ 'characters' | translate: { num: 2000 } }})</span>
+                <span class="text-xs font-medium"> ({{ 'characters' | translate: { num: 100 } }})</span>
               </div>
             }
           }
