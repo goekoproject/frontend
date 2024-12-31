@@ -13,7 +13,7 @@
 
               <label class="mb-2 block font-medium">{{ subcategory.label }}</label>
               <div class="mb-6">
-                <go-badge-group formControlName="products">
+                <go-badge-group formControlName="products" [compareWith]="comparteWithProduct">
                   @for (worktype of subcategory.products; track worktype.id) {
                     <go-badge [value]="worktype">{{ worktype.label }}</go-badge>
                   }
@@ -27,6 +27,7 @@
               <ui-super-select
                 [formControlName]="'ownerProfile'"
                 [multiple]="true"
+                [compareWith]="compareWithOptions"
                 [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
                 <label title for="ownerProfile">
                   {{ 'FORM_LABEL.ownerProfile' | translate }}
@@ -39,6 +40,7 @@
             <div>
               <ui-super-select
                 [formControlName]="'buildingTypes'"
+                [compareWith]="compareWithOptions"
                 [multiple]="true"
                 [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
                 <label title for="buildingTypes">
@@ -64,9 +66,9 @@
 
       <div class="flex gap-4 [&>*]:flex-grow">
         <div>
-          <ui-super-select [formControlName]="'montanMinimun'">
+          <ui-super-select [formControlName]="'montanMinimun'" [compareWith]="compareWithOptionsNumber">
             @for (money of amount(); track money.id) {
-              <super-option [value]="money"> {{ money.label }}</super-option>
+              <super-option [value]="money"> {{ money.label | number }}</super-option>
             }
           </ui-super-select>
         </div>
@@ -74,6 +76,7 @@
           <ui-super-select
             [multiple]="true"
             [readonly]="false"
+            [compareWith]="compareWithOptionsLabel"
             [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
             [formControlName]="'currency'"
             id="currency"

@@ -1,4 +1,5 @@
 import { Translations } from '../../admin-categories/classifications-subcategory.model'
+import { Product } from '../../classificactions/classifications.interface'
 import { LocationsCountry } from '../../model/locations.country'
 import { ContactRequest } from '../common-request.interface'
 
@@ -23,7 +24,7 @@ export interface Bank {
 export interface ClassificationFunding {
   category: CategoryFunding
   subcategory: SubcategoryFunding
-  products: any[]
+  products: Product[]
 }
 
 export interface CategoryFunding {

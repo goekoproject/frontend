@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, computed, input, output } from '@angular/core'
 import { ProductToCurrentLangPipe } from '@goeko/business-ui'
-import { LocationRegionsPipe, RealStateLoanResponse } from '@goeko/store'
+import { LocationRegionsPipe, Product, RealStateLoanResponse } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 
@@ -30,7 +30,7 @@ import { TranslateModule } from '@ngx-translate/core'
             <span class="text-grayText">{{ 'FORM_LABEL.workTypes' | translate }}</span>
 
             <div class="flex flex-wrap gap-2">
-              @for (product of products(); track products) {
+              @for (product of products(); track product.code) {
                 <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
                   <p>{{ product | productToCurrentLang }}</p>
                 </div>
@@ -48,6 +48,6 @@ import { TranslateModule } from '@ngx-translate/core'
 })
 export class CardPreviewRealEstateLoanComponent {
   realStateLoan = input.required<RealStateLoanResponse>()
-  products = computed(() => this.realStateLoan().classifications[0].products)
+  products = computed<Product[]>(() => this.realStateLoan().classifications[0].products)
   onEdit = output<{ id: string }>()
 }
