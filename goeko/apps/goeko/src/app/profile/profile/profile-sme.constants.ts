@@ -44,6 +44,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         controlName: 'phoneNumber',
         label: 'FORM_LABEL.phoneNumber',
         type: 'text',
+        placeholder: '0041770000000',
       },
     ],
   },

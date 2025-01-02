@@ -253,7 +253,7 @@
   },
   "INPUT_FILE": {
     "certified": "Sélectionnez votre certificat",
-    "image": "Glissez-déposez ou cliquez pour",
+    "image": "Glissez-déposez ou cliquez",
     "image2": "Sélectionner une image",
     "image3": "Ajouter une image",
     "selectLogo": "Sélectionnez le logo"
@@ -531,8 +531,8 @@
   "SIGNUP": {
     "acceptedConditions": "J’ai lu et accepté",
     "acceptedConditions2": "les conditions générales",
-    "cleantechDescription": "Je propose une solutions cleantech",
-    "enterpriseDescription": "Je cherche une solutions cleantech"
+    "cleantechDescription": "Je propose une solution cleantech",
+    "enterpriseDescription": "Je cherche une solution cleantech"
   },
   "SUCCESS_MESSAGES": {
     "DELETE": "Supprimé avec succès.",
@@ -661,7 +661,6 @@
   "yourEcosolution": "Votre éco-solution",
   "yourProjects": "Vos projets",
   "your_ecosolutions": "Vos Eco-solutions",
-  "characters": "{{num}} caractères",
   "yourFinancialSolutions": "Vos solutions financières",
   "addRealEstateLoan": "Ajouter un prêt immobilier",
   "addSustainableEquipment": "Ajouter un équipement durable",
@@ -727,5 +726,6 @@
     "realEstateCompany": "Société immobilière",
     "housingCooperative": "Coopérative de logement"
   },
-  "delete": "Supprimer"
+  "delete": "Supprimer",
+  "characters": "{{num}} caractères maximum"
 }

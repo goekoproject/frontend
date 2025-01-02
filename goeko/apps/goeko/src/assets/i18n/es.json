@@ -242,10 +242,10 @@
   },
   "INPUT_FILE": {
     "certified": "Seleccione su certificado",
-    "image": "Arrastra y suelta o haz click para",
+    "image": "Arrastra y suelta o haz click",
     "image2": "Selecciona una imagen",
     "image3": "Añadir imagen",
-    "selectLogo": "Selecciona su logo"
+    "selectLogo": "Selecciona el logo"
   },
   "LANGS": {
     "de": "Alemán",
@@ -657,7 +657,6 @@
   "resultSolution": "resultado",
   "yourProjects": "Tus proyectos",
   "backToResults": "Volver a los resultados",
-  "characters": "{{num}} caracteres",
   "yourFinancialSolutions": "Tus soluciones financieras",
   "addRealEstateLoan": "Añadir préstamo inmobiliario",
   "addSustainableEquipment": "Añadir equipo sostenible",
@@ -723,5 +722,6 @@
     "realEstateCompany": "Empresa inmobiliaria",
     "housingCooperative": "Cooperativa de viviendas "
   },
-  "delete": "Eliminar"
+  "delete": "Eliminar",
+  "characters": "{{num}} caracteres maximum"
 }

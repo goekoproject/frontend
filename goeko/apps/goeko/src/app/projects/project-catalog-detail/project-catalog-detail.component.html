@@ -62,8 +62,6 @@
         <div class="fieldset">
           <h3 class="font-semibold text-gray-700">{{ 'FORM_LABEL.price' | translate }}</h3>
           <p class="details-article--data" [innerHTML]="ecosolutionSearchDetail().priceDescription | lineBreak"></p>
-
-
         </div>
 
         <!-- Sustainable Development Goals -->
@@ -92,7 +90,11 @@
             <h3 class="font-semibold text-gray-700">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</h3>
             <span class="flex w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
               {{ ecosolutionSearchDetail()['paybackPeriodYears'] | number: '1.0-0' }}
-              {{ 'years' | translate }}
+              @if (ecosolutionSearchDetail()['paybackPeriodYears'] === 1) {
+                {{ 'year' | translate }}
+              } @else {
+                {{ 'years' | translate }}
+              }
             </span>
           </div>
         }

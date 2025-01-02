@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, RouterModule } from '@angular/router'
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { AssetsContentFulPipe, ContentFulModule, ContentFulService } from '@goeko/store'
 import { GoDateFormatPipe, MdToHtmlPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -22,7 +22,8 @@ export class BlogDetailComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _contentFulService: ContentFulService,
-    private _headerService: HeaderService
+    private _headerService: HeaderService,
+    private _router: Router
   ) {
     console.log('post', this._blogId)
   }
@@ -37,9 +38,11 @@ export class BlogDetailComponent implements OnInit {
       })
     }
   }
+
   goBack() {
-    window.history.back()
+    this._router.navigate(['home/blog'])
   }
+
 
   private _setHeaderTheme() {
     this._headerService.isDarkTheme.next(true);
