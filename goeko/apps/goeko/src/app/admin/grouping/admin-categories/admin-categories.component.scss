@@ -23,8 +23,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 4rem;
-  background: url(https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg)
-    no-repeat 14px 50%;
+  background: url(https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg) no-repeat 14px 50%;
   background-size: 18px;
   align-items: flex-start;
   cursor: pointer;
@@ -50,20 +49,10 @@ summary::-webkit-details-marker {
   display: none;
 }
 .subcategories-translations {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 2rem 4rem;
-  background: var(--primary--50);
-  border: 2rem solid var(--primary--100);
-  border-radius: 4rem;
-  position: relative;
+  @apply relative flex flex-col gap-4 p-8;
 }
 .subcategories-sentence {
-  text-transform: uppercase;
-  go-input {
-    min-width: 100%;
-  }
+  @apply flex items-center gap-4;
 }
 .subcategories-actions {
   display: flex;
@@ -76,12 +65,6 @@ summary::-webkit-details-marker {
   padding: 4px 1rem;
   background: var(--primary--200);
   border-radius: 0.5rem;
-}
-
-.button-actions-section {
-  position: absolute;
-  top: -3rem;
-  right: 1rem;
 }
 .button-toogle-actors {
   display: block;

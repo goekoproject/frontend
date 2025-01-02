@@ -92,9 +92,13 @@ const routes: Routes = [
       },
       {
         path: 'admin',
-        canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
-        canMatch: [hasRole(ROLES.ADMIN)],
+        /*   canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
+        canMatch: [hasRole(ROLES.ADMIN)], */
         loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
+      },
+      {
+        path: 'funding',
+        loadChildren: () => import('../funding/funding.module').then((m) => m.FundingModule),
       },
     ],
   },

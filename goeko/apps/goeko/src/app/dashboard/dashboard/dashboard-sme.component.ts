@@ -1,16 +1,19 @@
+import { CommonModule } from '@angular/common'
 import { Component, effect, inject, input } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
 import { EcosolutionsTaggingService, SmeRequestResponse, TAGGING } from '@goeko/store'
-import { DialogService } from '@goeko/ui'
+import { ButtonModule, CardProductComponent, DialogService, NotificationModule } from '@goeko/ui'
+import { TranslateModule } from '@ngx-translate/core'
 import { DashboardSmeService } from './dashboard-sme.service'
 
 @Component({
   selector: 'goeko-dashboard-sme',
+  standalone: true,
   templateUrl: './dashboard-sme.component.html',
   styleUrls: ['./dashboard-sme.component.scss'],
+  imports: [CardProductComponent, TranslateModule, RouterModule, ButtonModule, CommonModule, NotificationModule],
   providers: [MessageService, DashboardSmeService, EcosolutionsTaggingService],
-  
 })
 export class DashboardSmeComponent {
   private _dashboardSmeService = inject(DashboardSmeService)

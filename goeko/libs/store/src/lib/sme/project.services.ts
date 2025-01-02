@@ -4,8 +4,10 @@ import { CacheProperty } from '@goeko/coretools'
 import { map, Observable } from 'rxjs'
 import { Category } from '../classificactions/classifications.interface'
 import { ClassificationsService } from '../classificactions/classifications.service'
+import { GroupingType } from '../classificactions/grouping-type.enum'
 import { Project } from './project.interface'
 import { SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
+import { CategoryGrouping } from '../classificactions/grouping.interface'
 
 @Injectable()
 export class ProjectService {
@@ -48,7 +50,7 @@ export class ProjectService {
   deleteProject(id: string): Observable<any> {
     return this._http.delete<any>(`/v1/ecosolution/search/projects/smes/${id}`)
   }
-  getGroupingFormCategories(grouping: string = 'construction'): Observable<Category[]> {
+  getGroupingFormCategories(grouping = GroupingType.construction): Observable<CategoryGrouping[]> {
     return this._classificationsServices.groupingFormCategories(grouping)
   }
 }

@@ -73,8 +73,10 @@ export class GoInputDirective implements OnInit, AfterContentInit, ControlValueA
   ) {}
 
   ngOnInit(): void {
-    const injectedControl = this.injector.get(NgControl)
-    this._ngControl = this.injector.get(FormGroupDirective).getControl(injectedControl as FormControlName)
+    if (NgControl) {
+      const injectedControl = this.injector.get(NgControl)
+      this._ngControl = this.injector.get(FormGroupDirective).getControl(injectedControl as FormControlName)
+    }
   }
   ngAfterContentInit(): void {
     this._setAttributeRequired()

@@ -1,0 +1,121 @@
+<section class="flex flex-col gap-4">
+  <h1 class="text-4xl">{{ classifications()?.name }}</h1>
+  <p>
+    {{ classifications()?.description }}
+  </p>
+</section>
+
+<section class="section-step">
+  <!-- CATEGORY -->
+  <goeko-category [categories]="categories() || []" [indexSelected]="0" (onSelectCategory)="selectCategory($event)"> </goeko-category>
+</section>
+
+@defer (when subCategorySelected()) {
+  <section class="section-subcategories">
+    <div class="flex gap-4">
+      <!--   <button go-button appearance="white" (click)="addSubcategory()">
+        <i class="ti ti-plus"></i>
+        {{ 'Add Category' | translate }}
+      </button> -->
+      <button go-button appearance="white" (click)="addSubcategory()">
+        <i class="ti ti-plus"></i>
+        {{ 'Add Subcategory' | translate }}
+      </button>
+    </div>
+
+    @for (subcategory of subCategorySelected() || []; track subcategory.code; let index = $index) {
+      <details [@fadeAnimation] class="subcategories" #detailCategory>
+        <summary class="subcategories-summary" (click)="toogleSubcategory($event, index)">
+          <p>
+            {{ subcategory.label.translations[2].label }}
+          </p>
+          <p>( {{ subcategory.code }})</p>
+        </summary>
+        @defer (when detailCategory.open) {
+          <div class="subcategories-body">
+            <div class="flex flex-col gap-2 p-4">
+              <go-switch
+                class="button-toogle-actors"
+                (valueChanged)="hanldertoggleActor($event)"
+                [leftLabel]="'Question' | translate"
+                [rightLabel]="'Label' | translate"></go-switch>
+              <!--Question for SME's-->
+              @if (toggleActor()) {
+                <section>
+                  <fieldset class="subcategories-translations">
+                    <div class="flex gap-4">
+                      <legend class="section-legeng-subcategories">
+                        {{ 'Question' | translate }}
+                      </legend>
+                      <button go-button class="self-end" appearance="white" (click)="goToSubcategory(subcategory)">
+                        {{ 'Go to Subcategory' | translate }}
+                      </button>
+                    </div>
+
+                    @for (lang of langs(); track lang.code; let index = $index) {
+                      <article class="subcategories-sentence">
+                        <span class="fi fi-{{ lang.iconFlag }}"></span>
+                        <p>
+                          {{ subcategory.question.translations[index].label }}
+                        </p>
+                      </article>
+                    }
+                  </fieldset>
+                </section>
+              } @else {
+                <!--  Question for Cleantech-->
+                <section>
+                  <fieldset class="subcategories-translations">
+                    <legend class="section-legeng-subcategories">
+                      {{ 'Label' | translate }}
+                    </legend>
+
+                    @for (lang of langs(); track lang.code; let index = $index) {
+                      <article class="subcategories-sentence">
+                        <span class="fi fi-{{ lang.iconFlag }}"></span>
+                        <p>
+                          {{ subcategory.label.translations[index].label }}
+                        </p>
+                      </article>
+                    }
+                  </fieldset>
+                </section>
+              }
+            </div>
+
+            <fieldset class="subcategories-translations bg-transparent">
+              <div class="flex gap-4">
+                <legend class="section-legeng-subcategories">
+                  {{ 'FORM_LABEL.products' | translate }}
+                </legend>
+                <button go-button (click)="addProductToGrouping(subcategory, subcategory.products)">
+                  <i class="ti ti-plus"></i>
+                  {{ 'product' | translate }}
+                </button>
+              </div>
+
+              <go-badge-group [id]="'products'" name="products">
+                @for (product of subcategory.products; track product.code) {
+                  <go-badge [value]="product" [@fadeAnimation] [readonly]="true">
+                    {{ product | productToCurrentLang }}
+                  </go-badge>
+                }
+              </go-badge-group>
+            </fieldset>
+            <div class="subcategories-actions">
+              <button go-button appearance="flat" (click)="closeDetailCategory(index)">
+                {{ 'cancel' | translate }}
+              </button>
+
+              <button go-button appearance="white" (click)="removeSubcategoryGrouping(subcategory)">
+                {{ 'Remove of grouping' | translate }}
+              </button>
+            </div>
+          </div>
+        }
+      </details>
+    }
+  </section>
+} @loading {
+  <div>loading</div>
+}

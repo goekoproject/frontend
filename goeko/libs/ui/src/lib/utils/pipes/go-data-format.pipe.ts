@@ -22,7 +22,7 @@ export class GoDateFormatPipe implements PipeTransform {
    * @param styleTokens - The format style tokens (default: 'DD/MM/YYYY').
    * @returns The formatted date string.
    */
-  transform(value: string | Date | null | any, styleTokens: string = 'DD/MM/YYYY'): string {
+  transform(value: string | Date | null | any, styleTokens = 'DD/MM/YYYY'): string {
     if (value) {
       return format(value, styleTokens, this.langSignal())
     }

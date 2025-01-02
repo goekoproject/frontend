@@ -73,6 +73,7 @@ export class BadgeComponent implements AfterContentInit {
     this._cdf.markForCheck()
   }
   onSelect() {
+    if (this.readonly) return
     this.onSelected$.emit(this)
     this._cdf.markForCheck()
   }

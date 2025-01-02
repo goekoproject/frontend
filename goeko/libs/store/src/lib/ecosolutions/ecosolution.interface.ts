@@ -34,6 +34,7 @@ export interface Ecosolutions {
   solutionName: string
   solutionDescription?: string
   classification: Classification
+  classifications: Classification[]
   price?: Price
   improvement?: Improvement
   sustainableDevelopmentGoals?: number[]

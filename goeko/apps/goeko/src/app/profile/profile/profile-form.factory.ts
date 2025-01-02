@@ -1,10 +1,11 @@
 import { FormGroup } from '@angular/forms';
 import { UserSwitch, UserType } from '@goeko/store';
-import { cleanTechFormGroup, smeFormGroup } from './profile-form';
+import { bankFormGroup, cleanTechFormGroup, smeFormGroup } from './profile-form';
 
 const PROFILE_FORM: UserSwitch<any> = {
   sme: smeFormGroup,
   cleantech: cleanTechFormGroup,
+  bank: bankFormGroup
 };
 
 export abstract class ProfileFormFactory {

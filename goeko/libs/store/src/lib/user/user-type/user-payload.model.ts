@@ -1,3 +1,5 @@
+import { mapperLocations } from "@goeko/core"
+
 export interface NotificationProfile {
   email: string
   phoneNumber: string
@@ -31,5 +33,27 @@ export class UserCleantechPayload {
       phoneNumber: dataForm.phoneNumber,
       lang: dataForm.comunicationLanguage?.code,
     }
+  }
+}
+
+export class UserBankPayload {
+  name: string
+  website: string
+  externalId: string
+  contactPerson: string
+  notification: NotificationProfile
+  locations: any
+
+  constructor(dataForm: any) {
+    this.name = dataForm.name
+    this.website = dataForm.website
+    this.externalId = dataForm.externalId
+    this.contactPerson = dataForm.contactPerson
+    this.notification = {
+      email: dataForm.email,
+      phoneNumber: dataForm.phoneNumber,
+      lang: dataForm.comunicationLanguage,
+    }
+    this.locations = mapperLocations(dataForm.locations)
   }
 }

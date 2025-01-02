@@ -7,12 +7,9 @@
 
   <nav class="menu-user w-full">
     <ul class="menu-user-options">
-      @for (item of menuOptions; track item.id; let index = $index) {
+      @for (item of menuOptions | orderBy: 'asc' : 'order'; track item.id; let index = $index) {
         <ng-container *goShowForRoles="item.userRoles">
-          <li
-            class="flex-none flex-col items-start text-primary-900"
-            *goShowUserType="item.userType"
-            [id]="item.id">
+          <li class="flex-none flex-col items-start text-primary-900" [id]="item.id">
             @if (item.submenu && item.submenu.length > 0) {
               <div
                 (click)="openSubmenu(index)"
@@ -39,9 +36,7 @@
             }
 
             @if (item.submenu && item.submenu.length > 0) {
-              <ul
-                class="w-full flex-col px-4"
-                [ngClass]="{ flex: selectedOptionMenu() === index, hidden: selectedOptionMenu() !== index }">
+              <ul class="w-full flex-col px-4" [ngClass]="{ flex: selectedOptionMenu() === index, hidden: selectedOptionMenu() !== index }">
                 @for (subItem of item.submenu; track subItem.id) {
                   <li
                     class="z-50 flex h-10 items-center p-2 text-primary-900 transition delay-150 duration-500 hover:bg-primary-200"
@@ -57,7 +52,7 @@
       }
     </ul>
 
-    <div class="user-actions p-4 m-auto group-hover:m-0">
+    <div class="user-actions m-auto p-4 group-hover:m-0">
       <div class="flex cursor-pointer items-center gap-2 self-start text-textError" (click)="logout()">
         <i class="ti ti-power text-3xl"></i>
         <p class="hidden gap-2 text-base group-hover:block">{{ 'logout' | translate }}</p>
@@ -68,7 +63,7 @@
 <div class="flex h-screen w-20 flex-col"></div>
 <ng-template #titleOption let-title>
   <p
-    class="absolute -right-12 mr-auto h-0 min-w-max opacity-0 transition-all  group-hover:relative group-hover:right-0 group-hover:h-auto group-hover:opacity-100">
+    class="absolute -right-12 mr-auto h-0 min-w-max opacity-0 transition-all group-hover:relative group-hover:right-0 group-hover:h-auto group-hover:opacity-100">
     {{ title | translate }}
   </p>
 </ng-template>

@@ -8,8 +8,9 @@ import { Router } from '@angular/router'
 import { CacheProperty } from '@goeko/coretools'
 import { Picture } from '../model/pictures.interface'
 import { SessionStorageService } from '../session-storage.service'
-import { CleantechsUser, ROLES, SmeUser, UserType } from './public-api'
+import { CleantechsUser, ROLES, SmeUser, USER_TYPE, UserType } from './public-api'
 import { UserData } from './user-data.interface'
+import { BankUser } from './user-type/bank-user.model'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
 export const SS_LOAD_USER = 'SS_LOAD_USER'
 
@@ -20,8 +21,8 @@ export class UserService {
   public userAuthData = signal<any>({})
 
   @CacheProperty('_rawUser')
-  private _rawUser!: SmeUser | CleantechsUser
-  public userProfile = signal<SmeUser | CleantechsUser>(this._rawUser)
+  private _rawUser!: SmeUser | CleantechsUser | BankUser
+  public userProfile = signal<SmeUser | CleantechsUser | BankUser>(this._rawUser)
 
   public fechAuthUser = new Subject()
   private actorsEndpoint = computed(() => this.userAuthData()['userType'] + 's')
@@ -69,8 +70,8 @@ export class UserService {
             this._redirectDashboard()
           }
         } else {
-          this.userProfile.set({} as SmeUser | CleantechsUser)
-          this._rawUser = {} as SmeUser | CleantechsUser
+          this.userProfile.set({} as SmeUser | CleantechsUser | BankUser)
+          this._rawUser = {} as SmeUser | CleantechsUser | BankUser
           this._redirectProfile()
         }
       })
@@ -85,7 +86,12 @@ export class UserService {
 
   private _redirectDashboard() {
     this.sessionStorage.setItem(SS_LOAD_USER, true)
-    this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`])
+
+    if (this.userType() === USER_TYPE.BANK) {
+      this._router.navigate([`platform/funding`])
+    } else {
+      this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`])
+    }
   }
   private _redirectProfile() {
     this._router.navigate([`platform/profile/${this.externalId()}`])
@@ -98,11 +104,11 @@ export class UserService {
     this.getById(this.userProfile().id).subscribe((data) => this.propagateDataUser(data))
   }
   createUserProfile(body: any) {
-    return this._http.post<SmeUser | CleantechsUser>(`/v1/actor/${this.actorsEndpoint()}`, body)
+    return this._http.post<SmeUser | CleantechsUser | BankUser>(`/v1/actor/${this.actorsEndpoint()}`, body)
   }
 
   updateUserProfile(id: string, body: any) {
-    return this._http.put<SmeUser | CleantechsUser>(`/v1/actor/${this.actorsEndpoint()}/${id}`, body)
+    return this._http.put<SmeUser | CleantechsUser | BankUser>(`/v1/actor/${this.actorsEndpoint()}/${id}`, body)
   }
 
   uploadImgProfile(id: string, files: File[]): Observable<Picture[] | null> {

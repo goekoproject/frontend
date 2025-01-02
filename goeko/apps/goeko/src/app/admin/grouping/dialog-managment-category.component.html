@@ -1,0 +1,17 @@
+<h3 class="my-4 text-2xl text-primary-default">{{ nameCategory() }}</h3>
+
+@defer (when form) {
+  <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col">
+    <ng-container formGroupName="label">
+      @for (lang of LANGS; track lang.code; let index = $index) {
+        <ng-container formArrayName="translations">
+          <div class="mb-4" [formGroupName]="index">
+            <label for="{{ lang.code }}" class="mb-1 block font-medium text-gray-700">{{ lang.title | translate }}</label>
+            <go-input input type="text" id="{{ lang.code }}" class="input-dialog" formControlName="label" />
+          </div>
+        </ng-container>
+      }
+    </ng-container>
+    <button type="submit" class="ml-auto block" go-button>{{ 'confirm' | translate }}</button>
+  </form>
+}

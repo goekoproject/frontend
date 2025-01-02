@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { HttpClientTestingModule, provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideLocationMocks } from '@angular/common/testing'
 import { Component } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
@@ -63,7 +63,7 @@ describe('DashboardSmeComponent', () => {
     } as any
 
     await TestBed.configureTestingModule({
-      declarations: [DashboardSmeComponent],
+      declarations: [],
       imports: [
         HttpClientTestingModule,
         TranslateModule.forRoot(),
@@ -71,7 +71,7 @@ describe('DashboardSmeComponent', () => {
         GoInputModule,
         DialogMessageModule,
         GoDateFormatPipe,
-
+        DashboardSmeComponent,
         RouterModule.forRoot([
           {
             path: '../sme-analysis/projects/project',
@@ -80,6 +80,7 @@ describe('DashboardSmeComponent', () => {
         ]),
       ],
       providers: [
+        provideHttpClientTesting(),
         { provide: MessageService, useValue: mockMessageService },
         { provide: DialogService, useValue: mockDialogService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },

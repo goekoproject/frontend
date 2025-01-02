@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { DashboardCleantechComponent } from './dashboard/dashboard-cleantech/dashboard-cleantech.component'
-import { DashboardSmeComponent } from './dashboard/dashboard-sme.component'
+//import { DashboardBankComponent } from '../funding/hub-funding.component'
 
 const routes: Routes = [
   {
     path: 'sme/:id',
-    component: DashboardSmeComponent,
+    loadComponent: () => import('./dashboard/dashboard-sme.component').then((m) => m.DashboardSmeComponent),
     data: {
       breadcrumb: 'dashboard',
       hidden: true,
@@ -22,7 +22,6 @@ const routes: Routes = [
       onBack: false,
     },
   },
-
 ]
 
 @NgModule({

@@ -44,6 +44,9 @@ module.exports = {
         grayFog: 'var(--gray-fog)',
         graySmoke: 'var(--gray-smoke)',
         grayAsh: 'var(--gray-ash)',
+        grayText: 'var(--text-gray)',
+        lightYellow: 'var(--light-yellow)',
+        goldenYellow: 'var(--golden-yellow)',
       },
     },
     animation: {

@@ -1,7 +1,6 @@
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
-import { Product } from '@goeko/business-ui'
 import { LANGS } from '@goeko/core'
-import { ManageProduct, ManageSubcategory } from '@goeko/store'
+import { ManageProduct, ManageSubcategory, Product } from '@goeko/store'
 
 export abstract class AdminCategoriesDynamicForm {
   static _fb: FormBuilder | undefined
