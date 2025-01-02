@@ -12,4 +12,3 @@ export class BankUser extends Actor {
     super()
   }
 }
-
