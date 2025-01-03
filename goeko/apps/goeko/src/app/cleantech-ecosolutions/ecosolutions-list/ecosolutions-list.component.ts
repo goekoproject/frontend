@@ -44,7 +44,7 @@ export class EcosolutionsListComponent implements OnInit {
   viewEcosolution(ecosolution: CardEcosolutions) {
     this._goToEcosolutionForm(
       'detail',
-      { id: ecosolution.id },
+      { id: ecosolution.id, categoryId: this.categorySelected()?.id },
       {
         mainCategory: ecosolution.mainCategory,
         isReadOnly: true,

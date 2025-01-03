@@ -21,18 +21,18 @@ const routes: Routes = [
         resolve: { groupingForm: groupingFormCategoriesResolver },
       },
       {
-        path: 'detail/:id',
-        component: EcosolutionsFormComponent,
-        data: {
-          breadcrumb: 'BREADCRUMBS.view_ecosolutions',
-        },
-      },
-      {
         path: 'new/:categoryId',
         component: EcosolutionsFormComponent,
         resolve: { groupingForm: groupingFormCategoriesResolver },
         data: {
           breadcrumb: 'BREADCRUMBS.new_ecosolutions',
+        },
+      },
+      {
+        path: 'detail/:id/:categoryId',
+        component: EcosolutionsFormComponent,
+        data: {
+          breadcrumb: 'BREADCRUMBS.view_ecosolutions',
         },
       },
       {

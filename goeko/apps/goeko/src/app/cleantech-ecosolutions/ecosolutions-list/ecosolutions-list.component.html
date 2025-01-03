@@ -10,7 +10,7 @@
           <div #content class="ecosolutions-card-list">
             <button
               class="add-ecosolutions"
-              [routerLink]="['./new']"
+              [routerLink]="['./new',item.id]"
               [queryParams]="{
                 mainCategory: item.code,
               }"

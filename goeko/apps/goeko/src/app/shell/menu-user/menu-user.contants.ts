@@ -15,7 +15,6 @@ export interface MenuUser {
 const COMMON_MENU: MenuUser[] = [
   {
     id: window.crypto.randomUUID(),
-
     title: 'profile',
     url: 'profile',
     active: true,
@@ -84,6 +83,14 @@ const SME_MENU: MenuUser[] = [
   },
 ]
 const CLEANTECH_MENU: MenuUser[] = [
+  {
+    id: window.crypto.randomUUID(),
+    title: 'MENU_USER.dashboard',
+    url: 'dashboard/cleantech',
+    active: true,
+    icon: 'home',
+    order: 0,
+  },
   {
     id: window.crypto.randomUUID(),
     title: 'Eco-solutions',
