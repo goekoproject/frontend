@@ -618,5 +618,6 @@
   "resultSolution": "Ergebnis",
   "yourProjects": "Ihre Projekte",
   "backToResults": "Zurück zu den Ergebnissen",
-  "characters": "{{num}} Zechen"
+  "characters": "{{num}} Zechen",
+  "deleteLocation": "Standort löschen"
 }

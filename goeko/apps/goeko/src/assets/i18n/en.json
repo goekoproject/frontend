@@ -620,5 +620,6 @@
   "yourEcosolution": "Your Eco-solution",
   "yourProjects": "Your projects",
   "your_ecosolutions": "Your Eco-solutions",
-  "characters": "{{num}} characters"
+  "characters": "{{num}} characters",
+  "deleteLocation": "Delete location"
 }

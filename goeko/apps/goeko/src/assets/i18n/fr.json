@@ -621,5 +621,6 @@
   "yourEcosolution": "Votre éco-solution",
   "yourProjects": "Vos projets",
   "your_ecosolutions": "Vos Eco-solutions",
-  "characters": "{{num}} caractères maximum"
+  "characters": "{{num}} caractères maximum",
+  "deleteLocation": "Supprimer la région"
 }

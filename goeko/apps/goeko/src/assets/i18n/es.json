@@ -621,5 +621,6 @@
   "resultSolution": "resultado",
   "yourProjects": "Tus proyectos",
   "backToResults": "Volver a los resultados",
-  "characters": "{{num}} caracteres maximum"
+  "characters": "{{num}} caracteres maximum",
+  "deleteLocation": "Eliminar ubicación"
 }

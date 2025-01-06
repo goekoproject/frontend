@@ -1,5 +1,17 @@
 import { CommonModule } from '@angular/common'
-import { AfterViewInit, Component, Input, OnDestroy, inject, input, signal } from '@angular/core'
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions, LocationsCountry } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
@@ -16,7 +28,7 @@ const CODE_DEFAULT_COUNTRY = 'CH'
   templateUrl: './select-locations.component.html',
   styleUrl: './select-locations.component.scss',
 })
-export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
+export class SelectLocationsComponent implements OnInit, OnDestroy {
   private _translateService = inject(TranslateService)
   public countryCompareWith = (o1: string, o2: string) => o1 === o2
   public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1?.code === (o2?.code || o2) || o2?.isAll
@@ -40,7 +52,8 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   @Input() form!: FormGroup
   public singleSelect = input<boolean>(false)
 
-  public countries = this._selectLocationsService.countries
+  public countries = computed(() => this._selectLocationsService.countries())
+  public controlLocationsCountryValue = signal<string[]>([])
 
   public disabledRegions = false
 
@@ -56,6 +69,8 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
 
   public dataSourceSelect = new Map<string, any>()
   public selectedLocationsIndex = signal<number>(0)
+  public selectedCountryLocation = signal<string>(CODE_DEFAULT_COUNTRY)
+  private _codeNext = computed(() => this.selectedCountryLocation())
   formArraySubscription!: Subscription
   public getOnlyRegions() {
     return this._controlCountryRegionsByIndex?.value?.filter((region: LocationRegions) => region.code !== this.optionAllProvince.code)
@@ -70,21 +85,61 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
       this._controlCountryRegionsByIndex.value.find((region: LocationRegions) => region.isAll).isAll = isAll
     }
   }
+  constructor() {
+    effect(() => {
+      if (this.selectedCountryLocation()) {
+        this._getRegionsByCountryCode()
+      }
+    })
+  }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
+    this._susbcribeToFormArrayChanges()
+
     this._selectLocationsService.setUpCountries()
     if (this.controlLocations.length === 0) {
       this.addLocation()
     } else {
       this._patchLocationsValue()
     }
-    this.subscribeToFormArrayAndItemChanges()
     this._changeLang()
   }
   ngOnDestroy(): void {
     this._controlLocations.clear()
   }
 
+  private _susbcribeToFormArrayChanges() {
+    let previousValues = this.controlLocations.value
+
+    this.controlLocations.valueChanges.pipe(map((values: LocationsCountry[], index) => ({ values, index }))).subscribe((currentValues) => {
+      currentValues.values.forEach((value: any, index: any) => {
+        if (value !== previousValues[index]) {
+          const { code } = value.country
+          if (code && !this.dataSourceSelect.has(code)) {
+            this.selectedCountryLocation.set(value.country.code)
+            console.log(`El elemento en la posición ${index} cambió a: `, this.dataSourceSelect)
+          }
+        }
+      })
+
+      previousValues = currentValues
+    })
+  }
+
+  private _getRegionsByCountryCode() {
+    const code = this.selectedCountryLocation()
+    this._selectLocationsService
+      .getRegions$(code)
+      .pipe(
+        map((regiones) => ({ code, regiones })), // Mapea las regiones junto con el countryCode
+      )
+      .subscribe(({ code, regiones }) => {
+        const newCode = this.selectedCountryLocation()
+        this.controlLocationsCountryValue.update((values) => [...values, newCode])
+        this.addRegionsForCodeCountry(code, [this.optionAllProvince, ...regiones])
+        this._setAllOptionWhenEmptyRegions()
+      })
+  }
   private _changeLang() {
     this._translateService.onLangChange.subscribe(() => {
       this._patchLocationsValue()
@@ -94,39 +149,8 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
   private _patchLocationsValue() {
     this.controlLocations.value.forEach((location: LocationsCountry) => {
       const { code } = location.country
-      this._selectLocationsService
-        .getRegions$(code)
-        .pipe(
-          map((regiones) => ({ code, regiones })), // Mapea las regiones junto con el countryCode
-        )
-        .subscribe(({ code, regiones }) => {
-          this.addRegionsForCodeCountry(code, [this.optionAllProvince, ...regiones])
-          this._setAllOptionWhenEmptyRegions()
-        })
+      this.selectedCountryLocation.set(code)
     })
-  }
-  private subscribeToFormArrayAndItemChanges(): void {
-    merge(
-      ...this.controlLocations.controls.map((control, index) =>
-        control.valueChanges.pipe(
-          map((value) => ({ index, value })),
-          filter((change) => change.index >= 0),
-          distinctUntilChanged((prev, curr) => prev.value.country.code === curr.value.country.code),
-          map((newValue) => newValue.value.country.code.code || newValue.value.country.code), // Transforma el cambio en el código de país
-        ),
-      ),
-    )
-      .pipe(
-        mergeMap((countryCode) =>
-          this._selectLocationsService.getRegions$(countryCode).pipe(
-            map((regiones) => ({ countryCode, regiones })), // Mapea las regiones junto con el countryCode
-          ),
-        ),
-      )
-      .subscribe(({ countryCode, regiones }) => {
-        this.addRegionsForCodeCountry(countryCode, [this.optionAllProvince, ...regiones])
-        this._setAllOptionWhenEmptyRegions()
-      })
   }
 
   private _setAllOptionWhenEmptyRegions() {
@@ -141,10 +165,9 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
 
   private addRegionsForCodeCountry = (clave: string, valor: any): void => {
     if (this.dataSourceSelect.has(clave)) {
-      this.dataSourceSelect.get(clave)?.push(valor)
-    } else {
-      this.dataSourceSelect.set(clave, valor)
+      return
     }
+    this.dataSourceSelect.set(clave, valor)
   }
 
   selectALL() {
@@ -169,9 +192,14 @@ export class SelectLocationsComponent implements AfterViewInit, OnDestroy {
 
   addLocation() {
     this.controlLocations.push(this._createLocations())
-    this.controlLocations.patchValue([{ country: { code: CODE_DEFAULT_COUNTRY, regions: [''] } }])
+    this.controlLocations.at(this.selectedLocationsIndex())?.get('country')?.get('code')?.patchValue(this._codeNext())
     this.selectedLocationsIndex.set(this.lastLocations)
-    this._patchLocationsValue()
+  }
+
+  removeLocation(index: number) {
+    this.controlLocations.removeAt(index)
+    this.controlLocationsCountryValue.update((values) => values.filter((value) => value !== this.selectedCountryLocation()))
+    this.selectedLocationsIndex.set(this.lastLocations)
   }
 
   private _createLocations(): FormGroup {
