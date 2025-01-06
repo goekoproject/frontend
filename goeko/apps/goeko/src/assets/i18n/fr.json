@@ -727,5 +727,6 @@
     "housingCooperative": "Coopérative de logement"
   },
   "delete": "Supprimer",
-  "characters": "{{num}} caractères maximum"
+  "characters": "{{num}} caractères maximum",
+  "deleteLocation": "Supprimer la région"
 }

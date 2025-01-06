@@ -729,5 +729,6 @@
     "realEstateCompany": "Immobiliengesellschaft",
     "housingCooperative": "Wohnungsbaugenossenschaft"
   },
-  "delete": "Löschen"
+  "delete": "Löschen",
+  "deleteLocation": "Standort löschen"
 }

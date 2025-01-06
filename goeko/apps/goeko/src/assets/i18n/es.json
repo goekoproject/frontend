@@ -723,5 +723,6 @@
     "housingCooperative": "Cooperativa de viviendas "
   },
   "delete": "Eliminar",
-  "characters": "{{num}} caracteres maximum"
+  "characters": "{{num}} caracteres maximum",
+  "deleteLocation": "Eliminar ubicación"
 }
