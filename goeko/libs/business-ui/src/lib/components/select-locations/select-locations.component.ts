@@ -99,6 +99,7 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
     this._selectLocationsService.setUpCountries()
     if (this.controlLocations.length === 0) {
       this.addLocation()
+      this._selectDefaultCountry()
     } else {
       this._patchLocationsValue()
     }
@@ -113,10 +114,13 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
 
     this.controlLocations.valueChanges.pipe(map((values: LocationsCountry[], index) => ({ values, index }))).subscribe((currentValues) => {
       currentValues.values.forEach((value: any, index: any) => {
+        this.controlLocationsCountryValue.set([...this.controlLocations.value.map((value: LocationsCountry) => value.country.code)])
+
         if (value !== previousValues[index]) {
           const { code } = value.country
           if (code && !this.dataSourceSelect.has(code)) {
             this.selectedCountryLocation.set(value.country.code)
+
             console.log(`El elemento en la posición ${index} cambió a: `, this.dataSourceSelect)
           }
         }
@@ -135,7 +139,6 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
       )
       .subscribe(({ code, regiones }) => {
         const newCode = this.selectedCountryLocation()
-        this.controlLocationsCountryValue.update((values) => [...values, newCode])
         this.addRegionsForCodeCountry(code, [this.optionAllProvince, ...regiones])
         this._setAllOptionWhenEmptyRegions()
       })
@@ -192,13 +195,15 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
 
   addLocation() {
     this.controlLocations.push(this._createLocations())
-    this.controlLocations.at(this.selectedLocationsIndex())?.get('country')?.get('code')?.patchValue(this._codeNext())
     this.selectedLocationsIndex.set(this.lastLocations)
+  }
+
+  private _selectDefaultCountry() {
+    this.controlLocations.at(this.selectedLocationsIndex())?.get('country')?.get('code')?.patchValue(this._codeNext())
   }
 
   removeLocation(index: number) {
     this.controlLocations.removeAt(index)
-    this.controlLocationsCountryValue.update((values) => values.filter((value) => value !== this.selectedCountryLocation()))
     this.selectedLocationsIndex.set(this.lastLocations)
   }
 
