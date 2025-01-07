@@ -37,7 +37,7 @@
                   <super-option
                     [value]="option.code"
                     [valueSelected]="first"
-                    [disabled]="controlLocationsCountryValue().includes(option.code)">
+                    [disabled]="singleSelect() ? false : controlLocationsCountryValue().includes(option.code)">
                     {{ option.label | translate }}
                   </super-option>
                 }
@@ -65,7 +65,7 @@
                 </div>
               }
               @if (controlLocations.value.length > 1) {
-                <button (click)="removeLocation(i)" class="text-primary-500 text-sm hover:text-primary-400">
+                <button (click)="removeLocation(i)" class="text-sm text-primary-500 hover:text-primary-400">
                   <i class="ti ti-trash"></i>
                   {{ 'deleteLocation' | translate }}
                 </button>
