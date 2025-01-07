@@ -1,18 +1,13 @@
-<section
-  class="bg-white p-3 rounded-xl shadow-xl flex items-center justify-between mt-4 gap-2"
->
-  <div class="flex space-x-6 items-center w-full">
-    <img src="assets/lead.svg" class="w-auto h-40 rounded-lg" />
+<section class="mt-4 flex items-center justify-between gap-2 rounded-xl bg-white p-3 shadow-xl">
+  <div class="flex w-full items-center space-x-6">
+    <img src="assets/lead.svg" class="h-40 w-auto rounded-lg" />
     <div>
       @if (this.cleantechLeads$ | async; as leads) {
         @if (leads && leads.length > 0) {
-          <p class="font-semibold text-base">
+          <p class="text-base font-semibold">
             {{ 'lastLead' | translate }}
           </p>
-          <p
-            class="lead-lastest-text w-[60%]"
-            [innerHTML]="leads.at(-1)?.message"
-          ></p>
+          <p class="lead-lastest-text w-[60%]" [innerHTML]="leads.at(-1)?.message"></p>
         } @else {
           <ng-container *ngTemplateOutlet="defaultMsgLead"></ng-container>
         }
@@ -24,7 +19,7 @@
 
   @if (this.cleantechLeads$ | async; as leads) {
     @if (leads && leads.length > 0) {
-      <button go-button [routerLink]="'../../leads'">
+      <button go-button (click)="goLeadList()">
         {{ 'showLead' | translate }}
         <i class="ti ti-arrow-badge-right"></i>
       </button>
@@ -33,7 +28,7 @@
 </section>
 
 <ng-template #defaultMsgLead>
-  <p class="font-semibold text-lg text-primary-800">
+  <p class="text-lg font-semibold text-primary-800">
     {{ 'titleBannerLead' | translate }}
   </p>
   <p class="text-base text-gray-400">

@@ -204,7 +204,7 @@
     "subcategoryForLangSME": "Unterkategorie nach Sprache für KMU",
     "technicalDescription": "Detaillierte Beschreibung",
     "titleFormAnalysis": "Wählen Sie eine Kategorie und finden Sie Ihre eco-solutions",
-    "titleSelectImgEcosolution": "Wählen Sie mehrere Bilder für Ihre EcoSolution",
+    "titleSelectImgEcosolution": "Wählen Sie mehrere Bilder für Ihre solution cleantech",
     "typeOfEcolutions": "Art der eco-solution",
     "unit": "Maßeinheit (m2, m3, y, kg)",
     "website": "Webseite",
@@ -729,5 +729,6 @@
     "realEstateCompany": "Immobiliengesellschaft",
     "housingCooperative": "Wohnungsbaugenossenschaft"
   },
-  "delete": "Löschen"
+  "delete": "Löschen",
+  "deleteLocation": "Standort löschen"
 }

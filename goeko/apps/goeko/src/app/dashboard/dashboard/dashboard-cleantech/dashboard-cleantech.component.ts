@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 import { LeadResponse, LeadService } from '@goeko/store'
 import { Observable } from 'rxjs'
 import { DashboardCleantechService } from './dashboard-cleantech.service'
@@ -10,11 +11,17 @@ import { DashboardCleantechService } from './dashboard-cleantech.service'
   styleUrls: ['./dashboard-cleantech.component.scss'],
 })
 export class DashboardCleantechComponent implements OnInit {
+  private _route = inject(ActivatedRoute)
+  private _router = inject(Router)
   public cleantechLeads!: Array<LeadResponse>
   public cleantechLeads$!: Observable<Array<LeadResponse>>
   constructor(private dashboardCleantechService: DashboardCleantechService) {}
 
   ngOnInit(): void {
     this.cleantechLeads$ = this.dashboardCleantechService.getLeads()
+  }
+
+  goLeadList = () => {
+    this._router.navigate(['leads'], { relativeTo: this._route.parent?.parent })
   }
 }

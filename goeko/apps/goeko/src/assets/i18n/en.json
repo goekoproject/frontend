@@ -213,7 +213,7 @@
     "subcategoryForLangSME": "Subcategory by language for SMEs",
     "technicalDescription": "Detailed description",
     "titleFormAnalysis": "Choose a category and find your eco-solutions",
-    "titleSelectImgEcosolution": "Choose multiple images for your EcoSolution",
+    "titleSelectImgEcosolution": "Choose multiple images for your solution cleantech",
     "typeOfEcolutions": "Type of eco-solution",
     "unit": "Unit of measurement (m2, m3, y, kg)",
     "website": "Website",
@@ -734,5 +734,6 @@
     "realEstateCompany": "Real estate company",
     "housingCooperative": "Housing cooperative"
   },
-  "delete": "Delete"
+  "delete": "Delete",
+  "deleteLocation": "Delete location"
 }
