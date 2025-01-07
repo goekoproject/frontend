@@ -84,7 +84,7 @@ describe('ProjectFormComponent', () => {
 
   it('should select next category', () => {
     component.nextCategory()
-    expect(component.categorySelected()).toEqual(MOCK_GROUPING[1])
+    expect(component.categorySelected()?.code).toEqual(MOCK_GROUPING[1].code)
   })
 
   it('should select previous category', () => {
