@@ -27,8 +27,8 @@
 
     <ng-template goCellRef let-element>
       <div class="flex flex-wrap gap-2 p-2">
-        @for (category of element['classifications'] | splitCategories; track category) {
-          <span class="rounded-full bg-greenPastel px-3 py-1.5 text-sm font-semibold text-greenLime"> {{ category }}</span>
+        @for (classification of element.classifications | classificationsLabel; track classification) {
+          <span class="rounded-full bg-greenPastel px-3 py-1.5 text-sm font-semibold text-greenLime"> {{ classification }}</span>
         }
       </div>
     </ng-template>

@@ -1,13 +1,23 @@
-import { Classifications, LocationsCountry, LocationTranslated, Project } from '@goeko/store'
+import { Classifications, LocationsCountry, LocationTranslated, Project, ResponseClassifications } from '@goeko/store'
 import { formToClassificationsMapper } from '../sme-analysis-form/sme-form-analysis/sme-analysis.request'
 
+const mapperResponseClassificationstoClassifications = (classification: ResponseClassifications[]): Classifications[] => {
+  return classification.map((classification) => ({
+    mainCategory: classification.category.code,
+    subCategory: classification.subcategory.code,
+    products: classification.products.map((product) => product.code),
+  }))
+}
+/**
+ * Query payload for search project ecosolutions
+ */
 export class ProjectEcosolutionsQuery {
   classifications: Array<Classifications>
   locations: Array<LocationsCountry>
   smeId: string
 
   constructor(projectData: Project, smeId: string) {
-    this.classifications = projectData['classifications'] ? projectData.classifications : formToClassificationsMapper(projectData)
+    this.classifications = mapperResponseClassificationstoClassifications(projectData.classifications)
     this.locations = projectData.locations?.map((location: LocationTranslated) => this.mapLocation(location))
     this.smeId = smeId
   }
@@ -17,19 +27,22 @@ export class ProjectEcosolutionsQuery {
     return {
       country: {
         code: location.country.code,
-        regions: location.country.regions ? location.country.regions.map((region) => region.code) : [],
+        regions: location.country.regions ? location.country.regions.map((region) => region.code) : undefined,
       },
     }
   }
 }
 
-export class ProjectEcosolutionParams {
+/**
+ * Save and update project ecosolution payload
+ */
+export class ProjectEcosolutionPayload {
   classifications: Array<Classifications>
   locations: Array<LocationsCountry>
   name: string
 
   constructor(projectData: Project) {
-    this.classifications = projectData['classifications'] ? projectData.classifications : formToClassificationsMapper(projectData)
+    this.classifications = formToClassificationsMapper(projectData)
     this.locations = projectData?.locations?.map((location: LocationTranslated) => this.mapLocation(location))
     this.name = projectData.name
   }

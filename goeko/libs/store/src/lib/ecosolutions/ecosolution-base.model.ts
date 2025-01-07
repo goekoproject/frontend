@@ -1,5 +1,5 @@
 import { mapperLocations } from '@goeko/core'
-import { Classifications } from '../model/classificaciones.interface'
+import { Classifications } from '../model/classifications.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
 import { LocationsCountry } from '../model/locations.country'
 import { Ecosolutions, Improvement, Price } from './ecosolution.interface'

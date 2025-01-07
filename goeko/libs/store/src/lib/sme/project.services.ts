@@ -24,7 +24,7 @@ export class ProjectService {
 
   getProjects(id: string) {
     this._http
-      .get(`/v1/ecosolution/search/projects/smes/${id}`)
+      .get(`/v2/ecosolution/search/projects/smes/${id}`)
       .pipe(map((res: any) => res['projects']))
       .subscribe((projects) => {
         this.projects.set(projects)
@@ -32,23 +32,23 @@ export class ProjectService {
   }
 
   createProject(body: SmeCreateRecomendationRequest): Observable<any> {
-    return this._http.post<any>(`/v1/ecosolution/search/projects/smes`, body)
+    return this._http.post<any>(`/v2/ecosolution/search/projects/smes`, body)
   }
 
   saveProject(body: SmeSaveRecomendationRequest): Observable<any> {
-    return this._http.post<any>(`/v1/ecosolution/search/projects/smes`, body)
+    return this._http.post<any>(`/v2/ecosolution/search/projects/smes`, body)
   }
 
   updateProject(id: string, body: SmeSaveRecomendationRequest): Observable<any> {
-    return this._http.put<any>(`/v1/ecosolution/search/projects/smes/${id}`, body)
+    return this._http.put<any>(`/v2/ecosolution/search/projects/smes/${id}`, body)
   }
 
   getProjectId({ smeId = '', projectId = '' }): Observable<SmeRequestResponse | Project> {
-    return this._http.get<SmeRequestResponse | Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
+    return this._http.get<SmeRequestResponse | Project>(`/v2/ecosolution/search/projects/smes/${smeId}/${projectId}`)
   }
 
   deleteProject(id: string): Observable<any> {
-    return this._http.delete<any>(`/v1/ecosolution/search/projects/smes/${id}`)
+    return this._http.delete<any>(`/v2/ecosolution/search/projects/smes/${id}`)
   }
   getGroupingFormCategories(grouping = GroupingType.construction): Observable<CategoryGrouping[]> {
     return this._classificationsServices.groupingFormCategories(grouping)
