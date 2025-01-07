@@ -23,7 +23,7 @@
       @if (controlLocations.controls && controlLocations.controls.length) {
         @for (location of controlLocations.controls; track location; let i = $index) {
           <div [formGroupName]="i" class="locations-selected">
-            <div [formGroupName]="'country'" class="flex w-full flex-col gap-4">
+            <div [formGroupName]="'country'" class="flex w-full gap-4 flex-col">
               <ui-super-select
                 class="w-full"
                 [placeholder]="'FORM_LABEL.country' | translate"

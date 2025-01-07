@@ -1,0 +1,13 @@
+input[type='radio']:checked + label span {
+  --tw-border-opacity: 1;
+  border-color: rgb(99 102 241 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+  --tw-shadow: inset 0 0px 0px 3.5px #e7e7ff;
+  --tw-shadow-colored: inset 0 0px 0px 3.5px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+input[type="radio"] + label span {
+  transition: background .2s, transform .2s;
+}

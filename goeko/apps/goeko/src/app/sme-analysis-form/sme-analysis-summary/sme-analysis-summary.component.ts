@@ -1,11 +1,12 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { CanAnalysisDeactivate, FORM_CATEGORIES_QUESTION, MessageService, Product, ProductsManagementComponent } from '@goeko/business-ui'
+import { CanAnalysisDeactivate, FORM_CATEGORIES_QUESTION, MessageService, ProductsManagementComponent } from '@goeko/business-ui'
 import {
   ClassificationCategory,
   ClassificationCategoryProduct,
   ClassificationSubcategory,
   DataSelect,
+  Product,
   ProjectService,
   SmeAnalysisStoreService,
   SmeService,
@@ -240,7 +241,7 @@ export class SmeAnalysisSummaryComponent implements OnInit, CanAnalysisDeactivat
     }
     this._router.navigate([route, this._smeId], { relativeTo: this._route.parent })
   }
-  getEnableNotificationEmail(onNewEcosolution: boolean) {
+  getEnableNotificationEmail(onNewEcosolution: boolean | undefined) {
     this.currentAnalytics.update((value) => ({
       ...value,
       notification: {

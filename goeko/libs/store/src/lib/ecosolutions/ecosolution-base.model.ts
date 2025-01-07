@@ -1,5 +1,5 @@
 import { mapperLocations } from '@goeko/core'
-import { Classifications } from '../model/classificaciones.interface'
+import { Classifications } from '../model/classifications.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
 import { LocationsCountry } from '../model/locations.country'
 import { Ecosolutions, Improvement, Price } from './ecosolution.interface'
@@ -12,6 +12,7 @@ export class EcosolutionsBody implements Ecosolutions {
   solutionDescription?: string
   detailedDescription?: string
   classification: Classifications
+  classifications: Classifications[]
   price?: Price
   improvement?: Improvement
   sustainableDevelopmentGoals?: any[]
@@ -56,6 +57,7 @@ export class EcosolutionsBody implements Ecosolutions {
       subCategory: formValue.subCategory?.code ?? formValue.subCategory,
       products: formValue.products,
     }
+    this.classifications = [this.classification]
     this.countries = undefined
     this.paybackPeriodYears = formValue?.paybackPeriodYears?.id
     this.marketReady = formValue.marketReady

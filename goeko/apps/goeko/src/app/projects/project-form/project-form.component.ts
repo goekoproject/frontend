@@ -13,7 +13,7 @@ import { Category, Product, Project } from '@goeko/store'
 import { BadgeModule, ButtonModule, DialogMessageModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Observable, of } from 'rxjs'
-import { ProjectEcosolutionParams } from '../project-ecosolutions-query.model'
+import { ProjectEcosolutionPayload } from '../project-ecosolutions-query.model'
 import { ProjectForm } from '../project-form.model'
 import { ProjectManagmentService } from '../project-managment.service'
 const compareWithProducts = (product: Product, productCodeSelected: Product | string | any) => {
@@ -145,7 +145,7 @@ export class ProjectFormComponent implements OnInit, CanComponentDeactivate {
   }
 
   protected _saveProjects = () => {
-    const payload = new ProjectEcosolutionParams({
+    const payload = new ProjectEcosolutionPayload({
       ...this.form.value,
       name: this.project().name,
       locations: this.project().locations,

@@ -13,8 +13,9 @@ import { Category } from '@goeko/store'
   },
 })
 export class CategoryComponent {
-  public categories = input<Category[]>([] as Category[])
+  public categories = input<any[]>([] as Category[])
 
+  public editMode = input<boolean>(false)
   public formValue = input<any>()
   @Input()
   public get indexSelected() {
@@ -28,6 +29,7 @@ export class CategoryComponent {
 
   public selectedCategory = signal<Category>({} as Category)
   public onSelectCategory = output<Category>()
+  public onEditCategory = output<Category>()
 
   constructor() {
     effect(() => {
@@ -40,5 +42,8 @@ export class CategoryComponent {
   onSelect(category: Category) {
     this.selectedCategory.set(category)
     this.onSelectCategory.emit(this.selectedCategory())
+  }
+  editCategory(category: Category) {
+    this.onEditCategory.emit(category)
   }
 }

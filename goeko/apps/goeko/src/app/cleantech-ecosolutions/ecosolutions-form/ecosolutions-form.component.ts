@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
+import { Component, computed, ElementRef, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CanComponentDeactivate, canDeactivateForm } from '@goeko/business-ui'
 import { LANGS } from '@goeko/core'
 import {
+  CategoryGrouping,
   DataSelect,
   Ecosolutions,
   EcosolutionsBody,
@@ -50,10 +51,13 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   public defaultSetCurrency = defaultSetCurrency
   public defaultSetReductions = defaultSetReductions
   public defaultSetyearGuarantee = defaultSetyearGuarantee
+
+  groupingForm = input<CategoryGrouping[]>()
+  categoryId = input<string>()
   public form!: FormGroup
   public ods = ODS_CODE
   public idEcosolution!: string
-  public questionsCategories = this._cleantechEcosolutionsService.subCategorySelected
+  public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.id === this.categoryId())?.subcategories)
   public productsCategories!: any[]
   public editor!: Editor
   public html = ''

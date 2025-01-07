@@ -1,0 +1,52 @@
+<h1 class="text-2xl font-semibold">{{ 'yourFinancialSolutions' | translate }}</h1>
+@defer (when bankId()) {
+  @if (sustainbleEquipment() || realStateLoan()) {
+    <div class="mt-10 flex flex-col gap-4">
+      <div class="ml-auto flex">
+        @if (!sustainbleEquipment()) {
+          <button type="button" go-button appearance="primary" (click)="goSustainbleEquipment()">
+            {{ 'addSustainableEquipment' | translate }}
+          </button>
+        }
+        @if (!realStateLoan()) {
+          <button type="button" go-button appearance="primary" (click)="goRealStateLoan()">
+            {{ 'addRealStateLoan' | translate }}
+          </button>
+        }
+      </div>
+
+      <!--TODO: Create card -->
+      <ng-container *ngTemplateOutlet="cardSustainbleEquipment"></ng-container>
+
+      <ng-container *ngTemplateOutlet="cardRealStateLoan"></ng-container>
+    </div>
+  } @else {
+    <div class="dashboard-option">
+      <div class="container p-10">
+        <div
+          class="flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-lg shadow-gray-300 dark:bg-white">
+          <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_BANK.titleCard' | translate }}</h5>
+
+          <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_BANK.subtitleCard' | translate }}</p>
+          <img src="assets/Group 65.svg" class="mb-11" />
+          <button
+            type="button"
+            go-button
+            appearance="primary"
+            [routerLink]="['../king-of-funding', bankId()]"
+            [queryParams]="{ isNew: 'true' }">
+            {{ 'MENU_USER_BANK.buttonSearch' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+}
+
+<ng-template #cardSustainbleEquipment>
+  <goeko-card-preview-sustainable-equipment [sustainbleEquipment]="sustainbleEquipment()" (onEdit)="goSustainbleEquipment($event.id)" />
+</ng-template>
+
+<ng-template #cardRealStateLoan>
+  <goeko-card-preview-real-estate-loan [realStateLoan]="realStateLoan()" (onEdit)="goRealStateLoan($event.id)" />
+</ng-template>

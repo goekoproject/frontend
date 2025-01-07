@@ -16,6 +16,11 @@
     "the": "La",
     "transition": "verte"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Solutions financières",
+    "description": "Vous pouvez obtenir un soutien financier pour votre projet durable.",
+    "callToAction": "Commencer"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Modifier éco-solution",
     "new_ecosolutions": "Nouvelle éco-solution",
@@ -213,7 +218,31 @@
     "typeOfEcolutions": "Type d'éco-solution",
     "unit": "Unité",
     "website": "Site web",
-    "yourLocation": "Sélectionnez le pays et la région"
+    "yourLocation": "Sélectionnez le pays et la région",
+    "financialName": "Nom de l'institution financière",
+    "contactPerson": "Personne de contact",
+    "notification": "Notification",
+    "requiredDocumentsFunding": "Documents requis en relation avec l’objet",
+    "amountRequiredFunding": "Montant minimum requis pour que la demande soit prise en compte",
+    "currencyFunding": "Devise",
+    "buildingFounding": "Prêt immobilier",
+    "workTypes": "Types de travaux que vous financez",
+    "buildingTypes": "Types de bien",
+    "targetRegion": "Régions cibles",
+    "ownerProfile": "Profil du propriétaire",
+    "objectType": "Type d'objet",
+    "contact": "Contact",
+    "montanMinimun": "Montant minimum requis"
+  },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Sélectionnez les catégories et les produits correspondant à votre projet",
+    "vehicles": "Véhicules",
+    "machines": "Machines",
+    "greenBonus": "Bonus écologique",
+    "targetRegion": "Régions cibles",
+    "activityProspect": "Nombre d'années d'activité minimum requises pour le prospect",
+    "originObject": "Origine de l’objet",
+    "balanceSheet": "Bilan et compte de résultat requis"
   },
   "HOME": {
     "btnCleantech": "Trouvez des leads",
@@ -230,6 +259,7 @@
     "selectLogo": "Sélectionnez le logo"
   },
   "LANGS": {
+    "de": "Allemand",
     "en": "Anglais",
     "es": "Espagnol",
     "fr": "Français",
@@ -262,7 +292,14 @@
   },
   "MENU_USER": {
     "dashboard": "Tableau de bord",
-    "favourites": "Favoris"
+    "favourites": "Favoris",
+    "funding": "Financement"
+  },
+  "MENU_USER_BANK": {
+    "buttonSearch": "Présentez vos solutions financières",
+    "titleCard": "Financement",
+    "subtitleCard": "Mettez en avant les solutions financières que votre institution souhaite promouvoir",
+    "funding": "Financement"
   },
   "MENU_USER_SME": {
     "buttonSearch": "Ajoutez un nouveau projet",
@@ -339,6 +376,8 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Sélectionnez une option",
+    "defaultLabelMulti": "Sélectionnez une ou plusieurs options",
+
     "fiveBetweenTen": "Entre 5 et 10 années",
     "greenWaste": {
       "greenWoodUntreated": "Bois naturel​",
@@ -589,6 +628,7 @@
   "resultSolution": "résultat",
   "results": "résultats",
   "save": "Sauvegarder",
+  "skip": "Passer",
   "saveYou": "Sauvegarder votre",
   "searchEcosolutions": "Recherchez des solutions cleantech",
   "selectAll": "Tout sélectionner",
@@ -621,6 +661,72 @@
   "yourEcosolution": "Votre éco-solution",
   "yourProjects": "Vos projets",
   "your_ecosolutions": "Vos Eco-solutions",
+  "yourFinancialSolutions": "Vos solutions financières",
+  "addRealEstateLoan": "Ajouter un prêt immobilier",
+  "addSustainableEquipment": "Ajouter un équipement durable",
+  "vehicles": {
+    "equipmentTransportTruck": "Camion de transport d’équipements",
+    "materialTransportTruck": "Camion de transport de matériaux",
+    "peopleTransportVehicle": "Véhicules de transport de personnes"
+  },
+  "machines": {
+    "loader": "Chargeuse",
+    "planer": "Raboteuse",
+    "excavator": "Pelle mécanique",
+    "bucketTruck": "Camion nacelle",
+    "bulldozer": "Bulldozer",
+    "scraper": "Scraper",
+    "compactor": "Rouleau compresseur",
+    "dumper": "Dumper",
+    "grader": "Niveleuse",
+    "trencher": "Trancheuse",
+    "compressor": "Compresseur",
+    "generator": "Génératrice",
+    "palletTruck": "Transpalette mécanique"
+  },
+  "origin": {
+    "all": "Toutes",
+    "switzerland": "Suisse",
+    "eu": "EU",
+    "america": "Amérique",
+    "asia": "Asie"
+  },
+  "documents": {
+    "none": "Aucun",
+    "quote": "Devis",
+    "offer": "Offre",
+    "proformaInvoice": "Facture proforma"
+  },
+  "sustainableEquipment": "Équipement durable",
+  "realStateLoan": "Prêt immobilier",
+  "worktypes": {
+    "all": "All",
+    "atticInsulation": "Isolation des combles",
+    "wallInsulation": "Isolation des murs",
+    "floorInsulation": "Isolation des sols",
+    "installationHeatPump": "Installation d’une pompe à chaleur",
+    "replacementWindows": "Remplacement des fenêtres",
+    "installationShuttersSolarProtection": "Installation de volets ou protections solaires",
+    "replacementBoiler": "Remplacement de la chaudière",
+    "solarThermalPanels": "Panneaux solaires ou thermiques",
+    "woodBiomassBoiler": "Chaudière à bois ou biomasse",
+    "lowenergyLighting": "Eclairage basse consommation",
+    "thermodynamicSolarWaterHeater": "Chauffe-eau thermodynamique ou solaire",
+    "installationDualflowVentilation": "Installation d’une ventilation double flux",
+    "homeAutomationSystems": "Systèmes domotiques"
+  },
+  "buildingtypes": {
+    "residential": "Résidentiel",
+    "mixed-use": "Mixte",
+    "commercial": "Commercial"
+  },
+  "ownerprofiles": {
+    "individual": "Particulier",
+    "PPE": "PPE",
+    "realEstateCompany": "Société immobilière",
+    "housingCooperative": "Coopérative de logement"
+  },
+  "delete": "Supprimer",
   "characters": "{{num}} caractères maximum",
   "deleteLocation": "Supprimer la région"
 }

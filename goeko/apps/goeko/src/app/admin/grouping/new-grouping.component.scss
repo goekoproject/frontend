@@ -1,0 +1,16 @@
+a {
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+a:hover {
+  background-color: #e0e7ff; /* Fondo azul claro al pasar el mouse */
+}
+
+span {
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}

@@ -16,6 +16,11 @@
     "the": "Die",
     "transition": "Übergang"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Finanzielle Lösungen",
+    "description": "Sie können finanzielle Unterstützung für Ihr nachhaltiges Projekt erhalten.",
+    "callToAction": "Starten"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Bearbeiten Sie Ihre Ökolösung",
     "new_ecosolutions": "Neue Öko-Lösung",
@@ -203,7 +208,31 @@
     "typeOfEcolutions": "Art der eco-solution",
     "unit": "Maßeinheit (m2, m3, y, kg)",
     "website": "Webseite",
-    "yourLocation": "Wählen Sie Land und Region"
+    "yourLocation": "Wählen Sie Land und Region",
+    "financialName": "Finanzierungsname",
+    "notification": "Benachrichtigung",
+    "requiredDocumentsFunding": "Erforderliche Dokumente für die Finanzierung",
+    "amountRequiredFunding": "Mindestbetrag erforderlich, damit der Antrag berücksichtigt wird",
+    "currencyFunding": "Währung",
+    "contactPerson": "Kontaktperson",
+    "buildingFounding": "Gebäudegründung",
+    "workTypes": "Arbeitstypen",
+    "buildingTypes": "Gebäudetypen",
+    "targetRegion": "Zielregion",
+    "ownerProfile": "Profil des Eigentümers",
+    "objectType": "Objekttyp",
+    "contact": "Kontakt",
+    "montanMinimun": "Mindestmenge"
+  },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Wählen Sie die Kategorien und Produkte aus, die zu Ihrem Projekt passen",
+    "vehicles": "Fahrzeuge",
+    "machines": "Maschinen",
+    "greenBonus": "Umweltbonus",
+    "targetRegion": "Zielregionen",
+    "activityProspect": "Mindestanzahl an Jahren der Tätigkeit, die für den Interessenten erforderlich sind",
+    "originObject": "Herkunft des Objekts",
+    "balanceSheet": "Bilanz und Gewinn- und Verlustrechnung erforderlich"
   },
   "HOME": {
     "btnCleantech": "Leads finden",
@@ -250,11 +279,18 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favourites": "Favoriten"
+    "favourites": "Favoriten",
+    "funding": "Finanzierung"
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "Abonnieren Sie für vollen Zugriff! Entdecken Sie mehr.",
     "messageContact": "Kontaktieren Sie uns unter {{email}}"
+  },
+  "MENU_USER_BANK": {
+    "buttonSearch": "Sie Ihre finanziellen Lösungen",
+    "titleCard": "Finanzierung",
+    "subtitleCard": "Heben Sie die finanziellen Lösungen hervor, die Ihre Institution fördern möchte",
+    "funding": "Finanzierung"
   },
   "MENU_USER_SME": {
     "titleCard": "Erstellen Sie ein Projekt",
@@ -327,6 +363,7 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Wählen Sie eine Option",
+    "defaultLabelMulti": "Wählen Sie eine oder mehrere Optionen",
     "fiveBetweenTen": "Zwischen 5 und 10 Jahren",
     "greenWaste": {
       "greenWoodUntreated": "Grünes Holz (unbehandelt)",
@@ -619,5 +656,79 @@
   "yourProjects": "Ihre Projekte",
   "backToResults": "Zurück zu den Ergebnissen",
   "characters": "{{num}} Zechen",
+  "yourFinancialSolutions": "Ihre Finanzierungslösungen",
+  "addRealEstateLoan": "Immobilienkredit hinzufügen",
+  "addSustainableEquipment": "Nachhaltige Ausrüstung hinzufügen",
+  "vehicles": {
+    "equipmentTransportTruck": "Ausrüstungstransport-LKW",
+    "materialTransportTruck": "Materialtransport-LKW",
+    "peopleTransportVehicle": "Personentransportfahrzeug"
+  },
+  "machines": {
+    "loader": "Lader",
+    "planer": "Hobelmaschine",
+    "excavator": "Bagger",
+    "bucketTruck": "Hubarbeitsbühne",
+    "bulldozer": "Planierraupe",
+    "scraper": "Schaber",
+    "compactor": "Walze",
+    "dumper": "Muldenkipper",
+    "grader": "Motorgrader",
+    "trencher": "Grabenfräse",
+    "compressor": "Kompressor",
+    "generator": "Generator",
+    "palletTruck": "Hubwagen"
+  },
+  "origin": {
+    "all": "Alle",
+    "switzerland": "Schweiz",
+    "eu": "EU",
+    "america": "Amerika",
+    "asia": "Asien"
+  },
+  "documents": {
+    "none": "Keine",
+    "quote": "Angebot",
+    "offer": "Offerte",
+    "proformaInvoice": "Proforma-Rechnung"
+  },
+  "sustainableEquipment": "Nachhaltige Ausrüstung",
+  "realStateLoan": "Immobilienkredit",
+  "worktypes": {
+    "all": "All",
+    "atticInsulation": "Dachbodenisolierung",
+    "wallInsulation": "Wandisolierung",
+    "floorInsulation": "Bodenisolierung",
+    "installationHeatPump": "Installation einer Wärmepumpe",
+    "replacementWindows": "Austausch der Fenster",
+    "installationShuttersSolarProtection": "Installation von Rollläden oder Sonnenschutz",
+    "replacementBoiler": "Austausch des Heizkessels",
+    "solarThermalPanels": "Solar- oder Wärmepaneele",
+    "woodBiomassBoiler": "Holz- oder Biomassekessel",
+    "lowenergyLighting": "Energiesparende Beleuchtung",
+    "thermodynamicSolarWaterHeater": "Thermodynamischer oder solarbetriebener Warmwasserbereiter",
+    "installationDualflowVentilation": "Installation einer doppelten Belüftung",
+    "homeAutomationSystems": "Domotische Systeme"
+  },
+  "buildingtypes": {
+    "residential": "Wohngebiet",
+    "mixed-use": "Gemischt",
+    "commercial": "Gewerblich",
+    "all": "Alle",
+    "aticInsulation": "Atische Isolierung",
+    "wallInsulation": "Wandisolierung",
+    "backhoe": "Bagger",
+    "backhoeLoader": "Baggerlader",
+    "scraper": "Abstreifer",
+    "dumper": "Dumper",
+    "trancheuse": "Trancheuse"
+  },
+  "ownerprofiles": {
+    "individual": "Privatperson",
+    "PPE": "PPE",
+    "realEstateCompany": "Immobiliengesellschaft",
+    "housingCooperative": "Wohnungsbaugenossenschaft"
+  },
+  "delete": "Löschen",
   "deleteLocation": "Standort löschen"
 }

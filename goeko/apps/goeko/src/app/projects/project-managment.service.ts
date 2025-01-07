@@ -1,10 +1,11 @@
 import { computed, inject, Injectable, signal } from '@angular/core'
 import {
-  Category,
+  CategoryGrouping,
   ClassificationsService,
   EcosolutionSearchRequest,
   EcosolutionsSearchService,
   EcosolutionsTaggingService,
+  GroupingType,
   Project,
   UserService,
 } from '@goeko/store'
@@ -53,7 +54,7 @@ export class ProjectManagmentService {
   deleteProject(id: string) {
     return this._ecosolutionsSearchService.deleteSearchProjectById(id)
   }
-  getGroupingFormCategories(grouping: string = 'construction'): Observable<Category[]> {
+  getGroupingFormCategories(grouping = GroupingType.construction): Observable<CategoryGrouping[]> {
     return this._classificationsServices.groupingFormCategories(grouping)
   }
   toogleFavourite(smeId: string, ecosolution: any) {
@@ -62,9 +63,5 @@ export class ProjectManagmentService {
       return this._taggingServices.removeFavorite(smeId, ecosolution.id)
     }
     return this._taggingServices.addFavorite(smeId, ecosolution.id)
-  }
-
-  getAllDataCategories() {
-    return this._classificationsServices.getAllDataCategories()
   }
 }
