@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core'
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { handlerHttpInterceptor, SelectI18nComponent } from '@goeko/business-ui'
-import { ConfigModule } from '@goeko/core'
+import { ConfigModule, OrderByPipe } from '@goeko/core'
 import {
   ClassificationsService,
   EcosolutionsSearchService,
@@ -46,6 +46,7 @@ import { PlatformComponent } from './platform.component'
     ShowForRolesDirective,
     GoShowUserTypeDirective,
     ToastComponent,
+    OrderByPipe,
     ConfigModule.forRoot({
       endopoint: environment.baseUrl,
       clientSecret: environment.clientSecret,

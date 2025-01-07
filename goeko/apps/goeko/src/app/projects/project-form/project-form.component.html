@@ -29,7 +29,7 @@
                   [compareWith]="compareWithProducts"
                   (valueSelected)="addProduct(subCategory.code, $event)">
                   @for (product of subCategory.products; track product.code; let i = $index) {
-                    @if (!product.disabled) {
+                    @if (product.enabled) {
                       <go-badge [value]="product">{{ product.label }}</go-badge>
                     }
                   }

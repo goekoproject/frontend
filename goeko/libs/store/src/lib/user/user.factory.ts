@@ -1,18 +1,23 @@
 import { mapperLocations } from '@goeko/core'
 import { UserProfileForm } from './user-profile-form.interface'
 import { USER_TYPE, UserType } from './user-type.constants'
-import { UserCleantechPayload } from './user-type/user-payload.model'
+import { UserBankPayload, UserCleantechPayload } from './user-type/user-payload.model'
 import { UserModal, UserSwitch } from './user-type/user-switch.type'
-import { CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
+import { BankBuilder, CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
 
 const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
   sme: new SmeBuilder(),
   cleantech: new CleantechBuilder(),
+  bank: new BankBuilder(),
 }
 
 export abstract class UserFactory {
   static createUserProfileBuilder(userType: UserType): IUserBuilder<UserModal> {
-    return USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE]
+    const builder = USER_TO_CREATE[userType as keyof typeof USER_TO_CREATE]
+    if (!builder) {
+      throw new Error(`Unsupported user type: ${userType}`)
+    }
+    return builder
   }
 
   //TODO: fix code smell
@@ -33,6 +38,9 @@ export abstract class UserFactory {
             enabled: userProfileForm.generalNotifications,
           },
         }
+      case USER_TYPE.BANK: {
+        return new UserBankPayload(userProfileForm)
+      }
       default:
         return new UserCleantechPayload(userProfileForm)
     }

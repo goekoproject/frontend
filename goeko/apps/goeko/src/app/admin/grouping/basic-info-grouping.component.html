@@ -1,0 +1,11 @@
+<form class="flex flex-col gap-4" [formGroup]="form">
+  <div class="flex flex-col gap-2">
+    <label for="name">Name</label>
+    <go-input  formControlName="name" />
+  </div>
+
+  <div class="flex flex-col  gap-2">
+    <label for="description">Description</label>
+    <go-input id="description" formControlName="description" />
+  </div>
+</form>

@@ -1,0 +1,120 @@
+@defer (when categories()) {
+  <form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
+    <!-- Selección de tipos de trabajo -->
+    <div class="mb-6">
+      @for (category of categories(); track category.code) {
+        <h2 class="text-lg font-semibold">{{ category.label }}</h2>
+        <div class="mt-4">
+          <ng-container formGroupName="workTypes">
+            <input id="category" class="invisible absolute h-0" formControlName="categoryCode" type="text" />
+
+            @for (subcategory of category.subcategories; track subcategory.id) {
+              <input id="category" class="invisible absolute h-0" formControlName="subcategoryCode" type="text" />
+
+              <label class="mb-2 block font-medium">{{ subcategory.label }}</label>
+              <div class="mb-6">
+                <go-badge-group formControlName="products" [compareWith]="comparteWithProduct">
+                  @for (worktype of subcategory.products; track worktype.id) {
+                    <go-badge [value]="worktype">{{ worktype.label }}</go-badge>
+                  }
+                </go-badge-group>
+              </div>
+            }
+          </ng-container>
+
+          <div class="flex gap-4 [&>*]:flex-grow">
+            <div>
+              <ui-super-select
+                [formControlName]="'ownerProfile'"
+                [multiple]="true"
+                [compareWith]="compareWithOptions"
+                [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
+                <label title for="ownerProfile">
+                  {{ 'FORM_LABEL.ownerProfile' | translate }}
+                </label>
+                @for (profile of ownerProfile(); track profile.id) {
+                  <super-option [value]="profile"> {{ profile.label | translate }}</super-option>
+                }
+              </ui-super-select>
+            </div>
+            <div>
+              <ui-super-select
+                [formControlName]="'buildingTypes'"
+                [compareWith]="compareWithOptions"
+                [multiple]="true"
+                [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
+                <label title for="buildingTypes">
+                  {{ 'FORM_LABEL.buildingTypes' | translate }}
+                </label>
+                @for (type of buildingTypes(); track type.id) {
+                  <super-option [value]="type"> {{ type.label | translate }}</super-option>
+                }
+              </ui-super-select>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <!-- Región objetivo -->
+    <div class="mb-6">
+      <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.targetRegion' | translate }}</h2>
+      <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+    </div>
+    <!-- Selección de cantidad minima -->
+    <div class="mb-6">
+      <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.montanMinimun' | translate }}</h2>
+
+      <div class="flex gap-4 [&>*]:flex-grow">
+        <div>
+          <ui-super-select [formControlName]="'montanMinimun'" [compareWith]="compareWithOptionsNumber">
+            @for (money of amount(); track money.id) {
+              <super-option [value]="money"> {{ money.label | number }}</super-option>
+            }
+          </ui-super-select>
+        </div>
+        <div>
+          <ui-super-select
+            [multiple]="true"
+            [readonly]="false"
+            [compareWith]="compareWithOptionsLabel"
+            [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
+            [formControlName]="'currency'"
+            id="currency"
+            name="currency">
+            @for (currency of currencys(); track currency.id) {
+              <super-option [value]="currency.label"> {{ currency.label }}</super-option>
+            }
+          </ui-super-select>
+        </div>
+      </div>
+    </div>
+    <!-- Datos de contacto -->
+    <div class="mb-6">
+      <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.contact' | translate }}</h2>
+
+      <div class="flex gap-4 [&>*]:flex-grow">
+        <div>
+          <go-input [formControlName]="'email'" id="email" type="email" placeholder="email@gmail.com">
+            <p slot="label">{{ 'FORM_LABEL.email' | translate }}</p>
+          </go-input>
+        </div>
+
+        <div>
+          <go-input [formControlName]="'phoneNumber'" type="text" placeholder="00 000 000 000">
+            <span slot="label">
+              {{ 'FORM_LABEL.phoneNumber' | translate }}
+            </span>
+          </go-input>
+        </div>
+      </div>
+    </div>
+  </form>
+}
+
+<div class="mt-4 flex justify-between">
+  <button go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>
+  <div class="flex items-center gap-2">
+    <button go-button type="submit" (click)="save()">{{ 'save' | translate }}</button>
+    <button go-button (click)="goSkip()" appearance="flat">{{ 'skip' | translate }}</button>
+  </div>
+</div>

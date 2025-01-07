@@ -1,4 +1,4 @@
-import { Classifications } from '../model/classificaciones.interface'
+import { Classifications, ResponseClassifications } from '../model/classifications.interface'
 
 export interface TaggingResponse {
   id: string
@@ -15,4 +15,5 @@ interface TaggingEcosolutionDetail {
   solutionName: string
   description: string
   classification: Classifications
+  classifications: ResponseClassifications[]
 }

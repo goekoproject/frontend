@@ -1,14 +1,13 @@
-@if (notificationData$ | async; as notificationData) {
-  <i class="ti ti-info-circle notification-icon"></i>
-
-  <div>
-    @if (notificationData.title) {
-      <h4>{{ notificationData.title }}</h4>
+<div class="flex items-start">
+  <div class="flex-grow">
+    @if (notificationData$ | async; as notificationData) {
+      @if (notificationData.title) {
+        <h2 id="title">{{ notificationData.title }}</h2>
+      }
+      @for (text of notificationData.texts; track text) {
+        <p>{{ text | translate }}</p>
+      }
     }
-
-    @for (text of notificationData.texts; track text) {
-      <p>{{ text | translate }}</p>
-    }
+    <ng-content></ng-content>
   </div>
-}
-<ng-content></ng-content>
+</div>

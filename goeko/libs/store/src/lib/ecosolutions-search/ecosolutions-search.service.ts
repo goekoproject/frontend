@@ -22,7 +22,7 @@ export class EcosolutionsSearchService extends TranslateChangeService {
 
   getSearchEcosolutionsByProjects(id: string) {
     this._http
-      .get<{ projects: Project[] }>(`/v1/ecosolution/search/projects/smes/${id}?lang=${this.lang()}`)
+      .get<{ projects: Project[] }>(`/v2/ecosolution/search/projects/smes/${id}?lang=${this.lang()}`)
       .pipe(map((res) => res.projects))
       .subscribe((projects) => {
         this.projects.set(projects)
@@ -30,23 +30,23 @@ export class EcosolutionsSearchService extends TranslateChangeService {
   }
 
   getSearchProjectId({ smeId = '', projectId = '' }): Observable<Project> {
-    return this._http.get<Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
+    return this._http.get<Project>(`/v2/ecosolution/search/projects/smes/${smeId}/${projectId}`)
   }
 
   createSearchProject(body: SmeSaveRecomendationRequest): Observable<any> {
-    return this._http.post<any>(`/v1/ecosolution/search/projects/smes`, body)
+    return this._http.post<any>(`/v2/ecosolution/search/projects/smes`, body)
   }
 
   updateSearchProject(id: string, body: SmeSaveRecomendationRequest): Observable<any> {
-    return this._http.put<any>(`/v1/ecosolution/search/projects/smes/${id}`, body)
+    return this._http.put<any>(`/v2/ecosolution/search/projects/smes/${id}`, body)
   }
 
   getSearchProjectById({ smeId = '', projectId = '' }): Observable<Project> {
-    return this._http.get<Project>(`/v1/ecosolution/search/projects/smes/${smeId}/${projectId}`)
+    return this._http.get<Project>(`/v2/ecosolution/search/projects/smes/${smeId}/${projectId}`)
   }
 
   deleteSearchProjectById(id: string): Observable<any> {
-    return this._http.delete<any>(`/v1/ecosolution/search/projects/smes/${id}`)
+    return this._http.delete<any>(`/v2/ecosolution/search/projects/smes/${id}`)
   }
 
   ecosolutionSearch(body: EcosolutionSearchRequest) {

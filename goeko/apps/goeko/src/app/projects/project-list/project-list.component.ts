@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, effect, inject, input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DialogNewProjectComponent, GoTableModule, MessageService, SplitCategoriesPipe } from '@goeko/business-ui'
-import { NotificationSearch, Project } from '@goeko/store'
+import { ClassificationsGroupByPipe, ClassificationsLabelPipe, NotificationSearch, Project } from '@goeko/store'
 import { ButtonModule, DialogService, GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { ProjectManagmentService } from '../project-managment.service'
@@ -11,7 +11,16 @@ import { DisplayRegionsPipe } from './display-regions.pipe'
 @Component({
   selector: 'goeko-project-list',
   standalone: true,
-  imports: [CommonModule, GoTableModule, GoDateFormatPipe, DisplayRegionsPipe, TranslateModule, SplitCategoriesPipe, ButtonModule],
+  imports: [
+    CommonModule,
+    GoTableModule,
+    ClassificationsLabelPipe,
+    GoDateFormatPipe,
+    DisplayRegionsPipe,
+    TranslateModule,
+    SplitCategoriesPipe,
+    ButtonModule,
+  ],
   providers: [ProjectManagmentService, MessageService],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.scss',

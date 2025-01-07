@@ -1,4 +1,4 @@
-import { Classifications } from '../model/classificaciones.interface'
+import { Classifications } from '../model/classifications.interface'
 import { CompanyDetail } from '../model/company-detail.interface'
 import { Document } from '../model/document.interface'
 import { LocationTranslated } from '../model/location-translated.interface'

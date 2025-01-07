@@ -16,6 +16,11 @@
     "the": "La",
     "transition": "verde"
   },
+  "BANNER_FUNDINGS": {
+    "title": "Soluciones financieras",
+    "description": "Puedes obtener apoyo financiero para tu proyecto sostenible.",
+    "callToAction": "Comenzar"
+  },
   "BREADCRUMBS": {
     "edit_ecosolutions": "Editar tu ecosolución",
     "new_ecosolutions": "Nueva ecosolución",
@@ -203,7 +208,30 @@
     "typeOfEcolutions": "Tipo de eco-solución",
     "unit": "Unidad de medida(m2,m3,l,kg)",
     "website": "Sitio web",
-    "yourLocation": "Seleccione el país y la provincia"
+    "yourLocation": "Seleccione el país y la provincia",
+    "notification": "Notificaciones",
+    "financialName": "Nombre financiero",
+    "contactPerson": "Persona de contacto",
+    "requiredDocumentsFunding": "Documentos requeridos",
+    "amountRequiredFunding": "Cantidad requerida para que la solicitud sea tenida en cuenta",
+    "currencyFunding": "Moneda",
+    "buildingFounding": "Construcción de edificios",
+    "workTypes": "Tipos de trabajo",
+    "buildingTypes": "Tipos de construccion",
+    "targetRegion": "Región de destino",
+    "ownerProfile": "Perfil del propietario",
+    "contact": "Contacto",
+    "montanMinimun": "Cantidad mínima"
+  },
+  "FUNDING_SUSTAINABLE_EQUIPMENT": {
+    "subtitleForm": "Selecciona las categorías y productos correspondientes a tu proyecto",
+    "vehicles": "Vehículos",
+    "machines": "Máquinas",
+    "greenBonus": "Bono verde",
+    "targetRegion": "Regiones objetivo",
+    "activityProspect": "Número mínimo de años de actividad requeridos para el prospecto",
+    "originObject": "Origen del objeto",
+    "balanceSheet": "Balance y cuenta de resultados requeridos"
   },
   "HOME": {
     "btnCleantech": "Encontrar leads",
@@ -252,11 +280,18 @@
   },
   "MENU_USER": {
     "dashboard": "Dashboard",
-    "favourites": "Favoritos"
+    "favourites": "Favoritos",
+    "funding": "Financiación"
   },
   "MESSAGE_SUBSCRIPTION_BANNER": {
     "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",
     "messageContact": "Póngase en contacto con nosotros en {{email}}"
+  },
+  "MENU_USER_BANK": {
+    "buttonSearch": "Presente sus soluciones financieras",
+    "titleCard": "Financiación",
+    "subtitleCard": "Destaque las soluciones financieras que su institución desea promover",
+    "funding": "Financiación"
   },
   "MENU_USER_SME": {
     "titleCard": "Crea un proyecto",
@@ -329,6 +364,7 @@
   "SELECT_DATA_LABEL": {
     "currency": "€",
     "defaultLabel": "Seleccione una opción",
+    "defaultLabelMulti": "Seleccione una o más opciones",
     "fiveBetweenTen": "Entre 5 y 10 años",
     "greenWaste": {
       "greenWoodUntreated": "Madera verde (no tratada)",
@@ -523,6 +559,7 @@
   },
   "a": "a",
   "yourEcosolution": "Tu Ecosolucion",
+  "your_ecosolutions": "Tu solución cleantech",
   "accept": "Aceptar",
   "add": "Añadir",
   "alertSelectedProduct": "Selecciona las categorías y productos correspondientes a tu proyecto",
@@ -621,6 +658,72 @@
   "resultSolution": "resultado",
   "yourProjects": "Tus proyectos",
   "backToResults": "Volver a los resultados",
+  "yourFinancialSolutions": "Tus soluciones financieras",
+  "addRealEstateLoan": "Añadir préstamo inmobiliario",
+  "addSustainableEquipment": "Añadir equipo sostenible",
+  "vehicles": {
+    "equipmentTransportTruck": "Camión de transporte de equipos",
+    "materialTransportTruck": "Camión de transporte de materiales",
+    "peopleTransportVehicle": "Vehículos de transporte de personas"
+  },
+  "machines": {
+    "loader": "Cargadora",
+    "planer": "Cepilladora",
+    "excavator": "Excavadora",
+    "bucketTruck": "Camión cesta",
+    "bulldozer": "Bulldozer",
+    "scraper": "Rascador",
+    "compactor": "Rodillo compactador",
+    "dumper": "Dumper",
+    "grader": "Niveladora",
+    "trencher": "Zanjadora",
+    "compressor": "Compresor",
+    "generator": "Generador",
+    "palletTruck": "Transpaleta"
+  },
+  "origin": {
+    "all": "Todas",
+    "switzerland": "Suiza",
+    "eu": "UE",
+    "america": "América",
+    "asia": "Asia"
+  },
+  "documents": {
+    "none": "Ninguno",
+    "quote": "Presupuesto",
+    "offer": "Oferta",
+    "proformaInvoice": "Factura proforma"
+  },
+  "sustainableEquipment": "Equipos sostenibles",
+  "realStateLoan": "Préstamo inmobiliario",
+  "worktypes": {
+    "all": "All",
+    "atticInsulation": "Aislamiento del ático",
+    "wallInsulation": "Aislamiento de paredes",
+    "floorInsulation": "Aislamiento del suelo",
+    "installationHeatPump": "Instalación de una bomba de calor",
+    "replacementWindows": "Sustitución de ventanas",
+    "installationShuttersSolarProtection": "Instalación de persianas o protección solar",
+    "replacementBoiler": "Sustitución de la caldera",
+    "solarThermalPanels": "Paneles solares o térmicos",
+    "woodBiomassBoiler": "Caldera de leña o biomasa",
+    "lowenergyLighting": "Iluminación de bajo consumo",
+    "thermodynamicSolarWaterHeater": "Calentador de agua termodinámico o solar",
+    "installationDualflowVentilation": "Instalación de ventilación de doble flujo",
+    "homeAutomationSystems": "Sistemas de domótica"
+  },
+  "buildingtypes": {
+    "residential": "Residencial",
+    "mixed-use": "Uso mixto",
+    "commercial": "Comercial"
+  },
+  "ownerprofiles": {
+    "individual": "Particular",
+    "PPE": "PPE",
+    "realEstateCompany": "Empresa inmobiliaria",
+    "housingCooperative": "Cooperativa de viviendas "
+  },
+  "delete": "Eliminar",
   "characters": "{{num}} caracteres maximum",
   "deleteLocation": "Eliminar ubicación"
 }

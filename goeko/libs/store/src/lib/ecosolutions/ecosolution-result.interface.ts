@@ -1,4 +1,4 @@
-import { Classifications } from '../model/classificaciones.interface'
+import { Classifications } from '../model/classifications.interface'
 
 /**
  * Ecosolution result interface for sme

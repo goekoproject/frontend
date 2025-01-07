@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core'
-import { CODE_LANG } from '@goeko/core'
-import { ManageProduct, Translations } from '@goeko/store'
+import { Product, Translations } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 
 @Pipe({
@@ -13,9 +12,9 @@ export class ProductToCurrentLangPipe implements PipeTransform {
     private _translations: TranslateService,
     private _cf: ChangeDetectorRef,
   ) {}
-  transform(product: ManageProduct): any {
+  transform(product: Product): any {
     const productCurrentLang: Translations | undefined = product?.label?.translations.find(
-      (translation: Translations) => translation.lang === this._getCurrentLang()
+      (translation: Translations) => translation.lang === this._getCurrentLang(),
     )
     return productCurrentLang?.label
   }

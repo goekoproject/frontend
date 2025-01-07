@@ -1,25 +1,61 @@
-<h2>{{ 'FORM_LABEL.products' | translate }}</h2>
+<h2 class="mb-6 text-2xl font-semibold">{{ mode() === 'add' ? 'New-Edit' : '' }} {{ 'FORM_LABEL.products' | translate }}</h2>
 
-<go-badge-group
-  [id]="'products'"
-  name="products"
-  (valueSelected)="valueSelected($event)"
->
-  @for ( product of products(); track product.id) {
-  <go-badge
-    [value]="product"
-    [selected]="codeProductsSeclected().includes(product.id)"
-    >{{ product.keyLang | translate }}
-  </go-badge>
+@defer (when form && mode() === 'add') {
+  <form [formGroup]="form">
+    <div formGroupName="label">
+      <div class="mb-4" [formGroupName]="'translations'">
+        @for (elementByLang of labelTranslations.controls; track elementByLang.value.lang; let index = $index) {
+          <div [formGroupName]="index">
+            <label for="{{ elementByLang.value.lang }}" class="mb-1 block font-medium text-gray-700">
+              <span class="fi fi-{{ elementByLang.value.lang === 'en' ? 'gb' : elementByLang.value.lang }}"></span>
 
+              {{ elementByLang.value.lang | translate }}</label
+            >
+            <input
+              type="text"
+              id="{{ elementByLang.value.lang }}"
+              placeholder="{{ elementByLang.value.label | translate }}"
+              class="input-dialog"
+              formControlName="label" />
+          </div>
+        }
+      </div>
+    </div>
+
+    <go-toggle-switch [checked]="form.value.enabled ?? false" (checkedChange)="toogleStatus($event)">
+      <p>
+        {{ form.value.enabled ? 'enabled' : ('disabled' | translate) }}
+      </p>
+    </go-toggle-switch>
+  </form>
+  <div class="product-actions">
+    <button go-button appearance="white" (click)="close()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button go-button (click)="data.productSelected ? updateProduct() : addNewProduct()">
+      {{ buttonText | translate }}
+    </button>
+  </div>
+}
+@defer (when products()) {
+  <go-badge-group [id]="'products'" (valueSelected)="productsSelected($event)">
+    @for (product of products(); track product.code; let i = $index) {
+      <go-badge [value]="product" [selected]="idProductsRecevied().includes(product.id)" [readonly]="mode() === 'add'">
+        @if (mode() !== 'view') {
+          <i
+            class="ti ti-pencil cursor-pointer rounded-full border px-1 text-lg hover:bg-blue-800 hover:text-blue-50 hover:shadow-sm"
+            [ngClass]="{ 'bg-blue-800 text-blue-50': data.productSelected && product.id === data.productSelected.id }"
+            (click)="editProduct(product)"></i>
+        }
+
+        {{ product | productToCurrentLang }}
+      </go-badge>
+    }
+  </go-badge-group>
+
+  @if (mode() === 'view') {
+    <button go-button appearance="white" (click)="sendProducts()">
+      {{ 'add' | translate }}
+    </button>
   }
-</go-badge-group>
-
-<div class="product-actions">
-  <button go-button appearance="white" (click)="close()">
-    {{ 'cancel' | translate }}
-  </button>
-  <button go-button (click)="addProducts()">
-    {{ buttonText | translate }} 
-  </button>
-</div>
+}

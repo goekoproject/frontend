@@ -118,7 +118,7 @@
 
         @defer (when questionsCategories()) {
           <div class="ecosolutions-subcategory">
-            @for (subcategory of questionsCategories().subcategories; track subcategory.code) {
+            @for (subcategory of questionsCategories(); track subcategory.code) {
               <goeko-select-subcategory-product
                 [id]="subcategory.code"
                 [formControlName]="'subCategory'"
