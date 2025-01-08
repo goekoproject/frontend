@@ -2,15 +2,23 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, inject, input } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { FINANCING_TYPE, RealStateLoanResponse, SustainableEquipmentResponse } from '@goeko/store'
-import { BadgeModule, ButtonModule, GoILeavesComponent } from '@goeko/ui'
+import { BadgeModule, ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { CardPreviewRealEstateLoanComponent } from './card-preview-real-estate-loan.component'
-import { CardPreviewSustainableEquipmentComponent } from './card-preview-sustainable-equipment.component'
+import { CardPreviewRealEstateLoanComponent } from './real-state-loan-form/card-preview-real-estate-loan.component'
+import { CardPreviewSustainableEquipmentComponent } from './sustainble-equipment-form/card-preview-sustainable-equipment.component'
 
 @Component({
   selector: 'goeko-hub-funding',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardPreviewRealEstateLoanComponent, CardPreviewSustainableEquipmentComponent, TranslateModule, ButtonModule, BadgeModule, GoILeavesComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    CardPreviewRealEstateLoanComponent,
+    CardPreviewSustainableEquipmentComponent,
+    TranslateModule,
+    ButtonModule,
+    BadgeModule,
+  ],
   providers: [],
   templateUrl: './hub-funding.component.html',
   styleUrl: './hub-funding.component.scss',

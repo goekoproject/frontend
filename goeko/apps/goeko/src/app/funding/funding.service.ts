@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core'
 import { FinancingService, FinancingType } from '@goeko/store'
 import { Observable, of } from 'rxjs'
-import { CreateRealStateLoan } from './real-state-loan-form/create-real-state-loan.model'
-import { CreateSustainableEquipment } from './sustainble-equipment-form/create-sustainable-equipment.model'
+import { CreateRealStateLoan } from './managment/real-state-loan-form/create-real-state-loan.model'
+import { CreateSustainableEquipment } from './managment/sustainble-equipment-form/create-sustainable-equipment.model'
 
 @Injectable()
 export class FundingService {

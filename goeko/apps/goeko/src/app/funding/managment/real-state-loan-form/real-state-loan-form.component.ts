@@ -7,8 +7,7 @@ import { CategoryGrouping, FinancingService, LocationsCountry, Product, RealStat
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { forkJoin } from 'rxjs'
-import { STORE_NAME } from '../funding-token.constants'
-import { FundingService } from '../funding.service'
+import { FundingService } from '../../funding.service'
 import { CreateRealStateLoan } from './create-real-state-loan.model'
 import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES } from './data-fields.constants'
 
@@ -30,7 +29,7 @@ type Options = {
     UiSuperSelectModule,
     SelectLocationsComponent,
   ],
-  providers: [FundingService, FinancingService, { provide: STORE_NAME, useValue: 'real-state-loan' }, SelectLocationsService],
+  providers: [FundingService, FinancingService, SelectLocationsService],
   templateUrl: './real-state-loan-form.component.html',
   styleUrls: ['./real-state-loan-form.component.scss'],
 })
@@ -138,11 +137,6 @@ export class RealStateLoanComponent implements OnInit {
     })
   }
 
-  private _updateOrCreateSustainableEquipment = (payload: any) => {
-    return this.id()
-      ? this._fundingService.updateSustainableEquipment(this.id() as string, payload)
-      : this._fundingService.createSustainableEquipment(payload)
-  }
   private _updateOrCreateRealStateLoan = (payload: CreateRealStateLoan) => {
     return this.id()
       ? this._fundingService.updateRealStateLoan(this.id() as string, payload)

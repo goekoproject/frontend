@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { groupingFormCategoriesResolver, GroupingType } from '@goeko/store'
 import { FundingComponent } from './funding.component'
-import { HubFundingComponent } from './hub-funding.component'
 import { getDataRealStateLoan, getKindOfFunding, getSustainableEquipment } from './hub-kind-of-fundind.resolver'
-import { RealStateLoanComponent } from './real-state-loan-form/real-state-loan-form.component'
-import { SustainbleEquipmentFormComponent } from './sustainble-equipment-form/sustainble-equipment-form.component'
+import { HubFundingComponent } from './managment/hub-funding.component'
+import { RealStateLoanComponent } from './managment/real-state-loan-form/real-state-loan-form.component'
+import { SustainbleEquipmentFormComponent } from './managment/sustainble-equipment-form/sustainble-equipment-form.component'
 
 const routes: Routes = [
   {
@@ -22,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'matches',
-    loadComponent: () => import('./funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),
+    loadComponent: () =>
+      import('./search/funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),
   },
   {
     path: 'king-of-funding',
