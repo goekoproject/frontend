@@ -14,7 +14,7 @@ export class CardProductComponent {
   @Input() description!: string
   @Input() image!: string
   @Input() category!: string
-  @Input() classNameCategoy!: string
+  @Input() classNameCategoy!: string | string[]
   @Input() isFavorite!: boolean
 
   @Output() changeFavorite = new EventEmitter<boolean>()

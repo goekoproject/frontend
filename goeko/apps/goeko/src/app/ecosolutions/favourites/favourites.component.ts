@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
 import { Router, RouterModule } from '@angular/router'
-import { ECOSOLUTIONS_CONFIGURATION, EcosolutionsTaggingService, TAGGING, UserService } from '@goeko/store'
+import { ClassificationsLabelPipe, ECOSOLUTIONS_CONFIGURATION, EcosolutionsTaggingService, TAGGING, UserService } from '@goeko/store'
 import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { environment } from '../../../environments/environment'
@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment'
 @Component({
   selector: 'goeko-favorite',
   standalone: true,
-  imports: [CommonModule, CardProductComponent, TranslateModule, RouterModule],
+  imports: [CommonModule, CardProductComponent, TranslateModule, RouterModule, ClassificationsLabelPipe],
   providers: [
     EcosolutionsTaggingService,
     {

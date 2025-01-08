@@ -1,4 +1,3 @@
-<h1 class="text-2xl font-bold">{{ 'MENU_USER.favourites' | translate }}</h1>
 <div class="mx-auto p-4 sm:max-w-full lg:max-w-7xl">
   <div class="flex flex-wrap gap-6">
     @if (ecosolutionFavorites$ | async; as ecosolutionFavorites) {
@@ -8,7 +7,7 @@
           [description]="ecosolutionFavorite.ecosolution.description"
           [image]="ecosolutionFavorite.ecosolution.companyDetail.logo"
           [category]="'CATEGORIES.' + ecosolutionFavorite.ecosolution.classification.mainCategory | translate"
-          [classNameCategoy]="ecosolutionFavorite.ecosolution.classification.mainCategory"
+          [classNameCategoy]="ecosolutionFavorite.ecosolution.classifications | classificationsLabel"
           [isFavorite]="ecosolutionFavorite.tag === TAGGING.FAVOURITES"
           (changeFavorite)="removeFavorite(ecosolutionFavorite.ecosolution.ecosolutionId)"
           (changeShowMore)="showMore(ecosolutionFavorite.ecosolution.ecosolutionId)" />
