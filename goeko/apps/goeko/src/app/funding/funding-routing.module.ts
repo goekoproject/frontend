@@ -21,6 +21,38 @@ const routes: Routes = [
     },
   },
   {
+    path: 'search',
+    children: [
+      {
+        path: 'sustainable-equipment',
+        loadComponent: () =>
+          import('./search/search-sustainble-equipment-form/search-sustainble-equipment-form.component').then(
+            (m) => m.SearchSustainbleEquipmentFormComponent,
+          ),
+        resolve: {
+          categories: groupingFormCategoriesResolver,
+        },
+        data: {
+          step: 1,
+          groupingCode: GroupingType.sustainableEquipment,
+        },
+      },
+      {
+        path: 'real-state-loan',
+        loadComponent: () =>
+          import('./search/search-real-estate-loan/search-real-estate-loan.component').then((m) => m.SearchRealEstateLoanComponent),
+        resolve: {
+          categories: groupingFormCategoriesResolver,
+        },
+        data: {
+          step: 1,
+          groupingCode: GroupingType.realEstateLoan,
+        },
+      },
+    ],
+  },
+
+  {
     path: 'matches',
     loadComponent: () =>
       import('./search/funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),

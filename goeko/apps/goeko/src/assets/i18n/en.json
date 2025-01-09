@@ -244,7 +244,18 @@
     "targetRegion": "Target region",
     "activityProspect": "Minimum number of years of activity required for the prospect",
     "originObject": "Origin of the object",
-    "balanceSheet": "Balance sheet and income statement required"
+    "balanceSheet": "Balance sheet and income statement required",
+    "selectProductsLabel": "Select the equipment to be financed",
+    "companyBasedLabel": "Where is your company based?",
+    "originEquipmmentLabel": "Origin of the equipment",
+    "yearsOperationsLabel": "How many years has your company being operating?",
+    "balanveSheetLabel": "Balance sheet and operating account available",
+    "documentsRelatedLabel": "Select the documents related to the purchase",
+    "estimatedAmountLabel": "Estimated amount",
+    "workTypeFieldLabel": "Select the work type to be financed",
+    "ownerProfileLabel": "Owner profile",
+    "objecTyeLabel": "Object type",
+    "regionOftheObjectLabel": "Region of the object to be financed"
   },
   "HOME": {
     "btnCleantech": "Find leads",

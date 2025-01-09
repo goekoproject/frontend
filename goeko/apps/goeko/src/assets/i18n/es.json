@@ -231,7 +231,18 @@
     "targetRegion": "Regiones objetivo",
     "activityProspect": "Número mínimo de años de actividad requeridos para el prospecto",
     "originObject": "Origen del objeto",
-    "balanceSheet": "Balance y cuenta de resultados requeridos"
+    "balanceSheet": "Balance y cuenta de resultados requeridos",
+    "selectProductsLabel": "Seleccione el equipo a financiar",
+    "companyBasedLabel": "¿Dónde está ubicada su empresa?",
+    "originEquipmmentLabel": "Origen del equipo",
+    "yearsOperationsLabel": "¿Cuántos años lleva operando su empresa?",
+    "balanveSheetLabel": "Balance y cuenta de explotación disponibles",
+    "documentsRelatedLabel": "Seleccione los documentos relacionados con la compra",
+    "estimatedAmountLabel": "Monto estimado",
+    "workTypeFieldLabel": "Seleccione el tipo de trabajo a financiar",
+    "ownerProfileLabel": "Perfil del propietario",
+    "objecTyeLabel": "Tipo de objeto",
+    "regionOftheObjectLabel": "Región del objeto a financiar"
   },
   "HOME": {
     "btnCleantech": "Encontrar leads",

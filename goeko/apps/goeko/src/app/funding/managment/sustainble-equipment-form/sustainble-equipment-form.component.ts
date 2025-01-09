@@ -14,10 +14,10 @@ import {
 } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoILeavesComponent, GoInputModule, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { AMOUNT, CURRENCY, DOCUMENTS, YEARS } from '../../data-fields.constants'
 import { STORE_NAME } from '../../funding-token.constants'
 import { FundingService } from '../../funding.service'
 import { CreateSustainableEquipment } from './create-sustainable-equipment.model'
-import { AMOUNT, CURRENCY, DOCUMENTS, YEARS } from './data-fields.constants'
 type Options = {
   label: string
   id: string
@@ -200,6 +200,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
       ? this._fundingService.updateSustainableEquipment(this.id() as string, payload)
       : this._fundingService.createSustainableEquipment(payload)
   }
+
   goBack = () => {
     window.history.back()
   }

@@ -232,7 +232,18 @@
     "targetRegion": "Zielregionen",
     "activityProspect": "Mindestanzahl an Jahren der Tätigkeit, die für den Interessenten erforderlich sind",
     "originObject": "Herkunft des Objekts",
-    "balanceSheet": "Bilanz und Gewinn- und Verlustrechnung erforderlich"
+    "balanceSheet": "Bilanz und Gewinn- und Verlustrechnung erforderlich",
+    "selectProductsLabel": "Wählen Sie die zu finanzierende Ausrüstung aus",
+    "companyBasedLabel": "Wo hat Ihr Unternehmen seinen Sitz?",
+    "originEquipmmentLabel": "Herkunft der Ausrüstung",
+    "yearsOperationsLabel": "Wie viele Jahre ist Ihr Unternehmen tätig?",
+    "balanveSheetLabel": "Bilanz und Betriebskonto verfügbar",
+    "documentsRelatedLabel": "Wählen Sie die mit dem Kauf verbundenen Dokumente aus",
+    "estimatedAmountLabel": "Geschätzter Betrag",
+    "workTypeFieldLabel": "Wählen Sie die zu finanzierende Arbeitsart aus",
+    "ownerProfileLabel": "Eigentümerprofil",
+    "objecTyeLabel": "Objekttyp",
+    "regionOftheObjectLabel": "Region des zu finanzierenden Objekts"
   },
   "HOME": {
     "btnCleantech": "Leads finden",

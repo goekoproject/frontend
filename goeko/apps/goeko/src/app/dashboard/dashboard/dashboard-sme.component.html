@@ -20,7 +20,8 @@
         <h2>{{ 'BANNER_FUNDINGS.title' | translate }}</h2>
         <p>
           {{ 'BANNER_FUNDINGS.description' | translate }}
-          <a href="#" class="text-primary-default hover:underline"> {{ 'BANNER_FUNDINGS.callToAction' | translate }}</a
+          <a routerLink="../funding/search/sustainable-equipment" [relativeTo]="route.parent" class="text-primary-default hover:underline">
+            {{ 'BANNER_FUNDINGS.callToAction' | translate }}</a
           >.
         </p>
       </go-notification>
