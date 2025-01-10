@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping, LocationTranslated } from '@goeko/store'
-import { ButtonModule, UiSuperSelectModule } from '@goeko/ui'
+import { ButtonModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AMOUNT, CURRENCY, DOCUMENTS, YEARS } from '../../data-fields.constants'
 type Options = {
@@ -14,7 +14,16 @@ type Options = {
 @Component({
   selector: 'goeko-search-sustainble-equipment-form',
   standalone: true,
-  imports: [CommonModule, RouterModule, ButtonModule, TranslateModule, UiSuperSelectModule, ReactiveFormsModule, SelectLocationsComponent],
+  imports: [
+    CommonModule,
+    OptionalLabelDirective,
+    RouterModule,
+    ButtonModule,
+    TranslateModule,
+    UiSuperSelectModule,
+    ReactiveFormsModule,
+    SelectLocationsComponent,
+  ],
   templateUrl: './search-sustainble-equipment-form.component.html',
   styleUrl: './search-sustainble-equipment-form.component.scss',
 })

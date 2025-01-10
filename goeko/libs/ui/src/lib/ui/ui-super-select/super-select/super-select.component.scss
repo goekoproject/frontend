@@ -1,4 +1,4 @@
-$border-color: var( --border-color);
+$border-color: var(--border-color);
 $border-color-disabled: transparent;
 $border-color-error: var(--border-error);
 $background-disbaled: var(--bg-field);
@@ -107,7 +107,9 @@ $color-label-pressed: var(--primary--main);
 }
 
 .cdk-overlay-backdrop {
-  transition: visibility 1ms linear, opacity 1ms linear;
+  transition:
+    visibility 1ms linear,
+    opacity 1ms linear;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -133,7 +135,7 @@ $color-label-pressed: var(--primary--main);
 .super-select {
   .select_label {
     background-color: transparent;
-    color:var(--primary--800);
+    color: var(--primary--800);
     border-radius: 24px;
     touch-action: manipulation;
     width: auto;
@@ -161,6 +163,6 @@ ui-super-select[readonly='true'] {
     padding: 0;
   }
 }
-.mandatory {
-  font-size: .75rem;
+.optional {
+  font-size: 0.75rem;
 }

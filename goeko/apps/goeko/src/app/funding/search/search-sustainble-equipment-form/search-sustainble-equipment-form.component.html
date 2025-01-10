@@ -79,7 +79,7 @@
 
     <!-- DOCUMENT REQUIRED-->
     <div class="mb-6">
-      <label class="mb-2 block font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.documentsRelatedLabel' | translate }}</label>
+      <label go-optional-label>{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.documentsRelatedLabel' | translate }}</label>
       <div class="form-group form-check mb-4 space-y-2">
         <ng-container formArrayName="documents">
           @for (document of requiredDocuments(); track document; let index = $index) {
@@ -94,7 +94,7 @@
 
     <!-- Operations Years -->
     <div class="mb-6">
-      <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.yearsOperationsLabel' | translate }}</h2>
+      <h2 class="label-form">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.yearsOperationsLabel' | translate }}</h2>
       <div class="mb-4">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
         <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity">
@@ -107,7 +107,7 @@
 
     <!-- Balance sheet -->
     <div class="mb-6">
-      <label class="text-lg font-semibold">
+      <label class="label-form">
         <input type="checkbox" id="balanceSheet" />
         {{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanveSheetLabel' | translate }}
       </label>
@@ -124,7 +124,7 @@
 
     <!-- Montant minimum -->
     <div class="mb-4">
-      <label class="mb-2 mt-2 block font-medium">{{ 'FORM_LABEL.estimatedAmountLabel' | translate }}</label>
+      <label class="label-form">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.estimatedAmountLabel' | translate }}</label>
       <div class="flex items-center gap-4">
         <ui-super-select formControlName="minimumQuantity" class="basis-1/2">
           @for (money of amount(); track money.id; let first = $first) {

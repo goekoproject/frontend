@@ -1,70 +1,51 @@
 <div>
-	<ng-content select="[title]"></ng-content>
-	@if (isRequired ) {
-		<span class="mandatory"> ({{'mandatory' | translate}})</span>
-	}
+  <ng-content select="[title]"></ng-content>
 </div>
 
-
 <div class="before-icon-select" [ngClass]="{ 'position-icon-select': positionIco !== 'left' }">
-	<ng-content select="i"></ng-content>
+  <ng-content select="i"></ng-content>
 </div>
 
 <ng-content select="[icon]"></ng-content>
 
 <div
-	cdk-overlay-origin
-	cdkOverlayOrigin
-	class="select {{ size }} {{ status }}"
-	[ngClass]="{
-		'select--error': hasError,
-		'ui-select--success': !hasError && value
-	}"
-	(click)="toggle($event)"
-	#origin="cdkOverlayOrigin"
-	#trigger
->
-	<label
-		*ngIf="empty"
-		id="floting-label"
-		class="select_label"
-		[ngClass]="{ 'not-floating': noFloatinglabel }"
-		#labelElement
-		>{{ placeholder }} </label>
+  cdk-overlay-origin
+  cdkOverlayOrigin
+  class="select {{ size }} {{ status }}"
+  [ngClass]="{
+    'select--error': hasError,
+    'ui-select--success': !hasError && value,
+  }"
+  (click)="toggle($event)"
+  #origin="cdkOverlayOrigin"
+  #trigger>
+  <label *ngIf="empty" id="floting-label" class="select_label" [ngClass]="{ 'not-floating': noFloatinglabel }" #labelElement
+    >{{ placeholder }}
+  </label>
 
-	<div *ngIf="!empty" class="select_value">
-		{{ label }}
+  <div *ngIf="!empty" class="select_value">
+    {{ label }}
+  </div>
 
-	</div>
+  <i id="{{ arrowId }}" class="icon-Arrow-Chevron-Down select_arrow" [ngClass]="{ 'select-arrow--rotate': isOpen }"> </i>
+  <span class="material-symbols-rounded"> keyboard_arrow_down </span>
 
-	<i id="{{ arrowId }}" class="icon-Arrow-Chevron-Down select_arrow" [ngClass]="{ 'select-arrow--rotate': isOpen }">
-	</i>
-	<span class="material-symbols-rounded"> keyboard_arrow_down </span>
+  <div class="ui-select_message-error" *ngIf="hasError">
+    <ng-content select="[isError]"></ng-content>
+  </div>
 
-	<div class="ui-select_message-error" *ngIf="hasError">
-		<ng-content select="[isError]"></ng-content>
-	</div>
-
-	<ng-template
-		#triggerOptions
-		cdkConnectedOverlay
-		[cdkConnectedOverlayHasBackdrop]="true"
-		[cdkConnectedOverlayPanelClass]="overlayPanelClass"
-		[cdkConnectedOverlayOrigin]="origin"
-		[cdkConnectedOverlayOpen]="isOpen"
-		[cdkConnectedOverlayWidth]="_overlayWidth"
-		[cdkConnectedOverlayPanelClass]="'select-dropdown'"
-		(backdropClick)="close()"
-	>
-		<div
-			role="listbox"
-			tabindex="-1"
-			(keydown)="_handleKeydown($event)"
-			class="select_options go-scroll"
-			cdkTrapFocus
-		>
-
-			<ng-content></ng-content>
-		</div>
-	</ng-template>
+  <ng-template
+    #triggerOptions
+    cdkConnectedOverlay
+    [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayPanelClass]="overlayPanelClass"
+    [cdkConnectedOverlayOrigin]="origin"
+    [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayWidth]="_overlayWidth"
+    [cdkConnectedOverlayPanelClass]="'select-dropdown'"
+    (backdropClick)="close()">
+    <div role="listbox" tabindex="-1" (keydown)="_handleKeydown($event)" class="select_options go-scroll" cdkTrapFocus>
+      <ng-content></ng-content>
+    </div>
+  </ng-template>
 </div>

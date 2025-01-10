@@ -1,3 +1,13 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+  .label-form {
+    @apply text-lg font-semibold text-black;
+  }
+  label[data-after-label]::after {
+    content: ' (' attr(data-after-label) ')';
+    @apply text-sm font-normal text-gray-500;
+  }
+}

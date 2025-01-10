@@ -113,8 +113,8 @@
                   [placeholder]="itemForm.placeholder || ''"
                   class="{{ itemForm.className }}">
                   <p slot="label">{{ itemForm.label | translate }}</p>
-                  @if (itemForm.required) {
-                    <p class="required-field" slot="required">{{ 'mandatory' | translate }}</p>
+                  @if (!itemForm.required) {
+                    <p class="optional" slot="required">{{ 'optional' | translate }}</p>
                   }
                 </go-input>
               }
