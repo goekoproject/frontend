@@ -1,1 +1,104 @@
-<p>search-real-estate-loan works!</p>
+<h1 class="text-2xl font-semibold">{{ 'realStateLoan' | translate }}</h1>
+
+@defer (when form) {
+  <form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
+    <div class="mb-6">
+      @for (category of categories(); track category.code) {
+        <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.workTypeFieldLabel' | translate }}</h2>
+        <div class="mt-4">
+          <ng-container formGroupName="workTypes">
+            <input id="category" class="invisible absolute h-0" formControlName="categoryCode" type="text" />
+
+            @for (subcategory of category.subcategories; track subcategory.id) {
+              <input id="category" class="invisible absolute h-0" formControlName="subcategoryCode" type="text" />
+
+              <div class="mb-6 flex flex-wrap">
+                @for (product of subcategory.products; track product.id) {
+                  <div class="flex basis-1/2 items-center gap-4">
+                    <input
+                      [id]="product.code"
+                      type="radio"
+                      formControlName="products"
+                      [value]="product.code"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                    <label for="{{ product.code }}">
+                      {{ product.label }}
+                    </label>
+                  </div>
+                }
+              </div>
+            }
+          </ng-container>
+
+          <div class="flex gap-4 [&>*]:flex-grow">
+            <div>
+              <ui-super-select
+                [formControlName]="'ownerProfile'"
+                [multiple]="true"
+                [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
+                <label title for="ownerProfile">
+                  {{ 'FORM_LABEL.ownerProfile' | translate }}
+                </label>
+                @for (profile of ownerProfile(); track profile.id) {
+                  <super-option [value]="profile.label"> {{ profile.label | translate }}</super-option>
+                }
+              </ui-super-select>
+            </div>
+            <div>
+              <ui-super-select
+                [formControlName]="'buildingTypes'"
+                [multiple]="true"
+                [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
+                <label title for="buildingTypes">
+                  {{ 'FORM_LABEL.buildingTypes' | translate }}
+                </label>
+                @for (type of buildingTypes(); track type.id) {
+                  <super-option [value]="type.label"> {{ type.label | translate }}</super-option>
+                }
+              </ui-super-select>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <!-- Locations -->
+    <div class="mb-6">
+      <h2 class="label-form">{{ 'FORM_LABEL.targetRegion' | translate }}</h2>
+      <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+    </div>
+    <!-- Montant minimum -->
+    <div class="mb-6">
+      <h2 class="label-form">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.estimatedAmountLabel' | translate }}</h2>
+
+      <div class="flex gap-4 [&>*]:flex-grow">
+        <div>
+          <ui-super-select [formControlName]="'montanMinimun'">
+            @for (money of amount(); track money.id; let first = $first) {
+              <super-option [value]="money.label" [valueSelected]="first"> {{ money.label | number }}</super-option>
+            }
+          </ui-super-select>
+        </div>
+        <div>
+          <ui-super-select
+            [multiple]="true"
+            [readonly]="false"
+            [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
+            [formControlName]="'currency'"
+            id="currency"
+            name="currency">
+            @for (currency of currencys(); track currency.id) {
+              <super-option [value]="currency.label"> {{ currency.label }}</super-option>
+            }
+          </ui-super-select>
+        </div>
+      </div>
+    </div>
+  </form>
+}
+
+<div class="mt-4 flex justify-between">
+  <button go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>
+  <div class="flex items-center gap-2">
+    <button go-button type="submit" (click)="search()">{{ 'FORM_LABEL.search' | translate }}</button>
+  </div>
+</div>

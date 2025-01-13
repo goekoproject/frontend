@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core'
       <div class="flex w-10/12 flex-col gap-6 rounded-2xl p-4 pb-10 shadow-xl">
         <h2 class="text-2xl font-semibold">{{ 'sustainableEquipment' | translate }}</h2>
         @for (location of sustainbleEquipment().locations; track location?.country?.code) {
-          <div class="flex gap-2">
+          <div class="flex flex-wrap gap-2">
             @for (region of location.country.regions; track region) {
               <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
                 <span class="fi fi-{{ location.country.code | lowercase }}"></span>
@@ -28,7 +28,7 @@ import { TranslateModule } from '@ngx-translate/core'
 
           <div class="flex gap-8">
             @defer (when productsVehicles().length > 0) {
-              <div class="flex flex-col gap-4 basis-1/2">
+              <div class="flex basis-1/2 flex-col gap-4">
                 <span class="text-grayText">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.vehicles' | translate }}</span>
                 @if (sustainbleEquipment().greenBonusVehicles) {
                   <div class="flex">
@@ -36,7 +36,7 @@ import { TranslateModule } from '@ngx-translate/core'
                     <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
                   </div>
                 }
-                <div class="flex flex-wrap gap-2 basis-1/2">
+                <div class="flex flex-wrap gap-2">
                   @for (vehicle of productsVehicles(); track vehicle.id) {
                     <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
                       <p>{{ vehicle | productToCurrentLang }}</p>
@@ -56,7 +56,7 @@ import { TranslateModule } from '@ngx-translate/core'
                   </div>
                 }
 
-                <div class="flex gap-2">
+                <div class="flex flex-wrap gap-2">
                   @for (machine of productsMachines(); track machine.id) {
                     <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
                       <p>{{ machine | productToCurrentLang }}</p>

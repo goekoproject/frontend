@@ -6,6 +6,7 @@ import { getDataRealStateLoan, getKindOfFunding, getSustainableEquipment } from 
 import { HubFundingComponent } from './managment/hub-funding.component'
 import { RealStateLoanComponent } from './managment/real-state-loan-form/real-state-loan-form.component'
 import { SustainbleEquipmentFormComponent } from './managment/sustainble-equipment-form/sustainble-equipment-form.component'
+import { searchFunding } from './search/search-funding.resolver'
 
 const routes: Routes = [
   {
@@ -49,14 +50,17 @@ const routes: Routes = [
           groupingCode: GroupingType.realEstateLoan,
         },
       },
+      {
+        path: 'search-results',
+        loadComponent: () =>
+          import('./search/funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),
+        resolve: {
+          searchResults: searchFunding,
+        },
+      },
     ],
   },
 
-  {
-    path: 'matches',
-    loadComponent: () =>
-      import('./search/funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),
-  },
   {
     path: 'king-of-funding',
     component: FundingComponent,

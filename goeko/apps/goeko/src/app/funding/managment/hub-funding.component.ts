@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, computed, inject, input } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
-import { FINANCING_TYPE, RealStateLoanResponse, SustainableEquipmentResponse } from '@goeko/store'
+import { FINANCING_TYPE, RealEstateLoanResponse, SustainableEquipmentResponse } from '@goeko/store'
 import { BadgeModule, ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { CardPreviewRealEstateLoanComponent } from './real-state-loan-form/card-preview-real-estate-loan.component'
@@ -28,7 +28,7 @@ export class HubFundingComponent {
   private _route = inject(ActivatedRoute)
   bankId = input.required<string>()
   kindOfFunding = input.required<{
-    realStateLoan: RealStateLoanResponse[]
+    realStateLoan: RealEstateLoanResponse[]
     sustainableEquipment: SustainableEquipmentResponse[]
   }>()
   KIND_OF_FUNDING = FINANCING_TYPE

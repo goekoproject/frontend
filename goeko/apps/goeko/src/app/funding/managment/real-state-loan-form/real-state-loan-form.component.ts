@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common'
 import { Component, inject, input, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { CategoryModule, SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
-import { CategoryGrouping, FinancingService, LocationsCountry, Product, RealStateLoanResponse } from '@goeko/store'
+import { SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
+import { CategoryGrouping, FinancingService, LocationsCountry, Product, RealEstateLoanResponse } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { forkJoin } from 'rxjs'
@@ -22,7 +22,6 @@ type Options = {
     CommonModule,
     ButtonModule,
     TranslateModule,
-    CategoryModule,
     BadgeModule,
     ReactiveFormsModule,
     GoInputModule,
@@ -47,7 +46,7 @@ export class RealStateLoanComponent implements OnInit {
   private _selectLocationsService = inject(SelectLocationsService)
   bankId = input.required<string>()
   categories = input.required<CategoryGrouping[]>()
-  dataRealEstateLoan = input<RealStateLoanResponse>()
+  dataRealEstateLoan = input<RealEstateLoanResponse>()
   id = input<string>()
   public form!: FormGroup
 
@@ -64,7 +63,7 @@ export class RealStateLoanComponent implements OnInit {
     this._buildFrom()
     console.log(this.bankId())
     if (this.dataRealEstateLoan()) {
-      this._patchFormData(this.dataRealEstateLoan() as RealStateLoanResponse)
+      this._patchFormData(this.dataRealEstateLoan() as RealEstateLoanResponse)
       console.log(this.form)
     }
   }
@@ -95,7 +94,7 @@ export class RealStateLoanComponent implements OnInit {
     this.form.get('workTypes.subcategoryCode')?.setValue(this.categories()[0].subcategories[0].code)
   }
 
-  private _patchFormData(data: RealStateLoanResponse) {
+  private _patchFormData(data: RealEstateLoanResponse) {
     this.form.patchValue({
       workTypes: {
         categoryCode: data.classifications[0].category.code,

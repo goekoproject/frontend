@@ -154,6 +154,7 @@
     "service": "Service"
   },
   "FORM_LABEL": {
+    "search": "Rechercher",
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",
     "advantagesEcosolutions": "Avantages de votre éco-solution",
@@ -570,6 +571,7 @@
     "body": "Nous sommes ravis que vous soyez des nôtres ! Nous vous avons envoyé un lien de vérification à votre adresse e-mail.",
     "title": "Consultez votre boîte de réception."
   },
+  "bestFiancialPartners": "Meilleurs partenaires financiers",
   "a": "à",
   "accept": "Accepter",
   "add": "Ajouter",

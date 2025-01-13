@@ -1,5 +1,12 @@
-import { inject, Injectable } from '@angular/core'
-import { FinancingService, FinancingType } from '@goeko/store'
+import { inject, Injectable, signal } from '@angular/core'
+import {
+  FinancingService,
+  FinancingType,
+  SearchFinancingBuilder,
+  SearchFinancingResponse,
+  SearchRealEstate,
+  SearchSustainableEquipment,
+} from '@goeko/store'
 import { Observable, of } from 'rxjs'
 import { CreateRealStateLoan } from './managment/real-state-loan-form/create-real-state-loan.model'
 import { CreateSustainableEquipment } from './managment/sustainble-equipment-form/create-sustainable-equipment.model'
@@ -10,20 +17,14 @@ export class FundingService {
   sustainableEquipment!: CreateSustainableEquipment
   realStateLoan!: CreateRealStateLoan
 
-  setRealStateLoan(realStateLoan: CreateRealStateLoan) {
-    this.realStateLoan = realStateLoan
+  private _financingBuilder = signal<SearchFinancingBuilder>(new SearchFinancingBuilder())
+
+  setQuerySustainableEquipment(data: SearchSustainableEquipment): void {
+    this._financingBuilder().setSustainableEquipment(data)
   }
 
-  getRealStateLoan() {
-    return this.realStateLoan
-  }
-
-  setSustainableEquipment(sustainableEquipment: CreateSustainableEquipment) {
-    this.sustainableEquipment = sustainableEquipment
-  }
-
-  getSustainableEquipment() {
-    return this.sustainableEquipment
+  setQueryRealEstateLoan(data: SearchRealEstate): void {
+    this._financingBuilder().setRealEstate(data)
   }
 
   getSustainableEquipmentById(id: string): Observable<any> {
@@ -58,5 +59,10 @@ export class FundingService {
 
   deleteKindOfFinancingById(type: FinancingType, kindOfFundingId: string): Observable<any> {
     return this._financingService.deleteKindOfFinancingById(type, kindOfFundingId)
+  }
+
+  searchFunding(): Observable<SearchFinancingResponse> {
+    const query = this._financingBuilder().build()
+    return this._financingService.searchFinancing(query)
   }
 }

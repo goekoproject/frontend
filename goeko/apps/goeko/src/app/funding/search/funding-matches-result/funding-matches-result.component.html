@@ -1,1 +1,8 @@
-<p>funding-matches-result works!</p>
+<h1>{{ 'bestFiancialPartners' | translate }}</h1>
+
+<section>
+  <h2>{{ 'sustainbleEquipment' | translate }}</h2>
+  @for (sustainableEquipments of fundsSustainableEquipments(); track $index) {
+    <goeko-display-search-funding [dataFunding]="sustainableEquipments"></goeko-display-search-funding>
+  }
+</section>

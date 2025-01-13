@@ -7,7 +7,7 @@ export interface SustainableEquipmentPayload {
   locations: LocationsCountry[]
   activityProspectMinimum: number
   balanceSheet?: number
-  requiredDocuments: string[]
+  requiredDocuments: string[] | undefined
   minimumQuantity: number
   currency: string[]
   contact: ContactRequest

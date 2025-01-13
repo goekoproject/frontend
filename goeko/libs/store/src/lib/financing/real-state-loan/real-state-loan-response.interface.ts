@@ -1,7 +1,7 @@
 import { LocationsCountry } from '../../model/locations.country'
 import { Bank, ClassificationFunding, ContactRequest } from '../common-request.interface'
 
-export interface RealStateLoanResponse {
+export interface RealEstateLoanResponse {
   id: string
   bank: Bank
   classifications: ClassificationFunding[]
@@ -12,4 +12,5 @@ export interface RealStateLoanResponse {
   currency: string[]
   contact: ContactRequest
   creationDate: string
+  financingType: string
 }

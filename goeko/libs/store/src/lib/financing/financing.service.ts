@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { inject, Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, shareReplay } from 'rxjs'
 import { FINANCING_TYPE } from './financing-type.enum'
-import { RealStateLoanResponse } from './real-state-loan/real-state-loan-response.interface'
+import { RealEstateLoanResponse } from './real-state-loan/real-state-loan-response.interface'
 import { OperationRealStateLoan } from './real-state-loan/real-state-loan.interface'
 import { RealStateLoanPayload } from './real-state-loan/real-state-loan.model'
+import { SearchFinancingResponse } from './search-financing-response.interface'
+import { SearchFinacing } from './search-financing.interface'
 import { OperationSustainableEquipment } from './sustainable-equipment/sustainable-equipment.interface'
 import { SustainableEquipmentPayload } from './sustainable-equipment/sustainable-equipment.model'
 
@@ -17,8 +19,8 @@ export class FinancingService implements OperationSustainableEquipment, Operatio
     return this._http.get(`/v1/financing/${type}`)
   }
 
-  getKindOfFinancingById(type: FinancingType, bankId: string): Observable<RealStateLoanResponse> {
-    return this._http.get<RealStateLoanResponse>(`/v1/financing/${type}/bank/${bankId}`)
+  getKindOfFinancingById(type: FinancingType, bankId: string): Observable<RealEstateLoanResponse> {
+    return this._http.get<RealEstateLoanResponse>(`/v1/financing/${type}/bank/${bankId}`)
   }
 
   getSustainableEquipmentById(id: string): Observable<any> {
@@ -43,5 +45,9 @@ export class FinancingService implements OperationSustainableEquipment, Operatio
 
   deleteKindOfFinancingById(type: FinancingType, kindOfFundingId: string): Observable<any> {
     return this._http.delete(`/v1/financing/${type}/${kindOfFundingId}`)
+  }
+
+  searchFinancing(data: SearchFinacing): Observable<SearchFinancingResponse> {
+    return this._http.post<SearchFinancingResponse>(`/v1/financing/search?lang=en`, data).pipe(shareReplay(1))
   }
 }

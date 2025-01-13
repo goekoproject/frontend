@@ -7,7 +7,7 @@ export class CreateSustainableEquipment implements SustainableEquipmentPayload {
   locations: LocationsCountry[]
   activityProspectMinimum: number
   balanceSheet?: number | undefined
-  requiredDocuments: string[]
+  requiredDocuments: string[] | undefined
   minimumQuantity: number
   currency: string[]
   contact: ContactRequest
@@ -31,9 +31,7 @@ export class CreateSustainableEquipment implements SustainableEquipmentPayload {
     this.locations = mapperLocations(dataForm.locations)
     this.activityProspectMinimum = parseInt(dataForm.yearsActivity.label)
     this.balanceSheet = parseInt(dataForm.yearsBalance.label)
-    this.requiredDocuments = dataForm.documents
-      .filter((d: { checked: boolean }) => d.checked)
-      .map((doc: { value: { label: string } }) => doc.value.label)
+    this.requiredDocuments = this._getDocumentsRequests(dataForm.documents)
     this.greenBonusVehicles = dataForm.greenBonusVehicle
     this.greenBonusMachines = dataForm.greenBonusMachines
 
@@ -45,5 +43,13 @@ export class CreateSustainableEquipment implements SustainableEquipmentPayload {
       name: 'mock',
       phoneNumber: dataForm.phoneNumber,
     }
+  }
+
+  private _getDocumentsRequests(documents: Array<{ value: { label: string }; checked: boolean }>): string[] | undefined {
+    const documentsChecked = documents.filter((d) => d.checked)
+    if (documentsChecked.length === 0) {
+      return undefined
+    }
+    return documentsChecked.map((doc: { value: { label: string } }) => doc.value.label)
   }
 }

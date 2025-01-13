@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, computed, input, output } from '@angular/core'
 import { ProductToCurrentLangPipe } from '@goeko/business-ui'
-import { LocationRegionsPipe, Product, RealStateLoanResponse } from '@goeko/store'
+import { LocationRegionsPipe, Product, RealEstateLoanResponse } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 
@@ -47,7 +47,7 @@ import { TranslateModule } from '@ngx-translate/core'
   styleUrl: './card-preview-real-estate-loan.component.scss',
 })
 export class CardPreviewRealEstateLoanComponent {
-  realStateLoan = input.required<RealStateLoanResponse>()
+  realStateLoan = input.required<RealEstateLoanResponse>()
   products = computed<Product[]>(() => this.realStateLoan().classifications[0].products)
   onEdit = output<{ id: string }>()
 }

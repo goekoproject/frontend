@@ -153,6 +153,7 @@
     "service": "Service"
   },
   "FORM_LABEL": {
+    "search": "Search",
     "additionalInformation": "Additional information",
     "advantages": "Benefits",
     "advantagesEcosolutions": "Advantages of your eco-solution",
@@ -570,6 +571,7 @@
     "body": "We are glad, that you’re with us ? We’ve sent you a verification link to yours email address",
     "title": "Check your inbox"
   },
+  "bestFiancialPartners": "Best financial partners",
   "a": "to",
   "accept": "Accept",
   "add": "Add",

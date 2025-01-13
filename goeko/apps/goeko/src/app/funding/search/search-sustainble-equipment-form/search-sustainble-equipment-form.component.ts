@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, input, signal } from '@angular/core'
+import { Component, computed, effect, inject, input, model, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
@@ -7,6 +7,8 @@ import { CategoryGrouping, LocationTranslated } from '@goeko/store'
 import { ButtonModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AMOUNT, CURRENCY, DOCUMENTS, YEARS } from '../../data-fields.constants'
+import { FundingService } from '../../funding.service'
+import { SearchSustainableEquipmentMapper } from '../search-financing-mapper.model'
 type Options = {
   label: string
   id: string
@@ -32,6 +34,7 @@ export class SearchSustainbleEquipmentFormComponent {
   private _fb = inject(FormBuilder)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
+  private _fundingService = inject(FundingService)
 
   //Data received from the parent component
   categories = input.required<CategoryGrouping[]>()
@@ -46,20 +49,27 @@ export class SearchSustainbleEquipmentFormComponent {
 
   // Initialize props
   form!: FormGroup
+  checkedBalanceSheet = model<boolean>(false)
 
   // Accessors
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
   }
+
+  private _goSearchRealStateLoan = () => {
+    this._router.navigate(['real-state-loan'], { relativeTo: this._route.parent })
+  }
   constructor() {
-    effect(() => {
-      if (this.vehicles() && this.machines()) {
-        this.form = this.formBuilder()
-      }
-    })
+    effect(() => this._initForm())
   }
 
-  formBuilder = () =>
+  private _initForm = () => {
+    if (this.vehicles() && this.machines()) {
+      this.form = this._formBuilder()
+    }
+  }
+
+  private _formBuilder = () =>
     this._fb.group({
       vehicles: this._fb.group({
         mainCategory: [this.vehicles().code],
@@ -75,7 +85,7 @@ export class SearchSustainbleEquipmentFormComponent {
       documents: this._fb.array(
         this.requiredDocuments().map((doc) =>
           this._fb.group({
-            value: [doc], // Objeto completo como valor
+            value: [doc.label], // Objeto completo como valor
             checked: [false], // Estado inicial del checkbox
           }),
         ),
@@ -91,13 +101,14 @@ export class SearchSustainbleEquipmentFormComponent {
     window.history.back()
   }
   save = () => {
-    console.log(this.form.value)
+    const searchSustainableEquipment = new SearchSustainableEquipmentMapper(this.form.value)
+    this._fundingService.setQuerySustainableEquipment(searchSustainableEquipment)
+    this._goSearchRealStateLoan()
   }
   goSkip = () => {
-    this._goRealStateLoan()
+    this._goSearchRealStateLoan()
   }
-
-  private _goRealStateLoan = () => {
-    this._router.navigate(['real-state-loan'], { relativeTo: this._route.parent })
+  changeBalanceSheet = () => {
+    this.checkedBalanceSheet.update((checked) => !checked)
   }
 }

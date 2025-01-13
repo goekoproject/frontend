@@ -15,4 +15,5 @@ export interface SustainableEquipmentResponse {
   currency: string[]
   contact: ContactRequest
   creationDate: string
+  financingType: string
 }

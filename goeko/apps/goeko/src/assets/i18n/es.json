@@ -145,6 +145,7 @@
     "service": "Servicios"
   },
   "FORM_LABEL": {
+    "search": "Buscar",
     "additionalInformation": "Información adicional",
     "advantages": "Beneficios",
     "advantagesEcosolutions": "Ventajas de su eco-solución",
@@ -568,6 +569,7 @@
     "messaggeProfileUncompletedBody": "Actualice su perfil para acceder a todas las herramientas de Goeko.",
     "messageNotification": "Active las notificaciones por email para recibir las últimas ecosoluciones que se adapten a sus necesidades."
   },
+  "bestFiancialPartners": "Mejores socios financieros",
   "a": "a",
   "yourEcosolution": "Tu Ecosolucion",
   "your_ecosolutions": "Tu solución cleantech",
