@@ -8,7 +8,7 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
   selector: 'goeko-display-search-funding',
   standalone: true,
   imports: [CommonModule, TranslateModule],
-  template: `<article class="flex items-center p-3 shadow-md bg-white gap-6">
+  template: `<article class="flex items-center gap-6 rounded-2xl bg-white p-3 shadow-lg">
     <img
       src="assets/images/illustrations/undraw_searching_p5ux.svg"
       alt="searching"
