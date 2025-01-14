@@ -84,13 +84,13 @@
     <!-- Balance sheet -->
     <div class="mb-6">
       <label class="text-lg font-semibold">
-        <input type="checkbox" id="balanceSheet" />
+        <input type="checkbox" id="balanceSheet"  [checked]="checkedBalanceSheet()" (change)="changeBalanceSheet()"  />
         {{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheet' | translate }}
       </label>
-      <div class="mb-4">
+      <div class="mb-4" [ngClass]="{ 'pointer-events-none opacity-50': !this.checkedBalanceSheet() }">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
 
-        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance" [compareWith]="compareWithOptionsNumber">
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance" [compareWith]="compareWithOptionsNumber" [disabled]="!this.checkedBalanceSheet()">
           @for (year of years(); track year.id) {
             <super-option [value]="year"> {{ year.label }}</super-option>
           }

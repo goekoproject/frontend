@@ -115,8 +115,8 @@
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
 
         <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance" [disabled]="!this.checkedBalanceSheet()">
-          @for (year of years(); track year.id) {
-            <super-option [value]="year.label"> {{ year.label }}</super-option>
+          @for (year of years(); track year.id; let first = $first) {
+            <super-option [value]="year.label" [valueSelected]="first"> {{ year.label }}</super-option>
           }
         </ui-super-select>
       </div>

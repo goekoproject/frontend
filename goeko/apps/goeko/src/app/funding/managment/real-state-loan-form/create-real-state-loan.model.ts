@@ -21,12 +21,8 @@ export class CreateRealStateLoan implements RealStateLoanPayload {
       },
     ]
     this.locations = mapperLocations(dataForm.locations)
-    this.buildingTypes = dataForm.buildingTypes.map((buildingType: any) => {
-      return buildingType.label
-    })
-    this.ownerProfile = dataForm.ownerProfile.map((ownerProfile: any) => {
-      return ownerProfile.label
-    })
+    this.buildingTypes = this._getOptionLabel(dataForm.buildingTypes)
+    this.ownerProfile = this._getOptionLabel(dataForm.ownerProfile)
     this.minimumQuantity = parseInt(dataForm.montanMinimun.label)
     this.currency = dataForm.currency
     this.contact = {
@@ -35,5 +31,11 @@ export class CreateRealStateLoan implements RealStateLoanPayload {
       name: 'mock',
       phoneNumber: dataForm.phoneNumber,
     }
+  }
+
+  private _getOptionLabel = (options: any[]) => {
+    return options.map((option) => {
+      return option.label
+    })
   }
 }

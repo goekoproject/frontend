@@ -20,4 +20,8 @@ export class SearchFinancingBuilder {
       realEstate: this.realEstate,
     }
   }
+  clearSustainableEquipment(): void {
+    this.sustainableEquipment = {} as SearchSustainableEquipment
+    this.realEstate = {} as SearchRealEstate
+  }
 }

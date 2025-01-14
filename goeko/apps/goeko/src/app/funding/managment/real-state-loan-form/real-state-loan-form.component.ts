@@ -32,7 +32,7 @@ type Options = {
   templateUrl: './real-state-loan-form.component.html',
   styleUrls: ['./real-state-loan-form.component.scss'],
 })
-export class RealStateLoanComponent implements OnInit {
+export class RealStateLoanComponent implements OnInit{
   comparteWithProduct = (o1: Product, o2: Product): boolean => o1.id === o2.id
   compareWithOptions = (o1: Options, o2: string): boolean => o1.label === o2
   compareWithOptionsNumber = (o1: Options, o2: string): boolean => +o1.label === +o2

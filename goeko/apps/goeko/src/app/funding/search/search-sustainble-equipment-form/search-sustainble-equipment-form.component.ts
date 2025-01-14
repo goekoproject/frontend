@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, input, model, signal } from '@angular/core'
+import { Component, computed, effect, inject, input, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
@@ -49,7 +49,7 @@ export class SearchSustainbleEquipmentFormComponent {
 
   // Initialize props
   form!: FormGroup
-  checkedBalanceSheet = model<boolean>(false)
+  checkedBalanceSheet = signal<boolean>(false)
 
   // Accessors
   public get locationsArrays(): FormArray {
@@ -93,8 +93,8 @@ export class SearchSustainbleEquipmentFormComponent {
       locations: this._fb.array<LocationTranslated>([], Validators.required),
       minimumQuantity: this._fb.control(this.amount()[0].label),
       currencys: this._fb.control(null),
-      yearsActivity: this._fb.control(this.years()[0]),
-      yearsBalance: this._fb.control(this.years()[0]),
+      yearsActivity: this._fb.control(this.years()[0].label),
+      yearsBalance: this._fb.control(this.years()[0].label),
     })
 
   goBack = () => {

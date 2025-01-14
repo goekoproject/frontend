@@ -27,6 +27,9 @@ export class FundingService {
     this._financingBuilder().setRealEstate(data)
   }
 
+  clearQuerySustainableEquipment(): void {
+    this._financingBuilder().clearSustainableEquipment()
+  }
   getSustainableEquipmentById(id: string): Observable<any> {
     return this._financingService.getSustainableEquipmentById(id)
   }

@@ -73,6 +73,9 @@ module.exports = {
         '100%': { opacity: '0', transform: 'translateX(-100%)' },
       },
     },
+    boxShadow: {
+      card: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06)',
+    },
   },
   plugins: [{ ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}) }, 'prettier-plugin-tailwindcss'],
 }

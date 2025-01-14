@@ -8,24 +8,30 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
   selector: 'goeko-display-search-funding',
   standalone: true,
   imports: [CommonModule, TranslateModule],
-  template: `<article class="flex items-center gap-6 rounded-2xl bg-white p-3 shadow-lg">
-    <img
+  template: `<article class="shadow-card flex items-center gap-6 rounded-2xl bg-white p-3">
+    <!--  <img
       src="assets/images/illustrations/undraw_searching_p5ux.svg"
       alt="searching"
       width="74px"
       height="74px"
-      class="rounded-lg border border-grayLight shadow-sm" />
+      class="rounded-lg border border-grayLight shadow-sm" /> -->
+
+    <div class="flex size-20 items-center justify-center rounded-lg border border-grayLight shadow-sm">
+      <i class="ti ti-building-bank text-5xl text-grayLight"></i>
+    </div>
     <div class="flex flex-col gap-2">
       <h3 class="text-lg font-bold">{{ nameBank() }}</h3>
-      <div class="flex max-w-max gap-2 rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
-        <p>{{ products() }}</p>
+      <div class="flex gap-2">
+        <div class="go-badge-category">
+          <p>{{ products() }}</p>
+        </div>
+        @if (haveGreenBonus()) {
+          <span class="flex items-center gap-1 font-semibold text-greenLime">
+            <i class="ti ti-check"></i>
+            <p class="text-xs">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
+          </span>
+        }
       </div>
-      @if (haveGreenBonus()) {
-        <span>
-          <i class="ti ri-check"></i>
-          <p>{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
-        </span>
-      }
     </div>
   </article>`,
 })

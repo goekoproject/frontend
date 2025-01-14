@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, input, OnInit, signal } from '@angular/core'
+import { Component, computed, effect, inject, input, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
@@ -53,7 +53,6 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   comparteWithProduct = (o1: Product, o2: Product): boolean => o1.id === o2.id
   compareWithOptions = (o1: Options, o2: string): boolean => o1.label === o2
   compareWithOptionsNumber = (o1: Options, o2: string): boolean => +o1.label === +o2
-
   compareWithOptionsLabel = (o1: string, o2: string): boolean => o1 === o2
 
   private _fb = inject(FormBuilder)
@@ -73,9 +72,14 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
   //origin = signal<Options[]>(ORIGIN)
+  checkedBalanceSheet = signal<boolean>(false)
 
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
+  }
+
+  private _goRealStateLoan = () => {
+    this._router.navigate(['real-state-loan', this.bankId()], { relativeTo: this._route.parent })
   }
   form: FormGroup = this._fb.group({
     vehicles: this._fb.group({
@@ -115,6 +119,16 @@ export class SustainbleEquipmentFormComponent implements OnInit {
 
   documentsFormArray = this.form.get('documents') as FormArray<FormControl>
 
+  constructor() {
+    effect(() => {
+      if (this.checkedBalanceSheet()) {
+        this.form.get('yearsBalance')?.setValidators([Validators.required])
+      } else {
+        this.form.get('yearsBalance')?.clearValidators()
+        this.form.get('yearsBalance')?.reset()
+      }
+    })
+  }
   ngOnInit() {
     this._selectLocationsService.setUpCountries()
     this._setCategoriesAndSubcategories()
@@ -163,6 +177,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     data.locations.forEach((location) => {
       this._addLocations(location)
     })
+    this.checkedBalanceSheet.update(() => !!data.balanceSheet)
   }
 
   private _addLocations(location: LocationsCountry) {
@@ -209,7 +224,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     this._goRealStateLoan()
   }
 
-  private _goRealStateLoan = () => {
-    this._router.navigate(['real-state-loan', this.bankId()], { relativeTo: this._route.parent })
+  changeBalanceSheet = () => {
+    this.checkedBalanceSheet.update((checked) => !checked)
   }
 }

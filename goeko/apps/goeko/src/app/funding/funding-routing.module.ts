@@ -26,6 +26,8 @@ const routes: Routes = [
     children: [
       {
         path: 'sustainable-equipment',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
         loadComponent: () =>
           import('./search/search-sustainble-equipment-form/search-sustainble-equipment-form.component').then(
             (m) => m.SearchSustainbleEquipmentFormComponent,
@@ -40,6 +42,7 @@ const routes: Routes = [
       },
       {
         path: 'real-state-loan',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () =>
           import('./search/search-real-estate-loan/search-real-estate-loan.component').then((m) => m.SearchRealEstateLoanComponent),
         resolve: {
@@ -52,6 +55,7 @@ const routes: Routes = [
       },
       {
         path: 'search-results',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () =>
           import('./search/funding-matches-result/funding-matches-result.component').then((m) => m.FundingMatchesResultComponent),
         resolve: {
@@ -69,6 +73,7 @@ const routes: Routes = [
       {
         path: ':bankId',
         component: SustainbleEquipmentFormComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         title: 'sustainableEquipment',
         resolve: {
           categories: groupingFormCategoriesResolver,
@@ -81,6 +86,7 @@ const routes: Routes = [
       {
         path: 'sustainable-equipment/:bankId',
         component: SustainbleEquipmentFormComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         title: 'sustainableEquipment',
         resolve: {
           categories: groupingFormCategoriesResolver,
@@ -92,6 +98,7 @@ const routes: Routes = [
       },
       {
         path: 'edit/sustainable-equipment/:bankId/:id',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         component: SustainbleEquipmentFormComponent,
         title: 'sustainableEquipment',
         resolve: {
@@ -105,6 +112,7 @@ const routes: Routes = [
       },
       {
         path: 'real-state-loan/:bankId',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         component: RealStateLoanComponent,
         title: 'realStateLoan',
         resolve: {
@@ -117,6 +125,7 @@ const routes: Routes = [
       },
       {
         path: 'edit/real-state-loan/:bankId/:id',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         component: RealStateLoanComponent,
         title: 'realStateLoan',
         resolve: {

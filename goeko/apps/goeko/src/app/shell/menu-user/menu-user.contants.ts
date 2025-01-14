@@ -76,7 +76,7 @@ const SME_MENU: MenuUser[] = [
   {
     id: window.crypto.randomUUID(),
     title: 'MENU_USER.funding',
-    url: 'funding/matches',
+    url: 'funding/search/sustainable-equipment',
     active: true,
     icon: 'ti ti-building-bank',
     order: 4,
