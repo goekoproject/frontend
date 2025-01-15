@@ -21,7 +21,7 @@ export class SearchSustainableEquipmentMapper implements SearchSustainableEquipm
   }
 
   private _mapClassifications(...classifications: any[]) {
-    return classifications.map((classification) => ({
+    return classifications.filter(c => c.products).map((classification) => ({
       mainCategory: classification.mainCategory,
       subCategory: classification.subCategory,
       products: [classification.products],
