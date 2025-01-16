@@ -16,7 +16,8 @@
     "lighthouse": "npx unlighthouse --site https://goeko.ch/",
     "lighthouse:dev": "npx unlighthouse --site https://goeko-c8a23.web.app/",
     "demo": "npm run build:dev && npx firebase hosting:channel:deploy goekohome --expires 7d",
-    "e2e": "nx e2e goeko-e2e --watch"
+    "e2e": "nx e2e goeko-e2e --watch",
+    "deploy:dev": "npm run build:dev && firebase deploy --only hosting -P goeko-dev"
   },
   "private": true,
   "dependencies": {
