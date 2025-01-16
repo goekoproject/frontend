@@ -9,7 +9,8 @@
       "options": {
         "cypressConfig": "apps/goeko-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "goeko:serve:development"
+        "devServerTarget": "goeko:serve:development",
+        "port" : 6001
       },
       "configurations": {
         "production": {

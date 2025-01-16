@@ -2,7 +2,7 @@ import { getButtonCookie, getIsPlatform } from '../support/app.po'
 
 describe('Login flow', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:4200/login')
+    cy.visit('http://localhost:4200')
     getButtonCookie().click({ force: true })
   })
 
