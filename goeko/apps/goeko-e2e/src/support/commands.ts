@@ -1,7 +1,3 @@
-/// <reference types="cypress" />
-
-import { getGoInput } from './app.po'
-
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -11,6 +7,8 @@ import { getGoInput } from './app.po'
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
+
+const getElInputByName = (name: string) => cy.get(`go-input[name="${name}"]`).shadow().find('input')
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
@@ -22,13 +20,13 @@ declare namespace Cypress {
 
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
-  cy.visit('/login') // Ajusta la ruta según tu aplicación
-
-  getGoInput('email').type(email as string)
-  cy.get('go-input[name="email"]').type(email)
-  cy.get('input[name="password"]').type(password)
+  /*   cy.visit('/login') // Ajusta la ruta según tu aplicación
+   */
+  getElInputByName('email').type(email)
+  getElInputByName('current-password').type(password)
   cy.get('button[type="submit"]').click()
 })
+
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
