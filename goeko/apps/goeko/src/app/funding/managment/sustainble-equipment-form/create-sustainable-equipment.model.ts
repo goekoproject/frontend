@@ -29,8 +29,8 @@ export class CreateSustainableEquipment implements SustainableEquipmentPayload {
       },
     ]
     this.locations = mapperLocations(dataForm.locations)
-    this.activityProspectMinimum = parseInt(dataForm.yearsActivity.label)
-    this.balanceSheet = parseInt(dataForm.yearsBalance.label)
+    this.activityProspectMinimum = parseInt(dataForm.yearsActivity?.label)
+    this.balanceSheet = parseInt(dataForm?.yearsBalance?.label)
     this.requiredDocuments = this._getDocumentsRequests(dataForm.documents)
     this.greenBonusVehicles = dataForm.greenBonusVehicle
     this.greenBonusMachines = dataForm.greenBonusMachines

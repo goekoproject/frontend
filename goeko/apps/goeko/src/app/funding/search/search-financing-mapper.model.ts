@@ -17,15 +17,17 @@ export class SearchSustainableEquipmentMapper implements SearchSustainableEquipm
     this.balanceSheet = parseInt(formValue.yearsBalance)
     this.documents = this._mapDocuments(formValue.documents)
     this.quantity = parseInt(formValue.minimumQuantity)
-    this.currency = formValue.currencys
+    this.currency = [formValue.currencys]
   }
 
   private _mapClassifications(...classifications: any[]) {
-    return classifications.filter(c => c.products).map((classification) => ({
-      mainCategory: classification.mainCategory,
-      subCategory: classification.subCategory,
-      products: [classification.products],
-    }))
+    return classifications
+      .filter((c) => c.products)
+      .map((classification) => ({
+        mainCategory: classification.mainCategory,
+        subCategory: classification.subCategory,
+        products: [classification.products],
+      }))
   }
 
   private _mapDocuments(documents: Array<{ value: string; checked: boolean }>): string[] {
@@ -53,14 +55,13 @@ export class RealEstateLoanMapper implements SearchRealEstate {
   private _mapClassifications(classifications: any) {
     if (!classifications.products || classifications.products.length === 0) {
       return undefined
-
     }
-      return [
-        {
-          mainCategory: classifications.categoryCode,
-          subCategory: classifications.subcategoryCode,
-          products: [classifications.products],
-        },
-      ]
+    return [
+      {
+        mainCategory: classifications.categoryCode,
+        subCategory: classifications.subcategoryCode,
+        products: [classifications.products],
+      },
+    ]
   }
 }
