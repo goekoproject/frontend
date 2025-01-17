@@ -7,7 +7,7 @@ import { CategoryGrouping, FinancingService, LocationsCountry, Product, RealEsta
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { forkJoin } from 'rxjs'
-import { AMOUNT, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES } from '../../data-fields.constants'
+import { AMOUNT, AMOUNT_BANK, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES } from '../../data-fields.constants'
 import { FundingService } from '../../funding.service'
 import { CreateRealStateLoan } from './create-real-state-loan.model'
 
@@ -45,7 +45,7 @@ export class RealStateLoanComponent implements OnInit {
   id = input<string>()
   public form!: FormGroup
 
-  amount = signal<Options[]>(AMOUNT)
+  amount = signal<Options[]>(AMOUNT_BANK)
   currencys = signal<Options[]>(CURRENCY)
   ownerProfile = signal<Options[]>(OWNERPROFILES)
   buildingTypes = signal<Options[]>(BUILDINGTYPES)

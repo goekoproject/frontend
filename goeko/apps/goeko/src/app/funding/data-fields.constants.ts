@@ -108,6 +108,44 @@ export const AMOUNT = [
     id: window.crypto.randomUUID(),
   },
 ]
+
+export const AMOUNT_BANK = [
+  {
+    label: '10000',
+    value: 10000,
+    id: window.crypto.randomUUID(),
+  },
+  {
+    label: '15000',
+    value: 15000,
+    id: window.crypto.randomUUID(),
+  },
+  {
+    label: '20000',
+    value: 20000,
+    id: window.crypto.randomUUID(),
+  },
+  {
+    label: '25000',
+    value: 25000,
+    id: window.crypto.randomUUID(),
+  },
+  {
+    label: '30000',
+    value: 30000,
+    id: window.crypto.randomUUID(),
+  },
+  {
+    label: '35000',
+    value: 35000,
+    id: window.crypto.randomUUID(),
+  },
+  {
+    label: '40000',
+    value: 40000,
+    id: window.crypto.randomUUID(),
+  },
+]
 export const WORKTYPES = [
   { label: 'all', id: window.crypto.randomUUID() },
   { label: 'worktypes.atticInsulation', id: window.crypto.randomUUID() },
