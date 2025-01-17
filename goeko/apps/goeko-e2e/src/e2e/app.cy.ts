@@ -2,7 +2,9 @@ import { getButtonCookie, getIsPlatform } from '../support/app.po'
 
 describe('Login flow', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:4200')
+    cy.visit('http://localhost:4200/login')
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1000)
     getButtonCookie().click({ force: true })
   })
 

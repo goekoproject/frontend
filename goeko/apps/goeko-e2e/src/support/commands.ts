@@ -20,7 +20,6 @@ declare namespace Cypress {
 
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
-  cy.visit('/login')
   getElInputByName('email').type(email)
   getElInputByName('current-password').type(password)
   cy.get('button[type="submit"]').click()

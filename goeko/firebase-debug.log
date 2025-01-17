@@ -1,0 +1,36 @@
+[debug] [2025-01-17T15:47:44.196Z] ----------------------------------------------------------------------
+[debug] [2025-01-17T15:47:44.200Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\oswal\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting -P goeko-dev
+[debug] [2025-01-17T15:47:44.200Z] CLI Version:   13.29.1
+[debug] [2025-01-17T15:47:44.200Z] Platform:      win32
+[debug] [2025-01-17T15:47:44.200Z] Node Version:  v20.15.0
+[debug] [2025-01-17T15:47:44.200Z] Time:          Fri Jan 17 2025 16:47:44 GMT+0100 (hora estándar de Europa central)
+[debug] [2025-01-17T15:47:44.201Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-01-17T15:47:44.293Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-01-17T15:47:44.294Z] > authorizing via signed-in user (goekoapp@gmail.com)
+[debug] [2025-01-17T15:47:44.294Z] [iam] checking project goeko-dev for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-01-17T15:47:44.295Z] Checked if tokens are valid: false, expires at: 1737122690818
+[debug] [2025-01-17T15:47:44.296Z] Checked if tokens are valid: false, expires at: 1737122690818
+[debug] [2025-01-17T15:47:44.296Z] > refreshing access token with scopes: []
+[debug] [2025-01-17T15:47:44.298Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-01-17T15:47:44.298Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-01-17T15:47:44.471Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-01-17T15:47:44.471Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-01-17T15:47:44.478Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/goeko-dev:testIamPermissions [none]
+[debug] [2025-01-17T15:47:44.478Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/goeko-dev:testIamPermissions x-goog-quota-user=projects/goeko-dev
+[debug] [2025-01-17T15:47:44.478Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/goeko-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-01-17T15:47:44.703Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/goeko-dev:testIamPermissions 200
+[debug] [2025-01-17T15:47:44.703Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/goeko-dev:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-01-17T15:47:44.704Z] Checked if tokens are valid: true, expires at: 1737132463471
+[debug] [2025-01-17T15:47:44.704Z] Checked if tokens are valid: true, expires at: 1737132463471
+[debug] [2025-01-17T15:47:44.704Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/goeko-dev [none]
+[debug] [2025-01-17T15:47:45.088Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/goeko-dev 200
+[debug] [2025-01-17T15:47:45.089Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/goeko-dev {"projectId":"goeko-dev","projectNumber":"139952053611","displayName":"goeko-dev","name":"projects/goeko-dev","resources":{"hostingSite":"goeko-dev"},"state":"ACTIVE","etag":"1_c054d397-25d2-48e1-8ae3-ac429d1b74be"}
+[info] 
+[info] === Deploying to 'goeko-dev'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-01-17T15:47:45.099Z] Checked if tokens are valid: true, expires at: 1737132463471
+[debug] [2025-01-17T15:47:45.099Z] Checked if tokens are valid: true, expires at: 1737132463471
+[debug] [2025-01-17T15:47:45.099Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/goeko-dev/versions [none]
+[debug] [2025-01-17T15:47:45.099Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/goeko-dev/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
