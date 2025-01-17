@@ -104,7 +104,7 @@
       <div class="flex items-center gap-4">
         <ui-super-select formControlName="minimumQuantity" class="basis-1/2">
           @for (money of amount(); track money.id; let first = $first) {
-            <super-option [value]="money.label" [valueSelected]="first"> {{ money.label | number }}</super-option>
+            <super-option [value]="money.value" [valueSelected]="first"> {{ money.label | number }}</super-option>
           }
         </ui-super-select>
         <ui-super-select [multiple]="true" formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">

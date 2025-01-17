@@ -2,18 +2,22 @@ import { inject, Injectable, signal } from '@angular/core'
 import {
   FinancingService,
   FinancingType,
+  SearchFinacing,
   SearchFinancingBuilder,
   SearchFinancingResponse,
   SearchRealEstate,
   SearchSustainableEquipment,
+  SessionStorageService,
 } from '@goeko/store'
 import { Observable, of } from 'rxjs'
 import { CreateRealStateLoan } from './managment/real-state-loan-form/create-real-state-loan.model'
 import { CreateSustainableEquipment } from './managment/sustainble-equipment-form/create-sustainable-equipment.model'
 
+const SESSION_QUERY = 'searchQuery'
 @Injectable()
 export class FundingService {
   private _financingService = inject(FinancingService)
+  private _sessionStorage = inject(SessionStorageService)
   sustainableEquipment!: CreateSustainableEquipment
   realStateLoan!: CreateRealStateLoan
 
@@ -29,6 +33,7 @@ export class FundingService {
 
   clearQuerySustainableEquipment(): void {
     this._financingBuilder().clearSustainableEquipment()
+    this._sessionStorage.removeItem(SESSION_QUERY)
   }
   getSustainableEquipmentById(id: string): Observable<any> {
     return this._financingService.getSustainableEquipmentById(id)
@@ -65,7 +70,12 @@ export class FundingService {
   }
 
   searchFunding(): Observable<SearchFinancingResponse> {
-    const query = this._financingBuilder().build()
+    const query = this._getSearchedQuery() as SearchFinacing
+    this._sessionStorage.setItem(SESSION_QUERY, query)
     return this._financingService.searchFinancing(query)
+  }
+
+  private _getSearchedQuery(): SearchFinacing | null {
+    return this._financingBuilder().isEmpty() ? this._sessionStorage.getItem(SESSION_QUERY) : this._financingBuilder().build()
   }
 }

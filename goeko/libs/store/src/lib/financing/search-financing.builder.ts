@@ -24,4 +24,7 @@ export class SearchFinancingBuilder {
     this.sustainableEquipment = {} as SearchSustainableEquipment
     this.realEstate = {} as SearchRealEstate
   }
+  isEmpty(): boolean {
+    return (!this.sustainableEquipment && !this.sustainableEquipment) ||  Object.keys(this.sustainableEquipment).length === 0 && Object.keys(this.realEstate).length === 0
+  }
 }

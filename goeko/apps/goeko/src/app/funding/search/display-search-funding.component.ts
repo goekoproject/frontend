@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, input } from '@angular/core'
+import { Component, computed, effect, input } from '@angular/core'
 import { RealEstateLoanResponse, SustainableEquipmentResponse } from '@goeko/store'
 import { TranslateModule } from '@ngx-translate/core'
 type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
@@ -8,7 +8,7 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
   selector: 'goeko-display-search-funding',
   standalone: true,
   imports: [CommonModule, TranslateModule],
-  template: `<article class="shadow-card flex items-center gap-6 rounded-2xl bg-white p-3">
+  template: `<article class="flex items-center gap-6 rounded-2xl bg-white p-3 shadow-card">
     <!--  <img
       src="assets/images/illustrations/undraw_searching_p5ux.svg"
       alt="searching"
@@ -16,7 +16,7 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
       height="74px"
       class="rounded-lg border border-grayLight shadow-sm" /> -->
 
-    <div class="flex size-20 items-center justify-center rounded-lg border border-grayLight shadow-sm">
+    <div class="shadow-sm flex size-20 items-center justify-center rounded-lg border border-grayLight">
       <i class="ti ti-building-bank text-5xl text-grayLight"></i>
     </div>
     <div class="flex flex-col gap-2">
@@ -37,11 +37,12 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
 })
 export class DisplaySearchFundingComponent {
   dataFunding = input.required<DataFunding>()
-  products = computed(() => this.dataFunding().classifications[0].products[0].label)
+  products = computed(() => this.dataFunding().classifications.filter((c) => c.products && c.products.length > 0)[0].products[0].label)
   nameBank = computed(() => this.dataFunding().bank.name)
   haveGreenBonus = computed(
     () =>
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusVehicles ||
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusMachines,
   )
+ 
 }

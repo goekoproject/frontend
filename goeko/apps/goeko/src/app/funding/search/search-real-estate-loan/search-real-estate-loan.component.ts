@@ -6,9 +6,8 @@ import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { AMOUNT, CURRENCY } from '../../data-fields.constants'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES } from '../../data-fields.constants'
 import { FundingService } from '../../funding.service'
-import { BUILDINGTYPES, OWNERPROFILES } from '../../managment/real-state-loan-form/data-fields.constants'
 import { RealEstateLoanMapper } from '../search-financing-mapper.model'
 
 type Options = {

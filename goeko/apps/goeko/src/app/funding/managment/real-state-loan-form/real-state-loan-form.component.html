@@ -1,5 +1,5 @@
 @defer (when categories()) {
-  <form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
+  <form [formGroup]="form" class="shadow-md w-full rounded-lg bg-white p-6">
     <!-- Selección de tipos de trabajo -->
     <div class="mb-6">
       @for (category of categories(); track category.code) {
@@ -22,7 +22,7 @@
             }
           </ng-container>
 
-          <div class="flex gap-4 [&>*]:flex-grow">
+          <div class="flex flex-wrap gap-4 [&>*]:flex-grow">
             <div>
               <ui-super-select
                 [formControlName]="'ownerProfile'"
@@ -64,11 +64,11 @@
     <div class="mb-6">
       <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.montanMinimun' | translate }}</h2>
 
-      <div class="flex gap-4 [&>*]:flex-grow">
+      <div class="flex flex-wrap gap-4 [&>*]:flex-grow">
         <div>
-          <ui-super-select [formControlName]="'montanMinimun'" [compareWith]="compareWithOptionsNumber">
-            @for (money of amount(); track money.id) {
-              <super-option [value]="money"> {{ money.label | number }}</super-option>
+          <ui-super-select formControlName="minimumQuantity">
+            @for (money of amount(); track money.id; let first = $first) {
+              <super-option [value]="money.value" [valueSelected]="first"> {{ money.label | number }}</super-option>
             }
           </ui-super-select>
         </div>

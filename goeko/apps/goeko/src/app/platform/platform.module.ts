@@ -11,6 +11,7 @@ import {
   isSubscribedCleantech,
   LocationsService,
   ProjectService,
+  SessionStorageService,
   ShowForRolesDirective,
   ToastComponent,
   UserService,
@@ -65,6 +66,7 @@ import { PlatformComponent } from './platform.component'
     ProjectService,
     ClassificationsService,
     EcosolutionsSearchService,
+    SessionStorageService,
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],
 })

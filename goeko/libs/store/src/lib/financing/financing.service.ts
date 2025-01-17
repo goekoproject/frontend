@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { inject, Injectable } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core'
 import { Observable, shareReplay } from 'rxjs'
 import { FINANCING_TYPE } from './financing-type.enum'
 import { RealEstateLoanResponse } from './real-state-loan/real-state-loan-response.interface'
@@ -14,6 +15,11 @@ export type FinancingType = FINANCING_TYPE.SustainableEquipment | FINANCING_TYPE
 @Injectable()
 export class FinancingService implements OperationSustainableEquipment, OperationRealStateLoan {
   private _http = inject(HttpClient)
+  private _translateService = inject(TranslateService)
+
+  private get _langSignal() {
+    return this._translateService.currentLang || this._translateService.defaultLang
+  }
 
   getAll(type: FinancingType): Observable<any> {
     return this._http.get(`/v1/financing/${type}`)
@@ -48,6 +54,6 @@ export class FinancingService implements OperationSustainableEquipment, Operatio
   }
 
   searchFinancing(data: SearchFinacing): Observable<SearchFinancingResponse> {
-    return this._http.post<SearchFinancingResponse>(`/v1/financing/search?lang=en`, data).pipe(shareReplay(1))
+    return this._http.post<SearchFinancingResponse>(`/v1/financing/search?lang=${this._langSignal}`, data).pipe(shareReplay(1))
   }
 }

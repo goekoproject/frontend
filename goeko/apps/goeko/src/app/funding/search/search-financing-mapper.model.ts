@@ -16,7 +16,7 @@ export class SearchSustainableEquipmentMapper implements SearchSustainableEquipm
     this.activityProspect = parseInt(formValue.yearsActivity)
     this.balanceSheet = parseInt(formValue.yearsBalance)
     this.documents = this._mapDocuments(formValue.documents)
-    this.quantity = parseInt(formValue.minimumQuantity)
+    this.quantity = formValue.minimumQuantity
     this.currency = [formValue.currencys]
   }
 
@@ -48,7 +48,7 @@ export class RealEstateLoanMapper implements SearchRealEstate {
     this.ownerProfile = formValue.ownerProfile
     this.buildingTypes = formValue.buildingTypes
     this.quantity = parseInt(formValue.montanMinimun)
-    this.currency = formValue.currency
+    this.currency = [formValue.currency]
     this.locations = mapperLocations(formValue.locations)
   }
 

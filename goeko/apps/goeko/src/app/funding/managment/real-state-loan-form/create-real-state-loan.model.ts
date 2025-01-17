@@ -23,7 +23,7 @@ export class CreateRealStateLoan implements RealStateLoanPayload {
     this.locations = mapperLocations(dataForm.locations)
     this.buildingTypes = this._getOptionLabel(dataForm.buildingTypes)
     this.ownerProfile = this._getOptionLabel(dataForm.ownerProfile)
-    this.minimumQuantity = parseInt(dataForm.montanMinimun.label)
+    this.minimumQuantity = dataForm.minimumQuantity
     this.currency = dataForm.currency
     this.contact = {
       email: dataForm.email,

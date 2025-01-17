@@ -6,13 +6,10 @@ import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping, LocationTranslated } from '@goeko/store'
 import { ButtonModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { AMOUNT, CURRENCY, DOCUMENTS, YEARS } from '../../data-fields.constants'
+import { AMOUNT, CURRENCY, DOCUMENTS, Options, YEARS } from '../../data-fields.constants'
 import { FundingService } from '../../funding.service'
 import { SearchSustainableEquipmentMapper } from '../search-financing-mapper.model'
-type Options = {
-  label: string
-  id: string
-}
+
 @Component({
   selector: 'goeko-search-sustainble-equipment-form',
   standalone: true,
@@ -91,7 +88,7 @@ export class SearchSustainbleEquipmentFormComponent {
         ),
       ),
       locations: this._fb.array<LocationTranslated>([], Validators.required),
-      minimumQuantity: this._fb.control(this.amount()[0].label),
+      minimumQuantity: this._fb.control(this.amount()[0].value),
       currencys: this._fb.control(null),
       yearsActivity: this._fb.control(this.years()[0].label),
       yearsBalance: this._fb.control(this.years()[0].label),

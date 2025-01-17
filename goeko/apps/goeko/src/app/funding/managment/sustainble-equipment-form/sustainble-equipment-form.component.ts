@@ -21,6 +21,7 @@ import { CreateSustainableEquipment } from './create-sustainable-equipment.model
 type Options = {
   label: string
   id: string
+  value?: number
 }
 
 @Component({
@@ -107,7 +108,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
         }),
       ),
     ),
-    minimumQuantity: this._fb.control(this.amount()[0].label),
+    minimumQuantity: this._fb.control(this.amount()[0].value),
     currencys: this._fb.control(null),
     locations: this._fb.array<LocationTranslated>([]),
     name: this._fb.control(null),
@@ -160,7 +161,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
       greenBonusMachines: data.greenBonusMachines,
       yearsActivity: data.activityProspectMinimum,
       yearsBalance: data.balanceSheet,
-      amount: data.minimumQuantity,
+      minimumQuantity: data.minimumQuantity,
       currencys: data.currency,
 
       name: data.contact.name,
