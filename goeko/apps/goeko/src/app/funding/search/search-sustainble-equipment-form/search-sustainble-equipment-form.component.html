@@ -133,7 +133,7 @@
             <super-option [value]="money.value" [valueSelected]="first"> {{ money.label | number }}</super-option>
           }
         </ui-super-select>
-        <ui-super-select formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
+        <ui-super-select formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate">
           @for (currency of currencys(); track currency.id) {
             <super-option [value]="currency.label"> {{ currency.label }}</super-option>
           }

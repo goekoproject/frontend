@@ -1,7 +1,7 @@
 <h1 class="text-2xl font-semibold">{{ 'realStateLoan' | translate }}</h1>
 
 @defer (when form) {
-  <form [formGroup]="form" class="w-full rounded-lg bg-white p-6 shadow-md">
+  <form [formGroup]="form" class="shadow-md w-full rounded-lg bg-white p-6">
     <div class="mb-6">
       @for (category of categories(); track category.code) {
         <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.workTypeFieldLabel' | translate }}</h2>
@@ -81,7 +81,7 @@
         <div>
           <ui-super-select
             [readonly]="false"
-            [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
+            [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
             [formControlName]="'currency'"
             id="currency"
             name="currency">
@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-  </form> 
+  </form>
 }
 
 <div class="mt-4 flex justify-between">
