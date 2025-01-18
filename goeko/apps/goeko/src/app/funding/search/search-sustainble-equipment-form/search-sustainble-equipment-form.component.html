@@ -81,7 +81,10 @@
 
     <!-- DOCUMENT REQUIRED-->
     <div class="mb-6">
-      <label go-optional-label>{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.documentsRelatedLabel' | translate }}</label>
+      <label class="label-form"
+        >{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.documentsRelatedLabel' | translate }}
+        <span class="text-xs font-light"> {{ 'ifAvailables' | translate }}</span>
+      </label>
       <div class="form-group form-check mb-4 space-y-2">
         <ng-container formArrayName="documents">
           @for (document of requiredDocuments(); track document; let index = $index) {
@@ -130,7 +133,7 @@
       <div class="flex items-center gap-4">
         <ui-super-select formControlName="minimumQuantity" class="basis-1/2">
           @for (money of amount(); track money.id; let first = $first) {
-            <super-option [value]="money.value" [valueSelected]="first"> {{ money.label | number }}</super-option>
+            <super-option [value]="money.value" [valueSelected]="first"> {{ money.label }}</super-option>
           }
         </ui-super-select>
         <ui-super-select formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate">

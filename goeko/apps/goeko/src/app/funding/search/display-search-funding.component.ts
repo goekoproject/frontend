@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, input } from '@angular/core'
+import { Component, computed, input } from '@angular/core'
 import { RealEstateLoanResponse, SustainableEquipmentResponse } from '@goeko/store'
+import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
 
 @Component({
   selector: 'goeko-display-search-funding',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, ButtonModule],
   template: `<article class="flex items-center gap-6 rounded-2xl bg-white p-3 shadow-card">
     <!--  <img
       src="assets/images/illustrations/undraw_searching_p5ux.svg"
@@ -33,6 +34,7 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
         }
       </div>
     </div>
+    <button go-button class="ml-auto">{{ 'contact' | translate }}</button>
   </article>`,
 })
 export class DisplaySearchFundingComponent {
@@ -44,5 +46,4 @@ export class DisplaySearchFundingComponent {
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusVehicles ||
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusMachines,
   )
- 
 }

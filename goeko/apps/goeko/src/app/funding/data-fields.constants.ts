@@ -73,27 +73,27 @@ export const CURRENCY = [
 
 export const AMOUNT = [
   {
-    label: '10000',
+    label: '10.000',
     value: 10000,
     id: window.crypto.randomUUID(),
   },
   {
-    label: '15000',
+    label: '15.000',
     value: 15000,
     id: window.crypto.randomUUID(),
   },
   {
-    label: '20000',
+    label: '20.000',
     value: 20000,
     id: window.crypto.randomUUID(),
   },
   {
-    label: '25000',
+    label: '25.000',
     value: 25000,
     id: window.crypto.randomUUID(),
   },
   {
-    label: '30000',
+    label: '30.000',
     value: 30000,
     id: window.crypto.randomUUID(),
   },
@@ -103,7 +103,7 @@ export const AMOUNT = [
     id: window.crypto.randomUUID(),
   },
   {
-    label: '> 35000',
+    label: '> 35.000',
     value: 36000,
     id: window.crypto.randomUUID(),
   },
