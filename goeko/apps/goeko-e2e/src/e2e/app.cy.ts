@@ -5,7 +5,7 @@ describe('Login flow', () => {
     cy.visit('http://localhost:4200/login')
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(1000)
-    getButtonCookie().click({ force: true })
+    getButtonCookie().click({ force: true, multiple: true })
   })
 
   it('should display welcome message', () => {
