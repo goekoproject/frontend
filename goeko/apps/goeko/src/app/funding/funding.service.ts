@@ -71,11 +71,14 @@ export class FundingService {
 
   searchFunding(): Observable<SearchFinancingResponse> {
     const query = this._getSearchedQuery() as SearchFinacing
+    if (!query) {
+      return of({ sustainableEquipment: [], realEstate: [] })
+    }
     this._sessionStorage.setItem(SESSION_QUERY, query)
     return this._financingService.searchFinancing(query)
   }
 
   private _getSearchedQuery(): SearchFinacing | null {
-    return this._financingBuilder().isEmpty() ? this._sessionStorage.getItem(SESSION_QUERY) : this._financingBuilder().build()
+    return this._financingBuilder().build() ?? this._sessionStorage.getItem(SESSION_QUERY)
   }
 }

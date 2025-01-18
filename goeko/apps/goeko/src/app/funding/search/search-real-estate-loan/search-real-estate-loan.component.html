@@ -74,7 +74,7 @@
         <div>
           <ui-super-select [formControlName]="'montanMinimun'">
             @for (money of amount(); track money.id; let first = $first) {
-              <super-option [value]="money.label" [valueSelected]="first"> {{ money.label }}</super-option>
+              <super-option [value]="money.value" [valueSelected]="first"> {{ money.label }}</super-option>
             }
           </ui-super-select>
         </div>

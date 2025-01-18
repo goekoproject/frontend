@@ -47,7 +47,7 @@ export class RealEstateLoanMapper implements SearchRealEstate {
     this.classifications = this._mapClassifications(formValue.workTypes)
     this.ownerProfile = formValue.ownerProfile
     this.buildingTypes = formValue.buildingTypes
-    this.quantity = parseInt(formValue.montanMinimun)
+    this.quantity = formValue.montanMinimun
     this.currency = [formValue.currency]
     this.locations = mapperLocations(formValue.locations)
   }

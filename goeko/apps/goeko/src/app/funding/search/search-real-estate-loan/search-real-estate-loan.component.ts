@@ -6,14 +6,10 @@ import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { AMOUNT, BUILDINGTYPES, CURRENCY, OWNERPROFILES } from '../../data-fields.constants'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES } from '../../data-fields.constants'
 import { FundingService } from '../../funding.service'
 import { RealEstateLoanMapper } from '../search-financing-mapper.model'
 
-type Options = {
-  label: string
-  id: string
-}
 @Component({
   selector: 'goeko-search-real-estate-loan',
   standalone: true,
@@ -69,11 +65,11 @@ export class SearchRealEstateLoanComponent {
         subcategoryCode: [this.categories()[0].subcategories[0].code],
         products: ['', Validators.required],
       }),
-      ownerProfile: [this.ownerProfile()[0]],
-      buildingTypes: [],
+      ownerProfile: ['', Validators.required],
+      buildingTypes: ['', Validators.required],
       locations: this._fb.array([]),
-      montanMinimun: [this.amount()[0].label],
-      currency: [null],
+      montanMinimun: [this.amount()[0].value, Validators.required],
+      currency: ['', Validators.required],
     })
 
   search = () => {
@@ -81,7 +77,6 @@ export class SearchRealEstateLoanComponent {
       const searchRealEstateLoan = new RealEstateLoanMapper(this.form.value)
       this._fundingService.setQueryRealEstateLoan(searchRealEstateLoan)
     }
-
     this._router.navigate(['search-results'], { relativeTo: this._route.parent })
   }
   goBack = () => {

@@ -14,17 +14,23 @@ export class SearchFinancingBuilder {
     return this
   }
 
-  build(): SearchFinacing {
+  build(): SearchFinacing | undefined {
+    if (!this.sustainableEquipment && !this.realEstate) {
+      return undefined
+    }
     return {
       sustainableEquipment: this.sustainableEquipment,
       realEstate: this.realEstate,
     }
   }
   clearSustainableEquipment(): void {
-    this.sustainableEquipment = {} as SearchSustainableEquipment
-    this.realEstate = {} as SearchRealEstate
+    this.sustainableEquipment = undefined as any
+    this.realEstate = undefined as any
   }
   isEmpty(): boolean {
-    return (!this.sustainableEquipment && !this.sustainableEquipment) ||  Object.keys(this.sustainableEquipment).length === 0 && Object.keys(this.realEstate).length === 0
+    return (
+      (!this.sustainableEquipment && !this.sustainableEquipment) ||
+      (Object.keys(this.sustainableEquipment).length === 0 && Object.keys(this.realEstate).length === 0)
+    )
   }
 }
