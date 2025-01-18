@@ -14,14 +14,12 @@ const getElInputByName = (name: string) => cy.get(`go-input[name="${name}"]`).sh
 declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
-    login(email: string, password: string): void
+    login(email?: string, password?: string): void
   }
 }
 
 // -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  /*   cy.visit('/login') // Ajusta la ruta según tu aplicación
-   */
+Cypress.Commands.add('login', (email = Cypress.env('email'), password = Cypress.env('password')) => {
   getElInputByName('email').type(email)
   getElInputByName('current-password').type(password)
   cy.get('button[type="submit"]').click()
