@@ -14,7 +14,7 @@ import {
 } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoILeavesComponent, GoInputModule, ToggleSwitchComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { AMOUNT, AMOUNT_BANK, CURRENCY, DOCUMENTS, YEARS } from '../../data-fields.constants'
+import { AMOUNT_BANK, CURRENCY, DOCUMENTS, YEARS } from '../../data-fields.constants'
 import { STORE_NAME } from '../../funding-token.constants'
 import { FundingService } from '../../funding.service'
 import { CreateSustainableEquipment } from './create-sustainable-equipment.model'

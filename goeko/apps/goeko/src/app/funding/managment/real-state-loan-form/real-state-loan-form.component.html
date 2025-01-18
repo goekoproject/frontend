@@ -115,6 +115,8 @@
   <button go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>
   <div class="flex items-center gap-2">
     <button go-button type="submit" (click)="save()">{{ 'save' | translate }}</button>
-    <button go-button (click)="goSkip()" appearance="flat">{{ 'skip' | translate }}</button>
+    @defer (when  !this.id()) {
+      <button go-button (click)="goSkip()" appearance="flat">{{ 'skip' | translate }}</button>
+    }
   </div>
 </div>
