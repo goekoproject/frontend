@@ -153,7 +153,7 @@ export class GoInput extends LitElement {
         class="go-input"
         type="${this.type}"
         .value="${this.value}"
-        .id="${this.id}"
+        .id="${this.name}"
         .name="${this.name}"
         ?maxlength="${this.maxLength}"
         .placeholder="${this.placeholder}"

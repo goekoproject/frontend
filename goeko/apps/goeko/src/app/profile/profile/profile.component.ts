@@ -3,12 +3,12 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
 import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
-import { AutoUnsubscribe } from '@goeko/ui'
+import { AutoUnsubscribe, GoInput } from '@goeko/ui'
 import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_BANK } from './profile-bank.constants'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
-import { LANG_PROFILE } from './profile-form'
+import { IdentifierPlaceholders, LANG_PROFILE } from './profile-form'
 import { ProfileFormFactory } from './profile-form.factory'
 import { NotificationProfile } from './profile-payload.model'
 import { PROFILE_SME } from './profile-sme.constants'
@@ -60,6 +60,9 @@ export class ProfileComponent implements CanComponentDeactivate {
   public USERTYPE = USER_TYPE
   public dataSelect = DataSelect as any
 
+  private get _identifier() {
+    return document.getElementById('identifier') as GoInput
+  }
   public formSection!: Array<ProfileFieldset<'sme' | 'cleantech' | 'bank'>>
   public dataProfile = this._profieService.userProfile
   public userType = this._profieService.userType
@@ -127,6 +130,9 @@ export class ProfileComponent implements CanComponentDeactivate {
         regions: new FormControl(location.country.regions),
       }),
     })
+  }
+  manageIdentifiers = (codeCountry: string) => {
+    this._identifier.placeholder = IdentifierPlaceholders[codeCountry as keyof typeof IdentifierPlaceholders]
   }
   fileChange(file: File[]) {
     this.profileImg = file
