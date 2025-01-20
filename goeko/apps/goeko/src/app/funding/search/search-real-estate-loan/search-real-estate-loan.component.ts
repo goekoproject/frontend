@@ -6,7 +6,7 @@ import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping } from '@goeko/store'
 import { BadgeModule, ButtonModule, GoInputModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { AMOUNT, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES } from '../../data-fields.constants'
+import { AMOUNT, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES, YEARS } from '../../data-fields.constants'
 import { FundingService } from '../../funding.service'
 import { RealEstateLoanMapper } from '../search-financing-mapper.model'
 
@@ -42,6 +42,9 @@ export class SearchRealEstateLoanComponent {
   currencys = signal<Options[]>(CURRENCY)
   ownerProfile = signal<Options[]>(OWNERPROFILES)
   buildingTypes = signal<Options[]>(BUILDINGTYPES)
+  years = signal<Options[]>(YEARS)
+  checkedBalanceSheet = signal<boolean>(false)
+
   //Init props
   form!: FormGroup
 
@@ -68,6 +71,7 @@ export class SearchRealEstateLoanComponent {
       ownerProfile: ['', Validators.required],
       buildingTypes: ['', Validators.required],
       locations: this._fb.array([]),
+      balanceSheet: [],
       montanMinimun: [this.amount()[0].value, Validators.required],
       currency: ['', Validators.required],
     })
@@ -81,5 +85,8 @@ export class SearchRealEstateLoanComponent {
   }
   goBack = () => {
     window.history.back()
+  }
+  changeBalanceSheet = () => {
+    this.checkedBalanceSheet.update((checked) => !checked)
   }
 }

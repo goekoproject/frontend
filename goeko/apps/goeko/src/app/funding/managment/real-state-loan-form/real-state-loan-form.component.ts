@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, input, OnInit, signal } from '@angular/core'
+import { Component, effect, inject, input, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SelectLocationsComponent, SelectLocationsService } from '@goeko/business-ui'
@@ -7,7 +7,7 @@ import { CategoryGrouping, FinancingService, LocationsCountry, Product, RealEsta
 import { BadgeModule, ButtonModule, GoInputModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { forkJoin } from 'rxjs'
-import { AMOUNT, AMOUNT_BANK, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES } from '../../data-fields.constants'
+import { AMOUNT_BANK, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES, YEARS } from '../../data-fields.constants'
 import { FundingService } from '../../funding.service'
 import { CreateRealStateLoan } from './create-real-state-loan.model'
 
@@ -30,9 +30,6 @@ import { CreateRealStateLoan } from './create-real-state-loan.model'
 })
 export class RealStateLoanComponent implements OnInit {
   comparteWithProduct = (o1: Product, o2: Product): boolean => o1.id === o2.id
-  compareWithOptions = (o1: Options, o2: string): boolean => o1.label === o2
-
-  compareWithOptionsLabel = (o1: string, o2: string): boolean => o1 === o2
 
   private _fb = inject(FormBuilder)
   private _router = inject(Router)
@@ -49,10 +46,16 @@ export class RealStateLoanComponent implements OnInit {
   currencys = signal<Options[]>(CURRENCY)
   ownerProfile = signal<Options[]>(OWNERPROFILES)
   buildingTypes = signal<Options[]>(BUILDINGTYPES)
+  years = signal<Options[]>(YEARS)
+  checkedBalanceSheet = signal<boolean>(false)
+
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
   }
 
+  constructor() {
+    effect(() => this._manageBalanceSheet())
+  }
   ngOnInit(): void {
     this._selectLocationsService.setUpCountries()
     this._buildFrom()
@@ -77,6 +80,7 @@ export class RealStateLoanComponent implements OnInit {
       buildingTypes: this._fb.control([]),
       locations: this._fb.array([]),
       minimumQuantity: this._fb.control(this.amount()[0].value),
+      balanceSheet: this._fb.control(this.years()[0].label),
       currency: this._fb.control(null),
       email: ['', [Validators.email]],
       phoneNumber: ['', Validators.pattern(/^[0-9]{10,15}$/)],
@@ -97,6 +101,7 @@ export class RealStateLoanComponent implements OnInit {
       ownerProfile: data.ownerProfile,
       buildingTypes: data.buildingTypes,
       minimumQuantity: data.minimumQuantity,
+      balanceSheet: data.balanceSheet,
       currency: data.currency,
       email: data.contact.email,
       phoneNumber: data.contact.phoneNumber,
@@ -105,6 +110,7 @@ export class RealStateLoanComponent implements OnInit {
     data.locations.forEach((location) => {
       this._addLocations(location)
     })
+    this.checkedBalanceSheet.update(() => !!data.balanceSheet)
   }
 
   private _addLocations(location: LocationsCountry) {
@@ -117,6 +123,19 @@ export class RealStateLoanComponent implements OnInit {
         regions: new FormControl(location.country.regions),
       }),
     })
+  }
+
+  private _manageBalanceSheet = () => {
+    if (this.checkedBalanceSheet()) {
+      this.form.get('yearsBalance')?.setValidators([Validators.required])
+    } else {
+      this.form.get('yearsBalance')?.clearValidators()
+      this.form.get('yearsBalance')?.reset()
+    }
+  }
+
+  changeBalanceSheet = () => {
+    this.checkedBalanceSheet.update((checked) => !checked)
   }
   save = () => {
     const realStateLoan = new CreateRealStateLoan(this.bankId(), this.form.value)

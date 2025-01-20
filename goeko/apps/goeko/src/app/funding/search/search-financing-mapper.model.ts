@@ -42,12 +42,13 @@ export class RealEstateLoanMapper implements SearchRealEstate {
   quantity: number
   currency: string[]
   locations: LocationsCountry[]
-
+  balanceSheet: number
   constructor(formValue: any) {
     this.classifications = this._mapClassifications(formValue.workTypes)
     this.ownerProfile = formValue.ownerProfile
     this.buildingTypes = formValue.buildingTypes
     this.quantity = formValue.montanMinimun
+    this.balanceSheet = formValue.balanceSheet
     this.currency = [formValue.currency]
     this.locations = mapperLocations(formValue.locations)
   }

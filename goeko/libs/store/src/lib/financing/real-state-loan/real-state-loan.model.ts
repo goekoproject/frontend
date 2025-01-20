@@ -10,4 +10,5 @@ export interface RealStateLoanPayload {
   minimumQuantity: number
   currency: string[]
   contact: ContactRequest
+  balanceSheet: number
 }

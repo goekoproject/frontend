@@ -13,4 +13,5 @@ export interface RealEstateLoanResponse {
   contact: ContactRequest
   creationDate: string
   financingType: string
+  balanceSheet: number
 }

@@ -90,13 +90,9 @@
       <div class="mb-4" [ngClass]="{ 'pointer-events-none opacity-50': !this.checkedBalanceSheet() }">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
 
-        <ui-super-select
-          [placeholder]="'years' | translate"
-          formControlName="yearsBalance"
-          [compareWith]="compareWithOptionsNumber"
-          [disabled]="!this.checkedBalanceSheet()">
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance" [disabled]="!this.checkedBalanceSheet()">
           @for (year of years(); track year.id) {
-            <super-option [value]="year"> {{ year.label }}</super-option>
+            <super-option [value]="year.value"> {{ year.label }}</super-option>
           }
         </ui-super-select>
       </div>
@@ -124,9 +120,9 @@
       <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.activityProspect' | translate }}</h2>
       <div class="mb-4">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
-        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity" [compareWith]="compareWithOptionsNumber">
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity" >
           @for (year of years(); track year.id) {
-            <super-option [value]="year"> {{ year.label }}</super-option>
+            <super-option [value]="year.value"> {{ year.label }}</super-option>
           }
         </ui-super-select>
       </div>

@@ -52,9 +52,6 @@ type Options = {
 })
 export class SustainbleEquipmentFormComponent implements OnInit {
   comparteWithProduct = (o1: Product, o2: Product): boolean => o1.id === o2.id
-  compareWithOptions = (o1: Options, o2: string): boolean => o1.label === o2
-  compareWithOptionsNumber = (o1: Options, o2: string): boolean => +o1.label === +o2
-  compareWithOptionsLabel = (o1: string, o2: string): boolean => o1 === o2
 
   private _fb = inject(FormBuilder)
   private _router = inject(Router)
@@ -121,14 +118,7 @@ export class SustainbleEquipmentFormComponent implements OnInit {
   documentsFormArray = this.form.get('documents') as FormArray<FormControl>
 
   constructor() {
-    effect(() => {
-      if (this.checkedBalanceSheet()) {
-        this.form.get('yearsBalance')?.setValidators([Validators.required])
-      } else {
-        this.form.get('yearsBalance')?.clearValidators()
-        this.form.get('yearsBalance')?.reset()
-      }
-    })
+    effect(() => this._manageBalanceSheet())
   }
   ngOnInit() {
     this._selectLocationsService.setUpCountries()
@@ -181,6 +171,14 @@ export class SustainbleEquipmentFormComponent implements OnInit {
     this.checkedBalanceSheet.update(() => !!data.balanceSheet)
   }
 
+  private _manageBalanceSheet = () => {
+    if (this.checkedBalanceSheet()) {
+      this.form.get('yearsBalance')?.setValidators([Validators.required])
+    } else {
+      this.form.get('yearsBalance')?.clearValidators()
+      this.form.get('yearsBalance')?.reset()
+    }
+  }
   private _addLocations(location: LocationsCountry) {
     this.locationsArrays.push(this._createLocations(location))
   }

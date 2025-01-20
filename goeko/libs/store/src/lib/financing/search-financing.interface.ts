@@ -18,6 +18,7 @@ export interface SearchRealEstate {
   ownerProfile: string[]
   quantity: number
   currency: string[]
+  balanceSheet: number
 }
 export interface SearchFinacing {
   sustainableEquipment: SearchSustainableEquipment

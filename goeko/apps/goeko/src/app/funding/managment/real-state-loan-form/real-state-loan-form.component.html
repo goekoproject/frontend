@@ -27,27 +27,25 @@
               <ui-super-select
                 [formControlName]="'ownerProfile'"
                 [multiple]="true"
-                [compareWith]="compareWithOptions"
                 [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
                 <label title for="ownerProfile">
                   {{ 'FORM_LABEL.ownerProfile' | translate }}
                 </label>
                 @for (profile of ownerProfile(); track profile.id) {
-                  <super-option [value]="profile"> {{ profile.label | translate }}</super-option>
+                  <super-option [value]="profile.label"> {{ profile.label | translate }}</super-option>
                 }
               </ui-super-select>
             </div>
             <div>
               <ui-super-select
                 [formControlName]="'buildingTypes'"
-                [compareWith]="compareWithOptions"
                 [multiple]="true"
                 [placeholder]="'SELECT_DATA_LABEL.defaultLabelMulti' | translate">
                 <label title for="buildingTypes">
                   {{ 'FORM_LABEL.buildingTypes' | translate }}
                 </label>
                 @for (type of buildingTypes(); track type.id) {
-                  <super-option [value]="type"> {{ type.label | translate }}</super-option>
+                  <super-option [value]="type.label"> {{ type.label | translate }}</super-option>
                 }
               </ui-super-select>
             </div>
@@ -59,6 +57,22 @@
     <div class="mb-6">
       <h2 class="mb-4 text-lg font-semibold">{{ 'FORM_LABEL.targetRegion' | translate }}</h2>
       <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+    </div>
+    <!-- Balance sheet -->
+    <div class="mb-6">
+      <label class="text-lg font-semibold">
+        <input type="checkbox" id="balanceSheet" [checked]="checkedBalanceSheet()" (change)="changeBalanceSheet()" />
+        {{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheet' | translate }}
+      </label>
+      <div class="mb-4" [ngClass]="{ 'pointer-events-none opacity-50': !this.checkedBalanceSheet() }">
+        <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
+
+        <ui-super-select [placeholder]="'years' | translate" formControlName="balanceSheet" [disabled]="!this.checkedBalanceSheet()">
+          @for (year of years(); track year.id) {
+            <super-option [value]="year.value"> {{ year.label }}</super-option>
+          }
+        </ui-super-select>
+      </div>
     </div>
     <!-- Selección de cantidad minima -->
     <div class="mb-6">
@@ -76,7 +90,6 @@
           <ui-super-select
             [multiple]="true"
             [readonly]="false"
-            [compareWith]="compareWithOptionsLabel"
             [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
             [formControlName]="'currency'"
             id="currency"

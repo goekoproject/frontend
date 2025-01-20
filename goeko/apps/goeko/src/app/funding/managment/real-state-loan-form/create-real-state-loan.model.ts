@@ -10,7 +10,7 @@ export class CreateRealStateLoan implements RealStateLoanPayload {
   minimumQuantity: number
   currency: string[]
   contact: ContactRequest
-
+  balanceSheet: number
   constructor(bankId: string, dataForm: any) {
     this.bankId = bankId
     this.classifications = [
@@ -21,10 +21,11 @@ export class CreateRealStateLoan implements RealStateLoanPayload {
       },
     ]
     this.locations = mapperLocations(dataForm.locations)
-    this.buildingTypes = this._getOptionLabel(dataForm.buildingTypes)
-    this.ownerProfile = this._getOptionLabel(dataForm.ownerProfile)
+    this.buildingTypes = dataForm.buildingTypes
+    this.ownerProfile = dataForm.ownerProfile
     this.minimumQuantity = dataForm.minimumQuantity
     this.currency = dataForm.currency
+    this.balanceSheet = dataForm.balanceSheet
     this.contact = {
       email: dataForm.email,
       //name: dataForm.name,
