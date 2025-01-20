@@ -55,31 +55,41 @@ export function validateCleanTechIdentifier(): (control: AbstractControl) => Val
   }
 }
 
-export const smeFormGroup = new FormGroup({
-  name: new FormControl('', Validators.required),
-  email: new FormControl('', [Validators.required, Validators.email]),
-  locations: new FormArray([], Validators.required),
-  website: new FormControl(),
-  employees: new FormControl('', [Validators.required, Validators.min(1)]),
-  externalId: new FormControl(),
-  comunicationLanguage: new FormControl(''),
-  identifier: new FormControl(''),
-  phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
-  generalNotifications: new FormControl(false),
-})
+export const smeFormGroup = new FormGroup(
+  {
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    locations: new FormArray([], Validators.required),
+    website: new FormControl(),
+    employees: new FormControl('', [Validators.required, Validators.min(1)]),
+    externalId: new FormControl(),
+    comunicationLanguage: new FormControl(''),
+    identifier: new FormControl(''),
+    phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
+    generalNotifications: new FormControl(false),
+  },
+  {
+    validators: validateSmeIdentifier(),
+  },
+)
 
-export const cleanTechFormGroup = new FormGroup({
-  name: new FormControl('', Validators.required),
-  email: new FormControl('', [Validators.email, Validators.required]),
-  country: new FormControl('', Validators.required),
-  link: new FormControl(),
-  logo: new FormControl(),
-  city: new FormControl(),
-  externalId: new FormControl(),
-  comunicationLanguage: new FormControl(''),
-  identifier: new FormControl('', []),
-  phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
-})
+export const cleanTechFormGroup = new FormGroup(
+  {
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    country: new FormControl('', Validators.required),
+    link: new FormControl(),
+    logo: new FormControl(),
+    city: new FormControl(),
+    externalId: new FormControl(),
+    comunicationLanguage: new FormControl(''),
+    identifier: new FormControl('', []),
+    phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
+  },
+  {
+    validators: validateCleanTechIdentifier(),
+  },
+)
 
 export const bankFormGroup = new FormGroup({
   name: new FormControl('', Validators.required),
