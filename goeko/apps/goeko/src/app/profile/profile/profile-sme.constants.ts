@@ -22,12 +22,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         type: 'lang',
         required: false,
       },
-      {
-        controlName: 'identifier',
-        label: 'FORM_LABEL.companyId',
-        type: 'text',
-        required: true,
-      },
+
       {
         controlName: 'employees',
         label: 'FORM_LABEL.numEmployees',
@@ -40,12 +35,12 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         type: 'url',
         placeholder: 'www.example.com',
       },
-      {
+      /*   {
         controlName: 'phoneNumber',
         label: 'FORM_LABEL.phoneNumber',
         type: 'text',
         placeholder: '0041770000000',
-      },
+      }, */
     ],
   },
   {
@@ -58,8 +53,15 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         dataSelectKey: 'countries',
         required: true,
       },
+      {
+        controlName: 'identifier',
+        label: 'FORM_LABEL.companyId',
+        type: 'text',
+        required: true,
+      },
     ],
   },
+
   {
     fields: [
       {

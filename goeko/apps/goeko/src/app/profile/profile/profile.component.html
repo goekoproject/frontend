@@ -1,4 +1,4 @@
-@if (form) {
+@defer (when form) {
   <div class="profile-data">
     <form [formGroup]="form" class="profile-page">
       <div class="profile-data-heading flex items-center gap-4">
@@ -95,7 +95,11 @@
                   }"></ng-container>
               }
               @case ('select-locations') {
-                <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
+                <goeko-select-locations
+                  [form]="form"
+                  [controlLocations]="locationsArrays"
+                  [singleSelect]="true"
+                  (changeCountry)="manageIdentifiers($event)"></goeko-select-locations>
               }
               @case ('checkbox') {
                 <div class="my-4 flex items-center">
@@ -108,10 +112,11 @@
               @default {
                 <go-input
                   [formControlName]="itemForm.controlName"
-                  name="{{ itemForm.type }}"
+                  name="{{ itemForm.controlName }}"
+                  id="{{ itemForm.controlName }}"
                   type="{{ itemForm.type }}"
                   [placeholder]="itemForm.placeholder || ''"
-                  class="{{ itemForm.className }}">
+                  class="{{ itemForm.className }}" #input>
                   <p slot="label">{{ itemForm.label | translate }}</p>
                   @if (!itemForm.required) {
                     <p class="optional" slot="required">{{ 'optional' | translate }}</p>

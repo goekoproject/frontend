@@ -5,6 +5,13 @@ export const LANG_PROFILE = [
   { code: 'es', keyLang: 'LANGS.es' },
   { code: 'fr', keyLang: 'LANGS.fr' },
 ]
+export const IdentifierPlaceholders = {
+  ES: 'B12345678',
+  FR: '123456789',
+  CH: 'CHE-123.456.789',
+  DE: 'DE123456789',
+  IT: '12345678901',
+}
 
 const IdentifierRegexs = {
   ES: /^[A-Z][0-9]{7}[0-9A-Z]$/,
@@ -15,16 +22,21 @@ const IdentifierRegexs = {
 }
 export function validateSmeIdentifier(): (control: AbstractControl) => ValidationErrors | null {
   return (control: AbstractControl): ValidationErrors | null => {
-    const firstLocation = control.parent?.get('locations')?.value?.[0]?.country?.code
-
+    const firstLocation = control?.get('locations')?.value?.[0]?.country?.code
+    const identifierControl = control.get('identifier') as FormControl
     if (!firstLocation) {
       return null
     }
 
-    const id = control.value
+    const id = control.value.identifier
     const regex = IdentifierRegexs[firstLocation as keyof typeof IdentifierRegexs]
-
-    return regex && !regex.test(id) ? { invalidSmeIdentifier: true } : null
+    if (regex && !regex.test(id)) {
+      identifierControl.setErrors({ invalidSmeIdentifier: true })
+      return { invalidSmeIdentifier: true }
+    } else {
+      identifierControl.setErrors(null)
+    }
+    return null
   }
 }
 
@@ -51,7 +63,7 @@ export const smeFormGroup = new FormGroup({
   employees: new FormControl('', [Validators.required, Validators.min(1)]),
   externalId: new FormControl(),
   comunicationLanguage: new FormControl(''),
-  identifier: new FormControl('', []),
+  identifier: new FormControl(''),
   phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
   generalNotifications: new FormControl(false),
 })

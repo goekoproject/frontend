@@ -1,22 +1,10 @@
 import { CommonModule } from '@angular/common'
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core'
+import { Component, Input, OnDestroy, OnInit, computed, effect, inject, input, output, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions, LocationsCountry } from '@goeko/store'
 import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { Subscription, distinctUntilChanged, filter, map, merge, mergeMap } from 'rxjs'
+import { Subscription, map } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
 
 const CODE_DEFAULT_COUNTRY = 'CH'
@@ -52,6 +40,7 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
   @Input() form!: FormGroup
   public singleSelect = input<boolean>(false)
 
+  public changeCountry = output<string>()
   public countries = computed(() => this._selectLocationsService.countries())
   public controlLocationsCountryValue = signal<string[]>([])
 
@@ -118,10 +107,9 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
 
         if (value !== previousValues[index]) {
           const { code } = value.country
+          this.changeCountry.emit(code)
           if (code && !this.dataSourceSelect.has(code)) {
             this.selectedCountryLocation.set(value.country.code)
-
-            console.log(`El elemento en la posición ${index} cambió a: `, this.dataSourceSelect)
           }
         }
       })
@@ -138,7 +126,6 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
         map((regiones) => ({ code, regiones })), // Mapea las regiones junto con el countryCode
       )
       .subscribe(({ code, regiones }) => {
-        const newCode = this.selectedCountryLocation()
         this.addRegionsForCodeCountry(code, [this.optionAllProvince, ...regiones])
         this._setAllOptionWhenEmptyRegions()
       })

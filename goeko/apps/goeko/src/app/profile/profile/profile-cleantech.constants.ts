@@ -23,6 +23,12 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         dataSelectKey: 'countries',
       },
       {
+        controlName: 'identifier',
+        label: 'FORM_LABEL.companyId',
+        type: 'text',
+        required: false,
+      },
+      {
         controlName: 'city',
         label: 'FORM_LABEL.city',
         type: 'text',
@@ -33,25 +39,20 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         type: 'lang',
         required: true,
       },
-      {
-        controlName: 'identifier',
-        label: 'FORM_LABEL.companyId',
-        type: 'text',
-        required: false,
-      },
+
       {
         controlName: 'link',
         label: 'FORM_LABEL.website',
         type: 'url',
         placeholder: 'www.example.com',
       },
-      {
+      /*       {
         controlName: 'phoneNumber',
         label: 'FORM_LABEL.phoneNumber',
         type: 'text',
         placeholder: '0041770000000',
         //required: true,
-      },
+      }, */
       {
         controlName: 'logo',
         label: 'FORM_LABEL.logo',
