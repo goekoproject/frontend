@@ -66,11 +66,11 @@
       <h2 class="label-form">{{ 'FORM_LABEL.targetRegion' | translate }}</h2>
       <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"></goeko-select-locations>
     </div>
-       <!-- Balance sheet -->
+    <!-- Balance sheet -->
     <div class="mb-6">
       <label class="text-lg font-semibold">
         <input type="checkbox" id="balanceSheet" [checked]="checkedBalanceSheet()" (change)="changeBalanceSheet()" />
-        {{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheet' | translate }}
+        {{ 'FUNDING_SUSTAINABLE_EQUIPMENT.balanceSheetSME' | translate }}
       </label>
       <div class="mb-4" [ngClass]="{ 'pointer-events-none opacity-50': !this.checkedBalanceSheet() }">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
