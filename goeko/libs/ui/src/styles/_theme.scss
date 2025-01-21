@@ -203,6 +203,9 @@ fieldset:not(:has(legend)) {
 }
 .fieldset-text-support {
   margin-bottom: 1rem;
+  &:empty {
+    display: none;
+  }
 }
 
 input[type='radio' i]:focus-visible {
