@@ -57,7 +57,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         controlName: 'identifier',
         label: 'FORM_LABEL.companyId',
         type: 'text',
-        required: true,
+        required: false,
       },
     ],
   },
