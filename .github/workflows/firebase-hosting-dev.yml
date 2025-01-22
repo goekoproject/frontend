@@ -39,6 +39,10 @@ jobs:
         with:
           name: build-project
           path: goeko/dist/apps
+      - name: Delete Artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: build-project
   test:
      name: Unit Test
      needs: build
