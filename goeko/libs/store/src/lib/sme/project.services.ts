@@ -2,12 +2,11 @@ import { HttpClient } from '@angular/common/http'
 import { inject, Injectable, signal } from '@angular/core'
 import { CacheProperty } from '@goeko/coretools'
 import { map, Observable } from 'rxjs'
-import { Category } from '../classificactions/classifications.interface'
 import { ClassificationsService } from '../classificactions/classifications.service'
 import { GroupingType } from '../classificactions/grouping-type.enum'
+import { CategoryGrouping } from '../classificactions/grouping.interface'
 import { Project } from './project.interface'
 import { SmeCreateRecomendationRequest, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
-import { CategoryGrouping } from '../classificactions/grouping.interface'
 
 @Injectable()
 export class ProjectService {

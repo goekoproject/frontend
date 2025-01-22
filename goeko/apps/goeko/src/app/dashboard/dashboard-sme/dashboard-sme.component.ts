@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common'
-import { Component, effect, inject, input } from '@angular/core'
+import { Component, inject, input } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
-import { EcosolutionsTaggingService, SmeRequestResponse, TAGGING } from '@goeko/store'
+import { EcosolutionsTaggingService, SmeRequestResponse, SummarySme, TAGGING, TaggingResponse } from '@goeko/store'
 import { ButtonModule, CardProductComponent, DialogService, NotificationModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { DashboardSmeService } from './dashboard-sme.service'
@@ -16,24 +16,16 @@ import { DashboardSmeService } from './dashboard-sme.service'
   providers: [MessageService, DashboardSmeService, EcosolutionsTaggingService],
 })
 export class DashboardSmeComponent {
-  private _dashboardSmeService = inject(DashboardSmeService)
   private _router = inject(Router)
   public route = inject(ActivatedRoute)
   private _dialogService = inject(DialogService)
 
   public TAGGING = TAGGING
-  public id = input<string>('')
 
-  public summary = this._dashboardSmeService.summary
-  public ecosolutionFavourites = this._dashboardSmeService.ecosolutionFavourites
-  constructor() {
-    effect(() => {
-      if (this.id()) {
-        this._dashboardSmeService.getDashboardData(this.id())
-        this._dashboardSmeService.getEcosolutionFavourites(this.id())
-      }
-    })
-  }
+  public id = input<string>('')
+  public summary = input<SummarySme | null>(null)
+  public ecosolutionFavourites = input<TaggingResponse[] | null>(null)
+
   openNewProjectDialog() {
     this._dialogService
       .open(DialogNewProjectComponent)

@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { DashboardCleantechComponent } from './dashboard/dashboard-cleantech/dashboard-cleantech.component'
+import { EcosolutionsTaggingService } from '@goeko/store'
+import { DashboardCleantechComponent } from './dashboard-cleantech/dashboard-cleantech.component'
+import { dataEcosolutionFavouritesResolver, dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
+import { DashboardSmeService } from './dashboard-sme/dashboard-sme.service'
 //import { DashboardBankComponent } from '../funding/hub-funding.component'
 
 const routes: Routes = [
   {
     path: 'sme/:id',
-    loadComponent: () => import('./dashboard/dashboard-sme.component').then((m) => m.DashboardSmeComponent),
+    loadComponent: () => import('./dashboard-sme/dashboard-sme.component').then((m) => m.DashboardSmeComponent),
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    resolve: {
+      summary: dataSummaryResolver,
+      ecosolutionFavourites: dataEcosolutionFavouritesResolver,
+    },
     data: {
       breadcrumb: 'dashboard',
       hidden: true,
@@ -27,5 +35,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [DashboardSmeService, EcosolutionsTaggingService],
 })
 export class DashboardRoutingModule {}

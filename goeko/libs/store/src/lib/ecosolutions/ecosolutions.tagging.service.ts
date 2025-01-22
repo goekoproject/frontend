@@ -36,7 +36,8 @@ export class EcosolutionsTaggingService extends TranslateChangeService {
   getEcosolutionNotInterested(id: string): Observable<TaggingResponse[]> {
     return this.getEcosolutionsByTagging(id, TaggingEnum.NOT_INTERESTED)
   }
+
   getEcosolutionsByTagging(id: string, tag: TaggingEnum): Observable<TaggingResponse[]> {
-    return this._http.get<any>(`/v1/ecosolution/search/tagging/smes/${id}/details?lang=${this.lang()}?tag=${tag}`)
+    return this._http.get<TaggingResponse[]>(`/v1/ecosolution/search/tagging/smes/${id}/details?lang=${this.lang()}&tag=${tag}`)
   }
 }
