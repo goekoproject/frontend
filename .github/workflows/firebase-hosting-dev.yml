@@ -16,6 +16,10 @@ jobs:
       run:
         working-directory: ./goeko
     steps:
+      - name: Delete Artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: build-project
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -39,10 +43,6 @@ jobs:
         with:
           name: build-project
           path: goeko/dist/apps
-      - name: Delete Artifact
-        uses: geekyeggo/delete-artifact@v5
-        with:
-          name: build-project
   test:
      name: Unit Test
      needs: build
