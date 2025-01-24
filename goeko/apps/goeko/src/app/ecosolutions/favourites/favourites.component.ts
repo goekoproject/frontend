@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject } from '@angular/core'
+import { Component, inject, input } from '@angular/core'
 import { Router, RouterModule } from '@angular/router'
-import { ClassificationsLabelPipe, ECOSOLUTIONS_CONFIGURATION, EcosolutionsTaggingService, TAGGING, UserService } from '@goeko/store'
+import { ClassificationsLabelPipe, ECOSOLUTIONS_CONFIGURATION, EcosolutionsTaggingService, TAGGING, TaggingResponse } from '@goeko/store'
 import { CardProductComponent } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { environment } from '../../../environments/environment'
@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment'
 @Component({
   selector: 'goeko-favorite',
   standalone: true,
-  imports: [CommonModule, CardProductComponent, TranslateModule, RouterModule, ClassificationsLabelPipe],
+  imports: [CommonModule, RouterModule, CardProductComponent, TranslateModule, RouterModule, ClassificationsLabelPipe],
   providers: [
     EcosolutionsTaggingService,
     {
@@ -24,19 +24,22 @@ import { environment } from '../../../environments/environment'
 })
 export class FavouritesComponent {
   private _ecosolutionTaggingService = inject(EcosolutionsTaggingService)
-  private _userProfile = inject(UserService).userProfile
-  private _router = inject(Router)
+  public _router = inject(Router)
+
+  ecosolutionFavorites = input.required<TaggingResponse[]>()
+  id = input.required<string>()
+  //const
   public TAGGING = TAGGING
 
-  ecosolutionFavorites$ = this._ecosolutionTaggingService.getEcosolutionFavourites(this._userProfile().id)
-
   removeFavorite(ecosolutionId: string) {
-    this._ecosolutionTaggingService
-      .removeFavorite(this._userProfile().id, ecosolutionId)
-      .subscribe(() => (this.ecosolutionFavorites$ = this._ecosolutionTaggingService.getEcosolutionFavourites(this._userProfile().id)))
+    this._ecosolutionTaggingService.removeFavorite(this.id(), ecosolutionId).subscribe(() => {
+      this._router.navigate([], {
+        queryParams: { hash: window.crypto.randomUUID() },
+      })
+    })
   }
 
   showMore(ecosolutionId: string) {
-    this._router.navigate([`platform/sme-analysis/results/${this._userProfile().id}/details`, ecosolutionId])
+    this._router.navigate([`platform/ecosolutions-detail/${this.id()}/${ecosolutionId}`])
   }
 }

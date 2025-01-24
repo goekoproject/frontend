@@ -34,14 +34,14 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg?.code))
   onChange: (value: Array<SDGLabel>) => void = () => {}
   onTouched: () => void = () => {}
-
+  readonly = input<boolean>(false)
   value = model<Array<SDGLabel>>([])
+
   @Input()
   public get selected(): number[] {
     return this._selected
   }
 
-  @Input() readonly: boolean = false
   public set selected(sustainableDevelopmentGoals: number[]) {
     if (sustainableDevelopmentGoals) {
       this.sdgs.set(SDG_LABEL.filter((sdg) => sustainableDevelopmentGoals.includes(sdg.code)))

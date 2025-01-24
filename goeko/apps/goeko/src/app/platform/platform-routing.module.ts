@@ -2,7 +2,14 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { canDeactivateGuard } from '@goeko/business-ui'
 import { AuthGuard, checkSessionUserData } from '@goeko/core'
-import { ROLES, ecosolutionSearchDetailResolver, groupingFormCategoriesResolver, hasRole, projectResolver } from '@goeko/store'
+import {
+  ROLES,
+  ecosolutionFavouritesResolver,
+  ecosolutionSearchDetailResolver,
+  groupingFormCategoriesResolver,
+  hasRole,
+  projectResolver,
+} from '@goeko/store'
 import { PlatformComponent } from './platform.component'
 
 const routes: Routes = [
@@ -80,10 +87,14 @@ const routes: Routes = [
         loadChildren: () => import('../leads/leads.module').then((m) => m.LeadsModule),
       },
       {
-        path: 'favourites',
+        path: 'favourites/:id',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () => import('../ecosolutions/favourites/favourites.component').then((m) => m.FavouritesComponent),
+        resolve: {
+          ecosolutionFavorites: ecosolutionFavouritesResolver,
+        },
         data: {
           breadcrumb: 'MENU_USER.favourites',
           hidden: true,
@@ -92,8 +103,8 @@ const routes: Routes = [
       },
       {
         path: 'admin',
-        /*   canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
-        canMatch: [hasRole(ROLES.ADMIN)], */
+        canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
+        canMatch: [hasRole(ROLES.ADMIN)],
         loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
       },
       {

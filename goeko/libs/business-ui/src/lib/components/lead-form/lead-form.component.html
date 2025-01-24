@@ -4,7 +4,7 @@
     <p class="text-sm">{{ 'leadFormSubtitle' | translate }}</p>
   </div>
 
-  <go-input formControlName="email">
+  <go-input formControlName="email" class="max-w-full">
     <span slot="label"> {{ 'your' | translate }} {{ 'FORM_LABEL.email' | translate }}</span>
   </go-input>
 
@@ -12,7 +12,7 @@
     <label for="solutionDescription">
       {{ 'FORM_LABEL.messageLead' | translate }}
     </label>
-    <textarea class="go-textarea" rows="10" formControlName="message" id="solutionDescription"> </textarea>
+    <textarea class="go-textarea max-w-full" rows="10" formControlName="message" id="solutionDescription"> </textarea>
   </div>
 
   <button go-button type="button" [disabled]="this.leadForm.invalid" (click)="createLead()">

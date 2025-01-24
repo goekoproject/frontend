@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { EcosolutionsTaggingService } from '@goeko/store'
+import { ecosolutionFavouritesResolver, EcosolutionsTaggingService } from '@goeko/store'
 import { DashboardCleantechComponent } from './dashboard-cleantech/dashboard-cleantech.component'
-import { dataEcosolutionFavouritesResolver, dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
+import { dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
 import { DashboardSmeService } from './dashboard-sme/dashboard-sme.service'
 //import { DashboardBankComponent } from '../funding/hub-funding.component'
 
@@ -13,7 +13,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
       summary: dataSummaryResolver,
-      ecosolutionFavourites: dataEcosolutionFavouritesResolver,
+      ecosolutionFavourites: ecosolutionFavouritesResolver,
     },
     data: {
       breadcrumb: 'dashboard',

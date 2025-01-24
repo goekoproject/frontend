@@ -12,26 +12,30 @@ import { AuthService } from './modules/auth/auth.service'
 import { LoadingModule } from './services/loading/loading.module'
 import { SpinnerOverlayModule } from './services/spinner-overlay/spinner-overlay.module'
 
-@NgModule({ declarations: [], imports: [CommonModule, RouterModule, LoadingModule, SpinnerOverlayModule], providers: [
-        AuthService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TranformDateInterceptor,
-            multi: true,
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthHttpInterceptor,
-            multi: true,
-        },
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: EmptyElementsInterceptor,
-            multi: true,
-        },
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [],
+  imports: [CommonModule, RouterModule, LoadingModule, SpinnerOverlayModule],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TranformDateInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: EmptyElementsInterceptor,
+      multi: true,
+    },
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class ConfigModule {
   static forRoot(config: Options): ModuleWithProviders<ConfigModule> {
     return {

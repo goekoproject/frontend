@@ -1,12 +1,12 @@
 import { inject } from '@angular/core'
 import { ActivatedRouteSnapshot } from '@angular/router'
-import { map, of, shareReplay } from 'rxjs'
+import { map, shareReplay, throwError } from 'rxjs'
 import { DashboardSmeService } from './dashboard-sme.service'
 
 export const dataSummaryResolver = (route: ActivatedRouteSnapshot) => {
   const _smeId = route.paramMap.get('id') as string
   if (!_smeId) {
-    return of(undefined)
+    return throwError(() => new Error('"id" not found in route parameters'))
   }
 
   return inject(DashboardSmeService)
@@ -15,13 +15,4 @@ export const dataSummaryResolver = (route: ActivatedRouteSnapshot) => {
       map((data) => data.summary),
       shareReplay(1),
     )
-}
-
-export const dataEcosolutionFavouritesResolver = (route: ActivatedRouteSnapshot) => {
-  const _smeId = route.paramMap.get('id') as string
-  if (!_smeId) {
-    return of(undefined)
-  }
-
-  return inject(DashboardSmeService).getEcosolutionFavourites(_smeId).pipe(shareReplay(1))
 }
