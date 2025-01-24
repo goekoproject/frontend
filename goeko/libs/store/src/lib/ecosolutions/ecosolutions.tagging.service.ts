@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { TranslateChangeService } from '../util/translate-change'
-import { Tagging, TaggingFactory } from './tagging'
+import { FavouritesEcosolutionsTagging, Tagging, TaggingFactory } from './tagging'
 import { TaggingEnum } from './tagging.enum'
 import { TaggingResponse } from './tagging.interface'
 
@@ -10,7 +10,8 @@ import { TaggingResponse } from './tagging.interface'
   providedIn: 'root',
 })
 export class EcosolutionsTaggingService extends TranslateChangeService {
-  constructor(private _http: HttpClient) {
+  private _http = inject(HttpClient)
+  constructor() {
     super()
     this.changeLang()
   }
@@ -19,16 +20,16 @@ export class EcosolutionsTaggingService extends TranslateChangeService {
     return this._createEcosolutions(TaggingEnum.FAVOURITES, smeId, ecosolutionId)
   }
   private _createEcosolutions(tag: TaggingEnum, smeId: string, ecosolutionId: string): Observable<Tagging> {
-    const bodyByTagging = TaggingFactory.createTagging(tag, smeId, ecosolutionId).tagging()
+    const bodyByTagging = TaggingFactory.createTagging(tag, smeId, ecosolutionId)
     return this._http.post<Tagging>(`/v1/ecosolution/search/tagging/smes`, bodyByTagging)
   }
 
-  removeFavorite(smeId: string, ecosolutionId: string): Observable<Tagging> {
+  removeFavorite(smeId: string, ecosolutionId: string): Observable<FavouritesEcosolutionsTagging> {
     return this._removeEcosolutions(smeId, ecosolutionId)
   }
 
-  private _removeEcosolutions(smeId: string, ecosolutionId: string): Observable<Tagging> {
-    return this._http.delete<Tagging>(`/v1/ecosolution/search/tagging/smes/${smeId}/ecosolution/${ecosolutionId}`)
+  private _removeEcosolutions(smeId: string, ecosolutionId: string): Observable<FavouritesEcosolutionsTagging> {
+    return this._http.delete<FavouritesEcosolutionsTagging>(`/v1/ecosolution/search/tagging/smes/${smeId}/ecosolution/${ecosolutionId}`)
   }
   getEcosolutionFavourites(id: string): Observable<TaggingResponse[]> {
     return this.getEcosolutionsByTagging(id, TaggingEnum.FAVOURITES)

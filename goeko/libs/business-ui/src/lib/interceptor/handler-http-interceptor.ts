@@ -1,10 +1,14 @@
 import { HttpEvent, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http'
 import { inject } from '@angular/core'
-import { Notification, TOAST_NOTIFICATION_SUBTYPE, TOAST_NOTIFICATION_TYPE, ToastService } from '@goeko/store'
+import { Notification, TOAST_NOTIFICATION_SUBTYPE, ToastService } from '@goeko/store'
 import { throwError } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
 const isPlatformGoeko = (request: HttpRequest<unknown>) => request.url.includes('/v1')
-
+enum TOAST_NOTIFICATION_TYPE {
+  SUCCESS = 'SUCCESS',
+  ERROR = 'ERROR',
+  WARNING = 'WARNING',
+}
 type MessageError = {
   [key: number]: Notification
 }

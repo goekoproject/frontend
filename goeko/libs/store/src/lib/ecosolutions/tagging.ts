@@ -1,37 +1,30 @@
-import { TAGGING } from './tagging.enum'
+import { TAGGING, TaggingEnum } from './tagging.enum'
 
 export interface Tagging {
   smeId: string
   ecosolutionId: string
-  tagging(): void
+  tag: TaggingEnum
 }
 
 export class FavouritesEcosolutionsTagging implements Tagging {
   smeId!: string
   ecosolutionId!: string
-  tag!: string
+  tag!: TaggingEnum
   constructor(smeId: string, ecosolutionId: string) {
     this.smeId = smeId
     this.ecosolutionId = ecosolutionId
-  }
-
-  tagging() {
-    this.tag = TAGGING.FAVOURITES
-    return this
+    this.tag = TaggingEnum.FAVOURITES
   }
 }
 
 export class NotInterestedEcosolutionsTagging implements Tagging {
   smeId!: string
   ecosolutionId!: string
-  tag!: string
+  tag!: TaggingEnum
   constructor(smeId: string, ecosolutionId: string) {
     this.smeId = smeId
     this.ecosolutionId = ecosolutionId
-  }
-  tagging() {
-    this.tag = TAGGING.NOT_INTERESTED
-    return this
+    this.tag = TaggingEnum.NOT_INTERESTED
   }
 }
 
