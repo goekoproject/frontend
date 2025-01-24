@@ -39,10 +39,6 @@ jobs:
         with:
           name: build-project
           path: goeko/dist/apps
-      - name: Delete Artifact
-        uses: geekyeggo/delete-artifact@v5
-        with:
-          name: build-project
   test:
      name: Unit Test
      needs: build
@@ -69,3 +65,7 @@ jobs:
         env:
           FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
           PROJECT_PATH : ./goeko
+      - name: Delete Artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: build-project
