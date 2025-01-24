@@ -7,6 +7,7 @@ import { ConfigModule, OrderByPipe } from '@goeko/core'
 import {
   ClassificationsService,
   EcosolutionsSearchService,
+  EcosolutionsTaggingService,
   GoShowUserTypeDirective,
   isSubscribedCleantech,
   LocationsService,
@@ -67,6 +68,7 @@ import { PlatformComponent } from './platform.component'
     ClassificationsService,
     EcosolutionsSearchService,
     SessionStorageService,
+    EcosolutionsTaggingService,
     provideHttpClient(withInterceptors([handlerHttpInterceptor])),
   ],
 })

@@ -49,6 +49,7 @@ export class MenuUserComponent {
       case 'dashboard/sme':
       case 'dashboard/cleantech':
       case 'funding':
+      case 'favourites':
         this._navigateWithCompanyId(route)
         return
 
