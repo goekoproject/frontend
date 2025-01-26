@@ -17,6 +17,8 @@ import { ClassificationCategoryService, EcosolutionsModule } from '@goeko/store'
 import {
   BadgeModule,
   ButtonModule,
+  FILE_UPLOAD_CONFIG,
+  FileUploadComponent,
   GoInputModule,
   GoTabGroupModule,
   InputFileComponent,
@@ -58,10 +60,18 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     SelectFormLangComponent,
     InputFileComponent,
     NgxEditorModule,
+    FileUploadComponent,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
     }),
   ],
-  providers: [CleantechEcosolutionsService, ClassificationCategoryService],
+  providers: [
+    CleantechEcosolutionsService,
+    ClassificationCategoryService,
+    {
+      provide: FILE_UPLOAD_CONFIG,
+      useValue: { maxFileSizeMB: environment.maxFileSizeMB }, // Sobrescribe el valor
+    },
+  ],
 })
 export class CleantechEcosolutionsModule {}

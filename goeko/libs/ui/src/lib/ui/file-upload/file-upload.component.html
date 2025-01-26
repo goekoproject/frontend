@@ -1,0 +1,21 @@
+<label for="file" class="label-form">{{label() | translate}}</label>
+<div class="p-4 border-2 border-dashed  rounded-lg text-center" [class.border-primary-default]="isDragover()"
+  [class.border-gray-300]="!isDragover()" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)">
+  <input type="file" id="file" class="hidden" (change)="onFileChange($event)" #fileInput>
+  <p class="text-black">{{'INPUT_FILE.dragAndDropHere' | translate}}</p>
+  <p class="text-black">{{ 'or' | translate}}</p>
+  <button class=" rounded-full border-2 font-semibold border-primary-default text-primary-default px-7 py-2
+    focus:outline-none focus:bg-sky-100 focus:ring-primary-default" (click)="fileInput.click()">
+    {{'INPUT_FILE.addNewFile' | translate}}
+  </button>
+  @if (error()) {
+  <div class="mt-4 text-red-600 text-sm">
+    ⚠️ {{ error() }}
+  </div>
+  }
+  @if(file() && showNameFile()){
+  <p class="text-gray-500 text-sm">{{file()?.name}}</p>
+  }
+
+</div>

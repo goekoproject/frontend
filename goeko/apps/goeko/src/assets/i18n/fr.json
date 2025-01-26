@@ -164,6 +164,7 @@
     "approvedSwiss": "Approuvé pour le marché suisse",
     "basicInformation": "Informations de base",
     "certified": "Certifiée",
+    "certificates": "Certificats",
     "city": "Ville",
     "companyId": "Numéro d’identification de votre entreprise",
     "companyName": "Nom de l'entreprise",
@@ -270,10 +271,12 @@
     "image": "Glissez-déposez ou cliquez",
     "image2": "Sélectionner une image",
     "image3": "Ajouter une image",
-    "selectLogo": "Sélectionnez le logo"
+    "addNewFile": "Ajouter un nouveau fichier",
+    "selectLogo": "Sélectionnez le logo",
+    "dragAndDropHere": "Glissez et déposez vos fichiers ici",
+    "maxSizeFile": "Taille maximale permise: {{size}}MB"
   },
   "LANGS": {
-    "de": "Allemand",
     "en": "Anglais",
     "es": "Espagnol",
     "fr": "Français",
@@ -746,5 +749,6 @@
   },
   "delete": "Supprimer",
   "characters": "{{num}} caractères maximum",
-  "deleteLocation": "Supprimer la région"
+  "deleteLocation": "Supprimer la région",
+  "or": "ou"
 }

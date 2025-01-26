@@ -260,7 +260,10 @@
     "image": "Ziehen Sie die Datei hierher oder klicken Sie, um",
     "image2": "Bild auswählen",
     "image3": "Bild hinzufügen",
-    "selectLogo": "Wählen Sie Ihr Logo aus"
+    "addNewFile": "Neue Datei hinzufügen",
+    "selectLogo": "Wählen Sie Ihr Logo aus",
+    "dragAndDropHere": "Dateien hierher ziehen und ablegen",
+    "maxSizeFile": "Maximale Dateigröße: {{size}}MB"
   },
   "LANGS": {
     "de": "Deutsch",
@@ -582,6 +585,7 @@
   "cancel": "Abbrechen",
   "categories": "Kategorien",
   "certified": "Zertifizierung",
+  "certificates": "Zertifikate",
   "cleantech": "Cleantech",
   "cleantechLeadDefault": "Verfolgen Sie Verbindungen mit Ihren qualifizierten Leads.",
   "companyDetails": "Unternehmensdetails",
@@ -748,5 +752,6 @@
     "housingCooperative": "Wohnungsbaugenossenschaft"
   },
   "delete": "Löschen",
-  "deleteLocation": "Standort löschen"
+  "deleteLocation": "Standort löschen",
+  "or": "oder"
 }
