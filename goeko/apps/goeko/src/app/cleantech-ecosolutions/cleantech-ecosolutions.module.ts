@@ -8,6 +8,7 @@ import {
   CategoryModule,
   ProductToCurrentLangPipe,
   SdgIconsComponent,
+  SelectCertificateComponent,
   SelectFormLangComponent,
   SelectLocationsComponent,
   SelectSubcategoryProductComponent,
@@ -61,6 +62,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     InputFileComponent,
     NgxEditorModule,
     FileUploadComponent,
+    SelectCertificateComponent,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
     }),

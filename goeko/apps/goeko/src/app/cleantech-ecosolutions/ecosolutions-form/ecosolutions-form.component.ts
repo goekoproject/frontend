@@ -99,6 +99,10 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     return (this.nameTranslations.controls[this.selectedFormLang().index] as FormGroup).controls['translation']
   }
 
+  public get certificates(): FormArray {
+    return this.form.get('certificates') as FormArray
+  }
+
   public get bodyRequestEcosolution(): EcosolutionsBody {
     return this.idEcosolution
       ? new UpdatedEcosolutionBody(this._cleantechId, this.mainCategory, this.form.value)
@@ -181,6 +185,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       certified: [false],
       approved: [false],
       locations: this._fb.array([], Validators.required),
+      certificates: this._fb.array([]),
     })
   }
 
@@ -234,6 +239,13 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       label: new FormControl(''),
       lang: new FormControl(code),
     })
+  }
+
+  addAddcertificates(file: File | null) {
+    this.certificates.push(this._fb.control(file))
+  }
+  removeAddcertificates(index: number) {
+    this.certificates.removeAt(index)
   }
   getEcosolution() {
     this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((ecosolution: Ecosolutions) => {
