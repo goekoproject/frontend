@@ -299,6 +299,9 @@
           </a>
           <input #inputCertified *ngIf="!isReadOnly" type="file" accept="application/pdf" (change)="fileChange($event)"
             [disabled]="!this.form.value.certified" />
+
+          <goeko-file-upload (fileAdded)="addAddcertificates($event)" />
+
         </div>
       </fieldset>
 

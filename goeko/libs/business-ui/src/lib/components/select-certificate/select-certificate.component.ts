@@ -1,6 +1,16 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, forwardRef, OnInit, signal } from '@angular/core'
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Component, computed, forwardRef, inject, Injector, input, OnInit, signal } from '@angular/core'
+import {
+  ControlContainer,
+  ControlValueAccessor,
+  FormArray,
+  FormControl,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms'
 import { UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 
@@ -21,10 +31,10 @@ interface CertificateFormGroup {
   ],
   template: `
     @if (existsFile()) {
-      <div class="max-h-52 h-full w-52 rounded-lg bg-white p-2 drop-shadow-md">
-        <i class="ti ti-trash-filled flex w-full cursor-pointer justify-end text-2xl text-primary-default"></i>
+      <div class="h-full max-h-52 w-52 rounded-lg bg-white p-2 drop-shadow-md">
+        <i class="ti ti-trash-filled flex w-full cursor-pointer justify-end text-2xl text-primary-default" (click)="removeFile()"></i>
         <!-- title -->
-        <h2 class="md:line-clamp-2 mb-4 bg-blueLightPastel p-2 text-base/10 font-semibold rounded-sm">{{ fileName() }}</h2>
+        <h2 class="mb-4 rounded-sm bg-blueLightPastel p-2 text-base/10 font-semibold md:line-clamp-2">{{ fileName() }}</h2>
 
         <!-- Selector certificate -->
         <ui-super-select
@@ -41,7 +51,11 @@ interface CertificateFormGroup {
   `,
 })
 export class SelectCertificateComponent implements ControlValueAccessor, OnInit {
-  certificates = signal<any>(null)
+  private _controlContainer = inject(ControlContainer, { optional: true })
+  private _injector = inject(Injector)
+  private _formControlNameDirective!: NgControl
+
+  certificates = input<any>(null)
 
   // Control de formulario reactivo
   certificateControl = new FormGroup<CertificateFormGroup | null>({
@@ -50,36 +64,40 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   })
 
   // Valor interno del componente
-  private _value: string | null = null
-  private _file!: File
+  private _value = signal<string | null>(null)
+  private _file = signal<File | null>(null)
 
   // Nombre del archivo para mostrar
-  fileName = computed(() => this.certificateControl.value?.file?.name ?? '')
+  fileName = computed(() => this._file()?.name ?? '')
 
   get typeCertificate() {
     return this.certificateControl.get('typeCertificate') as FormControl<string>
   }
+  get controlParent() {
+    return this._controlContainer?.control as FormArray
+  }
 
-  existsFile = computed(() => !!this._file)
+  existsFile = computed(() => !!this._file())
   // Métodos de ControlValueAccessor
   onChange: any = () => {}
   onTouched: any = () => {}
 
   // Escuchar cambios en el control de formulario
   ngOnInit() {
+    this._formControlNameDirective = this._injector.get(NgControl, null) as NgControl
     this.certificateControl.valueChanges.subscribe((value) => {
-      this._value = value?.typeCertificate ?? null
-      this.onChange(value)
+      this._value.set(value?.typeCertificate ?? null)
+      this.onChange(this._value())
       this.onTouched()
     })
   }
 
   // Implementación de ControlValueAccessor
   writeValue(value: any): void {
-    this._file = value
+    this._file.set(value)
     this.certificateControl.setValue(
       {
-        file: value,
+        file: this._file(),
         typeCertificate: null,
       },
       { emitEvent: false },
@@ -96,5 +114,17 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
 
   setDisabledState(isDisabled: boolean): void {
     isDisabled ? this.certificateControl.disable() : this.certificateControl.enable()
+  }
+
+  removeFile() {
+    this._file.set(null)
+    this.certificateControl.patchValue(null)
+    this.onChange()
+    this._removeElementofArray()
+  }
+
+  private _removeElementofArray() {
+    const index = this.controlParent.controls.findIndex((control: any) => control.name === this._formControlNameDirective?.name)
+    this.controlParent.removeAt(index)
   }
 }
