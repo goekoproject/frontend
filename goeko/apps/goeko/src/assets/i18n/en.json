@@ -758,5 +758,8 @@
   },
   "delete": "Delete",
   "deleteLocation": "Delete location",
-  "or": "or"
+  "or": "or",
+  "ERRORS_FORM": {
+    "SELECT_CERTIFICATE": "Select a certificate"
+  }
 }

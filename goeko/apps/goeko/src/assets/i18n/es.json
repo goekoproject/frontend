@@ -747,5 +747,8 @@
   "delete": "Eliminar",
   "characters": "{{num}} caracteres maximum",
   "deleteLocation": "Eliminar ubicación",
-  "or": "o"
+  "or": "o",
+  "ERRORS_FORM": {
+    "SELECT_CERTIFICATE": "Selecciona un certificado"
+  }
 }

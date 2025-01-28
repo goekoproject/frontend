@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, forwardRef, inject, Injector, input, OnInit, signal } from '@angular/core'
+import { Component, computed, ElementRef, forwardRef, HostListener, inject, Injector, input, OnInit, signal } from '@angular/core'
 import {
   ControlContainer,
   ControlValueAccessor,
@@ -32,7 +32,9 @@ interface CertificateFormGroup {
   template: `
     @if (existsFile()) {
       <div class="h-full max-h-52 w-52 rounded-lg bg-white p-2 drop-shadow-md">
-        <i class="ti ti-trash-filled flex w-full cursor-pointer justify-end text-2xl text-primary-default" (click)="removeFile()"></i>
+        <div class="flex w-full justify-end text-2xl text-primary-default">
+          <i class="ti ti-trash-filled cursor-pointer transition-colors hover:text-primary-blueDark" (click)="removeFile()"></i>
+        </div>
         <!-- title -->
         <h2 class="mb-4 rounded-sm bg-blueLightPastel p-2 text-base/10 font-semibold md:line-clamp-2">{{ fileName() }}</h2>
 
@@ -40,11 +42,13 @@ interface CertificateFormGroup {
         <ui-super-select
           [formControl]="typeCertificate"
           [placeholder]="'certified' | translate"
+          [hasError]="this.hasError()"
           id="certificateType"
           name="certificateType">
           <super-option *ngFor="let option of certificates()" [value]="option">
             {{ option.keyLang | translate }}
           </super-option>
+          <p errorBody>⚠️{{ 'ERRORS_FORM.SELECT_CERTIFICATE' | translate }}</p>
         </ui-super-select>
       </div>
     }
@@ -53,9 +57,11 @@ interface CertificateFormGroup {
 export class SelectCertificateComponent implements ControlValueAccessor, OnInit {
   private _controlContainer = inject(ControlContainer, { optional: true })
   private _injector = inject(Injector)
+  private _elementRef = inject(ElementRef)
+
   private _formControlNameDirective!: NgControl
 
-  certificates = input<any>(null)
+  certificates = input<any>([{ keyLang: 'Test', code: 'test' }])
 
   // Control de formulario reactivo
   certificateControl = new FormGroup<CertificateFormGroup | null>({
@@ -63,13 +69,16 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
     typeCertificate: new FormControl<string | null>(null, Validators.required),
   })
 
-  // Valor interno del componente
   private _value = signal<string | null>(null)
   private _file = signal<File | null>(null)
+  emptySelectCertificate = signal(false)
 
-  // Nombre del archivo para mostrar
   fileName = computed(() => this._file()?.name ?? '')
-
+  hasError = computed(
+    () =>
+      this.emptySelectCertificate() ||
+      (this.certificateControl.invalid && this.certificateControl.touched && this.certificateControl.dirty),
+  )
   get typeCertificate() {
     return this.certificateControl.get('typeCertificate') as FormControl<string>
   }
@@ -81,6 +90,15 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   // Métodos de ControlValueAccessor
   onChange: any = () => {}
   onTouched: any = () => {}
+
+  // Escuchar clics fuera del componente
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    if (!this._elementRef?.nativeElement?.contains(event.target)) {
+      this.emptySelectCertificate.set(true)
+      // Aquí puedes ejecutar la lógica que desees cuando se hace clic fuera del componente
+    }
+  }
 
   // Escuchar cambios en el control de formulario
   ngOnInit() {

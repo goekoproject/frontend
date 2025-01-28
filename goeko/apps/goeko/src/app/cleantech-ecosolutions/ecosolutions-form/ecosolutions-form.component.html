@@ -297,8 +297,8 @@
             <p>{{ fileData.name }}</p>
             <i class="ti ti-file-download"></i>
           </a>
-          <input #inputCertified *ngIf="!isReadOnly" type="file" accept="application/pdf" (change)="fileChange($event)"
-            [disabled]="!this.form.value.certified" />
+          <input #inputCertified *ngIf="!isReadOnly" type="file" accept="application/pdf" multiple
+            (change)="fileChange($event)" [disabled]="!this.form.value.certified" />
         </div>
       </fieldset>
 

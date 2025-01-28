@@ -55,10 +55,10 @@ export class EcosolutionsService extends TranslateChangeService {
     )
   }
 
-  uploadDocumentation(idEcosolution: string, files: File[]) {
+  uploadDocumentation(idEcosolution: string, files: any) {
     const formData = new FormData()
 
-    files.forEach((file) => {
+    files.forEach((file: any) => {
       formData.append('file', file)
     })
     return this._http.post(`/v1/ecosolutions/${idEcosolution}/documentation`, formData).pipe(

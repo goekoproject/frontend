@@ -750,5 +750,8 @@
   "delete": "Supprimer",
   "characters": "{{num}} caractères maximum",
   "deleteLocation": "Supprimer la région",
-  "or": "ou"
+  "or": "ou",
+  "ERRORS_FORM": {
+    "SELECT_CERTIFICATE": "Sélectionnez un certificat"
+  }
 }
