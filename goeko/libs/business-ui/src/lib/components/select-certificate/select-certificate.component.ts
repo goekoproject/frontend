@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, ElementRef, forwardRef, HostListener, inject, Injector, input, OnInit, signal } from '@angular/core'
+import { Component, computed, ElementRef, forwardRef, HostListener, inject, Injector, OnInit, signal } from '@angular/core'
+import { toSignal } from '@angular/core/rxjs-interop'
 import {
   ControlContainer,
   ControlValueAccessor,
@@ -13,6 +14,7 @@ import {
 } from '@angular/forms'
 import { UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { SelectCertificateService } from './select-certificate.service'
 
 interface CertificateFormGroup {
   file: FormControl<File | null>
@@ -23,6 +25,7 @@ interface CertificateFormGroup {
   standalone: true,
   imports: [CommonModule, UiSuperSelectModule, TranslateModule, ReactiveFormsModule],
   providers: [
+    SelectCertificateService,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => SelectCertificateComponent),
@@ -46,7 +49,7 @@ interface CertificateFormGroup {
           id="certificateType"
           name="certificateType">
           <super-option *ngFor="let option of certificates()" [value]="option">
-            {{ option.keyLang | translate }}
+            {{ option.label }}
           </super-option>
           <p errorBody>⚠️{{ 'ERRORS_FORM.SELECT_CERTIFICATE' | translate }}</p>
         </ui-super-select>
@@ -58,10 +61,11 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   private _controlContainer = inject(ControlContainer, { optional: true })
   private _injector = inject(Injector)
   private _elementRef = inject(ElementRef)
+  private _selectCertificateServices = inject(SelectCertificateService)
 
   private _formControlNameDirective!: NgControl
 
-  certificates = input<any>([{ keyLang: 'Test', code: 'test' }])
+  certificates = toSignal(this._selectCertificateServices.getCertificates(), { initialValue: [] })
 
   // Control de formulario reactivo
   certificateControl = new FormGroup<CertificateFormGroup | null>({

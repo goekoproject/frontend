@@ -1,6 +1,6 @@
 import { ClassificationPayload } from './classifications-payload.model'
 import { Category, Product, SubcategoryResponse } from './classifications.interface'
-import { GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
+import { GroupingByClassifications, NewUpdateGrouping } from './grouping/grouping.interface'
 
 export class GroupingBuilder {
   private grouping: GroupingByClassifications

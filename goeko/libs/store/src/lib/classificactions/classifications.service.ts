@@ -13,8 +13,8 @@ import {
   SubcategoryResponse,
   UpdateProduct,
 } from './classifications.interface'
-import { GroupingType } from './grouping-type.enum'
-import { CategoryGrouping, Grouping, GroupingByClassifications, NewUpdateGrouping } from './grouping.interface'
+import { GroupingType } from './grouping/grouping-type.enum'
+import { CategoryGrouping, Grouping, GroupingByClassifications, NewUpdateGrouping } from './grouping/grouping.interface'
 import { mergeCategoriesSectionWithClassificationCategory } from './transform.util'
 
 const sortCategories = (categories: CategoryGrouping[]): CategoryGrouping[] => {
@@ -70,7 +70,7 @@ export class ClassificationsService {
 
   /**	Category */
 
-  getCategoryTranslated() : Observable<Category[]> {
+  getCategoryTranslated(): Observable<Category[]> {
     return this._http.get<Category[]>(`/v2/classifications/category/translated?lang=${this.currentLang()}`)
   }
 

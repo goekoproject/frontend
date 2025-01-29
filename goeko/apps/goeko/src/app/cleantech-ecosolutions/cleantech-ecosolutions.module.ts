@@ -14,7 +14,7 @@ import {
   SelectSubcategoryProductComponent,
   SubcategoryToCurrentLangPipe,
 } from '@goeko/business-ui'
-import { ClassificationCategoryService, EcosolutionsModule } from '@goeko/store'
+import { ClassificationCategoryService, ClassificationsDocumentsService, EcosolutionsModule } from '@goeko/store'
 import {
   BadgeModule,
   ButtonModule,
@@ -70,6 +70,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
   providers: [
     CleantechEcosolutionsService,
     ClassificationCategoryService,
+    ClassificationsDocumentsService,
     {
       provide: FILE_UPLOAD_CONFIG,
       useValue: { maxFileSizeMB: environment.maxFileSizeMB }, // Sobrescribe el valor
