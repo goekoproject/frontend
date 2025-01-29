@@ -15,7 +15,7 @@ export class ClassificationsDocumentsService {
   private langCode = computed(() => this._lang() ?? this._translateService.defaultLang)
   getTranslatedDocumentTypeDepth(): Observable<ClassificationDocument[]> {
     return this._http
-      .get<ClassificationDocument[]>(`v1/classifications/document/type/depth/translated?lang=${this.langCode()}`)
+      .get<ClassificationDocument[]>(`/v1/classifications/document/type/depth/translated?lang=${this.langCode()}`)
       .pipe(shareReplay(1))
   }
 }

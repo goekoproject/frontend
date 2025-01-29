@@ -57,9 +57,11 @@ export class EcosolutionsService extends TranslateChangeService {
 
   uploadDocumentation(idEcosolution: string, files: any) {
     const formData = new FormData()
-
+    const metada = { type: 'falcon' }
     files.forEach((file: any) => {
-      formData.append('file', file)
+      const _id = window.crypto.randomUUID()
+      formData.append(`${_id}`, file)
+      formData.append(`${_id}.metadata`, JSON.stringify(metada))
     })
     return this._http.post(`/v1/ecosolutions/${idEcosolution}/documentation`, formData).pipe(
       catchError((error) => {

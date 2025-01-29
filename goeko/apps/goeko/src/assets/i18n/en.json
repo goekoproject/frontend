@@ -761,5 +761,6 @@
   "or": "or",
   "ERRORS_FORM": {
     "SELECT_CERTIFICATE": "Select a certificate"
-  }
+  },
+  "download": "Download"
 }

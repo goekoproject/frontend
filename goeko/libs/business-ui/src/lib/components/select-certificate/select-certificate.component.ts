@@ -49,7 +49,7 @@ interface CertificateFormGroup {
           id="certificateType"
           name="certificateType">
           <super-option *ngFor="let option of certificates()" [value]="option">
-            {{ option.label }}
+            {{ option.name }}
           </super-option>
           <p errorBody>⚠️{{ 'ERRORS_FORM.SELECT_CERTIFICATE' | translate }}</p>
         </ui-super-select>

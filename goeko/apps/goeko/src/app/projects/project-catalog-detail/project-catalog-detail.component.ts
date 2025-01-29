@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, input, signal } from '@angular/core'
-import { CATEGORIES, LeadFormComponent, PictureGetUrlPipe, SdgIconsComponent } from '@goeko/business-ui'
+import { CATEGORIES, InfoCertificateComponent, LeadFormComponent, PictureGetUrlPipe, SdgIconsComponent } from '@goeko/business-ui'
 import { SafePipe } from '@goeko/coretools'
 import { DataSelect, Document, EcosolutionSearchResponse } from '@goeko/store'
 import { BadgeModule, ButtonModule, InputFileComponent, PercentageModule } from '@goeko/ui'
@@ -21,6 +21,7 @@ import {LineBreakPipe} from '@goeko/business-ui'
     PercentageModule,
     LeadFormComponent,
     ButtonModule,
+    InfoCertificateComponent
   ],
   templateUrl: './project-catalog-detail.component.html',
   styleUrl: './project-catalog-detail.component.scss',

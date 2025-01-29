@@ -756,5 +756,6 @@
   "or": "oder",
   "ERRORS_FORM": {
     "SELECT_CERTIFICATE": "Wählen Sie Ihr Zertifikat aus"
-  }
+  },
+  "download": "Herunterladen"
 }

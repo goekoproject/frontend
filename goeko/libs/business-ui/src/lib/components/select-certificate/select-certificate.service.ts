@@ -13,7 +13,7 @@ export class SelectCertificateService {
 
   getCertificates() {
     return this._getClassificationsDocuments().pipe(
-      map((documents) => documents.find((document) => document.parentCode === PARENT_CODE)?.documentTypes),
+      map((documents) => documents.find((document) => document.code === PARENT_CODE)?.documentTypes),
     )
   }
 }
