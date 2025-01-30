@@ -1,5 +1,5 @@
-<label for="file" class="label-form">{{label() | translate}}</label>
-<div class="p-4 border-2 border-dashed text-base rounded-lg text-center" [class.border-primary-default]="isDragover()"
+@if (!documentData()) {
+<div class="p-4 border-2 border-dashed text-base rounded-2xl text-center" [class.border-primary-default]="isDragover()"
   [class.border-gray-300]="!isDragover()" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
   (dragleave)="onDragLeave($event)">
   <input type="file" id="file" class="hidden" (change)="onFileChange($event)" #fileInput>
@@ -19,3 +19,13 @@
   }
 
 </div>
+} @else {
+<div class=" relative w-60 p-1 border rounded-md drop-shadow-md bg-white gap-2 border-grayStone flex items-center">
+  <i class="ti ti-file-text border-gray-400 text-2xl p-2 border bg-primary-main rounded-md text-white"></i>
+
+  <p class="text-gray-500 text-sm">{{documentData()?.name}}</p>
+
+  <i class="ti ti-x rounded-full p-2"></i>
+</div>
+
+}

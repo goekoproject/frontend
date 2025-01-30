@@ -182,9 +182,11 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       marketReady: [false],
       guarantee: [false],
       yearGuarantee: [],
-      certified: [false],
       approved: [false],
       locations: this._fb.array([], Validators.required),
+      haveTechnicalSheet: [false],
+      technicalSheet: [],
+      certified: [false],
       certificates: this._fb.array([]),
     })
   }

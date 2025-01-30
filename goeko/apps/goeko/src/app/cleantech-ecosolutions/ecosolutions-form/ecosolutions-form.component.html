@@ -268,15 +268,28 @@
           </ui-super-select>
         </div>
 
-        <div formArrayName="certificates">
-          <goeko-file-upload (fileAdded)="addAddcertificates($event)" />
-          <div class="flex gap-4 mt-4 flex-wrap" [ngClass]="{
-              hidden: selectedFormLang().code !== langSignal(),
-            }">
-            @for (file of certificates.controls; track $index; let i = $index) {
-            <goeko-select-certificate [formControlName]="i" />
-            }
+        <div>
+          <div class="field-form-checked">
+            <label for="certified">{{ 'FORM_LABEL.certificates' | translate }}</label>
+            <label class="switch">
+              <input type="checkbox" formControlName="certified" [readonly]="isReadOnly" />
+              <span class="slider round"></span>
+            </label>
           </div>
+          @if(form.value.certified) {
+          <ng-container formArrayName="certificates">
+            <goeko-file-upload (fileAdded)="addAddcertificates($event)" />
+            <div class="flex gap-4 mt-4 flex-wrap" [ngClass]="{
+                      hidden: selectedFormLang().code !== langSignal(),
+                    }">
+              @for (file of certificates.controls; track $index; let i = $index) {
+              <goeko-select-certificate [formControlName]="i" />
+              }
+            </div>
+          </ng-container>
+
+
+          }
 
         </div>
 
@@ -285,20 +298,17 @@
             hidden: selectedFormLang().code !== langSignal(),
           }">
           <div class="field-form-checked">
-            <label for="certified">{{ 'FORM_LABEL.certified' | translate }}</label>
+            <label for="certified">{{ 'FORM_LABEL.technicalSheet' | translate }}</label>
             <label class="switch">
-              <input type="checkbox" [formControlName]="'certified'" [readonly]="isReadOnly" />
+              <input type="checkbox" [formControlName]="'haveTechnicalSheet'" [readonly]="isReadOnly" />
               <span class="slider round"></span>
             </label>
           </div>
 
-          <a *ngIf="this.form?.value?.certified && fileData?.url" [href]="fileData.url" target="_blank"
-            class="file-data">
-            <p>{{ fileData.name }}</p>
-            <i class="ti ti-file-download"></i>
-          </a>
-          <input #inputCertified *ngIf="!isReadOnly" type="file" accept="application/pdf" multiple
-            (change)="fileChange($event)" [disabled]="!this.form.value.certified" />
+          @if(form.value.haveTechnicalSheet) {
+          <goeko-file-upload formControlName="technicalSheet" />
+          }
+
         </div>
       </fieldset>
 

@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core'
-import { ClassificationsDocumentsService } from '@goeko/store'
+import { ClassificationsDocumentsService, PARENT_CODE } from '@goeko/store'
 import { map } from 'rxjs'
 
-const PARENT_CODE = 'CERTIFICATE'
 @Injectable()
 export class SelectCertificateService {
   private _classificationsDocumentsServices = inject(ClassificationsDocumentsService)
@@ -13,7 +12,7 @@ export class SelectCertificateService {
 
   getCertificates() {
     return this._getClassificationsDocuments().pipe(
-      map((documents) => documents.find((document) => document.code === PARENT_CODE)?.documentTypes),
+      map((documents) => documents.find((document) => document.code === PARENT_CODE.CERTIFICATE)?.documentTypes),
     )
   }
 }

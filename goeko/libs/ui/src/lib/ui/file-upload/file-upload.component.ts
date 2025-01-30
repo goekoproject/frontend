@@ -27,11 +27,11 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   private _config = inject(FILE_UPLOAD_CONFIG)
   private _translate = inject(TranslateService)
 
-  label = input<string>('FORM_LABEL.certificates')
   showNameFile = input<boolean>(false)
   fileAdded = output<File | null>()
 
   file = signal<File | null>(null)
+  documentData = signal<any>(null)
   isDragover = signal(false)
   error = signal<string | null>(null)
   disabled = signal(false)
@@ -75,6 +75,7 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
       this._validateAndSetFile(value)
     } else {
       this._validateAndSetFile(null)
+      this.documentData.set(value)
     }
   }
 

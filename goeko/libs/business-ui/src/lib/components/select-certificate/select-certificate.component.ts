@@ -98,7 +98,7 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   // Escuchar clics fuera del componente
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
-    if (!this._elementRef?.nativeElement?.contains(event.target)) {
+    if (!this._elementRef?.nativeElement?.contains(event.target) && this.certificateControl.invalid) {
       this.emptySelectCertificate.set(true)
       // Aquí puedes ejecutar la lógica que desees cuando se hace clic fuera del componente
     }

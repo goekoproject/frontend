@@ -1,4 +1,12 @@
-import { Ecosolutions, FromTO, LocationsCountry, ReductionPercentage, SDG_LABEL, TranslatedProperties } from '@goeko/store'
+import {
+  DocumentEcosolutions,
+  Ecosolutions,
+  FromTO,
+  LocationsCountry,
+  ReductionPercentage,
+  SDG_LABEL,
+  TranslatedProperties,
+} from '@goeko/store'
 export interface GoalChecked {
   value: string
   checked: boolean
@@ -18,6 +26,8 @@ export class EcosolutionForm {
   marketReady?: boolean
   guarantee?: boolean
   certified?: boolean
+  haveTechnicalSheet?: boolean
+  technicalSheet?: DocumentEcosolutions
   approved?: boolean
   yearGuarantee?: number
   priceDescription?: string
@@ -42,7 +52,9 @@ export class EcosolutionForm {
     this.paybackPeriodYears = ecosolution.paybackPeriodYears
     this.marketReady = ecosolution.marketReady
     this.guarantee = ecosolution.guarantee
-    this.certified = ecosolution.certified
+    this.haveTechnicalSheet = ecosolution.certified
+    this.technicalSheet = ecosolution?.documents?.at(0)
+    // find((doc) => doc.documentType.code === PARENT_CODE.TECHNICAL_SHEET)
     this.approved = ecosolution.approved
     this.yearGuarantee = ecosolution.guaranteeInYears
     this.priceDescription = ecosolution.priceDescription
