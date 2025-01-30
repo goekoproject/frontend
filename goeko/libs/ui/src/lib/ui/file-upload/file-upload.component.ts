@@ -144,4 +144,16 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
     event.preventDefault()
     this.isDragover.set(false)
   }
+
+  downloadFile() {
+    const url = this.documentData()?.url
+    if (url) {
+      window.open(url, '_blank')
+    }
+  }
+  removeFile() {
+    this.documentData.set(null)
+    this.onChange(null)
+    this.onTouched()
+  }
 }
