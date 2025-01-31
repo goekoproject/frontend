@@ -2,7 +2,14 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, inject, input, OnDestroy, OnInit, Signal, signal, viewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SelectLocationsService } from '@goeko/business-ui'
-import { EcosolutionResult, EcosolutionsService, EcosolutionsTaggingService, Project, TAGGING } from '@goeko/store'
+import {
+  DocumentTypeEcosolutions,
+  EcosolutionResult,
+  EcosolutionsService,
+  EcosolutionsTaggingService,
+  Project,
+  TAGGING,
+} from '@goeko/store'
 import { ButtonModule, CardProductComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { ProjectEcosolutionsFiltersComponent } from '../project-ecosolutions-filters.component'
@@ -51,6 +58,10 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
     this._projectManagmentService.project.set(this.project())
     this.fetchEcosolutionsCatalog()
     this._changeLang()
+    this._filtersRef()?.filterCertificate.subscribe((document) => {
+      this._queryCertificate(document as DocumentTypeEcosolutions[])
+      this.fetchEcosolutionsCatalog()
+    })
   }
 
   ngOnDestroy(): void {
@@ -100,6 +111,10 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
     return this._ecosolutionsSearchSignal()?.filter((ecosolution) => {
       return this._filterByCategory(ecosolution) && this._filterBySdg(ecosolution) && this._getFavoriteEcosolutions(ecosolution)
     })
+  }
+
+  private _queryCertificate = (document: DocumentTypeEcosolutions[]) => {
+    this.queryEcosolutions.update((query) => ({ ...query, documentTypeCodes: document.map((doc) => doc.code) ?? undefined }))
   }
 
   private _filterByCategory = (ecosolution: EcosolutionResult) => {

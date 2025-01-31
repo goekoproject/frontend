@@ -14,7 +14,7 @@ export class EcosolutionsManagmentService {
       const _id = window.crypto.randomUUID()
       formData.append(`${_id}`, file)
       formData.append(
-        `${_id}.metadata`,
+        `${_id}`,
         JSON.stringify({
           parentDocumentType: PARENT_CODE.CERTIFICATE,
           documentType: typeCertificate.code,
