@@ -3,6 +3,7 @@ import {
   Ecosolutions,
   FromTO,
   LocationsCountry,
+  PARENT_CODE,
   ReductionPercentage,
   SDG_LABEL,
   TranslatedProperties,
@@ -26,6 +27,7 @@ export class EcosolutionForm {
   marketReady?: boolean
   guarantee?: boolean
   certified?: boolean
+  certificates: DocumentEcosolutions[] = []
   haveTechnicalSheet?: boolean
   technicalSheet?: DocumentEcosolutions
   approved?: boolean
@@ -55,6 +57,7 @@ export class EcosolutionForm {
     this.haveTechnicalSheet = ecosolution.certified
     this.technicalSheet = ecosolution?.documents?.at(0)
     // find((doc) => doc.documentType.code === PARENT_CODE.TECHNICAL_SHEET)
+    this.certificates = ecosolution.documents?.filter((doc) => doc.documentType?.code === PARENT_CODE.CERTIFICATE) ?? []
     this.approved = ecosolution.approved
     this.yearGuarantee = ecosolution.guaranteeInYears
     this.priceDescription = ecosolution.priceDescription

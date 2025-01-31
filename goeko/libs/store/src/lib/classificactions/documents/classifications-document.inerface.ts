@@ -3,7 +3,7 @@ export enum PARENT_CODE {
   TECHNICAL_SHEET = 'TECHNICAL_SHEET',
 }
 
-export interface DocumentType {
+export interface DocumentTypeEcosolutions {
   code: string
   name: string
   description: string
@@ -14,5 +14,5 @@ export interface ClassificationDocument {
   code: string
   name: string
   description: string
-  documentTypes: DocumentType[]
+  documentTypes: DocumentTypeEcosolutions[]
 }

@@ -2,7 +2,7 @@ import { mapperLocations } from '@goeko/core'
 import { Classifications } from '../model/classifications.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
 import { LocationsCountry } from '../model/locations.country'
-import { DocumentEcosolutions, Ecosolutions, Improvement, Price } from './ecosolution.interface'
+import { Ecosolutions, Improvement, Price } from './ecosolution.interface'
 export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedProperties[] {
   return items.filter((item) => item.label && item.lang)
 }
@@ -31,7 +31,6 @@ export class EcosolutionsBody implements Ecosolutions {
   descriptionTranslations!: TranslatedProperties[]
   detailedDescriptionTranslations!: TranslatedProperties[]
   priceDescriptionTranslations!: TranslatedProperties[]
-  documents?: DocumentEcosolutions[]
   constructor(cleanTechId: string, mainCategory: string, formValue: any) {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`)

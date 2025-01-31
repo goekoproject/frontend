@@ -317,7 +317,7 @@
           {{ 'back' | translate }}
         </button>
 
-        <button *ngIf="!isReadOnly" go-button type="submit" [disabled]="form.invalid"
+        <button *ngIf="!isReadOnly" go-button type="submit"
           (click)="idEcosolution ? editEcosolution() : saveEcosolution()">
           {{ 'saveYou' | translate }} éco-solution
         </button>

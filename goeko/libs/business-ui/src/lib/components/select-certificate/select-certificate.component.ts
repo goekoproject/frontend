@@ -109,7 +109,7 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
     this._formControlNameDirective = this._injector.get(NgControl, null) as NgControl
     this.certificateControl.valueChanges.subscribe((value) => {
       this._value.set(value?.typeCertificate ?? null)
-      this.onChange(this._value())
+      this.onChange(value)
       this.onTouched()
     })
   }
