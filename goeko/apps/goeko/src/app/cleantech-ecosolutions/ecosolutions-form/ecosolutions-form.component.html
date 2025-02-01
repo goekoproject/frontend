@@ -123,7 +123,8 @@
                 [id]="subcategory.code"
                 [formControlName]="'subCategory'"
                 [subCategory]="subcategory"
-                [readonly]="isReadOnly">
+                [readonly]="isReadOnly"
+                [open]="this.idEcosolution? true : false">
                 <p title>
                   {{ subcategory.label }}
                 </p>
