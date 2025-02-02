@@ -2,14 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, inject, input, OnDestroy, OnInit, Signal, signal, viewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SelectLocationsService } from '@goeko/business-ui'
-import {
-  DocumentTypeEcosolutions,
-  EcosolutionResult,
-  EcosolutionsService,
-  EcosolutionsTaggingService,
-  Project,
-  TAGGING,
-} from '@goeko/store'
+import { EcosolutionResult, EcosolutionsService, EcosolutionsTaggingService, Project, TAGGING } from '@goeko/store'
 import { ButtonModule, CardProductComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { ProjectEcosolutionsFiltersComponent } from '../project-ecosolutions-filters.component'
@@ -58,10 +51,7 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
     this._projectManagmentService.project.set(this.project())
     this.fetchEcosolutionsCatalog()
     this._changeLang()
-    this._filtersRef()?.filterCertificate.subscribe((document) => {
-      this._queryCertificate(document as DocumentTypeEcosolutions[])
-      this.fetchEcosolutionsCatalog()
-    })
+    this._applyQuery()
   }
 
   ngOnDestroy(): void {
@@ -70,6 +60,13 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
 
   private _changeLang() {
     this._translateService.onLangChange.subscribe(() => {
+      this.fetchEcosolutionsCatalog()
+    })
+  }
+
+  private _applyQuery = () => {
+    this._filtersRef()?.filterCertificate.subscribe((documentCodes) => {
+      this._queryCertificate(documentCodes)
       this.fetchEcosolutionsCatalog()
     })
   }
@@ -113,8 +110,8 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
     })
   }
 
-  private _queryCertificate = (document: DocumentTypeEcosolutions[]) => {
-    this.queryEcosolutions.update((query) => ({ ...query, documentTypeCodes: document.map((doc) => doc.code) ?? undefined }))
+  private _queryCertificate = (document?: string[]) => {
+    this.queryEcosolutions.update((query) => ({ ...query, documentTypeCodes: document }))
   }
 
   private _filterByCategory = (ecosolution: EcosolutionResult) => {

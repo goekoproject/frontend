@@ -6,6 +6,7 @@ import { LANGS } from '@goeko/core'
 import {
   CategoryGrouping,
   DataSelect,
+  DocumentEcosolutions,
   Ecosolutions,
   EcosolutionsBody,
   EcosolutionsService,
@@ -62,7 +63,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   public ods = ODS_CODE
   public idEcosolution!: string
   public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.id === this.categoryId())?.subcategories)
-  public productsCategories!: any[]
   public editor!: Editor
   public html = ''
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
@@ -128,10 +128,27 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this.editor = new Editor()
     this._buildFrom()
     this._changeLangCode()
-    this._changeValueSubCategory()
     if (this.idEcosolution) {
       this.getEcosolution()
     }
+    this.form.valueChanges.subscribe((data) => {
+      /*   if (this.form.dirty) {
+        console.log('true dirty', this.form.dirty, data)
+      } else {
+        console.log('false dirty', data)
+      } */
+      this.logChangedValues(data)
+    })
+  }
+
+  logChangedValues(changes: any) {
+    // Itera sobre las claves de los cambios y muestra key y control
+    Object.keys(changes).forEach((key) => {
+      if (Object.prototype.hasOwnProperty.call(changes, key) && this.form.get(key)?.dirty) {
+        const control = this.form.get(key) // Obtén el control
+        console.log(`Campo: ${key}, Nuevo valor:`, changes[key], `Control:`, control?.dirty)
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -197,14 +214,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     return this.form.get('sustainableDevelopmentGoals') as FormArray
   }
 
-  private _changeValueSubCategory() {
-    this.form.get('subCategory')?.valueChanges.subscribe((subCategory) => {
-      if (subCategory) {
-        this.productsCategories = DataSelect[subCategory.controlName as keyof typeof DataSelect]
-      }
-    })
-  }
-
   private _addNameTranslations(codeLang: string): void {
     const nameTranslations = this.form.get('nameTranslations') as FormArray
     if (!this._isIncludeTranslation(codeLang, nameTranslations.value)) {
@@ -245,7 +254,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     })
   }
 
-  addAddcertificates(file: File | null) {
+  addCertificates(file: File | null) {
     this.certificates.push(this._fb.control(file))
   }
   removeAddcertificates(index: number) {
@@ -260,12 +269,25 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   private _patchDataToForm(ecosolution: any): void {
     const formValue = new EcosolutionForm(ecosolution)
-    this.form.patchValue(formValue)
+    this._buildFormArrays(formValue)
+
+    this.form.reset(formValue)
     this._setLocaltion(ecosolution.locations)
+    this._addCertifiedValidators(formValue.certificates)
+    this.form.markAsPristine()
+    this.form.markAsUntouched()
+  }
+
+  private _buildFormArrays(formValue: EcosolutionForm): void {
     this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
     this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
     this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
     this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
+  }
+  private _addCertifiedValidators(certificates: DocumentEcosolutions[]) {
+    certificates?.forEach((certificate) => {
+      this.certificates.push(this._fb.control({ documentType: certificate?.documentType?.code, name: certificate.name }))
+    })
   }
 
   private _setLocaltion(locations: Array<LocationsCountry>) {
@@ -278,7 +300,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   private _addLocations(location: LocationsCountry) {
-    this.locationsArrays.push(this._createLocations(location))
+    this.locationsArrays.push(this._createLocations(location), { emitEvent: false })
   }
   private _createLocations(location: LocationsCountry): FormGroup {
     return new FormGroup({
@@ -294,7 +316,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     values.forEach(() => {
       formArray.push(this._getFormGroupFieldTranslations())
     })
-    formArray.patchValue(values)
+    formArray.reset(values)
   }
 
   saveEcosolution() {

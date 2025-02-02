@@ -3,7 +3,7 @@ import { computed, inject, Injectable } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { TranslateService } from '@ngx-translate/core'
 import { map, Observable, shareReplay } from 'rxjs'
-import { ClassificationDocument } from './classifications-document.inerface'
+import { ClassificationDocument, ClassificationDocumentType, PARENT_CODE } from './classifications-document.inerface'
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +17,11 @@ export class ClassificationsDocumentsService {
     return this._http
       .get<ClassificationDocument[]>(`/v1/classifications/document/type/depth/translated?lang=${this.langCode()}`)
       .pipe(shareReplay(1))
+  }
+
+  getDocumentTypeCertificate(): Observable<ClassificationDocumentType[]> {
+    return this.getTranslatedDocumentTypeDepth().pipe(
+      map((documents) => documents.filter((document) => document.code === PARENT_CODE.CERTIFICATE).flatMap((doc) => doc.documentTypes)),
+    )
   }
 }

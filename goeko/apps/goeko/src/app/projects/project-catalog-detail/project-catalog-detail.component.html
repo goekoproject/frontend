@@ -99,11 +99,39 @@
         </div>
         }
 
-        <!-- Certificate-->
-        @if (ecosolutionSearchDetail().certified && ecosolutionSearchDetail().documents['length'] > 0) {
-        <goeko-info-certificate [fileUrl]="ecosolutionSearchDetail().documents[0].url"></goeko-info-certificate>
+        @defer ( when (ecosolutionSearchDetail().documents
+        | filterByDocumentType: PARENT_CODE().TECHNICAL_SHEET).length > 0) {
+        <div class="pt-4">
+          <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.technicalSheet' | translate }}</h3>
 
+          <!-- Tecnhical sheet-->
+          @for (document of ecosolutionSearchDetail().documents
+          | filterByDocumentType: PARENT_CODE().TECHNICAL_SHEET;track $index) {
+          <goeko-info-certificate [fileUrl]="document.url"></goeko-info-certificate>
+          }
+
+        </div>
         }
+
+
+        @defer ( when (ecosolutionSearchDetail().documents
+        | filterByDocumentType: PARENT_CODE().CERTIFICATE).length > 0) {
+        <div class="pt-4">
+          <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.certificates' | translate }}</h3>
+
+          <!-- Certificates-->
+          <div class="flex flex-wrap gap-2">
+            @for (document of ecosolutionSearchDetail().documents
+            | filterByDocumentType: PARENT_CODE().CERTIFICATE;track $index) {
+            <goeko-info-certificate [fileUrl]="document.url"
+              [fileType]="document.documentType.name"></goeko-info-certificate>
+            }
+          </div>
+
+        </div>
+        }
+
+
       </div>
       <!-- Description & Images -->
       <div class="pt-4">

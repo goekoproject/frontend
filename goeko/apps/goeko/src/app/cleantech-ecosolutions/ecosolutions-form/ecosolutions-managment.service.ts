@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'
-import { DocumentTypeEcosolutions, EcosolutionsService, PARENT_CODE } from '@goeko/store'
+import { ClassificationDocumentType, EcosolutionsService, PARENT_CODE } from '@goeko/store'
 
 @Injectable({
   providedIn: 'root',
@@ -7,17 +7,17 @@ import { DocumentTypeEcosolutions, EcosolutionsService, PARENT_CODE } from '@goe
 export class EcosolutionsManagmentService {
   private _ecosolutions = inject(EcosolutionsService)
 
-  uploadDocumentation(idEcosolution: string, dataFiles: { file: File; typeCertificate: DocumentTypeEcosolutions }[]) {
+  uploadDocumentation(idEcosolution: string, dataFiles: { file: File; documentType: ClassificationDocumentType }[]) {
     const formData = new FormData()
     dataFiles.forEach((data) => {
-      const { file, typeCertificate } = data
+      const { file, documentType } = data
       const _id = window.crypto.randomUUID()
       formData.append(`${_id}`, file)
       formData.append(
         `${_id}`,
         JSON.stringify({
           parentDocumentType: PARENT_CODE.CERTIFICATE,
-          documentType: typeCertificate.code,
+          documentType: documentType.code,
         }),
       )
     })

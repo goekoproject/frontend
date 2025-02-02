@@ -391,16 +391,17 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
       }
       value.forEach((currentValue: any) => this._selectOptionByValue(currentValue))
       const valuesSelected = (this.selected as SuperOptionComponent[]).map((option) => option.value)
-      if (valuesSelected && valuesSelected.length > 0) {
+      /*  if (valuesSelected && valuesSelected.length > 0) {
         this._propagateChanges()
-      }
+      } */
     } else {
-      const correspondingOption = this._findOptionByValue(value)
+      this._findOptionByValue(value)
+      /*  const correspondingOption =
       if (correspondingOption) {
         this._keyManager?.updateActiveItem(correspondingOption)
       } else if (!this.isOpen) {
         this._keyManager?.updateActiveItem(-1)
-      }
+      } */
     }
 
     this._changeDetector.markForCheck()
@@ -450,7 +451,7 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
     }) as SuperOptionComponent
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption)
-      this._propagateChanges()
+      //  this._propagateChanges()
     }
     return correspondingOption
   }

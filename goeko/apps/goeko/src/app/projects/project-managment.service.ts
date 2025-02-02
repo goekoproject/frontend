@@ -10,7 +10,7 @@ import {
   Project,
   UserService,
 } from '@goeko/store'
-import { map, Observable, switchMap } from 'rxjs'
+import { Observable, switchMap } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -68,8 +68,6 @@ export class ProjectManagmentService {
   }
 
   getDocumentTypeEcosolutionServices() {
-    return this._documentTypeEcosolutionServices
-      .getTranslatedDocumentTypeDepth()
-      .pipe(map((document) => document.flatMap((doc) => doc.documentTypes)))
+    return this._documentTypeEcosolutionServices.getDocumentTypeCertificate()
   }
 }

@@ -28,17 +28,18 @@ interface Classification {
   subCategory: string
   products: string[]
 }
-interface DocumentType {
+export interface DocumentTypeEcosolutions {
   code: string
   name: string
   description: string
   fieldOrder: number
+  parentCode: string
 }
 export interface DocumentEcosolutions {
   id: string
   url: string
   name: string
-  documentType: DocumentType
+  documentType: DocumentTypeEcosolutions
 }
 
 export interface Ecosolutions {

@@ -1,5 +1,17 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, ElementRef, forwardRef, HostListener, inject, Injector, OnInit, signal } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  forwardRef,
+  HostListener,
+  inject,
+  Injector,
+  OnInit,
+  signal,
+} from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import {
   ControlContainer,
@@ -18,12 +30,13 @@ import { SelectCertificateService } from './select-certificate.service'
 
 interface CertificateFormGroup {
   file: FormControl<File | null>
-  typeCertificate: FormControl<string | null>
+  documentType: FormControl<string | null>
 }
 @Component({
   selector: 'goeko-select-certificate',
   standalone: true,
   imports: [CommonModule, UiSuperSelectModule, TranslateModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     SelectCertificateService,
     {
@@ -33,7 +46,7 @@ interface CertificateFormGroup {
     },
   ],
   template: `
-    @if (existsFile()) {
+    @if (existsFile() && (certificates()?.length ?? 0) > 0) {
       <div class="h-full max-h-52 w-52 rounded-lg bg-white p-2 drop-shadow-md">
         <div class="flex w-full justify-end text-2xl text-primary-default">
           <i class="ti ti-trash-filled cursor-pointer transition-colors hover:text-primary-blueDark" (click)="removeFile()"></i>
@@ -43,12 +56,12 @@ interface CertificateFormGroup {
 
         <!-- Selector certificate -->
         <ui-super-select
-          [formControl]="typeCertificate"
+          [formControl]="documentType"
           [placeholder]="'certified' | translate"
           [hasError]="this.hasError()"
           id="certificateType"
           name="certificateType">
-          <super-option *ngFor="let option of certificates()" [value]="option">
+          <super-option *ngFor="let option of certificates()" [value]="option.code">
             {{ option.name }}
           </super-option>
           <p errorBody>⚠️{{ 'ERRORS_FORM.SELECT_CERTIFICATE' | translate }}</p>
@@ -68,29 +81,26 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   certificates = toSignal(this._selectCertificateServices.getCertificates(), { initialValue: [] })
 
   // Control de formulario reactivo
-  certificateControl = new FormGroup<CertificateFormGroup | null>({
-    file: new FormControl<File | null>(null, Validators.required),
-    typeCertificate: new FormControl<string | null>(null, Validators.required),
+  documentTypeControl = new FormGroup<CertificateFormGroup | null>({
+    file: new FormControl<File | null>(null),
+    documentType: new FormControl<string | null>(null, Validators.required),
   })
 
   private _value = signal<string | null>(null)
   private _file = signal<File | null>(null)
+  private _filename = signal<string>('')
   emptySelectCertificate = signal(false)
 
-  fileName = computed(() => this._file()?.name ?? '')
-  hasError = computed(
-    () =>
-      this.emptySelectCertificate() ||
-      (this.certificateControl.invalid && this.certificateControl.touched && this.certificateControl.dirty),
-  )
-  get typeCertificate() {
-    return this.certificateControl.get('typeCertificate') as FormControl<string>
+  fileName = computed(() => this._file()?.name ?? this._filename())
+  hasError = computed(() => this.emptySelectCertificate())
+  get documentType() {
+    return this.documentTypeControl.get('documentType') as FormControl<string>
   }
   get controlParent() {
     return this._controlContainer?.control as FormArray
   }
 
-  existsFile = computed(() => !!this._file())
+  existsFile = computed(() => !!this._file() || !!this._value())
   // Métodos de ControlValueAccessor
   onChange: any = () => {}
   onTouched: any = () => {}
@@ -98,17 +108,26 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   // Escuchar clics fuera del componente
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
-    if (!this._elementRef?.nativeElement?.contains(event.target) && this.certificateControl.invalid) {
-      this.emptySelectCertificate.set(true)
-      // Aquí puedes ejecutar la lógica que desees cuando se hace clic fuera del componente
+    if (!this._elementRef?.nativeElement?.contains(event.target) && this.documentTypeControl.invalid) {
+      this.emptySelectCertificate.set(this.documentTypeControl.touched && this.documentTypeControl.dirty)
     }
+  }
+
+  constructor() {
+    effect(() => {
+      if (this._file()) {
+        this.documentTypeControl.get('file')?.setValue(this._file())
+        this.documentType.markAsDirty()
+        this.documentType.markAsTouched()
+      }
+    })
   }
 
   // Escuchar cambios en el control de formulario
   ngOnInit() {
     this._formControlNameDirective = this._injector.get(NgControl, null) as NgControl
-    this.certificateControl.valueChanges.subscribe((value) => {
-      this._value.set(value?.typeCertificate ?? null)
+    this.documentTypeControl.valueChanges.subscribe((value) => {
+      this._value.set(value?.documentType ?? null)
       this.onChange(value)
       this.onTouched()
     })
@@ -116,14 +135,28 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
 
   // Implementación de ControlValueAccessor
   writeValue(value: any): void {
-    this._file.set(value)
-    this.certificateControl.setValue(
-      {
-        file: this._file(),
-        typeCertificate: null,
-      },
-      { emitEvent: false },
-    )
+    if (!value) {
+      return
+    }
+    this._asssingValue(value)
+  }
+
+  private _asssingValue(value: any) {
+    if (value instanceof File) {
+      this._file.set(value)
+    } else {
+      this._asssingValueDocumentType(value)
+    }
+  }
+
+  private _asssingValueDocumentType(value: any) {
+    if (!value?.documentType || !value?.name) {
+      throw new Error('Document type (documentType) or name is missing')
+    }
+    this._file.set(null)
+    this._filename.set(value?.name)
+    this.documentTypeControl.get('documentType')?.reset(value?.documentType, { emitEvent: false })
+    this.documentTypeControl.markAsPristine()
   }
 
   registerOnChange(fn: any): void {
@@ -135,12 +168,12 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   }
 
   setDisabledState(isDisabled: boolean): void {
-    isDisabled ? this.certificateControl.disable() : this.certificateControl.enable()
+    isDisabled ? this.documentTypeControl.disable() : this.documentTypeControl.enable()
   }
 
   removeFile() {
     this._file.set(null)
-    this.certificateControl.patchValue(null)
+    this.documentTypeControl.patchValue(null)
     this.onChange()
     this._removeElementofArray()
   }

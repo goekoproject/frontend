@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, ElementRef, inject, model, OnInit, output, signal, viewChildren } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { SdgIconsComponent } from '@goeko/business-ui'
-import { Category, ClassificationsDocumentsService, DocumentTypeEcosolutions, SDGLabel } from '@goeko/store'
+import { Category, ClassificationDocumentType, ClassificationsDocumentsService, SDGLabel } from '@goeko/store'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { ProjectManagmentService } from './project-managment.service'
 
@@ -27,7 +27,7 @@ export class ProjectEcosolutionsFiltersComponent implements OnInit {
   public documentTypes = toSignal(this._projectManagmenetService.getDocumentTypeEcosolutionServices(), { initialValue: [] })
   //Filters
   public filterCategories = signal<Category[] | null>(null)
-  public filterCertificate = output<DocumentTypeEcosolutions[] | null>()
+  public filterCertificate = output<string[] | undefined>()
   public checkFavourite = signal<boolean>(false)
   public filterSdg = signal<SDGLabel[]>([])
 
@@ -41,7 +41,7 @@ export class ProjectEcosolutionsFiltersComponent implements OnInit {
   private get _checkedDocumentTypes() {
     return this._documentTypesCheckbox()
       .filter((checkbox) => checkbox.nativeElement.checked)
-      .map((checkbox) => JSON.parse(checkbox.nativeElement.value) as unknown as DocumentTypeEcosolutions)
+      .map((checkbox) => JSON.parse(checkbox.nativeElement.value) as unknown as ClassificationDocumentType)
   }
 
   ngOnInit(): void {
@@ -63,10 +63,12 @@ export class ProjectEcosolutionsFiltersComponent implements OnInit {
   }
 
   applyCertificate() {
-    this.filterCertificate.emit(this._checkedDocumentTypes)
+    this.filterCertificate.emit(
+      this._checkedDocumentTypes && this._checkedDocumentTypes.length > 0 ? this._checkedDocumentTypes?.map((d) => d.code) : undefined,
+    )
   }
   applyAllCertificate() {
-    this.filterCertificate.emit(null)
+    this.filterCertificate.emit(undefined)
   }
   closeFilter = () => {
     this.filtersVisible.set(false)

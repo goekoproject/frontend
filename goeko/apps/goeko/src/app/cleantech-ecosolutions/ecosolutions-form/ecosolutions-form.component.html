@@ -108,7 +108,7 @@
         @defer (when questionsCategories()) {
         <div class="ecosolutions-subcategory">
           @for (subcategory of questionsCategories(); track subcategory.code) {
-          <goeko-select-subcategory-product [id]="subcategory.code" [formControlName]="'subCategory'"
+          <goeko-select-subcategory-product [id]="subcategory.code" formControlName="subCategory"
             [subCategory]="subcategory" [readonly]="isReadOnly">
             <p title>
               {{ subcategory.label }}
@@ -162,7 +162,6 @@
         <ui-super-select [readonly]="isReadOnly" [placeholder]="['upTo' | translate] + '... (%)'"
           [formControlName]="'reductionPercentage'" id="reductionPercentage" name="reductionPercentage"
           [compareWith]="defaultSetReductions">
-          <!--TODO: hacer pipe-->
           <super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
             {{ option.keyLang | translate }} {{ ' ' + option.to }}%
           </super-option>
@@ -278,7 +277,7 @@
           </div>
           @if(form.value.certified) {
           <ng-container formArrayName="certificates">
-            <goeko-file-upload (fileAdded)="addAddcertificates($event)" />
+            <goeko-file-upload (fileAdded)="addCertificates($event)" />
             <div class="flex gap-4 mt-4 flex-wrap" [ngClass]="{
                       hidden: selectedFormLang().code !== langSignal(),
                     }">
@@ -287,8 +286,6 @@
               }
             </div>
           </ng-container>
-
-
           }
 
         </div>

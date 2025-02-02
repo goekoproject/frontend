@@ -1,9 +1,9 @@
 import {
   DocumentEcosolutions,
+  EcosolutionDocumentsBuilder,
   Ecosolutions,
   FromTO,
   LocationsCountry,
-  PARENT_CODE,
   ReductionPercentage,
   SDG_LABEL,
   TranslatedProperties,
@@ -54,10 +54,10 @@ export class EcosolutionForm {
     this.paybackPeriodYears = ecosolution.paybackPeriodYears
     this.marketReady = ecosolution.marketReady
     this.guarantee = ecosolution.guarantee
-    this.haveTechnicalSheet = ecosolution.certified
-    this.technicalSheet = ecosolution?.documents?.at(0)
-    // find((doc) => doc.documentType.code === PARENT_CODE.TECHNICAL_SHEET)
-    this.certificates = ecosolution.documents?.filter((doc) => doc.documentType?.code === PARENT_CODE.CERTIFICATE) ?? []
+    this.certificates = new EcosolutionDocumentsBuilder(ecosolution.documents).assignOtherDocumentType().getCertificates().build()
+    this.certified = ecosolution.certified
+    this.technicalSheet = new EcosolutionDocumentsBuilder(ecosolution.documents).getTechnicalSheet().build()[0]
+    this.haveTechnicalSheet = !!this.technicalSheet
     this.approved = ecosolution.approved
     this.yearGuarantee = ecosolution.guaranteeInYears
     this.priceDescription = ecosolution.priceDescription

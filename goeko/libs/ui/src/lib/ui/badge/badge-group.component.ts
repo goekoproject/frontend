@@ -89,7 +89,7 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
     return this._value
   }
   set value(newValue: any) {
-    this._assignValue(newValue)
+    this._value = newValue
   }
   private _value!: any
 
@@ -183,9 +183,11 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
 
       return option.value != null && this._compareWith(option.value, value)
     })
+    //TODO: mejorar
     if (badgeOption) {
       this._selectionModel.select(badgeOption)
-      this._selectedAndPropagateValue(badgeOption)
+      this.valueChangedBadge$.emit(badgeOption)
+      badgeOption.onSelected(badgeOption.selected)
     }
     return badgeOption
   }
