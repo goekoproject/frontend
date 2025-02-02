@@ -64,6 +64,14 @@ export class EcosolutionsService extends TranslateChangeService {
     )
   }
 
+  delteDocumentation(idEcosolution: string, idDocumentation: string) {
+    return this._http.delete(`/v1/ecosolutions/${idEcosolution}/documentation`, {
+      body: {
+        documentId: idDocumentation,
+      },
+    })
+  }
+
   getEcosolutionsDocumentationById(id: string) {
     return this._http.get(`/v1/ecosolutions/${id}/documentation`)
   }

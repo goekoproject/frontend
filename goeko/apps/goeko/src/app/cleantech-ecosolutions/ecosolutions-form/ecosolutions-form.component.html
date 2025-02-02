@@ -282,7 +282,7 @@
                       hidden: selectedFormLang().code !== langSignal(),
                     }">
               @for (file of certificates.controls; track $index; let i = $index) {
-              <goeko-select-certificate [formControlName]="i" />
+              <goeko-select-certificate [formControlName]="i" (removeCertificate)="addCertificateForRemove($event)" />
               }
             </div>
           </ng-container>
@@ -303,7 +303,7 @@
           </div>
 
           @if(form.value.haveTechnicalSheet) {
-          <goeko-file-upload formControlName="technicalSheet" />
+          <goeko-file-upload formControlName="technicalSheet" [showNameFile]="true" />
           }
 
         </div>

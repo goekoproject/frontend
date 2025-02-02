@@ -10,6 +10,7 @@ import {
   inject,
   Injector,
   OnInit,
+  output,
   signal,
 } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
@@ -26,11 +27,13 @@ import {
 } from '@angular/forms'
 import { UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { BehaviorSubject, tap } from 'rxjs'
 import { SelectCertificateService } from './select-certificate.service'
 
 interface CertificateFormGroup {
   file: FormControl<File | null>
   documentType: FormControl<string | null>
+  id: FormControl<string | null>
 }
 @Component({
   selector: 'goeko-select-certificate',
@@ -46,7 +49,7 @@ interface CertificateFormGroup {
     },
   ],
   template: `
-    @if (existsFile() && (certificates()?.length ?? 0) > 0) {
+    @if (existsFile() && (certificates()?.length ?? 0) > 0 && !refresh()) {
       <div class="h-full max-h-52 w-52 rounded-lg bg-white p-2 drop-shadow-md">
         <div class="flex w-full justify-end text-2xl text-primary-default">
           <i class="ti ti-trash-filled cursor-pointer transition-colors hover:text-primary-blueDark" (click)="removeFile()"></i>
@@ -61,9 +64,12 @@ interface CertificateFormGroup {
           [hasError]="this.hasError()"
           id="certificateType"
           name="certificateType">
-          <super-option *ngFor="let option of certificates()" [value]="option.code">
-            {{ option.name }}
-          </super-option>
+          @for (option of certificates(); track option.code) {
+            <super-option [value]="option.code">
+              {{ option.name }}
+            </super-option>
+          }
+
           <p errorBody>⚠️{{ 'ERRORS_FORM.SELECT_CERTIFICATE' | translate }}</p>
         </ui-super-select>
       </div>
@@ -77,22 +83,35 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   private _selectCertificateServices = inject(SelectCertificateService)
 
   private _formControlNameDirective!: NgControl
+  private refreshSignal = new BehaviorSubject<boolean>(false)
 
-  certificates = toSignal(this._selectCertificateServices.getCertificates(), { initialValue: [] })
+  private _certificates$ = toSignal(
+    this._selectCertificateServices.getCertificateTranslated().pipe(
+      tap(() => {
+        this.refreshSignal.next(true)
+        setTimeout(() => this.refreshSignal.next(false), 1000)
+      }),
+    ),
+    { initialValue: [] },
+  )
+  removeCertificate = output<string>()
+  public certificates = computed(() => this._certificates$())
 
   // Control de formulario reactivo
   documentTypeControl = new FormGroup<CertificateFormGroup | null>({
     file: new FormControl<File | null>(null),
     documentType: new FormControl<string | null>(null, Validators.required),
+    id: new FormControl<string | null>(null),
   })
 
   private _value = signal<string | null>(null)
   private _file = signal<File | null>(null)
   private _filename = signal<string>('')
   emptySelectCertificate = signal(false)
-
+  test = this._selectCertificateServices.getCertificateTranslated()
   fileName = computed(() => this._file()?.name ?? this._filename())
   hasError = computed(() => this.emptySelectCertificate())
+  refresh = toSignal(this.refreshSignal.asObservable(), { initialValue: false })
   get documentType() {
     return this.documentTypeControl.get('documentType') as FormControl<string>
   }
@@ -156,6 +175,8 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
     this._file.set(null)
     this._filename.set(value?.name)
     this.documentTypeControl.get('documentType')?.reset(value?.documentType, { emitEvent: false })
+    this.documentTypeControl.get('id')?.reset(value?.id, { emitEvent: false })
+
     this.documentTypeControl.markAsPristine()
   }
 
@@ -174,8 +195,9 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   removeFile() {
     this._file.set(null)
     this.documentTypeControl.patchValue(null)
-    this.onChange()
+    this.onChange(undefined)
     this._removeElementofArray()
+    this.removeCertificate.emit(this.documentTypeControl.get('id')?.value)
   }
 
   private _removeElementofArray() {

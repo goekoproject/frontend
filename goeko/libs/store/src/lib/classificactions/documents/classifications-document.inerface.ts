@@ -5,9 +5,9 @@ export enum PARENT_CODE {
 
 export interface ClassificationDocumentType {
   code: string
-  name: string
-  description: string
-  fieldOrder: number
+  name?: string
+  description?: string
+  fieldOrder?: number
 }
 
 export interface ClassificationDocument {

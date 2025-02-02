@@ -19,7 +19,6 @@ import {
 import { TranslateService } from '@ngx-translate/core'
 import { Editor, Toolbar } from 'ngx-editor'
 import { forkJoin, Observable, of, switchMap, tap } from 'rxjs'
-import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import {
   defaultSetCurrency,
   defaultSetDeliverCountries,
@@ -29,7 +28,7 @@ import {
   defaultSetyearGuarantee,
 } from './compare-with-select'
 import { EcosolutionForm } from './ecosolution-form.model'
-import { EcosolutionsManagmentService } from './ecosolutions-managment.service'
+import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
 import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
 
 @Component({
@@ -114,41 +113,35 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _isIncludeTranslation = (codeLang: string, translations?: TranslatedProperties[]) => {
     return translations?.map((value) => value.lang).includes(codeLang)
   }
+  private get canUploadCertificates() {
+    return (
+      this.form.get('certificates')?.dirty &&
+      this.form.get('certificates')?.valid &&
+      this.form.value.certified &&
+      this.certificates.value.length > 0
+    )
+  }
+  private get canUploadTechnicalSheet(): boolean | undefined {
+    return this.form.get('haveTechnicalSheet')?.dirty && this.form.get('haveTechnicalSheet')?.valid && !!this.form.value?.technicalSheet
+  }
+
+  public certificateForRemove = signal<string[]>([])
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _ecosolutionsService: EcosolutionsService,
     private _fb: FormBuilder,
     private _translateServices: TranslateService,
-    private _cleantechEcosolutionsService: CleantechEcosolutionsService,
   ) {}
 
   ngOnInit(): void {
     this._getParamsUrl()
     this.editor = new Editor()
     this._buildFrom()
-    this._changeLangCode()
     if (this.idEcosolution) {
       this.getEcosolution()
     }
-    this.form.valueChanges.subscribe((data) => {
-      /*   if (this.form.dirty) {
-        console.log('true dirty', this.form.dirty, data)
-      } else {
-        console.log('false dirty', data)
-      } */
-      this.logChangedValues(data)
-    })
-  }
-
-  logChangedValues(changes: any) {
-    // Itera sobre las claves de los cambios y muestra key y control
-    Object.keys(changes).forEach((key) => {
-      if (Object.prototype.hasOwnProperty.call(changes, key) && this.form.get(key)?.dirty) {
-        const control = this.form.get(key) // Obtén el control
-        console.log(`Campo: ${key}, Nuevo valor:`, changes[key], `Control:`, control?.dirty)
-      }
-    })
   }
 
   ngOnDestroy(): void {
@@ -159,12 +152,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string
     this.mainCategory = this._route.snapshot.queryParamMap.get('mainCategory') as string
     this.idEcosolution = this._route.snapshot.paramMap.get('id') as string
-  }
-  private _changeLangCode() {
-    this._translateServices.onLangChange.subscribe((current) => {
-      this._cleantechEcosolutionsService.getSubcategorySelected(this.mainCategory)
-      this.langSignal.set(current.lang)
-    })
   }
 
   private _buildFrom() {
@@ -286,7 +273,9 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
   private _addCertifiedValidators(certificates: DocumentEcosolutions[]) {
     certificates?.forEach((certificate) => {
-      this.certificates.push(this._fb.control({ documentType: certificate?.documentType?.code, name: certificate.name }))
+      this.certificates.push(
+        this._fb.control({ documentType: certificate?.documentType?.code, name: certificate.name, id: certificate.id }),
+      )
     })
   }
 
@@ -351,6 +340,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       this._ecosolutionsService.getEcosolutionById(this.idEcosolution),
       this._uploadPicture(this.idEcosolution),
       this._uploadDocuments(this.idEcosolution),
+      this._removeDocument(),
     ])
       .pipe(
         tap(() => this._submitter.set(true)),
@@ -381,22 +371,28 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   private _uploadDocuments(ecosolutionId: string) {
-    return this._uploadDocumentsCertificates(ecosolutionId)
-    if ((!this.form.value.certified && !this.form.controls['certified']?.dirty) || !this.inputCertified.nativeElement.value) {
-      return of(null)
+    return forkJoin([this._uploadDocumentsCertificates(ecosolutionId), this._uploadDocumentsTechnicalSheet(ecosolutionId)])
+  }
+  private _uploadDocumentsCertificates(ecosolutionId: string) {
+    if (this.canUploadCertificates) {
+      return this._ecosolutionsManagmentService.uploadDocumentationCertificate(ecosolutionId, this.form.value.certificates)
     }
     return of(null)
-    /* return this._ecosolutionsService.uploadDocumentation(ecosolutionId, this.form.value.certificates) */
+  }
+  private _uploadDocumentsTechnicalSheet(ecosolutionId: string) {
+    if (this.canUploadTechnicalSheet) {
+      const metadata = { ...metadataTechnicalSheet, file: this.form.value.technicalSheet }
+      return this._ecosolutionsManagmentService.uplloadTechicalSheet(ecosolutionId, metadata)
+    }
+    return of(null)
   }
 
-  private _uploadDocumentsCertificates(ecosolutionId: string) {
-    if (
-      this.form.get('certificates')?.dirty &&
-      this.form.get('certificates')?.valid &&
-      this.form.value.certified &&
-      this.certificates.value.length > 0
-    ) {
-      return this._ecosolutionsManagmentService.uploadDocumentation(ecosolutionId, this.form.value.certificates)
+  addCertificateForRemove(id: string) {
+    this.certificateForRemove.set([...this.certificateForRemove(), id])
+  }
+  private _removeDocument() {
+    if (this.certificateForRemove().length > 0) {
+      return this._ecosolutionsManagmentService.removeDocument(this.idEcosolution, this.certificateForRemove())
     }
     return of(null)
   }
