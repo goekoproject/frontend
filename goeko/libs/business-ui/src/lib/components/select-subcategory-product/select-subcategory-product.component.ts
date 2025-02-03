@@ -81,6 +81,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   }
 
   private _open = true
+  @Input()
   public get open() {
     return this._open
   }

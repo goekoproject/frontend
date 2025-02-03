@@ -109,7 +109,7 @@
         <div class="ecosolutions-subcategory">
           @for (subcategory of questionsCategories(); track subcategory.code) {
           <goeko-select-subcategory-product [id]="subcategory.code" formControlName="subCategory"
-            [subCategory]="subcategory" [readonly]="isReadOnly">
+            [subCategory]="subcategory" [readonly]="isReadOnly" [open]="this.idEcosolution? true : false">
             <p title>
               {{ subcategory.label }}
             </p>
