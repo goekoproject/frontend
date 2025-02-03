@@ -32,9 +32,9 @@
       <fieldset class="ecosolutions-fieldset">
         <legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
         <ng-container formArrayName="nameTranslations">
-          @for (translation of nameTranslations.controls; track translation; let i = $index) {
+          @for (translation of nameTranslations.controls; track $index+'-name'; let i = $index) {
           <ng-container [formGroupName]="i">
-            @if (translation.value?.lang == selectedFormLang().code) {
+            @if (translation.value?.lang === selectedFormLang().code) {
             <go-input [formControlName]="'label'" [readonly]="isReadOnly">
               <span slot="label">
                 {{ 'FORM_LABEL.solutionName' | translate }}
@@ -50,8 +50,9 @@
         </ng-container>
 
         <ng-container formArrayName="descriptionTranslations">
-          @for (translation of descriptionTranslations.controls; track translation; let i = $index) {
-          @if (translation.value?.lang == selectedFormLang().code) {
+          @for (translation of descriptionTranslations.controls; track $index+'-descriptionTranslations'; let i =
+          $index) {
+          @if (translation.value?.lang === selectedFormLang().code) {
           <div [formGroupName]="i" class="wrapper-textarea">
             <label for="descriptionTranslations">
               {{ 'FORM_LABEL.solutionDescription' | translate }}
@@ -70,8 +71,9 @@
         </ng-container>
 
         <ng-container formArrayName="detailedDescriptionTranslations">
-          @for (translation of detailedDescriptionTranslations.controls; track translation; let i = $index) {
-          @if (translation.value?.lang == selectedFormLang().code) {
+          @for (translation of detailedDescriptionTranslations.controls; track $index+'detailedDescriptionTranslations';
+          let i = $index) {
+          @if (translation.value?.lang === selectedFormLang().code) {
           <div [formGroupName]="i" class="wrapper-textarea">
             <label for="detailedDescriptionTranslations">
               {{ 'FORM_LABEL.technicalDescription' | translate }}
@@ -198,8 +200,9 @@
         </legend>
 
         <ng-container formArrayName="priceDescriptionTranslations">
-          @for (translation of priceDescriptionTranslations.controls; track translation; let i = $index) {
-          @if (translation.value?.lang == selectedFormLang().code) {
+          @for (translation of priceDescriptionTranslations.controls; track $index+'-priceDescriptionTranslations'; let
+          i = $index) {
+          @if (translation.value?.lang === selectedFormLang().code) {
           <div [formGroupName]="i" class="wrapper-textarea">
             <label for="priceDescriptionTranslations">
               {{ 'FORM_LABEL.infoPrice' | translate }}
@@ -311,7 +314,7 @@
 
           @if(form.value.haveTechnicalSheet) {
           <goeko-file-upload formControlName="technicalSheet" [showNameFile]="true"
-            (fileRemoved)="addDocumentForRemove($event)" />
+            (fileRemoved)="addDocumentForRemove([$event])" />
           }
 
         </div>

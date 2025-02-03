@@ -142,13 +142,18 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
     })
   }
 
-  // Escuchar cambios en el control de formulario
   ngOnInit() {
     this._formControlNameDirective = this._injector.get(NgControl, null) as NgControl
     this.documentTypeControl.valueChanges.subscribe((value) => {
-      this._value.set(value?.documentType ?? null)
-      this.onChange(value)
-      this.onTouched()
+      if (value?.documentType) {
+        this._value.set(value?.documentType ?? null)
+        this._formControlNameDirective.control?.setErrors(null)
+
+        this.onChange(value)
+        this.onTouched()
+      } else {
+        this._formControlNameDirective.control?.setErrors({ required: true })
+      }
     })
   }
 

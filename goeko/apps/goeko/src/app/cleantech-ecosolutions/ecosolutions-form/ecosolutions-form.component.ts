@@ -127,8 +127,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     return this.form.get('haveTechnicalSheet')?.dirty && this.form.get('haveTechnicalSheet')?.valid && !!this.form.value?.technicalSheet
   }
 
-  public documentForRemove = signal<string[] | undefined>(undefined)
-
+  private _documentForRemove = new Array<string>()
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -236,12 +235,12 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   private _getFormGroupFieldTranslations(code?: string) {
-    if (this.selectedFormLang().code === code) {
+    /*     if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
         lang: new FormControl(code),
       })
-    }
+    } */
     return this._fb.group({
       label: new FormControl(''),
       lang: new FormControl(code),
@@ -283,6 +282,14 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       this.certificates.push(
         this._fb.control({ documentType: certificate?.documentType?.code, name: certificate.name, id: certificate.id }),
       )
+    })
+  }
+
+  private _getFormGroupCertificates(certificate: DocumentEcosolutions) {
+    return this._fb.group({
+      documentType: new FormControl(certificate?.documentType?.code, Validators.required),
+      name: new FormControl(certificate.name),
+      id: new FormControl(certificate.id),
     })
   }
 
@@ -397,14 +404,9 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this._ecosolutionsService
       .updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
       .pipe(
-        switchMap(() => {
-          return forkJoin([
-            this._ecosolutionsService.getEcosolutionById(this.idEcosolution),
-            this._uploadPicture(this.idEcosolution),
-            this._uploadDocuments(this.idEcosolution),
-            this._removeDocument(),
-          ])
-        }),
+        switchMap(() => this._uploadDocuments(this.idEcosolution)),
+        switchMap(() => this._removeDocument()),
+        switchMap(() => this._uploadPicture(this.idEcosolution)),
         tap(() => this._submitter.set(true)),
         tap(() => this.goToListEcosolution()),
       )
@@ -419,7 +421,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   private _uploadPicture(ecosolutionId: string) {
-    if (this._fileEcosolution && ecosolutionId) {
+    if (this._fileEcosolution?.length > 0 && ecosolutionId) {
       const createOrUpdatePicture = this.idEcosolution
         ? this._ecosolutionsService.updatePicture(ecosolutionId, this._fileEcosolution)
         : this._ecosolutionsService.uploadPicture(ecosolutionId, this._fileEcosolution)
@@ -456,13 +458,11 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     if (!id || id.length === 0) {
       return
     }
-    this.documentForRemove.update((value: any) => {
-      return value ? [...value, id] : (id as string[])
-    })
+    this._documentForRemove.push(...(Array.isArray(id) ? id : [id]))
   }
   private _removeDocument() {
-    if ((this.documentForRemove() as string[])?.length > 0) {
-      return this._ecosolutionsManagmentService.removeDocument(this.idEcosolution, this.documentForRemove() as string[])
+    if (this._documentForRemove.length > 0) {
+      return this._ecosolutionsManagmentService.removeDocument(this.idEcosolution, this._documentForRemove)
     }
     return of(null)
   }
