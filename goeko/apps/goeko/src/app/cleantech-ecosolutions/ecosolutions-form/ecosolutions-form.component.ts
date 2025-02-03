@@ -141,6 +141,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this._getParamsUrl()
     this.editor = new Editor()
     this._buildFrom()
+    this._changeLangCode()
     if (this.idEcosolution) {
       this.getEcosolution()
     }
@@ -169,6 +170,11 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this._addDescriptionTranslations(codeLang)
     this._detailDescriptionTranslations(codeLang)
     this._priceDescriptionTranslations(codeLang)
+  }
+  private _changeLangCode() {
+    this._translateServices.onLangChange.subscribe((current) => {
+      this.langSignal.set(current.lang)
+    })
   }
   private _initForm() {
     this.form = this._fb.group({
@@ -314,7 +320,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       if (value) {
         this.form.get('technicalSheet')?.setValidators(Validators.required)
       } else {
-        this.addDocumentForRemove(this.form.get('technicalSheet')?.value?.id)
+        this.addDocumentForRemove([this.form.get('technicalSheet')?.value?.id])
         this.form.get('technicalSheet')?.clearValidators()
         this.form.get('technicalSheet')?.reset()
       }
@@ -341,6 +347,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this.form.get('guarantee')?.valueChanges.subscribe((value) => {
       if (value) {
         this.form.get('yearGuarantee')?.setValidators(Validators.required)
+        this.form.get('yearGuarantee')?.markAsDirty()
       } else {
         this.form.get('yearGuarantee')?.clearValidators()
         this.form.get('yearGuarantee')?.reset()
@@ -350,9 +357,13 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   saveEcosolution() {
-    if (this.form.valid) {
-      this._createEcosolution()
+    if (this.form.invalid) {
+      this.form.markAllAsTouched()
+      this.form.markAsDirty()
+      this.form.updateValueAndValidity()
+      return
     }
+    this._createEcosolution()
   }
   private _createEcosolution() {
     this._ecosolutionsService
@@ -378,6 +389,9 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   editEcosolution() {
     if (this.form.invalid) {
+      this.form.markAllAsTouched()
+      this.form.markAsDirty()
+      this.form.updateValueAndValidity()
       return
     }
     this._ecosolutionsService

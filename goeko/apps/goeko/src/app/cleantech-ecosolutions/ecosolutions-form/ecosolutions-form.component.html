@@ -259,19 +259,23 @@
             </label>
           </div>
           @if(form.value.guarantee) {
-          <ui-super-select [readonly]="isReadOnly" [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-            [formControlName]="'yearGuarantee'" id="yearGuarantee" name="yearGuarantee"
-            [disabled]="!form.value.guarantee" [compareWith]="defaultSetyearGuarantee">
+
+          <ui-super-select [readonly]="isReadOnly"
+            [hasError]="form.get('yearGuarantee')?.invalid && form.get('yearGuarantee')?.touched || false"
+            [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate" [formControlName]="'yearGuarantee'"
+            id="yearGuarantee" name="yearGuarantee" [disabled]="!form.value.guarantee"
+            [compareWith]="defaultSetyearGuarantee">
             <super-option *ngFor="let option of dataSelect['yearGuarantee']" [value]="option">
               {{ option.id }} {{ option.keyLang | translate }}
             </super-option>
+            <p errorBody> {{'ERRORS_FORM.SELECT_YEARS_GUARANTEE' | translate}}</p>
           </ui-super-select>
           }
 
         </div>
 
         <div>
-          <div class="field-form-checked">
+          <div class="field-form-checked mb-2">
             <label for="certified">{{ 'FORM_LABEL.certificates' | translate }}</label>
             <label class="switch">
               <input type="checkbox" formControlName="certified" [readonly]="isReadOnly" />
@@ -297,7 +301,7 @@
         <div class="flex flex-col gap-4" [ngClass]="{
             hidden: selectedFormLang().code !== langSignal(),
           }">
-          <div class="field-form-checked">
+          <div class="field-form-checked mb-2">
             <label for="certified">{{ 'FORM_LABEL.technicalSheet' | translate }}</label>
             <label class="switch">
               <input type="checkbox" [formControlName]="'haveTechnicalSheet'" [readonly]="isReadOnly" />

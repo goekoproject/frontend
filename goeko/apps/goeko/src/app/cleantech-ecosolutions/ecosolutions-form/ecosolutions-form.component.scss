@@ -54,6 +54,7 @@
   display: flex;
   gap: 4rem;
   align-items: center;
+  justify-content: space-between;
   label:not(.switch) {
     width: 50%;
   }
@@ -122,6 +123,6 @@
 }
 .ngx-editor-content b,
 .ngx-editor-content strong {
-    font-weight: 700;
-    -webkit-font-smoothing: subpixel-antialiased;
+  font-weight: 700;
+  -webkit-font-smoothing: subpixel-antialiased;
 }

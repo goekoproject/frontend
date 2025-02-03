@@ -753,7 +753,8 @@
   "deleteLocation": "Supprimer la région",
   "or": "ou",
   "ERRORS_FORM": {
-    "SELECT_CERTIFICATE": "Sélectionnez un certificat"
+    "SELECT_CERTIFICATE": "Sélectionnez un certificat",
+    "SELECT_YEARS_GUARANTEE": "Sélectionnez les années de garantie"
   },
   "download": "Télécharger"
 }

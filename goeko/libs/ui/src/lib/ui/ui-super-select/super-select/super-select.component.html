@@ -35,6 +35,8 @@
     </div>
   </ng-template>
 </div>
-<div class="text-xs text-red-600 font-semibold" *ngIf="hasError">
+@if(hasError) {
+<div class="text-xs text-red-600 font-semibold">
   <ng-content select="[errorBody]"></ng-content>
 </div>
+}

@@ -209,6 +209,11 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
     // this will make the execution after the above boolean has changed
   }
 
+  onSelect(value:string) {
+    this.value = value
+    this._propagateValue()
+  }
+
   private _propagateValue() {
     this.checked = true
 

@@ -750,7 +750,8 @@
   "deleteLocation": "Eliminar ubicación",
   "or": "o",
   "ERRORS_FORM": {
-    "SELECT_CERTIFICATE": "Selecciona un certificado"
+    "SELECT_CERTIFICATE": "Selecciona un certificado",
+    "SELECT_YEARS_GUARANTEE": "Selecciona los años de garantía"
   },
   "download": "Descargar"
 }
