@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { ResponseClassifications } from '../model/classifications.interface'
+import { ResponseClassifications } from '../../model/classifications.interface'
 
 @Pipe({
   name: 'classificationsLabel',

@@ -51,6 +51,7 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
     this._projectManagmentService.project.set(this.project())
     this.fetchEcosolutionsCatalog()
     this._changeLang()
+    this._applyQuery()
   }
 
   ngOnDestroy(): void {
@@ -59,6 +60,13 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
 
   private _changeLang() {
     this._translateService.onLangChange.subscribe(() => {
+      this.fetchEcosolutionsCatalog()
+    })
+  }
+
+  private _applyQuery = () => {
+    this._filtersRef()?.filterCertificate.subscribe((documentCodes) => {
+      this._queryCertificate(documentCodes)
       this.fetchEcosolutionsCatalog()
     })
   }
@@ -100,6 +108,10 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
     return this._ecosolutionsSearchSignal()?.filter((ecosolution) => {
       return this._filterByCategory(ecosolution) && this._filterBySdg(ecosolution) && this._getFavoriteEcosolutions(ecosolution)
     })
+  }
+
+  private _queryCertificate = (document?: string[]) => {
+    this.queryEcosolutions.update((query) => ({ ...query, documentTypeCodes: document }))
   }
 
   private _filterByCategory = (ecosolution: EcosolutionResult) => {

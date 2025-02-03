@@ -155,6 +155,8 @@
     "approvedSwiss": "Aprobada para el mercado suizo",
     "basicInformation": "Información básica",
     "certified": "Certificado",
+    "technicalSheet": "Ficha técnica",
+    "certificates": "Certificados",
     "city": "Ciudad",
     "companyName": "Nombre de la Compañía",
     "comunicationLanguage": "Idioma para la comunicación",
@@ -259,7 +261,10 @@
     "image": "Arrastra y suelta o haz click",
     "image2": "Selecciona una imagen",
     "image3": "Añadir imagen",
-    "selectLogo": "Selecciona el logo"
+    "addNewFile": "Añadir nuevo archivo",
+    "selectLogo": "Selecciona el logo",
+    "dragAndDropHere": "Arrastra y suelta aquí",
+    "maxSizeFile": "Tamaño máximo permitido: {{size}}MB"
   },
   "LANGS": {
     "de": "Alemán",
@@ -742,5 +747,10 @@
   },
   "delete": "Eliminar",
   "characters": "{{num}} caracteres maximum",
-  "deleteLocation": "Eliminar ubicación"
+  "deleteLocation": "Eliminar ubicación",
+  "or": "o",
+  "ERRORS_FORM": {
+    "SELECT_CERTIFICATE": "Selecciona un certificado"
+  },
+  "download": "Descargar"
 }

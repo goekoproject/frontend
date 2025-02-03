@@ -1,5 +1,10 @@
 import { Category, Subcategory } from './classifications.interface'
-import { GroupingByClassifications, NewCategoryForGrouping, NewSubcategoryForGrouping, NewUpdateGrouping } from './grouping.interface'
+import {
+  GroupingByClassifications,
+  NewCategoryForGrouping,
+  NewSubcategoryForGrouping,
+  NewUpdateGrouping,
+} from './grouping/grouping.interface'
 
 export class ClassificationPayload implements NewUpdateGrouping {
   name: string

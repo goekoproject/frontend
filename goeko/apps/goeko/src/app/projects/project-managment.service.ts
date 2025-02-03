@@ -1,6 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core'
 import {
   CategoryGrouping,
+  ClassificationsDocumentsService,
   ClassificationsService,
   EcosolutionSearchRequest,
   EcosolutionsSearchService,
@@ -20,6 +21,7 @@ export class ProjectManagmentService {
   private _taggingServices = inject(EcosolutionsTaggingService)
   private _userServices = inject(UserService)
   private userProfle = this._userServices.userProfile()
+  private _documentTypeEcosolutionServices = inject(ClassificationsDocumentsService)
   private _smeId = computed(() => this._userServices.userProfile().id)
 
   public projects = this._ecosolutionsSearchService.projects
@@ -63,5 +65,9 @@ export class ProjectManagmentService {
       return this._taggingServices.removeFavorite(smeId, ecosolution.id)
     }
     return this._taggingServices.addFavorite(smeId, ecosolution.id)
+  }
+
+  getDocumentTypeEcosolutionServices() {
+    return this._documentTypeEcosolutionServices.getDocumentTypeCertificate()
   }
 }

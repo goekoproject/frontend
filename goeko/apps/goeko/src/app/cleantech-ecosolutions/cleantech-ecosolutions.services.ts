@@ -43,7 +43,7 @@ export class CleantechEcosolutionsService {
     private _remoteConfigService: RemoteConfigService,
   ) {
     effect(() => {
-      if (this.categorySelected().id !== '') {
+      if (this.categorySelected().code !== '') {
         this.getSubcategorySelected(this.categorySelected().code)
       }
     })

@@ -1,8 +1,8 @@
 import { Classifications } from '../model/classifications.interface'
 import { CompanyDetail } from '../model/company-detail.interface'
-import { Document } from '../model/document.interface'
 import { LocationTranslated } from '../model/location-translated.interface'
 import { Picture } from '../model/pictures.interface'
+import { DocumentEcosolutions } from './ecosolution.interface'
 import { ImprovementEcosolution } from './improvement-ecosolution.interface'
 
 /**
@@ -27,7 +27,7 @@ export interface EcosolutionSearchResponse {
   sustainableDevelopmentGoals: number[]
   pictures: Picture[]
   locations: LocationTranslated[]
-  documents: Document[]
+  documents: DocumentEcosolutions[]
   favourite: boolean
   notInterested: boolean
 }

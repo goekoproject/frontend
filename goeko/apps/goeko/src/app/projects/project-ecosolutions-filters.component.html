@@ -1,12 +1,9 @@
-<div
-  class="absolute top-0 z-10 max-w-72 rounded-lg bg-blueLightPastel p-4 sm:relative sm:w-full"
-  [ngClass]="{
+<div class="absolute top-0 z-10 max-w-72 rounded-lg bg-blueLightPastel p-4 sm:relative sm:w-full" [ngClass]="{
     'collapse-enter': !filtersVisible(),
     'collapse-enter-active': filtersVisible(),
     'collapse-leave-active': !filtersVisible(),
   }">
-  <i
-    class="ti ti-circle-x absolute right-0 top-0 m-4 cursor-pointer text-3xl text-primary-default hover:text-primary-blueDark sm:hidden"
+  <i class="ti ti-circle-x absolute right-0 top-0 m-4 cursor-pointer text-3xl text-primary-default hover:text-primary-blueDark sm:hidden"
     (click)="closeFilter()"></i>
 
   <div class="mt-4 space-y-4 overflow-hidden">
@@ -30,28 +27,42 @@
           <span>{{ 'all' | translate }}</span>
         </label>
         @for (classification of classificationsFilters(); track classification.id) {
-          <label class="flex cursor-pointer items-center space-x-2 text-sm">
-            <input
-              (input)="applyFiltersForCategories()"
-              type="checkbox"
-              name="categories"
-              [id]="classification.code"
-              [value]="classification | json"
-              class="form-checkbox h-4 w-4 text-blue-500"
-              #categories />
-            <span>{{ classification.label }}</span>
-          </label>
+        <label class="flex cursor-pointer items-center space-x-2 text-sm">
+          <input (input)="applyFiltersForCategories()" type="checkbox" name="categories" [id]="classification.code"
+            [value]="classification | json" class="form-checkbox h-4 w-4 text-blue-500" #categories />
+          <span>{{ classification.label }}</span>
+        </label>
 
-          @defer (when false) {
-            @for (subcategory of classification.subcategories; track subcategory.id) {
-              <div class="ml-4">
-                <label class="flex items-center space-x-2 text-sm text-blue-600">
-                  <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
-                  <span>{{ subcategory.label }}</span>
-                </label>
-              </div>
-            }
-          }
+        @defer (when false) {
+        @for (subcategory of classification.subcategories; track subcategory.id) {
+        <div class="ml-4">
+          <label class="flex items-center space-x-2 text-sm text-blue-600">
+            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
+            <span>{{ subcategory.label }}</span>
+          </label>
+        </div>
+        }
+        }
+        }
+      </div>
+    </div>
+
+    <!-- Certificate -->
+    <div>
+      <h4 class="text-sm font-bold text-gray-700">{{ 'FORM_LABEL.certificates' | translate }}</h4>
+      <div class="mt-2 space-y-2">
+        <label class="flex cursor-pointer items-center space-x-2 text-sm">
+          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCertificate()" />
+          <span>{{ 'all' | translate }}</span>
+        </label>
+        @for (document of documentTypes(); track $index) {
+        <label class="flex cursor-pointer items-center space-x-2 text-sm">
+          <input (input)="applyCertificate()" type="checkbox" name="categories" [id]="$index"
+            [value]="document | json" class="form-checkbox h-4 w-4 text-blue-500" #documentTypes />
+          <span>{{ document.name }}</span>
+        </label>
+
+
         }
       </div>
     </div>

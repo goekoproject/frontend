@@ -10,8 +10,6 @@ $color-label-pressed: var(--primary--main);
 @mixin status($status, $color, $background: none) {
   &#{$status} {
     border: 1px solid $color;
-    background: $background;
-    background-color: $background-overlay;
     border-radius: 0.5rem;
   }
 }
@@ -52,6 +50,16 @@ $color-label-pressed: var(--primary--main);
     }
   }
 }
+.super-select[has-error='true'] {
+  .select {
+    @apply border-red-500 bg-red-50 text-red-700
+  }
+  .select_label {
+    @apply  text-red-700
+  }
+
+}
+
 .select-dropdown {
   position: fixed;
   z-index: 10000;

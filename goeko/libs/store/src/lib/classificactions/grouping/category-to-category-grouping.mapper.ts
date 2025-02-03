@@ -1,4 +1,4 @@
-import { Category, Subcategory } from './classifications.interface'
+import { Category, Subcategory } from '../classifications.interface'
 import { NewCategoryForGrouping, NewSubcategoryForGrouping } from './grouping.interface'
 export class CategoryMapper {
   static mapCategoryToNewCategoryForGrouping(category: Category): NewCategoryForGrouping {

@@ -222,12 +222,15 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
   }
   private _focused = false
 
-  /** Whether the select has errors or not */
+  @Input()
   get hasError(): boolean {
     return this._hasError
   }
-  set hasError(hasError: boolean) {
-    this._hasError = hasError
+  set hasError(isError: boolean) {
+    if (typeof isError !== 'boolean' && isDevMode()) {
+      throw Error('`isError` must be a boolean.')
+    }
+    this._hasError = isError
   }
   private _hasError = false
 
@@ -329,9 +332,9 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
     if (this.ngControl) {
       this.ngControl.statusChanges?.subscribe((status) => {
         if (status === 'VALID') {
-          this.hasError = false
-        } else {
-          this.hasError = true
+          this._hasError = false
+        } else if (status?.touched || status?.dirty) {
+          this._hasError = true
         }
         this._changeDetector.detectChanges()
       })
@@ -388,16 +391,17 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
       }
       value.forEach((currentValue: any) => this._selectOptionByValue(currentValue))
       const valuesSelected = (this.selected as SuperOptionComponent[]).map((option) => option.value)
-      if (valuesSelected && valuesSelected.length > 0) {
+      /*  if (valuesSelected && valuesSelected.length > 0) {
         this._propagateChanges()
-      }
+      } */
     } else {
-      const correspondingOption = this._findOptionByValue(value)
+      this._findOptionByValue(value)
+      /*  const correspondingOption =
       if (correspondingOption) {
         this._keyManager?.updateActiveItem(correspondingOption)
       } else if (!this.isOpen) {
         this._keyManager?.updateActiveItem(-1)
-      }
+      } */
     }
 
     this._changeDetector.markForCheck()
@@ -447,7 +451,7 @@ export abstract class BaseSelectComponent implements OnInit, ControlValueAccesso
     }) as SuperOptionComponent
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption)
-      this._propagateChanges()
+      //  this._propagateChanges()
     }
     return correspondingOption
   }

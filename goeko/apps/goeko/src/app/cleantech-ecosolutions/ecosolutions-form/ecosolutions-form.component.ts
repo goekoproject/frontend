@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
+import { Component, computed, ElementRef, inject, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CanComponentDeactivate, canDeactivateForm } from '@goeko/business-ui'
@@ -6,6 +6,7 @@ import { LANGS } from '@goeko/core'
 import {
   CategoryGrouping,
   DataSelect,
+  DocumentEcosolutions,
   Ecosolutions,
   EcosolutionsBody,
   EcosolutionsService,
@@ -17,8 +18,7 @@ import {
 } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { Editor, Toolbar } from 'ngx-editor'
-import { forkJoin, last, Observable, of, switchMap, tap } from 'rxjs'
-import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
+import { forkJoin, Observable, of, switchMap, tap } from 'rxjs'
 import {
   defaultSetCurrency,
   defaultSetDeliverCountries,
@@ -28,12 +28,14 @@ import {
   defaultSetyearGuarantee,
 } from './compare-with-select'
 import { EcosolutionForm } from './ecosolution-form.model'
+import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
 import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
+  providers: [EcosolutionsManagmentService],
 })
 export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
@@ -43,6 +45,8 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
         : this._ecosolutionsService.createEcosolutions(this.bodyRequestEcosolution)
     return this._submitter() ? of(true) : canDeactivateForm(callback)
   }
+  private _ecosolutionsManagmentService = inject(EcosolutionsManagmentService)
+
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   private _submitter = signal(false)
   public defaultSetProductsCategories = defaultSetProductsCategories
@@ -58,7 +62,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   public ods = ODS_CODE
   public idEcosolution!: string
   public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.id === this.categoryId())?.subcategories)
-  public productsCategories!: any[]
   public editor!: Editor
   public html = ''
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
@@ -68,10 +71,8 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   public selectedFormLang = signal({ code: this.langSignal(), index: 0 })
   public dataSelect = DataSelect
   public mainCategory!: string
-  public fileData!: { name: string; url: string }
 
   private _cleantechId!: string
-  private fileCertificate: any
   private _fileEcosolution!: File[]
   public urlPicEcosolution?: string[]
   public firstLoad = false
@@ -99,6 +100,10 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     return (this.nameTranslations.controls[this.selectedFormLang().index] as FormGroup).controls['translation']
   }
 
+  public get certificates(): FormArray {
+    return this.form.get('certificates') as FormArray
+  }
+
   public get bodyRequestEcosolution(): EcosolutionsBody {
     return this.idEcosolution
       ? new UpdatedEcosolutionBody(this._cleantechId, this.mainCategory, this.form.value)
@@ -108,21 +113,32 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _isIncludeTranslation = (codeLang: string, translations?: TranslatedProperties[]) => {
     return translations?.map((value) => value.lang).includes(codeLang)
   }
+  private get canUploadCertificates() {
+    return (
+      this.form.get('certificates')?.dirty &&
+      this.form.get('certificates')?.valid &&
+      this.form.value.certified &&
+      this.certificates.value.length > 0
+    )
+  }
+  private get canUploadTechnicalSheet(): boolean | undefined {
+    return this.form.get('haveTechnicalSheet')?.dirty && this.form.get('haveTechnicalSheet')?.valid && !!this.form.value?.technicalSheet
+  }
+
+  public certificateForRemove = signal<string[]>([])
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _ecosolutionsService: EcosolutionsService,
     private _fb: FormBuilder,
     private _translateServices: TranslateService,
-    private _cleantechEcosolutionsService: CleantechEcosolutionsService,
   ) {}
 
   ngOnInit(): void {
     this._getParamsUrl()
     this.editor = new Editor()
     this._buildFrom()
-    this._changeLangCode()
-    this._changeValueSubCategory()
     if (this.idEcosolution) {
       this.getEcosolution()
     }
@@ -136,12 +152,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string
     this.mainCategory = this._route.snapshot.queryParamMap.get('mainCategory') as string
     this.idEcosolution = this._route.snapshot.paramMap.get('id') as string
-  }
-  private _changeLangCode() {
-    this._translateServices.onLangChange.subscribe((current) => {
-      this._cleantechEcosolutionsService.getSubcategorySelected(this.mainCategory)
-      this.langSignal.set(current.lang)
-    })
   }
 
   private _buildFrom() {
@@ -178,22 +188,17 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       marketReady: [false],
       guarantee: [false],
       yearGuarantee: [],
-      certified: [false],
       approved: [false],
       locations: this._fb.array([], Validators.required),
+      haveTechnicalSheet: [false],
+      technicalSheet: [],
+      certified: [false],
+      certificates: this._fb.array([]),
     })
   }
 
   get sustainableDevelopmentGoals(): FormArray {
     return this.form.get('sustainableDevelopmentGoals') as FormArray
-  }
-
-  private _changeValueSubCategory() {
-    this.form.get('subCategory')?.valueChanges.subscribe((subCategory) => {
-      if (subCategory) {
-        this.productsCategories = DataSelect[subCategory.controlName as keyof typeof DataSelect]
-      }
-    })
   }
 
   private _addNameTranslations(codeLang: string): void {
@@ -235,9 +240,15 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       lang: new FormControl(code),
     })
   }
+
+  addCertificates(file: File | null) {
+    this.certificates.push(this._fb.control(file))
+  }
+  removeAddcertificates(index: number) {
+    this.certificates.removeAt(index)
+  }
   getEcosolution() {
     this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((ecosolution: Ecosolutions) => {
-      this._getCertificateEcosolution()
       this.urlPicEcosolution = ecosolution?.pictures?.map((picture) => picture.url)
       this._patchDataToForm(ecosolution)
     })
@@ -245,12 +256,27 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   private _patchDataToForm(ecosolution: any): void {
     const formValue = new EcosolutionForm(ecosolution)
-    this.form.patchValue(formValue)
+    this._buildFormArrays(formValue)
+
+    this.form.reset(formValue)
     this._setLocaltion(ecosolution.locations)
+    this._addCertifiedValidators(formValue.certificates)
+    this.form.markAsPristine()
+    this.form.markAsUntouched()
+  }
+
+  private _buildFormArrays(formValue: EcosolutionForm): void {
     this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
     this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
     this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
     this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
+  }
+  private _addCertifiedValidators(certificates: DocumentEcosolutions[]) {
+    certificates?.forEach((certificate) => {
+      this.certificates.push(
+        this._fb.control({ documentType: certificate?.documentType?.code, name: certificate.name, id: certificate.id }),
+      )
+    })
   }
 
   private _setLocaltion(locations: Array<LocationsCountry>) {
@@ -263,7 +289,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   private _addLocations(location: LocationsCountry) {
-    this.locationsArrays.push(this._createLocations(location))
+    this.locationsArrays.push(this._createLocations(location), { emitEvent: false })
   }
   private _createLocations(location: LocationsCountry): FormGroup {
     return new FormGroup({
@@ -279,7 +305,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     values.forEach(() => {
       formArray.push(this._getFormGroupFieldTranslations())
     })
-    formArray.patchValue(values)
+    formArray.reset(values)
   }
 
   saveEcosolution() {
@@ -292,8 +318,8 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       .createEcosolutions(this.bodyRequestEcosolution)
       .pipe(
         switchMap((ecosolution) => {
-          const uploadPicture$ = this._uploadPicture(ecosolution)
-          const uploadCertificate$ = this._uploadCertificate(ecosolution)
+          const uploadPicture$ = this._uploadPicture(ecosolution.id)
+          const uploadCertificate$ = this._uploadDocuments(ecosolution.id)
           return forkJoin([uploadPicture$, uploadCertificate$])
         }),
         tap(() => this._submitter.set(true)),
@@ -310,14 +336,13 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   editEcosolution() {
-    this._ecosolutionsService
-      .updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
+    forkJoin([
+      this._ecosolutionsService.getEcosolutionById(this.idEcosolution),
+      this._uploadPicture(this.idEcosolution),
+      this._uploadDocuments(this.idEcosolution),
+      this._removeDocument(),
+    ])
       .pipe(
-        switchMap((ecosolution) => {
-          const uploadPicture$ = this._uploadPicture(ecosolution)
-          const uploadCertificate$ = this._uploadCertificate(ecosolution)
-          return forkJoin([uploadPicture$, uploadCertificate$])
-        }),
         tap(() => this._submitter.set(true)),
         tap(() => this.goToListEcosolution()),
       )
@@ -331,40 +356,45 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       })
   }
 
-  private _uploadPicture(ecosolution: any) {
-    if (this._fileEcosolution && ecosolution) {
+  private _uploadPicture(ecosolutionId: string) {
+    if (this._fileEcosolution && ecosolutionId) {
       const createOrUpdatePicture = this.idEcosolution
-        ? this._ecosolutionsService.updatePicture(ecosolution?.id, this._fileEcosolution)
-        : this._ecosolutionsService.uploadPicture(ecosolution?.id, this._fileEcosolution)
+        ? this._ecosolutionsService.updatePicture(ecosolutionId, this._fileEcosolution)
+        : this._ecosolutionsService.uploadPicture(ecosolutionId, this._fileEcosolution)
       return createOrUpdatePicture
     }
     return of(null)
-  }
-
-  fileChange(file: any) {
-    this.fileCertificate = file.target.files[0]
   }
 
   uploadImgEcosolutions(file: any) {
     this._fileEcosolution = file
   }
 
-  private _getCertificateEcosolution() {
-    this._ecosolutionsService
-      .getEcosolutionsDocumentationById(this.idEcosolution)
-      .pipe(last())
-      .subscribe((res: any) => {
-        if (res) {
-          this.fileData = res[res?.length - 1]
-        }
-      })
+  private _uploadDocuments(ecosolutionId: string) {
+    return forkJoin([this._uploadDocumentsCertificates(ecosolutionId), this._uploadDocumentsTechnicalSheet(ecosolutionId)])
+  }
+  private _uploadDocumentsCertificates(ecosolutionId: string) {
+    if (this.canUploadCertificates) {
+      return this._ecosolutionsManagmentService.uploadDocumentationCertificate(ecosolutionId, this.form.value.certificates)
+    }
+    return of(null)
+  }
+  private _uploadDocumentsTechnicalSheet(ecosolutionId: string) {
+    if (this.canUploadTechnicalSheet) {
+      const metadata = { ...metadataTechnicalSheet, file: this.form.value.technicalSheet }
+      return this._ecosolutionsManagmentService.uplloadTechicalSheet(ecosolutionId, metadata)
+    }
+    return of(null)
   }
 
-  private _uploadCertificate(ecosolution: any) {
-    if ((!this.form.value.certified && !this.form.controls['certified']?.dirty) || !this.inputCertified.nativeElement.value) {
-      return of(null)
+  addCertificateForRemove(id: string) {
+    this.certificateForRemove.set([...this.certificateForRemove(), id])
+  }
+  private _removeDocument() {
+    if (this.certificateForRemove().length > 0) {
+      return this._ecosolutionsManagmentService.removeDocument(this.idEcosolution, this.certificateForRemove())
     }
-    return this._ecosolutionsService.uploadDocumentation(ecosolution.id, [this.fileCertificate])
+    return of(null)
   }
   goToListEcosolution() {
     this._router.navigate(['../cleantech-ecosolutions', this._cleantechId], {
