@@ -336,13 +336,17 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   editEcosolution() {
-    forkJoin([
-      this._ecosolutionsService.getEcosolutionById(this.idEcosolution),
-      this._uploadPicture(this.idEcosolution),
-      this._uploadDocuments(this.idEcosolution),
-      this._removeDocument(),
-    ])
+    this._ecosolutionsService
+      .updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
       .pipe(
+        switchMap(() => {
+          return forkJoin([
+            this._ecosolutionsService.getEcosolutionById(this.idEcosolution),
+            this._uploadPicture(this.idEcosolution),
+            this._uploadDocuments(this.idEcosolution),
+            this._removeDocument(),
+          ])
+        }),
         tap(() => this._submitter.set(true)),
         tap(() => this.goToListEcosolution()),
       )
