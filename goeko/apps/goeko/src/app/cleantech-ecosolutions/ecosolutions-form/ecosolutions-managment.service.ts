@@ -81,7 +81,7 @@ export class EcosolutionsManagmentService {
   }
 
   removeDocument(idEcosolution: string, documentId: string[]) {
-    const deleteDocument$ = documentId.map((idDoc) => this._ecosolutions.delteDocumentation(idEcosolution, idDoc))
+    const deleteDocument$ = documentId.filter((d) => !!d).map((idDoc) => this._ecosolutions.delteDocumentation(idEcosolution, idDoc))
     return forkJoin(deleteDocument$).pipe(
       catchError((error) => {
         console.error('Error removing documentation:', error)

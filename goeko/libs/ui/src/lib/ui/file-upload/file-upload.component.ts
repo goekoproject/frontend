@@ -29,7 +29,7 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
 
   showNameFile = input<boolean>(false)
   fileAdded = output<File | null>()
-
+  fileRemoved = output<string>()
   file = signal<File | null>(null)
   documentData = signal<any>(null)
   isDragover = signal(false)
@@ -152,6 +152,7 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
     }
   }
   removeFile() {
+    this.fileRemoved.emit(this.documentData()?.id)
     this.documentData.set(null)
     this.onChange(null)
     this.onTouched()

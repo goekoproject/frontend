@@ -258,6 +258,7 @@
               <span class="slider round"></span>
             </label>
           </div>
+          @if(form.value.guarantee) {
           <ui-super-select [readonly]="isReadOnly" [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
             [formControlName]="'yearGuarantee'" id="yearGuarantee" name="yearGuarantee"
             [disabled]="!form.value.guarantee" [compareWith]="defaultSetyearGuarantee">
@@ -265,6 +266,8 @@
               {{ option.id }} {{ option.keyLang | translate }}
             </super-option>
           </ui-super-select>
+          }
+
         </div>
 
         <div>
@@ -282,7 +285,7 @@
                       hidden: selectedFormLang().code !== langSignal(),
                     }">
               @for (file of certificates.controls; track $index; let i = $index) {
-              <goeko-select-certificate [formControlName]="i" (removeCertificate)="addCertificateForRemove($event)" />
+              <goeko-select-certificate [formControlName]="i" (removeCertificate)="addDocumentForRemove($event)" />
               }
             </div>
           </ng-container>
@@ -303,7 +306,8 @@
           </div>
 
           @if(form.value.haveTechnicalSheet) {
-          <goeko-file-upload formControlName="technicalSheet" [showNameFile]="true" />
+          <goeko-file-upload formControlName="technicalSheet" [showNameFile]="true"
+            (fileRemoved)="addDocumentForRemove($event)" />
           }
 
         </div>
