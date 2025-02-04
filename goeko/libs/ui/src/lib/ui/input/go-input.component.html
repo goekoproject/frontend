@@ -1,0 +1,20 @@
+<!-- input.component.html -->
+<div class="mb-6">
+  <!-- Desestructuración de señales con `as` -->
+  <label [for]="id()" class="input-label" [class.text-red-700]="showError()" [class.dark-text-red-500]="showError()">
+    {{ label() }}
+  </label>
+  <input [type]="type()" [id]="id()" [placeholder]="placeholder()" class="input-field" [class.is-invalid]="showError()"
+    (input)="onInput($event)" (blur)="onBlur()" (focus)="onFocus()" [attr.data-size]="size()">
+
+  <!-- Error message for required field -->
+  @if(showError()) {
+  <p class="error-message">
+    <span class="font-medium">Oh, snapp!</span> {{ errorMessages()['required'] || 'Some error message.' }}
+  </p>
+  }
+
+
+  <!-- Custom error messages injected via ng-content -->
+  <ng-content select="[error-messages]"></ng-content>
+</div>

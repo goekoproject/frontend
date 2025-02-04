@@ -1,0 +1,24 @@
+
+.input-field {
+  @apply block w-full border border-gray-300 rounded-lg bg-gray-50 text-gray-900 focus:ring-blue-500 focus:border-blue-500;
+
+  &.is-invalid {
+    @apply border-red-500;
+  }
+
+  &[data-size='large'] {
+    @apply p-4 text-base;
+  }
+
+  &[data-size='default'] {
+    @apply p-2.5 text-sm;
+  }
+
+  &[data-size='small'] {
+    @apply p-2 text-xs;
+  }
+}
+
+.error-message {
+  @apply mt-2 text-sm text-red-600;
+}

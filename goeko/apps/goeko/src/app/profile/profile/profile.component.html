@@ -93,6 +93,9 @@
         </label>
       </div>
       }
+      @case('new-input') {
+      <goeko-go-input [formControlName]="itemForm.controlName" />
+      }
       @default {
       <go-input [formControlName]="itemForm.controlName" name="{{ itemForm.controlName }}"
         id="{{ itemForm.controlName }}" type="{{ itemForm.type }}" [placeholder]="itemForm.placeholder || ''"
