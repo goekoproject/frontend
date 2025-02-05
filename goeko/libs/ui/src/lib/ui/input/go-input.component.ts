@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, forwardRef, inject, Injector, input, OnInit, signal, Signal } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms'
+import { Component, computed, inject, input, signal, Signal } from '@angular/core'
+import { ControlValueAccessor, NgControl } from '@angular/forms'
 
 type Size = 'large' | 'default' | 'small'
 type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
@@ -10,13 +10,7 @@ type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
   imports: [CommonModule],
   templateUrl: './go-input.component.html',
   styleUrl: './go-input.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => GoInputComponent),
-      multi: true,
-    },
-  ],
+
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     '[attr.aria-describedby]': 'ariaDescribedby()',
@@ -24,11 +18,9 @@ type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
     '[attr.tabindex]': 'tabIndex()',
   },
 })
-export class GoInputComponent implements ControlValueAccessor, OnInit {
-  private _injector = inject(Injector)
-
+export class GoInputComponent implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  ngControl!: NgControl | null
+  ngControl = inject(NgControl, { optional: true, self: true })!
   // Inputs as Signals using Angular's built-in `input<T>()`
   id = input<string>('input') // Default ID is 'input'
   placeholder = input<string>('') // Default placeholder is empty
@@ -36,6 +28,11 @@ export class GoInputComponent implements ControlValueAccessor, OnInit {
   size = input<Size>('default') // Default size is 'default'
   type = input<InputType>('text') // Default type is 'text'
 
+  required = input<boolean>(this.ngControl?.control?.errors?.['required'] ?? false)
+
+  isRequired() {
+    return this.ngControl?.control?.errors?.['required'] ?? false
+  }
   // Internal state
   private _value = signal<string>('')
   errorMessages = signal<{ [key: string]: string }>({})
@@ -47,11 +44,7 @@ export class GoInputComponent implements ControlValueAccessor, OnInit {
     return this._value
   }
 
-  showError() {
-    return computed(
-      () => this.ngControl?.touched && this.ngControl?.dirty && this.ngControl.invalid && Object.keys(this.errorMessages()).length > 0,
-    )
-  }
+  showError = computed(() => !this._value() && this.ngControl?.touched && this.ngControl?.dirty && this.ngControl.invalid)
 
   ariaDescribedby(): Signal<string | null> {
     return computed(() => (this.showError() ? 'error-message' : null))
@@ -69,11 +62,12 @@ export class GoInputComponent implements ControlValueAccessor, OnInit {
     return computed(() => !!this.ngControl?.disabled)
   }
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.ngControl = this._injector.get(NgControl, null) as NgControl
+  constructor() {
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this
+    }
   }
+
   writeValue(value: any): void {
     this._value.set(value || '')
   }

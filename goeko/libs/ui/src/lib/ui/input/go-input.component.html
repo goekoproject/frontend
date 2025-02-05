@@ -8,13 +8,17 @@
     (input)="onInput($event)" (blur)="onBlur()" (focus)="onFocus()" [attr.data-size]="size()">
 
   <!-- Error message for required field -->
-  @if(showError()) {
+
+  @if(isRequired()) {
   <p class="error-message">
-    <span class="font-medium">Oh, snapp!</span> {{ errorMessages()['required'] || 'Some error message.' }}
+    <span class="font-medium">Oh, snapp!</span> {{ 'Some error message.' }}
   </p>
   }
 
 
+
+  @if(showError()) {
   <!-- Custom error messages injected via ng-content -->
   <ng-content select="[error-messages]"></ng-content>
+  }
 </div>
