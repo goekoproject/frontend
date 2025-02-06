@@ -7,7 +7,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
       {
         controlName: 'name',
         label: 'FORM_LABEL.companyName',
-        type: 'new-input',
+        type: 'text',
         required: true,
       },
       {

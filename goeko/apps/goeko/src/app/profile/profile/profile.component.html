@@ -93,18 +93,11 @@
         </label>
       </div>
       }
-      @case('new-input') {
-      <goeko-go-input [formControlName]="itemForm.controlName" />
-      }
+
       @default {
-      <go-input [formControlName]="itemForm.controlName" name="{{ itemForm.controlName }}"
-        id="{{ itemForm.controlName }}" type="{{ itemForm.type }}" [placeholder]="itemForm.placeholder || ''"
-        class="{{ itemForm.className }}" #input>
-        <p slot="label">{{ itemForm.label | translate }}</p>
-        @if (!itemForm.required) {
-        <p class="optional" slot="required">{{ 'optional' | translate }}</p>
-        }
-      </go-input>
+      <goeko-go-input [formControlName]="itemForm.controlName" [label]="itemForm.label | translate"
+        [id]="itemForm.controlName" [placeholder]="itemForm.placeholder || ''">
+      </goeko-go-input>
       }
       }
       }

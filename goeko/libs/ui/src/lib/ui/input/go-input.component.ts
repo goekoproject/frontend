@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, input, signal, Signal } from '@angular/core'
-import { ControlValueAccessor, NgControl } from '@angular/forms'
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, signal } from '@angular/core'
+import { ControlValueAccessor, NgControl, Validators } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+import { OptionalDirective } from '../directives/optional.directive'
 
 type Size = 'large' | 'default' | 'small'
 type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
 @Component({
   selector: 'goeko-go-input',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule, OptionalDirective],
   templateUrl: './go-input.component.html',
   styleUrl: './go-input.component.scss',
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     '[attr.aria-describedby]': 'ariaDescribedby()',
@@ -19,57 +21,48 @@ type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
   },
 })
 export class GoInputComponent implements ControlValueAccessor {
+  protected _elementRef = inject<ElementRef<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>>(ElementRef)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   ngControl = inject(NgControl, { optional: true, self: true })!
-  // Inputs as Signals using Angular's built-in `input<T>()`
-  id = input<string>('input') // Default ID is 'input'
-  placeholder = input<string>('') // Default placeholder is empty
-  label = input<string>('') // Default label is empty
-  size = input<Size>('default') // Default size is 'default'
-  type = input<InputType>('text') // Default type is 'text'
+
+  id = input('input', {
+    transform: (value: string) => `${window.crypto.randomUUID()}-${value}`,
+  })
+  placeholder = input<string>('')
+  label = input<string>('')
+  size = input<Size>('default')
+  type = input<InputType>('text')
 
   required = input<boolean>(this.ngControl?.control?.errors?.['required'] ?? false)
-
-  isRequired() {
-    return this.ngControl?.control?.errors?.['required'] ?? false
-  }
+  disabled = input<boolean>(this.ngControl?.disabled ?? false)
+  optional = input<boolean>(true)
   // Internal state
-  private _value = signal<string>('')
+  value = signal<string>('')
   errorMessages = signal<{ [key: string]: string }>({})
 
   private onChange!: (value: any) => void
   private onTouched!: () => void
 
-  value(): Signal<string> {
-    return this._value
+  showError = computed(() => (!this.value() && this.ngControl?.touched && this.ngControl?.dirty && this.ngControl.invalid) ?? false)
+  isRequired = computed(() => (!this.value() && this.ngControl?.control?.errors?.['required']) ?? false)
+  showOptional = computed(() => this.optional() && !this.hasValidatorRequired)
+  ariaDescribedby = computed(() => (this.showError() ? 'error-message' : null))
+  ariaInvalid = computed(() => this.showError())
+  tabIndex = computed(() => (this.disabled() ? -1 : 0))
+  isDisabled = computed(() => this.ngControl?.disabled ?? this.disabled())
+
+  get hasValidatorRequired() {
+    return this.ngControl.control?.hasValidator(Validators.required) ?? false
   }
-
-  showError = computed(() => !this._value() && this.ngControl?.touched && this.ngControl?.dirty && this.ngControl.invalid)
-
-  ariaDescribedby(): Signal<string | null> {
-    return computed(() => (this.showError() ? 'error-message' : null))
-  }
-
-  ariaInvalid() {
-    return computed(() => this.showError())
-  }
-
-  tabIndex(): Signal<number> {
-    return computed(() => (this.disabled() ? -1 : 0))
-  }
-
-  disabled(): Signal<boolean> {
-    return computed(() => !!this.ngControl?.disabled)
-  }
-
   constructor() {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this
+      console.log(this.id())
     }
   }
 
   writeValue(value: any): void {
-    this._value.set(value || '')
+    this.value.set(value || '')
   }
 
   registerOnChange(fn: any): void {
@@ -89,7 +82,7 @@ export class GoInputComponent implements ControlValueAccessor {
 
   onInput(event: Event): void {
     const newValue = (event.target as HTMLInputElement).value
-    this._value.set(newValue)
+    this.value.set(newValue)
     this.onChange(newValue)
   }
 
@@ -97,5 +90,7 @@ export class GoInputComponent implements ControlValueAccessor {
     this.onTouched()
   }
 
-  onFocus(): void {}
+  onFocus(): void {
+    this.onTouched()
+  }
 }

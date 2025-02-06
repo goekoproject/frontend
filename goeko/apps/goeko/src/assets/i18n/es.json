@@ -751,7 +751,8 @@
   "or": "o",
   "ERRORS_FORM": {
     "SELECT_CERTIFICATE": "Selecciona un certificado",
-    "SELECT_YEARS_GUARANTEE": "Selecciona los años de garantía"
+    "SELECT_YEARS_GUARANTEE": "Selecciona los años de garantía",
+    "required": "Este campo es obligatorio."
   },
   "download": "Descargar"
 }
