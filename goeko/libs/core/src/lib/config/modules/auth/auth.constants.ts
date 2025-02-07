@@ -4,6 +4,6 @@ export const SS_JWTDATA = 'jwtData'
 export const EXPIRES_AT = 'expires_at'
 export const AUTH_CONNECT = {
   REALM: 'goeko-users',
-  REDIRECT_URI: `${window.location.origin}/platform`,
+  REDIRECT_URI: `${window.location.origin}`,
   AUDIENCE: 'goeko-backend',
 }

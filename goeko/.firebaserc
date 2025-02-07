@@ -3,5 +3,18 @@
     "dev": "goeko-dev",
     "pro": "goeko-pro",
     "default": "goeko-pro"
-  }
+  },
+  "targets": {
+    "goeko-pro": {
+      "hosting": {
+        "platform": [
+          "ch-platform-pro"
+        ],
+        "legacy": [
+          "goeko-pro"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

@@ -16,8 +16,8 @@ const routes: Routes = [
   {
     path: '',
     component: PlatformComponent,
-    canActivate: [checkSessionUserData],
-    children: [
+/*     canActivate: [checkSessionUserData],
+ */    children: [
       {
         path: '',
         redirectTo: 'dashboard',
