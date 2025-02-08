@@ -1,22 +1,34 @@
-import { ApplicationConfig } from '@angular/core'
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
+import { HttpClient } from '@angular/common/http'
+import { ApplicationConfig, importProvidersFrom } from '@angular/core'
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app'
+import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config'
 import { provideRouter, withComponentInputBinding } from '@angular/router'
+import { CODE_LANG, ConfigModule } from '@goeko/core'
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { environment } from '../environments/environment'
 import { appRoutes } from './app.routes'
-import { CODE_LANG } from '@goeko/core'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
-import { HttpClient } from '@angular/common/http'
 
- const httpLoaderFactory = (http: HttpClient) => {
+const httpLoaderFactory = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
 }
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(appRoutes, withComponentInputBinding()),
+    provideRemoteConfig(() => getRemoteConfig(getApp())),
+
+    importProvidersFrom(
+      ConfigModule.forRoot({
+        endopoint: environment.baseUrl,
+        clientSecret: environment.clientSecret,
+        clientId: environment.clientId,
+        domainAuth0: environment.domainAuth0,
+        audience: environment.audience,
+        connection: environment.connection,
+      }),
+    ),
     provideTranslateService({
       defaultLanguage: sessionStorage.getItem('lang') ?? CODE_LANG.FR,
-
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,

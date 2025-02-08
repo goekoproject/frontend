@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { provideHttpClient, withInterceptors } from '@angular/common/http'
-import { handlerHttpInterceptor, SelectI18nComponent } from '@goeko/business-ui'
-import { ConfigModule, OrderByPipe } from '@goeko/core'
+import { SelectI18nComponent } from '@goeko/business-ui'
+import { OrderByPipe, RemoteConfigService } from '@goeko/core'
 import {
   ClassificationsService,
   EcosolutionsSearchService,
@@ -15,31 +14,22 @@ import {
   SessionStorageService,
   ShowForRolesDirective,
   ToastComponent,
-  UserService,
 } from '@goeko/store'
-import {
-  BadgeModule,
-  DialogMessageModule,
-  DialogService,
-  NotificationModule,
-  NotificationService,
-  SideDialogModule,
-  UiBreadcrumbsModule,
-} from '@goeko/ui'
+import { BadgeModule, DialogMessageModule, DialogService, NotificationModule, NotificationService, UiBreadcrumbsModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { environment } from '../../environments/environment'
 import { HeaderUserComponent } from '../shell/header-user/header-user.component'
 import { MenuUserComponent } from '../shell/menu-user/menu-user.component'
 import { PlatformRoutingModule } from './platform-routing.module'
 import { PlatformComponent } from './platform.component'
 
 @NgModule({
-  declarations: [PlatformComponent, MenuUserComponent, HeaderUserComponent],
+  declarations: [PlatformComponent],
   imports: [
+    HeaderUserComponent,
+    MenuUserComponent,
     CommonModule,
     PlatformRoutingModule,
     DialogMessageModule,
-    SideDialogModule,
     UiBreadcrumbsModule,
     NotificationModule,
     BadgeModule,
@@ -49,18 +39,9 @@ import { PlatformComponent } from './platform.component'
     GoShowUserTypeDirective,
     ToastComponent,
     OrderByPipe,
-    ConfigModule.forRoot({
-      endopoint: environment.baseUrl,
-      clientSecret: environment.clientSecret,
-      clientId: environment.clientId,
-      domainAuth0: environment.domainAuth0,
-      audience: environment.audience,
-      connection: environment.connection,
-    }),
   ],
   providers: [
     DialogService,
-    UserService,
     isSubscribedCleantech,
     NotificationService,
     LocationsService,
@@ -69,7 +50,7 @@ import { PlatformComponent } from './platform.component'
     EcosolutionsSearchService,
     SessionStorageService,
     EcosolutionsTaggingService,
-    provideHttpClient(withInterceptors([handlerHttpInterceptor])),
+    RemoteConfigService,
   ],
 })
 export class PlatformModule {}

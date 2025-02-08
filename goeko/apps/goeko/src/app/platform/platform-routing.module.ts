@@ -8,7 +8,7 @@ import {
   ecosolutionSearchDetailResolver,
   groupingFormCategoriesResolver,
   hasRole,
-    projectResolver,
+  projectResolver,
 } from '@goeko/store'
 import { PlatformComponent } from './platform.component'
 

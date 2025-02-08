@@ -1,12 +1,14 @@
 import { Component, signal } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
+import { RouterLink, RouterOutlet } from '@angular/router'
 import { PopupModule } from '@goeko/business-ui'
-import { TranslateDirective } from '@ngx-translate/core'
+import { ToastComponent } from '@goeko/store'
+import { DialogMessageModule, SideDialogModule } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
 
 const KEY_COOKIES = 'cookie-policy'
 @Component({
   selector: 'goeko-root',
-  imports: [RouterOutlet, TranslateDirective, PopupModule],
+  imports: [RouterOutlet, TranslatePipe, PopupModule, RouterLink, SideDialogModule, DialogMessageModule, ToastComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,

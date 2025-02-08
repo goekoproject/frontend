@@ -1,10 +1,14 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core'
-import { FormBuilder, Validators } from '@angular/forms'
-import { ActivatedRoute } from '@angular/router'
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
+import { ActivatedRoute, RouterLink } from '@angular/router'
+import { GoInputModule } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
 import { AccessService } from '../access.services'
 
 @Component({
   selector: 'goeko-reset-password',
+  standalone: true,
+  imports: [ReactiveFormsModule, GoInputModule, RouterLink, TranslatePipe],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss',
   encapsulation: ViewEncapsulation.None,

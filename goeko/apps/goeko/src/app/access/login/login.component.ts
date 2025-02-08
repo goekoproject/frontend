@@ -1,10 +1,15 @@
 import { Component, OnInit, signal, ViewEncapsulation } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { RouterLink } from '@angular/router'
 import { ErrorLogin, errorMessagelogin } from '@goeko/core'
+import { AlertComponent, ButtonModule, GoInputModule } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
 import { AccessService } from '../access.services'
 
 @Component({
   selector: 'goeko-login',
+  standalone: true,
+  imports: [GoInputModule, AlertComponent, ButtonModule, TranslatePipe, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None,

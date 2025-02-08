@@ -1,19 +1,17 @@
-import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
+import { Routes } from '@angular/router'
 import { redirectIsAuthenticated } from '@goeko/core'
 import { AccessComponent } from './access.component'
-import { LoginComponent } from './login/login.component'
-import { SignupComponent } from './signup/signup.component'
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
+import { SignupComponent } from './signup/signup.component'
 
-const routes: Routes = [
+export const ACCESS_ROUTERS: Routes = [
   {
     path: '',
     component: AccessComponent,
     children: [
       {
         path: '',
-        component: LoginComponent,
+        loadComponent: () => import('./login/login.component').then((m) => m.LoginComponent),
         canActivate: [redirectIsAuthenticated],
       },
       {
@@ -23,13 +21,7 @@ const routes: Routes = [
       {
         path: 'reset-password',
         component: ResetPasswordComponent,
-      }
+      },
     ],
   },
 ]
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class AccessRoutingModule {}

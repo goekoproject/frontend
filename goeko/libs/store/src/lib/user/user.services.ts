@@ -14,9 +14,12 @@ import { BankUser } from './user-type/bank-user.model'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
 export const SS_LOAD_USER = 'SS_LOAD_USER'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
   sessionStorage = inject(SessionStorageService)
+  private _http = inject(HttpClient)
 
   public userAuthData = signal<any>({})
 
@@ -41,10 +44,7 @@ export class UserService {
   public setUserData(user: any) {
     this.userAuthData.set(user)
   }
-  constructor(
-    public _http: HttpClient,
-    private _router: Router,
-  ) {
+  constructor(private _router: Router) {
     effect(() => {
       if (this.userAuthData().sub) {
         this._getDataProfile()

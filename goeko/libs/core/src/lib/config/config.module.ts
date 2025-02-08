@@ -10,13 +10,14 @@ import { Options } from './models/options.interface'
 import { AuthHttpInterceptor } from './modules/auth/auth.interceptor'
 import { AuthService } from './modules/auth/auth.service'
 import { LoadingModule } from './services/loading/loading.module'
-import { SpinnerOverlayModule } from './services/spinner-overlay/spinner-overlay.module'
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule, LoadingModule, SpinnerOverlayModule],
+  imports: [CommonModule, RouterModule, LoadingModule],
   providers: [
     AuthService,
+    provideHttpClient(withInterceptorsFromDi()),
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TranformDateInterceptor,
@@ -33,7 +34,6 @@ import { SpinnerOverlayModule } from './services/spinner-overlay/spinner-overlay
       useClass: EmptyElementsInterceptor,
       multi: true,
     },
-    provideHttpClient(withInterceptorsFromDi()),
   ],
 })
 export class ConfigModule {

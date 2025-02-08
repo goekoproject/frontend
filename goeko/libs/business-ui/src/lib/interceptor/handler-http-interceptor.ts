@@ -1,6 +1,6 @@
 import { HttpEvent, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http'
 import { inject } from '@angular/core'
-import { Notification, TOAST_NOTIFICATION_SUBTYPE, ToastService } from '@goeko/store'
+import { Notification, ToastService } from '@goeko/store'
 import { throwError } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
 const isPlatformGoeko = (request: HttpRequest<unknown>) => request.url.includes('/v1')
@@ -24,22 +24,22 @@ const ERROR_MESSAGE: MessageError = {
 
 const SUCCESS_MESSAGE: SuccessMessage = {
   POST: {
-    message: 'SUCCESS_MESSAGES.POST',
-    type: TOAST_NOTIFICATION_TYPE.SUCCESS,
-    subtype: TOAST_NOTIFICATION_SUBTYPE.POST,
+    message: 'POST',
+    type: 'SUCCESS',
+    subtype: 'POST',
   },
   PUT: {
-    message: 'SUCCESS_MESSAGES.PUT',
-    type: TOAST_NOTIFICATION_TYPE.SUCCESS,
-    subtype: TOAST_NOTIFICATION_SUBTYPE.PUT,
+    message: 'PUT',
+    type: 'SUCCESS',
+    subtype: 'PUT',
   },
   DELETE: {
-    message: 'SUCCESS_MESSAGES.DELETE',
-    type: TOAST_NOTIFICATION_TYPE.SUCCESS,
-    subtype: TOAST_NOTIFICATION_SUBTYPE.DELETE,
+    message: 'DELETE',
+    type: 'SUCCESS',
+    subtype: 'DELETE',
   },
 }
-export const handlerHttpInterceptor: HttpInterceptorFn = (req, next) => {
+export const handlerHttpErrorInterceptor: HttpInterceptorFn = (req, next) => {
   const _toastService = inject(ToastService)
   return next(req).pipe(
     tap((event: HttpEvent<any>) => {

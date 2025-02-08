@@ -1,14 +1,30 @@
+import { CommonModule } from '@angular/common'
 import { Component, ElementRef, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { RouterLink } from '@angular/router'
 import { errorMessageSignUp, ErrorSignUp, TypeErrorCode } from '@goeko/core'
 import { USER_TYPE, USER_TYPE_DESCRIPTION } from '@goeko/store'
-import { DialogService } from '@goeko/ui'
+import { AlertComponent, ButtonModule, DialogService, GoInputModule, TooltipComponent } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
 import { AccessService } from '../access.services'
+import { PasswordPolicyComponent } from '../password-policy/password-policy.component'
 import { SignUp } from '../singup.model'
 import { TermsOfServicesComponent } from './terms-of-services.component'
 
 @Component({
   selector: 'goeko-signup',
+  standalone: true,
+  imports: [
+    CommonModule,
+    TooltipComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    TranslatePipe,
+    ButtonModule,
+    GoInputModule,
+    PasswordPolicyComponent,
+    AlertComponent,
+  ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
   encapsulation: ViewEncapsulation.None,

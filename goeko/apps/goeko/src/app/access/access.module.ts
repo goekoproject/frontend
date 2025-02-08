@@ -18,16 +18,15 @@ import {
 } from '@goeko/ui'
 import { TranslateDirective } from '@ngx-translate/core'
 import { environment } from '../../environments/environment'
-import { AccessRoutingModule } from './access-routing.module'
+import { AccessRoutingModule } from './access.router'
 import { AccessComponent } from './access.component'
 import { AccessService } from './access.services'
-import { LoginComponent } from './login/login.component'
 import { PasswordPolicyComponent } from './password-policy/password-policy.component'
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
 import { SignupComponent } from './signup/signup.component'
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent, AccessComponent, ResetPasswordComponent],
+  declarations: [SignupComponent, AccessComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     AccessRoutingModule,

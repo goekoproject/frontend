@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common'
 import { Component, effect, signal } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from '@goeko/core'
-import { UserService } from '@goeko/store'
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router'
+import { AuthService, OrderByPipe } from '@goeko/core'
+import { ShowForRolesDirective, UserService } from '@goeko/store'
+import { TranslatePipe } from '@ngx-translate/core'
 import { getMenuByUserType, MenuUser } from './menu-user.contants'
 
 @Component({
   selector: 'goeko-menu-user',
+  standalone: true,
+  imports: [TranslatePipe, CommonModule, RouterLink, RouterLinkActive, OrderByPipe, ShowForRolesDirective],
   templateUrl: './menu-user.component.html',
   styleUrls: ['./menu-user.component.scss'],
 })
