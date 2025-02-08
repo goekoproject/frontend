@@ -1,13 +1,5 @@
-import { setRemoteDefinitions } from '@nx/angular/mf';
-import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
+import { bootstrapApplication } from '@angular/platform-browser'
 
-let url_module_federation_manifest = '/assets/module-federation.manifest.json';
-if (environment.production) {
-  url_module_federation_manifest =
-    '/assets/module-federation.manifest.pro.json';
-}
-
-fetch(url_module_federation_manifest)
-  .then((res) => res.json())
-  .then((definitions) => setRemoteDefinitions(definitions))
-  .then(() => import('./bootstrap').catch((err) => console.error(err)));
+bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err))

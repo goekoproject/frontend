@@ -39,7 +39,7 @@
     "@cloudinary/url-gen": "^1.21.0",
     "@contentful/rich-text-html-renderer": "^16.6.10",
     "@formkit/tempo": "^0.1.2",
-    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/core": "16.0.4",
     "@ngx-translate/http-loader": "^8.0.0",
     "@nrwl/nx-cloud": "19.1.0",
     "@nx/angular": "20.1.0",

@@ -16,15 +16,15 @@ import {
   TooltipComponent,
   UiSuperSelectModule,
 } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateDirective } from '@ngx-translate/core'
 import { environment } from '../../environments/environment'
 import { AccessRoutingModule } from './access-routing.module'
 import { AccessComponent } from './access.component'
 import { AccessService } from './access.services'
 import { LoginComponent } from './login/login.component'
+import { PasswordPolicyComponent } from './password-policy/password-policy.component'
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
 import { SignupComponent } from './signup/signup.component'
-import { PasswordPolicyComponent } from "./password-policy/password-policy.component";
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent, AccessComponent, ResetPasswordComponent],
@@ -35,7 +35,7 @@ import { PasswordPolicyComponent } from "./password-policy/password-policy.compo
     ButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    TranslateModule,
+    TranslateDirective,
     SwitchModule,
     UiSuperSelectModule,
     NotificationModule,
@@ -45,15 +45,15 @@ import { PasswordPolicyComponent } from "./password-policy/password-policy.compo
     AlertComponent,
     TooltipComponent,
     ConfigModule.forRoot({
-        endopoint: environment.baseUrl,
-        clientSecret: environment.clientSecret,
-        clientId: environment.clientId,
-        domainAuth0: environment.domainAuth0,
-        audience: environment.audience,
-        connection: environment.connection,
+      endopoint: environment.baseUrl,
+      clientSecret: environment.clientSecret,
+      clientId: environment.clientId,
+      domainAuth0: environment.domainAuth0,
+      audience: environment.audience,
+      connection: environment.connection,
     }),
-    PasswordPolicyComponent
-],
+    PasswordPolicyComponent,
+  ],
   providers: [DialogService, AccessService],
 })
 export class AccessModule {}
