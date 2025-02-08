@@ -8,7 +8,7 @@ import { SessionStorageService } from '../../services/session-storage.service'
 import { EXPIRES_AT, SESSIONID } from './auth.constants'
 export const ACCESS_TOKEN = 'accessToken'
 export const SS_JWTDATA = 'jwtData'
-const namespace = 'https://platform.goeko'
+const namespace = 'https://goeko'
 
 const getUserRole = (userData: any) => {
   if (!userData) return [ROLES.PUBLIC]

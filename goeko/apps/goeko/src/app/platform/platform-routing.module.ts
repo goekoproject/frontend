@@ -8,7 +8,7 @@ import {
   ecosolutionSearchDetailResolver,
   groupingFormCategoriesResolver,
   hasRole,
-  projectResolver,
+    projectResolver,
 } from '@goeko/store'
 import { PlatformComponent } from './platform.component'
 
@@ -16,8 +16,8 @@ const routes: Routes = [
   {
     path: '',
     component: PlatformComponent,
-/*     canActivate: [checkSessionUserData],
- */    children: [
+    canActivate: [checkSessionUserData],
+    children: [
       {
         path: '',
         redirectTo: 'dashboard',
