@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common'
-import { Component, effect, Inject, OnDestroy, OnInit, signal } from '@angular/core'
+import { Component, effect, Inject, OnInit, signal } from '@angular/core'
 import { VAR_GENERAL } from '@goeko/business-ui'
 import { AuthService, REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
 import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store'
@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment'
   templateUrl: './platform.component.html',
   styleUrl: './platform.component.scss',
 })
-export class PlatformComponent implements OnInit{
+export class PlatformComponent implements OnInit {
   get isSubscribed() {
     if (!environment.production) {
       return true

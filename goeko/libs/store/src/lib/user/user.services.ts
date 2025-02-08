@@ -88,13 +88,13 @@ export class UserService {
     this.sessionStorage.setItem(SS_LOAD_USER, true)
 
     if (this.userType() === USER_TYPE.BANK) {
-      this._router.navigate([`platform/funding`])
+      this._router.navigate([`funding`])
     } else {
-      this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`])
+      this._router.navigate([`dashboard/${this.userType()}/${this.userProfile().id}`])
     }
   }
   private _redirectProfile() {
-    this._router.navigate([`platform/profile/${this.externalId()}`])
+    this._router.navigate([`profile/${this.externalId()}`])
   }
 
   getById(id: string): Observable<UserData> {

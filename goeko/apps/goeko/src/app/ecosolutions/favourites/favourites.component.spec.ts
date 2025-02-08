@@ -98,6 +98,6 @@ describe('FavouritesComponent', () => {
   it('should navigate to ecosolution detail page when showMore is called', () => {
     const ecosolutionId = 'test-ecosolution-id'
     component.showMore(ecosolutionId)
-    expect(router.navigate).toHaveBeenCalledWith([`platform/ecosolutions-detail/${component.id()}/${ecosolutionId}`])
+    expect(router.navigate).toHaveBeenCalledWith([`ecosolutions-detail/${component.id()}/${ecosolutionId}`])
   })
 })

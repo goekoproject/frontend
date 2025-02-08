@@ -105,7 +105,7 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
       currentValues.values.forEach((value: any, index: any) => {
         this.controlLocationsCountryValue.set([...this.controlLocations.value.map((value: LocationsCountry) => value.country.code)])
 
-        if (value !== previousValues[index]) {
+        if (value.country.code !== previousValues.values[index]?.country?.code) {
           const { code } = value.country
           this.changeCountry.emit(code)
           if (code && !this.dataSourceSelect.has(code)) {

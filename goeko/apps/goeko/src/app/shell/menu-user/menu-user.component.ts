@@ -38,7 +38,7 @@ export class MenuUserComponent {
   }
 
   goToSubmenu(route: string) {
-    this._router.navigate([`platform/${route}`])
+    this._router.navigate([route])
   }
 
   //TODO: change pro property
@@ -59,7 +59,7 @@ export class MenuUserComponent {
         return
 
       default:
-        this._router.navigate([`platform/${route}`])
+        this._router.navigate([route])
         return
     }
   }
