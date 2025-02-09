@@ -26,9 +26,9 @@ export const appRoutes: Routes = [
     path: 'autenticate',
     loadComponent: () => import('@goeko/business-ui').then((m) => m.AutenticateComponent),
   },
-  /*   {
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
-  }, */
+  },
 ]
