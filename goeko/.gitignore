@@ -44,4 +44,4 @@ Thumbs.db
 
 # Project
 *.unlighthouse
-.worktree
+/.worktree
