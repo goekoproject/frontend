@@ -7,11 +7,14 @@
   "targets": {
     "goeko-pro": {
       "hosting": {
-        "platform": [
-          "ch-platform-pro"
-        ],
         "legacy": [
           "goeko-pro"
+        ],
+        "ch": [
+          "ch-platform-pro"
+        ],
+        "eu": [
+          "eu-platform-pro"
         ]
       }
     }
