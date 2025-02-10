@@ -12,7 +12,7 @@
       ]
     },
     {
-      "target": "platform",
+      "target": "ch",
       "public": "dist/apps/goeko",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
