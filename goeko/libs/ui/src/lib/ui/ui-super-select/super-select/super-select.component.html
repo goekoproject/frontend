@@ -8,42 +8,32 @@
 
 <ng-content select="[icon]"></ng-content>
 
-<div
-  cdk-overlay-origin
-  cdkOverlayOrigin
-  class="select {{ size }} {{ status }}"
-  [ngClass]="{
+<div cdk-overlay-origin cdkOverlayOrigin class="select {{ size }} {{ status }}" [ngClass]="{
     'select--error': hasError,
     'ui-select--success': !hasError && value,
-  }"
-  (click)="toggle($event)"
-  #origin="cdkOverlayOrigin"
-  #trigger>
-  <label *ngIf="empty" id="floting-label" class="select_label" [ngClass]="{ 'not-floating': noFloatinglabel }" #labelElement
-    >{{ placeholder }}
+  }" (click)="toggle($event)" #origin="cdkOverlayOrigin" #trigger>
+  <label *ngIf="empty" id="floting-label" class="select_label" [ngClass]="{ 'not-floating': noFloatinglabel }"
+    #labelElement>{{ placeholder }}
   </label>
 
   <div *ngIf="!empty" class="select_value">
     {{ label }}
   </div>
 
-  <i id="{{ arrowId }}" class="icon-Arrow-Chevron-Down select_arrow" [ngClass]="{ 'select-arrow--rotate': isOpen }"> </i>
-  <span class="material-symbols-rounded"> keyboard_arrow_down </span>
+  <i id="{{ arrowId }}" class="icon-Arrow-Chevron-Down select_arrow" [ngClass]="{ 'select-arrow--rotate': isOpen }">
+  </i>
+  <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+  </svg>
 
   <div class="ui-select_message-error" *ngIf="hasError">
     <ng-content select="[isError]"></ng-content>
   </div>
 
-  <ng-template
-    #triggerOptions
-    cdkConnectedOverlay
-    [cdkConnectedOverlayHasBackdrop]="true"
-    [cdkConnectedOverlayPanelClass]="overlayPanelClass"
-    [cdkConnectedOverlayOrigin]="origin"
-    [cdkConnectedOverlayOpen]="isOpen"
-    [cdkConnectedOverlayWidth]="_overlayWidth"
-    [cdkConnectedOverlayPanelClass]="'select-dropdown'"
-    (backdropClick)="close()">
+  <ng-template #triggerOptions cdkConnectedOverlay [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayPanelClass]="overlayPanelClass" [cdkConnectedOverlayOrigin]="origin"
+    [cdkConnectedOverlayOpen]="isOpen" [cdkConnectedOverlayWidth]="_overlayWidth"
+    [cdkConnectedOverlayPanelClass]="'select-dropdown'" (backdropClick)="close()">
     <div role="listbox" tabindex="-1" (keydown)="_handleKeydown($event)" class="select_options go-scroll" cdkTrapFocus>
       <ng-content></ng-content>
     </div>

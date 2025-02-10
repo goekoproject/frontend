@@ -3,13 +3,23 @@ import { Inject, Injectable, signal } from '@angular/core'
 import { LangOfLocalecontentFul } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { Auth0UserProfile } from 'auth0-js'
-import { Observable, of, tap } from 'rxjs'
+import { catchError, Observable, of, tap, throwError } from 'rxjs'
 import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
 import { AuthRequest } from './auth-request.interface'
 import { AUTH_CONNECT, EXPIRES_AT, SESSIONID } from './auth.constants'
 import { Auth0Connected } from './auth0.abtract'
 import { SignUp } from './signup.interface'
+
+type ErrorAuthType = 'general' | 'verifyEmail'
+enum ErrAuth {
+  GENERAL = 'general',
+  VERIFY_EMAIL = 'verifyEmail',
+}
+interface ErrorAuth {
+  type: ErrorAuthType
+  message: string
+}
 
 @Injectable({ providedIn: 'platform' })
 export class AuthService extends Auth0Connected {
@@ -121,7 +131,16 @@ export class AuthService extends Auth0Connected {
           this.authenticated.set(this.isAuthenticated)
         }
       }),
+      catchError(this._handerError),
     )
+  }
+
+  private _handerError(err: any) {
+    let errorMessage: ErrorAuth = { type: ErrAuth.VERIFY_EMAIL, message: 'An unknown error occurred!' }
+    if (err.errorDescription?.includes('verify your email before')) {
+      errorMessage = { type: ErrAuth.VERIFY_EMAIL, message: err.errorDescription }
+    }
+    return throwError(() => new Error(errorMessage.type, { cause: errorMessage }))
   }
 
   logout(returnTo = `${this.doc.location.origin}/login`) {

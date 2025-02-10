@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { canDeactivateGuard } from '@goeko/business-ui'
-import { AuthGuard, checkSessionUserData } from '@goeko/core'
+import { AuthGuard } from '@goeko/core'
 import {
   ROLES,
   ecosolutionFavouritesResolver,
@@ -16,7 +16,6 @@ const routes: Routes = [
   {
     path: '',
     component: PlatformComponent,
-    canActivate: [checkSessionUserData],
     children: [
       {
         path: '',

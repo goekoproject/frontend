@@ -1,3 +1,4 @@
+import { handlerHttpErrorInterceptor } from './../../../../business-ui/src/lib/interceptor/handler-http-interceptor';
 import { CommonModule } from '@angular/common'
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http'
 import { ModuleWithProviders, NgModule } from '@angular/core'
@@ -14,7 +15,8 @@ import { LoadingModule } from './services/loading/loading.module'
   declarations: [],
   imports: [CommonModule, RouterModule, LoadingModule],
   providers: [
-    provideHttpClient(withInterceptors([authHttpInterceptor])),
+    provideHttpClient(withInterceptors([authHttpInterceptor, handlerHttpErrorInterceptor])),
+    //TODO: transform to intercetopr funtion
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TranformDateInterceptor,

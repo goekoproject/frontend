@@ -1,7 +1,7 @@
 import { inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { ROLES } from '@goeko/store'
-import { Auth0UserProfile, WebAuth } from 'auth0-js'
+import { Auth0DecodedHash, Auth0UserProfile, WebAuth } from 'auth0-js'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { Options } from '../../models/options.interface'
 import { SessionStorageService } from '../../services/session-storage.service'
@@ -133,20 +133,22 @@ export abstract class Auth0Connected {
   }
 
   public _parseHashAuth0() {
+    const getIdToken = (authResult: Auth0DecodedHash | null) => {
+      if (!authResult?.idTokenPayload) {
+        return null
+      }
+      setSession(authResult)
+      return authResult.idTokenPayload
+    }
     return new Observable<any>((observer) => {
       this.webAuth.parseHash({ hash: window.location.hash }, function (err, authResult) {
         if (err) {
-          if (err.errorDescription?.includes('verify your email before')) {
-            window.location.href = `${window.location.origin}/verify-email`
-          }
-          console.log(err)
+          observer.error(err)
+          observer.complete()
         } else {
-          if (authResult && authResult.idTokenPayload) {
-            setSession(authResult)
-            const userAuth0 = authResult.idTokenPayload
-            observer.next(userAuth0)
-            observer.complete()
-          }
+          const userAuth0 = getIdToken(authResult)
+          observer.next(userAuth0)
+          observer.complete()
         }
       })
     })

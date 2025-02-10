@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router'
+import { checkSessionUserData } from '@goeko/core'
 
 export const appRoutes: Routes = [
   {
     path: '',
     loadChildren: () => import('./platform/platform.module').then((m) => m.PlatformModule),
+    canActivate: [checkSessionUserData],
   },
   {
     path: 'home',
@@ -25,10 +27,5 @@ export const appRoutes: Routes = [
   {
     path: 'autenticate',
     loadComponent: () => import('@goeko/business-ui').then((m) => m.AutenticateComponent),
-  },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
   },
 ]
