@@ -21,6 +21,17 @@
           "destination": "/index.html"
         }
       ]
+    },
+    {
+      "target": "eu",
+      "public": "dist/apps/goeko",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
   ]
 }
