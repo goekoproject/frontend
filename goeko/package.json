@@ -19,7 +19,7 @@
     "e2e": "nx e2e goeko-e2e --watch",
     "deploy:dev": "npm run build:dev && firebase deploy --only hosting -P goeko-dev",
     "deploy:pro": "npm run build:pro && firebase deploy --only hosting -P goeko-pro",
-    "deploy:platform": "npm run build:pro && firebase deploy --only hosting:ch -P goeko-pro"
+    "deploy:ch": "npm run build:pro && firebase deploy --only hosting:ch -P goeko-pro"
   },
   "private": true,
   "dependencies": {
