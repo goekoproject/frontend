@@ -20,6 +20,7 @@
   margin: 0;
   padding: 0;
 }
+
 html {
   box-sizing: border-box;
   height: 100%;
@@ -49,7 +50,7 @@ body:has(div.is-lighthome) {
   background: var(--white);
 }
 
-div.is-lighthome ~ .goeko-header   {
+div.is-lighthome ~ .goeko-header {
   background-color: var(--home-page-dark-blue);
 }
 
