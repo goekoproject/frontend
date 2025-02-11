@@ -24,4 +24,5 @@ export interface Profile<T = 'cleantech' | 'sme' | 'bank'> {
   className?: string
   required?: boolean
   placeholder?: string
+  errorMessage?: string
 }

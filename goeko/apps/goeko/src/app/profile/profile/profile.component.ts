@@ -132,6 +132,9 @@ export class ProfileComponent implements CanComponentDeactivate {
     })
   }
   manageIdentifiers = (codeCountry: string) => {
+    if (!this._identifier) {
+      return
+    }
     this._identifier.placeholder = IdentifierPlaceholders[codeCountry as keyof typeof IdentifierPlaceholders]
   }
   fileChange(file: File[]) {
