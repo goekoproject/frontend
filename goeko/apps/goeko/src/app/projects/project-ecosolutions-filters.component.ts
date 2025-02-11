@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, inject, model, OnInit, output, signal, viewChildren } from '@angular/core'
+import { Component, computed, ElementRef, inject, model, OnInit, output, signal, viewChildren } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { SdgIconsComponent } from '@goeko/business-ui'
 import { Category, ClassificationDocumentType, ClassificationsDocumentsService, SDGLabel } from '@goeko/store'
@@ -21,16 +21,18 @@ export class ProjectEcosolutionsFiltersComponent implements OnInit {
   private _projectManagmenetService = inject(ProjectManagmentService)
   filtersVisible = model<boolean>(true)
   protected classificationsFilters = toSignal(this._projectManagmenetService.getGroupingFormCategories(), { initialValue: [] })
+  public documentTypes = toSignal(this._projectManagmenetService.getDocumentTypeEcosolutionServices(), { initialValue: [] })
+
   private _translateService = inject(TranslateService)
   private _categoriesCheckbox = viewChildren<ElementRef<HTMLInputElement>>('categories')
   private _documentTypesCheckbox = viewChildren<ElementRef<HTMLInputElement>>('documentTypes')
-  public documentTypes = toSignal(this._projectManagmenetService.getDocumentTypeEcosolutionServices(), { initialValue: [] })
   //Filters
   public filterCategories = signal<Category[] | null>(null)
   public filterCertificate = output<string[] | undefined>()
   public checkFavourite = signal<boolean>(false)
   public filterSdg = signal<SDGLabel[]>([])
 
+  private _documentTypesForCode = computed(() => this.documentTypes()?.map((d) => d.code))
   private get _checkedCategories() {
     return this._categoriesCheckbox()
       .filter((checkbox) => checkbox.nativeElement.checked)
@@ -68,7 +70,7 @@ export class ProjectEcosolutionsFiltersComponent implements OnInit {
     )
   }
   applyAllCertificate() {
-    this.filterCertificate.emit(undefined)
+    this.filterCertificate.emit(this._documentTypesForCode())
   }
   closeFilter = () => {
     this.filtersVisible.set(false)
