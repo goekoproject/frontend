@@ -97,6 +97,12 @@
       @default {
       <goeko-go-input [formControlName]="itemForm.controlName" [label]="itemForm.label | translate"
         [id]="itemForm.controlName" [placeholder]="itemForm.placeholder || ''">
+
+        <p [error-messages>
+          {{ (itemForm.errorMessage ||'') | translate }}
+        </p>
+
+
       </goeko-go-input>
       }
       }
