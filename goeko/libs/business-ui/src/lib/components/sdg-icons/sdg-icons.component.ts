@@ -99,7 +99,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn
   }
   setDisabledState?(isDisabled: boolean): void {
-    console.log('Method not implemented.')
+    console.info('Method not implemented.')
   }
 
   selectedElement(event: Event, sdgSelected: SDGLabel): void {
