@@ -15,6 +15,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         label: 'FORM_LABEL.email',
         type: 'email',
         required: true,
+        errorMessage: 'ERRORS_FORM.email',
       },
       {
         controlName: 'comunicationLanguage',
@@ -34,6 +35,7 @@ export const PROFILE_SME: Array<ProfileFieldset<'sme'>> = [
         label: 'FORM_LABEL.website',
         type: 'url',
         placeholder: 'www.example.com',
+        errorMessage: 'ERRORS_FORM.email',
       },
       /*   {
         controlName: 'phoneNumber',

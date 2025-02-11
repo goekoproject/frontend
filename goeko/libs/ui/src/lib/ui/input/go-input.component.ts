@@ -36,14 +36,17 @@ export class GoInputComponent implements ControlValueAccessor {
   required = input<boolean>(this.ngControl?.control?.errors?.['required'] ?? false)
   disabled = input<boolean>(this.ngControl?.disabled ?? false)
   optional = input<boolean>(true)
+  isTyping = computed(() => !this.value() || this.value())
+
   // Internal state
   value = signal<string>('')
-  errorMessages = signal<{ [key: string]: string }>({})
+  errorMessages = computed(() => this.isTyping() ? this.ngControl?.errors : null)
 
   private onChange!: (value: any) => void
   private onTouched!: () => void
-
-  showError = computed(() => (!this.value() && this.ngControl?.touched && this.ngControl?.dirty && this.ngControl.invalid) ?? false)
+  showError = computed(
+    () => ((!this.value() || this.value()) && this.ngControl?.touched && this.ngControl?.dirty && this.ngControl.invalid) ?? false,
+  )
   isRequired = computed(() => (!this.value() && this.ngControl?.control?.errors?.['required']) ?? false)
   showOptional = computed(() => this.optional() && !this.hasValidatorRequired)
   ariaDescribedby = computed(() => (this.showError() ? 'error-message' : null))

@@ -755,7 +755,12 @@
   "ERRORS_FORM": {
     "SELECT_CERTIFICATE": "Sélectionnez un certificat",
     "SELECT_YEARS_GUARANTEE": "Sélectionnez les années de garantie",
-    "required": "Ce champ est obligatoire"
+    "required": "Ce champ est obligatoire",
+    "email": "Adresse e-mail invalide. Exemple : exemple@exemple.com",
+    "weblink": "Lien web invalide. Exemple : https://www.exemple.com",
+    "cif": "Le format du NIF/CIF est incorrect. Exemple : A12345678 ou B12345678",
+    "siret": "Le format du SIRET est incorrect. Exemple : 12345678901234",
+    "uid": "Le format de l'UID est incorrect. Exemple : CHE-123.456.789"
   },
   "download": "Télécharger"
 }
