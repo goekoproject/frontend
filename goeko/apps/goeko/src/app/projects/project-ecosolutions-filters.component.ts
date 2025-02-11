@@ -71,7 +71,6 @@ export class ProjectEcosolutionsFiltersComponent implements OnInit {
   }
   applyAllCertificate(event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked
-
     this.filterCertificate.emit(isChecked ? this._documentTypesForCode() : undefined)
   }
   closeFilter = () => {
