@@ -69,8 +69,10 @@ export class ProjectEcosolutionsFiltersComponent implements OnInit {
       this._checkedDocumentTypes && this._checkedDocumentTypes.length > 0 ? this._checkedDocumentTypes?.map((d) => d.code) : undefined,
     )
   }
-  applyAllCertificate() {
-    this.filterCertificate.emit(this._documentTypesForCode())
+  applyAllCertificate(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked
+
+    this.filterCertificate.emit(isChecked ? this._documentTypesForCode() : undefined)
   }
   closeFilter = () => {
     this.filtersVisible.set(false)
