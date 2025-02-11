@@ -19,18 +19,17 @@
     {{ label }}
   </div>
 
-  <i id="{{ arrowId }}" class="icon-Arrow-Chevron-Down select_arrow" [ngClass]="{ 'select-arrow--rotate': isOpen }">
-  </i>
-  <span class="material-symbols-rounded"> keyboard_arrow_down </span>
 
-
+  <span class="material-symbols-rounded" [ngClass]="{ 'rotate-180 transition-all': isOpen }"> keyboard_arrow_down
+  </span>
 
 
   <ng-template #triggerOptions cdkConnectedOverlay [cdkConnectedOverlayHasBackdrop]="true"
     [cdkConnectedOverlayPanelClass]="overlayPanelClass" [cdkConnectedOverlayOrigin]="origin"
     [cdkConnectedOverlayOpen]="isOpen" [cdkConnectedOverlayWidth]="_overlayWidth"
     [cdkConnectedOverlayPanelClass]="'select-dropdown'" (backdropClick)="close()">
-    <div role="listbox" tabindex="-1" (keydown)="_handleKeydown($event)" class="select_options go-scroll" cdkTrapFocus>
+    <div role="listbox" tabindex="-1" (keydown)="_handleKeydown($event)" class="select_options go-scroll" cdkTrapFocus
+      aria-label="Options list">
       <ng-content></ng-content>
     </div>
   </ng-template>

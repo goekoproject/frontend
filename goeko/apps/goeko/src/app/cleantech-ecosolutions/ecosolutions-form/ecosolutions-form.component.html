@@ -287,7 +287,10 @@
           </div>
           @if(form.value.certified) {
           <ng-container formArrayName="certificates">
+            @if(!isReadOnly) {
             <goeko-file-upload (fileAdded)="addCertificates($event)" />
+
+            }
             <div class="flex gap-4 mt-4 flex-wrap" [ngClass]="{
                       hidden: selectedFormLang().code !== langSignal(),
                     }">

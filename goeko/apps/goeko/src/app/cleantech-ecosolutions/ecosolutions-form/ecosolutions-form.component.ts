@@ -18,7 +18,7 @@ import {
 } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { Editor, Toolbar } from 'ngx-editor'
-import { forkJoin, Observable, of, switchMap, tap } from 'rxjs'
+import { concatMap, forkJoin, from, Observable, of, switchMap, tap } from 'rxjs'
 import {
   defaultSetCurrency,
   defaultSetDeliverCountries,
@@ -143,6 +143,8 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this._changeLangCode()
     if (this.idEcosolution) {
       this.getEcosolution()
+    } else {
+      this._seTranslatedProperties()
     }
   }
 
@@ -158,7 +160,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   private _buildFrom() {
     this._initForm()
-    this._seTranslatedProperties()
     this._changehaveTechnicalSheet()
     this._changeCertificate()
     this._changeGuarantee()
@@ -267,6 +268,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this.form.reset(formValue)
     this._setLocaltion(ecosolution.locations)
     this._addCertifiedValidators(formValue.certificates)
+
     this.form.markAsPristine()
     this.form.markAsUntouched()
   }
@@ -382,10 +384,10 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
           return forkJoin([uploadPicture$, uploadCertificate$])
         }),
         tap(() => this._submitter.set(true)),
-        tap(() => this.goToListEcosolution()),
       )
       .subscribe({
         next: (result) => {
+          this.goToListEcosolution()
           console.log('Ecosolution creado con éxito', result)
         },
         error: (error) => {
@@ -401,25 +403,29 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       this.form.updateValueAndValidity()
       return
     }
-    this._ecosolutionsService
-      .updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
+    from(this._stepForUpdateEcosolution())
       .pipe(
-        switchMap(() => this._uploadDocuments(this.idEcosolution)),
-        switchMap(() => this._removeDocument()),
-        switchMap(() => this._uploadPicture(this.idEcosolution)),
+        concatMap((step) => step()),
         tap(() => this._submitter.set(true)),
-        tap(() => this.goToListEcosolution()),
       )
       .subscribe({
-        next: (result) => {
-          console.log('Ecosolution update ok', result)
+        next: () => {
+          this.goToListEcosolution()
         },
         error: (error) => {
-          console.error('Fail update ecosolution', error)
+          console.error('Error al editar Ecosolution', error)
         },
       })
   }
 
+  private _stepForUpdateEcosolution() {
+    return [
+      () => this._ecosolutionsService.updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution),
+      () => this._uploadDocuments(this.idEcosolution),
+      () => this._removeDocument(),
+      () => this._uploadPicture(this.idEcosolution),
+    ]
+  }
   private _uploadPicture(ecosolutionId: string) {
     if (this._fileEcosolution?.length > 0 && ecosolutionId) {
       const createOrUpdatePicture = this.idEcosolution
