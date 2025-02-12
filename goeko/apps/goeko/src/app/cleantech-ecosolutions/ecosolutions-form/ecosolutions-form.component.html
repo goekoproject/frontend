@@ -35,15 +35,13 @@
           @for (translation of nameTranslations.controls; track $index + '-name'; let i = $index) {
           <ng-container [formGroupName]="i">
             @if (translation.value?.lang === selectedFormLang().code) {
-            <go-input [formControlName]="'label'" [readonly]="isReadOnly">
-              <span slot="label">
-                {{ 'FORM_LABEL.solutionName' | translate }}
-                <span
-                  class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-                  {{ translation.value.lang | translate }}</span>
-              </span>
-              <p class="optional" slot="required">{{ 'mandatory' | translate }}</p>
-            </go-input>
+            <div class="relative">
+              <goeko-go-input [formControlName]="'label'" [label]="'FORM_LABEL.solutionName' | translate " />
+              <span
+                class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
+                {{ translation.value.lang | translate }}</span>
+            </div>
+
             }
           </ng-container>
           }
@@ -231,10 +229,8 @@
             </ui-super-select>
           </div>
 
-          <go-input *ngIf="false" [formControlName]="'unit'" type="text" aria-placeholder="item,m3,m2,L etc.."
-            placeholder="m3,m2,l etc.." [readonly]="isReadOnly">
-            <span slot="label">{{ 'FORM_LABEL.unit' | translate }}</span>
-          </go-input>
+          <goeko-go-input *ngIf="false" [formControlName]="'unit'" type="text" aria-placeholder="item,m3,m2,L etc.."
+            placeholder="m3,m2,l etc.." [label]="'FORM_LABEL.unit' | translate" />
         </div>
 
         <div [ngClass]="{

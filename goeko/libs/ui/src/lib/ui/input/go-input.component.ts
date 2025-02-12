@@ -46,11 +46,11 @@ export class GoInputComponent implements ControlValueAccessor {
   private onChange!: (value: any) => void
   private onTouched!: () => void
   get showError() {
-    return this.ngControl?.touched && this.ngControl?.dirty && Object.keys(this.ngControl?.errors || {}).length
+    return (this.ngControl?.touched && this.ngControl?.dirty && Object.keys(this.ngControl?.errors || {}).length) || this.isRequired
   }
 
   get isRequired() {
-    return this.ngControl?.control?.errors?.['required']
+    return this.ngControl?.control?.errors?.['required'] && this.ngControl?.touched
   }
   showOptional = computed(() => this.optional() && !this.hasValidatorRequired)
   ariaDescribedby = computed(() => (this.showError ? 'error-message' : null))

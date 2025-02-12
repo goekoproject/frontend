@@ -236,12 +236,12 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   private _getFormGroupFieldTranslations(code?: string) {
-    /*     if (this.selectedFormLang().code === code) {
+    if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
         lang: new FormControl(code),
       })
-    } */
+    }
     return this._fb.group({
       label: new FormControl(''),
       lang: new FormControl(code),
@@ -367,13 +367,12 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   saveEcosolution() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched()
-      this.form.markAsDirty()
-      this.form.updateValueAndValidity()
+      this._checkIsFormValid()
       return
     }
     this._createEcosolution()
   }
+
   private _createEcosolution() {
     this._ecosolutionsService
       .createEcosolutions(this.bodyRequestEcosolution)
@@ -398,9 +397,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   editEcosolution() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched()
-      this.form.markAsDirty()
-      this.form.updateValueAndValidity()
+      this._checkIsFormValid()
       return
     }
     from(this._stepForUpdateEcosolution())
@@ -417,7 +414,11 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
         },
       })
   }
-
+  private _checkIsFormValid() {
+    this.form.markAllAsTouched()
+    this.form.markAsDirty()
+    this.form.updateValueAndValidity()
+  }
   private _stepForUpdateEcosolution() {
     return [
       () => this._ecosolutionsService.updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution),

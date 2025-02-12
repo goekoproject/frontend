@@ -14,7 +14,7 @@ export const IdentifierPlaceholders = {
 }
 
 const IdentifierRegexs = {
-  ES: /^[A-Z][0-9]{7}[0-9A-Z]$/,
+  ES: /^[A-HJ-NP-U]\d{7}[A-Z0-9]$/,
   FR: /^[0-9]{9}$/,
   CH: /^CHE-[0-9]{3}\.[0-9]{3}\.[0-9]{3}$/,
   DE: /^DE[0-9]{9}$|^DE[0-9]{10}$/,
@@ -52,16 +52,25 @@ export function validateSmeIdentifier(): (control: AbstractControl) => Validatio
 
 export function validateCleanTechIdentifier(): (control: AbstractControl) => ValidationErrors | null {
   return (control: AbstractControl): ValidationErrors | null => {
-    const country = control.parent?.get('country')?.value
+    const country = control?.get('country')?.value as keyof typeof IdentifierRegexs
 
     if (!country) {
       return null
     }
 
-    const id = control.value
+    const id = control.value.identifier
     const regex = IdentifierRegexs[country as keyof typeof IdentifierRegexs]
+    const identifierControl = control.get('identifier') as FormControl
 
-    return regex && !regex.test(id) ? { invalidCleantechIdentifier: true } : null
+    if (regex && !regex.test(id)) {
+      identifierControl.setErrors({ invalidSmeIdentifier: MessageFprIdentifier[country] })
+      identifierControl.markAsTouched()
+      identifierControl.markAsDirty()
+      return { invalidSmeIdentifier: MessageFprIdentifier[country] }
+    } else {
+      identifierControl.setErrors(null)
+    }
+    return null
   }
 }
 
@@ -82,18 +91,21 @@ export const smeFormGroup = new FormGroup(
   { validators: validateSmeIdentifier() },
 )
 
-export const cleanTechFormGroup = new FormGroup({
-  name: new FormControl('', Validators.required),
-  email: new FormControl('', [Validators.email, Validators.required]),
-  country: new FormControl('', Validators.required),
-  link: new FormControl(),
-  logo: new FormControl(),
-  city: new FormControl(),
-  externalId: new FormControl(),
-  comunicationLanguage: new FormControl(''),
-  identifier: new FormControl('', []),
-  phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
-})
+export const cleanTechFormGroup = new FormGroup(
+  {
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    country: new FormControl('', Validators.required),
+    link: new FormControl(),
+    logo: new FormControl(),
+    city: new FormControl(),
+    externalId: new FormControl(),
+    comunicationLanguage: new FormControl(''),
+    identifier: new FormControl('', []),
+    phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
+  },
+  { validators: validateCleanTechIdentifier() },
+)
 
 export const bankFormGroup = new FormGroup({
   name: new FormControl('', Validators.required),

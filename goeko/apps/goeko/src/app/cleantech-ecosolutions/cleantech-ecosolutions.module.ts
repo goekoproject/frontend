@@ -20,6 +20,7 @@ import {
   ButtonModule,
   FILE_UPLOAD_CONFIG,
   FileUploadComponent,
+  GoInputComponent,
   GoInputModule,
   GoTabGroupModule,
   InputFileComponent,
@@ -62,6 +63,7 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     InputFileComponent,
     NgxEditorModule,
     FileUploadComponent,
+    GoInputComponent,
     SelectCertificateComponent,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
