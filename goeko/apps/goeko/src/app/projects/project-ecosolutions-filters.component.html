@@ -52,7 +52,7 @@
       <h4 class="text-sm font-bold text-gray-700">{{ 'FORM_LABEL.certificates' | translate }}</h4>
       <div class="mt-2 space-y-2">
         <label class="flex cursor-pointer items-center space-x-2 text-sm">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCertificate()" />
+          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-500" (input)="applyAllCertificate($event)" />
           <span>{{ 'all' | translate }}</span>
         </label>
         @for (document of documentTypes(); track $index) {
