@@ -20,22 +20,32 @@ const IdentifierRegexs = {
   DE: /^DE[0-9]{9}$|^DE[0-9]{10}$/,
   IT: /^[0-9]{11}$/,
 }
+const MessageFprIdentifier = {
+  ES: 'ERRORS_FORM.cif',
+  FR: 'ERRORS_FORM.siret',
+  CH: 'ERRORS_FORM.uid',
+  DE: 'ERRORS_FORM.steuer',
+  IT: 'ERRORS_FORM.piva',
+}
 export function validateSmeIdentifier(): (control: AbstractControl) => ValidationErrors | null {
   return (control: AbstractControl): ValidationErrors | null => {
-    const firstLocation = control?.get('locations')?.value?.[0]?.country?.code
+    const firstLocation = control?.get('locations')?.value?.[0]?.country?.code as keyof typeof IdentifierRegexs
     const identifierControl = control.get('identifier') as FormControl
     if (!firstLocation) {
       return null
     }
 
     const id = control.value.identifier
-    const regex = IdentifierRegexs[firstLocation as keyof typeof IdentifierRegexs]
+    const regex = IdentifierRegexs[firstLocation]
     if (regex && !regex.test(id)) {
-      identifierControl.setErrors({ invalidSmeIdentifier: true })
+      identifierControl.setErrors({ invalidSmeIdentifier: MessageFprIdentifier[firstLocation] })
+      identifierControl.markAsTouched()
+      identifierControl.markAsDirty()
       return { invalidSmeIdentifier: 'ERRORS_FORM.cif' }
     } else {
       identifierControl.setErrors(null)
     }
+
     return null
   }
 }
@@ -68,7 +78,8 @@ export const smeFormGroup = new FormGroup(
     phoneNumber: new FormControl('', [Validators.pattern(/^[0-9]{10,15}$/)]),
     generalNotifications: new FormControl(false),
   },
-  validateSmeIdentifier(),
+
+  { validators: validateSmeIdentifier() },
 )
 
 export const cleanTechFormGroup = new FormGroup({

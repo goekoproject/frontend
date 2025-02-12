@@ -1,33 +1,28 @@
 <!-- input.component.html -->
 <div class="mb-6">
   <!-- Desestructuración de señales con `as` -->
-  <label [for]="id()" [class.is-invalid]="showError()" class="input-label" [class.text-red-700]="showError()"
-    [class.dark-text-red-500]="showError()" [go-optional]="showOptional()">
+  <label [for]="id()" [class.is-invalid]="showError" class="input-label" [class.text-red-700]="showError"
+    [class.dark-text-red-500]="showError" [go-optional]="showOptional()">
     {{ label() }}
   </label>
-  <input [type]="type()" [id]="id()" [placeholder]="placeholder()" [value]="value()" class="input-field"
-    [class.is-invalid]="showError()" (input)="onInput($event)" (blur)="onBlur()" (focus)="onFocus()"
-    [attr.data-size]="size()">
+  <input [type]="type()" [id]="id()" [autocomplete]="autocomplete()" [name]="name()" [placeholder]="placeholder()"
+    [value]="value()" class="input-field" [class.is-invalid]="showError" (input)="onInput($event)" (blur)="onBlur()"
+    (focus)="onFocus()" [attr.data-size]="size()">
 
   <!-- Error message for required field -->
-  @if(isRequired()) {
+  @if(isRequired) {
   <p class="error-message">
     {{ 'ERRORS_FORM.required' | translate }}
   </p>
   }
 
-  @if(showError() && !isRequired()) {
+  @if(showError && !isRequired) {
   <!-- Custom error messages injected via ng-content -->
-  <div [class.is-invalid]="showError()" class="input-label" [class.text-red-700]="showError()"
-    [class.dark-text-red-500]="showError()">
+  <div [class.is-invalid]="showError" class="input-label" [class.text-red-700]="showError"
+    [class.dark-text-red-500]="showError" #errorMessages>
     <ng-content select="[error-messages]"></ng-content>
-
   </div>
   }
-  <div [class.is-invalid]="showError()" class="input-label" [class.text-red-700]="showError()"
-    [class.dark-text-red-500]="showError()">
-    <p>{{errorMessages()}}</p>
 
-  </div>
 
 </div>

@@ -33,8 +33,6 @@ $color-label-pressed: var(--primary--main);
 .super-select {
   display: block;
   overflow: hidden;
-  max-width: var(--medium-width-field);
-  min-width: 5rem;
   &:focus-visible {
     outline-color: rgb(111, 87, 205);
     box-shadow: rgba(111, 87, 205, 0.25) 0px 0px 1px 2px;
@@ -52,12 +50,11 @@ $color-label-pressed: var(--primary--main);
 }
 .super-select[has-error='true'] {
   .select {
-    @apply border-red-500 bg-red-50 text-red-700
+    @apply border-red-500 bg-red-50 text-red-700;
   }
   .select_label {
-    @apply  text-red-700
+    @apply text-red-700;
   }
-
 }
 
 .select-dropdown {
