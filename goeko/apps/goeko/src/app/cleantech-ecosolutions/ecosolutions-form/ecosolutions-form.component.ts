@@ -279,6 +279,12 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
     this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
   }
+  private _allFormArrayAsDirty() {
+    this._markAllAsDirtyFormArray(this.nameTranslations)
+    this._markAllAsDirtyFormArray(this.descriptionTranslations)
+    this._markAllAsDirtyFormArray(this.detailedDescriptionTranslations)
+    this._markAllAsDirtyFormArray(this.priceDescriptionTranslations)
+  }
   private _addCertifiedValidators(certificates: DocumentEcosolutions[]) {
     certificates?.forEach((certificate) => {
       this.certificates.push(
@@ -322,6 +328,17 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       formArray.push(this._getFormGroupFieldTranslations())
     })
     formArray.reset(values)
+  }
+
+  private _markAllAsDirtyFormArray(form: FormGroup | FormArray): void {
+    Object.values(form.controls).forEach((control) => {
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        this._markAllAsDirtyFormArray(control) // Llamado recursivo
+      } else {
+        control.markAsDirty()
+        control.updateValueAndValidity() // Opcional
+      }
+    })
   }
 
   private _changehaveTechnicalSheet() {
@@ -417,7 +434,9 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _checkIsFormValid() {
     this.form.markAllAsTouched()
     this.form.markAsDirty()
+    this._allFormArrayAsDirty()
     this.form.updateValueAndValidity()
+    console.log(this.nameTranslations.controls[0] as any)
   }
   private _stepForUpdateEcosolution() {
     return [

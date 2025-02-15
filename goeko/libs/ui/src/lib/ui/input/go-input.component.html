@@ -1,28 +1,37 @@
 <!-- input.component.html -->
-<div class="mb-6">
-  <!-- Desestructuración de señales con `as` -->
-  <label [for]="id()" [class.is-invalid]="showError" class="input-label" [class.text-red-700]="showError"
-    [class.dark-text-red-500]="showError" [go-optional]="showOptional()">
+<div class="mb-6 go-wrapper-input" [class.has-error]="showError">
+  <label [for]="id()" class="input-label" [go-optional]="showOptional()">
     {{ label() }}
   </label>
-  <input [type]="type()" [id]="id()" [autocomplete]="autocomplete()" [name]="name()" [placeholder]="placeholder()"
-    [value]="value()" class="input-field" [class.is-invalid]="showError" (input)="onInput($event)" (blur)="onBlur()"
-    (focus)="onFocus()" [attr.data-size]="size()">
+  <ng-container *ngIf="!isTextarea(); else textareaTemplate">
+    <input [type]="type()" [id]="id()" [autocomplete]="autocomplete()" [name]="name()" [placeholder]="placeholder()"
+      [value]="value()" class="input-field" (input)="onInput($event)" (blur)="onBlur()" (focus)="onFocus()"
+      [attr.data-size]="size()">
+
+  </ng-container>
 
   <!-- Error message for required field -->
   @if(isRequired) {
-  <p class="error-message">
+  <p class="error-required">
     {{ 'ERRORS_FORM.required' | translate }}
   </p>
   }
 
   @if(showError && !isRequired) {
   <!-- Custom error messages injected via ng-content -->
-  <div [class.is-invalid]="showError" class="input-label" [class.text-red-700]="showError"
-    [class.dark-text-red-500]="showError" #errorMessages>
+  <div class="input-label" #errorMessages>
     <ng-content select="[error-messages]"></ng-content>
   </div>
   }
 
 
 </div>
+
+<ng-template #textareaTemplate>
+  <textarea [id]="id()" [maxLength]="maxLength()" [rows]="rows()" [name]="name()" [placeholder]="placeholder()"
+    [disabled]="isDisabled()" [required]="isRequired" [attr.aria-invalid]="ariaInvalid()"
+    [attr.aria-describedby]="ariaDescribedby()" [value]="value()" (input)="onInput($event)" (blur)="onBlur()"
+    (focus)="onFocus()"></textarea>
+  <span class="text-xs font-medium"> ({{ 'characters' | translate: { num: maxLength() } }})</span>
+
+</ng-template>

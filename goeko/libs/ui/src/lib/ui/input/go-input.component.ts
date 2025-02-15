@@ -7,16 +7,22 @@ import { OptionalDirective } from '../directives/optional.directive'
 type Size = 'large' | 'default' | 'small'
 type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
 @Component({
-  selector: 'goeko-go-input',
+  selector: 'goeko-go-input,goeko-go-textarea',
   standalone: true,
   imports: [CommonModule, TranslateModule, OptionalDirective],
   templateUrl: './go-input.component.html',
   styleUrl: './go-input.component.scss',
+
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
+    '[attr.aria-label]': 'label',
+    '[attr.aria-required]': 'isRequired',
     '[attr.aria-describedby]': 'ariaDescribedby()',
     '[attr.aria-invalid]': 'ariaInvalid()',
     '[attr.tabindex]': 'tabIndex()',
+    '[attr.disabled]': 'isDisabled()',
+    '[attr.required]': 'isRequired',
+    '[attr.id]': 'id()',
   },
 })
 export class GoInputComponent implements ControlValueAccessor {
@@ -38,7 +44,10 @@ export class GoInputComponent implements ControlValueAccessor {
   required = input<boolean>(this.ngControl?.control?.errors?.['required'] ?? false)
   disabled = input<boolean>(this.ngControl?.disabled ?? false)
   optional = input<boolean>(true)
-  isTyping = computed(() => !this.value() || this.value())
+
+  //only textarea
+  maxLength = input<number>(999999)
+  rows = input<number | undefined>(undefined)
 
   // Internal state
   value = signal<string>('')
@@ -46,17 +55,17 @@ export class GoInputComponent implements ControlValueAccessor {
   private onChange!: (value: any) => void
   private onTouched!: () => void
   get showError() {
-    return (this.ngControl?.touched && this.ngControl?.dirty && Object.keys(this.ngControl?.errors || {}).length) || this.isRequired
+    return this.ngControl?.touched && this.ngControl?.dirty && Object.keys(this.ngControl?.errors || {}).length > 0
   }
-
   get isRequired() {
-    return this.ngControl?.control?.errors?.['required'] && this.ngControl?.touched
+    return this.ngControl?.control?.errors?.['required'] && this.showError
   }
   showOptional = computed(() => this.optional() && !this.hasValidatorRequired)
   ariaDescribedby = computed(() => (this.showError ? 'error-message' : null))
   ariaInvalid = computed(() => this.showError)
   tabIndex = computed(() => (this.disabled() ? -1 : 0))
   isDisabled = computed(() => this.ngControl?.disabled ?? this.disabled())
+  isTextarea = computed(() => this._elementRef.nativeElement.tagName.toLowerCase() === 'goeko-go-textarea')
 
   get hasValidatorRequired() {
     return this.ngControl.control?.hasValidator(Validators.required) ?? false

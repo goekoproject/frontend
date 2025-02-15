@@ -59,10 +59,11 @@
                 class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
                 {{ translation.value.lang | translate }}</span>
             </label>
-            <textarea maxlength="100" class="go-textarea" rows="5" id="descriptionTranslations"
-              [formControlName]="'label'" [readonly]="isReadOnly">
+            <goeko-go-textarea [formControlName]="'label'" [maxLength]="100" />
+           <!--  <textarea maxlength="100" class="go-textarea" rows="5" id="descriptionTranslations"
+              [formControlName]="'label'">
                 </textarea>
-            <span class="text-xs font-medium"> ({{ 'characters' | translate: { num: 100 } }})</span>
+            <span class="text-xs font-medium"> ({{ 'characters' | translate: { num: 100 } }})</span> -->
           </div>
           }
           }
