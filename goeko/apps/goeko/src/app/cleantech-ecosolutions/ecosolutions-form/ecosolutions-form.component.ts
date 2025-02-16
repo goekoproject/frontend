@@ -17,7 +17,7 @@ import {
   UpdatedEcosolutionBody,
 } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
-import { Editor, Toolbar } from 'ngx-editor'
+import { Editor, Toolbar, Validators as ValidatorsEditor } from 'ngx-editor'
 import { concatMap, forkJoin, from, Observable, of, switchMap, tap } from 'rxjs'
 import {
   defaultSetCurrency,
@@ -48,7 +48,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _ecosolutionsManagmentService = inject(EcosolutionsManagmentService)
 
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
-  private _submitter = signal(false)
+  _submitter = signal(false)
   public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries
   public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
@@ -224,7 +224,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _detailDescriptionTranslations(codeLang: string): void {
     const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
     if (!this._isIncludeTranslation(codeLang, detailedDescriptionTranslations.value)) {
-      detailedDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+      detailedDescriptionTranslations.push(this._getFormGroupEditor(codeLang))
     }
   }
 
@@ -239,6 +239,18 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
+        lang: new FormControl(code),
+      })
+    }
+    return this._fb.group({
+      label: new FormControl(''),
+      lang: new FormControl(code),
+    })
+  }
+  private _getFormGroupEditor(code?: string) {
+    if (this.selectedFormLang().code === code) {
+      return this._fb.group({
+        label: new FormControl('', ValidatorsEditor.required()),
         lang: new FormControl(code),
       })
     }
@@ -434,9 +446,9 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _checkIsFormValid() {
     this.form.markAllAsTouched()
     this.form.markAsDirty()
+    this.form.get('subCategory')?.markAsDirty()
     this._allFormArrayAsDirty()
     this.form.updateValueAndValidity()
-    console.log(this.nameTranslations.controls[0] as any)
   }
   private _stepForUpdateEcosolution() {
     return [

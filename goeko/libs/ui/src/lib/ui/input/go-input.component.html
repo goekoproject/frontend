@@ -1,5 +1,5 @@
 <!-- input.component.html -->
-<div class="mb-6 go-wrapper-input" [class.has-error]="showError">
+<div class="mb-6 relative go-wrapper-input" [class.has-error]="showError">
   <label [for]="id()" class="input-label" [go-optional]="showOptional()">
     {{ label() }}
   </label>
@@ -11,27 +11,31 @@
   </ng-container>
 
   <!-- Error message for required field -->
+
   @if(isRequired) {
-  <p class="error-required">
+  <goeko-form-error-text [form]="ngControl.control">
     {{ 'ERRORS_FORM.required' | translate }}
-  </p>
+  </goeko-form-error-text>
   }
 
   @if(showError && !isRequired) {
-  <!-- Custom error messages injected via ng-content -->
-  <div class="input-label" #errorMessages>
+  <goeko-form-error-text [form]="ngControl.control">
     <ng-content select="[error-messages]"></ng-content>
-  </div>
+  </goeko-form-error-text>
+  <!-- Custom error messages injected via ng-content -->
   }
 
 
 </div>
 
 <ng-template #textareaTemplate>
-  <textarea [id]="id()" [maxLength]="maxLength()" [rows]="rows()" [name]="name()" [placeholder]="placeholder()"
-    [disabled]="isDisabled()" [required]="isRequired" [attr.aria-invalid]="ariaInvalid()"
-    [attr.aria-describedby]="ariaDescribedby()" [value]="value()" (input)="onInput($event)" (blur)="onBlur()"
-    (focus)="onFocus()"></textarea>
-  <span class="text-xs font-medium"> ({{ 'characters' | translate: { num: maxLength() } }})</span>
+  <div class="relative flex flex-col gap-1">
+    <textarea [id]="id()" [maxLength]="maxLength()" [rows]="rows()" [name]="name()" [placeholder]="placeholder()"
+      [disabled]="isDisabled()" [required]="isRequired" [attr.aria-invalid]="ariaInvalid()"
+      [attr.aria-describedby]="ariaDescribedby()" [value]="value()" (input)="onInput($event)" (blur)="onBlur()"
+      (focus)="onFocus()"></textarea>
+    <span class="text-xs"> ({{ 'characters' | translate: { num: maxLength() } }})</span>
+  </div>
+
 
 </ng-template>

@@ -38,7 +38,7 @@
             <div class="relative">
               <goeko-go-input [formControlName]="'label'" [label]="'FORM_LABEL.solutionName' | translate " />
               <span
-                class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
+                class=" -translate-y-1/2 absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
                 {{ translation.value.lang | translate }}</span>
             </div>
 
@@ -51,19 +51,13 @@
           @for (translation of descriptionTranslations.controls; track $index + '-descriptionTranslations'; let i =
           $index) {
           @if (translation.value?.lang === selectedFormLang().code) {
-          <div [formGroupName]="i" class="wrapper-textarea">
-            <label for="descriptionTranslations">
-              {{ 'FORM_LABEL.solutionDescription' | translate }}
-              <span class="optional">{{ 'mandatory' | translate }}</span>
-              <span
-                class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-                {{ translation.value.lang | translate }}</span>
-            </label>
-            <goeko-go-textarea [formControlName]="'label'" [maxLength]="100" />
-           <!--  <textarea maxlength="100" class="go-textarea" rows="5" id="descriptionTranslations"
-              [formControlName]="'label'">
-                </textarea>
-            <span class="text-xs font-medium"> ({{ 'characters' | translate: { num: 100 } }})</span> -->
+          <div [formGroupName]="i" class="relative">
+            <span
+              class=" -translate-y-1/2 absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
+              {{ translation.value.lang | translate }}</span>
+            <goeko-go-textarea [formControlName]="'label'" [label]="'FORM_LABEL.solutionDescription' | translate"
+              [maxLength]="100" />
+
           </div>
           }
           }
@@ -76,18 +70,21 @@
           <div [formGroupName]="i" class="wrapper-textarea">
             <label for="detailedDescriptionTranslations">
               {{ 'FORM_LABEL.technicalDescription' | translate }}
-              <span class="optional">{{ 'mandatory' | translate }}</span>
               <span
                 class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
                 {{ translation.value.lang | translate }}
               </span>
             </label>
 
-            <div class="go-textarea">
-              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-              <ngx-editor [editor]="editor" [formControlName]="'label'"
-                [placeholder]="'FORM_LABEL.editorText' | translate"></ngx-editor>
+            <div>
+              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" class="block"> </ngx-editor-menu>
+              <ngx-editor [editor]="editor" [formControlName]="'label'" [class.editor-invalid]="translation.get('label')?.invalid && translation.get('label')?.touched &&
+              translation.get('label')?.dirty" [placeholder]="'FORM_LABEL.editorText' | translate"></ngx-editor>
+              <goeko-form-error-text [form]="translation.get('label')">
+                {{ 'ERRORS_FORM.required' | translate }}
+              </goeko-form-error-text>
             </div>
+
           </div>
           }
           }
@@ -100,7 +97,6 @@
         <div class="legend--info">
           <legend>
             {{ 'FORM_LABEL.typeOfEcolutions' | translate }}
-            <span class="optional">{{ 'mandatory' | translate }}</span>
           </legend>
 
           <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
@@ -108,6 +104,9 @@
 
         @defer (when questionsCategories()) {
         <div class="ecosolutions-subcategory">
+          <goeko-form-error-text [form]="form.get('subCategory')">
+            {{ 'ERRORS_FORM.required' | translate }}
+          </goeko-form-error-text>
           @for (subcategory of questionsCategories(); track subcategory.code) {
           <goeko-select-subcategory-product [id]="subcategory.code" formControlName="subCategory"
             [subCategory]="subcategory" [readonly]="isReadOnly" [open]="this.idEcosolution ? true : false">
@@ -131,10 +130,10 @@
       </fieldset>
 
       <fieldset [class.hidden]="selectedFormLang().code !== langSignal()">
+
         <div class="legend--info">
           <legend>
             {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
-            <span class="optional">{{ 'mandatory' | translate }}</span>
           </legend>
         </div>
 
@@ -202,18 +201,14 @@
           @for (translation of priceDescriptionTranslations.controls; track $index + '-priceDescriptionTranslations';
           let i = $index) {
           @if (translation.value?.lang === selectedFormLang().code) {
-          <div [formGroupName]="i" class="wrapper-textarea">
-            <label for="priceDescriptionTranslations">
-              {{ 'FORM_LABEL.infoPrice' | translate }}
-              <span class="optional">{{ 'mandatory' | translate }}</span>
-              <span
-                class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-                {{ translation.value.lang | translate }}
-              </span>
-            </label>
-            <textarea class="go-textarea" rows="5" id="priceDescriptionTranslations" [formControlName]="'label'"
-              [readonly]="isReadOnly">
-                </textarea>
+
+          <div [formGroupName]="i" class="relative">
+            <span
+              class=" -translate-y-1/2 absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
+              {{ translation.value.lang | translate }}</span>
+            <goeko-go-textarea id="priceDescriptionTranslations" [formControlName]="'label'"
+              [label]="'FORM_LABEL.infoPrice' | translate" [maxLength]="100" />
+
           </div>
           }
           }
@@ -313,8 +308,11 @@
           }
         </div>
       </fieldset>
-
+      <goeko-form-error-text [form]="form">
+        {{ 'ERRORS_FORM.haveError' | translate }}
+      </goeko-form-error-text>
       <div class="actions-button">
+
         <button go-button appearance="white" type="button" (click)="goToListEcosolution()">
           {{ 'back' | translate }}
         </button>

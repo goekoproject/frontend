@@ -1,3 +1,6 @@
+@mixin invalid {
+  @apply border-red-500 text-red-500 focus:border-red-500 focus:ring-red-500 focus-visible:outline-red-500 focus-visible:ring-red-500 focus-visible:ring-offset-red-200;
+}
 .wrapper-form-ecosolutions {
   @apply flex flex-col;
 }
@@ -14,42 +17,6 @@
     flex-wrap: wrap;
   }
 }
-
-.ecosolutions-cuestions {
-  display: flex;
-  margin: 1rem 0;
-  cursor: pointer;
-}
-.input-radio {
-  display: flex;
-  font-size: 16px;
-  gap: 1rem;
-  background-color: #ffffff;
-  padding: 1rem;
-  width: 370px;
-  border-radius: 16px;
-  border: 2px solid var(--primary--main);
-  cursor: pointer;
-  input {
-    width: 24px;
-  }
-}
-
-.fieldset-ods {
-  @apply flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.ods-check {
-  position: absolute;
-  font-size: 2rem;
-  color: var(--primary--main);
-  right: -2px;
-  background: #fff;
-  border-radius: 50%;
-  bottom: -2px;
-}
 .field-form-checked {
   display: flex;
   gap: 4rem;
@@ -65,64 +32,19 @@
   gap: 1rem;
   width: 100%;
 }
-.field-form-upload {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
 .actions-button {
   display: flex;
   justify-content: space-between;
 }
-.file-data {
-  border: 1px solid var(--primary--main);
-  background: rgba(0, 144, 214, 0.1294117647);
-  color: var(--primary--main);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 33%;
-  font-size: 1rem;
-  padding: 0.6rem;
-  cursor: pointer;
 
-  i {
-    font-size: 2rem;
-  }
-}
 .legend--info {
   width: 100%;
 }
-.file-ecosolutions {
-  display: none;
-}
-.ecosolution-upload {
-  display: flex;
-  align-items: center;
-  border-radius: 1rem;
-  overflow: hidden;
-  justify-content: space-around;
-  flex-grow: 2;
-  img {
-    width: 13rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
-  }
-  label {
-    padding: 1rem;
-    border-radius: 0.6rem;
-    border: 1px solid var(--primary-700, #016ba3);
-    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    background-color: white;
-  }
-}
+
 .wrapper-textarea {
   @apply relative flex w-full max-w-[24rem] flex-col gap-2;
 }
-.ngx-editor-content b,
-.ngx-editor-content strong {
-  font-weight: 700;
-  -webkit-font-smoothing: subpixel-antialiased;
+
+.editor-invalid ::ng-deep .NgxEditor {
+  @include invalid();
 }

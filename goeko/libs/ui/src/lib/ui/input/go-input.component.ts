@@ -3,13 +3,14 @@ import { Component, computed, ElementRef, inject, input, signal, viewChild } fro
 import { ControlValueAccessor, NgControl, Validators } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { OptionalDirective } from '../directives/optional.directive'
+import { FormErrorTextComponent } from '../form-error-text.component'
 
 type Size = 'large' | 'default' | 'small'
 type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
 @Component({
   selector: 'goeko-go-input,goeko-go-textarea',
   standalone: true,
-  imports: [CommonModule, TranslateModule, OptionalDirective],
+  imports: [CommonModule, TranslateModule, OptionalDirective, FormErrorTextComponent],
   templateUrl: './go-input.component.html',
   styleUrl: './go-input.component.scss',
 

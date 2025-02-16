@@ -760,7 +760,8 @@
     "weblink": "Lien web invalide. Exemple : https://www.exemple.com",
     "cif": "Le format du NIF/CIF est incorrect. Exemple : A12345678 ou B12345678",
     "siret": "Le format du SIRET est incorrect. Exemple : 12345678901234",
-    "uid": "Le format de l'UID est incorrect. Exemple : CHE-123.456.789"
+    "uid": "Le format de l'UID est incorrect. Exemple : CHE-123.456.789",
+    "haveError": "Il y a des erreurs dans le formulaire"
   },
   "download": "Télécharger"
 }
