@@ -97,12 +97,12 @@
       @default {
       <goeko-go-input [formControlName]="itemForm.controlName" [label]="itemForm.label | translate"
         [id]="itemForm.controlName" [placeholder]="itemForm.placeholder || ''">
-        <p error-messages>
+        <ng-container error-messages>
           {{ (itemForm.errorMessage ||'') | translate }}
-        </p>
-        <p error-messages>
+        </ng-container>
+        <ng-container error-messages>
           {{ (form.get(itemForm.controlName)?.errors || {})['invalidSmeIdentifier'] |translate}}
-        </p>
+        </ng-container>
       </goeko-go-input>
       }
       }

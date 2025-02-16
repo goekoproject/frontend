@@ -15,6 +15,7 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         label: 'FORM_LABEL.emailSalesManager',
         type: 'email',
         required: true,
+        errorMessage: 'ERRORS_FORM.email',
       },
       {
         controlName: 'country',
@@ -45,6 +46,7 @@ export const PROFILE_CLEANTECH: Array<ProfileFieldset<'cleantech'>> = [
         label: 'FORM_LABEL.website',
         type: 'url',
         placeholder: 'www.example.com',
+        errorMessage: 'ERRORS_FORM.website',
       },
       /*       {
         controlName: 'phoneNumber',

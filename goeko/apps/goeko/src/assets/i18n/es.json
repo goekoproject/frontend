@@ -758,7 +758,8 @@
     "cif": "El formato del NIF/CIF es incorrecto. Ejemplo: A12345678 o B12345678",
     "siret": "El formato del SIRET es incorrecto. Ejemplo: 12345678901234",
     "uid": "El formato del UID es incorrecto. Ejemplo: CHE-123.456.789",
-    "haveError": "Por favor, corrige los errores en el formulario."
+    "haveError": "Por favor, corrige los errores en el formulario.",
+    "website": "Error: La dirección web debe seguir el formato www.sitio.com"
   },
   "download": "Descargar"
 }

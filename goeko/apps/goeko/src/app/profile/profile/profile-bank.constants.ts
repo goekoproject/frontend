@@ -22,7 +22,7 @@ export const PROFILE_BANK: Array<ProfileFieldset<'bank'>> = [
         type: 'url',
         placeholder: 'www.example.com',
       },
-    ]
+    ],
   },
   {
     legend: 'FORM_LABEL.yourLocation',
@@ -44,6 +44,7 @@ export const PROFILE_BANK: Array<ProfileFieldset<'bank'>> = [
         label: 'FORM_LABEL.email',
         type: 'email',
         required: true,
+        errorMessage: 'ERRORS_FORM.email',
       },
       {
         controlName: 'phoneNumber',
@@ -56,6 +57,6 @@ export const PROFILE_BANK: Array<ProfileFieldset<'bank'>> = [
         type: 'lang',
         required: true,
       },
-    ]
+    ],
   },
 ]

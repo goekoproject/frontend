@@ -96,7 +96,7 @@ export const cleanTechFormGroup = new FormGroup(
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required]),
     country: new FormControl('', Validators.required),
-    link: new FormControl(),
+    link: new FormControl('', [Validators.pattern(/^www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/)]),
     logo: new FormControl(),
     city: new FormControl(),
     externalId: new FormControl(),
