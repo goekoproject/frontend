@@ -79,7 +79,7 @@ export const smeFormGroup = new FormGroup(
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     locations: new FormArray([], Validators.required),
-    website: new FormControl(),
+    website: new FormControl('', [Validators.pattern(/^www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/)]),
     employees: new FormControl('', [Validators.required, Validators.min(1)]),
     externalId: new FormControl(),
     comunicationLanguage: new FormControl(''),
@@ -109,7 +109,7 @@ export const cleanTechFormGroup = new FormGroup(
 
 export const bankFormGroup = new FormGroup({
   name: new FormControl('', Validators.required),
-  website: new FormControl(''),
+  link: new FormControl('', [Validators.pattern(/^www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/)]),
   externalId: new FormControl(),
   locations: new FormArray([], Validators.required),
   contactPerson: new FormControl(''),

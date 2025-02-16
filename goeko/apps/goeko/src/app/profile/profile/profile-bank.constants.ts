@@ -21,6 +21,7 @@ export const PROFILE_BANK: Array<ProfileFieldset<'bank'>> = [
         label: 'FORM_LABEL.website',
         type: 'url',
         placeholder: 'www.example.com',
+        errorMessage: 'ERRORS_FORM.website',
       },
     ],
   },
