@@ -28,6 +28,19 @@ interface Classification {
   subCategory: string
   products: string[]
 }
+export interface DocumentTypeEcosolutions {
+  code: string
+  name: string
+  description: string
+  fieldOrder: number
+  parentCode: string
+}
+export interface DocumentEcosolutions {
+  id: string
+  url: string
+  name: string
+  documentType: DocumentTypeEcosolutions
+}
 
 export interface Ecosolutions {
   cleantechId: string
@@ -53,4 +66,5 @@ export interface Ecosolutions {
   descriptionTranslations: TranslatedProperties[]
   detailedDescriptionTranslations: TranslatedProperties[]
   priceDescriptionTranslations: TranslatedProperties[]
+  documents?: DocumentEcosolutions[]
 }

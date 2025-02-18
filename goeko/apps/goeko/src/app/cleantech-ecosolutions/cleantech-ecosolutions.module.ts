@@ -8,15 +8,20 @@ import {
   CategoryModule,
   ProductToCurrentLangPipe,
   SdgIconsComponent,
+  SelectCertificateComponent,
   SelectFormLangComponent,
   SelectLocationsComponent,
   SelectSubcategoryProductComponent,
   SubcategoryToCurrentLangPipe,
 } from '@goeko/business-ui'
-import { ClassificationCategoryService, EcosolutionsModule } from '@goeko/store'
+import { ClassificationCategoryService, ClassificationsDocumentsService, EcosolutionsModule } from '@goeko/store'
 import {
   BadgeModule,
   ButtonModule,
+  FILE_UPLOAD_CONFIG,
+  FileUploadComponent,
+  FormErrorTextComponent,
+  GoInputComponent,
   GoInputModule,
   GoTabGroupModule,
   InputFileComponent,
@@ -58,10 +63,22 @@ import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main
     SelectFormLangComponent,
     InputFileComponent,
     NgxEditorModule,
+    FileUploadComponent,
+    GoInputComponent,
+    FormErrorTextComponent,
+    SelectCertificateComponent,
     EcosolutionsModule.forRoot({
       endpoint: environment.baseUrl,
     }),
   ],
-  providers: [CleantechEcosolutionsService, ClassificationCategoryService],
+  providers: [
+    CleantechEcosolutionsService,
+    ClassificationCategoryService,
+    ClassificationsDocumentsService,
+    {
+      provide: FILE_UPLOAD_CONFIG,
+      useValue: { maxFileSizeMB: environment.maxFileSizeMB }, // Sobrescribe el valor
+    },
+  ],
 })
 export class CleantechEcosolutionsModule {}

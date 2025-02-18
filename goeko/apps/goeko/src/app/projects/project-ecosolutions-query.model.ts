@@ -1,6 +1,14 @@
 import { Classifications, LocationsCountry, LocationTranslated, Project, ResponseClassifications } from '@goeko/store'
 import { formToClassificationsMapper } from '../sme-analysis-form/sme-form-analysis/sme-analysis.request'
 
+const mapLocation = (location: LocationTranslated): LocationsCountry => {
+  return {
+    country: {
+      code: location.country.code,
+      regions: location.country.regions ? location.country.regions.map((region) => region.code) : undefined,
+    },
+  }
+}
 const mapperResponseClassificationstoClassifications = (classification: ResponseClassifications[]): Classifications[] => {
   return classification.map((classification) => ({
     mainCategory: classification.category.code,
@@ -15,22 +23,16 @@ export class ProjectEcosolutionsQuery {
   classifications: Array<Classifications>
   locations: Array<LocationsCountry>
   smeId: string
+  documentTypesCodes?: string[]
 
   constructor(projectData: Project, smeId: string) {
     this.classifications = mapperResponseClassificationstoClassifications(projectData.classifications)
-    this.locations = projectData.locations?.map((location: LocationTranslated) => this.mapLocation(location))
+    this.locations = projectData.locations?.map((location: LocationTranslated) => mapLocation(location))
     this.smeId = smeId
+    this.documentTypesCodes = undefined
   }
 
   //TODO: Implement decorator for this
-  private mapLocation(location: LocationTranslated): LocationsCountry {
-    return {
-      country: {
-        code: location.country.code,
-        regions: location.country.regions ? location.country.regions.map((region) => region.code) : undefined,
-      },
-    }
-  }
 }
 
 /**

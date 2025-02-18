@@ -1,4 +1,4 @@
-import { Category } from './classifications.interface'
+import { Category } from '../classifications.interface'
 
 export interface Grouping {
   id: string
@@ -53,4 +53,3 @@ export interface ProductGrouping {
   label: string
   enabled: boolean
 }
-

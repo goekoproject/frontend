@@ -1,0 +1,41 @@
+<!-- input.component.html -->
+<div class="mb-6 relative go-wrapper-input" [class.has-error]="showError">
+  <label [for]="id()" class="input-label" [go-optional]="showOptional()">
+    {{ label() }}
+  </label>
+  <ng-container *ngIf="!isTextarea(); else textareaTemplate">
+    <input [type]="type()" [id]="id()" [autocomplete]="autocomplete()" [name]="name()" [placeholder]="placeholder()"
+      [value]="value()" class="input-field" (input)="onInput($event)" (blur)="onBlur()" (focus)="onFocus()"
+      [attr.data-size]="size()">
+
+  </ng-container>
+
+  <!-- Error message for required field -->
+
+  @if(isRequired) {
+  <goeko-form-error-text [form]="ngControl.control">
+    {{ 'ERRORS_FORM.required' | translate }}
+  </goeko-form-error-text>
+  }
+
+  @if(showError && !isRequired) {
+  <goeko-form-error-text [form]="ngControl.control">
+    <ng-content select="[error-messages]"></ng-content>
+  </goeko-form-error-text>
+  <!-- Custom error messages injected via ng-content -->
+  }
+
+
+</div>
+
+<ng-template #textareaTemplate>
+  <div class="relative flex flex-col gap-1">
+    <textarea [id]="id()" [maxLength]="maxLength()" [rows]="rows()" [name]="name()" [placeholder]="placeholder()"
+      [disabled]="isDisabled()" [required]="isRequired" [attr.aria-invalid]="ariaInvalid()"
+      [attr.aria-describedby]="ariaDescribedby()" [value]="value()" (input)="onInput($event)" (blur)="onBlur()"
+      (focus)="onFocus()"></textarea>
+    <span class="text-xs"> ({{ 'characters' | translate: { num: maxLength() } }})</span>
+  </div>
+
+
+</ng-template>

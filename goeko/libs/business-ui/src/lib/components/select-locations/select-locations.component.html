@@ -1,78 +1,71 @@
-@defer (when controlLocations &&  countries()) {
-  <div class="flex flex-col gap-4">
-    @defer (when countries() && dataSourceSelect.size > 0) {
-      <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
-    }
-    @if (
-      (singleSelect() && controlLocations.controls.length < 1) ||
-      (!singleSelect() && controlLocations.controls.length >= 0 && countries()?.length !== controlLocations.value.length)
+@defer (when controlLocations && countries()) {
+<div class="flex flex-col gap-4">
+  @defer (when countries() && dataSourceSelect.size > 0) {
+  <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
+  }
+  @if (
+  (singleSelect() && controlLocations.controls.length < 1) || (!singleSelect() && controlLocations.controls.length>= 0
+    && countries()?.length !== controlLocations.value.length)
     ) {
-      <div
-        (click)="addLocation()"
-        class="flex h-16 cursor-pointer items-center justify-center rounded-md border border-dashed border-primary-500 text-4xl text-primary-500">
-        <i class="ti ti-plus text-primary-900"></i>
-        <p class="text-base text-primary-900">{{ 'FORM_LABEL.newProvince' | translate }}</p>
-      </div>
+    <div (click)="addLocation()"
+      class="flex h-16 cursor-pointer items-center justify-center rounded-md border border-dashed border-primary-500 text-4xl text-primary-500">
+      <i class="ti ti-plus text-primary-900"></i>
+      <p class="text-base text-primary-900">{{ 'FORM_LABEL.newProvince' | translate }}</p>
+    </div>
     }
-  </div>
+</div>
 }
 
 <ng-template #formSelectLocation>
   <div class="select-profile" [formGroup]="form">
     <div formArrayName="locations" class="flex flex-col gap-4 divide-y">
       @if (controlLocations.controls && controlLocations.controls.length) {
-        @for (location of controlLocations.controls; track location; let i = $index) {
-          <div [formGroupName]="i" class="locations-selected">
-            <div [formGroupName]="'country'" class="flex w-full gap-4 flex-col">
-              <ui-super-select
-                class="w-full"
-                [placeholder]="'FORM_LABEL.country' | translate"
-                [formControlName]="'code'"
-                id="country"
-                [compareWith]="countryCompareWith">
-                <label title for=" country ">
-                  {{ 'FORM_LABEL.country' | translate }}
-                </label>
-                @for (option of countries(); track option.code; let first = $first) {
-                  <super-option
-                    [value]="option.code"
-                    [valueSelected]="first"
-                    [disabled]="singleSelect() ? false : controlLocationsCountryValue().includes(option.code)">
-                    {{ option.label | translate }}
-                  </super-option>
-                }
-              </ui-super-select>
+      @for (location of controlLocations.controls; track location; let i = $index) {
+      <div [formGroupName]="i" class="locations-selected">
 
-              @if (dataSourceSelect.has(location.value.country.code)) {
-                <div class="flex items-center gap-4">
-                  <ui-super-select
-                    class="w-full"
-                    [placeholder]="'regions' | translate"
-                    formControlName="regions"
-                    id="regions"
-                    [multiple]="true"
-                    [compareWith]="regionsCompareWith">
-                    <label title for="regions">
-                      {{ 'FORM_LABEL.province' | translate }}
-                    </label>
+        <div [formGroupName]="'country'" class="flex w-full gap-4 flex-col">
+          <ui-super-select class="w-full" [placeholder]="'FORM_LABEL.country' | translate" [formControlName]="'code'"
+            id="country" [compareWith]="countryCompareWith">
+            <label title for=" country ">
+              {{ 'FORM_LABEL.country' | translate }}
+            </label>
+            @for (option of countries(); track option.code; let first = $first) {
+            <super-option [value]="option.code" [valueSelected]="first"
+              [disabled]="singleSelect() ? false : controlLocationsCountryValue().includes(option.code)">
+              {{ option.label | translate }}
+            </super-option>
+            }
+          </ui-super-select>
 
-                    @for (option of dataSourceSelect.get(location.value.country.code); track option.code) {
-                      <super-option [value]="option" (click)="option.code === optionAllProvince.code ? selectALL() : deselectAll()">
-                        {{ option.label | translate }}
-                      </super-option>
-                    }
-                  </ui-super-select>
-                </div>
+          @if (dataSourceSelect.has(location.value.country.code)) {
+          <div class="flex items-center gap-4">
+            <ui-super-select class="w-full" [placeholder]="'regions' | translate" formControlName="regions" id="regions"
+              [multiple]="true" [compareWith]="regionsCompareWith">
+              <label title for="regions">
+                {{ 'FORM_LABEL.province' | translate }}
+              </label>
+
+              @for (option of dataSourceSelect.get(location.value.country.code); track option.code) {
+              <super-option [value]="option"
+                (click)="option.code === optionAllProvince.code ? selectALL() : deselectAll()">
+                {{ option.label | translate }}
+              </super-option>
               }
-              @if (controlLocations.value.length > 1) {
-                <button (click)="removeLocation(i)" class="text-sm text-primary-500 hover:text-primary-400">
-                  <i class="ti ti-trash"></i>
-                  {{ 'deleteLocation' | translate }}
-                </button>
-              }
-            </div>
+            </ui-super-select>
           </div>
-        }
+          }
+          @if (controlLocations.value.length > 1) {
+          <button (click)="removeLocation(i)" class="text-sm text-primary-500 hover:text-primary-400">
+            <i class="ti ti-trash"></i>
+            {{ 'deleteLocation' | translate }}
+          </button>
+          }
+        </div>
+      </div>
+      <goeko-form-error-text [form]="location">
+        {{ 'ERRORS_FORM.required' | translate }}
+      </goeko-form-error-text>
+      }
       }
     </div>
   </div>

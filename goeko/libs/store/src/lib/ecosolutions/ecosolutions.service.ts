@@ -55,18 +55,21 @@ export class EcosolutionsService extends TranslateChangeService {
     )
   }
 
-  uploadDocumentation(idEcosolution: string, files: File[]) {
-    const formData = new FormData()
-
-    files.forEach((file) => {
-      formData.append('file', file)
-    })
-    return this._http.post(`/v1/ecosolutions/${idEcosolution}/documentation`, formData).pipe(
+  uploadDocumentation(idEcosolution: string, body: FormData) {
+    return this._http.post(`/v1/ecosolutions/${idEcosolution}/documentation`, body).pipe(
       catchError((error) => {
         console.error('Error uploading documentation', error)
         return of(null)
       }),
     )
+  }
+
+  delteDocumentation(idEcosolution: string, idDocumentation: string) {
+    return this._http.delete(`/v1/ecosolutions/${idEcosolution}/documentation`, {
+      body: {
+        documentId: idDocumentation,
+      },
+    })
   }
 
   getEcosolutionsDocumentationById(id: string) {

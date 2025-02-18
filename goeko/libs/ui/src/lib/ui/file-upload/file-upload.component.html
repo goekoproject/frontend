@@ -1,0 +1,47 @@
+@if (!documentData()) {
+<div class="p-4 border-2 border-dashed text-base rounded-2xl text-center" [class.border-primary-default]="isDragover()"
+  [class.border-gray-300]="!isDragover()" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)">
+  <input type="file" id="file" class="hidden" (change)="onFileChange($event)" #fileInput>
+  <p class="text-black">{{'INPUT_FILE.dragAndDropHere' | translate}}</p>
+  <p class="text-black">{{ 'or' | translate}}</p>
+  <button class="rounded-full border-2 font-semibold border-primary-default text-primary-default px-7 py-2
+    focus:outline-none focus:bg-sky-100 focus:ring-primary-default" (click)="fileInput.click()">
+    {{'INPUT_FILE.addNewFile' | translate}}
+  </button>
+  @if (error()) {
+  <div class="mt-4 text-red-600 text-sm">
+    ⚠️ {{ error() }}
+  </div>
+  }
+  @if(file() && showNameFile()){
+  <p class="text-blue-500 text-lg mt-2">{{file()?.name}}</p>
+  }
+
+
+</div>
+} @else {
+<ng-container *ngTemplateOutlet="fileData"></ng-container>
+
+
+}
+
+<ng-template #fileData let-name="name">
+  <div
+    class=" relative w-60 p-3 border rounded-2xl hover:drop-shadow-md bg-white gap-2 border-grayStone flex items-center cursor-pointer"
+    (click)="downloadFile()">
+    <i
+      class="ti ti-file-text border-gray-400 text-xl items-center size-9 border bg-blue-400 flex justify-center rounded-lg text-white"></i>
+
+    <div class="flex flex-col">
+      <p class="text-gray-500 text-sm">{{documentData()?.name ||name}}</p>
+      <!--     <a class="text-blue-500 hover:text-blue-300 text-xs" (click)="downloadFile()">{{'show' | translate}}</a>
+ -->
+    </div>
+
+    <button class="absolute -top-2 -right-2 size-6 text-white bg-dark shadow-slate-100 rounded-full leading-4"
+      (click)="removeFile()">
+      <i class="ti ti-x text-sm"></i>
+    </button>
+  </div>
+</ng-template>

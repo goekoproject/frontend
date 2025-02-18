@@ -154,6 +154,8 @@
     "approvedSwiss": "Zugelassen für den Schweizer Markt",
     "basicInformation": "Grundlegende Informationen",
     "certified": "Zertifiziert",
+    "technicalSheet": "Technisches Datenblatt",
+    "certificates": "Zertifikate",
     "city": "Stadt",
     "companyName": "Firmenname",
     "comunicationLanguage": "Kommunikationssprache",
@@ -260,7 +262,10 @@
     "image": "Ziehen Sie die Datei hierher oder klicken Sie, um",
     "image2": "Bild auswählen",
     "image3": "Bild hinzufügen",
-    "selectLogo": "Wählen Sie Ihr Logo aus"
+    "addNewFile": "Neue Datei hinzufügen",
+    "selectLogo": "Wählen Sie Ihr Logo aus",
+    "dragAndDropHere": "Dateien hierher ziehen und ablegen",
+    "maxSizeFile": "Maximale Dateigröße: {{size}}MB"
   },
   "LANGS": {
     "de": "Deutsch",
@@ -582,6 +587,7 @@
   "cancel": "Abbrechen",
   "categories": "Kategorien",
   "certified": "Zertifizierung",
+  "certificates": "Zertifikate",
   "cleantech": "Cleantech",
   "cleantechLeadDefault": "Verfolgen Sie Verbindungen mit Ihren qualifizierten Leads.",
   "companyDetails": "Unternehmensdetails",
@@ -748,5 +754,19 @@
     "housingCooperative": "Wohnungsbaugenossenschaft"
   },
   "delete": "Löschen",
-  "deleteLocation": "Standort löschen"
+  "deleteLocation": "Standort löschen",
+  "or": "oder",
+  "ERRORS_FORM": {
+    "SELECT_CERTIFICATE": "Wählen Sie Ihr Zertifikat aus",
+    "SELECT_YEARS_GUARANTEE": "Wählen Sie die Garantiejahre aus",
+    "required": "Dieses Feld ist Pflichtfeld",
+    "email": "Ungültige E-Mail-Adresse. Beispiel: beispiel@beispiel.com",
+    "weblink": "Ungültige URL. Beispiel: https://www.beispiel.com",
+    "cif": "Das NIF/CIF-Format ist falsch. Beispiel: A12345678 oder B12345678",
+    "siret": "Das SIRET-Format ist falsch. Beispiel: 12345678901234",
+    "uid": "Das Format der UID ist ungültig. Beispiel: CHE-123.456.789",
+    "haveError": "Es gibt Fehler im Formular",
+    "website": "Fehler: Die Webadresse muss das Format www.seite.com haben"
+  },
+  "download": "Herunterladen"
 }

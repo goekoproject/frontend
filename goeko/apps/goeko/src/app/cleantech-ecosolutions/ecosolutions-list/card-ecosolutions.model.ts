@@ -18,7 +18,7 @@ export class CardEcosolutions {
   }
 
   private _getProductTranslated(classification: Classifications, translationService: TranslateService) {
-    return classification.products.map((product) => {
+    return classification.products?.map((product) => {
       const productDataSelect = DataSelect[classification.subCategory as keyof typeof DataSelect]?.find(
         (productSelect) => productSelect.id === product,
       )

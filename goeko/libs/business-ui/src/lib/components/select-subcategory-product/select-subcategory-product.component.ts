@@ -7,14 +7,16 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  Injector,
   Input,
   OnDestroy,
   Provider,
   ViewChild,
   ViewEncapsulation,
   forwardRef,
+  inject,
 } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule } from '@angular/forms'
 import { BadgeComponent, BadgeGroupComponent, BadgeModule, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { SelectSubcategoryProductDirective } from './select-subcategory.directive'
@@ -47,8 +49,11 @@ export enum TYPE_FIELD {
   },
 })
 export class SelectSubcategoryProductComponent implements ControlValueAccessor, AfterContentInit, AfterViewInit, OnDestroy {
+  private _injector = inject(Injector)
+
   @ContentChild(BadgeGroupComponent) badgeGroup!: BadgeGroupComponent
   @ViewChild('inputElement') inputElement!: ElementRef
+  private _formControlNameDirective!: NgControl
 
   @Input() id!: string
   @Input() readonly = false
@@ -76,6 +81,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   }
 
   private _open = true
+  @Input()
   public get open() {
     return this._open
   }
@@ -120,6 +126,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   ) {}
 
   ngAfterContentInit(): void {
+    this._formControlNameDirective = this._injector.get(NgControl, null) as NgControl
     this.badgeGroup.valueChangedBadge$.subscribe((badge) => {
       this._handleCheckSubcategoryWhenProductSelected()
     })
@@ -187,14 +194,24 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   assignValue(value: string): void {
     if (this.multiple) {
       this.value = value
-      this._propagateValue()
+      this.checked = true
+      this._cdf.markForCheck()
+
       this.open = false
     } else if (this.subCategory.code === value) {
       this.value = this.subCategory
-      this._propagateValue()
+      this.checked = true
+      this._cdf.markForCheck()
+      this._formControlNameDirective.control?.pristine
+      this._formControlNameDirective.control?.markAsPristine()
     }
 
     // this will make the execution after the above boolean has changed
+  }
+
+  onSelect(value:string) {
+    this.value = value
+    this._propagateValue()
   }
 
   private _propagateValue() {

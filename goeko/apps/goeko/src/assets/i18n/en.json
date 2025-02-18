@@ -163,6 +163,8 @@
     "approvedSwiss": "Approved for the Swiss market",
     "basicInformation": "Basic information",
     "certified": "Certified",
+    "technicalSheet": "Technical sheet",
+    "certificates": "Certificates",
     "city": "City",
     "companyId": "Enterprise identification number",
     "companyName": "Company name",
@@ -272,7 +274,10 @@
     "image": "Drag and drop or click  ",
     "image2": "Select an image",
     "image3": "Add image",
-    "selectLogo": "Select logo"
+    "addNewFile": "Add new file",
+    "selectLogo": "Select logo",
+    "dragAndDropHere": "Drag and drop here",
+    "maxSizeFile": "Maximum allowed size: {{size}}MB"
   },
   "LANGS": {
     "de": "German",
@@ -753,5 +758,19 @@
     "housingCooperative": "Housing cooperative"
   },
   "delete": "Delete",
-  "deleteLocation": "Delete location"
+  "deleteLocation": "Delete location",
+  "or": "or",
+  "ERRORS_FORM": {
+    "SELECT_CERTIFICATE": "Select a certificate",
+    "SELECT_YEARS_GUARANTEE": "Select the years of guarantee",
+    "required": "This field is required",
+    "email": "Invalid email address. Example: example@example.com",
+    "weblink": "Invalid URL. Example: https://www.example.com",
+    "cif": "The NIF/CIF format is incorrect. Example: A12345678 or B12345678",
+    "siret": "The SIRET format is incorrect. Example: 12345678901234",
+    "uid": "The UID format is incorrect. Example: CHE-123.456.789",
+    "haveError": "There are errors in the form",
+    "website": "Error: The website address must follow the format www.site.com"
+  },
+  "download": "Download"
 }

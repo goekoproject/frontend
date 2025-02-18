@@ -155,6 +155,8 @@
     "approvedSwiss": "Aprobada para el mercado suizo",
     "basicInformation": "Información básica",
     "certified": "Certificado",
+    "technicalSheet": "Ficha técnica",
+    "certificates": "Certificados",
     "city": "Ciudad",
     "companyName": "Nombre de la Compañía",
     "comunicationLanguage": "Idioma para la comunicación",
@@ -259,7 +261,10 @@
     "image": "Arrastra y suelta o haz click",
     "image2": "Selecciona una imagen",
     "image3": "Añadir imagen",
-    "selectLogo": "Selecciona el logo"
+    "addNewFile": "Añadir nuevo archivo",
+    "selectLogo": "Selecciona el logo",
+    "dragAndDropHere": "Arrastra y suelta aquí",
+    "maxSizeFile": "Tamaño máximo permitido: {{size}}MB"
   },
   "LANGS": {
     "de": "Alemán",
@@ -742,5 +747,19 @@
   },
   "delete": "Eliminar",
   "characters": "{{num}} caracteres maximum",
-  "deleteLocation": "Eliminar ubicación"
+  "deleteLocation": "Eliminar ubicación",
+  "or": "o",
+  "ERRORS_FORM": {
+    "SELECT_CERTIFICATE": "Selecciona un certificado",
+    "SELECT_YEARS_GUARANTEE": "Selecciona los años de garantía",
+    "required": "Este campo es obligatorio.",
+    "email": "Correo electrónico inválido. Ejemplo: ejemplo@ejemplo.com",
+    "weblink": "Enlace web inválido. Ejemplo: https://ejemplo.com",
+    "cif": "El formato del NIF/CIF es incorrecto. Ejemplo: A12345678 o B12345678",
+    "siret": "El formato del SIRET es incorrecto. Ejemplo: 12345678901234",
+    "uid": "El formato del UID es incorrecto. Ejemplo: CHE-123.456.789",
+    "haveError": "Por favor, corrige los errores en el formulario.",
+    "website": "Error: La dirección web debe seguir el formato www.sitio.com"
+  },
+  "download": "Descargar"
 }

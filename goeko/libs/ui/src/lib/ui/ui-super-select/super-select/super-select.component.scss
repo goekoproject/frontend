@@ -10,8 +10,6 @@ $color-label-pressed: var(--primary--main);
 @mixin status($status, $color, $background: none) {
   &#{$status} {
     border: 1px solid $color;
-    background: $background;
-    background-color: $background-overlay;
     border-radius: 0.5rem;
   }
 }
@@ -35,8 +33,6 @@ $color-label-pressed: var(--primary--main);
 .super-select {
   display: block;
   overflow: hidden;
-  max-width: var(--medium-width-field);
-  min-width: 5rem;
   &:focus-visible {
     outline-color: rgb(111, 87, 205);
     box-shadow: rgba(111, 87, 205, 0.25) 0px 0px 1px 2px;
@@ -52,6 +48,15 @@ $color-label-pressed: var(--primary--main);
     }
   }
 }
+.super-select[has-error='true'] {
+  .select {
+    @apply border-red-500 bg-red-50 text-red-700;
+  }
+  .select_label {
+    @apply text-red-700;
+  }
+}
+
 .select-dropdown {
   position: fixed;
   z-index: 10000;

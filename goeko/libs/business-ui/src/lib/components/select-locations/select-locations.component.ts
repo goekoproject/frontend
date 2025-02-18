@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, Input, OnDestroy, OnInit, computed, effect, inject, input, output, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions, LocationsCountry } from '@goeko/store'
-import { SwitchModule, UiSuperSelectModule } from '@goeko/ui'
+import { FormErrorTextComponent, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { Subscription, map } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
@@ -11,7 +11,7 @@ const CODE_DEFAULT_COUNTRY = 'CH'
 @Component({
   selector: 'goeko-select-locations',
   standalone: true,
-  imports: [CommonModule, TranslateModule, UiSuperSelectModule, ReactiveFormsModule, SwitchModule],
+  imports: [CommonModule, TranslateModule, UiSuperSelectModule, ReactiveFormsModule, SwitchModule, FormErrorTextComponent],
   providers: [SelectLocationsService],
   templateUrl: './select-locations.component.html',
   styleUrl: './select-locations.component.scss',
@@ -181,8 +181,16 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
   }
 
   addLocation() {
-    this.controlLocations.push(this._createLocations())
+    const newLocation = this._createLocations()
+    newLocation.markAsDirty()
+    this.controlLocations.push(newLocation)
+    this._updateStatusForm()
     this.selectedLocationsIndex.set(this.lastLocations)
+  }
+
+  private _updateStatusForm() {
+    this.controlLocations.markAsDirty()
+    this.controlLocations.updateValueAndValidity()
   }
 
   private _selectDefaultCountry() {

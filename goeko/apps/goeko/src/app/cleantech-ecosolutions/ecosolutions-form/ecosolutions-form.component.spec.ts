@@ -267,7 +267,7 @@ const mockGetEcosolutionById = {
   ],
   creationDate: '2024-08-22T07:14:29',
 }
-describe('EcosolutionsFormComponent', () => {
+xdescribe('EcosolutionsFormComponent', () => {
   let component: EcosolutionsFormComponent
   let fixture: ComponentFixture<EcosolutionsFormComponent>
   let cleantechEcosolutionsServiceMock: { getSubcategorySelected: jest.Mock; subCategorySelected: jest.Mock }

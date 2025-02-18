@@ -13,6 +13,7 @@ type FieldForm =
   | 'select-locations'
   | 'checkbox'
   | 'lang'
+  | 'new-input'
 
 export interface Profile<T = 'cleantech' | 'sme' | 'bank'> {
   userType?: T
@@ -23,4 +24,5 @@ export interface Profile<T = 'cleantech' | 'sme' | 'bank'> {
   className?: string
   required?: boolean
   placeholder?: string
+  errorMessage?: string
 }
