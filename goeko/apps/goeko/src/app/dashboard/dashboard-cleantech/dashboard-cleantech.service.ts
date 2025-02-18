@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { LeadService, UserService } from '@goeko/store'
+import { LeadService, USER_TYPE, UserService } from '@goeko/store'
 
 @Injectable()
 export class DashboardCleantechService {
@@ -11,6 +11,6 @@ export class DashboardCleantechService {
 
   getLeads() {
     this._cleantechId = this._userService.userProfile()?.id
-    return this._leadService.getLeadByCleantech(this._cleantechId)
+    return this._leadService.getLeadByCleantech(this._cleantechId, USER_TYPE.CLEANTECH)
   }
 }

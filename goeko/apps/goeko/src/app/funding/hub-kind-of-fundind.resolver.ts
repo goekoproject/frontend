@@ -1,6 +1,6 @@
 import { inject } from '@angular/core'
 import { ActivatedRouteSnapshot } from '@angular/router'
-import { FINANCING_TYPE } from '@goeko/store'
+import { FINANCING_TYPE } from '@goeko/store/model/financing-type.enum'
 import { forkJoin, of, shareReplay } from 'rxjs'
 import { FundingService } from './funding.service'
 

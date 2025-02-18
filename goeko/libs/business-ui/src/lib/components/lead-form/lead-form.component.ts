@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, OnInit, effect, input } from '@angular/core'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { LeadCreate, LeadService, UserService } from '@goeko/store'
+import { LeadCreate, LeadService, USER_TYPE, UserService } from '@goeko/store'
 import { ButtonModule, DialogConfig, DialogMessageService, GoInputModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { VAR_GENERAL } from '../../utils/var-general.constants'
@@ -68,7 +68,7 @@ export class LeadFormComponent implements OnInit {
     }
 
     this._buildMessage()
-    this._leadService.create(this.dataLead).subscribe(
+    this._leadService.create(this.dataLead, USER_TYPE.CLEANTECH).subscribe(
       (next) => {
         this._dialogCreateLead()
       },

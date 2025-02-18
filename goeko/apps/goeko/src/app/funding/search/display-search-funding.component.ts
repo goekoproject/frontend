@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, input } from '@angular/core'
+import { Component, computed, input, output } from '@angular/core'
 import { RealEstateLoanResponse, SustainableEquipmentResponse } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
@@ -34,7 +34,7 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
         }
       </div>
     </div>
-    <button go-button class="ml-auto">{{ 'contact' | translate }}</button>
+    <button go-button class="ml-auto" (click)="onContact.emit()">{{ 'contact' | translate }}</button>
   </article>`,
 })
 export class DisplaySearchFundingComponent {
@@ -46,4 +46,5 @@ export class DisplaySearchFundingComponent {
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusVehicles ||
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusMachines,
   )
+  onContact = output<void>()
 }

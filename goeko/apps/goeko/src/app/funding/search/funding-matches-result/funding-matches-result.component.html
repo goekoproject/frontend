@@ -4,7 +4,7 @@
   <section>
     <h2 class="label-form">{{ 'sustainableEquipment' | translate }}</h2>
     @for (sustainableEquipments of fundsSustainableEquipments(); track $index) {
-      <goeko-display-search-funding [dataFunding]="sustainableEquipments"></goeko-display-search-funding>
+      <goeko-display-search-funding [dataFunding]="sustainableEquipments" (onContact)="onBankLead(sustainableEquipments)"></goeko-display-search-funding>
     }
   </section>
 

@@ -1,13 +1,16 @@
+import { LeadBankPayload } from './../../../../../libs/store/src/lib/lead/lead-bank-payload-interface';
 import { inject, Injectable, signal } from '@angular/core'
 import {
   FinancingService,
   FinancingType,
+  LeadService,
   SearchFinacing,
   SearchFinancingBuilder,
   SearchFinancingResponse,
   SearchRealEstate,
   SearchSustainableEquipment,
   SessionStorageService,
+  USER_TYPE,
 } from '@goeko/store'
 import { Observable, of } from 'rxjs'
 import { CreateRealStateLoan } from './managment/real-state-loan-form/create-real-state-loan.model'
@@ -18,6 +21,7 @@ const SESSION_QUERY = 'searchQuery'
 export class FundingService {
   private _financingService = inject(FinancingService)
   private _sessionStorage = inject(SessionStorageService)
+  private _leadService = inject(LeadService)
   sustainableEquipment!: CreateSustainableEquipment
   realStateLoan!: CreateRealStateLoan
 
@@ -80,5 +84,9 @@ export class FundingService {
 
   private _getSearchedQuery(): SearchFinacing | null {
     return this._financingBuilder().build() ?? this._sessionStorage.getItem(SESSION_QUERY)
+  }
+
+  createLeadOfBank(data: LeadBankPayload): Observable<any> {
+    return this._leadService.create(data ,USER_TYPE.BANK)
   }
 }

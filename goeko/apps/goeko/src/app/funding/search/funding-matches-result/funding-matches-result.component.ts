@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, computed, inject, input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { SearchFinancingResponse } from '@goeko/store'
+import { RealEstateLoanResponse, SearchFinancingResponse, SustainableEquipmentResponse } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { FundingService } from '../../funding.service'
@@ -25,5 +25,9 @@ export class FundingMatchesResultComponent {
   serarchAgain = () => {
     this._fundingService.clearQuerySustainableEquipment()
     this._router.navigate(['sustainable-equipment'], { relativeTo: this._route.parent })
+  }
+  onBankLead(funding: SustainableEquipmentResponse | RealEstateLoanResponse) {
+    /*  this._fundingService.setBankLead(funding)
+    this._router.navigate(['bank-lead'], { relativeTo: this._route.parent }) */
   }
 }
