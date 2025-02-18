@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
-    "start": "concurrently  -c \"blue,green\"  \"nx serve goeko\" \"npm run start-tailwind\"",
+    "start": "concurrently  -c \"blue,green\"  \"nx serve goeko --port 4100\" \"npm run start-tailwind\"",
     "build:dev": "concurrently  -c \"blue,green\" \"npx nx run-many --target=build --projects=goeko --configuration=development \" \"npm run start-tailwind:build\"",
     "build:pro": "concurrently  -c \"blue,green\"  \"npx nx run-many --target=build --projects=goeko --configuration=production\" \"npm run start-tailwind:build\"",
     "start-tailwind": "npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --watch",

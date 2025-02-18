@@ -4,9 +4,13 @@ import { checkSessionUserData } from '@goeko/core'
 export const appRoutes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
+/*   {
+    path: '',
     loadChildren: () => import('./platform/platform.module').then((m) => m.PlatformModule),
     canActivate: [checkSessionUserData],
-  },
+  }, */
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
