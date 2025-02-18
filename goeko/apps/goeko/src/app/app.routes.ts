@@ -6,7 +6,9 @@ export const appRoutes: Routes = [
     path: '',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
-/*   {
+  //TODO:change platform.goeko.eu
+
+  /*   {
     path: '',
     loadChildren: () => import('./platform/platform.module').then((m) => m.PlatformModule),
     canActivate: [checkSessionUserData],
@@ -18,6 +20,7 @@ export const appRoutes: Routes = [
   {
     path: 'platform',
     loadChildren: () => import('./platform/platform.module').then((m) => m.PlatformModule),
+    canActivate: [checkSessionUserData],
   },
   {
     path: 'login',

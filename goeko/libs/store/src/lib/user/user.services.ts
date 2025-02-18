@@ -4,7 +4,7 @@ import { toObservable } from '@angular/core/rxjs-interop'
 import { BehaviorSubject, Observable, Subject, of, shareReplay, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CacheProperty } from '@goeko/coretools'
 import { Picture } from '../model/pictures.interface'
 import { SessionStorageService } from '../session-storage.service'
@@ -20,7 +20,8 @@ export const SS_LOAD_USER = 'SS_LOAD_USER'
 export class UserService {
   sessionStorage = inject(SessionStorageService)
   private _http = inject(HttpClient)
-
+  private _router = inject(Router)
+  private _route = inject(ActivatedRoute)
   public userAuthData = signal<any>({})
 
   @CacheProperty('_rawUser')
@@ -44,7 +45,7 @@ export class UserService {
   public setUserData(user: any) {
     this.userAuthData.set(user)
   }
-  constructor(private _router: Router) {
+  constructor() {
     effect(() => {
       if (this.userAuthData().sub) {
         this._getDataProfile()
@@ -90,11 +91,11 @@ export class UserService {
     if (this.userType() === USER_TYPE.BANK) {
       this._router.navigate([`funding`])
     } else {
-      this._router.navigate([`dashboard/${this.userType()}/${this.userProfile().id}`])
+      this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`], { relativeTo: this._route })
     }
   }
   private _redirectProfile() {
-    this._router.navigate([`profile/${this.externalId()}`])
+    this._router.navigate([`platformprofile/${this.externalId()}`], { relativeTo: this._route.parent })
   }
 
   getById(id: string): Observable<UserData> {
