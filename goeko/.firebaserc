@@ -17,6 +17,13 @@
           "eu-platform-pro"
         ]
       }
+    },
+    "goeko-dev": {
+      "hosting": {
+        "dev": [
+          "goeko-dev"
+        ]
+      }
     }
   },
   "etags": {}
