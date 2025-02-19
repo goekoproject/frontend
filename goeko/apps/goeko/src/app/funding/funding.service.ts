@@ -1,18 +1,17 @@
-import { LeadBankPayload } from './../../../../../libs/store/src/lib/lead/lead-bank-payload-interface';
 import { inject, Injectable, signal } from '@angular/core'
 import {
   FinancingService,
   FinancingType,
-  LeadService,
   SearchFinacing,
   SearchFinancingBuilder,
   SearchFinancingResponse,
   SearchRealEstate,
   SearchSustainableEquipment,
   SessionStorageService,
-  USER_TYPE,
 } from '@goeko/store'
+import { LeadCreateBank } from '@goeko/store/lead/bank/lead-create-bank.interface'
 import { Observable, of } from 'rxjs'
+import { LeadBankService } from './../../../../../libs/store/src/lib/lead/bank/lead-bank.service'
 import { CreateRealStateLoan } from './managment/real-state-loan-form/create-real-state-loan.model'
 import { CreateSustainableEquipment } from './managment/sustainble-equipment-form/create-sustainable-equipment.model'
 
@@ -21,7 +20,7 @@ const SESSION_QUERY = 'searchQuery'
 export class FundingService {
   private _financingService = inject(FinancingService)
   private _sessionStorage = inject(SessionStorageService)
-  private _leadService = inject(LeadService)
+  private _leadBankService = inject(LeadBankService)
   sustainableEquipment!: CreateSustainableEquipment
   realStateLoan!: CreateRealStateLoan
 
@@ -86,7 +85,7 @@ export class FundingService {
     return this._financingBuilder().build() ?? this._sessionStorage.getItem(SESSION_QUERY)
   }
 
-  createLeadOfBank(data: LeadBankPayload): Observable<any> {
-    return this._leadService.create(data ,USER_TYPE.BANK)
+  createLeadOfBank(data: LeadCreateBank): Observable<any> {
+    return this._leadBankService.createLeadBank(data)
   }
 }

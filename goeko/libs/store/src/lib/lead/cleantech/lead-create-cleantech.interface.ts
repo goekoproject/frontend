@@ -1,4 +1,4 @@
-export interface LeadCreate {
+export interface LeadCreateCleantech {
   cleantechId: string
   smeId: string
   ecosolutionId: string

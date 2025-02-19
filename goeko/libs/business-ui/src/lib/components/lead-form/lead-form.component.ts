@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, OnInit, effect, input } from '@angular/core'
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { LeadCreate, LeadService, USER_TYPE, UserService } from '@goeko/store'
+import { LeadCleantechService, LeadCreateCleantech, UserService } from '@goeko/store'
 import { ButtonModule, DialogConfig, DialogMessageService, GoInputModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { VAR_GENERAL } from '../../utils/var-general.constants'
@@ -14,7 +14,7 @@ interface LeadForm {
   selector: 'goeko-lead-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule, GoInputModule, TranslateModule, ButtonModule],
-  providers: [LeadService],
+  providers: [LeadCleantechService],
   templateUrl: './lead-form.component.html',
   styleUrl: './lead-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,7 +24,7 @@ export class LeadFormComponent implements OnInit {
   cleantechId = input.required<string>()
 
   public leadForm!: FormGroup
-  private dataLead!: LeadCreate
+  private dataLead!: LeadCreateCleantech
 
   get currentLang(): string {
     return this._translateService.currentLang || this._translateService.defaultLang
@@ -33,7 +33,7 @@ export class LeadFormComponent implements OnInit {
     private _fb: FormBuilder,
     private _userService: UserService,
     private _translateService: TranslateService,
-    private _leadService: LeadService,
+    private _leadCleantechService: LeadCleantechService,
     private _dialogMessage: DialogMessageService,
   ) {
     effect(() => {
@@ -68,7 +68,7 @@ export class LeadFormComponent implements OnInit {
     }
 
     this._buildMessage()
-    this._leadService.create(this.dataLead, USER_TYPE.CLEANTECH).subscribe(
+    this._leadCleantechService.createLeadCleantech(this.dataLead).subscribe(
       (next) => {
         this._dialogCreateLead()
       },

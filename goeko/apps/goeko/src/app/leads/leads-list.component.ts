@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { LeadResponse, LeadService } from '@goeko/store'
+import { LeadCleantechService, LeadResponse } from '@goeko/store'
 import { GoDateFormatPipe } from '@goeko/ui'
 import { Observable } from 'rxjs'
 import { ManagerLeadsService } from './manager-leads.services'
@@ -8,7 +8,7 @@ import { ManagerLeadsService } from './manager-leads.services'
 @Component({
   selector: 'goeko-leads-list',
   standalone: true,
-  providers: [LeadService, ManagerLeadsService],
+  providers: [LeadCleantechService, ManagerLeadsService],
   templateUrl: './leads-list.component.html',
   styleUrl: './leads-list.component.scss',
   imports: [CommonModule, GoDateFormatPipe],

@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { LeadResponse, LeadService } from '@goeko/store'
+import { LeadCleantechService, LeadResponse } from '@goeko/store'
 import { Observable } from 'rxjs'
 import { DashboardCleantechService } from './dashboard-cleantech.service'
 
 @Component({
   selector: 'goeko-dashboard-cleantech',
-  providers: [DashboardCleantechService, LeadService],
+  providers: [DashboardCleantechService, LeadCleantechService],
   templateUrl: './dashboard-cleantech.component.html',
   styleUrls: ['./dashboard-cleantech.component.scss'],
 })

@@ -1,6 +1,6 @@
-import { FinancingTypeLead } from '../model/financing-type.enum'
+import { FinancingTypeLead } from '../../model/financing-type.enum'
 
-export interface LeadBankPayload {
+export interface LeadCreateBank {
   bankId: string
   smeId: string
   financingId: string

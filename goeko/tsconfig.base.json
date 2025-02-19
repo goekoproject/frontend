@@ -36,6 +36,9 @@
       "@goeko/store/model/*": [
         "libs/store/src/lib/model/*"
       ],
+      "@goeko/store/*": [
+        "libs/store/src/lib/*"
+      ],
     }
   },
   "exclude": [

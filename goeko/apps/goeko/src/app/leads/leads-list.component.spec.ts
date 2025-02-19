@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { LeadResponse, LeadService, UserService } from '@goeko/store'
+import { LeadCleantech, LeadResponse, UserService } from '@goeko/store'
 import { GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -58,7 +58,7 @@ describe('LeadsListComponent', () => {
           useValue: userServiceMock,
         },
         {
-          provide: LeadService,
+          provide: LeadCleantech,
           useValue: leadsServiceMock,
         },
       ],

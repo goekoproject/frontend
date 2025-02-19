@@ -4,7 +4,7 @@ import { Signal, signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterModule } from '@angular/router'
 import { handlerHttpInterceptor } from '@goeko/business-ui'
-import { LeadService, UserService } from '@goeko/store'
+import { LeadCleantech, UserService } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -15,14 +15,14 @@ describe('DashboardCleantechComponent', () => {
   let component: DashboardCleantechComponent
   let fixture: ComponentFixture<DashboardCleantechComponent>
   let mockDashboardCleantechService: any
-  let mockLeadService: { getLeadByCleantech: jest.Mock }
+  let mockLeadCleantech: { getLeadByCleantech: jest.Mock }
   let mockUserService: { userProfile: Signal<any> }
 
   beforeEach(async () => {
     mockUserService = {
       userProfile: signal({ id: '1' } as any),
     }
-    mockLeadService = {
+    mockLeadCleantech = {
       getLeadByCleantech: jest.fn().mockReturnValue(of([{ id: 1, name: 'Lead 1' }])),
     }
     mockDashboardCleantechService = {
@@ -36,7 +36,7 @@ describe('DashboardCleantechComponent', () => {
         provideHttpClient(withInterceptors([handlerHttpInterceptor])),
         provideHttpClientTesting(),
         { provide: DashboardCleantechService, useValue: mockDashboardCleantechService },
-        { provide: LeadService, useValue: mockLeadService },
+        { provide: LeadCleantech, useValue: mockLeadCleantech },
         { provide: UserService, useValue: mockUserService },
       ],
     }).compileComponents()
