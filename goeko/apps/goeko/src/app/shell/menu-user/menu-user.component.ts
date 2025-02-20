@@ -36,41 +36,12 @@ export class MenuUserComponent {
     this._authService.logout()
   }
   goTo(route: string) {
-    if (route) {
-      this._managerNavigate(route)
-    }
+    const _id = this.user().id || this.userAuth()['externalId']
+    this._router.navigate([route, _id], { relativeTo: this._route })
   }
 
   goToSubmenu(route: string) {
     this._router.navigate([route])
-  }
-
-  //TODO: change pro property
-  private _managerNavigate(route: string) {
-    switch (route) {
-      case 'profile':
-      case 'projects-list':
-      case 'dashboard/sme':
-      case 'dashboard/cleantech':
-      case 'funding':
-      case 'favourites':
-        this._navigateWithCompanyId(route)
-        return
-
-      case 'cleantech-ecosolutions':
-        // eslint-disable-next-line no-case-declarations
-        this._navigateWithCompanyId(route)
-        return
-
-      default:
-        this._router.navigate([route])
-        return
-    }
-  }
-
-  private _navigateWithCompanyId(route: string) {
-    const _id = this.user().id || this.userAuth()['externalId']
-    this._router.navigate([route, _id], { relativeTo: this._route.parent })
   }
 
   openSubmenu(index: number) {

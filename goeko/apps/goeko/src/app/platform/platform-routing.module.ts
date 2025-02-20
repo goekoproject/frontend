@@ -34,12 +34,6 @@ const routes: Routes = [
         loadChildren: () => import('../profile/profile.module').then((m) => m.ProfileModule),
       },
       {
-        path: 'sme-analysis',
-        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
-        canMatch: [hasRole(ROLES.PUBLIC)],
-        loadChildren: () => import('../sme-analysis-form/sme-analysis-form.module').then((m) => m.SmeAnalysisFormModule),
-      },
-      {
         path: 'project-form/:smeId/:projectId',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],

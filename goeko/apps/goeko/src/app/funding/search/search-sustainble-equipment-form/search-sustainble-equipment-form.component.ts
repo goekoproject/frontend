@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping, LocationTranslated } from '@goeko/store'
+import { LeadBankService } from '@goeko/store/lead/bank/lead-bank.service'
 import { ButtonModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AMOUNT, CURRENCY, DOCUMENTS, Options, YEARS } from '../../data-fields.constants'
@@ -23,6 +24,7 @@ import { SearchSustainableEquipmentMapper } from '../search-financing-mapper.mod
     ReactiveFormsModule,
     SelectLocationsComponent,
   ],
+  providers: [LeadBankService],
   templateUrl: './search-sustainble-equipment-form.component.html',
   styleUrl: './search-sustainble-equipment-form.component.scss',
 })
@@ -35,6 +37,7 @@ export class SearchSustainbleEquipmentFormComponent {
 
   //Data received from the parent component
   categories = input.required<CategoryGrouping[]>()
+  id = input.required<string>()
   vehicles = computed(() => this.categories()[0])
   machines = computed(() => this.categories()[1])
 
@@ -54,7 +57,11 @@ export class SearchSustainbleEquipmentFormComponent {
   }
 
   private _goSearchRealStateLoan = () => {
-    this._router.navigate(['real-state-loan'], { relativeTo: this._route.parent })
+    this._router.navigate(['real-state-loan'], {
+      relativeTo: this._route.parent,
+      queryParams: { id: this.id() },
+      queryParamsHandling: 'merge',
+    })
   }
   constructor() {
     effect(() => this._initForm())

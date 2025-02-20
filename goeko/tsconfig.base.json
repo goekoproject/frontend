@@ -33,6 +33,9 @@
       "@goeko/ui": [
         "libs/ui/src/index.ts"
       ],
+      "@goeko/ui/*": [
+        "libs/ui/src/lib/ui/*"
+      ],
       "@goeko/store/model/*": [
         "libs/store/src/lib/model/*"
       ],

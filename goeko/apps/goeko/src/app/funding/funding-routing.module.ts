@@ -25,9 +25,23 @@ const routes: Routes = [
     path: 'search',
     children: [
       {
+        path: 'sustainable-equipment/:id',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        loadComponent: () =>
+          import('./search/search-sustainble-equipment-form/search-sustainble-equipment-form.component').then(
+            (m) => m.SearchSustainbleEquipmentFormComponent,
+          ),
+        resolve: {
+          categories: groupingFormCategoriesResolver,
+        },
+        data: {
+          step: 1,
+          groupingCode: GroupingType.sustainableEquipment,
+        },
+      },
+      {
         path: 'sustainable-equipment',
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-
         loadComponent: () =>
           import('./search/search-sustainble-equipment-form/search-sustainble-equipment-form.component').then(
             (m) => m.SearchSustainbleEquipmentFormComponent,

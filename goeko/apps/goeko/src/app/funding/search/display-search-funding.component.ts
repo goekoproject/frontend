@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, input, output } from '@angular/core'
 import { RealEstateLoanResponse, SustainableEquipmentResponse } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
+import { GoSpinnerComponent } from '@goeko/ui/icons/spinner.component'
 import { TranslateModule } from '@ngx-translate/core'
 type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
 
 @Component({
   selector: 'goeko-display-search-funding',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ButtonModule],
+  imports: [CommonModule, TranslateModule, ButtonModule, GoSpinnerComponent],
   template: `<article class="flex items-center gap-6 rounded-2xl bg-white p-3 shadow-card">
     <!--  <img
       src="assets/images/illustrations/undraw_searching_p5ux.svg"
@@ -34,13 +35,19 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
         }
       </div>
     </div>
-    <button go-button class="ml-auto" (click)="onContact.emit()">{{ 'contact' | translate }}</button>
+    <button go-button class="opa ml-auto" [class.opacity-55]="isSent()" (click)="onContact.emit()">
+      {{ textButton() | translate }}
+      <goeko-spinner [isLoading]="isLoading()" />
+    </button>
   </article>`,
 })
 export class DisplaySearchFundingComponent {
   dataFunding = input.required<DataFunding>()
+  isLoading = input<boolean>(false)
+  isSent = input<boolean>(false)
   products = computed(() => this.dataFunding().classifications.filter((c) => c.products && c.products.length > 0)[0].products[0].label)
   nameBank = computed(() => this.dataFunding().bank.name)
+  textButton = computed(() => (this.isSent() ? 'contacted' : 'contact'))
   haveGreenBonus = computed(
     () =>
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusVehicles ||

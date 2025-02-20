@@ -4,7 +4,8 @@
   <section>
     <h2 class="label-form">{{ 'sustainableEquipment' | translate }}</h2>
     @for (sustainableEquipments of fundsSustainableEquipments(); track $index) {
-      <goeko-display-search-funding [dataFunding]="sustainableEquipments" (onContact)="onBankLead(sustainableEquipments)"></goeko-display-search-funding>
+    <goeko-display-search-funding [dataFunding]="sustainableEquipments" [isLoading]="isLoading()"
+      (onContact)="onBankLead(sustainableEquipments)"></goeko-display-search-funding>
     }
   </section>
 
@@ -12,9 +13,12 @@
     <h2 class="label-form">{{ 'realStateLoan' | translate }}</h2>
     <div class="flex flex-col gap-3">
       @for (realEstateLoan of fundRealEstateLoans(); track $index) {
-        <goeko-display-search-funding [dataFunding]="realEstateLoan"></goeko-display-search-funding>
+      <goeko-display-search-funding [dataFunding]="realEstateLoan"
+        [isLoading]="isLoading()"></goeko-display-search-funding>
       }
     </div>
   </section>
 </div>
-<button go-button (click)="serarchAgain()">{{ 'FORM_LABEL.searchAgain' | translate }}</button>
+<button go-button (click)="serarchAgain()">
+  {{ 'FORM_LABEL.searchAgain' | translate }}
+</button>

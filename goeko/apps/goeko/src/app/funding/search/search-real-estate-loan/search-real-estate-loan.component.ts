@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { ActivatedRoute, Router } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping } from '@goeko/store'
+import { LeadBankService } from '@goeko/store/lead/bank/lead-bank.service'
 import { BadgeModule, ButtonModule, GoInputModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AMOUNT, BUILDINGTYPES, CURRENCY, Options, OWNERPROFILES, YEARS } from '../../data-fields.constants'
@@ -24,6 +25,7 @@ import { RealEstateLoanMapper } from '../search-financing-mapper.model'
     SelectLocationsComponent,
     OptionalLabelDirective,
   ],
+  providers: [LeadBankService],
   templateUrl: './search-real-estate-loan.component.html',
   styleUrl: './search-real-estate-loan.component.scss',
 })
@@ -36,7 +38,7 @@ export class SearchRealEstateLoanComponent {
 
   //Data received from the parent component
   categories = input.required<CategoryGrouping[]>()
-
+  id = input.required<string>()
   //Init const
   amount = signal<Options[]>(AMOUNT)
   currencys = signal<Options[]>(CURRENCY)
@@ -81,7 +83,11 @@ export class SearchRealEstateLoanComponent {
       const searchRealEstateLoan = new RealEstateLoanMapper(this.form.value)
       this._fundingService.setQueryRealEstateLoan(searchRealEstateLoan)
     }
-    this._router.navigate(['search-results'], { relativeTo: this._route.parent })
+    this._router.navigate(['search-results'], {
+      relativeTo: this._route.parent,
+      queryParams: { id: this.id() },
+      queryParamsHandling: 'merge',
+    })
   }
   goBack = () => {
     window.history.back()

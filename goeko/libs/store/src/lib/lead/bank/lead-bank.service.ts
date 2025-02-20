@@ -6,7 +6,7 @@ import { Lead } from '../lead-all.interface'
 import { LeadResponse } from '../lead-response.interface'
 import { LeadCreateBank } from './lead-create-bank.interface'
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class LeadBankService extends TranslateChangeService {
   constructor(private _http: HttpClient) {
     super()

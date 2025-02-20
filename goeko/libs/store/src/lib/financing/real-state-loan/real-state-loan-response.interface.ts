@@ -1,5 +1,6 @@
 import { LocationsCountry } from '../../model/locations.country'
 import { Bank, ClassificationFunding, ContactRequest } from '../common-request.interface'
+import { FinancingTypeLead } from './../../model/financing-type.enum'
 
 export interface RealEstateLoanResponse {
   id: string
@@ -12,6 +13,6 @@ export interface RealEstateLoanResponse {
   currency: string[]
   contact: ContactRequest
   creationDate: string
-  financingType: string
+  financingType: FinancingTypeLead
   balanceSheet: number
 }
