@@ -1,4 +1,7 @@
-import { NgModule } from '@angular/core'
+/**
+ * @deprecated
+ */
+/* import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -42,3 +45,4 @@ export const httpLoaderFactory = (http: HttpClient) => {
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+ */

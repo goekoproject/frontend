@@ -1,6 +1,17 @@
 {
   "hosting": [
     {
+      "target": "dev",
+      "public": "dist/apps/goeko",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
       "target": "legacy",
       "public": "dist/apps/goeko",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],

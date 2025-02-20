@@ -35,9 +35,12 @@ export function validateSmeIdentifier(): (control: AbstractControl) => Validatio
       return null
     }
 
-    const id = control.value.identifier
+    const identifier = control.value.identifier
+    if (!identifier) {
+      return null
+    }
     const regex = IdentifierRegexs[firstLocation]
-    if (regex && !regex.test(id)) {
+    if (regex && !regex.test(identifier)) {
       identifierControl.setErrors({ invalidSmeIdentifier: MessageFprIdentifier[firstLocation] })
       identifierControl.markAsTouched()
       identifierControl.markAsDirty()
@@ -58,11 +61,14 @@ export function validateCleanTechIdentifier(): (control: AbstractControl) => Val
       return null
     }
 
-    const id = control.value.identifier
+    const identifier = control.value.identifier
     const regex = IdentifierRegexs[country as keyof typeof IdentifierRegexs]
     const identifierControl = control.get('identifier') as FormControl
 
-    if (regex && !regex.test(id)) {
+    if (!identifier) {
+      return null
+    }
+    if (regex && !regex.test(identifier)) {
       identifierControl.setErrors({ invalidSmeIdentifier: MessageFprIdentifier[country] })
       identifierControl.markAsTouched()
       identifierControl.markAsDirty()

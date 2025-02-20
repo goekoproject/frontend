@@ -40,6 +40,6 @@ export class DashboardSmeComponent {
     })
   }
   showMore(ecosolutionId: string) {
-    this._router.navigate([`ecosolutions-detail/${this.id()}/${ecosolutionId}`])
+    this._router.navigate([`ecosolutions-detail/${this.id()}/${ecosolutionId}`], {relativeTo: this.route.parent?.parent})
   }
 }
