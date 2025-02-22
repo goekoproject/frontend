@@ -1,0 +1,36 @@
+@defer (when dataLeads()) {
+<goeko-go-table [dataSources]="dataLeads()">
+  <ng-template goCellRef let-element>
+    {{ element['companyName'] }}
+  </ng-template>
+
+  <ng-template goCellRef let-element>
+    {{ element['date'] | goDateFormat}}
+  </ng-template>
+  <ng-template goCellRef let-element>
+    {{ element['email'] }}
+  </ng-template>
+  <ng-template goCellRef let-element>
+    {{ element['financingType'] }}
+  </ng-template>
+  <ng-template goCellRef let-element>
+    {{ element['message'] }}
+  </ng-template>
+
+  @defer (when haveActions()) {
+  <ng-template goElementAction let-element>
+    <div class="ml-auto mr-4 flex items-center justify-end gap-4 [&>i]:cursor-pointer [&>i]:text-2xl">
+      <!-- <i class="ti ti-trash" (click)="deleteProject(element)"></i>
+
+            <i class="ti ti-pencil-minus" (click)="goToEdit(element)"></i>
+
+            <i class="ti ti-chevron-right" (click)="goToDetail(element)"></i> -->
+    </div>
+  </ng-template>
+  }
+
+
+
+  <ng-template [goHeaderRef]="displayColumns"> </ng-template>
+</goeko-go-table>
+}

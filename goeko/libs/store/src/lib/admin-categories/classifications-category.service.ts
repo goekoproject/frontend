@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable, signal } from '@angular/core'
-import { CODE_LANG } from '@goeko/core'
 import { TranslateService } from '@ngx-translate/core'
 import { Observable } from 'rxjs'
+import { CODE_LANG } from './../constants/langs.constants'
 import { ClassificationCategory } from './classifications-category.model'
 import { ManageCategory } from './classifications-subcategory.model'
 

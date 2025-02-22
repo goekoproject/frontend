@@ -1,4 +1,4 @@
-import { mapperLocations } from "@goeko/core"
+import { mapperLocations } from '../user.factory'
 
 export interface NotificationProfile {
   email: string

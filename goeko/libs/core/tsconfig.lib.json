@@ -7,6 +7,15 @@
     "inlineSources": true,
     "types": []
   },
-  "exclude": ["src/**/*.spec.ts", "src/test-setup.ts", "jest.config.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts", "../coretools/src/lib/cache/property.cache.ts"]
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/test-setup.ts",
+    "jest.config.ts",
+    "src/**/*.test.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "../coretools/src/lib/cache/property.cache.ts",
+    "../store/src/lib/constants/langs.constants.ts"
+  ]
 }

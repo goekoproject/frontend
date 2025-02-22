@@ -30,6 +30,10 @@ const routes: Routes = [
       onBack: false,
     },
   },
+  {
+    path: 'bank/:id',
+    loadComponent: () => import('./dashboard-bank/dashboard-bank.component').then((m) => m.DashboardBankComponent),
+  },
 ]
 
 @NgModule({

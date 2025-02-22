@@ -1,4 +1,4 @@
-import { mapperLocations } from '@goeko/core'
+import { LocationProvider } from '../model/location-provider.interface'
 import { UserProfileForm } from './user-profile-form.interface'
 import { USER_TYPE, UserType } from './user-type.constants'
 import { UserBankPayload, UserCleantechPayload } from './user-type/user-payload.model'
@@ -9,6 +9,20 @@ const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
   sme: new SmeBuilder(),
   cleantech: new CleantechBuilder(),
   bank: new BankBuilder(),
+}
+export function mapperLocations(locations: LocationProvider[]): any[] {
+  return locations.map((location: LocationProvider | any) => ({
+    ...location,
+    country: {
+      code: location?.country?.code,
+      regions:
+        location?.country?.regions &&
+        location?.country?.regions.length > 0 &&
+        location?.country?.regions?.every((region: any) => region.code)
+          ? location?.country?.regions?.map((region: any) => region.code)
+          : undefined,
+    },
+  }))
 }
 
 export abstract class UserFactory {

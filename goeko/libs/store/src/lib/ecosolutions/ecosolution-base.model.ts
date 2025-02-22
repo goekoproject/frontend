@@ -1,7 +1,7 @@
-import { mapperLocations } from '@goeko/core'
 import { Classifications } from '../model/classifications.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
 import { LocationsCountry } from '../model/locations.country'
+import { mapperLocations } from '../util/mapper-locations'
 import { Ecosolutions, Improvement, Price } from './ecosolution.interface'
 export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedProperties[] {
   return items.filter((item) => item.label && item.lang)

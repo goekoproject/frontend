@@ -1,5 +1,5 @@
 <div class="w-full">
-  <div class="bg-white py-4 md:py-7 xl:px-10">
+  <div class="bg-white">
     <div class="inline-flex w-full justify-end">
       <ng-content select="[header-action]"></ng-content>
     </div>
@@ -9,9 +9,9 @@
         <thead class="bg-graySmoke">
           <tr scope="col">
             @for (title of headers.goHeaderRef; track title) {
-              <th class="px-4 py-2 text-start text-lg font-semibold capitalize text-grayAsh">
-                {{ title | translate }}
-              </th>
+            <th class="px-4 py-2 text-start text-lg font-semibold capitalize text-grayAsh">
+              {{ title | translate }}
+            </th>
             }
           </tr>
 
@@ -19,25 +19,27 @@
         </thead>
         <tbody>
           @for (element of dataSources; track element.id) {
-            <tr tabindex="0" class="h-16 rounded border border-gray-100 focus:outline-none">
-              @for (cell of cells; track cell.id) {
-                <td id="{{ cell.id }}">
-                  <div class="flex items-center pl-5">
-                    <p class="mr-2 text-base font-medium leading-none text-gray-700">
-                      <ng-container [ngTemplateOutlet]="cell.template" [ngTemplateOutletContext]="{ $implicit: element }"></ng-container>
-                    </p>
-                  </div>
-                </td>
-              }
+          <tr tabindex="0" class="h-16 rounded border border-gray-100 focus:outline-none">
+            @for (cell of cells; track cell.id) {
+            <td id="{{ cell.id }}">
+              <div class="flex items-center pl-5">
+                <p class="mr-2 text-base font-medium leading-none text-gray-700">
+                  <ng-container [ngTemplateOutlet]="cell.template"
+                    [ngTemplateOutletContext]="{ $implicit: element }"></ng-container>
+                </p>
+              </div>
+            </td>
+            }
 
-              @for (action of elementActions; track action.id) {
-                <td>
-                  <div class="flex items-center gap-2">
-                    <ng-container [ngTemplateOutlet]="action.template" [ngTemplateOutletContext]="{ $implicit: element }"></ng-container>
-                  </div>
-                </td>
-              }
-            </tr>
+            @for (action of elementActions; track action.id) {
+            <td>
+              <div class="flex items-center gap-2">
+                <ng-container [ngTemplateOutlet]="action.template"
+                  [ngTemplateOutletContext]="{ $implicit: element }"></ng-container>
+              </div>
+            </td>
+            }
+          </tr>
           }
         </tbody>
       </table>

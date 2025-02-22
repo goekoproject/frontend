@@ -1,6 +1,6 @@
-import { AbstractControl, FormArray } from '@angular/forms';
-import { LocationProvider } from '@goeko/store';
-import { Observable, distinctUntilChanged, map, merge } from 'rxjs';
+import { AbstractControl, FormArray } from '@angular/forms'
+import { LocationProvider } from '@goeko/store'
+import { Observable, distinctUntilChanged, map, merge } from 'rxjs'
 
 export function valueChangeArray(value: FormArray): Observable<any> {
   return merge(
@@ -10,7 +10,7 @@ export function valueChangeArray(value: FormArray): Observable<any> {
         map((value) => ({ rowIndex: index, control: control, data: value })),
       ),
     ),
-  );
+  )
 }
 
 export function mapperLocations(locations: LocationProvider[]): any[] {
@@ -25,5 +25,5 @@ export function mapperLocations(locations: LocationProvider[]): any[] {
           ? location?.country?.regions?.map((region: any) => region.code)
           : undefined,
     },
-  }));
+  }))
 }

@@ -21,6 +21,9 @@
       "@goeko/business-ui": [
         "libs/business-ui/src/index.ts"
       ],
+      "@goeko/business-ui/*": [
+        "libs/business-ui/src/lib/*"
+      ],
       "@goeko/core": [
         "libs/core/src/index.ts"
       ],
@@ -30,18 +33,18 @@
       "@goeko/store": [
         "libs/store/src/index.ts"
       ],
+      "@goeko/store/*": [
+        "libs/store/src/lib/*"
+      ],
+      "@goeko/store/model/*": [
+        "libs/store/src/lib/model/*"
+      ],
       "@goeko/ui": [
         "libs/ui/src/index.ts"
       ],
       "@goeko/ui/*": [
         "libs/ui/src/lib/ui/*"
-      ],
-      "@goeko/store/model/*": [
-        "libs/store/src/lib/model/*"
-      ],
-      "@goeko/store/*": [
-        "libs/store/src/lib/*"
-      ],
+      ]
     }
   },
   "exclude": [

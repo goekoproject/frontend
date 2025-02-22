@@ -1,6 +1,5 @@
 import { inject } from '@angular/core'
 import { Router } from '@angular/router'
-import { ROLES } from '@goeko/store'
 import { Auth0DecodedHash, Auth0UserProfile, WebAuth } from 'auth0-js'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { Options } from '../../models/options.interface'
@@ -10,6 +9,11 @@ export const ACCESS_TOKEN = 'accessToken'
 export const SS_JWTDATA = 'jwtData'
 const namespace = 'https://goeko'
 
+export enum ROLES {
+  PUBLIC = 'public',
+  ADMIN = 'administrator',
+}
+export type UserRoles = ROLES.PUBLIC | ROLES.ADMIN
 const getUserRole = (userData: any) => {
   if (!userData) return [ROLES.PUBLIC]
   const roles = userData[`${namespace}/roles`]

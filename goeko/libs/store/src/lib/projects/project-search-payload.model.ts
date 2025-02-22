@@ -1,6 +1,6 @@
-import { mapperLocations } from '@goeko/core'
 import { Classifications } from '../model/classifications.interface'
 import { Locations } from '../model/locations.interface'
+import { mapperLocations } from '../util/mapper-locations'
 
 export class ProjectSearchPayload {
   name!: string
