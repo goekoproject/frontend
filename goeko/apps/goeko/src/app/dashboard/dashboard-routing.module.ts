@@ -33,6 +33,11 @@ const routes: Routes = [
   {
     path: 'bank/:id',
     loadComponent: () => import('./dashboard-bank/dashboard-bank.component').then((m) => m.DashboardBankComponent),
+    data: {
+      breadcrumb: 'dashboard',
+      hidden: true,
+      onBack: false,
+    },
   },
 ]
 

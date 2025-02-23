@@ -11,7 +11,9 @@
     {{ element['email'] }}
   </ng-template>
   <ng-template goCellRef let-element>
-    {{ element['financingType'] }}
+    <goeko-chip>
+      {{ element['financingType'] | translate}}
+    </goeko-chip>
   </ng-template>
   <ng-template goCellRef let-element>
     {{ element['message'] }}
