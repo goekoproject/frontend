@@ -127,6 +127,14 @@ const BANK_MENU: MenuUser[] = [
     icon: 'ti ti-building-bank',
     order: 2,
   },
+  {
+    id: window.crypto.randomUUID(),
+    title: 'leads',
+    url: 'lead-of-bank',
+    active: true,
+    icon: 'ti ti-access-point',
+    order: 3,
+  },
 ]
 
 const MENU_BY_USER_TYPE = {

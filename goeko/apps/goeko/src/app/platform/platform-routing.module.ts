@@ -104,6 +104,12 @@ const routes: Routes = [
         path: 'funding',
         loadChildren: () => import('../funding/funding.module').then((m) => m.FundingModule),
       },
+      {
+        path: 'lead-of-bank/:id',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        loadComponent: () => import('../lead-bank/lead-of-bank.component').then((m) => m.LeadOfBankComponent),
+      },
     ],
   },
 ]
