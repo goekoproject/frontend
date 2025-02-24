@@ -1,5 +1,5 @@
 .access {
-  @apply relative flex w-screen bg-[url('/assets/photo-login.jpg')] bg-cover bg-center;
+  @apply relative flex h-screen w-screen bg-[url('/assets/photo-login.jpg')] bg-cover bg-center;
 }
 .access-forms {
   @apply relative m-auto flex min-h-full w-full flex-col items-center justify-center gap-8 self-center rounded-l-3xl bg-white p-4 pt-24 sm:p-0;
