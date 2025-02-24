@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CacheProperty } from '@goeko/coretools'
 import { Picture } from '../model/pictures.interface'
 import { SessionStorageService } from '../session-storage.service'
-import { CleantechsUser, ROLES, SmeUser, USER_TYPE, UserType } from './public-api'
+import { CleantechsUser, ROLES, SmeUser, UserType } from './public-api'
 import { UserData } from './user-data.interface'
 import { BankUser } from './user-type/bank-user.model'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
@@ -87,12 +87,7 @@ export class UserService {
 
   private _redirectDashboard() {
     this.sessionStorage.setItem(SS_LOAD_USER, true)
-
-    if (this.userType() === USER_TYPE.BANK) {
-      this._router.navigate([`funding`])
-    } else {
-      this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`], { relativeTo: this._route })
-    }
+    this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`], { relativeTo: this._route })
   }
   private _redirectProfile() {
     this._router.navigate([`platformprofile/${this.externalId()}`], { relativeTo: this._route.parent })
