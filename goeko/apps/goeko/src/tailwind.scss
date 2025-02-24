@@ -19,3 +19,9 @@
     color: var(--green-lime);
   }
 }
+
+@layer title-page {
+  .title-page {
+    @apply text-2xl font-semibold text-black;
+  }
+}

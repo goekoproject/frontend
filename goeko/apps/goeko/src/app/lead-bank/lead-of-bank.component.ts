@@ -4,11 +4,12 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop'
 import { TableLeadsBankComponent } from '@goeko/business-ui/components/leads-bank/table-leads-bank.component'
 import { switchMap } from 'rxjs'
 import { LeadBankManagerService } from './lead-bank-manager.service'
+import { TranslatePipe } from '@ngx-translate/core'
 
 @Component({
   selector: 'goeko-lead-of-bank',
   standalone: true,
-  imports: [CommonModule, TableLeadsBankComponent],
+  imports: [CommonModule, TableLeadsBankComponent, TranslatePipe],
   templateUrl: './lead-of-bank.component.html',
   styleUrl: './lead-of-bank.component.scss',
 })

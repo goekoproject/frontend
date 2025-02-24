@@ -115,7 +115,7 @@ export const cleanTechFormGroup = new FormGroup(
 
 export const bankFormGroup = new FormGroup({
   name: new FormControl('', Validators.required),
-  link: new FormControl('', [Validators.pattern(/^www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/)]),
+  website: new FormControl('', [Validators.pattern(/^www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/)]),
   externalId: new FormControl(),
   locations: new FormArray([], Validators.required),
   contactPerson: new FormControl(''),

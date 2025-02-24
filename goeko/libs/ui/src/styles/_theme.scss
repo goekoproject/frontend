@@ -293,3 +293,6 @@ input[type='radio' i]:focus-visible {
   background-color: var(--green-pastel);
   color: var(--green-lime);
 }
+.title-page {
+  @apply text-2xl font-semibold text-black;
+}

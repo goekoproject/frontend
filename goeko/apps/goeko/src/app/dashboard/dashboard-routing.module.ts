@@ -4,6 +4,7 @@ import { ecosolutionFavouritesResolver, EcosolutionsTaggingService } from '@goek
 import { DashboardCleantechComponent } from './dashboard-cleantech/dashboard-cleantech.component'
 import { dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
 import { DashboardSmeService } from './dashboard-sme/dashboard-sme.service'
+import { dashboardData, leadOfBank } from './dashboard-bank/dashboard-data.resolver'
 //import { DashboardBankComponent } from '../funding/hub-funding.component'
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'bank/:id',
     loadComponent: () => import('./dashboard-bank/dashboard-bank.component').then((m) => m.DashboardBankComponent),
+    resolve: {
+      leads: leadOfBank,
+      dashboardData: dashboardData,
+    },
     data: {
       breadcrumb: 'dashboard',
       hidden: true,
