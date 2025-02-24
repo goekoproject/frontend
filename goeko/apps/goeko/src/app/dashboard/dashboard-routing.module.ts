@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { ecosolutionFavouritesResolver, EcosolutionsTaggingService } from '@goeko/store'
+import { dashboardData, leadOfBank } from './dashboard-bank/dashboard-data.resolver'
 import { DashboardCleantechComponent } from './dashboard-cleantech/dashboard-cleantech.component'
 import { dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
 import { DashboardSmeService } from './dashboard-sme/dashboard-sme.service'
-import { dashboardData, leadOfBank } from './dashboard-bank/dashboard-data.resolver'
 //import { DashboardBankComponent } from '../funding/hub-funding.component'
 
 const routes: Routes = [
@@ -36,7 +36,7 @@ const routes: Routes = [
     loadComponent: () => import('./dashboard-bank/dashboard-bank.component').then((m) => m.DashboardBankComponent),
     resolve: {
       leads: leadOfBank,
-      dashboardData: dashboardData,
+      summary: dashboardData,
     },
     data: {
       breadcrumb: 'dashboard',

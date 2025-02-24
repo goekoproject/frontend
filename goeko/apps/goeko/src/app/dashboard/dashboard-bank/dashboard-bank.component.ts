@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { Component, input } from '@angular/core'
+import { Component, computed, input } from '@angular/core'
 import { TableLeadsBankComponent } from '@goeko/business-ui/components/leads-bank/table-leads-bank.component'
+import { BankDashboardRecord } from '@goeko/store/bank/bank-dashboard.interface'
 import { LeadBankResponse } from '@goeko/store/lead/bank/lead-bank.-response.interface'
 import { TranslatePipe } from '@ngx-translate/core'
 
@@ -15,5 +16,7 @@ export class DashboardBankComponent {
   public id = input.required<string>()
 
   leads = input.required<LeadBankResponse[]>()
-  dashboardData = input.required<any>()
+  summary = input.required<BankDashboardRecord>()
+  sustainableEquipmentLeads = computed(() => this.summary().sustainableEquipmentLeads)
+  realEstateLeads = computed(() => this.summary().realEstateLeads)
 }
