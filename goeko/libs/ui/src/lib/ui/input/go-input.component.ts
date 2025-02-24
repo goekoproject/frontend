@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, ElementRef, inject, input, signal, viewChild } from '@angular/core'
+import { Component, computed, ElementRef, inject, input, OnInit, signal, viewChild } from '@angular/core'
 import { ControlValueAccessor, NgControl, Validators } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { OptionalDirective } from '../directives/optional.directive'
@@ -26,7 +26,7 @@ type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url'
     '[attr.id]': 'id()',
   },
 })
-export class GoInputComponent implements ControlValueAccessor {
+export class GoInputComponent implements ControlValueAccessor, OnInit {
   protected _elementRef = inject<ElementRef<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>>(ElementRef)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   ngControl = inject(NgControl, { optional: true, self: true })!
@@ -58,22 +58,22 @@ export class GoInputComponent implements ControlValueAccessor {
   get showError() {
     return this.ngControl?.touched && this.ngControl?.dirty && Object.keys(this.ngControl?.errors || {}).length > 0
   }
-  get isRequired() {
-    return this.ngControl?.control?.errors?.['required'] && this.showError
-  }
-  showOptional = computed(() => this.optional() && !this.hasValidatorRequired)
+  isRequired = signal<boolean>(false)
+  showOptional = computed(() => this.optional() && !this.isRequired())
   ariaDescribedby = computed(() => (this.showError ? 'error-message' : null))
   ariaInvalid = computed(() => this.showError)
   tabIndex = computed(() => (this.disabled() ? -1 : 0))
   isDisabled = computed(() => this.ngControl?.disabled ?? this.disabled())
   isTextarea = computed(() => this._elementRef.nativeElement.tagName.toLowerCase() === 'goeko-go-textarea')
 
-  get hasValidatorRequired() {
-    return this.ngControl.control?.hasValidator(Validators.required) ?? false
-  }
   constructor() {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this
+    }
+  }
+  ngOnInit(): void {
+    if (this.ngControl.control) {
+      this.isRequired.set(this.ngControl.control.hasValidator(Validators.required))
     }
   }
 

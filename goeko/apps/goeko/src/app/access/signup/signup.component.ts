@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
+import { Component, ElementRef, inject, OnInit, signal, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router'
 import { errorMessageSignUp, ErrorSignUp, TypeErrorCode } from '@goeko/core'
 import { USER_TYPE, USER_TYPE_DESCRIPTION } from '@goeko/store'
-import { AlertComponent, ButtonModule, DialogService, GoInputModule, TooltipComponent } from '@goeko/ui'
+import { AlertComponent, ButtonModule, DialogMessageModule, DialogService, GoInputModule, TooltipComponent } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { AccessService } from '../access.services'
 import { PasswordPolicyComponent } from '../password-policy/password-policy.component'
@@ -24,6 +24,7 @@ import { TermsOfServicesComponent } from './terms-of-services.component'
     GoInputModule,
     PasswordPolicyComponent,
     AlertComponent,
+    DialogMessageModule,
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
@@ -34,6 +35,7 @@ import { TermsOfServicesComponent } from './terms-of-services.component'
   },
 })
 export class SignupComponent implements OnInit {
+  private _dialogService = inject(DialogService)
   @ViewChild('inputAcceptConditions') inputAcceptConditions!: ElementRef<HTMLInputElement>
   public userType = signal(USER_TYPE_DESCRIPTION)
   public formSignup!: FormGroup
@@ -45,7 +47,6 @@ export class SignupComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _accessService: AccessService,
-    private _dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {

@@ -235,7 +235,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     }
   }
 
-  private _getFormGroupFieldTranslations(code?: string) {
+  private _getFormGroupFieldTranslations(code = this.selectedFormLang().code) {
     if (this.selectedFormLang().code === code) {
       return this._fb.group({
         label: new FormControl('', Validators.required),
