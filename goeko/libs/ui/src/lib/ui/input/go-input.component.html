@@ -12,13 +12,13 @@
 
   <!-- Error message for required field -->
 
-  @if(isRequired() && this.showError) {
+  @if(isRequired() && showError) {
   <goeko-form-error-text [form]="ngControl.control">
     {{ 'ERRORS_FORM.required' | translate }}
   </goeko-form-error-text>
   }
 
-  @if(showError && !isRequired) {
+  @if(showError && !isRequired()) {
   <goeko-form-error-text [form]="ngControl.control">
     <ng-content select="[error-messages]"></ng-content>
   </goeko-form-error-text>
