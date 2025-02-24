@@ -11,4 +11,7 @@
   </div>
 </div>
 
+@defer( when (leads() || []).length > 0) {
 <goeko-table-leads-bank [dataLeads]="leads()" [haveActions]="false" />
+
+}
