@@ -18,7 +18,7 @@ export const DEFAULT_CONFIG: Config = {
 	data: null,
 	elementRef: null
 };
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class OverlayRefService {
 	config!: Config;
 	overlayRef!: OverlayRef;
