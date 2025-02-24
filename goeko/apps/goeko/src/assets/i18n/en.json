@@ -441,11 +441,11 @@
 		"subtitleCard": "We will find the most adapted cleantech solutions",
 		"titleCard": "Create a project"
 	},
-	"messages": "Messages",
 	"MESSAGE_SUBSCRIPTION_BANNER": {
 		"messageAlert": "Subscribe for full access! Discover more.",
 		"messageContact": "Contact us at {{email}}"
 	},
+	"messages": "Messages",
 	"msg_empty_ecosolutions": "Your best eco-solution is yet to come",
 	"msg_empty_ecosolutions_notification": "Your best eco-solution is yet to come. We’ll notify you when it comes",
 	"msgSearchEcosolutions": "Searching the best eco-solutions for you",
