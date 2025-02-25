@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { CloudinaryModule } from '@cloudinary/ng'
-import { ContentFulModule, ContentFulService } from '@goeko/store'
+import { ContentFulModule } from '@goeko/store'
 import { ButtonModule, DialogService, GoekoButtonModule, TitlePageComponent, UiBreadcrumbsModule } from '@goeko/ui'
 import { BannerComponent } from './banner/banner.component'
 import { HomeRouteModule } from './home.routes'
