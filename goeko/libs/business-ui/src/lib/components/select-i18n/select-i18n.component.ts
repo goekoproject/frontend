@@ -17,7 +17,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
 export class SelectI18nComponent implements OnInit {
   private _translateServices = inject(TranslateService)
   private _router = inject(Router)
-  private _currentCodeLang = this._translateServices.currentLang ?? this._translateServices.defaultLang
+  private _currentCodeLang = (localStorage.getItem('lang') as string) || this._translateServices.getBrowserLang()
   public langs = input(LANGS)
 
   public isOpen = false
@@ -32,7 +32,7 @@ export class SelectI18nComponent implements OnInit {
   selectedLang(lang: Lang) {
     this.selectedLand.set(lang)
     this._translateServices.use(lang.code)
-    sessionStorage.setItem('lang', lang.code)
+    localStorage.setItem('lang', lang.code)
     this.isOpen = false
   }
 

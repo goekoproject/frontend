@@ -46,9 +46,9 @@ export abstract class UserFactory {
           country: userProfileForm.locations[0].country.code,
           locations: mapperLocations(userProfileForm.locations),
           notification: {
-            email: userProfileForm.email,
-            phoneNumber: userProfileForm.phoneNumber,
-            lang: userProfileForm.comunicationLanguage?.code,
+            email: userProfileForm.email || undefined,
+            phoneNumber: userProfileForm.phoneNumber || undefined,
+            lang: userProfileForm.comunicationLanguage?.code || undefined,
             enabled: userProfileForm.generalNotifications,
           },
         }

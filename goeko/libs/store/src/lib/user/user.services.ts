@@ -12,7 +12,6 @@ import { CleantechsUser, ROLES, SmeUser, UserType } from './public-api'
 import { UserData } from './user-data.interface'
 import { BankUser } from './user-type/bank-user.model'
 export const SS_COMPANY_DETAIL = 'SS_COMPANY'
-export const SS_LOAD_USER = 'SS_LOAD_USER'
 
 @Injectable({
   providedIn: 'root',
@@ -39,9 +38,6 @@ export class UserService {
 
   public completeLoadUser = new BehaviorSubject<boolean>(false)
 
-  get isLoadUser() {
-    return this.sessionStorage.getItem(SS_LOAD_USER)
-  }
   public setUserData(user: any) {
     this.userAuthData.set(user)
   }
@@ -67,9 +63,7 @@ export class UserService {
       .subscribe((data) => {
         if (data) {
           this.propagateDataUser(data)
-          if (!this.isLoadUser) {
-            this._redirectDashboard()
-          }
+          this._redirectDashboard()
         } else {
           this.userProfile.set({} as SmeUser | CleantechsUser | BankUser)
           this._rawUser = {} as SmeUser | CleantechsUser | BankUser
@@ -86,11 +80,10 @@ export class UserService {
   }
 
   private _redirectDashboard() {
-    this.sessionStorage.setItem(SS_LOAD_USER, true)
     this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`], { relativeTo: this._route })
   }
   private _redirectProfile() {
-    this._router.navigate([`platformprofile/${this.externalId()}`], { relativeTo: this._route.parent })
+    this._router.navigate([`platform/profile/${this.externalId()}`], { relativeTo: this._route.parent })
   }
 
   getById(id: string): Observable<UserData> {
