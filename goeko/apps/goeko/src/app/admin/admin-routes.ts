@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
+import { Routes } from '@angular/router'
 import { groupingByClassificationsResolver } from './grouping/grouping.resolver'
 
-const routes: Routes = [
+export const ADMIN_ROUTES: Routes = [
   {
     path: 'user-data',
     loadComponent: () => import('./data-admin/admin-users.component').then((c) => c.AdminUserComponent),
@@ -30,9 +29,3 @@ const routes: Routes = [
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
 ]
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class AdminRoutingModule {}

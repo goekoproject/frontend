@@ -2,6 +2,7 @@ import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common
 import { ApplicationConfig, importProvidersFrom } from '@angular/core'
 import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app'
 import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config'
+import { provideAnimations } from '@angular/platform-browser/animations'
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions } from '@angular/router'
 import { handlerHttpErrorInterceptor } from '@goeko/business-ui'
 import { AuthService, CODE_LANG, ConfigModule } from '@goeko/core'
@@ -27,6 +28,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideRemoteConfig(() => getRemoteConfig(getApp())),
     provideHttpClient(withInterceptors([handlerHttpErrorInterceptor])),
+    provideAnimations(),
     importProvidersFrom(
       ConfigModule.forRoot({
         endopoint: environment.baseUrl,

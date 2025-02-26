@@ -33,7 +33,7 @@ const COMMON_MENU: MenuUser[] = [
       {
         id: window.crypto.randomUUID(),
         title: 'Category',
-        url: 'admin/grouping',
+        url: 'platform/admin/grouping',
         active: true,
         order: 1,
       },

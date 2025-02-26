@@ -94,12 +94,7 @@ const routes: Routes = [
           onBack: false,
         },
       },
-      {
-        path: 'admin',
-        canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
-        canMatch: [hasRole(ROLES.ADMIN)],
-        loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
-      },
+
       {
         path: 'funding',
         loadChildren: () => import('../funding/funding.module').then((m) => m.FundingModule),
@@ -109,6 +104,12 @@ const routes: Routes = [
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadComponent: () => import('../lead-bank/lead-of-bank.component').then((m) => m.LeadOfBankComponent),
+      },
+      {
+        path: 'admin',
+        canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
+        canMatch: [hasRole(ROLES.ADMIN)],
+        loadChildren: () => import('../admin/admin-routes').then((m) => m.ADMIN_ROUTES),
       },
     ],
   },
