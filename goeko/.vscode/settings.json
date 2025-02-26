@@ -1,6 +1,6 @@
 {
     "github-actions.workflows.pinned.workflows": [
-        "d:\\frontend\\.github\\workflows\\firebase-hosting-dev.yml",
-        "d:\\frontend\\.github\\workflows\\firebase-hosting-pro.yml"
+        "d:\\frontend\\.github\\workflows\\firebase-hosting-pro.yml",
+        "d:\\frontend\\.github\\workflows\\firebase-hosting-dev.yml"
     ]
 }
