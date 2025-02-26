@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { CloudinaryModule } from '@cloudinary/ng'
 import { ContentFulModule } from '@goeko/store'
 import { ButtonModule, DialogService, GoekoButtonModule, TitlePageComponent, UiBreadcrumbsModule } from '@goeko/ui'
 import { BannerComponent } from './banner/banner.component'
@@ -51,7 +50,6 @@ import { TeamComponent } from './team/team.component'
     SelectI18nComponent,
     UiBreadcrumbsModule,
     MenuMobileComponent,
-    CloudinaryModule,
     ContentComponent,
     ContentFulModule.forRoot(ContentConfig),
   ],
