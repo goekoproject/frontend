@@ -32,8 +32,6 @@ jobs:
         run: npm cache clean --force
       - name: Install Dependencies
         run: npm install
-      - name: NX Reset
-        run: npm run nx-reset
       - name: Build
         run: npm run build:dev
       - name: Archive Production Artifact
