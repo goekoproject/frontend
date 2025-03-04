@@ -59,7 +59,7 @@ export class GoInputComponent implements ControlValueAccessor, OnInit {
     return this.ngControl?.touched && this.ngControl?.dirty && Object.keys(this.ngControl?.errors || {}).length > 0
   }
   isRequired = signal<boolean>(false)
-  showOptional = computed(() => this.optional() && !this.isRequired())
+  showOptional = computed(() => this.optional() && !this.isRequired() && !this.required())
   ariaDescribedby = computed(() => (this.showError ? 'error-message' : null))
   ariaInvalid = computed(() => this.showError)
   tabIndex = computed(() => (this.disabled() ? -1 : 0))
@@ -72,7 +72,7 @@ export class GoInputComponent implements ControlValueAccessor, OnInit {
     }
   }
   ngOnInit(): void {
-    if (this.ngControl.control) {
+    if (this.ngControl?.control) {
       this.isRequired.set(this.ngControl.control.hasValidator(Validators.required))
     }
   }

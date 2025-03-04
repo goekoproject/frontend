@@ -62,6 +62,9 @@
   height: 120px;
   flex-direction: column;
 }
+.go-button[size='max'] {
+  @apply max-w-full;
+}
 .go-button[appearance='flat'] {
   background-color: transparent;
   color: var(--primary--800);

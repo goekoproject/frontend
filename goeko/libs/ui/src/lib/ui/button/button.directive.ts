@@ -2,17 +2,10 @@
 /* eslint-disable @angular-eslint/directive-selector */
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 
-import { Directive, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core'
 
-type appearance =
-  | 'transparent'
-  | 'primary'
-  | 'secondary'
-  | 'white'
-  | 'any'
-  | 'flat'
-  | null;
-type size = 'huge' | 'medium';
+type appearance = 'transparent' | 'primary' | 'secondary' | 'white' | 'any' | 'flat' | null
+type size = 'huge' | 'medium' | 'max'
 
 @Directive({
   selector: '[go-button], [go-button-icon]',
@@ -25,19 +18,19 @@ type size = 'huge' | 'medium';
 export class ButtonDirective {
   @Input('appearance')
   public get appearance(): appearance {
-    return this._appearance;
+    return this._appearance
   }
   public set appearance(value: appearance) {
-    this._appearance = value;
+    this._appearance = value
   }
-  private _appearance!: appearance;
+  private _appearance!: appearance
 
   @Input('size')
   public get size(): size {
-    return this._size;
+    return this._size
   }
   public set size(value: size) {
-    this._size = value;
+    this._size = value
   }
-  private _size!: size;
+  private _size!: size
 }

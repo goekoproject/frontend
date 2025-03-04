@@ -1,0 +1,17 @@
+<div id="static-modal" tabindex="-1" aria-hidden="true" class="bg-white rounded-md size-96 flex flex-col gap-8 p-8">
+  <section class="flex flex-col gap-4">
+    <div>
+      <span class="text-sm text-grayStone">{{'FORM_LABEL.name' | translate}}</span>
+      <p class="font-semibold">{{ data()?.bankName}}</p>
+    </div>
+    <div>
+      <span class="text-sm text-grayStone">{{'FORM_LABEL.financingType' | translate}}</span>
+      <p class="font-semibold">{{ data()?.financingTye}}</p>
+    </div>
+    <goeko-go-textarea placeholder="{{'messages' | translate}}" [formControl]="message"></goeko-go-textarea>
+
+  </section>
+  <button go-button size="max" class="max-w-full" [disabled]="!message.valid" (click)="sendMessage()">
+    {{'sendMessage' | translate}}
+  </button>
+</div>
