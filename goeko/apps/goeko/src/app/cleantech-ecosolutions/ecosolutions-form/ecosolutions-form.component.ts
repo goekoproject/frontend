@@ -300,7 +300,12 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _addCertifiedValidators(certificates: DocumentEcosolutions[]) {
     certificates?.forEach((certificate) => {
       this.certificates.push(
-        this._fb.control({ documentType: certificate?.documentType?.code, name: certificate.name, id: certificate.id }),
+        this._fb.control({
+          documentType: certificate?.documentType?.code,
+          name: certificate.name,
+          id: certificate.id,
+          url: certificate.url,
+        }),
       )
     })
   }

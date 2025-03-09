@@ -1,13 +1,12 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http'
 import { inject } from '@angular/core'
 import { catchError, Observable, throwError } from 'rxjs'
+import { SKIP_INTERCEPTOR } from '../../../constants/skip-interceptor.constants'
 import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
 import { SessionStorageService } from '../../services/session-storage.service'
 import { SESSIONID } from './auth.constants'
 import { AuthService } from './auth.service'
-
-const isPlatformGoeko = (request: HttpRequest<unknown>) => request.url.includes('assets')
 
 /**
  * Function-based interceptor for authenticating a user
@@ -17,10 +16,10 @@ export const authHttpInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>
   const configuration = inject(CONFIGURATION) as Options
 
   // Check if the request is for the Goeko platform
-  if (!isPlatformGoeko(req)) {
-    req = requestGoekoBackend(req, configuration, sessionStorage)
+  if (req.context.get(SKIP_INTERCEPTOR)) {
+    return next(req)
   }
-
+  req = requestGoekoBackend(req, configuration, sessionStorage)
   return next(req).pipe(catchError((error: HttpErrorResponse) => handleError(error)))
 }
 
