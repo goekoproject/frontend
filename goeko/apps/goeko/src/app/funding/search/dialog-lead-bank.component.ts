@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, inject } from '@angular/core'
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ButtonModule, DialogService, GoekoButtonModule, GoInputComponent, OVERLAY } from '@goeko/ui'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 export interface DataLeadBank {
   financingTye: string
@@ -17,9 +17,10 @@ export interface DataLeadBank {
 })
 export class DialogLeadBankComponent {
   private _dialogService = inject(DialogService)
+  private _translateService = inject(TranslateService)
   private _data = inject<DataLeadBank>(OVERLAY, { optional: true })
-
-  public message = new FormControl('', Validators.required)
+  private _defaultMessage = this._translateService.instant('messageLeadForBank')
+  public message = new FormControl(this._defaultMessage, Validators.required)
   public data = computed(() => this._data)
 
   sendMessage() {

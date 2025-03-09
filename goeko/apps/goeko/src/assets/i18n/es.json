@@ -446,6 +446,7 @@
     "messageAlert": "¡Suscríbase para acceso completo! Descubra más.",
     "messageContact": "Póngase en contacto con nosotros en {{email}}"
   },
+  "messageLeadForBank": "Me permito contactarle en relación a una oportunidad de financiación para mi empresa. Me gustaría concertar una reunión con para hablar sobre las posibles soluciones.¿Podría indicarme sus disponibilidades? Quedo a la espera de su respuesta!",
   "messages": "Mensajes",
   "msg_empty_ecosolutions": "Tu mejor solución ecológica está por llegar.",
   "msg_empty_ecosolutions_notification": "Tu mejor solución ecológica está por llegar. Te notificaremos cuando llegue.",
