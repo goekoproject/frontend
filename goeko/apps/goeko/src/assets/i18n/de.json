@@ -516,7 +516,7 @@
   "projects": "Projekte",
   "questionsAnswered": "Beantwortete Fragen",
   "readMore": "Mehr lesen...",
-  "real_estate_loan_leads": "Immobilienkredit-Leads",
+  "real_estate_loan_leads": "Immobilienkredit-Lead",
   "realStateLoan": "Immobilienkredit",
   "region": "Provinze",
   "regions": "Provinzen",
@@ -729,6 +729,7 @@
     "PUT": "Erfolgreich aktualisiert."
   },
   "summary": "Zusammenfassung",
+  "sustainable_equipment_lead": "Potenzieller Kunde nachhaltiger Ausrüstung",
   "sustainable_equipment_leads": "Potenzielle Kunden nachhaltiger Ausrüstung",
   "sustainableEquipment": "Nachhaltige Ausrüstung",
   "TEXT_SUPPORT": {

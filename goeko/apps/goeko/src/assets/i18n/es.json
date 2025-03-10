@@ -516,7 +516,7 @@
   "projects": "Proyectos",
   "questionsAnswered": "Preguntas contestadas",
   "readMore": "Leer más...",
-  "real_estate_loan_leads": "Clientes potenciales de préstamos inmobiliarios",
+  "real_estate_loan_leads": "Cliente potencial de préstamos inmobiliarios",
   "realStateLoan": "Préstamo inmobiliario",
   "region": "Comunidad Autónoma",
   "regions": "Comunidades Autónomas",
@@ -729,6 +729,7 @@
     "PUT": "Actualizado con éxito."
   },
   "summary": "Resumen",
+  "sustainable_equipment_lead": "Cliente potencial de equipos sostenibles",
   "sustainable_equipment_leads": "Clientes potenciales de equipos sostenibles",
   "sustainableEquipment": "Equipos sostenibles",
   "TEXT_SUPPORT": {

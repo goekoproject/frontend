@@ -2,7 +2,13 @@
   <div class="flex w-6/12 gap-8 divide-x">
     <div class="flex-grow px-4 py-2 font-semibold leading-8 max-w-72">
       <span class="text-5xl">{{sustainableEquipmentLeads() }}</span>
-      <p class="text-grayCharcoal text-lg">{{ 'sustainable_equipment_leads' | translate }}</p>
+      <p class="text-grayCharcoal text-lg">
+
+
+        {{ sustainableEquipmentLeads() > 1 ? ('sustainable_equipment_leads' | translate) :
+        ('sustainable_equipment_lead'
+        |
+        translate) }}</p>
     </div>
     <div class="flex-grow px-6 py-2 font-semibold leading-8 max-w-72">
       <span class="text-5xl">{{ realEstateLeads() }}</span>

@@ -516,7 +516,7 @@
   "projects": "Projects",
   "questionsAnswered": "Questions answered",
   "readMore": "Read More...",
-  "real_estate_loan_leads": "Real Estate Loan Leads",
+  "real_estate_loan_leads": "Real Estate Loan Lead",
   "realStateLoan": "Real state loan",
   "region": "Province",
   "regions": "Provinces",
@@ -729,6 +729,7 @@
     "PUT": "Updated successfully."
   },
   "summary": "Summary",
+  "sustainable_equipment_lead": "Potential customer of sustainable equipment",
   "sustainable_equipment_leads": "Potential customers of sustainable equipment",
   "sustainableEquipment": "Sustainable equipment",
   "TEXT_SUPPORT": {
