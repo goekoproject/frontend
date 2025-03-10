@@ -17,6 +17,6 @@ export class DashboardBankComponent {
 
   leads = input.required<LeadBankResponse[]>()
   summary = input.required<BankDashboardRecord>()
-  sustainableEquipmentLeads = computed(() => this.summary().sustainableEquipmentLeads)
+  sustainableEquipmentLeads = computed(() => 2)
   realEstateLeads = computed(() => this.summary().realEstateLeads)
 }
