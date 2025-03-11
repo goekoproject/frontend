@@ -1,5 +1,7 @@
 <div id="static-modal" tabindex="-1" aria-hidden="true"
-  class="bg-white rounded-md w-[40rem] h-max flex flex-col gap-8 p-8">
+  class="bg-white rounded-md w-[40rem] h-max flex flex-col gap-8 p-8 relative">
+  <i class="ti ti-x absolute top-0 right-0 p-4 text-xl cursor-pointer" (click)="close()"></i>
+
   <section class="flex flex-col gap-4">
     <div>
       <span class="text-sm text-grayStone">{{'FORM_LABEL.name' | translate}}</span>

@@ -10,5 +10,15 @@
       }
     ],
     "typescript-config/consistent-casing": "off"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not and_ff <= 132",
+    "not chrome <= 109",
+    "not firefox <= 134",
+    "not ios_saf <= 18.3",
+    "not safari <= 18.3",
+    "not samsung <= 27"
+  ]
 }

@@ -20,6 +20,7 @@
 
 textarea {
   @apply box-content block h-full resize-none rounded-lg border border-gray-300 bg-white p-4 font-sans text-base text-gray-900 outline-offset-0 transition-all duration-[400ms] focus-visible:outline-1 focus-visible:outline-blue-500 focus-visible:ring-0 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-200;
+  field-sizing: content;
 }
 
 .input-label {

@@ -446,7 +446,7 @@
     "messageAlert": "Abonnieren Sie für vollen Zugriff! Entdecken Sie mehr.",
     "messageContact": "Kontaktieren Sie uns unter {{email}}"
   },
-  "messageLeadForBank": "Guten Tag, Ich erlaube mir, Sie bezüglich einer Finanzierungsmöglichkeit für mein Unternehmen zu kontaktieren. Ich würde gerne ein Gespräch mit Ihnen vereinbaren, um mögliche Lösungen zu besprechen. Könnten Sie mir Ihre Verfügbarkeit mitteilen? Ich freue mich auf Ihre Rückmeldung und danke Ihnen im Voraus.Mit freundlichen Grüßen",
+  "messageLeadForBank": "Guten Tag,\n \nIch erlaube mir, Sie bezüglich einer Finanzierungsmöglichkeit für mein Unternehmen zu kontaktieren. Ich würde gerne ein Gespräch mit Ihnen vereinbaren, um mögliche Lösungen zu besprechen. Könnten Sie mir Ihre Verfügbarkeit mitteilen? Ich freue mich auf Ihre Rückmeldung und danke Ihnen im Voraus.\n \nMit freundlichen Grüßen",
   "messages": "Nachrichten",
   "msg_empty_ecosolutions": "Keine Eco-solutions gefunden",
   "msg_empty_ecosolutions_notification": "Keine Eco-solutions gefunden, die Ihren Kriterien entsprechen. Ändern Sie Ihre Filter, um mehr Optionen zu sehen.",

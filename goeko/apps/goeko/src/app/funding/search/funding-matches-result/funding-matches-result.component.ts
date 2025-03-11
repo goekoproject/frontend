@@ -9,7 +9,7 @@ import { FINANCING_TYPE_LEAD } from '@goeko/store/model/financing-type.enum'
 import { DialogService } from '@goeko/ui'
 import { ButtonModule } from '@goeko/ui/button/button.module'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { delay, switchMap, tap } from 'rxjs'
+import { delay, of, switchMap, tap } from 'rxjs'
 import { FundingService } from '../../funding.service'
 import { DataLeadBank, DialogLeadBankComponent } from '../dialog-lead-bank.component'
 import { DisplaySearchFundingComponent } from '../display-search-funding.component'
@@ -46,7 +46,14 @@ export class FundingMatchesResultComponent {
     this._dialogService
       .open(DialogLeadBankComponent, { data: dataDialogLeadBank })
       .afterClosed()
-      .pipe(switchMap((message: string) => this._createLeadOfBank(message, funding)))
+      .pipe(
+        switchMap((message: string) => {
+          if (message) {
+            return this._createLeadOfBank(message, funding)
+          }
+          return of(null)
+        }),
+      )
       .subscribe(() => {
         this.isLoading.set(false)
       })

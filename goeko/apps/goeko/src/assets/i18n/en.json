@@ -446,7 +446,7 @@
     "messageAlert": "Subscribe for full access! Discover more.",
     "messageContact": "Contact us at {{email}}"
   },
-  "messageLeadForBank": "Hello, I am reaching out to you regarding a financing opportunity for my company. I would like to arrange a meeting with you to discuss possible solutions.Could you share your availability with me? Looking forward to your response, and thank you in advance.Kind regards",
+  "messageLeadForBank": "Hello,\n \nI am reaching out to you regarding a financing opportunity for my company. I would like to arrange a meeting with you to discuss possible solutions.Could you share your availability with me? Looking forward to your response, and thank you in advance.\n \nKind regards",
   "messages": "Messages",
   "msg_empty_ecosolutions": "Your best eco-solution is yet to come",
   "msg_empty_ecosolutions_notification": "Your best eco-solution is yet to come. We’ll notify you when it comes",

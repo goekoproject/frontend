@@ -26,4 +26,8 @@ export class DialogLeadBankComponent {
   sendMessage() {
     this._dialogService.close(this.message.value)
   }
+
+  close() {
+    this._dialogService.close(null)
+  }
 }

@@ -446,7 +446,7 @@
     "messageAlert": "Abonnez-vous pour un accès complet! Découvrez-en davantage",
     "messageContact": "Contactez-nous à {{email}}"
   },
-  "messageLeadForBank": "Bonjour,Je me permets de vous contacter dans le cadre d’une opportunité de financement pour mon entreprise. J’aimerais convenir d’un entretien avec vous afin d’échanger sur les solutions possibles.Pourriez-vous me faire part de vos disponibilités ? Dans l’attente de votre retour, je vous remercie par avance.Cordialement",
+  "messageLeadForBank": "Bonjour,\n \nJe me permets de vous contacter dans le cadre d’une opportunité de financement pour mon entreprise. J’aimerais convenir d’un entretien avec vous afin d’échanger sur les solutions possibles.Pourriez-vous me faire part de vos disponibilités ? Dans l’attente de votre retour, je vous remercie par avance.\n \n Cordialement",
   "messages": "Messages",
   "msg_empty_ecosolutions": "Votre meilleure éco-solution est encore à venir",
   "msg_empty_ecosolutions_notification": "Votre meilleure éco-solution est encore à venir. Nous vous informerons lorsqu'elle arrivera.",
