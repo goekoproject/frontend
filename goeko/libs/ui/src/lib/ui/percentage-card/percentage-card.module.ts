@@ -7,10 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 	imports: [
 		TranslateModule,
 		NgCircleProgressModule.forRoot({
-			radius: 50,
+			radius: 56,
 			outerStrokeWidth: 12,
 			space: -12,
-			innerStrokeWidth: 12,
+			innerStrokeWidth: 8,
 			showBackground: false,
 			startFromZero: true,
 			showSubtitle: false,

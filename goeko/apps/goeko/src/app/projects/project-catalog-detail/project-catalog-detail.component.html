@@ -151,18 +151,27 @@
     </div>
 
     <!-- Benefis -->
+    @if(ecosolutionSearchDetail().improvement.operationalCostReductionPercentage &&
+    ecosolutionSearchDetail().improvement.reductionPercentage) {
     <div class="section border-grayStone">
       <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.advantages' | translate }}</h3>
 
       <div class="flex gap-4">
+        @if(ecosolutionSearchDetail().improvement.reductionPercentage.to) {
         <ng-container [ngTemplateOutlet]="percentageReductionTpl" [ngTemplateOutletContext]="{
-            $implicit: ecosolutionSearchDetail().classification.mainCategory,
-          }"></ng-container>
+                  $implicit: ecosolutionSearchDetail().classification.mainCategory,
+                }"></ng-container>
+        }
 
+        @if(ecosolutionSearchDetail().improvement.operationalCostReductionPercentage.to) {
         <go-percentage-card [label]="'FORM_LABEL.operationalCostReductionPercentage'" [isUpto]="true"
           [percentage]="ecosolutionSearchDetail().improvement.operationalCostReductionPercentage.to || 0"></go-percentage-card>
+        }
+
       </div>
     </div>
+    }
+
     @if (ecosolutionSearchDetail().companyDetail.link) {
     <div class="section border-grayStone">
       <div class="self-start">

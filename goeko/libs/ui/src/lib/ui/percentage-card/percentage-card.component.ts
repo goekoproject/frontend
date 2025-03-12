@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'go-percentage-card',
@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./percentage-card.component.scss'],
 })
 export class PercentageCardComponent {
-  @Input() percentage: number = 15;
-  @Input() label = '';
-  @Input() isUpto = false;
+  @Input() percentage = 15
+  @Input() label = ''
+  @Input() isUpto = false
 }

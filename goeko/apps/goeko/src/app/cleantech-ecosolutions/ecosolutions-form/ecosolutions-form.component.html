@@ -144,9 +144,10 @@
         }
       </fieldset>
 
-      <fieldset *ngIf="mainCategory !== 'hazardousProduct'" [ngClass]="{
-          hidden: selectedFormLang().code !== langSignal(),
-        }">
+      @if(mainCategory !== 'hazardousProduct') {
+      <fieldset [ngClass]="{
+              hidden: selectedFormLang().code !== langSignal(),
+            }">
         <div class="legend--info">
           <legend>
             {{ 'FORM_LABEL.advantagesEcosolutions' | translate }}
@@ -177,6 +178,8 @@
           </super-option>
         </ui-super-select>
       </fieldset>
+      }
+
 
       <fieldset class="flex flex-wrap gap-4" [class.hidden]="selectedFormLang().code !== langSignal()">
         <div class="legend--info">
