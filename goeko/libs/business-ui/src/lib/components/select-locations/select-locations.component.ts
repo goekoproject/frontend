@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input, OnDestroy, OnInit, computed, effect, inject, input, output, signal } from '@angular/core'
+import { AfterContentInit, Component, Input, OnDestroy, OnInit, computed, effect, inject, input, output, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions, LocationsCountry } from '@goeko/store'
 import { FormErrorTextComponent, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
@@ -16,7 +16,7 @@ const CODE_DEFAULT_COUNTRY = 'CH'
   templateUrl: './select-locations.component.html',
   styleUrl: './select-locations.component.scss',
 })
-export class SelectLocationsComponent implements OnInit, OnDestroy {
+export class SelectLocationsComponent implements OnInit, AfterContentInit, OnDestroy {
   private _translateService = inject(TranslateService)
   public countryCompareWith = (o1: string, o2: string) => o1 === o2
   public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1?.code === (o2?.code || o2) || o2?.isAll
@@ -56,6 +56,7 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
     )?.controls['regions']
   }
 
+
   public dataSourceSelect = new Map<string, any>()
   public selectedLocationsIndex = signal<number>(0)
   public selectedCountryLocation = signal<string>(CODE_DEFAULT_COUNTRY)
@@ -83,8 +84,6 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._susbcribeToFormArrayChanges()
-
     this._selectLocationsService.setUpCountries()
     if (this.controlLocations.length === 0) {
       this.addLocation()
@@ -93,6 +92,9 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
       this._patchLocationsValue()
     }
     this._changeLang()
+  }
+  ngAfterContentInit(): void {
+    this._susbcribeToFormArrayChanges()
   }
   ngOnDestroy(): void {
     this._controlLocations.clear()
