@@ -729,8 +729,8 @@
     "PUT": "Erfolgreich aktualisiert."
   },
   "summary": "Zusammenfassung",
-  "sustainable_equipment_lead": "Potenzieller Kunde nachhaltiger Ausrüstung",
-  "sustainable_equipment_leads": "Potenzielle Kunden nachhaltiger Ausrüstung",
+  "sustainable_equipment_lead": "Potenzieller Kunde",
+  "sustainable_equipment_leads": "Potenzielle Kunden",
   "sustainableEquipment": "Nachhaltige Ausrüstung",
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Vorteile Ihrer eco-solution im Vergleich zu einer traditionellen Lösung",

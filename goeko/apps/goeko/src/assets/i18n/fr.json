@@ -516,7 +516,7 @@
   "projects": "Projets",
   "questionsAnswered": "Questions répondues",
   "readMore": "Lire la suite...",
-  "real_estate_loan_leads": "Client potentiel prêt immobilier",
+  "real_estate_loan_leads": "Client potentiel",
   "realStateLoan": "Prêt immobilier",
   "region": "Région",
   "regions": "Régions",
@@ -729,8 +729,8 @@
     "PUT": "Mis à jour avec succès."
   },
   "summary": "Résumé",
-  "sustainable_equipment_lead": "Client potentiel équipement durable",
-  "sustainable_equipment_leads": "Clients potentiel équipement durable",
+  "sustainable_equipment_lead": "Client potentiel",
+  "sustainable_equipment_leads": "Clients potentiel",
   "sustainableEquipment": "Équipement durable",
   "TEXT_SUPPORT": {
     "advantagesEcosolutions": "Avantages de votre éco-solution par rapport à une solution traditionnelle",
