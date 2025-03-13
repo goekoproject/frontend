@@ -1,7 +1,7 @@
 import { Classifications } from '../model/classifications.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
 import { LocationsCountry } from '../model/locations.country'
-import { mapperLocations } from '../util/mapper-locations'
+import { mapperLocationsEcosolutionManagment } from '../util/mapper-locations'
 import { Ecosolutions, Improvement, Price } from './ecosolution.interface'
 export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedProperties[] {
   return items.filter((item) => item.label && item.lang)
@@ -64,7 +64,7 @@ export class EcosolutionsBody implements Ecosolutions {
     this.guarantee = formValue.guarantee
     this.certified = formValue.certified
     this.approved = formValue.approved
-    this.locations = mapperLocations(formValue.locations)
+    this.locations = mapperLocationsEcosolutionManagment(formValue.locations)
     this.nameTranslations = _filterNotNull(formValue.nameTranslations)
     this.descriptionTranslations = _filterNotNull(formValue.descriptionTranslations)
     this.detailedDescriptionTranslations = _filterNotNull(formValue.detailedDescriptionTranslations)

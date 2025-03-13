@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
+import { Component, computed, effect, ElementRef, inject, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CanComponentDeactivate, canDeactivateForm } from '@goeko/business-ui'
@@ -57,6 +57,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   public defaultSetyearGuarantee = defaultSetyearGuarantee
 
   groupingForm = input<CategoryGrouping[]>()
+  ecosolutionData = input<Ecosolutions>()
   categoryId = input<string>()
   public form!: FormGroup
   public ods = ODS_CODE
@@ -74,7 +75,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   private _cleantechId!: string
   private _fileEcosolution!: File[]
-  public urlPicEcosolution?: string[]
+  public urlPicEcosolution = computed(() => this.ecosolutionData()?.pictures?.map((picture) => picture.url))
   public firstLoad = false
   public get isReadOnly(): boolean {
     return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true'
@@ -128,6 +129,12 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
 
   private _documentForRemove = new Array<string>()
+
+  effectLoadForm = effect(() => {
+    if (this.ecosolutionData()) {
+      this._patchDataToForm(this.ecosolutionData())
+    }
+  })
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -141,9 +148,8 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     this.editor = new Editor()
     this._buildFrom()
     this._changeLangCode()
-    if (this.idEcosolution) {
-      this.getEcosolution()
-    } else {
+
+    if (!this.ecosolutionData()) {
       this._seTranslatedProperties()
     }
   }
@@ -265,12 +271,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
   removeAddcertificates(index: number) {
     this.certificates.removeAt(index)
-  }
-  getEcosolution() {
-    this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((ecosolution: Ecosolutions) => {
-      this.urlPicEcosolution = ecosolution?.pictures?.map((picture) => picture.url)
-      this._patchDataToForm(ecosolution)
-    })
   }
 
   private _patchDataToForm(ecosolution: any): void {

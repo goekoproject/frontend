@@ -202,14 +202,14 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
       this.value = this.subCategory
       this.checked = true
       this._cdf.markForCheck()
-      this._formControlNameDirective.control?.pristine
-      this._formControlNameDirective.control?.markAsPristine()
+      this._formControlNameDirective?.control?.pristine
+      this._formControlNameDirective?.control?.markAsPristine()
     }
 
     // this will make the execution after the above boolean has changed
   }
 
-  onSelect(value:string) {
+  onSelect(value: string) {
     this.value = value
     this._propagateValue()
   }

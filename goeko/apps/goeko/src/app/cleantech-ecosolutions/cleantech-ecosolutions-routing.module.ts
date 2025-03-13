@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { canDeactivateGuard } from '@goeko/business-ui'
 import { groupingFormCategoriesResolver } from '@goeko/store'
+import { ecosolutionResolver } from './ecosolution-data.resolver'
 import { EcosolutionsFormComponent } from './ecosolutions-form/ecosolutions-form.component'
 import { EcosolutionsListComponent } from './ecosolutions-list/ecosolutions-list.component'
 import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main.component'
@@ -38,7 +39,7 @@ const routes: Routes = [
       {
         path: 'edit/:id/:categoryId',
         component: EcosolutionsFormComponent,
-        resolve: { groupingForm: groupingFormCategoriesResolver },
+        resolve: { groupingForm: groupingFormCategoriesResolver, ecosolutionData: ecosolutionResolver },
         canDeactivate: [canDeactivateGuard],
         data: {
           breadcrumb: 'BREADCRUMBS.edit_ecosolutions',

@@ -14,3 +14,21 @@ export function mapperLocations(locations: LocationProvider[]): any[] {
     },
   }))
 }
+
+interface LocationEcosolutions {
+  country: { code: string; regions: { code: string; label: string }[] }
+}
+export function mapperLocationsEcosolutionManagment(locations: LocationEcosolutions[]): any[] {
+  return locations.map((location) => ({
+    ...location,
+    country: {
+      code: location?.country?.code,
+      regions: getRegions(location.country.regions),
+    },
+  }))
+}
+
+const getRegions = (regions: { code: string; label: string }[]) => {
+  const regionCodes = regions?.filter((r) => r.code)?.map((region) => region.code)
+  return regionCodes && regionCodes.length > 0 ? regionCodes : undefined
+}

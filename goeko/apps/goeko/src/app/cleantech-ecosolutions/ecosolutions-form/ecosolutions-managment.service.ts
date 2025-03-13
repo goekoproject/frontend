@@ -20,6 +20,10 @@ export const metadataTechnicalSheet: DocumentMetadata = {
 export class EcosolutionsManagmentService {
   private _ecosolutions = inject(EcosolutionsService)
 
+  getEcosolutionById(id: string) {
+    return this._ecosolutions.getEcosolutionById(id)
+  }
+
   uploadDocumentationCertificate(idEcosolution: string, dataFiles: DocumentMetadata[]) {
     if (!this.validateDataFiles(dataFiles)) {
       return throwError(() => new Error('No files to upload.'))

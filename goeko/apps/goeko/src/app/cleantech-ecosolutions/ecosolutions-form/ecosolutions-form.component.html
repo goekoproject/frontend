@@ -3,8 +3,8 @@
   <ng-container *ngTemplateOutlet="ecosolutionsForm"></ng-container>
 </div>
 <ng-template #imageUpload>
-  <goeko-input-file (fileChange)="uploadImgEcosolutions($event)" [filesUrl]="urlPicEcosolution || ''" [multiple]="true"
-    [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
+  <goeko-input-file (fileChange)="uploadImgEcosolutions($event)" [filesUrl]="urlPicEcosolution() || ''"
+    [multiple]="true" [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
 </ng-template>
 <ng-template #heading>
   <div class="mb-10 flex items-center justify-between gap-1 rounded-md bg-primary-100 bg-opacity-65 p-4">
