@@ -1,28 +1,29 @@
-import { CommonModule } from '@angular/common'
+import { CommonModule, ViewportScroller } from '@angular/common'
 import { Component, computed, effect, inject, input, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
 import { CategoryGrouping, LocationTranslated } from '@goeko/store'
 import { LeadBankService } from '@goeko/store/lead/bank/lead-bank.service'
-import { ButtonModule, OptionalLabelDirective, UiSuperSelectModule } from '@goeko/ui'
+import { ButtonModule, FormErrorTextComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { AMOUNT, CURRENCY, DOCUMENTS, Options, YEARS } from '../../data-fields.constants'
 import { FundingService } from '../../funding.service'
 import { SearchSustainableEquipmentMapper } from '../search-financing-mapper.model'
+import { productSelectedRequiredValidator } from './product-selected-required.validator'
 
 @Component({
   selector: 'goeko-search-sustainble-equipment-form',
   standalone: true,
   imports: [
     CommonModule,
-    OptionalLabelDirective,
     RouterModule,
     ButtonModule,
     TranslateModule,
     UiSuperSelectModule,
     ReactiveFormsModule,
     SelectLocationsComponent,
+    FormErrorTextComponent,
   ],
   providers: [LeadBankService],
   templateUrl: './search-sustainble-equipment-form.component.html',
@@ -30,6 +31,7 @@ import { SearchSustainableEquipmentMapper } from '../search-financing-mapper.mod
 })
 export class SearchSustainbleEquipmentFormComponent {
   // Injected  services & providers
+  private viewportScroller = inject(ViewportScroller)
   private _fb = inject(FormBuilder)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
@@ -63,9 +65,8 @@ export class SearchSustainbleEquipmentFormComponent {
       queryParamsHandling: 'merge',
     })
   }
-  constructor() {
-    effect(() => this._initForm())
-  }
+
+  public _effectInitForm = effect(() => this._initForm())
 
   private _initForm = () => {
     if (this.vehicles() && this.machines()) {
@@ -74,42 +75,54 @@ export class SearchSustainbleEquipmentFormComponent {
   }
 
   private _formBuilder = () =>
-    this._fb.group({
-      vehicles: this._fb.group({
-        mainCategory: [this.vehicles().code],
-        subCategory: [this.vehicles().subcategories[0].code],
-        products: this._fb.control(null, Validators.required),
-      }),
-      machines: this._fb.group({
-        mainCategory: [this.machines().code],
-        subCategory: [this.machines().subcategories[0].code],
-        products: this._fb.control(null, Validators.required),
-      }),
+    this._fb.group(
+      {
+        vehicles: this._fb.group({
+          mainCategory: [this.vehicles().code],
+          subCategory: [this.vehicles().subcategories[0].code],
+          products: this._fb.control(null),
+        }),
+        machines: this._fb.group({
+          mainCategory: [this.machines().code],
+          subCategory: [this.machines().subcategories[0].code],
+          products: this._fb.control(null),
+        }),
 
-      documents: this._fb.array(
-        this.requiredDocuments().map((doc) =>
-          this._fb.group({
-            value: [doc.label], // Objeto completo como valor
-            checked: [false], // Estado inicial del checkbox
-          }),
+        documents: this._fb.array(
+          this.requiredDocuments().map((doc) =>
+            this._fb.group({
+              value: [doc.label], // Objeto completo como valor
+              checked: [false], // Estado inicial del checkbox
+            }),
+          ),
         ),
-      ),
-      locations: this._fb.array<LocationTranslated>([], Validators.required),
-      minimumQuantity: this._fb.control(this.amount()[0].value),
-      currencys: this._fb.control(null),
-      yearsActivity: this._fb.control(this.years()[0].label),
-      yearsBalance: this._fb.control(this.years()[0].label),
-    })
+        locations: this._fb.array<LocationTranslated>([], Validators.required),
+        minimumQuantity: this._fb.control(this.amount()[0].value),
+        currencys: this._fb.control(this.currencys()[0].label),
+        yearsActivity: this._fb.control(this.years()[0].label),
+        yearsBalance: this._fb.control(this.years()[0].label),
+      },
+      { validators: productSelectedRequiredValidator() },
+    )
 
   goBack = () => {
     window.history.back()
   }
-  save = () => {
+  save() {
+    console.log(this.form)
+
+    if (this.form.invalid) {
+      this.viewportScroller.scrollToAnchor('productRequired')
+      this.form.markAllAsTouched()
+      this.form.updateValueAndValidity()
+      return
+    }
     const searchSustainableEquipment = new SearchSustainableEquipmentMapper(this.form.value)
     this._fundingService.setQuerySustainableEquipment(searchSustainableEquipment)
     this._goSearchRealStateLoan()
   }
   goSkip = () => {
+    this.form.reset()
     this._goSearchRealStateLoan()
   }
   changeBalanceSheet = () => {

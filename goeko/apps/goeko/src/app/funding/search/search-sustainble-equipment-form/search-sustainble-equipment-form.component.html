@@ -1,73 +1,69 @@
 <h1 class="text-2xl font-semibold">{{ 'sustainableEquipment' | translate }}</h1>
 @defer (when form) {
-  <form [formGroup]="form" class="shadow-md w-full rounded-lg bg-white p-6">
+<form [formGroup]="form" (ngSubmit)="save()">
+  <section class="shadow-md w-full rounded-lg bg-white p-6">
     <!-- Selección de categorías -->
     <div class="mb-6">
       <h2 class="text-lg font-semibold">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.selectProductsLabel' | translate }}</h2>
+      <goeko-form-error-text [form]="form" id="productRequired">
+        {{ 'ERRORS_FORM.required' | translate }}
+      </goeko-form-error-text>
+
+
       <div class="mt-4">
         <label class="font-medium">{{ vehicles().label }}</label>
 
         <ng-container formGroupName="vehicles">
-          <input id="category" class="invisible absolute h-0" formControlName="mainCategory" type="text" />
+          <input id="vehicles" class="invisible absolute h-0" formControlName="mainCategory" type="text" />
 
-          @for (vehicle of vehicles().subcategories; track vehicle.code) {
-            <input id="subcategory" class="invisible absolute h-0" formControlName="subCategory" type="text" />
+          @for (vehicle of vehicles().subcategories; track vehicle.code; let i = $index) {
+          <input id="subcategory+{{i}}" class="invisible absolute h-0" formControlName="subCategory" type="text" />
 
-            <div [id]="'vehicles'" name="vehicles">
-              @for (product of vehicle.products; track product.code; let index = $index) {
-                <div class="flex items-center gap-2">
-                  <input
-                    name="products"
-                    [id]="product.code"
-                    type="radio"
-                    formControlName="products"
-                    [value]="product.code"
-                    class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                  <label for="{{ product.code }}">
-                    {{ product.label }}
-                  </label>
-                </div>
-              }
+          <div [id]="'vehicles'" name="vehicles">
+            @for (product of vehicle.products; track product.code; let index = $index) {
+            <div class="flex items-center gap-2">
+              <input name="products" [id]="product.code" type="radio" formControlName="products" [value]="product.code"
+                class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+              <label for="{{ product.code }}">
+                {{ product.label }}
+              </label>
             </div>
+            }
+          </div>
           }
         </ng-container>
 
         <!--    <div class="flex items-center justify-between rounded-lg border border-gray-300 p-3">
-          <span class="flex items-center gap-2">
-            <go-i-leaves></go-i-leaves>
-            <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
-          </span>
-          <go-toggle-switch
-            [checked]="form.value.greenBonusVehicle"
-            (checkedChange)="toogleGrenBonusVehicle($event)"
-            class="ml-2"></go-toggle-switch>
-        </div> -->
+            <span class="flex items-center gap-2">
+              <go-i-leaves></go-i-leaves>
+              <p class="font-medium">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.greenBonus' | translate }}</p>
+            </span>
+            <go-toggle-switch
+              [checked]="form.value.greenBonusVehicle"
+              (checkedChange)="toogleGrenBonusVehicle($event)"
+              class="ml-2"></go-toggle-switch>
+          </div> -->
       </div>
 
       <div class="mt-4">
         <label class="font-medium">{{ machines().label }}</label>
         <ng-container formGroupName="machines">
-          <input id="category" class="invisible absolute h-0" formControlName="mainCategory" type="text" />
+          <input id="machines" class="invisible absolute h-0" formControlName="mainCategory" type="text" />
 
           @for (machine of machines().subcategories; track machine.id) {
-            <input id="subcategory" class="invisible absolute h-0" formControlName="subCategory" type="text" />
+          <input id="subcategory" class="invisible absolute h-0" formControlName="subCategory" type="text" />
 
-            <div [id]="'machines'" name="machines" class="flex flex-wrap">
-              @for (product of machine.products; track product.code; let index = $index) {
-                <div class="flex basis-2/5 items-center gap-2">
-                  <input
-                    name="products"
-                    [id]="product.code"
-                    type="radio"
-                    formControlName="products"
-                    [value]="product.code"
-                    class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                  <label for="{{ product.code }}">
-                    {{ product.label }}
-                  </label>
-                </div>
-              }
+          <div [id]="'machines'" name="machines" class="flex flex-wrap">
+            @for (product of machine.products; track product.code; let index = $index) {
+            <div class="flex basis-2/5 items-center gap-2">
+              <input name="products" [id]="product.code" type="radio" formControlName="products" [value]="product.code"
+                class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+              <label for="{{ product.code }}">
+                {{ product.label }}
+              </label>
             </div>
+            }
+          </div>
           }
         </ng-container>
       </div>
@@ -81,17 +77,17 @@
 
     <!-- DOCUMENT REQUIRED-->
     <div class="mb-6">
-      <label class="label-form"
-        >{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.documentsRelatedLabel' | translate }}
+      <label class="label-form">{{ 'FUNDING_SUSTAINABLE_EQUIPMENT.documentsRelatedLabel' | translate }}
         <span class="text-xs font-light"> {{ 'ifAvailables' | translate }}</span>
       </label>
       <div class="form-group form-check mb-4 space-y-2">
         <ng-container formArrayName="documents">
           @for (document of requiredDocuments(); track document; let index = $index) {
-            <label class="flex items-center gap-2" [formGroupName]="index">
-              <input type="checkbox" formControlName="checked" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-              {{ document.label | translate }}
-            </label>
+          <label class="flex items-center gap-2" [formGroupName]="index">
+            <input type="checkbox" formControlName="checked"
+              class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+            {{ document.label | translate }}
+          </label>
           }
         </ng-container>
       </div>
@@ -104,7 +100,7 @@
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
         <ui-super-select [placeholder]="'years' | translate" formControlName="yearsActivity">
           @for (year of years(); track year.id) {
-            <super-option [value]="year.label"> {{ year.label }}</super-option>
+          <super-option [value]="year.label"> {{ year.label }}</super-option>
           }
         </ui-super-select>
       </div>
@@ -119,9 +115,10 @@
       <div class="mb-4" [ngClass]="{ 'pointer-events-none opacity-50': !this.checkedBalanceSheet() }">
         <label class="mb-2 block font-medium capitalize">{{ 'years' | translate }}</label>
 
-        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance" [disabled]="!this.checkedBalanceSheet()">
+        <ui-super-select [placeholder]="'years' | translate" formControlName="yearsBalance"
+          [disabled]="!this.checkedBalanceSheet()">
           @for (year of years(); track year.id; let first = $first) {
-            <super-option [value]="year.label" [valueSelected]="first"> {{ year.label }}</super-option>
+          <super-option [value]="year.label" [valueSelected]="first"> {{ year.label }}</super-option>
           }
         </ui-super-select>
       </div>
@@ -133,23 +130,26 @@
       <div class="flex items-center gap-4">
         <ui-super-select formControlName="minimumQuantity" class="basis-1/2">
           @for (money of amount(); track money.id; let first = $first) {
-            <super-option [value]="money.value" [valueSelected]="first"> {{ money.label }}</super-option>
+          <super-option [value]="money.value" [valueSelected]="first"> {{ money.label }}</super-option>
           }
         </ui-super-select>
         <ui-super-select formControlName="currencys" [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate">
-          @for (currency of currencys(); track currency.id) {
-            <super-option [value]="currency.label"> {{ currency.label }}</super-option>
+          @for (currency of currencys(); track currency.id; let first = $first) {
+          <super-option [value]="currency.label" [valueSelected]="first"> {{ currency.label }}</super-option>
           }
         </ui-super-select>
       </div>
     </div>
-  </form>
-}
 
-<div class="mt-4 flex justify-between">
-  <button go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>
-  <div class="flex items-center gap-2">
-    <button go-button type="submit" (click)="save()">{{ 'save' | translate }}</button>
-    <button go-button (click)="goSkip()" appearance="flat">{{ 'skip' | translate }}</button>
+  </section>
+
+  <div class="mt-4 flex justify-between">
+    <button type="button" title="back" go-button appearance="white" (click)="goBack()">{{ 'back' | translate }}</button>
+    <div class="flex items-center gap-2">
+      <button go-button type="submit">{{ 'next' | translate }}</button>
+      <button type="button" go-button (click)="goSkip()" appearance="flat">{{ 'skip' | translate }}</button>
+    </div>
   </div>
-</div>
+</form>
+
+}

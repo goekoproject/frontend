@@ -47,7 +47,7 @@ export class DisplaySearchFundingComponent {
   isSent = input<boolean>(false)
   products = computed(() => this.dataFunding().classifications.filter((c) => c.products && c.products.length > 0)[0].products[0].label)
   nameBank = computed(() => this.dataFunding().bank.name)
-  textButton = computed(() => (this.isSent() ? 'contacted' : 'contact'))
+  textButton = computed(() => (this.isSent() ? 'FORM_LABEL.contacted' : 'contactLead'))
   haveGreenBonus = computed(
     () =>
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusVehicles ||

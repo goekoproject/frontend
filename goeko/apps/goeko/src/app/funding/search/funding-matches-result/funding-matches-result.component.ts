@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, input, signal } from '@angular/core'
+import { Component, computed, effect, inject, input, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { RealEstateLoanResponse, SearchFinancingResponse, SustainableEquipmentResponse } from '@goeko/store'
 import { FINANCING_TYPE_LABEL } from '@goeko/store/constants/financing-type-label.constant'
@@ -32,16 +32,28 @@ export class FundingMatchesResultComponent {
   fundsSustainableEquipments = computed(() => this.searchResults().sustainableEquipment)
   fundRealEstateLoans = computed(() => this.searchResults().realEstate)
   id = input.required<string>()
+  private _leadCreated = signal<boolean>(false)
 
   public isLoading = signal<boolean>(false)
+  isSent = computed(() => this._leadCreated())
+  selectedFunding = signal<SustainableEquipmentResponse | RealEstateLoanResponse | null>(null)
+
+  effectOnBankLead = effect(() => {
+    if (this.selectedFunding()) {
+      this._openDialogLeadBank()
+    }
+  })
   serarchAgain = () => {
     this._fundingService.clearQuerySustainableEquipment()
-    this._router.navigate(['sustainable-equipment'], { relativeTo: this._route.parent })
+    this._router.navigate(['sustainable-equipment', this.id()], { relativeTo: this._route.parent })
   }
-  onBankLead(funding: SustainableEquipmentResponse | RealEstateLoanResponse) {
+  selectedFundingLead(funding: SustainableEquipmentResponse | RealEstateLoanResponse) {
+    this.selectedFunding.set(funding)
+  }
+  private _openDialogLeadBank() {
     const dataDialogLeadBank: DataLeadBank = {
-      financingTye: this._translateService.instant(FINANCING_TYPE_LABEL[funding?.financingType as FINANCING_TYPE_LEAD]),
-      bankName: funding.bank.name,
+      financingTye: this._translateService.instant(FINANCING_TYPE_LABEL[this.selectedFunding()?.financingType as FINANCING_TYPE_LEAD]),
+      bankName: this.selectedFunding()?.bank.name || '',
     }
     this._dialogService
       .open(DialogLeadBankComponent, { data: dataDialogLeadBank })
@@ -49,13 +61,14 @@ export class FundingMatchesResultComponent {
       .pipe(
         switchMap((message: string) => {
           if (message) {
-            return this._createLeadOfBank(message, funding)
+            return this._createLeadOfBank(message, this.selectedFunding() as SustainableEquipmentResponse | RealEstateLoanResponse)
           }
           return of(null)
         }),
       )
       .subscribe(() => {
         this.isLoading.set(false)
+        this._leadCreated.set(true)
       })
   }
 

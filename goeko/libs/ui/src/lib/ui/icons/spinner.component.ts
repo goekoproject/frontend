@@ -3,6 +3,11 @@ import { Component, input } from '@angular/core'
 @Component({
   selector: 'goeko-spinner',
   standalone: true,
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+  host: {
+    role: 'status',
+    '[attr.loading]': 'isLoading()',
+  },
   template: `
     @if (isLoading()) {
       <svg
@@ -23,6 +28,9 @@ import { Component, input } from '@angular/core'
   `,
   styles: [
     `
+      :host[loading='false'] {
+        position: absolute;
+      }
       .inline {
         display: inline-block;
       }

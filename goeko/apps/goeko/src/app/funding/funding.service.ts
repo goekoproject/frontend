@@ -16,7 +16,7 @@ import { CreateRealStateLoan } from './managment/real-state-loan-form/create-rea
 import { CreateSustainableEquipment } from './managment/sustainble-equipment-form/create-sustainable-equipment.model'
 
 const SESSION_QUERY = 'searchQuery'
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class FundingService {
   private _financingService = inject(FinancingService)
   private _sessionStorage = inject(SessionStorageService)
@@ -26,6 +26,9 @@ export class FundingService {
 
   private _financingBuilder = signal<SearchFinancingBuilder>(new SearchFinancingBuilder())
 
+  getQuerySustainableEquipment(): SearchSustainableEquipment {
+    return this._financingBuilder().sustainableEquipment
+  }
   setQuerySustainableEquipment(data: SearchSustainableEquipment): void {
     this._financingBuilder().setSustainableEquipment(data)
   }
@@ -72,7 +75,7 @@ export class FundingService {
     return this._financingService.deleteKindOfFinancingById(type, kindOfFundingId)
   }
 
-    searchFunding(): Observable<SearchFinancingResponse> {
+  searchFunding(): Observable<SearchFinancingResponse> {
     const query = this._getSearchedQuery() as SearchFinacing
     if (!query) {
       return of({ sustainableEquipment: [], realEstate: [] })

@@ -454,6 +454,7 @@
   "my_company": "Mein Unternehmen",
   "new_analysis": "Neue Analyse",
   "new_project": "Neues Projekt",
+  "next": "Weiter",
   "no": "Nein",
   "none": "Keine",
   "notAvailable": "Nicht verfügbar",
@@ -717,7 +718,7 @@
     "cleantechDescription": "Ich schlage eine Cleantech-Lösung vor",
     "enterpriseDescription": "Ich suche eine Cleantech-Lösung"
   },
-  "skip": "",
+  "skip": "Überspringen",
   "sloganGoeko": "Die Verbindung zur Effizienz",
   "sloganMainBanner": "Verbindung von Unternehmen mit sauberer Technologie und Finanzierung",
   "sme": "KMU",
@@ -789,5 +790,6 @@
   "your_ecosolutions": "Ihre Eco-solutions",
   "yourEcosolution": "Ihre Ökolösung",
   "yourFinancialSolutions": "Ihre Finanzierungslösungen",
-  "yourProjects": "Ihre Projekte"
+  "yourProjects": "Ihre Projekte",
+  "contactLead": "Kontaktieren"
 }

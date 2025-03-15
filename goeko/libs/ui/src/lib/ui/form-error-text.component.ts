@@ -8,7 +8,7 @@ import { AbstractControl, FormControl } from '@angular/forms'
   imports: [CommonModule],
   template: ` @defer (when form()) {
     @if (form()?.invalid && form()?.touched && form()?.dirty) {
-      <p class="mt-1 text-sm text-red-500">
+      <p class="mt-1 text-sm text-red-500" [id]="id()">
         <ng-content></ng-content>
       </p>
     }
@@ -17,4 +17,5 @@ import { AbstractControl, FormControl } from '@angular/forms'
 })
 export class FormErrorTextComponent {
   form = input.required<AbstractControl | FormControl | null>()
+  id = input<string>(Math.random().toString())
 }
