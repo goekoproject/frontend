@@ -106,6 +106,12 @@ const routes: Routes = [
         loadComponent: () => import('../lead-bank/lead-of-bank.component').then((m) => m.LeadOfBankComponent),
       },
       {
+        path: 'lead-of-bank/:id/:leadId',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        loadComponent: () => import('../lead-bank/lead-of-bank.component').then((m) => m.LeadOfBankComponent),
+      },
+      {
         path: 'admin',
         canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
         canMatch: [hasRole(ROLES.ADMIN)],

@@ -10,7 +10,7 @@ export const leadOfBank = (route: ActivatedRouteSnapshot) => {
   if (!_id) {
     return of(undefined)
   }
-  return _dashboardBankService.getLeads(_id)
+  return _dashboardBankService.getLastLeads(_id)
 }
 
 export const dashboardData = (route: ActivatedRouteSnapshot) => {
