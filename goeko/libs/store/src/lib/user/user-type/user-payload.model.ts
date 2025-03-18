@@ -50,8 +50,8 @@ export class UserBankPayload {
     this.externalId = dataForm.externalId
     this.contactPerson = dataForm.contactPerson
     this.notification = {
-      email: dataForm.email,
-      phoneNumber: dataForm.phoneNumber,
+      email: 'info@goeko.ch',
+      phoneNumber: '9999999',
       lang: dataForm.comunicationLanguage,
     }
     this.locations = mapperLocations(dataForm.locations)
