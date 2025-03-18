@@ -1,9 +1,8 @@
-import { HttpEvent, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http'
+import { HttpEvent, HttpInterceptorFn, HttpResponse } from '@angular/common/http'
 import { inject } from '@angular/core'
 import { Notification, TOAST_NOTIFICATION_SUBTYPE, ToastService } from '@goeko/store'
 import { throwError } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
-const isPlatformGoeko = (request: HttpRequest<unknown>) => request.url.includes('/v1')
 enum TOAST_NOTIFICATION_TYPE {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
@@ -43,7 +42,7 @@ export const handlerHttpErrorInterceptor: HttpInterceptorFn = (req, next) => {
   const _toastService = inject(ToastService)
   return next(req).pipe(
     tap((event: HttpEvent<any>) => {
-      if (event instanceof HttpResponse && isPlatformGoeko(req) && !req.url.includes('search?lang')) {
+      if (event instanceof HttpResponse && !req.url.includes('search?lang')) {
         const successMessage = SUCCESS_MESSAGE[req.method as keyof typeof SUCCESS_MESSAGE]
         if (successMessage) {
           _toastService.notify(successMessage.message, successMessage.type, successMessage.subtype)

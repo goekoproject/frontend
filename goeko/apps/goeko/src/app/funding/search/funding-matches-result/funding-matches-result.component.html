@@ -1,24 +1,26 @@
 <h1 class="text-2xl font-semibold">{{ 'bestFiancialPartners' | translate }}</h1>
-
 <div class="my-12 flex flex-col gap-6">
-  <section>
+  <section class="flex flex-col gap-3">
     <h2 class="label-form">{{ 'sustainableEquipment' | translate }}</h2>
     @for (sustainableEquipments of fundsSustainableEquipments(); track $index) {
-    <goeko-display-search-funding [dataFunding]="sustainableEquipments" [isLoading]="isLoading()"
-      (onContact)="onBankLead(sustainableEquipments)"></goeko-display-search-funding>
+    <goeko-display-search-funding [dataFunding]="sustainableEquipments"
+      [isLoading]="isLoading() && sustainableEquipments.id === selectedFunding()?.id"
+      [isSent]="isSent() && sustainableEquipments.id === selectedFunding()?.id"
+      (onContact)="selectedFundingLead(sustainableEquipments)"></goeko-display-search-funding>
     }
   </section>
 
-  <section class="flex flex-col gap-2">
+  <section class="flex flex-col gap-3">
     <h2 class="label-form">{{ 'realStateLoan' | translate }}</h2>
     <div class="flex flex-col gap-3">
-      @for (realEstateLoan of fundRealEstateLoans(); track $index) {
-      <goeko-display-search-funding [dataFunding]="realEstateLoan"
-        [isLoading]="isLoading()"></goeko-display-search-funding>
+      @for (realEstateLoan of fundRealEstateLoans(); track $index; let i = $index) {
+      <goeko-display-search-funding [dataFunding]="realEstateLoan" (onContact)="selectedFundingLead(realEstateLoan)"
+        [isSent]="isSent() && realEstateLoan.id === selectedFunding()?.id"
+        [isLoading]="isLoading() && realEstateLoan.id === selectedFunding()?.id"></goeko-display-search-funding>
       }
     </div>
   </section>
 </div>
-<button go-button (click)="serarchAgain()">
+<button go-button (click)="serarchAgain()" appearance="white">
   {{ 'FORM_LABEL.searchAgain' | translate }}
 </button>

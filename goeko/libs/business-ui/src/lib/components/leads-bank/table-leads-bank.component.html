@@ -16,7 +16,12 @@
     </goeko-chip>
   </ng-template>
   <ng-template goCellRef let-element>
-    {{ element['message'] }}
+    <abbr title="{{ element['message'] }}">
+      <div class="truncate max-w-52 cursor-pointer">
+        {{ element['message'] }}
+      </div>
+
+    </abbr>
   </ng-template>
 
   @defer (when haveActions()) {

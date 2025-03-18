@@ -38,20 +38,7 @@ export const PROFILE_BANK: Array<ProfileFieldset<'bank'>> = [
     ],
   },
   {
-    legend: 'FORM_LABEL.notification',
     fields: [
-      {
-        controlName: 'email',
-        label: 'FORM_LABEL.email',
-        type: 'email',
-        required: true,
-        errorMessage: 'ERRORS_FORM.email',
-      },
-      {
-        controlName: 'phoneNumber',
-        label: 'FORM_LABEL.phoneNumber',
-        type: 'text',
-      },
       {
         controlName: 'comunicationLanguage',
         label: 'FORM_LABEL.comunicationLanguage',

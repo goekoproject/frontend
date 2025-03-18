@@ -1,3 +1,4 @@
+import { FINANCING_TYPE_LABEL } from '@goeko/store/constants/financing-type-label.constant';
 import { CommonModule } from '@angular/common'
 import { Component, input } from '@angular/core'
 import { LeadBankResponse } from '@goeko/store/lead/bank/lead-bank.-response.interface'
@@ -7,10 +8,7 @@ import { ChipComponent } from '@goeko/ui/chip/chip.component'
 import { TranslatePipe } from '@ngx-translate/core'
 import { GoTableModule } from './../go-table/go-table.module'
 
-const FINANCING_TYPE_LABEL: Record<FINANCING_TYPE_LEAD, string> = {
-  REAL_ESTATE: 'realStateLoan',
-  SUSTAINABLE_EQUIPMENT: 'sustainableEquipment',
-}
+
 export interface TableLead {
   id: string
   date: Date

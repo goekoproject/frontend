@@ -55,7 +55,11 @@ interface CertificateFormGroup {
           <i class="ti ti-trash-filled cursor-pointer transition-colors hover:text-primary-blueDark" (click)="removeFile()"></i>
         </div>
         <!-- title -->
-        <h2 class="mb-4 rounded-sm bg-blueLightPastel p-2 text-base/10 font-semibold md:line-clamp-2">{{ fileName() }}</h2>
+        <h2
+          class="mb-4 rounded-sm bg-blueLightPastel p-2 text-base/10 font-semibold hover:cursor-pointer hover:underline md:line-clamp-2"
+          (click)="viewFile()">
+          {{ fileName() }}
+        </h2>
 
         <!-- Selector certificate -->
         <ui-super-select
@@ -108,7 +112,7 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   private _file = signal<File | null>(null)
   private _filename = signal<string>('')
   emptySelectCertificate = signal(false)
-  test = this._selectCertificateServices.getCertificateTranslated()
+  urlFile = signal<string>('')
   fileName = computed(() => this._file()?.name ?? this._filename())
   hasError = computed(() => this.emptySelectCertificate())
   refresh = toSignal(this.refreshSignal.asObservable(), { initialValue: false })
@@ -132,15 +136,13 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
     }
   }
 
-  constructor() {
-    effect(() => {
-      if (this._file()) {
-        this.documentTypeControl.get('file')?.setValue(this._file())
-        this.documentType.markAsDirty()
-        this.documentType.markAsTouched()
-      }
-    })
-  }
+  valueEffect = effect(() => {
+    if (this._file()) {
+      this.documentTypeControl.get('file')?.setValue(this._file())
+      this.documentType.markAsDirty()
+      this.documentType.markAsTouched()
+    }
+  })
 
   ngOnInit() {
     this._formControlNameDirective = this._injector.get(NgControl, null) as NgControl
@@ -148,7 +150,6 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
       if (value?.documentType) {
         this._value.set(value?.documentType ?? null)
         this._formControlNameDirective.control?.setErrors(null)
-
         this.onChange(value)
         this.onTouched()
       } else {
@@ -178,6 +179,7 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
       throw new Error('Document type (documentType) or name is missing')
     }
     this._file.set(null)
+    this.urlFile.set(value.url)
     this._filename.set(value?.name)
     this.documentTypeControl.get('documentType')?.reset(value?.documentType, { emitEvent: false })
     this.documentTypeControl.get('id')?.reset(value?.id, { emitEvent: false })
@@ -208,5 +210,17 @@ export class SelectCertificateComponent implements ControlValueAccessor, OnInit 
   private _removeElementofArray() {
     const index = this.controlParent.controls.findIndex((control: any) => control.name === this._formControlNameDirective?.name)
     this.controlParent.removeAt(index)
+  }
+
+  viewFile() {
+    this._selectCertificateServices.viewFileOnBrowser(this.urlFile())
+  }
+  private _downloadFile() {
+    this._selectCertificateServices.downloadFile(this.urlFile()).subscribe((file) => {
+      if (!file) {
+        return
+      }
+      this._file.set(file)
+    })
   }
 }

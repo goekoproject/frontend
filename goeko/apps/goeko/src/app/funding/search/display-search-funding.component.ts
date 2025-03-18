@@ -10,7 +10,7 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
   selector: 'goeko-display-search-funding',
   standalone: true,
   imports: [CommonModule, TranslateModule, ButtonModule, GoSpinnerComponent],
-  template: `<article class="flex items-center gap-6 rounded-2xl bg-white p-3 shadow-card">
+  template: `<article class="flex items-center gap-6 rounded-2xl bg-white p-4 shadow-card">
     <!--  <img
       src="assets/images/illustrations/undraw_searching_p5ux.svg"
       alt="searching"
@@ -35,7 +35,7 @@ type DataFunding = SustainableEquipmentResponse | RealEstateLoanResponse
         }
       </div>
     </div>
-    <button go-button class="opa ml-auto" [class.opacity-55]="isSent()" (click)="onContact.emit()">
+    <button go-button class="ml-auto max-w-80" [class.opacity-55]="isSent()" (click)="onContact.emit()">
       {{ textButton() | translate }}
       <goeko-spinner [isLoading]="isLoading()" />
     </button>
@@ -47,7 +47,7 @@ export class DisplaySearchFundingComponent {
   isSent = input<boolean>(false)
   products = computed(() => this.dataFunding().classifications.filter((c) => c.products && c.products.length > 0)[0].products[0].label)
   nameBank = computed(() => this.dataFunding().bank.name)
-  textButton = computed(() => (this.isSent() ? 'contacted' : 'contact'))
+  textButton = computed(() => (this.isSent() ? 'FORM_LABEL.contacted' : 'contactLead'))
   haveGreenBonus = computed(
     () =>
       (this.dataFunding() as SustainableEquipmentResponse).greenBonusVehicles ||

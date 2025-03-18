@@ -1,11 +1,15 @@
 import { SearchFinacing, SearchRealEstate, SearchSustainableEquipment } from './search-financing.interface'
 
 export class SearchFinancingBuilder {
-  private sustainableEquipment!: SearchSustainableEquipment
+  private _sustainableEquipment!: SearchSustainableEquipment
+
+  get sustainableEquipment() {
+    return this._sustainableEquipment
+  }
   private realEstate!: SearchRealEstate
 
   setSustainableEquipment(data: Partial<SearchSustainableEquipment>): this {
-    this.sustainableEquipment = { ...this.sustainableEquipment, ...data }
+    this._sustainableEquipment = { ...this.sustainableEquipment, ...data }
     return this
   }
 
@@ -24,7 +28,7 @@ export class SearchFinancingBuilder {
     }
   }
   clearSustainableEquipment(): void {
-    this.sustainableEquipment = undefined as any
+    this._sustainableEquipment = undefined as any
     this.realEstate = undefined as any
   }
   isEmpty(): boolean {

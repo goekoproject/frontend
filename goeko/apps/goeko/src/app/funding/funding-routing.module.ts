@@ -40,21 +40,6 @@ const routes: Routes = [
         },
       },
       {
-        path: 'sustainable-equipment',
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-        loadComponent: () =>
-          import('./search/search-sustainble-equipment-form/search-sustainble-equipment-form.component').then(
-            (m) => m.SearchSustainbleEquipmentFormComponent,
-          ),
-        resolve: {
-          categories: groupingFormCategoriesResolver,
-        },
-        data: {
-          step: 1,
-          groupingCode: GroupingType.sustainableEquipment,
-        },
-      },
-      {
         path: 'real-state-loan',
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () =>

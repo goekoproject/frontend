@@ -181,7 +181,8 @@ export const BUILDINGTYPES = [
 
 export const OWNERPROFILES = [
   { label: 'ownerprofiles.individual', id: window.crypto.randomUUID() },
-  { label: 'ownerprofiles.PPE', id: window.crypto.randomUUID() },
+  { label: 'ownerprofiles.business', id: window.crypto.randomUUID() },
+  /*   { label: 'ownerprofiles.PPE', id: window.crypto.randomUUID() },
   { label: 'ownerprofiles.realEstateCompany', id: window.crypto.randomUUID() },
-  { label: 'ownerprofiles.housingCooperative', id: window.crypto.randomUUID() },
+  { label: 'ownerprofiles.housingCooperative', id: window.crypto.randomUUID() }, */
 ]
