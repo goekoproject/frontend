@@ -27,15 +27,19 @@ export class LeadOfBankComponent {
   public leads = toSignal<LeadData[]>(
     toObservable(this.id).pipe(
       switchMap((id) => this._leadBankManagerService.getLeads(id)),
-      tap((leads) => this._setleadSelected(leads)),
+      tap((leads) => (leads ? this._setleadSelected(leads) : null)),
     ),
     { initialValue: null },
   )
   public leadSelected = signal<LeadData | null>(null)
 
   private _setleadSelected(leads: LeadBankResponse[]) {
-    if (!this.leadId() || !leads) return
-    const _leadSelected = leads.find((lead) => lead.id === this.leadId()) as LeadData
+    let _leadSelected: LeadData
+    if (!this.leadId()) {
+      _leadSelected = leads.at(0) as LeadData
+    } else {
+      _leadSelected = leads.find((lead) => lead.id === this.leadId()) as LeadData
+    }
     this.selectLead(_leadSelected)
   }
   selectLead(lead: LeadData) {

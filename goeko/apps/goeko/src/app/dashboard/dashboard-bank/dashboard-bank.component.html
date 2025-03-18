@@ -25,7 +25,7 @@
 
 @defer( when (leads() || []).length > 0) {
 <div class="relative flex flex-col  rounded-lg border border-slate-200 bg-white shadow-sm">
-  <nav class="flex flex-grow  flex-col gap-1 p-1.5">
+  <nav class="flex flex-grow  flex-col gap-1 p-1.5 m-4">
     @for (lead of leads(); track $index) {
     <div role="button" (click)="selectLead(lead)"
       class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
