@@ -8,9 +8,15 @@
       [ngClass]="{ 'bg-slate-100': leadSelected()?.id === lead.id }">
       <goeko-avatar [src]="lead.sme.name"></goeko-avatar>
       <div>
-        <h6 class="text-slate-800 font-medium">
-          {{lead.sme.name}}
-        </h6>
+        <div class="flex gap-2 items-center flex-wrap">
+          <h6 class="text-slate-800 font-medium">
+            {{lead.sme.name}}
+          </h6>
+          <goeko-chip size="xs">
+            {{lead.financingType | translate}}
+          </goeko-chip>
+        </div>
+
         <p
           class="line-clamp-1 text-xs group-[.is-unread]/chatitem:font-medium group-[.is-unread]/chatitem:text-slate-600 text-slate-400 w-[calc(100%-theme(spacing.10))]">
           {{lead.message}}
@@ -29,7 +35,7 @@
 
 <ng-template #chat>
   <div
-    class="conversation-body group/messagebody w-10/12 flex flex-col overflow-hidden flex-grow z-[5] transition-all duration-300 ease-in-out absolute inset-0 opacity-0 pointer-events-none lg:opacity-100 lg:pointer-events-auto [&amp;.conversation-shown]:opacity-100 [&amp;.conversation-shown]:pointer-events-auto lg:static bg-white  [&amp;.profile-shown]:2xl:pe-[365px] conversation-shown">
+    class="conversation-body group/messagebody w-10/12 flex flex-col overflow-hidden flex-grow z-[5] transition-all duration-300 ease-in-out absolute inset-0 pointer-events-none lg:opacity-100 lg:pointer-events-auto [&amp;.conversation-shown]:opacity-100 [&amp;.conversation-shown]:pointer-events-auto lg:static bg-white  [&amp;.profile-shown]:2xl:pe-[365px] conversation-shown">
     <div class="relative flex items-center justify-between py-4 px-7 bg-white  border-gray-200 ">
       <ul class="flex items-center -m-0.5 sm:-m-1.5">
 

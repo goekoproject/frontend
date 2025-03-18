@@ -10,5 +10,12 @@ import { Component } from '@angular/core'
       <ng-content></ng-content>
     </span>
   `,
+  styles: `
+    :host[size='xs'] {
+      > span {
+        @apply px-2 py-1 text-xs;
+      }
+    }
+  `,
 })
 export class ChipComponent {}

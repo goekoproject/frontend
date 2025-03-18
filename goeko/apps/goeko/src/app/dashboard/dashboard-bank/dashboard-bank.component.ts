@@ -8,6 +8,10 @@ import { AvatarComponent } from '@goeko/ui/avatar/avatar.component'
 import { ChipComponent } from '@goeko/ui/chip/chip.component'
 import { TranslatePipe } from '@ngx-translate/core'
 
+interface LeadData extends LeadBankResponse {
+  initials?: string
+  financingType: string
+}
 @Component({
   selector: 'goeko-dashboard-bank',
   standalone: true,
@@ -20,7 +24,7 @@ export class DashboardBankComponent {
   private _route = inject(ActivatedRoute)
   public id = input.required<string>()
 
-  leads = input.required<LeadBankResponse[]>()
+  leads = input.required<LeadData[]>()
   summary = input.required<BankDashboardRecord>()
   sustainableEquipmentLeads = computed(() => this.summary().sustainableEquipmentLeads)
   realEstateLeads = computed(() => this.summary().realEstateLeads)
