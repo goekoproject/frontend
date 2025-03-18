@@ -42,13 +42,13 @@ export class UserBankPayload {
   externalId: string
   contactPerson: string
   notification: NotificationProfile
-  locations: any
+  locations: any //TODO:clean any
 
   constructor(dataForm: any) {
     this.name = dataForm.name
-    this.website = dataForm.website
+    this.website = dataForm.website || undefined
     this.externalId = dataForm.externalId
-    this.contactPerson = dataForm.contactPerson
+    this.contactPerson = dataForm.contactPerson || undefined
     this.notification = {
       email: 'info@goeko.ch',
       phoneNumber: '9999999',
