@@ -1,29 +1,21 @@
-import { Inject, Injectable, signal } from '@angular/core'
+import { inject, Injectable, signal } from '@angular/core'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { TranslateService } from '@ngx-translate/core'
 import * as contentful from 'contentful'
 import { from } from 'rxjs'
-import { ContentFulConfig } from './config.interface'
-import { CONTENT_FUL_CONFIG } from './content-ful.module'
+import { CONTENT_CONFIG } from './content-ful.config'
 export enum LangOfLocalecontentFul {
   en = 'en-US',
   fr = 'fr',
 }
 @Injectable({ providedIn: 'root' })
 export class ContentFulService {
+  private _translateService = inject(TranslateService)
+  private config = CONTENT_CONFIG
   get currentLang() {
     const codeLang = this._translateService.currentLang || this._translateService.defaultLang
     const currentLang = LangOfLocalecontentFul[codeLang as keyof typeof LangOfLocalecontentFul]
     return signal(currentLang)
-  }
-  constructor(
-    @Inject(CONTENT_FUL_CONFIG) public config: ContentFulConfig,
-    private _translateService: TranslateService,
-  ) {
-    this._translateService.onLangChange.subscribe((lang) => {
-      if (lang) {
-      }
-    })
   }
 
   private _client = contentful.createClient({
@@ -31,7 +23,7 @@ export class ContentFulService {
     accessToken: this.config.contentFul.token,
   })
 
-  getContentEntry(entryId: string = '15Ahom6oBNAbJP3Mth7y18') {
+  getContentEntry(entryId = '15Ahom6oBNAbJP3Mth7y18') {
     return from(this._client.getEntry(entryId))
   }
 

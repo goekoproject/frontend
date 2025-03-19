@@ -9,7 +9,6 @@ import { HomeComponent } from './home/home.component'
 import { SelectI18nComponent } from '@goeko/business-ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { OverlayRefService } from 'libs/ui/src/lib/ui/dialog-message/overlay-ref.service'
-import { ContentConfig } from '../content-ful.config'
 import { FooterComponent } from '../shell/footer/footer.component'
 import { AboutComponent } from './about/about/about.component'
 import { SliderComponent } from './banner/slider/slider.component'
@@ -51,7 +50,7 @@ import { TeamComponent } from './team/team.component'
     UiBreadcrumbsModule,
     MenuMobileComponent,
     ContentComponent,
-    ContentFulModule.forRoot(ContentConfig),
+    ContentFulModule,
   ],
   providers: [DialogService, OverlayRefService, HomeService],
 })

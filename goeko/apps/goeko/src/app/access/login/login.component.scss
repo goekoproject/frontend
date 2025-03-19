@@ -1,5 +1,5 @@
 .login {
-  @apply flex w-full max-w-96 flex-col items-center gap-8 [&>*]:w-full [&>form>button]:max-w-full;
+  @apply flex h-screen w-full max-w-96 flex-col items-center gap-8 [&>*]:w-full [&>form>button]:max-w-full;
 }
 
 .arrow-back {

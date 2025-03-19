@@ -32,13 +32,11 @@ body {
 
   font: var(--font-default);
   position: relative;
-  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   height: 100%;
   max-width: 1920px;
-  align-items: center;
 }
 
 body:has(div.is-platform) {
