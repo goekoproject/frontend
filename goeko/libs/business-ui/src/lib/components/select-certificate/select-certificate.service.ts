@@ -5,7 +5,7 @@ import { ClassificationsDocumentsService, PARENT_CODE } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { distinctUntilChanged, map, Observable, shareReplay, startWith, switchMap } from 'rxjs'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SelectCertificateService {
   private _classificationsDocumentsServices = inject(ClassificationsDocumentsService)
   private _translateService = inject(TranslateService)
