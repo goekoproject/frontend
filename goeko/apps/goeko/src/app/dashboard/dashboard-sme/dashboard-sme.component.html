@@ -12,7 +12,12 @@
     </div>
     <div class="flex-grow px-6 py-2 leading-10">
       <span class="text-5xl">{{ summary()?.contacts }}</span>
+      @if ((summary()?.contacts || 0) > 1) {
+      <p class="text-lg">{{ 'cleantechsContacted' | translate }}</p>
+      } @else {
       <p class="text-lg">{{ 'cleantechContacted' | translate }}</p>
+
+      }
     </div>
   </div>
 

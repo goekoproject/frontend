@@ -149,11 +149,13 @@
   "cleantech": "Cleantech",
   "cleantechContacted": "Cleantech contacted",
   "cleantechLeadDefault": "Track connections with your qualified leads.",
+  "cleantechsContacted": "Cleantech contacted",
   "companyDetails": "Company details",
   "completeToProfileNow": "Complete to profile now!",
   "confirm": "Confirm",
   "connectNow": "Connect now!",
   "contact": "Contact",
+  "contactLead": "Contact",
   "continue": "Continue",
   "costReduction": "Costos operativos",
   "creationDate": "Creation date",
@@ -790,6 +792,5 @@
   "your_ecosolutions": "Your Eco-solutions",
   "yourEcosolution": "Your Eco-solution",
   "yourFinancialSolutions": "Your financial solutions",
-  "yourProjects": "Your projects",
-  "contactLead": "Contact"
+  "yourProjects": "Your projects"
 }

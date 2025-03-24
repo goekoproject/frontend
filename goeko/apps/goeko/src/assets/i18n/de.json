@@ -149,11 +149,13 @@
   "cleantech": "Cleantech",
   "cleantechContacted": "Cleantech kontaktiert",
   "cleantechLeadDefault": "Verfolgen Sie Verbindungen mit Ihren qualifizierten Leads.",
+  "cleantechsContacted": "Cleantech kontaktiert",
   "companyDetails": "Unternehmensdetails",
   "completeToProfileNow": "Profil jetzt vervollständigen!",
   "confirm": "Bestätigen",
   "connectNow": "Jetzt verbinden!",
   "contact": "Kontakt",
+  "contactLead": "Kontaktieren",
   "continue": "Fortfahren",
   "costReduction": "Betriebskosten",
   "creationDate": "Erstellungsdatum",
@@ -790,6 +792,5 @@
   "your_ecosolutions": "Ihre Eco-solutions",
   "yourEcosolution": "Ihre Ökolösung",
   "yourFinancialSolutions": "Ihre Finanzierungslösungen",
-  "yourProjects": "Ihre Projekte",
-  "contactLead": "Kontaktieren"
+  "yourProjects": "Ihre Projekte"
 }
