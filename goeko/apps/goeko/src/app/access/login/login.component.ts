@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, ViewEncapsulation } from '@angular/core'
+import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router'
 import { ErrorLogin, errorMessagelogin } from '@goeko/core'
@@ -19,16 +19,14 @@ import { AccessService } from '../access.services'
   },
 })
 export class LoginComponent implements OnInit {
+  private _accessService = inject(AccessService)
+  private _fb = inject(FormBuilder)
   public typeForm = true
   public formLogin!: FormGroup
   public signUpOk!: boolean
   public showPassword = false
   public changePassword = signal<boolean>(false)
   public errorMsgLogin = signal<string>('')
-  constructor(
-    private _fb: FormBuilder,
-    private _accessService: AccessService,
-  ) {}
 
   ngOnInit(): void {
     this._createFormLogin()

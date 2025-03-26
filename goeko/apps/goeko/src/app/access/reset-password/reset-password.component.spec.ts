@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
-import { RouterModule } from '@angular/router'
+import { provideRouter } from '@angular/router'
 import { ButtonModule, GoInputModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -17,9 +17,9 @@ describe('ResetPasswordComponent', () => {
       changePassword: jest.fn().mockReturnValue(of({ success: true })),
     }
     await TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([]), ReactiveFormsModule, ButtonModule, GoInputModule, TranslateModule.forRoot()],
-      declarations: [ResetPasswordComponent],
+      imports: [ResetPasswordComponent, ReactiveFormsModule, ButtonModule, GoInputModule, TranslateModule.forRoot()],
       providers: [
+        provideRouter([]),
         {
           provide: AccessService,
           useValue: accessServiceMock,
