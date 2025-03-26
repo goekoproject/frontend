@@ -1,10 +1,9 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http'
+import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { Signal, signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterModule } from '@angular/router'
-import { handlerHttpInterceptor } from '@goeko/business-ui'
-import { LeadCleantech, UserService } from '@goeko/store'
+import { LeadCleantechService, UserService } from '@goeko/store'
 import { ButtonModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -33,10 +32,10 @@ describe('DashboardCleantechComponent', () => {
       declarations: [DashboardCleantechComponent],
       imports: [TranslateModule.forRoot(), RouterModule.forRoot([]), ButtonModule],
       providers: [
-        provideHttpClient(withInterceptors([handlerHttpInterceptor])),
         provideHttpClientTesting(),
+        provideHttpClient(),
         { provide: DashboardCleantechService, useValue: mockDashboardCleantechService },
-        { provide: LeadCleantech, useValue: mockLeadCleantech },
+        { provide: LeadCleantechService, useValue: mockLeadCleantech },
         { provide: UserService, useValue: mockUserService },
       ],
     }).compileComponents()
