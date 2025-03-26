@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
 import { ContentFulModule, ContentFulService } from '@goeko/store'
 import { DialogService, MdToHtmlPipe } from '@goeko/ui'
-import { TranslateModule } from '@ngx-translate/core'
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core'
 import { map } from 'rxjs'
 
 const entryId = '67WiiwKgVdgTqphrs0hZLl'
 @Component({
   selector: 'goeko-terms-of-services',
   standalone: true,
-  imports: [CommonModule, MdToHtmlPipe, TranslateModule, ContentFulModule],
+  imports: [CommonModule, MdToHtmlPipe, TranslatePipe, ContentFulModule],
   templateUrl: './terms-of-services.component.html',
   styleUrl: './terms-of-services.component.scss',
 })
