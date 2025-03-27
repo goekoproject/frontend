@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { Injectable, computed, effect, inject, signal } from '@angular/core'
+import { Injectable, computed, inject, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
+import { AuthService } from '@goeko/core'
 import { BehaviorSubject, Observable, Subject, of, shareReplay, switchMap } from 'rxjs'
 import { UserFactory } from './user.factory'
 
+import { DOCUMENT } from '@angular/common'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CacheProperty } from '@goeko/coretools'
 import { Picture } from '../model/pictures.interface'
@@ -21,55 +23,35 @@ export class UserService {
   private _http = inject(HttpClient)
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
-  public userAuthData = signal<any>({})
+  private _authService = inject(AuthService)
+  private _doc = inject(DOCUMENT)
+  public auth0UserProfile = signal<any>({})
 
   @CacheProperty('_rawUser')
   private _rawUser!: SmeUser | CleantechsUser | BankUser
   public userProfile = signal<SmeUser | CleantechsUser | BankUser>(this._rawUser)
 
   public fechAuthUser = new Subject()
-  private actorsEndpoint = computed(() => this.userAuthData()['userType'] + 's')
-  public externalId = computed(() => this.userAuthData()['externalId'])
-  public userType = computed(() => this.userAuthData()['userType'])
-  public userRoles = computed(() => this.userAuthData()['roles'] || [ROLES.PUBLIC])
-  public username = computed(() => this.userAuthData()['email'])
-
-  public userType$ = toObservable<UserType>(this.userAuthData()['userType'])
-
+  private actorsEndpoint = computed(() => this.auth0UserProfile()['userType'] + 's')
+  public externalId = computed(() => this.auth0UserProfile()['externalId'])
+  public userType = computed(() => this.auth0UserProfile()['userType'])
+  public userRoles = computed(() => this.auth0UserProfile()['roles'] || [ROLES.PUBLIC])
+  public username = computed(() => this.auth0UserProfile()['email'])
+  public isUserProfileLoaded = computed(() => this.externalId() === this._rawUser.externalId)
+  public userType$ = toObservable<UserType>(this.auth0UserProfile()['userType'])
+  public isEmailVerified = computed(() => this.auth0UserProfile().email_verified)
   public completeLoadUser = new BehaviorSubject<boolean>(false)
 
-  public setUserData(user: any) {
-    this.userAuthData.set(user)
-  }
-  constructor() {
-    effect(() => {
-      if (this.userAuthData().sub) {
-        this._getDataProfile()
-      }
-    })
-  }
-
-  private _getDataProfile() {
-    this._getByIdExternal()
-      .pipe(
-        switchMap((dataAuth0) => {
-          if (dataAuth0) {
-            return this.getById(dataAuth0?.id)
-          }
-          return of(null)
-        }),
-        shareReplay(1),
-      )
-      .subscribe((data) => {
-        if (data) {
-          this.propagateDataUser(data)
-          this._redirectDashboard()
-        } else {
-          this.userProfile.set({} as SmeUser | CleantechsUser | BankUser)
-          this._rawUser = {} as SmeUser | CleantechsUser | BankUser
-          this._redirectProfile()
+  getDataProfile() {
+    return this._getByIdExternal().pipe(
+      switchMap((dataAuth0) => {
+        if (dataAuth0) {
+          return this.getById(dataAuth0?.id)
         }
-      })
+        return of(null)
+      }),
+      shareReplay(1),
+    )
   }
   private _getByIdExternal(): Observable<UserData> {
     const _id = this.externalId()
@@ -79,10 +61,17 @@ export class UserService {
     })
   }
 
-  private _redirectDashboard() {
+  checkEmailVerified() {
+    if (!this.auth0UserProfile().email_verified) {
+      const urlPageEmailVerify = `${this._doc.location.origin}/verify-email`
+      this._authService.logout(urlPageEmailVerify)
+    }
+  }
+
+  redirectDashboard() {
     this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`], { relativeTo: this._route })
   }
-  private _redirectProfile() {
+  redirectProfile() {
     this._router.navigate([`platform/profile/${this.externalId()}`], { relativeTo: this._route.parent })
   }
 
@@ -111,8 +100,8 @@ export class UserService {
     return of(null)
   }
 
-  private propagateDataUser(data: UserData) {
-    const user = UserFactory.createUserProfileBuilder(this.userAuthData()['userType']).init(data).build()
+  propagateDataUser(data: UserData) {
+    const user = UserFactory.createUserProfileBuilder(this.auth0UserProfile()['userType']).init(data).build()
     this._rawUser = user
 
     this.userProfile.set(this._rawUser)

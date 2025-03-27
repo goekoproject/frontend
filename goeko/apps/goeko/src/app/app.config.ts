@@ -9,6 +9,7 @@ import { AuthService, CODE_LANG, ConfigModule } from '@goeko/core'
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { environment } from '../environments/environment'
+import { providerToken } from './../../../../libs/core/src/lib/config/modules/auth/auth.provider'
 import { appRoutes } from './app.routes'
 
 const httpLoaderFactory = (httpBackend: HttpBackend) => {
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
       }),
       withViewTransitions(),
     ),
+    providerToken(),
     provideRemoteConfig(() => getRemoteConfig(getApp())),
     provideHttpClient(withInterceptors([handlerHttpErrorInterceptor])),
     provideAnimations(),
