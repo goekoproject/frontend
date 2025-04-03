@@ -2,13 +2,21 @@ import { Injectable, Injector, Signal, effect, inject, signal } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CATEGORY_SECTION, mergeCategoriesSectionWithClassificationCategory } from '@goeko/business-ui'
 import { REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
-import { ClassificationCategory, ClassificationCategoryService, NULL_CLASSIFICATION_CATEGORY, PaymentSystemService } from '@goeko/store'
+import {
+  ClassificationCategory,
+  ClassificationCategoryService,
+  EcosolutionsService,
+  NULL_CLASSIFICATION_CATEGORY,
+  PaymentSystemService,
+} from '@goeko/store'
 import { map, tap } from 'rxjs'
 import { environment } from '../../environments/environment'
+import { EcosolutionInfo } from './ecosolutions-list/ecosolution-info.model'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CleantechEcosolutionsService {
   private injector = inject(Injector)
+  private _ecosolutionsService = inject(EcosolutionsService)
 
   subCategorySelected = signal<ClassificationCategory>({
     id: '',
@@ -47,6 +55,12 @@ export class CleantechEcosolutionsService {
         this.getSubcategorySelected(this.categorySelected().code)
       }
     })
+  }
+
+  getAllEcosolutionsByCleanTech(id: string) {
+    return this._ecosolutionsService
+      .getEcosolutionsByCleantechId(id)
+      .pipe(map((solutions) => solutions?.map((ecosolution) => new EcosolutionInfo(ecosolution))))
   }
   private _getAllCategories$() {
     return this.classificationCategoryService.getClassificationsCategory().pipe(

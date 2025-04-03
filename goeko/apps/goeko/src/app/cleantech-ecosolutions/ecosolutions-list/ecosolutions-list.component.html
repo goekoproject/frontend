@@ -1,45 +1,9 @@
-@defer (when groupingForm()) {
-  <section class="ecosolutions-section">
-    <go-tab-group>
-      <div class="title-category" title>
-        <i class="ti ti-info-circle-filled"></i>
-        <h3>{{ 'selectCategoryEcosolutions' | translate }}</h3>
-      </div>
-      <ng-container *ngFor="let item of groupingForm(); let first = first">
-        <go-tab [title]="item.label | translate" [selected]="categorySelected()?.code === item.code" (selectedTab)="selectedTab(item)">
-          <div #content class="ecosolutions-card-list">
-            <button
-              class="add-ecosolutions"
-              [routerLink]="['./new',item.id]"
-              [queryParams]="{
-                mainCategory: item.code,
-              }"
-              routerLinkActive="router-link-active">
-              <i class="ti ti-plus"></i>
-              <p>{{ 'add' | translate }} Ecosolutions</p>
-            </button>
-            @for (ecosolution of ecosolutions; track ecosolution.id) {
-              @defer (when ecosolution) {
-                <goeko-card-ecosolutions
-                  *ngIf="item.code === ecosolution.mainCategory"
-                  [solutionName]="ecosolution.nameTranslations[0].label"
-                  [products]="ecosolution.products"
-                  [sustainableDevelopmentGoals]="ecosolution.sustainableDevelopmentGoals">
-                  <button go-button-icon (click)="viewEcosolution(ecosolution)" action-view>
-                    <i class="ti ti-eye"></i>
-                  </button>
-                  <button go-button-icon (click)="editEcosolution(ecosolution)" action-edit>
-                    <i class="ti ti-pencil"></i>
-                  </button>
-                  <button go-button-icon (click)="deleteEcosolution(ecosolution)" action-delete>
-                    <i class="ti ti-trash"></i>
-                  </button>
-                </goeko-card-ecosolutions>
-              }
-            }
-          </div>
-        </go-tab>
-      </ng-container>
-    </go-tab-group>
-  </section>
-}
+<section class="ecosolutions-section">
+
+  @for (ecosolution of ecosolutionsInfo(); track $index) {
+  <goeko-ecosolution-info [title]="ecosolution.solutionName"
+    [description]="ecosolution.description"></goeko-ecosolution-info>
+
+  }
+</section>
+{{ecosolutionsInfo() | json}}

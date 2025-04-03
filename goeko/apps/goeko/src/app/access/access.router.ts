@@ -4,7 +4,7 @@ import { AccessComponent } from './access.component'
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
 import { SignupComponent } from './signup/signup.component'
 
-export const ACCESS_ROUTERS: Routes = [
+export const ROUTERS: Routes = [
   {
     path: '',
     component: AccessComponent,

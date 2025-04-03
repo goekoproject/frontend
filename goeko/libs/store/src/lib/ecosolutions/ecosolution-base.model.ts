@@ -2,12 +2,12 @@ import { Classifications } from '../model/classifications.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
 import { LocationsCountry } from '../model/locations.country'
 import { mapperLocations } from '../util/mapper-locations'
-import { Ecosolutions, Improvement, Price } from './ecosolution.interface'
+import { Improvement, Price } from './ecosolution.interface'
 export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedProperties[] {
   return items.filter((item) => item.label && item.lang)
 }
-export class EcosolutionsBody implements Ecosolutions {
-  cleantechId: string
+export class EcosolutionsBody {
+  id: string
   solutionName: string
   solutionDescription?: string
   detailedDescription?: string
@@ -35,7 +35,7 @@ export class EcosolutionsBody implements Ecosolutions {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`)
     }
-    this.cleantechId = cleanTechId
+    this.id = cleanTechId
     this.solutionName = formValue.solutionName
     this.solutionDescription = formValue.solutionDescription
     this.detailedDescription = formValue.detailedDescription

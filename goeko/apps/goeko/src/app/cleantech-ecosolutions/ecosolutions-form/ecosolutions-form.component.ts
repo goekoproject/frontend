@@ -1,7 +1,15 @@
+import { CommonModule } from '@angular/common'
 import { Component, computed, ElementRef, inject, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { CanComponentDeactivate, canDeactivateForm } from '@goeko/business-ui'
+import {
+  CanComponentDeactivate,
+  canDeactivateForm,
+  SelectCertificateComponent,
+  SelectFormLangComponent,
+  SelectLocationsComponent,
+  SelectSubcategoryProductComponent,
+} from '@goeko/business-ui'
 import { LANGS } from '@goeko/core'
 import {
   CategoryGrouping,
@@ -16,8 +24,17 @@ import {
   TranslatedProperties,
   UpdatedEcosolutionBody,
 } from '@goeko/store'
-import { TranslateService } from '@ngx-translate/core'
-import { Editor, Toolbar, Validators as ValidatorsEditor } from 'ngx-editor'
+import {
+  BadgeModule,
+  ButtonModule,
+  FileUploadComponent,
+  FormErrorTextComponent,
+  GoInputComponent,
+  InputFileComponent,
+  UiSuperSelectModule,
+} from '@goeko/ui'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
+import { Editor, NgxEditorModule, Toolbar, Validators as ValidatorsEditor } from 'ngx-editor'
 import { concatMap, forkJoin, from, Observable, of, switchMap, tap } from 'rxjs'
 import {
   defaultSetCurrency,
@@ -33,6 +50,24 @@ import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    FormErrorTextComponent,
+    FileUploadComponent,
+    CommonModule,
+    TranslatePipe,
+    ButtonModule,
+    InputFileComponent,
+    GoInputComponent,
+    UiSuperSelectModule,
+    SelectCertificateComponent,
+    SelectLocationsComponent,
+    BadgeModule,
+    SelectSubcategoryProductComponent,
+    SelectFormLangComponent,
+    NgxEditorModule,
+  ],
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
   providers: [EcosolutionsManagmentService],
@@ -532,5 +567,4 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
       control?.get('label')?.updateValueAndValidity()
     })
   }
-  
 }

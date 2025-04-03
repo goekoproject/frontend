@@ -71,7 +71,7 @@ const routes: Routes = [
         path: 'cleantech-ecosolutions',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
-        loadChildren: () => import('../cleantech-ecosolutions/cleantech-ecosolutions.module').then((m) => m.CleantechEcosolutionsModule),
+        loadChildren: () => import('../cleantech-ecosolutions/cleantech-ecosolutions.router').then((m) => m.ROUTERS),
       },
       {
         path: 'leads',

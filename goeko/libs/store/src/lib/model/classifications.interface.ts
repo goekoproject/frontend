@@ -6,7 +6,7 @@ export interface Classifications {
 }
 
 //TODO: review name
-interface CodeLabel {
+export interface CodeLabel {
   code: string
   label: string
 }

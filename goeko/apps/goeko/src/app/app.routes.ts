@@ -24,7 +24,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./access/access.router').then((m) => m.ACCESS_ROUTERS),
+    loadChildren: () => import('./access/access.router').then((m) => m.ROUTERS),
   },
 
   {
