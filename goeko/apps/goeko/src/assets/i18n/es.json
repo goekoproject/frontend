@@ -10,6 +10,7 @@
     "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
   },
   "add": "Añadir",
+  "addNewSolution": "Añadir nueva solución",
   "addRealEstateLoan": "Añadir préstamo inmobiliario",
   "addSustainableEquipment": "Añadir equipo sostenible",
   "alertSelectedProduct": "Selecciona las categorías y productos correspondientes a tu proyecto",
@@ -724,6 +725,7 @@
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Conectando empresas con tecnología limpia y financiación",
   "sme": "PYMES",
+  "solutionType": "Tipo de solución",
   "start": "Empezar",
   "subtitlePageCatalog": "Mejores soluciones para ",
   "SUCCESS_MESSAGES": {

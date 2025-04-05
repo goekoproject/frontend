@@ -10,6 +10,7 @@
     "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
   },
   "add": "Add",
+  "addNewSolution": "Add new solution",
   "addRealEstateLoan": "Add real estate loan",
   "addSustainableEquipment": "Add sustainable equipment",
   "alertSelectedProduct": "Select the categories and products corresponding to your project",
@@ -724,6 +725,7 @@
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Connecting businesses to clean technology and financing",
   "sme": "Sme",
+  "solutionType": "Type of solution",
   "start": "Start",
   "subtitlePageCatalog": "Best solutions for your",
   "SUCCESS_MESSAGES": {

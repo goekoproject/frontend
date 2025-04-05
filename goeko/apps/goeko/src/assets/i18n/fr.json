@@ -10,6 +10,7 @@
     "passwordPolicyTitle": "Vous devez respecter au moins 3 des règles suivantes :"
   },
   "add": "Ajouter",
+  "addNewSolution": "Ajouter une nouvelle solution",
   "addRealEstateLoan": "Ajouter un prêt immobilier",
   "addSustainableEquipment": "Ajouter un équipement durable",
   "alertSelectedProduct": "Sélectionnez les catégories et les produits correspondant à votre projet",
@@ -148,9 +149,8 @@
   "characters": "{{num}} caractères maximum",
   "cleantech": "Cleantech",
   "cleantechContacted": "Cleantech contacté",
-  "cleantechsContacted": "Cleantech contactées",
-
   "cleantechLeadDefault": "Suivez les connexions avec vos leads qualifiés.",
+  "cleantechsContacted": "Cleantech contactées",
   "companyDetails": "Détails de l'entreprise",
   "completeToProfileNow": "Complétez votre profil maintenant !",
   "confirm": "Confirmer",
@@ -725,6 +725,7 @@
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "La connexion des entreprises aux technologies propres et au financement",
   "sme": "pme",
+  "solutionType": "Type de solution",
   "start": "Commencer",
   "subtitlePageCatalog": "Meilleures solutions pour",
   "SUCCESS_MESSAGES": {

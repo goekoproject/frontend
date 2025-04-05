@@ -6,6 +6,7 @@ export const ROUTERS: Routes = [
     path: ':id',
     loadComponent: () => import('./ecosolutions-list/ecosolutions-list.component').then((c) => c.EcosolutionsListComponent),
     resolve: { ecosolutionsInfo: ecosolutionsInfoResolver },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
 
     /*  children: [
       {

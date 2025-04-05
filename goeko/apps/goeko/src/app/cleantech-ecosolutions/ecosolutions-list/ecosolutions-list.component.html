@@ -1,9 +1,13 @@
+<div class="flex justify-between">
+  <h1 class="title-page">{{ 'your_ecosolutions' | translate }}</h1>
+  <button go-button>{{ 'addNewSolution' | translate }}</button>
+</div>
+
 <section class="ecosolutions-section">
-
   @for (ecosolution of ecosolutionsInfo(); track $index) {
-  <goeko-ecosolution-info [title]="ecosolution.solutionName"
-    [description]="ecosolution.description"></goeko-ecosolution-info>
-
+    <goeko-ecosolution-info
+      [title]="ecosolution.solutionName"
+      [description]="ecosolution.description"
+      [categories]="ecosolution.category"></goeko-ecosolution-info>
   }
 </section>
-{{ecosolutionsInfo() | json}}

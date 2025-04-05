@@ -12,14 +12,16 @@ interface SubcategoryEcosolutionInfo {
 class ClassificationEcosolutionInfo {
   categoryName: string
   categoryCode: string
-  subcategory: SubcategoryEcosolutionInfo
+  subcategory: SubcategoryEcosolutionInfo[]
   constructor(classification: ClassificationManagment) {
     this.categoryName = getTranslatedValue(classification.category.label.translations)
     this.categoryCode = classification.category.code
-    this.subcategory = {
-      subcategoryLabel: getTranslatedValue(classification.subcategory.label.translations),
-      products: classification.products.map((p) => getTranslatedValue(p.label.translations)),
-    }
+    this.subcategory = [
+      {
+        subcategoryLabel: getTranslatedValue(classification.subcategory.label.translations),
+        products: classification.products.map((p) => getTranslatedValue(p.label.translations)),
+      },
+    ]
   }
 }
 export class EcosolutionInfo {

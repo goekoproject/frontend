@@ -4,13 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { MessageService } from '@goeko/business-ui'
 import { EcosolutionInfoComponent } from '@goeko/business-ui/components/ecosolution-info/ecosolution-info.component'
 import { CategoryGrouping } from '@goeko/store'
+import { ButtonModule } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import { EcosolutionInfo } from './ecosolution-info.model'
 
 @Component({
   selector: 'goeko-ecosolutions-list',
   standalone: true,
-  imports: [CommonModule, EcosolutionInfoComponent],
+  imports: [CommonModule, EcosolutionInfoComponent, TranslatePipe, ButtonModule],
   templateUrl: './ecosolutions-list.component.html',
   styleUrls: ['./ecosolutions-list.component.scss'],
   providers: [MessageService],
