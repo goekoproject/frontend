@@ -5,7 +5,9 @@ import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
 import { EcosolutionsTaggingService, SmeRequestResponse, SummarySme, TAGGING, TaggingResponse } from '@goeko/store'
 import { ButtonModule, CardProductComponent, DialogService, NotificationModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
+import { PartnerService } from './../../../../../../libs/store/src/lib/partner/partner.service'
 import { DashboardSmeService } from './dashboard-sme.service'
+import { toSignal } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'goeko-dashboard-sme',
@@ -19,6 +21,7 @@ export class DashboardSmeComponent {
   private _router = inject(Router)
   public route = inject(ActivatedRoute)
   private _dialogService = inject(DialogService)
+  private _partnerService = inject(PartnerService)
 
   public TAGGING = TAGGING
 
@@ -26,6 +29,7 @@ export class DashboardSmeComponent {
   public summary = input<SummarySme | null>(null)
   public ecosolutionFavourites = input<TaggingResponse[] | null>(null)
 
+  public partners = toSignal(this._partnerService.partners$, { initialValue: [] })
   openNewProjectDialog() {
     this._dialogService
       .open(DialogNewProjectComponent)
@@ -40,6 +44,8 @@ export class DashboardSmeComponent {
     })
   }
   showMore(ecosolutionId: string) {
-    this._router.navigate([`ecosolutions-detail/${this.id()}/${ecosolutionId}`], {relativeTo: this.route.parent?.parent})
+    this._router.navigate([`ecosolutions-detail/${this.id()}/${ecosolutionId}`], { relativeTo: this.route.parent?.parent })
   }
+
+
 }
