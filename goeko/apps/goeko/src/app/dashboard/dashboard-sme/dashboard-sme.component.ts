@@ -1,20 +1,21 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject, input } from '@angular/core'
+import { Component, computed, inject, input } from '@angular/core'
+import { toSignal } from '@angular/core/rxjs-interop'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
+import { BannerPartnerComponent } from '@goeko/business-ui/components/banner-partner/banner-partner.component'
 import { EcosolutionsTaggingService, SmeRequestResponse, SummarySme, TAGGING, TaggingResponse } from '@goeko/store'
 import { ButtonModule, CardProductComponent, DialogService, NotificationModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { PartnerService } from './../../../../../../libs/store/src/lib/partner/partner.service'
 import { DashboardSmeService } from './dashboard-sme.service'
-import { toSignal } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'goeko-dashboard-sme',
   standalone: true,
   templateUrl: './dashboard-sme.component.html',
   styleUrls: ['./dashboard-sme.component.scss'],
-  imports: [CardProductComponent, TranslateModule, RouterModule, ButtonModule, CommonModule, NotificationModule],
+  imports: [CardProductComponent, TranslateModule, BannerPartnerComponent, RouterModule, ButtonModule, CommonModule, NotificationModule],
   providers: [MessageService, DashboardSmeService, EcosolutionsTaggingService],
 })
 export class DashboardSmeComponent {
@@ -29,7 +30,8 @@ export class DashboardSmeComponent {
   public summary = input<SummarySme | null>(null)
   public ecosolutionFavourites = input<TaggingResponse[] | null>(null)
 
-  public partners = toSignal(this._partnerService.partners$, { initialValue: [] })
+  private _partners = toSignal(this._partnerService.partners$, { initialValue: [] })
+  public emisiuumPartners = computed(() => this._partners().at(0))
   openNewProjectDialog() {
     this._dialogService
       .open(DialogNewProjectComponent)
@@ -44,8 +46,14 @@ export class DashboardSmeComponent {
     })
   }
   showMore(ecosolutionId: string) {
-    this._router.navigate([`ecosolutions-detail/${this.id()}/${ecosolutionId}`], { relativeTo: this.route.parent?.parent })
+    this._goToEcosolutionDetail(ecosolutionId)
   }
 
+  goToPartner(partnerId: string) {
+    this._goToEcosolutionDetail(partnerId)
+  }
 
+  private _goToEcosolutionDetail(ecosolutionId: string) {
+    this._router.navigate([`ecosolutions-detail/${this.id()}/${ecosolutionId}`], { relativeTo: this.route.parent?.parent })
+  }
 }

@@ -1,5 +1,6 @@
-<!-- <h1 class="text-2xl font-semibold">{{ 'MENU_USER.dashboard' | translate }}</h1>
- -->
+<h1 class="title-page">{{ 'MENU_USER.dashboard' | translate }}</h1>
+
+<!--Summary Projects-->
 @defer (when summary()) {
   @if ((summary()?.projects ?? 0) > 0) {
     <div class="flex flex-col gap-8">
@@ -19,59 +20,65 @@
           }
         </div>
       </div>
-
-      <go-notification>
-        <h2>{{ 'BANNER_FUNDINGS.title' | translate }}</h2>
-        <p>
-          {{ 'BANNER_FUNDINGS.description' | translate }}
-          <a
-            routerLink="../funding/search/sustainable-equipment/{{ id() }}"
-            [relativeTo]="route.parent"
-            class="text-primary-default hover:underline">
-            {{ 'BANNER_FUNDINGS.callToAction' | translate }}</a
-          >.
-        </p>
-      </go-notification>
-      <div class="flex flex-col gap-4 p-4 sm:max-w-full lg:max-w-7xl">
-        <div class="flex justify-between">
-          <h1 class="text-2xl font-semibold">{{ 'MENU_USER.favourites' | translate }}</h1>
-          <a [routerLink]="'../favourites'" [relativeTo]="route.parent" class="text-primary-default">{{ 'showAll' | translate }}</a>
-        </div>
-
-        <div class="flex gap-4">
-          @for (ecosolutionFavorite of ecosolutionFavourites(); track ecosolutionFavorite.id) {
-            <goeko-card-product
-              [title]="ecosolutionFavorite.ecosolution.solutionName"
-              [description]="ecosolutionFavorite.ecosolution.description"
-              [image]="ecosolutionFavorite.ecosolution.companyDetail.logo"
-              [category]="'CATEGORIES.' + ecosolutionFavorite.ecosolution.classification.mainCategory | translate"
-              [classNameCategoy]="ecosolutionFavorite.ecosolution.classification.mainCategory"
-              [isFavorite]="ecosolutionFavorite.tag === TAGGING.FAVOURITES"
-              (changeShowMore)="showMore(ecosolutionFavorite.ecosolution.ecosolutionId)" />
-          }
-        </div>
-      </div>
     </div>
   } @else {
     <ng-container [ngTemplateOutlet]="emptyProjects"></ng-container>
   }
-}
+  <ng-template #emptyProjects>
+    <div class="flex flex-col flex-wrap gap-8">
+      <div class="container p-10">
+        <div
+          class="shadow-lg flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-gray-300 dark:bg-white">
+          <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_SME.titleCard' | translate }}</h5>
 
-<ng-template #emptyProjects>
-  <div class="dashboard-option">
-    <div class="container p-10">
-      <div
-        class="shadow-lg flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-gray-300 dark:bg-white">
-        <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ 'MENU_USER_SME.titleCard' | translate }}</h5>
-
-        <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_SME.subtitleCard' | translate }}</p>
-        <img src="assets/Group 65.svg" class="mb-11" />
-        <button type="button" go-button appearance="primary" (click)="openNewProjectDialog()">
-          {{ 'MENU_USER_SME.buttonSearch' | translate }}
-        </button>
+          <p class="mb-7 text-center font-normal text-gray-700">{{ 'MENU_USER_SME.subtitleCard' | translate }}</p>
+          <img alt="group" vsrc="assets/Group 65.svg" class="mb-11" />
+          <button type="button" go-button appearance="primary" (click)="openNewProjectDialog()">
+            {{ 'MENU_USER_SME.buttonSearch' | translate }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+}
 
-{{ partners() | json }}
+<!-- Banner find financial type-->
+<go-notification>
+  <h2>{{ 'BANNER_FUNDINGS.title' | translate }}</h2>
+  <p>
+    {{ 'BANNER_FUNDINGS.description' | translate }}
+    <a
+      routerLink="../funding/search/sustainable-equipment/{{ id() }}"
+      [relativeTo]="route.parent"
+      class="text-primary-default hover:underline">
+      {{ 'BANNER_FUNDINGS.callToAction' | translate }}</a
+    >.
+  </p>
+</go-notification>
+
+<goeko-banner-partner
+(onSelectPartner)="goToPartner($event)"
+  [id]="emisiuumPartners()?.id || ''"
+  [title]="emisiuumPartners()?.title || ''"
+  [description]="emisiuumPartners()?.description || ''"
+  [image]="emisiuumPartners()?.image || ''"></goeko-banner-partner>
+<!-- Favourite Solution-->
+<div class="flex flex-col gap-4 p-4 sm:max-w-full lg:max-w-7xl">
+  <div class="flex justify-between">
+    <h1 class="text-2xl font-semibold">{{ 'MENU_USER.favourites' | translate }}</h1>
+    <a [routerLink]="'../favourites'" [relativeTo]="route.parent" class="text-primary-default">{{ 'showAll' | translate }}</a>
+  </div>
+
+  <div class="flex gap-4">
+    @for (ecosolutionFavorite of ecosolutionFavourites(); track ecosolutionFavorite.id) {
+      <goeko-card-product
+        [title]="ecosolutionFavorite.ecosolution.solutionName"
+        [description]="ecosolutionFavorite.ecosolution.description"
+        [image]="ecosolutionFavorite.ecosolution.companyDetail.logo"
+        [category]="'CATEGORIES.' + ecosolutionFavorite.ecosolution.classification.mainCategory | translate"
+        [classNameCategoy]="ecosolutionFavorite.ecosolution.classification.mainCategory"
+        [isFavorite]="ecosolutionFavorite.tag === TAGGING.FAVOURITES"
+        (changeShowMore)="showMore(ecosolutionFavorite.ecosolution.ecosolutionId)" />
+    }
+  </div>
+</div>

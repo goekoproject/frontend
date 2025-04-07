@@ -16,11 +16,6 @@ const routes: Routes = [
       summary: dataSummaryResolver,
       ecosolutionFavourites: ecosolutionFavouritesResolver,
     },
-    data: {
-      breadcrumb: 'dashboard',
-      hidden: true,
-      onBack: false,
-    },
   },
   {
     path: 'cleantech/:id',
