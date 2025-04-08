@@ -3,7 +3,6 @@ export interface Partner {
   title: string
   description: string
   image: string
-  code: string
   page: string
 }
 
@@ -14,6 +13,5 @@ export interface PartnerCollection {
     [lang: string]: string
   }
   image: string
-  code: string
   page: string
 }
