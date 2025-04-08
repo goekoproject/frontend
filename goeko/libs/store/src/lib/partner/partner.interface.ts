@@ -4,6 +4,7 @@ export interface Partner {
   description: string
   image: string
   code: string
+  page: string
 }
 
 export interface PartnerCollection {
@@ -14,4 +15,5 @@ export interface PartnerCollection {
   }
   image: string
   code: string
+  page: string
 }

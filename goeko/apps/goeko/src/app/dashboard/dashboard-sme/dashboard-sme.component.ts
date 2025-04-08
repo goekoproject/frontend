@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, input } from '@angular/core'
-import { toSignal } from '@angular/core/rxjs-interop'
+import { Component, inject, input } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { DialogNewProjectComponent, MessageService } from '@goeko/business-ui'
 import { BannerPartnerComponent } from '@goeko/business-ui/components/banner-partner/banner-partner.component'
 import { EcosolutionsTaggingService, SmeRequestResponse, SummarySme, TAGGING, TaggingResponse } from '@goeko/store'
 import { ButtonModule, CardProductComponent, DialogService, NotificationModule } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
-import { PartnerService } from './../../../../../../libs/store/src/lib/partner/partner.service'
 import { DashboardSmeService } from './dashboard-sme.service'
 
 @Component({
@@ -22,16 +20,14 @@ export class DashboardSmeComponent {
   private _router = inject(Router)
   public route = inject(ActivatedRoute)
   private _dialogService = inject(DialogService)
-  private _partnerService = inject(PartnerService)
-
+  private _dashboardSmeService = inject(DashboardSmeService)
   public TAGGING = TAGGING
 
   public id = input<string>('')
   public summary = input<SummarySme | null>(null)
   public ecosolutionFavourites = input<TaggingResponse[] | null>(null)
 
-  private _partners = toSignal(this._partnerService.partners$, { initialValue: [] })
-  public emisiuumPartners = computed(() => this._partners().at(0))
+  public emissiumPartner = this._dashboardSmeService.emissiumPartner
   openNewProjectDialog() {
     this._dialogService
       .open(DialogNewProjectComponent)
