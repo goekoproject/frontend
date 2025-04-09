@@ -1,6 +1,8 @@
 import { HttpBackend, HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
 import { ApplicationConfig, importProvidersFrom } from '@angular/core'
 import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app'
+import { getFirestore, provideFirestore } from '@angular/fire/firestore'
+
 import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config'
 import { provideAnimations } from '@angular/platform-browser/animations'
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions } from '@angular/router'
@@ -51,5 +53,6 @@ export const appConfig: ApplicationConfig = {
     }),
 
     provideFirebaseApp(() => initializeApp(environment.firebaseApp)),
+    provideFirestore(() => getFirestore()),
   ],
 }

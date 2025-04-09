@@ -1,0 +1,19 @@
+<div class="shadow-md flex items-center justify-between rounded-lg bg-[#e5e5d8] p-4">
+  <!-- Logo -->
+  <div class="flex items-center">
+    <div class="flex h-16 w-16 items-center justify-center rounded-lg border border-gray-300 bg-white">
+      <img [src]="image()" alt="Logo + {{ title() }}" class="h-10 w-10 object-contain" />
+    </div>
+    <div class="ml-4">
+      <h3 class="text-lg font-bold text-gray-800">{{ title() }}</h3>
+      <p class="text-sm text-gray-600">{{ description() }}</p>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <button class="rounded-full bg-[#3b7d6d] px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-[#2f6658]"
+  (click)="propagatePartner()"
+  >
+    {{ 'showMore' | translate }}
+  </button>
+</div>
