@@ -39,7 +39,7 @@ export class EcosolutionsListComponent {
   editEcosolution(ecosolution: EcosolutionInfo) {
     this._goToEcosolutionForm(
       'edit',
-      { id: ecosolution.id, categoryId: this.categorySelected()?.id },
+      { id: ecosolution.id, categoryId: ecosolution.category[0].categoryCode },
       {
         mainCategory: ecosolution.category,
       },
@@ -61,7 +61,7 @@ export class EcosolutionsListComponent {
     const { id, categoryId } = params
     this._router.navigate([`./${path}`, id, categoryId], {
       queryParams: arg,
-      relativeTo: this._route,
+      relativeTo: this._route.parent,
     })
   }
 

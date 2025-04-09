@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, input } from '@angular/core'
+import { Component, computed, input, output } from '@angular/core'
 import { BadgeModule, ButtonModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 
@@ -24,4 +24,10 @@ export class EcosolutionInfoComponent {
   categories = input.required<CategoryEcosolutionsInfo[]>()
   category = computed(() => this.categories().at(0))
   categoryName = computed(() => this.category()?.categoryName as string)
+
+  onEdit = output<boolean>()
+
+  edit() {
+    this.onEdit.emit(true)
+  }
 }

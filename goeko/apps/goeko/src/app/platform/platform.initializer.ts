@@ -25,9 +25,10 @@ export function initializeAuth(authService: AuthService, userService: UserServic
       ),
     )
       .then((dataProfile) => {
+
         if (dataProfile) {
           userService.propagateDataUser(dataProfile)
-          userService.redirectDashboard()
+         // userService.redirectDashboard()
         } else {
           userService.redirectProfile()
         }

@@ -42,6 +42,7 @@ export interface Ecosolutions {
   id: string
   solutionName: string
   solutionDescription?: string
+  classification: any
   classifications: ClassificationManagment[]
   price?: Price
   improvement?: Improvement

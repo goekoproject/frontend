@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router'
 import { ecosolutionsInfoResolver } from './ecosolutions-list/ecosolutions-info.resolver'
+import { groupingFormCategoriesResolver } from '@goeko/store'
+import { canDeactivateGuard } from '@goeko/business-ui'
 
 export const ROUTERS: Routes = [
   {
@@ -34,5 +36,16 @@ export const ROUTERS: Routes = [
         },
       },
     ], */
+  },
+  {
+    path: 'new/:categoryId',
+    loadComponent: () => import('./ecosolutions-form/ecosolutions-form.component').then((c) => c.EcosolutionsFormComponent),
+    resolve: { groupingForm: groupingFormCategoriesResolver },
+  },
+  {
+    path: 'edit/:id/:categoryId',
+    loadComponent: () => import('./ecosolutions-form/ecosolutions-form.component').then((c) => c.EcosolutionsFormComponent),
+    resolve: { groupingForm: groupingFormCategoriesResolver },
+    canDeactivate: [canDeactivateGuard]
   },
 ]

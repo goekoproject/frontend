@@ -1,21 +1,11 @@
 @mixin invalid {
   @apply border-red-500 text-red-500 focus:border-red-500 focus:ring-red-500 focus-visible:outline-red-500 focus-visible:ring-red-500 focus-visible:ring-offset-red-200;
 }
-.wrapper-form-ecosolutions {
+:host {
   @apply flex flex-col;
 }
-
-.ecosolutions-form {
-  border-radius: 12px;
-  background: #fff;
-  padding: 2rem;
-  @apply max-w-2xl;
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
+.fieldset-ecosolutions {
+  @apply bg-white p-12;
 }
 .field-form-checked {
   display: flex;

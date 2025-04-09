@@ -8,6 +8,8 @@
     <goeko-ecosolution-info
       [title]="ecosolution.solutionName"
       [description]="ecosolution.description"
-      [categories]="ecosolution.category"></goeko-ecosolution-info>
+      [categories]="ecosolution.category"
+      (onEdit)="editEcosolution(ecosolution)"
+      ></goeko-ecosolution-info>
   }
 </section>

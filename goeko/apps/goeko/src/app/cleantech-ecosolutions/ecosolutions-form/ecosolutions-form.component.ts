@@ -96,7 +96,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   public form!: FormGroup
   public ods = ODS_CODE
   public idEcosolution!: string
-  public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.id === this.categoryId())?.subcategories)
+  public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.code === this.categoryId())?.subcategories)
   public editor!: Editor
   public html = ''
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
@@ -141,7 +141,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   get sustainableDevelopmentGoals(): FormArray {
     return this.form.get('sustainableDevelopmentGoals') as FormArray
   }
-  public get bodyRequestEcosolution(): EcosolutionsBody {
+  public get bodyRequestEcosolution(): any {
     return this.idEcosolution
       ? new UpdatedEcosolutionBody(this._cleantechId, this.mainCategory, this.form.value)
       : new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value)
