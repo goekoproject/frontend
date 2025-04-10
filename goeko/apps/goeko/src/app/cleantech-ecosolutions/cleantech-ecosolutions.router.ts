@@ -38,14 +38,14 @@ export const ROUTERS: Routes = [
     ], */
   },
   {
-    path: 'new/:categoryId',
+    path: 'new/:categoryCode',
     loadComponent: () => import('./ecosolutions-form/ecosolutions-form.component').then((c) => c.EcosolutionsFormComponent),
     resolve: { groupingForm: groupingFormCategoriesResolver },
   },
   {
-    path: 'edit/:id/:categoryId',
+    path: 'edit/:id/:categoryCode',
     loadComponent: () => import('./ecosolutions-form/ecosolutions-form.component').then((c) => c.EcosolutionsFormComponent),
     resolve: { groupingForm: groupingFormCategoriesResolver },
-    canDeactivate: [canDeactivateGuard]
+    canDeactivate: [canDeactivateGuard],
   },
 ]

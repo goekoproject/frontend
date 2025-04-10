@@ -29,7 +29,7 @@ export class EcosolutionsListComponent {
   viewEcosolution(ecosolution: EcosolutionInfo) {
     this._goToEcosolutionForm(
       'detail',
-      { id: ecosolution.id, categoryId: this.categorySelected()?.id },
+      { id: ecosolution.id, categoryCode: this.categorySelected()?.id },
       {
         mainCategory: ecosolution.category,
         isReadOnly: true,
@@ -39,7 +39,7 @@ export class EcosolutionsListComponent {
   editEcosolution(ecosolution: EcosolutionInfo) {
     this._goToEcosolutionForm(
       'edit',
-      { id: ecosolution.id, categoryId: ecosolution.category[0].categoryCode },
+      { id: ecosolution.id, categoryCode: ecosolution.category[0].categoryCode },
       {
         mainCategory: ecosolution.category,
       },
@@ -57,9 +57,9 @@ export class EcosolutionsListComponent {
       })
   }
  */
-  private _goToEcosolutionForm(path: string, params: { id: string; categoryId?: string }, arg?: any) {
-    const { id, categoryId } = params
-    this._router.navigate([`./${path}`, id, categoryId], {
+  private _goToEcosolutionForm(path: string, params: { id: string; categoryCode?: string }, arg?: any) {
+    const { id, categoryCode } = params
+    this._router.navigate([`./${path}`, id, categoryCode], {
       queryParams: arg,
       relativeTo: this._route.parent,
     })

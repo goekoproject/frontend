@@ -4,9 +4,24 @@
 :host {
   @apply flex flex-col;
 }
-.fieldset-ecosolutions {
-  @apply bg-white p-12;
+
+.section-form {
+  @apply relative flex flex-col gap-4 bg-white p-12;
+  label {
+    @apply text-sm;
+  }
+  &::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 mx-12 border-b border-gray-200;
+  }
+  &:last-child {
+    @apply mb-0 pb-0;
+    &::after {
+      @apply hidden;
+    }
+  }
 }
+
 .field-form-checked {
   display: flex;
   gap: 4rem;

@@ -47,6 +47,9 @@ import {
 import { EcosolutionForm } from './ecosolution-form.model'
 import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
 import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
+import { EcosolutionsFormEcosolutionTypeComponent } from './ecosolutions-form-ecosolution-type/ecosolutions-form-ecosolution-type.component'
+import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
+import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ecosolutions-form-details.component'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -59,20 +62,20 @@ import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
     TranslatePipe,
     ButtonModule,
     InputFileComponent,
-    GoInputComponent,
     UiSuperSelectModule,
     SelectCertificateComponent,
     SelectLocationsComponent,
     BadgeModule,
-    SelectSubcategoryProductComponent,
-    SelectFormLangComponent,
     NgxEditorModule,
+    EcosolutionsFormEcosolutionTypeComponent,
+    EcosolutionsFormBenefisComponent,
+    EcosolutionsFormDetailsComponent,
   ],
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
   providers: [EcosolutionsManagmentService],
 })
-export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate {
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
     const callback = () =>
       this.idEcosolution
@@ -84,28 +87,17 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   _submitter = signal(false)
-  public defaultSetProductsCategories = defaultSetProductsCategories
   public defaultSetDeliverCountries = defaultSetDeliverCountries
   public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
   public defaultSetCurrency = defaultSetCurrency
-  public defaultSetReductions = defaultSetReductions
   public defaultSetyearGuarantee = defaultSetyearGuarantee
 
-  groupingForm = input<CategoryGrouping[]>()
-  categoryId = input<string>()
+  groupingForm = input.required<CategoryGrouping[]>()
+  categoryCode = input.required<string>()
   public form!: FormGroup
   public ods = ODS_CODE
   public idEcosolution!: string
-  public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.code === this.categoryId())?.subcategories)
-  public editor!: Editor
-  public html = ''
-  public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
-
-  public langs = LANGS
-  langSignal = signal(this._translateServices.currentLang || this._translateServices.defaultLang)
-  public selectedFormLang = signal({ code: this.langSignal(), index: 0 })
   public dataSelect = DataSelect
-  public mainCategory!: string
 
   private _cleantechId!: string
   private _fileEcosolution!: File[]
@@ -131,10 +123,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     return this.form.get('priceDescriptionTranslations') as FormArray
   }
 
-  public get selectedNameTranslationsControls() {
-    return (this.nameTranslations.controls[this.selectedFormLang().index] as FormGroup).controls['translation']
-  }
-
   public get certificates(): FormArray {
     return this.form.get('certificates') as FormArray
   }
@@ -143,13 +131,10 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   }
   public get bodyRequestEcosolution(): any {
     return this.idEcosolution
-      ? new UpdatedEcosolutionBody(this._cleantechId, this.mainCategory, this.form.value)
-      : new NewEcosolutionsBody(this._cleantechId, this.mainCategory, this.form.value)
+      ? new UpdatedEcosolutionBody(this._cleantechId, this.categoryCode(), this.form.value)
+      : new NewEcosolutionsBody(this._cleantechId, this.categoryCode(), this.form.value)
   }
 
-  private _isIncludeTranslation = (codeLang: string, translations?: TranslatedProperties[]) => {
-    return translations?.map((value) => value.lang).includes(codeLang)
-  }
   private get canUploadCertificates() {
     return (
       this.form.get('certificates')?.dirty &&
@@ -168,49 +153,38 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     private _router: Router,
     private _ecosolutionsService: EcosolutionsService,
     private _fb: FormBuilder,
-    private _translateServices: TranslateService,
   ) {}
 
   ngOnInit(): void {
     this._getParamsUrl()
-    this.editor = new Editor()
     this._buildFrom()
-    this._changeLangCode()
+
     if (this.idEcosolution) {
       this.getEcosolution()
-    } else {
-      this._seTranslatedProperties()
     }
-  }
-
-  ngOnDestroy(): void {
-    this.editor?.destroy()
   }
 
   private _getParamsUrl() {
     this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string
-    this.mainCategory = this._route.snapshot.queryParamMap.get('mainCategory') as string
     this.idEcosolution = this._route.snapshot.paramMap.get('id') as string
   }
 
   private _buildFrom() {
     this._initForm()
+    this._seTranslatedProperties()
     this._changehaveTechnicalSheet()
     this._changeCertificate()
     this._changeGuarantee()
+    console.log(this.form)
   }
 
-  private _seTranslatedProperties(codeLang: string = this.selectedFormLang().code) {
+  private _seTranslatedProperties(codeLang = 'fr') {
     this._addNameTranslations(codeLang)
     this._addDescriptionTranslations(codeLang)
     this._detailDescriptionTranslations(codeLang)
     this._priceDescriptionTranslations(codeLang)
   }
-  private _changeLangCode() {
-    this._translateServices.onLangChange.subscribe((current) => {
-      this.langSignal.set(current.lang)
-    })
-  }
+
   private _initForm() {
     this.form = this._fb.group({
       solutionName: ['deprecated'],
@@ -245,50 +219,30 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
 
   private _addNameTranslations(codeLang: string): void {
     const nameTranslations = this.form.get('nameTranslations') as FormArray
-    if (!this._isIncludeTranslation(codeLang, nameTranslations.value)) {
-      nameTranslations.push(this._getFormGroupFieldTranslations(codeLang))
-    }
+    nameTranslations.push(this._getFormGroupFieldTranslations(codeLang))
   }
   private _addDescriptionTranslations(codeLang: string): void {
     const descriptionTranslations = this.form.get('descriptionTranslations') as FormArray
-    if (!this._isIncludeTranslation(codeLang, descriptionTranslations.value)) {
-      descriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
-    }
+    descriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
   }
 
   private _detailDescriptionTranslations(codeLang: string): void {
     const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
-    if (!this._isIncludeTranslation(codeLang, detailedDescriptionTranslations.value)) {
-      detailedDescriptionTranslations.push(this._getFormGroupEditor(codeLang))
-    }
+    detailedDescriptionTranslations.push(this._getFormGroupEditor(codeLang))
   }
 
   private _priceDescriptionTranslations(codeLang: string): void {
     const priceDescriptionTranslations = this.form.get('priceDescriptionTranslations') as FormArray
-    if (!this._isIncludeTranslation(codeLang, priceDescriptionTranslations.value)) {
-      priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
-    }
+    priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
   }
 
-  private _getFormGroupFieldTranslations(code = this.selectedFormLang().code) {
-    if (this.selectedFormLang().code === code) {
-      return this._fb.group({
-        label: new FormControl('', Validators.required),
-        lang: new FormControl(code),
-      })
-    }
+  private _getFormGroupFieldTranslations(code: string) {
     return this._fb.group({
       label: new FormControl(''),
       lang: new FormControl(code),
     })
   }
-  private _getFormGroupEditor(code?: string) {
-    if (this.selectedFormLang().code === code) {
-      return this._fb.group({
-        label: new FormControl('', ValidatorsEditor.required()),
-        lang: new FormControl(code),
-      })
-    }
+  private _getFormGroupEditor(code: string) {
     return this._fb.group({
       label: new FormControl(''),
       lang: new FormControl(code),
@@ -345,14 +299,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
     })
   }
 
-  private _getFormGroupCertificates(certificate: DocumentEcosolutions) {
-    return this._fb.group({
-      documentType: new FormControl(certificate?.documentType?.code, Validators.required),
-      name: new FormControl(certificate.name),
-      id: new FormControl(certificate.id),
-    })
-  }
-
   private _setLocaltion(locations: Array<LocationsCountry>) {
     if (locations) {
       this.locationsArrays.clear()
@@ -377,7 +323,7 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   private _patchFormArray(formArray: FormArray, values: any[]): void {
     formArray.clear()
     values.forEach(() => {
-      formArray.push(this._getFormGroupFieldTranslations())
+      formArray.push(this._getFormGroupFieldTranslations('fr'))
     })
     formArray.reset(values)
   }
@@ -547,24 +493,6 @@ export class EcosolutionsFormComponent implements OnInit, OnDestroy, CanComponen
   goToListEcosolution() {
     this._router.navigate(['../cleantech-ecosolutions', this._cleantechId], {
       relativeTo: this._route.parent?.parent,
-    })
-  }
-
-  selectedFormLangChange($event: any) {
-    this._clearValidationTranslatedProperties()
-    this.selectedFormLang.set($event)
-    this._seTranslatedProperties($event.code)
-  }
-  private _clearValidationTranslatedProperties() {
-    this.removeNameTranslationsValidators(this.nameTranslations)
-    this.removeNameTranslationsValidators(this.descriptionTranslations)
-    this.removeNameTranslationsValidators(this.detailedDescriptionTranslations)
-    this.removeNameTranslationsValidators(this.priceDescriptionTranslations)
-  }
-  private removeNameTranslationsValidators(formArray: FormArray): void {
-    formArray.controls.forEach((control) => {
-      control?.get('label')?.clearValidators()
-      control?.get('label')?.updateValueAndValidity()
     })
   }
 }

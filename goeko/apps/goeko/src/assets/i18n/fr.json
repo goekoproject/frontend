@@ -289,7 +289,7 @@
     "notification": "Notification",
     "numEmployees": "Nombre d'employés",
     "objectType": "Type d'objet",
-    "operationalCostReductionPercentage": "Pourcentage de réduction des coûts opérationnels",
+    "operationalCostReductionPercentage": "Réduction des coûts opérationnels",
     "ownerProfile": "Profil du propriétaire",
     "password": "Mot de passe",
     "paybackPeriodYears": "Temps de retour sur investissement par rapport à une solution standard",
@@ -796,5 +796,4 @@
   "yourFinancialSolutions": "Vos solutions financières",
   "yourProjects": "Vos projets",
   "typeSolutionCleantech": "Type de solution cleantech"
-
 }

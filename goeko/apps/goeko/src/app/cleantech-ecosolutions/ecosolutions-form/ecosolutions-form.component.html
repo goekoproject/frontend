@@ -1,70 +1,24 @@
 <div class="bg-primary-gray">
   <form [formGroup]="form" class="m-auto w-full max-w-3xl rounded-sm p-8">
     <!--Select Products-->
-    <ng-container *ngTemplateOutlet="selectProducts"></ng-container>
-    <ng-container *ngTemplateOutlet="benefits"></ng-container>
-    <fieldset class="ecosolutions-fieldset">
-      <legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
-      <ng-container formArrayName="nameTranslations">
-        @for (translation of nameTranslations.controls; track $index + '-name'; let i = $index) {
-          <ng-container [formGroupName]="i">
-            @if (translation.value?.lang === selectedFormLang().code) {
-              <div class="relative">
-                <goeko-go-input [formControlName]="'label'" [label]="'FORM_LABEL.solutionName' | translate" />
-                <span
-                  class="absolute -right-20 bottom-4 -my-1 -translate-y-1/2 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-                  {{ translation.value.lang | translate }}</span
-                >
-              </div>
-            }
-          </ng-container>
-        }
-      </ng-container>
+    <goeko-ecosolutions-form-ecosolution-type
+      class="section-form"
+      [groupingForm]="groupingForm()"
+      [parentForm]="form"
+      [categoryCode]="categoryCode()"
+      [isReadOnly]="false"></goeko-ecosolutions-form-ecosolution-type>
 
-      <ng-container formArrayName="descriptionTranslations">
-        @for (translation of descriptionTranslations.controls; track $index + '-descriptionTranslations'; let i = $index) {
-          @if (translation.value?.lang === selectedFormLang().code) {
-            <div [formGroupName]="i" class="relative">
-              <span
-                class="absolute -right-20 bottom-4 -my-1 -translate-y-1/2 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-                {{ translation.value.lang | translate }}</span
-              >
-              <goeko-go-textarea [formControlName]="'label'" [label]="'FORM_LABEL.solutionDescription' | translate" [maxLength]="100" />
-            </div>
-          }
-        }
-      </ng-container>
+    <goeko-ecosolutions-form-benefis
+      class="section-form"
+      [parentForm]="form"
+      [categoryCode]="categoryCode()"
+      [isReadOnly]="false"></goeko-ecosolutions-form-benefis>
 
-      <ng-container formArrayName="detailedDescriptionTranslations">
-        @for (translation of detailedDescriptionTranslations.controls; track $index + 'detailedDescriptionTranslations'; let i = $index) {
-          @if (translation.value?.lang === selectedFormLang().code) {
-            <div [formGroupName]="i" class="wrapper-textarea">
-              <label for="detailedDescriptionTranslations">
-                {{ 'FORM_LABEL.technicalDescription' | translate }}
-                <span class="absolute -right-20 bottom-4 -my-1 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-                  {{ translation.value.lang | translate }}
-                </span>
-              </label>
+    <goeko-ecosolutions-form-details class="section-form" [parentForm]="form" [isReadOnly]="false"></goeko-ecosolutions-form-details>
 
-              <div>
-                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" class="block"> </ngx-editor-menu>
-                <ngx-editor
-                  [editor]="editor"
-                  [formControlName]="'label'"
-                  [class.editor-invalid]="
-                    translation.get('label')?.invalid && translation.get('label')?.touched && translation.get('label')?.dirty
-                  "
-                  [placeholder]="'FORM_LABEL.editorText' | translate"></ngx-editor>
-                <goeko-form-error-text [form]="translation.get('label')">
-                  {{ 'ERRORS_FORM.required' | translate }}
-                </goeko-form-error-text>
-              </div>
-            </div>
-          }
-        }
-      </ng-container>
-    </fieldset>
+    <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
 
+    <!--
     <fieldset [class.hidden]="selectedFormLang().code !== langSignal()">
       <div class="legend--info">
         <legend>
@@ -219,6 +173,7 @@
         }
       </div>
     </fieldset>
+    -->
     <goeko-form-error-text [form]="form">
       {{ 'ERRORS_FORM.haveError' | translate }}
     </goeko-form-error-text>
@@ -234,83 +189,9 @@
   </form>
 </div>
 
-<ng-template #selectProducts>
-  <fieldset class="fieldset-ecosolutions">
-    <div class="legend--info">
-      <legend>
-        {{ 'typeSolutionCleantech' | translate }}
-      </legend>
-
-      <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
-    </div>
-
-    @defer (when questionsCategories()) {
-      <div class="ecosolutions-subcategory">
-        <goeko-form-error-text [form]="form.get('subCategory')">
-          {{ 'ERRORS_FORM.required' | translate }}
-        </goeko-form-error-text>
-        @for (subcategory of questionsCategories(); track subcategory.code) {
-          <section formControlName="subCategory">
-            <p class="text-sm text-grayText">
-              {{ subcategory.label }}
-            </p>
-
-            <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly">
-              @for (product of subcategory.products; track product.code) {
-                <go-badge [readonly]="isReadOnly" [value]="product.code" [readonly]="isReadOnly">{{ product.label }}</go-badge>
-              }
-            </go-badge-group>
-          </section>
-        }
-      </div>
-    }
-  </fieldset>
-</ng-template>
-
-<ng-template #benefits>
-  <fieldset class="fieldset-ecosolutions">
-    <div class="legend--info">
-      <legend>
-        {{ 'FORM_LABEL.advantagesEcosolutions' | translate }}
-      </legend>
-      <p class="text-support">
-        {{ 'TEXT_SUPPORT.advantagesEcosolutions' | translate }}
-      </p>
-    </div>
-
-    <label>
-      <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container>
-    </label>
-    <ui-super-select
-      [readonly]="isReadOnly"
-      [placeholder]="['upTo' | translate] + '... (%)'"
-      [formControlName]="'reductionPercentage'"
-      id="reductionPercentage"
-      name="reductionPercentage"
-      [compareWith]="defaultSetReductions">
-      <super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
-        {{ option.keyLang | translate }} {{ ' ' + option.to }}%
-      </super-option>
-    </ui-super-select>
-
-    <label>{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</label>
-
-    <ui-super-select
-      [placeholder]="['upTo' | translate] + '... (%)'"
-      [readonly]="isReadOnly"
-      [formControlName]="'operationalCostReductionPercentage'"
-      id="operationalCostReductionPercentage"
-      name="operationalCostReductionPercentage"
-      [compareWith]="defaultSetReductions">
-      <super-option *ngFor="let option of dataSelect['operationalCostReduction']" [value]="option">
-        {{ option.keyLang | translate }} {{ ' ' + option.to }}%
-      </super-option>
-    </ui-super-select>
-  </fieldset>
-</ng-template>
-
 <ng-template #imageUpload>
   <goeko-input-file
+    class="section-form"
     (fileChange)="uploadImgEcosolutions($event)"
     [filesUrl]="urlPicEcosolution || ''"
     [multiple]="true"
@@ -329,33 +210,7 @@
     }
 
     <p class="rounded-full border-2 border-softDark px-4 py-2 text-sm text-softDark">
-      {{ 'CATEGORIES.' + mainCategory | translate }}
+      {{ 'CATEGORIES.' + categoryCode() | translate }}
     </p>
   </div>
-</ng-template>
-
-<ng-template #tmpReductionPercentage>
-  <span [ngSwitch]="true" slot="label">
-    <ng-container *ngSwitchCase="mainCategory === 'co2Emission'">{{ 'FORM_LABEL.reductionPercentageCO2' | translate }}</ng-container>
-    <ng-container *ngSwitchCase="mainCategory === 'waterConsumption'">{{ 'FORM_LABEL.reductionPercentageWater' | translate }}</ng-container>
-
-    <ng-container *ngSwitchCase="mainCategory === 'waste'">{{ 'FORM_LABEL.reductionPercentageWaste' | translate }}</ng-container>
-  </span>
-</ng-template>
-
-<ng-template #textSupportFieldSettypeOfEcolutions>
-  <p [ngSwitch]="true" class="text-support">
-    <ng-container *ngSwitchCase="mainCategory === 'hazardousProduct'" class="text-support">
-      {{ 'TEXT_SUPPORT.selectProducts' | translate }}
-    </ng-container>
-    <ng-container *ngSwitchCase="mainCategory === 'waterConsumption'" class="text-support">
-      {{ 'TEXT_SUPPORT.waterConsumption' | translate }}
-    </ng-container>
-    <ng-container *ngSwitchCase="mainCategory === 'co2Emission'" class="text-support">
-      {{ 'TEXT_SUPPORT.co2Emission' | translate }}
-    </ng-container>
-    <ng-container *ngSwitchCase="mainCategory === 'waste'" class="text-support">
-      {{ 'TEXT_SUPPORT.waste' | translate }}
-    </ng-container>
-  </p>
 </ng-template>

@@ -1,0 +1,50 @@
+@if (parentForm()) {
+  <fieldset class="fieldset-ecosolutions" [formGroup]="parentForm()">
+    <div class="legend--info">
+      <legend>
+        {{ 'typeSolutionCleantech' | translate }}
+      </legend>
+
+      <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
+    </div>
+
+    @defer (when questionsCategories()) {
+      <div class="ecosolutions-subcategory">
+        <goeko-form-error-text [form]="parentForm().get('subCategory')">
+          {{ 'ERRORS_FORM.required' | translate }}
+        </goeko-form-error-text>
+        @for (subcategory of questionsCategories(); track subcategory.code) {
+          <section>
+            <p class="text-sm text-grayText">
+              {{ subcategory.label }}
+            </p>
+            <input formControlName="subCategory" type="hidden" />
+
+            <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly()">
+              @for (product of subcategory.products; track product.code) {
+                <go-badge [readonly]="isReadOnly()" [value]="product.code">{{ product.label }}</go-badge>
+              }
+            </go-badge-group>
+          </section>
+        }
+      </div>
+    }
+  </fieldset>
+}
+
+<ng-template #textSupportFieldSettypeOfEcolutions>
+  <p [ngSwitch]="true" class="text-support">
+    <ng-container *ngSwitchCase="categoryCode() === 'hazardousProduct'" class="text-support">
+      {{ 'TEXT_SUPPORT.selectProducts' | translate }}
+    </ng-container>
+    <ng-container *ngSwitchCase="categoryCode() === 'waterConsumption'" class="text-support">
+      {{ 'TEXT_SUPPORT.waterConsumption' | translate }}
+    </ng-container>
+    <ng-container *ngSwitchCase="categoryCode() === 'co2Emission'" class="text-support">
+      {{ 'TEXT_SUPPORT.co2Emission' | translate }}
+    </ng-container>
+    <ng-container *ngSwitchCase="categoryCode() === 'waste'" class="text-support">
+      {{ 'TEXT_SUPPORT.waste' | translate }}
+    </ng-container>
+  </p>
+</ng-template>
