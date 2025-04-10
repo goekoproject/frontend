@@ -151,6 +151,7 @@ $color-label-pressed: var(--primary--main);
     display: inline-flex;
     align-items: center;
     font-weight: 600;
+    @apply text-sm
   }
 }
 

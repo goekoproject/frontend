@@ -16,7 +16,7 @@
 
 <ng-template #formSelectLocation>
   <div class="select-profile" [formGroup]="form">
-    <div formArrayName="locations" class="flex flex-col gap-4">
+    <div formArrayName="locations" class="flex flex-col gap-2">
       @if (controlLocations.controls && controlLocations.controls.length) {
         @for (location of controlLocations.controls; track location; let i = $index) {
           <div [formGroupName]="i" class="locations-selected">
@@ -27,7 +27,7 @@
                 [formControlName]="'code'"
                 id="country"
                 [compareWith]="countryCompareWith">
-                <label title for=" country ">
+                <label title for="country" class="text-sm">
                   {{ 'FORM_LABEL.country' | translate }}
                 </label>
                 @for (option of countries(); track option.code; let first = $first) {
@@ -48,7 +48,7 @@
                   id="regions"
                   [multiple]="true"
                   [compareWith]="regionsCompareWith">
-                  <label title for="regions">
+                  <label title for="regions" class="text-sm">
                     {{ 'FORM_LABEL.province' | translate }}
                   </label>
 
