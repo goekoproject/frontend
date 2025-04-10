@@ -52,10 +52,6 @@
     @for (translation of priceDescriptionTranslations.controls; track $index + '-priceDescriptionTranslations'; let i = $index) {
       @if (translation.value?.lang === selectedFormLang().code) {
         <div [formGroupName]="i" class="relative">
-          <span
-            class="absolute -right-20 bottom-4 -my-1 -translate-y-1/2 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-            {{ translation.value.lang | translate }}</span
-          >
           <goeko-go-textarea
             id="priceDescriptionTranslations"
             [formControlName]="'label'"

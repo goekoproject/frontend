@@ -17,6 +17,7 @@
     <goeko-ecosolutions-form-details class="section-form" [parentForm]="form" [isReadOnly]="false"></goeko-ecosolutions-form-details>
 
     <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
+    <ng-container *ngTemplateOutlet="countryAvailable"></ng-container>
 
     <!--
     <fieldset [class.hidden]="selectedFormLang().code !== langSignal()">
@@ -196,6 +197,15 @@
     [filesUrl]="urlPicEcosolution || ''"
     [multiple]="true"
     [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
+</ng-template>
+
+<ng-template #countryAvailable>
+  <fieldset class="section-form">
+    <div>
+      <legend>{{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}</legend>
+    </div>
+    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
+  </fieldset>
 </ng-template>
 <ng-template #heading>
   <div class="mb-10 flex items-center justify-between gap-1 rounded-md bg-primary-100 bg-opacity-65 p-4">
