@@ -22,7 +22,7 @@ export class EcosolutionsListComponent {
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
   public ecosolutionsInfo = input.required<EcosolutionInfo[]>()
-
+  public id = input.required<string>()
   public categorySelected = signal<CategoryGrouping | undefined>(undefined)
   public isSubscribed = !!this._cleantechEcosolutionsService.isSubscribed
 
@@ -37,13 +37,7 @@ export class EcosolutionsListComponent {
     )
   }
   editEcosolution(ecosolution: EcosolutionInfo) {
-    this._goToEcosolutionForm(
-      'edit',
-      { id: ecosolution.id, categoryCode: ecosolution.category[0].categoryCode },
-      {
-        mainCategory: ecosolution.category,
-      },
-    )
+    this._goToEcosolutionForm('edit', { id: ecosolution.id, categoryCode: ecosolution.category[0].categoryCode })
   }
 
   /*   deleteEcosolution(ecosolution: CardEcosolutions) {
@@ -60,7 +54,7 @@ export class EcosolutionsListComponent {
   private _goToEcosolutionForm(path: string, params: { id: string; categoryCode?: string }, arg?: any) {
     const { id, categoryCode } = params
     this._router.navigate([`./${path}`, id, categoryCode], {
-      queryParams: arg,
+      queryParams: { ...arg, cleantechId: this.id() },
       relativeTo: this._route.parent,
     })
   }

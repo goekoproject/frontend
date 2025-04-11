@@ -1,5 +1,5 @@
 @defer (when controlLocations && countries()) {
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-2">
     @defer (when countries() && dataSourceSelect.size > 0) {
       <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
     }
@@ -7,7 +7,7 @@
       (singleSelect() && controlLocations.controls.length < 1) ||
       (!singleSelect() && controlLocations.controls.length >= 0 && countries()?.length !== controlLocations.value.length)
     ) {
-      <a (click)="addLocation()" class="flex text-primary-500">
+      <a (click)="addLocation()" class="flex text-primary-default text-sm">
         {{ 'FORM_LABEL.newProvince' | translate }}
       </a>
     }

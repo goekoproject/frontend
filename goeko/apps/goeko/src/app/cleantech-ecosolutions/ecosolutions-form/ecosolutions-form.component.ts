@@ -1,55 +1,23 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, ElementRef, inject, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core'
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Component, effect, ElementRef, inject, input, OnInit, signal, ViewChild } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import {
-  CanComponentDeactivate,
-  canDeactivateForm,
-  SelectCertificateComponent,
-  SelectFormLangComponent,
-  SelectLocationsComponent,
-  SelectSubcategoryProductComponent,
-} from '@goeko/business-ui'
-import { LANGS } from '@goeko/core'
-import {
-  CategoryGrouping,
-  DataSelect,
-  DocumentEcosolutions,
-  Ecosolutions,
-  EcosolutionsBody,
-  EcosolutionsService,
-  LocationsCountry,
-  NewEcosolutionsBody,
-  ODS_CODE,
-  TranslatedProperties,
-  UpdatedEcosolutionBody,
-} from '@goeko/store'
-import {
-  BadgeModule,
-  ButtonModule,
-  FileUploadComponent,
-  FormErrorTextComponent,
-  GoInputComponent,
-  InputFileComponent,
-  UiSuperSelectModule,
-} from '@goeko/ui'
-import { TranslatePipe, TranslateService } from '@ngx-translate/core'
-import { Editor, NgxEditorModule, Toolbar, Validators as ValidatorsEditor } from 'ngx-editor'
+import { CanComponentDeactivate, canDeactivateForm, SdgIconsComponent, SelectLocationsComponent } from '@goeko/business-ui'
+import { CategoryGrouping, DataSelect, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
+import { BadgeModule, ButtonModule, FormErrorTextComponent, InputFileComponent, UiSuperSelectModule } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
+import { NgxEditorModule } from 'ngx-editor'
 import { concatMap, forkJoin, from, Observable, of, switchMap, tap } from 'rxjs'
-import {
-  defaultSetCurrency,
-  defaultSetDeliverCountries,
-  defaultSetPaybackPeriodYears,
-  defaultSetProductsCategories,
-  defaultSetReductions,
-  defaultSetyearGuarantee,
-} from './compare-with-select'
+import { defaultSetCurrency, defaultSetPaybackPeriodYears } from './compare-with-select'
 import { EcosolutionForm } from './ecosolution-form.model'
-import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
-import { EDITOR_TOOLBAR_ECOSOLUTIONS } from './editor-toolbar.constants'
-import { EcosolutionsFormEcosolutionTypeComponent } from './ecosolutions-form-ecosolution-type/ecosolutions-form-ecosolution-type.component'
 import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
+import { EcosolutionsFormCountryAvailableComponent } from './ecosolutions-form-country-available/ecosolutions-form-country-available.component'
 import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ecosolutions-form-details.component'
+import { EcosolutionsFormDocumentsComponent } from './ecosolutions-form-documents/ecosolutions-form-documents.component'
+import { EcosolutionsFormEcosolutionTypeComponent } from './ecosolutions-form-ecosolution-type/ecosolutions-form-ecosolution-type.component'
+import { EcosolutionsFormPaybackComponent } from './ecosolutions-form-payback/ecosolutions-form-payback.component'
+import { EcosolutionsFormWarrantyComponent } from './ecosolutions-form-warranty/ecosolutions-form-warranty.component'
+import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -57,19 +25,22 @@ import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ec
   imports: [
     ReactiveFormsModule,
     FormErrorTextComponent,
-    FileUploadComponent,
     CommonModule,
     TranslatePipe,
     ButtonModule,
     InputFileComponent,
     UiSuperSelectModule,
-    SelectCertificateComponent,
     SelectLocationsComponent,
     BadgeModule,
     NgxEditorModule,
     EcosolutionsFormEcosolutionTypeComponent,
     EcosolutionsFormBenefisComponent,
     EcosolutionsFormDetailsComponent,
+    SdgIconsComponent,
+    EcosolutionsFormWarrantyComponent,
+    EcosolutionsFormDocumentsComponent,
+    EcosolutionsFormCountryAvailableComponent,
+    EcosolutionsFormPaybackComponent,
   ],
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
@@ -78,8 +49,8 @@ import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ec
 export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate {
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
     const callback = () =>
-      this.idEcosolution
-        ? this._ecosolutionsService.updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution)
+      this.id()
+        ? this._ecosolutionsService.updateEcosolution(this.id(), this.bodyRequestEcosolution)
         : this._ecosolutionsService.createEcosolutions(this.bodyRequestEcosolution)
     return this._submitter() ? of(true) : canDeactivateForm(callback)
   }
@@ -87,28 +58,22 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
 
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   _submitter = signal(false)
-  public defaultSetDeliverCountries = defaultSetDeliverCountries
   public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
   public defaultSetCurrency = defaultSetCurrency
-  public defaultSetyearGuarantee = defaultSetyearGuarantee
 
-  groupingForm = input.required<CategoryGrouping[]>()
-  categoryCode = input.required<string>()
+  public groupingForm = input.required<CategoryGrouping[]>()
+  public categoryCode = input.required<string>()
+  public cleantechId = input.required<string>()
+  public id = input.required<string>()
+
+  public ecosolutionData = signal<Ecosolutions | undefined>(undefined)
+
   public form!: FormGroup
-  public ods = ODS_CODE
-  public idEcosolution!: string
   public dataSelect = DataSelect
 
-  private _cleantechId!: string
   private _fileEcosolution!: File[]
   public urlPicEcosolution?: string[]
-  public firstLoad = false
-  public get isReadOnly(): boolean {
-    return this._route.snapshot.queryParamMap.get('isReadOnly') === 'true'
-  }
-  public get locationsArrays(): FormArray {
-    return this.form.get('locations') as FormArray
-  }
+
   public get nameTranslations(): FormArray {
     return this.form.get('nameTranslations') as FormArray
   }
@@ -126,13 +91,11 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public get certificates(): FormArray {
     return this.form.get('certificates') as FormArray
   }
-  get sustainableDevelopmentGoals(): FormArray {
-    return this.form.get('sustainableDevelopmentGoals') as FormArray
-  }
+
   public get bodyRequestEcosolution(): any {
-    return this.idEcosolution
-      ? new UpdatedEcosolutionBody(this._cleantechId, this.categoryCode(), this.form.value)
-      : new NewEcosolutionsBody(this._cleantechId, this.categoryCode(), this.form.value)
+    return this.id()
+      ? new UpdatedEcosolutionBody(this.cleantechId(), this.categoryCode(), this.form.value)
+      : new NewEcosolutionsBody(this.cleantechId(), this.categoryCode(), this.form.value)
   }
 
   private get canUploadCertificates() {
@@ -155,38 +118,18 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     private _fb: FormBuilder,
   ) {}
 
-  ngOnInit(): void {
-    this._getParamsUrl()
-    this._buildFrom()
-
-    if (this.idEcosolution) {
+  effectLoadDataEcosolution = effect(() => {
+    if (this.id()) {
       this.getEcosolution()
     }
-  }
-
-  private _getParamsUrl() {
-    this._cleantechId = this._route.snapshot.parent?.paramMap.get('id') as string
-    this.idEcosolution = this._route.snapshot.paramMap.get('id') as string
-  }
-
-  private _buildFrom() {
+  })
+  ngOnInit(): void {
     this._initForm()
-    this._seTranslatedProperties()
-    this._changehaveTechnicalSheet()
-    this._changeCertificate()
-    this._changeGuarantee()
-    console.log(this.form)
-  }
-
-  private _seTranslatedProperties(codeLang = 'fr') {
-    this._addNameTranslations(codeLang)
-    this._addDescriptionTranslations(codeLang)
-    this._detailDescriptionTranslations(codeLang)
-    this._priceDescriptionTranslations(codeLang)
   }
 
   private _initForm() {
     this.form = this._fb.group({
+      classifications: new FormArray([]),
       solutionName: ['deprecated'],
       nameTranslations: new FormArray([]),
       solutionDescription: ['deprecated'],
@@ -217,115 +160,28 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     })
   }
 
-  private _addNameTranslations(codeLang: string): void {
-    const nameTranslations = this.form.get('nameTranslations') as FormArray
-    nameTranslations.push(this._getFormGroupFieldTranslations(codeLang))
-  }
-  private _addDescriptionTranslations(codeLang: string): void {
-    const descriptionTranslations = this.form.get('descriptionTranslations') as FormArray
-    descriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
-  }
-
-  private _detailDescriptionTranslations(codeLang: string): void {
-    const detailedDescriptionTranslations = this.form.get('detailedDescriptionTranslations') as FormArray
-    detailedDescriptionTranslations.push(this._getFormGroupEditor(codeLang))
-  }
-
-  private _priceDescriptionTranslations(codeLang: string): void {
-    const priceDescriptionTranslations = this.form.get('priceDescriptionTranslations') as FormArray
-    priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
-  }
-
-  private _getFormGroupFieldTranslations(code: string) {
-    return this._fb.group({
-      label: new FormControl(''),
-      lang: new FormControl(code),
-    })
-  }
-  private _getFormGroupEditor(code: string) {
-    return this._fb.group({
-      label: new FormControl(''),
-      lang: new FormControl(code),
-    })
-  }
-
-  addCertificates(file: File | null) {
-    this.certificates.push(this._fb.control(file))
-  }
-  removeAddcertificates(index: number) {
-    this.certificates.removeAt(index)
-  }
   getEcosolution() {
-    this._ecosolutionsService.getEcosolutionById(this.idEcosolution).subscribe((ecosolution: Ecosolutions) => {
+    this._ecosolutionsService.getEcosolutionById(this.id()).subscribe((ecosolution: Ecosolutions) => {
       this.urlPicEcosolution = ecosolution?.pictures?.map((picture) => picture.url)
       this._patchDataToForm(ecosolution)
     })
   }
 
-  private _patchDataToForm(ecosolution: any): void {
+  private _patchDataToForm(ecosolution: Ecosolutions): void {
     const formValue = new EcosolutionForm(ecosolution)
-    this._buildFormArrays(formValue)
+    this.ecosolutionData.set(ecosolution)
 
     this.form.reset(formValue)
-    this._setLocaltion(ecosolution.locations)
-    this._addCertifiedValidators(formValue.certificates)
 
     this.form.markAsPristine()
     this.form.markAsUntouched()
   }
 
-  private _buildFormArrays(formValue: EcosolutionForm): void {
-    this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
-    this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
-    this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
-    this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
-  }
   private _allFormArrayAsDirty() {
     this._markAllAsDirtyFormArray(this.nameTranslations)
     this._markAllAsDirtyFormArray(this.descriptionTranslations)
     this._markAllAsDirtyFormArray(this.detailedDescriptionTranslations)
     this._markAllAsDirtyFormArray(this.priceDescriptionTranslations)
-  }
-  private _addCertifiedValidators(certificates: DocumentEcosolutions[]) {
-    certificates?.forEach((certificate) => {
-      this.certificates.push(
-        this._fb.control({
-          documentType: certificate?.documentType?.code,
-          name: certificate.name,
-          id: certificate.id,
-          url: certificate.url,
-        }),
-      )
-    })
-  }
-
-  private _setLocaltion(locations: Array<LocationsCountry>) {
-    if (locations) {
-      this.locationsArrays.clear()
-      locations.forEach((location: LocationsCountry) => {
-        this._addLocations(location)
-      })
-    }
-  }
-
-  private _addLocations(location: LocationsCountry) {
-    this.locationsArrays.push(this._createLocations(location), { emitEvent: false })
-  }
-  private _createLocations(location: LocationsCountry): FormGroup {
-    return new FormGroup({
-      country: new FormGroup({
-        code: new FormControl(location.country.code),
-        regions: new FormControl(location.country.regions),
-      }),
-    })
-  }
-
-  private _patchFormArray(formArray: FormArray, values: any[]): void {
-    formArray.clear()
-    values.forEach(() => {
-      formArray.push(this._getFormGroupFieldTranslations('fr'))
-    })
-    formArray.reset(values)
   }
 
   private _markAllAsDirtyFormArray(form: FormGroup | FormArray): void {
@@ -336,47 +192,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         control.markAsDirty()
         control.updateValueAndValidity() // Opcional
       }
-    })
-  }
-
-  private _changehaveTechnicalSheet() {
-    this.form.get('haveTechnicalSheet')?.valueChanges.subscribe((value) => {
-      if (value) {
-        this.form.get('technicalSheet')?.setValidators(Validators.required)
-      } else {
-        this.addDocumentForRemove([this.form.get('technicalSheet')?.value?.id])
-        this.form.get('technicalSheet')?.clearValidators()
-        this.form.get('technicalSheet')?.reset()
-      }
-      this.form.get('technicalSheet')?.updateValueAndValidity()
-    })
-  }
-
-  private _changeCertificate() {
-    this.form.get('certified')?.valueChanges.subscribe((value) => {
-      if (value) {
-        this.form.get('certificates')?.setValidators(Validators.required)
-      } else {
-        const idsForRemove = this.form.get('certificates')?.value.map((certificate: DocumentEcosolutions) => certificate.id)
-        this.addDocumentForRemove(idsForRemove)
-
-        this.form.get('certificates')?.clearValidators()
-        this.form.get('certificates')?.reset()
-      }
-      this.form.get('certificates')?.updateValueAndValidity()
-    })
-  }
-
-  private _changeGuarantee() {
-    this.form.get('guarantee')?.valueChanges.subscribe((value) => {
-      if (value) {
-        this.form.get('yearGuarantee')?.setValidators(Validators.required)
-        this.form.get('yearGuarantee')?.markAsDirty()
-      } else {
-        this.form.get('yearGuarantee')?.clearValidators()
-        this.form.get('yearGuarantee')?.reset()
-      }
-      this.form.get('yearGuarantee')?.updateValueAndValidity()
     })
   }
 
@@ -438,15 +253,15 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   }
   private _stepForUpdateEcosolution() {
     return [
-      () => this._ecosolutionsService.updateEcosolution(this.idEcosolution, this.bodyRequestEcosolution),
-      () => this._uploadDocuments(this.idEcosolution),
+      () => this._ecosolutionsService.updateEcosolution(this.id(), this.bodyRequestEcosolution),
+      () => this._uploadDocuments(this.id()),
       () => this._removeDocument(),
-      () => this._uploadPicture(this.idEcosolution),
+      () => this._uploadPicture(this.id()),
     ]
   }
   private _uploadPicture(ecosolutionId: string) {
     if (this._fileEcosolution?.length > 0 && ecosolutionId) {
-      const createOrUpdatePicture = this.idEcosolution
+      const createOrUpdatePicture = this.id()
         ? this._ecosolutionsService.updatePicture(ecosolutionId, this._fileEcosolution)
         : this._ecosolutionsService.uploadPicture(ecosolutionId, this._fileEcosolution)
       return createOrUpdatePicture
@@ -478,20 +293,14 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     return of(null)
   }
 
-  addDocumentForRemove(id: string | string[]) {
-    if (!id || id.length === 0) {
-      return
-    }
-    this._documentForRemove.push(...(Array.isArray(id) ? id : [id]))
-  }
   private _removeDocument() {
     if (this._documentForRemove.length > 0) {
-      return this._ecosolutionsManagmentService.removeDocument(this.idEcosolution, this._documentForRemove)
+      return this._ecosolutionsManagmentService.removeDocument(this.id(), this._documentForRemove)
     }
     return of(null)
   }
   goToListEcosolution() {
-    this._router.navigate(['../cleantech-ecosolutions', this._cleantechId], {
+    this._router.navigate(['../cleantech-ecosolutions', this.cleantechId()], {
       relativeTo: this._route.parent?.parent,
     })
   }

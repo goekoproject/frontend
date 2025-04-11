@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, computed, forwardRef, input, Input, model, OnInit, signal, ViewEncapsulation } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms'
 import { OrderByPipe } from '@goeko/core'
 import { SDG_LABEL, SDGLabel } from '@goeko/store'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
@@ -8,7 +8,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
 type Size = 'small' | 'medium' | 'large'
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, OrderByPipe],
+  imports: [CommonModule, TranslateModule, OrderByPipe, ReactiveFormsModule],
   selector: 'goeko-sdg-icons',
   templateUrl: './sdg-icons.component.html',
   styleUrls: ['./sdg-icons.component.scss'],

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, input, OnDestroy, OnInit } from '@angular/core'
-import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { Component, computed, effect, inject, input, OnDestroy, OnInit } from '@angular/core'
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { Ecosolutions } from '@goeko/store'
 import { FormErrorTextComponent, GoInputComponent } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor'
@@ -14,8 +15,9 @@ import { EDITOR_TOOLBAR_ECOSOLUTIONS } from '../editor-toolbar.constants'
   styleUrl: './ecosolutions-form-details.component.scss',
 })
 export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
-  parentForm = input.required<FormGroup>()
-  isReadOnly = input<boolean>(false)
+  private _fb = inject(FormBuilder)
+  public parentForm = input.required<FormGroup>()
+  public ecosolutionDetails = input<Ecosolutions>()
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
 
   public selectedFormLang = computed(() => {
@@ -35,11 +37,71 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   }
   public editor!: Editor
 
+  effectLoadDetails = effect(() => {
+    if (this.ecosolutionDetails()) {
+      this._buildFormArrays(this.ecosolutionDetails())
+    }
+  })
   ngOnInit(): void {
     this.editor = new Editor()
   }
 
   ngOnDestroy(): void {
     this.editor?.destroy()
+  }
+
+  private _buildFormArrays(formValue?: Ecosolutions): void {
+    if (!formValue) {
+      return
+    }
+    this._patchFormArray(this.nameTranslations, formValue.nameTranslations)
+    this._patchFormArray(this.descriptionTranslations, formValue.descriptionTranslations)
+    this._patchFormArray(this.detailedDescriptionTranslations, formValue.detailedDescriptionTranslations)
+    this._patchFormArray(this.priceDescriptionTranslations, formValue.priceDescriptionTranslations)
+  }
+
+  private _patchFormArray(formArray: FormArray, values: any[]): void {
+    formArray.clear()
+    values.forEach(() => {
+      formArray.push(this._getFormGroupFieldTranslations('fr'))
+    })
+    formArray.reset(values)
+  }
+  private _seTranslatedProperties(codeLang = 'fr') {
+    this._addNameTranslations(codeLang)
+    this._addDescriptionTranslations(codeLang)
+    this._detailDescriptionTranslations(codeLang)
+    this._priceDescriptionTranslations(codeLang)
+  }
+
+  private _addNameTranslations(codeLang: string): void {
+    const nameTranslations = this.parentForm().get('nameTranslations') as FormArray
+    nameTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+  }
+  private _addDescriptionTranslations(codeLang: string): void {
+    const descriptionTranslations = this.parentForm().get('descriptionTranslations') as FormArray
+    descriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+  }
+
+  private _detailDescriptionTranslations(codeLang: string): void {
+    const detailedDescriptionTranslations = this.parentForm().get('detailedDescriptionTranslations') as FormArray
+    detailedDescriptionTranslations.push(this._getFormGroupEditor(codeLang))
+  }
+
+  private _priceDescriptionTranslations(codeLang: string): void {
+    const priceDescriptionTranslations = this.parentForm().get('priceDescriptionTranslations') as FormArray
+    priceDescriptionTranslations.push(this._getFormGroupFieldTranslations(codeLang))
+  }
+  private _getFormGroupEditor(code: string) {
+    return this._fb.group({
+      label: new FormControl(''),
+      lang: new FormControl(code),
+    })
+  }
+  private _getFormGroupFieldTranslations(code: string) {
+    return this._fb.group({
+      label: new FormControl(''),
+      lang: new FormControl(code),
+    })
   }
 }

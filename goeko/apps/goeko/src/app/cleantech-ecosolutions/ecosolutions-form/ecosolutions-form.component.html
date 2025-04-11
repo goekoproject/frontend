@@ -1,193 +1,51 @@
 <div class="bg-primary-gray">
-  <form [formGroup]="form" class="m-auto w-full max-w-3xl rounded-sm p-8">
-    <!--Select Products-->
-    <goeko-ecosolutions-form-ecosolution-type
-      class="section-form"
-      [groupingForm]="groupingForm()"
-      [parentForm]="form"
-      [categoryCode]="categoryCode()"
-      [isReadOnly]="false"></goeko-ecosolutions-form-ecosolution-type>
+  @defer (when form) {
+    <form [formGroup]="form" class="m-auto w-full max-w-3xl rounded-sm p-8">
+      <!--Select Products-->
+      <goeko-ecosolutions-form-ecosolution-type
+        class="section-form"
+        [groupingForm]="groupingForm()"
+        [ecosolutionsClassifications]="ecosolutionData()?.classifications"
+        [parentForm]="form"
+        [categoryCode]="categoryCode()"></goeko-ecosolutions-form-ecosolution-type>
 
-    <goeko-ecosolutions-form-benefis
-      class="section-form"
-      [parentForm]="form"
-      [categoryCode]="categoryCode()"
-      [isReadOnly]="false"></goeko-ecosolutions-form-benefis>
+      <goeko-ecosolutions-form-benefis
+        class="section-form"
+        [parentForm]="form"
+        [categoryCode]="categoryCode()"></goeko-ecosolutions-form-benefis>
 
-    <goeko-ecosolutions-form-details class="section-form" [parentForm]="form" [isReadOnly]="false"></goeko-ecosolutions-form-details>
+      <goeko-ecosolutions-form-details
+        class="section-form"
+        [ecosolutionDetails]="ecosolutionData()"
+        [parentForm]="form"></goeko-ecosolutions-form-details>
 
-    <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
-    <ng-container *ngTemplateOutlet="countryAvailable"></ng-container>
+      <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
+      <goeko-ecosolutions-form-country-available
+        class="section-form"
+        [parentForm]="form"
+        [ecosolutionLocation]="ecosolutionData()?.locations"></goeko-ecosolutions-form-country-available>
+      <ng-container *ngTemplateOutlet="sdg"></ng-container>
+      <ng-container *ngTemplateOutlet="payback"></ng-container>
+      <goeko-ecosolutions-form-warranty class="section-form" [parentForm]="form" [isReadOnly]="false"></goeko-ecosolutions-form-warranty>
+      <goeko-ecosolutions-form-documents
+        class="section-form"
+        [ecosolutionCertificates]="ecosolutionData()?.documents"
+        [parentForm]="form"
+        [isReadOnly]="false"></goeko-ecosolutions-form-documents>
+      <goeko-form-error-text [form]="form">
+        {{ 'ERRORS_FORM.haveError' | translate }}
+      </goeko-form-error-text>
+      <div class="actions-button">
+        <button go-button appearance="white" type="button" (click)="goToListEcosolution()">
+          {{ 'back' | translate }}
+        </button>
 
-    <!--
-    <fieldset [class.hidden]="selectedFormLang().code !== langSignal()">
-      <div class="legend--info">
-        <legend>
-          {{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}
-        </legend>
+        <button go-button type="submit" (click)="id() ? editEcosolution() : saveEcosolution()">
+          {{ 'saveYou' | translate }} éco-solution
+        </button>
       </div>
-
-      @defer (when firstLoad) {
-        <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
-      } @placeholder {
-        <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
-      }
-    </fieldset>
-
-    <fieldset class="flex flex-wrap gap-4" [class.hidden]="selectedFormLang().code !== langSignal()">
-      <div class="legend--info">
-        <legend>
-          {{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}
-        </legend>
-
-        <p class="text-support">
-          {{ 'TEXT_SUPPORT.ods' | translate }}
-        </p>
-      </div>
-
-      <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
-    </fieldset>
-
-    <fieldset class="ecosolutions-fieldset">
-      <legend>
-        {{ 'FORM_LABEL.furtherInformation' | translate }}
-      </legend>
-
-      <ng-container formArrayName="priceDescriptionTranslations">
-        @for (translation of priceDescriptionTranslations.controls; track $index + '-priceDescriptionTranslations'; let i = $index) {
-          @if (translation.value?.lang === selectedFormLang().code) {
-            <div [formGroupName]="i" class="relative">
-              <span
-                class="absolute -right-20 bottom-4 -my-1 -translate-y-1/2 rounded-full border-2 border-primary-400 px-4 uppercase text-primary-400">
-                {{ translation.value.lang | translate }}</span
-              >
-              <goeko-go-textarea
-                id="priceDescriptionTranslations"
-                [formControlName]="'label'"
-                [label]="'FORM_LABEL.infoPrice' | translate"
-                [maxLength]="100" />
-            </div>
-          }
-        }
-      </ng-container>
-
-      <div class="form-row" *ngIf="false">
-        <div>
-          <label for="currency">{{ 'FORM_LABEL.currency' | translate }}</label>
-          <ui-super-select
-            [readonly]="isReadOnly"
-            [placeholder]="'SELECT_DATA_LABEL.currency' | translate"
-            [formControlName]="'currency'"
-            id="currency"
-            name="currency"
-            [compareWith]="defaultSetCurrency">
-            <super-option *ngFor="let option of dataSelect['currency']" [value]="option">
-              {{ option.keyLang | translate }}
-            </super-option>
-          </ui-super-select>
-        </div>
-
-        <goeko-go-input
-          *ngIf="false"
-          [formControlName]="'unit'"
-          type="text"
-          aria-placeholder="item,m3,m2,L etc.."
-          placeholder="m3,m2,l etc.."
-          [label]="'FORM_LABEL.unit' | translate" />
-      </div>
-
-      <div>
-        <label for="deliverCountries">{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</label>
-
-        <ui-super-select
-          [readonly]="isReadOnly"
-          [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-          [formControlName]="'paybackPeriodYears'"
-          id="paybackPeriodYears"
-          name="paybackPeriodYears"
-          [compareWith]="defaultSetPaybackPeriodYears">
-          <super-option *ngFor="let option of dataSelect['paybackPeriodYears']" [value]="option">
-            {{ option.id }} {{ option.keyLang | translate }}
-          </super-option>
-        </ui-super-select>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <div class="field-form-checked">
-          <label for="guarantee">{{ 'FORM_LABEL.guarantee' | translate }}</label>
-          <label class="switch">
-            <input type="checkbox" [formControlName]="'guarantee'" [readonly]="isReadOnly" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        @if (form.value.guarantee) {
-          <ui-super-select
-            [readonly]="isReadOnly"
-            [hasError]="(form.get('yearGuarantee')?.invalid && form.get('yearGuarantee')?.touched) || false"
-            [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-            [formControlName]="'yearGuarantee'"
-            id="yearGuarantee"
-            name="yearGuarantee"
-            [disabled]="!form.value.guarantee"
-            [compareWith]="defaultSetyearGuarantee">
-            <super-option *ngFor="let option of dataSelect['yearGuarantee']" [value]="option">
-              {{ option.id }} {{ option.keyLang | translate }}
-            </super-option>
-            <p errorBody>{{ 'ERRORS_FORM.SELECT_YEARS_GUARANTEE' | translate }}</p>
-          </ui-super-select>
-        }
-      </div>
-
-      <div>
-        <div class="field-form-checked mb-2">
-          <label for="certified">{{ 'FORM_LABEL.certificates' | translate }}</label>
-          <label class="switch">
-            <input type="checkbox" formControlName="certified" [readonly]="isReadOnly" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        @if (form.value.certified) {
-          <ng-container formArrayName="certificates">
-            @if (!isReadOnly) {
-              <goeko-file-upload (fileAdded)="addCertificates($event)" />
-            }
-            <div class="mt-4 flex flex-wrap gap-4">
-              @for (file of certificates.controls; track $index; let i = $index) {
-                <goeko-select-certificate [formControlName]="i" (removeCertificate)="addDocumentForRemove($event)" />
-              }
-            </div>
-          </ng-container>
-        }
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <div class="field-form-checked mb-2">
-          <label for="certified">{{ 'FORM_LABEL.technicalSheet' | translate }}</label>
-          <label class="switch">
-            <input type="checkbox" [formControlName]="'haveTechnicalSheet'" [readonly]="isReadOnly" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-
-        @if (form.value.haveTechnicalSheet) {
-          <goeko-file-upload formControlName="technicalSheet" [showNameFile]="true" (fileRemoved)="addDocumentForRemove([$event])" />
-        }
-      </div>
-    </fieldset>
-    -->
-    <goeko-form-error-text [form]="form">
-      {{ 'ERRORS_FORM.haveError' | translate }}
-    </goeko-form-error-text>
-    <div class="actions-button">
-      <button go-button appearance="white" type="button" (click)="goToListEcosolution()">
-        {{ 'back' | translate }}
-      </button>
-
-      <button *ngIf="!isReadOnly" go-button type="submit" (click)="idEcosolution ? editEcosolution() : saveEcosolution()">
-        {{ 'saveYou' | translate }} éco-solution
-      </button>
-    </div>
-  </form>
+    </form>
+  }
 </div>
 
 <ng-template #imageUpload>
@@ -199,28 +57,33 @@
     [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
 </ng-template>
 
-<ng-template #countryAvailable>
-  <fieldset class="section-form">
-    <div>
-      <legend>{{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}</legend>
+<ng-template #sdg>
+  <fieldset class="section-form" [formGroup]="form">
+    <div class="legend--info">
+      <legend>
+        {{ 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals' | translate }}
+      </legend>
+      <p class="text-support">
+        {{ 'TEXT_SUPPORT.ods' | translate }}
+      </p>
     </div>
-    <goeko-select-locations [form]="form" [controlLocations]="locationsArrays"></goeko-select-locations>
+    <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
   </fieldset>
 </ng-template>
-<ng-template #heading>
-  <div class="mb-10 flex items-center justify-between gap-1 rounded-md bg-primary-100 bg-opacity-65 p-4">
-    @if (nameTranslations && nameTranslations.controls && nameTranslations.controls.length > 0) {
-      <h1 class="text-3xl font-bold text-primary-950">
-        {{ nameTranslations.controls[0].value?.label }}
-      </h1>
-    } @else {
-      <h1 class="text-3xl font-thin text-primary-950 text-opacity-40">
-        {{ 'BREADCRUMBS.new_ecosolutions' | translate }}
-      </h1>
-    }
 
-    <p class="rounded-full border-2 border-softDark px-4 py-2 text-sm text-softDark">
-      {{ 'CATEGORIES.' + categoryCode() | translate }}
-    </p>
-  </div>
+<ng-template #payback>
+  <fieldset class="section-form" [formGroup]="form">
+    <legend>{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</legend>
+
+    <ui-super-select
+      [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+      [formControlName]="'paybackPeriodYears'"
+      id="paybackPeriodYears"
+      name="paybackPeriodYears"
+      [compareWith]="defaultSetPaybackPeriodYears">
+      <super-option *ngFor="let option of dataSelect['paybackPeriodYears']" [value]="option">
+        {{ option.id }} {{ option.keyLang | translate }}
+      </super-option>
+    </ui-super-select>
+  </fieldset>
 </ng-template>
