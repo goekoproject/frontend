@@ -1,1 +1,13 @@
-<p>ecosolutions-form-payback works!</p>
+<fieldset [formGroup]="parentForm()">
+  <legend>{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</legend>
+  <ui-super-select
+    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+    [formControlName]="'paybackPeriodYears'"
+    id="paybackPeriodYears"
+    name="paybackPeriodYears"
+    [compareWith]="defaultSetPaybackPeriodYears">
+    @for (option of paybackPeriodYears(); track option.id) {
+      <super-option [value]="option"> {{ option.id }} {{ option.keyLang | translate }} </super-option>
+    }
+  </ui-super-select>
+</fieldset>

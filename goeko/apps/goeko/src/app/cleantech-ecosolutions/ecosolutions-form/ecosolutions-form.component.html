@@ -12,6 +12,7 @@
       <goeko-ecosolutions-form-benefis
         class="section-form"
         [parentForm]="form"
+        [ecosolutionsBenefits]="ecosolutionData()"
         [categoryCode]="categoryCode()"></goeko-ecosolutions-form-benefis>
 
       <goeko-ecosolutions-form-details
@@ -25,11 +26,14 @@
         [parentForm]="form"
         [ecosolutionLocation]="ecosolutionData()?.locations"></goeko-ecosolutions-form-country-available>
       <ng-container *ngTemplateOutlet="sdg"></ng-container>
-      <ng-container *ngTemplateOutlet="payback"></ng-container>
+      <goeko-ecosolutions-form-payback
+        class="section-form"
+        [parentForm]="form"
+        [ecosolutionsPayback]="ecosolutionData()?.paybackPeriodYears"></goeko-ecosolutions-form-payback>
       <goeko-ecosolutions-form-warranty class="section-form" [parentForm]="form" [isReadOnly]="false"></goeko-ecosolutions-form-warranty>
       <goeko-ecosolutions-form-documents
         class="section-form"
-        [ecosolutionCertificates]="ecosolutionData()?.documents"
+        [ecosolutionData]="ecosolutionData()"
         [parentForm]="form"
         [isReadOnly]="false"></goeko-ecosolutions-form-documents>
       <goeko-form-error-text [form]="form">
@@ -68,22 +72,5 @@
       </p>
     </div>
     <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
-  </fieldset>
-</ng-template>
-
-<ng-template #payback>
-  <fieldset class="section-form" [formGroup]="form">
-    <legend>{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</legend>
-
-    <ui-super-select
-      [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-      [formControlName]="'paybackPeriodYears'"
-      id="paybackPeriodYears"
-      name="paybackPeriodYears"
-      [compareWith]="defaultSetPaybackPeriodYears">
-      <super-option *ngFor="let option of dataSelect['paybackPeriodYears']" [value]="option">
-        {{ option.id }} {{ option.keyLang | translate }}
-      </super-option>
-    </ui-super-select>
   </fieldset>
 </ng-template>

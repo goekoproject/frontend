@@ -15,7 +15,6 @@
           <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container>
         </label>
         <ui-super-select
-          [readonly]="isReadOnly()"
           [placeholder]="['upTo' | translate] + '... (%)'"
           [formControlName]="'reductionPercentage'"
           id="reductionPercentage"
@@ -32,7 +31,6 @@
 
         <ui-super-select
           [placeholder]="['upTo' | translate] + '... (%)'"
-          [readonly]="isReadOnly()"
           [formControlName]="'operationalCostReductionPercentage'"
           id="operationalCostReductionPercentage"
           name="operationalCostReductionPercentage"

@@ -9,11 +9,10 @@
     </div>
     @if (parentForm().value.certified) {
       <ng-container formArrayName="certificates">
-        @if (!isReadOnly()) {
-          <goeko-file-upload (fileAdded)="addCertificates($event)" />
-        }
+        <goeko-file-upload (fileAdded)="addCertificates($event)" />
+
         <div class="mt-4 flex flex-wrap gap-4">
-          @for (file of certificates.controls; track $index; let i = $index) {
+          @for (file of certificatesFormArray().controls; track $index; let i = $index) {
             <goeko-select-certificate [formControlName]="i" (removeCertificate)="addDocumentForRemove($event)" />
           }
         </div>

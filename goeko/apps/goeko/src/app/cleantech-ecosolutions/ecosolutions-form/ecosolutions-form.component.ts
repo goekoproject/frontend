@@ -3,13 +3,12 @@ import { Component, effect, ElementRef, inject, input, OnInit, signal, ViewChild
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CanComponentDeactivate, canDeactivateForm, SdgIconsComponent, SelectLocationsComponent } from '@goeko/business-ui'
-import { CategoryGrouping, DataSelect, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
+import { CategoryGrouping, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
 import { BadgeModule, ButtonModule, FormErrorTextComponent, InputFileComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { NgxEditorModule } from 'ngx-editor'
 import { concatMap, forkJoin, from, Observable, of, switchMap, tap } from 'rxjs'
-import { defaultSetCurrency, defaultSetPaybackPeriodYears } from './compare-with-select'
-import { EcosolutionForm } from './ecosolution-form.model'
+import { defaultSetCurrency } from './compare-with-select'
 import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
 import { EcosolutionsFormCountryAvailableComponent } from './ecosolutions-form-country-available/ecosolutions-form-country-available.component'
 import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ecosolutions-form-details.component'
@@ -58,7 +57,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
 
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   _submitter = signal(false)
-  public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
   public defaultSetCurrency = defaultSetCurrency
 
   public groupingForm = input.required<CategoryGrouping[]>()
@@ -69,7 +67,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public ecosolutionData = signal<Ecosolutions | undefined>(undefined)
 
   public form!: FormGroup
-  public dataSelect = DataSelect
 
   private _fileEcosolution!: File[]
   public urlPicEcosolution?: string[]
@@ -168,10 +165,10 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   }
 
   private _patchDataToForm(ecosolution: Ecosolutions): void {
-    const formValue = new EcosolutionForm(ecosolution)
+    // const formValue = new EcosolutionForm(ecosolution)
     this.ecosolutionData.set(ecosolution)
 
-    this.form.reset(formValue)
+    // this.form.reset(formValue)
 
     this.form.markAsPristine()
     this.form.markAsUntouched()

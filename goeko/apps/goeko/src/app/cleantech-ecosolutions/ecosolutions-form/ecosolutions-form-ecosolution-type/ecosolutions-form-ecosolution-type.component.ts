@@ -22,15 +22,25 @@ export class EcosolutionsFormEcosolutionTypeComponent {
   public groupingForm = input.required<CategoryGrouping[]>()
   public ecosolutionsClassifications = input<ClassificationManagment[]>()
 
-  public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.code === this.categoryCode())?.subcategories)
-
   public parentForm = input.required<FormGroup>()
   public categoryCode = input.required<string>()
   public isReadOnly = input<boolean>(false)
 
+  public questionsCategories = computed(() => this.groupingForm()?.find((category) => category.code === this.categoryCode())?.subcategories)
   public classifications = computed(() => this.parentForm().get('classifications') as FormArray)
 
   effectInitFormClassifications = effect(() => {
+    if (this.questionsCategories()) {
+      this._initFormClassifications()
+    }
+  })
+  effectLoadDataEcosolutions = effect(() => {
+    if (this.ecosolutionsClassifications()) {
+      this._patchClassificationsValue()
+    }
+  })
+
+  private _initFormClassifications() {
     if (this.questionsCategories()) {
       this.questionsCategories()?.forEach((subcategory) => {
         this.classifications().push(
@@ -42,12 +52,8 @@ export class EcosolutionsFormEcosolutionTypeComponent {
         )
       })
     }
-  })
-  effectLoadDataEcosolutions = effect(() => {
-    if (this.ecosolutionsClassifications()) {
-      this._patchClassificationsValue()
-    }
-  })
+  }
+
   private _patchClassificationsValue() {
     if (!this.ecosolutionsClassifications()) {
       return
