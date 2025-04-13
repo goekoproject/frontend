@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common'
-import { Component, effect, ElementRef, inject, input, OnInit, signal, ViewChild } from '@angular/core'
+import { Component, computed, effect, ElementRef, inject, input, OnInit, signal, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CanComponentDeactivate, canDeactivateForm, SdgIconsComponent } from '@goeko/business-ui'
-import { CategoryGrouping, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
+import { CategoryGrouping, Ecosolutions, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
 import { BadgeModule, ButtonModule, FormErrorTextComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { NgxEditorModule } from 'ngx-editor'
-import { concatMap, forkJoin, from, Observable, of, switchMap, tap } from 'rxjs'
+import { forkJoin, Observable, of, tap } from 'rxjs'
 import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
 import { EcosolutionsFormCountryAvailableComponent } from './ecosolutions-form-country-available/ecosolutions-form-country-available.component'
 import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ecosolutions-form-details.component'
@@ -16,7 +16,7 @@ import { EcosolutionsFormEcosolutionTypeComponent } from './ecosolutions-form-ec
 import { EcosolutionsFormImageComponent } from './ecosolutions-form-image/ecosolutions-form-image.component'
 import { EcosolutionsFormPaybackComponent } from './ecosolutions-form-payback/ecosolutions-form-payback.component'
 import { EcosolutionsFormWarrantyComponent } from './ecosolutions-form-warranty/ecosolutions-form-warranty.component'
-import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
+import { DocumentMetadata, EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -45,6 +45,11 @@ import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolut
   providers: [EcosolutionsManagmentService],
 })
 export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate {
+  private _router = inject(Router)
+  private _route = inject(ActivatedRoute)
+  private _fb = inject(FormBuilder)
+  private _ecosolutionsManagmentService = inject(EcosolutionsManagmentService)
+
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
     const callback = () =>
       this.id()
@@ -52,7 +57,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         : this._ecosolutionsService.createEcosolutions(this.bodyRequestEcosolution)
     return this._submitter() ? of(true) : canDeactivateForm(callback)
   }
-  private _ecosolutionsManagmentService = inject(EcosolutionsManagmentService)
 
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   _submitter = signal(false)
@@ -66,10 +70,12 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public form!: FormGroup
   private _ecosolutionsImg = signal<File[] | undefined>(undefined)
 
+  public ecosolutionsName = computed(() => this.ecosolutionData()?.nameTranslations.at(0)?.label)
+  public ecosolutionsCategoryLabel = computed(() => this.groupingForm().find((g) => g.code === this.categoryCode())?.label || '')
+
   public get nameTranslations(): FormArray {
     return this.form.get('nameTranslations') as FormArray
   }
-
   public get descriptionTranslations(): FormArray {
     return this.form.get('descriptionTranslations') as FormArray
   }
@@ -79,9 +85,14 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public get priceDescriptionTranslations(): FormArray {
     return this.form.get('priceDescriptionTranslations') as FormArray
   }
-
-  public get certificates(): FormArray {
-    return this.form.get('certificates') as FormArray
+  public get certificates(): DocumentMetadata[] {
+    return this.form.get('certificates')?.value
+  }
+  public get technicalSheet(): File | undefined {
+    return this.form.get('technicalSheet')?.value
+  }
+  public get haveTechnicalSheet(): FormArray {
+    return this.form.get('haveTechnicalSheet') as FormArray
   }
 
   public get bodyRequestEcosolution(): any {
@@ -95,7 +106,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
       this.form.get('certificates')?.dirty &&
       this.form.get('certificates')?.valid &&
       this.form.value.certified &&
-      this.certificates.value.length > 0
+      this.certificates.length > 0
     )
   }
   private get canUploadTechnicalSheet(): boolean | undefined {
@@ -103,12 +114,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   }
 
   private _documentForRemove = new Array<string>()
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _ecosolutionsService: EcosolutionsService,
-    private _fb: FormBuilder,
-  ) {}
 
   effectLoadDataEcosolution = effect(() => {
     if (this.id()) {
@@ -157,19 +162,11 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   }
 
   getEcosolution() {
-    this._ecosolutionsService.getEcosolutionById(this.id()).subscribe((ecosolution: Ecosolutions) => {
-      this._patchDataToForm(ecosolution)
+    this._ecosolutionsManagmentService.getEcosolutionById(this.id()).subscribe((ecosolution: Ecosolutions) => {
+      this.ecosolutionData.set(ecosolution)
+      this.form.markAsPristine()
+      this.form.markAsUntouched()
     })
-  }
-
-  private _patchDataToForm(ecosolution: Ecosolutions): void {
-    // const formValue = new EcosolutionForm(ecosolution)
-    this.ecosolutionData.set(ecosolution)
-
-    // this.form.reset(formValue)
-
-    this.form.markAsPristine()
-    this.form.markAsUntouched()
   }
 
   private _allFormArrayAsDirty() {
@@ -199,16 +196,14 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   }
 
   private _createEcosolution() {
-    this._ecosolutionsService
-      .createEcosolutions(this.bodyRequestEcosolution)
-      .pipe(
-        switchMap((ecosolution) => {
-          const uploadPicture$ = this._uploadPicture(ecosolution.id)
-          const uploadCertificate$ = this._uploadDocuments(ecosolution.id)
-          return forkJoin([uploadPicture$, uploadCertificate$])
-        }),
-        tap(() => this._submitter.set(true)),
-      )
+    this._ecosolutionsManagmentService
+      .createEcosolutionWithUploads({
+        body: new NewEcosolutionsBody(this.cleantechId(), this.categoryCode(), this.form.value),
+        ecosolutionsImg: this._ecosolutionsImg(),
+        certificates: this.certificates,
+        technicalSheet: this.technicalSheet,
+      })
+      .pipe(tap(() => this._submitter.set(true)))
       .subscribe({
         next: (result) => {
           this.goToListEcosolution()
@@ -225,11 +220,14 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
       this._checkIsFormValid()
       return
     }
-    from(this._stepForUpdateEcosolution())
-      .pipe(
-        concatMap((step) => step()),
-        tap(() => this._submitter.set(true)),
-      )
+    this._ecosolutionsManagmentService
+      .updateEcosolution(this.id(), {
+        body: new UpdatedEcosolutionBody(this.cleantechId(), this.categoryCode(), this.form.value),
+        ecosolutionsImg: this._ecosolutionsImg(),
+        certificates: this.certificates,
+        technicalSheet: this.technicalSheet,
+      })
+      .pipe(tap(() => this._submitter.set(true)))
       .subscribe({
         next: () => {
           this.goToListEcosolution()
@@ -247,12 +245,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     this.form.updateValueAndValidity()
   }
   private _stepForUpdateEcosolution() {
-    return [
-      () => this._ecosolutionsService.updateEcosolution(this.id(), this.bodyRequestEcosolution),
-      () => this._uploadDocuments(this.id()),
-      () => this._removeDocument(),
-      () => this._uploadPicture(this.id()),
-    ]
+    return [() => this._uploadDocuments(this.id()), () => this._removeDocument(), () => this._uploadPicture(this.id())]
   }
   private _uploadPicture(ecosolutionId: string) {
     if (!this._ecosolutionsImg() || !ecosolutionId) {

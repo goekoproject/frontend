@@ -1,7 +1,7 @@
 <fieldset class="ecosolutions-fieldset" [formGroup]="parentForm()">
   <legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
   <ng-container formArrayName="nameTranslations">
-    @for (translation of nameTranslations.controls; track $index + '-name'; let i = $index) {
+    @for (translation of nameTranslations().controls; track $index + '-name'; let i = $index) {
       <ng-container [formGroupName]="i">
         @if (translation.value?.lang === selectedFormLang().code) {
           <div class="relative">
@@ -13,7 +13,7 @@
   </ng-container>
 
   <ng-container formArrayName="descriptionTranslations">
-    @for (translation of descriptionTranslations.controls; track $index + '-descriptionTranslations'; let i = $index) {
+    @for (translation of descriptionTranslations().controls; track $index + '-descriptionTranslations'; let i = $index) {
       @if (translation.value?.lang === selectedFormLang().code) {
         <div [formGroupName]="i" class="relative">
           <goeko-go-textarea [formControlName]="'label'" [label]="'FORM_LABEL.solutionDescription' | translate" [maxLength]="100" />
@@ -23,7 +23,7 @@
   </ng-container>
 
   <ng-container formArrayName="detailedDescriptionTranslations">
-    @for (translation of detailedDescriptionTranslations.controls; track $index + 'detailedDescriptionTranslations'; let i = $index) {
+    @for (translation of detailedDescriptionTranslations().controls; track $index + 'detailedDescriptionTranslations'; let i = $index) {
       @if (translation.value?.lang === selectedFormLang().code) {
         <div [formGroupName]="i" class="wrapper-textarea">
           <label for="detailedDescriptionTranslations">
@@ -49,7 +49,7 @@
   </ng-container>
 
   <ng-container formArrayName="priceDescriptionTranslations">
-    @for (translation of priceDescriptionTranslations.controls; track $index + '-priceDescriptionTranslations'; let i = $index) {
+    @for (translation of priceDescriptionTranslations().controls; track $index + '-priceDescriptionTranslations'; let i = $index) {
       @if (translation.value?.lang === selectedFormLang().code) {
         <div [formGroupName]="i" class="relative">
           <goeko-go-textarea

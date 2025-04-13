@@ -1,4 +1,10 @@
-<div class="bg-primary-gray">
+<section class="flex max-w-3xl items-center gap-2 px-8 py-4">
+  <h1 class="title-page">{{ ecosolutionsName() }}</h1>
+  <span class="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">{{
+    ecosolutionsCategoryLabel() | translate
+  }}</span>
+</section>
+<section class="bg-primary-gray">
   @defer (when form) {
     <form [formGroup]="form" class="m-auto w-full max-w-3xl rounded-sm p-8">
       <!--Select Products-->
@@ -56,7 +62,7 @@
       </div>
     </form>
   }
-</div>
+</section>
 
 <ng-template #sdg>
   <fieldset class="section-form" [formGroup]="form">

@@ -1,0 +1,6 @@
+@mixin invalid {
+  @apply border-red-500 text-red-500 focus:border-red-500 focus:ring-red-500 focus-visible:outline-red-500 focus-visible:ring-red-500 focus-visible:ring-offset-red-200;
+}
+.editor-invalid ::ng-deep .NgxEditor {
+  @include invalid();
+}
