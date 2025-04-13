@@ -20,7 +20,11 @@
         [ecosolutionDetails]="ecosolutionData()"
         [parentForm]="form"></goeko-ecosolutions-form-details>
 
-      <ng-container *ngTemplateOutlet="imageUpload"></ng-container>
+      <goeko-ecosolutions-form-image
+        class="section-form"
+        [parentForm]="form"
+        [ecosolutionImages]="ecosolutionData()?.pictures"
+        (ecosolutionsImg)="uploadEcosolutionsImg($event)"></goeko-ecosolutions-form-image>
       <goeko-ecosolutions-form-country-available
         class="section-form"
         [parentForm]="form"
@@ -30,12 +34,14 @@
         class="section-form"
         [parentForm]="form"
         [ecosolutionsPayback]="ecosolutionData()?.paybackPeriodYears"></goeko-ecosolutions-form-payback>
-      <goeko-ecosolutions-form-warranty class="section-form" [parentForm]="form" [isReadOnly]="false"></goeko-ecosolutions-form-warranty>
+      <goeko-ecosolutions-form-warranty
+        class="section-form"
+        [parentForm]="form"
+        [ecosolutionsData]="ecosolutionData()"></goeko-ecosolutions-form-warranty>
       <goeko-ecosolutions-form-documents
         class="section-form"
         [ecosolutionData]="ecosolutionData()"
-        [parentForm]="form"
-        [isReadOnly]="false"></goeko-ecosolutions-form-documents>
+        [parentForm]="form"></goeko-ecosolutions-form-documents>
       <goeko-form-error-text [form]="form">
         {{ 'ERRORS_FORM.haveError' | translate }}
       </goeko-form-error-text>
@@ -51,15 +57,6 @@
     </form>
   }
 </div>
-
-<ng-template #imageUpload>
-  <goeko-input-file
-    class="section-form"
-    (fileChange)="uploadImgEcosolutions($event)"
-    [filesUrl]="urlPicEcosolution || ''"
-    [multiple]="true"
-    [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
-</ng-template>
 
 <ng-template #sdg>
   <fieldset class="section-form" [formGroup]="form">

@@ -2,18 +2,18 @@ import { CommonModule } from '@angular/common'
 import { Component, effect, ElementRef, inject, input, OnInit, signal, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { CanComponentDeactivate, canDeactivateForm, SdgIconsComponent, SelectLocationsComponent } from '@goeko/business-ui'
+import { CanComponentDeactivate, canDeactivateForm, SdgIconsComponent } from '@goeko/business-ui'
 import { CategoryGrouping, Ecosolutions, EcosolutionsService, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
-import { BadgeModule, ButtonModule, FormErrorTextComponent, InputFileComponent, UiSuperSelectModule } from '@goeko/ui'
+import { BadgeModule, ButtonModule, FormErrorTextComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { NgxEditorModule } from 'ngx-editor'
 import { concatMap, forkJoin, from, Observable, of, switchMap, tap } from 'rxjs'
-import { defaultSetCurrency } from './compare-with-select'
 import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
 import { EcosolutionsFormCountryAvailableComponent } from './ecosolutions-form-country-available/ecosolutions-form-country-available.component'
 import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ecosolutions-form-details.component'
 import { EcosolutionsFormDocumentsComponent } from './ecosolutions-form-documents/ecosolutions-form-documents.component'
 import { EcosolutionsFormEcosolutionTypeComponent } from './ecosolutions-form-ecosolution-type/ecosolutions-form-ecosolution-type.component'
+import { EcosolutionsFormImageComponent } from './ecosolutions-form-image/ecosolutions-form-image.component'
 import { EcosolutionsFormPaybackComponent } from './ecosolutions-form-payback/ecosolutions-form-payback.component'
 import { EcosolutionsFormWarrantyComponent } from './ecosolutions-form-warranty/ecosolutions-form-warranty.component'
 import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
@@ -27,9 +27,7 @@ import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolut
     CommonModule,
     TranslatePipe,
     ButtonModule,
-    InputFileComponent,
     UiSuperSelectModule,
-    SelectLocationsComponent,
     BadgeModule,
     NgxEditorModule,
     EcosolutionsFormEcosolutionTypeComponent,
@@ -40,6 +38,7 @@ import { EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolut
     EcosolutionsFormDocumentsComponent,
     EcosolutionsFormCountryAvailableComponent,
     EcosolutionsFormPaybackComponent,
+    EcosolutionsFormImageComponent,
   ],
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
@@ -57,7 +56,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
 
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
   _submitter = signal(false)
-  public defaultSetCurrency = defaultSetCurrency
 
   public groupingForm = input.required<CategoryGrouping[]>()
   public categoryCode = input.required<string>()
@@ -65,11 +63,8 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public id = input.required<string>()
 
   public ecosolutionData = signal<Ecosolutions | undefined>(undefined)
-
   public form!: FormGroup
-
-  private _fileEcosolution!: File[]
-  public urlPicEcosolution?: string[]
+  private _ecosolutionsImg = signal<File[] | undefined>(undefined)
 
   public get nameTranslations(): FormArray {
     return this.form.get('nameTranslations') as FormArray
@@ -157,9 +152,12 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     })
   }
 
+  uploadEcosolutionsImg(files: File[]) {
+    this._ecosolutionsImg.set(files)
+  }
+
   getEcosolution() {
     this._ecosolutionsService.getEcosolutionById(this.id()).subscribe((ecosolution: Ecosolutions) => {
-      this.urlPicEcosolution = ecosolution?.pictures?.map((picture) => picture.url)
       this._patchDataToForm(ecosolution)
     })
   }
@@ -257,17 +255,13 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     ]
   }
   private _uploadPicture(ecosolutionId: string) {
-    if (this._fileEcosolution?.length > 0 && ecosolutionId) {
-      const createOrUpdatePicture = this.id()
-        ? this._ecosolutionsService.updatePicture(ecosolutionId, this._fileEcosolution)
-        : this._ecosolutionsService.uploadPicture(ecosolutionId, this._fileEcosolution)
-      return createOrUpdatePicture
+    if (!this._ecosolutionsImg() || !ecosolutionId) {
+      return of(null)
     }
-    return of(null)
-  }
-
-  uploadImgEcosolutions(file: any) {
-    this._fileEcosolution = file
+    const createOrUpdatePicture = this.id()
+      ? this._ecosolutionsService.updatePicture(ecosolutionId, this._ecosolutionsImg() || [])
+      : this._ecosolutionsService.uploadPicture(ecosolutionId, this._ecosolutionsImg() || [])
+    return createOrUpdatePicture
   }
 
   private _uploadDocuments(ecosolutionId: string) {

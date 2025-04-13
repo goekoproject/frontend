@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, input, OnInit } from '@angular/core'
+import { Component, computed, effect, input, OnInit } from '@angular/core'
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { DataSelect } from '@goeko/store'
+import { DataSelect, Ecosolutions } from '@goeko/store'
 import { UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { defaultSetyearGuarantee } from '../compare-with-select'
@@ -17,10 +17,18 @@ export class EcosolutionsFormWarrantyComponent implements OnInit {
   public defaultSetyearGuarantee = defaultSetyearGuarantee
   public dataSelect = DataSelect
 
-  parentForm = input.required<FormGroup>()
-  isReadOnly = input<boolean>(false)
-  hasError = computed(() => (this.parentForm().get('yearGuarantee')?.invalid && this.parentForm().get('yearGuarantee')?.touched) || false)
+  public parentForm = input.required<FormGroup>()
+  public ecosolutionsData = input<Ecosolutions>()
+  public hasError = computed(
+    () => (this.parentForm().get('yearGuarantee')?.invalid && this.parentForm().get('yearGuarantee')?.touched) || false,
+  )
 
+  effectLoadWarranty = effect(() => {
+    if (this.ecosolutionsData()) {
+      this.parentForm().get('guarantee')?.patchValue(this.ecosolutionsData()?.guarantee)
+      this.parentForm().get('yearGuarantee')?.patchValue(this.ecosolutionsData()?.guaranteeInYears)
+    }
+  })
   ngOnInit(): void {
     this._changeGuarantee()
   }
@@ -28,14 +36,17 @@ export class EcosolutionsFormWarrantyComponent implements OnInit {
     this.parentForm()
       .get('guarantee')
       ?.valueChanges.subscribe((value) => {
+        const yearGuaranteeControl = this.parentForm().get('yearGuarantee')
         if (value) {
-          this.parentForm().get('yearGuarantee')?.setValidators(Validators.required)
-          this.parentForm().get('yearGuarantee')?.markAsDirty()
+          yearGuaranteeControl?.enable()
+          yearGuaranteeControl?.setValidators(Validators.required)
+          yearGuaranteeControl?.markAsDirty()
         } else {
-          this.parentForm().get('yearGuarantee')?.clearValidators()
-          this.parentForm().get('yearGuarantee')?.reset()
+          yearGuaranteeControl?.disable()
+          yearGuaranteeControl?.clearValidators()
+          yearGuaranteeControl?.reset()
         }
-        this.parentForm().get('yearGuarantee')?.updateValueAndValidity()
+        yearGuaranteeControl?.updateValueAndValidity()
       })
   }
 }

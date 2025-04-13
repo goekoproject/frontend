@@ -2,19 +2,17 @@
   <div class="flex justify-between">
     <label for="guarantee">{{ 'FORM_LABEL.guarantee' | translate }}</label>
     <label class="switch">
-      <input type="checkbox" [formControlName]="'guarantee'" [readonly]="isReadOnly" />
+      <input type="checkbox" [formControlName]="'guarantee'" />
       <span class="slider round"></span>
     </label>
   </div>
 
   <ui-super-select
-    [readonly]="isReadOnly()"
     [hasError]="hasError()"
     [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
     [formControlName]="'yearGuarantee'"
     id="yearGuarantee"
     name="yearGuarantee"
-    [disabled]="!parentForm().value.guarantee"
     [compareWith]="defaultSetyearGuarantee">
     <super-option *ngFor="let option of dataSelect['yearGuarantee']" [value]="option">
       {{ option.id }} {{ option.keyLang | translate }}
