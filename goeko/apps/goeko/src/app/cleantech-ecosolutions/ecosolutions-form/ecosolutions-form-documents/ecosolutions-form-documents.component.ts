@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, input, OnInit } from '@angular/core'
+import { Component, computed, effect, inject, input, OnInit, output } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { SelectCertificateComponent } from '@goeko/business-ui'
 import { DocumentEcosolutions, EcosolutionDocumentsBuilder, Ecosolutions } from '@goeko/store'
@@ -19,6 +19,8 @@ export class EcosolutionsFormDocumentsComponent implements OnInit {
   public parentForm = input.required<FormGroup>()
   isReadOnly = input<boolean>(false)
   public ecosolutionData = input<Ecosolutions>()
+  public documentForRemove = output<string[]>()
+
   public certificates = computed(() =>
     new EcosolutionDocumentsBuilder(this._ecosolutionDocuments()).assignOtherDocumentType().getCertificates().build(),
   )
@@ -30,7 +32,6 @@ export class EcosolutionsFormDocumentsComponent implements OnInit {
     () => new EcosolutionDocumentsBuilder(this._ecosolutionDocuments()).assignOtherDocumentType().getTechnicalSheet().build()[0],
   )
   private _haveTechnicalSheet = computed(() => !!this.parentForm().get('technicalSheet')?.value)
-  private _documentForRemove = new Array<string>()
 
   effectLoadCertificates = effect(() => {
     if (this.certificates().length > 0) {
@@ -74,7 +75,8 @@ export class EcosolutionsFormDocumentsComponent implements OnInit {
     if (!id || id.length === 0) {
       return
     }
-    this._documentForRemove.push(...(Array.isArray(id) ? id : [id]))
+    const _docIdForRemove = new Array<string>(...(Array.isArray(id) ? id : [id]))
+    this.documentForRemove.emit(_docIdForRemove)
   }
 
   private _changehaveTechnicalSheet() {

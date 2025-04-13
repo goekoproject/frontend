@@ -1,4 +1,4 @@
-@if (parentForm()) {
+@if (parentForm() && questionsCategories()) {
   <fieldset class="fieldset-ecosolutions" [formGroup]="parentForm()">
     <div class="legend--info">
       <legend>
@@ -8,30 +8,28 @@
       <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
     </div>
 
-    @defer (when questionsCategories()) {
-      <div class="ecosolutions-subcategory">
-        <goeko-form-error-text [form]="parentForm().get('subCategory')">
-          {{ 'ERRORS_FORM.required' | translate }}
-        </goeko-form-error-text>
-        @for (subcategory of questionsCategories(); track subcategory.code; let i = $index) {
-          <ng-container formArrayName="classifications">
-            <section [formGroupName]="i">
-              <p class="text-sm text-grayText">
-                {{ subcategory.label }}
-              </p>
-              <input formControlName="subCategory" type="hidden" />
-              <input formControlName="category" type="hidden" />
+    <div class="ecosolutions-subcategory">
+      <goeko-form-error-text [form]="parentForm().get('subCategory')">
+        {{ 'ERRORS_FORM.required' | translate }}
+      </goeko-form-error-text>
+      @for (subcategory of questionsCategories(); track subcategory.code; let i = $index) {
+        <ng-container formArrayName="classifications">
+          <section [formGroupName]="i">
+            <p class="text-sm text-grayText">
+              {{ subcategory.label }}
+            </p>
+            <input formControlName="subCategory" type="hidden" />
+            <input formControlName="category" type="hidden" />
 
-              <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly()">
-                @for (product of subcategory.products; track product.code) {
-                  <go-badge [readonly]="isReadOnly()" [value]="product.code">{{ product.label }}</go-badge>
-                }
-              </go-badge-group>
-            </section>
-          </ng-container>
-        }
-      </div>
-    }
+            <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly()">
+              @for (product of subcategory.products; track product.code) {
+                <go-badge [readonly]="isReadOnly()" [value]="product.code">{{ product.label }}</go-badge>
+              }
+            </go-badge-group>
+          </section>
+        </ng-container>
+      }
+    </div>
   </fieldset>
 }
 

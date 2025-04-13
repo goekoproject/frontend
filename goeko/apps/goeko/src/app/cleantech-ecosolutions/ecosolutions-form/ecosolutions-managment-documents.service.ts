@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core'
 import { ClassificationDocumentType, EcosolutionsService, PARENT_CODE } from '@goeko/store'
-import { catchError, of, throwError } from 'rxjs'
+import { catchError, forkJoin, of, throwError } from 'rxjs'
 
 export interface DocumentMetadata {
   file: File | null
@@ -104,6 +104,16 @@ export class EcosolutionsManagmentDocumentsService {
       catchError((error) => {
         console.error('Error uploading documentation:', error)
         return throwError(() => new Error('Upload failed.'))
+      }),
+    )
+  }
+
+  removeDocument(idEcosolution: string, documentId: string[]) {
+    const deleteDocument$ = documentId.filter((d) => !!d).map((idDoc) => this._ecosolutionsService.delteDocumentation(idEcosolution, idDoc))
+    return forkJoin(deleteDocument$).pipe(
+      catchError((error) => {
+        console.error('Error removing documentation:', error)
+        return throwError(() => new Error('Remove failed.'))
       }),
     )
   }

@@ -7,7 +7,7 @@ import { CategoryGrouping, Ecosolutions, NewEcosolutionsBody, UpdatedEcosolution
 import { BadgeModule, ButtonModule, FormErrorTextComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { NgxEditorModule } from 'ngx-editor'
-import { forkJoin, Observable, of, tap } from 'rxjs'
+import { Observable, of, tap } from 'rxjs'
 import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
 import { EcosolutionsFormCountryAvailableComponent } from './ecosolutions-form-country-available/ecosolutions-form-country-available.component'
 import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ecosolutions-form-details.component'
@@ -16,7 +16,8 @@ import { EcosolutionsFormEcosolutionTypeComponent } from './ecosolutions-form-ec
 import { EcosolutionsFormImageComponent } from './ecosolutions-form-image/ecosolutions-form-image.component'
 import { EcosolutionsFormPaybackComponent } from './ecosolutions-form-payback/ecosolutions-form-payback.component'
 import { EcosolutionsFormWarrantyComponent } from './ecosolutions-form-warranty/ecosolutions-form-warranty.component'
-import { DocumentMetadata, EcosolutionsManagmentService, metadataTechnicalSheet } from './ecosolutions-managment.service'
+import { DocumentMetadata } from './ecosolutions-managment-documents.service'
+import { EcosolutionsManagmentService } from './ecosolutions-managment.service'
 
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -53,8 +54,8 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
     const callback = () =>
       this.id()
-        ? this._ecosolutionsService.updateEcosolution(this.id(), this.bodyRequestEcosolution)
-        : this._ecosolutionsService.createEcosolutions(this.bodyRequestEcosolution)
+        ? this._ecosolutionsManagmentService.updateEcosolution(this.id(), this.bodyRequestEcosolution)
+        : this._ecosolutionsManagmentService.createEcosolutions(this.bodyRequestEcosolution)
     return this._submitter() ? of(true) : canDeactivateForm(callback)
   }
 
@@ -65,10 +66,10 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public categoryCode = input.required<string>()
   public cleantechId = input.required<string>()
   public id = input.required<string>()
-
   public ecosolutionData = signal<Ecosolutions | undefined>(undefined)
   public form!: FormGroup
   private _ecosolutionsImg = signal<File[] | undefined>(undefined)
+  private _documentForRemove = signal<string[] | string>([])
 
   public ecosolutionsName = computed(() => this.ecosolutionData()?.nameTranslations.at(0)?.label)
   public ecosolutionsCategoryLabel = computed(() => this.groupingForm().find((g) => g.code === this.categoryCode())?.label || '')
@@ -112,8 +113,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   private get canUploadTechnicalSheet(): boolean | undefined {
     return this.form.get('haveTechnicalSheet')?.dirty && this.form.get('haveTechnicalSheet')?.valid && !!this.form.value?.technicalSheet
   }
-
-  private _documentForRemove = new Array<string>()
 
   effectLoadDataEcosolution = effect(() => {
     if (this.id()) {
@@ -226,6 +225,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         ecosolutionsImg: this._ecosolutionsImg(),
         certificates: this.certificates,
         technicalSheet: this.technicalSheet,
+        documentForRemove: this._documentForRemove() as string[],
       })
       .pipe(tap(() => this._submitter.set(true)))
       .subscribe({
@@ -244,44 +244,9 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     this._allFormArrayAsDirty()
     this.form.updateValueAndValidity()
   }
-  private _stepForUpdateEcosolution() {
-    return [() => this._uploadDocuments(this.id()), () => this._removeDocument(), () => this._uploadPicture(this.id())]
-  }
-  private _uploadPicture(ecosolutionId: string) {
-    if (!this._ecosolutionsImg() || !ecosolutionId) {
-      return of(null)
-    }
-    const createOrUpdatePicture = this.id()
-      ? this._ecosolutionsService.updatePicture(ecosolutionId, this._ecosolutionsImg() || [])
-      : this._ecosolutionsService.uploadPicture(ecosolutionId, this._ecosolutionsImg() || [])
-    return createOrUpdatePicture
-  }
 
-  private _uploadDocuments(ecosolutionId: string) {
-    return forkJoin({
-      certificate: this._uploadDocumentsCertificates(ecosolutionId),
-      technicalSheet: this._uploadDocumentsTechnicalSheet(ecosolutionId) ?? of(null),
-    })
-  }
-  private _uploadDocumentsCertificates(ecosolutionId: string) {
-    if (this.canUploadCertificates) {
-      return this._ecosolutionsManagmentService.uploadDocumentationCertificate(ecosolutionId, this.form.value.certificates)
-    }
-    return of(null)
-  }
-  private _uploadDocumentsTechnicalSheet(ecosolutionId: string) {
-    if (this.canUploadTechnicalSheet) {
-      const metadata = { ...metadataTechnicalSheet, file: this.form.value.technicalSheet }
-      return this._ecosolutionsManagmentService.uplloadTechicalSheet(ecosolutionId, metadata)
-    }
-    return of(null)
-  }
-
-  private _removeDocument() {
-    if (this._documentForRemove.length > 0) {
-      return this._ecosolutionsManagmentService.removeDocument(this.id(), this._documentForRemove)
-    }
-    return of(null)
+  public documentForRemove(id: string | string[]) {
+    this._documentForRemove.set(id)
   }
   goToListEcosolution() {
     this._router.navigate(['../cleantech-ecosolutions', this.cleantechId()], {

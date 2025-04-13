@@ -47,7 +47,8 @@
       <goeko-ecosolutions-form-documents
         class="section-form"
         [ecosolutionData]="ecosolutionData()"
-        [parentForm]="form"></goeko-ecosolutions-form-documents>
+        [parentForm]="form"
+        (documentForRemove)="documentForRemove($event)"></goeko-ecosolutions-form-documents>
       <goeko-form-error-text [form]="form">
         {{ 'ERRORS_FORM.haveError' | translate }}
       </goeko-form-error-text>

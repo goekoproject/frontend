@@ -8,6 +8,7 @@ export interface EcosolutionsRequestsParams {
   ecosolutionsImg?: File[]
   certificates?: DocumentMetadata[]
   technicalSheet?: File | undefined
+  documentForRemove?: string[]
 }
 @Injectable({
   providedIn: 'root',
@@ -44,13 +45,14 @@ export class EcosolutionsManagmentService {
   }
 
   public updateEcosolution(ecosolutionId: string, ecosolutionsRequests: EcosolutionsRequestsParams) {
-    const { body, ecosolutionsImg, certificates, technicalSheet } = ecosolutionsRequests
+    const { body, ecosolutionsImg, certificates, technicalSheet, documentForRemove } = ecosolutionsRequests
     const updateEcosolutions$ = this._ecosolutionsService.updateEcosolution(body.id, body as UpdatedEcosolutionBody)
     return forkJoin({
       updateEcosolution: updateEcosolutions$,
-      udpateEcosolutionImage: this._uploadPicture(ecosolutionId, ecosolutionsImg),
+      udpateEcosolutionImage: this._ecosolutionsService.updatePicture(ecosolutionId, ecosolutionsImg || []),
       updateEcosolutionCertificate: this._ecosolutionsManagmentDocumentsService.uploadCertificates(ecosolutionId, certificates),
       updateEcosolutionTechnicalSheet: this._ecosolutionsManagmentDocumentsService.uploadTechnicalSheet(ecosolutionId, technicalSheet),
+      removeDocument: this._ecosolutionsManagmentDocumentsService.removeDocument(ecosolutionId, documentForRemove || []),
     }).pipe(
       catchError((error) => {
         console.error('Error updating ecosolution with uploads:', error)
@@ -67,16 +69,6 @@ export class EcosolutionsManagmentService {
       catchError((error) => {
         console.error('Error uploading pictures:', error)
         return of({ error: 'Failed to upload pictures', data: null })
-      }),
-    )
-  }
-
-  removeDocument(idEcosolution: string, documentId: string[]) {
-    const deleteDocument$ = documentId.filter((d) => !!d).map((idDoc) => this._ecosolutionsService.delteDocumentation(idEcosolution, idDoc))
-    return forkJoin(deleteDocument$).pipe(
-      catchError((error) => {
-        console.error('Error removing documentation:', error)
-        return throwError(() => new Error('Remove failed.'))
       }),
     )
   }

@@ -30,32 +30,30 @@ export class EcosolutionsFormEcosolutionTypeComponent {
   public classifications = computed(() => this.parentForm().get('classifications') as FormArray)
 
   effectInitFormClassifications = effect(() => {
-    if (this.questionsCategories()) {
+    if (this.questionsCategories() && this.parentForm()) {
       this._initFormClassifications()
     }
   })
   effectLoadDataEcosolutions = effect(() => {
-    if (this.ecosolutionsClassifications()) {
+    if (this.ecosolutionsClassifications() && this.parentForm()) {
       this._patchClassificationsValue()
     }
   })
 
   private _initFormClassifications() {
-    if (this.questionsCategories()) {
-      this.questionsCategories()?.forEach((subcategory) => {
-        this.classifications().push(
-          this._fb.group({
-            category: [this.categoryCode()],
-            subCategory: [subcategory.code],
-            products: [],
-          }),
-        )
-      })
-    }
+    this.questionsCategories()?.forEach((subcategory) => {
+      this.classifications().push(
+        this._fb.group({
+          category: [this.categoryCode()],
+          subCategory: [subcategory.code],
+          products: [],
+        }),
+      )
+    })
   }
 
   private _patchClassificationsValue() {
-    if (!this.ecosolutionsClassifications()) {
+    if (!this.ecosolutionsClassifications() || !this.parentForm()) {
       return
     }
     this.ecosolutionsClassifications()?.forEach((classification, index) => {
