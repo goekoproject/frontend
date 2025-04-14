@@ -141,6 +141,10 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
       detailedDescriptionTranslations: new FormArray([]),
       reductionPercentage: [],
       operationalCostReductionPercentage: [],
+      improvementOtherCategory: this._fb.group({
+        category: [''],
+        reductionPercentage: [],
+      }),
       sustainableDevelopmentGoals: [[]],
       images: this._fb.array([]),
       price: [0],

@@ -12,6 +12,11 @@ export interface GoalChecked {
   value: string
   checked: boolean
 }
+export interface ImprovementOtherCategory {
+  category: string
+  reductionPercentage: FromTO
+  operationalCostReductionPercentage: FromTO
+}
 export class EcosolutionForm {
   solutionName: string
   solutionDescription?: string
@@ -39,7 +44,7 @@ export class EcosolutionForm {
   detailedDescriptionTranslations!: TranslatedProperties[]
   descriptionTranslations!: TranslatedProperties[]
   priceDescriptionTranslations!: TranslatedProperties[]
-
+  improvementOtherCategory!: ImprovementOtherCategory
   constructor(ecosolution: Ecosolutions) {
     this.solutionName = ecosolution.solutionName
     this.solutionDescription = ecosolution.solutionDescription
@@ -48,6 +53,7 @@ export class EcosolutionForm {
     this.reductionPercentage = ecosolution.improvement?.reductionPercentage
     this.operationalCostReductionPercentage = ecosolution.improvement?.operationalCostReductionPercentage
     this.sustainableDevelopmentGoals = SDG_LABEL.filter((sdg) => ecosolution.sustainableDevelopmentGoals?.includes(sdg.code))
+
     this.price = ecosolution.price?.amount
     this.currency = ecosolution.price?.currency
     this.deliverCountries = ecosolution.countries

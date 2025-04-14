@@ -20,9 +20,9 @@
           id="reductionPercentage"
           name="reductionPercentage"
           [compareWith]="defaultSetReductions">
-          <super-option *ngFor="let option of dataSelect['reductionPercentage']" [value]="option">
-            {{ option.keyLang | translate }} {{ ' ' + option.to }}%
-          </super-option>
+          @for (option of dataReductionPercentage(); track index + '-reductionPercentage'; let index = $index) {
+            <super-option [value]="option"> {{ option.keyLang | translate }} {{ ' ' + option.to }}% </super-option>
+          }
         </ui-super-select>
       </div>
 
@@ -35,12 +35,50 @@
           id="operationalCostReductionPercentage"
           name="operationalCostReductionPercentage"
           [compareWith]="defaultSetReductions">
-          <super-option *ngFor="let option of dataSelect['operationalCostReduction']" [value]="option">
-            {{ option.keyLang | translate }} {{ ' ' + option.to }}%
-          </super-option>
+          @for (option of dataOperationalCostReduction(); track index + '-operationalCostReductionPercentage'; let index = $index) {
+            <super-option [value]="option"> {{ option.keyLang | translate }} {{ ' ' + option.to }}% </super-option>
+          }
         </ui-super-select>
       </div>
     </section>
+
+    <button go-button type="button" appearance="flat" (click)="addOtherCategory()">{{ 'addOtherCategory' | translate }}</button>
+    <!-- Other benefits in other category-->
+    @if (true) {
+      <section class="flex gap-4" formGroupName="improvementOtherCategory">
+        <div class="flex-grow">
+          <label>
+            <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container>
+          </label>
+          <ui-super-select
+            [formControlName]="'category'"
+            id="reductionPercentage"
+            name="reductionPercentage"
+            [compareWith]="defaultSetReductions">
+            @for (option of categories(); track index + '-reductionPercentage'; let index = $index) {
+              @defer (when option.code !== this.categoryCode()) {
+                <super-option [value]="option.code"> {{ option.label }} </super-option>
+              }
+            }
+          </ui-super-select>
+        </div>
+
+        <div class="flex-grow">
+          <label>{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</label>
+
+          <ui-super-select
+            [placeholder]="['upTo' | translate] + '... (%)'"
+            [formControlName]="'reductionPercentage'"
+            id="reductionPercentage"
+            name="reductionPercentage"
+            [compareWith]="defaultSetReductions">
+            @for (option of dataOperationalCostReduction(); track index + '-othercostReduction'; let index = $index) {
+              <super-option [value]="option"> {{ option.keyLang | translate }} {{ ' ' + option.to }}% </super-option>
+            }
+          </ui-super-select>
+        </div>
+      </section>
+    }
   </fieldset>
 }
 

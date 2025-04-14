@@ -18,6 +18,7 @@
       <goeko-ecosolutions-form-benefis
         class="section-form"
         [parentForm]="form"
+        [categories]="groupingForm()"
         [ecosolutionsBenefits]="ecosolutionData()"
         [categoryCode]="categoryCode()"></goeko-ecosolutions-form-benefis>
 
@@ -51,7 +52,7 @@
       <goeko-form-error-text [form]="form">
         {{ 'ERRORS_FORM.haveError' | translate }}
       </goeko-form-error-text>
-      <div class="actions-button">
+      <div class="mt-4 flex justify-between">
         <button go-button appearance="white" type="button" (click)="goToListEcosolution()">
           {{ 'back' | translate }}
         </button>

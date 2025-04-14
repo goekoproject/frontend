@@ -2,9 +2,14 @@ import { Classifications } from '../model/classifications.interface'
 import { TranslatedProperties } from '../model/field-translations.interface'
 import { LocationsCountry } from '../model/locations.country'
 import { mapperLocations } from '../util/mapper-locations'
-import { Improvement, Price } from './ecosolution.interface'
+import { FromTO, Improvement, Price } from './ecosolution.interface'
 export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedProperties[] {
   return items.filter((item) => item.label && item.lang)
+}
+interface ImprovementOtherCategory {
+  category: string
+  reductionPercentage: FromTO
+  operationalCostReductionPercentage: FromTO
 }
 export class EcosolutionsBody {
   cleantechId: string
@@ -31,6 +36,7 @@ export class EcosolutionsBody {
   descriptionTranslations!: TranslatedProperties[]
   detailedDescriptionTranslations!: TranslatedProperties[]
   priceDescriptionTranslations!: TranslatedProperties[]
+  improvementOtherCategory!: ImprovementOtherCategory[]
   constructor(cleanTechId: string, mainCategory: string, formValue: any) {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`)
@@ -51,6 +57,19 @@ export class EcosolutionsBody {
         to: formValue?.operationalCostReductionPercentage?.to,
       },
     }
+    this.improvementOtherCategory = [
+      {
+        category: formValue?.improvementOtherCategory?.category,
+        reductionPercentage: (formValue.improvementOtherCategory = {
+          from: formValue?.improvementOtherCategory?.reductionPercentage?.from,
+          to: formValue?.improvementOtherCategory?.reductionPercentage?.to,
+        }),
+        operationalCostReductionPercentage: (formValue.improvementOtherCategory = {
+          from: 0,
+          to: 20,
+        }),
+      },
+    ]
     this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals?.map((goal: any) => goal.code)
     this.classification = formValue.classifications.map((c: any) => ({
       mainCategory: c.category,

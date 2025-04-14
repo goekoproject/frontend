@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { Component, effect, input } from '@angular/core'
+import { Component, effect, input, signal } from '@angular/core'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
-import { DataSelect, Ecosolutions } from '@goeko/store'
+import { CategoryGrouping, DataSelect, Ecosolutions } from '@goeko/store'
 import { UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { defaultSetReductions } from '../compare-with-select'
@@ -15,16 +15,30 @@ import { defaultSetReductions } from '../compare-with-select'
 })
 export class EcosolutionsFormBenefisComponent {
   public defaultSetReductions = defaultSetReductions
-  public dataSelect = DataSelect
+  public dataOperationalCostReduction = signal(DataSelect.operationalCostReduction)
+  public dataReductionPercentage = signal(DataSelect.reductionPercentage)
   public parentForm = input.required<FormGroup>()
   public categoryCode = input.required<string>()
+  public categories = input<CategoryGrouping[]>()
   public ecosolutionsBenefits = input<Ecosolutions>()
-
+  public addOtherBenefit = signal(false)
   effectLoadEcosolutionsBenefits = effect(() => {
     if (this.ecosolutionsBenefits()) {
       this._patchEcosolutionsBenefitsValue()
     }
   })
+  effetLoadCategories = effect(() => {
+    if (this.addOtherBenefit()) {
+      const firstCategory = this.categories()
+        ?.filter((c) => c.code !== this.categoryCode())
+        ?.at(0)
+      this.parentForm().get('improvementOtherCategory')?.get('category')?.patchValue(firstCategory?.code)
+    }
+  })
+
+  addOtherCategory() {
+    this.addOtherBenefit.set(true)
+  }
   private _patchEcosolutionsBenefitsValue() {
     if (!this.ecosolutionsBenefits()) {
       return
