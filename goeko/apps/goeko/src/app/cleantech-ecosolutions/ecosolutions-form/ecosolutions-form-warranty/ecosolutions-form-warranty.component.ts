@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, input, OnInit } from '@angular/core'
+import { Component, computed, effect, input, OnInit, signal } from '@angular/core'
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { DataSelect, Ecosolutions } from '@goeko/store'
 import { UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
-import { defaultSetyearGuarantee } from '../compare-with-select'
 
 @Component({
   selector: 'goeko-ecosolutions-form-warranty',
@@ -14,8 +13,7 @@ import { defaultSetyearGuarantee } from '../compare-with-select'
   styleUrl: './ecosolutions-form-warranty.component.scss',
 })
 export class EcosolutionsFormWarrantyComponent implements OnInit {
-  public defaultSetyearGuarantee = defaultSetyearGuarantee
-  public dataSelect = DataSelect
+  public dataYearGuarantee = signal(DataSelect.yearGuarantee)
 
   public parentForm = input.required<FormGroup>()
   public ecosolutionsData = input<Ecosolutions>()

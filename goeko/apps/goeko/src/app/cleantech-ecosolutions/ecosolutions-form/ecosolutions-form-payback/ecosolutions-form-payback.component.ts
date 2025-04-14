@@ -4,7 +4,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { DataSelect } from '@goeko/store'
 import { UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
-import { defaultSetPaybackPeriodYears } from '../compare-with-select'
 
 @Component({
   selector: 'goeko-ecosolutions-form-payback',
@@ -16,14 +15,12 @@ import { defaultSetPaybackPeriodYears } from '../compare-with-select'
 export class EcosolutionsFormPaybackComponent {
   public parentForm = input.required<FormGroup>()
   public ecosolutionsPayback = input.required<number | undefined>()
-
-  public defaultSetPaybackPeriodYears = defaultSetPaybackPeriodYears
   public paybackPeriodYears = signal(DataSelect.paybackPeriodYears)
 
   effectLoadPayback = effect(() => {
     if (!this.ecosolutionsPayback()) {
       return
     }
-    this.parentForm().get('paybackPeriodYears')?.setValue(this.ecosolutionsPayback())
+    this.parentForm().get('paybackPeriodYears')?.patchValue(this.ecosolutionsPayback())
   })
 }

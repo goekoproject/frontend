@@ -46,10 +46,17 @@ export class EcosolutionsManagmentService {
 
   public updateEcosolution(ecosolutionId: string, ecosolutionsRequests: EcosolutionsRequestsParams) {
     const { body, ecosolutionsImg, certificates, technicalSheet, documentForRemove } = ecosolutionsRequests
-    const updateEcosolutions$ = this._ecosolutionsService.updateEcosolution(body.id, body as UpdatedEcosolutionBody)
+    const updateEcosolutions$ = this._ecosolutionsService.updateEcosolution(ecosolutionId, body as UpdatedEcosolutionBody).pipe(
+      catchError((error) => {
+        console.error('Error en updateEcosolution:', error)
+        return of(null)
+      }),
+    )
+
     return forkJoin({
       updateEcosolution: updateEcosolutions$,
       udpateEcosolutionImage: this._ecosolutionsService.updatePicture(ecosolutionId, ecosolutionsImg || []),
+
       updateEcosolutionCertificate: this._ecosolutionsManagmentDocumentsService.uploadCertificates(ecosolutionId, certificates),
       updateEcosolutionTechnicalSheet: this._ecosolutionsManagmentDocumentsService.uploadTechnicalSheet(ecosolutionId, technicalSheet),
       removeDocument: this._ecosolutionsManagmentDocumentsService.removeDocument(ecosolutionId, documentForRemove || []),

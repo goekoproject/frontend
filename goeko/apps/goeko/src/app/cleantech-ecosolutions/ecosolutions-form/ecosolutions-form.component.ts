@@ -68,12 +68,13 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public id = input.required<string>()
   public ecosolutionData = signal<Ecosolutions | undefined>(undefined)
   public form!: FormGroup
-  private _ecosolutionsImg = signal<File[] | undefined>(undefined)
   private _documentForRemove = signal<string[] | string>([])
 
   public ecosolutionsName = computed(() => this.ecosolutionData()?.nameTranslations.at(0)?.label)
   public ecosolutionsCategoryLabel = computed(() => this.groupingForm().find((g) => g.code === this.categoryCode())?.label || '')
-
+  public questionsCategories = computed(
+    () => this.groupingForm()?.find((category) => category.code === this.categoryCode())?.subcategories || [],
+  )
   public get nameTranslations(): FormArray {
     return this.form.get('nameTranslations') as FormArray
   }
@@ -96,6 +97,10 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     return this.form.get('haveTechnicalSheet') as FormArray
   }
 
+  public get images(): File[] | undefined {
+    return this.canUpdateImages ? (this.form.get('images')?.value as File[]) : undefined
+  }
+
   public get bodyRequestEcosolution(): any {
     return this.id()
       ? new UpdatedEcosolutionBody(this.cleantechId(), this.categoryCode(), this.form.value)
@@ -111,9 +116,11 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     )
   }
   private get canUploadTechnicalSheet(): boolean | undefined {
-    return this.form.get('haveTechnicalSheet')?.dirty && this.form.get('haveTechnicalSheet')?.valid && !!this.form.value?.technicalSheet
+    return this.form.get('haveTechnicalSheet')?.dirty && this.form.get('haveTechnicalSheet')?.valid
   }
-
+  private get canUpdateImages(): boolean | undefined {
+    return this.form.get('images')?.dirty && this.form.get('images')?.valid
+  }
   effectLoadDataEcosolution = effect(() => {
     if (this.id()) {
       this.getEcosolution()
@@ -132,18 +139,17 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
       descriptionTranslations: new FormArray([]),
       detailedDescription: ['deprecated'],
       detailedDescriptionTranslations: new FormArray([]),
-      subCategory: ['', Validators.required],
-      products: ['', Validators.required],
       reductionPercentage: [],
       operationalCostReductionPercentage: [],
-      sustainableDevelopmentGoals: [],
+      sustainableDevelopmentGoals: [[]],
+      images: this._fb.array([]),
       price: [0],
       currency: ['EUR'],
       unit: [],
-      priceDescription: [''],
+      priceDescription: [null],
       priceDescriptionTranslations: new FormArray([]),
       deliverCountries: [],
-      paybackPeriodYears: [''],
+      paybackPeriodYears: [null],
       marketReady: [false],
       guarantee: [false],
       yearGuarantee: [],
@@ -156,10 +162,9 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     })
   }
 
-  uploadEcosolutionsImg(files: File[]) {
-    this._ecosolutionsImg.set(files)
+  public documentForRemove(id: string | string[]) {
+    this._documentForRemove.set(id)
   }
-
   getEcosolution() {
     this._ecosolutionsManagmentService.getEcosolutionById(this.id()).subscribe((ecosolution: Ecosolutions) => {
       this.ecosolutionData.set(ecosolution)
@@ -195,15 +200,14 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   }
 
   private _createEcosolution() {
-    this._ecosolutionsManagmentService
-      .createEcosolutionWithUploads({
-        body: new NewEcosolutionsBody(this.cleantechId(), this.categoryCode(), this.form.value),
-        ecosolutionsImg: this._ecosolutionsImg(),
-        certificates: this.certificates,
-        technicalSheet: this.technicalSheet,
-      })
-      .pipe(tap(() => this._submitter.set(true)))
-      .subscribe({
+    this._ecosolutionsManagmentService.createEcosolutionWithUploads({
+      body: new NewEcosolutionsBody(this.cleantechId(), this.categoryCode(), this.form.value),
+      ecosolutionsImg: this.images,
+      certificates: this.certificates,
+      technicalSheet: this.technicalSheet,
+    })
+    .pipe(tap(() => this._submitter.set(true)))
+    .subscribe({
         next: (result) => {
           this.goToListEcosolution()
           console.log('Ecosolution creado con éxito', result)
@@ -222,9 +226,9 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     this._ecosolutionsManagmentService
       .updateEcosolution(this.id(), {
         body: new UpdatedEcosolutionBody(this.cleantechId(), this.categoryCode(), this.form.value),
-        ecosolutionsImg: this._ecosolutionsImg(),
-        certificates: this.certificates,
-        technicalSheet: this.technicalSheet,
+        ecosolutionsImg: this.images,
+        certificates: this.canUploadCertificates ? this.certificates : undefined,
+        technicalSheet: this.canUploadTechnicalSheet ? this.technicalSheet : undefined,
         documentForRemove: this._documentForRemove() as string[],
       })
       .pipe(tap(() => this._submitter.set(true)))
@@ -245,9 +249,6 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     this.form.updateValueAndValidity()
   }
 
-  public documentForRemove(id: string | string[]) {
-    this._documentForRemove.set(id)
-  }
   goToListEcosolution() {
     this._router.navigate(['../cleantech-ecosolutions', this.cleantechId()], {
       relativeTo: this._route.parent?.parent,

@@ -85,7 +85,7 @@ export class EcosolutionsManagmentDocumentsService {
   }
 
   private appendFileAndMetadata(formData: FormData, data: DocumentMetadata) {
-    if (data?.file) {
+    if (data) {
       const uniqueId = window.crypto.randomUUID()
       formData.append(uniqueId, data?.file as File)
       formData.append(
@@ -109,6 +109,9 @@ export class EcosolutionsManagmentDocumentsService {
   }
 
   removeDocument(idEcosolution: string, documentId: string[]) {
+    if (documentId.length === 0) {
+      return of(null)
+    }
     const deleteDocument$ = documentId.filter((d) => !!d).map((idDoc) => this._ecosolutionsService.delteDocumentation(idEcosolution, idDoc))
     return forkJoin(deleteDocument$).pipe(
       catchError((error) => {

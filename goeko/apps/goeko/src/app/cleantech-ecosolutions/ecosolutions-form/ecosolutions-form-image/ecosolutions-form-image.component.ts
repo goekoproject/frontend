@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, input, output } from '@angular/core'
+import { Component, computed, input, output } from '@angular/core'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { Picture } from '@goeko/store'
 import { InputFileComponent } from '@goeko/ui'
@@ -17,10 +17,17 @@ export class EcosolutionsFormImageComponent {
   public ecosolutionImages = input.required<string[], Picture[] | undefined>({
     transform: (value) => value?.map((picture) => picture.url) || [],
   })
+  public imagenControl = computed(() => this.parentForm().get('images'))
 
   public ecosolutionsImg = output<File[]>()
 
   uploadImgEcosolutions(file: File[]) {
+    if ((file && file.length === 0) || !file) {
+      return
+    }
     this.ecosolutionsImg.emit(file)
+    this.imagenControl()?.patchValue(file)
+    this.imagenControl()?.markAsDirty()
+    this.imagenControl()?.markAsTouched()
   }
 }

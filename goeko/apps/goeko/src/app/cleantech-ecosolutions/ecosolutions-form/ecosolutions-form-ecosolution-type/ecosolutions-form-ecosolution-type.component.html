@@ -1,17 +1,17 @@
-@if (parentForm() && questionsCategories()) {
-  <fieldset class="fieldset-ecosolutions" [formGroup]="parentForm()">
-    <div class="legend--info">
-      <legend>
-        {{ 'typeSolutionCleantech' | translate }}
-      </legend>
+<fieldset class="fieldset-ecosolutions" [formGroup]="parentForm()">
+  <div class="legend--info">
+    <legend>
+      {{ 'typeSolutionCleantech' | translate }}
+    </legend>
 
-      <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
-    </div>
+    <ng-container *ngTemplateOutlet="textSupportFieldSettypeOfEcolutions"></ng-container>
+  </div>
 
-    <div class="ecosolutions-subcategory">
-      <goeko-form-error-text [form]="parentForm().get('subCategory')">
-        {{ 'ERRORS_FORM.required' | translate }}
-      </goeko-form-error-text>
+  <div class="ecosolutions-subcategory">
+    <goeko-form-error-text [form]="parentForm().get('subCategory')">
+      {{ 'ERRORS_FORM.required' | translate }}
+    </goeko-form-error-text>
+    @if (questionsCategories()) {
       @for (subcategory of questionsCategories(); track subcategory.code; let i = $index) {
         <ng-container formArrayName="classifications">
           <section [formGroupName]="i">
@@ -21,17 +21,17 @@
             <input formControlName="subCategory" type="hidden" />
             <input formControlName="category" type="hidden" />
 
-            <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories" [readonly]="isReadOnly()">
+            <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories">
               @for (product of subcategory.products; track product.code) {
-                <go-badge [readonly]="isReadOnly()" [value]="product.code">{{ product.label }}</go-badge>
+                <go-badge [value]="product.code">{{ product.label }}</go-badge>
               }
             </go-badge-group>
           </section>
         </ng-container>
       }
-    </div>
-  </fieldset>
-}
+    }
+  </div>
+</fieldset>
 
 <ng-template #textSupportFieldSettypeOfEcolutions>
   <p [ngSwitch]="true" class="text-support">

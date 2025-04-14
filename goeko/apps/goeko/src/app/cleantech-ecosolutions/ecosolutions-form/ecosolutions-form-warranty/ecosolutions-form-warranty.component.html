@@ -12,11 +12,11 @@
     [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
     [formControlName]="'yearGuarantee'"
     id="yearGuarantee"
-    name="yearGuarantee"
-    [compareWith]="defaultSetyearGuarantee">
-    <super-option *ngFor="let option of dataSelect['yearGuarantee']" [value]="option">
-      {{ option.id }} {{ option.keyLang | translate }}
-    </super-option>
+    name="yearGuarantee">
+    @for (year of dataYearGuarantee(); track year.id) {
+      <super-option [value]="year.id"> {{ year.id }} {{ year.keyLang | translate }} </super-option>
+    }
+
     <p errorBody>{{ 'ERRORS_FORM.SELECT_YEARS_GUARANTEE' | translate }}</p>
   </ui-super-select>
 </fieldset>

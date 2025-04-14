@@ -10,7 +10,7 @@
       <!--Select Products-->
       <goeko-ecosolutions-form-ecosolution-type
         class="section-form"
-        [groupingForm]="groupingForm()"
+        [questionsCategories]="questionsCategories()"
         [ecosolutionsClassifications]="ecosolutionData()?.classifications"
         [parentForm]="form"
         [categoryCode]="categoryCode()"></goeko-ecosolutions-form-ecosolution-type>
@@ -29,8 +29,7 @@
       <goeko-ecosolutions-form-image
         class="section-form"
         [parentForm]="form"
-        [ecosolutionImages]="ecosolutionData()?.pictures"
-        (ecosolutionsImg)="uploadEcosolutionsImg($event)"></goeko-ecosolutions-form-image>
+        [ecosolutionImages]="ecosolutionData()?.pictures"></goeko-ecosolutions-form-image>
       <goeko-ecosolutions-form-country-available
         class="section-form"
         [parentForm]="form"

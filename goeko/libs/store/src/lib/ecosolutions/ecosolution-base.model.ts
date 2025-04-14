@@ -7,11 +7,11 @@ export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedPr
   return items.filter((item) => item.label && item.lang)
 }
 export class EcosolutionsBody {
-  id: string
+  cleantechId: string
   solutionName: string
   solutionDescription?: string
   detailedDescription?: string
-  classification: Classifications
+  classification?: Classifications
   classifications: Classifications[]
   price?: Price
   improvement?: Improvement
@@ -35,12 +35,12 @@ export class EcosolutionsBody {
     if (!formValue) {
       throw Error(`Missing form value for create ecosolutions`)
     }
-    this.id = cleanTechId
+    this.cleantechId = cleanTechId
     this.solutionName = formValue.solutionName
     this.solutionDescription = formValue.solutionDescription
     this.detailedDescription = formValue.detailedDescription
     this.priceDescription = formValue.priceDescription
-    this.guaranteeInYears = formValue.yearGuarantee?.id
+    this.guaranteeInYears = formValue.yearGuarantee
     this.improvement = {
       reductionPercentage: {
         from: formValue?.reductionPercentage?.from,
@@ -52,14 +52,20 @@ export class EcosolutionsBody {
       },
     }
     this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals?.map((goal: any) => goal.code)
-    this.classification = {
-      mainCategory: mainCategory,
-      subCategory: formValue.subCategory?.code ?? formValue.subCategory,
-      products: formValue.products,
-    }
-    this.classifications = [this.classification]
+    this.classification = formValue.classifications.map((c: any) => ({
+      mainCategory: c.category,
+      subCategory: c.subCategory,
+      products: c.products,
+    }))[0]
+    this.classifications = formValue.classifications
+      .filter((classification: any) => classification.products)
+      .map((c: any) => ({
+        mainCategory: c.category,
+        subCategory: c.subCategory,
+        products: c.products,
+      }))
     this.countries = undefined
-    this.paybackPeriodYears = formValue?.paybackPeriodYears?.id
+    this.paybackPeriodYears = formValue?.paybackPeriodYears
     this.marketReady = formValue.marketReady
     this.guarantee = formValue.guarantee
     this.certified = formValue.certified
