@@ -42,9 +42,9 @@
       </div>
     </section>
 
-    <button go-button type="button" appearance="flat" (click)="addOtherCategory()">{{ 'addOtherCategory' | translate }}</button>
+    <a role="button" class="flex text-sm text-primary-default" (click)="addOtherCategory()">{{ 'addOtherBenefit' | translate }}</a>
     <!-- Other benefits in other category-->
-    @if (true) {
+    @if (addOtherBenefit()) {
       <section class="flex gap-4" formGroupName="improvementOtherCategory">
         <div class="flex-grow">
           <label>

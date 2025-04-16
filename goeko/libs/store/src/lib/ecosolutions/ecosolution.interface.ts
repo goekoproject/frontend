@@ -37,6 +37,11 @@ export interface DocumentEcosolutions {
   name: string
   documentType: DocumentTypeEcosolutions
 }
+export interface ImprovementOtherCategory {
+  category: string
+  reductionPercentage: ReductionPercentage
+  operationalCostReductionPercentage: OperationalCostReductionPercentage
+}
 
 export interface Ecosolutions {
   id: string
@@ -46,6 +51,7 @@ export interface Ecosolutions {
   classifications: ClassificationManagment[]
   price?: Price
   improvement?: Improvement
+  improvementOtherCategory?: ImprovementOtherCategory
   sustainableDevelopmentGoals?: number[]
   countries?: string[]
   paybackPeriodYears?: number

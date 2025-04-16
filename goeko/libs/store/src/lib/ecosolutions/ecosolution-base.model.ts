@@ -9,7 +9,7 @@ export function _filterNotNull(items: Array<TranslatedProperties>): TranslatedPr
 interface ImprovementOtherCategory {
   category: string
   reductionPercentage: FromTO
-  operationalCostReductionPercentage: FromTO
+  operationalCostReductionPercentage?: FromTO
 }
 export class EcosolutionsBody {
   cleantechId: string
@@ -63,11 +63,7 @@ export class EcosolutionsBody {
         reductionPercentage: (formValue.improvementOtherCategory = {
           from: formValue?.improvementOtherCategory?.reductionPercentage?.from,
           to: formValue?.improvementOtherCategory?.reductionPercentage?.to,
-        }),
-        operationalCostReductionPercentage: (formValue.improvementOtherCategory = {
-          from: 0,
-          to: 20,
-        }),
+        })
       },
     ]
     this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals?.map((goal: any) => goal.code)
