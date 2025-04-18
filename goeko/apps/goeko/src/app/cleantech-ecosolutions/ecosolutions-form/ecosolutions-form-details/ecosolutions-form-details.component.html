@@ -5,7 +5,11 @@
       <ng-container [formGroupName]="i">
         @if (translation.value?.lang === selectedFormLang().code) {
           <div class="relative">
-            <goeko-go-input [formControlName]="'label'" [label]="'FORM_LABEL.solutionName' | translate" />
+            <goeko-go-input [formControlName]="'label'" [label]="'FORM_LABEL.solutionName' | translate">
+              @if (showLanguageSwitcher()) {
+                <goeko-language-switcher after-label></goeko-language-switcher>
+              }
+            </goeko-go-input>
           </div>
         }
       </ng-container>
@@ -16,7 +20,11 @@
     @for (translation of descriptionTranslations().controls; track $index + '-descriptionTranslations'; let i = $index) {
       @if (translation.value?.lang === selectedFormLang().code) {
         <div [formGroupName]="i" class="relative">
-          <goeko-go-textarea [formControlName]="'label'" [label]="'FORM_LABEL.solutionDescription' | translate" [maxLength]="100" />
+          <goeko-go-textarea [formControlName]="'label'" [label]="'FORM_LABEL.solutionDescription' | translate" [maxLength]="100">
+            @if (showLanguageSwitcher()) {
+              <goeko-language-switcher after-label></goeko-language-switcher>
+            }
+          </goeko-go-textarea>
         </div>
       }
     }
@@ -29,7 +37,9 @@
           <label for="detailedDescriptionTranslations">
             {{ 'FORM_LABEL.technicalDescription' | translate }}
           </label>
-
+          @if (showLanguageSwitcher()) {
+            <goeko-language-switcher after-label></goeko-language-switcher>
+          }
           <div>
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" class="block"> </ngx-editor-menu>
             <ngx-editor
@@ -56,18 +66,20 @@
             id="priceDescriptionTranslations"
             [formControlName]="'label'"
             [label]="'FORM_LABEL.infoPrice' | translate"
-            [maxLength]="100" />
+            [maxLength]="100">
+            @if (showLanguageSwitcher()) {
+              <goeko-language-switcher after-label></goeko-language-switcher>
+            }
+          </goeko-go-textarea>
         </div>
       }
     }
   </ng-container>
 
   <section>
-        <a role="button" class="flex text-sm text-primary-default" (click)="activateTranslate()">{{ 'addOtherBenefit' | translate }}</a>
-      @if(activateTranslate()) {
-        @for(lang of lang()){
-          
-        }
-      }
+    <a role="button" class="flex text-sm text-primary-default" (click)="activateTranslate()">{{ 'translate' | translate }}</a>
+    @if (showLanguageSwitcher()) {
+      <goeko-language-switcher></goeko-language-switcher>
+    }
   </section>
 </fieldset>
