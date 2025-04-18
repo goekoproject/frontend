@@ -61,4 +61,13 @@
       }
     }
   </ng-container>
+
+  <section>
+        <a role="button" class="flex text-sm text-primary-default" (click)="activateTranslate()">{{ 'addOtherBenefit' | translate }}</a>
+      @if(activateTranslate()) {
+        @for(lang of lang()){
+          
+        }
+      }
+  </section>
 </fieldset>

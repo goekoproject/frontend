@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, input, OnDestroy, OnInit } from '@angular/core'
+import { Component, computed, effect, inject, input, OnDestroy, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { CODE_LANG } from '@goeko/core'
 import { Ecosolutions, TranslatedProperties } from '@goeko/store'
 import { FormErrorTextComponent, GoInputComponent } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
@@ -28,7 +29,9 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   public descriptionTranslations = computed(() => this.parentForm().get('descriptionTranslations') as FormArray)
   public detailedDescriptionTranslations = computed(() => this.parentForm().get('detailedDescriptionTranslations') as FormArray)
   public priceDescriptionTranslations = computed(() => this.parentForm().get('priceDescriptionTranslations') as FormArray)
-
+  public activateTranslate = signal(false)
+  public lang = signal(CODE_LANG)
+  public selectedLangForTranslate = signal<Array<string>>([])
   public editor!: Editor
 
   effectLoadDetails = effect(() => {
