@@ -5,7 +5,7 @@ import { LanguageSwitcherComponent } from '@goeko/business-ui'
 import { CODE_LANG } from '@goeko/core'
 import { Ecosolutions, TranslatedProperties } from '@goeko/store'
 import { FormErrorTextComponent, GoInputComponent } from '@goeko/ui'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor'
 import { EDITOR_TOOLBAR_ECOSOLUTIONS } from '../editor-toolbar.constants'
 
@@ -26,21 +26,19 @@ import { EDITOR_TOOLBAR_ECOSOLUTIONS } from '../editor-toolbar.constants'
 })
 export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   private _fb = inject(FormBuilder)
+  private _translateService = inject(TranslateService)
   public parentForm = input.required<FormGroup>()
   public ecosolutionDetails = input<Ecosolutions>()
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
 
-  public selectedFormLang = computed(() => {
-    return { code: 'fr', index: 0 }
-  })
-
+  public selectedFormLang = signal<string>(this._translateService.currentLang ?? CODE_LANG.FR)
+  public selectedFormArray = signal<string>('nameTranslations')
   public nameTranslations = computed(() => this.parentForm().get('nameTranslations') as FormArray)
   public descriptionTranslations = computed(() => this.parentForm().get('descriptionTranslations') as FormArray)
   public detailedDescriptionTranslations = computed(() => this.parentForm().get('detailedDescriptionTranslations') as FormArray)
   public priceDescriptionTranslations = computed(() => this.parentForm().get('priceDescriptionTranslations') as FormArray)
   public showLanguageSwitcher = signal(false)
   public lang = signal(CODE_LANG)
-  public selectedLangForTranslate = signal<Array<string>>([])
   public editor!: Editor
 
   effectLoadDetails = effect(() => {
@@ -58,6 +56,10 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
 
   activateTranslate() {
     this.showLanguageSwitcher.set(!this.showLanguageSwitcher())
+  }
+  selectedChangeForDetail(lang: string, nameFormArray: string) {
+    this.selectedFormLang.set(lang)
+    this.selectedFormArray.set(nameFormArray)
   }
   private _buildFormArrays(formValue?: Ecosolutions): void {
     if (!formValue) {

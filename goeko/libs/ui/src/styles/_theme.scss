@@ -191,6 +191,9 @@ legend {
   font-weight: 600;
   line-height: 1.5;
 }
+label {
+  @apply text-sm leading-10 text-black;
+}
 fieldset:not(:has(legend)) {
   padding: 0;
 }
