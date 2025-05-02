@@ -5,9 +5,7 @@
       <ng-container [formGroupName]="i">
         <div class="relative">
           <label> {{ 'FORM_LABEL.solutionName' | translate }}</label>
-          @if (showLanguageSwitcher()) {
-            <goeko-language-switcher (selectedChange)="selectedChangeForDetail($event, 'nameTranslations')"></goeko-language-switcher>
-          }
+
           <goeko-go-input
             [formControlName]="'label'"
             [class.hidden]="selectedFormLang() !== translation.value.lang && selectedFormArray() === 'nameTranslations'">
@@ -18,12 +16,25 @@
   </ng-container>
 
   <ng-container formArrayName="descriptionTranslations">
+    @if (showLanguageSwitcher()) {
+      <label>{{ 'FORM_LABEL.solutionDescription' | translate }}</label>
+
+      <goeko-language-switcher
+        [langs]="langField()"
+        (selectedChange)="selectedChangeForDetail($event, 'descriptionTranslations')"></goeko-language-switcher>
+    }
     @for (translation of descriptionTranslations().controls; track $index + '-descriptionTranslations'; let i = $index) {
-      <div [formGroupName]="i" class="relative">
-        <label>{{ 'FORM_LABEL.solutionDescription' | translate }}</label>
-        @if (showLanguageSwitcher()) {
-          <goeko-language-switcher (selectedChange)="selectedChangeForDetail($event, 'descriptionTranslations')"></goeko-language-switcher>
-        }
+      {{ i }}
+      {{ selectedFormLang() }} {{ translation.value.lang }}
+      {{ selectedFormLang() !== translation.value.lang && selectedFormArray() === 'descriptionTranslations' }}
+      <div
+        #descriptionTranslations
+        id="descriptionTranslations"
+        [formGroupName]="i"
+        class="relative"
+        [ngClass]="{
+          hidden: selectedFormLang() !== translation.value.lang && descriptionTranslations.id === 'descriptionTranslations',
+        }">
         <goeko-go-textarea [formControlName]="'label'" [maxLength]="100"> </goeko-go-textarea>
       </div>
     }
@@ -36,14 +47,18 @@
       </label>
       @if (showLanguageSwitcher()) {
         <goeko-language-switcher
+          [langs]="langField()"
           (selectedChange)="selectedChangeForDetail($event, 'detailedDescriptionTranslations')"></goeko-language-switcher>
       }
       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" class="block"> </ngx-editor-menu>
       @for (translation of detailedDescriptionTranslations().controls; track $index + 'detailedDescriptionTranslations'; let i = $index) {
         <div
+          #detailedDescriptionTranslationstp
+          id="detailedDescriptionTranslations"
           [formGroupName]="i"
           [ngClass]="{
-            hidden: selectedFormLang() !== translation.value.lang && selectedFormArray() === 'detailedDescriptionTranslations',
+            hidden:
+              selectedFormLang() !== translation.value.lang && detailedDescriptionTranslationstp.id === 'detailedDescriptionTranslations',
           }">
           <ngx-editor
             [editor]="editor"
@@ -61,12 +76,13 @@
   </ng-container>
 
   <ng-container formArrayName="priceDescriptionTranslations">
+    <label>{{ 'FORM_LABEL.infoPrice' | translate }}</label>
+    @if (showLanguageSwitcher()) {
+      <goeko-language-switcher
+        [langs]="langField()"
+        (selectedChange)="selectedChangeForDetail($event, 'priceDescriptionTranslations')"></goeko-language-switcher>
+    }
     @for (translation of priceDescriptionTranslations().controls; track $index + '-priceDescriptionTranslations'; let i = $index) {
-      <label>{{ 'FORM_LABEL.infoPrice' | translate }}</label>
-      @if (showLanguageSwitcher()) {
-        <goeko-language-switcher
-          (selectedChange)="selectedChangeForDetail($event, 'priceDescriptionTranslations')"></goeko-language-switcher>
-      }
       <div
         [formGroupName]="i"
         class="relative"
@@ -78,6 +94,13 @@
 
   <section>
     <a role="button" class="flex text-sm text-primary-default" (click)="activateTranslate()">{{ 'translate' | translate }}</a>
-    @if (showLanguageSwitcher()) {}
+    <go-badge-group>
+      @for (lang of languageAvailable(); track lang) {
+        <go-badge [value]="lang" (click)="selectedChange(lang)">
+          <span class="fi fi-{{ lang.iconFlag }}"></span>
+          <span>{{ lang.title | translate }}</span>
+        </go-badge>
+      }
+    </go-badge-group>
   </section>
 </fieldset>

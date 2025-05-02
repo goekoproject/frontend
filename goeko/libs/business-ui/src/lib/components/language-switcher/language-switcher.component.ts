@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, ElementRef, inject, output, QueryList, signal, viewChildren } from '@angular/core'
-import { LANGS } from '@goeko/core'
+import { Component, computed, ElementRef, inject, input, output, QueryList, signal, viewChildren } from '@angular/core'
+import { Lang, LANGS } from '@goeko/core'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 
 @Component({
@@ -40,13 +40,13 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 export class LanguageSwitcherComponent {
   private _translateService = inject(TranslateService)
   public selectedChange = output<string>()
-  private _langs = signal(LANGS)
+  public langs = input.required<Lang[]>()
   public langBtns = viewChildren<QueryList<ElementRef<HTMLButtonElement>>>('langBtn')
   public selected = signal<string | null>(this._translateService.currentLang)
 
   public orderedLangs = computed(() => {
     const current = this._translateService.currentLang
-    return [...this._langs()].sort((a) => (a.code === current ? -1 : 1))
+    return [...this.langs()].sort((a) => (a.code === current ? -1 : 1))
   })
   selectLang(code: string) {
     this.selected.set(code)

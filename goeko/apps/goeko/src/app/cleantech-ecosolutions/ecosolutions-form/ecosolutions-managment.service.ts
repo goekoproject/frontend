@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core'
 import { EcosolutionsService, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
+import { TranslateAutomaticService } from '@goeko/store/translate/translate-automatic.service'
 import { catchError, concatMap, forkJoin, of, throwError } from 'rxjs'
 import { DocumentMetadata, EcosolutionsManagmentDocumentsService } from './ecosolutions-managment-documents.service'
 
@@ -16,7 +17,7 @@ export interface EcosolutionsRequestsParams {
 export class EcosolutionsManagmentService {
   private _ecosolutionsService = inject(EcosolutionsService)
   private _ecosolutionsManagmentDocumentsService = inject(EcosolutionsManagmentDocumentsService)
-
+  private _translateAutomaticService = inject(TranslateAutomaticService)
   public getEcosolutionById(idEcosolution: string) {
     return this._ecosolutionsService.getEcosolutionById(idEcosolution)
   }
@@ -78,5 +79,14 @@ export class EcosolutionsManagmentService {
         return of({ error: 'Failed to upload pictures', data: null })
       }),
     )
+  }
+
+   translateTexts(data: {texts: string[], originalLanguage: string, targetLanguage: string}) {
+    const translateAutomatic = {
+      texts: data.texts,
+      originalLanguage: data.originalLanguage,
+      targetLanguage: data.targetLanguage
+    }
+    return this._translateAutomaticService.createTranslate(translateAutomatic)
   }
 }
