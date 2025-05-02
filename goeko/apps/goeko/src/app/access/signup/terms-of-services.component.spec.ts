@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { TranslatePipe } from '@ngx-translate/core'
 import { TermsOfServicesComponent } from './terms-of-services.component'
 
 describe('TermsOfServicesComponent', () => {
@@ -7,7 +8,7 @@ describe('TermsOfServicesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TermsOfServicesComponent],
+      imports: [TermsOfServicesComponent, TranslatePipe],
     }).compileComponents()
 
     fixture = TestBed.createComponent(TermsOfServicesComponent)

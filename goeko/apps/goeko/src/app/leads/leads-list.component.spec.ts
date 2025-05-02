@@ -1,6 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { LeadCleantech, LeadResponse, UserService } from '@goeko/store'
+import { LeadCleantechService, LeadResponse, UserService } from '@goeko/store'
 import { GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { of } from 'rxjs'
@@ -47,8 +48,10 @@ describe('LeadsListComponent', () => {
       getLeadByCleantech: jest.fn().mockReturnValue(of(mockLeads)),
     }
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, TranslateModule.forRoot(), LeadsListComponent, GoDateFormatPipe],
+      imports: [TranslateModule.forRoot(), LeadsListComponent, GoDateFormatPipe],
       providers: [
+        provideHttpClientTesting(),
+        provideHttpClient(),
         {
           provide: ManagerLeadsService,
           useValue: managerLeadsServiceMock,
@@ -58,7 +61,7 @@ describe('LeadsListComponent', () => {
           useValue: userServiceMock,
         },
         {
-          provide: LeadCleantech,
+          provide: LeadCleantechService,
           useValue: leadsServiceMock,
         },
       ],
