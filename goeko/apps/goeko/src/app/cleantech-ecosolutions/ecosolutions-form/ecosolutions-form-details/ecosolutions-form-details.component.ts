@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, computed, effect, inject, input, OnDestroy, OnInit, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LanguageSwitcherComponent } from '@goeko/business-ui'
-import { CODE_LANG, Lang, LANGS } from '@goeko/core'
+import { Lang, LANGS } from '@goeko/core'
 import { Ecosolutions, TranslatedProperties } from '@goeko/store'
 import { BadgeModule, FormErrorTextComponent, GoInputComponent } from '@goeko/ui'
 import { TranslatePipe, TranslateService } from '@ngx-translate/core'
@@ -20,6 +20,10 @@ function arraySetEqual(a: string[], b: string[]) {
     if (!setB.has(item)) return false
   }
   return true
+}
+
+interface TrasnlaledSwitcherField {
+  [key: string]: string
 }
 @Component({
   selector: 'goeko-ecosolutions-form-details',
@@ -45,10 +49,15 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   public ecosolutionDetails = input<Ecosolutions>()
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
 
-  public selectedFormLang = signal<string>(this._translateService.currentLang ?? CODE_LANG.FR)
-  public selectedFormArray = signal<string>('')
+  public selectedFormLang = signal<TrasnlaledSwitcherField>({
+    descriptionTranslations: this._translateService.currentLang,
+    detailedDescriptionTranslations: this._translateService.currentLang,
+    priceDescriptionTranslations: this._translateService.currentLang,
+  })
   public languageForTranslate = signal<string[]>([], { equal: arraySetEqual })
-  public langField = computed(() => LANGS.filter((lang) => this.languageForTranslate().includes(lang.code) || lang.code === this._translateService.currentLang))
+  public langField = computed(() =>
+    LANGS.filter((lang) => this.languageForTranslate().includes(lang.code) || lang.code === this._translateService.currentLang),
+  )
   public languageAvailable = signal([...LANGS].filter((lang) => lang.code !== this._translateService.currentLang))
 
   public nameTranslations = computed(() => this.parentForm().get('nameTranslations') as FormArray)
@@ -104,9 +113,8 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
     })
   }
 
-  selectedChangeForDetail(lang: string, nameFormArray: string) {
-    this.selectedFormLang.set(lang)
-    this.selectedFormArray.set(nameFormArray)
+  selectedChangeForDetail(lang: string, field: string) {
+    this.selectedFormLang.update((prev) => ({ ...prev, [field]: lang }))
   }
 
   private _buildFormArrays(formValue?: Ecosolutions): void {
