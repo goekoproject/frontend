@@ -65,19 +65,21 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   public detailedDescriptionTranslations = computed(() => this.parentForm().get('detailedDescriptionTranslations') as FormArray)
   public priceDescriptionTranslations = computed(() => this.parentForm().get('priceDescriptionTranslations') as FormArray)
   public showLanguageSwitcher = signal(false)
-  public editor!: Editor
+  public editors = new Array<Editor>()
 
   effectLoadDetails = effect(() => {
     if (this.ecosolutionDetails()) {
       this._buildFormArrays(this.ecosolutionDetails())
     }
+    this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
+    console.log(this.editors)
   })
   ngOnInit(): void {
-    this.editor = new Editor()
+    console.log(this.editors)
   }
 
   ngOnDestroy(): void {
-    this.editor?.destroy()
+    this.editors.forEach((editor) => editor.destroy())
   }
 
   selectedChange(lang: Lang) {
@@ -108,7 +110,6 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
         this._detailDescriptionTranslations(lang, detailDesc)
         this._priceDescriptionTranslations(lang, priceDesc)
       })
-      console.log(this.descriptionTranslations())
       this.showLanguageSwitcher.set(true)
     })
   }
@@ -139,12 +140,38 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
     this.nameTranslations().push(this._createFormGroupTranslations(codeLang, ''))
   }
   private _descriptionTranslationsTranslations(codeLang: string, label: string): void {
+    if (this.descriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
+      this.descriptionTranslations().controls.forEach((control) => {
+        if (control.value.lang === codeLang) {
+          control.get('label')?.setValue(label)
+        }
+      })
+      return
+    }
     this.descriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
   }
   private _detailDescriptionTranslations(codeLang: string, label: string): void {
+    if (this.detailedDescriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
+      this.detailedDescriptionTranslations().controls.forEach((control) => {
+        if (control.value.lang === codeLang) {
+          control.get('label')?.setValue(label)
+        }
+      })
+      return
+    }
+    this.editors = []
     this.detailedDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
+    this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
   }
   private _priceDescriptionTranslations(codeLang: string, label: string): void {
+    if (this.priceDescriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
+      this.priceDescriptionTranslations().controls.forEach((control) => {
+        if (control.value.lang === codeLang) {
+          control.get('label')?.setValue(label)
+        }
+      })
+      return
+    }
     this.priceDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
   }
   private _createFormGroupTranslations(code: string, label?: string) {
