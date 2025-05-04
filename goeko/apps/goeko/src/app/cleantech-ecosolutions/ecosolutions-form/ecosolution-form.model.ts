@@ -52,7 +52,10 @@ export class EcosolutionForm {
     this.products = ecosolution.classification.products
     this.reductionPercentage = ecosolution.improvement?.reductionPercentage
     this.operationalCostReductionPercentage = ecosolution.improvement?.operationalCostReductionPercentage
-    this.sustainableDevelopmentGoals = SDG_LABEL.filter((sdg) => ecosolution.sustainableDevelopmentGoals?.includes(sdg.code))
+    this.sustainableDevelopmentGoals =
+      (ecosolution.sustainableDevelopmentGoals?.length || 0) > 0
+        ? SDG_LABEL.filter((sdg) => ecosolution.sustainableDevelopmentGoals?.includes(sdg.code))
+        : undefined
 
     this.price = ecosolution.price?.amount
     this.currency = ecosolution.price?.currency

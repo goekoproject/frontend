@@ -103,8 +103,8 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
 
   public get bodyRequestEcosolution(): any {
     return this.id()
-      ? new UpdatedEcosolutionBody(this.cleantechId(), this.categoryCode(), this.form.value)
-      : new NewEcosolutionsBody(this.cleantechId(), this.categoryCode(), this.form.value)
+      ? new UpdatedEcosolutionBody(this.cleantechId(), this.form.value)
+      : new NewEcosolutionsBody(this.cleantechId(), this.form.value)
   }
 
   private get canUploadCertificates() {
@@ -204,14 +204,15 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   }
 
   private _createEcosolution() {
-    this._ecosolutionsManagmentService.createEcosolutionWithUploads({
-      body: new NewEcosolutionsBody(this.cleantechId(), this.categoryCode(), this.form.value),
-      ecosolutionsImg: this.images,
-      certificates: this.certificates,
-      technicalSheet: this.technicalSheet,
-    })
-    .pipe(tap(() => this._submitter.set(true)))
-    .subscribe({
+    this._ecosolutionsManagmentService
+      .createEcosolutionWithUploads({
+        body: new NewEcosolutionsBody(this.cleantechId(), this.form.value),
+        ecosolutionsImg: this.images,
+        certificates: this.certificates,
+        technicalSheet: this.technicalSheet,
+      })
+      .pipe(tap(() => this._submitter.set(true)))
+      .subscribe({
         next: (result) => {
           this.goToListEcosolution()
           console.log('Ecosolution creado con éxito', result)
@@ -229,7 +230,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     }
     this._ecosolutionsManagmentService
       .updateEcosolution(this.id(), {
-        body: new UpdatedEcosolutionBody(this.cleantechId(), this.categoryCode(), this.form.value),
+        body: new UpdatedEcosolutionBody(this.cleantechId(), this.form.value),
         ecosolutionsImg: this.images,
         certificates: this.canUploadCertificates ? this.certificates : undefined,
         technicalSheet: this.canUploadTechnicalSheet ? this.technicalSheet : undefined,

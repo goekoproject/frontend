@@ -141,22 +141,14 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   }
   private _descriptionTranslationsTranslations(codeLang: string, label: string): void {
     if (this.descriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
-      this.descriptionTranslations().controls.forEach((control) => {
-        if (control.value.lang === codeLang) {
-          control.get('label')?.setValue(label)
-        }
-      })
+      this.setLabelTranslated(this.descriptionTranslations(), codeLang, label)
       return
     }
     this.descriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
   }
   private _detailDescriptionTranslations(codeLang: string, label: string): void {
     if (this.detailedDescriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
-      this.detailedDescriptionTranslations().controls.forEach((control) => {
-        if (control.value.lang === codeLang) {
-          control.get('label')?.setValue(label)
-        }
-      })
+      this.setLabelTranslated(this.detailedDescriptionTranslations(), codeLang, label)
       return
     }
     this.editors = []
@@ -165,11 +157,7 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   }
   private _priceDescriptionTranslations(codeLang: string, label: string): void {
     if (this.priceDescriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
-      this.priceDescriptionTranslations().controls.forEach((control) => {
-        if (control.value.lang === codeLang) {
-          control.get('label')?.setValue(label)
-        }
-      })
+      this.setLabelTranslated(this.priceDescriptionTranslations(), codeLang, label)
       return
     }
     this.priceDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
@@ -178,6 +166,14 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
     return this._fb.group({
       label: new FormControl(label, Validators.required),
       lang: new FormControl(code),
+    })
+  }
+
+  private setLabelTranslated(formArray: FormArray, codeLang: string, label: string): void {
+    formArray.controls.forEach((control) => {
+      if (control.value.lang === codeLang) {
+        control.get('label')?.setValue(label)
+      }
     })
   }
 }
