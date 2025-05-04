@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, input, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { MessageService } from '@goeko/business-ui'
+import { EcosolutionCategorySelectorComponent, MessageService } from '@goeko/business-ui'
 import { EcosolutionInfoComponent } from '@goeko/business-ui/components/ecosolution-info/ecosolution-info.component'
 import { CategoryGrouping } from '@goeko/store'
-import { ButtonModule } from '@goeko/ui'
+import { ButtonModule, DialogMessageModule, DialogService } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
 import { EcosolutionInfo } from './ecosolution-info.model'
@@ -12,13 +12,15 @@ import { EcosolutionInfo } from './ecosolution-info.model'
 @Component({
   selector: 'goeko-ecosolutions-list',
   standalone: true,
-  imports: [CommonModule, EcosolutionInfoComponent, TranslatePipe, ButtonModule],
+  imports: [CommonModule, EcosolutionInfoComponent, TranslatePipe, ButtonModule, DialogMessageModule],
   templateUrl: './ecosolutions-list.component.html',
   styleUrls: ['./ecosolutions-list.component.scss'],
   providers: [MessageService],
 })
 export class EcosolutionsListComponent {
   private _cleantechEcosolutionsService = inject(CleantechEcosolutionsService)
+  private _dialogService = inject(DialogService)
+
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
   public ecosolutionsInfo = input.required<EcosolutionInfo[]>()
@@ -26,6 +28,16 @@ export class EcosolutionsListComponent {
   public categorySelected = signal<CategoryGrouping | undefined>(undefined)
   public isSubscribed = !!this._cleantechEcosolutionsService.isSubscribed
 
+  createEcosolution() {
+    this._dialogService
+      .open(EcosolutionCategorySelectorComponent)
+      .afterClosed()
+      .subscribe((category) => {
+        if (category) {
+          console.log(category)
+        }
+      })
+  }
   viewEcosolution(ecosolution: EcosolutionInfo) {
     this._goToEcosolutionForm(
       'detail',

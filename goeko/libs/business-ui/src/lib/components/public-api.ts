@@ -1,5 +1,6 @@
 export * from './card-ecosolutions/public-api'
 export * from './category/public-api'
+export * from './ecosolution-category-selector/public-api'
 export * from './first-loading/public-api'
 export * from './go-table/public-api'
 export * from './language-switcher/public-api'

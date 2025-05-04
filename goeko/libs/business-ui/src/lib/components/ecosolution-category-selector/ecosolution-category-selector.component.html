@@ -1,0 +1,50 @@
+<div class="shadow-lg relative flex w-full min-w-96 max-w-md flex-col items-center gap-8 rounded-md bg-white px-16 py-8">
+  <button class="absolute right-2 top-2 text-gray-500 hover:text-gray-700" (click)="close()" aria-label="Cerrar">
+    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        fill-rule="evenodd"
+        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+        clip-rule="evenodd" />
+    </svg>
+  </button>
+  <div class="mb-4 flex items-center">
+    <h2 class="text-lg font-semibold text-gray-800">{{ 'BREADCRUMBS.new_ecosolutions' | translate }}</h2>
+  </div>
+  <p class="mb-4 text-sm text-gray-600">Selecciona la categoría de tu eco-solución</p>
+
+  <div class="space-y-2">
+    @for (category of categories(); track category.id) {
+      <button
+        class="w-full rounded-md border border-gray-200 bg-white px-4 py-3 text-left hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        type="button"
+        [ngClass]="{
+          'bg-[#E4F5FE]': selectedCategory() === category.code,
+          'bg-white': selectedCategory() !== category.code,
+        }"
+        (click)="selectCategory(category)">
+        <div class="flex items-center gap-4">
+          @switch (category.code) {
+            @case (categoriesCode.CO2_EMISSION) {
+              <img src="assets/co2.svg" alt="CO2" />
+            }
+            @case (categoriesCode.WASTE) {
+              <img src="assets/3R.svg" alt="Waste" />
+            }
+            @case (categoriesCode.WATER) {
+              <img src="assets/drop.svg" alt="Water" />
+            }
+            @case (categoriesCode.HAZARDOUS_PRODUCT) {
+              <img src="assets/Fire.svg" alt="HP" />
+            }
+          }
+
+          <span>{{ category.label }}</span>
+        </div>
+      </button>
+    }
+  </div>
+
+  <button go-button appearance="primary" type="button" (click)="save()">
+    {{ 'save' | translate }}
+  </button>
+</div>
