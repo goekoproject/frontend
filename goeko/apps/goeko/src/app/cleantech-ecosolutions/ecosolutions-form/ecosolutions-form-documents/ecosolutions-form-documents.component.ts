@@ -33,6 +33,11 @@ export class EcosolutionsFormDocumentsComponent implements OnInit {
   )
   private _haveTechnicalSheet = computed(() => !!this.parentForm().get('technicalSheet')?.value)
 
+  private _projectFile = computed(
+    () => new EcosolutionDocumentsBuilder(this._ecosolutionDocuments()).assignOtherDocumentType().getProjectFile().build()[0],
+  )
+  private _haveProjectFile = computed(() => !!this.parentForm().get('projectFile')?.value)
+
   effectLoadCertificates = effect(() => {
     if (this.certificates().length > 0) {
       this.parentForm().get('certified')?.patchValue(this._certified())
@@ -57,6 +62,13 @@ export class EcosolutionsFormDocumentsComponent implements OnInit {
     if (this._technicalSheet()) {
       this.parentForm().get('technicalSheet')?.patchValue(this._technicalSheet())
       this.parentForm().get('haveTechnicalSheet')?.patchValue(this._haveTechnicalSheet())
+    }
+  })
+
+  effectLoadProjectFile = effect(() => {
+    if (this._projectFile()) {
+      this.parentForm().get('projectFile')?.patchValue(this._projectFile())
+      this.parentForm().get('haveProjectFile')?.patchValue(this._haveProjectFile())
     }
   })
 
