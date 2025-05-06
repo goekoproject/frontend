@@ -75,4 +75,7 @@ export class CleantechEcosolutionsService {
       }
     })
   }
+  deleteEcosolution(id: string) {
+    return this._ecosolutionsService.deleteEcosolution(id)
+  }
 }

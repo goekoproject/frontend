@@ -25,9 +25,13 @@ export class EcosolutionInfoComponent {
   category = computed(() => this.categories().at(0))
   categoryName = computed(() => this.category()?.categoryName as string)
 
+  onDelete = output<boolean>()
   onEdit = output<boolean>()
 
   edit() {
     this.onEdit.emit(true)
+  }
+  delete() {
+    this.onDelete.emit(true)
   }
 }

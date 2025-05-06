@@ -93,10 +93,13 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   public get technicalSheet(): File | undefined {
     return this.form.get('technicalSheet')?.value
   }
+
   public get haveTechnicalSheet(): FormArray {
     return this.form.get('haveTechnicalSheet') as FormArray
   }
-
+  public get projectFile(): File | undefined {
+    return this.form.get('projectFile')?.value
+  }
   public get images(): File[] | undefined {
     return this.canUpdateImages ? (this.form.get('images')?.value as File[]) : undefined
   }
@@ -162,6 +165,8 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
       haveTechnicalSheet: [false],
       technicalSheet: [],
       certified: [false],
+      haveProjectFile: [false],
+      projectFile: [],
       certificates: this._fb.array([]),
     })
   }
@@ -210,6 +215,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         ecosolutionsImg: this.images,
         certificates: this.certificates,
         technicalSheet: this.technicalSheet,
+        projectFile: this.projectFile,
       })
       .pipe(tap(() => this._submitter.set(true)))
       .subscribe({
@@ -234,6 +240,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         ecosolutionsImg: this.images,
         certificates: this.canUploadCertificates ? this.certificates : undefined,
         technicalSheet: this.canUploadTechnicalSheet ? this.technicalSheet : undefined,
+        projectFile: this.projectFile,
         documentForRemove: this._documentForRemove() as string[],
       })
       .pipe(tap(() => this._submitter.set(true)))
@@ -256,7 +263,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
 
   goToListEcosolution() {
     this._router.navigate(['../cleantech-ecosolutions', this.cleantechId()], {
-      relativeTo: this._route.parent?.parent,
+      relativeTo: this._route.parent,
     })
   }
 }

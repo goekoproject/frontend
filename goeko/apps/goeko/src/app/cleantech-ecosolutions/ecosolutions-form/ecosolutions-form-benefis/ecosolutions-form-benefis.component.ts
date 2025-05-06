@@ -21,9 +21,7 @@ export class EcosolutionsFormBenefisComponent {
   public categoryCode = input.required<string>()
   public categories = input<CategoryGrouping[]>()
   public ecosolutionsBenefits = input<Ecosolutions>()
-  public addOtherBenefit = computed(
-    () => this.parentForm().get('improvementOtherCategory')?.get('reductionPercentage')?.value !== null || this._addOtherBenefit(),
-  )
+  public addOtherBenefit = computed(() => this.parentForm().get('improvementOtherCategory')?.value || this._addOtherBenefit())
   private _addOtherBenefit = signal(false)
 
   effectLoadEcosolutionsBenefits = effect(() => {
@@ -51,7 +49,8 @@ export class EcosolutionsFormBenefisComponent {
       ?.patchValue(this.ecosolutionsBenefits()?.improvement?.operationalCostReductionPercentage)
   }
   private _patchEcosolutionsOtherBenefitValue() {
-    const { reductionPercentage } = this.ecosolutionsBenefits()?.improvementOtherCategory ?? {}
+    const { reductionPercentage, category } = this.ecosolutionsBenefits()?.improvementOtherCategory?.[0] ?? {}
     this.parentForm().get('improvementOtherCategory')?.get('reductionPercentage')?.patchValue(reductionPercentage)
+    this.parentForm().get('improvementOtherCategory')?.get('category')?.patchValue(category.code)
   }
 }

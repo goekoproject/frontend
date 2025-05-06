@@ -5,10 +5,17 @@ import { catchError, forkJoin, of, throwError } from 'rxjs'
 export interface DocumentMetadata {
   file: File | null
   documentType: ClassificationDocumentType
-  parentDocumentType: keyof typeof PARENT_CODE
+  parentDocumentType: unknown
 }
 export const metadataTechnicalSheet: DocumentMetadata = {
   parentDocumentType: PARENT_CODE.TECHNICAL_SHEET,
+  documentType: {
+    code: 'DEFAULT',
+  },
+  file: null,
+}
+export const metadataProjectFile: DocumentMetadata = {
+  parentDocumentType: PARENT_CODE.PROJECT_FILE,
   documentType: {
     code: 'DEFAULT',
   },
@@ -34,9 +41,16 @@ export class EcosolutionsManagmentDocumentsService {
       return of(null)
     }
     const metadata = { ...metadataTechnicalSheet, file: technicalSheet }
-    return this._buildFormDataTechnicalSheet(ecosolutionId, metadata)
+    return this._buildFormDataGDocument(ecosolutionId, metadata, PARENT_CODE.TECHNICAL_SHEET)
   }
-  private _buildFormDataTechnicalSheet(idEcosolution: string, data: DocumentMetadata) {
+  public uploadProjectFile(ecosolutionId: string, projectFile: File | undefined) {
+    if (!projectFile) {
+      return of(null)
+    }
+    const metadata = { ...metadataProjectFile, file: projectFile }
+    return this._buildFormDataGDocument(ecosolutionId, metadata, PARENT_CODE.PROJECT_FILE)
+  }
+  private _buildFormDataGDocument(idEcosolution: string, data: DocumentMetadata, parentDocumentType: PARENT_CODE) {
     if (!data.file) {
       return throwError(() => new Error('File missing'))
     }
@@ -49,7 +63,7 @@ export class EcosolutionsManagmentDocumentsService {
     formData.append(
       `${uniqueId}`,
       JSON.stringify({
-        parentDocumentType: PARENT_CODE.TECHNICAL_SHEET,
+        parentDocumentType: parentDocumentType,
         documentType: data.documentType.code,
       }),
     )

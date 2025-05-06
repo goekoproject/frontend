@@ -10,6 +10,7 @@ export interface EcosolutionsRequestsParams {
   certificates?: DocumentMetadata[]
   technicalSheet?: File | undefined
   documentForRemove?: string[]
+  projectFile?: File | undefined
 }
 @Injectable({
   providedIn: 'root',
@@ -26,16 +27,18 @@ export class EcosolutionsManagmentService {
   }
 
   public createEcosolutionWithUploads(ecosolutionsRequests: EcosolutionsRequestsParams) {
-    const { body, ecosolutionsImg, certificates, technicalSheet } = ecosolutionsRequests
+    const { body, ecosolutionsImg, certificates, technicalSheet, projectFile } = ecosolutionsRequests
     return this._ecosolutionsService.createEcosolutions(body).pipe(
       concatMap((ecosolution) => {
         const uploadPicture$ = this._uploadPicture(ecosolution.id, ecosolutionsImg)
         const uploadCertificates$ = this._ecosolutionsManagmentDocumentsService.uploadCertificates(ecosolution.id, certificates)
         const uploadTechnicalSheet$ = this._ecosolutionsManagmentDocumentsService.uploadTechnicalSheet(ecosolution.id, technicalSheet)
+        const uploadProjectFile$ = this._ecosolutionsManagmentDocumentsService.uploadProjectFile(ecosolution.id, projectFile)
         return forkJoin({
           pictures: uploadPicture$,
           certificates: uploadCertificates$,
           technicalSheet: uploadTechnicalSheet$,
+          projectFile: uploadProjectFile$,
         })
       }),
       catchError((error) => {
@@ -46,7 +49,7 @@ export class EcosolutionsManagmentService {
   }
 
   public updateEcosolution(ecosolutionId: string, ecosolutionsRequests: EcosolutionsRequestsParams) {
-    const { body, ecosolutionsImg, certificates, technicalSheet, documentForRemove } = ecosolutionsRequests
+    const { body, ecosolutionsImg, certificates, technicalSheet, documentForRemove, projectFile } = ecosolutionsRequests
     const updateEcosolutions$ = this._ecosolutionsService.updateEcosolution(ecosolutionId, body as UpdatedEcosolutionBody).pipe(
       catchError((error) => {
         console.error('Error en updateEcosolution:', error)
@@ -60,6 +63,7 @@ export class EcosolutionsManagmentService {
 
       updateEcosolutionCertificate: this._ecosolutionsManagmentDocumentsService.uploadCertificates(ecosolutionId, certificates),
       updateEcosolutionTechnicalSheet: this._ecosolutionsManagmentDocumentsService.uploadTechnicalSheet(ecosolutionId, technicalSheet),
+      updateEcosolutionProjectFile: this._ecosolutionsManagmentDocumentsService.uploadProjectFile(ecosolutionId, projectFile),
       removeDocument: this._ecosolutionsManagmentDocumentsService.removeDocument(ecosolutionId, documentForRemove || []),
     }).pipe(
       catchError((error) => {
@@ -81,11 +85,11 @@ export class EcosolutionsManagmentService {
     )
   }
 
-   translateTexts(data: {texts: string[], originalLanguage: string, targetLanguage: string}) {
+  translateTexts(data: { texts: string[]; originalLanguage: string; targetLanguage: string }) {
     const translateAutomatic = {
       texts: data.texts,
       originalLanguage: data.originalLanguage,
-      targetLanguage: data.targetLanguage
+      targetLanguage: data.targetLanguage,
     }
     return this._translateAutomaticService.createTranslate(translateAutomatic)
   }

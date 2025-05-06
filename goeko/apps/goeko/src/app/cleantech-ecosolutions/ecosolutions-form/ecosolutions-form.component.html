@@ -8,47 +8,82 @@
   @defer (when form) {
     <form [formGroup]="form" class="m-auto w-full max-w-3xl rounded-sm p-8">
       <!--Select Products-->
-      <goeko-ecosolutions-form-ecosolution-type
-        class="section-form"
-        [questionsCategories]="questionsCategories()"
-        [ecosolutionsClassifications]="ecosolutionData()?.classifications"
-        [parentForm]="form"
-        [categoryCode]="categoryCode()"></goeko-ecosolutions-form-ecosolution-type>
+      @defer (on viewport) {
+        <goeko-ecosolutions-form-ecosolution-type
+          class="section-form"
+          [questionsCategories]="questionsCategories()"
+          [ecosolutionsClassifications]="ecosolutionData()?.classifications"
+          [parentForm]="form"
+          [categoryCode]="categoryCode()"></goeko-ecosolutions-form-ecosolution-type>
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
 
-      <goeko-ecosolutions-form-benefis
-        class="section-form"
-        [parentForm]="form"
-        [categories]="groupingForm()"
-        [ecosolutionsBenefits]="ecosolutionData()"
+      @defer (on viewport) {
+        <goeko-ecosolutions-form-benefis
+          class="section-form"
+          [parentForm]="form"
+          [categories]="groupingForm()"
+          [ecosolutionsBenefits]="ecosolutionData()"
         [categoryCode]="categoryCode()"></goeko-ecosolutions-form-benefis>
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
+      @defer (on viewport) {
+        <goeko-ecosolutions-form-details
+          class="section-form"
+          [ecosolutionDetails]="ecosolutionData()"
+          [parentForm]="form"></goeko-ecosolutions-form-details>
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
+      @defer (on viewport) {
+        <goeko-ecosolutions-form-image
+          class="section-form"
+          [parentForm]="form"
+          [ecosolutionImages]="ecosolutionData()?.pictures"></goeko-ecosolutions-form-image>
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
 
-      <goeko-ecosolutions-form-details
-        class="section-form"
-        [ecosolutionDetails]="ecosolutionData()"
-        [parentForm]="form"></goeko-ecosolutions-form-details>
-
-      <goeko-ecosolutions-form-image
-        class="section-form"
-        [parentForm]="form"
-        [ecosolutionImages]="ecosolutionData()?.pictures"></goeko-ecosolutions-form-image>
-      <goeko-ecosolutions-form-country-available
-        class="section-form"
-        [parentForm]="form"
-        [ecosolutionLocation]="ecosolutionData()?.locations"></goeko-ecosolutions-form-country-available>
-      <ng-container *ngTemplateOutlet="sdg"></ng-container>
-      <goeko-ecosolutions-form-payback
+       @defer (on viewport) {
+        <goeko-ecosolutions-form-country-available
+          class="section-form"
+          [parentForm]="form"
+          [ecosolutionLocation]="ecosolutionData()?.locations"></goeko-ecosolutions-form-country-available>
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
+      @defer (on viewport) {
+        <ng-container *ngTemplateOutlet="sdg"></ng-container>
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
+      @defer (on viewport) {
+        <goeko-ecosolutions-form-payback
         class="section-form"
         [parentForm]="form"
         [ecosolutionsPayback]="ecosolutionData()?.paybackPeriodYears"></goeko-ecosolutions-form-payback>
-      <goeko-ecosolutions-form-warranty
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
+      @defer (on viewport) {
+        <goeko-ecosolutions-form-warranty
         class="section-form"
         [parentForm]="form"
         [ecosolutionsData]="ecosolutionData()"></goeko-ecosolutions-form-warranty>
-      <goeko-ecosolutions-form-documents
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
+      @defer (on viewport) {
+        <goeko-ecosolutions-form-documents
         class="section-form"
         [ecosolutionData]="ecosolutionData()"
         [parentForm]="form"
         (documentForRemove)="documentForRemove($event)"></goeko-ecosolutions-form-documents>
+      } @placeholder {
+        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
+      }
       <goeko-form-error-text [form]="form">
         {{ 'ERRORS_FORM.haveError' | translate }}
       </goeko-form-error-text>

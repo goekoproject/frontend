@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, effect, inject, input, OnDestroy, OnInit, signal } from '@angular/core'
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, effect, inject, input, OnDestroy, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LanguageSwitcherComponent } from '@goeko/business-ui'
 import { Lang, LANGS } from '@goeko/core'
@@ -40,20 +40,24 @@ interface TrasnlaledSwitcherField {
   ],
   templateUrl: './ecosolutions-form-details.component.html',
   styleUrl: './ecosolutions-form-details.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
+export class EcosolutionsFormDetailsComponent implements OnDestroy {
   private _fb = inject(FormBuilder)
   private _translateService = inject(TranslateService)
   private _ecosolutionsManagment = inject(EcosolutionsManagmentService)
+  private _cf = inject(ChangeDetectorRef)
   public parentForm = input.required<FormGroup>()
   public ecosolutionDetails = input<Ecosolutions>()
   public toolbar: Toolbar = EDITOR_TOOLBAR_ECOSOLUTIONS
+  public currentLang = signal<string>(this._translateService.currentLang)
 
   public selectedFormLang = signal<TrasnlaledSwitcherField>({
-    descriptionTranslations: this._translateService.currentLang,
-    detailedDescriptionTranslations: this._translateService.currentLang,
-    priceDescriptionTranslations: this._translateService.currentLang,
+    descriptionTranslations: this.currentLang(),
+    detailedDescriptionTranslations: this.currentLang(),
+    priceDescriptionTranslations: this.currentLang(),
   })
+
   public languageForTranslate = signal<string[]>([], { equal: arraySetEqual })
   public langField = computed(() =>
     LANGS.filter((lang) => this.languageForTranslate().includes(lang.code) || lang.code === this._translateService.currentLang),
@@ -68,15 +72,12 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   public editors = new Array<Editor>()
 
   effectLoadDetails = effect(() => {
+    this._initFormArrays()
     if (this.ecosolutionDetails()) {
       this._buildFormArrays(this.ecosolutionDetails())
     }
     this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
-    console.log(this.editors)
   })
-  ngOnInit(): void {
-    console.log(this.editors)
-  }
 
   ngOnDestroy(): void {
     this.editors.forEach((editor) => editor.destroy())
@@ -86,36 +87,13 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
     this.languageForTranslate.update((prev) =>
       prev.includes(lang.code) ? prev.filter((code) => code !== lang.code) : [...prev, lang.code],
     )
-    // this._seTranslatedProperties(lang.code)
-  }
-  activateTranslate() {
-    const texts = [
-      this.descriptionTranslations().at(0)?.value.label,
-      this.detailedDescriptionTranslations().at(0)?.value.label,
-      this.priceDescriptionTranslations().at(0)?.value.label,
-    ].filter(Boolean)
-    const language = this.languageForTranslate()
-
-    const translates$ = language.map((lang) =>
-      this._ecosolutionsManagment.translateTexts({
-        texts: texts,
-        originalLanguage: this._translateService.currentLang,
-        targetLanguage: lang === 'en' ? 'en-GB' : lang,
-      }),
-    )
-    forkJoin(translates$).subscribe((result) => {
-      language.forEach((lang, i) => {
-        const [desc, detailDesc, priceDesc] = result[i] // cada resultado es un array de 3 textos
-        this._descriptionTranslationsTranslations(lang, desc)
-        this._detailDescriptionTranslations(lang, detailDesc)
-        this._priceDescriptionTranslations(lang, priceDesc)
-      })
-      this.showLanguageSwitcher.set(true)
-    })
   }
 
-  selectedChangeForDetail(lang: string, field: string) {
-    this.selectedFormLang.update((prev) => ({ ...prev, [field]: lang }))
+  private _initFormArrays(): void {
+    this.nameTranslations().push(this._createFormGroupTranslations(this.currentLang()))
+    this.descriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
+    this.detailedDescriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
+    this.priceDescriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
   }
 
   private _buildFormArrays(formValue?: Ecosolutions): void {
@@ -129,42 +107,78 @@ export class EcosolutionsFormDetailsComponent implements OnInit, OnDestroy {
   }
 
   private _patchFormArray(formArray: FormArray, values: TranslatedProperties[]): void {
-    formArray.clear()
-    values.forEach((value) => {
-      formArray.push(this._createFormGroupTranslations(value.lang))
+    setTimeout(() => {
+      values.forEach((value) => {
+        const control = this._createFormGroupTranslations(value.lang, value.label, formArray)
+        if (control) {
+          formArray.push(control)
+        }
+      })
+      formArray.reset(values)
+
+      this._cf.markForCheck()
     })
-    formArray.reset(values)
+  }
+  activateTranslate() {
+    const texts = [
+      this.nameTranslations().at(0)?.value.label || '',
+      this.descriptionTranslations().at(0)?.value.label || '',
+      this.detailedDescriptionTranslations().at(0)?.value.label || '',
+      this.priceDescriptionTranslations().at(0)?.value.label || '',
+    ].filter(Boolean)
+    const language = this.languageForTranslate()
+
+    const translates$ = language.map((lang) =>
+      this._ecosolutionsManagment.translateTexts({
+        texts: texts,
+        originalLanguage: this.currentLang(),
+        targetLanguage: lang === 'en' ? 'en-GB' : lang,
+      }),
+    )
+    forkJoin(translates$).subscribe((result) => {
+      language.forEach((lang, i) => {
+        const [name, desc, detailDesc, priceDesc] = result[i]
+        this._addNameTranslations(lang, name)
+        this._descriptionTranslationsTranslations(lang, desc)
+        this._detailDescriptionTranslations(lang, detailDesc)
+        this._priceDescriptionTranslations(lang, priceDesc)
+      })
+      this.showLanguageSwitcher.set(true)
+    })
   }
 
-  private _addNameTranslations(codeLang: string): void {
-    this.nameTranslations().push(this._createFormGroupTranslations(codeLang, ''))
+  selectedChangeForDetail(lang: string, field: string) {
+    this.selectedFormLang.update((prev) => ({ ...prev, [field]: lang }))
+  }
+
+  showTranslations() {
+    this.showLanguageSwitcher.set(true)
+    const languageToShower = this.detailedDescriptionTranslations().controls.map((control) => control.value.lang) as string[]
+    this.languageForTranslate.set(languageToShower)
+    this._cf.markForCheck()
+  }
+
+  private _addNameTranslations(codeLang: string, label: string): void {
+    this.nameTranslations().push(this._createFormGroupTranslations(codeLang, label, this.nameTranslations()))
   }
   private _descriptionTranslationsTranslations(codeLang: string, label: string): void {
-    if (this.descriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
-      this.setLabelTranslated(this.descriptionTranslations(), codeLang, label)
-      return
-    }
-    this.descriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
+    this.descriptionTranslations().push(this._createFormGroupTranslations(codeLang, label, this.descriptionTranslations()))
   }
   private _detailDescriptionTranslations(codeLang: string, label: string): void {
-    if (this.detailedDescriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
-      this.setLabelTranslated(this.detailedDescriptionTranslations(), codeLang, label)
-      return
-    }
     this.editors = []
-    this.detailedDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
+    this.detailedDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label, this.detailedDescriptionTranslations()))
     this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
   }
   private _priceDescriptionTranslations(codeLang: string, label: string): void {
-    if (this.priceDescriptionTranslations().value.some((value: { lang: string }) => value.lang === codeLang)) {
-      this.setLabelTranslated(this.priceDescriptionTranslations(), codeLang, label)
-      return
-    }
-    this.priceDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label))
+    this.priceDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label, this.priceDescriptionTranslations()))
   }
-  private _createFormGroupTranslations(code: string, label?: string) {
+  private _createFormGroupTranslations(code: string, label?: string, control?: FormArray) {
+    if (control?.value.some((value: { lang: string }) => value.lang === code)) {
+      this.setLabelTranslated(control, code, label as string)
+      return undefined
+    }
     return this._fb.group({
-      label: new FormControl(label, Validators.required),
+      label: new FormControl(label || ''),
       lang: new FormControl(code),
     })
   }

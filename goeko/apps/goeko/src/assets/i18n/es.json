@@ -798,5 +798,7 @@
   "typeSolutionCleantech": "Tipo de solución cleantech",
   "addOtherBenefit": "Añadir otra beneficio",
   "translate": "Traducir",
-  "original": "Original"
+  "original": "Original",
+  "showTranslations": "Mostrar traducciones",
+  "yourProjectFile":"Tu archivo de proyecto"
 }

@@ -2,8 +2,7 @@
   <legend>{{ 'FORM_LABEL.basicInformation' | translate }}</legend>
   <ng-container formArrayName="nameTranslations">
     <label> {{ 'FORM_LABEL.solutionName' | translate }}</label>
-
-    @for (translation of nameTranslations().controls; track $index + '-name'; let i = $index) {
+    @if (nameTranslations().controls.length > 0) {
       <ng-container [formGroupName]="0">
         <div class="relative">
           <goeko-go-input [formControlName]="'label'"> </goeko-go-input>
@@ -49,7 +48,7 @@
           <div [formGroupName]="i">
             <ngx-editor
               [editor]="editors[i]"
-              [formControlName]="'label'"
+              formControlName="label"
               [class.editor-invalid]="
                 translation.get('label')?.invalid && translation.get('label')?.touched && translation.get('label')?.dirty
               "
@@ -82,7 +81,14 @@
   </ng-container>
 
   <section>
-    <a role="button" class="flex text-sm text-primary-default" (click)="activateTranslate()">{{ 'translate' | translate }}</a>
+
+    <div class="flex gap-2 justify-between">
+      <a role="button" class="flex text-sm text-primary-default" (click)="activateTranslate()">{{ 'translate' | translate }}</a>
+      @if(ecosolutionDetails()) {
+        <a role="button" class="flex text-sm text-primary-400" (click)="showTranslations()">{{ 'showTranslations' | translate }}</a>
+      }
+    </div>
+
     <go-badge-group>
       @for (lang of languageAvailable(); track lang) {
         <go-badge [value]="lang" (click)="selectedChange(lang)">

@@ -50,11 +50,7 @@
           <label>
             <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container>
           </label>
-          <ui-super-select
-            [formControlName]="'category'"
-            id="reductionPercentage"
-            name="reductionPercentage"
-            [compareWith]="defaultSetReductions">
+          <ui-super-select [formControlName]="'category'" id="reductionPercentage" name="reductionPercentage">
             @for (option of categories(); track index + '-reductionPercentage'; let index = $index) {
               @defer (when option.code !== this.categoryCode()) {
                 <super-option [value]="option.code"> {{ option.label }} </super-option>
@@ -90,5 +86,8 @@
     }}</ng-container>
 
     <ng-container *ngSwitchCase="categoryCode() === 'waste'">{{ 'FORM_LABEL.reductionPercentageWaste' | translate }}</ng-container>
-  </span>
+    <ng-container *ngSwitchCase="categoryCode() === 'hazardousProduct'">{{
+      'FORM_LABEL.reductionPercentageHP' | translate
+    }}</ng-container> </span
+  >º
 </ng-template>

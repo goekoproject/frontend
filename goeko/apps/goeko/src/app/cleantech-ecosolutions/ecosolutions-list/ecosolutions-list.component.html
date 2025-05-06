@@ -3,12 +3,13 @@
   <button go-button (click)="createEcosolution()">{{ 'addNewSolution' | translate }}</button>
 </section>
 
-<section class="ecosolutions-section">
+<section class="relative flex flex-col gap-4">
   @for (ecosolution of ecosolutionsInfo(); track $index) {
     <goeko-ecosolution-info
       [title]="ecosolution.solutionName"
       [description]="ecosolution.description"
       [categories]="ecosolution.category"
-      (onEdit)="editEcosolution(ecosolution)"></goeko-ecosolution-info>
+      (onEdit)="editEcosolution(ecosolution)"
+      (onDelete)="deleteEcosolution(ecosolution)"></goeko-ecosolution-info>
   }
 </section>
