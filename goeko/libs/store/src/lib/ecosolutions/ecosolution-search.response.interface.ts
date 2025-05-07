@@ -1,4 +1,4 @@
-import { Classifications } from '../model/classifications.interface'
+import { Classifications, ResponseClassifications } from '../model/classifications.interface'
 import { CompanyDetail } from '../model/company-detail.interface'
 import { LocationTranslated } from '../model/location-translated.interface'
 import { Picture } from '../model/pictures.interface'
@@ -13,6 +13,7 @@ export interface EcosolutionSearchResponse {
   approved: boolean
   certified: boolean
   classification: Classifications
+  classifications: ResponseClassifications[]
   companyDetail: CompanyDetail
   countries: string[]
   description: string

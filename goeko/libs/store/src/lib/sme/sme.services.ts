@@ -10,7 +10,9 @@ import { TranslateChangeService } from '../util/translate-change'
 import { SmeDashboard } from './sme-dashboard.interface'
 import { Requests, SmeRequestResponse, SmeSaveRecomendationRequest } from './sme-request.model'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SmeService extends TranslateChangeService {
   constructor(
     private readonly _ecosolutionServices: EcosolutionsService,
