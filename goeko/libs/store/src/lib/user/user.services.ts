@@ -70,6 +70,7 @@ export class UserService {
 
   redirectDashboard() {
     this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile().id}`], { relativeTo: this._route })
+    return of(true)
   }
   redirectProfile() {
     this._router.navigate([`platform/profile/${this.externalId()}`], { relativeTo: this._route.parent })

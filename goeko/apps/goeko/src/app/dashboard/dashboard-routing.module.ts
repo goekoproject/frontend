@@ -1,13 +1,21 @@
-import { NgModule } from '@angular/core'
+import { inject, NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { ecosolutionFavouritesResolver, EcosolutionsTaggingService } from '@goeko/store'
+import { ecosolutionFavouritesResolver, EcosolutionsTaggingService, UserService } from '@goeko/store'
 import { dashboardData, leadOfBank } from './dashboard-bank/dashboard-data.resolver'
 import { DashboardCleantechComponent } from './dashboard-cleantech/dashboard-cleantech.component'
 import { dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
 import { DashboardSmeService } from './dashboard-sme/dashboard-sme.service'
-//import { DashboardBankComponent } from '../funding/hub-funding.component'
 
 const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('../cleantech-ecosolutions/dashboard.component').then((m) => m.DashboardComponent),
+    canActivate: [
+      () => {
+        return inject(UserService).redirectDashboard()
+      },
+    ],
+  },
   {
     path: 'sme/:id',
     loadComponent: () => import('./dashboard-sme/dashboard-sme.component').then((m) => m.DashboardSmeComponent),
