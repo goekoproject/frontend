@@ -1,5 +1,5 @@
 <section class="flex max-w-3xl items-center gap-2 px-8 py-4">
-  <h1 class="title-page">{{ ecosolutionsName() }}</h1>
+  <h1 class="title-page">{{ ecosolutionsName() || 'BREADCRUMBS.new_ecosolutions' | translate }}</h1>
   <span class="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">{{
     ecosolutionsCategoryLabel() | translate
   }}</span>
@@ -25,7 +25,7 @@
           [parentForm]="form"
           [categories]="groupingForm()"
           [ecosolutionsBenefits]="ecosolutionData()"
-        [categoryCode]="categoryCode()"></goeko-ecosolutions-form-benefis>
+          [categoryCode]="categoryCode()"></goeko-ecosolutions-form-benefis>
       } @placeholder {
         <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
       }
@@ -46,7 +46,7 @@
         <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
       }
 
-       @defer (on viewport) {
+      @defer (on viewport) {
         <goeko-ecosolutions-form-country-available
           class="section-form"
           [parentForm]="form"
@@ -61,26 +61,26 @@
       }
       @defer (on viewport) {
         <goeko-ecosolutions-form-payback
-        class="section-form"
-        [parentForm]="form"
-        [ecosolutionsPayback]="ecosolutionData()?.paybackPeriodYears"></goeko-ecosolutions-form-payback>
+          class="section-form"
+          [parentForm]="form"
+          [ecosolutionsPayback]="ecosolutionData()?.paybackPeriodYears"></goeko-ecosolutions-form-payback>
       } @placeholder {
         <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
       }
       @defer (on viewport) {
         <goeko-ecosolutions-form-warranty
-        class="section-form"
-        [parentForm]="form"
-        [ecosolutionsData]="ecosolutionData()"></goeko-ecosolutions-form-warranty>
+          class="section-form"
+          [parentForm]="form"
+          [ecosolutionsData]="ecosolutionData()"></goeko-ecosolutions-form-warranty>
       } @placeholder {
         <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
       }
       @defer (on viewport) {
         <goeko-ecosolutions-form-documents
-        class="section-form"
-        [ecosolutionData]="ecosolutionData()"
-        [parentForm]="form"
-        (documentForRemove)="documentForRemove($event)"></goeko-ecosolutions-form-documents>
+          class="section-form"
+          [ecosolutionData]="ecosolutionData()"
+          [parentForm]="form"
+          (documentForRemove)="documentForRemove($event)"></goeko-ecosolutions-form-documents>
       } @placeholder {
         <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
       }

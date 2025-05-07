@@ -72,8 +72,8 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   }
 
   private _getValueArrayNumOrObj = (value: number[] | any[]): any => {
-    const newValue = value.map((val) => val.code)
-    if (!newValue) {
+    const newValue = value.map((val) => val.code).filter((val) => val)
+    if (!newValue || newValue.length === 0) {
       return this.sdgs().filter((sdg: SDGLabel) => value.includes(sdg.code))
     }
     return this.sdgs().filter((sdg: SDGLabel) => newValue.includes(sdg.code))

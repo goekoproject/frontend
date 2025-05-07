@@ -11,7 +11,9 @@
   },
   "add": "Add",
   "addNewSolution": "Add new solution",
+  "addOtherBenefit": "Add other benefit",
   "addRealEstateLoan": "Add real estate loan",
+  "addSolution": "Add an solution",
   "addSustainableEquipment": "Add sustainable equipment",
   "alertSelectedProduct": "Select the categories and products corresponding to your project",
   "all": "All",
@@ -354,6 +356,7 @@
     "sloganTeam": "Allow us to introduce you to the talented group of individuals leading our mission to drive a cleaner and more sustainable future."
   },
   "ifAvailables": "(If available)",
+  "infoActionCardSubtitleEcosolutions": "We'll find the best leads for you",
   "infoSaveMessages": "You have the option to save your data now, ensuring it's available for future reference, providing you with confidence in accessing it when needed.",
   "INPUT_FILE": {
     "addNewFile": "Add new file",
@@ -467,14 +470,6 @@
   "notSave": "Close without saving",
   "ODS": {
     "ods_1": "No poverty",
-    "ods_10": "Reduced inequality",
-    "ods_11": "Sustainable cities and communities",
-    "ods_12": "Responsible consumption and production",
-    "ods_13": "Climate action",
-    "ods_14": "Life below water",
-    "ods_15": "Life on land",
-    "ods_16": "Peace, justice, and strong institutions",
-    "ods_17": "Partnerships for the goals",
     "ods_2": "Zero hunger",
     "ods_3": "Good health and well-being",
     "ods_4": "Quality education",
@@ -482,7 +477,15 @@
     "ods_6": "Clean water and sanitation",
     "ods_7": "Affordable and clean energy",
     "ods_8": "Decent work and economic growth",
-    "ods_9": "Industry, innovation, and infrastructure"
+    "ods_9": "Industry, innovation, and infrastructure",
+    "ods_10": "Reduced inequality",
+    "ods_11": "Sustainable cities and communities",
+    "ods_12": "Responsible consumption and production",
+    "ods_13": "Climate action",
+    "ods_14": "Life below water",
+    "ods_15": "Life on land",
+    "ods_16": "Peace, justice, and strong institutions",
+    "ods_17": "Partnerships for the goals"
   },
   "ods_msg_card_result": "Positive impact on SDG",
   "ods_title": "Sustainable Development Goals (SDG)",
@@ -495,6 +498,7 @@
     "eu": "EU",
     "switzerland": "Switzerland"
   },
+  "original": "Original",
   "our_ecosolutions": "",
   "ownerprofiles": {
     "business": "Business",
@@ -540,14 +544,14 @@
     "slogan_text2": "Who are you?"
   },
   "SDG_TITLES": {
+    "6": "Clean water and sanitation",
+    "7": "Affordable and clean energy",
+    "9": "Industry, innovation and infrastructure",
     "11": "Sustainable cities and communities",
     "12": "Responsible consumption and production",
     "13": "Climate action",
     "14": "Life below water",
-    "15": "Life on land",
-    "6": "Clean water and sanitation",
-    "7": "Affordable and clean energy",
-    "9": "Industry, innovation and infrastructure"
+    "15": "Life on land"
   },
   "searchEcosolutions": "Search cleantech solutions",
   "SELECT_DATA_LABEL": {
@@ -715,6 +719,7 @@
   "showAll": "Show all",
   "showLead": "Show leads",
   "showMore": "View more",
+  "showTranslations": "Show translations",
   "SIGNUP": {
     "acceptedConditions": "I have read and accept the",
     "acceptedConditions2": "terms and conditions",
@@ -750,7 +755,9 @@
   },
   "titleBannerLead": " Qualified Leads Tracking",
   "titleResult": "Most adapted eco-solutions for",
+  "translate": "Translate",
   "turnOnNotifications": "Turn on notifications",
+  "typeSolutionCleantech": "Type of solution cleantech",
   "upgrade": "Upgrade",
   "upTo": "Up to",
   "user": "User",
@@ -794,11 +801,6 @@
   "your_ecosolutions": "Your Eco-solutions",
   "yourEcosolution": "Your Eco-solution",
   "yourFinancialSolutions": "Your financial solutions",
-  "yourProjects": "Your projects",
-  "typeSolutionCleantech": "Type of solution cleantech",
-  "addOtherBenefit": "Add other benefit",
-  "translate": "Translate",
-  "original": "Original",
-  "showTranslations": "Show translations",
-  "yourProjectFile": "Your project file"
+  "yourProjectFile": "Your project file",
+  "yourProjects": "Your projects"
 }

@@ -52,10 +52,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   private _ecosolutionsManagmentService = inject(EcosolutionsManagmentService)
 
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
-    const callback = () =>
-      this.id()
-        ? this._ecosolutionsManagmentService.updateEcosolution(this.id(), this.bodyRequestEcosolution)
-        : this._ecosolutionsManagmentService.createEcosolutions(this.bodyRequestEcosolution)
+    const callback = () => (this.id() ? this.editEcosolution() : this.saveEcosolution())
     return this._submitter() ? of(true) : canDeactivateForm(callback)
   }
 
@@ -121,6 +118,9 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   private get canUploadTechnicalSheet(): boolean | undefined {
     return this.form.get('haveTechnicalSheet')?.dirty && this.form.get('haveTechnicalSheet')?.valid
   }
+  private get canUploadProjectFile(): boolean | undefined {
+    return this.form.get('haveProjectFile')?.dirty && this.form.get('haveProjectFile')?.valid
+  }
   private get canUpdateImages(): boolean | undefined {
     return this.form.get('images')?.dirty && this.form.get('images')?.valid
   }
@@ -177,9 +177,14 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   getEcosolution() {
     this._ecosolutionsManagmentService.getEcosolutionById(this.id()).subscribe((ecosolution: Ecosolutions) => {
       this.ecosolutionData.set(ecosolution)
+      this._patchSdg()
       this.form.markAsPristine()
       this.form.markAsUntouched()
     })
+  }
+
+  private _patchSdg() {
+    this.form.get('sustainableDevelopmentGoals')?.setValue(this.ecosolutionData()?.sustainableDevelopmentGoals)
   }
 
   private _allFormArrayAsDirty() {
@@ -192,20 +197,21 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   private _markAllAsDirtyFormArray(form: FormGroup | FormArray): void {
     Object.values(form.controls).forEach((control) => {
       if (control instanceof FormGroup || control instanceof FormArray) {
-        this._markAllAsDirtyFormArray(control) // Llamado recursivo
+        this._markAllAsDirtyFormArray(control)
       } else {
         control.markAsDirty()
-        control.updateValueAndValidity() // Opcional
+        control.updateValueAndValidity()
       }
     })
   }
 
-  saveEcosolution() {
+  public saveEcosolution() {
     if (this.form.invalid) {
       this._checkIsFormValid()
-      return
+      return of(false)
     }
     this._createEcosolution()
+    return of(true)
   }
 
   private _createEcosolution() {
@@ -229,10 +235,10 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
       })
   }
 
-  editEcosolution() {
+  public editEcosolution() {
     if (this.form.invalid) {
       this._checkIsFormValid()
-      return
+      return of(false)
     }
     this._ecosolutionsManagmentService
       .updateEcosolution(this.id(), {
@@ -240,7 +246,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         ecosolutionsImg: this.images,
         certificates: this.canUploadCertificates ? this.certificates : undefined,
         technicalSheet: this.canUploadTechnicalSheet ? this.technicalSheet : undefined,
-        projectFile: this.projectFile,
+        projectFile: this.canUploadProjectFile ? this.projectFile : undefined,
         documentForRemove: this._documentForRemove() as string[],
       })
       .pipe(tap(() => this._submitter.set(true)))
@@ -252,6 +258,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
           console.error('Error al editar Ecosolution', error)
         },
       })
+    return of(true)
   }
   private _checkIsFormValid() {
     this.form.markAllAsTouched()

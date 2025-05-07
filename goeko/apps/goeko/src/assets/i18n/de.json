@@ -11,7 +11,9 @@
   },
   "add": "Hinzufügen",
   "addNewSolution": "Neue Lösung hinzufügen",
+  "addOtherBenefit": "Weitere Vorteile hinzufügen",
   "addRealEstateLoan": "Immobilienkredit hinzufügen",
+  "addSolution": "Lösung hinzufügen",
   "addSustainableEquipment": "Nachhaltige Ausrüstung hinzufügen",
   "alertSelectedProduct": "Wählen Sie die Kategorien und Produkte aus, die zu Ihrem Projekt passen",
   "all": "Alle",
@@ -354,6 +356,7 @@
     "sloganTeam": "Lassen Sie uns Ihnen die talentierte Gruppe von Personen vorstellen, die unsere Mission anführt, eine sauberere und nachhaltigere Zukunft zu gestalten."
   },
   "ifAvailables": "(Wenn verfügbar)",
+  "infoActionCardSubtitleEcosolutions": "Wir werden die besten Leads für Sie finden",
   "infoSaveMessages": "Sie haben die Möglichkeit, Ihre Daten jetzt zu speichern, um sicherzustellen, dass sie für zukünftige Referenzen verfügbar sind. Dies gibt Ihnen die Sicherheit, bei Bedarf darauf zugreifen zu können.",
   "INPUT_FILE": {
     "addNewFile": "Neue Datei hinzufügen",
@@ -467,14 +470,6 @@
   "notSave": "Ohne Speichern schließen",
   "ODS": {
     "ods_1": "Keine Armut",
-    "ods_10": "Verringerung der Ungleichheit",
-    "ods_11": "Nachhaltige Städte und Gemeinden",
-    "ods_12": "Verantwortungsvoller Konsum und Produktion",
-    "ods_13": "Maßnahmen zum Klimaschutz",
-    "ods_14": "Leben unter Wasser",
-    "ods_15": "Leben an Land",
-    "ods_16": "Frieden, Gerechtigkeit und starke Institutionen",
-    "ods_17": "Partnerschaften zur Erreichung der Ziele",
     "ods_2": "Kein Hunger",
     "ods_3": "Gesundheit und Wohlergehen",
     "ods_4": "Hochwertige Bildung",
@@ -482,7 +477,15 @@
     "ods_6": "Sauberes Wasser und Sanitäreinrichtungen",
     "ods_7": "Bezahlbare und saubere Energie",
     "ods_8": "Menschenwürdige Arbeit und Wirtschaftswachstum",
-    "ods_9": "Industrie, Innovation und Infrastruktur"
+    "ods_9": "Industrie, Innovation und Infrastruktur",
+    "ods_10": "Verringerung der Ungleichheit",
+    "ods_11": "Nachhaltige Städte und Gemeinden",
+    "ods_12": "Verantwortungsvoller Konsum und Produktion",
+    "ods_13": "Maßnahmen zum Klimaschutz",
+    "ods_14": "Leben unter Wasser",
+    "ods_15": "Leben an Land",
+    "ods_16": "Frieden, Gerechtigkeit und starke Institutionen",
+    "ods_17": "Partnerschaften zur Erreichung der Ziele"
   },
   "ods_msg_card_result": "Positiver Einfluss auf SDG",
   "ods_title": "Ziele für nachhaltige Entwicklung (SDG)",
@@ -495,6 +498,7 @@
     "eu": "EU",
     "switzerland": "Schweiz"
   },
+  "original": "Original",
   "our_ecosolutions": "",
   "ownerprofiles": {
     "business": "Unternehmen",
@@ -540,14 +544,14 @@
     "slogan_text2": "Wer sind Sie?"
   },
   "SDG_TITLES": {
+    "6": "Sauberes Wasser und Sanitäreinrichtungen",
+    "7": "Bezahlbare und saubere Energie",
+    "9": "Industrie, Innovation und Infrastruktur",
     "11": "Nachhaltige Städte und Gemeinden",
     "12": "Nachhaltige/r Konsum und Produktion",
     "13": "Maßnahmen zum Klimaschutz",
     "14": "Leben unter Wasser",
-    "15": "Leben an Land",
-    "6": "Sauberes Wasser und Sanitäreinrichtungen",
-    "7": "Bezahlbare und saubere Energie",
-    "9": "Industrie, Innovation und Infrastruktur"
+    "15": "Leben an Land"
   },
   "searchEcosolutions": "Suchen Sie nach Cleantech-Lösungen",
   "SELECT_DATA_LABEL": {
@@ -715,6 +719,7 @@
   "showAll": "Alle anzeigen",
   "showLead": "Leads anzeigen",
   "showMore": "Mehr erfahren",
+  "showTranslations": "Übersetzungen anzeigen",
   "SIGNUP": {
     "acceptedConditions": "Ich habe die",
     "acceptedConditions2": "Allgemeinen Geschäftsbedingungen gelesen und akzeptiere sie",
@@ -750,7 +755,9 @@
   },
   "titleBannerLead": " Verfolgung qualifizierter Leads",
   "titleResult": "Am besten geeignete eco-solutions für",
+  "translate": "Übersetzen",
   "turnOnNotifications": "Benachrichtigungen aktivieren",
+  "typeSolutionCleantech": "Art der Cleantech-Lösung",
   "upgrade": "Aktualisieren",
   "upTo": "Bis zu",
   "user": "Benutzer",
@@ -794,12 +801,6 @@
   "your_ecosolutions": "Ihre Eco-solutions",
   "yourEcosolution": "Ihre Ökolösung",
   "yourFinancialSolutions": "Ihre Finanzierungslösungen",
-  "yourProjects": "Ihre Projekte",
-  "typeSolutionCleantech": "Art der Cleantech-Lösung",
-  "addOtherBenefit": "Weitere Vorteile hinzufügen",
-  "translate": "Übersetzen",
-  "original": "Original",
-  "showTranslations": "Übersetzungen anzeigen",
-  "yourProjectFile":"Ihre Projektdatei"
-
+  "yourProjectFile": "Ihre Projektdatei",
+  "yourProjects": "Ihre Projekte"
 }

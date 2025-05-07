@@ -18,7 +18,7 @@ export interface EcosolutionFormData {
     reductionPercentage?: FromTO
     operationalCostReductionPercentage?: FromTO
   }
-  sustainableDevelopmentGoals?: Array<{ code: string }>
+  sustainableDevelopmentGoals?: number[]
   classifications: Array<{
     category: string
     subCategory: string
@@ -56,7 +56,7 @@ export class EcosolutionsBody {
   readonly classifications: Classifications[]
   readonly price?: Price
   readonly improvement?: Improvement
-  readonly sustainableDevelopmentGoals?: string[]
+  readonly sustainableDevelopmentGoals?: number[]
   readonly countries?: string[]
   readonly paybackPeriodYears?: number
   readonly marketReady?: boolean
@@ -94,7 +94,7 @@ export class EcosolutionsBody {
 
     this.improvement = this._mapImprovement(formValue)
     this.improvementOtherCategory = this._mapImprovementOtherCategory(formValue.improvementOtherCategory)
-    this.sustainableDevelopmentGoals = this._mapSustainableDevelopmentGoals(formValue.sustainableDevelopmentGoals)
+    this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals
 
     const classificationResult = this._mapClassifications(formValue.classifications)
     this.classification = classificationResult.primary
@@ -143,10 +143,6 @@ export class EcosolutionsBody {
       result.push(otherImprovement)
     }
     return result
-  }
-
-  private _mapSustainableDevelopmentGoals(sustainableDevelopmentGoals?: Array<{ code: string }>): string[] | undefined {
-    return sustainableDevelopmentGoals?.map((goal) => goal.code)
   }
 
   private _mapClassifications(formClassifications?: EcosolutionFormData['classifications']): MappedClassificationsResult {

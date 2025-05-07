@@ -29,6 +29,9 @@ export class EcosolutionsManagmentDocumentsService {
   private _ecosolutionsService = inject(EcosolutionsService)
 
   public uploadTechnicalSheet(ecosolutionId: string, technicalSheet: File | undefined) {
+    if (!technicalSheet) {
+      return of(null)
+    }
     return this._uploadDocumentsTechnicalSheet(ecosolutionId, technicalSheet).pipe(
       catchError((error) => {
         console.error('Error uploading technical sheet:', error)
@@ -71,6 +74,9 @@ export class EcosolutionsManagmentDocumentsService {
   }
 
   public uploadCertificates(ecosolutionId: string, certificates: DocumentMetadata[] | undefined) {
+    if (!certificates) {
+      return of(null)
+    }
     return this._uploadDocumentationCertificate(ecosolutionId, certificates).pipe(
       catchError((error) => {
         console.error('Error uploading certificates:', error)

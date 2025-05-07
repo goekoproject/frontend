@@ -1,3 +1,4 @@
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion'
 import { CommonModule } from '@angular/common'
 import { Component, computed, effect, input, OnInit, signal } from '@angular/core'
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
@@ -20,10 +21,11 @@ export class EcosolutionsFormWarrantyComponent implements OnInit {
   public hasError = computed(
     () => (this.parentForm().get('yearGuarantee')?.invalid && this.parentForm().get('yearGuarantee')?.touched) || false,
   )
+  public guarantee = computed(() => coerceBooleanProperty(this.ecosolutionsData()?.guaranteeInYears))
 
   effectLoadWarranty = effect(() => {
     if (this.ecosolutionsData()) {
-      this.parentForm().get('guarantee')?.patchValue(this.ecosolutionsData()?.guarantee)
+      this.parentForm().get('guarantee')?.patchValue(this.guarantee())
       this.parentForm().get('yearGuarantee')?.patchValue(this.ecosolutionsData()?.guaranteeInYears)
     }
   })
