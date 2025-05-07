@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, inject, signal } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
+import { distinctUntilChanged, map } from 'rxjs'
 import { Notification, ToastService } from './toast.service'
 
 type RemoveToast = {
@@ -18,6 +19,7 @@ type RemoveToast = {
   host: {
     class: 'goeko-toast',
     '[attr.static]': 'static',
+    '[attr.open]': 'messages() && messages().length > 0',
   },
 })
 export class ToastComponent implements OnInit {
@@ -27,26 +29,29 @@ export class ToastComponent implements OnInit {
   public messages = signal<Array<Notification | null>>([])
   public removing: RemoveToast = {}
   public removingAll = false
+
   ngOnInit(): void {
     this._getMessages()
   }
 
   private _getMessages() {
-    this._toastService.messageSource.subscribe((newMessage) => {
-      if (!newMessage) {
-        return
-      }
-      window.scrollTo(0, 0)
-      this.messages.update((message) => [...message, newMessage])
-      this._removeAllToast()
-    })
+    this._toastService.messageSource
+      .pipe(
+        distinctUntilChanged((prev, curr) => prev?.type === curr?.type && prev?.message === curr?.message),
+        map((newMessage) => {
+          if (!newMessage) return
+          this.messages.update((message) => [...message, newMessage])
+          this._removeAllToast()
+        }),
+      )
+      .subscribe()
   }
 
   closeToast(index: number) {
     this.removing[index] = true
     setTimeout(() => {
       this._removeToast(index)
-    }, 700)
+    }, 600)
   }
 
   private _removeToast(index: number) {
@@ -61,6 +66,6 @@ export class ToastComponent implements OnInit {
       this.messages().forEach((_, index) => {
         this._removeToast(index)
       })
-    }, 8000)
+    }, 900)
   }
 }

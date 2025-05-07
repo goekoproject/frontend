@@ -5,8 +5,8 @@ export interface Classifications {
   products: string[]
 }
 
-//TODO: review name
-interface CodeLabel {
+//TODO: review name   
+export interface CodeLabel {
   code: string
   label: string
 }

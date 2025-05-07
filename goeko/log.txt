@@ -1,0 +1,125 @@
+
+> @goeko/source@0.0.0 prestart
+> bun run prestart.js
+
+Starting...🚀
+
+ ██████╗  ██████╗ ███████╗██╗  ██╗ ██████╗
+██╔════╝ ██╔═══██╗██╔════╝██║ ██╔╝██╔═══██╗
+██║  ███╗██║   ██║█████╗  █████╔╝ ██║   ██║
+██║   ██║██║   ██║██╔══╝  ██╔═██╗ ██║   ██║
+╚██████╔╝╚██████╔╝███████╗██║  ██╗╚██████╔╝
+ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝
+
+
+2025
+¡Precaución llegarón los PERROS  SALVAJES!
+─────▄█▄█─────────────
+────█████▄▄▄──────────
+──────███████▄────────
+░░░░░░█▀█▀█████░░░░░░░
+░░░░░▄█▄█░▄████▄▄▀░░░░
+
+> @goeko/source@0.0.0 start
+> bun run start.js
+
+[32m
+> @goeko/source@0.0.0 start-tailwind
+> npx tailwindcss -i ./apps/goeko/src/tailwind.scss -o ./dist/tailwind-styles.scss --watch
+
+[0m
+[34m
+[0m
+[34m> nx run goeko:serve:local
+
+[0m
+[32mBrowserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[0m
+[32m
+Rebuilding...
+[0m
+[32m
+[0m
+[32mDone in 503ms.
+[0m
+[34mBrowserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should d[0m
+[34mo it regularly: https://github.com/browserslist/update-db#readme
+[0m
+[34m- Generating browser application bundles (phase: setup)...
+[0m
+[34m[32m✔[39m Browser application bundle generation complete.
+[0m
+[34m[37m[0m[0m[39m
+[37m[0m[1mInitial chunk files[22m                                                                                    [2m | [22m[1mNames[22m                                                                             [2m | [22m [1mRaw size[22m[0m[39m
+[37m[0m[32mvendor.js[39m[37m                                                                                              [2m | [22m[2mvendor[22m                                                                            [2m | [22m  [36m7.14 MB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mmain.js[39m[37m                                                                                                [2m | [22m[2mmain[22m                                                                              [2m | [22m  [36m1.16 MB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mstyles.css, styles.js[39m[37m                                                                                  [2m | [22m[2mstyles[22m                                                                            [2m | [22m[36m444.27 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mpolyfills.js[39m[37m                                                                                           [2m | [22m[2mpolyfills[22m                                                                         [2m | [22m[36m348.10 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mruntime.js[39m[37m                                                                                             [2m | [22m[2mruntime[22m                                                                           [2m | [22m [36m12.92 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1m [22m                                                                                                      [2m | [22m[1mInitial total[22m                                                                     [2m | [22m  [1m9.11 MB[22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy chunk files[22m                                                                                       [2m | [[39m[37m22m[1mNames[22m                                                                             [2m | [22m [1mRaw size[22m[0m[39m
+[37m[0m[32mdefault-node_modules_ngx-editor_fesm2022_ngx-editor_mjs.js[39m[37m                                             [2m | [22m[2mhome-home-module[22m                                                                  [2m | [22m[36m857.77 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_home_home_module_ts.js[39m[37m                                                              [2m | [22m[2mhome-home-module[22m                                                                  [2m | [22m[36m376.70 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_funding_funding_module_ts.js[39m[37m                                                        [2m | [22m[2mfunding-funding-module[22m                                                            [2m | [22m[36m162.89 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_cleantech-ecosolutions_ecosolutions-form_ecosolutions-form_component_ts.js[39m[37m          [2m | [22m[2mecosolutions-form-ecosolutions-form-component[22m                                     [2m | [22m[36m111.36 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_access_access_router_ts.js[39m[37m                                                          [2m | [22m[2maccess-access-router[22m                                                              [2m | [22m [36m70.95 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_profile_profile_module_ts.js[39m[37m                                                        [2m | [22m[2mprofile-profile-module[22m                                                            [2m | [22m [36m70.39 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_platform_platform_module_ts.js[39m[37m                                                      [2m | [22m[2mplatform-platform-module[22m                                                          [2m | [22m [36m58.71 kB[39m[37m[2m | [22m[39m
+[37m[0m[39m
+[37m[0m[32mapps_goeko_src_app_projects_project-ecosolutions-catalog_project-ecosolutions-catalog_component_ts.js[39m[37m  [2m | [22m[2mprojects-project-ecosolutions-catalog-project-ecosolutions-catalog-component[22m      [2m | [22m [36m51.96 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_projects_project-catalog-detail_project-catalog-detail_component_ts.js[39m[37m              [2m | [22m[2mprojects-project-catalog-detail-project-catalog-detail-component[22m                  [2m | [22m [36m40.72 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_funding_search_funding-matches-result_funding-matches-result_component_ts.js[39m[37m        [2m | [22m[2msearch-funding-matches-result-funding-matches-result-component[22m                    [2m | [22m [36m40.61 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_admin_grouping_admin-categories_admin-categories_component_ts.js[39m[37m                    [2m | [22m[2mgrouping-admin-categories-admin-categories-component[22m                              [2m | [22m [36m39.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_funding_search_search-sustainble-equipment-form_search-sustainble-equipmen-3dcc9b.js[39m[37m[2m | [22m[2msearch-search-sustainble-equipment-form-search-sustainble-equipment-form-component[22m[2m | [22m [36m38.96 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mdefault-apps_goeko_src_app_admin_grouping_add-category-subcategory-group_component_ts.js[39m[37m               [2m | [22m[2mgrouping-new-grouping-component[22m                                                   [2m | [22m [36m38.30 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_dashboard_dashboard_module_ts.js[39m[37m                                                    [2m | [22m[2mdashboard-dashboard-module[22m                                                        [2m | [22m [36m37.22 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_funding_search_search-real-estate-loan_search-real-estate-loan_component_ts.js[39m[37m      [[39m[37m2m | [22m[2msearch-search-real-estate-loan-search-real-estate-loan-component[22m                  [2m | [22m [36m29.77 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_dashboard_dashboard-sme_dashboard-sme_component_ts.js[39m[37m                               [2m | [22m[2mdashboard-sme-dashboard-sme-component[22m                                             [2m | [22m [36m28.61 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mdefault-apps_goeko_src_app_admin_grouping_list-subcategories_component_ts.js[39m[37m                           [2m | [22m[2mgrouping-admin-categories-admin-categories-component[22m                              [2m | [22m [36m27.81 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_projects_project-form_project-form_component_ts.js[39m[37m                                  [2m | [22m[2mprojects-project-form-project-form-component[22m                                      [2m | [22m [36m24.71 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_lead-bank_lead-of-bank_component_ts.js[39m[37m                                              [2m | [22m[2mlead-bank-lead-of-bank-component[22m                                                  [2m | [22m [36m22.03 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_cleantech-ecosolutions_ecosolutions-list_ecosolutions-list_component_ts.js[39m[37m          [2m | [22m[2mecosolutions-list-ecosolutions-list-component[22m                                     [2m | [22m [36m21.42 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_admin_data-admin_admin-users_component_ts.js[39m[37m                                        [2m | [22m[2mdata-admin-admin-users-component[22m                                                  [2m | [22m [36m18.95 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_admin_grouping_new-grouping_component_ts.js[39m[37m                                         [2m | [22m[2mgrouping-new-grouping-component[22m                                                   [2m | [22m [36m18.71[39m[37m kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_projects_project-list_project-list_component_ts.js[39m[37m                                  [2m | [22m[2mprojects-project-list-project-list-component[22m                                      [2m | [22m [36m18.00 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mdefault-apps_goeko_src_app_admin_grouping_admin-categories_admin-categories_services_ts-apps_-3b21d1.js[39m[37m[2m | [22m[2mgrouping-new-grouping-component[22m                                                   [2m | [22m [36m17.78 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mcommon.js[39m[37m                                                                                              [2m | [22m[2mcommon[22m                                                                            [2m | [22m [36m17.56 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_access_login_login_component_ts.js[39m[37m                                                  [2m | [22m[2mlogin-login-component[22m                                                             [2m | [22m [36m16.96 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_dashboard_dashboard-bank_dashboard-bank_component_ts.js[39m[37m                             [2m | [22m[2mdashboard-bank-dashboard-bank-component[22m                                           [2m | [22m [36m13.82 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_cleantech-ecosolutions_cleantech-ecosolutions_router_ts.js[39m[37m                          [2m | [22m[2mcleantech-ecosolutions-cleantech-ecosolutions-router[22m                              [2m | [22m [36m12.61 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_admin_grouping_grouping_component_ts.js[39m[37m                                             [2m | [22m[2mgrouping-grouping-component[22m                                                       [2m | [22m [36m12.20 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_leads_leads-list_component_ts.js[39m[37m                                  [39m[37m                  [2m | [22m[2mleads-list-component[22m                                                              [2m | [22m [36m10.23 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_ecosolutions_favourites_favourites_component_ts.js[39m[37m                                  [2m | [22m[2mecosolutions-favourites-favourites-component[22m                                      [2m | [22m  [36m7.65 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_leads_leads_module_ts.js[39m[37m                                                            [2m | [22m[2mleads-leads-module[22m                                                                [2m | [22m  [36m4.91 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_shell_verify-email_component_ts.js[39m[37m                                                  [2m | [22m[2mshell-verify-email-component[22m                                                      [2m | [22m  [36m4.88 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_admin_admin-routes_ts.js[39m[37m                                                            [2m | [22m[2madmin-admin-routes[22m                                                                [2m | [22m  [36m4.82 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mlibs_ui_src_lib_ui_avatar_avatar_component_ts.js[39m[37m                                                       [2m | [22m[2mgoeko-ui-avatar-avatar-component[22m                                                  [2m | [22m  [36m4.07 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_home_blog_blog_component_ts.js[39m[37m                                                      [2m | [22m[2mblog-blog-component[22m                                                               [2m | [22m  [36m2.34 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_admin_grouping_admin-categories_label-by-category_pipe_ts.js[39m[37m                        [2m | [22m[2madmin-categories-label-by-category-pipe[22m                                           [2[39m[37mm | [22m  [36m1.52 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[32mapps_goeko_src_app_projects_project-list_display-regions_pipe_ts.js[39m[37m                                    [2m | [22m[2mdisplay-regions-pipe[22m                                                              [2m | [22m  [36m1.50 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-04-10T09:48:34.555Z[39m[37m[22m - Hash: [1m[37m42fd5939c8bd3889[39m[37m[22m - Time: [1m[37m7824[39m[37m[22mms[0m[39m
+[37m[39m
+[37m** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **[39m
+[37m[39m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[0m
+[34m[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0mD:\frontend\goeko\apps\goeko\src\app\home\services\services.component.ts depends on '@contentful/rich-text-types'. CommonJS or AMD dependencies can cause optimization bailouts.[39m[22m
+[1m[33mFor more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0mD:\frontend\goeko\libs\store\src\lib\content-ful\content-ful.service.ts depends on '@contentful/rich-text-html-renderer'. CommonJS or AMD dependencies can cause optimization bailouts.[39m[22m
+[1m[33mFor more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0mD:\frontend\goeko\libs\store\src\lib\content-ful\content-ful.service.ts depends on 'contentful'. CommonJS or AMD dependencies can cause optimization bailouts.[39m[22m
+[1m[33mFor more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[0m

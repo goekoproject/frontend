@@ -1,0 +1,12 @@
+<fieldset [formGroup]="parentForm()">
+  <legend>{{ 'FORM_LABEL.paybackPeriodYears' | translate }}</legend>
+  <ui-super-select
+    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+    [formControlName]="'paybackPeriodYears'"
+    id="paybackPeriodYears"
+    name="paybackPeriodYears">
+    @for (option of paybackPeriodYears(); track option.id) {
+      <super-option [value]="option.id"> {{ option.id }} {{ option.keyLang | translate }} </super-option>
+    }
+  </ui-super-select>
+</fieldset>

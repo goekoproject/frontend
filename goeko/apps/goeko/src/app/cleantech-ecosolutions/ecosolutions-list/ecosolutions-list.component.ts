@@ -1,88 +1,89 @@
-import { Component, input, OnInit, signal } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { Component, inject, input, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { MessageService } from '@goeko/business-ui'
-import { CategoryGrouping, EcosolutionsService } from '@goeko/store'
-import { TranslateService } from '@ngx-translate/core'
+import { EcosolutionCategorySelectorComponent, MessageService } from '@goeko/business-ui'
+import { EcosolutionInfoComponent } from '@goeko/business-ui/components/ecosolution-info/ecosolution-info.component'
+import { CategoryGrouping } from '@goeko/store'
+import { ButtonModule, DialogService } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
 import { CleantechEcosolutionsService } from '../cleantech-ecosolutions.services'
-import { CardEcosolutions } from './card-ecosolutions.model'
+import { EcosolutionInfo } from './ecosolution-info.model'
 
 @Component({
   selector: 'goeko-ecosolutions-list',
+  standalone: true,
+  imports: [CommonModule, EcosolutionInfoComponent, TranslatePipe, ButtonModule],
   templateUrl: './ecosolutions-list.component.html',
   styleUrls: ['./ecosolutions-list.component.scss'],
   providers: [MessageService],
 })
-export class EcosolutionsListComponent implements OnInit {
-  groupingForm = input.required<CategoryGrouping[]>()
+export class EcosolutionsListComponent {
+  private _cleantechEcosolutionsService = inject(CleantechEcosolutionsService)
+  private _dialogService = inject(DialogService)
+  private _messageService = inject(MessageService)
+  private _route = inject(ActivatedRoute)
+  private _router = inject(Router)
+  public ecosolutionsInfo = input.required<EcosolutionInfo[]>()
+  public id = input.required<string>()
   public categorySelected = signal<CategoryGrouping | undefined>(undefined)
   public isSubscribed = !!this._cleantechEcosolutionsService.isSubscribed
-  public ecosolutions!: CardEcosolutions[]
-  public cleanTechId!: string
 
-  constructor(
-    private _ecosolutionsService: EcosolutionsService,
-    private _route: ActivatedRoute,
-    private _roter: Router,
-    private translateService: TranslateService,
-    private _cleantechEcosolutionsService: CleantechEcosolutionsService,
-    private _messageService: MessageService,
-  ) {}
-
-  async ngOnInit(): Promise<void> {
-    this.cleanTechId = this._route.snapshot.paramMap.get('id') as string
-    this.categorySelected.set(this.groupingForm()[0])
-
-    this.getAllEcosolutionsByCleanTech()
+  createEcosolution() {
+    this._dialogService
+      .open(EcosolutionCategorySelectorComponent)
+      .afterClosed()
+      .subscribe((categoryCode) => {
+        if (categoryCode) {
+          this._goToEcosolutionForm('new', { categoryCode })
+        }
+      })
   }
-
-  getAllEcosolutionsByCleanTech() {
-    this._ecosolutionsService.getEcosolutionsByCleantechId(this.cleanTechId).subscribe((ecosolutions: any) => {
-      this.ecosolutions = ecosolutions?.map((ecosolution: any) => new CardEcosolutions(ecosolution, this.translateService))
-    })
-  }
-
-  viewEcosolution(ecosolution: CardEcosolutions) {
+  viewEcosolution(ecosolution: EcosolutionInfo) {
     this._goToEcosolutionForm(
       'detail',
-      { id: ecosolution.id, categoryId: this.categorySelected()?.id },
+      { id: ecosolution.id, categoryCode: this.categorySelected()?.id as string },
       {
-        mainCategory: ecosolution.mainCategory,
+        mainCategory: ecosolution.category,
         isReadOnly: true,
       },
     )
   }
-  editEcosolution(ecosolution: CardEcosolutions) {
-    this._goToEcosolutionForm(
-      'edit',
-      { id: ecosolution.id, categoryId: this.categorySelected()?.id },
-      {
-        mainCategory: ecosolution.mainCategory,
-      },
-    )
+  editEcosolution(ecosolution: EcosolutionInfo) {
+    this._goToEcosolutionForm('edit', { id: ecosolution.id, categoryCode: ecosolution.category[0].categoryCode })
   }
 
-  deleteEcosolution(ecosolution: CardEcosolutions) {
+  deleteEcosolution(ecosolution: EcosolutionInfo) {
     this._messageService
       .deleteMessage(ecosolution.solutionName)
       .afterClosed()
       .subscribe((isDelete) => {
         if (isDelete) {
-          this._ecosolutionsService.deleteEcosolution(ecosolution.id).subscribe(() => {
-            this.getAllEcosolutionsByCleanTech()
+          this._cleantechEcosolutionsService.deleteEcosolution(ecosolution.id).subscribe(() => {
+            this._fetchData()
           })
         }
       })
   }
 
-  private _goToEcosolutionForm(path: string, params: { id: string; categoryId?: string }, arg?: any) {
-    const { id, categoryId } = params
-    this._roter.navigate([`./${path}`, id, categoryId], {
-      queryParams: arg,
-      relativeTo: this._route,
+  private _goToEcosolutionForm(path: string, params: { id?: string; categoryCode: string }, arg?: unknown) {
+    const { id, categoryCode } = params
+    const pathSegments = [`./${path}`, categoryCode]
+    if (id) {
+      pathSegments.push(id)
+    }
+    this._router.navigate(pathSegments, {
+      queryParams: { ...(arg as object), cleantechId: this.id() },
+      relativeTo: this._route.parent,
     })
   }
 
   selectedTab(category: CategoryGrouping) {
     this.categorySelected.set(category)
+  }
+
+  private _fetchData = () => {
+    this._router.navigate([], {
+      queryParams: { hash: window.crypto.randomUUID() },
+    })
   }
 }

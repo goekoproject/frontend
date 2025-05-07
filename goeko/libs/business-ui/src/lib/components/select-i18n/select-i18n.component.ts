@@ -33,6 +33,8 @@ export class SelectI18nComponent implements OnInit {
     this.selectedLand.set(lang)
     this._translateServices.use(lang.code)
     localStorage.setItem('lang', lang.code)
+    document.documentElement.setAttribute('lang', lang.code)
+
     this.isOpen = false
   }
 

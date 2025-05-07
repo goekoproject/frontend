@@ -1,11 +1,10 @@
 import { DOCUMENT } from '@angular/common'
-import { Component, effect, Inject, OnInit, signal } from '@angular/core'
+import { Component, effect, Inject, signal } from '@angular/core'
 import { VAR_GENERAL } from '@goeko/business-ui'
-import { AuthService, REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
+import { REMOTE_CONFIG_PARAMS, RemoteConfigService } from '@goeko/core'
 import { PaymentSystemService, STATUS_PENDING, USER_TYPE, UserService } from '@goeko/store'
 import { NotificationService } from '@goeko/ui'
 import { TranslateService } from '@ngx-translate/core'
-import { Auth0UserProfile } from 'auth0-js'
 import { environment } from '../../environments/environment'
 
 @Component({
@@ -13,7 +12,7 @@ import { environment } from '../../environments/environment'
   templateUrl: './platform.component.html',
   styleUrl: './platform.component.scss',
 })
-export class PlatformComponent implements OnInit {
+export class PlatformComponent {
   get isSubscribed() {
     if (!environment.production) {
       return true
@@ -31,7 +30,6 @@ export class PlatformComponent implements OnInit {
   private _isSuscriptionNeed = signal(this._remoteConfigService.getValue(REMOTE_CONFIG_PARAMS.SUSBCRIPTION_NEED).asBoolean())
 
   constructor(
-    private _authService: AuthService,
     private readonly _userService: UserService,
     private _notificationService: NotificationService,
     private readonly _remoteConfigService: RemoteConfigService,
@@ -42,24 +40,6 @@ export class PlatformComponent implements OnInit {
     effect(() => {
       this._hanlderCleantechSuscriptions()
     })
-  }
-
-  ngOnInit(): void {
-    this._loadAuhtUser()
-  }
-
-  private _loadAuhtUser() {
-    this._authService.userInfo$.subscribe((userInfo) => {
-      this._userService.setUserData(userInfo)
-      this._checkEmailVerified(userInfo)
-    })
-  }
-
-  private _checkEmailVerified(userInfo: Auth0UserProfile) {
-    if (!userInfo.email_verified) {
-      const urlPageEmailVerify = `${this.doc.location.origin}/verify-email`
-      this._authService.logout(urlPageEmailVerify)
-    }
   }
 
   private _hanlderCleantechSuscriptions(): void {

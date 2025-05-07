@@ -12,5 +12,7 @@ import { BadgeModule } from '@goeko/ui'
 })
 export class HeaderUserComponent {
   private _userService = inject(UserService)
-  userProfile = computed(() => (this._userService.userProfile().id ? this._userService.userProfile() : this._userService.userAuthData()))
+  userProfile = computed(() =>
+    this._userService.userProfile().id ? this._userService.userProfile() : this._userService.auth0UserProfile(),
+  )
 }

@@ -1,6 +1,7 @@
 export enum PARENT_CODE {
   CERTIFICATE = 'CERTIFICATE',
   TECHNICAL_SHEET = 'TECHNICAL_SHEET',
+  PROJECT_FILE = 'PROJECT',
 }
 
 export interface ClassificationDocumentType {

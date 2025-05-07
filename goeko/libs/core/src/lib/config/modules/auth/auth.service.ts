@@ -8,7 +8,7 @@ import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
 import { AuthRequest } from './auth-request.interface'
 import { AUTH_CONNECT, EXPIRES_AT, SESSIONID } from './auth.constants'
-import { Auth0Connected } from './auth0.abtract'
+import { Auth0Connected, setSession } from './auth0.abtract'
 import { SignUp } from './signup.interface'
 
 type ErrorAuthType = 'general' | 'verifyEmail'
@@ -121,6 +121,14 @@ export class AuthService extends Auth0Connected {
           observer.complete()
         }
       })
+    })
+  }
+
+  initializeToken() {
+    this.webAuth.parseHash({ hash: window.location.hash }, function (err, authResult) {
+      if (authResult) {
+        setSession(authResult)
+      }
     })
   }
 

@@ -16,7 +16,7 @@ import { getMenuByUserType, MenuUser } from './menu-user.contants'
 export class MenuUserComponent {
   private user = this._userService.userProfile
   private userTypes = this._userService.userType
-  private userAuth = this._userService.userAuthData
+  private userAuth = this._userService.auth0UserProfile
   public menuOptions!: MenuUser[]
   public selectedOptionMenu = signal<number | null>(null)
   constructor(
