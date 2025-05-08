@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, input, signal } from '@angular/core'
+import { Component, computed, effect, input, signal } from '@angular/core'
 import {
   CATEGORIES,
   InfoCertificateComponent,
@@ -28,7 +28,7 @@ import { TranslateModule } from '@ngx-translate/core'
     LeadFormComponent,
     ButtonModule,
     InfoCertificateComponent,
-    FilterByDocumentTypePipe
+    FilterByDocumentTypePipe,
   ],
   templateUrl: './project-catalog-detail.component.html',
   styleUrl: './project-catalog-detail.component.scss',
@@ -37,10 +37,16 @@ export class ProjectCatalogDetailComponent {
   public PARENT_CODE = signal(PARENT_CODE)
   public dataSelect = DataSelect as any
   public CATEGORIES = signal(CATEGORIES)
-  ecosolutionSearchDetail = input.required<EcosolutionSearchResponse>()
+  ecosolutionSearchDetail = input<EcosolutionSearchResponse>({} as EcosolutionSearchResponse)
+  categories = computed(() => this.ecosolutionSearchDetail()?.classifications || [])
   ecosolutionId = input.required<string>()
-
+  categoriesGrouped = computed(
+    () => Object.groupBy(this.categories(), (category) => category.category.code)[this.categories().at(0)?.category.code || ''] as any,
+  )
   goBack = () => window.history.back()
+  test = effect(() => {
+    console.log(this.categoriesGrouped())
+  })
 
   downloadCertified = (certifiedFile: Document) => {
     if (certifiedFile?.url) {

@@ -21,6 +21,7 @@ export interface EcosolutionSearchResponse {
   guarantee: boolean
   guaranteeInYears?: number
   improvement: ImprovementEcosolution
+  improvementOtherCategory: any[]
   marketReady: boolean
   paybackPeriodYears: number
   priceDescription?: string

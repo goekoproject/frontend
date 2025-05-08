@@ -9,7 +9,10 @@
         <!-- Header: Data comany and solution name -->
         <div class="mb-4 flex items-center justify-between">
           <div class="flex items-start gap-4">
-            <img alt="logo" class="size-28 rounded-xl border border-grayLight object-contain" [src]="ecosolutionSearchDetail().companyDetail.logo"
+            <img
+              alt="logo"
+              class="size-28 rounded-xl border border-grayLight object-contain"
+              [src]="ecosolutionSearchDetail().companyDetail.logo"
               [alt]="ecosolutionSearchDetail().companyDetail.id" />
             <div class="flex flex-col gap-3">
               <h2 class="text-2xl font-semibold">
@@ -26,22 +29,21 @@
         </div>
 
         <!-- Classification -->
-        @if (ecosolutionSearchDetail().classification) {
-          <section class="fieldset">
-            <p class="w-full text-sm font-semibold text-grayCharcoal">
-              {{ 'CATEGORIES_LABEL.' + ecosolutionSearchDetail().classification.subCategory + '.label' | translate }}
-            </p>
-            <!-- TODO:Change with admin v2 -->
-            <div class="flex flex-wrap gap-2">
-              @for (option of dataSelect[ecosolutionSearchDetail().classification.subCategory]; track option.id) {
-                @if (ecosolutionSearchDetail().classification.products.includes(option.id)) {
+        @if (categoriesGrouped()) {
+          @for (category of categoriesGrouped(); track category.id) {
+            <section class="fieldset">
+              <p class="w-full text-sm font-semibold text-grayCharcoal">
+                {{ category.subcategory?.label }}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                @for (option of category.products; track option.id) {
                   <div class="inline-block rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
-                    {{ option.keyLang | translate }}
+                    {{ option.label }}
                   </div>
                 }
-              }
-            </div>
-          </section>
+              </div>
+            </section>
+          }
         }
         <!-- Countries of Distribution -->
         <div class="fieldset">
@@ -121,6 +123,19 @@
             </div>
           </div>
         }
+        @defer (when (ecosolutionSearchDetail().documents
+        | filterByDocumentType: PARENT_CODE().PROJECT_FILE).length > 0) {
+          <div class="pt-4">
+            <h3 class="text-lg font-semibold">{{ 'projects' | translate }}</h3>
+
+            <!-- Certificates-->
+            <div class="flex flex-wrap gap-2">
+              @for (document of ecosolutionSearchDetail().documents | filterByDocumentType: PARENT_CODE().PROJECT_FILE; track $index) {
+                <goeko-info-certificate [fileUrl]="document.url" [fileType]="document.documentType.name"></goeko-info-certificate>
+              }
+            </div>
+          </div>
+        }
       </div>
       <!-- Description & Images -->
       <div class="pt-4">
@@ -158,6 +173,14 @@
               [label]="'FORM_LABEL.operationalCostReductionPercentage'"
               [isUpto]="true"
               [percentage]="ecosolutionSearchDetail().improvement.operationalCostReductionPercentage.to || 0"></go-percentage-card>
+          }
+          @if (ecosolutionSearchDetail().improvementOtherCategory.length > 0) {
+            @for (item of ecosolutionSearchDetail().improvementOtherCategory; track $index) {
+              <go-percentage-card
+                [label]="item.category"
+                [isUpto]="true"
+                [percentage]="item.reductionPercentage.to || 0"></go-percentage-card>
+            }
           }
         </div>
       </div>
