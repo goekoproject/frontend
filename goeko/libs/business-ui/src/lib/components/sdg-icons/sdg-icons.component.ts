@@ -32,7 +32,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   public sdgs = signal<SDGLabel[]>(SDG_LABEL)
   public justIcon = input<boolean>(false)
   public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg?.code))
-  onChange: (value: Array<SDGLabel>) => void = () => {}
+  onChange: (value: Array<number>) => void = () => {}
   onTouched: () => void = () => {}
   readonly = input<boolean>(false)
   value = model<Array<SDGLabel>>([])
@@ -105,7 +105,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   selectedElement(event: Event, sdgSelected: SDGLabel): void {
     this._assignValue(sdgSelected)
     this.onTouched()
-    this.onChange(this.value())
+    this.onChange(this.value().map((sdg) => sdg.code))
     event.preventDefault()
   }
 }
