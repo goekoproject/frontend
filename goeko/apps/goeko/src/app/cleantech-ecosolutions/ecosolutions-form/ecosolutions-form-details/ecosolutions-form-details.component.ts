@@ -178,7 +178,7 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
       return undefined
     }
     return this._fb.group({
-      label: new FormControl(label || ''),
+      label: new FormControl(label || '', Validators.required),
       lang: new FormControl(code),
     })
   }

@@ -39,7 +39,7 @@
   "bestFiancialPartners": "Beste Finanzierungspartner",
   "BREADCRUMBS": {
     "edit_ecosolutions": "Bearbeiten Sie Ihre Ökolösung",
-    "new_ecosolutions": "Neue Öko-Lösung",
+    "new_ecosolutions": "Neue Cleantech-Lösung",
     "view_ecosolutions": "Details Ihrer Ökolösung ecosolution"
   },
   "buildingtypes": {
@@ -239,7 +239,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Zusätzliche Informationen",
     "advantages": "Vorteile",
-    "advantagesEcosolutions": "Vorteile Ihrer eco-solution",
+    "advantagesEcosolutions": "Vorteile",
     "advantagesSupportText": "Vorteile im Vergleich zu einer Standardlösung",
     "allProvinces": "Alle Regionen",
     "amountRequiredFunding": "Mindestbetrag erforderlich, damit der Antrag berücksichtigt wird",
@@ -258,7 +258,7 @@
     "contactPerson": "Kontaktperson",
     "countriesAvailable": "Verfügbare Länder",
     "countriesDistribution": "Vertriebsländer",
-    "countriesProvincesAvailable": "Länder und Regionen der Verteilung",
+    "countriesProvincesAvailable": "Verteilung",
     "country": "Land",
     "currency": "Währung",
     "currencyFunding": "Währung",
@@ -710,6 +710,18 @@
     }
   },
   "selectAll": "Alles auswählen",
+  "selectCategory": "Wähle eine Kategorie",
+  "reductionEnvironmentalImpact": "Verringerung der Umweltbelastung",
+  "detail": "Detail",
+  "name": "Name",
+  "originalLanguage": "Originalsprache",
+  "shortDescription": "Kurzbeschreibung",
+  "description": "Beschreibung",
+  "informationAboutPrice": "Informationen zum Preis",
+  "selectLanguagesForTranslation": "Wähle die Sprachen aus, in die du die Beschreibungen und Preisinformationen übersetzen möchtest.",
+  "maxPhotoSize": "Die maximal zulässige Fotogröße beträgt {{maxSizeFile}}",
+  "addAnotherLocation": "Anderen Standort hinzufügen",
+  "environmentalCertificate": "Mit einem Label kompatibles oder anderes Umweltzertifikat",
   "selectCategoryEcosolutions": "Wählen Sie die Kategorie für Ihre eco-solution aus",
   "selected_products": "Ausgewählte Produkte",
   "selectedProduct": "Ausgewähltes Produkt",

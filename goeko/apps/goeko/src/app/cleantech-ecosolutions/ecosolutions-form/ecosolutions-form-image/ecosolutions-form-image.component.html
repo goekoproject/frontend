@@ -4,5 +4,5 @@
     (fileChange)="uploadImgEcosolutions($event)"
     [filesUrl]="ecosolutionImages() || ''"
     [multiple]="true"
-    [label]="'FORM_LABEL.titleSelectImgEcosolution' | translate"></goeko-input-file>
+    [label]="'maxPhotoSize' | translate: { maxSizeFile: maxSizeFile() }"></goeko-input-file>
 </ng-container>

@@ -38,7 +38,7 @@
   "bestFiancialPartners": "Meilleurs partenaires financiers",
   "BREADCRUMBS": {
     "edit_ecosolutions": "Modifier éco-solution",
-    "new_ecosolutions": "Nouvelle éco-solution",
+    "new_ecosolutions": "Nouvelle solution cleantech",
     "view_ecosolutions": "Détails de votre écosolution"
   },
   "buildingtypes": {
@@ -238,7 +238,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Informations supplémentaires",
     "advantages": "Avantages",
-    "advantagesEcosolutions": "Avantages de votre éco-solution",
+    "advantagesEcosolutions": "Avantages",
     "advantagesSupportText": "Avantages par rapport à une solution standard",
     "allProvinces": "Toutes les régions",
     "amountRequiredFunding": "Montant minimum requis pour que la demande soit prise en compte",
@@ -257,7 +257,7 @@
     "contactPerson": "Personne de contact",
     "countriesAvailable": "Pays disponibles",
     "countriesDistribution": "Territoires de distribution",
-    "countriesProvincesAvailable": "Pays et régions de distribution",
+    "countriesProvincesAvailable": "Distribución",
     "country": "Pays",
     "currency": "Devise",
     "currencyFunding": "Devise",
@@ -709,6 +709,18 @@
     }
   },
   "selectAll": "Tout sélectionner",
+  "selectCategory": "Sélectionnez une catégorie",
+  "reductionEnvironmentalImpact": "Réduction de l'impact environnemental",
+  "detail": "Détail",
+  "name": "Nom",
+  "originalLanguage": "Langue originale",
+  "shortDescription": "Description courte",
+  "description": "Description",
+  "informationAboutPrice": "Informations sur le prix",
+  "selectLanguagesForTranslation": "Sélectionnez les langues dans lesquelles vous souhaitez traduire les descriptions et les informations de prix.",
+  "maxPhotoSize": "La taille maximale autorisée pour les photos est {{maxSizeFile}}",
+  "addAnotherLocation": "Ajouter un autre lieu",
+  "environmentalCertificate": "Certificat compatible avec un label ou autre certificat environnemental",
   "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre écosolution",
   "selected_products": "Produits sélectionnés",
   "selectedProduct": "Produit sélectionné",

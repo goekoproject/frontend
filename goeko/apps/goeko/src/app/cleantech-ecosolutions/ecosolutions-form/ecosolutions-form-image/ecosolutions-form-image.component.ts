@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, computed, inject, input } from '@angular/core'
+import { Component, computed, inject, input, signal } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { Picture } from '@goeko/store'
 import { InputFileComponent } from '@goeko/ui'
@@ -14,7 +14,7 @@ import { TranslatePipe } from '@ngx-translate/core'
 })
 export class EcosolutionsFormImageComponent {
   private _fb = inject(FormBuilder)
-
+  public maxSizeFile = signal(`10MB`)
   public parentForm = input.required<FormGroup>()
   public ecosolutionImages = input.required<string[], Picture[] | undefined>({
     transform: (value) => value?.map((picture) => picture.url) || [],

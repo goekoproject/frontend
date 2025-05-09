@@ -39,7 +39,7 @@
   "bestFiancialPartners": "Mejores socios financieros",
   "BREADCRUMBS": {
     "edit_ecosolutions": "Editar tu ecosolución",
-    "new_ecosolutions": "Nueva ecosolución",
+    "new_ecosolutions": "Nueva solución cleantech",
     "view_ecosolutions": "Detalle de tu ecosolución"
   },
   "buildingtypes": {
@@ -239,7 +239,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Información adicional",
     "advantages": "Beneficios",
-    "advantagesEcosolutions": "Ventajas de su eco-solución",
+    "advantagesEcosolutions": "Beneficios",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
     "allProvinces": "Todas las provincias",
     "amountRequiredFunding": "Cantidad requerida para que la solicitud sea tenida en cuenta",
@@ -258,7 +258,7 @@
     "contactPerson": "Persona de contacto",
     "countriesAvailable": "Países disponibles",
     "countriesDistribution": "Países de distribución",
-    "countriesProvincesAvailable": "Países y regiones de distribución",
+    "countriesProvincesAvailable": "Distribución",
     "country": "País",
     "currency": "Moneda",
     "currencyFunding": "Moneda",
@@ -710,6 +710,18 @@
     }
   },
   "selectAll": "Seleccionar todo",
+  "selectCategory": "Selecciona una categoría",
+  "reductionEnvironmentalImpact": "Reducción del impacto ambiental",
+  "detail": "Detalle",
+  "name": "Nombre",
+  "originalLanguage": "Idioma original",
+  "shortDescription": "Descripción corta",
+  "description": "Descripción",
+  "informationAboutPrice": "Información sobre el precio",
+  "selectLanguagesForTranslation": "Selecciona los idiomas a los que deseas traducir las descripciones y la información de precios.",
+  "maxPhotoSize": "El tamaño máximo permitido para las fotos es {{maxSizeFile}}",
+  "addAnotherLocation": "Añadir otra ubicación",
+  "environmentalCertificate": "Certificado compatible con un sello o cualquier otro certificado ambiental",
   "selectCategoryEcosolutions": "Selecciona la categoría para tu ecosolución",
   "selected_products": "Productos seleccionados",
   "selectedProduct": "Producto seleccionado",
@@ -802,5 +814,5 @@
   "yourEcosolution": "Tu Ecosolucion",
   "yourFinancialSolutions": "Tus soluciones financieras",
   "yourProjectFile": "Tu archivo de proyecto",
-  "yourProjects": "Tus proyectos",
+  "yourProjects": "Tus proyectos"
 }

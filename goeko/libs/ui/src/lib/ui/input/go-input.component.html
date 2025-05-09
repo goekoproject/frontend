@@ -1,5 +1,5 @@
 <!-- input.component.html -->
-<div class="go-wrapper-input relative mb-6" [class.has-error]="showError">
+<div class="go-wrapper-input relative" [class.has-error]="showError">
   <label [for]="id()" class="input-label" [go-optional]="showOptional()">
     {{ label() }}
     <ng-content select="[after-label]"></ng-content>
