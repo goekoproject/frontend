@@ -76,7 +76,6 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     if (this.ecosolutionDetails()) {
       this._buildFormArrays(this.ecosolutionDetails())
     }
-    this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
   })
 
   ngOnDestroy(): void {
@@ -94,6 +93,7 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     this.descriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
     this.detailedDescriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
     this.priceDescriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
+    this.editors.push(new Editor())
   }
 
   private _buildFormArrays(formValue?: Ecosolutions): void {
@@ -102,7 +102,7 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     }
     this._patchFormArray(this.nameTranslations(), formValue.nameTranslations)
     this._patchFormArray(this.descriptionTranslations(), formValue.descriptionTranslations)
-    this._patchFormArray(this.detailedDescriptionTranslations(), formValue.detailedDescriptionTranslations)
+    this._patchFormArrayEditor(this.detailedDescriptionTranslations(), formValue.detailedDescriptionTranslations)
     this._patchFormArray(this.priceDescriptionTranslations(), formValue.priceDescriptionTranslations)
   }
 
@@ -119,6 +119,22 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
       this._cf.markForCheck()
     })
   }
+
+  private _patchFormArrayEditor(formArray: FormArray, values: TranslatedProperties[]): void {
+    setTimeout(() => {
+      values.forEach((value) => {
+        const control = this._createFormGroupTranslations(value.lang, value.label, formArray)
+        if (control) {
+          formArray.push(control)
+          this.editors.push(new Editor())
+        }
+      })
+      formArray.reset(values)
+
+      this._cf.markForCheck()
+    })
+  }
+
   activateTranslate() {
     const texts = [
       this.nameTranslations().at(0)?.value.label || '',
@@ -168,6 +184,7 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     this.editors = []
     this.detailedDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label, this.detailedDescriptionTranslations()))
     this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
+    console.log(this.editors)
   }
   private _priceDescriptionTranslations(codeLang: string, label: string): void {
     this.priceDescriptionTranslations().push(this._createFormGroupTranslations(codeLang, label, this.priceDescriptionTranslations()))
