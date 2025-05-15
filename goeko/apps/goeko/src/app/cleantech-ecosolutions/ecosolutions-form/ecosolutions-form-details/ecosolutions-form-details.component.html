@@ -16,7 +16,7 @@
       <label id="descriptionTranslations" #descriptionTranslationsTpl>{{ 'shortDescription' | translate }}</label>
       @if (showLanguageSwitcher()) {
         <goeko-language-switcher
-          [langs]="langField()"
+          [langs]="switcherLang()"
           (selectedChange)="selectedChangeForDetail($event, descriptionTranslationsTpl.id)"></goeko-language-switcher>
       }
       @for (translation of descriptionTranslations().controls; track $index + '-descriptionTranslations'; let i = $index) {
@@ -39,7 +39,7 @@
       </label>
       @if (showLanguageSwitcher()) {
         <goeko-language-switcher
-          [langs]="langField()"
+          [langs]="switcherLang()"
           (selectedChange)="selectedChangeForDetail($event, detailedDescriptionTranslationsTpl.id)"></goeko-language-switcher>
       }
 
@@ -69,7 +69,7 @@
       <label id="priceDescriptionTranslations" #priceDescriptionTranslationsTpl>{{ 'informationAboutPrice' | translate }}</label>
       @if (showLanguageSwitcher()) {
         <goeko-language-switcher
-          [langs]="langField()"
+          [langs]="switcherLang()"
           (selectedChange)="selectedChangeForDetail($event, priceDescriptionTranslationsTpl.id)"></goeko-language-switcher>
       }
       @for (translation of priceDescriptionTranslations().controls; track $index + '-priceDescriptionTranslations'; let i = $index) {
@@ -86,7 +86,7 @@
   <section>
     <div class="flex flex-col justify-between gap-2">
       <div class="flex justify-between gap-2">
-        <a role="button" class="flex text-sm text-primary-default" (click)="activateTranslate()">{{ 'translate' | translate }}</a>
+        <a role="button" class="flex text-sm text-primary-default" (click)="makeTranslate()">{{ 'translate' | translate }}</a>
         @if (ecosolutionDetails()) {
           <a role="button" class="flex text-sm text-primary-400" (click)="showTranslations()">{{ 'showTranslations' | translate }}</a>
         }
@@ -96,7 +96,7 @@
 
     <go-badge-group>
       @for (lang of languageAvailable(); track lang) {
-        <go-badge [value]="lang" (click)="selectedChange(lang)">
+        <go-badge [value]="lang" (click)="selectedChange(lang)" [selected]="selectedLang.includes(lang.code)">
           <span class="fi fi-{{ lang.iconFlag }}"></span>
           <span>{{ lang.title | translate }}</span>
         </go-badge>
