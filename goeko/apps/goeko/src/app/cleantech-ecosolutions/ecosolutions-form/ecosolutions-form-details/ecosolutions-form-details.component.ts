@@ -139,7 +139,7 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     const texts = [
       this.nameTranslations().at(0)?.value.label || '',
       this.descriptionTranslations().at(0)?.value.label || '',
-      this.detailedDescriptionTranslations().at(0)?.value.label || '',
+      this.getPlainText(this.detailedDescriptionTranslations().at(0)?.value.label || ''),
       this.priceDescriptionTranslations().at(0)?.value.label || '',
     ].filter(Boolean)
     const language = this.selectedLang
@@ -195,10 +195,12 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     if (control) {
       this.detailedDescriptionTranslations().push(control)
       if (control.pristine) {
-        this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
+        /*  this.editors.forEach((editor) => editor.update)
+        this.editors = []
+        this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor())) */
       }
+      console.log(this.editors)
     }
-    console.log(this.editors)
   }
   private _priceDescriptionTranslations(codeLang: string, label: string): void {
     const control = this._createFormGroupTranslations(codeLang, label, this.priceDescriptionTranslations())
@@ -223,5 +225,12 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
         control.get('label')?.setValue(label)
       }
     })
+  }
+
+  private getPlainText(value: string): string {
+    const html = value || ''
+    const div = document.createElement('div')
+    div.innerHTML = html
+    return div.textContent || div.innerText || ''
   }
 }
