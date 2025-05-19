@@ -27,7 +27,7 @@ jobs:
                   check-latest: true
             #Init Node
             - name: Install Dependencies
-              run: npm install
+              run: npm ci
             - name: Build
               run: npm run build:pro
             - name: Archive Production Artifact
