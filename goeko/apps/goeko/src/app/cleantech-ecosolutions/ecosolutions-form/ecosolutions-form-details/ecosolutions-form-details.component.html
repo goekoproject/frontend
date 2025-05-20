@@ -1,7 +1,7 @@
 <fieldset class="ecosolutions-fieldset" [formGroup]="parentForm()">
   <legend class="mb-1">{{ 'detail' | translate }}</legend>
   <ng-container formArrayName="nameTranslations">
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-2">
       <label> {{ 'name' | translate }}</label>
       @if (nameTranslations().controls.length > 0) {
         <ng-container [formGroupName]="0">
@@ -12,7 +12,7 @@
   </ng-container>
 
   <ng-container formArrayName="descriptionTranslations">
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-2">
       <label id="descriptionTranslations" #descriptionTranslationsTpl>{{ 'shortDescription' | translate }}</label>
       @if (showLanguageSwitcher()) {
         <goeko-language-switcher
@@ -33,19 +33,20 @@
   </ng-container>
 
   <ng-container formArrayName="detailedDescriptionTranslations">
-    <div class="wrapper-textarea">
+    <div>
       <label for="detailedDescriptionTranslations" #detailedDescriptionTranslationsTpl id="detailedDescriptionTranslations">
         {{ 'description' | translate }}
       </label>
       @if (showLanguageSwitcher()) {
         <goeko-language-switcher
+          class="my-2"
           [langs]="switcherLang()"
           (selectedChange)="selectedChangeForDetail($event, detailedDescriptionTranslationsTpl.id)"></goeko-language-switcher>
       }
 
       @for (translation of detailedDescriptionTranslations().controls; track $index + 'detailedDescriptionTranslations'; let i = $index) {
         @if (selectedFormLang()[detailedDescriptionTranslationsTpl.id] === translation.value.lang && editors.length > 0) {
-          <ngx-editor-menu [editor]="editors[i]" [toolbar]="toolbar" class="float-right block"> </ngx-editor-menu>
+          <ngx-editor-menu [editor]="editors[i]" [toolbar]="toolbar" class="relative -top-7 float-right block"> </ngx-editor-menu>
           <div [formGroupName]="i">
             <ngx-editor
               [editor]="editors[i]"
@@ -65,7 +66,7 @@
   </ng-container>
 
   <ng-container formArrayName="priceDescriptionTranslations">
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-2">
       <label id="priceDescriptionTranslations" #priceDescriptionTranslationsTpl>{{ 'informationAboutPrice' | translate }}</label>
       @if (showLanguageSwitcher()) {
         <goeko-language-switcher
@@ -83,16 +84,8 @@
     </div>
   </ng-container>
 
-  <section>
-    <div class="flex flex-col justify-between gap-2">
-      <div class="flex justify-between gap-2">
-        <a role="button" class="flex text-sm text-primary-default" (click)="makeTranslate()">{{ 'translate' | translate }}</a>
-        @if (ecosolutionDetails()) {
-          <a role="button" class="flex text-sm text-primary-400" (click)="showTranslations()">{{ 'showTranslations' | translate }}</a>
-        }
-      </div>
-      <p class="text-support text-xs">{{ 'selectLanguagesForTranslation' | translate }}</p>
-    </div>
+  <section class="mt-4">
+    <p class="text-support text-xs">{{ 'selectLanguagesForTranslation' | translate }}</p>
 
     <go-badge-group>
       @for (lang of languageAvailable(); track lang) {
@@ -102,5 +95,20 @@
         </go-badge>
       }
     </go-badge-group>
+
+    <div class="flex flex-col justify-between gap-2">
+      <div
+        role="button"
+        [ngClass]="{
+          'cursor-not-allowed text-gray-400 text-opacity-50': selectedLang.length === 0,
+          'cursor-pointer text-primary-default': selectedLang.length > 0,
+        }"
+        class="hover:border-primary-600 hover:text-primary-600 z-10 flex h-12 w-full items-center justify-center rounded-xl border border-primary-default p-4 text-lg transition-colors duration-200 hover:bg-primary-50"
+        (click)="makeTranslate()">
+        <i class="ti ti-language"></i>
+
+        <span class="flex">{{ 'translate' | translate }}</span>
+      </div>
+    </div>
   </section>
 </fieldset>

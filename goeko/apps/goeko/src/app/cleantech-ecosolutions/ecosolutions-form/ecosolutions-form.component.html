@@ -93,7 +93,7 @@
         </button>
 
         <button go-button type="submit" (click)="id() ? editEcosolution() : saveEcosolution()">
-          {{ 'saveYou' | translate }} éco-solution
+          {{ 'save' | translate }}
         </button>
       </div>
     </form>
@@ -110,3 +110,6 @@
     <goeko-sdg-icons [formControlName]="'sustainableDevelopmentGoals'"></goeko-sdg-icons>
   </fieldset>
 </ng-template>
+@if (submitter()) {
+  <goeko-loading-process title="{{ 'savingCleantechSolution' | translate }}"></goeko-loading-process>
+}

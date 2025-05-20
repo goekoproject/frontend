@@ -1,5 +1,16 @@
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, effect, inject, input, OnDestroy, signal } from '@angular/core'
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  OnDestroy,
+  signal,
+} from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LanguageSwitcherComponent } from '@goeko/business-ui'
 import { Lang, LANGS } from '@goeko/core'
@@ -42,7 +53,7 @@ interface TrasnlaledSwitcherField {
   styleUrl: './ecosolutions-form-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EcosolutionsFormDetailsComponent implements OnDestroy {
+export class EcosolutionsFormDetailsComponent implements AfterViewInit, OnDestroy {
   private _fb = inject(FormBuilder)
   private _translateService = inject(TranslateService)
   private _ecosolutionsManagment = inject(EcosolutionsManagmentService)
@@ -72,22 +83,34 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
   public showLanguageSwitcher = signal(false)
   public editors = new Array<Editor>()
 
-  effectLoadDetails = effect(() => {
+  effectLoadDetails = effect(
+    () => {
+      if (this.ecosolutionDetails()) {
+        this._buildFormArrays(this.ecosolutionDetails())
+      }
+      /*     Object.keys(this.parentForm().controls).forEach((key) => {
+        const control = this.parentForm().get(key)
+        if (control && control.invalid) {
+          console.log(key + ' -> ', control.invalid)
+        }
+      }) */
+    },
+    { allowSignalWrites: true },
+  )
+
+  ngAfterViewInit(): void {
     this._initFormArrays()
-    if (this.ecosolutionDetails()) {
-      this._buildFormArrays(this.ecosolutionDetails())
-    }
-  })
+  }
 
   ngOnDestroy(): void {
     this.editors.forEach((editor) => editor.destroy())
   }
 
   private _initFormArrays(): void {
-    this.nameTranslations().push(this._createFormGroupTranslations(this.currentLang()))
-    this.descriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
-    this.detailedDescriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
-    this.priceDescriptionTranslations().push(this._createFormGroupTranslations(this.currentLang()))
+    this.nameTranslations().push(this._initFormGroupTranslations(this.currentLang()))
+    this.descriptionTranslations().push(this._initFormGroupTranslations(this.currentLang()))
+    this.detailedDescriptionTranslations().push(this._initFormGroupTranslations(this.currentLang()))
+    this.priceDescriptionTranslations().push(this._initFormGroupTranslations(this.currentLang()))
     this.editors.push(new Editor())
   }
 
@@ -99,6 +122,16 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     this._patchFormArray(this.descriptionTranslations(), formValue.descriptionTranslations)
     this._patchFormArrayEditor(this.detailedDescriptionTranslations(), formValue.detailedDescriptionTranslations)
     this._patchFormArray(this.priceDescriptionTranslations(), formValue.priceDescriptionTranslations)
+    setTimeout(() => {
+      this.showTranslations()
+    })
+  }
+
+  private showTranslations(): void {
+    this.showLanguageSwitcher.set(true)
+    const languageToShower = this.detailedDescriptionTranslations().controls.map((control) => control.value.lang) as string[]
+    this.languageForTranslate.set(languageToShower)
+    this._cf.markForCheck()
   }
 
   private _patchFormArray(formArray: FormArray, values: TranslatedProperties[]): void {
@@ -110,24 +143,21 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
         }
       })
       formArray.reset(values)
-
       this._cf.markForCheck()
     })
   }
 
   private _patchFormArrayEditor(formArray: FormArray, values: TranslatedProperties[]): void {
-    setTimeout(() => {
-      values.forEach((value) => {
-        const control = this._createFormGroupTranslations(value.lang, value.label, formArray)
-        if (control) {
-          formArray.push(control)
-          this.editors.push(new Editor())
-        }
-      })
-      formArray.reset(values)
-
-      this._cf.markForCheck()
+    values.forEach((value) => {
+      const control = this._createFormGroupTranslations(value.lang, value.label, formArray)
+      if (control) {
+        formArray.push(control)
+        this.editors.push(new Editor())
+      }
     })
+    formArray.reset(values)
+
+    this._cf.markForCheck()
   }
 
   selectedChange(lang: Lang) {
@@ -171,13 +201,6 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     this.selectedFormLang.update((prev) => ({ ...prev, [field]: lang }))
   }
 
-  showTranslations() {
-    this.showLanguageSwitcher.set(true)
-    const languageToShower = this.detailedDescriptionTranslations().controls.map((control) => control.value.lang) as string[]
-    this.languageForTranslate.set(languageToShower)
-    this._cf.markForCheck()
-  }
-
   private _addNameTranslations(codeLang: string, label: string): void {
     const control = this._createFormGroupTranslations(codeLang, label, this.nameTranslations())
     if (control) {
@@ -209,13 +232,22 @@ export class EcosolutionsFormDetailsComponent implements OnDestroy {
     }
   }
   private _createFormGroupTranslations(code: string, label?: string, control?: FormArray) {
-    if (control?.value.some((value: { lang: string }) => value.lang === code)) {
-      this.setLabelTranslated(control, code, label as string)
+    const exist = control?.value.some((value: { lang: string }) => value.lang === code)
+    if (exist) {
+      this.setLabelTranslated(control as FormArray, code, label as string)
       return undefined
+    }
+
+    return this._initFormGroupTranslations(code, label)
+  }
+
+  private _initFormGroupTranslations(codeLang: string, label?: string) {
+    if (!codeLang) {
+      return
     }
     return this._fb.group({
       label: new FormControl(label || '', Validators.required),
-      lang: new FormControl(code),
+      lang: new FormControl(codeLang),
     })
   }
 

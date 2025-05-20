@@ -811,8 +811,10 @@
   "yes": "Sí",
   "your": "tu",
   "your_ecosolutions": "Tu solución cleantech",
+  "savingCleantechSolution": "Su solución cleantech se está guardando",
   "yourEcosolution": "Tu Ecosolucion",
   "yourFinancialSolutions": "Tus soluciones financieras",
-  "yourProjectFile": "Tu archivo de proyecto",
-  "yourProjects": "Tus proyectos"
+  "yourProjectFile": "Proyectos realizados",
+  "yourProjects": "Tus proyectos",
+  "cleantechSolutions": "Soluciones cleantech"
 }

@@ -59,7 +59,7 @@ export class EcosolutionsManagmentService {
 
     return forkJoin({
       updateEcosolution: updateEcosolutions$,
-      udpateEcosolutionImage: this._ecosolutionsService.updatePicture(ecosolutionId, ecosolutionsImg || []),
+      udpateEcosolutionImage: this._updatePicture(ecosolutionId, ecosolutionsImg),
 
       updateEcosolutionCertificate: this._ecosolutionsManagmentDocumentsService.uploadCertificates(ecosolutionId, certificates),
       updateEcosolutionTechnicalSheet: this._ecosolutionsManagmentDocumentsService.uploadTechnicalSheet(ecosolutionId, technicalSheet),
@@ -69,6 +69,18 @@ export class EcosolutionsManagmentService {
       catchError((error) => {
         console.error('Error updating ecosolution with uploads:', error)
         return throwError(() => new Error('Failed to update ecosolution with uploads'))
+      }),
+    )
+  }
+
+  private _updatePicture(ecosolutionId: string, ecosolutionsImg: File[] | undefined) {
+    if (!ecosolutionsImg || !ecosolutionId) {
+      return of(null)
+    }
+    return this._ecosolutionsService.updatePicture(ecosolutionId, ecosolutionsImg).pipe(
+      catchError((error) => {
+        console.error('Error updating picture:', error)
+        return of({ error: 'Failed to update picture', data: null })
       }),
     )
   }

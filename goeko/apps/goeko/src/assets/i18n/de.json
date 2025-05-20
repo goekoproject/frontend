@@ -10,6 +10,7 @@
     "passwordPolicyTitle": "Sie müssen mindestens 3 der folgenden Regeln erfüllen: "
   },
   "add": "Hinzufügen",
+  "addAnotherLocation": "Anderen Standort hinzufügen",
   "addNewSolution": "Neue Lösung hinzufügen",
   "addOtherBenefit": "Weitere Vorteile hinzufügen",
   "addRealEstateLoan": "Immobilienkredit hinzufügen",
@@ -153,6 +154,7 @@
   "cleantechContacted": "Cleantech kontaktiert",
   "cleantechLeadDefault": "Verfolgen Sie Verbindungen mit Ihren qualifizierten Leads.",
   "cleantechsContacted": "Cleantech kontaktiert",
+  "cleantechSolutions": "Cleantech-Lösung",
   "companyDetails": "Unternehmensdetails",
   "completeToProfileNow": "Profil jetzt vervollständigen!",
   "confirm": "Bestätigen",
@@ -171,7 +173,9 @@
   "defaultMessageLead": "Hallo, ich interessiere mich für Ihre ökologische Lösung. Bitte kontaktieren Sie mich unter der folgenden E-Mail-Adresse:",
   "delete": "Löschen",
   "deleteLocation": "Standort löschen",
+  "description": "Beschreibung",
   "deSelectAll": "Alles abwählen",
+  "detail": "Detail",
   "details": "Details",
   "DIALOG": {
     "messageBodyLead": "Ein Goeko-Vertreter steht Ihnen gerne für alle Fragen zur Verfügung.",
@@ -195,6 +199,7 @@
   "editProject": "Projekt bearbeiten",
   "editSelection": "Auswahl ändern",
   "enterprise": "Unternehmen",
+  "environmentalCertificate": "Mit einem Label kompatibles oder anderes Umweltzertifikat",
   "ERROR_MESSAGES": {
     "400": "Überprüfen Sie Ihre Daten und versuchen Sie es erneut.",
     "404": "Konnte das nicht finden. Überprüfen Sie den Link.",
@@ -357,6 +362,7 @@
   },
   "ifAvailables": "(Wenn verfügbar)",
   "infoActionCardSubtitleEcosolutions": "Wir werden die besten Leads für Sie finden",
+  "informationAboutPrice": "Informationen zum Preis",
   "infoSaveMessages": "Sie haben die Möglichkeit, Ihre Daten jetzt zu speichern, um sicherzustellen, dass sie für zukünftige Referenzen verfügbar sind. Dies gibt Ihnen die Sicherheit, bei Bedarf darauf zugreifen zu können.",
   "INPUT_FILE": {
     "addNewFile": "Neue Datei hinzufügen",
@@ -413,6 +419,7 @@
     "trencher": "Grabenfräse"
   },
   "mandatory": "Verpflichtend",
+  "maxPhotoSize": "Die maximal zulässige Fotogröße beträgt {{maxSizeFile}}",
   "MENU": {
     "aboutGoEKo": "Über GoEko",
     "blog": "Blog",
@@ -458,6 +465,7 @@
   "msg_empty_ecosolutions_notification": "Keine Eco-solutions gefunden, die Ihren Kriterien entsprechen. Ändern Sie Ihre Filter, um mehr Optionen zu sehen.",
   "msgSearchEcosolutions": "Suchen Sie nach Eco-solutions, die Ihren Bedürfnissen entsprechen",
   "my_company": "Mein Unternehmen",
+  "name": "Name",
   "new_analysis": "Neue Analyse",
   "new_project": "Neues Projekt",
   "next": "Weiter",
@@ -470,14 +478,6 @@
   "notSave": "Ohne Speichern schließen",
   "ODS": {
     "ods_1": "Keine Armut",
-    "ods_2": "Kein Hunger",
-    "ods_3": "Gesundheit und Wohlergehen",
-    "ods_4": "Hochwertige Bildung",
-    "ods_5": "Geschlechtergleichstellung",
-    "ods_6": "Sauberes Wasser und Sanitäreinrichtungen",
-    "ods_7": "Bezahlbare und saubere Energie",
-    "ods_8": "Menschenwürdige Arbeit und Wirtschaftswachstum",
-    "ods_9": "Industrie, Innovation und Infrastruktur",
     "ods_10": "Verringerung der Ungleichheit",
     "ods_11": "Nachhaltige Städte und Gemeinden",
     "ods_12": "Verantwortungsvoller Konsum und Produktion",
@@ -485,7 +485,15 @@
     "ods_14": "Leben unter Wasser",
     "ods_15": "Leben an Land",
     "ods_16": "Frieden, Gerechtigkeit und starke Institutionen",
-    "ods_17": "Partnerschaften zur Erreichung der Ziele"
+    "ods_17": "Partnerschaften zur Erreichung der Ziele",
+    "ods_2": "Kein Hunger",
+    "ods_3": "Gesundheit und Wohlergehen",
+    "ods_4": "Hochwertige Bildung",
+    "ods_5": "Geschlechtergleichstellung",
+    "ods_6": "Sauberes Wasser und Sanitäreinrichtungen",
+    "ods_7": "Bezahlbare und saubere Energie",
+    "ods_8": "Menschenwürdige Arbeit und Wirtschaftswachstum",
+    "ods_9": "Industrie, Innovation und Infrastruktur"
   },
   "ods_msg_card_result": "Positiver Einfluss auf SDG",
   "ods_title": "Ziele für nachhaltige Entwicklung (SDG)",
@@ -499,6 +507,7 @@
     "switzerland": "Schweiz"
   },
   "original": "Original",
+  "originalLanguage": "Originalsprache",
   "our_ecosolutions": "",
   "ownerprofiles": {
     "business": "Unternehmen",
@@ -526,6 +535,7 @@
   "readMore": "Mehr lesen...",
   "real_estate_loan_leads": "Immobilienkredit-Lead",
   "realStateLoan": "Immobilienkredit",
+  "reductionEnvironmentalImpact": "Verringerung der Umweltbelastung",
   "region": "Provinze",
   "regions": "Provinzen",
   "RESET_PASSWORD": {
@@ -544,14 +554,14 @@
     "slogan_text2": "Wer sind Sie?"
   },
   "SDG_TITLES": {
-    "6": "Sauberes Wasser und Sanitäreinrichtungen",
-    "7": "Bezahlbare und saubere Energie",
-    "9": "Industrie, Innovation und Infrastruktur",
     "11": "Nachhaltige Städte und Gemeinden",
     "12": "Nachhaltige/r Konsum und Produktion",
     "13": "Maßnahmen zum Klimaschutz",
     "14": "Leben unter Wasser",
-    "15": "Leben an Land"
+    "15": "Leben an Land",
+    "6": "Sauberes Wasser und Sanitäreinrichtungen",
+    "7": "Bezahlbare und saubere Energie",
+    "9": "Industrie, Innovation und Infrastruktur"
   },
   "searchEcosolutions": "Suchen Sie nach Cleantech-Lösungen",
   "SELECT_DATA_LABEL": {
@@ -711,23 +721,14 @@
   },
   "selectAll": "Alles auswählen",
   "selectCategory": "Wähle eine Kategorie",
-  "reductionEnvironmentalImpact": "Verringerung der Umweltbelastung",
-  "detail": "Detail",
-  "name": "Name",
-  "originalLanguage": "Originalsprache",
-  "shortDescription": "Kurzbeschreibung",
-  "description": "Beschreibung",
-  "informationAboutPrice": "Informationen zum Preis",
-  "selectLanguagesForTranslation": "Wähle die Sprachen aus, in die du die Beschreibungen und Preisinformationen übersetzen möchtest.",
-  "maxPhotoSize": "Die maximal zulässige Fotogröße beträgt {{maxSizeFile}}",
-  "addAnotherLocation": "Anderen Standort hinzufügen",
-  "environmentalCertificate": "Mit einem Label kompatibles oder anderes Umweltzertifikat",
   "selectCategoryEcosolutions": "Wählen Sie die Kategorie für Ihre eco-solution aus",
   "selected_products": "Ausgewählte Produkte",
   "selectedProduct": "Ausgewähltes Produkt",
   "selectedProducts": " Ausgewählte Produkte",
+  "selectLanguagesForTranslation": "Wähle die Sprachen aus, in die du die Beschreibungen und Preisinformationen übersetzen möchtest.",
   "send": "Senden",
   "sendMessage": "Nachricht senden",
+  "shortDescription": "Kurzbeschreibung",
   "showAll": "Alle anzeigen",
   "showLead": "Leads anzeigen",
   "showMore": "Mehr erfahren",
@@ -811,8 +812,9 @@
   "yes": "Ja",
   "your": "Ihr",
   "your_ecosolutions": "Ihre Eco-solutions",
+  "savingCleantechSolution": "Ihre Cleantech-Lösung wird gespeichert",
   "yourEcosolution": "Ihre Ökolösung",
   "yourFinancialSolutions": "Ihre Finanzierungslösungen",
-  "yourProjectFile": "Ihre Projektdatei",
+  "yourProjectFile": "Abgeschlossene Projekte",
   "yourProjects": "Ihre Projekte"
 }

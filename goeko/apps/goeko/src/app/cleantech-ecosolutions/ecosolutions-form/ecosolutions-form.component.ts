@@ -4,10 +4,10 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { ActivatedRoute, Router } from '@angular/router'
 import { CanComponentDeactivate, canDeactivateForm, SdgIconsComponent } from '@goeko/business-ui'
 import { CategoryGrouping, Ecosolutions, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
-import { BadgeModule, ButtonModule, FormErrorTextComponent, UiSuperSelectModule } from '@goeko/ui'
+import { BadgeModule, ButtonModule, FormErrorTextComponent, LoadingProcessComponent, UiSuperSelectModule } from '@goeko/ui'
 import { TranslatePipe } from '@ngx-translate/core'
 import { NgxEditorModule } from 'ngx-editor'
-import { Observable, of, tap } from 'rxjs'
+import { delay, Observable, of, tap } from 'rxjs'
 import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
 import { EcosolutionsFormCountryAvailableComponent } from './ecosolutions-form-country-available/ecosolutions-form-country-available.component'
 import { EcosolutionsFormDetailsComponent } from './ecosolutions-form-details/ecosolutions-form-details.component'
@@ -19,6 +19,7 @@ import { EcosolutionsFormWarrantyComponent } from './ecosolutions-form-warranty/
 import { DocumentMetadata } from './ecosolutions-managment-documents.service'
 import { EcosolutionsManagmentService } from './ecosolutions-managment.service'
 
+const TIME_DELAY = 1000
 @Component({
   selector: 'goeko-ecosolutions-form',
   standalone: true,
@@ -40,6 +41,7 @@ import { EcosolutionsManagmentService } from './ecosolutions-managment.service'
     EcosolutionsFormCountryAvailableComponent,
     EcosolutionsFormPaybackComponent,
     EcosolutionsFormImageComponent,
+    LoadingProcessComponent,
   ],
   templateUrl: './ecosolutions-form.component.html',
   styleUrls: ['./ecosolutions-form.component.scss'],
@@ -53,11 +55,11 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
 
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
     const callback = () => (this.id() ? this.editEcosolution() : this.saveEcosolution())
-    return this._submitter() ? of(true) : canDeactivateForm(callback)
+    return this.submitter() ? of(true) : canDeactivateForm(callback)
   }
 
   @ViewChild('inputCertified') inputCertified!: ElementRef<HTMLInputElement>
-  _submitter = signal(false)
+  public submitter = signal(false)
 
   public groupingForm = input.required<CategoryGrouping[]>()
   public categoryCode = input.required<string>()
@@ -122,7 +124,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     return this.form.get('haveProjectFile')?.dirty && this.form.get('haveProjectFile')?.valid
   }
   private get canUpdateImages(): boolean | undefined {
-    return this.form.get('images')?.dirty && this.form.get('images')?.valid
+    return !this.form.get('images')?.pristine && this.form.get('images')?.valid
   }
   effectLoadDataEcosolution = effect(() => {
     if (this.id()) {
@@ -223,7 +225,10 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         technicalSheet: this.technicalSheet,
         projectFile: this.projectFile,
       })
-      .pipe(tap(() => this._submitter.set(true)))
+      .pipe(
+        tap(() => this.submitter.set(true)),
+        delay(TIME_DELAY),
+      )
       .subscribe({
         next: (result) => {
           this.goToListEcosolution()
@@ -249,7 +254,10 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
         projectFile: this.canUploadProjectFile ? this.projectFile : undefined,
         documentForRemove: this._documentForRemove() as string[],
       })
-      .pipe(tap(() => this._submitter.set(true)))
+      .pipe(
+        tap(() => this.submitter.set(true)),
+        delay(TIME_DELAY),
+      )
       .subscribe({
         next: () => {
           this.goToListEcosolution()

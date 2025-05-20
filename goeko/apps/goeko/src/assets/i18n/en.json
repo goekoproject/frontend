@@ -10,6 +10,7 @@
     "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
   },
   "add": "Add",
+  "addAnotherLocation": "Add another location",
   "addNewSolution": "Add new solution",
   "addOtherBenefit": "Add other benefit",
   "addRealEstateLoan": "Add real estate loan",
@@ -153,6 +154,7 @@
   "cleantechContacted": "Cleantech contacted",
   "cleantechLeadDefault": "Track connections with your qualified leads.",
   "cleantechsContacted": "Cleantech contacted",
+  "cleantechSolutions": "Cleantech solutions",
   "companyDetails": "Company details",
   "completeToProfileNow": "Complete to profile now!",
   "confirm": "Confirm",
@@ -171,7 +173,9 @@
   "defaultMessageLead": "Hello, I am interested in your ecological solution. Please contact me at the following email address:",
   "delete": "Delete",
   "deleteLocation": "Delete location",
+  "description": "Description",
   "deSelectAll": "Deselect all",
+  "detail": "Detail",
   "details": "Details",
   "DIALOG": {
     "messageBodyLead": "A Goeko representative will be happy to assist you with any questions you have.",
@@ -195,6 +199,7 @@
   "editProject": "Edit project",
   "editSelection": "Modifier selection",
   "enterprise": "Enterprise",
+  "environmentalCertificate": "Label-compatible or other environmental certificates",
   "ERROR_MESSAGES": {
     "400": "Check your info and try again.",
     "404": "Couldn't find that. Check the link.",
@@ -357,6 +362,7 @@
   },
   "ifAvailables": "(If available)",
   "infoActionCardSubtitleEcosolutions": "We'll find the best leads for you",
+  "informationAboutPrice": "Information about price",
   "infoSaveMessages": "You have the option to save your data now, ensuring it's available for future reference, providing you with confidence in accessing it when needed.",
   "INPUT_FILE": {
     "addNewFile": "Add new file",
@@ -413,6 +419,7 @@
     "trencher": "Trencher"
   },
   "mandatory": "Mandatory",
+  "maxPhotoSize": "The maximum photo size allowed is {{maxSizeFile}}",
   "MENU": {
     "aboutGoEKo": "About GoEko",
     "blog": "Blog",
@@ -458,6 +465,7 @@
   "msg_empty_ecosolutions_notification": "Your best eco-solution is yet to come. We’ll notify you when it comes",
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
   "my_company": "My company",
+  "name": "Name",
   "new_analysis": "New analysis",
   "new_project": "New project",
   "next": "Next",
@@ -470,14 +478,6 @@
   "notSave": "Close without saving",
   "ODS": {
     "ods_1": "No poverty",
-    "ods_2": "Zero hunger",
-    "ods_3": "Good health and well-being",
-    "ods_4": "Quality education",
-    "ods_5": "Gender equality",
-    "ods_6": "Clean water and sanitation",
-    "ods_7": "Affordable and clean energy",
-    "ods_8": "Decent work and economic growth",
-    "ods_9": "Industry, innovation, and infrastructure",
     "ods_10": "Reduced inequality",
     "ods_11": "Sustainable cities and communities",
     "ods_12": "Responsible consumption and production",
@@ -485,7 +485,15 @@
     "ods_14": "Life below water",
     "ods_15": "Life on land",
     "ods_16": "Peace, justice, and strong institutions",
-    "ods_17": "Partnerships for the goals"
+    "ods_17": "Partnerships for the goals",
+    "ods_2": "Zero hunger",
+    "ods_3": "Good health and well-being",
+    "ods_4": "Quality education",
+    "ods_5": "Gender equality",
+    "ods_6": "Clean water and sanitation",
+    "ods_7": "Affordable and clean energy",
+    "ods_8": "Decent work and economic growth",
+    "ods_9": "Industry, innovation, and infrastructure"
   },
   "ods_msg_card_result": "Positive impact on SDG",
   "ods_title": "Sustainable Development Goals (SDG)",
@@ -499,6 +507,7 @@
     "switzerland": "Switzerland"
   },
   "original": "Original",
+  "originalLanguage": "Original language",
   "our_ecosolutions": "",
   "ownerprofiles": {
     "business": "Business",
@@ -526,6 +535,7 @@
   "readMore": "Read More...",
   "real_estate_loan_leads": "Potencial client",
   "realStateLoan": "Real state loan",
+  "reductionEnvironmentalImpact": "Reduction of environmental impact",
   "region": "Province",
   "regions": "Provinces",
   "RESET_PASSWORD": {
@@ -544,14 +554,14 @@
     "slogan_text2": "Who are you?"
   },
   "SDG_TITLES": {
-    "6": "Clean water and sanitation",
-    "7": "Affordable and clean energy",
-    "9": "Industry, innovation and infrastructure",
     "11": "Sustainable cities and communities",
     "12": "Responsible consumption and production",
     "13": "Climate action",
     "14": "Life below water",
-    "15": "Life on land"
+    "15": "Life on land",
+    "6": "Clean water and sanitation",
+    "7": "Affordable and clean energy",
+    "9": "Industry, innovation and infrastructure"
   },
   "searchEcosolutions": "Search cleantech solutions",
   "SELECT_DATA_LABEL": {
@@ -710,24 +720,16 @@
     }
   },
   "selectAll": "Select All",
+  "savingCleantechSolution": "Your cleantech solution is being saved",
   "selectCategory": "Select a category",
-  "reductionEnvironmentalImpact": "Reduction of environmental impact",
-  "detail": "Detail",
-  "name": "Name",
-  "originalLanguage": "Original language",
-  "shortDescription": "Short description",
-  "description": "Description",
-  "informationAboutPrice": "Information about price",
-  "selectLanguagesForTranslation": "Select the languages you want to translate the descriptions and price information into.",
-  "maxPhotoSize": "The maximum photo size allowed is {{maxSizeFile}}",
-  "addAnotherLocation": "Add another location",
-  "environmentalCertificate": "Label-compatible or other environmental certificates",
   "selectCategoryEcosolutions": "Select the category for your ecosolution",
   "selected_products": "Selected products",
   "selectedProduct": "Selected product",
   "selectedProducts": " Selected products",
+  "selectLanguagesForTranslation": "Select the languages you want to translate the descriptions and price information into.",
   "send": "Send",
   "sendMessage": "Send Message",
+  "shortDescription": "Short description",
   "showAll": "Show all",
   "showLead": "Show leads",
   "showMore": "View more",
@@ -813,6 +815,6 @@
   "your_ecosolutions": "Your Eco-solutions",
   "yourEcosolution": "Your Eco-solution",
   "yourFinancialSolutions": "Your financial solutions",
-  "yourProjectFile": "Your project file",
+  "yourProjectFile": "Completed projects",
   "yourProjects": "Your projects"
 }
