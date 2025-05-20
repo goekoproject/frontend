@@ -10,10 +10,9 @@
         <div class="mb-4 flex items-center justify-between">
           <div class="flex items-start gap-4">
             <img
-              alt="logo"
               class="size-28 rounded-xl border border-grayLight object-contain"
               [src]="ecosolutionSearchDetail().companyDetail.logo"
-              [alt]="ecosolutionSearchDetail().companyDetail.id" />
+              alt="{{ (ecosolutionSearchDetail().companyDetail.name || 'Company') + ' logo' }}" />
             <div class="flex flex-col gap-3">
               <h2 class="text-2xl font-semibold">
                 {{ ecosolutionSearchDetail().solutionName }}
@@ -30,13 +29,13 @@
 
         <!-- Classification -->
         @if (categoriesGrouped()) {
-          @for (category of categoriesGrouped(); track category.id) {
+          @for (category of categoriesGrouped(); track $index) {
             <section class="fieldset">
               <p class="w-full text-sm font-semibold text-grayCharcoal">
                 {{ category.subcategory?.label }}
               </p>
               <div class="flex flex-wrap gap-2">
-                @for (option of category.products; track option.id) {
+                @for (option of category.products; track $index) {
                   <div class="inline-block rounded-full border border-grayMedium px-3 py-1.5 text-sm font-semibold text-grayDark">
                     {{ option.label }}
                   </div>
@@ -157,7 +156,7 @@
       ecosolutionSearchDetail().improvement.operationalCostReductionPercentage && ecosolutionSearchDetail().improvement.reductionPercentage
     ) {
       <div class="section border-grayStone">
-        <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.advantages' | translate }}</h3>
+        <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.advantagesSupportText' | translate }}</h3>
 
         <div class="flex gap-4">
           @if (ecosolutionSearchDetail().improvement.reductionPercentage.to) {
@@ -174,13 +173,12 @@
               [isUpto]="true"
               [percentage]="ecosolutionSearchDetail().improvement.operationalCostReductionPercentage.to || 0"></go-percentage-card>
           }
-          @if (ecosolutionSearchDetail().improvementOtherCategory.length > 0) {
-            @for (item of ecosolutionSearchDetail().improvementOtherCategory; track $index) {
-              <go-percentage-card
-                [label]="item.category"
-                [isUpto]="true"
-                [percentage]="item.reductionPercentage.to || 0"></go-percentage-card>
-            }
+
+          @for (item of ecosolutionSearchDetail().improvementOtherCategory; track $index) {
+            <go-percentage-card
+              [label]="'FORM_LABEL.reductionPercentage' | translate: { category: item.category }"
+              [isUpto]="true"
+              [percentage]="item.reductionPercentage.to || 0"></go-percentage-card>
           }
         </div>
       </div>
