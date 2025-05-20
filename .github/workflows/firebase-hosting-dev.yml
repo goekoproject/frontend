@@ -31,7 +31,7 @@ jobs:
       - name: Clean Cache
         run: npm cache clean --force
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
       - name: Build
         run: npm run build:dev
       - name: Archive Production Artifact
