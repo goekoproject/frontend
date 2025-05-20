@@ -165,13 +165,18 @@ export class EcosolutionsFormDetailsComponent implements AfterViewInit, OnDestro
       this.selectedLang.push(lang.code)
     }
   }
-  makeTranslate() {
-    const texts = [
+  private _getTexts() {
+    return [
       this.nameTranslations().at(0)?.value.label || '',
-      this.descriptionTranslations().at(0)?.value.label || '',
-      this.getPlainText(this.detailedDescriptionTranslations().at(0)?.value.label || ''),
-      this.priceDescriptionTranslations().at(0)?.value.label || '',
+      this.descriptionTranslations().value.find((t: TranslatedProperties) => t.lang === this.currentLang())?.label || '',
+      this.getPlainText(
+        this.detailedDescriptionTranslations().value.find((t: TranslatedProperties) => t.lang === this.currentLang())?.label || '',
+      ),
+      this.priceDescriptionTranslations().value.find((t: TranslatedProperties) => t.lang === this.currentLang())?.label || '',
     ].filter(Boolean)
+  }
+  makeTranslate() {
+    const texts = this._getTexts()
     const language = this.selectedLang
 
     const translates$ = language.map((lang) =>
@@ -187,13 +192,15 @@ export class EcosolutionsFormDetailsComponent implements AfterViewInit, OnDestro
         language.forEach((lang, i) => {
           const [name, desc, detailDesc, priceDesc] = result[i]
           this._addNameTranslations(lang, name)
-          this._descriptionTranslationsTranslations(lang, desc)
+          this._descriptionTranslations(lang, desc)
           this._detailDescriptionTranslations(lang, detailDesc)
           this._priceDescriptionTranslations(lang, priceDesc)
         })
         this.showLanguageSwitcher.set(true)
         this.languageForTranslate.set(this.selectedLang)
         this.selectedLang = []
+        this._cf.markForCheck()
+        console.log(this.detailedDescriptionTranslations().value)
       })
   }
 
@@ -207,7 +214,7 @@ export class EcosolutionsFormDetailsComponent implements AfterViewInit, OnDestro
       this.nameTranslations().push(control)
     }
   }
-  private _descriptionTranslationsTranslations(codeLang: string, label: string): void {
+  private _descriptionTranslations(codeLang: string, label: string): void {
     const control = this._createFormGroupTranslations(codeLang, label, this.descriptionTranslations())
     if (control) {
       this.descriptionTranslations().push(control)

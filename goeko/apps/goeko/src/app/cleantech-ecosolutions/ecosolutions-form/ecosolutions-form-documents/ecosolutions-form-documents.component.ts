@@ -75,6 +75,7 @@ export class EcosolutionsFormDocumentsComponent implements OnInit {
   ngOnInit(): void {
     this._changehaveTechnicalSheet()
     this._changeCertificate()
+    this._changehaveProjectFile()
   }
 
   addCertificates(file: File | null) {
@@ -103,6 +104,21 @@ export class EcosolutionsFormDocumentsComponent implements OnInit {
           this.parentForm().get('technicalSheet')?.reset()
         }
         this.parentForm().get('technicalSheet')?.updateValueAndValidity()
+      })
+  }
+
+  private _changehaveProjectFile() {
+    this.parentForm()
+      .get('haveProjectFile')
+      ?.valueChanges.subscribe((value: boolean) => {
+        if (value) {
+          this.parentForm().get('projectFile')?.setValidators(Validators.required)
+        } else {
+          this.addDocumentForRemove([this.parentForm().get('projectFile')?.value?.id])
+          this.parentForm().get('projectFile')?.clearValidators()
+          this.parentForm().get('projectFile')?.reset()
+        }
+        this.parentForm().get('projectFile')?.updateValueAndValidity()
       })
   }
 
