@@ -10,7 +10,7 @@ export const environment = {
     apiKey: 'AIzaSyCj73PUjQH0LJuDXJygViUyja49jTqDbZo',
     authDomain: 'goeko-pro.firebaseapp.com',
     projectId: 'goeko-pro',
-    storageBucket: 'goeko-pro.appspot.com',
+    storageBucket: 'goeko-pro.firebasestorage.app',
     messagingSenderId: '917495184913',
     appId: '1:917495184913:web:16a0423942179bedccbbb0',
     measurementId: 'G-70QSDK7YCQ',
