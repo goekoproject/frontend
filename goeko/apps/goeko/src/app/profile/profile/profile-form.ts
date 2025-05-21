@@ -117,6 +117,8 @@ export const bankFormGroup = new FormGroup({
   name: new FormControl('', Validators.required),
   website: new FormControl('', [Validators.pattern(/^www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/)]),
   externalId: new FormControl(),
+
+  // logo: new FormControl(),
   locations: new FormArray([], Validators.required),
   contactPerson: new FormControl(''),
   email: new FormControl('info@goeko.ch', [Validators.email]),

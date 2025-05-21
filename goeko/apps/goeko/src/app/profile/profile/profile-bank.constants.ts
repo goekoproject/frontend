@@ -23,6 +23,12 @@ export const PROFILE_BANK: Array<ProfileFieldset<'bank'>> = [
         placeholder: 'www.example.com',
         errorMessage: 'ERRORS_FORM.website',
       },
+      /*  {
+        controlName: 'logo',
+        label: 'FORM_LABEL.logo',
+        type: 'file-link',
+        required: false,
+      }, */
     ],
   },
   {
