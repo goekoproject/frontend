@@ -1,0 +1,14 @@
+.terms-of-services {
+  h1 {
+    @apply mb-2 text-xl font-bold;
+  }
+  h2 {
+    @apply mb-1 text-lg font-semibold;
+  }
+  p {
+    @apply mb-2 text-base leading-relaxed;
+  }
+  hr {
+    @apply my-4;
+  }
+}
