@@ -788,7 +788,7 @@
     "peopleTransportVehicle": "People Transport Vehicle"
   },
   "VERIFY_EMAIL": {
-    "body": "We are glad, that you’re with us ? We’ve sent you a verification link to yours email address",
+    "body": "We are glad you're joining us. We've sent you a verification link to your email address.",
     "title": "Check your inbox"
   },
   "watchVideo": "Watch video",
