@@ -30,7 +30,7 @@ export class DashboardCleantechComponent implements OnInit {
   }
 
   goLeadList = () => {
-    this._router.navigate(['leads'], { relativeTo: this._route.parent?.parent })
+    this._router.navigate(['leads', this.id()], { relativeTo: this._route.parent?.parent })
   }
 
   createEcosolution = () => {
