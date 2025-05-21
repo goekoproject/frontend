@@ -134,6 +134,13 @@ export class InputFileComponent {
     this._propagateSelected()
   }
 
+  removeFile(event: Event) {
+    event.stopPropagation()
+    this.filesUrl = []
+    this._fileSetMultiple = []
+    //this._propagateSelected()
+  }
+
   private _displayPreview() {
     this._renderer.addClass(this.dropzone.nativeElement, 'border-indigo-600')
   }

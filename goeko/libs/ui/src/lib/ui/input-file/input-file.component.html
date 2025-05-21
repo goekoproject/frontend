@@ -23,6 +23,9 @@
             <a>{{ 'INPUT_FILE.image3' | translate }}</a>
           } @else {
             <a>{{ textButton() | translate }}</a>
+            <!--   <a class="z-50 bg-red-600 text-white hover:border-none hover:bg-red-700 hover:text-white" (click)="removeFile($event)">{{
+              'delete' | translate
+            }}</a> -->
           }
           @if (multiple) {
             <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)" multiple />
@@ -54,7 +57,7 @@
             [ngClass]="{
               'shadow-md border-[0.1rem] shadow-primary-900': selectedSlideMain() === t,
             }">
-            <img [src]="file" alt="{{'Preview image ' + (t + 1)}}" class="h-full max-h-80 w-full rounded-2xl object-cover" />
+            <img [src]="file" alt="{{ 'Preview image ' + (t + 1) }}" class="h-full max-h-80 w-full rounded-2xl object-cover" />
           </button>
         }
       </div>

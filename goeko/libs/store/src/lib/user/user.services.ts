@@ -101,6 +101,17 @@ export class UserService {
     return of(null)
   }
 
+  uploadImgProfileBank(id: string, files: File[]): Observable<Picture[] | null> {
+    if (files) {
+      const formData = new FormData()
+      files.forEach((file) => {
+        formData.append('file', file)
+      })
+      return this._http.put<Picture[]>(`/v1/actor/${this.actorsEndpoint()}/${id}/logo`, formData)
+    }
+    return of(null)
+  }
+
   propagateDataUser(data: UserData) {
     const user = UserFactory.createUserProfileBuilder(this.auth0UserProfile()['userType']).init(data).build()
     this._rawUser = user

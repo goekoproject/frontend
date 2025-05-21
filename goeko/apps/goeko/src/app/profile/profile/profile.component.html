@@ -76,7 +76,7 @@
                 </div>
               }
               @case ('file-link') {
-                @if (userType() === USERTYPE.CLEANTECH) {
+                @if (userType() === USERTYPE.CLEANTECH || userType() === USERTYPE.BANK) {
                   <goeko-input-file
                     (fileChange)="fileChange($event)"
                     [textButton]="'INPUT_FILE.selectLogo' | translate"
