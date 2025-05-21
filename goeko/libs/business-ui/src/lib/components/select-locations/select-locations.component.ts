@@ -4,7 +4,7 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { LocationRegions, LocationsCountry } from '@goeko/store'
 import { FormErrorTextComponent, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
-import { Subscription, map } from 'rxjs'
+import { Subject, Subscription, map, takeUntil } from 'rxjs'
 import { SelectLocationsService } from './select-locations.service'
 
 const CODE_DEFAULT_COUNTRY = 'CH'
@@ -17,6 +17,8 @@ const CODE_DEFAULT_COUNTRY = 'CH'
   styleUrl: './select-locations.component.scss',
 })
 export class SelectLocationsComponent implements OnInit, OnDestroy {
+  private readonly destroy$ = new Subject<void>()
+
   private _translateService = inject(TranslateService)
   public countryCompareWith = (o1: string, o2: string) => o1 === o2
   public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1?.code === (o2?.code || o2) || o2?.isAll
@@ -95,27 +97,34 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
     this._changeLang()
   }
   ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
     this._controlLocations.clear()
   }
 
   private _susbcribeToFormArrayChanges() {
     let previousValues = this.controlLocations.value
 
-    this.controlLocations.valueChanges.pipe(map((values: LocationsCountry[], index) => ({ values, index }))).subscribe((currentValues) => {
-      currentValues.values.forEach((value: any, index: any) => {
-        this.controlLocationsCountryValue.set([...this.controlLocations.value.map((value: LocationsCountry) => value.country.code)])
+    this.controlLocations.valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+        map((values: LocationsCountry[], index) => ({ values, index })),
+      )
+      .subscribe((currentValues) => {
+        currentValues.values.forEach((value: any, index: any) => {
+          this.controlLocationsCountryValue.set([...this.controlLocations.value.map((value: LocationsCountry) => value.country.code)])
 
-        if (value.country.code !== previousValues.values[index]?.country?.code) {
-          const { code } = value.country
-          this.changeCountry.emit(code)
-          if (code && !this.dataSourceSelect.has(code)) {
-            this.selectedCountryLocation.set(value.country.code)
+          if (value.country.code !== previousValues.values[index]?.country?.code) {
+            const { code } = value.country
+            this.changeCountry.emit(code)
+            if (code && !this.dataSourceSelect.has(code)) {
+              this.selectedCountryLocation.set(value.country.code)
+            }
           }
-        }
-      })
+        })
 
-      previousValues = currentValues
-    })
+        previousValues = currentValues
+      })
   }
 
   private _getRegionsByCountryCode() {

@@ -1,28 +1,16 @@
-import { LocationProvider } from '../model/location-provider.interface'
 import { UserProfileForm } from './user-profile-form.interface'
 import { USER_TYPE, UserType } from './user-type.constants'
-import { UserBankPayload, UserCleantechPayload } from './user-type/user-payload.model'
 import { UserModal, UserSwitch } from './user-type/user-switch.type'
+import { UserBankPayload } from './user-type/users-payload/user-bank-payload.model'
+import { UserCleantechPayload } from './user-type/users-payload/user-cleantech-payload.model'
+import { UserSmePayload } from './user-type/users-payload/user-sme-payload.model'
+
 import { BankBuilder, CleantechBuilder, IUserBuilder, SmeBuilder } from './user.builder'
 
 const USER_TO_CREATE: UserSwitch<IUserBuilder<UserModal>> = {
   sme: new SmeBuilder(),
   cleantech: new CleantechBuilder(),
   bank: new BankBuilder(),
-}
-export function mapperLocations(locations: LocationProvider[]): any[] {
-  return locations.map((location: LocationProvider | any) => ({
-    ...location,
-    country: {
-      code: location?.country?.code,
-      regions:
-        location?.country?.regions &&
-        location?.country?.regions.length > 0 &&
-        location?.country?.regions?.every((region: any) => region.code)
-          ? location?.country?.regions?.map((region: any) => region.code)
-          : undefined,
-    },
-  }))
 }
 
 export abstract class UserFactory {
@@ -34,24 +22,10 @@ export abstract class UserFactory {
     return builder
   }
 
-  //TODO: fix code smell
   static createProfileDto(userProfileForm: UserProfileForm, userType: UserType) {
     switch (userType) {
       case USER_TYPE.SME:
-        return {
-          ...userProfileForm,
-          comunicationLanguage: undefined,
-          generalNotifications: undefined,
-          phoneNumber: undefined,
-          country: userProfileForm.locations[0].country.code,
-          locations: mapperLocations(userProfileForm.locations),
-          notification: {
-            email: userProfileForm.email || undefined,
-            phoneNumber: userProfileForm.phoneNumber || undefined,
-            lang: userProfileForm.comunicationLanguage?.code || undefined,
-            enabled: userProfileForm.generalNotifications,
-          },
-        }
+        return new UserSmePayload(userProfileForm)
       case USER_TYPE.BANK: {
         return new UserBankPayload(userProfileForm)
       }

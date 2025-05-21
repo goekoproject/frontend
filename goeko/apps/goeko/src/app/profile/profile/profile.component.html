@@ -1,136 +1,156 @@
 @defer (when form) {
-<div class="profile-data">
-  <form [formGroup]="form" class="profile-page">
-    <div class="profile-data-heading flex items-center gap-4">
-      <i class="ti ti-building-community icon-profile bg-primary-400"></i>
-      <p>{{ username() }}</p>
-    </div>
-    @for (fieldset of formSection; track fieldset.fields) {
-    <fieldset class="w-2/3 max-w-lg">
-      <div class="fieldset-text-support">
-        @if (fieldset.legend) {
-        <legend>{{ fieldset.legend | translate }}</legend>
-        }
-        @if (fieldset.textSupport) {
-        <p class="text-support">
-          {{ fieldset.textSupport | translate }}
-        </p>
-        }
+  <div class="profile-data">
+    <form [formGroup]="form" class="profile-page">
+      <div class="profile-data-heading flex items-center gap-4">
+        <i class="ti ti-building-community icon-profile bg-primary-400"></i>
+        <p>{{ username() }}</p>
       </div>
+      @for (fieldset of formSection; track fieldset.fields) {
+        <fieldset class="w-2/3 max-w-lg">
+          <div class="fieldset-text-support">
+            @if (fieldset.legend) {
+              <legend>{{ fieldset.legend | translate }}</legend>
+            }
+            @if (fieldset.textSupport) {
+              <p class="text-support">
+                {{ fieldset.textSupport | translate }}
+              </p>
+            }
+          </div>
 
-      @for (itemForm of fieldset.fields; track itemForm.controlName) {
-      @switch (itemForm.type) {
-      @case ('select-multiple') {
-      <div class="select-profile">
-        <label for="{{ itemForm.controlName }}">{{ itemForm.label | translate }}</label>
+          @for (itemForm of fieldset.fields; track itemForm.controlName) {
+            @switch (itemForm.type) {
+              @case ('select-multiple') {
+                <div class="select-profile">
+                  <label for="{{ itemForm.controlName }}">{{ itemForm.label | translate }}</label>
 
-        <ui-super-select [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate" [multiple]="true"
-          [formControlName]="itemForm.controlName" [id]="itemForm.controlName" [name]="itemForm.controlName"
-          [compareWith]="defaultSetSuperSelect">
-          <ng-container *ngIf="itemForm.dataSelectKey">
-            <super-option *ngFor="let option of dataSelect[itemForm.dataSelectKey]" [value]="option">
-              {{ option.keyLang | translate }}
-            </super-option>
-          </ng-container>
-        </ui-super-select>
-      </div>
-      }
-      @case ('select') {
-      <div class="select-profile">
-        <ui-super-select [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-          [formControlName]="itemForm.controlName" [id]="itemForm.controlName" [name]="itemForm.controlName">
-          <label title for="{{ itemForm.controlName }}">
-            {{ itemForm.label | translate }}
-          </label>
-          <ng-container *ngIf="itemForm.dataSelectKey">
-            <super-option *ngFor="let option of dataSelect[itemForm.dataSelectKey]" [value]="option.code">
-              {{ option.keyLang | translate }}
-            </super-option>
-          </ng-container>
-        </ui-super-select>
-      </div>
-      }
-      @case ('lang') {
-      <div class="select-profile">
-        <ui-super-select [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-          [formControlName]="itemForm.controlName" [id]="itemForm.controlName" [name]="itemForm.controlName">
-          <label title for="{{ itemForm.controlName }}">
-            {{ itemForm.label | translate }}
-          </label>
-          @for (lang of dataLang; track lang.code) {
-          <super-option [value]="lang.code">
-            {{ lang.keyLang | translate }}
-          </super-option>
-          }
-        </ui-super-select>
-      </div>
-      }
-      @case ('file-link') {
-      @if (userType() === USERTYPE.CLEANTECH) {
-      <goeko-input-file (fileChange)="fileChange($event)" [textButton]="'INPUT_FILE.selectLogo' | translate"
-        [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
-      } @else {
-      <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
-      }
-      }
-      @case ('country') {
-      <ng-container [ngTemplateOutlet]="select" [ngTemplateOutletContext]="{
+                  <ui-super-select
+                    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                    [multiple]="true"
+                    [formControlName]="itemForm.controlName"
+                    [id]="itemForm.controlName"
+                    [name]="itemForm.controlName"
+                    [compareWith]="defaultSetSuperSelect">
+                    <ng-container *ngIf="itemForm.dataSelectKey">
+                      <super-option *ngFor="let option of dataSelect[itemForm.dataSelectKey]" [value]="option">
+                        {{ option.keyLang | translate }}
+                      </super-option>
+                    </ng-container>
+                  </ui-super-select>
+                </div>
+              }
+              @case ('select') {
+                <div class="select-profile">
+                  <ui-super-select
+                    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                    [formControlName]="itemForm.controlName"
+                    [id]="itemForm.controlName"
+                    [name]="itemForm.controlName">
+                    <label title for="{{ itemForm.controlName }}">
+                      {{ itemForm.label | translate }}
+                    </label>
+                    <ng-container *ngIf="itemForm.dataSelectKey">
+                      <super-option *ngFor="let option of dataSelect[itemForm.dataSelectKey]" [value]="option.code">
+                        {{ option.keyLang | translate }}
+                      </super-option>
+                    </ng-container>
+                  </ui-super-select>
+                </div>
+              }
+              @case ('lang') {
+                <div class="select-profile">
+                  <ui-super-select
+                    [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+                    [formControlName]="itemForm.controlName"
+                    [id]="itemForm.controlName"
+                    [name]="itemForm.controlName">
+                    <label title for="{{ itemForm.controlName }}">
+                      {{ itemForm.label | translate }}
+                    </label>
+                    @for (lang of dataLang; track lang.code) {
+                      <super-option [value]="lang.code">
+                        {{ lang.keyLang | translate }}
+                      </super-option>
+                    }
+                  </ui-super-select>
+                </div>
+              }
+              @case ('file-link') {
+                @if (userType() === USERTYPE.CLEANTECH) {
+                  <goeko-input-file
+                    (fileChange)="fileChange($event)"
+                    [textButton]="'INPUT_FILE.selectLogo' | translate"
+                    [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
+                } @else {
+                  <goeko-input-file (fileChange)="fileChange($event)" [filesUrl]="this.dataProfile().logo || ''"></goeko-input-file>
+                }
+              }
+              @case ('country') {
+                <ng-container
+                  [ngTemplateOutlet]="select"
+                  [ngTemplateOutletContext]="{
                     itemForm: itemForm,
                     source: countries(),
                     formTemplate: form,
                   }"></ng-container>
-      }
-      @case ('select-locations') {
-      <goeko-select-locations [form]="form" [controlLocations]="locationsArrays" [singleSelect]="true"
-        (changeCountry)="manageIdentifiers($event)"></goeko-select-locations>
-      }
-      @case ('checkbox') {
-      <div class="my-4 flex items-center">
-        <input id="{{ itemForm.controlName }}" type="checkbox" [formControlName]="itemForm.controlName"
-          class="h-4 w-4" />
-        <label for="{{ itemForm.controlName }}" class="ml-2  font-bold text-gray-600 text-lg">
-          {{ itemForm.label | translate }}
-        </label>
-      </div>
-      }
+              }
+              @case ('select-locations') {
+                <goeko-select-locations
+                  [form]="form"
+                  [controlLocations]="locationsArrays"
+                  [singleSelect]="true"
+                  (changeCountry)="manageIdentifiers($event)"></goeko-select-locations>
+              }
+              @case ('checkbox') {
+                <div class="my-4 flex items-center">
+                  <input id="{{ itemForm.controlName }}" type="checkbox" [formControlName]="itemForm.controlName" class="h-4 w-4" />
+                  <label for="{{ itemForm.controlName }}" class="ml-2 text-lg font-bold text-gray-600">
+                    {{ itemForm.label | translate }}
+                  </label>
+                </div>
+              }
 
-      @default {
-      <goeko-go-input [formControlName]="itemForm.controlName" [label]="itemForm.label | translate"
-        [id]="itemForm.controlName" [placeholder]="itemForm.placeholder || ''">
-        <ng-container error-messages>
-          {{ (itemForm.errorMessage ||'') | translate }}
-        </ng-container>
-        <ng-container error-messages>
-          {{ (form.get(itemForm.controlName)?.errors || {})['invalidSmeIdentifier'] |translate}}
-        </ng-container>
-      </goeko-go-input>
+              @default {
+                <goeko-go-input
+                  [formControlName]="itemForm.controlName"
+                  [label]="itemForm.label | translate"
+                  [id]="itemForm.controlName"
+                  [placeholder]="itemForm.placeholder || ''">
+                  <ng-container error-messages>
+                    {{ itemForm.errorMessage || '' | translate }}
+                  </ng-container>
+                  <ng-container error-messages>
+                    {{ (form.get(itemForm.controlName)?.errors || {})['invalidSmeIdentifier'] | translate }}
+                  </ng-container>
+                </goeko-go-input>
+              }
+            }
+          }
+        </fieldset>
       }
-      }
-      }
-    </fieldset>
-    }
-    <div class="profile-actions">
-      <button type="button" go-button appearance="white" [routerLink]="['../dashboard', userType()]"
-        [relativeTo]="route.parent">
-        {{ 'cancel' | translate }}
-      </button>
-      <button type="button" go-button appearance="primary" [disabled]="form.invalid" type="submit"
-        (click)="dataProfile().id ? updateProfile() : saveProfile()">
-        {{ 'save' | translate }}
-      </button>
-    </div>
-  </form>
-</div>
+      <div class="profile-actions">
+        <button type="button" go-button appearance="white" [routerLink]="['../dashboard', userType()]" [relativeTo]="route.parent">
+          {{ 'cancel' | translate }}
+        </button>
+        <button type="button" go-button appearance="primary" type="submit" (click)="dataProfile().id ? updateProfile() : saveProfile()">
+          {{ 'save' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
 }
 
 <br />
 
-<ng-template #select let-itemForm="itemForm" let-source="source" let-multiSelect="multiSelect"
-  let-formTemplate="formTemplate">
+<ng-template #select let-itemForm="itemForm" let-source="source" let-multiSelect="multiSelect" let-formTemplate="formTemplate">
   <div class="select-profile" [formGroup]="formTemplate">
-    <ui-super-select [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
-      [formControlName]="itemForm.controlName" [id]="itemForm.controlName" [multiple]="multiSelect"
-      [name]="itemForm.controlName" [compareWith]="defaultSetSuperSelect">
+    <ui-super-select
+      [placeholder]="'SELECT_DATA_LABEL.defaultLabel' | translate"
+      [formControlName]="itemForm.controlName"
+      [id]="itemForm.controlName"
+      [multiple]="multiSelect"
+      [name]="itemForm.controlName"
+      [compareWith]="defaultSetSuperSelect">
       <label title for="{{ itemForm.controlName }}">
         {{ itemForm.label | translate }}
       </label>
