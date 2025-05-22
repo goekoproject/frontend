@@ -153,7 +153,8 @@
 
     <!-- Benefis -->
     @if (
-      ecosolutionSearchDetail().improvement.operationalCostReductionPercentage && ecosolutionSearchDetail().improvement.reductionPercentage
+      ecosolutionSearchDetail().improvement?.operationalCostReductionPercentage &&
+      ecosolutionSearchDetail().improvement?.reductionPercentage
     ) {
       <div class="section border-grayStone">
         <h3 class="text-lg font-semibold">{{ 'FORM_LABEL.advantagesSupportText' | translate }}</h3>
