@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, input, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { EcosolutionCategorySelectorComponent, MessageService } from '@goeko/business-ui'
+import { EcosolutionCategorySelectorComponent, InfoActionCardComponent, MessageService } from '@goeko/business-ui'
 import { EcosolutionInfoComponent } from '@goeko/business-ui/components/ecosolution-info/ecosolution-info.component'
 import { CategoryGrouping } from '@goeko/store'
 import { ButtonModule, DialogService } from '@goeko/ui'
@@ -12,7 +12,7 @@ import { EcosolutionInfo } from './ecosolution-info.model'
 @Component({
   selector: 'goeko-ecosolutions-list',
   standalone: true,
-  imports: [CommonModule, EcosolutionInfoComponent, TranslatePipe, ButtonModule],
+  imports: [CommonModule, EcosolutionInfoComponent, TranslatePipe, ButtonModule, InfoActionCardComponent],
   templateUrl: './ecosolutions-list.component.html',
   styleUrls: ['./ecosolutions-list.component.scss'],
   providers: [MessageService],

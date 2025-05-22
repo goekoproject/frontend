@@ -3,13 +3,23 @@
   <button go-button (click)="createEcosolution()">{{ 'addNewSolution' | translate }}</button>
 </section>
 
-<section class="relative flex flex-col gap-4">
-  @for (ecosolution of ecosolutionsInfo(); track $index) {
-    <goeko-ecosolution-info
-      [title]="ecosolution.solutionName"
-      [description]="ecosolution.description"
-      [categories]="ecosolution.category"
-      (onEdit)="editEcosolution(ecosolution)"
-      (onDelete)="deleteEcosolution(ecosolution)"></goeko-ecosolution-info>
-  }
-</section>
+@if (ecosolutionsInfo().length > 0) {
+  <section class="relative flex flex-col gap-4">
+    @for (ecosolution of ecosolutionsInfo(); track $index) {
+      <goeko-ecosolution-info
+        [title]="ecosolution.solutionName"
+        [description]="ecosolution.description"
+        [categories]="ecosolution.category"
+        (onEdit)="editEcosolution(ecosolution)"
+        (onDelete)="deleteEcosolution(ecosolution)"></goeko-ecosolution-info>
+    }
+  </section>
+} @else {
+  <goeko-info-action-card
+    title="addSolution"
+    subtitle="infoActionCardSubtitleEcosolutions"
+    textButton="addNewSolution"
+    (actionClick)="createEcosolution()">
+    <img src="assets/new-ecosolution.svg" alt="new-ecosolution" />
+  </goeko-info-action-card>
+}

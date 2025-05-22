@@ -225,9 +225,8 @@ export class EcosolutionsFormDetailsComponent implements AfterViewInit, OnDestro
     if (control) {
       this.detailedDescriptionTranslations().push(control)
       if (control.pristine) {
-        /*  this.editors.forEach((editor) => editor.update)
         this.editors = []
-        this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor())) */
+        this.detailedDescriptionTranslations().controls.forEach(() => this.editors.push(new Editor()))
       }
       console.log(this.editors)
     }
