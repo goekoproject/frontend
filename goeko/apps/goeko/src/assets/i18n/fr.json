@@ -39,9 +39,9 @@
   },
   "bestFiancialPartners": "Meilleurs partenaires financiers",
   "BREADCRUMBS": {
-    "edit_ecosolutions": "Modifier éco-solution",
+    "edit_ecosolutions": "Modifier  solution cleantech",
     "new_ecosolutions": "Nouvelle solution cleantech",
-    "view_ecosolutions": "Détails de votre écosolution"
+    "view_ecosolutions": "Détails de votre  solution cleantech"
   },
   "buildingtypes": {
     "all": "",
@@ -107,7 +107,7 @@
       "question": "Déchets dangereux"
     },
     "inertOrMineralWaste": {
-      "label": "Dans quelle(s) catégorie(s) de déchets minéraux ou inertes votre éco-solution améliore-t-elle la gestion?",
+      "label": "Dans quelle(s) catégorie(s) de déchets minéraux ou inertes votre  solution cleantech améliore-t-elle la gestion?",
       "question": "Déchets minéraux ou inertes"
     },
     "lastYearInvoice": {
@@ -115,11 +115,11 @@
       "question": "Facture d'eau (2022)"
     },
     "mainActivity": {
-      "label": "Pour quelle(s) activité(s) en rapport avec l’eau votre éco-solution permet-elle de réduire sa consommation ou d'améliorer sa qualité ?",
+      "label": "Pour quelle(s) activité(s) en rapport avec l’eau votre  solution cleantech permet-elle de réduire sa consommation ou d'améliorer sa qualité ?",
       "question": "Activités consommant de l'eau"
     },
     "mainCategoryNonInert": {
-      "label": "Dans quelle(s) catégorie(s) de déchets non inertes votre éco-solution améliore-t-elle la gestion?",
+      "label": "Dans quelle(s) catégorie(s) de déchets non inertes votre  solution cleantech améliore-t-elle la gestion?",
       "question": "Déchets non inertes"
     },
     "mainInternalCombustionEngine": {
@@ -139,7 +139,7 @@
       "question": "Produits toxiques"
     },
     "specialWaste": {
-      "label": "Dans quelle(s) catégorie(s) de déchets spéciaux votre éco-solution améliore-t-elle la gestion?",
+      "label": "Dans quelle(s) catégorie(s) de déchets spéciaux votre  solution cleantech améliore-t-elle la gestion?",
       "question": "Déchets spéciaux"
     },
     "sustainableBuildingOperations": {
@@ -170,7 +170,7 @@
   },
   "dashboard": "Tableau de bord",
   "decline": "Refuser",
-  "defaultMessageLead": "Bonjour, votre éco-solution m’intéresse. Merci de bien vouloir me contacter par e-mail.",
+  "defaultMessageLead": "Bonjour, votre  solution cleantech m’intéresse. Merci de bien vouloir me contacter par e-mail.",
   "delete": "Supprimer",
   "deleteLocation": "Supprimer la région",
   "description": "Description",
@@ -179,8 +179,8 @@
   "details": "Détails",
   "DIALOG": {
     "messageBodyLead": "Un représentant de Goeko sera heureux de répondre à toutes vos questions.",
-    "messageLeadDuplicated": "Vous avez déjà contacté cette écosolution, s'il ne répond toujours pas, veuillez contacter {{email}}",
-    "messageNotification": "Activez les notifications par email pour recevoir les dernières éco-solutions correspondant à vos besoins.",
+    "messageLeadDuplicated": "Vous avez déjà contacté cette  solution cleantech, s'il ne répond toujours pas, veuillez contacter {{email}}",
+    "messageNotification": "Activez les notifications par email pour recevoir les dernières  solution cleantechs correspondant à vos besoins.",
     "messageSendOk": "Votre message a été envoyé avec succès !",
     "messaggeProfileUncompletedBody": "Mettez à jour votre profil pour accéder à tous les outils de Goeko.",
     "messaggeProfileUncompletedTitle": "Complétez votre profil",
@@ -268,9 +268,9 @@
     "currency": "Devise",
     "currencyFunding": "Devise",
     "date": "Date",
-    "deliverCountries": "Pays où votre éco-solution est livrable",
+    "deliverCountries": "Pays où votre  solution cleantech est livrable",
     "deliverCountries ": "",
-    "ecosolution_classification": "Sélectionnez des questions et choisissez des produits pour votre éco-solution.",
+    "ecosolution_classification": "Sélectionnez des questions et choisissez des produits pour votre  solution cleantech.",
     "ecosolutions_products": "Sélectionnez les produits",
     "ecosolutions_subCategory": "Sélectionnez les sous-catégories",
     "ecosolutions_sustainableDevelopmentGoals": "Sélectionnez les Objectifs de développement durable (ODD)",
@@ -282,11 +282,11 @@
     "furtherInformation": "Informations complémentaires",
     "guarantee": "Garantie",
     "improvement": "Améliorations",
-    "infoPrice": "Informations sur le prix de votre éco-solution (exemple: prix minimum)",
-    "labelSelectedFormLang": "Sélectionnez la langue pour compléter votre éco-solution.",
+    "infoPrice": "Informations sur le prix de votre  solution cleantech (exemple: prix minimum)",
+    "labelSelectedFormLang": "Sélectionnez la langue pour compléter votre  solution cleantech.",
     "location": "Emplacement",
     "logo": "Teléchargez le logo de votre entreprise",
-    "marketReady": "Votre éco-solution est-elle prête pour le marché?",
+    "marketReady": "Votre  solution cleantech est-elle prête pour le marché?",
     "messageLead": "Écrivez votre message",
     "montanMinimun": "Montant minimum requis",
     "name": "Nom",
@@ -316,16 +316,16 @@
     "selectProducts": "Sélectionner des produits",
     "selectProvinces": "Sélection de régions",
     "showProvinces": "Voir les régions",
-    "solutionDescription": "Brève description de votre éco-solution",
-    "solutionName": "Nom de votre éco-solution",
+    "solutionDescription": "Brève description de votre  solution cleantech",
+    "solutionName": "Nom de votre  solution cleantech",
     "subcategoryForLangCleantech": "Sous-catégorie par langue pour les Cleantech",
     "subcategoryForLangSME": "Sous-catégorie par langue pour les PME",
     "targetRegion": "Régions cibles",
     "technicalDescription": "Description détaillée",
     "technicalSheet": "Fiche technique",
-    "titleFormAnalysis": "Sélectionnez vos catégories pour trouver des éco-solutions",
+    "titleFormAnalysis": "Sélectionnez vos catégories pour trouver des  solution cleantechs",
     "titleSelectImgEcosolution": "Choisissez plusieurs images pour votre solution cleantech",
-    "typeOfEcolutions": "Type d'éco-solution",
+    "typeOfEcolutions": "Type d' solution cleantech",
     "unit": "Unité",
     "website": "Site web",
     "workTypes": "Types de travaux que vous financez",
@@ -462,9 +462,9 @@
   },
   "messageLeadForBank": "Bonjour,\n \nJe me permets de vous contacter dans le cadre d’une opportunité de financement pour mon entreprise. J’aimerais convenir d’un entretien avec vous afin d’échanger sur les solutions possibles.Pourriez-vous me faire part de vos disponibilités ? Dans l’attente de votre retour, je vous remercie par avance.\n \n Cordialement",
   "messages": "Messages",
-  "msg_empty_ecosolutions": "Votre meilleure éco-solution est encore à venir",
-  "msg_empty_ecosolutions_notification": "Votre meilleure éco-solution est encore à venir. Nous vous informerons lorsqu'elle arrivera.",
-  "msgSearchEcosolutions": "Trouvez des éco-solutions pour votre entreprise",
+  "msg_empty_ecosolutions": "Votre meilleure  solution cleantech est encore à venir",
+  "msg_empty_ecosolutions_notification": "Votre meilleure  solution cleantech est encore à venir. Nous vous informerons lorsqu'elle arrivera.",
+  "msgSearchEcosolutions": "Trouvez des  solution cleantechs pour votre entreprise",
   "my_company": "Mon entreprise",
   "name": "Nom",
   "new_analysis": "Nouvelle analyse",
@@ -722,7 +722,7 @@
   },
   "selectAll": "Tout sélectionner",
   "selectCategory": "Sélectionnez une catégorie",
-  "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre écosolution",
+  "selectCategoryEcosolutions": "Sélectionnez la catégorie de votre  solution cleantech",
   "selected_products": "Produits sélectionnés",
   "selectedProduct": "Produit sélectionné",
   "selectedProducts": " Produits sélectionnés",
@@ -757,18 +757,18 @@
   "sustainable_equipment_leads": "Clients potentiels",
   "sustainableEquipment": "Équipement durable",
   "TEXT_SUPPORT": {
-    "advantagesEcosolutions": "Avantages de votre éco-solution par rapport à une solution traditionnelle",
+    "advantagesEcosolutions": "Avantages de votre  solution cleantech par rapport à une solution traditionnelle",
     "buildingOperation_question": "Recherchez-vous une ou des solutions pour réduire la consommation d’eau telles que :",
-    "co2Emission": "Domaine où votre éco-solution réduit les émissions de CO₂",
-    "ods": "En lien avec votre éco-solution",
+    "co2Emission": "Domaine où votre  solution cleantech réduit les émissions de CO₂",
+    "ods": "En lien avec votre  solution cleantech",
     "odsSme": "ODD en lien avec la solution",
     "paybackPeriodYears": "Nombre d’années pour rentabiliser l’investissement par rapport à une solution traditionnelle",
-    "selectProducts": "Votre éco-solution réduit l'impact du ou des produits toxiques suivants",
+    "selectProducts": "Votre  solution cleantech réduit l'impact du ou des produits toxiques suivants",
     "waste": "Types de déchets",
     "waterConsumption": "Activités liées à la consommation d’eau"
   },
   "titleBannerLead": "Suivi des leads qualifiés",
-  "titleResult": "Les éco-solutions les plus adaptées pour",
+  "titleResult": "Les  solution cleantechs les plus adaptées pour",
   "translate": "Traduire",
   "turnOnNotifications": "Activez les notifications",
   "typeSolutionCleantech": "Type de solution cleantech",
@@ -812,9 +812,9 @@
   "years": "années",
   "yes": "Oui",
   "your": "Votre",
-  "your_ecosolutions": "Vos cleantech-ecosolutions",
+  "your_ecosolutions": "Vos solutions cleantech cleantech",
   "savingCleantechSolution": "Votre solution cleantech est en cours d'enregistrement",
-  "yourEcosolution": "Votre éco-solution",
+  "yourEcosolution": "Votre  solution cleantech",
   "yourFinancialSolutions": "Vos solutions financières",
   "yourProjectFile": "Projets réalisés",
   "yourProjects": "Vos projets"

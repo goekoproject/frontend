@@ -41,7 +41,7 @@
   "BREADCRUMBS": {
     "edit_ecosolutions": "Bearbeiten Sie Ihre Ökolösung",
     "new_ecosolutions": "Neue Cleantech-Lösung",
-    "view_ecosolutions": "Details Ihrer Ökolösung ecosolution"
+    "view_ecosolutions": "Details Ihrer Ökolösung  solution cleantech"
   },
   "buildingtypes": {
     "all": "Alle",
@@ -812,7 +812,7 @@
   "years": "Jahre",
   "yes": "Ja",
   "your": "Ihr",
-  "your_ecosolutions": "Ihre Eco-solutions",
+  "your_ecosolutions": "Ihre cleantech-Lösungens",
   "savingCleantechSolution": "Ihre Cleantech-Lösung wird gespeichert",
   "yourEcosolution": "Ihre Ökolösung",
   "yourFinancialSolutions": "Ihre Finanzierungslösungen",

@@ -39,9 +39,9 @@
   },
   "bestFiancialPartners": "Best financial partners",
   "BREADCRUMBS": {
-    "edit_ecosolutions": "Edit your ecosolution",
+    "edit_ecosolutions": "Edit your  solution cleantech",
     "new_ecosolutions": "New cleantech solution ",
-    "view_ecosolutions": "Detail of your ecosolution"
+    "view_ecosolutions": "Detail of your  solution cleantech"
   },
   "buildingtypes": {
     "all": "",
@@ -286,7 +286,7 @@
     "labelSelectedFormLang": "Select the language to complete your eco-solution.",
     "location": "Location",
     "logo": "Link to your logo",
-    "marketReady": "Is your ecosolution market-ready?",
+    "marketReady": "Is your  solution cleantech market-ready?",
     "messageLead": "Write your message",
     "montanMinimun": "Minimum amount",
     "name": "Name",
@@ -723,7 +723,7 @@
   "selectAll": "Select All",
   "savingCleantechSolution": "Your cleantech solution is being saved",
   "selectCategory": "Select a category",
-  "selectCategoryEcosolutions": "Select the category for your ecosolution",
+  "selectCategoryEcosolutions": "Select the category for your  solution cleantech",
   "selected_products": "Selected products",
   "selectedProduct": "Selected product",
   "selectedProducts": " Selected products",
@@ -813,8 +813,8 @@
   "years": "years",
   "yes": "Yes",
   "your": "Your",
-  "your_ecosolutions": "Your Eco-solutions",
-  "yourEcosolution": "Your Eco-solution",
+  "your_ecosolutions": "Your cleantech solutions",
+  "yourEcosolution": "Your cleantech solution",
   "yourFinancialSolutions": "Your financial solutions",
   "yourProjectFile": "Completed projects",
   "yourProjects": "Your projects"
