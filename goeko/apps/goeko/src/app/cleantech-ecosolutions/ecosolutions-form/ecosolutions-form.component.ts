@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CanComponentDeactivate, canDeactivateForm, SdgIconsComponent } from '@goeko/business-ui'
 import { CategoryGrouping, Ecosolutions, NewEcosolutionsBody, UpdatedEcosolutionBody } from '@goeko/store'
 import { BadgeModule, ButtonModule, FormErrorTextComponent, LoadingProcessComponent, UiSuperSelectModule } from '@goeko/ui'
-import { TranslatePipe } from '@ngx-translate/core'
+import { TranslatePipe, TranslateService } from '@ngx-translate/core'
 import { NgxEditorModule } from 'ngx-editor'
 import { delay, Observable, of, tap } from 'rxjs'
 import { EcosolutionsFormBenefisComponent } from './ecosolutions-form-benefis/ecosolutions-form-benefis.component'
@@ -18,7 +18,37 @@ import { EcosolutionsFormPaybackComponent } from './ecosolutions-form-payback/ec
 import { EcosolutionsFormWarrantyComponent } from './ecosolutions-form-warranty/ecosolutions-form-warranty.component'
 import { DocumentMetadata } from './ecosolutions-managment-documents.service'
 import { EcosolutionsManagmentService } from './ecosolutions-managment.service'
-
+const getControlLabel = (controlName: string): string => {
+  const labelMap: { [key: string]: string } = {
+    nameTranslations: 'FORM_LABEL.solutionName',
+    descriptionTranslations: 'FORM_LABEL.solutionDescription',
+    detailedDescriptionTranslations: 'FORM_LABEL.technicalDescription',
+    priceDescriptionTranslations: 'FORM_LABEL.infoPrice',
+    sustainableDevelopmentGoals: 'FORM_LABEL.ecosolutions_sustainableDevelopmentGoals',
+    classifications: 'FORM_LABEL.ecosolution_classification',
+    reductionPercentage: 'FORM_LABEL.reductionPercentageCO2',
+    operationalCostReductionPercentage: 'FORM_LABEL.operationalCostReductionPercentage',
+    improvementOtherCategory: 'FORM_LABEL.improvement',
+    images: 'FORM_LABEL.titleSelectImgEcosolution',
+    price: 'FORM_LABEL.price',
+    currency: 'FORM_LABEL.currency',
+    unit: 'FORM_LABEL.unit',
+    deliverCountries: 'FORM_LABEL.deliverCountries',
+    paybackPeriodYears: 'FORM_LABEL.paybackPeriodYears',
+    marketReady: 'FORM_LABEL.marketReady',
+    guarantee: 'FORM_LABEL.guarantee',
+    yearGuarantee: 'FORM_LABEL.guarantee',
+    approved: 'FORM_LABEL.approvedSwiss',
+    locations: 'FORM_LABEL.location',
+    haveTechnicalSheet: 'FORM_LABEL.technicalSheet',
+    technicalSheet: 'FORM_LABEL.technicalSheet',
+    certified: 'FORM_LABEL.certified',
+    haveProjectFile: 'FORM_LABEL.technicalSheet',
+    projectFile: 'yourProjectFile',
+    certificates: 'FORM_LABEL.certificates',
+  }
+  return labelMap[controlName] || controlName
+}
 const TIME_DELAY = 1000
 @Component({
   selector: 'goeko-ecosolutions-form',
@@ -51,6 +81,7 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
   private _router = inject(Router)
   private _route = inject(ActivatedRoute)
   private _fb = inject(FormBuilder)
+  private _translate = inject(TranslateService)
   private _ecosolutionsManagmentService = inject(EcosolutionsManagmentService)
 
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean = () => {
@@ -131,8 +162,13 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
       this.getEcosolution()
     }
   })
+  public formErrors = signal<string[]>([])
+
   ngOnInit(): void {
     this._initForm()
+    this.form.valueChanges.pipe(delay(TIME_DELAY)).subscribe(() => {
+      this._showFormErrors()
+    })
   }
 
   private _initForm() {
@@ -280,5 +316,22 @@ export class EcosolutionsFormComponent implements OnInit, CanComponentDeactivate
     this._router.navigate(['../cleantech-ecosolutions', this.cleantechId()], {
       relativeTo: this._route.parent,
     })
+  }
+
+  private _showFormErrors() {
+    const errors: { controlName: string }[] = []
+
+    Object.keys(this.form.controls).forEach((key) => {
+      const control = this.form.get(key)
+      if (control?.invalid) {
+        errors.push({
+          controlName: this._translate.instant(getControlLabel(key)),
+        })
+      }
+    })
+
+    this.formErrors.set(errors.map((error) => error.controlName))
+
+    return errors
   }
 }

@@ -1,9 +1,10 @@
+import { CODE_LANG } from '@goeko/core'
 import { Ecosolutions, TranslatedProperties } from '@goeko/store'
 import { ClassificationManagment } from '@goeko/store/model/classifications-managment.interface'
 
 const getTranslatedValue = (translations: TranslatedProperties[]) => {
-  const translation = translations.find((t) => t.lang === document.documentElement.lang)
-  return translation ? translation.label : (translations.at(0)?.label as string)
+  const translation = translations.find((t) => t.lang === document.documentElement.lang || t.lang === CODE_LANG.GB)
+  return translation?.label || 'missing'
 }
 interface SubcategoryEcosolutionInfo {
   subcategoryLabel: string

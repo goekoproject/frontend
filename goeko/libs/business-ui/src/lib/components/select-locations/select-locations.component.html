@@ -7,7 +7,7 @@
       (singleSelect() && controlLocations.controls.length < 1) ||
       (!singleSelect() && controlLocations.controls.length >= 0 && countries()?.length !== controlLocations.value.length)
     ) {
-      <a (click)="addLocation()" class="flex text-primary-default text-sm">
+      <a (click)="addLocation()" class="flex text-sm text-primary-default">
         {{ 'addAnotherLocation' | translate }}
       </a>
     }
@@ -22,7 +22,7 @@
           <div [formGroupName]="i" class="locations-selected">
             <div [formGroupName]="'country'" class="flex w-full items-center gap-4">
               <ui-super-select
-                class="w-64 flex-grow"
+                class="w-64 max-w-48 flex-grow"
                 [placeholder]="'FORM_LABEL.country' | translate"
                 [formControlName]="'code'"
                 id="country"
@@ -42,7 +42,7 @@
 
               @if (dataSourceSelect.has(location.value.country.code)) {
                 <ui-super-select
-                  class="w-64 flex-grow"
+                  class="w-96 flex-grow"
                   [placeholder]="'regions' | translate"
                   formControlName="regions"
                   id="regions"

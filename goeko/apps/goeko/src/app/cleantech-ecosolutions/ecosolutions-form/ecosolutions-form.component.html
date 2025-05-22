@@ -46,14 +46,11 @@
         <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
       }
 
-      @defer (on viewport) {
-        <goeko-ecosolutions-form-country-available
-          class="section-form"
-          [parentForm]="form"
-          [ecosolutionLocation]="ecosolutionData()?.locations"></goeko-ecosolutions-form-country-available>
-      } @placeholder {
-        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
-      }
+      <goeko-ecosolutions-form-country-available
+        class="section-form"
+        [parentForm]="form"
+        [ecosolutionLocation]="ecosolutionData()?.locations"></goeko-ecosolutions-form-country-available>
+
       @defer (on viewport) {
         <ng-container *ngTemplateOutlet="sdg"></ng-container>
       } @placeholder {
@@ -84,8 +81,16 @@
       } @placeholder {
         <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
       }
+
       <goeko-form-error-text [form]="form">
-        {{ 'ERRORS_FORM.haveError' | translate }}
+        <div class="h-max rounded-md border-2 border-red-500 bg-white p-4">
+          {{ 'ERRORS_FORM.haveError' | translate }}
+          <div class="flex flex-col gap-1 p-2">
+            @for (error of formErrors(); track $index) {
+              <span>* {{ error | translate }}</span>
+            }
+          </div>
+        </div>
       </goeko-form-error-text>
       <div class="mt-4 flex justify-between">
         <button go-button appearance="white" type="button" (click)="goToListEcosolution()">
