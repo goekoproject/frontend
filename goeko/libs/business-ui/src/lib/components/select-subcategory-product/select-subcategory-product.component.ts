@@ -59,15 +59,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   @Input() readonly = false
   @Input() subCategory: any
   @Input() typeTitle: 'label' | 'question' = 'label'
-  @Input()
-  public get multiple(): boolean {
-    return this._multiple
-  }
-  public set multiple(value: boolean) {
-    this._multiple = value
-    this.type = value ? 'checkbox' : 'radio'
-  }
-  private _multiple!: boolean
+
 
   public type: TYPE_INPUT = 'radio'
   public disabled = false
@@ -192,19 +184,12 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
   }
 
   assignValue(value: string): void {
-    if (this.multiple) {
       this.value = value
       this.checked = true
       this._cdf.markForCheck()
 
       this.open = false
-    } else if (this.subCategory.code === value) {
-      this.value = this.subCategory
-      this.checked = true
-      this._cdf.markForCheck()
-      this._formControlNameDirective.control?.pristine
-      this._formControlNameDirective.control?.markAsPristine()
-    }
+
 
     // this will make the execution after the above boolean has changed
   }
@@ -227,7 +212,7 @@ export class SelectSubcategoryProductComponent implements ControlValueAccessor, 
     if (this.type === TYPE_FIELD.CHECKBOX) {
       return
     }
-    if (!this.open && !this.multiple) {
+    if (!this.open) {
       this.badgeGroup._selectionModel.clear()
       this.value = ''
     }

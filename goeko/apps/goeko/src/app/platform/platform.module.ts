@@ -21,6 +21,7 @@ import { HeaderUserComponent } from '../shell/header-user/header-user.component'
 import { MenuUserComponent } from '../shell/menu-user/menu-user.component'
 import { PlatformRoutingModule } from './platform-routing.module'
 import { PlatformComponent } from './platform.component'
+import { ProviderLoadUserInfo } from './platform.initializer'
 
 @NgModule({
   declarations: [PlatformComponent],
@@ -51,6 +52,7 @@ import { PlatformComponent } from './platform.component'
     SessionStorageService,
     EcosolutionsTaggingService,
     RemoteConfigService,
+    ProviderLoadUserInfo,
   ],
 })
 export class PlatformModule {}

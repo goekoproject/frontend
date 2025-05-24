@@ -4,7 +4,9 @@ import { EcosolutionsTaggingService, SmeDashboard, SmeService, TaggingResponse }
 import { PartnerService } from '@goeko/store/partner/partner.service'
 import { Observable } from 'rxjs'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class DashboardSmeService {
   private _smeServices = inject(SmeService)
   private _ecosolutionTaggingService = inject(EcosolutionsTaggingService)

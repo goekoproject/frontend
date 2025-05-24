@@ -2,75 +2,86 @@
   {{ label }}
 </label>
 
-<div [ngClass]="{ flex: this.multiple, 'flex-col-reverse': this.multiple }"
-  class="relative w-full  rounded-lg border-2 border-dashed border-gray-300 p-6 transition-all"
-  [ngClass]="{ 'input-readonly': readonly }" id="dropzone" #dropzone (dragover)="onDragOver($event)"
-  (drop)="onDrop($event)" (dropleave)="onDragLeave($event)">
+<div
+  [ngClass]="{ flex: this.multiple, 'flex-col-reverse': this.multiple }"
+  class="relative w-full rounded-lg border-2 border-dashed border-gray-300 p-6 transition-all"
+  [ngClass]="{ 'input-readonly': readonly }"
+  id="dropzone"
+  #dropzone
+  (dragover)="onDragOver($event)"
+  (drop)="onDrop($event)"
+  (dropleave)="onDragLeave($event)">
   @defer (when !readonly) {
-  <div class="m-4 text-center">
-    @if (!this.multiple) {
-    <i class="ti ti-file-upload icon-upload"></i>
-    }
-    <h3 class="mt-2 text-sm font-medium text-gray-900">
-      <label class="text-label relative cursor-pointer">
-        <p>{{ 'INPUT_FILE.image' | translate }}</p>
-        @if (this.multiple) {
-        <a>{{ 'INPUT_FILE.image3' | translate }}</a>
-        } @else {
-        <a>{{ textButton() | translate }}</a>
-        }
-        @if (multiple) {
-        <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)"
-          multiple />
-        } @else {
-        <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)" />
-        }
-      </label>
-    </h3>
-    <p class="mt-1 text-xs text-gray-500">(JPGE, JPG)</p>
-  </div>
+    <div class="m-4 text-center">
+      @if (!this.multiple) {
+        <i class="ti ti-file-upload icon-upload"></i>
+      }
+      <h3 class="mt-2 text-sm font-medium text-gray-900">
+        <label class="text-label relative cursor-pointer">
+          <p>{{ 'INPUT_FILE.image' | translate }}</p>
+          @if (this.multiple) {
+            <a>{{ 'INPUT_FILE.image3' | translate }}</a>
+          } @else {
+            <a>{{ textButton() | translate }}</a>
+            <!--   <a class="z-50 bg-red-600 text-white hover:border-none hover:bg-red-700 hover:text-white" (click)="removeFile($event)">{{
+              'delete' | translate
+            }}</a> -->
+          }
+          @if (multiple) {
+            <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)" multiple />
+          } @else {
+            <input class="sr-only" type="file" [id]="id" accept="{{ acceptedFileTypes }}" (change)="uploadFile($event)" />
+          }
+        </label>
+      </h3>
+      <p class="mt-1 text-xs text-gray-500">(JPGE, JPG)</p>
+    </div>
   }
 
   @if (multiple && filesUrl && filesUrl.length > 0) {
-  <div class="embla w-full" emblaCarousel>
-    <div class="embla__container">
-      @for (file of filesUrl; track file; let i = $index) {
-      <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ id: i, url: file }"></ng-container>
-      }
+    <div class="embla w-full" emblaCarousel>
+      <div class="embla__container">
+        @for (file of filesUrl; track i; let i = $index) {
+          <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ id: i, url: file }"></ng-container>
+        }
+      </div>
     </div>
-  </div>
-  <div class="thumb py-4" thumb>
-    <div class="embla__container mt-4 flex shrink-0 grow-0 basis-24 gap-3 rounded-2xl">
-      @for (file of filesUrl; track file; let i = $index) {
-      <button (click)="selectedImg(i)" class="embla__slide max-h-20 max-w-28 rounded-2xl transition-all" [ngClass]="{
-              'border-[0.1rem] shadow-md shadow-primary-900': selectedSlideMain() === i,
+    <div class="thumb py-4" thumb>
+      <div class="embla__container mt-4 flex shrink-0 grow-0 basis-24 gap-3 rounded-2xl">
+        @for (file of filesUrl; track t; let t = $index) {
+          <button
+            title="next"
+            (click)="selectedImg(t)"
+            [attr.aria-label]="'View image ' + (t + 1)"
+            class="embla__slide max-h-20 max-w-28 rounded-2xl transition-all"
+            [ngClass]="{
+              'shadow-md border-[0.1rem] shadow-primary-900': selectedSlideMain() === t,
             }">
-        <img [src]="file" [alt]="'tumb' + i" class="h-full max-h-80 w-full rounded-2xl object-cover" />
-      </button>
-      }
+            <img [src]="file" alt="{{ 'Preview image ' + (t + 1) }}" class="h-full max-h-80 w-full rounded-2xl object-cover" />
+          </button>
+        }
+      </div>
     </div>
-  </div>
-  <div class="flex self-end text-4xl text-primary-900">
-    <i class="ti ti-circle-arrow-left cursor-pointer" (click)="prev()"></i>
-    <i class="ti ti-circle-arrow-right cursor-pointer" (click)="next()"></i>
-  </div>
+    <div class="flex self-end text-4xl text-primary-900">
+      <i class="ti ti-circle-arrow-left cursor-pointer" (click)="prev()"></i>
+      <i class="ti ti-circle-arrow-right cursor-pointer" (click)="next()"></i>
+    </div>
   } @else if (filesUrl && filesUrl.length === 1) {
-  <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ id: 0, url: filesUrl[0] }"></ng-container>
+    <ng-container [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ id: 0, url: filesUrl[0] }"></ng-container>
   }
 </div>
 
 <ng-template #preview let-url="url" let-id="id">
   <div class="relative h-fit min-w-full">
     @defer (when !readonly) {
-    @if (this.multiple) {
-    <div
-      class="absolute right-0 m-4 flex cursor-pointer rounded-full bg-primary-950 text-3xl text-white transition-all hover:text-4xl">
-      <i class="ti ti-circle-x" (click)="removeSlide(id)"></i>
-    </div>
-    }
+      @if (this.multiple) {
+        <div class="absolute right-0 m-4 flex cursor-pointer rounded-full bg-primary-950 text-3xl text-white transition-all hover:text-4xl">
+          <i class="ti ti-circle-x" (click)="removeSlide(id)"></i>
+        </div>
+      }
     }
     @if (id === selectedSlideMain()) {
-    <img [src]="url" loading="lazy" [alt]="id" class="object-cover rounded-2xl max-w-[36rem]" />
+      <img [src]="url" loading="lazy" alt="{{ id }}" class="max-w-[36rem] rounded-2xl object-cover" />
     }
   </div>
 </ng-template>

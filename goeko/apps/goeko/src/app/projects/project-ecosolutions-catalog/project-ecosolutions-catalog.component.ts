@@ -94,6 +94,9 @@ export class ProjectEcosolutionCatalogComponent implements OnInit, OnDestroy {
   viewEcosolutionDetail = (ecosolution: EcosolutionResult) => {
     this._router.navigate(['ecosolutions-detail', this.smeId(), ecosolution.id], {
       relativeTo: this._route.parent,
+      queryParams: {
+        projectId: this.project().id,
+      },
     })
   }
   turnOnNotification = () => {

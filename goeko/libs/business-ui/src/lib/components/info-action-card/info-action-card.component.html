@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="shadow-lg flex min-h-96 w-full max-w-sm flex-col items-center justify-center rounded-lg p-12 shadow-gray-300 dark:bg-white">
+    <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-700">{{ title() | translate }}</h5>
+
+    <p class="mb-7 text-center font-normal text-gray-700">{{ subtitle() | translate }}</p>
+    <ng-content select="img"></ng-content>
+    <button type="button" go-button appearance="primary" (click)="onAction()">
+      {{ textButton() | translate }}
+    </button>
+  </div>
+</div>

@@ -5,12 +5,12 @@
 .text-label {
   font-weight: 100;
   a {
-    color: var(--primary--400);
     font: var(--font-label);
     border-radius: 2rem;
     border: 1px solid;
     padding: 0.6rem 1.2rem;
     line-height: 4;
+    @apply m-2 font-semibold;
   }
 }
 .input-readonly {

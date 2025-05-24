@@ -93,7 +93,7 @@ const CLEANTECH_MENU: MenuUser[] = [
   },
   {
     id: window.crypto.randomUUID(),
-    title: 'Eco-solutions',
+    title: 'cleantechSolutions',
     url: 'cleantech-ecosolutions',
     active: true,
     icon: 'solar-panel-2',

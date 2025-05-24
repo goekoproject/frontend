@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
 import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
 import { AutoUnsubscribe, GoInput } from '@goeko/ui'
-import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs'
+import { forkJoin, map, of, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_BANK } from './profile-bank.constants'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
@@ -75,11 +75,23 @@ export class ProfileComponent implements CanComponentDeactivate {
   public username = this._profieService.username
   public defaultSetSuperSelect = defaultSetSuperSelect as (o1: any, o2: any) => boolean
   public defaultSetCountriesSme = defaultSetCountriesSme as (o1: CountrySelectOption, o2: string) => boolean
+  private readonly UPLOAD_STRATEGIES = {
+    [USER_TYPE.CLEANTECH]: (id: string) => this._uploadImgCleantech$(id),
+    [USER_TYPE.BANK]: (id: string) => this._uploadImgBank$(id),
+  } as const
 
-  private _uploadImg$ = (id = this.dataProfile()?.id) => {
+  private _uploadImgCleantech$ = (id = this.dataProfile()?.id) => {
     return this._profieService.uploadImgProfile(id, this.profileImg)
   }
 
+  private _uploadImgBank$ = (id = this.dataProfile()?.id) => {
+    return this._profieService.uploadImgProfileBank(id, this.profileImg)
+  }
+
+  private _uploadImg$ = (id = this.dataProfile()?.id) => {
+    const uploadStrategy = this.UPLOAD_STRATEGIES[this.userType() as keyof typeof this.UPLOAD_STRATEGIES]
+    return uploadStrategy ? uploadStrategy(id) : of(null)
+  }
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
   }

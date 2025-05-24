@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { PARENT_CODE } from '../classificactions/public-api'
 import { DocumentEcosolutions } from './ecosolution.interface'
 import { getDocumentTypeByParanteCode } from './ecosolutions-document.builder'
 
@@ -8,7 +7,7 @@ import { getDocumentTypeByParanteCode } from './ecosolutions-document.builder'
   standalone: true,
 })
 export class FilterByDocumentTypePipe implements PipeTransform {
-  transform(documents: DocumentEcosolutions[], documentType: keyof typeof PARENT_CODE): any[] {
+  transform(documents: DocumentEcosolutions[], documentType: string): any[] {
     if (!documents || !documentType) {
       return documents
     }

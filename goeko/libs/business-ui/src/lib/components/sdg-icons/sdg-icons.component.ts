@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, computed, forwardRef, input, Input, model, OnInit, signal, ViewEncapsulation } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms'
 import { OrderByPipe } from '@goeko/core'
 import { SDG_LABEL, SDGLabel } from '@goeko/store'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
@@ -8,7 +8,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core'
 type Size = 'small' | 'medium' | 'large'
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, OrderByPipe],
+  imports: [CommonModule, TranslateModule, OrderByPipe, ReactiveFormsModule],
   selector: 'goeko-sdg-icons',
   templateUrl: './sdg-icons.component.html',
   styleUrls: ['./sdg-icons.component.scss'],
@@ -32,7 +32,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   public sdgs = signal<SDGLabel[]>(SDG_LABEL)
   public justIcon = input<boolean>(false)
   public sdgCodeSelected = computed(() => (this.value() || [])?.map((sdg) => sdg?.code))
-  onChange: (value: Array<SDGLabel>) => void = () => {}
+  onChange: (value: Array<number>) => void = () => {}
   onTouched: () => void = () => {}
   readonly = input<boolean>(false)
   value = model<Array<SDGLabel>>([])
@@ -72,8 +72,8 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   }
 
   private _getValueArrayNumOrObj = (value: number[] | any[]): any => {
-    const newValue = value.map((val) => val.code)
-    if (!newValue) {
+    const newValue = value.map((val) => val.code).filter((val) => val)
+    if (!newValue || newValue.length === 0) {
       return this.sdgs().filter((sdg: SDGLabel) => value.includes(sdg.code))
     }
     return this.sdgs().filter((sdg: SDGLabel) => newValue.includes(sdg.code))
@@ -105,7 +105,7 @@ export class SdgIconsComponent implements OnInit, ControlValueAccessor {
   selectedElement(event: Event, sdgSelected: SDGLabel): void {
     this._assignValue(sdgSelected)
     this.onTouched()
-    this.onChange(this.value())
+    this.onChange(this.value().map((sdg) => sdg.code))
     event.preventDefault()
   }
 }

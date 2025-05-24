@@ -10,7 +10,11 @@
     "passwordPolicyTitle": "You must meet at least 3 of the following rules: "
   },
   "add": "Add",
+  "addAnotherLocation": "Add another location",
+  "addNewSolution": "Add new solution",
+  "addOtherBenefit": "Add other benefit",
   "addRealEstateLoan": "Add real estate loan",
+  "addSolution": "Add an solution",
   "addSustainableEquipment": "Add sustainable equipment",
   "alertSelectedProduct": "Select the categories and products corresponding to your project",
   "all": "All",
@@ -35,9 +39,9 @@
   },
   "bestFiancialPartners": "Best financial partners",
   "BREADCRUMBS": {
-    "edit_ecosolutions": "Edit your ecosolution",
-    "new_ecosolutions": "New eco-solution",
-    "view_ecosolutions": "Detail of your ecosolution"
+    "edit_ecosolutions": "Edit your  solution cleantech",
+    "new_ecosolutions": "New cleantech solution ",
+    "view_ecosolutions": "Detail of your  solution cleantech"
   },
   "buildingtypes": {
     "all": "",
@@ -150,6 +154,7 @@
   "cleantechContacted": "Cleantech contacted",
   "cleantechLeadDefault": "Track connections with your qualified leads.",
   "cleantechsContacted": "Cleantech contacted",
+  "cleantechSolutions": "Cleantech solutions",
   "companyDetails": "Company details",
   "completeToProfileNow": "Complete to profile now!",
   "confirm": "Confirm",
@@ -168,7 +173,9 @@
   "defaultMessageLead": "Hello, I am interested in your ecological solution. Please contact me at the following email address:",
   "delete": "Delete",
   "deleteLocation": "Delete location",
+  "description": "Description",
   "deSelectAll": "Deselect all",
+  "detail": "Detail",
   "details": "Details",
   "DIALOG": {
     "messageBodyLead": "A Goeko representative will be happy to assist you with any questions you have.",
@@ -192,6 +199,7 @@
   "editProject": "Edit project",
   "editSelection": "Modifier selection",
   "enterprise": "Enterprise",
+  "environmentalCertificate": "Label-compatible or other environmental certificates",
   "ERROR_MESSAGES": {
     "400": "Check your info and try again.",
     "404": "Couldn't find that. Check the link.",
@@ -236,7 +244,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Additional information",
     "advantages": "Benefits",
-    "advantagesEcosolutions": "Advantages of your eco-solution",
+    "advantagesEcosolutions": "Benefits",
     "advantagesSupportText": "Advantages compared to a standard solution",
     "allProvinces": "All regions",
     "amountRequiredFunding": "Amount required for the request to be considered",
@@ -255,7 +263,7 @@
     "contactPerson": "Contact person",
     "countriesAvailable": "Countries Available",
     "countriesDistribution": "Countries of distribution",
-    "countriesProvincesAvailable": "Countries and regions of distribution",
+    "countriesProvincesAvailable": "Distribution",
     "country": "Country",
     "currency": "Currency",
     "currencyFunding": "Currency",
@@ -278,7 +286,7 @@
     "labelSelectedFormLang": "Select the language to complete your eco-solution.",
     "location": "Location",
     "logo": "Link to your logo",
-    "marketReady": "Is your ecosolution market-ready?",
+    "marketReady": "Is your  solution cleantech market-ready?",
     "messageLead": "Write your message",
     "montanMinimun": "Minimum amount",
     "name": "Name",
@@ -288,7 +296,7 @@
     "notification": "Notification",
     "numEmployees": "Number of employees",
     "objectType": "Object Type",
-    "operationalCostReductionPercentage": "Percentage of operational cost reduction",
+    "operationalCostReductionPercentage": "Operational cost reduction",
     "ownerProfile": "Owner profile",
     "password": "Password",
     "paybackPeriodYears": "Return on investment time compared to a standard solution",
@@ -296,11 +304,12 @@
     "price": "Price",
     "products": "Products",
     "province": "Province",
-    "reductionPercentage": "Reduction Percentage",
-    "reductionPercentageCO2": "CO₂ Reduction Percentage",
-    "reductionPercentageHP": "Hazardous Products Reduction Percentage",
-    "reductionPercentageWaste": "Waste Reduction Percentage",
-    "reductionPercentageWater": "Water Consumption Reduction Percentage",
+    "reductionPercentage": "{{category}} reduction",
+    "reductionPercentageCO2": "CO₂ reduction",
+    "reductionPercentageHP": "Hazardous Products reduction",
+    "reductionPercentageWaste": "Waste reduction",
+    "reductionPercentageWater": "Water consumption reduction",
+    "reductionEnvironmentalImpact": "Reduction of environmental impact",
     "requiredDocumentsFunding": "Required document related to the object",
     "search": "Search",
     "searchAgain": "Search again",
@@ -353,6 +362,8 @@
     "sloganTeam": "Allow us to introduce you to the talented group of individuals leading our mission to drive a cleaner and more sustainable future."
   },
   "ifAvailables": "(If available)",
+  "infoActionCardSubtitleEcosolutions": "We'll find the best leads for you",
+  "informationAboutPrice": "Information about price",
   "infoSaveMessages": "You have the option to save your data now, ensuring it's available for future reference, providing you with confidence in accessing it when needed.",
   "INPUT_FILE": {
     "addNewFile": "Add new file",
@@ -409,6 +420,7 @@
     "trencher": "Trencher"
   },
   "mandatory": "Mandatory",
+  "maxPhotoSize": "The maximum photo size allowed is {{maxSizeFile}}",
   "MENU": {
     "aboutGoEKo": "About GoEko",
     "blog": "Blog",
@@ -454,6 +466,7 @@
   "msg_empty_ecosolutions_notification": "Your best eco-solution is yet to come. We’ll notify you when it comes",
   "msgSearchEcosolutions": "Searching the best eco-solutions for you",
   "my_company": "My company",
+  "name": "Name",
   "new_analysis": "New analysis",
   "new_project": "New project",
   "next": "Next",
@@ -494,6 +507,8 @@
     "eu": "EU",
     "switzerland": "Switzerland"
   },
+  "original": "Original",
+  "originalLanguage": "Original language",
   "our_ecosolutions": "",
   "ownerprofiles": {
     "business": "Business",
@@ -521,6 +536,7 @@
   "readMore": "Read More...",
   "real_estate_loan_leads": "Potencial client",
   "realStateLoan": "Real state loan",
+  "reductionEnvironmentalImpact": "Reduction of environmental impact",
   "region": "Province",
   "regions": "Provinces",
   "RESET_PASSWORD": {
@@ -705,15 +721,20 @@
     }
   },
   "selectAll": "Select All",
-  "selectCategoryEcosolutions": "Select the category for your ecosolution",
+  "savingCleantechSolution": "Your cleantech solution is being saved",
+  "selectCategory": "Select a category",
+  "selectCategoryEcosolutions": "Select the category for your  solution cleantech",
   "selected_products": "Selected products",
   "selectedProduct": "Selected product",
   "selectedProducts": " Selected products",
+  "selectLanguagesForTranslation": "Select the languages you want to translate the descriptions and price information into.",
   "send": "Send",
   "sendMessage": "Send Message",
+  "shortDescription": "Short description",
   "showAll": "Show all",
   "showLead": "Show leads",
   "showMore": "View more",
+  "showTranslations": "Show translations",
   "SIGNUP": {
     "acceptedConditions": "I have read and accept the",
     "acceptedConditions2": "terms and conditions",
@@ -724,6 +745,7 @@
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Connecting businesses to clean technology and financing",
   "sme": "Sme",
+  "solutionType": "Type of solution",
   "start": "Start",
   "subtitlePageCatalog": "Best solutions for your",
   "SUCCESS_MESSAGES": {
@@ -748,7 +770,9 @@
   },
   "titleBannerLead": " Qualified Leads Tracking",
   "titleResult": "Most adapted eco-solutions for",
+  "translate": "Translate",
   "turnOnNotifications": "Turn on notifications",
+  "typeSolutionCleantech": "Type of solution cleantech",
   "upgrade": "Upgrade",
   "upTo": "Up to",
   "user": "User",
@@ -764,7 +788,7 @@
     "peopleTransportVehicle": "People Transport Vehicle"
   },
   "VERIFY_EMAIL": {
-    "body": "We are glad, that you’re with us ? We’ve sent you a verification link to yours email address",
+    "body": "We are glad you're joining us. We've sent you a verification link to your email address.",
     "title": "Check your inbox"
   },
   "watchVideo": "Watch video",
@@ -789,8 +813,9 @@
   "years": "years",
   "yes": "Yes",
   "your": "Your",
-  "your_ecosolutions": "Your Eco-solutions",
-  "yourEcosolution": "Your Eco-solution",
+  "your_ecosolutions": "Your cleantech solutions",
+  "yourEcosolution": "Your cleantech solution",
   "yourFinancialSolutions": "Your financial solutions",
+  "yourProjectFile": "Completed projects",
   "yourProjects": "Your projects"
 }

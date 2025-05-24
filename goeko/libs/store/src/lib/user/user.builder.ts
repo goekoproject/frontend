@@ -77,6 +77,7 @@ export class BankBuilder implements IUserBuilder<BankUser> {
     this.bankUser.contactPerson = data?.contactPerson
     this.bankUser.identifier = data?.identifier
     this.bankUser.notification = data?.notification
+    this.bankUser.logo = data?.logo
     return this
   }
   build() {

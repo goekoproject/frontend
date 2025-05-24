@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, catchError, map, of, shareReplay } from 'rxjs'
 import { TranslateChangeService } from '../util/translate-change'
+import { EcosolutionsBody } from './ecosolution-base.model'
 import { EcosolutionResult } from './ecosolution-result.interface'
 import { EcosolutionSearchRequest } from './ecosolution-search.request.model'
 import { EcosolutionSearchResponse } from './ecosolution-search.response.interface'
@@ -24,7 +25,7 @@ export class EcosolutionsService extends TranslateChangeService {
     return this._http.delete(`/v1/ecosolutions/${id}`)
   }
 
-  updateEcosolution(id: string, body: Ecosolutions) {
+  updateEcosolution(id: string, body: EcosolutionsBody) {
     return this._http.put(`/v1/ecosolutions/${id}`, body)
   }
 
@@ -84,7 +85,7 @@ export class EcosolutionsService extends TranslateChangeService {
     return this._http.get<Ecosolutions[]>(`/v1/ecosolutions/cleantech/${id}`)
   }
 
-  createEcosolutions(body: Ecosolutions): Observable<any> {
+  createEcosolutions(body: EcosolutionsBody): Observable<any> {
     return this._http.post<Observable<any>>(`/v1/ecosolutions`, body)
   }
 

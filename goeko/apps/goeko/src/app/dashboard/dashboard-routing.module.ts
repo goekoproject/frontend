@@ -1,13 +1,19 @@
-import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
-import { ecosolutionFavouritesResolver, EcosolutionsTaggingService } from '@goeko/store'
+import { inject } from '@angular/core'
+import { Routes } from '@angular/router'
+import { ecosolutionFavouritesResolver, UserService } from '@goeko/store'
 import { dashboardData, leadOfBank } from './dashboard-bank/dashboard-data.resolver'
-import { DashboardCleantechComponent } from './dashboard-cleantech/dashboard-cleantech.component'
 import { dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
-import { DashboardSmeService } from './dashboard-sme/dashboard-sme.service'
-//import { DashboardBankComponent } from '../funding/hub-funding.component'
 
-const routes: Routes = [
+export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('../cleantech-ecosolutions/dashboard.component').then((m) => m.DashboardComponent),
+    canActivate: [
+      () => {
+        return inject(UserService).redirectDashboard()
+      },
+    ],
+  },
   {
     path: 'sme/:id',
     loadComponent: () => import('./dashboard-sme/dashboard-sme.component').then((m) => m.DashboardSmeComponent),
@@ -19,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'cleantech/:id',
-    component: DashboardCleantechComponent,
+    loadComponent: () => import('./dashboard-cleantech/dashboard-cleantech.component').then((m) => m.DashboardCleantechComponent),
     data: {
       breadcrumb: 'dashboard',
       hidden: true,
@@ -40,10 +46,3 @@ const routes: Routes = [
     },
   },
 ]
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: [DashboardSmeService, EcosolutionsTaggingService],
-})
-export class DashboardRoutingModule {}
