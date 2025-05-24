@@ -183,19 +183,16 @@ input:checked + .slider:before {
 }
 
 fieldset {
-  border-radius: 12px;
-  background: #fff;
-  padding: 1.5rem 0.5rem;
-  font-size: 18px;
-  border: none;
   @apply flex flex-col gap-4;
 }
 
 legend {
-  font-size: 1.25rem;
   color: var(--soft-dark);
   font-weight: 600;
   line-height: 1.5;
+}
+label {
+  @apply text-sm leading-10 text-black;
 }
 fieldset:not(:has(legend)) {
   padding: 0;

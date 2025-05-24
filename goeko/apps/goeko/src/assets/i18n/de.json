@@ -10,7 +10,11 @@
     "passwordPolicyTitle": "Sie müssen mindestens 3 der folgenden Regeln erfüllen: "
   },
   "add": "Hinzufügen",
+  "addAnotherLocation": "Anderen Standort hinzufügen",
+  "addNewSolution": "Neue Lösung hinzufügen",
+  "addOtherBenefit": "Weitere Vorteile hinzufügen",
   "addRealEstateLoan": "Immobilienkredit hinzufügen",
+  "addSolution": "Lösung hinzufügen",
   "addSustainableEquipment": "Nachhaltige Ausrüstung hinzufügen",
   "alertSelectedProduct": "Wählen Sie die Kategorien und Produkte aus, die zu Ihrem Projekt passen",
   "all": "Alle",
@@ -36,8 +40,8 @@
   "bestFiancialPartners": "Beste Finanzierungspartner",
   "BREADCRUMBS": {
     "edit_ecosolutions": "Bearbeiten Sie Ihre Ökolösung",
-    "new_ecosolutions": "Neue Öko-Lösung",
-    "view_ecosolutions": "Details Ihrer Ökolösung ecosolution"
+    "new_ecosolutions": "Neue Cleantech-Lösung",
+    "view_ecosolutions": "Details Ihrer Ökolösung  solution cleantech"
   },
   "buildingtypes": {
     "all": "Alle",
@@ -150,6 +154,7 @@
   "cleantechContacted": "Cleantech kontaktiert",
   "cleantechLeadDefault": "Verfolgen Sie Verbindungen mit Ihren qualifizierten Leads.",
   "cleantechsContacted": "Cleantech kontaktiert",
+  "cleantechSolutions": "Cleantech-Lösung",
   "companyDetails": "Unternehmensdetails",
   "completeToProfileNow": "Profil jetzt vervollständigen!",
   "confirm": "Bestätigen",
@@ -168,7 +173,9 @@
   "defaultMessageLead": "Hallo, ich interessiere mich für Ihre ökologische Lösung. Bitte kontaktieren Sie mich unter der folgenden E-Mail-Adresse:",
   "delete": "Löschen",
   "deleteLocation": "Standort löschen",
+  "description": "Beschreibung",
   "deSelectAll": "Alles abwählen",
+  "detail": "Detail",
   "details": "Details",
   "DIALOG": {
     "messageBodyLead": "Ein Goeko-Vertreter steht Ihnen gerne für alle Fragen zur Verfügung.",
@@ -192,6 +199,7 @@
   "editProject": "Projekt bearbeiten",
   "editSelection": "Auswahl ändern",
   "enterprise": "Unternehmen",
+  "environmentalCertificate": "Mit einem Label kompatibles oder anderes Umweltzertifikat",
   "ERROR_MESSAGES": {
     "400": "Überprüfen Sie Ihre Daten und versuchen Sie es erneut.",
     "404": "Konnte das nicht finden. Überprüfen Sie den Link.",
@@ -236,7 +244,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Zusätzliche Informationen",
     "advantages": "Vorteile",
-    "advantagesEcosolutions": "Vorteile Ihrer eco-solution",
+    "advantagesEcosolutions": "Vorteile",
     "advantagesSupportText": "Vorteile im Vergleich zu einer Standardlösung",
     "allProvinces": "Alle Regionen",
     "amountRequiredFunding": "Mindestbetrag erforderlich, damit der Antrag berücksichtigt wird",
@@ -255,7 +263,7 @@
     "contactPerson": "Kontaktperson",
     "countriesAvailable": "Verfügbare Länder",
     "countriesDistribution": "Vertriebsländer",
-    "countriesProvincesAvailable": "Länder und Regionen der Verteilung",
+    "countriesProvincesAvailable": "Verteilung",
     "country": "Land",
     "currency": "Währung",
     "currencyFunding": "Währung",
@@ -288,7 +296,7 @@
     "notification": "Benachrichtigung",
     "numEmployees": "Anzahl der Mitarbeiter",
     "objectType": "Objekttyp",
-    "operationalCostReductionPercentage": "Prozentsatz der Betriebskostenreduzierung",
+    "operationalCostReductionPercentage": "Betriebskostenreduzierung",
     "ownerProfile": "Profil des Eigentümers",
     "password": "Passwort",
     "paybackPeriodYears": "Amortisationszeit im Vergleich zu einer Standardlösung",
@@ -296,11 +304,12 @@
     "price": "Preis",
     "products": "Produkte",
     "province": "Region",
-    "reductionPercentage": "Prozentuale Reduzierung",
-    "reductionPercentageCO2": "CO₂-Reduzierungsprozentsatz",
-    "reductionPercentageHP": "Prozentsatz der Reduzierung gefährlicher Produkte",
-    "reductionPercentageWaste": "Abfallreduzierung in Prozent",
-    "reductionPercentageWater": "Prozentsatz der Reduzierung des Wasserverbrauchs",
+    "reductionPercentage": "{{category}}-Reduzierung",
+    "reductionPercentageCO2": "CO₂-Reduzierung",
+    "reductionPercentageHP": "Reduzierung gefährlicher Produkte",
+    "reductionPercentageWaste": "Abfallreduzierung",
+    "reductionPercentageWater": "Reduzierung des Wasserverbrauchs",
+    "reductionEnvironmentalImpact": "Reduzierung der Umweltbelastung",
     "requiredDocumentsFunding": "Erforderliche Dokumente für die Finanzierung",
     "search": "Suchen",
     "searchAgain": "Erneut suchen",
@@ -353,6 +362,8 @@
     "sloganTeam": "Lassen Sie uns Ihnen die talentierte Gruppe von Personen vorstellen, die unsere Mission anführt, eine sauberere und nachhaltigere Zukunft zu gestalten."
   },
   "ifAvailables": "(Wenn verfügbar)",
+  "infoActionCardSubtitleEcosolutions": "Wir werden die besten Leads für Sie finden",
+  "informationAboutPrice": "Informationen zum Preis",
   "infoSaveMessages": "Sie haben die Möglichkeit, Ihre Daten jetzt zu speichern, um sicherzustellen, dass sie für zukünftige Referenzen verfügbar sind. Dies gibt Ihnen die Sicherheit, bei Bedarf darauf zugreifen zu können.",
   "INPUT_FILE": {
     "addNewFile": "Neue Datei hinzufügen",
@@ -409,6 +420,7 @@
     "trencher": "Grabenfräse"
   },
   "mandatory": "Verpflichtend",
+  "maxPhotoSize": "Die maximal zulässige Fotogröße beträgt {{maxSizeFile}}",
   "MENU": {
     "aboutGoEKo": "Über GoEko",
     "blog": "Blog",
@@ -454,6 +466,7 @@
   "msg_empty_ecosolutions_notification": "Keine Eco-solutions gefunden, die Ihren Kriterien entsprechen. Ändern Sie Ihre Filter, um mehr Optionen zu sehen.",
   "msgSearchEcosolutions": "Suchen Sie nach Eco-solutions, die Ihren Bedürfnissen entsprechen",
   "my_company": "Mein Unternehmen",
+  "name": "Name",
   "new_analysis": "Neue Analyse",
   "new_project": "Neues Projekt",
   "next": "Weiter",
@@ -494,6 +507,8 @@
     "eu": "EU",
     "switzerland": "Schweiz"
   },
+  "original": "Original",
+  "originalLanguage": "Originalsprache",
   "our_ecosolutions": "",
   "ownerprofiles": {
     "business": "Unternehmen",
@@ -521,6 +536,7 @@
   "readMore": "Mehr lesen...",
   "real_estate_loan_leads": "Immobilienkredit-Lead",
   "realStateLoan": "Immobilienkredit",
+  "reductionEnvironmentalImpact": "Verringerung der Umweltbelastung",
   "region": "Provinze",
   "regions": "Provinzen",
   "RESET_PASSWORD": {
@@ -705,15 +721,19 @@
     }
   },
   "selectAll": "Alles auswählen",
+  "selectCategory": "Wähle eine Kategorie",
   "selectCategoryEcosolutions": "Wählen Sie die Kategorie für Ihre eco-solution aus",
   "selected_products": "Ausgewählte Produkte",
   "selectedProduct": "Ausgewähltes Produkt",
   "selectedProducts": " Ausgewählte Produkte",
+  "selectLanguagesForTranslation": "Wähle die Sprachen aus, in die du die Beschreibungen und Preisinformationen übersetzen möchtest.",
   "send": "Senden",
   "sendMessage": "Nachricht senden",
+  "shortDescription": "Kurzbeschreibung",
   "showAll": "Alle anzeigen",
   "showLead": "Leads anzeigen",
   "showMore": "Mehr erfahren",
+  "showTranslations": "Übersetzungen anzeigen",
   "SIGNUP": {
     "acceptedConditions": "Ich habe die",
     "acceptedConditions2": "Allgemeinen Geschäftsbedingungen gelesen und akzeptiere sie",
@@ -724,6 +744,7 @@
   "sloganGoeko": "Die Verbindung zur Effizienz",
   "sloganMainBanner": "Verbindung von Unternehmen mit sauberer Technologie und Finanzierung",
   "sme": "KMU",
+  "solutionType": "Art der Lösung",
   "start": "Start",
   "subtitlePageCatalog": "Beste Lösungen für",
   "SUCCESS_MESSAGES": {
@@ -748,7 +769,9 @@
   },
   "titleBannerLead": " Verfolgung qualifizierter Leads",
   "titleResult": "Am besten geeignete eco-solutions für",
+  "translate": "Übersetzen",
   "turnOnNotifications": "Benachrichtigungen aktivieren",
+  "typeSolutionCleantech": "Art der Cleantech-Lösung",
   "upgrade": "Aktualisieren",
   "upTo": "Bis zu",
   "user": "Benutzer",
@@ -789,8 +812,10 @@
   "years": "Jahre",
   "yes": "Ja",
   "your": "Ihr",
-  "your_ecosolutions": "Ihre Eco-solutions",
+  "your_ecosolutions": "Ihre cleantech-Lösungens",
+  "savingCleantechSolution": "Ihre Cleantech-Lösung wird gespeichert",
   "yourEcosolution": "Ihre Ökolösung",
   "yourFinancialSolutions": "Ihre Finanzierungslösungen",
+  "yourProjectFile": "Abgeschlossene Projekte",
   "yourProjects": "Ihre Projekte"
 }

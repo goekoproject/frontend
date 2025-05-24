@@ -33,5 +33,6 @@
 }
 
 [readonly='true'] {
-  cursor: auto;
+  cursor: default;
+  pointer-events: none;
 }

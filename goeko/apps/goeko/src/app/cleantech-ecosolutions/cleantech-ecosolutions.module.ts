@@ -30,15 +30,12 @@ import {
 } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { environment } from '../../environments/environment'
-import { CleantechEcosolutionsRoutingModule } from './cleantech-ecosolutions-routing.module'
+import { CleantechEcosolutionsRoutingModule } from './cleantech-ecosolutions.router'
 import { CleantechEcosolutionsService } from './cleantech-ecosolutions.services'
-import { EcosolutionsFormComponent } from './ecosolutions-form/ecosolutions-form.component'
-import { EcosolutionsListComponent } from './ecosolutions-list/ecosolutions-list.component'
 import { ProductTitlePipe } from './ecosolutions-list/product-title.pipe'
-import { EcosolutionsMainComponent } from './ecosolutions-main/ecosolutions-main.component'
 
 @NgModule({
-  declarations: [EcosolutionsMainComponent, EcosolutionsListComponent, EcosolutionsFormComponent, ProductTitlePipe],
+  declarations: [ProductTitlePipe],
   imports: [
     InputFileComponent,
     CommonModule,

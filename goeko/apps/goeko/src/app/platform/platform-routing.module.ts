@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
+        loadChildren: () => import('../dashboard/dashboard-routing.module').then((m) => m.routes),
         canActivate: [AuthGuard],
       },
       {
@@ -71,10 +71,10 @@ const routes: Routes = [
         path: 'cleantech-ecosolutions',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
-        loadChildren: () => import('../cleantech-ecosolutions/cleantech-ecosolutions.module').then((m) => m.CleantechEcosolutionsModule),
+        loadChildren: () => import('../cleantech-ecosolutions/cleantech-ecosolutions.router').then((m) => m.ROUTERS),
       },
       {
-        path: 'leads',
+        path: 'leads/:id',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadChildren: () => import('../leads/leads.module').then((m) => m.LeadsModule),

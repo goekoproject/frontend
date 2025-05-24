@@ -9,13 +9,12 @@
   align-items: center;
   appearance: none;
   background-color: var(--primary--500);
-  @apply rounded-full px-12 py-2 font-semibold;
+  @apply h-10 rounded-full px-12 py-2 font-semibold;
   border-style: none;
   box-sizing: border-box;
   color: var(--white);
   cursor: pointer;
   display: inline-flex;
-  height: 2.625rem;
   line-height: 1.25rem;
   justify-content: center;
   text-align: center;

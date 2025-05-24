@@ -33,7 +33,7 @@ export class ClassificationsService {
   private _http = inject(HttpClient)
   private _translateService = inject(TranslateService)
   langSignal = signal(this._translateService.currentLang || this._translateService.defaultLang)
-  currentLang = computed(() => (this.langSignal() === 'en' ? 'gb' : this.langSignal()))
+  currentLang = computed(() => this.langSignal())
 
   private categories = toSignal(this.getClassificationsCategory(), { initialValue: [] })
 

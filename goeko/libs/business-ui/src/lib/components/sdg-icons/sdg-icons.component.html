@@ -2,7 +2,7 @@
   @defer (when !justIcon()) {
     @for (sdg of sdgs() | orderBy; track sdg.code; let i = $index) {
       <label
-        class="relative flex max-h-16 cursor-pointer items-center gap-2 rounded-md bg-white p-2 shadow-sm hover:bg-slate-100"
+        class="shadow-sm relative flex max-h-16 cursor-pointer items-center gap-2 rounded-md bg-white p-2 hover:bg-slate-100"
         [ngClass]="{ 'border-2 border-primary-default': sdgCodeSelected() && sdgCodeSelected().includes(sdg.code) }">
         <input
           class="absolute opacity-0"
@@ -11,7 +11,11 @@
           [value]="sdg.code"
           [checked]="sdgCodeSelected() && sdgCodeSelected().includes(sdg.code)"
           (change)="selectedElement($event, sdg)" />
-        <img class="z-10 size-12 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
+        <img
+          alt="{{ sdg.code }}"
+          class="z-10 size-12 rounded-md"
+          [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'"
+          [alt]="sdg.code" />
         <span class="ecosolution-unchecked" (click)="selectedElement($event, sdg.code)">
           <i class="ti ti-trash icon-delete"></i>
         </span>
@@ -21,7 +25,7 @@
     }
   } @placeholder {
     @for (sdg of sdgs() | orderBy; track sdg.code; let i = $index) {
-      <img class="size-16 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
+      <img alt="{{ sdg.code }}" class="size-16 rounded-md" [src]="'assets/icon-ods/' + currentLangCode + '-Goal-' + sdg.code + '.png'" [alt]="sdg.code" />
     }
   }
 </div>

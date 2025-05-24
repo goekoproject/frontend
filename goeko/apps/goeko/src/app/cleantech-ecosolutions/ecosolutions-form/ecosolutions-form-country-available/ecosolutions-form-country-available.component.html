@@ -1,0 +1,6 @@
+<fieldset class="section-form" [formGroup]="parentForm()">
+  <div>
+    <legend>{{ 'FORM_LABEL.countriesProvincesAvailable' | translate }}</legend>
+  </div>
+  <goeko-select-locations [form]="parentForm()" [controlLocations]="locationsArrays()"></goeko-select-locations>
+</fieldset>

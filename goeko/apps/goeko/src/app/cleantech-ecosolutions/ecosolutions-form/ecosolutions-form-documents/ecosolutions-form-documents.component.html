@@ -1,0 +1,50 @@
+<fieldset [formGroup]="parentForm()">
+  <div>
+    <div class="mb-2 flex justify-between">
+      <label for="certified">{{ 'environmentalCertificate' | translate }}</label>
+      <label class="switch">
+        <input type="checkbox" formControlName="certified" [readonly]="isReadOnly()" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+    @if (parentForm().value.certified) {
+      <ng-container formArrayName="certificates">
+        <goeko-file-upload (fileAdded)="addCertificates($event)" />
+
+        <div class="mt-4 flex flex-wrap gap-4">
+          @for (file of certificatesFormArray().controls; track $index; let i = $index) {
+            <goeko-select-certificate [formControlName]="i" (removeCertificate)="addDocumentForRemove($event)" />
+          }
+        </div>
+      </ng-container>
+    }
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <div class="mb-2 flex justify-between">
+      <label for="certified">{{ 'FORM_LABEL.technicalSheet' | translate }}</label>
+      <label class="switch">
+        <input type="checkbox" [formControlName]="'haveTechnicalSheet'" [readonly]="isReadOnly()" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    @if (parentForm().value.haveTechnicalSheet) {
+      <goeko-file-upload formControlName="technicalSheet" [showNameFile]="true" (fileRemoved)="addDocumentForRemove([$event])" />
+    }
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <div class="mb-2 flex justify-between">
+      <label for="certified">{{ 'yourProjectFile' | translate }}</label>
+      <label class="switch">
+        <input type="checkbox" [formControlName]="'haveProjectFile'" [readonly]="isReadOnly()" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    @if (parentForm().value.haveProjectFile) {
+      <goeko-file-upload formControlName="projectFile" [showNameFile]="true" (fileRemoved)="addDocumentForRemove([$event])" />
+    }
+  </div>
+</fieldset>

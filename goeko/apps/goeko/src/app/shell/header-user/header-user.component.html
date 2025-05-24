@@ -1,11 +1,9 @@
-<nav class="header-user"></nav>
+<nav class="header-user">
+  <div class="header-user-actions">
+    <goeko-select-i18n />
+    <div class="flex flex-col items-center rounded-lg bg-gray-200 px-2 py-4">
+      <p>{{ userProfile().name }}</p>
+    </div>
+  </div>
+</nav>
 <ng-content></ng-content>
-<div class="header-user-actions">
-  <goeko-select-i18n />
-  <go-badge fill="true" class="tag-username" [readonly]="true">
-    <span class="heading-icon">
-      <i class="ti ti-building-community"></i>
-    </span>
-    <p>{{ userProfile().name }}</p>
-  </go-badge>
-</div>

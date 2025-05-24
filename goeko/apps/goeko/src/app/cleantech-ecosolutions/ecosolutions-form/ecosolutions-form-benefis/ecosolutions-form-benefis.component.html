@@ -1,0 +1,89 @@
+@if (parentForm()) {
+  <fieldset class="fieldset-ecosolutions" [formGroup]="parentForm()">
+    <div class="legend--info">
+      <legend>
+        {{ 'FORM_LABEL.advantagesSupportText' | translate }}
+      </legend>
+    </div>
+
+    <section class="flex gap-4">
+      <div class="flex-grow">
+        <label>
+          <ng-container *ngTemplateOutlet="tmpReductionPercentage"></ng-container>
+        </label>
+        <ui-super-select
+          [placeholder]="['upTo' | translate] + '... (%)'"
+          [formControlName]="'reductionPercentage'"
+          id="reductionPercentage"
+          name="reductionPercentage"
+          [compareWith]="defaultSetReductions">
+          @for (option of dataReductionPercentage(); track index + '-reductionPercentage'; let index = $index) {
+            <super-option [value]="option"> {{ option.keyLang | translate }} {{ ' ' + option.to }}% </super-option>
+          }
+        </ui-super-select>
+      </div>
+
+      <div class="flex-grow">
+        <label>{{ 'FORM_LABEL.operationalCostReductionPercentage' | translate }}</label>
+
+        <ui-super-select
+          [placeholder]="['upTo' | translate] + '... (%)'"
+          [formControlName]="'operationalCostReductionPercentage'"
+          id="operationalCostReductionPercentage"
+          name="operationalCostReductionPercentage"
+          [compareWith]="defaultSetReductions">
+          @for (option of dataOperationalCostReduction(); track index + '-operationalCostReductionPercentage'; let index = $index) {
+            <super-option [value]="option"> {{ option.keyLang | translate }} {{ ' ' + option.to }}% </super-option>
+          }
+        </ui-super-select>
+      </div>
+    </section>
+
+    <a role="button" class="flex text-sm text-primary-default" (click)="addOtherCategory()">{{ 'addOtherBenefit' | translate }}</a>
+
+    <!-- Other benefits in other category-->
+    @if (addOtherBenefit()) {
+      <section class="flex gap-4" formGroupName="improvementOtherCategory">
+        <div class="flex-grow">
+          <label>
+            {{ 'selectCategory' | translate }}
+          </label>
+          <ui-super-select [formControlName]="'category'" id="reductionPercentage" name="reductionPercentage">
+            @for (option of categories(); track index + '-reductionPercentage'; let index = $index) {
+              @defer (when option.code !== this.categoryCode()) {
+                <super-option [value]="option.code"> {{ option.label }} </super-option>
+              }
+            }
+          </ui-super-select>
+        </div>
+
+        <div class="flex-grow">
+          <label>{{ 'FORM_LABEL.reductionEnvironmentalImpact' | translate }}</label>
+
+          <ui-super-select
+            [placeholder]="['upTo' | translate] + '... (%)'"
+            [formControlName]="'reductionPercentage'"
+            id="reductionPercentage"
+            name="reductionPercentage"
+            [compareWith]="defaultSetReductions">
+            @for (option of dataOperationalCostReduction(); track index + '-othercostReduction'; let index = $index) {
+              <super-option [value]="option"> {{ option.keyLang | translate }} {{ ' ' + option.to }}% </super-option>
+            }
+          </ui-super-select>
+        </div>
+      </section>
+    }
+  </fieldset>
+}
+
+<ng-template #tmpReductionPercentage>
+  <span [ngSwitch]="true" slot="label">
+    <ng-container *ngSwitchCase="categoryCode() === 'co2Emission'">{{ 'FORM_LABEL.reductionPercentageCO2' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="categoryCode() === 'waterConsumption'">{{
+      'FORM_LABEL.reductionPercentageWater' | translate
+    }}</ng-container>
+
+    <ng-container *ngSwitchCase="categoryCode() === 'waste'">{{ 'FORM_LABEL.reductionPercentageWaste' | translate }}</ng-container>
+    <ng-container *ngSwitchCase="categoryCode() === 'hazardousProduct'">{{ 'FORM_LABEL.reductionPercentageHP' | translate }}</ng-container>
+  </span>
+</ng-template>

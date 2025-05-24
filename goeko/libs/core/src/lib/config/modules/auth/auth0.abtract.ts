@@ -45,7 +45,7 @@ const setItemSessionStorage = (name: string, obj: any, code?: boolean) => {
   }
   sessionStorage.setItem(name, window.btoa(JSON.stringify(obj)))
 }
-const setSession = (authResult: any) => {
+export const setSession = (authResult: any) => {
   const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
   setItemSessionStorage(SESSIONID, authResult.accessToken)
   setItemSessionStorage(EXPIRES_AT, expiresAt)
@@ -69,7 +69,11 @@ export abstract class Auth0Connected {
   }
   get _userInfo$(): Observable<Auth0UserProfile | any> {
     return new Observable((observer) => {
-      this.webAuth.client.userInfo(this.sessionStorage.getItem(SESSIONID) as string, (err, userInfo) => {
+      const _tokenSession = this.sessionStorage.getItem(SESSIONID) as string
+      if (!_tokenSession) {
+        observer.error('missing SESSIONID')
+      }
+      this.webAuth.client.userInfo(_tokenSession, (err, userInfo) => {
         if (err) {
           observer.error(err)
         } else {

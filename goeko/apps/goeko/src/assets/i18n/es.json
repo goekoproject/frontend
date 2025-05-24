@@ -10,7 +10,10 @@
     "passwordPolicyTitle": "Debe cumplir al menos 3 de las siguientes reglas: "
   },
   "add": "Añadir",
+  "addNewSolution": "Añadir nueva solución",
+  "addOtherBenefit": "Añadir otra beneficio",
   "addRealEstateLoan": "Añadir préstamo inmobiliario",
+  "addSolution": "Añadir una solución",
   "addSustainableEquipment": "Añadir equipo sostenible",
   "alertSelectedProduct": "Selecciona las categorías y productos correspondientes a tu proyecto",
   "all": "Todo",
@@ -36,7 +39,7 @@
   "bestFiancialPartners": "Mejores socios financieros",
   "BREADCRUMBS": {
     "edit_ecosolutions": "Editar tu ecosolución",
-    "new_ecosolutions": "Nueva ecosolución",
+    "new_ecosolutions": "Nueva solución cleantech",
     "view_ecosolutions": "Detalle de tu ecosolución"
   },
   "buildingtypes": {
@@ -236,7 +239,7 @@
   "FORM_LABEL": {
     "additionalInformation": "Información adicional",
     "advantages": "Beneficios",
-    "advantagesEcosolutions": "Ventajas de su eco-solución",
+    "advantagesEcosolutions": "Beneficios",
     "advantagesSupportText": "Ventajas en comparación con una solución estándar",
     "allProvinces": "Todas las provincias",
     "amountRequiredFunding": "Cantidad requerida para que la solicitud sea tenida en cuenta",
@@ -255,7 +258,7 @@
     "contactPerson": "Persona de contacto",
     "countriesAvailable": "Países disponibles",
     "countriesDistribution": "Países de distribución",
-    "countriesProvincesAvailable": "Países y regiones de distribución",
+    "countriesProvincesAvailable": "Distribución",
     "country": "País",
     "currency": "Moneda",
     "currencyFunding": "Moneda",
@@ -288,7 +291,7 @@
     "notification": "Notificaciones",
     "numEmployees": "Número de empleados",
     "objectType": "",
-    "operationalCostReductionPercentage": "Porcentaje de reducción de costos operativos",
+    "operationalCostReductionPercentage": "Reducción de costos operativos",
     "ownerProfile": "Perfil del propietario",
     "password": "Contraseña",
     "paybackPeriodYears": "Tiempo de retorno de inversión en comparación con solución estándar",
@@ -296,11 +299,12 @@
     "price": "Precio",
     "products": "Productos",
     "province": "Provincia",
-    "reductionPercentage": "",
-    "reductionPercentageCO2": "Porcentaje de reducción de CO₂",
-    "reductionPercentageHP": "Porcentaje de reducción de productos peligrosos",
-    "reductionPercentageWaste": "Porcentaje de reducción de desechos",
-    "reductionPercentageWater": "Porcentaje de reducción de consumo de agua",
+    "reductionPercentage": "Reducción de{{category}}",
+    "reductionPercentageCO2": "Reducción de CO₂",
+    "reductionPercentageHP": "Reducción de productos peligrosos",
+    "reductionPercentageWaste": "Reducción de desechos",
+    "reductionPercentageWater": "Reducción de consumo de agua",
+    "reductionEnvironmentalImpact": "Reducción del impacto ambiental",
     "requiredDocumentsFunding": "Documentos requeridos",
     "search": "Buscar",
     "searchAgain": "Buscar de nuevo",
@@ -353,6 +357,7 @@
     "sloganTeam": "Permítenos presentarte al talentoso grupo de individuos que lidera nuestra misión de impulsar un futuro más limpio y sostenible."
   },
   "ifAvailables": "(Si está disponible(s))",
+  "infoActionCardSubtitleEcosolutions": "Nosotros encontraremos las mejores leads para ti",
   "infoSaveMessages": "Tienes la opción de guardar tus datos en este momento, lo cual asegurará que estén disponibles para futuras consultas, brindándote la certeza de contar con ellos cuando los necesites.",
   "INPUT_FILE": {
     "addNewFile": "Añadir nuevo archivo",
@@ -466,14 +471,6 @@
   "notSave": "Cerrar sin guardar",
   "ODS": {
     "ods_1": "Sin pobreza",
-    "ods_10": "Reducción de las desigualdades",
-    "ods_11": "Ciudades y comunidades sostenibles",
-    "ods_12": "Producción y consumo responsables",
-    "ods_13": "Acción por el clima",
-    "ods_14": "Vida submarina",
-    "ods_15": "Vida de ecosistemas terrestres",
-    "ods_16": "Paz, justicia e instituciones sólidas",
-    "ods_17": "Alianzas para lograr los objetivos",
     "ods_2": "Hambre cero",
     "ods_3": "Salud y bienestar",
     "ods_4": "Educación de calidad",
@@ -481,7 +478,15 @@
     "ods_6": "Agua limpia y saneamiento",
     "ods_7": "Energía asequible y no contaminante",
     "ods_8": "Trabajo decente y crecimiento económico",
-    "ods_9": "Industria, innovación e infraestructura"
+    "ods_9": "Industria, innovación e infraestructura",
+    "ods_10": "Reducción de las desigualdades",
+    "ods_11": "Ciudades y comunidades sostenibles",
+    "ods_12": "Producción y consumo responsables",
+    "ods_13": "Acción por el clima",
+    "ods_14": "Vida submarina",
+    "ods_15": "Vida de ecosistemas terrestres",
+    "ods_16": "Paz, justicia e instituciones sólidas",
+    "ods_17": "Alianzas para lograr los objetivos"
   },
   "ods_msg_card_result": "Impacto positivo en los ODS",
   "ods_title": "Objetivos de Desarrollo Sostenible",
@@ -494,6 +499,7 @@
     "eu": "UE",
     "switzerland": "Suiza"
   },
+  "original": "Original",
   "our_ecosolutions": "Tus Eco-soluciones",
   "ownerprofiles": {
     "business": "Empresa",
@@ -539,14 +545,14 @@
     "slogan_text2": "¿Quién eres?"
   },
   "SDG_TITLES": {
+    "6": "Agua limpia y saneamiento",
+    "7": "Energía asequible y no contaminante",
+    "9": "Industria, innovación e infraestructura",
     "11": "Ciudades y comunidades sostenibles",
     "12": "Producción y consumo responsables",
     "13": "Acción por el clima",
     "14": "Vida submarina",
-    "15": "Vida de ecosistemas terrestres",
-    "6": "Agua limpia y saneamiento",
-    "7": "Energía asequible y no contaminante",
-    "9": "Industria, innovación e infraestructura"
+    "15": "Vida de ecosistemas terrestres"
   },
   "searchEcosolutions": "Busca soluciones cleantech",
   "SELECT_DATA_LABEL": {
@@ -705,6 +711,18 @@
     }
   },
   "selectAll": "Seleccionar todo",
+  "selectCategory": "Selecciona una categoría",
+  "reductionEnvironmentalImpact": "Reducción del impacto ambiental",
+  "detail": "Detalle",
+  "name": "Nombre",
+  "originalLanguage": "Idioma original",
+  "shortDescription": "Descripción corta",
+  "description": "Descripción",
+  "informationAboutPrice": "Información sobre el precio",
+  "selectLanguagesForTranslation": "Selecciona los idiomas a los que deseas traducir las descripciones y la información de precios.",
+  "maxPhotoSize": "El tamaño máximo permitido para las fotos es {{maxSizeFile}}",
+  "addAnotherLocation": "Añadir otra ubicación",
+  "environmentalCertificate": "Certificado compatible con un sello o cualquier otro certificado ambiental",
   "selectCategoryEcosolutions": "Selecciona la categoría para tu ecosolución",
   "selected_products": "Productos seleccionados",
   "selectedProduct": "Producto seleccionado",
@@ -714,6 +732,7 @@
   "showAll": "Ver todo",
   "showLead": "Mostrar clientes potenciales",
   "showMore": "Ver más",
+  "showTranslations": "Mostrar traducciones",
   "SIGNUP": {
     "acceptedConditions": "He leído y aceptado",
     "acceptedConditions2": "los términos y condiciones",
@@ -724,6 +743,7 @@
   "sloganGoeko": "The connection to efficiency",
   "sloganMainBanner": "Conectando empresas con tecnología limpia y financiación",
   "sme": "PYMES",
+  "solutionType": "Tipo de solución",
   "start": "Empezar",
   "subtitlePageCatalog": "Mejores soluciones para ",
   "SUCCESS_MESSAGES": {
@@ -748,7 +768,9 @@
   },
   "titleBannerLead": "Seguimiento de Leads Calificados",
   "titleResult": "Las soluciones ecológicas más adaptadas para",
+  "translate": "Traducir",
   "turnOnNotifications": "Activa las notificaciones",
+  "typeSolutionCleantech": "Tipo de solución cleantech",
   "upgrade": "Mejora",
   "upTo": "Hasta",
   "user": "Usuario",
@@ -789,8 +811,11 @@
   "years": "años",
   "yes": "Sí",
   "your": "tu",
-  "your_ecosolutions": "Tu solución cleantech",
+  "your_ecosolutions": "Tus soluciones cleantech",
+  "savingCleantechSolution": "Su solución cleantech se está guardando",
   "yourEcosolution": "Tu Ecosolucion",
   "yourFinancialSolutions": "Tus soluciones financieras",
-  "yourProjects": "Tus proyectos"
+  "yourProjectFile": "Proyectos realizados",
+  "yourProjects": "Tus proyectos",
+  "cleantechSolutions": "Soluciones cleantech"
 }

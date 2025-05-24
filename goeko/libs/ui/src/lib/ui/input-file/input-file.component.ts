@@ -29,7 +29,7 @@ export class InputFileComponent {
   public set acceptedFileTypes(value: string) {
     this._acceptedFileTypes = value
   }
-  private _acceptedFileTypes: string = 'application/png, application/jpeg, application/jpg'
+  private _acceptedFileTypes = 'application/png, application/jpeg, application/jpg'
 
   @Input() readonly = false
 
@@ -48,7 +48,7 @@ export class InputFileComponent {
   public id!: string
 
   @Input()
-  multiple: boolean = false
+  multiple = false
 
   @Input()
   label!: string
@@ -132,6 +132,13 @@ export class InputFileComponent {
     ;(this.filesUrl as Array<string>).splice(id, 1)
     this._fileSetMultiple?.splice(id, 1)
     this._propagateSelected()
+  }
+
+  removeFile(event: Event) {
+    event.stopPropagation()
+    this.filesUrl = []
+    this._fileSetMultiple = []
+    //this._propagateSelected()
   }
 
   private _displayPreview() {

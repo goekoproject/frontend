@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, effect, inject, input } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DialogNewProjectComponent, GoTableModule, MessageService, SplitCategoriesPipe } from '@goeko/business-ui'
-import { ClassificationsGroupByPipe, ClassificationsLabelPipe, NotificationSearch, Project } from '@goeko/store'
+import { ClassificationsLabelPipe, NotificationSearch, Project } from '@goeko/store'
 import { ButtonModule, DialogService, GoDateFormatPipe } from '@goeko/ui'
 import { TranslateModule } from '@ngx-translate/core'
 import { ProjectManagmentService } from '../project-managment.service'
@@ -64,6 +64,7 @@ export class ProjectListComponent {
   goToEdit(project: Project) {
     this._router.navigate(['project-form', this.smeId(), project.id], {
       relativeTo: this._route.parent,
+      queryParamsHandling: 'preserve',
     })
   }
 

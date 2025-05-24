@@ -1,0 +1,8 @@
+<ng-container [formGroup]="parentForm()">
+  <goeko-input-file
+    class="section-form"
+    (fileChange)="uploadImgEcosolutions($event)"
+    [filesUrl]="ecosolutionImages() || ''"
+    [multiple]="true"
+    [label]="'maxPhotoSize' | translate: { maxSizeFile: maxSizeFile() }"></goeko-input-file>
+</ng-container>

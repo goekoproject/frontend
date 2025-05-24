@@ -1,5 +1,5 @@
-import { Translations } from '../admin-categories/classifications-subcategory.model'
 import { Product } from '../classificactions/classifications.interface'
+import { Translations } from '../model/classifications-subcategory.model'
 
 export interface ClassificationCodeRequest {
   mainCategory: string

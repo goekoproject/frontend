@@ -84,7 +84,7 @@ export class LeadFormComponent implements OnInit {
   private _buildMessage() {
     this.dataLead = {
       ...this.dataLead,
-      message: ` <b>${this._translateService.instant('FORM_LABEL.email')} :</b> ${this.leadForm.value.email};  <br> ${
+      message: ` <b>${this._translateService.instant('FORM_LABEL.email')} :</b> ${this.leadForm.value.email}  <br> ${
         this.leadForm.value.message
       }`,
     }

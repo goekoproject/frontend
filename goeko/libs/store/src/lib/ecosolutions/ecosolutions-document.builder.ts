@@ -1,16 +1,14 @@
 import { PARENT_CODE } from '../classificactions/public-api'
 import { DocumentEcosolutions, DocumentTypeEcosolutions } from './ecosolution.interface'
 
-export const getDocumentTypeByParanteCode = (
-  documents: DocumentEcosolutions[],
-  parentCode: keyof typeof PARENT_CODE,
-): DocumentEcosolutions[] => {
+export const getDocumentTypeByParanteCode = (documents: DocumentEcosolutions[], parentCode: unknown): DocumentEcosolutions[] => {
   switch (parentCode) {
     case PARENT_CODE.CERTIFICATE:
       return new EcosolutionDocumentsBuilder(documents).assignOtherDocumentType().getCertificates().build()
     case PARENT_CODE.TECHNICAL_SHEET:
       return new EcosolutionDocumentsBuilder(documents).getTechnicalSheet().build()
-
+    case PARENT_CODE.PROJECT_FILE:
+      return new EcosolutionDocumentsBuilder(documents).getProjectFile().build()
     default:
       return documents
   }
@@ -32,6 +30,11 @@ export class EcosolutionDocumentsBuilder {
 
   getTechnicalSheet(): EcosolutionDocumentsBuilder {
     this.documents = this.documents.filter((doc) => doc.documentType?.parentCode === PARENT_CODE.TECHNICAL_SHEET)
+    return this
+  }
+
+  getProjectFile(): EcosolutionDocumentsBuilder {
+    this.documents = this.documents.filter((doc) => doc.documentType?.parentCode === PARENT_CODE.PROJECT_FILE)
     return this
   }
 

@@ -1,16 +1,18 @@
 <div class="relative pb-16 pt-16 lg:pt-8">
   <div class="slider">
     <div #sliderTrack class="slide-track">
-      @for (company of carousel()?.companies; track company.id) {
-        <div class="slide grid place-items-center">
-          <img [src]="company?.file.url" class="object-contain" [alt]="company.title" />
-        </div>
-      }
+      @defer (when carousel()?.companies) {
+        @for (company of carousel()?.companies; track company.id + '-first') {
+          <div class="slide grid place-items-center">
+            <img alt="company.title" [src]="company?.file.url" class="object-contain" />
+          </div>
+        }
 
-      @for (company of carousel()?.companies; track company.title) {
-        <div class="slide grid place-items-center">
-          <img [src]="company.file.url" [alt]="company.title" />
-        </div>
+        @for (company of carousel()?.companies; track company.id + '-second') {
+          <div class="slide grid place-items-center">
+            <img alt="company.title" [src]="company.file.url" />
+          </div>
+        }
       }
     </div>
   </div>
