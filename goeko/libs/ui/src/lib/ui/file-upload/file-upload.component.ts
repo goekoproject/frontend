@@ -28,7 +28,7 @@ export class FileUploadComponent implements ControlValueAccessor, Validator {
   private _translate = inject(TranslateService)
 
   showNameFile = input<boolean>(false)
-  label=input<string>('INPUT_FILE.dragAndDropHere')
+  label = input<string>('INPUT_FILE.dragAndDropHere')
   fileAdded = output<File | null>()
   fileRemoved = output<string>()
   file = signal<File | null>(null)
