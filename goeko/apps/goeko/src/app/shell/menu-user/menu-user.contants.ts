@@ -81,6 +81,14 @@ const SME_MENU: MenuUser[] = [
     icon: 'ti ti-building-bank',
     order: 4,
   },
+  {
+    id: window.crypto.randomUUID(),
+    title: 'MENU_USER.request-onboarding',
+    url: 'request-onboarding',
+    active: true,
+    icon: 'ti ti-building-bank',
+    order: 5,
+  },
 ]
 const CLEANTECH_MENU: MenuUser[] = [
   {

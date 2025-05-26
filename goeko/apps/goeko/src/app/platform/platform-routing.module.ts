@@ -97,6 +97,8 @@ const routes: Routes = [
 
       {
         path: 'funding',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
         loadChildren: () => import('../funding/funding.module').then((m) => m.FundingModule),
       },
       {
@@ -116,6 +118,12 @@ const routes: Routes = [
         canActivate: [hasRole(ROLES.ADMIN), AuthGuard],
         canMatch: [hasRole(ROLES.ADMIN)],
         loadChildren: () => import('../admin/admin-routes').then((m) => m.ADMIN_ROUTES),
+      },
+      {
+        path: 'request-onboarding',
+        canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
+        canMatch: [hasRole(ROLES.PUBLIC)],
+        loadChildren: () => import('../request-onboarding/request-onboarding.routes').then((m) => m.REQUEST_ONBOARDING_ROUTES),
       },
     ],
   },
