@@ -9,7 +9,7 @@
     </div>
     @if (parentForm().value.certified) {
       <ng-container formArrayName="certificates">
-        <goeko-file-upload (fileAdded)="addCertificates($event)" />
+        <goeko-file-upload (fileAdded)="addCertificates($event)" [label]="'INPUT_FILE.dragAndDropHere2' | translate" />
 
         <div class="mt-4 flex flex-wrap gap-4">
           @for (file of certificatesFormArray().controls; track $index; let i = $index) {
