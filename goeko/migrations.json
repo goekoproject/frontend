@@ -151,7 +151,43 @@
         ],
         "ref": "fe060527f1c3c90c434bb75479c1c05ba4f4de8a",
         "nextSteps": []
+      },
+      "remove-custom-tasks-runner": {
+        "type": "successful",
+        "name": "remove-custom-tasks-runner",
+        "changedFiles": [],
+        "ref": "a23cdabbeba71721eb59d90840e227cdb9a02545",
+        "nextSteps": []
+      },
+      "release-version-config-changes": {
+        "type": "successful",
+        "name": "release-version-config-changes",
+        "changedFiles": [],
+        "ref": "a23cdabbeba71721eb59d90840e227cdb9a02545",
+        "nextSteps": []
+      },
+      "release-changelog-config-changes": {
+        "type": "successful",
+        "name": "release-changelog-config-changes",
+        "changedFiles": [],
+        "ref": "a23cdabbeba71721eb59d90840e227cdb9a02545",
+        "nextSteps": []
+      },
+      "21-1-0-add-ignore-entries-for-nx-rule-files": {
+        "type": "successful",
+        "name": "21-1-0-add-ignore-entries-for-nx-rule-files",
+        "changedFiles": [
+          {
+            "path": ".gitignore",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "d510dd84d5e747fa336ba919b88d912e18b7e527",
+        "nextSteps": []
       }
-    }
+    },
+    "runningMigrations": [
+      "21-1-0-add-ignore-entries-for-nx-rule-files"
+    ]
   }
 }
