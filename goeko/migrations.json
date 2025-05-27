@@ -139,9 +139,6 @@
     },
     "targetVersion": "latest",
     "confirmedPackageUpdates": true,
-    "runningMigrations": [
-      "remove-legacy-cache"
-    ],
     "completedMigrations": {
       "remove-legacy-cache": {
         "type": "successful",
@@ -152,7 +149,7 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "d3c19bbd55f3199403a5e907c68686e624897172",
+        "ref": "fe060527f1c3c90c434bb75479c1c05ba4f4de8a",
         "nextSteps": []
       }
     }
