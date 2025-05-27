@@ -138,6 +138,23 @@
       "subject": "WIP: Create dto and services for onboarding"
     },
     "targetVersion": "latest",
-    "confirmedPackageUpdates": true
+    "confirmedPackageUpdates": true,
+    "runningMigrations": [
+      "remove-legacy-cache"
+    ],
+    "completedMigrations": {
+      "remove-legacy-cache": {
+        "type": "successful",
+        "name": "remove-legacy-cache",
+        "changedFiles": [
+          {
+            "path": "nx.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "d3c19bbd55f3199403a5e907c68686e624897172",
+        "nextSteps": []
+      }
+    }
   }
 }
