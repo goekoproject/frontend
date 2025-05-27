@@ -6,20 +6,43 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "@goeko/business-ui": ["libs/business-ui/src/index.ts"],
-      "@goeko/business-ui/components/*": ["libs/business-ui/src/lib/components/*"],
-      "@goeko/core": ["libs/core/src/index.ts"],
-      "@goeko/core/*": ["libs/core/src/*"],
-      "@goeko/coretools": ["libs/coretools/src/index.ts"],
-      "@goeko/store": ["libs/store/src/index.ts"],
-      "@goeko/store/*": ["libs/store/src/lib/*"],
-      "@goeko/store/model/*": ["libs/store/src/lib/model/*"],
-      "@goeko/ui": ["libs/ui/src/index.ts"],
-      "@goeko/ui/*": ["libs/ui/src/lib/ui/*"]
+      "@goeko/business-ui": [
+        "libs/business-ui/src/index.ts"
+      ],
+      "@goeko/business-ui/components/*": [
+        "libs/business-ui/src/lib/components/*"
+      ],
+      "@goeko/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@goeko/core/*": [
+        "libs/core/src/*"
+      ],
+      "@goeko/coretools": [
+        "libs/coretools/src/index.ts"
+      ],
+      "@goeko/store": [
+        "libs/store/src/index.ts"
+      ],
+      "@goeko/store/*": [
+        "libs/store/src/lib/*"
+      ],
+      "@goeko/store/model/*": [
+        "libs/store/src/lib/model/*"
+      ],
+      "@goeko/ui": [
+        "libs/ui/src/index.ts"
+      ],
+      "@goeko/ui/*": [
+        "libs/ui/src/lib/ui/*"
+      ]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,
@@ -27,5 +50,8 @@
     "sourceMap": true,
     "target": "es2015"
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

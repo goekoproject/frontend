@@ -182,12 +182,28 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "d510dd84d5e747fa336ba919b88d912e18b7e527",
+        "ref": "d937f7a3dc55e14794ead3ed20451b94ab1c699c",
+        "nextSteps": []
+      },
+      "set-inject-document-domain": {
+        "type": "successful",
+        "name": "set-inject-document-domain",
+        "changedFiles": [
+          {
+            "path": "apps/goeko-e2e/cypress.config.ts",
+            "type": "UPDATE"
+          },
+          {
+            "path": "tsconfig.base.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "eb5060d9e176887c61464040d5e21b28d73395f6",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "21-1-0-add-ignore-entries-for-nx-rule-files"
+      "set-inject-document-domain"
     ]
   }
 }
