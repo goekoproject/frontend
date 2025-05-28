@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/goekoproject/frontend/compare/v1.1.3...v1.1.4) (2025-05-28)
+
+
+### Bug Fixes
+
+* return false if not userprofile ([66e44c5](https://github.com/goekoproject/frontend/commit/66e44c56a8e692f2928c198c7c3dd39f6dc35453))
+
 ## [1.1.3](https://github.com/goekoproject/frontend/compare/v1.1.2...v1.1.3) (2025-05-28)
 
 
