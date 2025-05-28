@@ -69,6 +69,9 @@ export class UserService {
   }
 
   redirectDashboard() {
+    if (!this.userProfile()) {
+      return of(false)
+    }
     setTimeout(() => {
       this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile()?.id}`], { relativeTo: this._route })
     }, 500)
