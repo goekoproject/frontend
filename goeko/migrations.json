@@ -198,12 +198,9 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "eb5060d9e176887c61464040d5e21b28d73395f6",
+        "ref": "058d336b6c02f4fef3c0d27bc5478a35203b7598",
         "nextSteps": []
       }
-    },
-    "runningMigrations": [
-      "set-inject-document-domain"
-    ]
+    }
   }
 }
