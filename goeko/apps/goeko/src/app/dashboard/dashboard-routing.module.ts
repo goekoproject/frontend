@@ -8,7 +8,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('../cleantech-ecosolutions/dashboard.component').then((m) => m.DashboardComponent),
-    canActivate: [
+    canMatch: [
       () => {
         return inject(UserService).redirectDashboard()
       },
