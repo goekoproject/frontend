@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router'
+import { requestOnboardingResolver } from './request-onboarding.resolver'
 
 export const REQUEST_ONBOARDING_ROUTES: Routes = [
   {
@@ -8,6 +9,9 @@ export const REQUEST_ONBOARDING_ROUTES: Routes = [
       {
         path: '',
         loadComponent: () => import('./myideas/myideas.component').then((m) => m.MyideasComponent),
+        resolve: {
+          requestsOnboarding: requestOnboardingResolver,
+        },
       },
     ],
   },

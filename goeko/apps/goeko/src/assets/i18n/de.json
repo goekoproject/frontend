@@ -817,5 +817,18 @@
   "yourEcosolution": "Ihre Ökolösung",
   "yourFinancialSolutions": "Ihre Finanzierungslösungen",
   "yourProjectFile": "Abgeschlossene Projekte",
-  "yourProjects": "Ihre Projekte"
+  "yourProjects": "Ihre Projekte",
+  "REQUESTS_ONBOARDING": {
+    "myIdeas": "Meine Ideen",
+    "myCompany": "Mein Unternehmen",
+    "addCleantechSolution": "Cleantech-Lösung hinzufügen",
+    "addShareCleantech": "Fügen Sie Cleantech-Lösungen hinzu und teilen Sie sie mit Ihrem Unternehmen",
+    "titlePage": "Ideen teilen",
+    "cleantechSolutionName": "Name der Cleantech-Lösung",
+    "companyName": "Name des Unternehmens",
+    "selectCategory": "Kategorie auswählen",
+    "selectSubcategory": "Unterkategorie auswählen",
+    "website": "Webseite",
+    "msgMissingIdentifier": "Sie müssen die Identifikationsnummer Ihres Unternehmens angeben, wenn Sie eine Cleantech-Lösung einreichen. Dies stellt sicher, dass nur Kollegen derselben Organisation darauf zugreifen und sie einsehen können."
+  }
 }

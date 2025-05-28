@@ -1,13 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { CategoryComponent } from '@goeko/business-ui'
+import { Component, input } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { OperationDirective, SwitcherOperationComponent } from '@goeko/ui'
+import { TranslatePipe } from '@ngx-translate/core'
 
 @Component({
   selector: 'goeko-request-onboarding',
   standalone: true,
-  imports: [CommonModule, CategoryComponent],
+  imports: [CommonModule, SwitcherOperationComponent, OperationDirective, TranslatePipe, RouterOutlet],
   templateUrl: './request-onboarding.component.html',
   styleUrl: './request-onboarding.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RequestOnboardingComponent {}
+export class RequestOnboardingComponent {
+  public requestsOnboarding = input.required<string>()
+}

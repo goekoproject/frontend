@@ -817,5 +817,18 @@
   "yourEcosolution": "Votre  solution cleantech",
   "yourFinancialSolutions": "Vos solutions financières",
   "yourProjectFile": "Projets réalisés",
-  "yourProjects": "Vos projets"
+  "yourProjects": "Vos projets",
+  "REQUESTS_ONBOARDING": {
+    "myIdeas": "Mes idées",
+    "myCompany": "Mon entreprise",
+    "addCleantechSolution": "Ajouter une solution cleantech",
+    "addShareCleantech": "Ajoutez et partagez des solutions cleantech avec votre entreprise",
+    "titlePage": "Partager des Idées",
+    "cleantechSolutionName": "Nom de la solution Cleantech",
+    "companyName": "Nom de l'entreprise",
+    "selectCategory": "Sélectionnez une catégorie",
+    "selectSubcategory": "Sélectionnez une sous-catégorie",
+    "website": "Site web",
+    "msgMissingIdentifier": "Vous devez saisir le numéro d'identification de votre entreprise lors de la soumission d'une solution cleantech. Cela garantit que seuls les collègues de la même organisation peuvent y accéder et la consulter."
+  }
 }

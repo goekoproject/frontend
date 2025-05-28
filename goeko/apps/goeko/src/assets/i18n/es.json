@@ -817,5 +817,18 @@
   "yourFinancialSolutions": "Tus soluciones financieras",
   "yourProjectFile": "Proyectos realizados",
   "yourProjects": "Tus proyectos",
-  "cleantechSolutions": "Soluciones cleantech"
+  "cleantechSolutions": "Soluciones cleantech",
+  "REQUESTS_ONBOARDING": {
+    "myIdeas": "Mis ideas",
+    "myCompany": "Mi empresa",
+    "addCleantechSolution": "Añadir cleantech solution",
+    "addShareCleantech": "Añade y comparte soluciones cleantech con tu empresa",
+    "titlePage": "Compartir ideas",
+    "cleantechSolutionName": "Nombre de la solución cleantech",
+    "companyName": "Nombre de la empresa",
+    "selectCategory": "Selecciona una categoría",
+    "selectSubcategory": "Selecciona una subcategoría",
+    "website": "Sitio web",
+    "msgMissingIdentifier": "Debes ingresar el número de identificación de tu empresa al enviar una solución cleantech. Esto garantiza que solo los colegas de la misma organización puedan acceder y verla."
+  }
 }

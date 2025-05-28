@@ -1,1 +1,7 @@
-<p>request-onboarding works!</p>
+<h1 class="title-page">{{ 'REQUESTS_ONBOARDING.titlePage' | translate }}</h1>
+
+<goeko-switcher-operation>
+  <ng-template goekoOperation> {{ 'REQUESTS_ONBOARDING.myIdeas' | translate }}</ng-template>
+  <ng-template goekoOperation> {{ 'REQUESTS_ONBOARDING.myCompany' | translate }}</ng-template>
+</goeko-switcher-operation>
+<router-outlet></router-outlet>
