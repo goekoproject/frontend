@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/goekoproject/frontend/compare/v1.1.2...v1.1.3) (2025-05-28)
+
+
+### Bug Fixes
+
+* check id ([fb4dfde](https://github.com/goekoproject/frontend/commit/fb4dfde70356cdabb113b2dbb440cb1f9ce5c76a))
+
 ## [1.1.2](https://github.com/goekoproject/frontend/compare/v1.1.1...v1.1.2) (2025-05-28)
 
 
