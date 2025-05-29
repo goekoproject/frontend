@@ -47,6 +47,7 @@ export class SelectI18nComponent implements OnInit {
     this._router.navigate([], {
       relativeTo: this._router.routerState.root,
       queryParams: { lang: lang },
+      queryParamsHandling: 'merge',
     })
   }
 }

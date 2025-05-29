@@ -153,6 +153,7 @@ export class AuthService extends Auth0Connected {
 
   logout(returnTo = `${this.doc.location.origin}/login`) {
     this.sessionStorage.clearItems()
+    localStorage.removeItem('_rawUser')
     this.webAuth.logout({ returnTo: returnTo, clientID: this._clientId })
   }
 

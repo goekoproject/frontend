@@ -368,7 +368,9 @@
   "INPUT_FILE": {
     "addNewFile": "Ajouter un nouveau fichier",
     "certified": "Sélectionnez votre certificat",
-    "dragAndDropHere": "Glissez et déposez vos fichier ici",
+    "dragAndDropHere": "Glissez et déposez votre fichier ici",
+    "dragAndDropHere2": "Glissez et déposez vos fichiers ici",
+
     "image": "Glissez-déposez ou cliquez",
     "image2": "Sélectionner une image",
     "image3": "Ajouter une image",
@@ -812,7 +814,7 @@
   "years": "années",
   "yes": "Oui",
   "your": "Votre",
-  "your_ecosolutions": "Vos solutions cleantech cleantech",
+  "your_ecosolutions": "Vos solutions cleantech",
   "savingCleantechSolution": "Votre solution cleantech est en cours d'enregistrement",
   "yourEcosolution": "Votre  solution cleantech",
   "yourFinancialSolutions": "Vos solutions financières",
