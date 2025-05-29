@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/goekoproject/frontend/compare/v1.1.5...v1.1.6) (2025-05-29)
+
+
+### Bug Fixes
+
+* check user type ([#153](https://github.com/goekoproject/frontend/issues/153)) ([9d389e7](https://github.com/goekoproject/frontend/commit/9d389e75f220c36b59213c3a6192d64807ddca68))
+
 ## [1.1.5](https://github.com/goekoproject/frontend/compare/v1.1.4...v1.1.5) (2025-05-29)
 
 
