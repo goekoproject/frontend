@@ -1,18 +1,20 @@
-import { inject } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { Routes } from '@angular/router'
 import { ecosolutionFavouritesResolver, UserService } from '@goeko/store'
 import { dashboardData, leadOfBank } from './dashboard-bank/dashboard-data.resolver'
 import { dataSummaryResolver } from './dashboard-sme/dashboard-sme-data.resolver'
-
+@Component({
+  selector: 'goeko-dashboard-redirect',
+  template: '',
+  standalone: true,
+})
+export class DashboardRedirectComponent {}
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('../cleantech-ecosolutions/dashboard.component').then((m) => m.DashboardComponent),
-    canMatch: [
-      () => {
-        return inject(UserService).redirectDashboard()
-      },
-    ],
+    pathMatch: 'full',
+    canMatch: [() => inject(UserService).redirectDashboard()],
+    component: DashboardRedirectComponent,
   },
   {
     path: 'sme/:id',

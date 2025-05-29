@@ -2,11 +2,11 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable, computed, inject, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
 import { AuthService } from '@goeko/core'
-import { BehaviorSubject, Observable, Subject, of, shareReplay, switchMap } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, filter, map, of, shareReplay, switchMap, take, timeout } from 'rxjs'
 import { UserFactory } from './user.factory'
 
 import { DOCUMENT } from '@angular/common'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router, UrlTree } from '@angular/router'
 import { CacheProperty } from '@goeko/coretools'
 import { Picture } from '../model/pictures.interface'
 import { SessionStorageService } from '../session-storage.service'
@@ -68,14 +68,18 @@ export class UserService {
     }
   }
 
-  redirectDashboard() {
-    if (!this.userProfile()) {
-      return of(false)
-    }
-    setTimeout(() => {
-      this._router.navigate([`platform/dashboard/${this.userType()}/${this.userProfile()?.id}`], { relativeTo: this._route })
-    }, 500)
-    return of(true)
+  redirectDashboard(): Observable<boolean | UrlTree> {
+    return toObservable(this.userProfile).pipe(
+      filter((profile) => !!profile && !!profile.id),
+      take(1),
+      timeout(5000),
+      map((profile) => {
+        if (!profile.id) {
+          return this._router.createUrlTree(['/platform/profile', this.externalId()])
+        }
+        return this._router.createUrlTree([`/platform/dashboard/${this.userType()}/${profile.id}`])
+      }),
+    )
   }
   redirectProfile() {
     this._router.navigate([`platform/profile/${this.externalId()}`], { relativeTo: this._route.parent })
