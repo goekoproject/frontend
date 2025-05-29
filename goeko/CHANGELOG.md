@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/goekoproject/frontend/compare/v1.1.4...v1.1.5) (2025-05-29)
+
+
+### Bug Fixes
+
+* fixed redirect dashboard adn change ([c3c5b1c](https://github.com/goekoproject/frontend/commit/c3c5b1ccdfdcd9957326e59258ead2aae5084abe))
+
 ## [1.1.4](https://github.com/goekoproject/frontend/compare/v1.1.3...v1.1.4) (2025-05-28)
 
 
