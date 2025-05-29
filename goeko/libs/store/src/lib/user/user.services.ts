@@ -77,7 +77,7 @@ export class UserService {
         if (!profile.id) {
           return this._router.createUrlTree(['/platform/profile', this.externalId()])
         }
-        return this._router.createUrlTree([`/platform/dashboard/${this.userType()}/${profile.id}`])
+        return this._router.createUrlTree([`/platform/dashboard/${profile.userType}/${profile.id}`])
       }),
     )
   }
