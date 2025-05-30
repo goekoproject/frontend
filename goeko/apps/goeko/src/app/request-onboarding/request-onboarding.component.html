@@ -1,4 +1,7 @@
-<h1 class="title-page">{{ 'REQUESTS_ONBOARDING.titlePage' | translate }}</h1>
+<div class="flex justify-between">
+  <h1 class="title-page">{{ 'REQUESTS_ONBOARDING.titlePage' | translate }}</h1>
+  <button go-button [routerLink]="['../request-onboarding-form', id()]">{{ 'REQUESTS_ONBOARDING.addCleantechSolution' | translate }}</button>
+</div>
 
 <goeko-switcher-operation>
   <ng-template goekoOperation> {{ 'REQUESTS_ONBOARDING.myIdeas' | translate }}</ng-template>

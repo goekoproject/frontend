@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 
 @Component({
   selector: 'goeko-myideas',
@@ -9,4 +9,6 @@ import { CommonModule } from '@angular/common'
   styleUrl: './myideas.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyideasComponent {}
+export class MyideasComponent {
+  public myIdeas = input.required<string>()
+}

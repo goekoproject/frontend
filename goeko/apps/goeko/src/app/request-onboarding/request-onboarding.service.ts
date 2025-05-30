@@ -7,8 +7,6 @@ import { RequestOnboardingService, SolutionRequestCreate, SolutionRequestUpdate 
 export class RequestOnboardingFacadeService {
   private _requestOnboardingService = inject(RequestOnboardingService)
 
-  constructor() {}
-
   createRequest(smeId: string, request: SolutionRequestCreate) {
     return this._requestOnboardingService.createSolutionRequest(smeId, request)
   }
@@ -21,7 +19,11 @@ export class RequestOnboardingFacadeService {
     return this._requestOnboardingService.deleteSolutionRequest(smeId, requestId)
   }
 
-  getRequest(smeId: string) {
-    return this._requestOnboardingService.getTranslatedSolutionRequests(smeId)
+  getRequestMyIdeas(smeId: string) {
+    return this._requestOnboardingService.getTranslatedSolutionRequests(smeId, true)
+  }
+
+  getRequestMyCompany(smeId: string) {
+    return this._requestOnboardingService.getTranslatedSolutionRequests(smeId, false)
   }
 }

@@ -1,0 +1,11 @@
+.section-form {
+  @apply mb-8 rounded-md border border-gray-200 bg-white p-6;
+}
+
+:host ::ng-deep .form-field-error {
+  @apply text-sm text-red-500 mt-1;
+}
+
+:host ::ng-deep go-input.ng-touched.ng-invalid {
+  @apply border-red-500;
+}

@@ -71,7 +71,7 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
   }
 
   private toogleAllRegions = (isAll: boolean) => {
-    const allRegions = this._controlCountryRegionsByIndex.value.find((region: LocationRegions) => region.isAll)
+    const allRegions = this._controlCountryRegionsByIndex?.value?.find((region: LocationRegions) => region.isAll)
     if (allRegions) {
       this._controlCountryRegionsByIndex.value.find((region: LocationRegions) => region.isAll).isAll = isAll
     }

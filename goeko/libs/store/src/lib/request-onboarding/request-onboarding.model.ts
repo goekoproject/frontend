@@ -36,6 +36,12 @@ export interface SolutionRequestCreate {
   contactEmail: string
   contactPhone: string
   notes: string
+  classifications: [
+    {
+      mainCategory: string
+      subCategory: string
+    },
+  ]
 }
 
 export type SolutionRequestUpdate = SolutionRequestCreate

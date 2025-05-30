@@ -1,0 +1,93 @@
+<section class="flex max-w-3xl items-center gap-2 px-8 py-4">
+  <h1 class="title-page">{{ 'New Cleantech Solution' }}</h1>
+</section>
+
+@defer (when form) {
+  <section>
+    <form [formGroup]="form" class="w-full max-w-4xl rounded-sm p-8">
+      <!-- Cleantech Solution Info -->
+      <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Cleantech Solution Name -->
+        <div class="w-full">
+          <label class="mb-2 block text-sm font-medium">Cleantech Solution Name</label>
+          <goeko-go-input formControlName="solutionName"></goeko-go-input>
+        </div>
+
+        <!-- Company Name -->
+        <div class="w-full">
+          <label class="mb-2 block text-sm font-medium">Company Name</label>
+          <goeko-go-input formControlName="companyName"></goeko-go-input>
+        </div>
+      </div>
+
+      <!-- Category Selection -->
+      <fieldset class="mb-6">
+        <div class="mb-4">
+          <label class="mb-2 block text-sm font-medium">Select a category</label>
+          <!-- This is the placeholder that will be filled in by the user -->
+          <ui-super-select formControlName="mainCategory" id="mainCategory">
+            @for (option of groupingForm(); track index + '-mainCategory'; let index = $index) {
+              <super-option [value]="option.code"> {{ option.label }} </super-option>
+            }
+          </ui-super-select>
+        </div>
+
+        <div class="mb-4">
+          <label class="mb-2 block text-sm font-medium">Select a subcategory</label>
+          <go-badge-group formControlName="subCategory">
+            @if ((subcategoriesSelected() ?? []).length > 0) {
+              @for (option of subcategoriesSelected() ?? []; track index + '-subCategory'; let index = $index) {
+                <go-badge [value]="option.code"> {{ option.question }}</go-badge>
+              }
+            }
+          </go-badge-group>
+        </div>
+      </fieldset>
+
+      <!-- Locations -->
+      @defer (when locations) {
+        <fieldset class="mb-6" formArrayName="locations">
+          <legend class="mb-2 block text-sm font-medium">Select locations</legend>
+          <goeko-select-locations [form]="form" [controlLocations]="locations"> </goeko-select-locations>
+        </fieldset>
+      }
+
+      <!-- Website -->
+      <div class="mb-6">
+        <label class="mb-2 block text-sm font-medium">Website</label>
+        <goeko-go-input formControlName="website"></goeko-go-input>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="w-full">
+          <label class="mb-2 block text-sm font-medium">Contact name</label>
+          <goeko-go-input formControlName="contactPerson"></goeko-go-input>
+        </div>
+
+        <div class="w-full">
+          <label class="mb-2 block text-sm font-medium">Phone</label>
+          <goeko-go-input formControlName="contactPhone"></goeko-go-input>
+        </div>
+
+        <div class="w-full">
+          <label class="mb-2 block text-sm font-medium">Email</label>
+          <goeko-go-input formControlName="contactEmail"></goeko-go-input>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="mb-6">
+        <label class="mb-2 block text-sm font-medium">Notes</label>
+        <goeko-go-textarea formControlName="notes" [rows]="4"></goeko-go-textarea>
+      </div>
+
+      <!-- Form Controls -->
+      <div class="mt-4 flex justify-between">
+        <button go-button appearance="flat" type="button">Back</button>
+
+        <button go-button type="submit" (click)="onSubmit()">Share</button>
+      </div>
+    </form>
+  </section>
+}
