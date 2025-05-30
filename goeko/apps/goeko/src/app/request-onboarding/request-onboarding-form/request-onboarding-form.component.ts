@@ -55,16 +55,17 @@ export class RequestOnboardingFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const classifications = this.form.value.subCategory.map((item: string) => {
+      return {
+        mainCategory: this.form.value.mainCategory,
+        subCategory: item,
+      }
+    })
     if (this.form.valid) {
       const request: SolutionRequestCreate = {
         solutionName: this.form.value.solutionName,
         companyName: this.form.value.companyName,
-        classifications: [
-          {
-            mainCategory: this.form.value.mainCategory,
-            subCategory: this.form.value.subCategory.toString(),
-          },
-        ],
+        classifications: classifications,
         locations: mapperLocations(this.form.value.locations),
         website: this.form.value.website,
         contactPerson: this.form.value.contactPerson,
