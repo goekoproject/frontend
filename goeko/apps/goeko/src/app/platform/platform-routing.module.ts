@@ -120,7 +120,7 @@ const routes: Routes = [
         loadChildren: () => import('../admin/admin-routes').then((m) => m.ADMIN_ROUTES),
       },
       {
-        path: 'request-onboarding',
+        path: 'request-onboarding/:id',
         canActivate: [hasRole(ROLES.PUBLIC), AuthGuard],
         canMatch: [hasRole(ROLES.PUBLIC)],
         loadChildren: () => import('../request-onboarding/request-onboarding.routes').then((m) => m.REQUEST_ONBOARDING_ROUTES),

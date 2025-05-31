@@ -1,5 +1,5 @@
-@defer (when myIdeas) {
-  @for (idea of myIdeas(); track $index) {
+@defer (when companyIdeas) {
+  @for (idea of companyIdeas(); track $index) {
     <goeko-request-card>
       <h2 title>{{ idea.solutionName }}</h2>
       <p company>{{ idea.companyName }}</p>

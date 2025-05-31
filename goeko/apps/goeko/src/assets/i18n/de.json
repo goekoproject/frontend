@@ -831,5 +831,6 @@
     "selectSubcategory": "Unterkategorie auswählen",
     "website": "Webseite",
     "msgMissingIdentifier": "Sie müssen die Identifikationsnummer Ihres Unternehmens angeben, wenn Sie eine Cleantech-Lösung einreichen. Dies stellt sicher, dass nur Kollegen derselben Organisation darauf zugreifen und sie einsehen können."
-  }
+  },
+  "share": "Teilen"
 }

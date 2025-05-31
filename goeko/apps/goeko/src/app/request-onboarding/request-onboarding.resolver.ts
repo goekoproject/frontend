@@ -4,7 +4,7 @@ import { of } from 'rxjs'
 import { RequestOnboardingFacadeService } from './request-onboarding.service'
 
 export const requestOnboardingMyIdeasResolver = (route: ActivatedRouteSnapshot) => {
-  const _smeId = route.paramMap.get('id') as string
+  const _smeId = route.paramMap.get('id') || (route.parent?.paramMap.get('id') as string)
 
   if (!_smeId) {
     return of(undefined)
@@ -14,7 +14,7 @@ export const requestOnboardingMyIdeasResolver = (route: ActivatedRouteSnapshot) 
 }
 
 export const requestOnboardingMyCompanyResolver = (route: ActivatedRouteSnapshot) => {
-  const _smeId = route.paramMap.get('id') as string
+  const _smeId = route.paramMap.get('id') || (route.parent?.paramMap.get('id') as string)
 
   if (!_smeId) {
     return of(undefined)

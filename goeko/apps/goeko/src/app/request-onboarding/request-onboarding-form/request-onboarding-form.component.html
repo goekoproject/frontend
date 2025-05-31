@@ -9,13 +9,13 @@
       <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <!-- Cleantech Solution Name -->
         <div class="w-full">
-          <label class="mb-2 block text-sm font-medium">Cleantech Solution Name</label>
+          <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.cleantechSolutionName' | translate }}</label>
           <goeko-go-input formControlName="solutionName"></goeko-go-input>
         </div>
 
         <!-- Company Name -->
         <div class="w-full">
-          <label class="mb-2 block text-sm font-medium">Company Name</label>
+          <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.companyName' | translate }}</label>
           <goeko-go-input formControlName="companyName"></goeko-go-input>
         </div>
       </div>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="mb-4">
-          <label class="mb-2 block text-sm font-medium">Select a subcategory</label>
+          <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.selectSubcategory' | translate }}</label>
           <go-badge-group formControlName="subCategory">
             @if ((subcategoriesSelected() ?? []).length > 0) {
               @for (option of subcategoriesSelected() ?? []; track index + '-subCategory'; let index = $index) {
@@ -54,39 +54,39 @@
 
       <!-- Website -->
       <div class="mb-6">
-        <label class="mb-2 block text-sm font-medium">Website</label>
+        <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.website' | translate }}</label>
         <goeko-go-input formControlName="website"></goeko-go-input>
       </div>
 
       <!-- Contact Information -->
       <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="w-full">
-          <label class="mb-2 block text-sm font-medium">Contact name</label>
+          <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.contactPerson' | translate }}</label>
           <goeko-go-input formControlName="contactPerson"></goeko-go-input>
         </div>
 
         <div class="w-full">
-          <label class="mb-2 block text-sm font-medium">Phone</label>
+          <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.contactPhone' | translate }}</label>
           <goeko-go-input formControlName="contactPhone"></goeko-go-input>
         </div>
 
         <div class="w-full">
-          <label class="mb-2 block text-sm font-medium">Email</label>
+          <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.contactEmail' | translate }}</label>
           <goeko-go-input formControlName="contactEmail"></goeko-go-input>
         </div>
       </div>
 
       <!-- Notes -->
       <div class="mb-6">
-        <label class="mb-2 block text-sm font-medium">Notes</label>
+        <label class="mb-2 block text-sm font-medium">{{ 'REQUESTS_ONBOARDING.notes' | translate }}</label>
         <goeko-go-textarea formControlName="notes" [rows]="4"></goeko-go-textarea>
       </div>
 
       <!-- Form Controls -->
       <div class="mt-4 flex justify-between">
-        <button go-button appearance="flat" type="button">Back</button>
+        <button go-button appearance="flat" type="button" (click)="goBack()">{{ 'back' | translate }}</button>
 
-        <button go-button type="submit" (click)="onSubmit()">Share</button>
+        <button go-button type="submit" (click)="onSubmit()">{{ 'share' | translate }}</button>
       </div>
     </form>
   </section>

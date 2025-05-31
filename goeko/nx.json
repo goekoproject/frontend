@@ -59,7 +59,8 @@
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "style": "scss"
+      "style": "scss",
+      "changeDetection": "OnPush"
     }
   },
   "nxCloudAccessToken": "ZmJiMDQ3MjMtMmZiOS00YmU5LWJmZDEtOTZmYzkzZGVhYmY4fHJlYWQtd3JpdGU=",

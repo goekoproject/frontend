@@ -1,12 +1,12 @@
 @for (operation of operations(); track $index; let first = $first) {
   <div
-    (click)="selectOperation($index)"
-    class="flex h-12 w-56 cursor-pointer items-center justify-center gap-1 border transition-colors duration-300 border-primary-default p-4 first:rounded-l-full last:rounded-r-full"
+    (click)="selectOperation($index, operation)"
+    class="flex h-12 w-56 cursor-pointer items-center justify-center gap-1 border border-primary-default p-4 transition-colors duration-300 first:rounded-l-full last:rounded-r-full"
     [ngClass]="{
       'bg-primary-default text-white': selectedOperation() === $index,
       'bg-white text-primary-default': selectedOperation() !== $index,
     }">
-    <ng-container [ngTemplateOutlet]="operation.templateRef"></ng-container>
+    <ng-container *ngTemplateOutlet="operation.template"></ng-container>
   </div>
 }
 <ng-content></ng-content>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, Component, contentChildren, signal } from '@angular/core'
+import { ChangeDetectionStrategy, Component, contentChildren, output, signal } from '@angular/core'
 import { OperationDirective } from './switcher-operation.directive'
 
 @Component({
@@ -17,8 +17,10 @@ import { OperationDirective } from './switcher-operation.directive'
 export class SwitcherOperationComponent {
   operations = contentChildren(OperationDirective)
   selectedOperation = signal<number>(0)
+  onSelectOperation = output<unknown>()
 
-  selectOperation(index: number) {
+  selectOperation(index: number, operation: OperationDirective) {
     this.selectedOperation.set(index)
+    this.onSelectOperation.emit(operation.dataOperation())
   }
 }

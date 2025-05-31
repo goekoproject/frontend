@@ -5,22 +5,21 @@ import { SolutionRequest } from '@goeko/store'
 import { CardRequestComponent } from '../components/card-request.component'
 
 @Component({
-  selector: 'goeko-myideas',
+  selector: 'goeko-my-company',
   standalone: true,
   imports: [CommonModule, CardRequestComponent, ChipCategoryComponent],
-  templateUrl: './myideas.component.html',
-  styleUrl: './myideas.component.scss',
+  templateUrl: './my-company.component.html',
+  styleUrl: './my-company.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     class: 'flex flex-col gap-4',
   },
 })
-export class MyideasComponent {
-  public myIdeas = input.required<SolutionRequest[]>()
-
+export class MyCompanyComponent {
+  public companyIdeas = input.required<SolutionRequest[]>()
   public category = computed(() => {
-    const ideas = this.myIdeas()
-    return ideas.length > 0 ? ideas[0].classifications[0].category.label : ''
+    const companyIdeas = this.companyIdeas()
+    return companyIdeas.length > 0 ? companyIdeas[0].classifications[0].category.label : ''
   })
 }

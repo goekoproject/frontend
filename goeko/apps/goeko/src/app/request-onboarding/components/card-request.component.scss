@@ -1,0 +1,7 @@
+:host ::ng-deep [title] {
+  @apply text-2xl font-semibold text-black;
+}
+
+:host ::ng-deep [company] {
+  @apply text-gray-500;
+}
