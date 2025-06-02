@@ -20,10 +20,10 @@ export class RequestOnboardingFacadeService {
   }
 
   getRequestMyIdeas(smeId: string) {
-    return this._requestOnboardingService.getTranslatedSolutionRequests(smeId, true)
+    return this._requestOnboardingService.getSolutionRequestsTranslated(smeId)
   }
 
   getRequestMyCompany(smeId: string) {
-    return this._requestOnboardingService.getTranslatedSolutionRequests(smeId, false)
+    return this._requestOnboardingService.getSolutionRequestsTranslatedColleagues(smeId, true)
   }
 }

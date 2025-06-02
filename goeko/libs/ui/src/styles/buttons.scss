@@ -25,6 +25,7 @@
   gap: 0.5rem;
   max-width: max-content;
   text-wrap: pretty;
+  text-transform: capitalize;
   width: 100%;
   &:hover {
     background: var(--primary--main);

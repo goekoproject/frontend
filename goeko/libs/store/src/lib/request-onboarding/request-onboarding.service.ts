@@ -14,8 +14,13 @@ export class RequestOnboardingService {
 
   lang = toSignal(this._translateService.onLangChange.pipe(map((event) => event.lang)))
 
-  getTranslatedSolutionRequests(smeId: string, requestedByMe: boolean): Observable<SolutionRequest[]> {
-    const url = `/v1/smes/${smeId}/solution-requests/translated?lang=${this.lang()}&requestedByMe=${requestedByMe}`
+  getSolutionRequestsTranslated(smeId: string): Observable<SolutionRequest[]> {
+    const url = `/v1/smes/${smeId}/solution-requests/translated?lang=${this.lang()}`
+    return this._http.get<SolutionRequest[]>(url)
+  }
+
+  getSolutionRequestsTranslatedColleagues(smeId: string, requestedByColleagues: boolean): Observable<SolutionRequest[]> {
+    const url = `/v1/smes/${smeId}/solution-requests/translated?lang=${this.lang()}&requestedByColleagues=${requestedByColleagues}`
     return this._http.get<SolutionRequest[]>(url)
   }
 

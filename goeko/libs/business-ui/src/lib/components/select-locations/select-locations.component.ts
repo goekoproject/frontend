@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, Input, OnDestroy, OnInit, computed, effect, inject, input, output, signal } from '@angular/core'
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, computed, effect, inject, input, output, signal } from '@angular/core'
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { LocationRegions, LocationsCountry } from '@goeko/store'
 import { FormErrorTextComponent, SwitchModule, UiSuperSelectModule } from '@goeko/ui'
@@ -18,7 +18,7 @@ const CODE_DEFAULT_COUNTRY = 'CH'
 })
 export class SelectLocationsComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>()
-
+  private _cf = inject(ChangeDetectorRef)
   private _translateService = inject(TranslateService)
   public countryCompareWith = (o1: string, o2: string) => o1 === o2
   public regionsCompareWith = (o1: LocationRegions, o2: LocationRegions) => o1?.code === (o2?.code || o2) || o2?.isAll
@@ -167,6 +167,8 @@ export class SelectLocationsComponent implements OnInit, OnDestroy {
       return
     }
     this.dataSourceSelect.set(clave, valor)
+    console.log(this.dataSourceSelect)
+    this._cf.detectChanges()
   }
 
   selectALL() {

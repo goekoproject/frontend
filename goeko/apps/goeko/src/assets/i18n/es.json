@@ -427,7 +427,8 @@
   "MENU_USER": {
     "dashboard": "Dashboard",
     "favourites": "Favoritos",
-    "funding": "Financiación"
+    "funding": "Financiación",
+    "onboarding": "Comparte tus ideas"
   },
   "MENU_USER_BANK": {
     "buttonSearch": "Presente sus soluciones financieras",
@@ -830,6 +831,10 @@
     "selectCategory": "Selecciona una categoría",
     "selectSubcategory": "Selecciona una subcategoría",
     "website": "Sitio web",
-    "msgMissingIdentifier": "Debes ingresar el número de identificación de tu empresa al enviar una solución cleantech. Esto garantiza que solo los colegas de la misma organización puedan acceder y verla."
+    "msgMissingIdentifier": "Debes ingresar el número de identificación de tu empresa al enviar una solución cleantech. Esto garantiza que solo los colegas de la misma organización puedan acceder y verla.",
+    "contactPerson": "Persona de contacto",
+    "contactPhone": "Teléfono",
+    "contactEmail": "Correo electrónico",
+    "notes": "Notas"
   }
 }

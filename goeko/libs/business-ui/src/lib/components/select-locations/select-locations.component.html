@@ -1,6 +1,6 @@
-@defer (when controlLocations && countries()) {
+@if (controlLocations && countries()) {
   <div class="flex flex-col gap-2">
-    @defer (when countries() && dataSourceSelect.size > 0) {
+    @if (dataSourceSelect.size > 0) {
       <ng-container *ngTemplateOutlet="formSelectLocation"></ng-container>
     }
     @if (

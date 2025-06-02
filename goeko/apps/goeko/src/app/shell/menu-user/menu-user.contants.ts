@@ -83,10 +83,10 @@ const SME_MENU: MenuUser[] = [
   },
   {
     id: window.crypto.randomUUID(),
-    title: 'MENU_USER.request-onboarding',
+    title: 'MENU_USER.onboarding',
     url: 'request-onboarding',
     active: true,
-    icon: 'ti ti-building-bank',
+    icon: 'ti ti-brand-4chan',
     order: 5,
   },
 ]
