@@ -63,7 +63,7 @@
     "rxjs": "~7.8.0",
     "rxjs-interop": "^2.0.0",
     "save-dev": "^0.0.1-security",
-    "three": "^0.170.0",
+    "three": "^0.177.0",
     "tslib": "^2.3.0",
     "zone.js": "0.14.10"
   },
@@ -99,7 +99,7 @@
     "@types/jest": "^29.5.12",
     "@types/jsrsasign": "^10.5.12",
     "@types/node": "18.19.64",
-    "@types/three": "^0.169.0",
+    "@types/three": "^0.177.0",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "autoprefixer": "^10.4.17",
