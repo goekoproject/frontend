@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections'
 import {
-  AfterViewInit,
+  AfterContentInit,
   Component,
   ContentChildren,
   EventEmitter,
@@ -28,7 +28,7 @@ const CONTROL_VALUE_ACCESSOR: Provider = {
   styleUrls: ['./badge-group.component.scss'],
   providers: [CONTROL_VALUE_ACCESSOR],
 })
-export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterViewInit {
+export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterContentInit {
   @ContentChildren(BadgeComponent) badge!: QueryList<BadgeComponent>
   _selectionModel!: SelectionModel<BadgeComponent>
 
@@ -118,7 +118,7 @@ export class BadgeGroupComponent implements ControlValueAccessor, OnInit, AfterV
     this._selectionModel = new SelectionModel<BadgeComponent>(true)
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this.optionSelectionChanges.subscribe((badge) => this._selectOption(badge))
     this.badge
       .toArray()

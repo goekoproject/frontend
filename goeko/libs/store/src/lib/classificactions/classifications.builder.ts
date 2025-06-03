@@ -51,7 +51,7 @@ export class GroupingBuilder {
     if (category) {
       const subcategory = category.subcategories.find((subcat) => subcat.id === subcategoryId)
       if (subcategory) {
-        subcategory.products = subcategory.products && subcategory.products.length > 0 ? [...subcategory.products, ...products] : products
+        subcategory.products = subcategory.products && subcategory.products.length > 0 ? products : []
       }
     }
     return this
