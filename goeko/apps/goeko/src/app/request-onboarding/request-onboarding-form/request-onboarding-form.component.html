@@ -45,7 +45,7 @@
       </fieldset>
 
       <!-- Locations -->
-      @defer (when locations?.controls) {
+      @defer (when locations.controls) {
         <fieldset class="mb-6" formArrayName="locations">
           <legend class="mb-2 block text-sm font-medium">Select locations</legend>
           <goeko-select-locations [form]="form" [controlLocations]="locations" [singleSelect]="true" />

@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { TranslateService } from '@ngx-translate/core'
 import { map, Observable } from 'rxjs'
-import { SolutionRequest, SolutionRequestCreate, SolutionRequestUpdate } from './request-onboarding.model'
+import { SolutionRequestCreate, SolutionRequestUpdate, SolutionResponse } from './request-onboarding.model'
 
 @Injectable({
   providedIn: 'root',
@@ -14,24 +14,24 @@ export class RequestOnboardingService {
 
   lang = toSignal(this._translateService.onLangChange.pipe(map((event) => event.lang)))
 
-  getSolutionRequestsTranslated(smeId: string): Observable<SolutionRequest[]> {
+  getSolutionRequestsTranslated(smeId: string): Observable<SolutionResponse[]> {
     const url = `/v1/smes/${smeId}/solution-requests/translated?lang=${this.lang()}`
-    return this._http.get<SolutionRequest[]>(url)
+    return this._http.get<SolutionResponse[]>(url)
   }
 
-  getSolutionRequestsTranslatedColleagues(smeId: string, requestedByColleagues: boolean): Observable<SolutionRequest[]> {
+  getSolutionRequestsTranslatedColleagues(smeId: string, requestedByColleagues: boolean): Observable<SolutionResponse[]> {
     const url = `/v1/smes/${smeId}/solution-requests/translated?lang=${this.lang()}&requestedByColleagues=${requestedByColleagues}`
-    return this._http.get<SolutionRequest[]>(url)
+    return this._http.get<SolutionResponse[]>(url)
   }
 
-  createSolutionRequest(smeId: string, req: SolutionRequestCreate): Observable<SolutionRequest> {
+  createSolutionRequest(smeId: string, req: SolutionRequestCreate): Observable<SolutionResponse> {
     const url = `/v1/smes/${smeId}/solution-requests`
-    return this._http.post<SolutionRequest>(url, req)
+    return this._http.post<SolutionResponse>(url, req)
   }
 
-  updateSolutionRequest(smeId: string, id: string, req: SolutionRequestUpdate): Observable<SolutionRequest> {
+  updateSolutionRequest(smeId: string, id: string, req: SolutionRequestUpdate): Observable<SolutionResponse> {
     const url = `/v1/smes/${smeId}/solution-requests/${id}`
-    return this._http.put<SolutionRequest>(url, req)
+    return this._http.put<SolutionResponse>(url, req)
   }
 
   deleteSolutionRequest(smeId: string, id: string): Observable<void> {

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, output } from '@angular/core'
+import { TranslatePipe } from '@ngx-translate/core'
 
 @Component({
   selector: 'goeko-request-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './card-request.component.html',
   styleUrl: './card-request.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,4 +14,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
     class: 'flex items-center bg-white  shadow p-8 border border-gray-200 rounded-xl shadow-md',
   },
 })
-export class CardRequestComponent {}
+export class CardRequestComponent {
+  viewMoreChange = output<void>()
+
+  onViewMore() {
+    this.viewMoreChange.emit()
+  }
+}

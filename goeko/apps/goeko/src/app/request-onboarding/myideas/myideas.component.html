@@ -1,6 +1,6 @@
 @defer (when myIdeas) {
   @for (idea of myIdeas(); track $index) {
-    <goeko-request-card>
+    <goeko-request-card (viewMoreChange)="onViewMore(idea)">
       <h2 title>{{ idea.solutionName }}</h2>
       <p company>{{ idea.companyName }}</p>
       <goeko-chip-category category>{{ category() }}</goeko-chip-category>

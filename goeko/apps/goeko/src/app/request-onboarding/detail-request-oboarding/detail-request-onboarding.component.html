@@ -1,0 +1,74 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+  <!-- Modal Container -->
+  <div class="shadow-xl w-full max-w-2xl rounded-xl bg-white">
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between border-b border-gray-200 p-6">
+      <h2 class="text-xl font-semibold text-gray-800" [innerHTML]="'REQUESTS_ONBOARDING.myIdeas' | translate"></h2>
+      <button class="text-gray-500 hover:text-gray-700" (click)="onClose()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="space-y-6 p-6">
+      <!-- Company Name -->
+      <div class="space-y-1">
+        <p class="text-sm font-medium text-gray-500">{{ 'REQUESTS_ONBOARDING.companyName' | translate }}</p>
+        <p class="text-gray-900">{{ dataRequestOnboarding().companyName }}</p>
+      </div>
+
+      <!-- Category and Subcategory -->
+      <div class="space-y-1">
+        <p class="text-sm font-medium text-gray-500">{{ 'category' | translate }}</p>
+        <div class="flex flex-wrap gap-2">
+          <goeko-chip-category>{{ category() }}</goeko-chip-category>
+          @for (classification of dataRequestOnboarding().classifications; track $index) {
+            <go-badge>{{ classification.subcategory.label }}</go-badge>
+          }
+        </div>
+      </div>
+
+      <!-- Website -->
+      <div class="space-y-1">
+        <p class="text-sm font-medium text-gray-500">{{ 'REQUESTS_ONBOARDING.website' | translate }}</p>
+        <a [href]="'https://www.soltechinnovations'" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+          {{ dataRequestOnboarding().website }}
+        </a>
+      </div>
+
+      <!-- Contact -->
+      <div class="space-y-1">
+        <p class="text-sm font-medium text-gray-500">{{ 'FORM_LABEL.contact' | translate }}</p>
+        <div class="flex flex-wrap items-center gap-4 text-gray-900">
+          <span class="text-gray-500">
+            <i class="ti ti-user"></i>
+            {{ dataRequestOnboarding().contactPerson }}
+          </span>
+          <a [href]="'mailto:' + dataRequestOnboarding().contactEmail" class="text-blue-600 hover:underline">
+            <i class="ti ti-mail"></i>
+            {{ dataRequestOnboarding().contactEmail }}</a
+          >
+          <a [href]="'tel:' + dataRequestOnboarding().contactPhone" class="hover:underline">
+            <i class="ti ti-phone"></i>
+            {{ dataRequestOnboarding().contactPhone }}</a
+          >
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="space-y-1">
+        <p class="text-sm font-medium text-gray-500">{{ 'REQUESTS_ONBOARDING.notes' | translate }}</p>
+        <p class="text-gray-700">{{ dataRequestOnboarding().notes }}</p>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="flex justify-end rounded-b-xl bg-gray-50 px-6 py-4">
+      <button class="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700" (click)="onClose()">
+        {{ 'close' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

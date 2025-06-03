@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core'
 import { ChipCategoryComponent } from '@goeko/business-ui'
-import { SolutionRequest } from '@goeko/store'
+import { SolutionResponse } from '@goeko/store'
+import { DialogService } from '@goeko/ui'
 import { CardRequestComponent } from '../components/card-request.component'
+import { DetailRequestOnboardingComponent } from '../detail-request-oboarding/detail-request-onboarding.component'
 
 @Component({
   selector: 'goeko-myideas',
@@ -17,10 +19,22 @@ import { CardRequestComponent } from '../components/card-request.component'
   },
 })
 export class MyideasComponent {
-  public myIdeas = input.required<SolutionRequest[]>()
+  private _dialogService = inject(DialogService)
+  public myIdeas = input.required<SolutionResponse[]>()
 
   public category = computed(() => {
     const ideas = this.myIdeas()
     return ideas.length > 0 ? ideas[0].classifications[0].category.label : ''
   })
+
+  public onViewMore(idea: SolutionResponse) {
+    this._dialogService
+      .open(DetailRequestOnboardingComponent, {
+        data: idea,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        console.log(res)
+      })
+  }
 }

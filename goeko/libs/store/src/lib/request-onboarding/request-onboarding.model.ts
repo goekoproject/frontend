@@ -10,19 +10,27 @@ export interface LocationRequest {
   country: CountryRequest
 }
 
-export interface SmeRequest {
+export interface SmeRequestOnboarding {
   id: string
   name: string
 }
+export interface SmeResponseOnboarding extends SmeRequestOnboarding {
+  identifier: string
+  email: string
+}
 
 export interface ClassificationResponseRequest {
+  category: CodeLabel
+  subcategory: CodeLabel
+}
+export interface ClassificationRequest {
   category: CodeLabel
   subCategory: CodeLabel
 }
 
 export interface SolutionRequest {
   id: string
-  sme: SmeRequest
+  sme: SmeRequestOnboarding
   solutionName: string
   companyName: string
   locations: LocationRequest[]
@@ -32,6 +40,20 @@ export interface SolutionRequest {
   contactPhone: string
   notes: string
   creationDate: string
+  classifications: ClassificationRequest[]
+}
+export interface SolutionResponse {
+  companyName: string
+  contactEmail: string
+  contactPerson: string
+  contactPhone: string
+  creationDate: string
+  id: string
+  locations: LocationRequest[]
+  notes: string
+  sme: SmeResponseOnboarding
+  solutionName: string
+  website: string
   classifications: ClassificationResponseRequest[]
 }
 
