@@ -37,13 +37,13 @@
     </button>
   </div>
 }
-@defer (when products()) {
+@defer (when (products() || []).length > 0) {
   <go-badge-group [id]="'products'" (valueSelected)="productsSelected($event)">
     @for (product of products(); track product.code; let i = $index) {
       <go-badge [value]="product" [selected]="idProductsRecevied().includes(product.id)" [readonly]="mode() === 'add'">
         @if (mode() !== 'view') {
           <i
-            class="ti ti-pencil cursor-pointer rounded-full border px-1 text-lg hover:bg-blue-800 hover:text-blue-50 hover:shadow-sm"
+            class="ti ti-pencil hover:shadow-sm cursor-pointer rounded-full border px-1 text-lg hover:bg-blue-800 hover:text-blue-50"
             [ngClass]="{ 'bg-blue-800 text-blue-50': data.productSelected && product.id === data.productSelected.id }"
             (click)="editProduct(product)"></i>
         }

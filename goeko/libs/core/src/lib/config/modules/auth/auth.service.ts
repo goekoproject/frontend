@@ -3,7 +3,7 @@ import { Inject, Injectable, signal } from '@angular/core'
 import { LangOfLocalecontentFul } from '@goeko/store'
 import { TranslateService } from '@ngx-translate/core'
 import { Auth0UserProfile } from 'auth0-js'
-import { catchError, Observable, of, tap, throwError } from 'rxjs'
+import { catchError, Observable, tap, throwError } from 'rxjs'
 import { CONFIGURATION } from '../../config-token'
 import { Options } from '../../models/options.interface'
 import { AuthRequest } from './auth-request.interface'
@@ -77,9 +77,6 @@ export class AuthService extends Auth0Connected {
    * @returns
    */
   isLoggedIn(body: AuthRequest) {
-    if (!body) {
-      return of(null)
-    }
     return this._loginAuth0(body)
   }
 

@@ -7,11 +7,10 @@ import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-confi
 import { provideAnimations } from '@angular/platform-browser/animations'
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions } from '@angular/router'
 import { handlerHttpErrorInterceptor } from '@goeko/business-ui'
-import { AuthService, CODE_LANG, ConfigModule } from '@goeko/core'
+import { AuthService, CODE_LANG, ConfigModule, providerToken } from '@goeko/core'
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { environment } from '../environments/environment'
-import { providerToken } from './../../../../libs/core/src/lib/config/modules/auth/auth.provider'
 import { appRoutes } from './app.routes'
 
 const httpLoaderFactory = (httpBackend: HttpBackend) => {
