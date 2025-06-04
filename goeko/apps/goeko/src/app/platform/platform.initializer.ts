@@ -14,12 +14,10 @@ export function initializeAuth(authService: AuthService, userService: UserServic
     return firstValueFrom(
       authService.userInfo$.pipe(
         catchError((error) => {
-          // Manejar errores de autenticación
           console.error('Error de inicialización de autenticación', error)
-          // Puedes lanzar un error o devolver un valor por defecto
           throw error
         }),
-        tap((userInfo) => userService.auth0UserProfile.set(userInfo)),
+        tap((userInfo) => userService.setAuthUser(userInfo)),
         tap(() => userService.checkEmailVerified()),
         switchMap(() => userService.getDataProfile()),
       ),

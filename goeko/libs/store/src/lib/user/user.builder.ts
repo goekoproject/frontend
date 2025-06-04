@@ -1,9 +1,10 @@
-import { BankUser } from './user-type/bank-user.model';
 import { CleantechsUser, SmeUser } from './public-api'
+import { BankUser } from './user-type/bank-user.model'
 
 export interface IUserBuilder<T = any> {
   build(): T
   init(data: any): this
+  setId(id: string): this
 }
 
 //TODO:change pattern to use factory pattern
@@ -28,6 +29,11 @@ export class SmeBuilder implements IUserBuilder<SmeUser> {
     this.smeUser.notification = data?.notification
     return this
   }
+  public setId(id: string) {
+    this.smeUser.id = id
+    return this
+  }
+
   build() {
     return this.smeUser
   }
@@ -52,6 +58,11 @@ export class CleantechBuilder implements IUserBuilder<CleantechsUser> {
     this.cleantechUser.notification = data?.notification
     return this
   }
+  public setId(id: string) {
+    this.cleantechUser.id = id
+    return this
+  }
+
   build() {
     return this.cleantechUser
   }
@@ -80,6 +91,11 @@ export class BankBuilder implements IUserBuilder<BankUser> {
     this.bankUser.logo = data?.logo
     return this
   }
+  public setId(id: string) {
+    this.bankUser.id = id
+    return this
+  }
+
   build() {
     return this.bankUser
   }
