@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/goekoproject/frontend/compare/v1.1.6...v1.1.7) (2025-06-03)
+
+
+### Bug Fixes
+
+* login and admin ([#154](https://github.com/goekoproject/frontend/issues/154)) ([feb548d](https://github.com/goekoproject/frontend/commit/feb548d6517df9f1a7ac29c3d4f188580bf27cc9))
+
 ## [1.1.6](https://github.com/goekoproject/frontend/compare/v1.1.5...v1.1.6) (2025-05-29)
 
 

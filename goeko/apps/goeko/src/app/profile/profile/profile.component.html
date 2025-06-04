@@ -129,7 +129,7 @@
         </fieldset>
       }
       <div class="profile-actions">
-        <button type="button" go-button appearance="white" [routerLink]="['../dashboard', userType()]" [relativeTo]="route.parent">
+        <button type="button" go-button appearance="white" [routerLink]="['../../dashboard', userType(), dataProfile().id]">
           {{ 'cancel' | translate }}
         </button>
         <button type="button" go-button appearance="primary" type="submit" (click)="dataProfile().id ? updateProfile() : saveProfile()">
