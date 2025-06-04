@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core'
+import { Component, effect, inject } from '@angular/core'
 import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
@@ -55,6 +55,8 @@ const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantec
   providers: [],
 })
 export class ProfileComponent implements CanComponentDeactivate {
+  private _profieService = inject(ProfileService)
+  private _route = inject(ActivatedRoute)
   form!: FormGroup
   savedProfileOK!: boolean
   public USERTYPE = USER_TYPE
@@ -95,17 +97,18 @@ export class ProfileComponent implements CanComponentDeactivate {
   public get locationsArrays(): FormArray {
     return this.form.get('locations') as FormArray
   }
-  constructor(
-    private _profieService: ProfileService,
-    public route: ActivatedRoute,
-  ) {
-    effect(() => {
-      if (this.userType() && !this.form) {
-        this._createFormForUserType()
-        this._loadDataProfile()
-      }
-    })
-  }
+
+  createForm = effect(() => {
+    if (this.userType() && !this.form) {
+      this._createFormForUserType()
+    }
+  })
+
+  loadDataProfile = effect(() => {
+    if (this.dataProfile()) {
+      this._loadDataProfile()
+    }
+  })
 
   canDeactivate() {
     return !!this.dataProfile().id
@@ -118,18 +121,18 @@ export class ProfileComponent implements CanComponentDeactivate {
 
   private _loadDataProfile() {
     this.form.patchValue(this.dataProfile())
-    this.form.get('comunicationLanguage')?.patchValue(this.dataProfile().notification?.lang)
+    this.form.get('comunicationLanguage')?.patchValue(this.dataProfile()?.notification?.lang)
     this.form.get('phoneNumber')?.patchValue(this.dataProfile()?.notification?.phoneNumber)
     this.form.get('externalId')?.patchValue(this._externalId())
-    this.form.get('generalNotifications')?.patchValue((this.dataProfile().notification as NotificationProfile).enabled)
-    this.form.get('email')?.patchValue(this.dataProfile().notification?.email)
+    this.form.get('generalNotifications')?.patchValue((this.dataProfile()?.notification as NotificationProfile)?.enabled)
+    this.form.get('email')?.patchValue(this.dataProfile()?.notification?.email)
     this._setLocaltionInFormForSme()
   }
 
   private _setLocaltionInFormForSme() {
-    if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser).locations) {
+    if (this.userType() === USER_TYPE.SME && (this.dataProfile() as SmeUser)?.locations) {
       this.locationsArrays.clear()
-      this._addLocations((this.dataProfile() as SmeUser).locations[0])
+      this._addLocations((this.dataProfile() as SmeUser)?.locations[0])
     }
   }
   private _addLocations(location: LocationsCountry) {

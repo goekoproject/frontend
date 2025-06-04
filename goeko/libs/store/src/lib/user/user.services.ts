@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable, computed, inject, signal } from '@angular/core'
 import { toObservable } from '@angular/core/rxjs-interop'
 import { AuthService } from '@goeko/core'
-import { BehaviorSubject, Observable, Subject, filter, map, of, shareReplay, switchMap, take, timeout } from 'rxjs'
+import { Observable, Subject, filter, map, of, shareReplay, switchMap, take, timeout } from 'rxjs'
 import { UserFactory } from './user.factory'
 
 import { DOCUMENT } from '@angular/common'
@@ -40,7 +40,6 @@ export class UserService {
   public isUserProfileLoaded = computed(() => this.externalId() === this._rawUser.externalId)
   public userType$ = toObservable<UserType>(this.auth0UserProfile()['userType'])
   public isEmailVerified = computed(() => this.auth0UserProfile().email_verified)
-  public completeLoadUser = new BehaviorSubject<boolean>(false)
 
   getDataProfile() {
     return this._getByIdExternal().pipe(
@@ -124,10 +123,16 @@ export class UserService {
   propagateDataUser(data: UserData) {
     const user = UserFactory.createUserProfileBuilder(this.auth0UserProfile()['userType']).init(data).build()
     this._rawUser = user
-
     this.userProfile.set(this._rawUser)
-    /** @deprecated */
-    this.completeLoadUser.next(true)
-    this.completeLoadUser.complete()
+  }
+  setAuthUser(data: any) {
+    this.auth0UserProfile.set(data)
+    const dataUser = {
+      ...data,
+      email: data.email,
+      name: '',
+    }
+    const userWithData = UserFactory.createUserProfileBuilder(this.auth0UserProfile()['userType']).init(dataUser).build()
+    this.userProfile.set(userWithData)
   }
 }
