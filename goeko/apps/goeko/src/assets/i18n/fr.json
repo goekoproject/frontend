@@ -529,6 +529,7 @@
     "specialChars": "Caractères spéciaux (par exemple, !@#$%^&*)",
     "upperCase": "Lettres majuscules (A-Z)"
   },
+  "close": "Fermer",
   "PRODUCT_ACTIONS": {
     "addProduct": "Actualiser"
   },
@@ -836,6 +837,7 @@
     "contactPerson": "Personne de contact",
     "contactPhone": "Téléphone",
     "contactEmail": "E-mail",
-    "notes": "Notes"
+    "notes": "Notes",
+    "categoryAndSubcategories": "Catégorie et sous-catégorie"
   }
 }

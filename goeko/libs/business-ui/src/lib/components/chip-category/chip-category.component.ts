@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
   changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
-    class: 'rounded-full bg-greenPastel px-3 py-1.5 text-sm font-semibold text-greenLime',
+    class: 'rounded-full bg-greenPastel px-3 py-1.5 text-sm font-semibold text-greenLime h-fit w-fit',
   },
 })
 export class ChipCategoryComponent {}

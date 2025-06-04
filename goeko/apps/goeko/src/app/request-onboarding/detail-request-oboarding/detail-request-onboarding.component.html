@@ -1,6 +1,6 @@
 <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
   <!-- Modal Container -->
-  <div class="shadow-xl w-full max-w-2xl rounded-xl bg-white">
+  <div class="shadow-xl w-full max-w-4xl rounded-xl bg-white">
     <!-- Modal Header -->
     <div class="flex items-center justify-between border-b border-gray-200 p-6">
       <h2 class="text-xl font-semibold text-gray-800" [innerHTML]="'REQUESTS_ONBOARDING.myIdeas' | translate"></h2>
@@ -21,12 +21,14 @@
 
       <!-- Category and Subcategory -->
       <div class="space-y-1">
-        <p class="text-sm font-medium text-gray-500">{{ 'category' | translate }}</p>
-        <div class="flex flex-wrap gap-2">
+        <p class="text-sm font-medium text-gray-500">{{ 'REQUESTS_ONBOARDING.categoryAndSubcategories' | translate }}</p>
+        <div class="flex flex-col flex-wrap gap-2">
           <goeko-chip-category>{{ category() }}</goeko-chip-category>
-          @for (classification of dataRequestOnboarding().classifications; track $index) {
-            <go-badge>{{ classification.subcategory.label }}</go-badge>
-          }
+          <div class="flex flex-wrap gap-2">
+            @for (classification of dataRequestOnboarding().classifications; track $index) {
+              <go-badge>{{ classification.subcategory.label }}</go-badge>
+            }
+          </div>
         </div>
       </div>
 
@@ -41,12 +43,12 @@
       <!-- Contact -->
       <div class="space-y-1">
         <p class="text-sm font-medium text-gray-500">{{ 'FORM_LABEL.contact' | translate }}</p>
-        <div class="flex flex-wrap items-center gap-4 text-gray-900">
+        <div class="flex w-11/12 flex-wrap items-center justify-between gap-4 text-gray-900">
           <span class="text-gray-500">
             <i class="ti ti-user"></i>
             {{ dataRequestOnboarding().contactPerson }}
           </span>
-          <a [href]="'mailto:' + dataRequestOnboarding().contactEmail" class="text-blue-600 hover:underline">
+          <a [href]="'mailto:' + dataRequestOnboarding().contactEmail" class="hover:underline">
             <i class="ti ti-mail"></i>
             {{ dataRequestOnboarding().contactEmail }}</a
           >
@@ -66,9 +68,7 @@
 
     <!-- Modal Footer -->
     <div class="flex justify-end rounded-b-xl bg-gray-50 px-6 py-4">
-      <button class="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700" (click)="onClose()">
-        {{ 'close' | translate }}
-      </button>
+      <button go-button (click)="onClose()">{{ 'close' | translate }}</button>
     </div>
   </div>
 </div>
