@@ -1,8 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { signal } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
-import { ActivatedRoute, RouterModule } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { SelectLocationsComponent } from '@goeko/business-ui'
 import { Picture, SmeUser, USER_TYPE } from '@goeko/store'
 import { ButtonModule, GoInputModule } from '@goeko/ui'
@@ -18,7 +17,6 @@ describe('ProfileComponent SME', () => {
   let profileServiceMock: Partial<ProfileService>
 
   beforeEach(async () => {
-    // Mock del ProfileService
     profileServiceMock = {
       createUserProfile: jest.fn().mockReturnValue({
         pipe: jest.fn().mockReturnValue({
@@ -47,63 +45,41 @@ describe('ProfileComponent SME', () => {
           }),
         }),
       }),
-
+      uploadImgProfileBank: jest.fn().mockReturnValue({
+        pipe: jest.fn().mockReturnValue({
+          subscribe: jest.fn().mockImplementation((callbacks) => {
+            callbacks.next([
+              {
+                id: 1,
+                url: 'http://test.com/test.png',
+                name: 'test.png',
+              },
+            ])
+          }),
+        }),
+      }),
+      userProfile: signal(new SmeUser()),
       userType: signal(USER_TYPE.SME),
       externalId: signal('123'),
       selectedCodeLang: signal({ code: 'en', label: 'English' }),
       countries: signal([
-        {
-          code: 'CH-AG',
-          label: 'Argovie',
-        },
-        {
-          code: 'CH-AR',
-          label: 'Appenzell Rhodes-Extérieures',
-        },
-        {
-          code: 'CH-AI',
-          label: 'Appenzell Rhodes-Intérieures',
-        },
-        {
-          code: 'CH-BL',
-          label: 'Bâle-Campagne',
-        },
+        { code: 'CH-AG', label: 'Argovie' },
+        { code: 'CH-AR', label: 'Appenzell Rhodes-Extérieures' },
+        { code: 'CH-AI', label: 'Appenzell Rhodes-Intérieures' },
+        { code: 'CH-BL', label: 'Bâle-Campagne' },
       ]),
       regions: signal([
-        {
-          code: 'FR-ARA',
-          label: 'Auvergne-Rhône-Alpes',
-        },
-        {
-          code: 'FR-BFC',
-          label: 'Bourgogne-Franche-Comté',
-        },
-        {
-          code: 'FR-BRE',
-          label: 'Bretagne',
-        },
-        {
-          code: 'FR-20R',
-          label: 'Corse',
-        },
+        { code: 'FR-ARA', label: 'Auvergne-Rhône-Alpes' },
+        { code: 'FR-BFC', label: 'Bourgogne-Franche-Comté' },
+        { code: 'FR-BRE', label: 'Bretagne' },
+        { code: 'FR-20R', label: 'Corse' },
       ]),
-      userProfile: signal(new SmeUser()),
       username: signal('testuser'),
-
-      // Añadir más métodos mockeados según sea necesario
     }
 
     await TestBed.configureTestingModule({
       declarations: [ProfileComponent],
-      imports: [
-        ReactiveFormsModule,
-        HttpClientTestingModule,
-        TranslateModule.forRoot(),
-        ButtonModule,
-        GoInputModule,
-        SelectLocationsComponent,
-        RouterModule.forRoot([]),
-      ],
+      imports: [ReactiveFormsModule, TranslateModule.forRoot(), ButtonModule, GoInputModule, SelectLocationsComponent],
       providers: [
         { provide: ProfileService, useValue: profileServiceMock },
         {
@@ -111,7 +87,7 @@ describe('ProfileComponent SME', () => {
           useValue: {
             snapshot: {
               paramMap: {
-                get: jest.fn().mockReturnValue('123'), // Ejemplo, ajustar según sea necesario
+                get: jest.fn().mockReturnValue('123'),
               },
             },
           },
@@ -128,16 +104,41 @@ describe('ProfileComponent SME', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should initialize form based on user type on component initialization', () => {
+  it('should initialize form based on user type', () => {
     // Arrange
     const profileComponent = component
-
-    // Act
-
     // Assert
     expect(profileComponent.form).toBeDefined()
     expect(profileComponent.formSection).toEqual(PROFILE_SME)
     expect(profileComponent.form.get('externalId')?.value).toBe('123')
+  })
+
+  it('should load profile data', () => {
+    // Arrange
+    const profileComponent = component
+    const mockData: SmeUser = {
+      id: '1',
+      externalId: '123',
+      userType: USER_TYPE.SME,
+      name: 'Test User',
+      email: 'text@test.com',
+      locations: [],
+      employees: 0,
+      notification: {
+        email: 'text@test.com',
+        lang: 'en',
+        phoneNumber: '123456789',
+        enabled: true,
+      },
+    }
+
+    profileServiceMock.userProfile?.set(mockData)
+
+    expect(profileComponent.form.get('name')?.value).toBe('Test User')
+    expect(profileComponent.form.get('email')?.value).toBe('text@test.com')
+    expect(profileComponent.form.get('comunicationLanguage')?.value).toEqual({ code: 'en', label: 'English' })
+    expect(profileComponent.form.get('phoneNumber')?.value).toBe('123456789')
+    expect(profileComponent.form.get('generalNotifications')?.value).toBe(true)
   })
 
   // Save User
