@@ -25,14 +25,16 @@ export class EcosolutionsFormCountryAvailableComponent {
   private _setLocaltion(locations?: Array<LocationsCountry>) {
     if (locations) {
       this.locationsArrays().clear()
-      locations.forEach((location: LocationsCountry) => {
-        this._addLocations(location)
+      setTimeout(() => {
+        locations.forEach((location: LocationsCountry) => {
+          this._addLocations(location)
+        })
       })
     }
   }
 
   private _addLocations(location: LocationsCountry) {
-    this.locationsArrays().push(this._createLocations(location), { emitEvent: false })
+    this.locationsArrays().push(this._createLocations(location))
   }
   private _createLocations(location: LocationsCountry): FormGroup {
     return new FormGroup({
