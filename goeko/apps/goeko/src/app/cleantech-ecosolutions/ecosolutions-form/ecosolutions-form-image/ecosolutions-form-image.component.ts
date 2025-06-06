@@ -32,5 +32,7 @@ export class EcosolutionsFormImageComponent {
   private _addImageControl(file: File) {
     const imageControl = this._fb.control(file)
     this.imagenControl().push(imageControl)
+    this.parentForm().get('images')?.markAsDirty()
+    this.parentForm().get('images')?.markAsTouched()
   }
 }
