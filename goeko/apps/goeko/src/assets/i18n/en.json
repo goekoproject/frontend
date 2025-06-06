@@ -230,7 +230,9 @@
     "siret": "The SIRET format is incorrect. Example: 12345678901234",
     "uid": "The UID format is incorrect. Example: CHE-123.456.789",
     "weblink": "Invalid URL. Example: https://www.example.com",
-    "website": "Error: The website address must follow the format www.site.com"
+    "website": "Error: The website address must follow the format www.site.com",
+    "steuer": "Error: The tax number format is incorrect. Example: 12 345 678 901",
+    "piva": "Error: The tax number format is incorrect. Example: IT12345678901"
   },
   "exit": "Exit",
   "exploreNow": "Explore now",

@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/goekoproject/frontend/compare/v1.1.7...v1.1.8) (2025-06-04)
+
+
+### Bug Fixes
+
+* error profile ([#155](https://github.com/goekoproject/frontend/issues/155)) ([1caf604](https://github.com/goekoproject/frontend/commit/1caf604521fd28c56964ad2238b96bec53023a48))
+
 ## [1.1.7](https://github.com/goekoproject/frontend/compare/v1.1.6...v1.1.7) (2025-06-03)
 
 

@@ -10,6 +10,7 @@ export const ProviderLoadUserInfo: Provider = {
   multi: true,
 }
 export function initializeAuth(authService: AuthService, userService: UserService) {
+  console.log('init platform')
   return (): Promise<any> => {
     return firstValueFrom(
       authService.userInfo$.pipe(
@@ -23,7 +24,9 @@ export function initializeAuth(authService: AuthService, userService: UserServic
       ),
     )
       .then((dataProfile) => {
+        console.log('check data profile')
         if (dataProfile) {
+          console.log('get data profile')
           userService.propagateDataUser(dataProfile)
         } else {
           userService.redirectProfile()

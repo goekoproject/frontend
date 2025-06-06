@@ -1,10 +1,9 @@
 import { Component, effect, inject } from '@angular/core'
 import { FormArray, FormControl, FormGroup } from '@angular/forms'
-import { ActivatedRoute } from '@angular/router'
 import { CanComponentDeactivate } from '@goeko/business-ui'
-import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserModal, UserSwitch } from '@goeko/store'
+import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserSwitch } from '@goeko/store'
 import { AutoUnsubscribe, GoInput } from '@goeko/ui'
-import { forkJoin, map, of, Subject, switchMap, takeUntil } from 'rxjs'
+import { catchError, forkJoin, map, of, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_BANK } from './profile-bank.constants'
 import { PROFILE_CLEANTECH } from './profile-cleantech.constants'
 import { ProfileFieldset } from './profile-fieldset.interface'
@@ -56,7 +55,6 @@ const TYPE_FORM_FOR_USERTYPE: UserSwitch<Array<ProfileFieldset<'sme' | 'cleantec
 })
 export class ProfileComponent implements CanComponentDeactivate {
   private _profieService = inject(ProfileService)
-  private _route = inject(ActivatedRoute)
   form!: FormGroup
   savedProfileOK!: boolean
   public USERTYPE = USER_TYPE
@@ -98,6 +96,9 @@ export class ProfileComponent implements CanComponentDeactivate {
     return this.form.get('locations') as FormArray
   }
 
+  canDeactivate() {
+    return !!this.dataProfile().id
+  }
   createForm = effect(() => {
     if (this.userType() && !this.form) {
       this._createFormForUserType()
@@ -109,10 +110,6 @@ export class ProfileComponent implements CanComponentDeactivate {
       this._loadDataProfile()
     }
   })
-
-  canDeactivate() {
-    return !!this.dataProfile().id
-  }
 
   private _createFormForUserType() {
     this.form = ProfileFormFactory.createProfileForm(this.userType())
@@ -170,7 +167,7 @@ export class ProfileComponent implements CanComponentDeactivate {
       )
       .subscribe({
         next: ({ dataProfile }) => {
-          this._propageDataUser(dataProfile)
+          this._propageDataUser()
         },
         error: (error) => {
           console.error('Error al crear el perfil', error)
@@ -182,20 +179,21 @@ export class ProfileComponent implements CanComponentDeactivate {
     const profileUpdate$ = this._profieService.updateUserProfile(this.dataProfile().id, this.form.value)
 
     forkJoin({ profileUpdate: profileUpdate$, imageUpdate: this._uploadImg$() })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (dataProfile) => {
-          if (dataProfile) {
-            this._propageDataUser(dataProfile.profileUpdate)
-          }
-        },
-        error: (error) => {
-          console.error('Error al actualizar el perfil', error)
-        },
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((err) => {
+          console.error('Error al actualizar el perfil', err)
+          return of(null)
+        }),
+      )
+      .subscribe((res) => {
+        if (res) {
+          this._propageDataUser()
+        }
       })
   }
 
-  private _propageDataUser(dataProfile: UserModal) {
-    this.dataProfile.set(dataProfile)
+  private _propageDataUser() {
+    this._profieService.fetchUser()
   }
 }
