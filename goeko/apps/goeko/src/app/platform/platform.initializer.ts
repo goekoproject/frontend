@@ -10,20 +10,24 @@ export const ProviderLoadUserInfo: Provider = {
   multi: true,
 }
 export function initializeAuth(authService: AuthService, userService: UserService) {
+  console.log('init platform')
   return (): Promise<any> => {
     return firstValueFrom(
       authService.userInfo$.pipe(
         catchError((error) => {
-          console.error('Error de inicialización de autenticación', error)
+          console.log('Error de inicialización de autenticación', error)
           throw error
         }),
+        tap((userInfo) => console.log('userInfo', userInfo)),
         tap((userInfo) => userService.setAuthUser(userInfo)),
         tap(() => userService.checkEmailVerified()),
         switchMap(() => userService.getDataProfile()),
       ),
     )
       .then((dataProfile) => {
+        console.log('check data profile')
         if (dataProfile) {
+          console.log('get data profile')
           userService.propagateDataUser(dataProfile)
         } else {
           userService.redirectProfile()

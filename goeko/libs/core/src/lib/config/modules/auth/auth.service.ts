@@ -53,8 +53,10 @@ export class AuthService extends Auth0Connected {
     return this._userInfo$
   }
   get checkSession$(): Observable<any> {
+    console.log('in checkSession$')
     return this._checkSession$.pipe(
       tap((user) => {
+        console.log('in checkSession$', user)
         if (user) {
           this.authenticated.set(this.isAuthenticated)
         }
@@ -77,6 +79,7 @@ export class AuthService extends Auth0Connected {
    * @returns
    */
   isLoggedIn(body: AuthRequest) {
+    console.log('is logged in')
     return this._loginAuth0(body)
   }
 
@@ -109,11 +112,16 @@ export class AuthService extends Auth0Connected {
       password: body.password,
     })
 
+    console.log('_loginAuth0')
     return new Observable((observer) => {
+      console.log('webAuth')
       this.webAuth.login(auth0Params, (err, result) => {
         if (err) {
+          console.log('webAuth', err)
           observer.error(err)
         } else {
+          console.log('webAuth')
+
           observer.next(result)
           observer.complete()
         }
@@ -122,8 +130,11 @@ export class AuthService extends Auth0Connected {
   }
 
   initializeToken() {
+    console.log('initializeToken')
     this.webAuth.parseHash({ hash: window.location.hash }, function (err, authResult) {
+      console.log('initializeToken', err)
       if (authResult) {
+        console.log('ok get Token')
         setSession(authResult)
       }
     })

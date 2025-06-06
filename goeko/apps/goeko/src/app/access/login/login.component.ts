@@ -41,15 +41,17 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.formLogin.valid) {
+      console.log('access login')
       this._accessService.login(this.formLogin.value).subscribe(
-      (next) => {
+        (next) => {
           console.log('next', next)
-      },
+        },
         (error) => {
-        const errorMsg = errorMessagelogin(error as ErrorLogin)
-        console.log('error', errorMsg)
-        this.errorMsgLogin.set(`ERROR_MESSAGES.${errorMsg}`)
-      })
+          const errorMsg = errorMessagelogin(error as ErrorLogin)
+          console.log('error', errorMsg)
+          this.errorMsgLogin.set(`ERROR_MESSAGES.${errorMsg}`)
+        },
+      )
     }
   }
 

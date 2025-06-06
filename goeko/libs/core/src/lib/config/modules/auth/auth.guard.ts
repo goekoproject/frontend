@@ -4,6 +4,7 @@ import { AuthService } from './auth.service'
 
 export const checkSessionUserData: CanActivateFn = () => {
   const authService = inject(AuthService)
+  console.log('checkSessionUserData guard')
   return !authService.isAuthenticated ? true : authService.checkSession$
 }
 

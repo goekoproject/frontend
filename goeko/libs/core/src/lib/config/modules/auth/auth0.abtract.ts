@@ -89,6 +89,7 @@ export abstract class Auth0Connected {
   }
 
   get _checkSession$() {
+    console.log('in checkSession$ get')
     return new Observable((observer) => {
       this.webAuth.checkSession(
         {
@@ -101,9 +102,11 @@ export abstract class Auth0Connected {
         },
         (err, authResult) => {
           if (err) {
+            console.log('checkSession$ get', err)
             observer.error(err)
           } else {
             setSession(authResult)
+            console.log('checkSession$ get', authResult)
             observer.next(true)
             observer.complete()
           }
