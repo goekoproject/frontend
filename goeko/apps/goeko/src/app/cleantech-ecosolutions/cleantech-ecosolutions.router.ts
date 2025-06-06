@@ -41,6 +41,7 @@ export const ROUTERS: Routes = [
     path: 'new/:categoryCode',
     loadComponent: () => import('./ecosolutions-form/ecosolutions-form.component').then((c) => c.EcosolutionsFormComponent),
     resolve: { groupingForm: groupingFormCategoriesResolver },
+    canDeactivate: [canDeactivateGuard],
   },
   {
     path: 'edit/:categoryCode/:id',
