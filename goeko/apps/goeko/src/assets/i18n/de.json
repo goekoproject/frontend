@@ -230,7 +230,9 @@
     "siret": "Das SIRET-Format ist falsch. Beispiel: 12345678901234",
     "uid": "Das Format der UID ist ungültig. Beispiel: CHE-123.456.789",
     "weblink": "Ungültige URL. Beispiel: https://www.beispiel.com",
-    "website": "Fehler: Die Webadresse muss das Format www.seite.com haben"
+    "website": "Fehler: Die Webadresse muss das Format www.seite.com haben",
+    "steuer": "Fehler: Das Format des Steuernumsers ist falsch. Beispiel: 12 345 678 901",
+    "piva": "Fehler: Das Format des Steuernumsers ist falsch. Beispiel: IT12345678901"
   },
   "exit": "Beenden",
   "exploreNow": "Jetzt erkunden",
