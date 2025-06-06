@@ -225,7 +225,9 @@
     "siret": "El formato del SIRET es incorrecto. Ejemplo: 12345678901234",
     "uid": "El formato del UID es incorrecto. Ejemplo: CHE-123.456.789",
     "weblink": "Enlace web inválido. Ejemplo: https://ejemplo.com",
-    "website": "Error: La dirección web debe seguir el formato www.sitio.com"
+    "website": "Error: La dirección web debe seguir el formato www.sitio.com",
+    "steuer": "Error: El formato del número de identificación fiscal es incorrecto. Ejemplo: 12 345 678 901",
+    "piva": "Error: El formato del número de identificación fiscal es incorrecto. Ejemplo: IT12345678901"
   },
   "exit": "Salir",
   "exploreNow": "Explora ahora",
