@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/goekoproject/frontend/compare/v1.1.8...v1.1.9) (2025-06-06)
+
+
+### Bug Fixes
+
+* **card-ecosolutions:** logo ecosolution and locations ([#158](https://github.com/goekoproject/frontend/issues/158)) ([45507eb](https://github.com/goekoproject/frontend/commit/45507ebdd4aefd64a8892cdf95fdaa0b00c0a8ea))
+
 ## [1.1.8](https://github.com/goekoproject/frontend/compare/v1.1.7...v1.1.8) (2025-06-04)
 
 
