@@ -35,7 +35,7 @@ export class ProfileService {
     return this._userService.uploadImgProfileBank(id, img)
   }
 
-  fetchUser() {
-    this._userService.fetchUser()
+  fetchUser(id: string) {
+    this._userService.fetchUser(id)
   }
 }

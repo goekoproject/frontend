@@ -87,8 +87,8 @@ export class UserService {
   getById(id: string): Observable<UserData> {
     return this._http.get<UserData>(`/v1/actor/${this.actorsEndpoint()}/` + id)
   }
-  fetchUser() {
-    this.getById(this.userProfile().id).subscribe((data) => this.propagateDataUser(data))
+  fetchUser(id: string) {
+    this.getById(id).subscribe((data) => this.propagateDataUser(data))
   }
   createUserProfile(body: any) {
     return this._http.post<SmeUser | CleantechsUser | BankUser>(`/v1/actor/${this.actorsEndpoint()}`, body)

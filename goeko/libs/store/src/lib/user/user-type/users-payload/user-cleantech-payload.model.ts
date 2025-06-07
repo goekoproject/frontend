@@ -18,7 +18,7 @@ export class UserCleantechPayload {
     this.country = dataForm.country
     this.city = dataForm.city
     this.email = dataForm.email
-    this.link = dataForm.link
+    this.link = dataForm.link || undefined
     this.logo = dataForm.logo
     this.externalId = dataForm.externalId
     this.phoneNumber = dataForm.phoneNumber
