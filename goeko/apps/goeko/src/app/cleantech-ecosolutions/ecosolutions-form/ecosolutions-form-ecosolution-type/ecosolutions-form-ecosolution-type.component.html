@@ -21,7 +21,7 @@
             <input formControlName="subCategory" type="hidden" />
             <input formControlName="category" type="hidden" />
 
-            <go-badge-group [formControlName]="'products'" [compareWith]="defaultSetProductsCategories">
+            <go-badge-group [formControlName]="'products'">
               @for (product of subcategory.products; track product.code) {
                 <go-badge [value]="product.code">{{ product.label }}</go-badge>
               }

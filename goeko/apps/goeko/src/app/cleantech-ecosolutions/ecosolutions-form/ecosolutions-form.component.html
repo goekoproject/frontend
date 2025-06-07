@@ -8,16 +8,13 @@
   @defer (when form) {
     <form [formGroup]="form" class="m-auto w-full max-w-3xl rounded-sm p-8">
       <!--Select Products-->
-      @defer (on viewport) {
-        <goeko-ecosolutions-form-ecosolution-type
-          class="section-form"
-          [questionsCategories]="questionsCategories()"
-          [ecosolutionsClassifications]="ecosolutionData()?.classifications"
-          [parentForm]="form"
-          [categoryCode]="categoryCode()"></goeko-ecosolutions-form-ecosolution-type>
-      } @placeholder {
-        <div class="section-form animate-pulse h-64 rounded bg-gray-100"></div>
-      }
+
+      <goeko-ecosolutions-form-ecosolution-type
+        class="section-form"
+        [questionsCategories]="questionsCategories()"
+        [ecosolutionsClassifications]="ecosolutionData()?.classifications"
+        [parentForm]="form"
+        [categoryCode]="categoryCode()"></goeko-ecosolutions-form-ecosolution-type>
 
       @defer (on viewport) {
         <goeko-ecosolutions-form-benefis
