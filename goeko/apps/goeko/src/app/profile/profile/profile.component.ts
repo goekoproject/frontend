@@ -1,7 +1,8 @@
 import { Component, effect, inject } from '@angular/core'
 import { FormArray, FormControl, FormGroup } from '@angular/forms'
 import { CanComponentDeactivate } from '@goeko/business-ui'
-import { CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserSwitch } from '@goeko/store'
+import { CleantechsUser, CountrySelectOption, DataSelect, LocationsCountry, SmeUser, USER_TYPE, UserSwitch } from '@goeko/store'
+import { BankUser } from '@goeko/store/user/user-type/bank-user.model'
 import { AutoUnsubscribe, GoInput } from '@goeko/ui'
 import { catchError, forkJoin, map, of, Subject, switchMap, takeUntil } from 'rxjs'
 import { PROFILE_BANK } from './profile-bank.constants'
@@ -167,7 +168,7 @@ export class ProfileComponent implements CanComponentDeactivate {
       )
       .subscribe({
         next: ({ dataProfile }) => {
-          this._propageDataUser()
+          this._propageDataUser(dataProfile)
         },
         error: (error) => {
           console.error('Error al crear el perfil', error)
@@ -188,12 +189,12 @@ export class ProfileComponent implements CanComponentDeactivate {
       )
       .subscribe((res) => {
         if (res) {
-          this._propageDataUser()
+          this._propageDataUser(res.profileUpdate)
         }
       })
   }
 
-  private _propageDataUser() {
-    this._profieService.fetchUser()
+  private _propageDataUser(dataProfile: SmeUser | CleantechsUser | BankUser) {
+    this._profieService.fetchUser(dataProfile.id)
   }
 }
