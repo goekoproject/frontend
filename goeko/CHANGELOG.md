@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/goekoproject/frontend/compare/v1.1.9...v1.1.10) (2025-06-07)
+
+
+### Bug Fixes
+
+* error patch category ([#161](https://github.com/goekoproject/frontend/issues/161)) ([702b0b5](https://github.com/goekoproject/frontend/commit/702b0b57b74349babbd009a3774343dfe508f303))
+
 ## [1.1.9](https://github.com/goekoproject/frontend/compare/v1.1.8...v1.1.9) (2025-06-06)
 
 
