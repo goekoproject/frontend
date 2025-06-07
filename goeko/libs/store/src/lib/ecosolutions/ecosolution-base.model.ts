@@ -52,7 +52,7 @@ export class EcosolutionsBody {
   readonly solutionName: string
   readonly solutionDescription?: string
   readonly detailedDescription?: string
-  readonly classification?: Classifications
+  classification?: Classifications
   readonly classifications: Classifications[]
   readonly price?: Price
   readonly improvement?: Improvement
@@ -95,10 +95,9 @@ export class EcosolutionsBody {
     this.improvement = this._mapImprovement(formValue)
     this.improvementOtherCategory = this._mapImprovementOtherCategory(formValue.improvementOtherCategory)
     this.sustainableDevelopmentGoals = formValue.sustainableDevelopmentGoals
+    this._setClassificationsDefault()
 
-    const classificationResult = this._mapClassifications(formValue.classifications)
-    this.classification = classificationResult.primary
-    this.classifications = classificationResult.all
+    this.classifications = this._mapClassifications(formValue.classifications)
 
     this.locations = mapperLocations(formValue.locations)
 
@@ -145,8 +144,8 @@ export class EcosolutionsBody {
     return result
   }
 
-  private _mapClassifications(formClassifications?: EcosolutionFormData['classifications']): MappedClassificationsResult {
-    const result: MappedClassificationsResult = { all: [] }
+  private _mapClassifications(formClassifications?: EcosolutionFormData['classifications']): Classifications[] {
+    let result: Classifications[] = []
     if (!formClassifications) {
       return result
     }
@@ -161,9 +160,17 @@ export class EcosolutionsBody {
         }),
       )
 
-    result.all = mapped
-    result.primary = mapped.length > 0 ? mapped[0] : undefined
+    result = mapped.filter((c) => c.products.length > 0)
 
     return result
+  }
+
+  /**@deprecated */
+  private _setClassificationsDefault() {
+    this.classification = {
+      mainCategory: 'deprecated',
+      subCategory: 'deprecated',
+      products: ['deprecated'],
+    }
   }
 }

@@ -55,11 +55,14 @@ export class EcosolutionsFormEcosolutionTypeComponent implements OnInit {
     if (!this.ecosolutionsClassifications() || !this.parentForm()) {
       return
     }
-    this.ecosolutionsClassifications()?.forEach((classification, index) => {
-      this.classifications()
-        .at(index)
-        ?.get('products')
-        ?.setValue(classification.products.map((product) => product.code))
+    this.ecosolutionsClassifications()?.forEach((classification) => {
+      const productsCode = classification.products.map((p) => p.code) || []
+      const controls = this.classifications().controls.find(
+        (c) => c.value.subCategory === classification.subcategory.code && c.value.category === classification.category.code,
+      )
+      if (controls && productsCode.length > 0) {
+        controls.get('products')?.patchValue(productsCode)
+      }
     })
   }
 }
